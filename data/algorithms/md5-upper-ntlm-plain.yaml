@@ -1,0 +1,15 @@
+id: "md5-upper-ntlm-plain"
+name: "md5(upper(ntlm($plain)))"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["MD5NTLMUC"]
+    verified: "asserted"
+vectors:
+  - hash: "69d5cad6c179e4629634a2d4d921b2c1"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "MD5UCNTLM"

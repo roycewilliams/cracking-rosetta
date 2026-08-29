@@ -1,0 +1,9 @@
+id: "sha1sha1hum"
+name: "SHA1SHA1HUM"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["SHA1SHA1HUM"]
+    verified: "asserted"

@@ -1,0 +1,19 @@
+id: "gost2012-64"
+name: "GOST2012-64"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [11800]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+    note: "hashcat mapping shipped in mdxfind's own type table"
+  mdxfind:
+    types: ["GOST2012-64"]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+vectors:
+  - hash: "9b7ce5af74589324a811f467795a93ad4fb5e6a62ea10e4116d134beae36dba62c29cee821927cc5ec4da0fe4c9ac6cfd9274cb78ac0e63c968ef55da20effc6"
+    pass: "password123"
+    source: "mdxfind"

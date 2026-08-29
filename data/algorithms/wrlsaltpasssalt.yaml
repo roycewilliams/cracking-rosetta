@@ -1,0 +1,19 @@
+id: "wrlsaltpasssalt"
+name: "WRLSALTPASSSALT"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [32600]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+    note: "hashcat mapping shipped in mdxfind's own type table"
+  mdxfind:
+    types: ["WRLSALTPASSSALT"]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+vectors:
+  - hash: "2d937185151d7d5c49b4ad1def0250e4459c7752e32945ac3ceb15e8ae5a2f97d21869e5b6239a51c643d0ecd48138c50d485078f8d410cd06a95c934af227b0:testsalt"
+    pass: "password123"
+    source: "mdxfind"

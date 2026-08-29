@@ -1,0 +1,19 @@
+id: "gost12512crypt"
+name: "GOST12512CRYPT"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [35600]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+    note: "hashcat mapping shipped in mdxfind's own type table"
+  mdxfind:
+    types: ["GOST12512CRYPT"]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+vectors:
+  - hash: "$gost12512hash$defaultS$NF.9WTf1BfkSz8fQjCsT9zm6REXDO8/yr50P2tYsFyrOuQJdbqeNdz6qSBaqyWCFciwEpcVIeCY1ZPRYshNd1."
+    pass: "password123"
+    source: "mdxfind"

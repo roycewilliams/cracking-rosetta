@@ -1,0 +1,15 @@
+id: "md4-mysql3-plain"
+name: "md4(mysql3($plain))"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["MD4SQL3"]
+    verified: "asserted"
+vectors:
+  - hash: "af890c9705389d77919d0d502f560fb2"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "MD4MYSQL3"

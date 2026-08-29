@@ -1,0 +1,15 @@
+id: "sha1-strtoupper-sha1-sha1-plain-true"
+name: "sha1(strtoupper(sha1(sha1($plain, true))))"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["SHA1SQL5-40"]
+    verified: "asserted"
+vectors:
+  - hash: "797ada9d4ab559ff0cbc02f84f3dbe6d9f409e10"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "SHA1UCSHA1RAWSHA1"

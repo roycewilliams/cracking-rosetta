@@ -1,0 +1,9 @@
+id: "sha512sha512rawuser"
+name: "SHA512SHA512RAWUSER"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["SHA512SHA512RAWUSER"]
+    verified: "asserted"

@@ -1,0 +1,15 @@
+id: "simd384"
+name: "SIMD384"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["SIMD384"]
+    verified: "asserted"
+vectors:
+  - hash: "8f42b706d7c65528a8d10091e0d6acf89e290f31c69011d57c1f4239b1cbbdf29821de224363de6ddc4ee78c28f9ca51"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "SIMD384"

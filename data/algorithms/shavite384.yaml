@@ -1,0 +1,15 @@
+id: "shavite384"
+name: "SHAVITE384"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["SHAVITE384"]
+    verified: "asserted"
+vectors:
+  - hash: "bfc4ee078ea647b66dd2e04c9b8c007e604b999704b756fe18fddc9ae4f5a1f872dac26efebccd85af7b1ed55eb93342"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "SHAVITE384"

@@ -1,0 +1,19 @@
+id: "hmac-sha512-kpass"
+name: "HMAC-SHA512-KPASS"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [1750]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+    note: "hashcat mapping shipped in mdxfind's own type table"
+  mdxfind:
+    types: ["HMAC-SHA512-KPASS"]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+vectors:
+  - hash: "b05fe862891386bea0536631b38db71d1955168a9174961ca05cee238d41c920be8df3b3389cea4bac643ac15cd2a7aeb91f8f5a7fb7f003df5fc5b4c8f99135:testsalt"
+    pass: "password123"
+    source: "mdxfind"

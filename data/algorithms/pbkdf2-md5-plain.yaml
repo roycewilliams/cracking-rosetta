@@ -1,0 +1,16 @@
+id: "pbkdf2-md5-plain"
+name: "pbkdf2-md5($plain)"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [11900]
+    verified: "asserted"
+  mdxfind:
+    types: ["PBKDF2-MD5"]
+    verified: "asserted"
+vectors:
+  - hash: "md5:1000:eE1KdEJpUDZ6UA==:HBt42X+tFNv5thXKxVdVn1vg/UkVgXLrZREWdmaWcy4="
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "PBKDF2"

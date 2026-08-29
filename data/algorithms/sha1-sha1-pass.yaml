@@ -1,0 +1,21 @@
+id: "sha1-sha1-pass"
+name: "sha1(sha1($pass))"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [4500]
+    verified: "asserted"
+  mdxfind:
+    types: ["SHA1"]
+    verified: "asserted"
+  john:
+    cpu: ["dynamic_1026", "dynamic_26"]
+    verified: "asserted"
+vectors:
+  - hash: "e74b7ca3b557563710b439f7f666deee6aab007b"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "SHA1X2"
+  hashkiller: "sha1(sha1($pass))"
+notes: "-i2"

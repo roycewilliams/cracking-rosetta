@@ -1,0 +1,9 @@
+id: "sha1-customusersalt"
+name: "SHA1-CUSTOMUSERSALT"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["SHA1-CUSTOMUSERSALT"]
+    verified: "asserted"

@@ -1,0 +1,19 @@
+id: "bcryptsha512"
+name: "BCRYPTSHA512"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [28400]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+    note: "hashcat mapping shipped in mdxfind's own type table"
+  mdxfind:
+    types: ["BCRYPTSHA512"]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+vectors:
+  - hash: "$2a$05$RndSa1tRndSa1tRndSa1tuGAL47xENrIOe1cL89GFQH/bc4mp64Hy"
+    pass: "password123"
+    source: "mdxfind"

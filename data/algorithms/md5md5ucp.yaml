@@ -1,0 +1,9 @@
+id: "md5md5ucp"
+name: "MD5MD5UCp"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["MD5MD5UCp"]
+    verified: "asserted"

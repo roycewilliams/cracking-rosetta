@@ -1,0 +1,19 @@
+id: "sap-passcode5"
+name: "SAP-PASSCODE5"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [7801]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+    note: "hashcat mapping shipped in mdxfind's own type table"
+  mdxfind:
+    types: ["SAP-PASSCODE5"]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+vectors:
+  - hash: "USER$ebfec7528f4d6617b1c200000000000000000000"
+    pass: "password123"
+    source: "mdxfind"

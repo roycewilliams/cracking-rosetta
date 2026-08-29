@@ -1,0 +1,20 @@
+id: "ipb2-mybb1-2"
+name: "IPB2+, MyBB1.2+"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [2811]
+    verified: "asserted"
+  mdxfind:
+    types: ["MD5-MD5SALTMD5PASS"]
+    verified: "asserted"
+  john:
+    cpu: ["dynamic_12"]
+    verified: "asserted"
+vectors:
+  - hash: "cb5e393cf9d97d19a5d797be77c9ce6a:UhdG"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "IPB / MYBB"
+  hashkiller: "IPB2+, MyBB1.2+"

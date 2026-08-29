@@ -1,0 +1,9 @@
+id: "md4-utf16-le-utf-8-plain"
+name: "md4(utf16-le(utf-8($plain)))"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [1000]
+    verified: "asserted"
+legacy:
+  hashes_org: "TROLLHUNTNTLM"

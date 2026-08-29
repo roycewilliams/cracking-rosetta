@@ -1,0 +1,13 @@
+id: "drupal-7"
+name: "Drupal 7"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [7900]
+    verified: "asserted"
+vectors:
+  - hash: "$S$5PpDG6SBfYKrvTHtiMzdZBWjwqOTTiW1Qntn1Sf4jO2PFhkrchMP"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "DRUPAL7"

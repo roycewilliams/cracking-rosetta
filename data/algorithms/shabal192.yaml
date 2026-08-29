@@ -1,0 +1,12 @@
+id: "shabal192"
+name: "SHABAL192"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+vectors:
+  - hash: "a7c46ea1968b4b03419d78829df983fb457027b58f219b99"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "SHABAL192"

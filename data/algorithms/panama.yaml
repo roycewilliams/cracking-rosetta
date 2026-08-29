@@ -1,0 +1,21 @@
+id: "panama"
+name: "PANAMA"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["PANAMA"]
+    verified: "asserted"
+  john:
+    cpu: ["dynamic_320"]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
+    note: "from hashpipe john_map.h, confirmed upstream by recomputation"
+vectors:
+  - hash: "8f8d192270e3e7f8fbbeb35b544dd0c893771628cb4163ea68bc9d815736b896"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "PANAMA"

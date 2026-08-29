@@ -1,0 +1,19 @@
+id: "sha256utf16le"
+name: "SHA256UTF16LE"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [1470]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+    note: "hashcat mapping shipped in mdxfind's own type table"
+  mdxfind:
+    types: ["SHA256UTF16LE"]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+vectors:
+  - hash: "84b2cff2b372c47acb02c72fa6f0a04e9c21ae7f1b04123a40caf3d2f99d7180"
+    pass: "password123"
+    source: "mdxfind"

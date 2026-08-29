@@ -1,0 +1,7 @@
+id: "mdc2"
+name: "MDC2"
+status: "needs-review"
+tools:
+  mdxfind:
+    types: ["MDC2"]
+    verified: "asserted"

@@ -1,0 +1,13 @@
+id: "md5swap"
+name: "MD5SWAP"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["MD5SWAP"]
+    verified: "asserted"
+vectors:
+  - hash: "008c087f234c6666d4551b52ea6ef848"
+    pass: "rosetta"
+    source: "sheet"

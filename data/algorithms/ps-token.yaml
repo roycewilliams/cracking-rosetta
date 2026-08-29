@@ -1,0 +1,19 @@
+id: "ps-token"
+name: "PS-TOKEN"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [13500]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+    note: "hashcat mapping shipped in mdxfind's own type table"
+  mdxfind:
+    types: ["PS-TOKEN"]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+vectors:
+  - hash: "d7ace0616a3ae62d2c271e3bb3fa4204099cfea0:deadbeef01020304"
+    pass: "password123"
+    source: "mdxfind"

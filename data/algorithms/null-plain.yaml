@@ -1,0 +1,13 @@
+id: "null-plain"
+name: "null($plain)"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["NULL"]
+    verified: "asserted"
+vectors:
+  - hash: "726f7365747461000000000000000000"
+    pass: "rosetta"
+    source: "sheet"

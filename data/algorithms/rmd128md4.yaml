@@ -1,0 +1,9 @@
+id: "rmd128md4"
+name: "RMD128MD4"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["RMD128MD4"]
+    verified: "asserted"

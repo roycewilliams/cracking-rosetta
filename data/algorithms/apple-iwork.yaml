@@ -1,0 +1,19 @@
+id: "apple-iwork"
+name: "APPLE-IWORK"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [23300]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+    note: "hashcat mapping shipped in mdxfind's own type table"
+  mdxfind:
+    types: ["APPLE-IWORK"]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+vectors:
+  - hash: "$iwork$2$1$1$4000$b31b7320d1e7a5ee$01f54d6f9e5090eb16fef2b05f8242bc$be7d23232a5fc51d875ef4343586aff0603cf9df10f24e33c34edd813eb5e770ba0b6251af83186a097820a8fabc4d1effa198a5d4556e21a8a32d3ea60781db"
+    pass: "password123"
+    source: "mdxfind"

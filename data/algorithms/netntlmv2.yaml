@@ -1,0 +1,19 @@
+id: "netntlmv2"
+name: "NETNTLMV2"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [5600]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+    note: "hashcat mapping shipped in mdxfind's own type table"
+  mdxfind:
+    types: ["NETNTLMV2"]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+vectors:
+  - hash: "user::domain:1122334455667788:d5add1cebafed2180b3cca8728f5aff8:01010000000000000000000000000000aabbccdd1122334400000000"
+    pass: "password123"
+    source: "mdxfind"

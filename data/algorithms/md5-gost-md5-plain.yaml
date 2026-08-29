@@ -1,0 +1,15 @@
+id: "md5-gost-md5-plain"
+name: "md5(gost(md5($plain)))"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["MD5GOSTMD5"]
+    verified: "asserted"
+vectors:
+  - hash: "475a7009441dfc0b94c6013ec2fedb86"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "MD5GOSTMD5"

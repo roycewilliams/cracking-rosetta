@@ -1,0 +1,15 @@
+id: "haval160-3-md5-plain-plain"
+name: "haval160_3(md5($plain).$plain)"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["HAV160-3MD5PASS"]
+    verified: "asserted"
+vectors:
+  - hash: "8172dd83997f71957767ecda4c5327b2a6852744"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "HAVAL160-3(MD5(PLAIN)PLAIN)"

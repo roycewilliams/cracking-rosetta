@@ -1,0 +1,21 @@
+id: "ntlm-plain-md4-utf16-le-plain"
+name: "ntlm($plain) / md4(utf16-le($plain))"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["NTLM"]
+    verified: "asserted"
+  john:
+    cpu: ["dynamic_33"]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
+    note: "from hashpipe john_map.h, confirmed upstream by recomputation"
+vectors:
+  - hash: "a2dde7c8056b54f9f419fc9b62cb6611"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "NTLM"

@@ -1,0 +1,9 @@
+id: "md5-plain-md5-md5-md5-plain"
+name: "md5($plain.$md5(md5(md5($plain))))"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["MD5PASSMD5MD5MD5"]
+    verified: "asserted"

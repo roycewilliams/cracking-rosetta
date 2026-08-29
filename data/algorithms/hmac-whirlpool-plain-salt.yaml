@@ -1,0 +1,15 @@
+id: "hmac-whirlpool-plain-salt"
+name: "hmac(\"whirlpool\", $plain, $salt)"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["HMAC-WRL"]
+    verified: "asserted"
+vectors:
+  - hash: "7cae693e6919f283227fbfc5dcd24e1094a807f309b9cdca08fe3097b7eb3e97:abc123"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "not supported"

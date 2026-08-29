@@ -1,0 +1,19 @@
+id: "md5-sha1-sha1-pass"
+name: "md5(sha1(sha1($pass)))"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["MD5SHA1SHA1"]
+    verified: "asserted"
+  john:
+    cpu: ["dynamic_1018"]
+    verified: "asserted"
+vectors:
+  - hash: "2db0a6ad192b03a28775e627b246721f"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "MD5SHA1X2"
+  hashkiller: "md5(sha1(sha1($pass)))"

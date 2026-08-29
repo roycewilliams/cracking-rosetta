@@ -1,0 +1,15 @@
+id: "bmw384"
+name: "BMW384"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["BMW384"]
+    verified: "asserted"
+vectors:
+  - hash: "c4f2bf8f2ba6727df2fd264868ec3e98bfcea9770c3745cc210d84e3c3407d3d2cb3a92f6d7ad3405c0d77394c24b223"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "BMW384"

@@ -1,0 +1,25 @@
+id: "sha512-sha512-plain-true"
+name: "sha512(sha512($plain, true))"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [21000]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+    note: "hashcat mapping shipped in mdxfind's own type table"
+  mdxfind:
+    types: ["SHA512RAW"]
+    verified: "asserted"
+  john:
+    cpu: ["dynamic_84"]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
+    note: "from hashpipe john_map.h, confirmed upstream by recomputation"
+vectors:
+  - hash: "9b9aeb094459f236179207bb06d42942baa72f8deb7d77cea56ba918e9df2694fd911de47a750a5daadab02c53715f0cf80a02d739b997becd6be92687ad5b4d"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "SHA512RAWSHA512"

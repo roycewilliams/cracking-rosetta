@@ -1,0 +1,22 @@
+id: "keccak384"
+name: "KECCAK384"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [17900]
+    verified: "asserted"
+  mdxfind:
+    types: ["KECCAK384"]
+    verified: "asserted"
+  john:
+    cpu: ["dynamic_440"]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
+    note: "from hashpipe john_map.h, confirmed upstream by recomputation"
+vectors:
+  - hash: "fcd1c4e4259bb65aae49b2e3d7247d35918f1ddd403d17f2775c23901432f37994d443909cb35c3afd92e446cd9ab4be"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "KECCAK384"

@@ -1,0 +1,19 @@
+id: "blake2s256"
+name: "BLAKE2S256"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [31000]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+    note: "hashcat mapping shipped in mdxfind's own type table"
+  mdxfind:
+    types: ["BLAKE2S256"]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+vectors:
+  - hash: "$BLAKE2$02027c0e103001c546eaf0688c8270aa97dcdf867964d0049cdd021936768667"
+    pass: "password123"
+    source: "mdxfind"

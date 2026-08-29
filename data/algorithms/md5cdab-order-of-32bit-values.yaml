@@ -1,0 +1,12 @@
+id: "md5cdab-order-of-32bit-values"
+name: "md5cdab (order of 32bit values)"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+vectors:
+  - hash: "094fe62477a7d5f3975790dfb2854c88"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "CDAB-MD5"

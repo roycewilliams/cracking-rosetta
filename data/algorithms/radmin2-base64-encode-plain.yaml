@@ -1,0 +1,15 @@
+id: "radmin2-base64-encode-plain"
+name: "radmin2(base64_encode($plain))"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["RADMIN2BASE64"]
+    verified: "asserted"
+vectors:
+  - hash: "5f6dcd23fbd0046bee6620b4ec662921"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "RADMIN2BASE64"

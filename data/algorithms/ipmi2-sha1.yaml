@@ -1,0 +1,19 @@
+id: "ipmi2-sha1"
+name: "IPMI2-SHA1"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [7300]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+    note: "hashcat mapping shipped in mdxfind's own type table"
+  mdxfind:
+    types: ["IPMI2-SHA1"]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+vectors:
+  - hash: "00:1c9f35d812ea7ef72acdd262ec5e3ae59582103a"
+    pass: "password123"
+    source: "mdxfind"

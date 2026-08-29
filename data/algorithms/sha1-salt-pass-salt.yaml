@@ -1,0 +1,20 @@
+id: "sha1-salt-pass-salt"
+name: "sha1($salt.$pass.$salt)"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [4900]
+    verified: "asserted"
+  mdxfind:
+    types: ["SHA1SALTPASSSALT"]
+    verified: "asserted"
+  john:
+    cpu: ["dynamic_1504"]
+    verified: "asserted"
+vectors:
+  - hash: "1edf02c870b44a560cd6714080fcbb34603e2b36:h9wJfj"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "SHA1(SALTPLAINSALT)"
+  hashkiller: "sha1($salt.$pass.$salt)"

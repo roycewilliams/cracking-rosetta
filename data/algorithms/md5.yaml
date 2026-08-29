@@ -1,0 +1,21 @@
+id: "md5"
+name: "MD5"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [0]
+    verified: "asserted"
+  mdxfind:
+    types: ["MD5"]
+    verified: "asserted"
+  john:
+    cpu: ["Raw-MD5", "dynamic_0"]
+    gpu: ["raw-MD5-opencl"]
+    verified: "asserted"
+vectors:
+  - hash: "975790dfb2854c88094fe62477a7d5f3"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "MD5"
+  hashkiller: "MD5"

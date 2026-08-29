@@ -1,0 +1,20 @@
+id: "radmin"
+name: "Radmin"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [9900]
+    verified: "asserted"
+  mdxfind:
+    types: ["RADMIN2"]
+    verified: "asserted"
+  john:
+    cpu: ["RAdmin", "dynamic_1010"]
+    verified: "asserted"
+vectors:
+  - hash: "42c824c35d2544e0bc95f70e678d0577"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "RADMIN2"
+  hashkiller: "Radmin"

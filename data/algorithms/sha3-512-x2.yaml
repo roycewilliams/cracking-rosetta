@@ -1,0 +1,20 @@
+id: "sha3-512-x2"
+name: "SHA3-512 (2 iterations)"
+status: "needs-review"
+tools:
+  mdxfind:
+    types: ["SHA3-512"]
+    iterations: 2
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+  john:
+    cpu: ["dynamic_403"]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
+    note: "from hashpipe john_map.h, confirmed upstream by recomputation"
+vectors:
+  - hash: "4ad2c01fc6007f58720b00fc99b978c2a17c577859d31fdbba4b3a749de9383ac4b0738aeaf0b13337db8bfeaf9d8f87faa236fc3c8a68fbf23eb6862fadb86e"
+    pass: "password123"
+    source: "mdxfind"

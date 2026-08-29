@@ -1,0 +1,21 @@
+id: "md5-userid-md5-plain"
+name: "md5($userid.md5($plain))"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["MD5USERIDMD5"]
+    verified: "asserted"
+  john:
+    cpu: ["dynamic_9"]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
+    note: "from hashpipe john_map.h, confirmed upstream by recomputation"
+vectors:
+  - hash: "80f27f91fbec4c2fd50aed9f4f9d8a92:abc123"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "MD5(SALTMD5(PLAIN))"

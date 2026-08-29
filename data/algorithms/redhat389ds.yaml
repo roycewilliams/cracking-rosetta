@@ -1,0 +1,19 @@
+id: "redhat389ds"
+name: "REDHAT389DS"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [10901]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+    note: "hashcat mapping shipped in mdxfind's own type table"
+  mdxfind:
+    types: ["REDHAT389DS"]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+vectors:
+  - hash: "{PBKDF2_SHA256}AAAgAEFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUF9h4FZYLxdoiv6COGSMJkvo7NTruAVtL80gwJdyIE2RjA+v3s8nal9A3D/NjSVxlBnuEbzbyi0h2QMEBopkWRDTY5CDn/tQbfXS97KYKkG9QYWztJbPvAqPXtcGsu86TJ8WhHS3tZAyluhXdcQTPZNWFQe0x2bgYoPwUFbzfOEUl16ssQOmsslEofV3OP6U3iTIGR3BnnbfFRr818ObLdoMOwSBwXM1ffu4lu2iUkACTw93LPfT7dXlCx9HzW+3c4T5NImdICsY1OPcXb7UdjpS3ULFAM6tRkMKInZzFltmegiUqOEqWFdu7hcVzFNUfdneKg3jEXZbHngIO4sJG10"
+    pass: "password123"
+    source: "mdxfind"

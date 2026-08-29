@@ -1,0 +1,12 @@
+id: "pbkdf2-sha512-plain"
+name: "pbkdf2-sha512($plain)"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [20200]
+    verified: "asserted"
+  mdxfind:
+    types: ["PBKDF2-SHA512"]
+    verified: "asserted"
+legacy:
+  hashes_org: "PBKDF2"

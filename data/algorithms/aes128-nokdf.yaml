@@ -1,0 +1,19 @@
+id: "aes128-nokdf"
+name: "AES128-NOKDF"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [26401]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+    note: "hashcat mapping shipped in mdxfind's own type table"
+  mdxfind:
+    types: ["AES128-NOKDF"]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+vectors:
+  - hash: "0458fc918468d9cca6e8e7e8bdb85801:86046627772965328523223752173724"
+    pass: "password123"
+    source: "mdxfind"

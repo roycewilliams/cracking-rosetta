@@ -1,0 +1,19 @@
+id: "scrypt"
+name: "SCRYPT"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [8900]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+    note: "hashcat mapping shipped in mdxfind's own type table"
+  mdxfind:
+    types: ["SCRYPT"]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+vectors:
+  - hash: "SCRYPT:1024:1:1:AA==:m3hB8eGi24+6bsMZkTf+If0G0liOTm26E7zsUzY/SRg="
+    pass: "password123"
+    source: "mdxfind"

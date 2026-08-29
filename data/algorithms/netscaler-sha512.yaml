@@ -1,0 +1,19 @@
+id: "netscaler-sha512"
+name: "NETSCALER-SHA512"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [22200]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+    note: "hashcat mapping shipped in mdxfind's own type table"
+  mdxfind:
+    types: ["NETSCALER-SHA512"]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+vectors:
+  - hash: "2f9282ade00462c9682f0f7d4f0546c3e5f3152f0da4f9a66fd621fd12d20e0fadb15f25ba3b6bbc93ad8e83880eebf3b17022c2de7f7fd70d8e8d98bfb98ffefd4390481"
+    pass: "password123"
+    source: "mdxfind"

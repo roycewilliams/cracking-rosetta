@@ -1,0 +1,9 @@
+id: "md5specam"
+name: "MD5SPECAM"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["MD5SPECAM"]
+    verified: "asserted"

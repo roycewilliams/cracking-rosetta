@@ -1,0 +1,19 @@
+id: "awssigv4"
+name: "AWSSIGV4"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [28700]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+    note: "hashcat mapping shipped in mdxfind's own type table"
+  mdxfind:
+    types: ["AWSSIGV4"]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+vectors:
+  - hash: "$AWS-Sig-v4$0$20220221T000000Z$us-east-1$s3$421ab6e4af9f49fa30fa9c253fcfeb2ce91668e139e6b23303c5f75b04f8a3c4$ef3a8acaee907d0810ebed5fc7fd33072c5fd787f42e17187b9a08aefdb0bcdf"
+    pass: "password123"
+    source: "mdxfind"

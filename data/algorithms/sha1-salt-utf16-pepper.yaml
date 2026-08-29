@@ -1,0 +1,9 @@
+id: "sha1-salt-utf16-pepper"
+name: "SHA1-SALT-UTF16-PEPPER"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["SHA1-SALT-UTF16-PEPPER"]
+    verified: "asserted"

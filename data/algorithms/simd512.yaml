@@ -1,0 +1,15 @@
+id: "simd512"
+name: "SIMD512"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["SIMD512"]
+    verified: "asserted"
+vectors:
+  - hash: "5f3231ad8c81eda012f75cf5c201caf8110b234a73643d6fa3d6a9b61e26a422b088d4401260f92eb4b1ca0eab91ac2e4ea0fd1cade0866267a9102cfef01fa5"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "SIMD512"

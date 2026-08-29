@@ -1,0 +1,23 @@
+id: "sha512-salt-pass"
+name: "sha512($salt.$pass)"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [1720]
+    verified: "asserted"
+  mdxfind:
+    types: ["SHA512SALTPASS"]
+    verified: "asserted"
+  john:
+    cpu: ["dynamic_81"]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
+    note: "from hashpipe john_map.h, confirmed upstream by recomputation"
+vectors:
+  - hash: "42eff3c389844d5a196b1b06c2a3495131005894e0472a8003dc00de9e09711db2d1ea3c96a6ea1f086b5d2139851fa05071aad61fea2990881257df59c93579:iZiz5Y"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "SHA512(SALTPLAIN)"
+  hashkiller: "sha512($salt.$pass)"

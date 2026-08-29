@@ -1,0 +1,19 @@
+id: "werkzeug-sha256"
+name: "WERKZEUG-SHA256"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [30120]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+    note: "hashcat mapping shipped in mdxfind's own type table"
+  mdxfind:
+    types: ["WERKZEUG-SHA256"]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+vectors:
+  - hash: "sha256$Salt$5470a0da1e556b61d89430bc25aa630436e7bf8d68db104d76f024d68d5fce07"
+    pass: "password123"
+    source: "mdxfind"

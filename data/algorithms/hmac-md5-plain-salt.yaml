@@ -1,0 +1,16 @@
+id: "hmac-md5-plain-salt"
+name: "hmac(\"md5\", $plain, $salt)"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [60]
+    verified: "asserted"
+  mdxfind:
+    types: ["HMAC-MD5"]
+    verified: "asserted"
+vectors:
+  - hash: "78c07ffc6675de7fef452e2748c5af2a:abc123"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "not supported"

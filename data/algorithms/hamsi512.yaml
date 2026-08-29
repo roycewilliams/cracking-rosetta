@@ -1,0 +1,15 @@
+id: "hamsi512"
+name: "HAMSI512"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["HAMSI512"]
+    verified: "asserted"
+vectors:
+  - hash: "3f1b29ffafea309acb40e443647c64c4e9dff6b92d50ad4aeaf0953e3e04024799ed66a72e42cc65b932e3ea700568cf3aae69e46ebd7c47802aea5f4136cf92"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "HAMSI512"

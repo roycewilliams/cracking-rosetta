@@ -1,0 +1,16 @@
+id: "descrypt-plain"
+name: "descrypt($plain)"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [1500]
+    verified: "asserted"
+  mdxfind:
+    types: ["DESCRYPT"]
+    verified: "asserted"
+vectors:
+  - hash: "mIRigMYTnft4M"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "DESCRYPT"

@@ -1,0 +1,15 @@
+id: "md5-substr-base64-encode-md5-md5-plain-true-0-2"
+name: "md5(substr(base64_encode(md5(md5($plain), true)), 0, -2))"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["MD5BASE64MD5RAWMD5"]
+    verified: "asserted"
+vectors:
+  - hash: "dcf5f5226be78c2a212535a0f2a26e8e"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "MD5CUT0-22BASE64RAWMD5X2"

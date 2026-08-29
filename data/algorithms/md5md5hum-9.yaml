@@ -1,0 +1,15 @@
+id: "md5md5hum-9"
+name: "MD5MD5HUM"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["MD5MD5HUM"]
+    verified: "asserted"
+vectors:
+  - hash: "d7d61eb5e27f983b1277b28340d72b49:0a"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "MD5HUMMD5"

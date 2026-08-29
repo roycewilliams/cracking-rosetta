@@ -1,0 +1,20 @@
+id: "hav224-3-x2"
+name: "HAV224-3 (2 iterations)"
+status: "needs-review"
+tools:
+  mdxfind:
+    types: ["HAV224-3"]
+    iterations: 2
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+  john:
+    cpu: ["dynamic_253"]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
+    note: "from hashpipe john_map.h, confirmed upstream by recomputation"
+vectors:
+  - hash: "a08d02d32aad0e9406197dca0287ebc4362f719e259c4859834967f4"
+    pass: "password123"
+    source: "mdxfind"

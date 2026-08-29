@@ -1,0 +1,15 @@
+id: "md5-base64-encode-str-rot13-plain"
+name: "md5(base64_encode(str_rot13($plain)))"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["MD5BASE64ROT13"]
+    verified: "asserted"
+vectors:
+  - hash: "ba99fae073973d8ed10b946f7fd47965"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "MD5BASE64RO13"

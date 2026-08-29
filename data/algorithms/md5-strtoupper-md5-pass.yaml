@@ -1,0 +1,14 @@
+id: "md5-strtoupper-md5-pass"
+name: "md5(strtoupper(md5($pass)))"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [4300]
+    verified: "asserted"
+vectors:
+  - hash: "94b9a9d316bf89ef7e0ef48c36fac57c"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "MD5UCMD5"
+  hashkiller: "md5(strtoupper(md5($pass)))"

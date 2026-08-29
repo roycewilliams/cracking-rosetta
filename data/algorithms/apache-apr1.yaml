@@ -1,0 +1,16 @@
+id: "apache-apr1"
+name: "Apache $apr1$"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [1600]
+    verified: "asserted"
+  mdxfind:
+    types: ["APR1"]
+    verified: "asserted"
+vectors:
+  - hash: "$apr1$kVztWGHo$NxMuZ1fKTGFq1QAKFHPfZ/"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "MD5APR1"

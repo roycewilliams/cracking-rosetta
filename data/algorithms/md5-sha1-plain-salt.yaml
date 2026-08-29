@@ -1,0 +1,10 @@
+id: "md5-sha1-plain-salt"
+name: "md5(sha1($plain.$salt))"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [4420]
+    verified: "asserted"
+  mdxfind:
+    types: ["MD5SHA1PASSSALT"]
+    verified: "asserted"

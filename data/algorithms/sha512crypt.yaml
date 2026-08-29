@@ -1,0 +1,16 @@
+id: "sha512crypt"
+name: "sha512crypt"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [1800]
+    verified: "asserted"
+  mdxfind:
+    types: ["SHA512CRYPT"]
+    verified: "asserted"
+vectors:
+  - hash: "$6$GpbaJosCgtCiO57x$Ea7F43GgpZ6RyJuYQAMHcDfsHipMxZFk5ogbXBlIxmEUOoHMYRklcJCOLCQVKXEtWqsl98CSvt9enTrgYkJUf."
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "SHA512CRYPT"

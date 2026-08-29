@@ -1,0 +1,20 @@
+id: "plaintext"
+name: "plaintext"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [99999]
+    verified: "asserted"
+  mdxfind:
+    types: ["NULL"]
+    verified: "asserted"
+  john:
+    cpu: ["plaintext"]
+    verified: "asserted"
+vectors:
+  - hash: "rosetta"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "PLAIN"
+  hashkiller: "n/a"

@@ -1,0 +1,19 @@
+id: "as400-des"
+name: "AS400-DES"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [8501]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+    note: "hashcat mapping shipped in mdxfind's own type table"
+  mdxfind:
+    types: ["AS400-DES"]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+vectors:
+  - hash: "$as400$des$*OPEN3*B6079DA0E2EF813D"
+    pass: "pass1234"
+    source: "mdxfind"

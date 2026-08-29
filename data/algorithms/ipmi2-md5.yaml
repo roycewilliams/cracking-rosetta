@@ -1,0 +1,19 @@
+id: "ipmi2-md5"
+name: "IPMI2-MD5"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [7350]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+    note: "hashcat mapping shipped in mdxfind's own type table"
+  mdxfind:
+    types: ["IPMI2-MD5"]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+vectors:
+  - hash: "e83eb99a98bd696bc41c0826bb378986:00"
+    pass: "password123"
+    source: "mdxfind"

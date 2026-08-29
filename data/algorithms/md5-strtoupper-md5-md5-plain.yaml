@@ -1,0 +1,15 @@
+id: "md5-strtoupper-md5-md5-plain"
+name: "md5(strtoupper(md5(md5($plain))))"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["MD5MD5UCMD5"]
+    verified: "asserted"
+vectors:
+  - hash: "488878b3a06cc6dcbd14dd7f710d2b25"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "MD5UCMD5X2"

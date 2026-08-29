@@ -1,0 +1,15 @@
+id: "sha512-md5-plain-plain"
+name: "sha512(md5($plain),$plain)"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["SHA512MD5PASS"]
+    verified: "asserted"
+vectors:
+  - hash: "7be4cea6c365b23a2657c827eec3be3230fc09a2d91e7a844e8d7481b4db07c9a4ed54d69443bb14f013ee2a9c1c4c96c6e294072de750d2514572fcd8556a45"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "SHA512(MD5(PLAIN)PLAIN)"

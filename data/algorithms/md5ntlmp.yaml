@@ -1,0 +1,9 @@
+id: "md5ntlmp"
+name: "MD5NTLMp"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["MD5NTLMp"]
+    verified: "asserted"

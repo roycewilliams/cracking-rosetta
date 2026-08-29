@@ -1,0 +1,15 @@
+id: "blake384"
+name: "BLAKE384"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["BLAKE384"]
+    verified: "asserted"
+vectors:
+  - hash: "4a3a31b1553e33e9060888d2a49d38ffb1d1c8eb72eb36408fcc26e901529cf40462f74f583787c1cc75158ea045e0f5"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "BLAKE384"

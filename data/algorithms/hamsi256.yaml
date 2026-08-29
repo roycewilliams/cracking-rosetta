@@ -1,0 +1,15 @@
+id: "hamsi256"
+name: "HAMSI256"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["HAMSI256"]
+    verified: "asserted"
+vectors:
+  - hash: "8787e926b42fa359544a7b65b0934d9f05a8ea12c35fb89b7d0b00086a3c0e70"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "HAMSI256"

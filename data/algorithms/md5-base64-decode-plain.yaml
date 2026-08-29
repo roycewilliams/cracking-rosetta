@@ -1,0 +1,11 @@
+id: "md5-base64-decode-plain"
+name: "md5(base64_decode($plain))"
+status: "needs-review"
+tools:
+  mdxfind:
+    types: ["MD5DECBASE64"]
+    verified: "asserted"
+vectors:
+  - hash: "a2b13376298b04eec7dc995e71d3bd3e"
+    pass: "rosetta"
+    source: "sheet"

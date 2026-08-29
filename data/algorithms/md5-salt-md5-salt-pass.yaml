@@ -1,0 +1,20 @@
+id: "md5-salt-md5-salt-pass"
+name: "md5($salt.md5($salt.$pass))"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [4010]
+    verified: "asserted"
+  mdxfind:
+    types: ["MD5-SALTMD5SALTPASS"]
+    verified: "asserted"
+  john:
+    cpu: ["dynamic_10"]
+    verified: "asserted"
+vectors:
+  - hash: "439b6d1a6aa03944d3dc139bbf1f042f:59rHLNz"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "MD5(SALTMD5(SALTPLAIN))"
+  hashkiller: "md5($salt.md5($salt.$pass))"

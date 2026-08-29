@@ -1,0 +1,16 @@
+id: "progressencode-plain"
+name: "progressencode($plain)"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [26200]
+    verified: "asserted"
+  mdxfind:
+    types: ["PROGRESSENCODE"]
+    verified: "asserted"
+vectors:
+  - hash: "LjnhkUkzakkqZzlG"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "not supported"

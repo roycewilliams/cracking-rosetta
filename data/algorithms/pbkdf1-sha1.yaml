@@ -1,0 +1,19 @@
+id: "pbkdf1-sha1"
+name: "PBKDF1-SHA1"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [32900]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+    note: "hashcat mapping shipped in mdxfind's own type table"
+  mdxfind:
+    types: ["PBKDF1-SHA1"]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+vectors:
+  - hash: "PBKDF1:sha1:1000:cGVuZ3VpbmtlZXBlcg==:ojgqgSA34VYUi3u7iXF/vNKR6/E="
+    pass: "password123"
+    source: "mdxfind"

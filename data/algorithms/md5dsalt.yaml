@@ -1,0 +1,9 @@
+id: "md5dsalt"
+name: "MD5DSALT"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["MD5DSALT"]
+    verified: "asserted"

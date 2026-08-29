@@ -1,0 +1,20 @@
+id: "tiger-x2"
+name: "TIGER (2 iterations)"
+status: "needs-review"
+tools:
+  mdxfind:
+    types: ["TIGER"]
+    iterations: 2
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+  john:
+    cpu: ["dynamic_113"]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
+    note: "from hashpipe john_map.h, confirmed upstream by recomputation"
+vectors:
+  - hash: "763cfa83b7d3dd5fd82d536e6a2f912142721444b919367e"
+    pass: "password123"
+    source: "mdxfind"

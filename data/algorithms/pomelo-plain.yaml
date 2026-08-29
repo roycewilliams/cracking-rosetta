@@ -1,0 +1,13 @@
+id: "pomelo-plain"
+name: "pomelo($plain)"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["POMELO"]
+    verified: "asserted"
+vectors:
+  - hash: "b4dd8a03985988ef432af66ca8a9b4d63b7b6cf4a07a9392dfb9c0b516048fee:administrator"
+    pass: "rosetta"
+    source: "sheet"

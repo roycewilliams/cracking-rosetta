@@ -1,0 +1,20 @@
+id: "vbulletin-v3-8-5-2"
+name: "vBulletin > v3.8.5"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [2711]
+    verified: "asserted"
+  mdxfind:
+    types: ["MD5SALT"]
+    verified: "asserted"
+  john:
+    cpu: ["dynamic_1007", "dynamic_6"]
+    verified: "asserted"
+vectors:
+  - hash: "bc926ffde1bab8659f4a3ab0f30f418e:9eOlrQF9WEXZ8I6mKpb26lg3p16mft"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "VBULLETIN"
+  hashkiller: "vBulletin > v3.8.5"

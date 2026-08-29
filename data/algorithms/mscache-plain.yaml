@@ -1,0 +1,14 @@
+id: "mscache-plain"
+name: "mscache($plain)"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [1100]
+    verified: "asserted"
+  mdxfind:
+    types: ["MSCACHE"]
+    verified: "asserted"
+vectors:
+  - hash: "f43fd64d8e4a84cd72ea440264ebdf60:Administrator"
+    pass: "rosetta"
+    source: "sheet"

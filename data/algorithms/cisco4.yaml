@@ -1,0 +1,19 @@
+id: "cisco4"
+name: "CISCO4"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [5700]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+    note: "hashcat mapping shipped in mdxfind's own type table"
+  mdxfind:
+    types: ["CISCO4"]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+vectors:
+  - hash: "vt8rS9fyRlu773i7v9k6d2dC3ak4NNYFW/wsDIFnuIw"
+    pass: "password123"
+    source: "mdxfind"

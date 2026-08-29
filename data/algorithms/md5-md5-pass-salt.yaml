@@ -1,0 +1,20 @@
+id: "md5-md5-pass-salt"
+name: "md5(md5($pass).$salt)"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [2611, 2711]
+    verified: "asserted"
+  mdxfind:
+    types: ["MD5-MD5PASS-SALT"]
+    verified: "asserted"
+  john:
+    cpu: ["dynamic_6"]
+    verified: "asserted"
+vectors:
+  - hash: "991adb53a943df0a8907b3541e52a2db:uGh"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "VBULLETIN"
+  hashkiller: "md5(md5($pass).$salt)"

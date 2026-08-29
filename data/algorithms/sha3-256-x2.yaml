@@ -1,0 +1,20 @@
+id: "sha3-256-x2"
+name: "SHA3-256 (2 iterations)"
+status: "needs-review"
+tools:
+  mdxfind:
+    types: ["SHA3-256"]
+    iterations: 2
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+  john:
+    cpu: ["dynamic_383"]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
+    note: "from hashpipe john_map.h, confirmed upstream by recomputation"
+vectors:
+  - hash: "ab3fe4003f14e3ef573417f95e47d4985c482eadd139c08b3758eeae7cc60b9d"
+    pass: "password123"
+    source: "mdxfind"

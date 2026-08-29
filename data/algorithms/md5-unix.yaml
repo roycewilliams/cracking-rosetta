@@ -1,0 +1,16 @@
+id: "md5-unix"
+name: "md5(unix)"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [500]
+    verified: "asserted"
+  mdxfind:
+    types: ["MD5CRYPT"]
+    verified: "asserted"
+vectors:
+  - hash: "$1$AQQ4Z4bg$RIsaaAerjDK0FYJ0qx4Uj1"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "MD5CRYPT"

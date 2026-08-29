@@ -1,0 +1,19 @@
+id: "arubaos"
+name: "ARUBAOS"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [125]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+    note: "hashcat mapping shipped in mdxfind's own type table"
+  mdxfind:
+    types: ["ARUBAOS"]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+vectors:
+  - hash: "5387280701b9809a521b6175cb9519910413a11227468b252f"
+    pass: "password123"
+    source: "mdxfind"

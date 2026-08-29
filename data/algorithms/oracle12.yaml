@@ -1,0 +1,19 @@
+id: "oracle12"
+name: "ORACLE12"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [12300]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+    note: "hashcat mapping shipped in mdxfind's own type table"
+  mdxfind:
+    types: ["ORACLE12"]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+vectors:
+  - hash: "00A4881893C78287CD84EB39D3DA49F05A4DF2FC48A97A70B0A9FC941C3CB465C5B0EEEF06686DA9F0B1BB3E0BEBFBBB65192CB51118EC775C9D1941724AF65941414141414141414141414141414141"
+    pass: "password123"
+    source: "mdxfind"

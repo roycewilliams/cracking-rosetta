@@ -1,0 +1,16 @@
+id: "md5-sha256-pass"
+name: "md5(sha256($pass))"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["MD5SHA256"]
+    verified: "asserted"
+vectors:
+  - hash: "271749ec9c47a6afe99da5dc0d508a8b"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "MD5SHA256"
+  hashkiller: "md5(sha256($pass))"

@@ -1,0 +1,15 @@
+id: "md5sha1md5uc"
+name: "MD5SHA1MD5UC"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["MD5SHA1MD5UC"]
+    verified: "asserted"
+vectors:
+  - hash: "36231418e02c6d9ecd6a67638d6b97de"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "MD5SHA1UCMD5"

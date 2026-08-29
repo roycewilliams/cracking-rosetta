@@ -1,0 +1,21 @@
+id: "hav192-3"
+name: "HAV192-3"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["HAV192-3"]
+    verified: "asserted"
+  john:
+    cpu: ["dynamic_220"]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
+    note: "from hashpipe john_map.h, confirmed upstream by recomputation"
+vectors:
+  - hash: "99463df815ab6e3cc2b7b16185909a34c2032e51b3748390"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "HAVAL192-3"

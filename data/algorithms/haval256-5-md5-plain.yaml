@@ -1,0 +1,15 @@
+id: "haval256-5-md5-plain"
+name: "haval256_5(md5($plain))"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["HAV256-5MD5"]
+    verified: "asserted"
+vectors:
+  - hash: "73a3b3431fe4108aa905edf95377f85011d9c9299e41dba4e8ce2893c76e95ff"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "HAVAL256-5MD5"

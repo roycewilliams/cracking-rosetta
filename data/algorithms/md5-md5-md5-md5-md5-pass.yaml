@@ -1,0 +1,20 @@
+id: "md5-md5-md5-md5-md5-pass"
+name: "md5(md5(md5(md5(md5($pass)))))"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["MD5"]
+    verified: "asserted"
+  john:
+    cpu: ["dynamic_0", "dynamic_1002"]
+    verified: "asserted"
+vectors:
+  - hash: "5381baf622596c5d73d0e693827e303c"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "MD5X5"
+  hashkiller: "md5(md5(md5(md5(md5($pass)))))"
+notes: "-i5"

@@ -1,0 +1,7 @@
+id: "sha256uc"
+name: "SHA256UC"
+status: "needs-review"
+tools:
+  mdxfind:
+    types: ["SHA256UC"]
+    verified: "asserted"

@@ -1,0 +1,15 @@
+id: "fugue224"
+name: "FUGUE224"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["FUGUE224"]
+    verified: "asserted"
+vectors:
+  - hash: "2fdf48f5a7d2e360298c9647c1c061047af8c4466d57b2eb5c1782c1"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "FUGUE224"

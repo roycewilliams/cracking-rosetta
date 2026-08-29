@@ -1,0 +1,19 @@
+id: "mssntp"
+name: "MSSNTP"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [31300]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+    note: "hashcat mapping shipped in mdxfind's own type table"
+  mdxfind:
+    types: ["MSSNTP"]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+vectors:
+  - hash: "$sntp-ms$4da11e6ad992140a420d88062b8e2ae3$907733697536811342962140955567108526489624716566696971338784438986103976327367763739445744705380"
+    pass: "password123"
+    source: "mdxfind"

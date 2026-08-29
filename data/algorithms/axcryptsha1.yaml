@@ -1,0 +1,19 @@
+id: "axcryptsha1"
+name: "AXCRYPTSHA1"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [13300]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+    note: "hashcat mapping shipped in mdxfind's own type table"
+  mdxfind:
+    types: ["AXCRYPTSHA1"]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+vectors:
+  - hash: "$axcrypt_sha1$cbfdac6008f9cab4083784cbd1874f76"
+    pass: "password123"
+    source: "mdxfind"

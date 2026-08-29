@@ -1,0 +1,15 @@
+id: "md5-hesk-plain"
+name: "md5(hesk($plain)) ?"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["MD5HESK"]
+    verified: "asserted"
+vectors:
+  - hash: "82906a2560b4b670589b6565ccb715de"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "HESK-MD5"

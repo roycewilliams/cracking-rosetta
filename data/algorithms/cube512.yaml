@@ -1,0 +1,15 @@
+id: "cube512"
+name: "CUBE512"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["CUBE512"]
+    verified: "asserted"
+vectors:
+  - hash: "7ff2bfecd39eace46a473a4d18be0ef6f22ff392d8f1d42a8c194dafc5dc85170de874fb28e1662b7d6a6b28d85ab770757e3f7e6e66151eb87daa482d3edd9f"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "CUBE512"

@@ -1,0 +1,19 @@
+id: "domino5"
+name: "DOMINO5"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [8600]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+    note: "hashcat mapping shipped in mdxfind's own type table"
+  mdxfind:
+    types: ["DOMINO5"]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+vectors:
+  - hash: "173127311326bb6eeacdfef5c2791514"
+    pass: "password123"
+    source: "mdxfind"

@@ -1,0 +1,15 @@
+id: "ripemd160-md5-plain"
+name: "ripemd160(md5($plain))"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["RMD160MD5"]
+    verified: "asserted"
+vectors:
+  - hash: "c4ab50d4b2bfcca838f81db1f561bd03de683888"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "RIPEMD160MD5"

@@ -1,0 +1,22 @@
+id: "ripemd160"
+name: "ripemd160"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [6000]
+    verified: "asserted"
+  mdxfind:
+    types: ["RMD160"]
+    verified: "asserted"
+  john:
+    cpu: ["dynamic_130"]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
+    note: "from hashpipe john_map.h, confirmed upstream by recomputation"
+vectors:
+  - hash: "20396cba20e01e0abb35c840924f6d31ab56f677"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "RIPEMD160"

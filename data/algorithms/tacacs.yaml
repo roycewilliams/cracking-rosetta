@@ -1,0 +1,19 @@
+id: "tacacs"
+name: "TACACS"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [16100]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+    note: "hashcat mapping shipped in mdxfind's own type table"
+  mdxfind:
+    types: ["TACACS"]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+vectors:
+  - hash: "$tacacs-plus$0$5fde8e68$2c388f382ca4$c006"
+    pass: "password123"
+    source: "mdxfind"

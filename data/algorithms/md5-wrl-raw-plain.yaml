@@ -1,0 +1,15 @@
+id: "md5-wrl-raw-plain"
+name: "md5(wrl_raw($plain))"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["MD5WRLRAW"]
+    verified: "asserted"
+vectors:
+  - hash: "7c07f975b91b54215e6d4e78a6fbfc33"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "MD5RAWWRL"

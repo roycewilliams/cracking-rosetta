@@ -1,0 +1,15 @@
+id: "md5-str-reverse-md5-plain"
+name: "md5(str_reverse(md5($plain)))"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["MD5revMD5"]
+    verified: "asserted"
+vectors:
+  - hash: "722c484d8b83d0852b35519e8a2d1bfa"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "MD5REVMD5"

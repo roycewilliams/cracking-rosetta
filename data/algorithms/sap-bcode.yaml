@@ -1,0 +1,19 @@
+id: "sap-bcode"
+name: "SAP-BCODE"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [7700]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+    note: "hashcat mapping shipped in mdxfind's own type table"
+  mdxfind:
+    types: ["SAP-BCODE"]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+vectors:
+  - hash: "ABCDEFGH$246EFDAD288F373D"
+    pass: "pass1234"
+    source: "mdxfind"

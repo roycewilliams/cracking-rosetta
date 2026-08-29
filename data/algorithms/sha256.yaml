@@ -1,0 +1,21 @@
+id: "sha256"
+name: "SHA256"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [1400]
+    verified: "asserted"
+  mdxfind:
+    types: ["SHA256"]
+    verified: "asserted"
+  john:
+    cpu: ["Raw-SHA256", "dynamic_60"]
+    gpu: ["raw-SHA256-opencl"]
+    verified: "asserted"
+vectors:
+  - hash: "27c3d3b047672ba2cf4abd7688e81f4fbb044eadeec897b665fc76636069daa7"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "SHA256"
+  hashkiller: "SHA256"

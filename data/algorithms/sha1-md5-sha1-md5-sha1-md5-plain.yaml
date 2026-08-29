@@ -1,0 +1,15 @@
+id: "sha1-md5-sha1-md5-sha1-md5-plain"
+name: "sha1(md5(sha1(md5(sha1(md5($plain))))))"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["SHA1MD5SHA1MD5SHA1MD5"]
+    verified: "asserted"
+vectors:
+  - hash: "aef7f03be27763d427e83c1302a11bb35b2d13d1"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "(SHA1MD5)X3"

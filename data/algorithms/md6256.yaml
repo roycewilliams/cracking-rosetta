@@ -1,0 +1,19 @@
+id: "md6256"
+name: "MD6256"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [34600]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+    note: "hashcat mapping shipped in mdxfind's own type table"
+  mdxfind:
+    types: ["MD6256"]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+vectors:
+  - hash: "04516e374f0ad9f74c3fc62045a597e732b3387020f7646bf8ea5643e8ab3037"
+    pass: "password123"
+    source: "mdxfind"

@@ -1,0 +1,15 @@
+id: "hmac-gost-plain-salt"
+name: "hmac(\"gost\", $plain, $salt)"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["HMAC-GOST"]
+    verified: "asserted"
+vectors:
+  - hash: "549eb7acac0e1a39218a0f80bd816e733dffb5e456147396930d2a0e9b79ed54:abc123"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "not supported"

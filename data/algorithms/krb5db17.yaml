@@ -1,0 +1,19 @@
+id: "krb5db17"
+name: "KRB5DB17"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [28800]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+    note: "hashcat mapping shipped in mdxfind's own type table"
+  mdxfind:
+    types: ["KRB5DB17"]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+vectors:
+  - hash: "$krb5db$17$test$TEST.LOCAL$ea35f3bdc1c4fdb75c708405d8273e51"
+    pass: "password123"
+    source: "mdxfind"

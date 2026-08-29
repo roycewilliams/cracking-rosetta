@@ -1,0 +1,19 @@
+id: "krb5pa-18"
+name: "KRB5PA-18"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [19900]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+    note: "hashcat mapping shipped in mdxfind's own type table"
+  mdxfind:
+    types: ["KRB5PA-18"]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+vectors:
+  - hash: "$krb5pa$18$hashpipe$HASHPIPEDOMAIN.FAKE$ce165afbd18b9b6f50ed9cb9954cd77c0c7a6054a26dbe5607206ed459156b27df4a6db33cc1e39aa1263ddfd6c45540af2b316e109da4ca"
+    pass: "password123"
+    source: "mdxfind"

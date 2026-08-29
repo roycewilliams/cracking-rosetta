@@ -1,0 +1,15 @@
+id: "sha1-upper-wrl-plain"
+name: "sha1(upper(wrl($plain)))"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["SHA1UCWRL"]
+    verified: "asserted"
+vectors:
+  - hash: "b71d157fa4bc686d61db7bcc2afa1482f40f4707"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "SHA1UCWRL"

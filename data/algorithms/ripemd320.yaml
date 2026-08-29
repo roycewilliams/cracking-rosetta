@@ -1,0 +1,12 @@
+id: "ripemd320"
+name: "ripemd320"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+vectors:
+  - hash: "b05513f048c2096c2472980dc4893a65e4a2b552a6fa652983d92627ebc120cf58d01c56eb9d6960"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "RIPEMD320"

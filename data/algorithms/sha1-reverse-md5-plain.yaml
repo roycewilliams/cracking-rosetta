@@ -1,0 +1,13 @@
+id: "sha1-reverse-md5-plain"
+name: "sha1(reverse(md5($plain)))"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["SHA1revMD5"]
+    verified: "asserted"
+vectors:
+  - hash: "021a6203fd00c33333ba067db54dac358ee8c601"
+    pass: "rosetta"
+    source: "sheet"

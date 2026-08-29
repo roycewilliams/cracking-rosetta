@@ -1,0 +1,15 @@
+id: "md5-md5-plain-plain-2"
+name: "md5(md5($plain).\":\".$plain)"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["MD5MD5PASS"]
+    verified: "asserted"
+vectors:
+  - hash: "4948708c2d6fe45899772049bf585fa4"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "MD5(MD5(PLAIN)INSDPPLAIN)"

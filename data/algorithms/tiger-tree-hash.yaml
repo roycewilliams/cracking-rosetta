@@ -1,0 +1,15 @@
+id: "tiger-tree-hash"
+name: "Tiger Tree Hash"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["TTH"]
+    verified: "asserted"
+vectors:
+  - hash: "313439e6a1b229ac75271edb9fd5abbe1914e39d7609ced1"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "TTH-HEX"

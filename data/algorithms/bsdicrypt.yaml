@@ -1,0 +1,19 @@
+id: "bsdicrypt"
+name: "BSDICRYPT"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [12400]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+    note: "hashcat mapping shipped in mdxfind's own type table"
+  mdxfind:
+    types: ["BSDICRYPT"]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+vectors:
+  - hash: "_J9......I6Q/yEZj5OA"
+    pass: "password123"
+    source: "mdxfind"

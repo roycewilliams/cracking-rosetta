@@ -1,0 +1,15 @@
+id: "jh256"
+name: "JH256"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["JH256"]
+    verified: "asserted"
+vectors:
+  - hash: "1ece79f847b8498bd0ec7bbb40318f5f87ee2836d210e6d892c01baa60c339fd"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "JH256"

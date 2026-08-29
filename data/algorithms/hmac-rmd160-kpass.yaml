@@ -1,0 +1,19 @@
+id: "hmac-rmd160-kpass"
+name: "HMAC-RMD160-KPASS"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [6050]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+    note: "hashcat mapping shipped in mdxfind's own type table"
+  mdxfind:
+    types: ["HMAC-RMD160-KPASS"]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+vectors:
+  - hash: "514f58996b12f1c91595c12be92d4519fff07e48:testsalt"
+    pass: "password123"
+    source: "mdxfind"

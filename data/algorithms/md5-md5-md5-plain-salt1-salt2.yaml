@@ -1,0 +1,9 @@
+id: "md5-md5-md5-plain-salt1-salt2"
+name: "md5(md5(md5($plain).$salt1).$salt2)"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [31700]
+    verified: "asserted"
+legacy:
+  hashes_org: "not supported"

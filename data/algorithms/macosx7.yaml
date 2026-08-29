@@ -1,0 +1,19 @@
+id: "macosx7"
+name: "MACOSX7"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [1722]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+    note: "hashcat mapping shipped in mdxfind's own type table"
+  mdxfind:
+    types: ["MACOSX7"]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+vectors:
+  - hash: "123456780c911e4f72ab8610bd212f4fb547c6b13c0abb1b488350f19e888fe874dbcb542ab2ad0706af8d9303164a54008937f7a328404dfb81b5e2d1017b1a5c3ea141"
+    pass: "password123"
+    source: "mdxfind"

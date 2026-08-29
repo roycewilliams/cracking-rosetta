@@ -1,0 +1,20 @@
+id: "rmd160-x2"
+name: "RMD160 (2 iterations)"
+status: "needs-review"
+tools:
+  mdxfind:
+    types: ["RMD160"]
+    iterations: 2
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+  john:
+    cpu: ["dynamic_133"]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
+    note: "from hashpipe john_map.h, confirmed upstream by recomputation"
+vectors:
+  - hash: "604081c4e43c8fc4b7c8c03da55534a2ead5bb05"
+    pass: "password123"
+    source: "mdxfind"

@@ -1,0 +1,15 @@
+id: "hmac-snefru128-plain-salt"
+name: "hmac(\"snefru128\", $plain, $salt)"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["HMAC-SNE128"]
+    verified: "asserted"
+vectors:
+  - hash: "778d254eebc6e782d3f7f55f0bb1a8f7:abc123"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "not supported"

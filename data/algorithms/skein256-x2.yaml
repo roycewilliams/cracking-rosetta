@@ -1,0 +1,20 @@
+id: "skein256-x2"
+name: "SKEIN256 (2 iterations)"
+status: "needs-review"
+tools:
+  mdxfind:
+    types: ["SKEIN256"]
+    iterations: 2
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+  john:
+    cpu: ["dynamic_343"]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
+    note: "from hashpipe john_map.h, confirmed upstream by recomputation"
+vectors:
+  - hash: "3c25a8e83a9a294db94bcb375c18d3ec620027eb8b8c20e4843465f51ccebbaf"
+    pass: "password123"
+    source: "mdxfind"

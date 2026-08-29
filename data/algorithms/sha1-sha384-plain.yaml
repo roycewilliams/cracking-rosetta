@@ -1,0 +1,15 @@
+id: "sha1-sha384-plain"
+name: "sha1(sha384($plain))"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["SHA1SHA384"]
+    verified: "asserted"
+vectors:
+  - hash: "fc7fe4000cb2c6a5aec736e1311ca3e71e1487f9"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "SHA1SHA384"

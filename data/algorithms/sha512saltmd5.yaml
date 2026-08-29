@@ -1,0 +1,9 @@
+id: "sha512saltmd5"
+name: "SHA512SALTMD5"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["SHA512SALTMD5"]
+    verified: "asserted"

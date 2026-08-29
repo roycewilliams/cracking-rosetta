@@ -1,0 +1,16 @@
+id: "cisco8"
+name: "CISCO8"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [9200]
+    verified: "asserted"
+  mdxfind:
+    types: ["CISCO8"]
+    verified: "asserted"
+vectors:
+  - hash: "$8$TnGX/fE4KGHOVU$/y6TkzwXzKg3tzpEs4yHca5PgftnlQ38aSvj9g98zO."
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "not supported"

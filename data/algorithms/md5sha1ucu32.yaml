@@ -1,0 +1,9 @@
+id: "md5sha1ucu32"
+name: "MD5SHA1UCu32"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["MD5SHA1UCu32"]
+    verified: "asserted"

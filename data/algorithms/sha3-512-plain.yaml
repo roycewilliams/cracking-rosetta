@@ -1,0 +1,22 @@
+id: "sha3-512-plain"
+name: "sha3-512($plain)"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [17600]
+    verified: "asserted"
+  mdxfind:
+    types: ["SHA3-512"]
+    verified: "asserted"
+  john:
+    cpu: ["dynamic_400"]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
+    note: "from hashpipe john_map.h, confirmed upstream by recomputation"
+vectors:
+  - hash: "14b2cb30dcb9a0e596425cf27c2e6315dfb436bbd4f9dbf234c0de2a5f94d21687a227884dc16c9f782fdc828adf850d2ba767cab7914f5cf6148bf8e521c048"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "SHA3-512"

@@ -1,0 +1,16 @@
+id: "sha256crypt"
+name: "sha256crypt"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [7400]
+    verified: "asserted"
+  mdxfind:
+    types: ["SHA256CRYPT"]
+    verified: "asserted"
+vectors:
+  - hash: "$5$yuPFJGtfUjuJbffW$x3RBzZ3oPkds1EfjGSJN7U0m9moPrqwHrhhtKDsofX0"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "SHA256CRYPT"

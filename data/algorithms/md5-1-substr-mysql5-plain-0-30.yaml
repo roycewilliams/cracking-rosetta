@@ -1,0 +1,15 @@
+id: "md5-1-substr-mysql5-plain-0-30"
+name: "md5(\"1*\".substr(mysql5($plain),0,30))"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["MD5SQL5-32"]
+    verified: "asserted"
+vectors:
+  - hash: "0043b42cca3fb55158310e4ecf633663"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "MD5INS1CUT0-31MYSQL5TOT"

@@ -1,0 +1,19 @@
+id: "md5-md5salt-md5md5pass"
+name: "MD5-MD5SALT-MD5MD5PASS"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [30500]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+    note: "hashcat mapping shipped in mdxfind's own type table"
+  mdxfind:
+    types: ["MD5-MD5SALT-MD5MD5PASS"]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+vectors:
+  - hash: "f6ad0e1f305657761efeb50a112a16ac:testsalt"
+    pass: "password123"
+    source: "mdxfind"

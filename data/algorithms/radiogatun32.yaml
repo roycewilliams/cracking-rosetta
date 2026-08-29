@@ -1,0 +1,15 @@
+id: "radiogatun32"
+name: "RADIOGATUN32"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["RADIOGATUN32"]
+    verified: "asserted"
+vectors:
+  - hash: "9ee7fdfb57e2132c6614dcfcf4084bc7"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "RADIOGATUN32"

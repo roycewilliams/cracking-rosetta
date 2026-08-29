@@ -1,0 +1,15 @@
+id: "simd256"
+name: "SIMD256"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["SIMD256"]
+    verified: "asserted"
+vectors:
+  - hash: "2a6ab6573ca32252f35f260fb969560fc65d56344d7e94652999ae53432baac0"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "SIMD256"

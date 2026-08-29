@@ -1,0 +1,15 @@
+id: "cube384"
+name: "CUBE384"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["CUBE384"]
+    verified: "asserted"
+vectors:
+  - hash: "91d275da5d1301e874ce6966215669d0b9651111cca533ddc42f44dbfd3b01a4915a8deb1c3fea9ea08fb6a345546b52"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "CUBE384"

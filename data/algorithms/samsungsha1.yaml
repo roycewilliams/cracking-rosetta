@@ -1,0 +1,19 @@
+id: "samsungsha1"
+name: "SAMSUNGSHA1"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [5800]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+    note: "hashcat mapping shipped in mdxfind's own type table"
+  mdxfind:
+    types: ["SAMSUNGSHA1"]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+vectors:
+  - hash: "b663d01f50b917f6a9b1aa402207f863ba8b7c41:2173921648"
+    pass: "password123"
+    source: "mdxfind"

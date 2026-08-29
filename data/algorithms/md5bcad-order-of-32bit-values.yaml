@@ -1,0 +1,15 @@
+id: "md5bcad-order-of-32bit-values"
+name: "md5bcad (order of 32bit values)"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["MD5bcad"]
+    verified: "asserted"
+vectors:
+  - hash: "b2854c88094fe624975790df77a7d5f3"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "BCAD-MD5"

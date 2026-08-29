@@ -1,0 +1,11 @@
+id: "md5-4xmd5"
+name: "MD5-4xMD5"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["MD5-4xMD5"]
+    verified: "asserted"
+legacy:
+  hashes_org: "MD5(MD5(PLAIN)MD5(PLAIN)MD5(PLAIN)MD5(PLAIN))"

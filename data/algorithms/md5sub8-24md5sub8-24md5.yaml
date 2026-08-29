@@ -1,0 +1,15 @@
+id: "md5sub8-24md5sub8-24md5"
+name: "MD5sub8-24MD5sub8-24MD5"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["MD5sub8-24MD5sub8-24MD5"]
+    verified: "asserted"
+vectors:
+  - hash: "ab7a37c36dd93f9e05308253b61dbfcd"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "MD5CUT8-16(MD5CUT8-16(MD5(PLAIN)))"

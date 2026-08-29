@@ -1,0 +1,21 @@
+id: "lm"
+name: "LM"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [3000]
+    verified: "asserted"
+  mdxfind:
+    types: ["LM"]
+    verified: "asserted"
+  john:
+    cpu: ["LM"]
+    gpu: ["LM-opencl"]
+    verified: "asserted"
+vectors:
+  - hash: "4b4aa8a8a048c29caad3b435b51404ee"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "LM"
+  hashkiller: "n/a"

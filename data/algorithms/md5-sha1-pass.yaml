@@ -1,0 +1,20 @@
+id: "md5-sha1-pass"
+name: "md5(sha1($pass))"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [4400]
+    verified: "asserted"
+  mdxfind:
+    types: ["MD5SHA1"]
+    verified: "asserted"
+  john:
+    cpu: ["dynamic_22"]
+    verified: "asserted"
+vectors:
+  - hash: "cbf32826d7200ba083767f3685a711a9"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "MD5SHA1"
+  hashkiller: "md5(sha1($pass))"

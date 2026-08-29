@@ -1,0 +1,9 @@
+id: "md5padmd5"
+name: "MD5padMD5"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["MD5padMD5"]
+    verified: "asserted"

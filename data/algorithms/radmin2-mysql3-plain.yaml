@@ -1,0 +1,15 @@
+id: "radmin2-mysql3-plain"
+name: "radmin2(mysql3($plain))"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["RADMIN2SQL3"]
+    verified: "asserted"
+vectors:
+  - hash: "2802ea620989ed0097fdcc7b4d6d8748"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "RADMIN2MYSQL3"

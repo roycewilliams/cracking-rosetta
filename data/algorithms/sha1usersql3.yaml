@@ -1,0 +1,9 @@
+id: "sha1usersql3"
+name: "SHA1USERSQL3"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["SHA1USERSQL3"]
+    verified: "asserted"

@@ -1,0 +1,19 @@
+id: "blake2b512"
+name: "BLAKE2B512"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [600]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+    note: "hashcat mapping shipped in mdxfind's own type table"
+  mdxfind:
+    types: ["BLAKE2B512"]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+vectors:
+  - hash: "$BLAKE2$fbdba996cade3bae2d948c2f03f8149ffa7068584731ac6efbef1688e64609b6969a52dcc203b74aa87d6d9d1b0cd93bea724cddd12443f2b808bc03776b81cc"
+    pass: "password123"
+    source: "mdxfind"

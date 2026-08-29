@@ -1,0 +1,13 @@
+id: "md5-md5pusha1md5pup"
+name: "MD5-MD5puSHA1MD5pup"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["MD5-MD5puSHA1MD5pup"]
+    verified: "asserted"
+vectors:
+  - hash: "95020dae731d5a01e096f79bf3d07abc:1"
+    pass: "rosetta"
+    source: "sheet"

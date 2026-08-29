@@ -1,0 +1,9 @@
+id: "md5sha0"
+name: "MD5SHA0"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["MD5SHA0"]
+    verified: "asserted"

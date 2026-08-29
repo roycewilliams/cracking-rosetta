@@ -1,0 +1,15 @@
+id: "sha1-radmin2-md5-plain"
+name: "sha1(radmin2(md5($plain)))"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["SHA1RADMIN2MD5"]
+    verified: "asserted"
+vectors:
+  - hash: "c7e22a7a0fd83c0e1a11f4a3a2e70ec119df9b76"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "SHA1RADMIN2MD5"

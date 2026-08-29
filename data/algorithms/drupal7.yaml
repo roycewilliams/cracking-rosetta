@@ -1,0 +1,19 @@
+id: "drupal7"
+name: "DRUPAL7"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [7900]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+    note: "hashcat mapping shipped in mdxfind's own type table"
+  mdxfind:
+    types: ["DRUPAL7"]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+vectors:
+  - hash: "$S$C00000000uP3JXd.0IL30e76wJH2NZ/Ovd0AALo.mjXytygeAP9u"
+    pass: "password123"
+    source: "mdxfind"

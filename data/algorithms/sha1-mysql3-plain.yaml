@@ -1,0 +1,15 @@
+id: "sha1-mysql3-plain"
+name: "sha1(mysql3($plain))"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["SHA1SQL3"]
+    verified: "asserted"
+vectors:
+  - hash: "1573d58bf304e45e8e99789f2faf6780de72a84b"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "SHA1MYSQL3"

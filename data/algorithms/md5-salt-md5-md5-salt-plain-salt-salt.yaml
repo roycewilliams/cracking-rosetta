@@ -1,0 +1,15 @@
+id: "md5-salt-md5-md5-salt-plain-salt-salt"
+name: "md5($salt.md5(md5($salt.$plain).$salt).$salt)"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["MD5-MULTISALT"]
+    verified: "asserted"
+vectors:
+  - hash: "1318f15bdd865413ef892880fbc6052e:abc123"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "MD5(SALTMD5(MD5(SALTPLAIN)SALT)SALT)"

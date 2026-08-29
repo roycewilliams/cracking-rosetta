@@ -1,0 +1,15 @@
+id: "md5-tiger192-3-plain"
+name: "md5(tiger192_3($plain))"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["MD5TIGER"]
+    verified: "asserted"
+vectors:
+  - hash: "61ea24a8c78e2e11be379bba5938c87f"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "MD5TIGER192-3"

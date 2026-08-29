@@ -1,0 +1,19 @@
+id: "mongodb-sha256"
+name: "MONGODB-SHA256"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [24200]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+    note: "hashcat mapping shipped in mdxfind's own type table"
+  mdxfind:
+    types: ["MONGODB-SHA256"]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+vectors:
+  - hash: "$mongodb-scram$*1**15000*qYaA1K1ZZSSpWfY+yqShlcTn0XVcrNipxiYCLQ==*B3T1SAp4Rlryqmm5sdJdGUzAM7lzQyH7h/XPSN71mFA="
+    pass: "password123"
+    source: "mdxfind"

@@ -1,0 +1,22 @@
+id: "sha3-384-plain"
+name: "sha3-384($plain)"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [17500]
+    verified: "asserted"
+  mdxfind:
+    types: ["SHA3-384"]
+    verified: "asserted"
+  john:
+    cpu: ["dynamic_390"]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
+    note: "from hashpipe john_map.h, confirmed upstream by recomputation"
+vectors:
+  - hash: "2650013dd6e61219ead77e373ca202155fee08726885f895a29ad4a5fd1a1a7fc9f9c33aa1a9fe08690aa9e8bfd934ee"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "SHA3-384"

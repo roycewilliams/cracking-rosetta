@@ -1,0 +1,19 @@
+id: "hmac-streebog256"
+name: "HMAC-STREEBOG256"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [11760]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+    note: "hashcat mapping shipped in mdxfind's own type table"
+  mdxfind:
+    types: ["HMAC-STREEBOG256"]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+vectors:
+  - hash: "35ec05ed149db7e04872e979499ad91333b040bae8c6e687ab08a1d10957f2fc:testsalt"
+    pass: "password123"
+    source: "mdxfind"

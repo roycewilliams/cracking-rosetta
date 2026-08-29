@@ -1,0 +1,11 @@
+id: "md5-md5-pass-pass-sha1-pass"
+name: "md5( md5($pass) . $pass . sha1($pass) )"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["MD5MD5PASSSHA1"]
+    verified: "asserted"
+legacy:
+  hashes_org: "MD5(MD5(PLAIN)PLAINSHA1(PLAIN))"

@@ -1,0 +1,15 @@
+id: "sha1-md5-md5-plain-salt-salt"
+name: "sha1(md5(md5($plain).$salt.$salt))"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["SHA1MD51SALTMD5"]
+    verified: "asserted"
+vectors:
+  - hash: "d26e2cfbc8cc288acb1ddab0c82b5df3a969c23c:z"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "SHA1MD5(MD5(PLAIN)SALTSALT)"

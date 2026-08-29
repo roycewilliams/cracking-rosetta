@@ -1,0 +1,9 @@
+id: "sha1lsb35"
+name: "SHA1lsb35"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["SHA1lsb35"]
+    verified: "asserted"

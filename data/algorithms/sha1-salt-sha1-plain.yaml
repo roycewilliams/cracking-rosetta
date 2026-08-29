@@ -1,0 +1,16 @@
+id: "sha1-salt-sha1-plain"
+name: "sha1($salt.sha1($plain))"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [4520]
+    verified: "asserted"
+  mdxfind:
+    types: ["SHA1SALTSHA1PASS"]
+    verified: "asserted"
+vectors:
+  - hash: "6e28eba8059a9e06aa3aa0679e721d4fb29bd825:6602905396"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "?"

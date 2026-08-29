@@ -1,0 +1,15 @@
+id: "md5-cut8-16-md5-plain"
+name: "md5(cut8-16(md5($plain)))"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["MD5sub8-24MD5"]
+    verified: "asserted"
+vectors:
+  - hash: "ce37ee3731fc4afd219c1321c98c7593"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "MD5CUT8-16MD5"

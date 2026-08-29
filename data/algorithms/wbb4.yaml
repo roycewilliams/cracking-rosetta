@@ -1,0 +1,19 @@
+id: "wbb4"
+name: "WBB4"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [33800]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+    note: "hashcat mapping shipped in mdxfind's own type table"
+  mdxfind:
+    types: ["WBB4"]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+vectors:
+  - hash: "$2a$08$aaaaaaaaaaaaaaaaaaaaaOTh6vK9mhTsqbydr1hjy8VMv24KoT/pS"
+    pass: "password123"
+    source: "mdxfind"

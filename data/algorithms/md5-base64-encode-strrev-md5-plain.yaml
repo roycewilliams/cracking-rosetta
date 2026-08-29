@@ -1,0 +1,15 @@
+id: "md5-base64-encode-strrev-md5-plain"
+name: "md5(base64_encode(strrev(md5($plain))))"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["MD5BASE64revMD5"]
+    verified: "asserted"
+vectors:
+  - hash: "18dee10335f04f0f4771f99abdb66be1"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "MD5BASE64REVMD5"

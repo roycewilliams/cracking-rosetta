@@ -1,0 +1,15 @@
+id: "shabal256"
+name: "SHABAL256"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["SHABAL256"]
+    verified: "asserted"
+vectors:
+  - hash: "4dad87411e79d5db7c8e3f2e0d464f6a0c5a67d8cc31f1ed8d383861a8d7a597"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "SHABAL256"

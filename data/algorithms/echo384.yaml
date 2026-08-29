@@ -1,0 +1,15 @@
+id: "echo384"
+name: "ECHO384"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["ECHO384"]
+    verified: "asserted"
+vectors:
+  - hash: "647453eb02c1712d844d20f34acd28ee712b7558e2be11a67d5eecc026d9e63d703bdf00f318d957c57bdfef0f55a21f"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "ECHO384"

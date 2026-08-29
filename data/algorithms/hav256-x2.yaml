@@ -1,0 +1,20 @@
+id: "hav256-x2"
+name: "HAV256 (2 iterations)"
+status: "needs-review"
+tools:
+  mdxfind:
+    types: ["HAV256"]
+    iterations: 2
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+  john:
+    cpu: ["dynamic_283"]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
+    note: "from hashpipe john_map.h, confirmed upstream by recomputation"
+vectors:
+  - hash: "426c08f266fdf8898ac806a4ff499c98911235e7f1164f6ed6c0532892cba11e"
+    pass: "password123"
+    source: "mdxfind"

@@ -1,0 +1,20 @@
+id: "sha3-384-x2"
+name: "SHA3-384 (2 iterations)"
+status: "needs-review"
+tools:
+  mdxfind:
+    types: ["SHA3-384"]
+    iterations: 2
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+  john:
+    cpu: ["dynamic_393"]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
+    note: "from hashpipe john_map.h, confirmed upstream by recomputation"
+vectors:
+  - hash: "d9b644c85745fe084746ef61cd2b5c0981ad524b9ab114c1e88966687479a0fbbe87f09a647a92b08437d1b63c555b06"
+    pass: "password123"
+    source: "mdxfind"

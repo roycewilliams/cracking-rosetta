@@ -1,0 +1,15 @@
+id: "sha256-md5-salt-plain-salt-2"
+name: "sha256(md5($salt.$plain).$salt)"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["SHA256HEXSALT"]
+    verified: "asserted"
+vectors:
+  - hash: "7d103c6361bb8141387bb32ede14c24eb9f72062fdd5188aadb0f69960594038:ff"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "SHA256(MD5(SALTPLAIN)SALT)"

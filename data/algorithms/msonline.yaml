@@ -1,0 +1,19 @@
+id: "msonline"
+name: "MSONLINE"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [33700]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+    note: "hashcat mapping shipped in mdxfind's own type table"
+  mdxfind:
+    types: ["MSONLINE"]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+vectors:
+  - hash: "$MSONLINEACCOUNT$0$10000$6153d80b93f4f3c4082576154118d4191744911d6370b505e823d049375654ef"
+    pass: "password123"
+    source: "mdxfind"

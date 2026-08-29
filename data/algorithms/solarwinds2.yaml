@@ -1,0 +1,19 @@
+id: "solarwinds2"
+name: "SOLARWINDS2"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [21501]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+    note: "hashcat mapping shipped in mdxfind's own type table"
+  mdxfind:
+    types: ["SOLARWINDS2"]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+vectors:
+  - hash: "$solarwinds$1$3pHkk55NTYpAeV3EJjcAww==$G/b0s7BdfWnW4288yY55lK3McRo2dP9BdjInZtv7oo6V+JVh8wUHd1K13pfwc6E2X/YEZJ63kz3GMXKrH/v27A=="
+    pass: "password123"
+    source: "mdxfind"

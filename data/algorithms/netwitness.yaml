@@ -1,0 +1,19 @@
+id: "netwitness"
+name: "NETWITNESS"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [20712]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+    note: "hashcat mapping shipped in mdxfind's own type table"
+  mdxfind:
+    types: ["NETWITNESS"]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+vectors:
+  - hash: "7F6B6E9ECD0E25FA22A5CB1A6433CC193C70CF476B8294B9C0AAA8F583AE38D4:U2FsdA=="
+    pass: "password123"
+    source: "mdxfind"

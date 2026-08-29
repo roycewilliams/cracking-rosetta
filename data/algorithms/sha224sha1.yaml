@@ -1,0 +1,19 @@
+id: "sha224sha1"
+name: "SHA224SHA1"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [34500]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+    note: "hashcat mapping shipped in mdxfind's own type table"
+  mdxfind:
+    types: ["SHA224SHA1"]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+vectors:
+  - hash: "714711d32a639cebcb593d2646c98e9d91245ebb23092d3335e031ab"
+    pass: "password123"
+    source: "mdxfind"

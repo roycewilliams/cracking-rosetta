@@ -1,0 +1,15 @@
+id: "md5-whirlpool-plain"
+name: "md5(whirlpool($plain))"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["MD5WRL"]
+    verified: "asserted"
+vectors:
+  - hash: "399f6a0d962eaa66ca0caf143589f9f8"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "MD5WRL"

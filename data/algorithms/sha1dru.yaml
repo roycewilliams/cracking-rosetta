@@ -1,0 +1,9 @@
+id: "sha1dru"
+name: "SHA1DRU"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["SHA1DRU"]
+    verified: "asserted"

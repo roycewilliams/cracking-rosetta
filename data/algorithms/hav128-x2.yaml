@@ -1,0 +1,20 @@
+id: "hav128-x2"
+name: "HAV128 (2 iterations)"
+status: "needs-review"
+tools:
+  mdxfind:
+    types: ["HAV128"]
+    iterations: 2
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+  john:
+    cpu: ["dynamic_163"]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
+    note: "from hashpipe john_map.h, confirmed upstream by recomputation"
+vectors:
+  - hash: "ab71f5c32f8720509626227686136dff"
+    pass: "password123"
+    source: "mdxfind"

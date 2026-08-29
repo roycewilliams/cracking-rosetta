@@ -1,0 +1,15 @@
+id: "md5-substr-sha1-plain-0-32"
+name: "md5(substr(sha1($plain), 0, 32))"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["MD5SHA1u32"]
+    verified: "asserted"
+vectors:
+  - hash: "403335e200cf12080dbf5d88e537fb85"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "MD5CUT0-32SHA1"

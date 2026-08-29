@@ -1,0 +1,15 @@
+id: "half-md5"
+name: "Half MD5"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [5100]
+    verified: "asserted"
+vectors:
+  - hash: "975790dfb2854c88"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "CUTn-16MD5"
+  hashkiller: "n/a"
+notes: "(n denoting the starting position n>=0)"

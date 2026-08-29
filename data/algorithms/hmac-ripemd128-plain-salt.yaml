@@ -1,0 +1,15 @@
+id: "hmac-ripemd128-plain-salt"
+name: "hmac(\"ripemd128\", $plain, $salt)"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["HMAC-RMD128"]
+    verified: "asserted"
+vectors:
+  - hash: "5da94f442282d3d063fc35a6c482f495:abc123"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "not supported"

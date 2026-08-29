@@ -1,0 +1,21 @@
+id: "ntlm"
+name: "NTLM"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [1000]
+    verified: "asserted"
+  mdxfind:
+    types: ["NTLM"]
+    verified: "asserted"
+  john:
+    cpu: ["dynamic_33"]
+    gpu: ["ntlmv2-opencl"]
+    verified: "asserted"
+vectors:
+  - hash: "a2dde7c8056b54f9f419fc9b62cb6611"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "NTLM"
+  hashkiller: "NTLM"

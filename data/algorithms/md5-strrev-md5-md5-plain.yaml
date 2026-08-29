@@ -1,0 +1,15 @@
+id: "md5-strrev-md5-md5-plain"
+name: "md5(strrev(md5(md5($plain))))"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["MD5revMD5MD5"]
+    verified: "asserted"
+vectors:
+  - hash: "822a3cf24fbc73f7fab79e6aa8ce0c4d"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "MD5REVMD5X2"

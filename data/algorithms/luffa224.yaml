@@ -1,0 +1,15 @@
+id: "luffa224"
+name: "LUFFA224"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["LUFFA224"]
+    verified: "asserted"
+vectors:
+  - hash: "274106a05113bf30487ff312da705e270d63e0e7291d585a473e236b"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "LUFFA224"

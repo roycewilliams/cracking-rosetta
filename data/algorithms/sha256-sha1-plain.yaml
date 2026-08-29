@@ -1,0 +1,15 @@
+id: "sha256-sha1-plain"
+name: "sha256(sha1($plain))"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["SHA256SHA1"]
+    verified: "asserted"
+vectors:
+  - hash: "e239802419c530d36ce60dc4c6a6600f7adf11a55619579c524802f0994ec4a3"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "SHA256SHA1"

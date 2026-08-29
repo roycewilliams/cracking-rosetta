@@ -1,0 +1,15 @@
+id: "bmw256"
+name: "BMW256"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["BMW256"]
+    verified: "asserted"
+vectors:
+  - hash: "d5532da92f46ff110de98ee3ebd351ed9180c69ee0dc86d73ce0ac1ad2441ed4"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "BMW256"

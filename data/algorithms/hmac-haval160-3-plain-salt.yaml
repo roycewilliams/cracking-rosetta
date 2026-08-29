@@ -1,0 +1,15 @@
+id: "hmac-haval160-3-plain-salt"
+name: "hmac(\"haval160,3\", $plain, $salt)"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["HMAC-HAV160"]
+    verified: "asserted"
+vectors:
+  - hash: "9e21d4c57fad80b1a1f6f847528ee9cdc3b451f0:abc123"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "not supported"

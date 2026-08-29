@@ -1,0 +1,19 @@
+id: "sha384utf16lepasssalt"
+name: "SHA384UTF16LEPASSSALT"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [10830]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+    note: "hashcat mapping shipped in mdxfind's own type table"
+  mdxfind:
+    types: ["SHA384UTF16LEPASSSALT"]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+vectors:
+  - hash: "c517a98fbedb4a9322f4b1bec2d9581a00391e615141f5fa2b76a360076603daca839c7cb2270201780ddcc2aaeae313:testsalt"
+    pass: "password123"
+    source: "mdxfind"

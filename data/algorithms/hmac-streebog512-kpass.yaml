@@ -1,0 +1,19 @@
+id: "hmac-streebog512-kpass"
+name: "HMAC-STREEBOG512-KPASS"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [11850]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+    note: "hashcat mapping shipped in mdxfind's own type table"
+  mdxfind:
+    types: ["HMAC-STREEBOG512-KPASS"]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+vectors:
+  - hash: "f7b1bd906c850d6de2a29c373f7786910ecb3c6f457245924432a24e8b263f14b43b4795a8c27babdb8fa5fdb1aab4f4743521a9de9612ecb4390ed9b303ea32:testsalt"
+    pass: "password123"
+    source: "mdxfind"

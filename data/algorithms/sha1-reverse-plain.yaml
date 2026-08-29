@@ -1,0 +1,15 @@
+id: "sha1-reverse-plain"
+name: "sha1(reverse($plain))"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["SHA1revp"]
+    verified: "asserted"
+vectors:
+  - hash: "9cdfc911296bda3ea534efd6499f8d3f61093e95"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "not supported (just reverse first)"

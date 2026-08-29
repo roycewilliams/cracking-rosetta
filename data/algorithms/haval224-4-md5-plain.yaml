@@ -1,0 +1,15 @@
+id: "haval224-4-md5-plain"
+name: "haval224_4(md5($plain))"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["HAV224-4MD5"]
+    verified: "asserted"
+vectors:
+  - hash: "af044154b313a74b0d030e97351d1cfe554abb03e9770f84475c6726"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "HAVAL224-4MD5"

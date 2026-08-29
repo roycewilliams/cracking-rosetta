@@ -1,0 +1,11 @@
+id: "md5-base64-raw-sha256"
+name: "md5(base64(raw_sha256)) ?"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["MD5BASE64SHA256RAW"]
+    verified: "asserted"
+legacy:
+  hashes_org: "MD5BASE64RAWSHA256"

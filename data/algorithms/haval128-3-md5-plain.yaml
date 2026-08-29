@@ -1,0 +1,15 @@
+id: "haval128-3-md5-plain"
+name: "haval128_3(md5($plain))"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["HAV128MD5"]
+    verified: "asserted"
+vectors:
+  - hash: "63e20ddcd1f5c667ca9c8eefac7c7c87"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "HAVAL128-3MD5"

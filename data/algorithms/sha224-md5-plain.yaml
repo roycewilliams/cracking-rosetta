@@ -1,0 +1,15 @@
+id: "sha224-md5-plain"
+name: "sha224(md5($plain))"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["SHA224MD5"]
+    verified: "asserted"
+vectors:
+  - hash: "0bb52cf2ad59bfe8a348bee6f1195d8efb65bb5ef7f92bae77828682"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "SHA224MD5"

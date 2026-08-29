@@ -1,0 +1,19 @@
+id: "pwsafe3"
+name: "PWSAFE3"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [5200]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+    note: "hashcat mapping shipped in mdxfind's own type table"
+  mdxfind:
+    types: ["PWSAFE3"]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+vectors:
+  - hash: "50575333e4e2a590a5e5c8269f57ec04a8a1c0c03da55b311c51236dab8c6b96b0afca0200080000a146c17e011363b180b2a121713dc6ea94accb57a2751a99e67528a5872622bd"
+    pass: "password123"
+    source: "mdxfind"

@@ -1,0 +1,19 @@
+id: "netscaler-pbkdf2"
+name: "NETSCALER-PBKDF2"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [33900]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+    note: "hashcat mapping shipped in mdxfind's own type table"
+  mdxfind:
+    types: ["NETSCALER-PBKDF2"]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+vectors:
+  - hash: "5567243c55099b6b10a714a350db53beea8be6ac9c247fd40fea7e96d206a9f11998b7c6b32242e28c311596e9cabcf6ccd0d14af94ae904820a36e7fb9a8277f"
+    pass: "password123"
+    source: "mdxfind"

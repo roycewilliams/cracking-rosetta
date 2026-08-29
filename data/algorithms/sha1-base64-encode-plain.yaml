@@ -1,0 +1,15 @@
+id: "sha1-base64-encode-plain"
+name: "sha1(base64_encode($plain))"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["SHA1BASE64"]
+    verified: "asserted"
+vectors:
+  - hash: "a07445b1a23792a88c177ae6e315dfadac81bdde"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "SHA1BASE64"

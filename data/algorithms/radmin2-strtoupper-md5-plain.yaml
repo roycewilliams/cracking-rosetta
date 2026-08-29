@@ -1,0 +1,15 @@
+id: "radmin2-strtoupper-md5-plain"
+name: "radmin2(strtoupper(md5($plain)))"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["RADMIN2MD5UC"]
+    verified: "asserted"
+vectors:
+  - hash: "9106bc1a4066c88b665973790c8c2428"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "RADMIN2UCMD5"

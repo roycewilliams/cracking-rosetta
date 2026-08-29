@@ -1,0 +1,20 @@
+id: "sha224"
+name: "SHA224"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [1300]
+    verified: "asserted"
+  mdxfind:
+    types: ["SHA224"]
+    verified: "asserted"
+  john:
+    cpu: ["dynamic_50"]
+    verified: "asserted"
+vectors:
+  - hash: "223b5c5625a10b045533f2f731dc47f572b3070feaf0838dffba0dbb"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "SHA224"
+  hashkiller: "n/a"

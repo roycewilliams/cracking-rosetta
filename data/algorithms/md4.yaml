@@ -1,0 +1,21 @@
+id: "md4"
+name: "MD4"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [900]
+    verified: "asserted"
+  mdxfind:
+    types: ["MD4"]
+    verified: "asserted"
+  john:
+    cpu: ["Raw-MD4", "dynamic_30"]
+    gpu: ["raw-MD4-opencl"]
+    verified: "asserted"
+vectors:
+  - hash: "d9e2bf8ca98bfadf4eac11b0c2d5b644"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "MD4"
+  hashkiller: "MD4"

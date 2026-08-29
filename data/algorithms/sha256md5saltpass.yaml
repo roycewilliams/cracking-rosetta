@@ -1,0 +1,9 @@
+id: "sha256md5saltpass"
+name: "SHA256MD5SALTPASS"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["SHA256MD5SALTPASS"]
+    verified: "asserted"

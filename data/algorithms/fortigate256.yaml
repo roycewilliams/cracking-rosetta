@@ -1,0 +1,19 @@
+id: "fortigate256"
+name: "FORTIGATE256"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [26300]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+    note: "hashcat mapping shipped in mdxfind's own type table"
+  mdxfind:
+    types: ["FORTIGATE256"]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+vectors:
+  - hash: "SH2FCIhM0IUIQVFJgcDRi8y4h+RPUoet9Ij4x2A2r8N+kp3ClVyJltoBYACm5M="
+    pass: "password123"
+    source: "mdxfind"

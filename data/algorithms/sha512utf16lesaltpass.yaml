@@ -1,0 +1,19 @@
+id: "sha512utf16lesaltpass"
+name: "SHA512UTF16LESALTPASS"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [1740]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+    note: "hashcat mapping shipped in mdxfind's own type table"
+  mdxfind:
+    types: ["SHA512UTF16LESALTPASS"]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+vectors:
+  - hash: "505489751055fae2616a85ca76401c7d73685c4338637cd28fbb8d130e843c4c3d3594f9077ddce7f7d6cec342f61384a67b1004923bb1e17baa234795669af1:testsalt"
+    pass: "password123"
+    source: "mdxfind"

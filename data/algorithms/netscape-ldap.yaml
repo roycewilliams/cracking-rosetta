@@ -1,0 +1,16 @@
+id: "netscape-ldap"
+name: "netscape LDAP"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [101]
+    verified: "asserted"
+  mdxfind:
+    types: ["APACHE-SHA"]
+    verified: "asserted"
+vectors:
+  - hash: "{SHA}0hr37OBGrw4S08OEcnks1fCBw58="
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "NSLDAP"

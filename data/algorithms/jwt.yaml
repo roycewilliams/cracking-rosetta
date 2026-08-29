@@ -1,0 +1,19 @@
+id: "jwt"
+name: "JWT"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [16500]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+    note: "hashcat mapping shipped in mdxfind's own type table"
+  mdxfind:
+    types: ["JWT"]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+vectors:
+  - hash: "eyJhbGciOiJIUzI1NiJ9.eyIzNDM2MzQyMCI6NTc2ODc1NDd9.YVWX_3IWKC7NpoDVtyr4Qzm6FQVA62aeHiTqj4U5ojI"
+    pass: "password123"
+    source: "mdxfind"

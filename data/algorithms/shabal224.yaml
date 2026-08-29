@@ -1,0 +1,15 @@
+id: "shabal224"
+name: "SHABAL224"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["SHABAL224"]
+    verified: "asserted"
+vectors:
+  - hash: "905b4e54f72c13539d1231beef2c6808b02a00afa0558a15828f7256"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "SHABAL224"

@@ -1,0 +1,15 @@
+id: "fugue384"
+name: "FUGUE384"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["FUGUE384"]
+    verified: "asserted"
+vectors:
+  - hash: "8f5a1d084c257a4590667eb3820a5bd03a41216a6944c2d8799f8d631658423d87a971d14867d9a4fa53ffb7a57b764f"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "FUGUE384"

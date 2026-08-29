@@ -1,0 +1,15 @@
+id: "ripemd128-md5-plain"
+name: "ripemd128(md5($plain))"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["RMD128MD5"]
+    verified: "asserted"
+vectors:
+  - hash: "c1937d511306514f7635f6e12630f1f0"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "RIPEMD128MD5"

@@ -1,0 +1,15 @@
+id: "ripemd-plain"
+name: "ripemd($plain)"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["RIPEMD"]
+    verified: "asserted"
+vectors:
+  - hash: "37bfd0e9f5b0ffdb5c0d97c3851d3eb8"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "not supported"

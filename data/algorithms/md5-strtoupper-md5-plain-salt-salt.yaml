@@ -1,0 +1,15 @@
+id: "md5-strtoupper-md5-plain-salt-salt"
+name: "md5(strtoupper(md5($plain)).$salt.$salt)"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["MD51SALTMD5UC"]
+    verified: "asserted"
+vectors:
+  - hash: "7812a39b97f89fd967afff4ffe14ffc8:z"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "MD5(UC(MD5(PLAIN))SALTSALT)"

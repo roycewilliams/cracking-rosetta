@@ -1,0 +1,19 @@
+id: "argon2"
+name: "ARGON2"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [34000]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+    note: "hashcat mapping shipped in mdxfind's own type table"
+  mdxfind:
+    types: ["ARGON2"]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+vectors:
+  - hash: "3118004b2f9ce8fcf3abc2fdf9623b85988db360951c607456beb26821381a12:aaaaaaaaaaaaaaaabbbbbbbbbbbbbbbb:3_32_2_67108864"
+    pass: "password123"
+    source: "mdxfind"

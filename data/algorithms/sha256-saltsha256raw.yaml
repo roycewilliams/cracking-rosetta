@@ -1,0 +1,19 @@
+id: "sha256-saltsha256raw"
+name: "SHA256-SALTSHA256RAW"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [21420]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+    note: "hashcat mapping shipped in mdxfind's own type table"
+  mdxfind:
+    types: ["SHA256-SALTSHA256RAW"]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+vectors:
+  - hash: "e8ce7be541f79491609f5834c3c7ae8a3abe63d237e07fd6d492356a1697c08b:Salt"
+    pass: "password123"
+    source: "mdxfind"

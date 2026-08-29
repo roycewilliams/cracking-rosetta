@@ -1,0 +1,9 @@
+id: "leet-sha512-wrl-user"
+name: "LEET-SHA512-WRL-USER"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["LEET-SHA512-WRL-USER"]
+    verified: "asserted"

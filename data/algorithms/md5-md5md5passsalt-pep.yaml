@@ -1,0 +1,19 @@
+id: "md5-md5md5passsalt-pep"
+name: "MD5-MD5MD5PASSSALT-PEP"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [31700]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+    note: "hashcat mapping shipped in mdxfind's own type table"
+  mdxfind:
+    types: ["MD5-MD5MD5PASSSALT-PEP"]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+vectors:
+  - hash: "ee7c5e3d9be506a265c21e426add16ec:Salt:Pepper"
+    pass: "password123"
+    source: "mdxfind"

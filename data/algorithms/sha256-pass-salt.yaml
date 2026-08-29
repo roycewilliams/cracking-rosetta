@@ -1,0 +1,20 @@
+id: "sha256-pass-salt"
+name: "sha256($pass.$salt)"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [1410]
+    verified: "asserted"
+  mdxfind:
+    types: ["SHA256PASSSALT"]
+    verified: "asserted"
+  john:
+    cpu: ["dynamic_62"]
+    verified: "asserted"
+vectors:
+  - hash: "764f15cb8693554b353d381afcb26d1581ed13ce4be97dc6ae6993c657778c2c:9eOlrQ"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "SHA256(PLAINSALT)"
+  hashkiller: "sha256($pass.$salt)"

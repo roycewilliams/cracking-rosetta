@@ -1,0 +1,19 @@
+id: "ssha512base64"
+name: "SSHA512BASE64"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [1711]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+    note: "hashcat mapping shipped in mdxfind's own type table"
+  mdxfind:
+    types: ["SSHA512BASE64"]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+vectors:
+  - hash: "{SSHA512}Ez2Xp55xerUzNyNXPfxuGDxgzItJLkWWY86Rikkvqs64xKnzjdtMdHrGwd6a3r4YSgTuOx+vKeLn0EK/KKmEDnRlc3Q="
+    pass: "password123"
+    source: "mdxfind"

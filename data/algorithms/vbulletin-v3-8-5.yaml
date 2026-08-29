@@ -1,0 +1,23 @@
+id: "vbulletin-v3-8-5"
+name: "vBulletin < v3.8.5"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [2611]
+    verified: "asserted"
+  mdxfind:
+    types: ["MD5SALT"]
+    verified: "asserted"
+  john:
+    cpu: ["dynamic_6"]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
+    note: "from hashpipe john_map.h, confirmed upstream by recomputation"
+vectors:
+  - hash: "896bdefea73a4d4ffd6218267b753530:Hgd"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "VBULLETIN"
+  hashkiller: "vBulletin < v3.8.5"

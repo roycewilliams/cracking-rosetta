@@ -1,0 +1,15 @@
+id: "bcrypt-sha1-plain"
+name: "bcrypt(sha1($plain))"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["BCRYPTSHA1"]
+    verified: "asserted"
+vectors:
+  - hash: "$2y$12$9keRDvsa.Xgu4tB.CBXUEecBu3TkKmW4Y7kZ/SciKOB0.FhQI1Rre"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "BCRYPTSHA1"

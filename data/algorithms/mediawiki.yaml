@@ -1,0 +1,19 @@
+id: "mediawiki"
+name: "MEDIAWIKI"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [3711]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+    note: "hashcat mapping shipped in mdxfind's own type table"
+  mdxfind:
+    types: ["MEDIAWIKI"]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+vectors:
+  - hash: "$B$56668501$20461e17ce27c23cf7927fe0aa1a7725"
+    pass: "password123"
+    source: "mdxfind"

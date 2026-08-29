@@ -1,0 +1,21 @@
+id: "md2"
+name: "MD2"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["MD2"]
+    verified: "asserted"
+  john:
+    cpu: ["dynamic_310"]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
+    note: "from hashpipe john_map.h, confirmed upstream by recomputation"
+vectors:
+  - hash: "31f9be2cfbc2ac8f6cf5f6de1c358f2c"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "MD2"

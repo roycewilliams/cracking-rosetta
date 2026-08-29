@@ -1,0 +1,21 @@
+id: "smf-v1-1"
+name: "SMF < v1.1"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [121]
+    verified: "asserted"
+  mdxfind:
+    types: ["SMF"]
+    verified: "asserted"
+  john:
+    cpu: ["dynamic_37"]
+    verified: "asserted"
+vectors:
+  - hash: "c127b5d28f587364a7c034865384c53040226025:testuser"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "SHA1(SALTPLAIN)"
+  hashkiller: "SMF < v1.1"
+notes: "(using lowercase username as salt)"

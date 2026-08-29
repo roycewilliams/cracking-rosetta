@@ -1,0 +1,19 @@
+id: "des3encrypt"
+name: "DES3ENCRYPT"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [14100]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+    note: "hashcat mapping shipped in mdxfind's own type table"
+  mdxfind:
+    types: ["DES3ENCRYPT"]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+vectors:
+  - hash: "c74ec0f283bb3efb:8152001061460743"
+    pass: "password123"
+    source: "mdxfind"

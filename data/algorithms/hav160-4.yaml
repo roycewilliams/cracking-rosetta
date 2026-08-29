@@ -1,0 +1,21 @@
+id: "hav160-4"
+name: "HAV160-4"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["HAV160-4"]
+    verified: "asserted"
+  john:
+    cpu: ["dynamic_200"]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
+    note: "from hashpipe john_map.h, confirmed upstream by recomputation"
+vectors:
+  - hash: "3e364ce4e304f7715e1c9d86f0af62cf9882d32f"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "HAVAL160-4"

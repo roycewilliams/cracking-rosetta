@@ -1,0 +1,19 @@
+id: "postgresscram256"
+name: "POSTGRESSCRAM256"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [28600]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+    note: "hashcat mapping shipped in mdxfind's own type table"
+  mdxfind:
+    types: ["POSTGRESSCRAM256"]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+vectors:
+  - hash: "SCRAM-SHA-256$4096:IKfxyYOHyqPkoSUM8TgKkA==$v6UrTg19oAlY0aDMyijgZwTq9fEGNIRE650DWrsqIXQ=:*"
+    pass: "password123"
+    source: "mdxfind"

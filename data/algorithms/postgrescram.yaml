@@ -1,0 +1,19 @@
+id: "postgrescram"
+name: "POSTGRESCRAM"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [11100]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+    note: "hashcat mapping shipped in mdxfind's own type table"
+  mdxfind:
+    types: ["POSTGRESCRAM"]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+vectors:
+  - hash: "$postgres$postgres*41414141*e189d76dcdaf3bb15764784e2f24eee3"
+    pass: "password123"
+    source: "mdxfind"

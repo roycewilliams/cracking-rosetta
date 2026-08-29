@@ -1,0 +1,13 @@
+id: "md5am"
+name: "MD5AM"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["MD5AM"]
+    verified: "asserted"
+vectors:
+  - hash: "95e20a37247b576b68f9f4e1d389c3ad:admin"
+    pass: "rosetta"
+    source: "sheet"

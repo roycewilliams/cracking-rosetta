@@ -1,0 +1,21 @@
+id: "hav256-4"
+name: "HAV256-4"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["HAV256-4"]
+    verified: "asserted"
+  john:
+    cpu: ["dynamic_290"]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
+    note: "from hashpipe john_map.h, confirmed upstream by recomputation"
+vectors:
+  - hash: "b666f41a9692896b7ba7b4297b6ccf9c2db3fea636d49c7f709ca50cc6baed33"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "HAVAL256-4"

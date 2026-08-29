@@ -1,0 +1,19 @@
+id: "ikepsk-sha1"
+name: "IKEPSK-SHA1"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [5400]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+    note: "hashcat mapping shipped in mdxfind's own type table"
+  mdxfind:
+    types: ["IKEPSK-SHA1"]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+vectors:
+  - hash: "4141414141414141:4242424242424242:4343434343434343:4444444444444444:4545454545454545:4646464646464646:4747474747474747:4848484848484848:8bcc01c0e06096876785012e8ddb071e7b629917"
+    pass: "password123"
+    source: "mdxfind"

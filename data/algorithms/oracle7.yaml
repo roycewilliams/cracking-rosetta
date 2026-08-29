@@ -1,0 +1,19 @@
+id: "oracle7"
+name: "ORACLE7"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [3100]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+    note: "hashcat mapping shipped in mdxfind's own type table"
+  mdxfind:
+    types: ["ORACLE7"]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+vectors:
+  - hash: "192802346638CC4F:7284616727"
+    pass: "password123"
+    source: "mdxfind"

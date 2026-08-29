@@ -1,0 +1,15 @@
+id: "sha1-mysql5-plain"
+name: "sha1(\"*\".mysql5($plain))"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["SHA1SQL5"]
+    verified: "asserted"
+vectors:
+  - hash: "d5a61a408f8bfd58bfd8ab00c1494f2a159550e6"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "SHA1MYSQL5TOT"

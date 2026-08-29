@@ -1,0 +1,15 @@
+id: "haval128-4-md5-plain-plain"
+name: "haval128_4(md5($plain).$plain)"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["HAV128-4MD5PASS"]
+    verified: "asserted"
+vectors:
+  - hash: "9657d87b87015b79c4083f45039c3965"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "HAVAL128-4(MD5(PLAIN)PLAIN)"

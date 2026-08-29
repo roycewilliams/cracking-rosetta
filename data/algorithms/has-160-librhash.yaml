@@ -1,0 +1,15 @@
+id: "has-160-librhash"
+name: "has-160 (librhash)"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["HAS160"]
+    verified: "asserted"
+vectors:
+  - hash: "7a4ba60dc1f6f04a2b9b355aa36a869ab2832768"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "HAS-160"

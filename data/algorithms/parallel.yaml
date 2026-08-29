@@ -1,0 +1,9 @@
+id: "parallel"
+name: "PARALLEL"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["PARALLEL"]
+    verified: "asserted"

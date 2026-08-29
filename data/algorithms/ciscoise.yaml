@@ -1,0 +1,19 @@
+id: "ciscoise"
+name: "CISCOISE"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [5720]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+    note: "hashcat mapping shipped in mdxfind's own type table"
+  mdxfind:
+    types: ["CISCOISE"]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+vectors:
+  - hash: "6921eaf6ba9eedb30c84a2c7fed2309e964d631f69e7f6b2972482dcb68007824d65737361676544696765737400000000000000000000000000000000000000"
+    pass: "password123"
+    source: "mdxfind"

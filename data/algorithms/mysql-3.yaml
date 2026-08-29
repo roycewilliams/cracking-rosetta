@@ -1,0 +1,16 @@
+id: "mysql-3"
+name: "MySQL 3"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [200]
+    verified: "asserted"
+  mdxfind:
+    types: ["MYSQL3"]
+    verified: "asserted"
+vectors:
+  - hash: "41752a086e75f00c"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "MYSQL3"

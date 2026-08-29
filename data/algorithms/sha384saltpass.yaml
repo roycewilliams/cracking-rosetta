@@ -1,0 +1,25 @@
+id: "sha384saltpass"
+name: "SHA384SALTPASS"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [10820]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+    note: "hashcat mapping shipped in mdxfind's own type table"
+  mdxfind:
+    types: ["SHA384SALTPASS"]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+  john:
+    cpu: ["dynamic_71"]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
+    note: "from hashpipe john_map.h, confirmed upstream by recomputation"
+vectors:
+  - hash: "effd3c241e63f9b970d9093cf09af5fa2f180bd91e79818ca1c4b9832b66dd66683abb3687cbd0ddd765e1feefb2e09e:testsalt"
+    pass: "password123"
+    source: "mdxfind"

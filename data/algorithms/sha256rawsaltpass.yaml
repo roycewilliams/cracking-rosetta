@@ -1,0 +1,9 @@
+id: "sha256rawsaltpass"
+name: "SHA256RAWSALTPASS"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["SHA256RAWSALTPASS"]
+    verified: "asserted"

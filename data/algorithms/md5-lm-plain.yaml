@@ -1,0 +1,15 @@
+id: "md5-lm-plain"
+name: "md5(lm($plain))"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["MD5LM"]
+    verified: "asserted"
+vectors:
+  - hash: "a3e5fb855e307c0674b12ccb1346f317"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "MD5LM"

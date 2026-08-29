@@ -1,0 +1,21 @@
+id: "phpass"
+name: "phpass"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [400]
+    verified: "asserted"
+  mdxfind:
+    types: ["PHPBB3"]
+    verified: "asserted"
+  john:
+    gpu: ["phpass-opencl"]
+    verified: "asserted"
+vectors:
+  - hash: "$P$68EpAeraqYY3OYBMWpG6I//eL2e5IZ0"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "WORDPRESS / PHPBB3"
+  hashkiller: "n/a"
+notes: "(depending on the signature)"

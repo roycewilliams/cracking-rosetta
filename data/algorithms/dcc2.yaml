@@ -1,0 +1,19 @@
+id: "dcc2"
+name: "DCC2"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [2100]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+    note: "hashcat mapping shipped in mdxfind's own type table"
+  mdxfind:
+    types: ["DCC2"]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+vectors:
+  - hash: "$DCC2$10240#6848#4f9d6397a4756474a8ee1bdf701f4db5"
+    pass: "password123"
+    source: "mdxfind"

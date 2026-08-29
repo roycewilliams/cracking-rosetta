@@ -1,0 +1,13 @@
+id: "md4-utf16-md5-plain"
+name: "md4(utf16(md5($plain)))"
+status: "needs-review"
+tools:
+  mdxfind:
+    types: ["MD4UTF16MD5"]
+    verified: "asserted"
+vectors:
+  - hash: "f5cc60b599740b831e279698d464ac7e"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "NTLMMD5"

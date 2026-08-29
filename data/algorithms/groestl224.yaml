@@ -1,0 +1,15 @@
+id: "groestl224"
+name: "GROESTL224"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["GROESTL224"]
+    verified: "asserted"
+vectors:
+  - hash: "1b6ebe3878ee3b294f582fc82c0b47859c62a16314da9587806f3e5c"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "GROESTL224"

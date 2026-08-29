@@ -1,0 +1,15 @@
+id: "sha1-sha1-plain-substr-plain-0-2"
+name: "sha1(sha1($plain).substr($plain,0,2))"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["SHA1-1xSHA1psubp"]
+    verified: "asserted"
+vectors:
+  - hash: "b719f8c34ab7eb268ddd4ced305126e795e512fb:ro"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "SHA1(SHA1(PLAIN)CUT0-2(PLAIN))"

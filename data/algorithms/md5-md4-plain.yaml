@@ -1,0 +1,21 @@
+id: "md5-md4-plain"
+name: "md5(md4($plain))"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["MD5MD4"]
+    verified: "asserted"
+  john:
+    cpu: ["dynamic_34"]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
+    note: "from hashpipe john_map.h, confirmed upstream by recomputation"
+vectors:
+  - hash: "bd8f3885f87732da8f225adce02a6c95"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "MD5MD4"

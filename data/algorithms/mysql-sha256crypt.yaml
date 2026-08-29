@@ -1,0 +1,19 @@
+id: "mysql-sha256crypt"
+name: "MYSQL-SHA256CRYPT"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [7401]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+    note: "hashcat mapping shipped in mdxfind's own type table"
+  mdxfind:
+    types: ["MYSQL-SHA256CRYPT"]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+vectors:
+  - hash: "$mysql$A$005*0000000000*735953686774693157507A4A56526F713439744874516D6878335855747A644E416D506979304547335A37"
+    pass: "password123"
+    source: "mdxfind"

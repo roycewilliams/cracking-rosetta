@@ -1,0 +1,15 @@
+id: "tiger128-3-md5-plain-plain"
+name: "tiger128_3(md5($plain).$plain)"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["TIGERMD5PASS"]
+    verified: "asserted"
+vectors:
+  - hash: "4f71c6d63c3e9be1762f7b5b391595d1d3b40b54a5f024a0"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "TIGER128-3(MD5(PLAIN)PLAIN)"

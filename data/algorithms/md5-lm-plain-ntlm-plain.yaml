@@ -1,0 +1,15 @@
+id: "md5-lm-plain-ntlm-plain"
+name: "md5(lm($plain).ntlm($plain))"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["MD5-LMNTLM"]
+    verified: "asserted"
+vectors:
+  - hash: "3bad23f2a023a7ea5d5c2e7768ef0b6a"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "MD5(LM(PLAIN)NTLM(PLAIN))"

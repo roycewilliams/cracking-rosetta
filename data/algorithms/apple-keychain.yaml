@@ -1,0 +1,19 @@
+id: "apple-keychain"
+name: "APPLE-KEYCHAIN"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [23100]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+    note: "hashcat mapping shipped in mdxfind's own type table"
+  mdxfind:
+    types: ["APPLE-KEYCHAIN"]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+vectors:
+  - hash: "$keychain$*74cd1efd49e54a8fdc8750288801e09fa26a33b1*66001ad4e0498dc7*cfc13fbe9043b537f82101e5ff7c1dcda68e546fa1d225004969db9aaa8ffa0a09391a6ea5acc434da322198378f3cd0"
+    pass: "password123"
+    source: "mdxfind"

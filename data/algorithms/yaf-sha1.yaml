@@ -1,0 +1,9 @@
+id: "yaf-sha1"
+name: "YAF-SHA1"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["YAF-SHA1"]
+    verified: "asserted"

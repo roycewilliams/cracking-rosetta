@@ -1,0 +1,19 @@
+id: "blake2b256saltpass"
+name: "BLAKE2B256SALTPASS"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [34820]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+    note: "hashcat mapping shipped in mdxfind's own type table"
+  mdxfind:
+    types: ["BLAKE2B256SALTPASS"]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+vectors:
+  - hash: "$BLAKE2$f4fdf6b1cda2872527244ff036f1670af39c39decbd9aab4765a7aaa2b1d41d0:testsalt"
+    pass: "password123"
+    source: "mdxfind"

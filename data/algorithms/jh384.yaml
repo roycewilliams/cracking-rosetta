@@ -1,0 +1,15 @@
+id: "jh384"
+name: "JH384"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["JH384"]
+    verified: "asserted"
+vectors:
+  - hash: "0eb2667e9f5b1136ecaad630946364447e1646a081290d3abaa8a7248f1e5e7e0c9b93a88d0e0e464c038132e69cfdca"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "JH384"

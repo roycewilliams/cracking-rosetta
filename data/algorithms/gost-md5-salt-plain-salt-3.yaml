@@ -1,0 +1,15 @@
+id: "gost-md5-salt-plain-salt-3"
+name: "gost(md5($salt.$plain).\":\".$salt.\":\")"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["GOSTHEXSALT"]
+    verified: "asserted"
+vectors:
+  - hash: "a3ad962682d0a05b070bd021df196d2538101ccd92c620ac94d9647da579c639:ff"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "GOST(MD5(SALTPLAIN)INSDPSALTINSDP)"

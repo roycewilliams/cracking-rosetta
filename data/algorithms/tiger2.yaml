@@ -1,0 +1,15 @@
+id: "tiger2"
+name: "TIGER2"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["TIGER2"]
+    verified: "asserted"
+vectors:
+  - hash: "9533622341c04caa8606602a96b7fb77b80c8e685a1587bd"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "TIGER2"

@@ -1,0 +1,15 @@
+id: "bcrypt-md5-plain"
+name: "bcrypt(md5($plain))"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["BCRYPTMD5"]
+    verified: "asserted"
+vectors:
+  - hash: "$2y$12$sQAjI1tnXS4PCojWebPGteIV7AVSonJFTkP95UaMg.PSZEFLxDpWe"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "BCRYPTMD5"

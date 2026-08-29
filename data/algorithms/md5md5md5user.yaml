@@ -1,0 +1,15 @@
+id: "md5md5md5user"
+name: "MD5MD5MD5USER"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["MD5MD5MD5USER"]
+    verified: "asserted"
+vectors:
+  - hash: "661bb5e44a125ae81ec14925465ed923:abc123"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "MD5(MD5(MD5(PLAIN))SALT)"

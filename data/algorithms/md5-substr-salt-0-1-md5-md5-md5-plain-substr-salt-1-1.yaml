@@ -1,0 +1,15 @@
+id: "md5-substr-salt-0-1-md5-md5-md5-plain-substr-salt-1-1"
+name: "md5(substr($salt,0,1).md5(md5(md5($plain))).substr($salt,1,1))"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["MD52SALTMD5MD5MD5"]
+    verified: "asserted"
+vectors:
+  - hash: "33e63d8b5c509e87990dd36e4cd081f0:zz"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "MD5(CUT0-1(SALT)MD5X3(PLAIN)CUT1-1(SALT))"

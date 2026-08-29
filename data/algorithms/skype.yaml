@@ -1,0 +1,19 @@
+id: "skype"
+name: "SKYPE"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [23]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+    note: "hashcat mapping shipped in mdxfind's own type table"
+  mdxfind:
+    types: ["SKYPE"]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+vectors:
+  - hash: "229922b8b59931e6f8bfd223eb006806:chloe01"
+    pass: "password123"
+    source: "mdxfind"

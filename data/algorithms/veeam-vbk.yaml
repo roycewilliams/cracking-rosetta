@@ -1,0 +1,19 @@
+id: "veeam-vbk"
+name: "VEEAM-VBK"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [31200]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+    note: "hashcat mapping shipped in mdxfind's own type table"
+  mdxfind:
+    types: ["VEEAM-VBK"]
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "RCS 1.540 (2026/08/22)"
+vectors:
+  - hash: "$vbk$*54731702769149752741495960625996207399688284541933702394775960978730695504382155223405444342855920150089170058956647576461877712*10000*448812102f7669e53dde96be5614587a"
+    pass: "password123"
+    source: "mdxfind"

@@ -1,0 +1,15 @@
+id: "hmac-tiger128-3-plain-salt"
+name: "hmac(\"tiger128,3\", $plain, $salt)"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["HMAC-TIGER128"]
+    verified: "asserted"
+vectors:
+  - hash: "fdcb6eb1a77d8ff88708d93f34f4dade:abc123"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "not supported"

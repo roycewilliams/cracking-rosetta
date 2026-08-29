@@ -1,0 +1,15 @@
+id: "snefru128-md5-plain-plain"
+name: "snefru128(md5($plain).$plain)"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["SNE128MD5PASS"]
+    verified: "asserted"
+vectors:
+  - hash: "09fd10f5d45b6a655f5f7c8f4dca8cb2"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "not supported"

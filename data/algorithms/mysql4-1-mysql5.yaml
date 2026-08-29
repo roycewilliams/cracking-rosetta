@@ -1,0 +1,21 @@
+id: "mysql4-1-mysql5"
+name: "MySQL4.1/MySQL5"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [300]
+    verified: "asserted"
+  mdxfind:
+    types: ["SQL5"]
+    verified: "asserted"
+  john:
+    cpu: ["mysql-sha1"]
+    gpu: ["mysql-sha1-opencl"]
+    verified: "asserted"
+vectors:
+  - hash: "8236c4133430071e41c5103876d103299d348814"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "MYSQL5"
+  hashkiller: "MySQL4.1/MySQL5"

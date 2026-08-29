@@ -1,0 +1,15 @@
+id: "bmw224"
+name: "BMW224"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["BMW224"]
+    verified: "asserted"
+vectors:
+  - hash: "98f9a934f4aad886c23f9497432c1cd7ca2158bc3b3f4bcf1bfa175f"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "BMW224"

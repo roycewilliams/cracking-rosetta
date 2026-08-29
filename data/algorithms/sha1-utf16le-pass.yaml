@@ -1,0 +1,12 @@
+id: "sha1-utf16le-pass"
+name: "sha1(utf16le($pass))"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [170]
+    verified: "asserted"
+  mdxfind:
+    types: ["SHA1UTF16LE"]
+    verified: "asserted"
+legacy:
+  hashes_org: "n/a"

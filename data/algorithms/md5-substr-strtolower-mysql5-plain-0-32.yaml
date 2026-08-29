@@ -1,0 +1,15 @@
+id: "md5-substr-strtolower-mysql5-plain-0-32"
+name: "md5(\"*\".substr(strtolower(mysql5($plain)), 0, 32))"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["MD5SQL5-32"]
+    verified: "asserted"
+vectors:
+  - hash: "b3fe926c32fda29d2c63641da5c8d877"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "MD5CUT0-33MYSQL5LCTOT"

@@ -1,0 +1,15 @@
+id: "jh224"
+name: "JH224"
+status: "needs-review"
+tools:
+  hashcat:
+    verified: "absent"
+  mdxfind:
+    types: ["JH224"]
+    verified: "asserted"
+vectors:
+  - hash: "65b0485586c47003fc8d67a5e2e821a8688dbce634da305cd77a550e"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "JH224"
