@@ -9,7 +9,10 @@ tools:
     verified_with: "hashcat"
   mdxfind:
     types: ["SHA1"]
-    verified: "asserted"
+    iterations: 2
+    verified: "vector"
+    verified_at: "2026-08-29"
+    verified_with: "mdxfind"
   john:
     cpu: ["dynamic_1026", "dynamic_26"]
     verified: "asserted"

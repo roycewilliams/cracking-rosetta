@@ -4,7 +4,10 @@ status: "needs-review"
 tools:
   mdxfind:
     types: ["SHA384RAW"]
-    verified: "asserted"
+    iterations: 2
+    verified: "vector"
+    verified_at: "2026-08-29"
+    verified_with: "mdxfind"
   john:
     cpu: ["dynamic_74"]
     verified: "upstream"
