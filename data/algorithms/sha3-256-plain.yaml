@@ -4,7 +4,9 @@ status: "needs-review"
 tools:
   hashcat:
     modes: [17400]
-    verified: "asserted"
+    verified: "vector"
+    verified_at: "2026-08-29"
+    verified_with: "hashcat"
   mdxfind:
     types: ["SHA3-256"]
     verified: "vector"

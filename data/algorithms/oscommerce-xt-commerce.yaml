@@ -4,7 +4,9 @@ status: "needs-review"
 tools:
   hashcat:
     modes: [21]
-    verified: "asserted"
+    verified: "vector"
+    verified_at: "2026-08-29"
+    verified_with: "hashcat"
   mdxfind:
     types: ["MD5SALTPASS"]
     verified: "vector"

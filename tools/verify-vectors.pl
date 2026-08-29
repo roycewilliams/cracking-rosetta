@@ -48,6 +48,22 @@
 # was. Silently demoting on an unproven negative would be the same sin as
 # silently promoting on an unproven positive.
 #
+# ITERATION COUNTS ARE RECOVERED, NOT GUESSED
+#
+# The sheet recorded mdxfind types without the -i value, so md5(md5($pass))
+# arrived as type MD5 with the iteration count silently lost. Those entries
+# cannot verify at -i 1 and 25 of them duly failed.
+#
+# mdxfind computes every iteration up to -i N and names the one that matched
+# in its output suffix: "MD5x02 <hash>:<plain>". So --discover-iterations
+# re-runs a FAILED block once at a high -i and reads the true count off the
+# result. That is a measurement, not an inference: if MD5 at iteration 3
+# reproduces the digest then the algorithm is md5 applied three times, and no
+# other count would have matched.
+#
+# It runs only against blocks that already failed at their declared count, so
+# it can never quietly redefine an entry that was verifying correctly.
+#
 # SALTED mdxfind TYPES NEED -F, NOT -f
 #
 # mdxfind's -f reads bare hashes; -F reads hashes with the salt embedded in the
@@ -98,6 +114,9 @@ Usage: $PROG --tool hashcat|mdxfind|john|all [options]
    --limit N         stop after N identifiers; for smoke tests
    --only ID         verify just this entry
    --john-gpu        also verify john's opencl/ztex formats (needs a GPU)
+   --discover-iterations N
+                     for mdxfind blocks that failed, re-run once at -i N and
+                     record the iteration count that actually matched
    -n, --dry-run     show the plan; run nothing, write nothing
    -v, --verbose     per-identifier result (repeatable)
    -h, --help        this help
@@ -114,6 +133,7 @@ END_USAGE
 
 my (@tools, $hashcat, $mdxfind, $john, $algdir, $workdir, $only, $help);
 my ($dry, $john_gpu);
+my $discover = 0;
 my $timeout = 120;
 my $limit   = 0;
 my $verbose = 0;
@@ -129,6 +149,7 @@ GetOptions(
     'limit=i'      => \$limit,
     'only=s'       => \$only,
     'john-gpu'     => \$john_gpu,
+    'discover-iterations=i' => \$discover,
     'n|dry-run'    => \$dry,
     'v|verbose+'   => \$verbose,
     'h|help'       => \$help,
@@ -264,7 +285,7 @@ sub vectors_for {
     return @v;
 }
 
-my (%cracked, %attempted, %failed_job);
+my (%cracked, %attempted, %failed_job, %mx_job_ids);
 my $ran = 0;
 
 #-----------------------------------------------------------------------
@@ -331,6 +352,7 @@ if ($want{mdxfind} && $job{mdxfind}) {
             $cracked{mdxfind}{ $vec->{id} }{$type} = 1
                 if $out =~ /^\Q$type\E(?:x\d+)?\s+\Q$vec->{hash}\E:/m;
         }
+        $mx_job_ids{$type} = [@ids];
         $failed_job{mdxfind}{$type} = $code if $code == -2;
         printf STDERR "-   mdxfind %-24s i=%s %d hash(es) -> %d cracked%s\n",
             $type, $it, scalar @v,
@@ -382,6 +404,42 @@ if ($want{john} && $job{john}) {
             $label, scalar @v,
             scalar(grep { $cracked{john}{ $_->{id} }{$label} } @v),
             ($code == -2 ? ' [TIMEOUT]' : '') if $verbose;
+    }
+}
+
+#-----------------------------------------------------------------------
+# Recover lost iteration counts. Only for mdxfind blocks that failed at the
+# count they declare; see methodology.
+
+my @discovered;
+
+if ($discover && $want{mdxfind} && !$dry) {
+    for my $type (sort keys %mx_job_ids) {
+        for my $id (@{ $mx_job_ids{$type} }) {
+            next if $cracked{mdxfind}{$id}{$type};
+            my $blk = $entry{$id}{tools}{mdxfind} or next;
+            my @v = vectors_for($id) or next;
+
+            (my $safe = $type) =~ s/[^A-Za-z0-9]/_/g;
+            my $hf = write_file("$workdir/dx.$safe.hash", map { $_->{hash} } @v);
+            my $wf = write_file("$workdir/dx.$safe.word", map { $_->{pass} } @v);
+            my $readflag = $MX_SALTED{$type} ? '-F' : '-f';
+
+            my ($code, $out) = run_capture($timeout, $mdxfind,
+                '-h', "^\Q$type\E\$", $readflag, $hf, '-i', $discover, $wf);
+
+            for my $vec (@v) {
+                next unless $out =~ /^\Q$type\Ex(\d+)\s+\Q$vec->{hash}\E:/m;
+                my $found = $1 + 0;
+                my $was   = $blk->{iterations} // 1;
+                next if $found == $was;
+
+                $blk->{iterations} = $found;
+                $cracked{mdxfind}{$id}{$type} = 1;
+                push @discovered, "$id: mdxfind $type needs -i $found (was $was)";
+                last;
+            }
+        }
     }
 }
 
@@ -445,6 +503,12 @@ for my $tool (@tools) {
         $tool, scalar(keys %{ $attempted{$tool} }), $promoted{$tool} // 0;
 }
 printf STDERR "-   files rewritten: %d\n", $changed unless $dry;
+
+if (@discovered) {
+    printf STDERR "- %d iteration count(s) recovered from failed blocks:\n", scalar @discovered;
+    my $n = 0;
+    for (@discovered) { print STDERR "-   $_\n"; last if ++$n >= ($verbose ? @discovered : 10) }
+}
 
 if (@partial) {
     printf STDERR "- %d block(s) verified only in part (tier unchanged):\n", scalar @partial;

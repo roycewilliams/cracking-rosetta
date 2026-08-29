@@ -4,7 +4,9 @@ status: "needs-review"
 tools:
   hashcat:
     modes: [5100]
-    verified: "asserted"
+    verified: "vector"
+    verified_at: "2026-08-29"
+    verified_with: "hashcat"
 vectors:
   - hash: "975790dfb2854c88"
     pass: "rosetta"
