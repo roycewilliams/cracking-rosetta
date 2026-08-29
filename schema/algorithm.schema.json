@@ -1,0 +1,130 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/cracking-rosetta/schema/algorithm.schema.json",
+  "title": "cracking-rosetta algorithm entry",
+  "description": "One curated algorithm in data/algorithms/. This schema documents the shape for editors and external consumers; tools/validate.pl is what actually gates a PR, because the checks that matter most (does hashcat mode 2811 exist in this hashcat? does dynamic_12 exist in this john?) are cross-references no schema can express.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "name"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9._-]*$",
+      "description": "Stable identifier. MUST equal the filename stem; it is what external automation keys on, so it never changes once published."
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Human-readable name, as an SME would say it."
+    },
+    "aliases": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Other names this algorithm is known by, for search."
+    },
+    "expression": {
+      "type": "string",
+      "description": "hx-style expression, e.g. md5(md5($p).$s). The semantic join key: it is what lets a validator assert two tools' identifiers denote the same construction."
+    },
+    "john_dynamic_expr": {
+      "type": "string",
+      "description": "John's equivalent, as passed to --format=dynamic='...'."
+    },
+    "category": { "type": "string" },
+    "status": {
+      "enum": ["ok", "needs-review"],
+      "default": "ok",
+      "description": "needs-review marks an entry a machine created and a human has not yet confirmed - what the upstream-drift PRs emit."
+    },
+    "tools": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "hashcat": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "modes": { "type": "array", "items": { "type": "integer", "minimum": 0 } },
+            "verified": { "$ref": "#/$defs/tier" },
+            "verified_at": { "$ref": "#/$defs/date" },
+            "verified_with": { "type": "string" },
+            "note": { "type": "string" }
+          }
+        },
+        "john": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "cpu": { "type": "array", "items": { "type": "string" } },
+            "gpu": { "type": "array", "items": { "type": "string" } },
+            "verified": { "$ref": "#/$defs/tier" },
+            "verified_at": { "$ref": "#/$defs/date" },
+            "verified_with": { "type": "string" },
+            "note": { "type": "string" }
+          }
+        },
+        "mdxfind": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "types": { "type": "array", "items": { "type": "string" } },
+            "iterations": {
+              "type": "integer",
+              "minimum": 1,
+              "default": 1,
+              "description": "mdxfind -i value. Part of the identity, not a tuning knob: MD5x02 is john's dynamic_2 and MD5x03 is dynamic_3, so the same type at a different iteration count is a different algorithm."
+            },
+            "verified": { "$ref": "#/$defs/tier" },
+            "verified_at": { "$ref": "#/$defs/date" },
+            "verified_with": { "type": "string" },
+            "note": { "type": "string" }
+          }
+        },
+        "crack": {
+          "type": "object",
+          "additionalProperties": false,
+          "description": "Alec Muffett's Crack, historical reference only. Crack delegates to the host crypt(3) and implements nothing itself; see docs/REFERENCES.md.",
+          "properties": {
+            "supported": { "type": "boolean" },
+            "note": { "type": "string" }
+          }
+        }
+      }
+    },
+    "vectors": {
+      "type": "array",
+      "description": "Test vectors. A vector is what promotes a mapping to tier 'vector'.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["hash", "pass"],
+        "properties": {
+          "hash": { "type": "string", "minLength": 1 },
+          "pass": { "type": "string" },
+          "salt": { "type": "string" },
+          "source": {
+            "type": "string",
+            "description": "Where this vector came from: hashcat, mdxfind, john, sheet, or a person."
+          }
+        }
+      }
+    },
+    "legacy": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Identifiers from services that no longer exist. Kept because they make old cracking write-ups readable, not because anything can be verified against them.",
+      "properties": {
+        "hashes_org": { "type": "string" },
+        "hashkiller": { "type": "string" }
+      }
+    },
+    "notes": { "type": "string" }
+  },
+  "$defs": {
+    "tier": {
+      "enum": ["vector", "upstream", "asserted", "absent"],
+      "description": "vector: round-tripped locally by that tool under that exact identifier - the only tier meaning proven. upstream: asserted by a project that verifies by recomputation. asserted: a human said so. absent: the tool does not support this algorithm."
+    },
+    "date": { "type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$" }
+  }
+}

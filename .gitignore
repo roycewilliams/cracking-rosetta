@@ -1,0 +1,12 @@
+# Scratch: temporary scripts, captured tool output, working data.
+# Project convention keeps these in tmp/ rather than /tmp -- see CLAUDE.md.
+tmp/
+
+# Staged copy of a fleet-managed file. Its authoritative home is the
+# fleet-files library, not this repository.
+fleet-staging/
+
+# Rendered exports are built by tools/render.pl; not yet wired up.
+dist/
+
+*.swp
