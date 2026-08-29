@@ -10,9 +10,9 @@ tools:
     note: "hashcat mapping shipped in mdxfind's own type table"
   mdxfind:
     types: ["MSSQL2000"]
-    verified: "upstream"
+    verified: "vector"
     verified_at: "2026-08-29"
-    verified_with: "RCS 1.540 (2026/08/22)"
+    verified_with: "mdxfind"
 vectors:
   - hash: "0x010012345678f9cf12a8bbcee0131a6068815203371250b5cb1198069a7aec5df5cb05ef43f73acbe8572cf9d744"
     pass: "password123"

@@ -6,7 +6,9 @@ tools:
     verified: "absent"
   mdxfind:
     types: ["RADIOGATUN32"]
-    verified: "asserted"
+    verified: "vector"
+    verified_at: "2026-08-29"
+    verified_with: "mdxfind"
 vectors:
   - hash: "9ee7fdfb57e2132c6614dcfcf4084bc7"
     pass: "rosetta"

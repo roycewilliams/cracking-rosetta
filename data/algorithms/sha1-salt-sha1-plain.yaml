@@ -7,7 +7,9 @@ tools:
     verified: "asserted"
   mdxfind:
     types: ["SHA1SALTSHA1PASS"]
-    verified: "asserted"
+    verified: "vector"
+    verified_at: "2026-08-29"
+    verified_with: "mdxfind"
 vectors:
   - hash: "6e28eba8059a9e06aa3aa0679e721d4fb29bd825:6602905396"
     pass: "rosetta"

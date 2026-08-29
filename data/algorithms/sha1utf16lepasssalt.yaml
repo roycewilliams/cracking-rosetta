@@ -10,9 +10,9 @@ tools:
     note: "hashcat mapping shipped in mdxfind's own type table"
   mdxfind:
     types: ["SHA1UTF16LEPASSSALT"]
-    verified: "upstream"
+    verified: "vector"
     verified_at: "2026-08-29"
-    verified_with: "RCS 1.540 (2026/08/22)"
+    verified_with: "mdxfind"
 vectors:
   - hash: "13b30726901692e8111f34f9c22d2e9b3b0845f6:testsalt"
     pass: "password123"

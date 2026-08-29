@@ -6,7 +6,9 @@ tools:
     verified: "absent"
   mdxfind:
     types: ["ECHO384"]
-    verified: "asserted"
+    verified: "vector"
+    verified_at: "2026-08-29"
+    verified_with: "mdxfind"
 vectors:
   - hash: "647453eb02c1712d844d20f34acd28ee712b7558e2be11a67d5eecc026d9e63d703bdf00f318d957c57bdfef0f55a21f"
     pass: "rosetta"

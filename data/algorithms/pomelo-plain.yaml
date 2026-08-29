@@ -6,7 +6,9 @@ tools:
     verified: "absent"
   mdxfind:
     types: ["POMELO"]
-    verified: "asserted"
+    verified: "vector"
+    verified_at: "2026-08-29"
+    verified_with: "mdxfind"
 vectors:
   - hash: "b4dd8a03985988ef432af66ca8a9b4d63b7b6cf4a07a9392dfb9c0b516048fee:administrator"
     pass: "rosetta"

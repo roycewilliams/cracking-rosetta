@@ -10,9 +10,9 @@ tools:
     note: "hashcat mapping shipped in mdxfind's own type table"
   mdxfind:
     types: ["RORAILS-SHA1"]
-    verified: "upstream"
+    verified: "vector"
     verified_at: "2026-08-29"
-    verified_with: "RCS 1.540 (2026/08/22)"
+    verified_with: "mdxfind"
 vectors:
   - hash: "9363ba0339ef7beb13b59f3b8dbcf3b8b5fbe6bf:5dcc47b04c49d3c8e1b9e4ec367fddeed21b7b85"
     pass: "password123"

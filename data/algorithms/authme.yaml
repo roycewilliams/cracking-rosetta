@@ -10,9 +10,9 @@ tools:
     note: "hashcat mapping shipped in mdxfind's own type table"
   mdxfind:
     types: ["AUTHME"]
-    verified: "upstream"
+    verified: "vector"
     verified_at: "2026-08-29"
-    verified_with: "RCS 1.540 (2026/08/22)"
+    verified_with: "mdxfind"
 vectors:
   - hash: "$SHA$1234567890123456$6b7d5ab9458f1d9ef8316945b3904d19d90eabf67a8bf98b0ddacede6baaf5a3"
     pass: "password123"

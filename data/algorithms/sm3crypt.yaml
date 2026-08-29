@@ -10,9 +10,9 @@ tools:
     note: "hashcat mapping shipped in mdxfind's own type table"
   mdxfind:
     types: ["SM3CRYPT"]
-    verified: "upstream"
+    verified: "vector"
     verified_at: "2026-08-29"
-    verified_with: "RCS 1.540 (2026/08/22)"
+    verified_with: "mdxfind"
 vectors:
   - hash: "$sm3$aaaaaaaaaaaaaaaa$9hj3BsTKoxVnrt6XmdzPzkD4Xi1i8VVI6wk6t.RK.w7"
     pass: "password123"

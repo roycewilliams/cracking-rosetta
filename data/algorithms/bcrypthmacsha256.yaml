@@ -10,9 +10,9 @@ tools:
     note: "hashcat mapping shipped in mdxfind's own type table"
   mdxfind:
     types: ["BCRYPTHMACSHA256"]
-    verified: "upstream"
+    verified: "vector"
     verified_at: "2026-08-29"
-    verified_with: "RCS 1.540 (2026/08/22)"
+    verified_with: "mdxfind"
 vectors:
   - hash: "$bcrypt-sha256$v=2,t=2b,r=5$RndSa1tRndSa1tRndSa1tu$wLxHrJMAHPX7Br7IB1EkHSpfXdnxnTC"
     pass: "password123"

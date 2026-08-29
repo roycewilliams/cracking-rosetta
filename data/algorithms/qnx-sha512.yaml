@@ -10,9 +10,9 @@ tools:
     note: "hashcat mapping shipped in mdxfind's own type table"
   mdxfind:
     types: ["QNX-SHA512"]
-    verified: "upstream"
+    verified: "vector"
     verified_at: "2026-08-29"
-    verified_with: "RCS 1.540 (2026/08/22)"
+    verified_with: "mdxfind"
 vectors:
   - hash: "@S,1000@a16f7fee0d37b2e3bad06ba26f0caff09095e19face700ecdd8d78d626d358da4408951f714c609122444757af7376555d4733e445ca0b5ecc65b4fa4209fae5@2257314490293159"
     pass: "password123"

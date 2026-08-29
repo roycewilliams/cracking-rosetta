@@ -6,7 +6,9 @@ tools:
     verified: "absent"
   mdxfind:
     types: ["FUGUE384"]
-    verified: "asserted"
+    verified: "vector"
+    verified_at: "2026-08-29"
+    verified_with: "mdxfind"
 vectors:
   - hash: "8f5a1d084c257a4590667eb3820a5bd03a41216a6944c2d8799f8d631658423d87a971d14867d9a4fa53ffb7a57b764f"
     pass: "rosetta"

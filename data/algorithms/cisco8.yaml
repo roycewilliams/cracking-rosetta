@@ -7,7 +7,9 @@ tools:
     verified: "asserted"
   mdxfind:
     types: ["CISCO8"]
-    verified: "asserted"
+    verified: "vector"
+    verified_at: "2026-08-29"
+    verified_with: "mdxfind"
 vectors:
   - hash: "$8$TnGX/fE4KGHOVU$/y6TkzwXzKg3tzpEs4yHca5PgftnlQ38aSvj9g98zO."
     pass: "rosetta"

@@ -4,7 +4,9 @@ status: "needs-review"
 tools:
   mdxfind:
     types: ["MD4UTF16MD5"]
-    verified: "asserted"
+    verified: "vector"
+    verified_at: "2026-08-29"
+    verified_with: "mdxfind"
 vectors:
   - hash: "f5cc60b599740b831e279698d464ac7e"
     pass: "rosetta"

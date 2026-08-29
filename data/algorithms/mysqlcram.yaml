@@ -10,9 +10,9 @@ tools:
     note: "hashcat mapping shipped in mdxfind's own type table"
   mdxfind:
     types: ["MYSQLCRAM"]
-    verified: "upstream"
+    verified: "vector"
     verified_at: "2026-08-29"
-    verified_with: "RCS 1.540 (2026/08/22)"
+    verified_with: "mdxfind"
 vectors:
   - hash: "$mysqlna$4141414141414141414141414141414141414141*024763fc7fa983ef4c424bb91c4c9ca58a4c6a20"
     pass: "password123"

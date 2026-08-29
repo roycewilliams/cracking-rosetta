@@ -10,9 +10,9 @@ tools:
     note: "hashcat mapping shipped in mdxfind's own type table"
   mdxfind:
     types: ["SHIRO1"]
-    verified: "upstream"
+    verified: "vector"
     verified_at: "2026-08-29"
-    verified_with: "RCS 1.540 (2026/08/22)"
+    verified_with: "mdxfind"
 vectors:
   - hash: "$shiro1$SHA-512$1024$QUFBQUFBQUFBQUFBQUFBQQ==$PGoJ83m0phYuc1i1rh7Vqv2+kkuSqxgEX+Ah0luTEOXRcKChRdW2wI38pCMRLTWzeEhMNricVDAqJ3cwO95ItA=="
     pass: "password123"

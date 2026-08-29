@@ -10,9 +10,9 @@ tools:
     note: "hashcat mapping shipped in mdxfind's own type table"
   mdxfind:
     types: ["BLAKE2B256"]
-    verified: "upstream"
+    verified: "vector"
     verified_at: "2026-08-29"
-    verified_with: "RCS 1.540 (2026/08/22)"
+    verified_with: "mdxfind"
 vectors:
   - hash: "$BLAKE2$4482542d0cdfeb679f2e0c4d5780af2c33dc57892390c9d5a17e8fa8be01100f"
     pass: "password123"

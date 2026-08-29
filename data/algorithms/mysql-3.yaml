@@ -7,7 +7,9 @@ tools:
     verified: "asserted"
   mdxfind:
     types: ["MYSQL3"]
-    verified: "asserted"
+    verified: "vector"
+    verified_at: "2026-08-29"
+    verified_with: "mdxfind"
 vectors:
   - hash: "41752a086e75f00c"
     pass: "rosetta"

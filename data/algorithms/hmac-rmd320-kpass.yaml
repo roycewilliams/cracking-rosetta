@@ -10,9 +10,9 @@ tools:
     note: "hashcat mapping shipped in mdxfind's own type table"
   mdxfind:
     types: ["HMAC-RMD320-KPASS"]
-    verified: "upstream"
+    verified: "vector"
     verified_at: "2026-08-29"
-    verified_with: "RCS 1.540 (2026/08/22)"
+    verified_with: "mdxfind"
 vectors:
   - hash: "022ee238a2e2bacfe3bcdd23d0dc06e6246813c82a79898890e1555f703ef89b52c964e8a341d8a8:testsalt"
     pass: "password123"

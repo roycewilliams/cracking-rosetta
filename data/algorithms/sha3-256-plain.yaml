@@ -7,7 +7,9 @@ tools:
     verified: "asserted"
   mdxfind:
     types: ["SHA3-256"]
-    verified: "asserted"
+    verified: "vector"
+    verified_at: "2026-08-29"
+    verified_with: "mdxfind"
   john:
     cpu: ["dynamic_380"]
     verified: "upstream"

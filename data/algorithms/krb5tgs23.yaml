@@ -10,9 +10,9 @@ tools:
     note: "hashcat mapping shipped in mdxfind's own type table"
   mdxfind:
     types: ["KRB5TGS23"]
-    verified: "upstream"
+    verified: "vector"
     verified_at: "2026-08-29"
-    verified_with: "RCS 1.540 (2026/08/22)"
+    verified_with: "mdxfind"
 vectors:
   - hash: "$krb5tgs$23$*user$REALM$test/spn*$ef5b8ff40b085c0db7b56e6c138a746b$c5f8ac38e28042d9a9b69d9667d1c8cd7ad0a7fe2849c3502fa7437e5108c2e73932b4ac570d899bbef1aa1b96efb37406e5619ca542a13659916788ebc53cce"
     pass: "password123"

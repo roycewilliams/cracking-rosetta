@@ -10,9 +10,9 @@ tools:
     note: "hashcat mapping shipped in mdxfind's own type table"
   mdxfind:
     types: ["SSPR-SHA1S"]
-    verified: "upstream"
+    verified: "vector"
     verified_at: "2026-08-29"
-    verified_with: "RCS 1.540 (2026/08/22)"
+    verified_with: "mdxfind"
 vectors:
   - hash: "$sspr$2$100000$CxCpGqosk9PkCBcoRFp6DLjjRhVEJKK8$c87d697549444287f755ca4209bf66ccf46caefe"
     pass: "password123"

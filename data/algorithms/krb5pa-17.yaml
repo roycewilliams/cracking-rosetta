@@ -10,9 +10,9 @@ tools:
     note: "hashcat mapping shipped in mdxfind's own type table"
   mdxfind:
     types: ["KRB5PA-17"]
-    verified: "upstream"
+    verified: "vector"
     verified_at: "2026-08-29"
-    verified_with: "RCS 1.540 (2026/08/22)"
+    verified_with: "mdxfind"
 vectors:
   - hash: "$krb5pa$17$hashpipe$HASHPIPEDOMAIN.FAKE$87d690b66ff46a8b55bb9eb4152848c595d6c33837954d627dc9ce19bbc32768e9a1dad8c63c27edbbd4e6f361534a48b8d7fe055b61f9cf"
     pass: "password123"

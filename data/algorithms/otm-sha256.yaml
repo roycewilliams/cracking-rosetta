@@ -10,9 +10,9 @@ tools:
     note: "hashcat mapping shipped in mdxfind's own type table"
   mdxfind:
     types: ["OTM-SHA256"]
-    verified: "upstream"
+    verified: "vector"
     verified_at: "2026-08-29"
-    verified_with: "RCS 1.540 (2026/08/22)"
+    verified_with: "mdxfind"
 vectors:
   - hash: "otm_sha256:1000:1234567890:VXxvkQcU+34QHlMrdScpmdbKTHi8oA41M4VBfy1z3zc="
     pass: "password123"

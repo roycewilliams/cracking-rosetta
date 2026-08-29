@@ -6,7 +6,9 @@ tools:
     verified: "absent"
   mdxfind:
     types: ["HAV224-3MD5"]
-    verified: "asserted"
+    verified: "vector"
+    verified_at: "2026-08-29"
+    verified_with: "mdxfind"
 vectors:
   - hash: "915271a51a43bb808ff431090ed2ba866f03ffdf3f60ff525c8e7116"
     pass: "rosetta"

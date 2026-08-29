@@ -7,7 +7,9 @@ tools:
     verified: "asserted"
   mdxfind:
     types: ["NTLM"]
-    verified: "asserted"
+    verified: "vector"
+    verified_at: "2026-08-29"
+    verified_with: "mdxfind"
   john:
     cpu: ["dynamic_33"]
     gpu: ["ntlmv2-opencl"]

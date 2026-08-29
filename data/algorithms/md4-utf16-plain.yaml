@@ -7,7 +7,9 @@ tools:
     verified: "asserted"
   mdxfind:
     types: ["MD4UTF16"]
-    verified: "asserted"
+    verified: "vector"
+    verified_at: "2026-08-29"
+    verified_with: "mdxfind"
 vectors:
   - hash: "a2dde7c8056b54f9f419fc9b62cb6611"
     pass: "rosetta"

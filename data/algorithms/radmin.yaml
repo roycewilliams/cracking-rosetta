@@ -7,7 +7,9 @@ tools:
     verified: "asserted"
   mdxfind:
     types: ["RADMIN2"]
-    verified: "asserted"
+    verified: "vector"
+    verified_at: "2026-08-29"
+    verified_with: "mdxfind"
   john:
     cpu: ["RAdmin", "dynamic_1010"]
     verified: "asserted"

@@ -7,7 +7,9 @@ tools:
     verified: "asserted"
   mdxfind:
     types: ["PBKDF2-MD5"]
-    verified: "asserted"
+    verified: "vector"
+    verified_at: "2026-08-29"
+    verified_with: "mdxfind"
 vectors:
   - hash: "md5:1000:eE1KdEJpUDZ6UA==:HBt42X+tFNv5thXKxVdVn1vg/UkVgXLrZREWdmaWcy4="
     pass: "rosetta"

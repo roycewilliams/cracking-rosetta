@@ -10,9 +10,9 @@ tools:
     note: "hashcat mapping shipped in mdxfind's own type table"
   mdxfind:
     types: ["APFS"]
-    verified: "upstream"
+    verified: "vector"
     verified_at: "2026-08-29"
-    verified_with: "RCS 1.540 (2026/08/22)"
+    verified_with: "mdxfind"
 vectors:
   - hash: "$fvde$2$16$58778104701476542047675521040224$20000$c75ba59230e2d14c19eb26a75176d853c88dce8ec8996f745fff5050073987391ac0092d7009b131"
     pass: "password123"

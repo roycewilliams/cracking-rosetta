@@ -6,7 +6,9 @@ tools:
     verified: "absent"
   mdxfind:
     types: ["BMW384"]
-    verified: "asserted"
+    verified: "vector"
+    verified_at: "2026-08-29"
+    verified_with: "mdxfind"
 vectors:
   - hash: "c4f2bf8f2ba6727df2fd264868ec3e98bfcea9770c3745cc210d84e3c3407d3d2cb3a92f6d7ad3405c0d77394c24b223"
     pass: "rosetta"

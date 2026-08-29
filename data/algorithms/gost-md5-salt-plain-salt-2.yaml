@@ -6,7 +6,9 @@ tools:
     verified: "absent"
   mdxfind:
     types: ["GOSTHEXSALT"]
-    verified: "asserted"
+    verified: "vector"
+    verified_at: "2026-08-29"
+    verified_with: "mdxfind"
 vectors:
   - hash: "3658eea2e621bd54772207ab226795b114758d4317692f782f7b808ddec6a234:ff"
     pass: "rosetta"
