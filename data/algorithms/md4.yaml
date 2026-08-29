@@ -15,7 +15,9 @@ tools:
   john:
     cpu: ["Raw-MD4", "dynamic_30"]
     gpu: ["raw-MD4-opencl"]
-    verified: "asserted"
+    verified: "vector"
+    verified_at: "2026-08-29"
+    verified_with: "john"
 vectors:
   - hash: "d9e2bf8ca98bfadf4eac11b0c2d5b644"
     pass: "rosetta"

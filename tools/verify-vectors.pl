@@ -31,6 +31,22 @@
 # the two entries really are the same algorithm, which is a discovery worth
 # having rather than an error.
 #
+# THE john CHECK MATCHES THE HASH, NOT THE PLAINTEXT
+#
+# john's pot line is "$dynamic_0$<hash>:<plain>", and the obvious check --
+# does the plaintext appear in the pot -- is WRONG in exactly the case that
+# matters. Every vector imported from the sheet carries the plaintext
+# "rosetta", so a batched job feeds five different hashes sharing one
+# password; john cracks one of them and a plaintext test credits all five.
+# Observed 2026-08-29: md5(md5($pass)) was briefly credited to dynamic_0,
+# which is plain MD5.
+#
+# So a crack counts only when the entry's OWN hash and its OWN plaintext
+# appear on the same pot line. Where the stored hash carries a salt in a form
+# john rewrites, this fails to match and the block is reported unverified --
+# a false negative, which is reported and harmless, rather than a false
+# positive, which would be a lie in the one column people trust.
+#
 # PROMOTION IS ALL-OR-NOTHING PER TOOL BLOCK
 #
 # tools.john.cpu can list several formats. The block is promoted only when
@@ -38,6 +54,15 @@
 # otherwise mean "at least one of these is right", which is not a claim anyone
 # can act on. Partial results are reported so the failing identifier can be
 # fixed or removed.
+#
+# AN IDENTIFIER THAT WAS NOT RUN IS NOT AN IDENTIFIER THAT FAILED
+#
+# --limit stops after N jobs, and jobs run in sorted order, so a block naming
+# both Raw-MD4 and dynamic_30 can have the first run and the second never
+# reached. Counting the un-run one as a failure reported md4 as only partly
+# verified when dynamic_30 cracks its vector perfectly well. So promotion is
+# evaluated only for blocks whose every identifier actually executed;
+# everything else is left completely alone, neither promoted nor reported.
 #
 # FAILURE NEVER DEMOTES
 #
@@ -285,7 +310,7 @@ sub vectors_for {
     return @v;
 }
 
-my (%cracked, %attempted, %failed_job, %mx_job_ids);
+my (%cracked, %attempted, %failed_job, %mx_job_ids, %ran_ident);
 my $ran = 0;
 
 #-----------------------------------------------------------------------
@@ -299,6 +324,7 @@ if ($want{hashcat} && $job{hashcat}) {
         $ran++;
 
         $attempted{hashcat}{$_} = 1 for @ids;
+        $ran_ident{hashcat}{$mode} = 1;
         next if $dry;
 
         my $hf = write_file("$workdir/hc.$mode.hash", map { $_->{hash} } @v);
@@ -335,6 +361,7 @@ if ($want{mdxfind} && $job{mdxfind}) {
         $ran++;
 
         $attempted{mdxfind}{$_} = 1 for @ids;
+        $ran_ident{mdxfind}{$type} = 1;
         next if $dry;
 
         (my $safe = $type) =~ s/[^A-Za-z0-9]/_/g;
@@ -376,6 +403,7 @@ if ($want{john} && $job{john}) {
         $ran++;
 
         $attempted{john}{$_} = 1 for @ids;
+        $ran_ident{john}{$label} = 1;
         next if $dry;
 
         (my $safe = $label) =~ s/[^A-Za-z0-9]/_/g;
@@ -395,9 +423,22 @@ if ($want{john} && $job{john}) {
         if (open my $pfh, '<', $pot) { local $/; $potdata = <$pfh> // ''; close $pfh }
 
         for my $vec (@v) {
-            $cracked{john}{ $vec->{id} }{$label} = 1
-                if index($potdata, $vec->{pass}) >= 0
-                   && ($potdata =~ /\Q$vec->{pass}\E\s*$/m);
+            # The stored hash may carry a salt as "hash:salt" while john
+            # writes "$tag$hash$salt"; fall back to the leading field, but
+            # only when it is long enough to identify one hash on its own.
+            my ($first) = split /:/, $vec->{hash}, 2;
+            my @needles = ($vec->{hash});
+            push @needles, $first if defined $first && length($first) >= 16
+                                     && $first ne $vec->{hash};
+
+            LINE: for my $line (split /\n/, $potdata) {
+                next unless $line =~ /:\Q$vec->{pass}\E$/;
+                for my $n (@needles) {
+                    next unless index(lc $line, lc $n) >= 0;
+                    $cracked{john}{ $vec->{id} }{$label} = 1;
+                    last LINE;
+                }
+            }
         }
         $failed_job{john}{$label} = $code if $code == -2;
         printf STDERR "-   john --format=%-22s %d hash(es) -> %d cracked%s\n",
@@ -464,6 +505,9 @@ if (!$dry) {
                        :                      (@{ $blk->{cpu} || [] },
                                                $john_gpu ? @{ $blk->{gpu} || [] } : ());
             next unless @idents;
+
+            # Every identifier must have actually run; see methodology.
+            next if grep { !$ran_ident{$tool}{$_} } @idents;
 
             my @ok  = grep {  $cracked{$tool}{$id}{$_} } @idents;
             my @bad = grep { !$cracked{$tool}{$id}{$_} } @idents;

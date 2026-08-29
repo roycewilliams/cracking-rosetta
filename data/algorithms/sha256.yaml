@@ -15,7 +15,9 @@ tools:
   john:
     cpu: ["Raw-SHA256", "dynamic_60"]
     gpu: ["raw-SHA256-opencl"]
-    verified: "asserted"
+    verified: "vector"
+    verified_at: "2026-08-29"
+    verified_with: "john"
 vectors:
   - hash: "27c3d3b047672ba2cf4abd7688e81f4fbb044eadeec897b665fc76636069daa7"
     pass: "rosetta"

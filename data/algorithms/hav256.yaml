@@ -11,10 +11,9 @@ tools:
     verified_with: "mdxfind"
   john:
     cpu: ["dynamic_280"]
-    verified: "upstream"
+    verified: "vector"
     verified_at: "2026-08-29"
-    verified_with: "1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
-    note: "from hashpipe john_map.h, confirmed upstream by recomputation"
+    verified_with: "john"
 vectors:
   - hash: "f7d3b3936e52b5c7e36d76ed06d31c1fd92761b002ddc6426dccbac1a598bee9"
     pass: "rosetta"

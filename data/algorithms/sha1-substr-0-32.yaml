@@ -9,10 +9,9 @@ tools:
     verified: "asserted"
   john:
     cpu: ["dynamic_26"]
-    verified: "upstream"
+    verified: "vector"
     verified_at: "2026-08-29"
-    verified_with: "1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
-    note: "from hashpipe john_map.h, confirmed upstream by recomputation"
+    verified_with: "john"
 vectors:
   - hash: "d21af7ece046af0e12d3c38472792cd5"
     pass: "rosetta"

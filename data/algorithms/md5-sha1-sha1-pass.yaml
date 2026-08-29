@@ -11,7 +11,9 @@ tools:
     verified_with: "mdxfind"
   john:
     cpu: ["dynamic_1018"]
-    verified: "asserted"
+    verified: "vector"
+    verified_at: "2026-08-29"
+    verified_with: "john"
 vectors:
   - hash: "2db0a6ad192b03a28775e627b246721f"
     pass: "rosetta"

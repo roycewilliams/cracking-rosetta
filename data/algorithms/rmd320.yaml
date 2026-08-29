@@ -14,10 +14,9 @@ tools:
     verified_with: "mdxfind"
   john:
     cpu: ["dynamic_150"]
-    verified: "upstream"
+    verified: "vector"
     verified_at: "2026-08-29"
-    verified_with: "1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
-    note: "from hashpipe john_map.h, confirmed upstream by recomputation"
+    verified_with: "john"
 vectors:
   - hash: "e3a8ce82f0e176fd498227b3994bf3b238197c98a9576c7e5741b5a7f22cfab7ef9c2bbf462d2a32"
     pass: "password123"
