@@ -102,15 +102,23 @@ mdxfind also accepts hashcat modes directly (`mdxfind -m 0`, `-m e1`,
   pin the candidate type with `-h '^TYPE$'` and require *every* sampled vector
   of the format to verify. Break ties toward the lowest `eN`.
 - **Iteration suffix is identity.** `MD5x01` != `MD5x02`; `MD5x02` is
-  `dynamic_2`, `MD5x03` is `dynamic_3`. Never strip the suffix.
+  `dynamic_2`, `MD5x03` is `dynamic_3`. Never strip the suffix, and check it
+  on the way back in: 42 entries declaring two iterations were seeded with
+  their type's single-iteration self-test vector and reached tier `vector`
+  because the verifier accepted any suffix. `tools/audit-iterations.pl`
+  measures the count a vector actually matches at.
 - **Name separator drift.** The source sheet wrote `HAV128_4` where mdxfind
   writes `HAV128-4`. Normalize by stripping non-alphanumerics before matching;
   store the tool's exact spelling.
 - **Upstream can name modes that do not exist.** mdxfind's map references
   hashcat modes `11780`, `46100`, `67000`, none of which exist in hashcat
   v7.1.2-549. Report, do not silently drop.
-- **Sheet-era junk.** `NOTSUPPORTED`, `MD5AUTOMATICPARTIALMATCH`,
-  `MD5UCWITHI2MD5UCX2`, `WLR1` appear in the mdxfind column but are not types.
+- **Sheet-era junk.** `NOTSUPPORTED`, `MD5AUTOMATICPARTIALMATCH` and
+  `MD5UCWITHI2MD5UCX2` appear in the mdxfind column but are not types.
+  `WLR1` was on that list and should not have been: it is `WRL1`
+  (Whirlpool-1) with the letters transposed, and both mdxfind pinned to
+  `WRL1` and john's `whirlpool1` reproduce the sheet's vector. Check a
+  suspected non-type against the inventory before writing it off.
 - **john is not executable by every user here.** `run/john` and `run/*.conf`
   are `0750 royce:royce`. Extraction must run as `royce`, or the mode must be
   widened. `src/*.c` is world-readable but only yields ~114 of ~403 formats;

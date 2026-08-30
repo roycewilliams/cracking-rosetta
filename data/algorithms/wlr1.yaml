@@ -4,6 +4,17 @@ status: "needs-review"
 tools:
   hashcat:
     verified: "absent"
+  mdxfind:
+    types: ["WRL1"]
+    verified: "vector"
+    verified_at: "2026-08-29"
+    verified_with: "mdxfind"
+  john:
+    cpu: ["whirlpool1"]
+    verified: "vector"
+    verified_at: "2026-08-29"
+    verified_with: "john"
+    note: "format discovered by round-trip search, not by name"
   crack:
     supported: false
 vectors:
@@ -12,3 +23,4 @@ vectors:
     source: "sheet"
 legacy:
   hashes_org: "WLR1"
+notes: "the sheet spelled this WLR1 and CLAUDE.md listed it as a non-type; it is mdxfind WRL1 (Whirlpool-1) with the letters transposed. mdxfind pinned to WRL1 and john whirlpool1 both reproduce the vector."
