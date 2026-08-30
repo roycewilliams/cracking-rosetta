@@ -88,6 +88,7 @@ Two rules that have each cost real time here:
 | Expressions | `tools/expressions.pl` (transcribe, tier `upstream`), then `tools/derive-expressions.pl` (prove, tier `vector`) |
 | Two entries share an expression | `tools/relate.pl` — writes both sides; never hand-write one |
 | Refreshing upstream copies | `tools/fetch-upstream.sh`, committed on its own |
+| Giving an entry a recognisable vector | `tools/vanity.pl --entry ID` (`--apply` to write) — a second vector whose digest starts `dec0ded`, alongside the plain one, never over it |
 
 Every tool prints usage with no arguments and writes nothing without
 `--apply`. Data goes to stdout, progress to stderr.
