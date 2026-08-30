@@ -13,6 +13,10 @@ tools:
 
 This is a migration and continuation of the community "rosetta stone" spreadsheet, which had drifted a long way behind its upstreams.
 
+**Were you using the spreadsheet?** The closest equivalent is [`dist/rosetta.csv`](dist/rosetta.csv) - one row per algorithm, one column per tool. Also [`dist/rosetta.json`](dist/rosetta.json) to script against, and [`docs/ROSETTA.md`](docs/ROSETTA.md) to just read.
+
+Two things are new since the sheet and worth thirty seconds before you rely on a row. Every mapping now says *how well it is known* - the `*_state` columns carry the tier described below, and `vector` is the only one that means proven. And those three files are **generated**: the source of truth is one small YAML file per algorithm under `data/algorithms/`, which is what pull requests edit, so a correction goes there rather than into a cell.
+
 ## Why?
 
 Cross-references like this rot silently, and that's the whole problem. A row that was right in 2021 still *looks* right in 2026 after upstream renamed the format, retired the mode, or changed the salt handling. Nothing in a spreadsheet cell tells you whether anyone ever checked.
