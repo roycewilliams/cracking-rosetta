@@ -7,7 +7,9 @@ tools:
     verified: "asserted"
   mdxfind:
     types: ["PBKDF2-SHA1"]
-    verified: "asserted"
+    verified: "vector"
+    verified_at: "2026-08-30"
+    verified_with: "mdxfind"
   crack:
     supported: false
 vectors:

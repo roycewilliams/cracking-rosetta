@@ -4,10 +4,14 @@ status: "needs-review"
 tools:
   hashcat:
     modes: [21200]
-    verified: "asserted"
+    verified: "vector"
+    verified_at: "2026-08-30"
+    verified_with: "hashcat"
   mdxfind:
     types: ["MD5SHA1SALTMD5PASS"]
-    verified: "asserted"
+    verified: "vector"
+    verified_at: "2026-08-30"
+    verified_with: "mdxfind"
   crack:
     supported: false
 vectors:

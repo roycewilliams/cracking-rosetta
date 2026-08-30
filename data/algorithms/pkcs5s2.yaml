@@ -6,7 +6,9 @@ tools:
     verified: "absent"
   mdxfind:
     types: ["PKCS5S2"]
-    verified: "asserted"
+    verified: "vector"
+    verified_at: "2026-08-30"
+    verified_with: "mdxfind"
   crack:
     supported: false
 vectors:

@@ -4,19 +4,19 @@ status: "needs-review"
 tools:
   hashcat:
     modes: [32410]
-    verified: "upstream"
-    verified_at: "2026-08-29"
-    verified_with: "RCS 1.540 (2026/08/22)"
-    note: "hashcat mapping shipped in mdxfind's own type table"
+    verified: "vector"
+    verified_at: "2026-08-30"
+    verified_with: "hashcat"
   mdxfind:
     types: ["SHA512SHA512SALT"]
-    verified: "asserted"
+    verified: "vector"
+    verified_at: "2026-08-30"
+    verified_with: "mdxfind"
   john:
     cpu: ["dynamic_85"]
-    verified: "upstream"
-    verified_at: "2026-08-29"
-    verified_with: "1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
-    note: "from hashpipe john_map.h, confirmed upstream by recomputation"
+    verified: "vector"
+    verified_at: "2026-08-30"
+    verified_with: "john"
   crack:
     supported: false
 vectors:
