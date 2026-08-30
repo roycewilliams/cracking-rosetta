@@ -158,6 +158,32 @@ sub cell {
              ids => $label, tier => $tier };
 }
 
+# same_as($entry) - the relations as one phrase a person can read in a table
+# cell. A row that says "md5($p.$s)" twice in a 784-row table is a puzzle; a
+# row that says "same as md5-pass-salt (application)" is an answer.
+sub same_as {
+    my ($e) = @_;
+    my @r = @{ $e->{relations} || [] } or return '';
+    my %verb = (
+        'same-computation'   => 'same as',
+        'encodes'            => 'encoding of',
+        'input-encoding'     => 'input encoding of',
+        'iterates'           => 'iterates',
+        'truncates'          => 'truncates',
+        'collides-on-subset' => 'collides with',
+        'duplicate-of'       => 'duplicate of',
+    );
+    my @parts;
+    for my $rel (sort { ($a->{kind} // '') cmp ($b->{kind} // '')
+                     || ($a->{entry} // '') cmp ($b->{entry} // '') } @r) {
+        my $v = $verb{ $rel->{kind} // '' } // ($rel->{kind} // '?');
+        my $d = $rel->{distinction};
+        push @parts, sprintf('%s %s%s', $v, $rel->{entry},
+            (defined $d && length $d && $d ne 'none') ? " ($d)" : '');
+    }
+    return join('; ', @parts);
+}
+
 my (%tally, %state_count);
 my @out;
 for my $e (@rows) {
@@ -171,6 +197,16 @@ for my $e (@rows) {
         notes  => $e->{notes} // '',
         legacy => join('; ', grep { defined && length }
                         ($e->{legacy}{hashes_org}, $e->{legacy}{hashkiller})),
+        category    => $e->{category} // '',
+        application => join(' ', grep { defined && length }
+                             ($e->{application}, $e->{application_version})),
+        # Full edges for machines; one short phrase for people.
+        relations   => [ map { { kind        => $_->{kind},
+                                 entry       => $_->{entry},
+                                 distinction => $_->{distinction} // '',
+                                 note        => $_->{note} // '' } }
+                         @{ $e->{relations} || [] } ],
+        sameas      => same_as($e),
     );
     for my $t (qw(hashcat john mdxfind crack)) {
         my $c = cell($e, $t);
@@ -193,19 +229,20 @@ sub csv_field {
     return qq{"$v"};
 }
 
-my @CSV = qw(id name aliases expression status
+my @CSV = qw(id name aliases expression category application status
              hashcat hashcat_state john john_state mdxfind mdxfind_state
-             crack_state vectors legacy notes);
+             crack_state vectors relations legacy notes);
 
 open my $csv, '>', "$distdir/rosetta.csv" or die "cannot write csv: $!\n";
 print {$csv} join(',', @CSV), "\n";
 for my $r (@out) {
     print {$csv} join(',', map { csv_field($_) } (
-        $r->{id}, $r->{name}, $r->{alias}, $r->{expr}, $r->{status},
+        $r->{id}, $r->{name}, $r->{alias}, $r->{expr},
+        $r->{category}, $r->{application}, $r->{status},
         join(' ', @{ $r->{hashcat}{ids} }), $r->{hashcat}{state},
         join(' ', @{ $r->{john}{ids} }),    $r->{john}{state},
         join(' ', @{ $r->{mdxfind}{ids} }), $r->{mdxfind}{state},
-        $r->{crack}{state}, $r->{vecs}, $r->{legacy}, $r->{notes},
+        $r->{crack}{state}, $r->{vecs}, $r->{sameas}, $r->{legacy}, $r->{notes},
     )), "\n";
 }
 close $csv;
@@ -304,12 +341,14 @@ LEGEND
 # column spent 782 rows saying "no" to buy two rows of information. The data
 # itself is unchanged in data/algorithms, the CSV and the JSON; only the
 # presentation moves, to docs/CRACK.md and a marker on the rows it concerns.
-print  {$md} "| Algorithm | hashcat | John | mdxfind |\n|---|---|---|---|\n";
+print  {$md} "| Algorithm | hashcat | John | mdxfind | Same as |\n|---|---|---|---|---|\n";
 for my $r (@out) {
     my $n = wrap_name($r->{name}); $n =~ s/\|/\\|/g;
     $n .= ' †' if $r->{crack}{state} ne 'no' && $r->{crack}{state} ne 'unknown';
-    printf {$md} "| %s | %s | %s | %s |\n", $n,
-        md_cell($r->{hashcat}), md_cell($r->{john}), md_cell($r->{mdxfind});
+    my $rel = $r->{sameas}; $rel =~ s/\|/\\|/g;
+    printf {$md} "| %s | %s | %s | %s | %s |\n", $n,
+        md_cell($r->{hashcat}), md_cell($r->{john}), md_cell($r->{mdxfind}),
+        (length $rel ? $rel : '');
 }
 close $md;
 
@@ -421,7 +460,7 @@ my $compact = JSON::PP->new->canonical->encode([
             $_->{john}{state},    join(', ', @{ $_->{john}{ids} }),
             $_->{mdxfind}{state}, join(', ', @{ $_->{mdxfind}{ids} }),
             $_->{crack}{state},
-            $_->{alias}, $_->{legacy}, $_->{vecs} ] } @out
+            $_->{alias}, $_->{legacy}, $_->{vecs}, $_->{sameas} ] } @out
 ]);
 
 my $versions = sprintf('hashcat %s &middot; john %s &middot; mdxfind %s',
@@ -473,6 +512,8 @@ th:hover{color:var(--ink)}
 td.alg{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.82rem;
  max-width:32ch;word-break:break-word}
 td.alg .al{display:block;color:var(--ink3);font-size:.74rem;
+ font-family:ui-sans-serif,system-ui,sans-serif}
+td.rel{color:var(--ink3);font-size:.74rem;max-width:30ch;word-break:break-word;
  font-family:ui-sans-serif,system-ui,sans-serif}
 .ids{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.8rem}
 .pill{display:inline-block;padding:1px 6px;border-radius:3px;font-size:.66rem;
@@ -529,6 +570,7 @@ a{color:inherit}
 <thead><tr>
   <th data-c="0">Algorithm</th><th data-c="3">hashcat</th>
   <th data-c="5">John</th><th data-c="7">mdxfind</th><th data-c="11">Vectors</th>
+  <th data-c="12">Same as</th>
 </tr></thead>
 <tbody id="tb"></tbody>
 </table></div>
@@ -537,6 +579,8 @@ a{color:inherit}
   <a href="ROSETTA.md">ROSETTA.md</a> and
   <a href="../dist/rosetta.csv">rosetta.csv</a>.
   A gap is not a claim that the tool cannot do it &mdash; it means nobody has said.
+  &quot;Same as&quot; names another row that is the same computation, and why both
+  rows exist; the full typed edges are in <code>rosetta.json</code>.
   Alec Muffett's Crack is covered separately in <a href="CRACK.md">CRACK.md</a>.
 </footer>
 <script>
@@ -560,7 +604,7 @@ function render(){
   const term=q.value.trim().toLowerCase(), tool=toolSel.value, st=stSel.value;
   let rows=D.filter(r=>{
     if(term){
-      const hay=(r[0]+' '+r[3]+' '+r[5]+' '+r[7]+' '+r[9]+' '+r[10]).toLowerCase();
+      const hay=(r[0]+' '+r[3]+' '+r[5]+' '+r[7]+' '+r[9]+' '+r[10]+' '+r[12]).toLowerCase();
       if(hay.indexOf(term)<0) return false;
     }
     const idx = tool===''? null : COLS[+tool][0];
@@ -579,6 +623,7 @@ function render(){
     '<td class="alg">'+esc(r[0])+(r[9]?'<span class="al">'+esc(r[9])+'</span>':'')+'</td>'
     +cellHtml(r[2],r[3])+cellHtml(r[4],r[5])+cellHtml(r[6],r[7])
     +'<td>'+(r[11]||0)+'</td>'
+    +'<td class="rel">'+esc(r[12]||'')+'</td>'
   ).map(s=>'<tr>'+s+'</tr>').join('');
   countEl.textContent=rows.length+' of '+D.length;
 }
