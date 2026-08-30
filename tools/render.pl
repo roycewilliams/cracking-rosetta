@@ -31,6 +31,13 @@
 # "unknown" is the gap, and it is deliberately the loudest thing on the page,
 # because a gap someone can see is a gap someone might fill.
 #
+# THE README COUNTER IS UPDATED HERE
+#
+# README.md carries the algorithm count between <!-- counter --> markers, the
+# same trick kens-salty-rainbow uses. Updating it here means the number is a
+# by-product of rendering rather than something a person has to remember, and
+# it cannot drift from the data the way a hand-typed figure does.
+#
 # THE HTML CARRIES ITS OWN DATA
 #
 # The page embeds the rows as JSON and filters client-side. No build step, no
@@ -425,6 +432,23 @@ render();
 </body></html>
 HTML_HEAD
 close $html;
+
+#-----------------------------------------------------------------------
+# README counter. Left alone if the markers are absent, so this never becomes
+# a reason a render fails.
+
+my $readme = "$ROOT/README.md";
+if (-w $readme) {
+    open my $rf, '<', $readme or die "cannot read README: $!\n";
+    my $txt = do { local $/; <$rf> };
+    close $rf;
+    my $n = scalar @out;
+    if ($txt =~ s/(<!-- counter -->)\s*\d+\s*(<!-- endcounter -->)/$1 $n $2/) {
+        open my $wf, '>', $readme or die "cannot write README: $!\n";
+        print {$wf} $txt;
+        close $wf;
+    }
+}
 
 #-----------------------------------------------------------------------
 # Report.
