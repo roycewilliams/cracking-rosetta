@@ -506,8 +506,11 @@
          },
          "id" : "argon2",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "Argon2"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -520,7 +523,7 @@
          "name" : "ARGON2",
          "notes" : "",
          "status" : "needs-review",
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -1577,8 +1580,11 @@
          },
          "id" : "cisco4",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "Raw-SHA256"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -1610,8 +1616,11 @@
          },
          "id" : "cisco8",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "PBKDF2-HMAC-SHA256"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "not supported",
          "mdxfind" : {
@@ -1624,7 +1633,7 @@
          "name" : "CISCO8",
          "notes" : "",
          "status" : "needs-review",
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -1643,8 +1652,11 @@
          },
          "id" : "cisco9",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "scrypt"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -1657,7 +1669,7 @@
          "name" : "CISCO9",
          "notes" : "",
          "status" : "needs-review",
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -1666,7 +1678,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "md5($p.$s)",
          "hashcat" : {
             "ids" : [
                2410
@@ -1679,8 +1691,8 @@
             "ids" : [
                "dynamic_20"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -1775,7 +1787,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "sha256($s.sha1($p))",
          "hashcat" : {
             "ids" : [
                12600
@@ -1785,8 +1797,11 @@
          },
          "id" : "coldfusion10",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "dynamic_1588"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -1818,8 +1833,11 @@
          },
          "id" : "crammd5",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "HMAC-MD5"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -2813,7 +2831,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "gost(gost($p))",
          "hashcat" : {
             "ids" : [],
             "state" : "unknown"
@@ -3347,7 +3365,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "gost($p)",
          "hashcat" : {
             "ids" : [
                6900
@@ -3413,7 +3431,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "haval128_3($p)",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -3446,7 +3464,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "haval128_3(haval128_3($p))",
          "hashcat" : {
             "ids" : [],
             "state" : "unknown"
@@ -3479,7 +3497,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "haval128_4($p)",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -3512,7 +3530,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "haval128_4(haval128_4($p))",
          "hashcat" : {
             "ids" : [],
             "state" : "unknown"
@@ -3545,7 +3563,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "haval128_5($p)",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -3578,7 +3596,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "haval128_5(haval128_5($p))",
          "hashcat" : {
             "ids" : [],
             "state" : "unknown"
@@ -3611,7 +3629,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "haval160_3($p)",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -3644,7 +3662,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "haval160_3(haval160_3($p))",
          "hashcat" : {
             "ids" : [],
             "state" : "unknown"
@@ -3677,7 +3695,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "haval160_4($p)",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -3710,7 +3728,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "haval160_4(haval160_4($p))",
          "hashcat" : {
             "ids" : [],
             "state" : "unknown"
@@ -3743,7 +3761,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "haval160_5($p)",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -3776,7 +3794,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "haval160_5(haval160_5($p))",
          "hashcat" : {
             "ids" : [],
             "state" : "unknown"
@@ -3809,7 +3827,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "haval192_3($p)",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -3842,7 +3860,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "haval192_3(haval192_3($p))",
          "hashcat" : {
             "ids" : [],
             "state" : "unknown"
@@ -3875,7 +3893,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "haval192_4($p)",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -3908,7 +3926,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "haval192_4(haval192_4($p))",
          "hashcat" : {
             "ids" : [],
             "state" : "unknown"
@@ -3941,7 +3959,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "haval192_5($p)",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -3974,7 +3992,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "haval192_5(haval192_5($p))",
          "hashcat" : {
             "ids" : [],
             "state" : "unknown"
@@ -4007,7 +4025,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "haval224_3($p)",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -4040,7 +4058,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "haval224_3(haval224_3($p))",
          "hashcat" : {
             "ids" : [],
             "state" : "unknown"
@@ -4073,7 +4091,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "haval224_4($p)",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -4106,7 +4124,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "haval224_4(haval224_4($p))",
          "hashcat" : {
             "ids" : [],
             "state" : "unknown"
@@ -4139,7 +4157,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "haval224_5($p)",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -4172,7 +4190,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "haval224_5(haval224_5($p))",
          "hashcat" : {
             "ids" : [],
             "state" : "unknown"
@@ -4205,7 +4223,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "haval256_3($p)",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -4238,7 +4256,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "haval256_3(haval256_3($p))",
          "hashcat" : {
             "ids" : [],
             "state" : "unknown"
@@ -4271,7 +4289,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "haval256_4($p)",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -4304,7 +4322,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "haval256_4(haval256_4($p))",
          "hashcat" : {
             "ids" : [],
             "state" : "unknown"
@@ -4337,7 +4355,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "haval256_5($p)",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -4370,7 +4388,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "haval256_5(haval256_5($p))",
          "hashcat" : {
             "ids" : [],
             "state" : "unknown"
@@ -5348,8 +5366,8 @@
             "ids" : [
                "HMAC-GOST"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "hmac(\"gost\", $plain, $salt)",
          "notes" : "",
@@ -5378,8 +5396,8 @@
             "ids" : [
                "HMAC-HAV128"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "hmac(\"haval128,3\", $plain, $salt)",
          "notes" : "",
@@ -5408,8 +5426,8 @@
             "ids" : [
                "HMAC-HAV160"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "hmac(\"haval160,3\", $plain, $salt)",
          "notes" : "",
@@ -5438,8 +5456,8 @@
             "ids" : [
                "HMAC-HAV192"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "hmac(\"haval192,3\", $plain, $salt)",
          "notes" : "",
@@ -5468,8 +5486,8 @@
             "ids" : [
                "HMAC-HAV224"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "hmac(\"haval224,3\", $plain, $salt)",
          "notes" : "",
@@ -5498,8 +5516,8 @@
             "ids" : [
                "HMAC-HAV256"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "hmac(\"haval256,3\", $plain, $salt)",
          "notes" : "",
@@ -5528,8 +5546,8 @@
             "ids" : [
                "HMAC-MD2"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "hmac(\"md2\", $plain, $salt)",
          "notes" : "",
@@ -5558,8 +5576,8 @@
             "ids" : [
                "HMAC-MD4"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "hmac(\"md4\", $plain, $salt)",
          "notes" : "",
@@ -5591,8 +5609,8 @@
             "ids" : [
                "HMAC-MD5"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "hmac(\"md5\", $plain, $salt)",
          "notes" : "",
@@ -5621,8 +5639,8 @@
             "ids" : [
                "HMAC-RMD128"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "hmac(\"ripemd128\", $plain, $salt)",
          "notes" : "",
@@ -5651,8 +5669,8 @@
             "ids" : [
                "HMAC-RMD160"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "hmac(\"ripemd160\", $plain, $salt)",
          "notes" : "",
@@ -5681,8 +5699,8 @@
             "ids" : [
                "HMAC-RMD256"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "hmac(\"ripemd256\", $plain, $salt)",
          "notes" : "",
@@ -5711,8 +5729,8 @@
             "ids" : [
                "HMAC-RMD320"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "hmac(\"ripemd320\", $plain, $salt)",
          "notes" : "",
@@ -5744,8 +5762,8 @@
             "ids" : [
                "HMAC-SHA1"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "hmac(\"sha1\", $plain, $salt)",
          "notes" : "",
@@ -5774,8 +5792,8 @@
             "ids" : [
                "HMAC-SHA224"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "hmac(\"sha224\", $plain, $salt)",
          "notes" : "",
@@ -5804,8 +5822,8 @@
             "ids" : [
                "HMAC-SHA256"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "hmac(\"sha256\", $plain, $salt)",
          "notes" : "",
@@ -5834,8 +5852,8 @@
             "ids" : [
                "HMAC-SHA512"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "hmac(\"sha512\", $plain, $salt)",
          "notes" : "",
@@ -5864,8 +5882,8 @@
             "ids" : [
                "HMAC-SNE128"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "hmac(\"snefru128\", $plain, $salt)",
          "notes" : "",
@@ -5894,8 +5912,8 @@
             "ids" : [
                "HMAC-SNE256"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "hmac(\"snefru256\", $plain, $salt)",
          "notes" : "",
@@ -5924,8 +5942,8 @@
             "ids" : [
                "HMAC-TIGER128"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "hmac(\"tiger128,3\", $plain, $salt)",
          "notes" : "",
@@ -5954,8 +5972,8 @@
             "ids" : [
                "HMAC-TIGER160"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "hmac(\"tiger160,3\", $plain, $salt)",
          "notes" : "",
@@ -5984,8 +6002,8 @@
             "ids" : [
                "HMAC-TIGER192"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "hmac(\"tiger192,3\", $plain, $salt)",
          "notes" : "",
@@ -6014,8 +6032,8 @@
             "ids" : [
                "HMAC-WRL"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "hmac(\"whirlpool\", $plain, $salt)",
          "notes" : "",
@@ -6402,8 +6420,11 @@
          },
          "id" : "hmailserver",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "hMailServer"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -6416,7 +6437,7 @@
          "name" : "HMAILSERVER",
          "notes" : "",
          "status" : "needs-review",
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -6491,7 +6512,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "md5(md5($s).md5($p))",
          "hashcat" : {
             "ids" : [
                2811
@@ -6504,8 +6525,8 @@
             "ids" : [
                "dynamic_12"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "IPB / MYBB; IPB2+, MyBB1.2+",
          "mdxfind" : {
@@ -6746,7 +6767,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "md5($p.$s)",
          "hashcat" : {
             "ids" : [
                11
@@ -6758,10 +6779,12 @@
          "john" : {
             "ids" : [
                "dynamic_1",
+               "dynamic_1014",
+               "dynamic_1016",
                "dynamic_2001"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "JOOMLA; Joomla",
          "mdxfind" : {
@@ -6834,8 +6857,8 @@
             "ids" : [
                "JUNIPERSSG"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "JUNIPERSSG",
          "notes" : "",
@@ -6859,8 +6882,11 @@
          },
          "id" : "jwt",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "HMAC-SHA256"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -6873,7 +6899,7 @@
          "name" : "JWT",
          "notes" : "",
          "status" : "needs-review",
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -6882,7 +6908,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "keccak_224($p)",
          "hashcat" : {
             "ids" : [
                17700
@@ -6918,7 +6944,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "keccak_224(keccak_224($p))",
          "hashcat" : {
             "ids" : [],
             "state" : "unknown"
@@ -6951,7 +6977,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "keccak_256($p)",
          "hashcat" : {
             "ids" : [
                5000
@@ -6987,7 +7013,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "keccak_256(keccak_256($p))",
          "hashcat" : {
             "ids" : [],
             "state" : "unknown"
@@ -7020,7 +7046,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "keccak_384($p)",
          "hashcat" : {
             "ids" : [
                17900
@@ -7056,7 +7082,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "keccak_384(keccak_384($p))",
          "hashcat" : {
             "ids" : [],
             "state" : "unknown"
@@ -7089,7 +7115,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "keccak_512($p)",
          "hashcat" : {
             "ids" : [
                18000
@@ -7125,7 +7151,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "keccak_512(keccak_512($p))",
          "hashcat" : {
             "ids" : [],
             "state" : "unknown"
@@ -7300,8 +7326,11 @@
          },
          "id" : "krb5pa23",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "krb5pa-md5"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -7314,7 +7343,7 @@
          "name" : "KRB5PA23",
          "notes" : "",
          "status" : "needs-review",
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -7333,8 +7362,11 @@
          },
          "id" : "krb5tgs23",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "krb5tgs"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -7347,7 +7379,7 @@
          "name" : "KRB5TGS23",
          "notes" : "",
          "status" : "needs-review",
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -7645,7 +7677,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "md2($p)",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -7678,7 +7710,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "md2(md2($p))",
          "hashcat" : {
             "ids" : [],
             "state" : "unknown"
@@ -7771,7 +7803,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "md4($p)",
          "hashcat" : {
             "ids" : [
                900
@@ -7959,7 +7991,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "md4(utf16($p))",
          "hashcat" : {
             "ids" : [
                1000
@@ -8057,7 +8089,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "md5($p)",
          "hashcat" : {
             "ids" : [
                0
@@ -8245,7 +8277,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "md5($p.$s)",
          "hashcat" : {
             "ids" : [
                10
@@ -8257,11 +8289,12 @@
          "john" : {
             "ids" : [
                "dynamic_1",
+               "dynamic_1014",
                "dynamic_1016",
                "dynamic_2001"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "MD5(PLAINSALT); md5($pass.$salt)",
          "mdxfind" : {
@@ -8283,7 +8316,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "md5($p.md5($s))",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -8291,10 +8324,11 @@
          "id" : "md5-pass-md5-salt",
          "john" : {
             "ids" : [
-               "dynamic_1011"
+               "dynamic_1011",
+               "dynamic_1012"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "MD5(PLAINMD5(SALT)); md5($pass.md5($salt))",
          "mdxfind" : {
@@ -8436,7 +8470,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "md5($s.$p)",
          "hashcat" : {
             "ids" : [
                20
@@ -8447,10 +8481,13 @@
          "id" : "md5-salt-pass",
          "john" : {
             "ids" : [
+               "dynamic_1009",
+               "dynamic_1017",
+               "dynamic_2004",
                "dynamic_4"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "MD5(SALTPLAIN); md5($salt.$pass)",
          "mdxfind" : {
@@ -8472,7 +8509,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "md5($s.$p.$s)",
          "hashcat" : {
             "ids" : [
                3800
@@ -8483,10 +8520,11 @@
          "id" : "md5-salt-pass-salt",
          "john" : {
             "ids" : [
+               "dynamic_2005",
                "dynamic_5"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "MD5(SALTPLAINSALT); md5($salt.$pass.$salt)",
          "mdxfind" : {
@@ -8538,7 +8576,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "md5($s.md5($p))",
          "hashcat" : {
             "ids" : [
                3710
@@ -8549,10 +8587,11 @@
          "id" : "md5-salt-md5-pass",
          "john" : {
             "ids" : [
+               "dynamic_2009",
                "dynamic_9"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "MD5(SALTMD5(PLAIN)); md5($salt.md5($pass))",
          "mdxfind" : {
@@ -8586,7 +8625,8 @@
          "john" : {
             "ids" : [
                "dynamic_11",
-               "dynamic_14"
+               "dynamic_14",
+               "dynamic_2011"
             ],
             "state" : "claimed",
             "tier" : "upstream"
@@ -8611,7 +8651,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "md5($s.md5($s.$p))",
          "hashcat" : {
             "ids" : [
                4010
@@ -8622,10 +8662,11 @@
          "id" : "md5-salt-md5-salt-pass",
          "john" : {
             "ids" : [
-               "dynamic_10"
+               "dynamic_10",
+               "dynamic_2010"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "MD5(SALTMD5(SALTPLAIN)); md5($salt.md5($salt.$pass))",
          "mdxfind" : {
@@ -8725,8 +8766,8 @@
             "ids" : [
                "MD5USERnulPASS"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "md5($user.\"\\0\".$plain)",
          "notes" : "",
@@ -8740,7 +8781,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "md5($s.md5($p))",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -8748,18 +8789,19 @@
          "id" : "md5-userid-md5-plain",
          "john" : {
             "ids" : [
+               "dynamic_2009",
                "dynamic_9"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "MD5(SALTMD5(PLAIN))",
          "mdxfind" : {
             "ids" : [
                "MD5USERIDMD5"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "md5($userid.md5($plain))",
          "notes" : "",
@@ -8788,8 +8830,8 @@
             "ids" : [
                "MD5USERIDMD5MD5"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "md5($userid.md5(md5($plain)))",
          "notes" : "",
@@ -9223,23 +9265,28 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "md5(md5($p).$s)",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
          },
          "id" : "md5-capitalise-md5-plain-username",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "dynamic_1007",
+               "dynamic_2006",
+               "dynamic_6"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "MD5(CAPMD5(PLAIN)SALT)",
          "mdxfind" : {
             "ids" : [
                "MD5CAPMD5USER"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "md5(capitalise(md5($plain).$username)",
          "notes" : "",
@@ -9523,7 +9570,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "md5(md4($p))",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -9556,7 +9603,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "md5(md5($p))",
          "hashcat" : {
             "ids" : [
                2600
@@ -9592,7 +9639,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "md5(md5($p).$s)",
          "hashcat" : {
             "ids" : [
                2611,
@@ -9604,10 +9651,12 @@
          "id" : "md5-md5-pass-salt",
          "john" : {
             "ids" : [
+               "dynamic_1007",
+               "dynamic_2006",
                "dynamic_6"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "VBULLETIN; md5(md5($pass).$salt)",
          "mdxfind" : {
@@ -9629,7 +9678,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "md5(md5($p).md5($s))",
          "hashcat" : {
             "ids" : [
                3910
@@ -9642,8 +9691,8 @@
             "ids" : [
                "dynamic_13"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "MD5(MD5(PLAIN)MD5(SALT)); md5(md5($pass).md5($salt))",
          "mdxfind" : {
@@ -9755,23 +9804,28 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "md5(md5($p).$s)",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
          },
          "id" : "md5-md5-plain-salt-3",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "dynamic_1007",
+               "dynamic_2006",
+               "dynamic_6"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "MD5(MD5(PLAIN)SALT)",
          "mdxfind" : {
             "ids" : [
                "MD5MD5USER"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "md5(md5($plain).$salt)",
          "notes" : "",
@@ -9815,7 +9869,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "md5(md5($p).md5($p))",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -9938,7 +9992,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "md5(md5_raw($p))",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -9971,7 +10025,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "md5(md5($s).$p)",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -9979,10 +10033,11 @@
          "id" : "md5-md5-salt-pass",
          "john" : {
             "ids" : [
+               "dynamic_2008",
                "dynamic_8"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "MD5(MD5(SALT)PLAIN); md5(md5($salt).$pass)",
          "mdxfind" : {
@@ -10004,15 +10059,18 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "md5(md5($s.$p):$s)",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
          },
          "id" : "md5-md5-salt-plain-salt",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "dynamic_1350"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "MD5(MD5(SALTPLAIN)INSDPSALT)",
          "mdxfind" : {
@@ -10034,7 +10092,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "md5(md5(md5($p)))",
          "hashcat" : {
             "ids" : [
                3500
@@ -10280,7 +10338,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "md5(md5(md5(md5($p))))",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -10463,7 +10521,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "md5(md5(md5(md5(md5($p)))))",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -11006,7 +11064,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "md5(sha1($p))",
          "hashcat" : {
             "ids" : [
                4400
@@ -11042,7 +11100,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "md5(sha1($p).md5($p).sha1($p))",
          "hashcat" : {
             "ids" : [
                20900
@@ -11052,8 +11110,11 @@
          },
          "id" : "md5-sha1-plain-md5-pass-sha1-plain",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "dynamic_1518"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -11066,7 +11127,7 @@
          "name" : "md5(sha1($plain).md5($pass).sha1($plain))",
          "notes" : "",
          "status" : "needs-review",
-         "vecs" : 0
+         "vecs" : 1
       },
       {
          "alias" : "",
@@ -11321,7 +11382,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "md5(sha1(md5($p)))",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -11624,7 +11685,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "md5(sha1(md5(sha1($p))))",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -11657,7 +11718,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "md5(sha1(md5(sha1(md5($p)))))",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -11720,7 +11781,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "md5(sha1(sha1($p)))",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -11783,7 +11844,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "md5(sha1(sha1(md5($p))))",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -12683,8 +12744,8 @@
             "ids" : [
                "MD5-MD5puSHA1MD5pup"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "MD5-MD5puSHA1MD5pup",
          "notes" : "",
@@ -12824,7 +12885,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "md5($s.md5($p.$s))",
          "hashcat" : {
             "ids" : [
                4110
@@ -12835,10 +12896,11 @@
          "id" : "md5-saltmd5passsalt",
          "john" : {
             "ids" : [
-               "dynamic_11"
+               "dynamic_11",
+               "dynamic_2011"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -12938,8 +13000,8 @@
             "ids" : [
                "MD5AM"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "MD5AM",
          "notes" : "",
@@ -12968,8 +13030,8 @@
             "ids" : [
                "MD5AM2"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "MD5AM2",
          "notes" : "",
@@ -13118,8 +13180,8 @@
             "ids" : [
                "MD5CAPMD5MD5USER"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "MD5CAPMD5MD5USER",
          "notes" : "",
@@ -13325,8 +13387,8 @@
             "ids" : [
                "MD5MD5MD5USER"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "MD5MD5MD5USER",
          "notes" : "",
@@ -14096,7 +14158,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "md5($p)",
          "hashcat" : {
             "ids" : [
                4300
@@ -14202,10 +14264,12 @@
          "id" : "md5userpass",
          "john" : {
             "ids" : [
+               "dynamic_1009",
+               "dynamic_2004",
                "dynamic_4"
             ],
             "state" : "claimed",
-            "tier" : "upstream"
+            "tier" : "asserted"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -14218,7 +14282,7 @@
          "name" : "MD5USERPASS",
          "notes" : "",
          "status" : "needs-review",
-         "vecs" : 0
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -14227,7 +14291,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "md5(utf16($p))",
          "hashcat" : {
             "ids" : [
                70
@@ -14542,8 +14606,8 @@
             "ids" : [
                "MSCACHE"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "mscache($plain)",
          "notes" : "",
@@ -14636,8 +14700,11 @@
          },
          "id" : "mssql2000",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "mssql"
+            ],
+            "state" : "claimed",
+            "tier" : "asserted"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -14910,6 +14977,7 @@
          "id" : "mysql4-1-mysql5",
          "john" : {
             "ids" : [
+               "dynamic_1028",
                "mysql-sha1",
                "mysql-sha1-opencl"
             ],
@@ -14927,7 +14995,7 @@
          "name" : "MySQL4.1/MySQL5",
          "notes" : "",
          "status" : "needs-review",
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -15015,8 +15083,12 @@
          },
          "id" : "netntlmv2",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "netlmv2",
+               "netntlmv2"
+            ],
+            "state" : "claimed",
+            "tier" : "asserted"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -15029,7 +15101,7 @@
          "name" : "NETNTLMV2",
          "notes" : "",
          "status" : "needs-review",
-         "vecs" : 1
+         "vecs" : 3
       },
       {
          "alias" : "",
@@ -15150,8 +15222,11 @@
          },
          "id" : "netscape-ldap",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "Raw-SHA1"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "NSLDAP",
          "mdxfind" : {
@@ -15164,7 +15239,7 @@
          "name" : "netscape LDAP",
          "notes" : "",
          "status" : "needs-review",
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -15239,7 +15314,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "md4(utf16($p))",
          "hashcat" : {
             "ids" : [
                1000
@@ -15276,7 +15351,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "md4(utf16($p))",
          "hashcat" : {
             "ids" : [
                1000
@@ -15391,6 +15466,9 @@
          "id" : "oscommerce-xt-commerce",
          "john" : {
             "ids" : [
+               "dynamic_1009",
+               "dynamic_1017",
+               "dynamic_2004",
                "dynamic_4",
                "osc"
             ],
@@ -15450,7 +15528,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "panama($p)",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -15483,7 +15561,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "panama(panama($p))",
          "hashcat" : {
             "ids" : [],
             "state" : "unknown"
@@ -15688,8 +15766,11 @@
          },
          "id" : "pbkdf2-sha512-plain",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "PBKDF2-HMAC-SHA512"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "PBKDF2",
          "mdxfind" : {
@@ -15702,7 +15783,7 @@
          "name" : "pbkdf2-sha512($plain)",
          "notes" : "",
          "status" : "needs-review",
-         "vecs" : 0
+         "vecs" : 1
       },
       {
          "alias" : "",
@@ -15791,8 +15872,12 @@
          },
          "id" : "phps",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "PHPS",
+               "PHPS2"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -15805,7 +15890,7 @@
          "name" : "PHPS",
          "notes" : "",
          "status" : "needs-review",
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -16193,8 +16278,11 @@
          },
          "id" : "qnx-sha512",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "qnx"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -16207,7 +16295,7 @@
          "name" : "QNX-SHA512",
          "notes" : "",
          "status" : "needs-review",
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -16808,7 +16896,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "ripemd128($p)",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -16931,7 +17019,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "ripemd160($p)",
          "hashcat" : {
             "ids" : [
                6000
@@ -17027,7 +17115,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "ripemd256($p)",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -17057,7 +17145,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "ripemd320($p)",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -17087,7 +17175,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "ripemd128(ripemd128($p))",
          "hashcat" : {
             "ids" : [],
             "state" : "unknown"
@@ -17150,7 +17238,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "ripemd160(ripemd160($p))",
          "hashcat" : {
             "ids" : [],
             "state" : "unknown"
@@ -17183,7 +17271,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "ripemd320($p)",
          "hashcat" : {
             "ids" : [
                33600
@@ -17219,7 +17307,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "ripemd320(ripemd320($p))",
          "hashcat" : {
             "ids" : [],
             "state" : "unknown"
@@ -17328,8 +17416,11 @@
          },
          "id" : "sap-bcode",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "sapb"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -17342,7 +17433,7 @@
          "name" : "SAP-BCODE",
          "notes" : "",
          "status" : "needs-review",
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -17532,8 +17623,11 @@
          },
          "id" : "scrypt",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "scrypt"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -17546,7 +17640,7 @@
          "name" : "SCRYPT",
          "notes" : "",
          "status" : "needs-review",
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -17585,7 +17679,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "sha1($p.$s)",
          "hashcat" : {
             "ids" : [
                110
@@ -17598,8 +17692,8 @@
             "ids" : [
                "dynamic_24"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "SHA1(PLAINSALT); sha1($pass.$salt)",
          "mdxfind" : {
@@ -17651,7 +17745,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "sha1($s.$p)",
          "hashcat" : {
             "ids" : [
                120
@@ -17664,8 +17758,8 @@
             "ids" : [
                "dynamic_25"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "SHA1(SALTPLAIN); sha1($salt.$pass)",
          "mdxfind" : {
@@ -17687,7 +17781,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "sha1($s.$p.$s)",
          "hashcat" : {
             "ids" : [
                4900
@@ -17700,8 +17794,8 @@
             "ids" : [
                "dynamic_1504"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "SHA1(SALTPLAINSALT); sha1($salt.$pass.$salt)",
          "mdxfind" : {
@@ -17723,7 +17817,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "sha1($s.sha1($p))",
          "hashcat" : {
             "ids" : [
                4520
@@ -17733,8 +17827,11 @@
          },
          "id" : "sha1-salt-sha1-plain",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "dynamic_1501"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "?",
          "mdxfind" : {
@@ -17747,7 +17844,7 @@
          "name" : "sha1($salt.sha1($plain))",
          "notes" : "",
          "status" : "needs-review",
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -17756,7 +17853,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "sha1($s.sha1($s.sha1($p)))",
          "hashcat" : {
             "ids" : [
                13900
@@ -17769,8 +17866,8 @@
             "ids" : [
                "dynamic_38"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "SHA1(SALTSHA1(SALTSHA1(PLAIN)))",
          "mdxfind" : {
@@ -18057,8 +18154,8 @@
             "ids" : [
                "SHA1MD5USER"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "sha1(md5($plain).$salt)",
          "notes" : "",
@@ -18805,23 +18902,26 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "sha1(sha1($p).$s)",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
          },
          "id" : "sha1-sha1-plain-salt",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "dynamic_1502"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "SHA1(SHA1(PLAIN)SALT)",
          "mdxfind" : {
             "ids" : [
                "SHA1SHA1USER"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "sha1(sha1($plain).$salt)",
          "notes" : "",
@@ -18895,15 +18995,18 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "sha1(sha1($p).$s)",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
          },
          "id" : "sha1-sha1-plain-substr-plain-0-1",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "dynamic_1502"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "SHA1(SHA1(PLAIN)CUT0-1(PLAIN))",
          "mdxfind" : {
@@ -19751,7 +19854,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "sha1($p)",
          "hashcat" : {
             "ids" : [
                100
@@ -19892,8 +19995,11 @@
          },
          "id" : "sha1lsb35",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "Raw-SHA1-Linkedin"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -19906,7 +20012,7 @@
          "name" : "SHA1lsb35",
          "notes" : "",
          "status" : "needs-review",
-         "vecs" : 0
+         "vecs" : 1
       },
       {
          "alias" : "",
@@ -20327,8 +20433,12 @@
          },
          "id" : "sha1utf16lesaltpass",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "dynamic_1600",
+               "dynamic_41"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -20350,7 +20460,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "sha224($p)",
          "hashcat" : {
             "ids" : [
                1300
@@ -20386,7 +20496,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "sha224(sha224($p))",
          "hashcat" : {
             "ids" : [],
             "state" : "unknown"
@@ -20479,7 +20589,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "sha224(sha224_raw($p))",
          "hashcat" : {
             "ids" : [],
             "state" : "unknown"
@@ -20512,7 +20622,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "sha224($p.$s)",
          "hashcat" : {
             "ids" : [
                1310
@@ -20525,8 +20635,8 @@
             "ids" : [
                "dynamic_52"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -20548,7 +20658,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "sha224($s.$p)",
          "hashcat" : {
             "ids" : [
                1320
@@ -20561,8 +20671,8 @@
             "ids" : [
                "dynamic_51"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -20617,7 +20727,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "sha256($p)",
          "hashcat" : {
             "ids" : [
                1400
@@ -20655,7 +20765,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "sha256(sha256($p))",
          "hashcat" : {
             "ids" : [],
             "state" : "unknown"
@@ -20688,7 +20798,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "sha256($p.$s)",
          "hashcat" : {
             "ids" : [
                1410
@@ -20701,8 +20811,8 @@
             "ids" : [
                "dynamic_62"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "SHA256(PLAINSALT); sha256($pass.$salt)",
          "mdxfind" : {
@@ -20724,7 +20834,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "sha256($s.$p)",
          "hashcat" : {
             "ids" : [
                1420
@@ -20737,8 +20847,8 @@
             "ids" : [
                "dynamic_61"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "SHA256(SALTPLAIN); sha256($salt.$pass)",
          "mdxfind" : {
@@ -20919,7 +21029,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "sha256(sha256_raw($p))",
          "hashcat" : {
             "ids" : [
                21400
@@ -21084,15 +21194,19 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "sha256($s.$p)",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
          },
          "id" : "sha256rawsaltpass",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "FormSpring",
+               "dynamic_61"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -21105,7 +21219,7 @@
          "name" : "SHA256RAWSALTPASS",
          "notes" : "",
          "status" : "needs-review",
-         "vecs" : 0
+         "vecs" : 1
       },
       {
          "alias" : "",
@@ -21158,10 +21272,11 @@
          "id" : "sha256sha256salt",
          "john" : {
             "ids" : [
+               "dynamic_1503",
                "dynamic_65"
             ],
             "state" : "claimed",
-            "tier" : "upstream"
+            "tier" : "asserted"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -21174,7 +21289,7 @@
          "name" : "SHA256SHA256SALT",
          "notes" : "",
          "status" : "needs-review",
-         "vecs" : 0
+         "vecs" : 1
       },
       {
          "alias" : "",
@@ -21312,7 +21427,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "sha3_224(sha3_224($p))",
          "hashcat" : {
             "ids" : [],
             "state" : "unknown"
@@ -21345,7 +21460,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "sha3_224($p)",
          "hashcat" : {
             "ids" : [
                17300
@@ -21381,7 +21496,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "sha3_256(sha3_256($p))",
          "hashcat" : {
             "ids" : [],
             "state" : "unknown"
@@ -21414,7 +21529,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "sha3_256($p)",
          "hashcat" : {
             "ids" : [
                17400
@@ -21450,7 +21565,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "sha3_384(sha3_384($p))",
          "hashcat" : {
             "ids" : [],
             "state" : "unknown"
@@ -21483,7 +21598,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "sha3_384($p)",
          "hashcat" : {
             "ids" : [
                17500
@@ -21519,7 +21634,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "sha3_512(sha3_512($p))",
          "hashcat" : {
             "ids" : [],
             "state" : "unknown"
@@ -21552,7 +21667,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "sha3_512($p)",
          "hashcat" : {
             "ids" : [
                17600
@@ -21588,7 +21703,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "sha384($p)",
          "hashcat" : {
             "ids" : [
                10800
@@ -21624,7 +21739,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "sha384(sha384($p))",
          "hashcat" : {
             "ids" : [],
             "state" : "unknown"
@@ -21717,7 +21832,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "sha384(sha384_raw($p))",
          "hashcat" : {
             "ids" : [],
             "state" : "unknown"
@@ -21750,7 +21865,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "sha384($p.$s)",
          "hashcat" : {
             "ids" : [
                10810
@@ -21763,8 +21878,8 @@
             "ids" : [
                "dynamic_72"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -21786,7 +21901,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "sha384($s.$p)",
          "hashcat" : {
             "ids" : [
                10820
@@ -21799,8 +21914,8 @@
             "ids" : [
                "dynamic_71"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -21921,7 +22036,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "sha512($p)",
          "hashcat" : {
             "ids" : [
                1700
@@ -21959,7 +22074,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "sha512(sha512($p))",
          "hashcat" : {
             "ids" : [],
             "state" : "unknown"
@@ -21992,7 +22107,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "sha512($p.$s)",
          "hashcat" : {
             "ids" : [
                1710
@@ -22005,8 +22120,8 @@
             "ids" : [
                "dynamic_82"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "SHA512(PLAINSALT); sha512($pass.$salt)",
          "mdxfind" : {
@@ -22028,7 +22143,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "sha512($s.$p)",
          "hashcat" : {
             "ids" : [
                1720
@@ -22041,8 +22156,8 @@
             "ids" : [
                "dynamic_81"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "SHA512(SALTPLAIN); sha512($salt.$pass)",
          "mdxfind" : {
@@ -22124,7 +22239,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "sha512(sha512_raw($p))",
          "hashcat" : {
             "ids" : [
                21000
@@ -22940,7 +23055,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "skein224($p)",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -22973,7 +23088,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "skein224(skein224($p))",
          "hashcat" : {
             "ids" : [],
             "state" : "unknown"
@@ -23006,7 +23121,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "skein256($p)",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -23039,7 +23154,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "skein256(skein256($p))",
          "hashcat" : {
             "ids" : [],
             "state" : "unknown"
@@ -23072,7 +23187,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "skein384($p)",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -23105,7 +23220,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "skein384(skein384($p))",
          "hashcat" : {
             "ids" : [],
             "state" : "unknown"
@@ -23138,7 +23253,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "skein512($p)",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -23171,7 +23286,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "skein512(skein512($p))",
          "hashcat" : {
             "ids" : [],
             "state" : "unknown"
@@ -23222,8 +23337,8 @@
             "ids" : [
                "SKYPE"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "SKYPE",
          "notes" : "",
@@ -23237,7 +23352,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "sm3($p)",
          "hashcat" : {
             "ids" : [
                31100
@@ -23273,7 +23388,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "sm3(sm3($p))",
          "hashcat" : {
             "ids" : [],
             "state" : "unknown"
@@ -23353,6 +23468,7 @@
          "id" : "smf-v1-1",
          "john" : {
             "ids" : [
+               "dynamic_25",
                "dynamic_37"
             ],
             "state" : "claimed",
@@ -23363,8 +23479,8 @@
             "ids" : [
                "SMF"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "SMF < v1.1",
          "notes" : "(using lowercase username as salt)",
@@ -24017,7 +24133,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "tiger($p)",
          "hashcat" : {
             "ids" : [],
             "state" : "unknown"
@@ -24050,7 +24166,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "tiger(tiger($p))",
          "hashcat" : {
             "ids" : [],
             "state" : "unknown"
@@ -24236,7 +24352,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "md5(md5($p).$s)",
          "hashcat" : {
             "ids" : [
                2611
@@ -24247,10 +24363,12 @@
          "id" : "vbulletin-v3-8-5",
          "john" : {
             "ids" : [
+               "dynamic_1007",
+               "dynamic_2006",
                "dynamic_6"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "VBULLETIN; vBulletin < v3.8.5",
          "mdxfind" : {
@@ -24284,6 +24402,7 @@
          "john" : {
             "ids" : [
                "dynamic_1007",
+               "dynamic_2006",
                "dynamic_6"
             ],
             "state" : "claimed",
@@ -24375,7 +24494,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "sha1($s.sha1($s.sha1($p)))",
          "hashcat" : {
             "ids" : [
                8400
@@ -24385,8 +24504,12 @@
          },
          "id" : "wbb3",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "dynamic_1592",
+               "dynamic_38"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -24540,7 +24663,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "whirlpool($p)",
          "hashcat" : {
             "ids" : [
                6100
@@ -24769,7 +24892,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "expr" : "",
+         "expr" : "whirlpool(whirlpool($p))",
          "hashcat" : {
             "ids" : [],
             "state" : "unknown"
