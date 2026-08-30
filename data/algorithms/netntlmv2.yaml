@@ -13,9 +13,21 @@ tools:
     verified: "vector"
     verified_at: "2026-08-29"
     verified_with: "mdxfind"
+  john:
+    cpu: ["netlmv2", "netntlmv2"]
+    verified: "asserted"
+    verified_at: "2026-08-29"
+    verified_with: "mdxfind"
+    note: "john's own test vector for this format is reproduced by mdxfind pinned to NETNTLMV2 at iteration 1"
   crack:
     supported: false
 vectors:
   - hash: "user::domain:1122334455667788:d5add1cebafed2180b3cca8728f5aff8:01010000000000000000000000000000aabbccdd1122334400000000"
     pass: "password123"
     source: "mdxfind"
+  - hash: "aTest:::1122334455667788:83B59F1536D3321DBF1FAEC14ADB1675:A1E7281FE8C10E53"
+    pass: "SomeFancyP4$$w0rdHere"
+    source: "john"
+  - hash: "NTlmv2::TESTWORKGROUP:1122334455667788:07659A550D5E9D02996DFD95C87EC1D5:0101000000000000006CF6385B74CA01B3610B02D99732DD000000000200120057004F0052004B00470052004F00550050000100200044004100540041002E00420049004E0043002D0053004500430055005200490000000000"
+    pass: "password"
+    source: "john"

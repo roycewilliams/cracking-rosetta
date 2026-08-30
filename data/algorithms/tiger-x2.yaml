@@ -1,5 +1,7 @@
 id: "tiger-x2"
 name: "TIGER (2 iterations)"
+expression: "tiger(tiger($p))"
+john_dynamic_expr: "dynamic=tiger(tiger($p))"
 status: "needs-review"
 tools:
   mdxfind:

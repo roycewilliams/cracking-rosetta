@@ -1,5 +1,7 @@
 id: "sha1-salt-pass"
 name: "sha1($salt.$pass)"
+expression: "sha1($s.$p)"
+john_dynamic_expr: "dynamic=sha1($s.$p)"
 status: "needs-review"
 tools:
   hashcat:
@@ -14,7 +16,10 @@ tools:
     verified_with: "mdxfind"
   john:
     cpu: ["dynamic_25"]
-    verified: "asserted"
+    verified: "vector"
+    verified_at: "2026-08-29"
+    verified_with: "john"
+    note: "format discovered by round-trip search, not by name"
   crack:
     supported: false
 vectors:

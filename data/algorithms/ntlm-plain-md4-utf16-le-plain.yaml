@@ -1,5 +1,7 @@
 id: "ntlm-plain-md4-utf16-le-plain"
 name: "ntlm($plain) / md4(utf16-le($plain))"
+expression: "md4(utf16($p))"
+john_dynamic_expr: "dynamic=md4(utf16($p))"
 status: "needs-review"
 tools:
   hashcat:

@@ -1,5 +1,7 @@
 id: "sm3-x2"
 name: "SM3 (2 iterations)"
+expression: "sm3(sm3($p))"
+john_dynamic_expr: "dynamic=sm3(sm3($p))"
 status: "needs-review"
 tools:
   mdxfind:

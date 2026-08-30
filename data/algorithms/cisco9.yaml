@@ -12,9 +12,18 @@ tools:
     verified: "vector"
     verified_at: "2026-08-29"
     verified_with: "mdxfind"
+  john:
+    cpu: ["scrypt"]
+    verified: "vector"
+    verified_at: "2026-08-29"
+    verified_with: "john"
+    note: "john's own test vector for this format is reproduced by mdxfind pinned to CISCO9 at iteration 1"
   crack:
     supported: false
 vectors:
   - hash: "$9$rndSa1tRndSa1t$vNe65wzVje3iwyqNXv34z3vaHXV9qbyYgYB37IWc5uA"
     pass: "password123"
     source: "mdxfind"
+  - hash: "$9$X9fA8mypebLFVj$Klp6X9hxNhkns0kwUIinvLRSIgWOvCwDhVTZqjsycyU"
+    pass: "JtR"
+    source: "john"

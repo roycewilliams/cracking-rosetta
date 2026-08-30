@@ -13,6 +13,12 @@ tools:
     verified: "vector"
     verified_at: "2026-08-29"
     verified_with: "mdxfind"
+  john:
+    cpu: ["mssql"]
+    verified: "asserted"
+    verified_at: "2026-08-29"
+    verified_with: "john"
+    note: "john --format=mssql recovers the vector, but as PASSWORD123: the format attacks the case-insensitive half of an MSSQL2000 hash, so the plaintext it returns is the case-folded one and the round-trip cannot match the recorded pass exactly. john --format=mssql05 does return the exact plaintext, by reading only the 2005-shaped prefix of the same hash, and is deliberately NOT recorded here"
   crack:
     supported: false
 vectors:

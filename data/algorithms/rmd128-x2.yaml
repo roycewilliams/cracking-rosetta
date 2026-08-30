@@ -1,5 +1,7 @@
 id: "rmd128-x2"
 name: "RMD128 (2 iterations)"
+expression: "ripemd128(ripemd128($p))"
+john_dynamic_expr: "dynamic=ripemd128(ripemd128($p))"
 status: "needs-review"
 tools:
   mdxfind:

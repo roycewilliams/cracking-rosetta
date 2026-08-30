@@ -7,5 +7,15 @@ tools:
   mdxfind:
     types: ["SHA1lsb35"]
     verified: "asserted"
+  john:
+    cpu: ["Raw-SHA1-Linkedin"]
+    verified: "vector"
+    verified_at: "2026-08-29"
+    verified_with: "john"
+    note: "john's own test vector for this format is reproduced by mdxfind pinned to SHA1lsb35 at iteration 1"
   crack:
     supported: false
+vectors:
+  - hash: "$dynamic_26$0000012f25e64931f3833b26e999e26e81f9ad24"
+    pass: "azertyuiop3"
+    source: "john"

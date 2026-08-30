@@ -9,9 +9,9 @@ tools:
     verified_with: "hashcat"
   mdxfind:
     types: ["JUNIPERSSG"]
-    verified: "upstream"
+    verified: "vector"
     verified_at: "2026-08-29"
-    verified_with: "RCS 1.540 (2026/08/22)"
+    verified_with: "mdxfind"
   crack:
     supported: false
 vectors:

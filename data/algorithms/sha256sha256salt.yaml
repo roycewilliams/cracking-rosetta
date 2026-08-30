@@ -12,10 +12,14 @@ tools:
     types: ["SHA256SHA256SALT"]
     verified: "asserted"
   john:
-    cpu: ["dynamic_65"]
-    verified: "upstream"
+    cpu: ["dynamic_1503", "dynamic_65"]
+    verified: "asserted"
     verified_at: "2026-08-29"
-    verified_with: "1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
-    note: "from hashpipe john_map.h, confirmed upstream by recomputation"
+    verified_with: "mdxfind"
+    note: "john's own test vector for this format is reproduced by mdxfind pinned to SHA256SHA256SALT at iteration 1"
   crack:
     supported: false
+vectors:
+  - hash: "$dynamic_1503$453f2e21fa6c150670d3ecf0e4a0ff3bab8b1903c2e96ad655d960b95f104248$697de9eda4a02563a7ec66d42d4a96995cb2948e29ab76fbcc89e8db71dd10f1"
+    pass: "password"
+    source: "john"

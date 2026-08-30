@@ -1,5 +1,7 @@
 id: "tiger"
 name: "TIGER"
+expression: "tiger($p)"
+john_dynamic_expr: "dynamic=tiger($p)"
 status: "needs-review"
 tools:
   mdxfind:

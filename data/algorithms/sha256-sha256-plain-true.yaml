@@ -1,5 +1,7 @@
 id: "sha256-sha256-plain-true"
 name: "sha256(sha256($plain, true))"
+expression: "sha256(sha256_raw($p))"
+john_dynamic_expr: "dynamic=sha256(sha256_raw($p))"
 status: "needs-review"
 tools:
   hashcat:

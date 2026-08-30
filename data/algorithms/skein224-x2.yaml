@@ -1,5 +1,7 @@
 id: "skein224-x2"
 name: "SKEIN224 (2 iterations)"
+expression: "skein224(skein224($p))"
+john_dynamic_expr: "dynamic=skein224(skein224($p))"
 status: "needs-review"
 tools:
   mdxfind:

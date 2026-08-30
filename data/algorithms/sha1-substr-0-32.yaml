@@ -1,5 +1,7 @@
 id: "sha1-substr-0-32"
 name: "SHA1.Substr(0, 32)"
+expression: "sha1($p)"
+john_dynamic_expr: "dynamic=sha1($p)"
 status: "needs-review"
 tools:
   hashcat:

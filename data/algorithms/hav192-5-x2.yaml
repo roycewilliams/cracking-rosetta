@@ -1,5 +1,7 @@
 id: "hav192-5-x2"
 name: "HAV192-5 (2 iterations)"
+expression: "haval192_5(haval192_5($p))"
+john_dynamic_expr: "dynamic=haval192_5(haval192_5($p))"
 status: "needs-review"
 tools:
   mdxfind:

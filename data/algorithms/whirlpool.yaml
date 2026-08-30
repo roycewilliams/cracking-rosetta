@@ -1,5 +1,7 @@
 id: "whirlpool"
 name: "Whirlpool"
+expression: "whirlpool($p)"
+john_dynamic_expr: "dynamic=whirlpool($p)"
 status: "needs-review"
 tools:
   hashcat:

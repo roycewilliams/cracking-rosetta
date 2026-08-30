@@ -1,5 +1,7 @@
 id: "skein256-x2"
 name: "SKEIN256 (2 iterations)"
+expression: "skein256(skein256($p))"
+john_dynamic_expr: "dynamic=skein256(skein256($p))"
 status: "needs-review"
 tools:
   mdxfind:

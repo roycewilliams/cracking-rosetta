@@ -1,5 +1,7 @@
 id: "sha256"
 name: "SHA256"
+expression: "sha256($p)"
+john_dynamic_expr: "dynamic=sha256($p)"
 status: "needs-review"
 tools:
   hashcat:

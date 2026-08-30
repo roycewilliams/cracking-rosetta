@@ -9,9 +9,11 @@ tools:
     verified_with: "hashcat"
   mdxfind:
     types: ["SMF"]
-    verified: "asserted"
+    verified: "vector"
+    verified_at: "2026-08-29"
+    verified_with: "mdxfind"
   john:
-    cpu: ["dynamic_37"]
+    cpu: ["dynamic_25", "dynamic_37"]
     verified: "asserted"
   crack:
     supported: false

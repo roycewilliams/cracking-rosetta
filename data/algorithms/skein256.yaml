@@ -1,5 +1,7 @@
 id: "skein256"
 name: "SKEIN256"
+expression: "skein256($p)"
+john_dynamic_expr: "dynamic=skein256($p)"
 status: "needs-review"
 tools:
   hashcat:

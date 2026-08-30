@@ -1,5 +1,7 @@
 id: "hav224-4"
 name: "HAV224-4"
+expression: "haval224_4($p)"
+john_dynamic_expr: "dynamic=haval224_4($p)"
 status: "needs-review"
 tools:
   hashcat:

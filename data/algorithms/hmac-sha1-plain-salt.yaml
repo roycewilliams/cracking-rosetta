@@ -9,7 +9,9 @@ tools:
     verified_with: "hashcat"
   mdxfind:
     types: ["HMAC-SHA1"]
-    verified: "asserted"
+    verified: "vector"
+    verified_at: "2026-08-29"
+    verified_with: "mdxfind"
   crack:
     supported: false
 vectors:

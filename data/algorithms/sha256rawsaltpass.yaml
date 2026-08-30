@@ -1,5 +1,7 @@
 id: "sha256rawsaltpass"
 name: "SHA256RAWSALTPASS"
+expression: "sha256($s.$p)"
+john_dynamic_expr: "dynamic=sha256($s.$p)"
 status: "needs-review"
 tools:
   hashcat:
@@ -7,5 +9,15 @@ tools:
   mdxfind:
     types: ["SHA256RAWSALTPASS"]
     verified: "asserted"
+  john:
+    cpu: ["FormSpring", "dynamic_61"]
+    verified: "vector"
+    verified_at: "2026-08-29"
+    verified_with: "john"
+    note: "john's own test vector for this format is reproduced by mdxfind pinned to SHA256RAWSALTPASS at iteration 1"
   crack:
     supported: false
+vectors:
+  - hash: "$dynamic_61$2a4fa0bf8c6a01dd625d3141746451ba51e07f99dc9143f1e25a37f65cb02eb4$RA"
+    pass: "test1"
+    source: "john"

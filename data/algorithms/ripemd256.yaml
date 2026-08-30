@@ -1,5 +1,7 @@
 id: "ripemd256"
 name: "ripemd256"
+expression: "ripemd256($p)"
+john_dynamic_expr: "dynamic=ripemd256($p)"
 status: "needs-review"
 tools:
   hashcat:

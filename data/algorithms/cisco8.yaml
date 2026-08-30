@@ -12,11 +12,20 @@ tools:
     verified: "vector"
     verified_at: "2026-08-29"
     verified_with: "mdxfind"
+  john:
+    cpu: ["PBKDF2-HMAC-SHA256"]
+    verified: "vector"
+    verified_at: "2026-08-29"
+    verified_with: "john"
+    note: "john's own test vector for this format is reproduced by mdxfind pinned to CISCO8 at iteration 1"
   crack:
     supported: false
 vectors:
   - hash: "$8$TnGX/fE4KGHOVU$/y6TkzwXzKg3tzpEs4yHca5PgftnlQ38aSvj9g98zO."
     pass: "rosetta"
     source: "sheet"
+  - hash: "$8$6NHinlEjiwvb5J$RjC.H.ydVb34wDLqJvfjyG1ubxYKpfXqv.Ry9mtrNBY"
+    pass: "password"
+    source: "john"
 legacy:
   hashes_org: "not supported"

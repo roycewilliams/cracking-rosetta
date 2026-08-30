@@ -13,9 +13,18 @@ tools:
     verified: "upstream"
     verified_at: "2026-08-29"
     verified_with: "RCS 1.540 (2026/08/22)"
+  john:
+    cpu: ["Argon2"]
+    verified: "vector"
+    verified_at: "2026-08-29"
+    verified_with: "john"
+    note: "john's own test vector for this format is reproduced by mdxfind pinned to ARGON2 at iteration 1"
   crack:
     supported: false
 vectors:
   - hash: "3118004b2f9ce8fcf3abc2fdf9623b85988db360951c607456beb26821381a12:aaaaaaaaaaaaaaaabbbbbbbbbbbbbbbb:3_32_2_67108864"
     pass: "password123"
     source: "mdxfind"
+  - hash: "$argon2d$v=19$m=16384,t=3,p=1$c2hvcnRfc2FsdA$TLSTPihIo+5F67Y1vJdfWdB9"
+    pass: "blessed_dead"
+    source: "john"

@@ -1,5 +1,7 @@
 id: "md5-sha1-pass"
 name: "md5(sha1($pass))"
+expression: "md5(sha1($p))"
+john_dynamic_expr: "dynamic=md5(sha1($p))"
 status: "needs-review"
 tools:
   hashcat:

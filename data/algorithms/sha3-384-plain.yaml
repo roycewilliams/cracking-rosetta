@@ -1,5 +1,7 @@
 id: "sha3-384-plain"
 name: "sha3-384($plain)"
+expression: "sha3_384($p)"
+john_dynamic_expr: "dynamic=sha3_384($p)"
 status: "needs-review"
 tools:
   hashcat:

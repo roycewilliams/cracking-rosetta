@@ -1,5 +1,7 @@
 id: "sha384-sha384-plain-true"
 name: "sha384(sha384($plain, true))"
+expression: "sha384(sha384_raw($p))"
+john_dynamic_expr: "dynamic=sha384(sha384_raw($p))"
 status: "needs-review"
 tools:
   mdxfind:

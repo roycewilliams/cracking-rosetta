@@ -1,5 +1,7 @@
 id: "panama-x2"
 name: "PANAMA (2 iterations)"
+expression: "panama(panama($p))"
+john_dynamic_expr: "dynamic=panama(panama($p))"
 status: "needs-review"
 tools:
   mdxfind:

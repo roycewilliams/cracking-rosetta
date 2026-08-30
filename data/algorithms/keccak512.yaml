@@ -1,5 +1,7 @@
 id: "keccak512"
 name: "KECCAK512"
+expression: "keccak_512($p)"
+john_dynamic_expr: "dynamic=keccak_512($p)"
 status: "needs-review"
 tools:
   hashcat:

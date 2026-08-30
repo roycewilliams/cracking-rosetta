@@ -1,5 +1,7 @@
 id: "gost-x2"
 name: "GOST (2 iterations)"
+expression: "gost(gost($p))"
+john_dynamic_expr: "dynamic=gost(gost($p))"
 status: "needs-review"
 tools:
   mdxfind:

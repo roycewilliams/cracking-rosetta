@@ -7,7 +7,9 @@ tools:
     verified: "absent"
   mdxfind:
     types: ["SHA1MD5USER"]
-    verified: "asserted"
+    verified: "vector"
+    verified_at: "2026-08-29"
+    verified_with: "mdxfind"
   crack:
     supported: false
 vectors:

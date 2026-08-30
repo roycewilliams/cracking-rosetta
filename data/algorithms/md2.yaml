@@ -1,5 +1,7 @@
 id: "md2"
 name: "MD2"
+expression: "md2($p)"
+john_dynamic_expr: "dynamic=md2($p)"
 status: "needs-review"
 tools:
   hashcat:

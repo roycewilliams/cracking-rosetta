@@ -12,11 +12,20 @@ tools:
     verified: "vector"
     verified_at: "2026-08-29"
     verified_with: "mdxfind"
+  john:
+    cpu: ["Raw-SHA1"]
+    verified: "vector"
+    verified_at: "2026-08-29"
+    verified_with: "john"
+    note: "john's own test vector for this format is reproduced by mdxfind pinned to APACHE-SHA at iteration 1"
   crack:
     supported: false
 vectors:
   - hash: "{SHA}0hr37OBGrw4S08OEcnks1fCBw58="
     pass: "rosetta"
     source: "sheet"
+  - hash: "{SHA}0ijZPTcJXMa+t2XnEbEwSOkvQu0="
+    pass: "ccccccccc"
+    source: "john"
 legacy:
   hashes_org: "NSLDAP"

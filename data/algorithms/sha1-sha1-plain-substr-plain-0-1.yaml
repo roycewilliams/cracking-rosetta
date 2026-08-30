@@ -1,6 +1,8 @@
 id: "sha1-sha1-plain-substr-plain-0-1"
 name: "sha1(sha1($plain).substr($plain,0,1))"
 aliases: ["sha1(sha1($plain).substr($plain,0,2))", "sha1(sha1($plain).substr($plain,0,3))", "sha1(sha1($plain).substr($plain,0,4))", "sha1(sha1($plain).substr($plain,0,5))", "sha1(sha1($plain).substr($plain,0,6))", "sha1(sha1($plain).substr($plain,0,7))", "sha1(sha1($plain).substr($plain,0,8))"]
+expression: "sha1(sha1($p).$s)"
+john_dynamic_expr: "dynamic=sha1(sha1($p).$s)"
 status: "needs-review"
 tools:
   hashcat:
@@ -10,6 +12,12 @@ tools:
     verified: "vector"
     verified_at: "2026-08-29"
     verified_with: "mdxfind"
+  john:
+    cpu: ["dynamic_1502"]
+    verified: "vector"
+    verified_at: "2026-08-29"
+    verified_with: "john"
+    note: "format discovered by round-trip search, not by name"
   crack:
     supported: false
 vectors:

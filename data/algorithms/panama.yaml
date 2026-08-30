@@ -1,5 +1,7 @@
 id: "panama"
 name: "PANAMA"
+expression: "panama($p)"
+john_dynamic_expr: "dynamic=panama($p)"
 status: "needs-review"
 tools:
   hashcat:

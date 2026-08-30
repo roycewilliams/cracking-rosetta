@@ -6,7 +6,9 @@ tools:
     verified: "absent"
   mdxfind:
     types: ["HMAC-TIGER160"]
-    verified: "asserted"
+    verified: "vector"
+    verified_at: "2026-08-29"
+    verified_with: "mdxfind"
   crack:
     supported: false
 vectors:

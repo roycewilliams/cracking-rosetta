@@ -1,5 +1,7 @@
 id: "sha224"
 name: "SHA224"
+expression: "sha224($p)"
+john_dynamic_expr: "dynamic=sha224($p)"
 status: "needs-review"
 tools:
   hashcat:

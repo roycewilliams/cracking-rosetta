@@ -1,5 +1,7 @@
 id: "keccak384-x2"
 name: "KECCAK384 (2 iterations)"
+expression: "keccak_384(keccak_384($p))"
+john_dynamic_expr: "dynamic=keccak_384(keccak_384($p))"
 status: "needs-review"
 tools:
   mdxfind:

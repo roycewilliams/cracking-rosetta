@@ -12,9 +12,18 @@ tools:
     verified: "vector"
     verified_at: "2026-08-29"
     verified_with: "mdxfind"
+  john:
+    cpu: ["PHPS", "PHPS2"]
+    verified: "vector"
+    verified_at: "2026-08-29"
+    verified_with: "john"
+    note: "john's own test vector for this format is reproduced by mdxfind pinned to PHPS at iteration 1"
   crack:
     supported: false
 vectors:
   - hash: "$PHPS$3031$216cb30ddee43eced3bb76fd38e0b7df"
     pass: "password123"
     source: "mdxfind"
+  - hash: "$PHPS$247824$ad14afbbf0e16d4ad8c8985263a3d051"
+    pass: "test"
+    source: "john"

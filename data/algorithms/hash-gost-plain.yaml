@@ -1,5 +1,7 @@
 id: "hash-gost-plain"
 name: "hash('gost', $plain)"
+expression: "gost($p)"
+john_dynamic_expr: "dynamic=gost($p)"
 status: "needs-review"
 tools:
   hashcat:

@@ -1,5 +1,7 @@
 id: "md5-md4-plain"
 name: "md5(md4($plain))"
+expression: "md5(md4($p))"
+john_dynamic_expr: "dynamic=md5(md4($p))"
 status: "needs-review"
 tools:
   hashcat:

@@ -1,5 +1,7 @@
 id: "md5uc"
 name: "MD5UC"
+expression: "md5($p)"
+john_dynamic_expr: "dynamic=md5($p)"
 status: "needs-review"
 tools:
   hashcat:

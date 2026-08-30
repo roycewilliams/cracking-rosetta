@@ -1,5 +1,7 @@
 id: "sha3-224-x2"
 name: "SHA3-224 (2 iterations)"
+expression: "sha3_224(sha3_224($p))"
+john_dynamic_expr: "dynamic=sha3_224(sha3_224($p))"
 status: "needs-review"
 tools:
   mdxfind:

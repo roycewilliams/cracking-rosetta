@@ -1,5 +1,7 @@
 id: "md2-x2"
 name: "MD2 (2 iterations)"
+expression: "md2(md2($p))"
+john_dynamic_expr: "dynamic=md2(md2($p))"
 status: "needs-review"
 tools:
   mdxfind:

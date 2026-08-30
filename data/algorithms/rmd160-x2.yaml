@@ -1,5 +1,7 @@
 id: "rmd160-x2"
 name: "RMD160 (2 iterations)"
+expression: "ripemd160(ripemd160($p))"
+john_dynamic_expr: "dynamic=ripemd160(ripemd160($p))"
 status: "needs-review"
 tools:
   mdxfind:

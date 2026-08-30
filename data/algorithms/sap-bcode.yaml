@@ -13,9 +13,18 @@ tools:
     verified: "vector"
     verified_at: "2026-08-29"
     verified_with: "mdxfind"
+  john:
+    cpu: ["sapb"]
+    verified: "vector"
+    verified_at: "2026-08-29"
+    verified_with: "john"
+    note: "john's own test vector for this format is reproduced by mdxfind pinned to SAP-BCODE at iteration 1"
   crack:
     supported: false
 vectors:
   - hash: "ABCDEFGH$246EFDAD288F373D"
     pass: "pass1234"
     source: "mdxfind"
+  - hash: "------------$058DE95926E00F32"
+    pass: "--+----"
+    source: "john"

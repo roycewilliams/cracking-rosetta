@@ -1,6 +1,8 @@
 id: "md5-md5-md5-pass"
 name: "md5(md5(md5($pass)))"
 aliases: ["MD5 (3 iterations)"]
+expression: "md5(md5(md5($p)))"
+john_dynamic_expr: "dynamic=md5(md5(md5($p)))"
 status: "needs-review"
 tools:
   hashcat:

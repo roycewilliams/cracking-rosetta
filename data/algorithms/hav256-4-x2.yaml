@@ -1,5 +1,7 @@
 id: "hav256-4-x2"
 name: "HAV256-4 (2 iterations)"
+expression: "haval256_4(haval256_4($p))"
+john_dynamic_expr: "dynamic=haval256_4(haval256_4($p))"
 status: "needs-review"
 tools:
   mdxfind:

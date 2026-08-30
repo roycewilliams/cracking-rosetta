@@ -8,7 +8,17 @@ tools:
   mdxfind:
     types: ["PBKDF2-SHA512"]
     verified: "asserted"
+  john:
+    cpu: ["PBKDF2-HMAC-SHA512"]
+    verified: "vector"
+    verified_at: "2026-08-29"
+    verified_with: "john"
+    note: "john's own test vector for this format is reproduced by mdxfind pinned to PBKDF2-SHA512 at iteration 1"
   crack:
     supported: false
+vectors:
+  - hash: "$ml$23923$c3fa2e153466f7619286024fe7d812d0a8ae836295f84b9133ccc65456519fc3$ccb903ee691ade6d5dee9b3c6931ebed6ddbb1348f1b26c21add8ba0d45f27e61e97c0b80d9a18020944bb78f1ebda6fdd79c5cf08a12c80522caf987c287b6d"
+    pass: "openwall"
+    source: "john"
 legacy:
   hashes_org: "PBKDF2"

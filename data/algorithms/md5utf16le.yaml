@@ -1,5 +1,7 @@
 id: "md5utf16le"
 name: "MD5UTF16LE"
+expression: "md5(utf16($p))"
+john_dynamic_expr: "dynamic=md5(utf16($p))"
 status: "needs-review"
 tools:
   hashcat:

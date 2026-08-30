@@ -1,5 +1,7 @@
 id: "sm3"
 name: "SM3"
+expression: "sm3($p)"
+john_dynamic_expr: "dynamic=sm3($p)"
 status: "needs-review"
 tools:
   hashcat:

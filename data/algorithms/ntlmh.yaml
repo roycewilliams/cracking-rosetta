@@ -1,5 +1,7 @@
 id: "ntlmh"
 name: "NTLMH"
+expression: "md4(utf16($p))"
+john_dynamic_expr: "dynamic=md4(utf16($p))"
 status: "needs-review"
 tools:
   hashcat:

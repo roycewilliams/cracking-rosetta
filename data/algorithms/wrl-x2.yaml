@@ -1,5 +1,7 @@
 id: "wrl-x2"
 name: "WRL (2 iterations)"
+expression: "whirlpool(whirlpool($p))"
+john_dynamic_expr: "dynamic=whirlpool(whirlpool($p))"
 status: "needs-review"
 tools:
   mdxfind:

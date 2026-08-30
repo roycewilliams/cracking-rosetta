@@ -6,10 +6,17 @@ tools:
     types: ["MD5USERPASS"]
     verified: "asserted"
   john:
-    cpu: ["dynamic_4"]
-    verified: "upstream"
+    cpu: ["dynamic_1009", "dynamic_2004", "dynamic_4"]
+    verified: "asserted"
     verified_at: "2026-08-29"
-    verified_with: "1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
-    note: "from hashpipe john_map.h, confirmed upstream by recomputation"
+    verified_with: "mdxfind"
+    note: "john's own test vector for this format is reproduced by mdxfind pinned to MD5USERPASS at iteration 1"
   crack:
     supported: false
+vectors:
+  - hash: "$dynamic_1009$0b9b9fdf75fc79d85c5b69aa1de26288$Salt"
+    pass: "test1"
+    source: "john"
+  - hash: "$dynamic_2004$3a032e36a9609df6411b8004070431d3$aaaaa"
+    pass: "test3"
+    source: "john"

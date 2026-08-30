@@ -1,6 +1,8 @@
 id: "md5-md5-salt-plain-salt"
 name: "md5(md5($salt.$plain).\":\".$salt)"
 aliases: ["md5(md5($salt.$plain).$salt)", "md5(md5($salt.$plain).\":\".$salt.\":\")"]
+expression: "md5(md5($s.$p):$s)"
+john_dynamic_expr: "dynamic=md5(md5($s.$p):$s)"
 status: "needs-review"
 tools:
   hashcat:
@@ -10,6 +12,12 @@ tools:
     verified: "vector"
     verified_at: "2026-08-29"
     verified_with: "mdxfind"
+  john:
+    cpu: ["dynamic_1350"]
+    verified: "vector"
+    verified_at: "2026-08-29"
+    verified_with: "john"
+    note: "format discovered by round-trip search, not by name"
   crack:
     supported: false
 vectors:

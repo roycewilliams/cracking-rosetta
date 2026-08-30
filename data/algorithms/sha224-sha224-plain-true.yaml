@@ -1,5 +1,7 @@
 id: "sha224-sha224-plain-true"
 name: "sha224(sha224($plain, true))"
+expression: "sha224(sha224_raw($p))"
+john_dynamic_expr: "dynamic=sha224(sha224_raw($p))"
 status: "needs-review"
 tools:
   mdxfind:

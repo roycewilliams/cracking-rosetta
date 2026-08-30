@@ -13,15 +13,21 @@ tools:
     verified_at: "2026-08-29"
     verified_with: "mdxfind"
   john:
-    cpu: ["mysql-sha1"]
+    cpu: ["dynamic_1028", "mysql-sha1"]
     gpu: ["mysql-sha1-opencl"]
     verified: "asserted"
+    verified_at: "2026-08-29"
+    verified_with: "mdxfind"
+    note: "john's own test vector for this format is reproduced by mdxfind pinned to SQL5 at iteration 1"
   crack:
     supported: false
 vectors:
   - hash: "8236c4133430071e41c5103876d103299d348814"
     pass: "rosetta"
     source: "sheet"
+  - hash: "$dynamic_1028$06c0bf5b64ece2f648b5f048a7190390"
+    pass: "test1"
+    source: "john"
 legacy:
   hashes_org: "MYSQL5"
   hashkiller: "MySQL4.1/MySQL5"

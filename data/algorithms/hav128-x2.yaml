@@ -1,5 +1,7 @@
 id: "hav128-x2"
 name: "HAV128 (2 iterations)"
+expression: "haval128_3(haval128_3($p))"
+john_dynamic_expr: "dynamic=haval128_3(haval128_3($p))"
 status: "needs-review"
 tools:
   mdxfind:

@@ -1,5 +1,7 @@
 id: "rmd320-x2"
 name: "RMD320 (2 iterations)"
+expression: "ripemd320(ripemd320($p))"
+john_dynamic_expr: "dynamic=ripemd320(ripemd320($p))"
 status: "needs-review"
 tools:
   mdxfind:

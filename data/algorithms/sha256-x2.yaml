@@ -1,5 +1,7 @@
 id: "sha256-x2"
 name: "SHA256 (2 iterations)"
+expression: "sha256(sha256($p))"
+john_dynamic_expr: "dynamic=sha256(sha256($p))"
 status: "needs-review"
 tools:
   mdxfind:

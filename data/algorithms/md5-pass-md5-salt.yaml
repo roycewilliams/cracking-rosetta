@@ -1,5 +1,7 @@
 id: "md5-pass-md5-salt"
 name: "md5($pass.md5($salt))"
+expression: "md5($p.md5($s))"
+john_dynamic_expr: "dynamic=md5($p.md5($s))"
 status: "needs-review"
 tools:
   hashcat:
@@ -10,8 +12,11 @@ tools:
     verified_at: "2026-08-29"
     verified_with: "mdxfind"
   john:
-    cpu: ["dynamic_1011"]
-    verified: "asserted"
+    cpu: ["dynamic_1011", "dynamic_1012"]
+    verified: "vector"
+    verified_at: "2026-08-29"
+    verified_with: "john"
+    note: "format discovered by round-trip search, not by name"
   crack:
     supported: false
 vectors:
