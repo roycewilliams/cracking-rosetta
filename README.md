@@ -58,10 +58,12 @@ Each also takes `--from FILE` (or `stdin`), so captured output can be diffed wit
 2. Check your work:
 
 ```
-tools/validate.pl
+tools/fmt.pl --all              # canonical YAML; also catches a misspelled key
+tools/validate.pl --changed     # only reports errors in entries you touched
+tools/review-delta.pl           # what your change actually claims
 ```
 
-This checks entry shape, then resolves every identifier you named against the inventories - whether hashcat mode 2811 exists in *this* hashcat, whether `dynamic_12` is really a CPU format. Naming an identifier no installed tool has is the likeliest defect in a repo like this, and it's exactly what the spreadsheet accumulated over three years.
+`validate.pl` checks entry shape, then resolves every identifier you named against the inventories - whether hashcat mode 2811 exists in *this* hashcat, whether `dynamic_12` is really a CPU format. Naming an identifier no installed tool has is the likeliest defect in a repo like this, and it's exactly what the spreadsheet accumulated over three years. Without `--changed` it reports on everything, which is what CI runs.
 
 3. Prove what you can (needs the tools installed, and a GPU for hashcat):
 
@@ -69,13 +71,15 @@ This checks entry shape, then resolves every identifier you named against the in
 tools/verify-vectors.pl --tool all
 ```
 
+Full instructions: [CONTRIBUTING.md](CONTRIBUTING.md) if you want to add or correct information, [MAINTAINING.md](MAINTAINING.md) if you are reviewing a contribution.
+
 ## Layout
 
 ```
 data/algorithms/*.yaml   curated, one file per algorithm - the PR surface
 data/tools/*.yaml        generated inventories - never hand-edited
 schema/                  entry shape, for editors and consumers
-tools/                   extractors, validator, verifier
+tools/                   extractors, validator, verifier, review helpers
 vendor/cynosureprime/    vendored upstream catalogs, with provenance
 ```
 

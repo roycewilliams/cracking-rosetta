@@ -1,46 +1,87 @@
-# Contributing
+# Contributing to cracking-rosetta
 
-## The short version
+Most of what this project needs is **information**, not code: a mapping that's
+missing, a mapping that's wrong, and above all test vectors. If you know that
+hashcat mode 4110 is what John calls `dynamic_11`, and you have a hash that
+proves it, that's a contribution.
 
-Edit exactly one file in `data/algorithms/`, run `tools/validate.pl`, open a PR.
+You do **not** need hashcat, John or mdxfind installed to contribute. The
+checks you run before opening a PR are pure text.
 
-## What you may and may not edit
+## What you'll need
 
-**Edit:** `data/algorithms/*.yaml`. One algorithm per file; the filename stem
-must equal the entry's `id`.
+- `git` and a text editor
+- `perl` (any version this decade) and the YAML module:
+  - Debian/Ubuntu: `sudo apt install libyaml-libyaml-perl`
+  - Fedora/Rocky: `sudo dnf install perl-YAML-LibYAML`
+  - FreeBSD: `pkg install p5-YAML-LibYAML`
 
-**Do not edit:** `data/tools/*.yaml`. Those are regenerated from the tools
-themselves and every one carries a `GENERATED` banner. If a mode or format is
-missing there, the fix is to re-run the extractor, not to hand-patch the file.
+## The three commands
 
-**Do not edit:** `vendor/`. Refresh it with `tools/fetch-upstream.sh` and
-commit that as its own change, so the diff shows what upstream altered.
+Run these before you open a pull request. Together they take a couple of
+seconds.
 
-## Before you open a PR
+```sh
+tools/fmt.pl --all              # put your edit in the house YAML style
+tools/validate.pl --changed     # check just what you changed
+tools/review-delta.pl           # show what your change actually claims
+```
 
-    tools/validate.pl
+`validate.pl --changed` checks the whole repository but only reports errors in
+*your* entries, so you never have to hunt for your own mistake in someone
+else's. If it mentions errors "elsewhere in the corpus", those aren't yours
+and won't block you.
 
-It checks entry shape and then resolves every identifier you named against the
-generated inventories: whether hashcat mode 2811 exists in this hashcat,
-whether `dynamic_12` is really a CPU format, whether `MD5-MD5SALTMD5PASS`
-exists in this mdxfind. Naming an identifier no installed tool has is the
-likeliest defect in a repository like this and is exactly what the old
-spreadsheet accumulated over three years.
+`fmt.pl` is worth running even if your YAML looks fine. Every file here is
+written in one canonical style, and matching it keeps your diff the size of
+your change. It also catches the mistake nothing else will: if you misspell a
+key, `fmt.pl` tells you, where otherwise the line would be silently dropped
+the next time a tool touches the file.
 
-## Tiers: please do not inflate them
+## I want to...
 
-`verified: vector` means **this repository cracked the vector with that tool**.
-It is not a synonym for "I'm confident". If you have not round-tripped it, use
-`asserted` and say where the claim came from in `note`. Someone will verify it
-later and promote it, and an honest `asserted` is far more useful than a
-`vector` that turns out to be hopeful.
+### ...add a test vector
 
-`tools/verify-vectors.pl` does the promotion. It will refuse to promote a tool
-block unless *every* identifier that block lists verified.
+This is the most valuable thing you can contribute, and the easiest. A vector
+is a hash and the plaintext that produces it. It's what lets anyone else
+promote a mapping from "someone said so" to "we ran it".
 
-## Adding an algorithm
+```yaml
+vectors:
+  - hash: "45b1a3b4d0d4b1e4a5b3d9ee08e0e0c7:tj81ZLT"
+    pass: "rosetta"
+    source: "hashcat's example hashes"
+```
 
-Minimum viable entry:
+Salted hashes go in as `hash:salt`. Say where you got it in `source:` — a
+tool's example hash, a public test corpus, "generated it myself" are all fine.
+Please don't contribute a hash from real data.
+
+### ...add a mapping a tool is missing
+
+Find the entry in `data/algorithms/`, add the block, and be honest about the
+tier:
+
+```yaml
+tools:
+  john:
+    cpu: ["dynamic_11"]
+    verified: "asserted"
+    note: "from the hashcat wiki; not reproduced"
+```
+
+Use the exact identifier the tool prints — `Raw-MD5` on CPU but
+`raw-MD5-opencl` on GPU, John is inconsistent about case. If you name an
+identifier no installed tool has, `validate.pl` will tell you.
+
+### ...fix a mapping that's wrong
+
+Don't overwrite the old claim — add yours in `note:` and say so in the PR.
+Disagreements here get settled by verification, not by whoever edited last.
+
+### ...add an algorithm that isn't here
+
+One file, named after its `id`, in `data/algorithms/`. The minimum:
 
 ```yaml
 id: "example-thing"
@@ -56,67 +97,96 @@ vectors:
     source: "where you got it"
 ```
 
-A vector is the most valuable thing you can add — it is what lets anyone
-promote the mapping to `vector` later, and it is what makes a disagreement
-resolvable instead of an argument.
+Run `tools/fmt.pl data/algorithms/example-thing.yaml` and it'll be tidied into
+the house style. The full field list is in `schema/algorithm.schema.json`.
 
-## One entry is one algorithm
+### ...say two entries are the same thing
 
-If a hash you are adding is computed differently from the entry you were about
-to put it in, it needs its own entry — even when the two share a name, a tool
-identifier, or a mode.
+Don't merge them yourself — propose it in the data:
 
-- `aliases:` is for other **names** of the same computation. It is not a place
-  to list related algorithms. One entry here reached five vectors falling to
-  three different John dynamics that way, and no check caught it.
-- Two entries **may** legitimately share an `expression:` — but they must say
-  so. `joomla` and `md5-pass-salt` are both `md5($p.$s)`; hashcat gives them
-  modes 11 and 10 because the application is the distinction, and both rows
-  earn their place. Record it:
+```sh
+tools/relate.pl --kind same-computation \
+    --entry joomla --with md5-pass-salt \
+    --distinction application \
+    --note "hashcat 11 assumes Joomla's salt; 10 is generic" --apply
+```
 
-      tools/relate.pl --kind same-computation \
-          --entry joomla --with md5-pass-salt \
-          --distinction application \
-          --note "hashcat 11 assumes Joomla's salt; 10 is generic" --apply
+That writes **both** sides of the relation, which is required. `kind` is one
+of `same-computation`, `encodes`, `input-encoding`, `iterates`, `truncates`,
+`collides-on-subset`, `duplicate-of`. `distinction` says why both rows still
+exist: `application`, `encoding`, `input-encoding`, `iteration`, `truncation`,
+`salt-convention`, or `none`.
 
-  That writes both sides. `validate.pl` **fails** if two entries share an
-  expression with no relation joining them, so this is not optional.
-  `distinction` is one of `application`, `encoding`, `input-encoding`,
-  `iteration`, `truncation`, `salt-convention`, `none`; `kind` is one of
-  `same-computation`, `encodes`, `input-encoding`, `iterates`, `truncates`,
-  `collides-on-subset`, `duplicate-of`.
-- If you think two entries are the same thing with no distinction left, say
-  so in data rather than in the PR description: `--kind duplicate-of
-  --distinction none`. That is the proposal; a maintainer does the merge.
-- If a tool cracks your vector but does not really implement your algorithm,
-  do not record the mapping. `md5cap` is `cap(md5($p))`, which is a no-op
-  whenever the digest has no letters, so John's `dynamic_2` recovers its
-  vector while denoting something else. That is a `collides-on-subset` edge,
-  and it must carry a note saying on which inputs the two agree.
-- `id` never changes once published — it is the filename stem, a URL fragment
-  in the rendered page, and the key in `dist/rosetta.csv`. If a name is wrong,
-  add the better one to `aliases:` on the entry that survives.
+If you think there's genuinely no difference left, use
+`--kind duplicate-of --distinction none`. That's the proposal; a maintainer
+does the merge, because an `id` is a published key that other people's scripts
+point at.
 
-`category:` is optional and mostly unpopulated; set it when you know it —
-`primitive`, `composite`, `iterated`, `encoding`, `application`, `protocol`,
-`kdf` — and add `application:` / `application_version:` on a product row.
+## The one rule: don't inflate tiers
 
-## Things worth knowing
+`verified: vector` means **this repository cracked that vector with that tool,
+pinned to that exact identifier**. It does not mean "I'm confident", and it
+does not mean "the documentation says so".
 
-- **The mdxfind iteration count is part of the identity.** `MD5` at `-i 2` is
-  `md5(md5($pass))`, which is John's `dynamic_2`, not `dynamic_0`. Record it as
-  `tools.mdxfind.iterations`.
-- **John is inconsistent about case**: `Raw-MD5` on CPU, `raw-MD5-opencl` on
-  GPU. Use the exact label the inventory lists.
-- **Some John dynamics are disabled by default** in `dynamic_disabled.conf`.
-  They are real formats and valid to reference; the validator will note them.
+If you haven't round-tripped it yourself, write `asserted` and say where the
+claim came from. Someone will verify it later and promote it. An honest
+`asserted` is worth far more than a hopeful `vector`, because the whole point
+of this repository is that you can trust the `vector` rows without checking.
+
+The automated checks on your PR deliberately never run a cracker, so this one
+is on your honour — and it's the thing a maintainer will look at first.
+
+## Files you may and may not edit
+
+**Edit:** `data/algorithms/*.yaml` — one algorithm per file, filename stem
+equal to the `id`.
+
+**Don't edit:** `data/tools/*.yaml`, `docs/index.html`, `docs/ROSETTA.md`,
+`dist/*`. All generated, all carrying a banner that says so. If a mode or
+format is missing from an inventory, the fix is to re-run the extractor.
+
+**Don't edit:** `vendor/`. Refresh it with `tools/fetch-upstream.sh` and send
+that as its own PR, so the diff shows what upstream actually changed.
+
+## Mistakes that are easy to make
+
+- **One entry is one algorithm.** If your hash is computed differently from
+  the entry you were going to put it in, it needs its own entry — even if the
+  two share a name or a mode. `aliases:` is for other *names* of the same
+  computation, not for related algorithms.
+- **A tool cracking your vector doesn't mean it implements your algorithm.**
+  `md5cap` is `cap(md5($p))`, which does nothing when the digest has no
+  letters, so John's `dynamic_2` recovers its vector while computing something
+  else. That's a `collides-on-subset` relation, not a mapping.
+- **mdxfind's iteration count is part of the identity.** `MD5` at `-i 2` is
+  `md5(md5($pass))`, which is John's `dynamic_2`, not `dynamic_0`. Record it
+  as `tools.mdxfind.iterations`.
 - **mdxfind's hashcat column lists *related* modes, not equivalents.** Type
-  `MD5` names modes 0, 2600, 3500 and 5100 — four different algorithms it
-  reaches by varying `-i` and truncation. Do not copy such a list wholesale
-  into one entry.
+  `MD5` names modes 0, 2600, 3500 and 5100 — four different algorithms. Don't
+  copy such a list into one entry.
+- **`id` never changes once it's published.** It's the filename, a link
+  fragment on the rendered page, and the key in `dist/rosetta.csv`. If a name
+  is wrong, add the better one to `aliases:`.
 
-## Disagreements
+## What happens to your PR
 
-If your source contradicts what is already in an entry, do not overwrite it.
-Add your claim in `note` and say so in the PR. Disagreements get settled by
-verification, not by whoever edited last.
+CI runs the same checks you ran, plus a compile of every tool. It never runs a
+cracker — verification has to happen on a machine with the tools and a GPU,
+and a tier that a pull request could influence would be worthless.
+
+A maintainer then runs `tools/review-delta.pl`, which lists what your change
+claims and which claims need proving locally, and re-runs the ones that do. If
+a `vector` claim doesn't reproduce, expect a question rather than a rejection
+— a vector that won't crack can mean a wrong mapping, a wrong plaintext or a
+missing salt, and those are worth telling apart.
+
+## No GitHub account, or not comfortable with YAML?
+
+Open an issue, or send the facts however is convenient. A mode number, a
+format label and a test vector in a plain email is a perfectly good
+contribution; someone will turn it into a file and credit you.
+
+## Be nice
+
+Keep PR descriptions lean. Using an LLM to help is fine — strip the padding
+before you send it. Say what changed and why, and stop.

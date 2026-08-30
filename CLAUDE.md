@@ -23,6 +23,8 @@ are absent rather than guessed."*
     data/algorithms/*.yaml   CURATED. One file per algorithm. The PR surface.
     schema/                  JSON Schema for both file kinds.
     tools/                   Extractors, validators, renderers (Perl).
+    CONTRIBUTING.md          For someone adding information; assumes no crackers.
+    MAINTAINING.md           For someone reviewing a contribution; assumes them.
     docs/ROSETTA.md          GENERATED. Flat human-readable table.
     dist/rosetta.{csv,json}  GENERATED. Machine consumption.
     tmp/                     Scratch. Not committed.
