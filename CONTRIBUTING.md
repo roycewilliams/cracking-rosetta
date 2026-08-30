@@ -168,72 +168,58 @@ that as its own PR, so the diff shows what upstream actually changed.
   fragment on the rendered page, and the key in `dist/rosetta.csv`. If a name
   is wrong, add the better one to `aliases:`.
 
-## Bonus: vanity vectors (optional, and very welcome)
+## Bonus: vanity vectors (optional, and welcome)
 
-A reference hash that is *visibly* a rosetta artefact is more fun than a random
-one, and just as valid. Three rules make it work.
+One target, not a collection — a marker is recognisable because it is always
+the same string.
 
-**Only salted algorithms.** For an unsalted hash the digest is a pure function
-of the plaintext, so the only thing you could vary is the plaintext itself —
-and keeping that pure matters far more than a pretty digest. Salted types give
-you a free variable that nobody cares about, so that is where this belongs.
+**The salt is `rosetta`. The plaintext is `rosetta`. The digest starts
+`dec0ded`.**
 
-**The plaintext never moves.** It stays exactly `rosetta`. You search the
-*salt*.
+Only salted algorithms qualify. For an unsalted hash the digest is a pure
+function of the plaintext, so the only thing you could vary is the plaintext,
+and keeping that clean matters more than a pretty digest. On a salted type the
+salt is a free variable nobody cares about, so search that and leave the
+plaintext alone.
 
-**Pick a marker that needs no decoding.** The point is to be recognised at a
-glance, so heavy leetspeak defeats it — `ca7a109` for "catalog" is a puzzle,
-not a marker. Hex is `0-9a-f`, and the only letters it can show are
-`a b c d e f` plus `o`→`0`, `i/l`→`1`, `s`→`5`, `t`→`7`, `g`→`9`, `z`→`2`.
-Prefer words needing **zero or one** substitution:
-
-| marker | subs | reads as | GPU @20 GH/s |
-|---|---:|---|---:|
-| `dec0ded` | 1 | decoded | instant |
-| `defaced` | 0 | defaced — the stone is a broken fragment | instant |
-| `effaced` | 0 | effaced | instant |
-| `abcdefaced` | 0 | the whole hex alphabet, plus "aced" | ~55 s |
-| `defacedbeef` | 0 | nods to `deadbeef` | ~15 min |
-| `dec0dedface` | 1 | decoded face | ~15 min |
-| `decadefacade` | 0 | | ~4 h |
-
-Four bits per character, so cost quadruples every character. Up to about 12 is
-an afternoon; 14 is out of reach.
-
-**A themed salt is a bonus, not a constraint — and you can usually have both.**
-Salts of the form `rosetta<N>` are an unbounded family, so searching them is
-just as deep a space as searching random salts: a 10-character marker needs
-about 13 digits of `N`, a 12-character one about 15, giving a salt of ~22
-characters that most formats accept happily. So the choice between "themed
-salt" and "best digest" rarely arises. Where the format pins the salt short or
-to a fixed alphabet — descrypt's two characters, a hex-only salt — **the
-digest wins**; take a random salt and a good marker over a themed salt and a
-poor one.
-
-Worked examples, plaintext `rosetta` throughout, each verified with `md5sum`:
+Searching means the salt becomes `rosetta<N>` — still obviously deliberate,
+which is the point. `dec0ded` is seven hex characters, so about 268 million
+tries: a minute or two on a CPU, instant on a GPU. Fast hashes only; a
+deliberately slow KDF like bcrypt or argon2 is not worth it, and nobody should
+try.
 
 ```
-md5("rosetta" . "rosetta12426436") = decade0a494ed9b3cb23fa09af639b15
-md5("rosetta" . "rosetta21442562") = facade391d27044cd1a3dad0852a5ec2
-md5("rosetta" . "rosetta23158488") = dec1ded2121e9be4e236a816c438b0d1
-md5("rosetta" . "rosetta13743570") = dec0de53931f54a32b25db2b530baea9
+plaintext  rosetta
+salt       rosetta<N>
+digest     dec0ded...
 ```
 
-And the free tier, if you don't want to search at all: just use `rosetta` as
-the salt. `mdxfind -z -s` will generate the vector for you, and both ends are
-on theme at zero cost.
+What counts as good enough, best first:
+
+1. **`decoded`, spelled properly.** Only possible where the digest is base64
+   rather than hex — `{SSHA}`, `$apr1$`, `$P$` and friends, 75 entries here
+   already. Seven characters of a 64-character alphabet is 42 bits, a few
+   minutes of GPU time. This is the real prize.
+2. **`dec0ded`** — the hex form, and the normal target. Hex is `0-9a-f`, so
+   `o`→`0` is forced and nothing else is.
+3. **Heavier leet or a shorter prefix** (`dec0d3d`, `dec0de`) — accepted only
+   if nothing better has been found for that entry.
+
+**An entry is closed for vanity once it has a clean `dec0ded`.** Don't send a
+second one, and don't send an improvement on a marker that already reads
+correctly. This is meant to be a pleasant side quest, not a leaderboard.
+
+If you don't want to search at all, just use `rosetta` as the salt and take
+whatever digest falls out — both ends are still on theme, and
+`mdxfind -z -s` will generate the vector for you.
 
 Housekeeping:
 
 - A vanity vector is still a vector. It must verify like any other.
-- Say how you made it in `source:` — `"vanity, salt search, md5 prefix"` is
-  perfect.
+- Say how you made it in `source:` — `"vanity, salt search"` is perfect.
 - **Don't replace a good existing vector with a vanity one.** A vector from
   hashcat's example set is *evidence about hashcat*; one we generated is not.
   Vanity vectors fill gaps; they don't redecorate.
-- Computing the hash with an implementation independent of hashcat, John and
-  mdxfind makes it *better* evidence than one generated by a tool under test.
-  Worth saying in `source:` too.
 
 ## What happens to your PR
 
