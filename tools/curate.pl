@@ -49,6 +49,23 @@
 # typed it. Recording a human's belief and acting on it are different things,
 # and this repository's whole premise is the distinction.
 #
+# 'x' -- THE ANSWER THAT IS NOT ONE OF THE OPTIONS
+#
+# Every closed question here is a guess about the shape of the answer, and a
+# curator who knows the subject will hit questions where none of the options
+# is true -- two entries that are neither the same nor different, an
+# expression that is right for one vector and wrong for another. The old
+# choices were to force one of the options, which puts a false answer in the
+# journal, or to skip, which throws the knowledge away and asks again next
+# session.
+#
+# So 'x' takes MULTI-LINE free text, ends on a lone '.', and records the
+# answer 'complicated'. It is never applied to data/algorithms whatever the
+# kind -- including denotation, which is otherwise free text -- and --again
+# re-asks it, because it is a deferral with its reasons attached rather than a
+# decision. It leads the --report for the same reason: it is the pile that
+# needs a conversation.
+#
 # --report PRINTS THE JOURNAL AS MARKDOWN
 #
 # Because the other half of this workflow is handing the answers to someone --
@@ -100,12 +117,16 @@ Usage: $PROG [options]
    --journal FILE    where answers live (default tmp/curation.tsv)
    --min-group N     'token' questions covering at least N entries (default 2)
    --list            print the queue and the counts; ask nothing
-   --again           re-ask questions previously skipped
+   --again           re-ask questions previously skipped or answered 'x'
    --report          print the journal as Markdown and exit
    --apply           write the journal's category and denotation answers into
                      data/algorithms; report the rest
    -v, --verbose
    -h, --help
+
+   'x' at any question takes multi-line free text -- why none of the offered
+   answers is true -- ending on a lone '.'. It records 'complicated', leads
+   --report, and is never applied to data/algorithms.
 
    Answering writes nothing but the journal. Exit 0 success, 1 error, 2 usage.
 
@@ -161,6 +182,9 @@ sub read_journal {
         next unless defined $answer;
         my $r = { when => $when, kind => $kind, target => $target,
                   answer => $answer, note => ($note // '') };
+        # One pass, so an escaped backslash cannot be re-read as an escape.
+        s{\\(.)}{ $1 eq 'n' ? "\n" : $1 eq 't' ? "\t" : $1 }ge
+            for $r->{answer}, $r->{note};
         $seen{"$kind\0$target"} = $r;
         push @rows, $r;
     }
@@ -179,8 +203,15 @@ sub append_journal {
                   . "# Answers only. Nothing here is in data/algorithms until\n"
                   . "# tools/curate.pl --apply writes the kinds it can write.\n";
     }
-    $_ = defined $_ ? $_ : '' for $answer, $note;
-    s/\t/ /g, s/\n/ /g for $answer, $note;
+    # Escaped rather than flattened: an 'x' note is multi-line prose and its
+    # paragraphs are the point. Backslash first, so the unescape in
+    # read_journal is unambiguous.
+    for ($answer, $note) {
+        $_ = defined $_ ? $_ : '';
+        s/\\/\\\\/g;
+        s/\t/\\t/g;
+        s/\r?\n/\\n/g;
+    }
     printf {$fh} "%s\t%s\t%s\t%s\t%s\n", $TODAY, $kind, $target, $answer, $note;
     close $fh;
     return;
@@ -217,13 +248,36 @@ if ($report) {
     push @{ $by{ $_->{kind} } }, $_ for @$rows;
     printf "# Curation answers\n\nFrom `%s`, %d answer(s).\n",
         $journal, scalar @$rows;
+
+    # Markdown swallows a single newline, so a multi-line note is indented and
+    # its breaks are made hard. Without this an 'x' answer arrives as one run-
+    # on paragraph, which is the opposite of why it was typed at length.
+    my $body = sub {
+        my ($t) = @_;
+        return '' unless defined $t && length $t;
+        $t =~ s/\n/  \n  /g;
+        return "  \n  $t";
+    };
+
+    # The complicated ones lead: they are the pile that needs a conversation,
+    # and they are never applied, so nothing else in this report acts on them.
+    my @hard = grep { ($_->{answer} // '') eq 'complicated' } @$rows;
+    if (@hard) {
+        printf "\n## it's complicated (%d)\n\n"
+             . "None of the offered answers was true. Nothing here is applied.\n\n",
+            scalar @hard;
+        printf "- **%s** (%s)%s\n", $_->{target}, $_->{kind}, $body->($_->{note})
+            for @hard;
+    }
+
     for my $k (@KINDS) {
-        my @r = grep { ($_->{answer} // '') ne '(skipped)' } @{ $by{$k} || [] };
+        my @r = grep { ($_->{answer} // '') ne '(skipped)'
+                    && ($_->{answer} // '') ne 'complicated' } @{ $by{$k} || [] };
         next unless @r;
         printf "\n## %s (%d)\n\n", $k, scalar @r;
         for my $r (@r) {
             printf "- **%s** -> `%s`%s\n", $r->{target}, $r->{answer},
-                (length $r->{note} ? "  \n  $r->{note}" : '');
+                $body->($r->{note});
         }
     }
     my @skipped = grep { ($_->{answer} // '') eq '(skipped)' } @$rows;
@@ -433,7 +487,10 @@ unless (%want_kind && !$want_kind{token}) {
 my $total_open = scalar @queue;
 @queue = grep {
     my $a = $answered->{"$_->{kind}\0$_->{target}"};
-    !$a || ($again && ($a->{answer} // '') eq '(skipped)');
+    # 'complicated' is a deferral with its reasons attached, not a decision,
+    # so --again brings it back alongside the skips.
+    !$a || ($again && ( ($a->{answer} // '') eq '(skipped)'
+                     || ($a->{answer} // '') eq 'complicated' ));
 } @queue;
 
 #-----------------------------------------------------------------------
@@ -445,6 +502,11 @@ if ($apply) {
     for my $r (@$rows) {
         next if ($r->{answer} // '') eq '(skipped)';
         my $id = $r->{target};
+
+        # 'complicated' says none of the options was true. It is a note to a
+        # human, never a value -- and denotation would otherwise write the
+        # word into the data, since that kind takes free text.
+        if ($r->{answer} eq 'complicated') { $held++; next }
 
         if ($r->{kind} eq 'category') {
             my $e = $entry{$id} or next;
@@ -516,6 +578,25 @@ printf ", asking %d", $limit if $limit && $limit < @queue;
 printf ".  Answers go to %s\n", $journal;
 print  "Enter to skip, 'q' to stop. Nothing is written to data/algorithms.\n\n";
 
+# read_long_text() - as many lines as it takes, ending on a lone '.'.
+#
+# A blank line would be the obvious terminator and is the wrong one: prose
+# with a paragraph break in it is exactly what this is for. End of input ends
+# the answer too, which also ends the session -- the loop below reads undef
+# and stops -- so the '.' is the way to carry on answering.
+sub read_long_text {
+    print "  Explain. Finish with a single '.' on a line of its own.\n";
+    my @lines;
+    while (defined(my $l = <STDIN>)) {
+        chomp $l;
+        last if $l eq '.';
+        push @lines, $l;
+    }
+    my $text = join "\n", @lines;
+    $text =~ s/\A\s+|\s+\z//g;
+    return $text;
+}
+
 my $asked = 0;
 QUESTION: for my $q (@queue) {
     last if $limit && $asked >= $limit;
@@ -530,6 +611,7 @@ QUESTION: for my $q (@queue) {
         printf "    %s  %-14s %s\n", $o->[0], $o->[1], ($o->[2] // '');
     }
     print  "    (type your own)\n" if $q->{free};
+    print  "    x  it's complicated -- explain at length; never applied\n";
     print  "    Enter skip   q quit\n";
     print  "> ";
 
@@ -539,6 +621,19 @@ QUESTION: for my $q (@queue) {
     $in =~ s/^\s+|\s+$//g;
 
     last QUESTION if lc $in eq 'q';
+
+    if (lc $in eq 'x') {
+        my $text = read_long_text();
+        unless (length $text) {
+            print "  nothing written; skipped\n\n";
+            append_journal($q->{kind}, $q->{target}, '(skipped)', '');
+            next;
+        }
+        append_journal($q->{kind}, $q->{target}, 'complicated', $text);
+        printf "  recorded: complicated (%d line(s)); it will lead --report "
+             . "and is never applied\n\n", scalar(split /\n/, $text);
+        next;
+    }
 
     if ($in eq '') {
         append_journal($q->{kind}, $q->{target}, '(skipped)', '');
