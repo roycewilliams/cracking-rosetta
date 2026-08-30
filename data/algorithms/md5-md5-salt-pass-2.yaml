@@ -9,7 +9,10 @@ tools:
     verified_with: "hashcat"
   mdxfind:
     types: ["MD5"]
-    verified: "asserted"
+    iterations: 3
+    verified: "vector"
+    verified_at: "2026-08-29"
+    verified_with: "mdxfind"
   john:
     cpu: ["dynamic_0", "dynamic_3"]
     verified: "asserted"

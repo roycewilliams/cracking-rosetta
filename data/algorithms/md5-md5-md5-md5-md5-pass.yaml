@@ -6,7 +6,10 @@ tools:
     verified: "absent"
   mdxfind:
     types: ["MD5"]
-    verified: "asserted"
+    iterations: 5
+    verified: "vector"
+    verified_at: "2026-08-29"
+    verified_with: "mdxfind"
   john:
     cpu: ["dynamic_0", "dynamic_1002"]
     verified: "asserted"

@@ -379,7 +379,10 @@ if ($want{mdxfind} && $job{mdxfind}) {
             $cracked{mdxfind}{ $vec->{id} }{$type} = 1
                 if $out =~ /^\Q$type\E(?:x\d+)?\s+\Q$vec->{hash}\E:/m;
         }
-        $mx_job_ids{$type} = [@ids];
+        # Accumulate: one type has a separate job per declared iteration
+        # count, and assigning here would leave discovery seeing only the
+        # entries of whichever iteration ran last.
+        push @{ $mx_job_ids{$type} }, @ids;
         $failed_job{mdxfind}{$type} = $code if $code == -2;
         printf STDERR "-   mdxfind %-24s i=%s %d hash(es) -> %d cracked%s\n",
             $type, $it, scalar @v,
@@ -456,7 +459,8 @@ my @discovered;
 
 if ($discover && $want{mdxfind} && !$dry) {
     for my $type (sort keys %mx_job_ids) {
-        for my $id (@{ $mx_job_ids{$type} }) {
+        my %seen;
+        for my $id (grep { !$seen{$_}++ } @{ $mx_job_ids{$type} }) {
             next if $cracked{mdxfind}{$id}{$type};
             my $blk = $entry{$id}{tools}{mdxfind} or next;
             my @v = vectors_for($id) or next;
