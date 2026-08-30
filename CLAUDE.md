@@ -138,6 +138,38 @@ Record both, canonical field is the hx-style expression:
 The expression is the semantic join key — it is what lets a validator assert
 that two tools' identifiers really do denote the same thing.
 
+`tools/expressions.pl` populates both fields from `john --list=subformats`,
+which states what each of john's 474 dynamics computes in the syntax
+`--format=dynamic='...'` takes back. It writes only where the john block
+reached tier `vector` and every identifier that block names prints the same
+expression, so the field is transcription rather than interpretation. 144
+entries carry one.
+
+## Collisions: when two entries mean the same thing
+
+The moment expressions existed, nine of them turned out to be claimed by more
+than one entry. That is not noise — it is the `id` being asked to carry four
+independent facts at once: the **computation**, the **representation** (hex
+case, base64, a `$1$` wrapper), the **deployment** (Joomla, vBulletin 3.8.5,
+osCommerce — which hashcat gives separate modes), and the **tool identifier**.
+Only the last was ever modelled.
+
+The rule, until the schema catches up (design in `ACTION-PLAN.md` §11):
+
+- **One entry is one computation.** If you find yourself writing a second,
+  different algorithm into `aliases:`, you need a second entry.
+  `aliases:` is for other *names* of the same computation, nothing else.
+- **Two entries may share an expression**, and often should — `joomla` and
+  `md5-pass-salt` are both `md5($p.$s)` and hashcat separates them (11 vs 10)
+  because the application is the distinction. Say which axis differs in a
+  `note:` until `relations:` exists.
+- **Say so when two things are only equal by accident.** `md5cap` is
+  `cap(md5($p))`, a no-op on a lowercase digest, so john's `dynamic_2` cracks
+  its vector without denoting it. Record the trap; do not record the mapping.
+- **`id` never changes.** It is the filename stem, a URL fragment in
+  `docs/index.html` and the key in `dist/rosetta.csv`. A rename is a new entry
+  plus an alias on the survivor, never an `mv`.
+
 ## Conventions
 
 - ETL and tooling in **Perl** (see global CLAUDE.md). The one-shot sheet

@@ -60,6 +60,33 @@ A vector is the most valuable thing you can add — it is what lets anyone
 promote the mapping to `vector` later, and it is what makes a disagreement
 resolvable instead of an argument.
 
+## One entry is one algorithm
+
+If a hash you are adding is computed differently from the entry you were about
+to put it in, it needs its own entry — even when the two share a name, a tool
+identifier, or a mode.
+
+- `aliases:` is for other **names** of the same computation. It is not a place
+  to list related algorithms. One entry here reached five vectors falling to
+  three different John dynamics that way, and no check caught it.
+- Two entries **may** legitimately share an `expression:`. `joomla` and
+  `md5-pass-salt` are both `md5($p.$s)`; hashcat gives them modes 11 and 10
+  because the application is the distinction, and both rows earn their place.
+  When you add such an entry, say in `note:` which axis differs — the
+  application, the encoding of the digest, the encoding of the plaintext, an
+  iteration count, or a truncation.
+- If a tool cracks your vector but does not really implement your algorithm,
+  do not record the mapping. `md5cap` is `cap(md5($p))`, which is a no-op
+  whenever the digest has no letters, so John's `dynamic_2` recovers its
+  vector while denoting something else. Put it in `note:` instead.
+- `id` never changes once published — it is the filename stem, a URL fragment
+  in the rendered page, and the key in `dist/rosetta.csv`. If a name is wrong,
+  add the better one to `aliases:` on the entry that survives.
+
+A richer, machine-readable form of all this — a typed `relations:` edge list,
+so "same computation, differs by application" is data rather than prose — is
+designed in `ACTION-PLAN.md` §11 and not built yet.
+
 ## Things worth knowing
 
 - **The mdxfind iteration count is part of the identity.** `MD5` at `-i 2` is

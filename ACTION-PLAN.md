@@ -274,3 +274,164 @@ Either widen the mode / add a shared group, or run `extract-john.pl` as
 5. **Repo home** — personal namespace, or offer it to Cynosureprime given how
    much of the verified seed data is theirs? Worth asking them before
    publishing; it also gets the SME review you want built in.
+
+---
+
+## 11. Collisions: how one row should relate to another
+
+Status: **proposal**, written 2026-08-29 after `expressions.pl` made the
+problem measurable. Nothing below is built.
+
+### What went wrong, concretely
+
+Populating `expression:` for 144 entries immediately produced nine expressions
+claimed by more than one entry, and `discover-john.pl` found three entries
+whose own vectors fall to *different* John formats. Both are the same defect
+wearing two hats: **the entry `id` is being asked to carry four independent
+facts at once.**
+
+| Axis | Question it answers | Example of it being conflated |
+|---|---|---|
+| Computation | what bytes in, what bytes out | `joomla` and `md5-pass-salt` are both `md5($p.$s)` |
+| Representation | how the digest is written down | `md5` and `md5uc` differ only in hex case |
+| Deployment | which product emits it | hashcat mode 11 vs 10; 2611 vs 2711; 21 vs 20 |
+| Tool identifier | what to type at a prompt | already many-to-many, already fine |
+
+`md5-md5-plain-salt` is the extreme case: one file, an `aliases:` list naming
+four *different* algorithms, and five vectors that fall to three different
+dynamics. Nothing in the schema stopped that, because `aliases:` was never
+defined as "names for the same computation" — it was just a search aid.
+
+### Option A — normalise into two tables
+
+Split `data/algorithms/` into computations (keyed by expression) and
+`data/profiles/` for the product-facing rows, each profile pointing at one
+computation plus its own modes and vectors.
+
+Cleanest semantics, and the table people read becomes the profile table. But
+it is the largest migration, it changes what a pull request touches, and most
+entries have no product at all, so several hundred profiles would be 1:1
+shells around their computation. Rejected on cost, not on correctness.
+
+### Option B — one file per entry, explicit typed relations *(recommended)*
+
+Keep the file layout exactly as it is, and make the relationship a first-class
+field rather than a hint buried in `aliases:` or prose.
+
+1. **`expression:` is the machine key.** Already populated for 144 entries,
+   transcribed from `john --list=subformats`. It is what makes a collision
+   detectable at all.
+
+2. **`category:` gets an enum.** The field exists in the schema and is used by
+   zero entries; the sheet had a `class` column that was also empty. Revive it
+   as the human-intelligible axis:
+
+       primitive | composite | iterated | encoding | application | protocol | kdf
+
+3. **`relations:` — a typed, many-to-many edge list.**
+
+   ```yaml
+   relations:
+     - kind: "same-computation"
+       entry: "md5-pass-salt"
+       distinction: "application"
+       note: "hashcat separates these: 11 assumes Joomla's salt, 10 is generic"
+   ```
+
+   `kind` says what the relationship *is*:
+
+   | `kind` | Meaning |
+   |---|---|
+   | `same-computation` | identical bytes in, identical bytes out |
+   | `encodes` | same digest, different textual encoding (hex case, base64, tag) |
+   | `input-encoding` | same primitive over a re-encoded plaintext (utf16le) |
+   | `iterates` | this entry is the other applied N times |
+   | `truncates` | this entry is the other, cut short |
+   | `collides-on-subset` | agrees only on a degenerate class of inputs |
+   | `duplicate-of` | no distinction survives; one of these should go |
+
+   `distinction` says why both rows nonetheless exist:
+
+       application | encoding | input-encoding | iteration | truncation
+       | salt-convention | none
+
+   `distinction: none` is only legal with `kind: duplicate-of`, which is how
+   a merge gets proposed in data rather than in a comment.
+
+4. **`aliases:` is narrowed to names.** Other spellings of the *same*
+   computation, for search. Naming a different algorithm there becomes an
+   error, which is exactly the mistake `md5-md5-plain-salt` encodes today.
+
+5. **Optional `application:` / `application_version:`** so "vBulletin ≥ 3.8.5"
+   is data rather than punctuation inside `name:`.
+
+### Option C — a separate relations file
+
+`data/relations.yaml` holding the whole graph. One place to review, entry
+files untouched — but it moves the fact away from the file that states it, a
+contributor editing one algorithm no longer sees it, and every change
+collides in a single file. That is the exact failure one-file-per-algorithm
+was chosen to avoid. Rejected.
+
+### Why B satisfies both audiences
+
+**Human intelligibility.** Nobody reads a join table. The rendered view stays
+one row per entry, with the relation surfaced as a short "same as" column —
+`joomla` reads "same computation as md5-pass-salt, differs by application".
+`render.pl` can additionally emit Option C's *view* — a grouped listing keyed
+by expression — without paying Option C's cost, because the edges are data.
+
+**Machine precision.** `dist/rosetta.json` gains a `relations` array. A
+consumer building hash-ID tooling can collapse the graph to computations; a
+consumer building a cracking cheat-sheet can keep the product rows. Neither
+has to guess from a name.
+
+### The rules that make it a gate rather than a suggestion
+
+`validate.pl` grows five checks, and they are what turn the join key into
+something enforced:
+
+1. Two entries with an equal `expression` **must** be joined by a
+   `same-computation`, `encodes` or `duplicate-of` edge. Otherwise: error.
+   This is the rule that would have caught all nine collisions on the PR that
+   introduced them.
+2. Every edge names an existing `id`, and every edge is mirrored on the other
+   entry. `--fix` writes the mirror.
+3. `distinction: none` outside `duplicate-of` is an error.
+4. `collides-on-subset` requires a `note` naming the degenerate class — this
+   is where `md5cap`/`md5` and `md5-plain-md5-plain`/`dynamic_1011` are
+   recorded, so the trap is documented instead of rediscovered.
+5. An entry whose vectors fall to different John formats (what
+   `discover-john.pl` reports as "this entry's vectors disagree") is an error
+   unless the entry declares the corresponding relations.
+
+### Identifier discipline
+
+`id` remains the stable key and the filename stem, and still never changes
+once published — it is a URL fragment in `docs/index.html` and the key in
+`dist/rosetta.csv`. A rename is expressed as a new entry plus a
+`duplicate-of` edge and an `aliases:` entry on the survivor, never as an
+`mv`.
+
+### The nine collisions under this model
+
+| Entries | `kind` | `distinction` |
+|---|---|---|
+| `joomla`, `md5-pass-salt`, `ciscoasa` | `same-computation` | `application` |
+| `md5`, `md5uc` | `encodes` | `encoding` |
+| `md4-utf16-plain`, `ntlmh`, `ntlm-plain-md4-utf16-le-plain` | `duplicate-of` | `none` |
+| `ripemd320`, `rmd320` | `duplicate-of` | `none` |
+| `md5-salt-md5-pass`, `md5-userid-md5-plain` | `same-computation` | `salt-convention` |
+| `md5-md5-pass-salt`, `vbulletin-v3-8-5`, `md5-md5-plain-salt-3`, `md5-capitalise-md5-plain-username` | `same-computation` | `application` |
+| `sha1-salt-sha1-salt-sha1-plain-aka-opencart`, `wbb3` | `same-computation` | `application` |
+| `sha1-sha1-plain-salt`, `sha1-sha1-plain-substr-plain-0-1` | `same-computation` | `application` |
+| `sha256-salt-pass`, `sha256rawsaltpass` | `same-computation` | `encoding` |
+
+Plus, not a collision but the same machinery: `md5cap` →
+`collides-on-subset` → `md5`, and `md5-plain-md5-plain` →
+`collides-on-subset` → `md5-pass-md5-salt`.
+
+`md5-md5-plain-salt` and `md5-md5-plain-salt-2` are the one case that needs
+splitting rather than linking: their `aliases:` name genuinely different
+computations, so each alias becomes its own entry taking the vector that
+falls to it, and the originals keep the vector matching their own expression.
