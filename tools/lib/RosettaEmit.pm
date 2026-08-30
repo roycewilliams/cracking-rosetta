@@ -141,6 +141,16 @@ my %TOOL_KEYS = (
     john    => [qw(cpu gpu verified verified_at verified_with note)],
     crack   => [qw(supported note)],
 );
+# Keys whose value is a YAML boolean, addressed as "<tool>.<key>".
+#
+# YAML::XS loads "true" as 1 and "false" as the empty string, so a boolean
+# round-tripped through a loader arrives looking like an integer or like
+# nothing at all. Left to the generic path that turned crack.supported: true
+# into "supported: 1" and made crack.supported: false disappear entirely --
+# and "Crack cannot do this" is exactly the claim docs/CRACK.md is built on.
+# So these keys are rendered as booleans, and only an absent value is skipped.
+my %BOOL_KEYS = ('crack.supported' => 1);
+
 my @VECTOR_KEYS = qw(hash pass salt source);
 my @LEGACY_KEYS = qw(hashes_org hashkiller);
 
@@ -176,6 +186,11 @@ sub entry_text {
             for my $t (@tools) {
                 $out .= "  $t:\n";
                 for my $tk (@{ $TOOL_KEYS{$t} }) {
+                    if ($BOOL_KEYS{"$t.$tk"}) {
+                        next unless defined $v->{$t}{$tk};
+                        $out .= _kv('    ', $tk, \(!!$v->{$t}{$tk}));
+                        next;
+                    }
                     next if _empty($v->{$t}{$tk});
                     $out .= _kv('    ', $tk, $v->{$t}{$tk});
                 }
