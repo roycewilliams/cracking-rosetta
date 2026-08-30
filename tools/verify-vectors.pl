@@ -172,7 +172,7 @@ Usage: $PROG --tool hashcat|mdxfind|john|all [options]
    --work DIR        scratch for hash/word/pot files (default: tmp/verify)
    --timeout SECS    per invocation   (default: 120)
    --limit N         stop after N identifiers; for smoke tests
-   --only ID         verify just this entry
+   --only ID         verify just this entry (repeatable)
    --john-gpu        also verify john's opencl/ztex formats (needs a GPU)
    --discover-iterations N
                      for mdxfind blocks that failed, re-run once at -i N and
@@ -191,7 +191,7 @@ END_USAGE
     return;
 }
 
-my (@tools, $hashcat, $mdxfind, $john, $algdir, $workdir, $only, $help);
+my (@tools, $hashcat, $mdxfind, $john, $algdir, $workdir, @only, $help);
 my ($dry, $john_gpu);
 my $discover = 0;
 my $timeout = 120;
@@ -207,7 +207,7 @@ GetOptions(
     'work=s'       => \$workdir,
     'timeout=i'    => \$timeout,
     'limit=i'      => \$limit,
-    'only=s'       => \$only,
+    'only=s'       => \@only,
     'john-gpu'     => \$john_gpu,
     'discover-iterations=i' => \$discover,
     'n|dry-run'    => \$dry,
@@ -227,6 +227,10 @@ $workdir //= "$ROOT/tmp/verify";
 @tools = map { lc } @tools;
 @tools = qw(hashcat mdxfind john) if grep { $_ eq 'all' } @tools;
 my %want = map { $_ => 1 } @tools;
+# --only is repeatable: a delta from review-delta.pl or seed-vectors.pl names
+# the entries it changed, and verifying just those is minutes rather than a
+# whole-corpus run.
+my %only = map { $_ => 1 } @only;
 for my $t (@tools) {
     next if $t =~ /^(hashcat|mdxfind|john)$/;
     print STDERR "$PROG: unknown tool '$t'.\n";
@@ -266,7 +270,7 @@ for my $f (@files) {
     my $p = "$algdir/$f";
     my $e = eval { YAML::XS::LoadFile($p) };
     next unless $e && $e->{id};
-    next if defined $only && $e->{id} ne $only;
+    next if %only && !$only{ $e->{id} };
     $entry{ $e->{id} } = $e;
     $path{  $e->{id} } = $p;
 }
