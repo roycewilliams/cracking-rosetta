@@ -1,5 +1,5 @@
-id: "md5-md5-salt-pass-2"
-name: "md5(md5($salt).$pass)"
+id: "md5-md5-md5-pass"
+name: "md5(md5(md5($pass)))"
 aliases: ["MD5 (3 iterations)"]
 status: "needs-review"
 tools:
@@ -15,11 +15,11 @@ tools:
     verified_at: "2026-08-29"
     verified_with: "mdxfind"
   john:
-    cpu: ["dynamic_0", "dynamic_3"]
-    verified: "upstream"
+    cpu: ["dynamic_3"]
+    verified: "vector"
     verified_at: "2026-08-29"
-    verified_with: "1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
-    note: "from hashpipe john_map.h, confirmed upstream by recomputation"
+    verified_with: "john"
+    note: "dynamic_0 removed 2026-08-29: verify-vectors showed it does not reproduce this vector"
 vectors:
   - hash: "dea55753a4991cf1d8a5e8bf0871fd48"
     pass: "rosetta"
@@ -30,4 +30,4 @@ vectors:
 legacy:
   hashes_org: "MD5X3"
   hashkiller: "md5(md5(md5($pass)))"
-notes: "-i3"
+notes: "-i3; renamed 2026-08-29 - the sheet named this md5(md5($salt).$pass), but the vector is md5^3(\"rosetta\") and hashcat 3500, mdxfind MD5 -i 3, john dynamic_3 and both legacy columns all agree"

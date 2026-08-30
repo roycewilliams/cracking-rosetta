@@ -11,8 +11,11 @@ tools:
     verified_at: "2026-08-29"
     verified_with: "mdxfind"
   john:
-    cpu: ["dynamic_0", "dynamic_1002"]
-    verified: "asserted"
+    cpu: ["dynamic_1002"]
+    verified: "vector"
+    verified_at: "2026-08-29"
+    verified_with: "john"
+    note: "dynamic_0 removed 2026-08-29: verify-vectors showed it does not reproduce this vector"
 vectors:
   - hash: "5381baf622596c5d73d0e693827e303c"
     pass: "rosetta"
