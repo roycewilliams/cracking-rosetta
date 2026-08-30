@@ -131,8 +131,9 @@ sub emit_records {
 # entry and requiring the bytes to match what the importer produced.
 
 my @ENTRY_ORDER = qw(
-    id name aliases expression john_dynamic_expr category status
-    tools vectors legacy notes
+    id name aliases expression john_dynamic_expr category
+    application application_version status
+    tools relations vectors legacy notes
 );
 my @TOOL_ORDER   = qw(hashcat mdxfind john crack);
 my %TOOL_KEYS = (
@@ -151,7 +152,11 @@ my %TOOL_KEYS = (
 # So these keys are rendered as booleans, and only an absent value is skipped.
 my %BOOL_KEYS = ('crack.supported' => 1);
 
-my @VECTOR_KEYS = qw(hash pass salt source);
+my @VECTOR_KEYS   = qw(hash pass salt source);
+
+# relations: is a list of maps like vectors:, and emitted the same way -- the
+# first key of each edge carries the "- " so one edge is one readable stanza.
+my @RELATION_KEYS = qw(kind entry distinction note);
 my @LEGACY_KEYS = qw(hashes_org hashkiller);
 
 # Skip a value that carries no information: undef, empty string, empty list,
@@ -193,6 +198,20 @@ sub entry_text {
                     }
                     next if _empty($v->{$t}{$tk});
                     $out .= _kv('    ', $tk, $v->{$t}{$tk});
+                }
+            }
+        }
+        elsif ($k eq 'relations') {
+            # Sorted by (kind, entry) so the file is stable no matter what
+            # order a tool discovered the edges in.
+            $out .= "relations:\n";
+            for my $rel (sort { ($a->{kind} // '') cmp ($b->{kind} // '')
+                             || ($a->{entry} // '') cmp ($b->{entry} // '') } @$v) {
+                my $first = 1;
+                for my $rk (@RELATION_KEYS) {
+                    next if _empty($rel->{$rk});
+                    $out .= _kv($first ? '  - ' : '    ', $rk, $rel->{$rk});
+                    $first = 0;
                 }
             }
         }

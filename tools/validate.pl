@@ -98,8 +98,41 @@ my %IS_TIER    = map { $_ => 1 } @TIERS;
 my %IS_STATUS  = map { $_ => 1 } qw(ok needs-review);
 
 my %TOP_KEY = map { $_ => 1 } qw(
-    id name aliases expression john_dynamic_expr category status
-    tools vectors legacy notes
+    id name aliases expression john_dynamic_expr category
+    application application_version status
+    tools relations vectors legacy notes
+);
+
+my %IS_CATEGORY = map { $_ => 1 } qw(
+    primitive composite iterated encoding application protocol kdf
+);
+
+# The relation vocabulary. See ACTION-PLAN.md section 11 for what each edge
+# means; the short version is that 'kind' says what the relationship is and
+# 'distinction' says why both entries nonetheless exist.
+my %IS_REL_KIND = map { $_ => 1 } qw(
+    same-computation encodes input-encoding iterates truncates
+    collides-on-subset duplicate-of
+);
+my %IS_REL_DISTINCTION = map { $_ => 1 } qw(
+    application encoding input-encoding iteration truncation
+    salt-convention none
+);
+
+# An edge of one of these kinds is what makes two entries allowed to share an
+# expression: it says the shared computation is deliberate and accounted for.
+my %JOINS_EXPRESSION = map { $_ => 1 } qw(same-computation encodes duplicate-of);
+
+# What each kind mirrors to on the other entry. Every relation is symmetric --
+# an unmirrored edge is a half-truth that only one of the two files tells.
+my %REL_MIRROR = (
+    'same-computation'  => 'same-computation',
+    'encodes'           => 'encodes',
+    'input-encoding'    => 'input-encoding',
+    'collides-on-subset'=> 'collides-on-subset',
+    'duplicate-of'      => 'duplicate-of',
+    'iterates'          => 'iterates',
+    'truncates'         => 'truncates',
 );
 
 my %TOOL_KEY = (
@@ -172,6 +205,8 @@ my @files = sort grep { /\.yaml$/ } readdir $dh;
 closedir $dh;
 
 my %seen_id;
+my %by_expression;   # expression -> [ ids ] , for the collision rule
+my @rel_edges;       # every edge seen, resolved after the loop
 my $entries = 0;
 
 for my $file (@files) {
@@ -345,6 +380,74 @@ for my $file (@files) {
         }
     }
 
+    push @{ $by_expression{ $d->{expression} } }, ($id // $stem)
+        if defined $d->{expression} && length $d->{expression};
+
+    # --- category -----------------------------------------------------
+    if (defined $d->{category} && !$IS_CATEGORY{ $d->{category} }) {
+        err("%s: category '%s' is not one of: %s",
+            $file, $d->{category}, join(' ', sort keys %IS_CATEGORY));
+    }
+    if (defined $d->{application} && ($d->{category} // '') ne 'application') {
+        warn_("%s: names an application but category is not 'application'", $file);
+    }
+
+    # --- relations ----------------------------------------------------
+    if (defined $d->{relations}) {
+        if (ref $d->{relations} ne 'ARRAY') {
+            err("%s: 'relations' must be a list", $file);
+        }
+        else {
+            my $i = 0;
+            for my $r (@{ $d->{relations} }) {
+                $i++;
+                if (ref $r ne 'HASH') {
+                    err("%s: relations[%d] must be a mapping", $file, $i);
+                    next;
+                }
+                my ($kind, $to) = ($r->{kind}, $r->{entry});
+                if (!defined $kind || !$IS_REL_KIND{$kind}) {
+                    err("%s: relations[%d] kind '%s' is not one of: %s",
+                        $file, $i, $kind // '(missing)',
+                        join(' ', sort keys %IS_REL_KIND));
+                    next;
+                }
+                if (!defined $to || $to !~ /^[a-z0-9][a-z0-9._-]*$/) {
+                    err("%s: relations[%d] needs an 'entry' id", $file, $i);
+                    next;
+                }
+                err("%s: relations[%d] points at its own entry", $file, $i)
+                    if defined $id && $to eq $id;
+
+                my $dist = $r->{distinction};
+                if (defined $dist && !$IS_REL_DISTINCTION{$dist}) {
+                    err("%s: relations[%d] distinction '%s' is not one of: %s",
+                        $file, $i, $dist, join(' ', sort keys %IS_REL_DISTINCTION));
+                }
+                # 'none' means nothing separates these two, which is only a
+                # coherent thing to say while proposing a merge.
+                if (defined $dist && $dist eq 'none' && $kind ne 'duplicate-of') {
+                    err("%s: relations[%d] has distinction 'none' but kind '%s'; "
+                      . "'none' is only legal with 'duplicate-of'", $file, $i, $kind);
+                }
+                if ($kind eq 'duplicate-of' && defined $dist && $dist ne 'none') {
+                    err("%s: relations[%d] is 'duplicate-of' but claims a "
+                      . "distinction '%s'", $file, $i, $dist);
+                }
+                # The whole point of this kind is to record WHY the agreement
+                # is an accident, so an unexplained one is worse than none.
+                if ($kind eq 'collides-on-subset'
+                    && !(defined $r->{note} && length $r->{note})) {
+                    err("%s: relations[%d] is 'collides-on-subset' and must carry "
+                      . "a note naming the inputs on which the two agree",
+                        $file, $i);
+                }
+                push @rel_edges, { from => ($id // $stem), to => $to,
+                                   kind => $kind, file => $file };
+            }
+        }
+    }
+
     # --- vectors ------------------------------------------------------
     if (defined $d->{vectors}) {
         if (ref $d->{vectors} ne 'ARRAY') {
@@ -364,6 +467,72 @@ for my $file (@files) {
                     unless defined $v->{pass};
             }
         }
+    }
+}
+
+#-----------------------------------------------------------------------
+# Cross-entry relation checks.
+#
+# These are the rules that make expression: a gate rather than a decoration.
+# Everything above validates one file at a time; a relation is by definition
+# about two, and the collision rule is about the whole corpus at once.
+
+{
+    my %edge;                       # "from\0to\0kind" -> 1
+    $edge{"$_->{from}\0$_->{to}\0$_->{kind}"} = 1 for @rel_edges;
+
+    # Union-find over the joining edges: equivalence is transitive, so a group
+    # of four entries sharing an expression needs three edges in a star, not
+    # six in a clique. Requiring the clique would make the data unreadable
+    # long before it made it more correct.
+    my %parent;
+    my $find; $find = sub {
+        my ($x) = @_;
+        $parent{$x} //= $x;
+        return $x if $parent{$x} eq $x;
+        return $parent{$x} = $find->($parent{$x});
+    };
+    my $union = sub {
+        my ($x, $y) = @_;
+        my ($rx, $ry) = ($find->($x), $find->($y));
+        $parent{$rx} = $ry unless $rx eq $ry;
+    };
+
+    for my $e (@rel_edges) {
+        # 1. The other end has to exist.
+        unless ($seen_id{ $e->{to} }) {
+            err("%s: relation names '%s', which is not an entry",
+                $e->{file}, $e->{to});
+            next;
+        }
+        # 2. And it has to say so too. A one-sided edge is a fact only one of
+        #    the two files tells, and whichever file a reader opens first
+        #    decides whether they learn it. tools/relate.pl writes both.
+        my $mirror = $REL_MIRROR{ $e->{kind} } // $e->{kind};
+        unless ($edge{"$e->{to}\0$e->{from}\0$mirror"}) {
+            err("%s: relation '%s' -> %s is not mirrored; %s.yaml needs "
+              . "'%s' -> %s (tools/relate.pl --apply writes both sides)",
+                $e->{file}, $e->{kind}, $e->{to}, $e->{to}, $mirror, $e->{from});
+        }
+        $union->($e->{from}, $e->{to}) if $JOINS_EXPRESSION{ $e->{kind} };
+    }
+
+    # 3. Two entries claiming the same expression are claiming to be the same
+    #    computation. That is allowed -- Joomla and generic md5($p.$s) really
+    #    are -- but it has to be stated, or the table has two rows and no
+    #    account of why. Every entry in a colliding group must reach every
+    #    other through same-computation, encodes or duplicate-of edges.
+    for my $x (sort keys %by_expression) {
+        my @ids = @{ $by_expression{$x} };
+        next unless @ids > 1;
+        my %group;
+        push @{ $group{ $find->($_) } }, $_ for @ids;
+        next if keys %group == 1;
+        err("'%s' is claimed by entries that are not related to each other: "
+          . "%s. Join them with same-computation, encodes or duplicate-of "
+          . "(see ACTION-PLAN.md section 11)",
+            $x, join(' | ', map { join(', ', sort @{ $group{$_} }) }
+                            sort keys %group));
     }
 }
 

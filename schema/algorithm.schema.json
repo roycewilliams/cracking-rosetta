@@ -30,7 +30,47 @@
       "type": "string",
       "description": "John's equivalent, as passed to --format=dynamic='...'."
     },
-    "category": { "type": "string" },
+    "category": {
+      "enum": ["primitive", "composite", "iterated", "encoding",
+               "application", "protocol", "kdf"],
+      "description": "The human axis this entry sits on. primitive: one hash function over the plaintext. composite: a construction over several. iterated: another entry applied N times. encoding: another entry's digest written differently. application: a product's use of a computation another entry also names. protocol: a challenge-response or wire format. kdf: a deliberately slow derivation."
+    },
+    "application": {
+      "type": "string",
+      "description": "The product this row is about, when category is 'application' - Joomla, vBulletin, osCommerce. Data rather than punctuation inside name:."
+    },
+    "application_version": {
+      "type": "string",
+      "description": "Version constraint the product places on the row, e.g. '>=3.8.5'."
+    },
+    "relations": {
+      "type": "array",
+      "description": "Typed edges to other entries. Many-to-many and symmetric: every edge must be mirrored on the entry it names. This is what lets two entries share an expression honestly - the edge says they are the same computation and the distinction says why both rows exist.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["kind", "entry"],
+        "properties": {
+          "kind": {
+            "enum": ["same-computation", "encodes", "input-encoding",
+                     "iterates", "truncates", "collides-on-subset",
+                     "duplicate-of"],
+            "description": "same-computation: identical bytes in, identical bytes out. encodes: same digest, different textual encoding. input-encoding: same primitive over a re-encoded plaintext. iterates: this entry is the other applied N times. truncates: this entry is the other, cut short. collides-on-subset: agrees only on a degenerate class of inputs, so a tool may crack one entry's vector without denoting it. duplicate-of: no distinction survives and one of these should go."
+          },
+          "entry": {
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9._-]*$",
+            "description": "The id of the other entry."
+          },
+          "distinction": {
+            "enum": ["application", "encoding", "input-encoding", "iteration",
+                     "truncation", "salt-convention", "none"],
+            "description": "Why both rows exist despite the relation. 'none' is legal only with kind duplicate-of, which is how a merge is proposed in data rather than in a comment."
+          },
+          "note": { "type": "string" }
+        }
+      }
+    },
     "status": {
       "enum": ["ok", "needs-review"],
       "default": "ok",
