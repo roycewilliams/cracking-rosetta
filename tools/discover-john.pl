@@ -49,6 +49,18 @@
 # pot line counts only when it carries the entry's OWN hash and its OWN
 # plaintext.
 #
+# ATTRIBUTION IS BY LOGIN, NOT BY SEARCHING THE POT
+#
+# john echoes its own canonical encoding, not what it was handed: a bare digest
+# comes back "$dynamic_213$...", bcrypt's "$2y$" comes back "$2a$", a Cisco
+# type 8 comes back "$pbkdf2-sha256$...". Searching the pot for the hash we
+# submitted therefore misses cracks that really happened, and every rewrite
+# john grows needs another special case.
+#
+# So each line carries a synthetic login and the run is followed by "--show",
+# which prints that login beside the plaintext. The login is ours; it survives
+# every canonicalisation, and the special cases go away.
+#
 # TAB IS THE FIELD SEPARATOR, WHICH BUYS TWO THINGS
 #
 # john's input is login:hash, so a vector recorded as "hash:salt" -- the shape
@@ -75,6 +87,38 @@
 # algorithm has many names, so --max-per-entry holds those back for a human
 # instead of writing a wall of identifiers into the file. Likewise a format
 # that suddenly claims a large share of the corpus is reported, not applied.
+#
+# A SALTED VECTOR IS ALSO OFFERED IN JOHN'S OWN SHAPE
+#
+# The corpus records a salted vector the way mdxfind reads it, "<hash>:<salt>".
+# john's dynamic_1009 wants "$dynamic_1009$<hash>$<salt>" and its valid()
+# discards the colon form before computing anything, so every salted composite
+# -- most of what was left unmapped -- was invisible to this search.
+#
+# So for a dynamic, each two-field vector is additionally written in that
+# format's own encoding. The rewrite is mechanical and adds no claim: if the
+# algorithms do not match, john simply fails to crack it, exactly as before.
+# What it buys is that the mapping is then proven on THE ENTRY'S OWN vector.
+#
+# That matters more than it sounds. The other direction -- identify-john.pl,
+# which asks mdxfind to name john's test vectors -- reported dynamic_1011,
+# md5($p.md5($s)), as a match for MD5PASSMD5, md5($p.md5($p)). It is not one:
+# two of dynamic_1011's four test vectors happen to use the password as the
+# salt, so the two algorithms agree on them. An entry's own vector does not
+# have that property, and the rewrite here refuses the pairing.
+#
+# AN ENTRY WHOSE VECTORS DISAGREE IS A DATA DEFECT, NOT A MAPPING
+#
+# md5-md5-plain-salt-2 is named md5(md5($p).$s) and carries two vectors that
+# share a salt. One falls to dynamic_6, md5(md5($p).$s); the other to
+# dynamic_9, md5($s.md5($p)). Both cracks are real, and they cannot both be
+# this entry's algorithm: the second vector belongs to a different entry and
+# was collated onto this one.
+#
+# So the label set is computed per vector, and an entry whose cracked vectors
+# do not agree on it is held for review rather than having the union written
+# in. Writing the union would put two contradictory algorithms in one row --
+# and it is the row a reader trusts to say what to run.
 #
 # ONE FORMAT IS NEVER RECORDED: crypt
 #
@@ -248,7 +292,8 @@ for my $id (sort keys %entry) {
     for my $v (@{ $e->{vectors} || [] }) {
         next unless defined $v->{hash} && defined $v->{pass};
         next if $v->{hash} =~ /\t/ || $v->{pass} =~ /\t/;   # would break the field split
-        push @vectors, { id => $id, hash => $v->{hash}, pass => $v->{pass} };
+        push @vectors, { id => $id, hash => $v->{hash}, pass => $v->{pass},
+                         vid => "$id\0" . scalar(@vectors) };
         $targets{$id} = 1;
     }
 }
@@ -270,35 +315,6 @@ sub write_file {
     print {$fh} "$_\n" for @lines;
     close $fh;
     return $p;
-}
-
-# pot_keys($ciphertext) - the forms of a pot ciphertext that might be one of
-# our recorded hashes, lowercased.
-#
-# john does not echo back what it was given; it echoes its own canonical
-# encoding. A bare digest handed to a dynamic comes back tagged as
-# "$dynamic_210$44f5...", and a salted one as "$dynamic_6$<hash>$<salt>"
-# where the vector recorded "<hash>:<salt>". So strip a leading "$tag$" and,
-# for anything that still carries a '$', also offer the part in front of it.
-# Every form is only ever used as a lookup key against hashes we already hold,
-# so a wrong guess finds nothing rather than inventing a match.
-sub pot_keys {
-    my ($ct) = @_;
-    my @k = (lc $ct);
-
-    # bcrypt's variant letter is a property of the encoding, not of the hash:
-    # john reads "$2y$" and writes "$2a$" for the same digest, so a vector
-    # recorded either way has to reach the same key.
-    (my $bc = $ct) =~ s/^\$2[abxy]\$/\$2\$/;
-    push @k, lc $bc if $bc ne $ct;
-
-    (my $untagged = $ct) =~ s/^\$[A-Za-z0-9_.-]+\$//;
-    push @k, lc $untagged if $untagged ne $ct;
-    for my $k (@k[0 .. $#k]) {
-        push @k, $1 if $k =~ /^([^\$]{16,})\$/;
-    }
-    my %seen;
-    return grep { !$seen{$_}++ } @k;
 }
 
 # run_capture($timeout, @argv) - run without a shell, return (exit, output).
@@ -330,27 +346,12 @@ sub run_capture {
 # the hash file as "<id>TAB<hash>"; the id is only along for the ride, but it
 # makes john's own progress output readable while a long run is going.
 
-my $hashfile = "$workdir/corpus.hash";
 my $wordfile = "$workdir/corpus.word";
 
 my %uniq_word;
 my @words = grep { !$uniq_word{$_}++ } map { $_->{pass} } @vectors;
 
-write_file($hashfile, map { "$_->{id}\t$_->{hash}" } @vectors);
 write_file($wordfile, @words);
-
-# Index vectors by lowercased hash for pot lookups, plus by leading field for
-# the case where john rewrote a "hash:salt" vector into its own encoding.
-my (%by_hash, %by_lead);
-for my $v (@vectors) {
-    push @{ $by_hash{ lc $v->{hash} } }, $v;
-    # Same bcrypt variant-letter normalisation the pot side applies.
-    (my $bc = $v->{hash}) =~ s/^\$2[abxy]\$/\$2\$/;
-    push @{ $by_hash{ lc $bc } }, $v if $bc ne $v->{hash};
-    my ($lead) = split /:/, $v->{hash}, 2;
-    push @{ $by_lead{ lc $lead } }, $v
-        if defined $lead && $lead ne $v->{hash} && length($lead) >= 16;
-}
 
 #-----------------------------------------------------------------------
 # One john run per format.
@@ -360,6 +361,8 @@ my $jbin = basename($john);
 die "$PROG: john not executable at $john\n" unless -x $john;
 
 my %hits;          # entry id -> format -> 1
+my %per_vector;    # vector id -> format -> 1, so an entry whose vectors
+                   # disagree can be spotted rather than merged
 my %fmt_hits;      # format -> count of entries
 my (%timed_out, %ran);
 my $started = time;
@@ -378,6 +381,22 @@ FORMAT: for my $label (@candidates) {
     my $pot  = "$workdir/pot/$safe.pot";
     make_path("$workdir/pot") unless -d "$workdir/pot";
 
+    # A dynamic gets the salted vectors rewritten into its own encoding as
+    # well; both lines carry the same login, so a crack of either credits the
+    # vector. See the methodology note on attribution.
+    my (@lines, %login_of);
+    my $seq = 0;
+    for my $v (@vectors) {
+        my $login = 'v' . $seq++;
+        $login_of{$login} = $v;
+        push @lines, "$login\t$v->{hash}";
+        next unless $label =~ /^dynamic_\d+$/;
+        my ($h, $salt) = split /:/, $v->{hash}, 2;
+        push @lines, "$login\t\$$label\$$h\$$salt"
+            if defined $salt && length $salt && $salt !~ /:/;
+    }
+    my $hf = write_file("$workdir/hash.$safe", @lines);
+
     my $code = 0;
     if ($resume && -e $pot) {
         # Evidence from an earlier run; re-read it rather than re-cracking.
@@ -389,31 +408,34 @@ FORMAT: for my $label (@candidates) {
                   . '--wordlist=%s --pot=%s --session=%s %s >/dev/null 2>&1',
                     quotemeta($jdir), quotemeta($jbin), quotemeta($label),
                     quotemeta($wordfile), quotemeta($pot),
-                    quotemeta("$workdir/s.$safe"), quotemeta($hashfile)));
+                    quotemeta("$workdir/s.$safe"), quotemeta($hf)));
         $timed_out{$label} = 1 if $code == -2;
     }
     $ran{$label} = 1;
 
     my $found = 0;
-    if (open my $pfh, '<', $pot) {
-        while (my $line = <$pfh>) {
-            chomp $line;
-            # Tab separator was requested, so the pot line is exactly
-            # "<ciphertext>TAB<plaintext>" even when the ciphertext has colons.
-            my ($ct, $pw) = split /\t/, $line, 2;
-            next unless defined $ct && defined $pw;
-            my %cand;
-            for my $k (pot_keys($ct)) {
-                for my $v (@{ $by_hash{$k} || [] }, @{ $by_lead{$k} || [] }) {
-                    $cand{ $v->{id} } = $v if $v->{pass} eq $pw;
-                }
-            }
-            for my $id (keys %cand) {
-                next if $hits{$id}{$label}++;
-                $found++;
-            }
+    if (-s $pot) {
+        my (undef, $shown) = run_capture($timeout, '/bin/sh', '-c',
+            sprintf('cd %s && exec ./%s --show --format=%s '
+                  . '--field-separator-char=tab --pot=%s %s 2>/dev/null',
+                    quotemeta($jdir), quotemeta($jbin), quotemeta($label),
+                    quotemeta($pot), quotemeta($hf)));
+        my %won;
+        for my $line (split /\n/, $shown // '') {
+            my ($login, $pw) = split /\t/, $line, 2;
+            next unless defined $login && defined $pw;
+            my $v = $login_of{$login} or next;
+            next unless $pw eq $v->{pass};
+            $won{"$v->{hash}\0$v->{pass}"} = 1;
         }
-        close $pfh;
+        # A hash john deduplicated on load is shown once, so the crack is
+        # spread to every vector carrying the same hash and plaintext.
+        for my $v (@vectors) {
+            next unless $won{"$v->{hash}\0$v->{pass}"};
+            $per_vector{ $v->{vid} }{$label} = 1;
+            next if $hits{ $v->{id} }{$label}++;
+            $found++;
+        }
     }
     $fmt_hits{$label} = $found if $found;
 
@@ -444,7 +466,21 @@ my (@apply_list, @held);
 for my $id (sort keys %hits) {
     my @f = sort keys %{ $hits{$id} };
     my @clean = grep { !$noisy_fmt{$_} && !$host_dependent{$_} } @f;
-    if ($excluded{$id}) {
+
+    # Every vector of this entry that cracked at all must have cracked under
+    # the same formats; see the methodology note.
+    my @sets = map  { join ' ', sort grep { !$noisy_fmt{$_} && !$host_dependent{$_} }
+                                     keys %{ $per_vector{$_} } }
+               grep { %{ $per_vector{$_} } }
+               grep { (split /\0/)[0] eq $id } keys %per_vector;
+    my %distinct = map { $_ => 1 } grep { length } @sets;
+
+    if (keys %distinct > 1) {
+        push @held, [$id, \@clean,
+                     'this entry\'s vectors disagree: ' .
+                     join(' | ', sort keys %distinct)];
+    }
+    elsif ($excluded{$id}) {
         push @held, [$id, \@f, 'named in --exclude'];
     }
     elsif (!@clean) {

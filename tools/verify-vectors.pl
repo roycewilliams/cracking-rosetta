@@ -33,7 +33,7 @@
 #
 # THE john CHECK MATCHES THE HASH, NOT THE PLAINTEXT
 #
-# john's pot line is "$dynamic_0$<hash>:<plain>", and the obvious check --
+# john's pot line is "$dynamic_0$<hash>TAB<plain>", and the obvious check --
 # does the plaintext appear in the pot -- is WRONG in exactly the case that
 # matters. Every vector imported from the sheet carries the plaintext
 # "rosetta", so a batched job feeds five different hashes sharing one
@@ -46,6 +46,27 @@
 # john rewrites, this fails to match and the block is reported unverified --
 # a false negative, which is reported and harmless, rather than a false
 # positive, which would be a lie in the one column people trust.
+#
+# TAB IS THE FIELD SEPARATOR
+#
+# john's default input shape is "login:hash", so a vector that legitimately
+# contains a colon -- netntlmv2, krb5tgs, a JWT, or any mdxfind "<hash>:<salt>"
+# -- is read as a login plus a truncated hash and never loads.
+# --field-separator-char=tab moves the separator out of the way of the data,
+# lets the entry id ride along as the login field, and makes john write the pot
+# with tabs too, so the pot parses into exactly two fields instead of being
+# split on a character the ciphertext may contain.
+#
+# A SALTED VECTOR IS ALSO OFFERED IN JOHN'S OWN SHAPE
+#
+# The corpus stores a salted vector as mdxfind reads it, "<hash>:<salt>".
+# john's dynamic_9 wants "$dynamic_9$<hash>$<salt>" and discards the colon
+# form in valid(), so every salted composite came back unverified even where
+# the mapping is right. discover-john.pl proved those mappings by rewriting the
+# vector into the format's own encoding; this does the same, so that what that
+# search found can be re-derived here from the entry file alone.
+#
+# The rewrite adds no claim of its own: a wrong mapping still fails to crack.
 #
 # PROMOTION IS ALL-OR-NOTHING PER TOOL BLOCK
 #
@@ -106,6 +127,11 @@
 # through -F cracks immediately. The inventory already records which types are
 # salted -- flag 's' in mdxfind -h -- so the flag is chosen from the data
 # rather than from a list maintained here.
+#
+# Flag 'u' is the same situation wearing a different name: the extra field is a
+# userid rather than a salt, which is how mdxfind's HMAC types take their key.
+# 47 types carry it, and reading them with -f is why the whole HMAC-* family
+# sat in the failure list.
 #
 # THE SHEET'S PLAINTEXT IS A GUESS
 #
@@ -216,8 +242,11 @@ if ($want{mdxfind}) {
     my $mx = eval { YAML::XS::LoadFile("$ROOT/data/tools/mdxfind.yaml") };
     if ($mx) {
         for my $t (@{ $mx->{types} }) {
+            # 's' is a salt carried in the hash line; 'u' is a userid field
+            # carried the same way -- mdxfind's HMAC types take their key that
+            # way, and 47 types are flagged 'u'. Both need -F rather than -f.
             $MX_SALTED{ $t->{name} } = 1
-                if grep { $_ eq 's' } @{ $t->{flags} || [] };
+                if grep { $_ eq 's' || $_ eq 'u' } @{ $t->{flags} || [] };
         }
     }
     else {
@@ -430,38 +459,60 @@ if ($want{john} && $job{john}) {
         next if $dry;
 
         (my $safe = $label) =~ s/[^A-Za-z0-9]/_/g;
-        my $hf  = write_file("$workdir/jn.$safe.hash", map { $_->{hash} } @v);
+
+        # Each line carries a synthetic login, and john's --show prints that
+        # login back beside the plaintext. That is what makes the attribution
+        # exact: john echoes its OWN canonical encoding into the pot -- a bare
+        # digest comes back "$dynamic_213$...", bcrypt's "$2y$" comes back
+        # "$2a$", a Cisco type 8 comes back as "$pbkdf2-sha256$..." -- so
+        # searching the pot for the hash we submitted misses cracks that really
+        # happened. The login is ours and survives every rewrite.
+        #
+        # A dynamic also gets each two-field vector in john's own encoding,
+        # under the SAME login, so a crack of either form credits the vector.
+        my (@lines, %login_of);
+        my $seq = 0;
+        for my $vec (@v) {
+            my $login = 'v' . $seq++;
+            $login_of{$login} = $vec;
+            push @lines, "$login\t$vec->{hash}";
+            next unless $label =~ /^dynamic_\d+$/;
+            my ($h, $salt) = split /:/, $vec->{hash}, 2;
+            push @lines, "$login\t\$$label\$$h\$$salt"
+                if defined $salt && length $salt && $salt !~ /:/;
+        }
+
+        my $hf  = write_file("$workdir/jn.$safe.hash", @lines);
         my $wf  = write_file("$workdir/jn.$safe.word", map { $_->{pass} } @v);
         my $pot = "$workdir/jn.$safe.pot";
         unlink $pot;
 
-        my ($code, $out) = run_capture($timeout, '/bin/sh', '-c',
-            sprintf('cd %s && ./%s --format=%s --wordlist=%s --pot=%s --session=%s %s 2>&1',
+        my ($code, undef) = run_capture($timeout, '/bin/sh', '-c',
+            sprintf('cd %s && ./%s --format=%s --field-separator-char=tab '
+                  . '--wordlist=%s --pot=%s --session=%s %s >/dev/null 2>&1',
                     quotemeta($jdir), quotemeta($jbin), quotemeta($label),
                     quotemeta($wf), quotemeta($pot), quotemeta("$workdir/jn.$safe"),
                     quotemeta($hf)));
 
-        # The pot file is the reliable record; stdout formatting varies.
-        my $potdata = '';
-        if (open my $pfh, '<', $pot) { local $/; $potdata = <$pfh> // ''; close $pfh }
+        my (undef, $shown) = run_capture($timeout, '/bin/sh', '-c',
+            sprintf('cd %s && ./%s --show --format=%s --field-separator-char=tab '
+                  . '--pot=%s %s 2>/dev/null',
+                    quotemeta($jdir), quotemeta($jbin), quotemeta($label),
+                    quotemeta($pot), quotemeta($hf)));
 
+        # "<login>TAB<plaintext>"; a hash john deduplicated on load is shown
+        # once, so a crack is spread to every vector carrying the same pair.
+        my %won;
+        for my $line (split /\n/, $shown // '') {
+            my ($login, $pw) = split /\t/, $line, 2;
+            next unless defined $login && defined $pw;
+            my $vec = $login_of{$login} or next;
+            next unless $pw eq $vec->{pass};
+            $won{"$vec->{hash}\0$vec->{pass}"} = 1;
+        }
         for my $vec (@v) {
-            # The stored hash may carry a salt as "hash:salt" while john
-            # writes "$tag$hash$salt"; fall back to the leading field, but
-            # only when it is long enough to identify one hash on its own.
-            my ($first) = split /:/, $vec->{hash}, 2;
-            my @needles = ($vec->{hash});
-            push @needles, $first if defined $first && length($first) >= 16
-                                     && $first ne $vec->{hash};
-
-            LINE: for my $line (split /\n/, $potdata) {
-                next unless $line =~ /:\Q$vec->{pass}\E$/;
-                for my $n (@needles) {
-                    next unless index(lc $line, lc $n) >= 0;
-                    $cracked{john}{ $vec->{id} }{$label} = 1;
-                    last LINE;
-                }
-            }
+            $cracked{john}{ $vec->{id} }{$label} = 1
+                if $won{"$vec->{hash}\0$vec->{pass}"};
         }
         $failed_job{john}{$label} = $code if $code == -2;
         printf STDERR "-   john --format=%-22s %d hash(es) -> %d cracked%s\n",

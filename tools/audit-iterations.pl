@@ -137,12 +137,13 @@ make_path($workdir) unless -d $workdir;
 my $today = strftime('%Y-%m-%d', localtime);
 
 #-----------------------------------------------------------------------
-# Which mdxfind types carry their salt inline: those need -F, not -f.
+# Which mdxfind types carry an extra field inline -- a salt ('s') or a userid
+# ('u', how the HMAC types take their key). Both need -F, not -f.
 
 my $inv = eval { YAML::XS::LoadFile("$ROOT/data/tools/mdxfind.yaml") }
     or do { print STDERR "$PROG: cannot load the mdxfind inventory: $@\n"; exit 1 };
 my %salted = map { $_->{name} => 1 }
-             grep { grep { $_ eq 's' } @{ $_->{flags} || [] } }
+             grep { grep { $_ eq 's' || $_ eq 'u' } @{ $_->{flags} || [] } }
              @{ $inv->{types} || [] };
 
 #-----------------------------------------------------------------------
