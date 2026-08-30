@@ -89,6 +89,15 @@
 # It runs only against blocks that already failed at their declared count, so
 # it can never quietly redefine an entry that was verifying correctly.
 #
+# ...AND THE COUNT IS CHECKED, NOT JUST THE CRACK
+#
+# The same suffix that recovers a lost count is also the only thing that says
+# a crack belongs to THIS entry. This script originally accepted any suffix,
+# so a vector that fell at x01 satisfied an entry declaring x02, and 42 such
+# entries reached tier 'vector' on a proof of the wrong algorithm. The suffix
+# is now pinned to the declared count. tools/audit-iterations.pl found that
+# and repairs the data; this is the check that stops it recurring.
+#
 # SALTED mdxfind TYPES NEED -F, NOT -f
 #
 # mdxfind's -f reads bare hashes; -F reads hashes with the salt embedded in the
@@ -374,10 +383,21 @@ if ($want{mdxfind} && $job{mdxfind}) {
         my ($code, $out) = run_capture($timeout, $mdxfind,
             '-h', "^\Q$type\E\$", $readflag, $hf, '-i', $it, $wf);
 
-        # Output lines look like "MD5x01 <hash>:<plain>".
-        for my $vec (@v) {
-            $cracked{mdxfind}{ $vec->{id} }{$type} = 1
-                if $out =~ /^\Q$type\E(?:x\d+)?\s+\Q$vec->{hash}\E:/m;
+        # Output lines look like "MD5x01 <hash>:<plain>". The suffix is the
+        # iteration that actually matched and is part of the identity, so a
+        # vector that falls at x01 does NOT verify an entry declaring x02 --
+        # accepting any suffix here is how 42 single-iteration vectors were
+        # promoted under twice-iterated entries (see audit-iterations.pl).
+        # The plaintext is matched too, for the reason the john block gives.
+        for my $line (split /\n/, $out) {
+            next unless $line =~ /^\Q$type\E(?:x(\d+))?\s+(.+)$/;
+            my $got = defined $1 ? $1 + 0 : $it;   # no suffix: cannot tell
+            next unless $got == $it;
+            my $rest = $2;
+            for my $vec (@v) {
+                $cracked{mdxfind}{ $vec->{id} }{$type} = 1
+                    if $rest eq "$vec->{hash}:$vec->{pass}";
+            }
         }
         # Accumulate: one type has a separate job per declared iteration
         # count, and assigning here would leave discovery seeing only the
@@ -523,7 +543,7 @@ if (!$dry) {
                 $blk->{verified_with} = $tool eq 'hashcat' ? 'hashcat'
                                       : $tool eq 'mdxfind' ? 'mdxfind'
                                       :                      'john';
-                delete $blk->{note} if ($blk->{note} // '') =~ /^(hashcat mapping shipped|from hashpipe)/;
+                delete $blk->{note} if ($blk->{note} // '') =~ /^(hashcat mapping shipped|from hashpipe|vector replaced)/;
                 $promoted{$tool}++;
                 $touched = 1;
             }
