@@ -175,6 +175,7 @@ for my $e (@rows) {
     for my $t (qw(hashcat john mdxfind crack)) {
         my $c = cell($e, $t);
         $r{$t} = $c;
+        $r{cracknote} = $e->{tools}{crack}{note} // '' if $t eq 'crack';
         $state_count{$t}{ $c->{state} }++;
     }
     $tally{ $r{status} }++;
@@ -293,25 +294,123 @@ print  {$md} <<'LEGEND';
 `x` ✓ verified here by round-trip · `x` claimed, not verified · `·` tool does
 not support it · **—** nobody has said yet (a gap worth filling)
 
-Crack is historical reference only. It implements no hash itself - it calls the
-host `crypt(3)` - so its column records what a stock Crack 5.0a could actually
-attack, not what some modern libcrypt might happen to support.
+† also attackable by Alec Muffett's Crack - see [CRACK.md](CRACK.md).
 
 For sorting, filtering and search, open [index.html](index.html) - or
 [dist/rosetta.csv](../dist/rosetta.csv) in a spreadsheet.
 
 LEGEND
-# Crack is always rendered. It is a requested column and its emptiness was a
-# statement about this project, not about Crack - hiding it hid the gap rather
-# than closing it.
-print  {$md} "| Algorithm | hashcat | John | mdxfind | Crack |\n|---|---|---|---|---|\n";
+# Crack gets a dagger, not a column. It attacks 2 of these algorithms, so a
+# column spent 782 rows saying "no" to buy two rows of information. The data
+# itself is unchanged in data/algorithms, the CSV and the JSON; only the
+# presentation moves, to docs/CRACK.md and a marker on the rows it concerns.
+print  {$md} "| Algorithm | hashcat | John | mdxfind |\n|---|---|---|---|\n";
 for my $r (@out) {
     my $n = wrap_name($r->{name}); $n =~ s/\|/\\|/g;
-    printf {$md} "| %s | %s | %s | %s | %s |\n", $n,
-        md_cell($r->{hashcat}), md_cell($r->{john}), md_cell($r->{mdxfind}),
-        md_cell($r->{crack});
+    $n .= ' †' if $r->{crack}{state} ne 'no' && $r->{crack}{state} ne 'unknown';
+    printf {$md} "| %s | %s | %s | %s |\n", $n,
+        md_cell($r->{hashcat}), md_cell($r->{john}), md_cell($r->{mdxfind});
 }
 close $md;
+
+#-----------------------------------------------------------------------
+# docs/CRACK.md - the historical note the column was a poor substitute for.
+#
+# The prose is fixed because Crack is: v5.0 shipped in 1996 and will not gain
+# an algorithm. Only the list of matching entries is derived, so that marking
+# another entry tools.crack.supported shows up here without anyone editing
+# this file.
+
+my @crackable = grep { $_->{crack}{state} ne 'no' && $_->{crack}{state} ne 'unknown' } @out;
+
+open my $cm, '>', "$docsdir/CRACK.md" or die "cannot write CRACK.md: $!\n";
+print {$cm} <<'CRACK_HEAD';
+# Crack
+
+Alec Muffett's `Crack` - the password cracker that predates every other tool
+in this repository. Included for historical reference only. Nothing here is
+verified against it: it is not installed on the machine that builds this data,
+and its capability is taken from its own manual rather than from a round-trip.
+
+The newest thing quoted below is the v5.0 manual of December 1996. Treat any
+version or date claim beyond what is quoted as unchecked - I have not tried to
+establish a release history.
+
+## What it could actually attack
+
+Crack implements no hash of its own. It calls the host's `crypt(3)`, and picks
+which implementation to build against by looking for a directory - `libdes`,
+`ufc_crypt` or GNU `crypt` - and falling back to the system library. So its
+capability is really the capability of a 1996 Unix `crypt(3)`, which is three
+things.
+
+From the v5.0 manual (Alec Muffett, December 1996):
+
+* **descrypt** - traditional DES `crypt(3)`. The default, and the one it ships
+  ready for: *"For traditional crypt() users, I ship with libdes."* The bundled
+  libdes is Eric Young's, of SSLeay fame.
+
+* **md5crypt** - the FreeBSD/NetBSD MD5-based `crypt()`: *"if you're using a
+  MD5-based version of crypt(), you must first do ... `cp elcid.c,bsd
+  elcid.c`"* before building.
+
+* **crypt16** - Ultrix, OSF and Digital Unix: *"edit src/util/elcid.c to use
+  crypt16() (change #undef to #define)"*. No algorithm in this repository
+  names crypt16, so it appears nowhere in the table.
+
+## What it could not
+
+The manual is unambiguous, under the heading *Weird Password Systems (Novell,
+Kerberos Tickets, LAN-Manager, VMS)*:
+
+> Crack v5.0 does not (as distributed) support cracking these sorts of
+> systems, although I am aware that versions of Crack v4.1f were modified to
+> support one or more of the above.
+
+Worth knowing if you go reading the source: circulating trees include
+`src/util/elcid.c,lanman` and `elcid.c,nt`, plus `scripts/lanman2spf` and
+`nt2spf`. Those belong to Elias Levy's `crack-nt` fork, not to stock Crack,
+and crediting Crack with LM or NTLM support on the strength of finding them is
+a mistake this file exists to prevent.
+
+## Why it is frozen rather than tracked
+
+Because Crack delegates to `crypt(3)`, building it on a modern glibc would
+inherit sha256crypt, sha512crypt and possibly bcrypt, and the answer would
+then depend on which machine you asked. That is useless as a historical
+record. This records what the shipped release could do on the systems it
+shipped for.
+
+## Algorithms here that Crack could attack
+
+CRACK_HEAD
+
+if (@crackable) {
+    print {$cm} "| Algorithm | hashcat | mdxfind | How |\n|---|---|---|---|\n";
+    for my $r (@crackable) {
+        my $how = '';
+        printf {$cm} "| %s | %s | %s | %s |\n", $r->{name},
+            md_cell($r->{hashcat}), md_cell($r->{mdxfind}),
+            ($r->{cracknote} // '');
+    }
+}
+else {
+    print {$cm} "None currently marked.\n";
+}
+
+print {$cm} <<'CRACK_TAIL';
+
+Marked with † in [ROSETTA.md](ROSETTA.md). The underlying field is
+`tools.crack.supported` in `data/algorithms/`, and it is carried in
+`dist/rosetta.csv` and `dist/rosetta.json` for anyone consuming those.
+
+## References
+
+* Manual, source and licence as distributed with Crack v5.0a
+* [Elias Levy's crack-nt fork](https://github.com/eliaslevy/crack-nt) - the NT
+  and LAN-Manager additions described above
+CRACK_TAIL
+close $cm;
 
 #-----------------------------------------------------------------------
 # docs/index.html - the browsable equivalent of the old sheet.
@@ -438,6 +537,7 @@ a{color:inherit}
   <a href="ROSETTA.md">ROSETTA.md</a> and
   <a href="../dist/rosetta.csv">rosetta.csv</a>.
   A gap is not a claim that the tool cannot do it &mdash; it means nobody has said.
+  Alec Muffett's Crack is covered separately in <a href="CRACK.md">CRACK.md</a>.
 </footer>
 <script>
 const D = $compact;

@@ -1,6 +1,6 @@
 # cracking-rosetta
 
-A cross-reference of password-cracking algorithm identifiers across [hashcat](https://hashcat.net/hashcat/), [John the Ripper](https://www.openwall.com/john/), [mdxfind](https://github.com/Cynosureprime/mdxfind) / [hashpipe](https://github.com/Cynosureprime/hashpipe), and - for historical reference only - Alec Muffett's [Crack](https://dl.acm.org/doi/10.5555/1268341.1268352). <!-- counter --> 784 <!-- endcounter --> algorithms, one file each.
+A cross-reference of password-cracking algorithm identifiers across [hashcat](https://hashcat.net/hashcat/), [John the Ripper](https://www.openwall.com/john/), [mdxfind](https://github.com/Cynosureprime/mdxfind) / [hashpipe](https://github.com/Cynosureprime/hashpipe), and - for historical reference only - Alec Muffett's [Crack](docs/CRACK.md). <!-- counter --> 784 <!-- endcounter --> algorithms, one file each.
 
 It answers the question you actually have at 2am: this thing is hashcat mode 2811 - what does John call it, and can mdxfind do it?
 
@@ -84,6 +84,11 @@ Inventory (what each tool supports) is kept apart from mapping (human judgement 
 One file per algorithm rather than one big table is deliberate: you touch one small file, merge conflicts effectively vanish, `git blame` is meaningful per algorithm, and CODEOWNERS can route review by path.
 
 ## Notes
+
+* Crack does not get a table column. It attacks two of these algorithms, so a
+  column would spend 782 rows saying "no" to buy two rows of information -
+  those two are marked † and the detail lives in [docs/CRACK.md](docs/CRACK.md).
+  The `tools.crack` field is still in the data and in both exports.
 
 * Coverage is partial and visibly so. Run `tools/validate.pl` for live numbers rather than trusting a README - as of 2026-08-29 the inventories held 593 hashcat modes, 552 John formats and 1001 mdxfind types.
 
