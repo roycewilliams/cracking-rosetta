@@ -182,17 +182,32 @@ and keeping that clean matters more than a pretty digest. On a salted type the
 salt is a free variable nobody cares about, so search that and leave the
 plaintext alone.
 
-Searching means the salt becomes `rosetta<N>` — still obviously deliberate,
-which is the point. `dec0ded` is seven hex characters, so about 268 million
-tries: a minute or two on a CPU, instant on a GPU. Fast hashes only; a
-deliberately slow KDF like bcrypt or argon2 is not worth it, and nobody should
-try.
+Searching means padding the salt. The only requirement is that **`rosetta` is
+still visible in it** — what surrounds it is yours: digits, letters,
+punctuation, before, after, or both. A wider alphabet buys you a shorter salt
+for the same search depth, which matters because plenty of formats cap salt
+length:
+
+| affix alphabet | to reach `dec0ded` | total salt |
+|---|---:|---:|
+| digits only | 9 chars | 16 |
+| mixed alphanumeric | 5 chars | 12 |
+
+`dec0ded` is seven hex characters, so about 268 million tries: a minute or two
+on a CPU, instant on a GPU. Fast hashes only; a deliberately slow KDF like
+bcrypt or argon2 is not worth it, and nobody should try.
 
 ```
 plaintext  rosetta
-salt       rosetta<N>
+salt       anything containing "rosetta"   e.g. rosetta7fQ2x, Kj-rosetta-90
 digest     dec0ded...
 ```
+
+Two characters to avoid in a salt, for mechanical reasons rather than taste:
+**`:`**, because vectors are stored as `hash:salt` and the tools split on it,
+and **tab**, because John is fed with `--field-separator-char=tab`. Beyond
+that, respect whatever the format itself allows — some want hex-only or
+fixed-length salts.
 
 What counts as good enough, best first:
 
