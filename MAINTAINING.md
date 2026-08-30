@@ -91,6 +91,42 @@ Two rules that have each cost real time here:
 Every tool prints usage with no arguments and writes nothing without
 `--apply`. Data goes to stdout, progress to stderr.
 
+## Curation: the decisions no tool can make
+
+The machine passes are done. What's left is a person knowing things — 772
+entries with no `category:` (the sheet's own `class` column, defined in 2023
+and never filled), 402 with no expression and nothing said about why, a
+handful of merge proposals, and 14 expressions that don't reproduce their own
+vectors.
+
+`tools/curate.pl` is a question queue for exactly that. One question at a
+time, every fact the repo already knows printed above it, usually one
+keystroke to answer:
+
+```sh
+tools/curate.pl --list                      # what's open
+tools/curate.pl --kind category --limit 20  # ten minutes' worth
+tools/curate.pl --report                    # the answers, as Markdown
+tools/curate.pl --apply                     # write what can be written
+```
+
+Answers append to `tmp/curation.tsv` as you give them, so quitting costs
+nothing and re-running skips what's answered. **Nothing touches
+`data/algorithms` until `--apply`**, and `--apply` deliberately writes only
+two kinds:
+
+- `category` — a closed vocabulary; the answer *is* the value.
+- `denotation` — free text with `source: human`, which is what that field is
+  for: untiered, because nothing can round-trip it.
+
+Everything else is recorded and reported, never applied. A merge needs an
+id-resolution policy this repo hasn't decided; an expression must be proven by
+john, not accepted because someone typed it. `--report` prints the held
+answers as Markdown, which is the format to hand to whoever — or whatever —
+acts on them next.
+
+Run `validate.pl` and `fmt.pl --all --check` after `--apply`; it tells you to.
+
 ## Merging duplicate entries
 
 `duplicate-of` with `distinction: none` is a contributor saying "nothing
