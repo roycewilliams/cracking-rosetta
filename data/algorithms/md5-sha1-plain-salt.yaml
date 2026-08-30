@@ -8,3 +8,5 @@ tools:
   mdxfind:
     types: ["MD5SHA1PASSSALT"]
     verified: "asserted"
+  crack:
+    supported: false

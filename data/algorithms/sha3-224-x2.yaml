@@ -14,6 +14,8 @@ tools:
     verified_at: "2026-08-29"
     verified_with: "1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
     note: "from hashpipe john_map.h, confirmed upstream by recomputation"
+  crack:
+    supported: false
 vectors:
   - hash: "cc782e5480878ba3fb6bb07905fdcf4a00e056adb957ae8a03c53a52"
     pass: "password123"

@@ -7,6 +7,8 @@ tools:
   mdxfind:
     types: ["MD5AM2"]
     verified: "asserted"
+  crack:
+    supported: false
 vectors:
   - hash: "95e20a37247b576b68f9f4e1d389c3ad:admin"
     pass: "rosetta"

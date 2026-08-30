@@ -17,6 +17,8 @@ tools:
     verified: "vector"
     verified_at: "2026-08-29"
     verified_with: "john"
+  crack:
+    supported: false
 vectors:
   - hash: "e3a8ce82f0e176fd498227b3994bf3b238197c98a9576c7e5741b5a7f22cfab7ef9c2bbf462d2a32"
     pass: "password123"

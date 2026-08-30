@@ -8,6 +8,8 @@ tools:
   mdxfind:
     types: ["MSCACHE"]
     verified: "asserted"
+  crack:
+    supported: false
 vectors:
   - hash: "f43fd64d8e4a84cd72ea440264ebdf60:Administrator"
     pass: "rosetta"

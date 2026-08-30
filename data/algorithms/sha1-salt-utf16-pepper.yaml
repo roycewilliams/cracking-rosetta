@@ -7,3 +7,5 @@ tools:
   mdxfind:
     types: ["SHA1-SALT-UTF16-PEPPER"]
     verified: "asserted"
+  crack:
+    supported: false

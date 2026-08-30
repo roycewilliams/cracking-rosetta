@@ -20,6 +20,8 @@ tools:
     verified_at: "2026-08-29"
     verified_with: "john"
     note: "dynamic_0 removed 2026-08-29: verify-vectors showed it does not reproduce this vector"
+  crack:
+    supported: false
 vectors:
   - hash: "bd62daf88a5f6d734e91228e7f2e540a"
     pass: "rosetta"

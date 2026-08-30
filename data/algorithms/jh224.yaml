@@ -9,6 +9,8 @@ tools:
     verified: "vector"
     verified_at: "2026-08-29"
     verified_with: "mdxfind"
+  crack:
+    supported: false
 vectors:
   - hash: "65b0485586c47003fc8d67a5e2e821a8688dbce634da305cd77a550e"
     pass: "rosetta"

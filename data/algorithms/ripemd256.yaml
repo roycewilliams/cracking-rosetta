@@ -4,6 +4,8 @@ status: "needs-review"
 tools:
   hashcat:
     verified: "absent"
+  crack:
+    supported: false
 vectors:
   - hash: "fe662e2a9a42ac28567858835728a902db19ee39733cb81c8bf0a8fb163ffef5"
     pass: "rosetta"

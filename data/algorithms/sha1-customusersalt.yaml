@@ -7,3 +7,5 @@ tools:
   mdxfind:
     types: ["SHA1-CUSTOMUSERSALT"]
     verified: "asserted"
+  crack:
+    supported: false

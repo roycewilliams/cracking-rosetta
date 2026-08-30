@@ -7,3 +7,5 @@ tools:
   mdxfind:
     types: ["MD5NTLMp"]
     verified: "asserted"
+  crack:
+    supported: false

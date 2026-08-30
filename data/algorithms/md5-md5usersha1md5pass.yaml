@@ -7,3 +7,5 @@ tools:
   mdxfind:
     types: ["MD5-MD5USERSHA1MD5PASS"]
     verified: "asserted"
+  crack:
+    supported: false

@@ -7,3 +7,5 @@ tools:
   mdxfind:
     types: ["MD5DSALT"]
     verified: "asserted"
+  crack:
+    supported: false

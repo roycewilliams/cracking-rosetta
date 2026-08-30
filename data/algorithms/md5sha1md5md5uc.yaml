@@ -7,3 +7,5 @@ tools:
   mdxfind:
     types: ["MD5SHA1MD5MD5UC"]
     verified: "asserted"
+  crack:
+    supported: false

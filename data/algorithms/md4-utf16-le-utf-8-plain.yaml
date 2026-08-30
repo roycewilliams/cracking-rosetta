@@ -5,5 +5,7 @@ tools:
   hashcat:
     modes: [1000]
     verified: "asserted"
+  crack:
+    supported: false
 legacy:
   hashes_org: "TROLLHUNTNTLM"

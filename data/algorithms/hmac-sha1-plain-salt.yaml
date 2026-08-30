@@ -10,6 +10,8 @@ tools:
   mdxfind:
     types: ["HMAC-SHA1"]
     verified: "asserted"
+  crack:
+    supported: false
 vectors:
   - hash: "7dae08ba6c9d641f6892fc38aaf2d9120a7011df:abc123"
     pass: "rosetta"

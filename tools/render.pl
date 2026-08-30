@@ -293,27 +293,23 @@ print  {$md} <<'LEGEND';
 `x` ✓ verified here by round-trip · `x` claimed, not verified · `·` tool does
 not support it · **—** nobody has said yet (a gap worth filling)
 
-Crack is omitted while no entry claims it; it is historical reference only and
-delegates to the host `crypt(3)` rather than implementing anything itself.
+Crack is historical reference only. It implements no hash itself - it calls the
+host `crypt(3)` - so its column records what a stock Crack 5.0a could actually
+attack, not what some modern libcrypt might happen to support.
 
 For sorting, filtering and search, open [index.html](index.html) - or
 [dist/rosetta.csv](../dist/rosetta.csv) in a spreadsheet.
 
 LEGEND
-# The Crack column is omitted while nothing populates it. Rendering 784
-# identical "nobody has said" cells costs real width and tells the reader
-# nothing they cannot get from one line of prose. It comes back on its own as
-# soon as a single entry carries tools.crack.
-my $any_crack = grep { $_->{crack}{state} ne 'unknown' } @out;
-
-print  {$md} $any_crack
-    ? "| Algorithm | hashcat | John | mdxfind | Crack |\n|---|---|---|---|---|\n"
-    : "| Algorithm | hashcat | John | mdxfind |\n|---|---|---|---|\n";
+# Crack is always rendered. It is a requested column and its emptiness was a
+# statement about this project, not about Crack - hiding it hid the gap rather
+# than closing it.
+print  {$md} "| Algorithm | hashcat | John | mdxfind | Crack |\n|---|---|---|---|---|\n";
 for my $r (@out) {
     my $n = wrap_name($r->{name}); $n =~ s/\|/\\|/g;
-    printf {$md} "| %s | %s | %s | %s |%s\n", $n,
+    printf {$md} "| %s | %s | %s | %s | %s |\n", $n,
         md_cell($r->{hashcat}), md_cell($r->{john}), md_cell($r->{mdxfind}),
-        $any_crack ? ' ' . md_cell($r->{crack}) . " |" : '';
+        md_cell($r->{crack});
 }
 close $md;
 

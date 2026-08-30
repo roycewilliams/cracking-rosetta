@@ -8,5 +8,7 @@ tools:
   mdxfind:
     types: ["PBKDF2-SHA512"]
     verified: "asserted"
+  crack:
+    supported: false
 legacy:
   hashes_org: "PBKDF2"

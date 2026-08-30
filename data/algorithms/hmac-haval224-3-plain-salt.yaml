@@ -7,6 +7,8 @@ tools:
   mdxfind:
     types: ["HMAC-HAV224"]
     verified: "asserted"
+  crack:
+    supported: false
 vectors:
   - hash: "2c06f6daffe271c13840e9102306ec82b00caddde255c3419366b4dd:abc123"
     pass: "rosetta"

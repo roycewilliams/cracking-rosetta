@@ -7,3 +7,5 @@ tools:
   mdxfind:
     types: ["SHA256RAWSALTPASS"]
     verified: "asserted"
+  crack:
+    supported: false

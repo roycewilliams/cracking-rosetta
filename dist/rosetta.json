@@ -5,7 +5,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -37,7 +37,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -69,7 +69,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -101,7 +101,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -133,7 +133,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -165,7 +165,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -197,7 +197,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -229,7 +229,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -261,7 +261,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -293,7 +293,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -325,7 +325,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -357,7 +357,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -389,7 +389,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -421,7 +421,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -453,7 +453,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -485,7 +485,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -517,7 +517,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -549,7 +549,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -581,7 +581,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -613,7 +613,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -645,7 +645,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -677,7 +677,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -709,7 +709,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -741,7 +741,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -773,7 +773,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -802,7 +802,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -831,7 +831,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -863,7 +863,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -895,7 +895,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -927,7 +927,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -959,7 +959,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -991,7 +991,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -1020,7 +1020,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -1049,7 +1049,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -1081,7 +1081,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -1113,7 +1113,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -1145,7 +1145,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -1177,7 +1177,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -1209,7 +1209,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -1241,7 +1241,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -1273,7 +1273,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -1302,7 +1302,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -1331,7 +1331,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -1360,7 +1360,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -1389,7 +1389,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -1418,7 +1418,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -1447,7 +1447,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -1479,7 +1479,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -1511,7 +1511,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -1543,7 +1543,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -1575,7 +1575,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -1610,7 +1610,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -1642,7 +1642,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -1677,7 +1677,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -1709,7 +1709,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -1741,7 +1741,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -1773,7 +1773,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -1802,7 +1802,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -1831,7 +1831,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -1860,7 +1860,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -1889,7 +1889,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -1921,7 +1921,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -1953,7 +1953,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -1985,7 +1985,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -2017,7 +2017,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "claimed"
          },
          "expr" : "",
          "hashcat" : {
@@ -2049,7 +2049,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -2081,7 +2081,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -2113,7 +2113,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -2145,7 +2145,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -2177,7 +2177,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -2206,7 +2206,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -2238,7 +2238,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -2267,7 +2267,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -2296,7 +2296,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -2325,7 +2325,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -2354,7 +2354,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -2386,7 +2386,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -2415,7 +2415,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -2444,7 +2444,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -2476,7 +2476,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -2508,7 +2508,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -2540,7 +2540,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -2569,7 +2569,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -2598,7 +2598,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -2627,7 +2627,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -2656,7 +2656,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -2688,7 +2688,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -2717,7 +2717,7 @@
          "alias" : "gost(md5($salt.$plain).$salt); gost(md5($salt.$plain).\":\".$salt.\":\")",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -2746,7 +2746,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -2778,7 +2778,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -2810,7 +2810,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -2842,7 +2842,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -2871,7 +2871,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -2900,7 +2900,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -2929,7 +2929,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -2958,7 +2958,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -2987,7 +2987,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -3016,7 +3016,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -3045,7 +3045,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -3074,7 +3074,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -3103,7 +3103,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -3132,7 +3132,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -3161,7 +3161,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -3196,7 +3196,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -3225,7 +3225,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -3257,7 +3257,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -3289,7 +3289,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -3321,7 +3321,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -3353,7 +3353,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -3385,7 +3385,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -3417,7 +3417,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -3449,7 +3449,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -3481,7 +3481,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -3513,7 +3513,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -3545,7 +3545,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -3577,7 +3577,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -3609,7 +3609,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -3641,7 +3641,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -3673,7 +3673,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -3705,7 +3705,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -3737,7 +3737,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -3769,7 +3769,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -3801,7 +3801,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -3833,7 +3833,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -3865,7 +3865,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -3897,7 +3897,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -3929,7 +3929,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -3961,7 +3961,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -3993,7 +3993,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -4025,7 +4025,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -4057,7 +4057,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -4089,7 +4089,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -4121,7 +4121,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -4153,7 +4153,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -4185,7 +4185,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -4214,7 +4214,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -4243,7 +4243,7 @@
          "alias" : "haval128_3(md5($salt.$plain).\":\".$salt.\":\"); haval128_3(md5($salt.$plain).$salt)",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -4272,7 +4272,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -4301,7 +4301,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -4330,7 +4330,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -4359,7 +4359,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -4388,7 +4388,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -4417,7 +4417,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -4446,7 +4446,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -4475,7 +4475,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -4504,7 +4504,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -4533,7 +4533,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -4562,7 +4562,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -4591,7 +4591,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -4620,7 +4620,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -4649,7 +4649,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -4678,7 +4678,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -4707,7 +4707,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -4736,7 +4736,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -4765,7 +4765,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -4794,7 +4794,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -4823,7 +4823,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -4852,7 +4852,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -4881,7 +4881,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -4910,7 +4910,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -4939,7 +4939,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -4968,7 +4968,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -4997,7 +4997,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -5026,7 +5026,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -5055,7 +5055,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -5084,7 +5084,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -5113,7 +5113,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -5142,7 +5142,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -5171,7 +5171,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -5200,7 +5200,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -5229,7 +5229,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -5258,7 +5258,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -5287,7 +5287,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -5316,7 +5316,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -5348,7 +5348,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -5377,7 +5377,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -5406,7 +5406,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -5435,7 +5435,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -5464,7 +5464,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -5496,7 +5496,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -5525,7 +5525,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -5554,7 +5554,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -5583,7 +5583,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -5612,7 +5612,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -5641,7 +5641,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -5670,7 +5670,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -5699,7 +5699,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -5728,7 +5728,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -5757,7 +5757,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -5789,7 +5789,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -5821,7 +5821,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -5853,7 +5853,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -5885,7 +5885,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -5917,7 +5917,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -5949,7 +5949,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -5981,7 +5981,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -6013,7 +6013,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -6045,7 +6045,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -6077,7 +6077,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -6109,7 +6109,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -6141,7 +6141,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -6173,7 +6173,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -6205,7 +6205,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -6240,7 +6240,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -6272,7 +6272,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -6304,7 +6304,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -6336,7 +6336,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -6365,7 +6365,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -6394,7 +6394,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -6423,7 +6423,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -6452,7 +6452,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -6488,7 +6488,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -6520,7 +6520,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -6552,7 +6552,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -6584,7 +6584,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -6619,7 +6619,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -6651,7 +6651,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -6686,7 +6686,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -6718,7 +6718,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -6753,7 +6753,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -6785,7 +6785,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -6820,7 +6820,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -6852,7 +6852,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -6884,7 +6884,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -6916,7 +6916,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -6948,7 +6948,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -6980,7 +6980,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -7012,7 +7012,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -7044,7 +7044,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -7076,7 +7076,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -7105,7 +7105,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -7141,7 +7141,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -7170,7 +7170,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -7199,7 +7199,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -7228,7 +7228,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -7257,7 +7257,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -7289,7 +7289,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -7321,7 +7321,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -7353,7 +7353,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -7385,7 +7385,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -7414,7 +7414,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -7443,7 +7443,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -7480,7 +7480,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -7509,7 +7509,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -7538,7 +7538,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -7567,7 +7567,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -7596,7 +7596,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -7625,7 +7625,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -7657,7 +7657,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -7686,7 +7686,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -7715,7 +7715,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -7752,7 +7752,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -7781,7 +7781,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -7810,7 +7810,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -7839,7 +7839,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -7868,7 +7868,7 @@
          "alias" : "md5(\"1*\".substr(strtolower(mysql5($plain)),0,30)); md5(\"*\".substr(mysql5($plain), 0, 31)); md5(substr(mysql5($plain), 0, 31)); md5(\"*\".substr(mysql5($plain), 0, 32)); md5(\"*\".substr(strtolower(mysql5($plain)), 0, 31)); md5(substr(strtolower(mysql5($plain)), 0, 31)); md5(\"*\".substr(strtolower(mysql5($plain)), 0, 32))",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -7897,7 +7897,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -7934,7 +7934,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -7966,7 +7966,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -7995,7 +7995,7 @@
          "alias" : "md5($plain.\":\".md5($plain))",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -8024,7 +8024,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -8053,7 +8053,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -8082,7 +8082,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -8117,7 +8117,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -8152,7 +8152,7 @@
          "alias" : "md5($salt.strtoupper(md5($plain))); md5($salt.strtoupper(md5($plain)).$salt); md5(strtoupper(md5($plain)).$salt); md5(strtoupper(md5($plain)).$salt.$salt)",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -8181,7 +8181,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -8216,7 +8216,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -8252,7 +8252,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -8287,7 +8287,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -8316,7 +8316,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -8348,7 +8348,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -8377,7 +8377,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -8409,7 +8409,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -8438,7 +8438,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -8467,7 +8467,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -8496,7 +8496,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -8525,7 +8525,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -8554,7 +8554,7 @@
          "alias" : "md5(substr(base64_encode(md5($plain, true)), 0, -2))",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -8583,7 +8583,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -8612,7 +8612,7 @@
          "alias" : "md5(substr(base64_encode(md5(md5($plain), true)), 0, -2))",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -8641,7 +8641,7 @@
          "alias" : "md5(substr(base64_encode(md5(md5(md5($plain)), true)), 0, -2))",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -8670,7 +8670,7 @@
          "alias" : "md5(substr(base64_encode(md5(sha1($plain), true)), 0, -2))",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -8699,7 +8699,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -8728,7 +8728,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -8757,7 +8757,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -8786,7 +8786,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -8815,7 +8815,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -8844,7 +8844,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -8873,7 +8873,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -8902,7 +8902,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -8931,7 +8931,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -8960,7 +8960,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -8989,7 +8989,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -9018,7 +9018,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -9047,7 +9047,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -9076,7 +9076,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -9105,7 +9105,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -9134,7 +9134,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -9166,7 +9166,7 @@
          "alias" : "MD5 (2 iterations)",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -9201,7 +9201,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -9237,7 +9237,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -9272,7 +9272,7 @@
          "alias" : "md5(md5($plain).\":\".$plain)",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -9301,7 +9301,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -9330,7 +9330,7 @@
          "alias" : "md5($salt.md5($plain)); md5(substr($salt,0,1).md5($plain).substr($salt,1,1))",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -9359,7 +9359,7 @@
          "alias" : "md5(md5($plain).\":\".$salt)",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -9388,7 +9388,7 @@
          "alias" : "md5(md5($plain).$salt.$salt); md5($salt.md5($plain)); md5($salt.md5($plain).$salt); md5($salt.$salt.md5($plain))",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -9417,7 +9417,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -9446,7 +9446,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -9475,7 +9475,7 @@
          "alias" : "md5(md5($plain).\":\".md5(md5($plain)))",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -9504,7 +9504,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -9533,7 +9533,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -9562,7 +9562,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -9594,7 +9594,7 @@
          "alias" : "md5(md5($salt.$plain).$salt); md5(md5($salt.$plain).\":\".$salt.\":\")",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -9623,7 +9623,7 @@
          "alias" : "MD5 (3 iterations)",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -9658,7 +9658,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -9687,7 +9687,7 @@
          "alias" : "md5($salt.md5(md5($plain))); md5(substr($salt,0,1).md5(md5($plain)).substr($salt,1,1))",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -9716,7 +9716,7 @@
          "alias" : "md5(md5(md5($plain)).$salt.$salt); md5($salt.md5(md5($plain))); md5($salt.md5(md5($plain)).$salt); md5($salt.$salt.md5(md5($plain)))",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -9745,7 +9745,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -9774,7 +9774,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -9803,7 +9803,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -9832,7 +9832,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -9861,7 +9861,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -9893,7 +9893,7 @@
          "alias" : "md5($salt.md5(md5(md5($plain)))); md5(substr($salt,0,1).md5(md5(md5($plain))).substr($salt,1,1))",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -9922,7 +9922,7 @@
          "alias" : "md5(md5(md5(md5($plain))).$salt.$salt); md5($salt.md5(md5(md5($plain)))); md5($salt.md5(md5(md5($plain))).$salt); md5($salt.$salt.md5(md5(md5($plain))))",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -9951,7 +9951,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -9980,7 +9980,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -10009,7 +10009,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -10038,7 +10038,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -10070,7 +10070,7 @@
          "alias" : "md5(md5(md5(md5(md5($plain)))).$salt.$salt); md5($salt.md5(md5(md5(md5($plain))))); md5($salt.md5(md5(md5(md5($plain)))).$salt); md5($salt.$salt.md5(md5(md5(md5($plain)))))",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -10099,7 +10099,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -10128,7 +10128,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -10157,7 +10157,7 @@
          "alias" : "md5(md5(md5(md5(md5(md5($plain))))).$salt.$salt); md5($salt.md5(md5(md5(md5(md5($plain)))))); md5($salt.md5(md5(md5(md5(md5($plain))))).$salt); md5($salt.$salt.md5(md5(md5(md5(md5($plain))))))",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -10186,7 +10186,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -10215,7 +10215,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -10244,7 +10244,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -10273,7 +10273,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -10302,7 +10302,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -10331,7 +10331,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -10360,7 +10360,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -10389,7 +10389,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -10418,7 +10418,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -10447,7 +10447,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -10476,7 +10476,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -10505,7 +10505,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -10534,7 +10534,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -10563,7 +10563,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -10598,7 +10598,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -10630,7 +10630,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -10659,7 +10659,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -10688,7 +10688,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -10720,7 +10720,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -10752,7 +10752,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -10781,7 +10781,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -10810,7 +10810,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -10839,7 +10839,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -10868,7 +10868,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -10900,7 +10900,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -10929,7 +10929,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -10958,7 +10958,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -10987,7 +10987,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -11016,7 +11016,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -11045,7 +11045,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -11074,7 +11074,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -11103,7 +11103,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -11132,7 +11132,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -11161,7 +11161,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -11190,7 +11190,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -11219,7 +11219,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -11248,7 +11248,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -11280,7 +11280,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -11309,7 +11309,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -11338,7 +11338,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -11367,7 +11367,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -11396,7 +11396,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -11425,7 +11425,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -11454,7 +11454,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -11483,7 +11483,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -11512,7 +11512,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -11541,7 +11541,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -11570,7 +11570,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -11599,7 +11599,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -11628,7 +11628,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -11657,7 +11657,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -11686,7 +11686,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -11715,7 +11715,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -11744,7 +11744,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -11773,7 +11773,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -11802,7 +11802,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "claimed"
          },
          "expr" : "",
          "hashcat" : {
@@ -11834,7 +11834,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -11863,7 +11863,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -11892,7 +11892,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -11921,7 +11921,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -11950,7 +11950,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -11979,7 +11979,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -12008,7 +12008,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -12037,7 +12037,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -12066,7 +12066,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -12098,7 +12098,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -12130,7 +12130,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -12159,7 +12159,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -12188,7 +12188,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -12220,7 +12220,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -12249,7 +12249,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -12278,7 +12278,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -12310,7 +12310,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -12345,7 +12345,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -12374,7 +12374,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -12406,7 +12406,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -12435,7 +12435,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -12464,7 +12464,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -12493,7 +12493,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -12522,7 +12522,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -12551,7 +12551,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -12580,7 +12580,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -12609,7 +12609,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -12638,7 +12638,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -12664,7 +12664,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -12693,7 +12693,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -12722,7 +12722,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -12751,7 +12751,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -12780,7 +12780,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -12809,7 +12809,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -12838,7 +12838,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -12867,7 +12867,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -12896,7 +12896,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -12925,7 +12925,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -12954,7 +12954,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -12983,7 +12983,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -13012,7 +13012,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -13044,7 +13044,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -13073,7 +13073,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -13102,7 +13102,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -13131,7 +13131,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -13160,7 +13160,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -13189,7 +13189,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -13218,7 +13218,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -13247,7 +13247,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -13276,7 +13276,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -13305,7 +13305,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -13334,7 +13334,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -13366,7 +13366,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -13395,7 +13395,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -13424,7 +13424,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -13453,7 +13453,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -13482,7 +13482,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -13511,7 +13511,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -13540,7 +13540,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -13572,7 +13572,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -13601,7 +13601,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -13630,7 +13630,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -13662,7 +13662,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -13697,7 +13697,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -13729,7 +13729,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -13761,7 +13761,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -13790,7 +13790,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -13822,7 +13822,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -13851,7 +13851,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -13883,7 +13883,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -13915,7 +13915,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -13947,7 +13947,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -13979,7 +13979,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -14011,7 +14011,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -14043,7 +14043,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -14075,7 +14075,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -14107,7 +14107,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -14139,7 +14139,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -14171,7 +14171,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -14203,7 +14203,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -14235,7 +14235,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -14267,7 +14267,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -14299,7 +14299,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -14335,7 +14335,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -14367,7 +14367,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -14399,7 +14399,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -14431,7 +14431,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -14463,7 +14463,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -14495,7 +14495,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -14527,7 +14527,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -14559,7 +14559,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -14591,7 +14591,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -14623,7 +14623,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -14659,7 +14659,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -14691,7 +14691,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -14723,7 +14723,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -14755,7 +14755,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -14791,7 +14791,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -14823,7 +14823,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -14855,7 +14855,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -14887,7 +14887,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -14916,7 +14916,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -14948,7 +14948,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -14980,7 +14980,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -15012,7 +15012,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -15044,7 +15044,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -15076,7 +15076,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -15108,7 +15108,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -15143,7 +15143,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -15175,7 +15175,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -15204,7 +15204,7 @@
          "alias" : "null($plain)",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -15239,7 +15239,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -15268,7 +15268,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -15300,7 +15300,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -15332,7 +15332,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -15364,7 +15364,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -15396,7 +15396,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -15428,7 +15428,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -15460,7 +15460,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -15492,7 +15492,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -15524,7 +15524,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -15556,7 +15556,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -15588,7 +15588,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -15620,7 +15620,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -15652,7 +15652,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -15681,7 +15681,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -15710,7 +15710,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -15746,7 +15746,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -15775,7 +15775,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -15804,7 +15804,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -15833,7 +15833,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -15862,7 +15862,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -15891,7 +15891,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -15920,7 +15920,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -15949,7 +15949,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -15978,7 +15978,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -16007,7 +16007,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -16036,7 +16036,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -16068,7 +16068,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -16100,7 +16100,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -16129,7 +16129,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -16161,7 +16161,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -16190,7 +16190,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -16219,7 +16219,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -16248,7 +16248,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -16283,7 +16283,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -16312,7 +16312,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -16341,7 +16341,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -16367,7 +16367,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -16393,7 +16393,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -16425,7 +16425,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -16454,7 +16454,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -16486,7 +16486,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -16521,7 +16521,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -16553,7 +16553,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -16585,7 +16585,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -16617,7 +16617,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -16649,7 +16649,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -16681,7 +16681,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -16713,7 +16713,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -16745,7 +16745,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -16777,7 +16777,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -16809,7 +16809,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -16841,7 +16841,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -16870,7 +16870,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -16905,7 +16905,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -16934,7 +16934,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -16969,7 +16969,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -17004,7 +17004,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -17036,7 +17036,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -17071,7 +17071,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -17100,7 +17100,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -17129,7 +17129,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -17158,7 +17158,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -17187,7 +17187,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -17223,7 +17223,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -17255,7 +17255,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -17284,7 +17284,7 @@
          "alias" : "sha1(md5($plain).$salt.$salt); sha1($salt.md5($plain)); sha1($salt.md5($plain).$salt); sha2($salt.$salt.md5($plain))",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -17313,7 +17313,7 @@
          "alias" : "sha1(md5($plain).\":\".$salt)",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -17342,7 +17342,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -17371,7 +17371,7 @@
          "alias" : "sha1(md5($salt.$plain).$salt); sha1(md5($salt.$plain).\":\".$salt.\":\")",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -17400,7 +17400,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -17429,7 +17429,7 @@
          "alias" : "sha1(md5(md5($pass)))",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -17464,7 +17464,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -17493,7 +17493,7 @@
          "alias" : "sha1(md5(md5($plain).$salt.$salt)); sha1(md5($salt.md5($plain))); sha1(md5($salt.md5($plain).$salt)); sha1(md5($salt.$salt.md5($plain)))",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -17522,7 +17522,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -17551,7 +17551,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -17580,7 +17580,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -17609,7 +17609,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -17638,7 +17638,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -17667,7 +17667,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -17696,7 +17696,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -17725,7 +17725,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -17754,7 +17754,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -17783,7 +17783,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -17812,7 +17812,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -17841,7 +17841,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -17870,7 +17870,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -17899,7 +17899,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -17928,7 +17928,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -17957,7 +17957,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -17986,7 +17986,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -18015,7 +18015,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -18051,7 +18051,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -18080,7 +18080,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -18109,7 +18109,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -18138,7 +18138,7 @@
          "alias" : "sha1(sha1($plain).substr($plain,0,2)); sha1(sha1($plain).substr($plain,0,3)); sha1(sha1($plain).substr($plain,0,4)); sha1(sha1($plain).substr($plain,0,5)); sha1(sha1($plain).substr($plain,0,6)); sha1(sha1($plain).substr($plain,0,7)); sha1(sha1($plain).substr($plain,0,8))",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -18167,7 +18167,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -18196,7 +18196,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -18225,7 +18225,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -18254,7 +18254,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -18283,7 +18283,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -18312,7 +18312,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -18341,7 +18341,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -18370,7 +18370,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -18403,7 +18403,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -18432,7 +18432,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -18461,7 +18461,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -18490,7 +18490,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -18519,7 +18519,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -18548,7 +18548,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -18577,7 +18577,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -18606,7 +18606,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -18638,7 +18638,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -18667,7 +18667,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -18696,7 +18696,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -18725,7 +18725,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -18754,7 +18754,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -18783,7 +18783,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -18812,7 +18812,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -18844,7 +18844,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -18873,7 +18873,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -18902,7 +18902,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -18934,7 +18934,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -18966,7 +18966,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -19003,7 +19003,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -19035,7 +19035,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -19064,7 +19064,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -19093,7 +19093,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -19122,7 +19122,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -19151,7 +19151,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -19180,7 +19180,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -19209,7 +19209,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -19241,7 +19241,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -19273,7 +19273,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -19302,7 +19302,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -19331,7 +19331,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -19360,7 +19360,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -19389,7 +19389,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -19418,7 +19418,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -19450,7 +19450,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -19479,7 +19479,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -19511,7 +19511,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -19543,7 +19543,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -19578,7 +19578,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -19610,7 +19610,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -19639,7 +19639,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -19668,7 +19668,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -19700,7 +19700,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -19735,7 +19735,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -19770,7 +19770,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -19802,7 +19802,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -19839,7 +19839,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -19871,7 +19871,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -19906,7 +19906,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -19941,7 +19941,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -19976,7 +19976,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -20008,7 +20008,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -20037,7 +20037,7 @@
          "alias" : "sha256(md5($salt.$plain).$salt); sha256(md5($salt.$plain).\":\".$salt.\":\")",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -20066,7 +20066,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -20095,7 +20095,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -20130,7 +20130,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -20159,7 +20159,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -20191,7 +20191,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -20223,7 +20223,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -20252,7 +20252,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -20281,7 +20281,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -20313,7 +20313,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -20348,7 +20348,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -20377,7 +20377,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -20409,7 +20409,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -20441,7 +20441,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -20473,7 +20473,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -20505,7 +20505,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -20540,7 +20540,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -20572,7 +20572,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -20607,7 +20607,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -20639,7 +20639,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -20674,7 +20674,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -20706,7 +20706,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -20741,7 +20741,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -20776,7 +20776,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -20808,7 +20808,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -20837,7 +20837,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -20866,7 +20866,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -20898,7 +20898,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -20933,7 +20933,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -20968,7 +20968,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -21000,7 +21000,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -21032,7 +21032,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -21064,7 +21064,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -21101,7 +21101,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -21133,7 +21133,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -21168,7 +21168,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -21203,7 +21203,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -21232,7 +21232,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -21261,7 +21261,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -21296,7 +21296,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -21325,7 +21325,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -21357,7 +21357,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -21386,7 +21386,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -21418,7 +21418,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -21447,7 +21447,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -21482,7 +21482,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -21514,7 +21514,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -21546,7 +21546,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -21578,7 +21578,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -21604,7 +21604,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -21633,7 +21633,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -21662,7 +21662,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -21691,7 +21691,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -21720,7 +21720,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -21749,7 +21749,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -21778,7 +21778,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -21807,7 +21807,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -21836,7 +21836,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -21868,7 +21868,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -21897,7 +21897,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -21926,7 +21926,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -21955,7 +21955,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -21984,7 +21984,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -22016,7 +22016,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -22048,7 +22048,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -22080,7 +22080,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -22112,7 +22112,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -22144,7 +22144,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -22176,7 +22176,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -22208,7 +22208,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -22240,7 +22240,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -22272,7 +22272,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -22304,7 +22304,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -22336,7 +22336,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -22371,7 +22371,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -22403,7 +22403,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -22435,7 +22435,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -22470,7 +22470,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -22499,7 +22499,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -22528,7 +22528,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -22557,7 +22557,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -22586,7 +22586,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -22618,7 +22618,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -22650,7 +22650,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -22682,7 +22682,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -22714,7 +22714,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -22746,7 +22746,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -22778,7 +22778,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -22810,7 +22810,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -22842,7 +22842,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -22874,7 +22874,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -22903,7 +22903,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -22932,7 +22932,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -22964,7 +22964,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -22996,7 +22996,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -23028,7 +23028,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -23060,7 +23060,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -23092,7 +23092,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -23124,7 +23124,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -23153,7 +23153,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -23182,7 +23182,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -23211,7 +23211,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -23240,7 +23240,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -23272,7 +23272,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -23307,7 +23307,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -23343,7 +23343,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -23375,7 +23375,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -23407,7 +23407,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -23439,7 +23439,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -23471,7 +23471,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -23503,7 +23503,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -23535,7 +23535,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -23567,7 +23567,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -23603,7 +23603,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -23632,7 +23632,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -23661,7 +23661,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -23693,7 +23693,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -23719,7 +23719,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -23751,7 +23751,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -23783,7 +23783,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -23815,7 +23815,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -23844,7 +23844,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -23873,7 +23873,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -23905,7 +23905,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -23937,7 +23937,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -23969,7 +23969,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -24001,7 +24001,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {
@@ -24033,7 +24033,7 @@
          "alias" : "",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "expr" : "",
          "hashcat" : {

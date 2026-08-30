@@ -7,3 +7,5 @@ tools:
   mdxfind:
     types: ["SHA1DRU"]
     verified: "asserted"
+  crack:
+    supported: false

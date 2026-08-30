@@ -7,3 +7,5 @@ tools:
   mdxfind:
     types: ["PKCS5S2"]
     verified: "asserted"
+  crack:
+    supported: false

@@ -8,5 +8,7 @@ tools:
   mdxfind:
     types: ["SHA1UTF16LE"]
     verified: "asserted"
+  crack:
+    supported: false
 legacy:
   hashes_org: "n/a"

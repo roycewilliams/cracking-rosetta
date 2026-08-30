@@ -7,3 +7,5 @@ tools:
   mdxfind:
     types: ["SHA1USERSQL3"]
     verified: "asserted"
+  crack:
+    supported: false

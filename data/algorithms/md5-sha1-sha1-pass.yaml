@@ -14,6 +14,8 @@ tools:
     verified: "vector"
     verified_at: "2026-08-29"
     verified_with: "john"
+  crack:
+    supported: false
 vectors:
   - hash: "2db0a6ad192b03a28775e627b246721f"
     pass: "rosetta"

@@ -7,3 +7,5 @@ tools:
   mdxfind:
     types: ["PARALLEL"]
     verified: "asserted"
+  crack:
+    supported: false

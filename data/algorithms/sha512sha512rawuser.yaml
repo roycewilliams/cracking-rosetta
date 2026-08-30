@@ -7,3 +7,5 @@ tools:
   mdxfind:
     types: ["SHA512SHA512RAWUSER"]
     verified: "asserted"
+  crack:
+    supported: false

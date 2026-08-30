@@ -7,5 +7,7 @@ tools:
   mdxfind:
     types: ["MD5BASE64SHA256RAW"]
     verified: "asserted"
+  crack:
+    supported: false
 legacy:
   hashes_org: "MD5BASE64RAWSHA256"

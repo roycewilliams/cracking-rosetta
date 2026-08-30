@@ -7,5 +7,7 @@ tools:
   mdxfind:
     types: ["MD5-4xMD5"]
     verified: "asserted"
+  crack:
+    supported: false
 legacy:
   hashes_org: "MD5(MD5(PLAIN)MD5(PLAIN)MD5(PLAIN)MD5(PLAIN))"

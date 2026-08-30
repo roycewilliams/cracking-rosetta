@@ -7,3 +7,5 @@ tools:
   mdxfind:
     types: ["MD5UCBASE64MD5RAW"]
     verified: "asserted"
+  crack:
+    supported: false

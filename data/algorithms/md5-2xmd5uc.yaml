@@ -7,3 +7,5 @@ tools:
   mdxfind:
     types: ["MD5-2xMD5UC"]
     verified: "asserted"
+  crack:
+    supported: false

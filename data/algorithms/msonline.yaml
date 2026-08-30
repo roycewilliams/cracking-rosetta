@@ -12,6 +12,8 @@ tools:
     verified: "vector"
     verified_at: "2026-08-29"
     verified_with: "mdxfind"
+  crack:
+    supported: false
 vectors:
   - hash: "$MSONLINEACCOUNT$0$10000$6153d80b93f4f3c4082576154118d4191744911d6370b505e823d049375654ef"
     pass: "password123"

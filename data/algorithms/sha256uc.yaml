@@ -5,3 +5,5 @@ tools:
   mdxfind:
     types: ["SHA256UC"]
     verified: "asserted"
+  crack:
+    supported: false

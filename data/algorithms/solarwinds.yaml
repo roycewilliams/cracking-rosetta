@@ -12,6 +12,8 @@ tools:
     verified: "vector"
     verified_at: "2026-08-29"
     verified_with: "mdxfind"
+  crack:
+    supported: false
 vectors:
   - hash: "$solarwinds$0$admin$M+blDF6m56Y24YMVrjDDGUEbGVsviTpp5JYS+pHfym1Z9+UDDw6iHfZRUknm89UUa/EnuH5t7x8MREolxvf7jA=="
     pass: "password123"

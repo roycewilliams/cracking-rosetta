@@ -14,6 +14,8 @@ tools:
     cpu: ["LM"]
     gpu: ["LM-opencl"]
     verified: "asserted"
+  crack:
+    supported: false
 vectors:
   - hash: "4b4aa8a8a048c29caad3b435b51404ee"
     pass: "rosetta"

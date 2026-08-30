@@ -12,6 +12,8 @@ tools:
     verified: "vector"
     verified_at: "2026-08-29"
     verified_with: "mdxfind"
+  crack:
+    supported: false
 vectors:
   - hash: "$bitwarden$2*100000*2*bm9yZXBseUBoYXNoY2F0Lm5ldA==*7DPaaAl24R+4E1ehI4S1N2kiIBY9H3W0qS2C8o5v4nE="
     pass: "password123"

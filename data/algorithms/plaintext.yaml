@@ -16,6 +16,8 @@ tools:
   john:
     cpu: ["plaintext"]
     verified: "asserted"
+  crack:
+    supported: false
 vectors:
   - hash: "rosetta"
     pass: "rosetta"

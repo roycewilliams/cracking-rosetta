@@ -12,6 +12,8 @@ tools:
     verified: "vector"
     verified_at: "2026-08-29"
     verified_with: "mdxfind"
+  crack:
+    supported: false
 vectors:
   - hash: "1234563fa01c590efd5499b9f9468f7ae5d427112933294e3d150f9bdce07e3e578ae3"
     pass: "password123"

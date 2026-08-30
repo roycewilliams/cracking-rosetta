@@ -5,3 +5,5 @@ tools:
   mdxfind:
     types: ["MDC2"]
     verified: "asserted"
+  crack:
+    supported: false

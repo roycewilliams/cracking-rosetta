@@ -7,6 +7,8 @@ tools:
   mdxfind:
     types: ["HMAC-WRL"]
     verified: "asserted"
+  crack:
+    supported: false
 vectors:
   - hash: "7cae693e6919f283227fbfc5dcd24e1094a807f309b9cdca08fe3097b7eb3e97:abc123"
     pass: "rosetta"

@@ -12,6 +12,8 @@ tools:
     verified: "vector"
     verified_at: "2026-08-29"
     verified_with: "mdxfind"
+  crack:
+    supported: false
 vectors:
   - hash: "$krb5pa$23$user$realm$salt$6925dc172806e0ce5681bbaefb6781bf058c03f1a21e383fd55a7b79fa98a8078d7ebdcc6c208758de6e78fd9c8ea704f894c15d"
     pass: "password123"

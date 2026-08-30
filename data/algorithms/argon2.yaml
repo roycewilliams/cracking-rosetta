@@ -13,6 +13,8 @@ tools:
     verified: "upstream"
     verified_at: "2026-08-29"
     verified_with: "RCS 1.540 (2026/08/22)"
+  crack:
+    supported: false
 vectors:
   - hash: "3118004b2f9ce8fcf3abc2fdf9623b85988db360951c607456beb26821381a12:aaaaaaaaaaaaaaaabbbbbbbbbbbbbbbb:3_32_2_67108864"
     pass: "password123"

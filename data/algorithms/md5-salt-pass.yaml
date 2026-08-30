@@ -15,6 +15,8 @@ tools:
   john:
     cpu: ["dynamic_4"]
     verified: "asserted"
+  crack:
+    supported: false
 vectors:
   - hash: "6812da91ee7426c161a69aa4d5d373c5:6lg3p16"
     pass: "rosetta"

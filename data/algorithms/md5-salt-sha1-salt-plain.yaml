@@ -8,3 +8,5 @@ tools:
   mdxfind:
     types: ["MD5-SALTSHA1SALTPASS"]
     verified: "asserted"
+  crack:
+    supported: false

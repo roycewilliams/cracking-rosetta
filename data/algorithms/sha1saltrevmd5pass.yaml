@@ -7,3 +7,5 @@ tools:
   mdxfind:
     types: ["SHA1SALTrevMD5PASS"]
     verified: "asserted"
+  crack:
+    supported: false

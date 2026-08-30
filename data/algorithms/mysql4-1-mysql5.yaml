@@ -16,6 +16,8 @@ tools:
     cpu: ["mysql-sha1"]
     gpu: ["mysql-sha1-opencl"]
     verified: "asserted"
+  crack:
+    supported: false
 vectors:
   - hash: "8236c4133430071e41c5103876d103299d348814"
     pass: "rosetta"

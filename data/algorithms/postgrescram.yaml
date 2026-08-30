@@ -12,6 +12,8 @@ tools:
     verified: "vector"
     verified_at: "2026-08-29"
     verified_with: "mdxfind"
+  crack:
+    supported: false
 vectors:
   - hash: "$postgres$postgres*41414141*e189d76dcdaf3bb15764784e2f24eee3"
     pass: "password123"

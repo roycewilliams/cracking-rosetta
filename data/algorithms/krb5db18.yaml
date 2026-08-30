@@ -12,6 +12,8 @@ tools:
     verified: "vector"
     verified_at: "2026-08-29"
     verified_with: "mdxfind"
+  crack:
+    supported: false
 vectors:
   - hash: "$krb5db$18$test$TEST.LOCAL$d7fbc0329154eda6b067f57d206199173dfb0b5b3fea74d0ddda2127981d62f1"
     pass: "password123"

@@ -12,6 +12,8 @@ tools:
     verified: "vector"
     verified_at: "2026-08-29"
     verified_with: "mdxfind"
+  crack:
+    supported: false
 vectors:
   - hash: "$telegram$0*3f5ac7633b523d99d01ea3f99950be1d783d55e377e06f3bff98ccb9a3b20122*25184098058621950709328221838128"
     pass: "password123"
