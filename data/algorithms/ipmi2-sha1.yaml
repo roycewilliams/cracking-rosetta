@@ -4,10 +4,9 @@ status: "needs-review"
 tools:
   hashcat:
     modes: [7300]
-    verified: "upstream"
-    verified_at: "2026-08-29"
-    verified_with: "RCS 1.540 (2026/08/22)"
-    note: "hashcat mapping shipped in mdxfind's own type table"
+    verified: "vector"
+    verified_at: "2026-08-30"
+    verified_with: "hashcat"
   mdxfind:
     types: ["IPMI2-SHA1"]
     verified: "vector"
@@ -19,3 +18,6 @@ vectors:
   - hash: "00:1c9f35d812ea7ef72acdd262ec5e3ae59582103a"
     pass: "password123"
     source: "mdxfind"
+  - hash: "3437343735333336383831353232323433383333303236303337333338363232303135383237333638363532373231343030313131333838323734373138363632343133333335353030353633373533333133313530363533303738343334313330303630343633333237373037383537333630303233303830303437323838333237313438363238343434383831363634323431333430383735323038:f4b376e25868751fc0264f573ff1fe50b65ce5a2"
+    pass: "hashcat"
+    source: "hashcat"
