@@ -43,6 +43,9 @@ vectors:
   - hash: "991adb53a943df0a8907b3541e52a2db:uGh"
     pass: "rosetta"
     source: "sheet"
+  - hash: "28f9975808ae2bdc5847b1cda26033ea:308"
+    pass: "hashcat"
+    source: "hashcat"
 legacy:
   hashes_org: "VBULLETIN"
   hashkiller: "md5(md5($pass).$salt)"

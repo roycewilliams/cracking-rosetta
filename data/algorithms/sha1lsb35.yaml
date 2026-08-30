@@ -6,7 +6,9 @@ tools:
     verified: "absent"
   mdxfind:
     types: ["SHA1lsb35"]
-    verified: "asserted"
+    verified: "vector"
+    verified_at: "2026-08-30"
+    verified_with: "mdxfind"
   john:
     cpu: ["Raw-SHA1-Linkedin"]
     verified: "vector"
@@ -19,3 +21,6 @@ vectors:
   - hash: "$dynamic_26$0000012f25e64931f3833b26e999e26e81f9ad24"
     pass: "azertyuiop3"
     source: "john"
+  - hash: "00000c6008f9cab4083784cbd1874f76618d2a97"
+    pass: "password123"
+    source: "mdxfind"

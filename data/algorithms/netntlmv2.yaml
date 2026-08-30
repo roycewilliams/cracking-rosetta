@@ -4,10 +4,9 @@ status: "needs-review"
 tools:
   hashcat:
     modes: [5600]
-    verified: "upstream"
-    verified_at: "2026-08-29"
-    verified_with: "RCS 1.540 (2026/08/22)"
-    note: "hashcat mapping shipped in mdxfind's own type table"
+    verified: "vector"
+    verified_at: "2026-08-30"
+    verified_with: "hashcat"
   mdxfind:
     types: ["NETNTLMV2"]
     verified: "vector"
@@ -31,3 +30,6 @@ vectors:
   - hash: "NTlmv2::TESTWORKGROUP:1122334455667788:07659A550D5E9D02996DFD95C87EC1D5:0101000000000000006CF6385B74CA01B3610B02D99732DD000000000200120057004F0052004B00470052004F00550050000100200044004100540041002E00420049004E0043002D0053004500430055005200490000000000"
     pass: "password"
     source: "john"
+  - hash: "0UL5G37JOI0SX::6VB1IS0KA74:ebe1afa18b7fbfa6:aab8bf8675658dd2a939458a1077ba08:010100000000000031c8aa092510945398b9f7b7dde1a9fb00000000f7876f2b04b700"
+    pass: "hashcat"
+    source: "hashcat"

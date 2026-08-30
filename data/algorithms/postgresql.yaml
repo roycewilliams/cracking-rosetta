@@ -4,18 +4,20 @@ status: "needs-review"
 tools:
   hashcat:
     modes: [12]
-    verified: "upstream"
-    verified_at: "2026-08-29"
-    verified_with: "RCS 1.540 (2026/08/22)"
-    note: "hashcat mapping shipped in mdxfind's own type table"
+    verified: "vector"
+    verified_at: "2026-08-30"
+    verified_with: "hashcat"
   mdxfind:
     types: ["POSTGRESQL"]
-    verified: "upstream"
-    verified_at: "2026-08-29"
-    verified_with: "RCS 1.540 (2026/08/22)"
+    verified: "vector"
+    verified_at: "2026-08-30"
+    verified_with: "mdxfind"
   crack:
     supported: false
 vectors:
   - hash: "md5c3a6d24526b9285dd98be631e8271309:testuser"
     pass: "password123"
     source: "mdxfind"
+  - hash: "93a8cf6a7d43e3b5bcd2dc6abb3e02c6:27032153220030464358344758762807"
+    pass: "hashcat"
+    source: "hashcat"

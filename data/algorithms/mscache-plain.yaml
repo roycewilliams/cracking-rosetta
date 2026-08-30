@@ -12,7 +12,9 @@ status: "needs-review"
 tools:
   hashcat:
     modes: [1100]
-    verified: "asserted"
+    verified: "vector"
+    verified_at: "2026-08-30"
+    verified_with: "hashcat"
   mdxfind:
     types: ["MSCACHE"]
     verified: "vector"
@@ -24,3 +26,6 @@ vectors:
   - hash: "f43fd64d8e4a84cd72ea440264ebdf60:Administrator"
     pass: "rosetta"
     source: "sheet"
+  - hash: "c896b3c6963e03c86ade3a38370bbb09:54161084332"
+    pass: "hashcat"
+    source: "hashcat"

@@ -4,7 +4,9 @@ status: "needs-review"
 tools:
   hashcat:
     modes: [3000]
-    verified: "asserted"
+    verified: "vector"
+    verified_at: "2026-08-30"
+    verified_with: "hashcat"
   mdxfind:
     types: ["LM"]
     verified: "vector"
@@ -20,6 +22,9 @@ vectors:
   - hash: "4b4aa8a8a048c29caad3b435b51404ee"
     pass: "rosetta"
     source: "sheet"
+  - hash: "299bd128c1101fd6"
+    pass: "HASHCAT"
+    source: "hashcat"
 legacy:
   hashes_org: "LM"
   hashkiller: "n/a"

@@ -4,10 +4,9 @@ status: "needs-review"
 tools:
   hashcat:
     modes: [501]
-    verified: "upstream"
-    verified_at: "2026-08-29"
-    verified_with: "RCS 1.540 (2026/08/22)"
-    note: "hashcat mapping shipped in mdxfind's own type table"
+    verified: "vector"
+    verified_at: "2026-08-30"
+    verified_with: "hashcat"
   mdxfind:
     types: ["JUNIPERIVE"]
     verified: "vector"
@@ -19,3 +18,6 @@ vectors:
   - hash: "hn9NPzVmhLxotWISQlgcHIt7y1p5zPDZXqW5AGKrTSNi7lgSKXbXGCGVIgfwMDir8FuS+x0+4MxIfdErHoaZ6aDkvMuMSlYSXG8hvw=="
     pass: "password123"
     source: "mdxfind"
+  - hash: "3u+UR6n8AgABAAAAHxxdXKmiOmUoqKnZlf8lTOhlPYy93EAkbPfs5+49YLFd/B1+omSKbW7DoqNM40/EeVnwJ8kYoXv9zy9D5C5m5A=="
+    pass: "hashcat"
+    source: "hashcat"

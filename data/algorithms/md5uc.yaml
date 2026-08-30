@@ -12,10 +12,9 @@ status: "needs-review"
 tools:
   hashcat:
     modes: [4300]
-    verified: "upstream"
-    verified_at: "2026-08-29"
-    verified_with: "RCS 1.540 (2026/08/22)"
-    note: "hashcat mapping shipped in mdxfind's own type table"
+    verified: "vector"
+    verified_at: "2026-08-30"
+    verified_with: "hashcat"
   mdxfind:
     types: ["MD5UC"]
     verified: "upstream"
@@ -38,3 +37,6 @@ vectors:
   - hash: "482C811DA5D5B4BC6D497FFA98491E38"
     pass: "password123"
     source: "mdxfind"
+  - hash: "b8c385461bb9f9d733d3af832cf60b27"
+    pass: "hashcat"
+    source: "hashcat"

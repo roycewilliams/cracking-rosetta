@@ -4,18 +4,19 @@ status: "needs-review"
 tools:
   hashcat:
     modes: [20710]
-    verified: "upstream"
-    verified_at: "2026-08-29"
-    verified_with: "RCS 1.540 (2026/08/22)"
-    note: "hashcat mapping shipped in mdxfind's own type table"
+    verified: "vector"
+    verified_at: "2026-08-30"
+    verified_with: "hashcat"
   mdxfind:
     types: ["SHA256SHA256SALT"]
-    verified: "asserted"
+    verified: "vector"
+    verified_at: "2026-08-30"
+    verified_with: "mdxfind"
   john:
     cpu: ["dynamic_1503", "dynamic_65"]
-    verified: "asserted"
-    verified_at: "2026-08-29"
-    verified_with: "mdxfind"
+    verified: "vector"
+    verified_at: "2026-08-30"
+    verified_with: "john"
     note: "john's own test vector for this format is reproduced by mdxfind pinned to SHA256SHA256SALT at iteration 1"
   crack:
     supported: false
@@ -23,3 +24,9 @@ vectors:
   - hash: "$dynamic_1503$453f2e21fa6c150670d3ecf0e4a0ff3bab8b1903c2e96ad655d960b95f104248$697de9eda4a02563a7ec66d42d4a96995cb2948e29ab76fbcc89e8db71dd10f1"
     pass: "password"
     source: "john"
+  - hash: "c13ec3c0bee06d3315f743a0df31b3f23069eed4bdcf6dde4d37f894c0c9d1b6:testsalt"
+    pass: "password123"
+    source: "mdxfind"
+  - hash: "bfede293ecf6539211a7305ea218b9f3f608953130405cda9eaba6fb6250f824:7218532375810603"
+    pass: "hashcat"
+    source: "hashcat"

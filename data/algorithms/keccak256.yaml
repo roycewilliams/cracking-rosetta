@@ -11,7 +11,9 @@ status: "needs-review"
 tools:
   hashcat:
     modes: [5000]
-    verified: "asserted"
+    verified: "vector"
+    verified_at: "2026-08-30"
+    verified_with: "hashcat"
   mdxfind:
     types: ["KECCAK256"]
     verified: "vector"
@@ -28,5 +30,8 @@ vectors:
   - hash: "6b7bc1ebe35cf833944033160b3ae7752ca0b8d1ff8c48b3a26687786e4942ab"
     pass: "rosetta"
     source: "sheet"
+  - hash: "05ac0c544060af48f993f9c3cdf2fc03937ea35b:232725102020"
+    pass: "hashcat"
+    source: "hashcat"
 legacy:
   hashes_org: "KECCAK256"

@@ -4,10 +4,9 @@ status: "needs-review"
 tools:
   hashcat:
     modes: [131]
-    verified: "upstream"
-    verified_at: "2026-08-29"
-    verified_with: "RCS 1.540 (2026/08/22)"
-    note: "hashcat mapping shipped in mdxfind's own type table"
+    verified: "vector"
+    verified_at: "2026-08-30"
+    verified_with: "hashcat"
   mdxfind:
     types: ["MSSQL2000"]
     verified: "vector"
@@ -15,8 +14,8 @@ tools:
     verified_with: "mdxfind"
   john:
     cpu: ["mssql"]
-    verified: "asserted"
-    verified_at: "2026-08-29"
+    verified: "vector"
+    verified_at: "2026-08-30"
     verified_with: "john"
     note: "john --format=mssql recovers the vector, but as PASSWORD123: the format attacks the case-insensitive half of an MSSQL2000 hash, so the plaintext it returns is the case-folded one and the round-trip cannot match the recorded pass exactly. john --format=mssql05 does return the exact plaintext, by reading only the 2005-shaped prefix of the same hash, and is deliberately NOT recorded here"
   crack:
@@ -25,3 +24,6 @@ vectors:
   - hash: "0x010012345678f9cf12a8bbcee0131a6068815203371250b5cb1198069a7aec5df5cb05ef43f73acbe8572cf9d744"
     pass: "password123"
     source: "mdxfind"
+  - hash: "0x0100778883860000000000000000000000000000000000000000eda3604e067a06f2732b05b9cb90b8a710996939"
+    pass: "HASHCAT"
+    source: "hashcat"

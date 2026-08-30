@@ -4,18 +4,20 @@ status: "needs-review"
 tools:
   hashcat:
     modes: [6800]
-    verified: "upstream"
-    verified_at: "2026-08-29"
-    verified_with: "RCS 1.540 (2026/08/22)"
-    note: "hashcat mapping shipped in mdxfind's own type table"
+    verified: "vector"
+    verified_at: "2026-08-30"
+    verified_with: "hashcat"
   mdxfind:
     types: ["LASTPASS"]
-    verified: "upstream"
-    verified_at: "2026-08-29"
-    verified_with: "RCS 1.540 (2026/08/22)"
+    verified: "vector"
+    verified_at: "2026-08-30"
+    verified_with: "mdxfind"
   crack:
     supported: false
 vectors:
   - hash: "e70e2b8e01e218f19f4cbfaf3c9dcd98:100100:pmix@trash-mail.com"
     pass: "password123"
     source: "mdxfind"
+  - hash: "02eb97e869e0ddc7dc760fc633b4b54d:100100:pmix@trash-mail.com:9b071db7b8e265d4cadd3eb65ac0864a"
+    pass: "hashcat"
+    source: "hashcat"

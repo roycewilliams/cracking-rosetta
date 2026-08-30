@@ -4,10 +4,9 @@ status: "needs-review"
 tools:
   hashcat:
     modes: [19100]
-    verified: "upstream"
-    verified_at: "2026-08-29"
-    verified_with: "RCS 1.540 (2026/08/22)"
-    note: "hashcat mapping shipped in mdxfind's own type table"
+    verified: "vector"
+    verified_at: "2026-08-30"
+    verified_with: "hashcat"
   mdxfind:
     types: ["QNX-SHA256"]
     verified: "vector"
@@ -25,3 +24,6 @@ vectors:
   - hash: "@s,1000@0f907e0c5ae79e486c0979f31b2d2ed20eaa38d6a04a720749530f12bd5bfb94@5498317092471604"
     pass: "password123"
     source: "mdxfind"
+  - hash: "@s@0b365cab7e17ee1e7e1a90078501cc1aa85888d6da34e2f5b04f5c614b882a93@5498317092471604"
+    pass: "hashcat"
+    source: "hashcat"

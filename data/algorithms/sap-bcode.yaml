@@ -4,10 +4,9 @@ status: "needs-review"
 tools:
   hashcat:
     modes: [7700]
-    verified: "upstream"
-    verified_at: "2026-08-29"
-    verified_with: "RCS 1.540 (2026/08/22)"
-    note: "hashcat mapping shipped in mdxfind's own type table"
+    verified: "vector"
+    verified_at: "2026-08-30"
+    verified_with: "hashcat"
   mdxfind:
     types: ["SAP-BCODE"]
     verified: "vector"
@@ -28,3 +27,6 @@ vectors:
   - hash: "------------$058DE95926E00F32"
     pass: "--+----"
     source: "john"
+  - hash: "027642760180$77EC38630C08DF8D"
+    pass: "HASHCAT"
+    source: "hashcat"

@@ -4,7 +4,9 @@ status: "needs-review"
 tools:
   hashcat:
     modes: [20400]
-    verified: "asserted"
+    verified: "vector"
+    verified_at: "2026-08-30"
+    verified_with: "hashcat"
   mdxfind:
     types: ["PBKDF2-SHA1"]
     verified: "vector"
@@ -16,5 +18,8 @@ vectors:
   - hash: "sha1:100:dGVzdA:JTkptWKRlhEnUcwCFCdX/7Q8iyU="
     pass: "password123"
     source: "mdxfind"
+  - hash: "$pbkdf2$131000$r5WythYixPgfQ2jt3buXcg$8Kdr.QQEOaZIXNOrrru36I/.6Po"
+    pass: "hashcat"
+    source: "hashcat"
 legacy:
   hashes_org: "PBKDF2"

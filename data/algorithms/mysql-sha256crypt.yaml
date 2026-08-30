@@ -4,10 +4,9 @@ status: "needs-review"
 tools:
   hashcat:
     modes: [7401]
-    verified: "upstream"
-    verified_at: "2026-08-29"
-    verified_with: "RCS 1.540 (2026/08/22)"
-    note: "hashcat mapping shipped in mdxfind's own type table"
+    verified: "vector"
+    verified_at: "2026-08-30"
+    verified_with: "hashcat"
   mdxfind:
     types: ["MYSQL-SHA256CRYPT"]
     verified: "vector"
@@ -19,3 +18,6 @@ vectors:
   - hash: "$mysql$A$005*0000000000*735953686774693157507A4A56526F713439744874516D6878335855747A644E416D506979304547335A37"
     pass: "password123"
     source: "mdxfind"
+  - hash: "$mysql$A$005*F9CC98CE08892924F50A213B6BC571A2C11778C5*625479393559393965414D45316477456B484F41316E64484742577A2E3162785353526B7554584647562F"
+    pass: "hashcat"
+    source: "hashcat"

@@ -14,7 +14,9 @@ status: "needs-review"
 tools:
   hashcat:
     modes: [11]
-    verified: "asserted"
+    verified: "vector"
+    verified_at: "2026-08-30"
+    verified_with: "hashcat"
   mdxfind:
     types: ["MD5PASSSALT"]
     verified: "vector"
@@ -37,6 +39,9 @@ vectors:
   - hash: "25e0e3a09fb987a37f3e57b3c77debb4:AnTomd3E87cHv8hYodF1"
     pass: "rosetta"
     source: "sheet"
+  - hash: "b78f863f2c67410c41e617f724e22f34:89384528665349271307465505333378"
+    pass: "hashcat"
+    source: "hashcat"
 legacy:
   hashes_org: "JOOMLA"
   hashkiller: "Joomla"

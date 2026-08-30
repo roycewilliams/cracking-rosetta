@@ -4,15 +4,14 @@ status: "needs-review"
 tools:
   hashcat:
     modes: [34000]
-    verified: "upstream"
-    verified_at: "2026-08-29"
-    verified_with: "RCS 1.540 (2026/08/22)"
-    note: "hashcat mapping shipped in mdxfind's own type table"
+    verified: "vector"
+    verified_at: "2026-08-30"
+    verified_with: "hashcat"
   mdxfind:
     types: ["ARGON2"]
-    verified: "upstream"
-    verified_at: "2026-08-29"
-    verified_with: "RCS 1.540 (2026/08/22)"
+    verified: "vector"
+    verified_at: "2026-08-30"
+    verified_with: "mdxfind"
   john:
     cpu: ["Argon2"]
     verified: "vector"
@@ -28,3 +27,6 @@ vectors:
   - hash: "$argon2d$v=19$m=16384,t=3,p=1$c2hvcnRfc2FsdA$TLSTPihIo+5F67Y1vJdfWdB9"
     pass: "blessed_dead"
     source: "john"
+  - hash: "$argon2id$v=19$m=65536,t=3,p=1$FBMjI4RJBhIykCgol1KEJA$2ky5GAdhT1kH4kIgPN/oERE3Taiy43vNN70a3HpiKQU"
+    pass: "hashcat"
+    source: "hashcat"
