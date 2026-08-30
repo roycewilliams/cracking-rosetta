@@ -1,3 +1,8 @@
+# Session handoff notes. Deliberately untracked: it records host paths, local
+# tool versions and working state that belong to this machine, not to anyone
+# who clones this. Keep it here, keep it out of git.
+STATE.md
+
 # Scratch: temporary scripts, captured tool output, working data.
 # Project convention keeps these in tmp/ rather than /tmp -- see CLAUDE.md.
 tmp/
