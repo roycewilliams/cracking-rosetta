@@ -3531,8 +3531,15 @@
          },
          "name" : "GOST2012-32",
          "notes" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "none",
+               "entry" : "streebog-32-plain",
+               "kind" : "duplicate-of",
+               "note" : "Streebog IS GOST R 34.11-2012; mdxfind carries both names as separate types (e427, e430) publishing the same example vector. Proven here rather than assumed: mdxfind pinned to EACH type reproduces BOTH entries' vectors, on two different plaintexts, and both entries already name john's Stribog-256 at tier vector. Nothing distinguishes them; the merge would fold hashcat 11700 into the survivor."
+            }
+         ],
+         "sameas" : "duplicate of streebog-32-plain",
          "status" : "needs-review",
          "vecs" : 1
       },
@@ -3573,8 +3580,15 @@
          },
          "name" : "GOST2012-64",
          "notes" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "none",
+               "entry" : "streebog-64-plain",
+               "kind" : "duplicate-of",
+               "note" : "Streebog IS GOST R 34.11-2012; mdxfind carries both names as separate types (e428, e431) publishing the same example vector. mdxfind pinned to EACH type reproduces BOTH entries' vectors, on two different plaintexts, and both entries already name john's Stribog-512 at tier vector. Nothing distinguishes them; the merge would fold hashcat 11800 into the survivor."
+            }
+         ],
+         "sameas" : "duplicate of streebog-64-plain",
          "status" : "needs-review",
          "vecs" : 1
       },
@@ -9907,7 +9921,7 @@
          ],
          "sameas" : "same as ciscoasa (application); same as joomla (application)",
          "status" : "needs-review",
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -10157,7 +10171,7 @@
          ],
          "sameas" : "same as oscommerce-xt-commerce (application)",
          "status" : "needs-review",
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -21233,7 +21247,7 @@
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -21311,7 +21325,7 @@
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -21672,7 +21686,7 @@
                "distinction" : "none",
                "entry" : "sha1-md5-md5-pass-salt",
                "kind" : "duplicate-of",
-               "note" : "mdxfind types SHA1MD5SALT (e587) and SHA1-MD5PASSSALT (e578) publish the same example vector and mdxfind -z computes the same digest for both, so they are one computation under two type indices. Perl Digest::MD5/SHA, independent of all three crackers, confirms 18768e97...c76d2c is sha1(md5($p).$s) and NOT the sha1(md5(md5($pass).$salt)) this entry's name asserts -- the name is wrong, and the merge would settle it."
+               "note" : "CONFIRMED BY UPSTREAM: mdxfind's maintainer states e578 and e587 are literal duplicates, added while working through the SHA-1 HIBP hashes. Both compute sha1(md5(pass).salt), which is also what Perl's Digest::MD5/SHA says and what hashcat 4710 is -- so this entry's name, sha1(md5(md5($pass).$salt)), is simply wrong and the merge settles it. Note e471 SHA1MD5PASS-SALT publishes the same example vector and is a third member of the set, unnamed by any entry here."
             }
          ],
          "sameas" : "duplicate of sha1-md5-md5-pass-salt",
@@ -21895,7 +21909,7 @@
                "distinction" : "none",
                "entry" : "sha1-md5-pass-salt",
                "kind" : "duplicate-of",
-               "note" : "mdxfind types SHA1MD5SALT (e587) and SHA1-MD5PASSSALT (e578) publish the same example vector and mdxfind -z computes the same digest for both, so they are one computation under two type indices. Perl Digest::MD5/SHA, independent of all three crackers, confirms 18768e97...c76d2c is sha1(md5($p).$s) and NOT the sha1(md5(md5($pass).$salt)) this entry's name asserts -- the name is wrong, and the merge would settle it."
+               "note" : "CONFIRMED BY UPSTREAM: mdxfind's maintainer states e578 and e587 are literal duplicates, added while working through the SHA-1 HIBP hashes. Both compute sha1(md5(pass).salt), which is also what Perl's Digest::MD5/SHA says and what hashcat 4710 is -- so this entry's name, sha1(md5(md5($pass).$salt)), is simply wrong and the merge settles it. Note e471 SHA1MD5PASS-SALT publishes the same example vector and is a third member of the set, unnamed by any entry here."
             }
          ],
          "sameas" : "duplicate of sha1-md5-pass-salt",
@@ -24984,7 +24998,7 @@
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -28693,8 +28707,15 @@
          },
          "name" : "streebog-32($plain)",
          "notes" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "none",
+               "entry" : "gost2012-32",
+               "kind" : "duplicate-of",
+               "note" : "Streebog IS GOST R 34.11-2012; mdxfind carries both names as separate types (e427, e430) publishing the same example vector. Proven here rather than assumed: mdxfind pinned to EACH type reproduces BOTH entries' vectors, on two different plaintexts, and both entries already name john's Stribog-256 at tier vector. Nothing distinguishes them; the merge would fold hashcat 11700 into the survivor."
+            }
+         ],
+         "sameas" : "duplicate of gost2012-32",
          "status" : "needs-review",
          "vecs" : 1
       },
@@ -28732,8 +28753,15 @@
          },
          "name" : "streebog-64($plain)",
          "notes" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "none",
+               "entry" : "gost2012-64",
+               "kind" : "duplicate-of",
+               "note" : "Streebog IS GOST R 34.11-2012; mdxfind carries both names as separate types (e428, e431) publishing the same example vector. mdxfind pinned to EACH type reproduces BOTH entries' vectors, on two different plaintexts, and both entries already name john's Stribog-512 at tier vector. Nothing distinguishes them; the merge would fold hashcat 11800 into the survivor."
+            }
+         ],
+         "sameas" : "duplicate of gost2012-64",
          "status" : "needs-review",
          "vecs" : 1
       },

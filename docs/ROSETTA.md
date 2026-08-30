@@ -103,8 +103,8 @@ For sorting, filtering and search, open [index.html](index.html) - or
 | gost(md5($plain).$plain) | · | **—** | `GOSTMD5PASS` ✓ |  |
 | gost(md5($salt.$plain).":".$salt) | · | **—** | `GOSTHEXSALT` ✓ |  |
 | GOST12512CRYPT | `35600` ✓ | `streebog512crypt` ✓ | `GOST12512CRYPT` ✓ |  |
-| GOST2012-32 | `11700` ✓ | `Stribog-256` ✓ | `GOST2012-32` ✓ |  |
-| GOST2012-64 | `11800` ✓ | `Stribog-512` ✓ | `GOST2012-64` ✓ |  |
+| GOST2012-32 | `11700` ✓ | `Stribog-256` ✓ | `GOST2012-32` ✓ | duplicate of streebog-32-plain |
+| GOST2012-64 | `11800` ✓ | `Stribog-512` ✓ | `GOST2012-64` ✓ | duplicate of streebog-64-plain |
 | GOSTMD5 | · | **—** | `GOSTMD5` ✓ |  |
 | GROESTL224 | · | **—** | `GROESTL224` ✓ |  |
 | GROESTL256 | · | **—** | `GROESTL256` ✓ |  |
@@ -760,8 +760,8 @@ For sorting, filtering and search, open [index.html](index.html) - or
 | SSPR-MD5 | `32000` ✓ | `sspr` ✓ | `SSPR-MD5` ✓ |  |
 | SSPR-SHA1 | `32010` ✓ | `sspr` ✓ | `SSPR-SHA1` ✓ |  |
 | SSPR-SHA1S | `32020` ✓ | `sspr` ✓ | `SSPR-SHA1S` ✓ |  |
-| streebog-32($plain) | **—** | `Stribog-256` ✓ | `STREEBOG-32` ✓ |  |
-| streebog-64($plain) | **—** | `Stribog-512` ✓ | `STREEBOG-64` ✓ |  |
+| streebog-32($plain) | **—** | `Stribog-256` ✓ | `STREEBOG-32` ✓ | duplicate of gost2012-32 |
+| streebog-64($plain) | **—** | `Stribog-512` ✓ | `STREEBOG-64` ✓ | duplicate of gost2012-64 |
 | SYBASE-ASE | `8000` ✓ | `SybaseASE` ✓ | `SYBASE-ASE` ✓ |  |
 | SYMFONY256 | `35800` ✓ | **—** | `SYMFONY256` ✓ |  |
 | TACACS | `16100` ✓ | `tacacs-plus` ✓ | `TACACS` ✓ |  |
