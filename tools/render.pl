@@ -98,7 +98,15 @@ $docsdir //= "$ROOT/docs";
 $distdir //= "$ROOT/dist";
 make_path($_) for grep { !-d } ($docsdir, $distdir);
 
-my $today = strftime('%Y-%m-%d', localtime);
+# The stamp is the date of the last commit touching the data or this script -
+# NOT the clock. Using the clock made the output differ between a local run
+# and a CI run in another timezone, so the workflow rewrote three files with a
+# date-only change every time and fought with local renders. Dating it from
+# the source means the same checkout renders identically anywhere, and the
+# stamp answers the more useful question: how current is the data?
+my $today = `git -C \Q$ROOT\E log -1 --format=%cs -- data tools/render.pl 2>/dev/null`;
+chomp $today;
+$today = strftime('%Y-%m-%d', localtime) unless $today =~ /^\d{4}-\d{2}-\d{2}$/;
 
 #-----------------------------------------------------------------------
 # Load.
