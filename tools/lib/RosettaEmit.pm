@@ -73,6 +73,13 @@ sub yaml_scalar {
     # Escape backslash first, then the quote - the other order double-escapes.
     (my $s = $v) =~ s/\\/\\\\/g;
     $s =~ s/"/\\"/g;
+    # A raw newline inside a double-quoted scalar is legal YAML but FOLDS: the
+    # loader gives back a space, so the value that comes out is not the value
+    # that went in. hashcat's usage_notice for the caching_sha2_password modes
+    # carries an embedded SQL query and is the first field to hit this.
+    $s =~ s/\r/\\r/g;
+    $s =~ s/\n/\\n/g;
+    $s =~ s/\t/\\t/g;
     return qq{"$s"};
 }
 

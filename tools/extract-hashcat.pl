@@ -20,6 +20,26 @@
 # Verified 2026-08-29: 593 mode blocks, and every one of them carries all 20
 # always-present fields.
 #
+# WHY --machine-readable
+#
+# The human-readable form ELIDES a long example hash, printing
+# "48435058...00000 [Truncated, use --mach for full length]". The first run of
+# this extractor recorded the elision verbatim for 181 of 593 modes, and the
+# damage was invisible until something tried to USE one: hashcat refuses its
+# own truncated example with "Separator unmatched", so those modes could never
+# be round-tripped and their entries stayed at tier 'upstream' for a reason
+# nothing in the data explained. --machine-readable emits JSON with the full
+# value, so it is the source now; the text parser is kept for --from on a
+# previously captured human-readable dump, and the input shape is detected
+# rather than declared.
+#
+# The JSON says some things differently and the inventory follows it rather
+# than reshaping to match the old output: salt_type is "generic" where the
+# text said "Generic", and kernel_type / plaintext_encoding are real lists
+# rather than a comma-joined string. Nothing reads those fields; they are
+# recorded because an inventory that drops what it does not currently use is
+# an inventory that has to be regenerated to answer a new question.
+#
 # THE FIELD MAP IS EXPLICIT, NOT DERIVED
 #
 # It would be shorter to mangle "Example.Hash.Format." into example_hash_format
@@ -51,6 +71,7 @@ use File::Basename qw(basename);
 use FindBin qw($RealBin);
 use Getopt::Long qw(GetOptions);
 use POSIX qw(strftime);
+use JSON::PP ();
 
 use lib "$RealBin/lib";
 use RosettaEmit qw(yaml_scalar emit_header emit_records);
@@ -101,6 +122,39 @@ my %FIELD = (
     'Autodetect.Enabled'  => 'autodetect',
     'Self.Test.Enabled'   => 'self_test',
     'Plaintext.Encoding'  => 'plaintext_encoding',
+);
+
+# The same choice again for --machine-readable, whose key names are hashcat's
+# own and differ from the text labels. Kept as a separate table rather than
+# derived from %FIELD: the two are hashcat's decisions, not ours, and a rule
+# that mapped one onto the other would break silently the first time they
+# diverged.
+my %JFIELD = (
+    name                => 'name',
+    category            => 'category',
+    slow_hash           => 'slow',
+    is_deprecated       => 'deprecated',
+    deprecated_notice   => 'deprecated_notice',
+    usage_notice        => 'usage_notice',
+    password_type       => 'password_type',
+    password_len_min    => 'password_len_min',
+    password_len_max    => 'password_len_max',
+    salt_type           => 'salt_type',
+    salt_len_min        => 'salt_len_min',
+    salt_len_max        => 'salt_len_max',
+    kernel_type         => 'kernel_types',
+    example_hash_format => 'example_hash_format',
+    example_hash        => 'example_hash',
+    example_pass        => 'example_pass',
+    autodetect_enabled  => 'autodetect',
+    self_test_enabled   => 'self_test',
+    plaintext_encoding  => 'plaintext_encoding',
+);
+
+my %JIGNORED = map { $_ => 1 } (
+    'advice_notice', 'benchmark_mask', 'benchmark_charset1',
+    'custom_plugin', 'keep_guessing', 'potfile_enabled',
+    'is_salted',          # implied by the presence of salt_len_min/max
 );
 
 # Fields hashcat prints that are deliberately NOT carried into the inventory.
@@ -163,9 +217,9 @@ if (defined $binary) {
         print STDERR "$PROG: $binary is not executable.\n";
         exit 1;
     };
-    print STDERR "- Running $binary --hash-info ...\n" if $verbose;
+    print STDERR "- Running $binary --hash-info --machine-readable ...\n" if $verbose;
     # </dev/null so a readable stdin cannot leave hashcat waiting.
-    open my $fh, '-|', "$binary --hash-info 2>&1 </dev/null"
+    open my $fh, '-|', "$binary --hash-info --machine-readable 2>&1 </dev/null"
         or do { print STDERR "$PROG: cannot run $binary: $!\n"; exit 1 };
     @lines = <$fh>;
     close $fh;
@@ -186,12 +240,67 @@ else {
 @lines or do { print STDERR "$PROG: no input.\n"; exit 1 };
 
 #-----------------------------------------------------------------------
-# Parse. One block per "Hash mode #N", fields indented beneath it.
+# Parse. Either hashcat's JSON or its human-readable blocks -- detected from
+# the input, because --from may hand us either and a wrong guess would produce
+# an empty inventory rather than an error.
 
 my $version = 'unknown';
 my (@modes, $cur);
 my ($unknown_fields, $skipped_lines) = (0, 0);
 my %unknown_seen;
+
+# The banner precedes the JSON, so version comes from the same scan either way.
+for my $line (@lines) {
+    next unless $line =~ /^hashcat \(([^)]+)\)/;
+    $version = $1;
+    last;
+}
+
+my $json_text = join '', grep { !/^hashcat \(/ } @lines;
+if ($json_text =~ /\A\s*\{/) {
+    my $doc = eval { JSON::PP->new->decode($json_text) };
+    unless (ref $doc eq 'HASH') {
+        print STDERR "$PROG: input looks like JSON but does not decode: $@\n";
+        exit 1;
+    }
+
+    for my $mode (keys %$doc) {
+        my $rec = $doc->{$mode};
+        next unless ref $rec eq 'HASH';
+        my $out = { mode => $mode + 0 };
+
+        for my $jk (sort keys %$rec) {
+            my $key = $JFIELD{$jk};
+            if (!defined $key) {
+                next if $JIGNORED{$jk};
+                $unknown_fields++;
+                $unknown_seen{$jk}++;
+                next;
+            }
+            my $value = $rec->{$jk};
+            next unless defined $value;
+
+            # JSON::PP hands back its own boolean objects; the emitter wants a
+            # scalar ref. Done by ref type rather than by field name so a field
+            # hashcat turns from string to boolean cannot slip through as the
+            # string "1".
+            if (ref $value eq 'JSON::PP::Boolean') {
+                $out->{$key} = $value ? \1 : \0;
+                next;
+            }
+            if (ref $value eq 'ARRAY') {
+                my @v = grep { defined && $_ ne 'N/A' && $_ ne '' } @$value;
+                $out->{$key} = [@v] if @v;
+                next;
+            }
+            # N/A means the field does not apply; absent is the honest encoding.
+            next if $value eq 'N/A' || $value eq '';
+            $out->{$key} = $value;
+        }
+        push @modes, $out;
+    }
+}
+else {
 
 for my $line (@lines) {
     chomp $line;
@@ -239,6 +348,8 @@ for my $line (@lines) {
 
 push @modes, $cur if $cur;
 
+}
+
 @modes or do {
     print STDERR "$PROG: parsed no hash modes -- is this --hash-info output?\n";
     exit 1;
@@ -258,7 +369,8 @@ if (defined $outfile) {
 }
 
 my $today = strftime('%Y-%m-%d', localtime);
-my $source = defined $binary ? "$binary --hash-info" : "captured: $from";
+my $source = defined $binary ? "$binary --hash-info --machine-readable"
+                            : "captured: $from";
 
 emit_header($out, [
     "GENERATED by tools/$PROG -- do not edit by hand; regenerate.",
