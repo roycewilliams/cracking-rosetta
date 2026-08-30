@@ -62,3 +62,10 @@ jobs:
 
       - name: Validate
         run: perl -Itools/lib tools/validate.pl
+
+      # Canonical form, so a reviewer never has to read a one-line change
+      # buried in a whole-file reformat, and so a misspelled key is caught
+      # here rather than vanishing the next time a tool rewrites the entry.
+      # --check writes nothing.
+      - name: Check formatting
+        run: perl -Itools/lib tools/fmt.pl --all --check

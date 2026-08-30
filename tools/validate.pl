@@ -61,6 +61,11 @@ Usage: $PROG [options]
 
    --algorithms DIR  curated entries (default: data/algorithms)
    --tools DIR       generated inventories (default: data/tools)
+   --only ID         report only errors that concern this entry (repeatable)
+   --changed [REF]   report only errors that concern entries you have changed.
+                     With no REF: whatever git says is modified, staged or
+                     untracked right now. With a REF (e.g. --changed main):
+                     that, plus everything the branch changed since REF.
    -q, --quiet       errors only; no summary
    -v, --verbose     per-tool coverage breakdown (repeatable)
    -h, --help        this help
@@ -68,18 +73,28 @@ Usage: $PROG [options]
    Checks every data/algorithms/*.yaml for shape, and cross-references every
    identifier it names against the generated tool inventories.
 
-   Exit 0 clean, 1 validation errors found, 2 usage or missing inventories.
+   --only and --changed narrow the REPORT, never the checking. The whole
+   corpus is always loaded, because the rules that matter most are not about
+   one file: an expression collision is about every entry that claims it, and
+   a relation is by definition about two. Scoping tells you which errors are
+   YOURS, and says separately how many were already there.
+
+   Exit 0 clean, 1 validation errors found in scope, 2 usage or missing
+   inventories.
 
 END_USAGE
     return;
 }
 
-my ($algdir, $tooldir, $quiet, $help);
+my ($algdir, $tooldir, $quiet, $help, $changed);
+my @only;
 my $verbose = 0;
 
 GetOptions(
     'algorithms=s' => \$algdir,
     'tools=s'      => \$tooldir,
+    'only=s'       => \@only,
+    'changed:s'    => \$changed,
     'q|quiet'      => \$quiet,
     'v|verbose+'   => \$verbose,
     'h|help'       => \$help,
@@ -89,6 +104,55 @@ if ($help) { usage(); exit 0 }
 
 $algdir  //= "$ROOT/data/algorithms";
 $tooldir //= "$ROOT/data/tools";
+
+#-----------------------------------------------------------------------
+# Scope: which entries the caller wants to hear about.
+#
+# Empty means "all of them", which is the gate's behaviour and what CI runs.
+
+my %scope = map { $_ => 1 } @only;
+
+if (defined $changed) {
+    # git names paths from the repo root, so ask git where that is rather
+    # than assuming this script sits two levels down from it.
+    chomp(my $top = `git -C @{[quotemeta $ROOT]} rev-parse --show-toplevel 2>/dev/null`);
+    if (!length $top) {
+        print STDERR "$PROG: --changed needs a git repository.\n";
+        exit 2;
+    }
+
+    my @paths;
+    # Working tree, index and untracked: what a contributor has in hand right
+    # now, before anything is committed.
+    for my $line (`git -C @{[quotemeta $top]} status --porcelain 2>/dev/null`) {
+        chomp $line;
+        # "XY path" or "XY old -> new"; the new name is the one that exists.
+        next unless $line =~ /^..\s+(.*)$/;
+        my $pth = $1;
+        $pth = $1 if $pth =~ /->\s*(.*)$/;
+        $pth =~ s/^"|"$//g;
+        push @paths, $pth;
+    }
+    # And, when a ref was named, everything the branch changed since it
+    # diverged -- three dots, so an unrelated commit on main is not counted
+    # as part of this contribution.
+    if (length $changed) {
+        push @paths, split /\n/,
+            `git -C @{[quotemeta $top]} diff --name-only @{[quotemeta $changed]}...HEAD 2>/dev/null`;
+    }
+
+    for my $pth (@paths) {
+        next unless $pth =~ m{(?:^|/)data/algorithms/([^/]+)\.yaml$};
+        $scope{$1} = 1;
+    }
+
+    unless (%scope) {
+        print STDERR "$PROG: nothing changed under data/algorithms"
+                   . (length $changed ? " since $changed" : '') . ".\n";
+    }
+}
+
+my $scoped = %scope ? 1 : 0;
 
 #-----------------------------------------------------------------------
 # Known vocabulary. Kept beside the checks that use it so the two cannot drift.
@@ -156,8 +220,24 @@ my %IDENT_KEYS = (
 
 my (@errors, @warnings);
 
-sub err  { push @errors,   sprintf(shift, @_) }
+# Every error records which entries it is about, so --only and --changed can
+# tell a contributor's own mistakes from the ones that were already there.
+# @ABOUT is set by whichever loop is running; an error with an empty @ABOUT is
+# corpus-wide and is always reported.
+our @ABOUT = ();
+sub err  { push @errors,   { msg => sprintf(shift, @_), about => [@ABOUT] } }
 sub warn_ { push @warnings, sprintf(shift, @_) }
+
+# in_scope($error) - does this error concern anything the caller asked about?
+sub in_scope {
+    my ($e) = @_;
+    return 1 unless $scoped;
+    return 1 unless @{ $e->{about} };
+    for my $id (@{ $e->{about} }) {
+        return 1 if $scope{$id};
+    }
+    return 0;
+}
 
 #-----------------------------------------------------------------------
 # Load the generated inventories. Without these there is nothing to check
@@ -217,6 +297,7 @@ my $entries = 0;
 for my $file (@files) {
     my $path = "$algdir/$file";
     my $stem = $file; $stem =~ s/\.yaml$//;
+    local @ABOUT = ($stem);
 
     my $d = eval { YAML::XS::LoadFile($path) };
     if ($@ || !defined $d) {
@@ -594,6 +675,9 @@ for my $file (@files) {
     };
 
     for my $e (@rel_edges) {
+        # A relation error is about BOTH ends: whichever of the two the
+        # contributor touched, they need to see it.
+        local @ABOUT = ($e->{from}, $e->{to});
         # 1. The other end has to exist.
         unless ($seen_id{ $e->{to} }) {
             err("%s: relation names '%s', which is not an entry",
@@ -620,6 +704,7 @@ for my $file (@files) {
     for my $x (sort keys %by_expression) {
         my @ids = @{ $by_expression{$x} };
         next unless @ids > 1;
+        local @ABOUT = @ids;
         my %group;
         push @{ $group{ $find->($_) } }, $_ for @ids;
         next if keys %group == 1;
@@ -636,8 +721,11 @@ for my $file (@files) {
 
 print STDERR "- $_\n" for @warnings;
 
-if (@errors) {
-    print STDERR "- Error: $_\n" for @errors;
+my @shown = grep { in_scope($_) } @errors;
+my $elsewhere = @errors - @shown;
+
+if (@shown) {
+    print STDERR "- Error: $_->{msg}\n" for @shown;
 }
 
 unless ($quiet) {
@@ -647,6 +735,16 @@ unless ($quiet) {
         scalar(@$mx_list), $mx_doc->{version};
 
     printf STDERR "- Entries:     %d file(s) in %s\n", $entries, $algdir;
+
+    if ($scoped) {
+        printf STDERR "- Scope:       reporting on %d entry/entries: %s\n",
+            scalar(keys %scope),
+            join(', ', (sort keys %scope)[0 .. ((keys %scope) > 8 ? 7 : (keys %scope) - 1)])
+              . ((keys %scope) > 8 ? sprintf(' ... (+%d)', (keys %scope) - 8) : '');
+        printf STDERR "-              everything was still CHECKED; %d error(s) "
+                    . "elsewhere in the corpus are not yours\n", $elsewhere
+            if $elsewhere;
+    }
 
     my $pc = sub {
         my ($n, $d) = @_;
@@ -670,9 +768,13 @@ unless ($quiet) {
         printf STDERR "-              (real formats; re-enable them in that file to use them)\n";
     }
 
-    printf STDERR "- %s\n", @errors
-        ? sprintf('FAILED: %d error(s)', scalar @errors)
-        : 'OK: no errors';
+    printf STDERR "- %s\n", @shown
+        ? sprintf('FAILED: %d error(s)%s', scalar @shown,
+                  $scoped ? ' in scope' : '')
+        : ($scoped ? 'OK: no errors in scope' : 'OK: no errors');
 }
 
-exit(@errors ? 1 : 0);
+# Only in-scope errors fail the run. A contributor is not responsible for a
+# defect that was in the corpus before they arrived, and telling them their
+# one-line change "failed" because of one would be both wrong and hostile.
+exit(@shown ? 1 : 0);
