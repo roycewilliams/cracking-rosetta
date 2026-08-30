@@ -154,21 +154,51 @@ case, base64, a `$1$` wrapper), the **deployment** (Joomla, vBulletin 3.8.5,
 osCommerce — which hashcat gives separate modes), and the **tool identifier**.
 Only the last was ever modelled.
 
-The rule, until the schema catches up (design in `ACTION-PLAN.md` §11):
+So an entry carries three fields for it. `category:` names the axis it sits on
+— `primitive`, `composite`, `iterated`, `encoding`, `application`, `protocol`,
+`kdf` — with `application:` and `application_version:` for a product row.
+`relations:` is a typed, symmetric edge list:
 
-- **One entry is one computation.** If you find yourself writing a second,
-  different algorithm into `aliases:`, you need a second entry.
-  `aliases:` is for other *names* of the same computation, nothing else.
-- **Two entries may share an expression**, and often should — `joomla` and
-  `md5-pass-salt` are both `md5($p.$s)` and hashcat separates them (11 vs 10)
-  because the application is the distinction. Say which axis differs in a
-  `note:` until `relations:` exists.
-- **Say so when two things are only equal by accident.** `md5cap` is
-  `cap(md5($p))`, a no-op on a lowercase digest, so john's `dynamic_2` cracks
-  its vector without denoting it. Record the trap; do not record the mapping.
+    relations:
+      - kind: "same-computation"
+        entry: "md5-pass-salt"
+        distinction: "application"
+        note: "hashcat separates these: mode 11 assumes Joomla's fixed-length
+               salt, mode 10 is the generic construction"
+
+`kind` says what the relationship is — `same-computation`, `encodes`,
+`input-encoding`, `iterates`, `truncates`, `collides-on-subset`,
+`duplicate-of`. `distinction` says why both rows nonetheless exist —
+`application`, `encoding`, `input-encoding`, `iteration`, `truncation`,
+`salt-convention`, `none`. `none` is legal only with `duplicate-of`, which is
+how a merge gets proposed in data rather than in a comment.
+
+`tools/relate.pl` writes edges, both sides at once. Never hand-write one side:
+a relation only one of the two files states is a fact whichever file the
+reader opens first decides whether they learn.
+
+`validate.pl` enforces it. **Two entries claiming the same `expression` must
+reach each other through `same-computation`, `encodes` or `duplicate-of`
+edges, or the run fails.** That is what makes the expression a key rather than
+a decoration. It also checks that every edge is mirrored and points at a real
+entry, that `distinction: none` appears only on a `duplicate-of`, and that
+`collides-on-subset` carries a note naming the inputs on which the two agree.
+
+Three rules that are not the validator's job:
+
+- **One entry is one computation.** If you are writing a second, different
+  algorithm into `aliases:`, you need a second entry. `aliases:` is for other
+  *names* of the same computation.
+- **Record the trap, not the mapping**, when a tool cracks a vector without
+  denoting the algorithm. `md5cap` is `cap(md5($p))`, a no-op on a lowercase
+  digest, so john's `dynamic_2` recovers its vector; that is a
+  `collides-on-subset` edge, not a john mapping.
 - **`id` never changes.** It is the filename stem, a URL fragment in
   `docs/index.html` and the key in `dist/rosetta.csv`. A rename is a new entry
-  plus an alias on the survivor, never an `mv`.
+  plus a `duplicate-of` edge and an alias on the survivor, never an `mv`.
+
+The full design, the options weighed against it and what changed on contact
+with the code are in `ACTION-PLAN.md` §11.
 
 ## Conventions
 

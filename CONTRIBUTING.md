@@ -69,23 +69,37 @@ identifier, or a mode.
 - `aliases:` is for other **names** of the same computation. It is not a place
   to list related algorithms. One entry here reached five vectors falling to
   three different John dynamics that way, and no check caught it.
-- Two entries **may** legitimately share an `expression:`. `joomla` and
-  `md5-pass-salt` are both `md5($p.$s)`; hashcat gives them modes 11 and 10
-  because the application is the distinction, and both rows earn their place.
-  When you add such an entry, say in `note:` which axis differs — the
-  application, the encoding of the digest, the encoding of the plaintext, an
-  iteration count, or a truncation.
+- Two entries **may** legitimately share an `expression:` — but they must say
+  so. `joomla` and `md5-pass-salt` are both `md5($p.$s)`; hashcat gives them
+  modes 11 and 10 because the application is the distinction, and both rows
+  earn their place. Record it:
+
+      tools/relate.pl --kind same-computation \
+          --entry joomla --with md5-pass-salt \
+          --distinction application \
+          --note "hashcat 11 assumes Joomla's salt; 10 is generic" --apply
+
+  That writes both sides. `validate.pl` **fails** if two entries share an
+  expression with no relation joining them, so this is not optional.
+  `distinction` is one of `application`, `encoding`, `input-encoding`,
+  `iteration`, `truncation`, `salt-convention`, `none`; `kind` is one of
+  `same-computation`, `encodes`, `input-encoding`, `iterates`, `truncates`,
+  `collides-on-subset`, `duplicate-of`.
+- If you think two entries are the same thing with no distinction left, say
+  so in data rather than in the PR description: `--kind duplicate-of
+  --distinction none`. That is the proposal; a maintainer does the merge.
 - If a tool cracks your vector but does not really implement your algorithm,
   do not record the mapping. `md5cap` is `cap(md5($p))`, which is a no-op
   whenever the digest has no letters, so John's `dynamic_2` recovers its
-  vector while denoting something else. Put it in `note:` instead.
+  vector while denoting something else. That is a `collides-on-subset` edge,
+  and it must carry a note saying on which inputs the two agree.
 - `id` never changes once published — it is the filename stem, a URL fragment
   in the rendered page, and the key in `dist/rosetta.csv`. If a name is wrong,
   add the better one to `aliases:` on the entry that survives.
 
-A richer, machine-readable form of all this — a typed `relations:` edge list,
-so "same computation, differs by application" is data rather than prose — is
-designed in `ACTION-PLAN.md` §11 and not built yet.
+`category:` is optional and mostly unpopulated; set it when you know it —
+`primitive`, `composite`, `iterated`, `encoding`, `application`, `protocol`,
+`kdf` — and add `application:` / `application_version:` on a product row.
 
 ## Things worth knowing
 

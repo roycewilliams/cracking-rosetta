@@ -279,8 +279,11 @@ Either widen the mode / add a shared group, or run `extract-john.pl` as
 
 ## 11. Collisions: how one row should relate to another
 
-Status: **proposal**, written 2026-08-29 after `expressions.pl` made the
-problem measurable. Nothing below is built.
+Status: **built**, 2026-08-29. Option B was chosen and implemented: the
+schema, the emitter, `tools/relate.pl`, four per-entry checks and three
+cross-entry checks in `validate.pl`, and a "Same as" column in every rendered
+view. Three things below changed on contact with the code and are marked
+**[as built]**.
 
 ### What went wrong, concretely
 
@@ -313,7 +316,7 @@ it is the largest migration, it changes what a pull request touches, and most
 entries have no product at all, so several hundred profiles would be 1:1
 shells around their computation. Rejected on cost, not on correctness.
 
-### Option B — one file per entry, explicit typed relations *(recommended)*
+### Option B — one file per entry, explicit typed relations *(chosen)*
 
 Keep the file layout exactly as it is, and make the relationship a first-class
 field rather than a hint buried in `aliases:` or prose.
@@ -391,19 +394,45 @@ has to guess from a name.
 `validate.pl` grows five checks, and they are what turn the join key into
 something enforced:
 
-1. Two entries with an equal `expression` **must** be joined by a
-   `same-computation`, `encodes` or `duplicate-of` edge. Otherwise: error.
-   This is the rule that would have caught all nine collisions on the PR that
-   introduced them.
+1. Two entries with an equal `expression` **must** be joined by
+   `same-computation`, `encodes` or `duplicate-of` edges. Otherwise: error.
+   This is the rule that caught all nine collisions the moment it was
+   switched on.
+
+   **[as built]** The check is *connected components*, not every pair. Four
+   entries sharing an expression need three edges in a star, not six in a
+   clique; requiring the clique makes the data unreadable long before it makes
+   it more correct. Equivalence is transitive, so the star says the same thing.
 2. Every edge names an existing `id`, and every edge is mirrored on the other
-   entry. `--fix` writes the mirror.
-3. `distinction: none` outside `duplicate-of` is an error.
+   entry.
+
+   **[as built]** The mirror is *written* by `tools/relate.pl`, not by a
+   `--fix` on the gate. `validate.pl` runs on pull requests from forks and its
+   verdict is the thing people trust; giving it a flag that edits the data it
+   is judging is the wrong shape. The check lives in the gate, the repair
+   lives in the tool.
+3. `distinction: none` outside `duplicate-of` is an error, and so is a
+   `duplicate-of` that claims a distinction.
 4. `collides-on-subset` requires a `note` naming the degenerate class — this
-   is where `md5cap`/`md5` and `md5-plain-md5-plain`/`dynamic_1011` are
-   recorded, so the trap is documented instead of rediscovered.
-5. An entry whose vectors fall to different John formats (what
-   `discover-john.pl` reports as "this entry's vectors disagree") is an error
-   unless the entry declares the corresponding relations.
+   is where `md5cap`/`md5`, `md5capsha1`/`md5-sha1-pass` and
+   `md5-plain-md5-plain`/`md5-pass-md5-salt` are recorded, so the trap is
+   documented instead of rediscovered.
+5. An entry whose vectors fall to different John formats.
+
+   **[as built]** This one is *not* in `validate.pl` and cannot be: deciding
+   it means running a cracker, and the gate must stay a text check that a fork
+   PR can run. `discover-john.pl` already reports it under "this entry's
+   vectors disagree", and holds the entry back rather than writing the union.
+
+### What the rule cannot see
+
+The collision check fires only where an `expression` exists, and only 144
+entries have one — they are the entries whose John block reached tier
+`vector` with identifiers that agree. `oscommerce-xt-commerce` and
+`vbulletin-v3-8-5-2` are the same computation as their siblings and have no
+expression yet, so nothing forced their edges; they were added by hand. The
+gate gets stronger as `expressions.pl` reaches more entries, and it is worth
+knowing that its silence is not proof.
 
 ### Identifier discipline
 
@@ -435,3 +464,5 @@ Plus, not a collision but the same machinery: `md5cap` →
 splitting rather than linking: their `aliases:` name genuinely different
 computations, so each alias becomes its own entry taking the vector that
 falls to it, and the originals keep the vector matching their own expression.
+**Not done** — creating entries is a bigger curation act than linking
+existing ones, and `discover-john.pl` holds both back and says why.
