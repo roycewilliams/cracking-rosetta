@@ -32,7 +32,11 @@ Nothing is promoted without a round-trip, and - just as important - a failed rou
 
 ## Be nice
 
-**Please only send pull requests for `data/algorithms/` - not for `data/tools/`.** Those inventories are generated from the tools themselves and every one carries a `GENERATED` banner. If a mode or format is missing there, the fix is to re-run the extractor, not to hand-patch the file. Same for `vendor/` - refresh it with `tools/fetch-upstream.sh` and commit that separately, so the diff shows what upstream actually changed.
+Pull requests are welcome for all of it - the algorithm data, the extractors, the validator, the CI, whatever needs doing.
+
+The one hard rule is mechanical rather than territorial: **don't hand-edit `data/tools/`.** Those inventories are generated from the tools themselves and every one carries a `GENERATED` banner. If a mode or format is missing there, the fix is to re-run the extractor. Same for `vendor/` - refresh it with `tools/fetch-upstream.sh` and commit that separately, so the diff shows what upstream actually changed.
+
+**Keep comments and PR descriptions lean.** Using an LLM to help is fine - but strip the padding before you send it. A wall of generated narrative restating what a three-line diff plainly does costs a reviewer more time than reading the diff would have. Say what changed and why, and stop.
 
 Please don't inflate tiers. `verified: vector` means *this repository cracked the vector*, not "I'm confident". An honest `asserted` with a note saying where the claim came from is far more useful than a hopeful `vector`, and someone will verify and promote it later.
 
