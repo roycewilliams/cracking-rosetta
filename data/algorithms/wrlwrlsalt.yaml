@@ -15,3 +15,7 @@ tools:
     note: "from hashpipe john_map.h, confirmed upstream by recomputation"
   crack:
     supported: false
+vectors:
+  - hash: "0488b47b2bf8dd700377efc9dbc809f2a0ec794bd39d41f9de0a084d9725531fc94540faee049d2c2fc4b2b4386dc9d64b196264e6881709645c86f29f4f1834:testsalt"
+    pass: "password123"
+    source: "mdxfind"

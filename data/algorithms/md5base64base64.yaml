@@ -9,3 +9,7 @@ tools:
     verified: "asserted"
   crack:
     supported: false
+vectors:
+  - hash: "2662267993ec9092a1c99802586ad20f"
+    pass: "password123"
+    source: "mdxfind"

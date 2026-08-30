@@ -9,5 +9,9 @@ tools:
     verified: "asserted"
   crack:
     supported: false
+vectors:
+  - hash: "d7820a43972cdff931bf4343f74b49cf"
+    pass: "password123"
+    source: "mdxfind"
 legacy:
   hashes_org: "MD5(MD5(PLAIN)MD5(PLAIN)MD5(PLAIN)MD5(PLAIN))"
