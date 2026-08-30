@@ -12,3 +12,8 @@ tmp/
 fleet-staging/
 
 *.swp
+
+# The hashcat-pattern fork, cloned here for the vanity-vector work. It is a
+# separate repository with its own history and remotes; it must never be
+# committed into this one.
+hashcat-pattern/
