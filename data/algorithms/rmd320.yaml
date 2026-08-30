@@ -21,6 +21,11 @@ tools:
     verified_with: "john"
   crack:
     supported: false
+relations:
+  - kind: "duplicate-of"
+    entry: "ripemd320"
+    distinction: "none"
+    note: "one is the sheet's spelling and one is mdxfind's; same computation, same tool identifiers"
 vectors:
   - hash: "e3a8ce82f0e176fd498227b3994bf3b238197c98a9576c7e5741b5a7f22cfab7ef9c2bbf462d2a32"
     pass: "password123"

@@ -22,6 +22,11 @@ tools:
     note: "format discovered by round-trip search, not by name"
   crack:
     supported: false
+relations:
+  - kind: "encodes"
+    entry: "sha256rawsaltpass"
+    distinction: "encoding"
+    note: "same digest; the RAW form differs in how the salt is fed, not in the hash computed"
 vectors:
   - hash: "9766ff25309a963469057ce375e5d4c359fbc635213c1b4b793b81d58b33d902:PAky1i"
     pass: "rosetta"

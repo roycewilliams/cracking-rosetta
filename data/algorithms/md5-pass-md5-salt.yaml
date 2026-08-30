@@ -19,6 +19,11 @@ tools:
     note: "format discovered by round-trip search, not by name"
   crack:
     supported: false
+relations:
+  - kind: "collides-on-subset"
+    entry: "md5-plain-md5-plain"
+    distinction: "salt-convention"
+    note: "md5($p.md5($p)) and md5($p.md5($s)) agree exactly when the salt is the password, which two of john's four dynamic_1011 test vectors happen to do"
 vectors:
   - hash: "ddff8db4a0e67f368b20936cc8f4406d:ZqVGsKp"
     pass: "rosetta"

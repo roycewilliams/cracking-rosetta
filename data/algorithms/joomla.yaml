@@ -2,6 +2,9 @@ id: "joomla"
 name: "Joomla"
 expression: "md5($p.$s)"
 john_dynamic_expr: "dynamic=md5($p.$s)"
+category: "application"
+application: "Joomla"
+application_version: "<2.5.18"
 status: "needs-review"
 tools:
   hashcat:
@@ -20,6 +23,11 @@ tools:
     note: "format discovered by round-trip search, not by name"
   crack:
     supported: false
+relations:
+  - kind: "same-computation"
+    entry: "md5-pass-salt"
+    distinction: "application"
+    note: "hashcat separates these: mode 11 assumes Joomla's fixed-length salt, mode 10 is the generic construction"
 vectors:
   - hash: "25e0e3a09fb987a37f3e57b3c77debb4:AnTomd3E87cHv8hYodF1"
     pass: "rosetta"

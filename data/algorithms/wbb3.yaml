@@ -2,6 +2,8 @@ id: "wbb3"
 name: "WBB3"
 expression: "sha1($s.sha1($s.sha1($p)))"
 john_dynamic_expr: "dynamic=sha1($s.sha1($s.sha1($p)))"
+category: "application"
+application: "Woltlab Burning Board 3"
 status: "needs-review"
 tools:
   hashcat:
@@ -22,6 +24,11 @@ tools:
     note: "format discovered by round-trip search, not by name"
   crack:
     supported: false
+relations:
+  - kind: "same-computation"
+    entry: "sha1-salt-sha1-salt-sha1-plain-aka-opencart"
+    distinction: "application"
+    note: "OpenCart and Woltlab Burning Board reach the same construction; john maps both to dynamic_38"
 vectors:
   - hash: "e4351f5c90ae882a35a1b94ac837088707111680:0000000000000000000000000000000000000000"
     pass: "password123"

@@ -11,6 +11,11 @@ tools:
     verified_with: "mdxfind"
   crack:
     supported: false
+relations:
+  - kind: "collides-on-subset"
+    entry: "md5-sha1-pass"
+    distinction: "encoding"
+    note: "MD5CAPSHA1 is md5(cap(sha1($p))) and cap() is a no-op on a lowercase digest, so john's dynamic_22 (md5(sha1($p))) cracks its vector without denoting it"
 vectors:
   - hash: "17fd98f4dab3a23ddcaa51325c88248f"
     pass: "rosetta"

@@ -2,6 +2,8 @@ id: "ciscoasa"
 name: "CISCOASA"
 expression: "md5($p.$s)"
 john_dynamic_expr: "dynamic=md5($p.$s)"
+category: "application"
+application: "Cisco ASA"
 status: "needs-review"
 tools:
   hashcat:
@@ -22,6 +24,11 @@ tools:
     note: "format discovered by round-trip search, not by name"
   crack:
     supported: false
+relations:
+  - kind: "same-computation"
+    entry: "md5-pass-salt"
+    distinction: "application"
+    note: "same construction, different product convention"
 vectors:
   - hash: "iOZ4lbE3GPO/eeeS:36"
     pass: "password123"

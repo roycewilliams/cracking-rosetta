@@ -22,6 +22,11 @@ tools:
     note: "format discovered by round-trip search, not by name"
   crack:
     supported: false
+relations:
+  - kind: "same-computation"
+    entry: "md5-userid-md5-plain"
+    distinction: "salt-convention"
+    note: "identical computation; mdxfind reads the second field as a userid (-u) rather than a salt"
 vectors:
   - hash: "5c9c872a5b69f166e71ff4a1e5607cf7:hMXRLhX"
     pass: "rosetta"

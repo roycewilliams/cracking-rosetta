@@ -19,6 +19,11 @@ tools:
     note: "format discovered by round-trip search, not by name"
   crack:
     supported: false
+relations:
+  - kind: "same-computation"
+    entry: "md5-md5-pass-salt"
+    distinction: "application"
+    note: "same construction; the cap() in the name is a no-op on a lowercase digest"
 vectors:
   - hash: "05b56c69b512a1c641fc59d1070df60b:abc123"
     pass: "rosetta"

@@ -20,6 +20,11 @@ tools:
     note: "format discovered by round-trip search, not by name"
   crack:
     supported: false
+relations:
+  - kind: "same-computation"
+    entry: "sha1-sha1-plain-salt"
+    distinction: "application"
+    note: "same construction; the substr in the second name describes a product's salt derivation, not a different digest"
 vectors:
   - hash: "fc8ee9b8a5de83a40eff442213e983573a6979ac:r"
     pass: "rosetta"

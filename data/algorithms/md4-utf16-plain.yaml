@@ -22,6 +22,15 @@ tools:
     note: "format discovered by round-trip search, not by name"
   crack:
     supported: false
+relations:
+  - kind: "duplicate-of"
+    entry: "ntlm-plain-md4-utf16-le-plain"
+    distinction: "none"
+    note: "third spelling of NTLM imported from the sheet"
+  - kind: "duplicate-of"
+    entry: "ntlmh"
+    distinction: "none"
+    note: "both are NTLM: hashcat 1000, john NT, mdxfind MD4UTF16 and NTLMH are the same digest"
 vectors:
   - hash: "a2dde7c8056b54f9f419fc9b62cb6611"
     pass: "rosetta"

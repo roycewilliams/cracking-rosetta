@@ -20,6 +20,11 @@ tools:
     note: "format discovered by round-trip search, not by name"
   crack:
     supported: false
+relations:
+  - kind: "same-computation"
+    entry: "md5-md5-pass-salt"
+    distinction: "application"
+    note: "same construction, mdxfind type MD5MD5USER reading the second field as a userid"
 vectors:
   - hash: "05b56c69b512a1c641fc59d1070df60b:abc123"
     pass: "rosetta"

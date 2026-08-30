@@ -22,6 +22,11 @@ tools:
     verified_with: "john"
   crack:
     supported: false
+relations:
+  - kind: "duplicate-of"
+    entry: "md4-utf16-plain"
+    distinction: "none"
+    note: "third spelling of NTLM imported from the sheet"
 vectors:
   - hash: "a2dde7c8056b54f9f419fc9b62cb6611"
     pass: "rosetta"

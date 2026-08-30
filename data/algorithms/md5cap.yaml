@@ -12,6 +12,11 @@ tools:
     verified_with: "mdxfind"
   crack:
     supported: false
+relations:
+  - kind: "collides-on-subset"
+    entry: "md5"
+    distinction: "encoding"
+    note: "MD5CAP is cap(md5($p)), a no-op whenever the digest contains no letters to capitalise, so john's dynamic_2 and plain MD5 crack its vector without denoting it"
 vectors:
   - hash: "bd62daf88a5f6d734e91228e7f2e540a"
     pass: "rosetta"

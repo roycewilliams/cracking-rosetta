@@ -2,6 +2,9 @@ id: "vbulletin-v3-8-5"
 name: "vBulletin < v3.8.5"
 expression: "md5(md5($p).$s)"
 john_dynamic_expr: "dynamic=md5(md5($p).$s)"
+category: "application"
+application: "vBulletin"
+application_version: "<3.8.5"
 status: "needs-review"
 tools:
   hashcat:
@@ -22,6 +25,15 @@ tools:
     note: "format discovered by round-trip search, not by name"
   crack:
     supported: false
+relations:
+  - kind: "same-computation"
+    entry: "md5-md5-pass-salt"
+    distinction: "application"
+    note: "vBulletin's use of md5(md5($p).$s); hashcat gives it mode 2611"
+  - kind: "same-computation"
+    entry: "vbulletin-v3-8-5-2"
+    distinction: "application"
+    note: "the vBulletin split: hashcat 2611 for versions before 3.8.5 and 2711 from 3.8.5, same construction, different salt length"
 vectors:
   - hash: "896bdefea73a4d4ffd6218267b753530:Hgd"
     pass: "rosetta"

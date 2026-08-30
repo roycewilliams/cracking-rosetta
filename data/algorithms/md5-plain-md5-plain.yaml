@@ -12,6 +12,11 @@ tools:
     verified_with: "mdxfind"
   crack:
     supported: false
+relations:
+  - kind: "collides-on-subset"
+    entry: "md5-pass-md5-salt"
+    distinction: "salt-convention"
+    note: "md5($p.md5($p)) and md5($p.md5($s)) agree exactly when the salt is the password, which two of john's four dynamic_1011 test vectors happen to do"
 vectors:
   - hash: "4c8696c5de62e8c3b256a14a6fbeee1e"
     pass: "rosetta"
