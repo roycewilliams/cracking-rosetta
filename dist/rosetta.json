@@ -17,8 +17,8 @@
             "ids" : [
                11600
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "7zip",
          "john" : {
@@ -38,7 +38,7 @@
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -589,8 +589,8 @@
             "ids" : [
                34000
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "argon2",
          "john" : {
@@ -605,15 +605,15 @@
             "ids" : [
                "ARGON2"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "ARGON2",
          "notes" : "",
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 2
+         "vecs" : 3
       },
       {
          "alias" : "",
@@ -670,8 +670,8 @@
             "ids" : [
                8501
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "as400-des",
          "john" : {
@@ -691,7 +691,7 @@
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -2508,8 +2508,8 @@
             "ids" : [
                14100
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "des3encrypt",
          "john" : {
@@ -2529,7 +2529,7 @@
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -2589,8 +2589,8 @@
             "ids" : [
                14000
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "desencrypt",
          "john" : {
@@ -2610,7 +2610,7 @@
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -7662,8 +7662,8 @@
             "ids" : [
                5300
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "ikepsk-md5",
          "john" : {
@@ -7683,7 +7683,7 @@
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -7701,8 +7701,8 @@
             "ids" : [
                5400
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "ikepsk-sha1",
          "john" : {
@@ -7722,7 +7722,7 @@
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -7782,8 +7782,8 @@
             "ids" : [
                7350
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "ipmi2-md5",
          "john" : {
@@ -7803,7 +7803,7 @@
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -7821,8 +7821,8 @@
             "ids" : [
                7300
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "ipmi2-sha1",
          "john" : {
@@ -7842,7 +7842,7 @@
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -8043,8 +8043,8 @@
             "ids" : [
                11
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "joomla",
          "john" : {
@@ -8077,7 +8077,7 @@
          ],
          "sameas" : "same as md5-pass-salt (application)",
          "status" : "needs-review",
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -8095,8 +8095,8 @@
             "ids" : [
                501
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "juniperive",
          "john" : {
@@ -8116,7 +8116,7 @@
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -8296,8 +8296,8 @@
             "ids" : [
                5000
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "keccak256",
          "john" : {
@@ -8320,7 +8320,7 @@
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -8617,8 +8617,8 @@
             "ids" : [
                19800
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "krb5pa-17",
          "john" : {
@@ -8638,7 +8638,7 @@
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -8656,8 +8656,8 @@
             "ids" : [
                19900
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "krb5pa-18",
          "john" : {
@@ -8677,7 +8677,7 @@
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -8737,8 +8737,8 @@
             "ids" : [
                13100
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "krb5tgs23",
          "john" : {
@@ -8761,7 +8761,7 @@
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 2
+         "vecs" : 3
       },
       {
          "alias" : "",
@@ -8779,8 +8779,8 @@
             "ids" : [
                6800
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "lastpass",
          "john" : {
@@ -8792,15 +8792,15 @@
             "ids" : [
                "LASTPASS"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "LASTPASS",
          "notes" : "",
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -8828,15 +8828,15 @@
             "ids" : [
                "LEET-SHA512-WRL-USER"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "LEET-SHA512-WRL-USER",
          "notes" : "",
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 0
+         "vecs" : 1
       },
       {
          "alias" : "",
@@ -8854,8 +8854,8 @@
             "ids" : [
                3000
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "lm",
          "john" : {
@@ -8879,7 +8879,7 @@
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -9589,13 +9589,18 @@
             "ids" : [
                1000
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "md4-utf16-le-utf-8-plain",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "NT",
+               "NT-long",
+               "dynamic_33"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "TROLLHUNTNTLM",
          "mdxfind" : {
@@ -9607,7 +9612,7 @@
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 0
+         "vecs" : 1
       },
       {
          "alias" : "",
@@ -9676,8 +9681,8 @@
          },
          "cracknote" : "",
          "denotation" : "",
-         "expr" : "",
-         "expr_tier" : "",
+         "expr" : "md5(md5($p).$p.sha1($p))",
+         "expr_tier" : "vector",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -9692,15 +9697,15 @@
             "ids" : [
                "MD5MD5PASSSHA1"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "md5( md5($pass) . $pass . sha1($pass) )",
          "notes" : "",
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 0
+         "vecs" : 1
       },
       {
          "alias" : "",
@@ -9961,8 +9966,8 @@
          },
          "cracknote" : "",
          "denotation" : "",
-         "expr" : "",
-         "expr_tier" : "",
+         "expr" : "md5($p.md5(md5(md5($p))))",
+         "expr_tier" : "vector",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -9977,15 +9982,15 @@
             "ids" : [
                "MD5PASSMD5MD5MD5"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "md5($plain.$md5(md5(md5($plain))))",
          "notes" : "",
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 0
+         "vecs" : 1
       },
       {
          "alias" : "md5($plain.\":\".md5($plain))",
@@ -10040,8 +10045,8 @@
          },
          "cracknote" : "",
          "denotation" : "",
-         "expr" : "",
-         "expr_tier" : "",
+         "expr" : "md5($p.md5(md5($p).$p))",
+         "expr_tier" : "vector",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -10056,15 +10061,15 @@
             "ids" : [
                "MD5PASSMD5MD5PASS"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "md5($plain.md5(md5($plain)))",
          "notes" : "",
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 0
+         "vecs" : 1
       },
       {
          "alias" : "",
@@ -10309,16 +10314,16 @@
                "dynamic_14",
                "dynamic_2011"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "MD5(SALTMD5(PLAINSALT)); md5($salt.md5($pass.$salt))",
          "mdxfind" : {
             "ids" : [
                "MD5-SALTMD5PASS-SALT"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "md5($salt.md5($pass.$salt))",
          "notes" : "",
@@ -10332,7 +10337,7 @@
          ],
          "sameas" : "duplicate of md5-saltmd5passsalt",
          "status" : "needs-review",
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -10423,14 +10428,14 @@
          },
          "cracknote" : "",
          "denotation" : "",
-         "expr" : "",
-         "expr_tier" : "",
+         "expr" : "md5($s.sha1($s.$p))",
+         "expr_tier" : "vector",
          "hashcat" : {
             "ids" : [
                21300
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "md5-salt-sha1-salt-plain",
          "john" : {
@@ -10442,15 +10447,15 @@
             "ids" : [
                "MD5-SALTSHA1SALTPASS"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "md5($salt.sha1($salt.$plain))",
          "notes" : "",
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 0
+         "vecs" : 1
       },
       {
          "alias" : "",
@@ -10597,15 +10602,15 @@
             "ids" : [
                "MD5BASE64SHA256RAW"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "md5(base64(raw_sha256)) ?",
          "notes" : "",
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 0
+         "vecs" : 1
       },
       {
          "alias" : "",
@@ -11590,7 +11595,7 @@
          ],
          "sameas" : "same as md5-capitalise-md5-plain-username (application); same as md5-md5-plain-salt-3 (application); same as vbulletin-v3-8-5 (application)",
          "status" : "needs-review",
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -11680,8 +11685,8 @@
          },
          "cracknote" : "",
          "denotation" : "",
-         "expr" : "",
-         "expr_tier" : "",
+         "expr" : "md5(md5($p).$p.md5($p))",
+         "expr_tier" : "vector",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -11696,15 +11701,15 @@
             "ids" : [
                "MD5-MD5PASSMD5"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "md5(md5($plain).$plain.md5($plain))",
          "notes" : "",
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 0
+         "vecs" : 1
       },
       {
          "alias" : "md5($salt.md5($plain)); md5(substr($salt,0,1).md5($plain).substr($salt,1,1))",
@@ -12365,8 +12370,8 @@
             "ids" : [
                31700
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "md5-md5-md5-plain-salt1-salt2",
          "john" : {
@@ -12383,7 +12388,7 @@
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 0
+         "vecs" : 1
       },
       {
          "alias" : "",
@@ -13320,8 +13325,8 @@
             "ids" : [
                20900
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "md5-sha1-plain-md5-pass-sha1-plain",
          "john" : {
@@ -13336,15 +13341,15 @@
             "ids" : [
                "MD5SHA1PASSMD5PASSSHA1PASS"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "md5(sha1($plain).md5($pass).sha1($plain))",
          "notes" : "",
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 1
+         "vecs" : 3
       },
       {
          "alias" : "",
@@ -13434,8 +13439,8 @@
             "ids" : [
                4420
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "md5-sha1-plain-salt",
          "john" : {
@@ -13447,15 +13452,15 @@
             "ids" : [
                "MD5SHA1PASSSALT"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "md5(sha1($plain.$salt))",
          "notes" : "",
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 0
+         "vecs" : 1
       },
       {
          "alias" : "",
@@ -13467,14 +13472,14 @@
          },
          "cracknote" : "",
          "denotation" : "",
-         "expr" : "",
-         "expr_tier" : "",
+         "expr" : "md5(sha1($s).md5($p))",
+         "expr_tier" : "vector",
          "hashcat" : {
             "ids" : [
                21200
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "md5-sha1-salt-md5-plain",
          "john" : {
@@ -13486,15 +13491,15 @@
             "ids" : [
                "MD5SHA1SALTMD5PASS"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "md5(sha1($salt).md5($plain))",
          "notes" : "",
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 0
+         "vecs" : 1
       },
       {
          "alias" : "",
@@ -14689,15 +14694,15 @@
             "ids" : [
                "MD5SHA1UCMD5UC"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "md5(strtoupper(sha1(strtoupper(md5('$pass')))));",
          "notes" : "",
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 0
+         "vecs" : 1
       },
       {
          "alias" : "",
@@ -15019,15 +15024,15 @@
             "ids" : [
                "MD5-2xMD5UC"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "MD5-2xMD5UC",
          "notes" : "",
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 0
+         "vecs" : 1
       },
       {
          "alias" : "",
@@ -15055,15 +15060,15 @@
             "ids" : [
                "MD5-2xSHA1"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "MD5-2xSHA1",
          "notes" : "",
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 0
+         "vecs" : 1
       },
       {
          "alias" : "",
@@ -15091,15 +15096,15 @@
             "ids" : [
                "MD5-4xMD5"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "MD5-4xMD5",
          "notes" : "",
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 0
+         "vecs" : 1
       },
       {
          "alias" : "",
@@ -15127,15 +15132,15 @@
             "ids" : [
                "MD5-4xMD5-SALT"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "MD5-4xMD5-SALT",
          "notes" : "",
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 0
+         "vecs" : 1
       },
       {
          "alias" : "",
@@ -15352,15 +15357,15 @@
             "ids" : [
                "MD5-MD5SHA1MD5SHA1MD5SHA1p"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "MD5-MD5SHA1MD5SHA1MD5SHA1p",
          "notes" : "",
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 0
+         "vecs" : 1
       },
       {
          "alias" : "",
@@ -15388,15 +15393,15 @@
             "ids" : [
                "MD5-MD5USERSHA1MD5PASS"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "MD5-MD5USERSHA1MD5PASS",
          "notes" : "",
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 0
+         "vecs" : 1
       },
       {
          "alias" : "",
@@ -15513,15 +15518,15 @@
             "ids" : [
                "MD5-SHA1numSHA1"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "MD5-SHA1numSHA1",
          "notes" : "",
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 0
+         "vecs" : 1
       },
       {
          "alias" : "",
@@ -15660,15 +15665,15 @@
             "ids" : [
                "MD5BASE64BASE64"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "MD5BASE64BASE64",
          "notes" : "",
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 0
+         "vecs" : 1
       },
       {
          "alias" : "",
@@ -15696,15 +15701,15 @@
             "ids" : [
                "MD5BASE64BASE64BASE64"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "MD5BASE64BASE64BASE64",
          "notes" : "",
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 0
+         "vecs" : 1
       },
       {
          "alias" : "",
@@ -16139,15 +16144,15 @@
             "ids" : [
                "MD5MD5UCp"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "MD5MD5UCp",
          "notes" : "",
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 0
+         "vecs" : 1
       },
       {
          "alias" : "",
@@ -16175,15 +16180,15 @@
             "ids" : [
                "MD5MD5UCSHA1MD5MD5"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "MD5MD5UCSHA1MD5MD5",
          "notes" : "",
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 0
+         "vecs" : 1
       },
       {
          "alias" : "",
@@ -16211,15 +16216,15 @@
             "ids" : [
                "MD5MD5UCSQL3p"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "MD5MD5UCSQL3p",
          "notes" : "",
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 0
+         "vecs" : 1
       },
       {
          "alias" : "",
@@ -16247,15 +16252,15 @@
             "ids" : [
                "MD5NTLMp"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "MD5NTLMp",
          "notes" : "",
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 0
+         "vecs" : 1
       },
       {
          "alias" : "",
@@ -16283,15 +16288,15 @@
             "ids" : [
                "MD5padMD5"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "MD5padMD5",
          "notes" : "",
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 0
+         "vecs" : 1
       },
       {
          "alias" : "",
@@ -16303,8 +16308,8 @@
          },
          "cracknote" : "",
          "denotation" : "",
-         "expr" : "",
-         "expr_tier" : "",
+         "expr" : "md5($p.sha1($p))",
+         "expr_tier" : "vector",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -16319,15 +16324,15 @@
             "ids" : [
                "MD5PASSSHA1"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "MD5PASSSHA1",
          "notes" : "",
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 0
+         "vecs" : 1
       },
       {
          "alias" : "",
@@ -16394,15 +16399,15 @@
             "ids" : [
                "MD5SHA0"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "MD5SHA0",
          "notes" : "",
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 0
+         "vecs" : 1
       },
       {
          "alias" : "",
@@ -16574,15 +16579,15 @@
             "ids" : [
                "MD5SHA1MD5MD5UC"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "MD5SHA1MD5MD5UC",
          "notes" : "",
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 0
+         "vecs" : 1
       },
       {
          "alias" : "",
@@ -16610,15 +16615,15 @@
             "ids" : [
                "MD5SHA1MD5SHA1MD5SHA1MD5SHA1MD5SHA1MD5SHA1"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "MD5SHA1MD5SHA1MD5SHA1MD5SHA1MD5SHA1MD5SHA1",
          "notes" : "",
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 0
+         "vecs" : 1
       },
       {
          "alias" : "",
@@ -16718,15 +16723,15 @@
             "ids" : [
                "MD5SHA1RADMIN2MD5"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "MD5SHA1RADMIN2MD5",
          "notes" : "",
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 0
+         "vecs" : 1
       },
       {
          "alias" : "",
@@ -16793,15 +16798,15 @@
             "ids" : [
                "MD5SHA1u32SALT"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "MD5SHA1u32SALT",
          "notes" : "",
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 0
+         "vecs" : 1
       },
       {
          "alias" : "",
@@ -16829,15 +16834,15 @@
             "ids" : [
                "MD5SHA1UCu32"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "MD5SHA1UCu32",
          "notes" : "",
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 0
+         "vecs" : 1
       },
       {
          "alias" : "",
@@ -16849,8 +16854,8 @@
          },
          "cracknote" : "",
          "denotation" : "",
-         "expr" : "",
-         "expr_tier" : "",
+         "expr" : "md5(sha256(md5($p)))",
+         "expr_tier" : "vector",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -16865,15 +16870,15 @@
             "ids" : [
                "MD5SHA256MD5"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "MD5SHA256MD5",
          "notes" : "",
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 0
+         "vecs" : 1
       },
       {
          "alias" : "",
@@ -16999,8 +17004,8 @@
             "ids" : [
                4300
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "md5uc",
          "john" : {
@@ -17032,7 +17037,7 @@
          ],
          "sameas" : "encoding of md5 (encoding)",
          "status" : "needs-review",
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -17096,15 +17101,15 @@
             "ids" : [
                "MD5UCBASE64SHA1RAW"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "MD5UCBASE64SHA1RAW",
-         "notes" : "",
+         "notes" : "The vendored catalog renders this type's example digest in uppercase hex, and mdxfind will not read it back in that case, so the seeding pass could not verify it. mdxfind -z computes the same digest in lowercase for the same plaintext, and pinned to ^MD5UCBASE64SHA1RAW$ it reproduces that form; the stored vector is the catalog's own digest re-cased, not one we invented. Fourteen other types carry an uppercase example (MD5UC, SHA1UC, SHA256UC, RACF, ORACLE7 among them) and are NOT all the same story -- MD5UC and SHA256UC do not reproduce in either case.",
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 0
+         "vecs" : 1
       },
       {
          "alias" : "",
@@ -17129,23 +17134,23 @@
                "dynamic_2004",
                "dynamic_4"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
             "ids" : [
                "MD5USERPASS"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "MD5USERPASS",
          "notes" : "",
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 2
+         "vecs" : 3
       },
       {
          "alias" : "",
@@ -17360,23 +17365,26 @@
          },
          "id" : "mdc2",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "mdc2"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
             "ids" : [
                "MDC2"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "MDC2",
          "notes" : "",
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 0
+         "vecs" : 1
       },
       {
          "alias" : "",
@@ -17514,8 +17522,8 @@
             "ids" : [
                1100
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "mscache-plain",
          "john" : {
@@ -17535,7 +17543,7 @@
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -17634,16 +17642,16 @@
             "ids" : [
                131
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "mssql2000",
          "john" : {
             "ids" : [
                "mssql"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -17658,7 +17666,7 @@
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -17799,8 +17807,8 @@
             "ids" : [
                34200
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "murmur64a",
          "john" : {
@@ -17820,7 +17828,7 @@
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -17919,8 +17927,8 @@
             "ids" : [
                7401
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "mysql-sha256crypt",
          "john" : {
@@ -17940,7 +17948,7 @@
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -18083,8 +18091,8 @@
             "ids" : [
                5600
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "netntlmv2",
          "john" : {
@@ -18108,7 +18116,7 @@
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 3
+         "vecs" : 4
       },
       {
          "alias" : "",
@@ -18327,8 +18335,8 @@
             "ids" : [
                8300
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "nsec3",
          "john" : {
@@ -18348,7 +18356,7 @@
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -18829,8 +18837,8 @@
             "ids" : [
                20400
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "pbkdf2-sha1-plain",
          "john" : {
@@ -18842,15 +18850,15 @@
             "ids" : [
                "PBKDF2-SHA1"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "pbkdf2-sha1($plain)",
          "notes" : "",
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 0
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -18868,8 +18876,8 @@
             "ids" : [
                10000
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "pbkdf2-sha256-plain",
          "john" : {
@@ -18881,15 +18889,15 @@
             "ids" : [
                "PBKDF2-SHA256"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "pbkdf2-sha256($plain)",
          "notes" : "",
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 0
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -18907,8 +18915,8 @@
             "ids" : [
                20200
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "pbkdf2-sha512-plain",
          "john" : {
@@ -18923,15 +18931,15 @@
             "ids" : [
                "PBKDF2-SHA512"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "pbkdf2-sha512($plain)",
          "notes" : "",
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 1
+         "vecs" : 3
       },
       {
          "alias" : "",
@@ -19076,23 +19084,26 @@
          },
          "id" : "pkcs5s2",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "PBKDF2-HMAC-SHA1"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
             "ids" : [
                "PKCS5S2"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "PKCS5S2",
          "notes" : "",
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 0
+         "vecs" : 1
       },
       {
          "alias" : "null($plain)",
@@ -19230,8 +19241,8 @@
             "ids" : [
                12
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "postgresql",
          "john" : {
@@ -19243,15 +19254,15 @@
             "ids" : [
                "POSTGRESQL"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "POSTGRESQL",
          "notes" : "",
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -19269,8 +19280,8 @@
             "ids" : [
                28600
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "postgresscram256",
          "john" : {
@@ -19290,7 +19301,7 @@
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -19347,8 +19358,8 @@
             "ids" : [
                13500
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "ps-token",
          "john" : {
@@ -19368,7 +19379,7 @@
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -19425,8 +19436,8 @@
             "ids" : [
                19000
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "qnx-md5",
          "john" : {
@@ -19449,7 +19460,7 @@
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -19467,8 +19478,8 @@
             "ids" : [
                19100
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "qnx-sha256",
          "john" : {
@@ -19491,7 +19502,7 @@
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -19509,8 +19520,8 @@
             "ids" : [
                19200
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "qnx-sha512",
          "john" : {
@@ -19533,7 +19544,7 @@
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 2
+         "vecs" : 3
       },
       {
          "alias" : "",
@@ -19572,7 +19583,7 @@
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -19590,8 +19601,8 @@
             "ids" : [
                8500
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "racf",
          "john" : {
@@ -19611,7 +19622,7 @@
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -20630,8 +20641,8 @@
          },
          "cracknote" : "",
          "denotation" : "",
-         "expr" : "",
-         "expr_tier" : "",
+         "expr" : "ripemd128(md4($p))",
+         "expr_tier" : "vector",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -20646,15 +20657,15 @@
             "ids" : [
                "RMD128MD4"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "RMD128MD4",
          "notes" : "",
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 0
+         "vecs" : 1
       },
       {
          "alias" : "",
@@ -20877,8 +20888,8 @@
             "ids" : [
                7700
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "sap-bcode",
          "john" : {
@@ -20901,7 +20912,7 @@
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 2
+         "vecs" : 3
       },
       {
          "alias" : "",
@@ -20919,8 +20930,8 @@
             "ids" : [
                7701
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "sap-bcode4",
          "john" : {
@@ -20940,7 +20951,7 @@
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -20958,8 +20969,8 @@
             "ids" : [
                7800
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "sap-passcode",
          "john" : {
@@ -20979,7 +20990,7 @@
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -20997,8 +21008,8 @@
             "ids" : [
                7801
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "sap-passcode5",
          "john" : {
@@ -21018,7 +21029,7 @@
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -21632,14 +21643,14 @@
          },
          "cracknote" : "",
          "denotation" : "",
-         "expr" : "",
-         "expr_tier" : "",
+         "expr" : "sha1(md5($p).$s)",
+         "expr_tier" : "vector",
          "hashcat" : {
             "ids" : [
                4710
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "sha1-md5-pass-salt",
          "john" : {
@@ -21651,15 +21662,22 @@
             "ids" : [
                "SHA1-MD5PASSSALT"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "sha1(md5($pass).$salt)",
          "notes" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "none",
+               "entry" : "sha1-md5-md5-pass-salt",
+               "kind" : "duplicate-of",
+               "note" : "mdxfind types SHA1MD5SALT (e587) and SHA1-MD5PASSSALT (e578) publish the same example vector and mdxfind -z computes the same digest for both, so they are one computation under two type indices. Perl Digest::MD5/SHA, independent of all three crackers, confirms 18768e97...c76d2c is sha1(md5($p).$s) and NOT the sha1(md5(md5($pass).$salt)) this entry's name asserts -- the name is wrong, and the merge would settle it."
+            }
+         ],
+         "sameas" : "duplicate of sha1-md5-md5-pass-salt",
          "status" : "needs-review",
-         "vecs" : 0
+         "vecs" : 1
       },
       {
          "alias" : "",
@@ -21851,8 +21869,8 @@
          },
          "cracknote" : "",
          "denotation" : "",
-         "expr" : "",
-         "expr_tier" : "",
+         "expr" : "sha1(md5($p).$s)",
+         "expr_tier" : "vector",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -21867,15 +21885,22 @@
             "ids" : [
                "SHA1MD5SALT"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "sha1(md5(md5($pass).$salt))",
          "notes" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "none",
+               "entry" : "sha1-md5-pass-salt",
+               "kind" : "duplicate-of",
+               "note" : "mdxfind types SHA1MD5SALT (e587) and SHA1-MD5PASSSALT (e578) publish the same example vector and mdxfind -z computes the same digest for both, so they are one computation under two type indices. Perl Digest::MD5/SHA, independent of all three crackers, confirms 18768e97...c76d2c is sha1(md5($p).$s) and NOT the sha1(md5(md5($pass).$salt)) this entry's name asserts -- the name is wrong, and the merge would settle it."
+            }
+         ],
+         "sameas" : "duplicate of sha1-md5-pass-salt",
          "status" : "needs-review",
-         "vecs" : 0
+         "vecs" : 1
       },
       {
          "alias" : "sha1(md5(md5($pass)))",
@@ -21945,15 +21970,15 @@
             "ids" : [
                "SHA1MD5MD5PASS"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "sha1(md5(md5($plain).$plain)",
          "notes" : "",
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 0
+         "vecs" : 1
       },
       {
          "alias" : "sha1(md5(md5($plain).$salt.$salt)); sha1(md5($salt.md5($plain))); sha1(md5($salt.md5($plain).$salt)); sha1(md5($salt.$salt.md5($plain)))",
@@ -23370,28 +23395,31 @@
             "ids" : [
                170
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "sha1-utf16le-pass",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "dynamic_1400"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "n/a",
          "mdxfind" : {
             "ids" : [
                "SHA1UTF16LE"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "sha1(utf16le($pass))",
          "notes" : "",
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 0
+         "vecs" : 1
       },
       {
          "alias" : "",
@@ -23491,15 +23519,15 @@
             "ids" : [
                "SHA1-2xMD5"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "SHA1-2xMD5",
          "notes" : "",
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 0
+         "vecs" : 1
       },
       {
          "alias" : "",
@@ -23563,15 +23591,15 @@
             "ids" : [
                "SHA1-CUSTOMUSERSALT"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "SHA1-CUSTOMUSERSALT",
          "notes" : "",
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 0
+         "vecs" : 1
       },
       {
          "alias" : "",
@@ -23599,15 +23627,15 @@
             "ids" : [
                "SHA1-revMD5SALT"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "SHA1-revMD5SALT",
          "notes" : "",
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 0
+         "vecs" : 1
       },
       {
          "alias" : "",
@@ -23674,15 +23702,15 @@
             "ids" : [
                "SHA1-SALT-SPECIAL"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "SHA1-SALT-SPECIAL",
          "notes" : "",
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 0
+         "vecs" : 1
       },
       {
          "alias" : "",
@@ -23710,15 +23738,15 @@
             "ids" : [
                "SHA1-SALT-UTF16-PEPPER"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "SHA1-SALT-UTF16-PEPPER",
          "notes" : "",
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 0
+         "vecs" : 1
       },
       {
          "alias" : "",
@@ -23858,8 +23886,8 @@
             "ids" : [
                15100
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "sha1crypt",
          "john" : {
@@ -23882,7 +23910,7 @@
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -23910,15 +23938,15 @@
             "ids" : [
                "SHA1DRU"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "SHA1DRU",
          "notes" : "",
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 0
+         "vecs" : 1
       },
       {
          "alias" : "",
@@ -23946,15 +23974,15 @@
             "ids" : [
                "SHA1lsb32"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "SHA1lsb32",
          "notes" : "",
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 0
+         "vecs" : 1
       },
       {
          "alias" : "",
@@ -23985,15 +24013,15 @@
             "ids" : [
                "SHA1lsb35"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "SHA1lsb35",
          "notes" : "",
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -24041,8 +24069,8 @@
          },
          "cracknote" : "",
          "denotation" : "",
-         "expr" : "",
-         "expr_tier" : "",
+         "expr" : "sha1(md5(md5($p)).$s)",
+         "expr_tier" : "vector",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -24057,15 +24085,15 @@
             "ids" : [
                "SHA1MD5MD5SALT"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "SHA1MD5MD5SALT",
          "notes" : "",
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 0
+         "vecs" : 1
       },
       {
          "alias" : "",
@@ -24077,8 +24105,8 @@
          },
          "cracknote" : "",
          "denotation" : "",
-         "expr" : "",
-         "expr_tier" : "",
+         "expr" : "sha1(md5(md5(sha1(md5(sha1(sha1(md5($p))))))))",
+         "expr_tier" : "vector",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -24093,15 +24121,15 @@
             "ids" : [
                "SHA1MD5MD5SHA1MD5SHA1SHA1MD5"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "SHA1MD5MD5SHA1MD5SHA1SHA1MD5",
          "notes" : "",
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 0
+         "vecs" : 1
       },
       {
          "alias" : "",
@@ -24207,15 +24235,15 @@
             "ids" : [
                "SHA1revMD5PASSSALT"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "SHA1revMD5PASSSALT",
          "notes" : "",
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 0
+         "vecs" : 1
       },
       {
          "alias" : "",
@@ -24263,8 +24291,8 @@
          },
          "cracknote" : "",
          "denotation" : "",
-         "expr" : "",
-         "expr_tier" : "",
+         "expr" : "sha1($s.md5($p))",
+         "expr_tier" : "vector",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -24279,15 +24307,15 @@
             "ids" : [
                "SHA1SALTMD5PASS"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "SHA1SALTMD5PASS",
          "notes" : "",
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 0
+         "vecs" : 1
       },
       {
          "alias" : "",
@@ -24315,15 +24343,15 @@
             "ids" : [
                "SHA1SALTrevMD5PASS"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "SHA1SALTrevMD5PASS",
          "notes" : "",
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 0
+         "vecs" : 1
       },
       {
          "alias" : "",
@@ -24426,15 +24454,15 @@
             "ids" : [
                "SHA1USERSQL3"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "SHA1USERSQL3",
          "notes" : "",
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 0
+         "vecs" : 1
       },
       {
          "alias" : "",
@@ -25017,37 +25045,37 @@
          },
          "cracknote" : "",
          "denotation" : "",
-         "expr" : "",
-         "expr_tier" : "",
+         "expr" : "sha256($s.sha256($p))",
+         "expr_tier" : "vector",
          "hashcat" : {
             "ids" : [
                20720
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "sha256-salt-sha256-pass",
          "john" : {
             "ids" : [
                "dynamic_66"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
             "ids" : [
                "SHA256SALTSHA256PASS"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "sha256($salt.sha256($pass))",
          "notes" : "",
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 0
+         "vecs" : 1
       },
       {
          "alias" : "",
@@ -25365,8 +25393,8 @@
          },
          "cracknote" : "",
          "denotation" : "",
-         "expr" : "",
-         "expr_tier" : "",
+         "expr" : "sha256(md5($s.$p))",
+         "expr_tier" : "vector",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -25381,15 +25409,15 @@
             "ids" : [
                "SHA256MD5SALTPASS"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "SHA256MD5SALTPASS",
          "notes" : "",
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 0
+         "vecs" : 1
       },
       {
          "alias" : "",
@@ -25421,8 +25449,8 @@
             "ids" : [
                "SHA256RAWSALTPASS"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "SHA256RAWSALTPASS",
          "notes" : "",
@@ -25436,7 +25464,7 @@
          ],
          "sameas" : "encoding of sha256-salt-pass (encoding)",
          "status" : "needs-review",
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -25493,8 +25521,8 @@
             "ids" : [
                20710
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "sha256sha256salt",
          "john" : {
@@ -25502,23 +25530,23 @@
                "dynamic_1503",
                "dynamic_65"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
             "ids" : [
                "SHA256SHA256SALT"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "SHA256SHA256SALT",
          "notes" : "",
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 1
+         "vecs" : 3
       },
       {
          "alias" : "",
@@ -26775,15 +26803,15 @@
             "ids" : [
                "SHA512SALTMD5"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "SHA512SALTMD5",
          "notes" : "",
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 0
+         "vecs" : 1
       },
       {
          "alias" : "",
@@ -26795,8 +26823,8 @@
          },
          "cracknote" : "",
          "denotation" : "",
-         "expr" : "",
-         "expr_tier" : "",
+         "expr" : "sha512($s.sha512($p))",
+         "expr_tier" : "vector",
          "hashcat" : {
             "ids" : [],
             "state" : "unknown"
@@ -26806,23 +26834,23 @@
             "ids" : [
                "dynamic_86"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
             "ids" : [
                "SHA512SALTSHA512"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "SHA512SALTSHA512",
          "notes" : "",
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 0
+         "vecs" : 1
       },
       {
          "alias" : "",
@@ -26850,15 +26878,15 @@
             "ids" : [
                "SHA512SHA512RAWUSER"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "SHA512SHA512RAWUSER",
          "notes" : "",
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 0
+         "vecs" : 1
       },
       {
          "alias" : "",
@@ -26870,37 +26898,37 @@
          },
          "cracknote" : "",
          "denotation" : "",
-         "expr" : "",
-         "expr_tier" : "",
+         "expr" : "sha512(sha512($p).$s)",
+         "expr_tier" : "vector",
          "hashcat" : {
             "ids" : [
                32410
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "sha512sha512salt",
          "john" : {
             "ids" : [
                "dynamic_85"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
             "ids" : [
                "SHA512SHA512SALT"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "SHA512SHA512SALT",
          "notes" : "",
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 0
+         "vecs" : 1
       },
       {
          "alias" : "",
@@ -29919,8 +29947,8 @@
          },
          "cracknote" : "",
          "denotation" : "",
-         "expr" : "",
-         "expr_tier" : "",
+         "expr" : "whirlpool($p.$s)",
+         "expr_tier" : "vector",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -29930,23 +29958,23 @@
             "ids" : [
                "dynamic_102"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
             "ids" : [
                "WRLPASSSALT"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "WRLPASSSALT",
          "notes" : "",
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 0
+         "vecs" : 1
       },
       {
          "alias" : "",
@@ -29958,8 +29986,8 @@
          },
          "cracknote" : "",
          "denotation" : "",
-         "expr" : "",
-         "expr_tier" : "",
+         "expr" : "whirlpool($s.$p)",
+         "expr_tier" : "vector",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -29969,23 +29997,23 @@
             "ids" : [
                "dynamic_101"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
             "ids" : [
                "WRLSALTPASS"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "WRLSALTPASS",
          "notes" : "",
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 0
+         "vecs" : 1
       },
       {
          "alias" : "",
@@ -30036,8 +30064,8 @@
          },
          "cracknote" : "",
          "denotation" : "",
-         "expr" : "",
-         "expr_tier" : "",
+         "expr" : "whirlpool($s.whirlpool($p))",
+         "expr_tier" : "vector",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -30047,23 +30075,23 @@
             "ids" : [
                "dynamic_106"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
             "ids" : [
                "WRLSALTWRL"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "WRLSALTWRL",
          "notes" : "",
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 0
+         "vecs" : 1
       },
       {
          "alias" : "",
@@ -30075,8 +30103,8 @@
          },
          "cracknote" : "",
          "denotation" : "",
-         "expr" : "",
-         "expr_tier" : "",
+         "expr" : "whirlpool(whirlpool($p).$s)",
+         "expr_tier" : "vector",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -30086,23 +30114,23 @@
             "ids" : [
                "dynamic_105"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
             "ids" : [
                "WRLWRLSALT"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "WRLWRLSALT",
          "notes" : "",
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
-         "vecs" : 0
+         "vecs" : 1
       },
       {
          "alias" : "",
@@ -30141,7 +30169,7 @@
          "vecs" : 0
       }
    ],
-   "generated" : "2026-08-29",
+   "generated" : "2026-08-30",
    "tools" : {
       "hashcat" : "v7.1.2-549-g8a15e210b",
       "john" : "1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200",
