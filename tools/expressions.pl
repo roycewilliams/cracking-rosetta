@@ -76,6 +76,17 @@ use RosettaEmit qw(emit_entry);
 
 my $PROG = basename($0);
 my $ROOT = "$RealBin/..";
+my $TODAY = do { my @t = localtime; sprintf '%04d-%02d-%02d',
+                 $t[5] + 1900, $t[4] + 1, $t[3] };
+
+# The john build string, taken from the extracted inventory rather than probed
+# again, so every tier this run writes names exactly the build data/tools was
+# generated from.
+sub john_version {
+    my $y = eval { YAML::XS::LoadFile("$ROOT/data/tools/john.yaml") };
+    my $v = $y && $y->{version};
+    return (defined $v && length $v) ? "john $v" : 'john';
+}
 
 sub usage {
     print STDERR <<"END_USAGE";
@@ -198,16 +209,39 @@ for my $f (@files) {
     my ($x) = keys %seen;
     push @{ $by_expr{$x} }, $e->{id};
 
-    if (!$overwrite && defined $e->{expression} && length $e->{expression}) {
+    # An entry that already carries this expression AND a tier for it is
+    # finished. One that carries the expression but no tier is not: it
+    # predates expression_proof: and is exactly what this pass now backfills.
+    my $has_expr  = defined $e->{expression} && length $e->{expression};
+    my $has_proof = ref $e->{expression_proof} eq 'HASH'
+                    && defined $e->{expression_proof}{verified};
+    if (!$overwrite && $has_expr && $has_proof) {
         $already++;
         next;
     }
 
-    printf "%-34s %s\n", $e->{id}, $x if $verbose || !$apply;
+    printf "%-34s %-46s %s\n", $e->{id}, $x,
+        ($has_expr && !$has_proof ? '[tier only]' : '') if $verbose || !$apply;
 
     next unless $apply;
     $e->{expression}        = $x;
     $e->{john_dynamic_expr} = "dynamic=$x";
+
+    # Tier 'upstream', not 'vector'. What was round-tripped locally is the
+    # IDENTIFIER -- the john block reached 'vector' before this pass would
+    # touch the entry. The expression itself is john's own statement about
+    # that identifier, i.e. a claim by a project that verifies by
+    # recomputation, which is precisely what 'upstream' means. Only
+    # derive-expressions.pl, which compiles the string and cracks with it,
+    # may write 'vector' here.
+    $e->{expression_proof} = {
+        verified      => 'upstream',
+        verified_at   => $TODAY,
+        verified_with => john_version(),
+        note          => 'transcribed from john --list=subformats for an '
+                       . 'identifier this entry proved by round-trip',
+    };
+    delete $e->{denotation};   # an expression supersedes the fallback wording
     $written += emit_entry($p, $e);
 }
 

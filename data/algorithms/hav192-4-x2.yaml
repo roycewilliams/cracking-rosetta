@@ -2,6 +2,11 @@ id: "hav192-4-x2"
 name: "HAV192-4 (2 iterations)"
 expression: "haval192_4(haval192_4($p))"
 john_dynamic_expr: "dynamic=haval192_4(haval192_4($p))"
+expression_proof:
+  verified: "vector"
+  verified_at: "2026-08-29"
+  verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
+  note: "round-tripped as --format=dynamic=<expr> against every vector this entry carries"
 status: "needs-review"
 tools:
   mdxfind:

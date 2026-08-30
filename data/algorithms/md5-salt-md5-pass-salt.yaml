@@ -1,5 +1,12 @@
 id: "md5-salt-md5-pass-salt"
 name: "md5($salt.md5($pass.$salt))"
+expression: "md5($s.md5($p.$s))"
+john_dynamic_expr: "dynamic=md5($s.md5($p.$s))"
+expression_proof:
+  verified: "vector"
+  verified_at: "2026-08-29"
+  verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
+  note: "round-tripped as --format=dynamic=<expr> against every vector this entry carries"
 status: "needs-review"
 tools:
   hashcat:
@@ -18,6 +25,11 @@ tools:
     note: "from hashpipe john_map.h, confirmed upstream by recomputation"
   crack:
     supported: false
+relations:
+  - kind: "duplicate-of"
+    entry: "md5-saltmd5passsalt"
+    distinction: "none"
+    note: "Both are md5($s.md5($p.$s)); each entry's own vector was round-tripped by hashcat -m 4110 on 2026-08-29. md5-salt-md5-pass-salt additionally names mdxfind type MD5-SALTMD5PASS-SALT, which is e818 -> hashcat 33100 = md5($s.md5($p).$s), a different computation; that type is tier asserted and looks wrong."
 vectors:
   - hash: "4bea0721f00e194e440c9c2332d55624:tj81ZLT"
     pass: "rosetta"

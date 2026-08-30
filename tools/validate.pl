@@ -98,10 +98,15 @@ my %IS_TIER    = map { $_ => 1 } @TIERS;
 my %IS_STATUS  = map { $_ => 1 } qw(ok needs-review);
 
 my %TOP_KEY = map { $_ => 1 } qw(
-    id name aliases expression john_dynamic_expr category
-    application application_version status
+    id name aliases expression john_dynamic_expr expression_proof denotation
+    category application application_version status
     tools relations vectors legacy notes
 );
+
+my %EXPR_PROOF_KEY = map { $_ => 1 } qw(verified verified_at verified_with note);
+my %DENOTATION_KEY = map { $_ => 1 } qw(text source note);
+my %IS_DENOT_SOURCE = map { $_ => 1 }
+    qw(sheet mdxfind hashcat john hashpipe hashes.org human);
 
 my %IS_CATEGORY = map { $_ => 1 } qw(
     primitive composite iterated encoding application protocol kdf
@@ -256,6 +261,96 @@ for my $file (@files) {
     if (defined $d->{status} && !$IS_STATUS{ $d->{status} }) {
         err("%s: status '%s' is not one of: %s", $file, $d->{status},
             join(', ', sort keys %IS_STATUS));
+    }
+
+    # --- expression_proof ---------------------------------------------
+    #
+    # expression: is a gate: rule 3 below fails a build where two entries
+    # claim the same one. A field with that much authority must say how it
+    # was established, the same way every per-tool mapping does -- otherwise
+    # a transcription and a round-trip are indistinguishable and the first
+    # awkward collision becomes an argument for weakening the rule.
+    my $has_expr  = defined $d->{expression} && length $d->{expression};
+    my $proof     = $d->{expression_proof};
+    my $expr_tier;
+
+    if (defined $proof) {
+        if (ref $proof ne 'HASH') {
+            err("%s: 'expression_proof' must be a mapping", $file);
+        }
+        else {
+            for my $k (sort keys %$proof) {
+                err("%s: unknown key 'expression_proof.%s'", $file, $k)
+                    unless $EXPR_PROOF_KEY{$k};
+            }
+            $expr_tier = $proof->{verified};
+            if (!defined $expr_tier || !length $expr_tier) {
+                err("%s: expression_proof needs a 'verified' tier", $file);
+            }
+            elsif (!$IS_TIER{$expr_tier}) {
+                err("%s: expression_proof.verified '%s' is not one of: %s",
+                    $file, $expr_tier, join(', ', @TIERS));
+            }
+
+            if (defined $proof->{verified_at}
+                && $proof->{verified_at} !~ /^\d{4}-\d{2}-\d{2}$/) {
+                err("%s: expression_proof.verified_at '%s' is not YYYY-MM-DD",
+                    $file, $proof->{verified_at});
+            }
+
+            # Same rule the tool blocks get: 'vector' means something was
+            # round-tripped, and there is nothing to round-trip against.
+            if (defined $expr_tier && $expr_tier eq 'vector'
+                && !(ref $d->{vectors} eq 'ARRAY' && @{ $d->{vectors} })) {
+                err("%s: expression_proof.verified is 'vector' but the entry "
+                  . "has no vectors", $file);
+            }
+
+            # 'absent' is the settled decision that this algorithm has no
+            # expression in the dynamic language. Carrying one anyway is the
+            # entry contradicting itself.
+            if (defined $expr_tier && $expr_tier eq 'absent' && $has_expr) {
+                err("%s: expression_proof.verified is 'absent' but an "
+                  . "expression is recorded", $file);
+            }
+        }
+    }
+
+    # Nothing lands untiered. This is what stops the field drifting back to
+    # a bare string whose provenance nobody can reconstruct.
+    if ($has_expr && !defined $proof) {
+        err("%s: 'expression' is set but there is no expression_proof tier",
+            $file);
+    }
+
+    if (defined $d->{john_dynamic_expr} && length $d->{john_dynamic_expr}
+        && !$has_expr) {
+        err("%s: 'john_dynamic_expr' is set without an 'expression'", $file);
+    }
+
+    # --- denotation ---------------------------------------------------
+    my $den = $d->{denotation};
+    if (defined $den) {
+        if (ref $den ne 'HASH') {
+            err("%s: 'denotation' must be a mapping", $file);
+        }
+        else {
+            for my $k (sort keys %$den) {
+                err("%s: unknown key 'denotation.%s'", $file, $k)
+                    unless $DENOTATION_KEY{$k};
+            }
+            err("%s: denotation needs a 'text'", $file)
+                unless defined $den->{text} && length $den->{text};
+            if (defined $den->{source} && !$IS_DENOT_SOURCE{ $den->{source} }) {
+                err("%s: denotation.source '%s' is not one of: %s", $file,
+                    $den->{source}, join(', ', sort keys %IS_DENOT_SOURCE));
+            }
+            # denotation is the fallback for an entry with no expression. An
+            # entry with both says the same thing twice at two strengths, and
+            # a reader has no way to know which one to believe.
+            err("%s: denotation is set alongside an expression; denotation is "
+              . "for entries that have none", $file) if $has_expr;
+        }
     }
 
     # --- tools --------------------------------------------------------

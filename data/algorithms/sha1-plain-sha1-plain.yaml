@@ -1,5 +1,12 @@
 id: "sha1-plain-sha1-plain"
 name: "sha1($plain.sha1($plain))"
+expression: "sha1($p.sha1($p))"
+john_dynamic_expr: "dynamic=sha1($p.sha1($p))"
+expression_proof:
+  verified: "vector"
+  verified_at: "2026-08-29"
+  verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
+  note: "round-tripped as --format=dynamic=<expr> against every vector this entry carries"
 status: "needs-review"
 tools:
   hashcat:

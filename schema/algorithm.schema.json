@@ -30,6 +30,53 @@
       "type": "string",
       "description": "John's equivalent, as passed to --format=dynamic='...'."
     },
+    "expression_proof": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["verified"],
+      "description": "The tier on expression:, in the same vocabulary the per-tool blocks use, because it is the same kind of claim. An expression is a statement about what the algorithm IS, and validate.pl fails a build when two entries share one - so a key whose provenance cannot be audited is a key that will eventually have to be weakened. 'vector' means the expression string itself was compiled by john --format=dynamic='...' and recovered this entry's own plaintext from its own hash. 'upstream' means a project that verifies by recomputation stated it - john's own --list=subformats for a locally proven identifier. 'asserted' means a human said so. 'absent' means this algorithm has no expression in the dynamic language at all, which is a decision worth recording once rather than re-asking every run; pair it with denotation:.",
+      "properties": {
+        "verified": {
+          "enum": ["vector", "upstream", "asserted", "absent"],
+          "description": "Same four tiers, same meanings as a per-tool block."
+        },
+        "verified_at": {
+          "type": "string",
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$",
+          "description": "ISO date the tier was last established. Never promote a tier without re-running the check."
+        },
+        "verified_with": {
+          "type": "string",
+          "description": "Version string of whatever established it, e.g. the john build."
+        },
+        "note": {
+          "type": "string",
+          "description": "Why, when the tier is not self-explanatory - especially for 'absent'."
+        }
+      }
+    },
+    "denotation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["text"],
+      "description": "How people refer to this algorithm when there is no machine-checkable expression: a pseudo-expression in a language richer than john's dynamic ('hmac(\"sha1\", $plain, $salt)', 'md5(base64_encode($plain))'), or simply the label a suite or a standard uses ('PBKDF2-HMAC-SHA256', '7-Zip'). It is deliberately NOT tiered, because nothing can round-trip it; instead it carries a source, so it is never an unattributed human claim. Illegal alongside expression:, which would make the entry say the same thing twice in two strengths.",
+      "properties": {
+        "text": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The denotation itself, exactly as the source spells it."
+        },
+        "source": {
+          "enum": ["sheet", "mdxfind", "hashcat", "john", "hashpipe",
+                   "hashes.org", "human"],
+          "description": "Where the wording came from. 'sheet' is the migrated Google Sheet; a tool name means it restates that tool's own label, which is then also in tools.<tool>."
+        },
+        "note": {
+          "type": "string",
+          "description": "Anything a reader needs in order to trust or qualify it."
+        }
+      }
+    },
     "category": {
       "enum": ["primitive", "composite", "iterated", "encoding",
                "application", "protocol", "kdf"],

@@ -192,6 +192,14 @@ for my $e (@rows) {
         name   => $e->{name} // $e->{id},
         alias  => join('; ', @{ $e->{aliases} || [] }),
         expr   => $e->{expression} // '',
+        # The tier on the expression, and the fallback wording for a row that
+        # has none. The expression has never appeared in the HTML or Markdown
+        # tables -- those show name: -- so these follow it into the two
+        # machine-consumption views and nowhere else.
+        expr_tier  => (ref $e->{expression_proof} eq 'HASH'
+                       ? ($e->{expression_proof}{verified} // '') : ''),
+        denotation => (ref $e->{denotation} eq 'HASH'
+                       ? ($e->{denotation}{text} // '') : ''),
         status => $e->{status} // 'ok',
         vecs   => scalar @{ $e->{vectors} || [] },
         notes  => $e->{notes} // '',
@@ -229,7 +237,8 @@ sub csv_field {
     return qq{"$v"};
 }
 
-my @CSV = qw(id name aliases expression category application status
+my @CSV = qw(id name aliases expression expression_tier denotation
+             category application status
              hashcat hashcat_state john john_state mdxfind mdxfind_state
              crack_state vectors relations legacy notes);
 
@@ -238,6 +247,7 @@ print {$csv} join(',', @CSV), "\n";
 for my $r (@out) {
     print {$csv} join(',', map { csv_field($_) } (
         $r->{id}, $r->{name}, $r->{alias}, $r->{expr},
+        $r->{expr_tier}, $r->{denotation},
         $r->{category}, $r->{application}, $r->{status},
         join(' ', @{ $r->{hashcat}{ids} }), $r->{hashcat}{state},
         join(' ', @{ $r->{john}{ids} }),    $r->{john}{state},

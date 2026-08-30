@@ -3,6 +3,11 @@ name: "sha1(sha1($plain).substr($plain,0,1))"
 aliases: ["sha1(sha1($plain).substr($plain,0,2))", "sha1(sha1($plain).substr($plain,0,3))", "sha1(sha1($plain).substr($plain,0,4))", "sha1(sha1($plain).substr($plain,0,5))", "sha1(sha1($plain).substr($plain,0,6))", "sha1(sha1($plain).substr($plain,0,7))", "sha1(sha1($plain).substr($plain,0,8))"]
 expression: "sha1(sha1($p).$s)"
 john_dynamic_expr: "dynamic=sha1(sha1($p).$s)"
+expression_proof:
+  verified: "upstream"
+  verified_at: "2026-08-29"
+  verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
+  note: "transcribed from john --list=subformats for an identifier this entry proved by round-trip"
 status: "needs-review"
 tools:
   hashcat:

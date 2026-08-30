@@ -131,8 +131,8 @@ sub emit_records {
 # entry and requiring the bytes to match what the importer produced.
 
 my @ENTRY_ORDER = qw(
-    id name aliases expression john_dynamic_expr category
-    application application_version status
+    id name aliases expression john_dynamic_expr expression_proof denotation
+    category application application_version status
     tools relations vectors legacy notes
 );
 my @TOOL_ORDER   = qw(hashcat mdxfind john crack);
@@ -157,7 +157,25 @@ my @VECTOR_KEYS   = qw(hash pass salt source);
 # relations: is a list of maps like vectors:, and emitted the same way -- the
 # first key of each edge carries the "- " so one edge is one readable stanza.
 my @RELATION_KEYS = qw(kind entry distinction note);
-my @LEGACY_KEYS = qw(hashes_org hashkiller);
+# Flat nested maps: one key, a fixed inner key order, no list. legacy: was the
+# only one; expression_proof: and denotation: are the same shape and are
+# emitted by the same branch rather than three near-identical ones.
+#
+# expression_proof: is the tier on expression:, in the same vocabulary the
+# per-tool blocks use, because it is the same kind of claim -- "was this
+# reproduced, by what, when". Without it the field cannot say whether it was
+# round-tripped through john's dynamic compiler or transcribed from john's
+# own subformat listing, and validate.pl fails a build on it.
+#
+# denotation: is how people refer to an algorithm that has NO machine-checkable
+# expression -- a pseudo-expression in a richer language than john's dynamic
+# ('hmac("sha1", $plain, $salt)'), or simply the label a suite uses. It carries
+# a source so it is never an unattributed human claim.
+my %FLAT_BLOCKS = (
+    legacy           => [qw(hashes_org hashkiller)],
+    expression_proof => [qw(verified verified_at verified_with note)],
+    denotation       => [qw(text source note)],
+);
 
 # Skip a value that carries no information: undef, empty string, empty list,
 # empty map. Matches the importer, which omits rather than writes null.
@@ -226,9 +244,9 @@ sub entry_text {
                 }
             }
         }
-        elsif ($k eq 'legacy') {
-            $out .= "legacy:\n";
-            for my $lk (@LEGACY_KEYS) {
+        elsif ($FLAT_BLOCKS{$k}) {
+            $out .= "$k:\n";
+            for my $lk (@{ $FLAT_BLOCKS{$k} }) {
                 next if _empty($v->{$lk});
                 $out .= _kv('  ', $lk, $v->{$lk});
             }

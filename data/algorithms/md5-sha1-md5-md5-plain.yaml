@@ -1,5 +1,12 @@
 id: "md5-sha1-md5-md5-plain"
 name: "md5(sha1(md5(md5($plain))))"
+expression: "md5(sha1(md5(md5($p))))"
+john_dynamic_expr: "dynamic=md5(sha1(md5(md5($p))))"
+expression_proof:
+  verified: "vector"
+  verified_at: "2026-08-29"
+  verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
+  note: "round-tripped as --format=dynamic=<expr> against every vector this entry carries"
 status: "needs-review"
 tools:
   hashcat:

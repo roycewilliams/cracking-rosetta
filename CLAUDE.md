@@ -75,6 +75,10 @@ Every per-tool mapping carries `verified:`:
 Also record `verified_at` (ISO date) and `verified_with` (tool version string).
 Never promote a tier without re-running the check.
 
+The same four tiers apply to `expression:` via `expression_proof:` — see
+**Expression language** below. It is the same kind of claim and deserves the
+same audit trail.
+
 ## Round-trip verification recipes
 
 These are proven working in this environment.
@@ -142,8 +146,99 @@ that two tools' identifiers really do denote the same thing.
 which states what each of john's 474 dynamics computes in the syntax
 `--format=dynamic='...'` takes back. It writes only where the john block
 reached tier `vector` and every identifier that block names prints the same
-expression, so the field is transcription rather than interpretation. 144
-entries carry one.
+expression, so the field is transcription rather than interpretation.
+
+`tools/derive-expressions.pl` is the other direction, and it is the reason an
+expression can be *proven* rather than proposed. **John's dynamic compiler
+takes an expression on the command line**, so a candidate never has to be
+believed: hand it to john against the entry's own vector and either it
+recovers the entry's own plaintext or it does not. Candidates come from three
+redundant generators — the `name:` field, the entry `id` slug, and the mdxfind
+type name — and every one of them **bails on the first token it does not
+know**. That rule is what keeps the tool honest: `MD5CAP`'s `CAP` is not in
+the vocabulary, so no candidate is emitted, whereas silently dropping the
+token would emit `md5($p)`, which john would happily "prove" because `cap()`
+is a no-op on a lowercase digest. The function vocabulary is harvested from
+john's own subformat listing, never hand-written.
+
+Two guards, both non-negotiable. **Every vector the entry carries must fall,
+not the first** — an entry with three vectors and a candidate that cracks two
+has found a coincidence, which is exactly how `dynamic_1011` looked like
+`MD5PASSMD5`. And **if two different expressions each reproduce every vector,
+nothing is written**: they agree on this entry's inputs, they need not agree
+in general, and choosing between them is curation.
+
+A proven expression is also an operational answer — `john
+--format=dynamic='haval128_3(md5($p))'` is a command someone can run today on
+an entry that has no named john format at all. It belongs in
+`john_dynamic_expr:`, **never in `tools.john.cpu`**: an ad-hoc expression is
+not a john format identifier and putting it in the identifier column would
+inflate john's coverage with something no `--list=formats` will ever show.
+
+### The expression carries its own tier
+
+`expression:` is a gate — `validate.pl` fails a build where two entries claim
+the same one — so it says how it was established, in the same vocabulary the
+per-tool blocks use:
+
+    expression: "haval128_3(md5($p))"
+    john_dynamic_expr: "dynamic=haval128_3(md5($p))"
+    expression_proof:
+      verified: "vector"
+      verified_at: "2026-08-29"
+      verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a"
+      note: "round-tripped as --format=dynamic=<expr> against every vector"
+
+Without it a transcription and a round-trip are indistinguishable, and the
+first awkward collision becomes an argument for weakening the rule. The tiers
+mean here what they mean everywhere:
+
+- `vector`   — this exact string was compiled by john and recovered the
+               entry's own plaintext from its own hash. Only
+               `derive-expressions.pl` may write it.
+- `upstream` — john's `--list=subformats` states it for an identifier the
+               entry already proved. `expressions.pl` writes this and nothing
+               stronger: what was round-tripped is the *identifier*.
+- `asserted` — a human said so.
+- `absent`   — this algorithm has no expression in the dynamic language.
+
+`validate.pl` enforces the pairing: an `expression:` with no
+`expression_proof:` fails, `vector` with no vectors fails, and `absent`
+alongside an expression fails.
+
+### `denotation:` — no expression, but still a way to refer to it
+
+`absent` on its own leaves a row's expression column empty and says nothing
+useful to a reader. So the entry records how people actually refer to the
+algorithm:
+
+    expression_proof:
+      verified: "absent"
+      note: "john's dynamic expression vocabulary has no hmac(), so this
+             construction cannot be written as an expression; that is separate
+             from whether john has a FORMAT for it"
+    denotation:
+      text: "hmac(\"sha1\", $plain, $salt)"
+      source: "sheet"
+
+`text` is a pseudo-expression in a language richer than john's dynamic
+(`md5(base64_encode($plain))`), or simply the label a suite or standard uses
+(`PBKDF2-HMAC-SHA256`, `7-Zip`). It is deliberately **not tiered** — nothing
+can round-trip it — so it carries a `source:` instead and is never an
+unattributed human claim. It is illegal alongside `expression:`: an entry with
+both says the same thing twice at two strengths and a reader cannot tell which
+to believe.
+
+`--denote` writes this pair, and only where `absent` is a **checkable fact**
+rather than a shrug: the name is already expression-shaped and at least one
+function in it is not in the vocabulary harvested from john. That is a lookup,
+not an opinion. Note what it does *not* say — john has formats for HMAC-SHA1
+and for bcrypt; it has no `hmac()` or `bcrypt()` token in the dynamic
+*expression* language, and those are different sentences.
+
+Entries whose name is not expression-shaped (`7ZIP`, `AIX-MD5`, `Tiger Tree
+Hash`) are left alone rather than bulk-marked, because "no candidate could be
+generated" is a fact about our generators, not about john.
 
 ## Collisions: when two entries mean the same thing
 
