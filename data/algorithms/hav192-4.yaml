@@ -6,18 +6,20 @@ tools:
     verified: "absent"
   mdxfind:
     types: ["HAV192-4"]
-    verified: "asserted"
+    verified: "vector"
+    verified_at: "2026-08-29"
+    verified_with: "mdxfind"
   john:
     cpu: ["dynamic_230"]
-    verified: "upstream"
+    verified: "vector"
     verified_at: "2026-08-29"
-    verified_with: "1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
-    note: "from hashpipe john_map.h, confirmed upstream by recomputation"
+    verified_with: "john"
   crack:
     supported: false
 vectors:
-  - hash: "7ddef9835674d0f43921c5ae8f195749e71eca527d53f1e8"
+  - hash: "c3b51271a851284dbf87bbb806c6ad42d537c6e20720a966"
     pass: "rosetta"
     source: "sheet"
 legacy:
   hashes_org: "HAVAL192-4"
+notes: "sheet vector corrected 2026-08-29: the HAVAL-192 4-pass and 5-pass example hashes were swapped in the source sheet. mdxfind pinned to each type and john dynamic_230/dynamic_240 independently agree on the pairing now recorded."

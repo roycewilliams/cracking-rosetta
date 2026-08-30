@@ -10,13 +10,12 @@ tools:
     verified_with: "mdxfind"
   john:
     cpu: ["dynamic_223"]
-    verified: "upstream"
+    verified: "vector"
     verified_at: "2026-08-29"
-    verified_with: "1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
-    note: "from hashpipe john_map.h, confirmed upstream by recomputation"
+    verified_with: "john"
   crack:
     supported: false
 vectors:
-  - hash: "403f8d57068308bca70ea3d199db7687dca545b836ec1b3e"
-    pass: "password123"
-    source: "mdxfind"
+  - hash: "fca9979c0af3134687d4d6eb12261181c737aeb0499b4be3"
+    pass: "abc"
+    source: "john"
