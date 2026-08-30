@@ -18,26 +18,26 @@ For sorting, filtering and search, open [index.html](index.html) - or
 | AES128-NOKDF | `26401` ✓ | **—** | `AES128-NOKDF` ✓ |
 | AES192-NOKDF | `26402` ✓ | **—** | `AES192-NOKDF` ✓ |
 | AES256-NOKDF | `26403` ✓ | **—** | `AES256-NOKDF` ✓ |
-| AIX-MD5 | `6300` ✓ | **—** | `AIX-MD5` ✓ |
-| AIX-SHA1 | `6700` ✓ | **—** | `AIX-SHA1` ✓ |
-| AIX-SHA256 | `6400` ✓ | **—** | `AIX-SHA256` ✓ |
-| AIX-SHA512 | `6500` ✓ | **—** | `AIX-SHA512` ✓ |
+| AIX-MD5 | `6300` ✓ | `md5crypt`<br>`md5crypt-long` ✓ | `AIX-MD5` ✓ |
+| AIX-SHA1 | `6700` ✓ | `aix-ssha1` ✓ | `AIX-SHA1` ✓ |
+| AIX-SHA256 | `6400` ✓ | `aix-ssha256` ✓ | `AIX-SHA256` ✓ |
+| AIX-SHA512 | `6500` ✓ | `aix-ssha512` ✓ | `AIX-SHA512` ✓ |
 | ANDROIDFDE | `12900` ✓ | **—** | `ANDROIDFDE` ✓ |
-| ANSIBLE-VAULT | `16900` ✓ | **—** | `ANSIBLE-VAULT` ✓ |
-| Apache $apr1$ | `1600` ✓ | **—** | `APR1` ✓ |
-| APFS | `18300` ✓ | **—** | `APFS` ✓ |
+| ANSIBLE-VAULT | `16900` ✓ | `ansible` ✓ | `ANSIBLE-VAULT` ✓ |
+| Apache $apr1$ | `1600` ✓ | `md5crypt`<br>`md5crypt-long` ✓ | `APR1` ✓ |
+| APFS | `18300` ✓ | `FVDE` ✓ | `APFS` ✓ |
 | APPLE-IWORK | `23300` ✓ | **—** | `APPLE-IWORK` ✓ |
-| APPLE-KEYCHAIN | `23100` ✓ | **—** | `APPLE-KEYCHAIN` ✓ |
+| APPLE-KEYCHAIN | `23100` ✓ | `keychain` ✓ | `APPLE-KEYCHAIN` ✓ |
 | ARGON2 | `34000` | **—** | `ARGON2` |
 | ARUBAOS | `125` ✓ | **—** | `ARUBAOS` ✓ |
 | AS400-DES | `8501` | **—** | `AS400-DES` ✓ |
 | AS400SSHA1 | `35200` ✓ | **—** | `AS400SSHA1` ✓ |
 | AUTHME | `20711` ✓ | **—** | `AUTHME` ✓ |
 | AWSSIGV4 | `28700` ✓ | **—** | `AWSSIGV4` ✓ |
-| AXCRYPT | `13200` ✓ | **—** | `AXCRYPT` ✓ |
+| AXCRYPT | `13200` ✓ | `AxCrypt` ✓ | `AXCRYPT` ✓ |
 | AXCRYPTSHA1 | `13300` ✓ | **—** | `AXCRYPTSHA1` ✓ |
 | AZURESYNC | `12800` ✓ | **—** | `AZURESYNC` ✓ |
-| Bcrypt | `3200` ✓ | **—** | `BCRYPT` ✓ |
+| Bcrypt | `3200` ✓ | `bcrypt` ✓ | `BCRYPT` ✓ |
 | bcrypt(md5($plain)) | · | **—** | `BCRYPTMD5` ✓ |
 | bcrypt(sha1($plain)) | · | **—** | `BCRYPTSHA1` ✓ |
 | BCRYPT256 | `30600` ✓ | **—** | `BCRYPT256` ✓ |
@@ -50,7 +50,7 @@ For sorting, filtering and search, open [index.html](index.html) - or
 | BLAKE2B256 | `34800` ✓ | **—** | `BLAKE2B256` ✓ |
 | BLAKE2B256PASSSALT | `34810` ✓ | **—** | `BLAKE2B256PASSSALT` ✓ |
 | BLAKE2B256SALTPASS | `34820` ✓ | **—** | `BLAKE2B256SALTPASS` ✓ |
-| BLAKE2B512 | `600` ✓ | **—** | `BLAKE2B512` ✓ |
+| BLAKE2B512 | `600` ✓ | `Raw-Blake2` ✓ | `BLAKE2B512` ✓ |
 | BLAKE2B512PASSSALT | `610` ✓ | **—** | `BLAKE2B512PASSSALT` ✓ |
 | BLAKE2B512SALTPASS | `620` ✓ | **—** | `BLAKE2B512SALTPASS` ✓ |
 | BLAKE2S256 | `31000` ✓ | **—** | `BLAKE2S256` |
@@ -60,13 +60,13 @@ For sorting, filtering and search, open [index.html](index.html) - or
 | BMW256 | · | **—** | `BMW256` ✓ |
 | BMW384 | · | **—** | `BMW384` ✓ |
 | BMW512 | · | **—** | `BMW512` ✓ |
-| BSDICRYPT | `12400` ✓ | **—** | `BSDICRYPT` ✓ |
+| BSDICRYPT | `12400` ✓ | `bsdicrypt` ✓ | `BSDICRYPT` ✓ |
 | CISCO4 | `5700` ✓ | **—** | `CISCO4` ✓ |
 | CISCO8 | `9200` ✓ | **—** | `CISCO8` ✓ |
 | CISCO9 | `9300` ✓ | **—** | `CISCO9` ✓ |
 | CISCOASA | `2410` ✓ | `dynamic_20` | `CISCOASA` ✓ |
-| CISCOISE | `5720` ✓ | **—** | `CISCOISE` ✓ |
-| CISCOPIX | `2400` ✓ | `dynamic_19` | `CISCOPIX` ✓ |
+| CISCOISE | `5720` ✓ | `Iterated-SHA256` ✓ | `CISCOISE` ✓ |
+| CISCOPIX | `2400` ✓ | `dynamic_19`<br>`pix-md5` | `CISCOPIX` ✓ |
 | COLDFUSION10 | `12600` ✓ | **—** | `COLDFUSION10` ✓ |
 | CRAMMD5 | `10200` ✓ | **—** | `CRAMMD5` ✓ |
 | CRAMMD5-DOVECOT | `16400` ✓ | **—** | `CRAMMD5-DOVECOT` ✓ |
@@ -76,35 +76,35 @@ For sorting, filtering and search, open [index.html](index.html) - or
 | CUBE512 | · | **—** | `CUBE512` ✓ |
 | DAHUA | `3730` ✓ | **—** | `DAHUA` |
 | DAHUA-AUTH | `24900` ✓ | **—** | `DAHUA-AUTH` ✓ |
-| DCC2 | `2100` ✓ | **—** | `DCC2` ✓ |
+| DCC2 | `2100` ✓ | `mscash2` ✓ | `DCC2` ✓ |
 | DES3ENCRYPT | `14100` | **—** | `DES3ENCRYPT` ✓ |
-| descrypt($plain) † | `1500` ✓ | **—** | `DESCRYPT` ✓ |
+| descrypt($plain) † | `1500` ✓ | `descrypt` ✓ | `DESCRYPT` ✓ |
 | DESENCRYPT | `14000` | **—** | `DESENCRYPT` ✓ |
 | DOMINO5 | `8600` ✓ | **—** | `DOMINO5` ✓ |
-| DOMINO6 | `8700` ✓ | **—** | `DOMINO6` ✓ |
-| DOMINO8 | `9100` ✓ | **—** | `DOMINO8` ✓ |
-| Drupal 7 | `7900` ✓ | **—** | **—** |
-| DRUPAL7 | `7900` ✓ | **—** | `DRUPAL7` ✓ |
+| DOMINO6 | `8700` ✓ | `dominosec` ✓ | `DOMINO6` ✓ |
+| DOMINO8 | `9100` ✓ | `dominosec8` ✓ | `DOMINO8` ✓ |
+| Drupal 7 | `7900` ✓ | `Drupal7` ✓ | **—** |
+| DRUPAL7 | `7900` ✓ | `Drupal7` ✓ | `DRUPAL7` ✓ |
 | ECHO224 | · | **—** | `ECHO224` ✓ |
 | ECHO256 | · | **—** | `ECHO256` ✓ |
 | ECHO384 | · | **—** | `ECHO384` ✓ |
 | ECHO512 | · | **—** | `ECHO512` ✓ |
-| ECRYPTFS | `12200` ✓ | **—** | `ECRYPTFS` ✓ |
+| ECRYPTFS | `12200` ✓ | `eCryptfs` ✓ | `ECRYPTFS` ✓ |
 | EDON256 | · | **—** | `EDON256` ✓ |
 | EDON512 | · | **—** | `EDON512` ✓ |
 | EMPIRECMS | `32300` ✓ | **—** | `EMPIRECMS` ✓ |
-| FORTIGATE | `7000` ✓ | **—** | `FORTIGATE` ✓ |
-| FORTIGATE256 | `26300` ✓ | **—** | `FORTIGATE256` ✓ |
+| FORTIGATE | `7000` ✓ | `Fortigate` ✓ | `FORTIGATE` ✓ |
+| FORTIGATE256 | `26300` ✓ | `Fortigate256` ✓ | `FORTIGATE256` ✓ |
 | FUGUE224 | · | **—** | `FUGUE224` ✓ |
 | FUGUE256 | · | **—** | `FUGUE256` ✓ |
 | FUGUE384 | · | **—** | `FUGUE384` ✓ |
 | FUGUE512 | · | **—** | `FUGUE512` ✓ |
-| GOST (2 iterations) | **—** | `dynamic_93` | `GOST -i2` ✓ |
+| GOST (2 iterations) | **—** | `dynamic_93` ✓ | `GOST -i2` ✓ |
 | gost(md5($plain).$plain) | · | **—** | `GOSTMD5PASS` ✓ |
 | gost(md5($salt.$plain).":".$salt) | · | **—** | `GOSTHEXSALT` ✓ |
-| GOST12512CRYPT | `35600` ✓ | **—** | `GOST12512CRYPT` ✓ |
-| GOST2012-32 | `11700` ✓ | **—** | `GOST2012-32` ✓ |
-| GOST2012-64 | `11800` ✓ | **—** | `GOST2012-64` ✓ |
+| GOST12512CRYPT | `35600` ✓ | `streebog512crypt` ✓ | `GOST12512CRYPT` ✓ |
+| GOST2012-32 | `11700` ✓ | `Stribog-256` ✓ | `GOST2012-32` ✓ |
+| GOST2012-64 | `11800` ✓ | `Stribog-512` ✓ | `GOST2012-64` ✓ |
 | GOSTMD5 | · | **—** | `GOSTMD5` ✓ |
 | GROESTL224 | · | **—** | `GROESTL224` ✓ |
 | GROESTL256 | · | **—** | `GROESTL256` ✓ |
@@ -115,39 +115,39 @@ For sorting, filtering and search, open [index.html](index.html) - or
 | HAMSI256 | · | **—** | `HAMSI256` ✓ |
 | HAMSI384 | · | **—** | `HAMSI384` ✓ |
 | HAMSI512 | · | **—** | `HAMSI512` ✓ |
-| has-160 (librhash) | · | **—** | `HAS160` ✓ |
+| has-160 (librhash) | · | `has-160` ✓ | `HAS160` ✓ |
 | hash('gost', $plain) | `6900` ✓ | `dynamic_90` ✓ | `GOST` ✓ |
 | hash('gost-crypto', $plain) | · | **—** | `GOST-CRYPTO` ✓ |
 | HAV128 | · | `dynamic_160` ✓ | `HAV128` ✓ |
-| HAV128 (2 iterations) | **—** | `dynamic_163` | `HAV128 -i2` ✓ |
+| HAV128 (2 iterations) | **—** | `dynamic_163` ✓ | `HAV128 -i2` ✓ |
 | HAV128-4 | · | `dynamic_170` ✓ | `HAV128-4` ✓ |
-| HAV128-4 (2 iterations) | **—** | `dynamic_173` | `HAV128-4 -i2` ✓ |
+| HAV128-4 (2 iterations) | **—** | `dynamic_173` ✓ | `HAV128-4 -i2` ✓ |
 | HAV128-5 | · | `dynamic_180` ✓ | `HAV128-5` ✓ |
-| HAV128-5 (2 iterations) | **—** | `dynamic_183` | `HAV128-5 -i2` ✓ |
+| HAV128-5 (2 iterations) | **—** | `dynamic_183` ✓ | `HAV128-5 -i2` ✓ |
 | HAV160-3 | · | `dynamic_190` ✓ | `HAV160-3` ✓ |
-| HAV160-3 (2 iterations) | **—** | `dynamic_193` | `HAV160-3 -i2` ✓ |
+| HAV160-3 (2 iterations) | **—** | `dynamic_193` ✓ | `HAV160-3 -i2` ✓ |
 | HAV160-4 | · | `dynamic_200` ✓ | `HAV160-4` ✓ |
-| HAV160-4 (2 iterations) | **—** | `dynamic_203` | `HAV160-4 -i2` ✓ |
+| HAV160-4 (2 iterations) | **—** | `dynamic_203` ✓ | `HAV160-4 -i2` ✓ |
 | HAV160-5 | · | `dynamic_210` ✓ | `HAV160-5` ✓ |
-| HAV160-5 (2 iterations) | **—** | `dynamic_213` | `HAV160-5 -i2` ✓ |
+| HAV160-5 (2 iterations) | **—** | `dynamic_213` ✓ | `HAV160-5 -i2` ✓ |
 | HAV192-3 | · | `dynamic_220` ✓ | `HAV192-3` ✓ |
-| HAV192-3 (2 iterations) | **—** | `dynamic_223` | `HAV192-3 -i2` ✓ |
-| HAV192-4 | · | `dynamic_230` | `HAV192-4` |
-| HAV192-4 (2 iterations) | **—** | `dynamic_233` | `HAV192-4 -i2` ✓ |
-| HAV192-5 | · | `dynamic_240` | `HAV192-5` |
-| HAV192-5 (2 iterations) | **—** | `dynamic_243` | `HAV192-5 -i2` ✓ |
+| HAV192-3 (2 iterations) | **—** | `dynamic_223` ✓ | `HAV192-3 -i2` ✓ |
+| HAV192-4 | · | `dynamic_230` ✓ | `HAV192-4` ✓ |
+| HAV192-4 (2 iterations) | **—** | `dynamic_233` ✓ | `HAV192-4 -i2` ✓ |
+| HAV192-5 | · | `dynamic_240` ✓ | `HAV192-5` ✓ |
+| HAV192-5 (2 iterations) | **—** | `dynamic_243` ✓ | `HAV192-5 -i2` ✓ |
 | HAV224-3 | · | `dynamic_250` ✓ | `HAV224-3` ✓ |
-| HAV224-3 (2 iterations) | **—** | `dynamic_253` | `HAV224-3 -i2` ✓ |
+| HAV224-3 (2 iterations) | **—** | `dynamic_253` ✓ | `HAV224-3 -i2` ✓ |
 | HAV224-4 | · | `dynamic_260` ✓ | `HAV224-4` ✓ |
-| HAV224-4 (2 iterations) | **—** | `dynamic_263` | `HAV224-4 -i2` ✓ |
+| HAV224-4 (2 iterations) | **—** | `dynamic_263` ✓ | `HAV224-4 -i2` ✓ |
 | HAV224-5 | · | `dynamic_270` ✓ | `HAV224-5` ✓ |
-| HAV224-5 (2 iterations) | **—** | `dynamic_273` | `HAV224-5 -i2` ✓ |
+| HAV224-5 (2 iterations) | **—** | `dynamic_273` ✓ | `HAV224-5 -i2` ✓ |
 | HAV256 | · | `dynamic_280` ✓ | `HAV256` ✓ |
-| HAV256 (2 iterations) | **—** | `dynamic_283` | `HAV256 -i2` ✓ |
+| HAV256 (2 iterations) | **—** | `dynamic_283` ✓ | `HAV256 -i2` ✓ |
 | HAV256-4 | · | `dynamic_290` ✓ | `HAV256-4` ✓ |
-| HAV256-4 (2 iterations) | **—** | `dynamic_293` | `HAV256-4 -i2` ✓ |
+| HAV256-4 (2 iterations) | **—** | `dynamic_293` ✓ | `HAV256-4 -i2` ✓ |
 | HAV256-5 | · | `dynamic_300` ✓ | `HAV256-5` ✓ |
-| HAV256-5 (2 iterations) | **—** | `dynamic_303` | `HAV256-5 -i2` ✓ |
+| HAV256-5 (2 iterations) | **—** | `dynamic_303` ✓ | `HAV256-5 -i2` ✓ |
 | haval128_3(md5($plain)) | · | **—** | `HAV128MD5` ✓ |
 | haval128_3(md5($plain).$plain) | · | **—** | `HAV128MD5PASS` ✓ |
 | haval128_3(md5($salt.$plain).":".$salt) | · | **—** | `HAV128HEXSALT` ✓ |
@@ -229,13 +229,13 @@ For sorting, filtering and search, open [index.html](index.html) - or
 | JUNIPERSSG | `22` ✓ | **—** | `JUNIPERSSG` |
 | JWT | `16500` ✓ | **—** | `JWT` ✓ |
 | KECCAK224 | `17700` ✓ | `dynamic_430` ✓ | `KECCAK224` ✓ |
-| KECCAK224 (2 iterations) | **—** | `dynamic_433` | `KECCAK224 -i2` ✓ |
+| KECCAK224 (2 iterations) | **—** | `dynamic_433` ✓ | `KECCAK224 -i2` ✓ |
 | KECCAK256 | `5000` | `dynamic_410` ✓ | `KECCAK256` ✓ |
-| KECCAK256 (2 iterations) | **—** | `dynamic_413` | `KECCAK256 -i2` ✓ |
+| KECCAK256 (2 iterations) | **—** | `dynamic_413` ✓ | `KECCAK256 -i2` ✓ |
 | KECCAK384 | `17900` ✓ | `dynamic_440` ✓ | `KECCAK384` ✓ |
-| KECCAK384 (2 iterations) | **—** | `dynamic_443` | `KECCAK384 -i2` ✓ |
+| KECCAK384 (2 iterations) | **—** | `dynamic_443` ✓ | `KECCAK384 -i2` ✓ |
 | KECCAK512 | `18000` ✓ | `dynamic_420` ✓ | `KECCAK512` ✓ |
-| KECCAK512 (2 iterations) | **—** | `dynamic_423` | `KECCAK512 -i2` ✓ |
+| KECCAK512 (2 iterations) | **—** | `dynamic_423` ✓ | `KECCAK512 -i2` ✓ |
 | KRB5DB17 | `28800` ✓ | **—** | `KRB5DB17` ✓ |
 | KRB5DB18 | `28900` ✓ | **—** | `KRB5DB18` ✓ |
 | KRB5PA-17 | `19800` | **—** | `KRB5PA-17` ✓ |
@@ -250,9 +250,9 @@ For sorting, filtering and search, open [index.html](index.html) - or
 | LUFFA384 | · | **—** | `LUFFA384` ✓ |
 | LUFFA512 | · | **—** | `LUFFA512` ✓ |
 | MACOSX | `122` ✓ | **—** | `MACOSX` ✓ |
-| MACOSX7 | `1722` ✓ | **—** | `MACOSX7` ✓ |
+| MACOSX7 | `1722` ✓ | `xsha512` ✓ | `MACOSX7` ✓ |
 | MD2 | · | `dynamic_310` ✓ | `MD2` ✓ |
-| MD2 (2 iterations) | **—** | `dynamic_313` | `MD2 -i2` ✓ |
+| MD2 (2 iterations) | **—** | `dynamic_313` ✓ | `MD2 -i2` ✓ |
 | md2(md5($plain)) | · | **—** | `MD2MD5` ✓ |
 | md2(md5($plain).$plain) | · | **—** | `MD2MD5PASS` ✓ |
 | MD4 | `900` ✓ | `Raw-MD4`<br>`dynamic_30`<br>`raw-MD4-opencl` ✓ | `MD4` ✓ |
@@ -261,7 +261,7 @@ For sorting, filtering and search, open [index.html](index.html) - or
 | md4(md5($plain).$plain) | · | **—** | `MD4MD5PASS` ✓ |
 | md4(mysql3($plain)) | · | **—** | `MD4SQL3` ✓ |
 | md4(sha1(md5($plain))) | · | **—** | `MD4SHA1MD5` ✓ |
-| md4(utf16($plain)) | `1000` ✓ | **—** | `MD4UTF16` ✓ |
+| md4(utf16($plain)) | `1000` ✓ | `NT`<br>`NT-long`<br>`dynamic_33` ✓ | `MD4UTF16` ✓ |
 | md4(utf16(md5($plain))) | **—** | **—** | `MD4UTF16MD5` ✓ |
 | md4(utf16-le(utf-8($plain))) | `1000` | **—** | **—** |
 | MD5 | `0` ✓ | `Raw-MD5`<br>`dynamic_0`<br>`raw-MD5-opencl` ✓ | `MD5` ✓ |
@@ -320,11 +320,11 @@ For sorting, filtering and search, open [index.html](index.html) - or
 | md5(md5($plain).$salt) | · | **—** | `MD52SALTMD5` ✓ |
 | md5(md5($plain).$salt) | · | **—** | `MD5MD5USER` |
 | md5(md5($plain).$salt) | · | **—** | `MD51SALTMD5` ✓ |
-| md5(md5($plain).md5($plain)) | · | **—** | `MD5-2xMD5` ✓ |
+| md5(md5($plain).md5($plain)) | · | `dynamic_1003` ✓ | `MD5-2xMD5` ✓ |
 | md5(md5($plain).md5($plain).md5($plain)) | · | **—** | `MD5-3xMD5` ✓ |
 | md5(md5($plain).md5(md5($plain))) | · | **—** | `MD5-DBL-PASS` ✓ |
 | md5(md5($plain).sha1($plain)) | · | **—** | `MD5-1xMD5SHA1` ✓ |
-| md5(md5($plain, true)) | · | **—** | `MD5RAW -i2` ✓ |
+| md5(md5($plain, true)) | · | `dynamic_1300` ✓ | `MD5RAW -i2` ✓ |
 | md5(md5($salt).$pass) | · | `dynamic_8` | `MD5-MD5SALT-PASS` ✓ |
 | md5(md5($salt.$plain).":".$salt) | · | **—** | `MD5HEXSALT` ✓ |
 | md5(md5(md5($pass))) | `3500` ✓ | `dynamic_3` ✓ | `MD5 -i3` ✓ |
@@ -379,12 +379,12 @@ For sorting, filtering and search, open [index.html](index.html) - or
 | md5(sha1(md5(md5(md5($plain))))) | · | **—** | `MD5SHA1MD5MD5MD5` ✓ |
 | md5(sha1(md5(md5(md5(sha1($plain)))))) | · | **—** | `MD5SHA1MD5MD5MD5SHA1` ✓ |
 | md5(sha1(md5(radmin2($plain)))) | · | **—** | `MD5SHA1MD5RADMIN2` ✓ |
-| md5(sha1(md5(sha1($plain)))) | · | **—** | `MD5SHA1MD5SHA1` ✓ |
-| md5(sha1(md5(sha1(md5($plain))))) | · | **—** | `MD5SHA1MD5SHA1MD5` ✓ |
+| md5(sha1(md5(sha1($plain)))) | · | `dynamic_1021` ✓ | `MD5SHA1MD5SHA1` ✓ |
+| md5(sha1(md5(sha1(md5($plain))))) | · | `dynamic_1022` ✓ | `MD5SHA1MD5SHA1MD5` ✓ |
 | md5(sha1(md5(sha1(sha1($plain))))) | · | **—** | `MD5SHA1MD5SHA1SHA1` ✓ |
 | md5(sha1(sha1($pass))) | · | `dynamic_1018` ✓ | `MD5SHA1SHA1` ✓ |
 | md5(sha1(sha1($plain, true))) | · | **—** | `MD5SHA1SHA1RAW` ✓ |
-| md5(sha1(sha1(md5($plain)))) | · | **—** | `MD5SHA1SHA1MD5` ✓ |
+| md5(sha1(sha1(md5($plain)))) | · | `dynamic_1019` ✓ | `MD5SHA1SHA1MD5` ✓ |
 | md5(sha1(sha1(md5($plain)).sha1($plain))) | · | **—** | `MD5SHA1-1xSHA1MD5pSHA1p` ✓ |
 | md5(sha1(sha256($plain))) | · | **—** | `MD5SHA1SHA256` ✓ |
 | md5(sha256($pass)) | · | **—** | `MD5SHA256` ✓ |
@@ -401,7 +401,7 @@ For sorting, filtering and search, open [index.html](index.html) - or
 | md5(substr(sha1($plain), 0, 32)) | · | **—** | `MD5SHA1u32` ✓ |
 | md5(tiger192_3($plain)) | · | **—** | `MD5TIGER` ✓ |
 | md5(tiger2($plain)) | · | **—** | `MD5TIGER2` ✓ |
-| md5(unix) † | `500` ✓ | **—** | `MD5CRYPT` ✓ |
+| md5(unix) † | `500` ✓ | `md5crypt` ✓ | `MD5CRYPT` ✓ |
 | md5(upper(ntlm($plain))) | · | **—** | `MD5NTLMUC` ✓ |
 | md5(whirlpool($plain)) | · | **—** | `MD5WRL` ✓ |
 | md5(wrl(md5($plain))) | · | **—** | `MD5WRLMD5` ✓ |
@@ -460,7 +460,7 @@ For sorting, filtering and search, open [index.html](index.html) - or
 | MD5SPECAM | · | **—** | `MD5SPECAM` |
 | MD5sub8-24MD5sub8-24MD5 | · | **—** | `MD5sub8-24MD5sub8-24MD5` ✓ |
 | MD5SWAP | · | **—** | `MD5SWAP` ✓ |
-| MD5UC | `4300` | **—** | `MD5UC` |
+| MD5UC | `4300` | `Raw-MD5`<br>`dynamic_0`<br>`dynamic_2000` ✓ | `MD5UC` |
 | MD5UCBASE64MD5RAW | · | **—** | `MD5UCBASE64MD5RAW` |
 | MD5UCBASE64SHA1RAW | · | **—** | `MD5UCBASE64SHA1RAW` |
 | MD5USERPASS | **—** | `dynamic_4` | `MD5USERPASS` |
@@ -470,38 +470,38 @@ For sorting, filtering and search, open [index.html](index.html) - or
 | md6 (128bit) | · | **—** | `MD6` ✓ |
 | MD6256 | `34600` ✓ | **—** | `MD6256` ✓ |
 | MDC2 | **—** | **—** | `MDC2` |
-| MEDIAWIKI | `3711` ✓ | **—** | `MEDIAWIKI` ✓ |
+| MEDIAWIKI | `3711` ✓ | `MediaWiki` ✓ | `MEDIAWIKI` ✓ |
 | MONGODB-SHA1 | `24100` ✓ | **—** | `MONGODB-SHA1` ✓ |
 | MONGODB-SHA256 | `24200` ✓ | **—** | `MONGODB-SHA256` ✓ |
 | mscache($plain) | `1100` | **—** | `MSCACHE` |
 | MSONLINE | `33700` ✓ | **—** | `MSONLINE` ✓ |
-| MSSNTP | `31300` ✓ | **—** | `MSSNTP` ✓ |
+| MSSNTP | `31300` ✓ | `timeroast` ✓ | `MSSNTP` ✓ |
 | MSSQL2000 | `131` | **—** | `MSSQL2000` ✓ |
-| MSSQL2005 | `132` ✓ | **—** | `MSSQL2005` ✓ |
-| MSSQL2012 | `1731` ✓ | **—** | `MSSQL2012` ✓ |
+| MSSQL2005 | `132` ✓ | `mssql05` ✓ | `MSSQL2005` ✓ |
+| MSSQL2012 | `1731` ✓ | `mssql12` ✓ | `MSSQL2012` ✓ |
 | MURMUR3 | `27800` ✓ | **—** | `MURMUR3` ✓ |
 | MURMUR64A | `34200` | **—** | `MURMUR64A` ✓ |
 | MURMUR64AZERO | `34201` ✓ | **—** | `MURMUR64AZERO` ✓ |
-| MySQL 3 | `200` ✓ | **—** | `MYSQL3` ✓ |
+| MySQL 3 | `200` ✓ | `mysql` ✓ | `MYSQL3` ✓ |
 | MYSQL-SHA256CRYPT | `7401` | **—** | `MYSQL-SHA256CRYPT` ✓ |
 | MySQL4.1/MySQL5 | `300` ✓ | `mysql-sha1`<br>`mysql-sha1-opencl` | `SQL5` ✓ |
-| MYSQLCRAM | `11200` ✓ | **—** | `MYSQLCRAM` ✓ |
+| MYSQLCRAM | `11200` ✓ | `mysqlna` ✓ | `MYSQLCRAM` ✓ |
 | NETNTLMV1 | `5500` ✓ | **—** | `NETNTLMV1` ✓ |
 | NETNTLMV2 | `5600` | **—** | `NETNTLMV2` ✓ |
-| NETSCALER | `8100` ✓ | **—** | `NETSCALER` ✓ |
+| NETSCALER | `8100` ✓ | `Citrix_NS10` ✓ | `NETSCALER` ✓ |
 | NETSCALER-PBKDF2 | `33900` ✓ | **—** | `NETSCALER-PBKDF2` ✓ |
 | NETSCALER-SHA512 | `22200` ✓ | **—** | `NETSCALER-SHA512` ✓ |
 | netscape LDAP | `101` ✓ | **—** | `APACHE-SHA` ✓ |
 | NETWITNESS | `20712` ✓ | **—** | `NETWITNESS` ✓ |
 | NSEC3 | `8300` | **—** | `NSEC3` ✓ |
 | ntlm($plain) / md4(utf16-le($plain)) | `1000` ✓ | `dynamic_33`<br>`ntlmv2-opencl` ✓ | `NTLM` ✓ |
-| NTLMH | `1000` ✓ | **—** | `NTLMH` ✓ |
+| NTLMH | `1000` ✓ | `NT`<br>`NT-long`<br>`dynamic_33` ✓ | `NTLMH` ✓ |
 | ORACLE12 | `12300` ✓ | **—** | `ORACLE12` ✓ |
 | ORACLE7 | `3100` ✓ | **—** | `ORACLE7` ✓ |
 | osCommerce, xt:Commerce | `21` ✓ | `dynamic_4`<br>`osc` | `MD5SALTPASS` ✓ |
 | OTM-SHA256 | `20600` ✓ | **—** | `OTM-SHA256` ✓ |
 | PANAMA | · | `dynamic_320` ✓ | `PANAMA` ✓ |
-| PANAMA (2 iterations) | **—** | `dynamic_323` | `PANAMA -i2` ✓ |
+| PANAMA (2 iterations) | **—** | `dynamic_323` ✓ | `PANAMA -i2` ✓ |
 | PARALLEL | · | **—** | `PARALLEL` |
 | PBKDF1-SHA1 | `32900` ✓ | **—** | `PBKDF1-SHA1` ✓ |
 | pbkdf2-md5($plain) | `11900` ✓ | **—** | `PBKDF2-MD5` ✓ |
@@ -509,19 +509,19 @@ For sorting, filtering and search, open [index.html](index.html) - or
 | pbkdf2-sha256($plain) | `10000` | **—** | `PBKDF2-SHA256` |
 | pbkdf2-sha512($plain) | `20200` | **—** | `PBKDF2-SHA512` |
 | PEOPLESOFT | `133` ✓ | **—** | `PEOPLESOFT` ✓ |
-| phpass | `400` ✓ | `phpass-opencl` | `PHPBB3` ✓ |
+| phpass | `400` ✓ | `phpass`<br>`phpass-opencl` ✓ | `PHPBB3` ✓ |
 | PHPS | `2612` ✓ | **—** | `PHPS` ✓ |
 | PKCS5S2 | · | **—** | `PKCS5S2` |
 | plaintext | `99999` ✓ | `plaintext` | `NULL` ✓ |
 | pomelo($plain) | · | **—** | `POMELO` ✓ |
-| POSTGRESCRAM | `11100` ✓ | **—** | `POSTGRESCRAM` ✓ |
+| POSTGRESCRAM | `11100` ✓ | `postgres` ✓ | `POSTGRESCRAM` ✓ |
 | POSTGRESQL | `12` | **—** | `POSTGRESQL` |
 | POSTGRESSCRAM256 | `28600` | **—** | `POSTGRESSCRAM256` ✓ |
 | progressencode($plain) | `26200` ✓ | **—** | `PROGRESSENCODE` |
 | PS-TOKEN | `13500` | **—** | `PS-TOKEN` ✓ |
 | PWSAFE3 | `5200` | **—** | `PWSAFE3` ✓ |
-| QNX-MD5 | `19000` | **—** | `QNX-MD5` ✓ |
-| QNX-SHA256 | `19100` | **—** | `QNX-SHA256` ✓ |
+| QNX-MD5 | `19000` | `qnx` ✓ | `QNX-MD5` ✓ |
+| QNX-SHA256 | `19100` | `qnx` ✓ | `QNX-SHA256` ✓ |
 | QNX-SHA512 | `19200` | **—** | `QNX-SHA512` ✓ |
 | QNX7-SHA512 | `19210` | **—** | `QNX7-SHA512` ✓ |
 | RACF | `8500` | **—** | `RACF` |
@@ -549,21 +549,21 @@ For sorting, filtering and search, open [index.html](index.html) - or
 | ripemd160 | `6000` ✓ | `dynamic_130` ✓ | `RMD160` ✓ |
 | ripemd160(md5($plain)) | · | **—** | `RMD160MD5` ✓ |
 | ripemd160(md5($plain).$plain) | · | **—** | `RMD160MD5PASS` ✓ |
-| ripemd256 | · | **—** | **—** |
-| ripemd320 | · | **—** | **—** |
-| RMD128 (2 iterations) | **—** | `dynamic_123` | `RMD128 -i2` ✓ |
+| ripemd256 | · | `dynamic_140` ✓ | **—** |
+| ripemd320 | · | `dynamic_150` ✓ | **—** |
+| RMD128 (2 iterations) | **—** | `dynamic_123` ✓ | `RMD128 -i2` ✓ |
 | RMD128MD4 | · | **—** | `RMD128MD4` |
-| RMD160 (2 iterations) | **—** | `dynamic_133` | `RMD160 -i2` ✓ |
+| RMD160 (2 iterations) | **—** | `dynamic_133` ✓ | `RMD160 -i2` ✓ |
 | RMD320 | `33600` ✓ | `dynamic_150` ✓ | `RMD320` ✓ |
-| RMD320 (2 iterations) | **—** | `dynamic_153` | `RMD320 -i2` ✓ |
+| RMD320 (2 iterations) | **—** | `dynamic_153` ✓ | `RMD320 -i2` ✓ |
 | RORAILS-SHA1 | `27200` ✓ | **—** | `RORAILS-SHA1` ✓ |
 | SAMSUNGSHA1 | `5800` ✓ | **—** | `SAMSUNGSHA1` ✓ |
 | SAP-BCODE | `7700` | **—** | `SAP-BCODE` ✓ |
 | SAP-BCODE4 | `7701` | **—** | `SAP-BCODE4` ✓ |
 | SAP-PASSCODE | `7800` | **—** | `SAP-PASSCODE` ✓ |
 | SAP-PASSCODE5 | `7801` | **—** | `SAP-PASSCODE5` ✓ |
-| SAPCODVNH | `10300` ✓ | **—** | `SAPCODVNH` ✓ |
-| SAPCODVNH512 | `35000` ✓ | **—** | `SAPCODVNH512` ✓ |
+| SAPCODVNH | `10300` ✓ | `saph` ✓ | `SAPCODVNH` ✓ |
+| SAPCODVNH512 | `35000` ✓ | `saph` ✓ | `SAPCODVNH512` ✓ |
 | SCRYPT | `8900` ✓ | **—** | `SCRYPT` ✓ |
 | sha1("*".mysql5($plain)) | · | **—** | `SHA1SQL5` ✓ |
 | sha1($pass.$salt) | `110` ✓ | `dynamic_24` | `SHA1PASSSALT` ✓ |
@@ -637,7 +637,7 @@ For sorting, filtering and search, open [index.html](index.html) - or
 | SHA1-SALTSHA1PASSSALT | `24300` ✓ | **—** | `SHA1-SALTSHA1PASSSALT` ✓ |
 | SHA1-SALTSHA1U16 | `29000` ✓ | **—** | `SHA1-SALTSHA1U16` ✓ |
 | SHA1.Substr(0, 32) | `100` ✓ | `dynamic_1023`<br>`dynamic_26`<br>`raw-SHA1-opencl` ✓ | `SHA1` ✓ |
-| SHA1CRYPT | `15100` | **—** | `SHA1CRYPT` ✓ |
+| SHA1CRYPT | `15100` | `sha1crypt` ✓ | `SHA1CRYPT` ✓ |
 | SHA1DRU | · | **—** | `SHA1DRU` |
 | SHA1lsb32 | · | **—** | `SHA1lsb32` |
 | SHA1lsb35 | · | **—** | `SHA1lsb35` |
@@ -656,7 +656,7 @@ For sorting, filtering and search, open [index.html](index.html) - or
 | SHA1UTF16LEPASSSALT | `130` ✓ | **—** | `SHA1UTF16LEPASSSALT` ✓ |
 | SHA1UTF16LESALTPASS | `140` ✓ | **—** | `SHA1UTF16LESALTPASS` ✓ |
 | SHA224 | `1300` ✓ | `dynamic_50` ✓ | `SHA224` ✓ |
-| SHA224 (2 iterations) | **—** | `dynamic_53` | `SHA224 -i2` ✓ |
+| SHA224 (2 iterations) | **—** | `dynamic_53` ✓ | `SHA224 -i2` ✓ |
 | sha224(md5($plain)) | · | **—** | `SHA224MD5` ✓ |
 | sha224(md5($plain),$plain) | · | **—** | `SHA224MD5PASS` ✓ |
 | sha224(sha224($plain, true)) | **—** | `dynamic_54` ✓ | `SHA224RAW -i2` ✓ |
@@ -664,7 +664,7 @@ For sorting, filtering and search, open [index.html](index.html) - or
 | SHA224SALTPASS | `1320` ✓ | `dynamic_51` | `SHA224SALTPASS` ✓ |
 | SHA224SHA1 | `34500` ✓ | **—** | `SHA224SHA1` ✓ |
 | SHA256 | `1400` ✓ | `Raw-SHA256`<br>`dynamic_60`<br>`raw-SHA256-opencl` ✓ | `SHA256` ✓ |
-| SHA256 (2 iterations) | **—** | `dynamic_63` | `SHA256 -i2` ✓ |
+| SHA256 (2 iterations) | **—** | `dynamic_63` ✓ | `SHA256 -i2` ✓ |
 | sha256($pass.$salt) | `1410` ✓ | `dynamic_62` | `SHA256PASSSALT` ✓ |
 | sha256($salt.$pass) | `1420` ✓ | `dynamic_61` | `SHA256SALTPASS` ✓ |
 | sha256($salt.sha256($pass)) | `20720` | `dynamic_66` | `SHA256SALTSHA256PASS` |
@@ -675,7 +675,7 @@ For sorting, filtering and search, open [index.html](index.html) - or
 | sha256(sha256($plain, true)) | `21400` ✓ | `dynamic_64` ✓ | `SHA256RAW -i2` ✓ |
 | sha256(sha512($plain)) | · | **—** | `SHA256SHA512` ✓ |
 | SHA256-SALTSHA256RAW | `21420` ✓ | **—** | `SHA256-SALTSHA256RAW` ✓ |
-| sha256crypt | `7400` ✓ | **—** | `SHA256CRYPT` ✓ |
+| sha256crypt | `7400` ✓ | `sha256crypt` ✓ | `SHA256CRYPT` ✓ |
 | SHA256MD5SALTPASS | · | **—** | `SHA256MD5SALTPASS` |
 | SHA256RAWSALTPASS | · | **—** | `SHA256RAWSALTPASS` |
 | SHA256SALTPASSSALT | `22300` ✓ | **—** | `SHA256SALTPASSSALT` ✓ |
@@ -684,16 +684,16 @@ For sorting, filtering and search, open [index.html](index.html) - or
 | SHA256UTF16LE | `1470` ✓ | **—** | `SHA256UTF16LE` ✓ |
 | SHA256UTF16LEPASSSALT | `1430` ✓ | **—** | `SHA256UTF16LEPASSSALT` ✓ |
 | SHA256UTF16LESALTPASS | `1440` ✓ | **—** | `SHA256UTF16LESALTPASS` ✓ |
-| SHA3-224 (2 iterations) | **—** | `dynamic_373` | `SHA3-224 -i2` ✓ |
+| SHA3-224 (2 iterations) | **—** | `dynamic_373` ✓ | `SHA3-224 -i2` ✓ |
 | sha3-224($plain) | `17300` ✓ | `dynamic_370` ✓ | `SHA3-224` ✓ |
-| SHA3-256 (2 iterations) | **—** | `dynamic_383` | `SHA3-256 -i2` ✓ |
+| SHA3-256 (2 iterations) | **—** | `dynamic_383` ✓ | `SHA3-256 -i2` ✓ |
 | sha3-256($plain) | `17400` ✓ | `dynamic_380` ✓ | `SHA3-256` ✓ |
-| SHA3-384 (2 iterations) | **—** | `dynamic_393` | `SHA3-384 -i2` ✓ |
+| SHA3-384 (2 iterations) | **—** | `dynamic_393` ✓ | `SHA3-384 -i2` ✓ |
 | sha3-384($plain) | `17500` ✓ | `dynamic_390` ✓ | `SHA3-384` ✓ |
-| SHA3-512 (2 iterations) | **—** | `dynamic_403` | `SHA3-512 -i2` ✓ |
+| SHA3-512 (2 iterations) | **—** | `dynamic_403` ✓ | `SHA3-512 -i2` ✓ |
 | sha3-512($plain) | `17600` ✓ | `dynamic_400` ✓ | `SHA3-512` ✓ |
 | sha384 | `10800` ✓ | `dynamic_70` ✓ | `SHA384` ✓ |
-| SHA384 (2 iterations) | **—** | `dynamic_73` | `SHA384 -i2` ✓ |
+| SHA384 (2 iterations) | **—** | `dynamic_73` ✓ | `SHA384 -i2` ✓ |
 | sha384(md5($plain)) | · | **—** | `SHA384MD5` ✓ |
 | sha384(md5($plain),$plain) | · | **—** | `SHA384MD5PASS` ✓ |
 | sha384(sha384($plain, true)) | **—** | `dynamic_74` ✓ | `SHA384RAW -i2` ✓ |
@@ -703,14 +703,14 @@ For sorting, filtering and search, open [index.html](index.html) - or
 | SHA384UTF16LEPASSSALT | `10830` ✓ | **—** | `SHA384UTF16LEPASSSALT` ✓ |
 | SHA384UTF16LESALTPASS | `10840` ✓ | **—** | `SHA384UTF16LESALTPASS` ✓ |
 | SHA512 | `1700` ✓ | `Raw-SHA512`<br>`dynamic_80`<br>`raw-SHA512-opencl` ✓ | `SHA512` ✓ |
-| SHA512 (2 iterations) | **—** | `dynamic_83` | `SHA512 -i2` ✓ |
+| SHA512 (2 iterations) | **—** | `dynamic_83` ✓ | `SHA512 -i2` ✓ |
 | sha512($pass.$salt) | `1710` ✓ | `dynamic_82` | `SHA512PASSSALT` ✓ |
 | sha512($salt.$pass) | `1720` ✓ | `dynamic_81` | `SHA512SALTPASS` ✓ |
 | sha512(md5($plain)) | · | **—** | `SHA512MD5` ✓ |
 | sha512(md5($plain),$plain) | · | **—** | `SHA512MD5PASS` ✓ |
 | sha512(sha512($plain, true)) | `21000` ✓ | `dynamic_84` ✓ | `SHA512RAW -i2` ✓ |
 | SHA512-CUSTOM1 | · | **—** | `SHA512-CUSTOM1` ✓ |
-| sha512crypt | `1800` ✓ | **—** | `SHA512CRYPT` ✓ |
+| sha512crypt | `1800` ✓ | `sha512crypt` ✓ | `SHA512CRYPT` ✓ |
 | SHA512SALTMD5 | · | **—** | `SHA512SALTMD5` |
 | SHA512SALTSHA512 | **—** | `dynamic_86` | `SHA512SALTSHA512` |
 | SHA512SHA512RAWUSER | · | **—** | `SHA512SHA512RAWUSER` |
@@ -735,39 +735,39 @@ For sorting, filtering and search, open [index.html](index.html) - or
 | SIMPLACMS | `22800` ✓ | **—** | `SIMPLACMS` ✓ |
 | SIPHASH | `10100` ✓ | **—** | `SIPHASH` ✓ |
 | SKEIN224 | · | `dynamic_330` ✓ | `SKEIN224` ✓ |
-| SKEIN224 (2 iterations) | **—** | `dynamic_333` | `SKEIN224 -i2` ✓ |
+| SKEIN224 (2 iterations) | **—** | `dynamic_333` ✓ | `SKEIN224 -i2` ✓ |
 | SKEIN256 | · | `dynamic_340` ✓ | `SKEIN256` ✓ |
-| SKEIN256 (2 iterations) | **—** | `dynamic_343` | `SKEIN256 -i2` ✓ |
+| SKEIN256 (2 iterations) | **—** | `dynamic_343` ✓ | `SKEIN256 -i2` ✓ |
 | SKEIN384 | · | `dynamic_350` ✓ | `SKEIN384` ✓ |
-| SKEIN384 (2 iterations) | **—** | `dynamic_353` | `SKEIN384 -i2` ✓ |
+| SKEIN384 (2 iterations) | **—** | `dynamic_353` ✓ | `SKEIN384 -i2` ✓ |
 | SKEIN512 | · | `dynamic_360` ✓ | `SKEIN512` ✓ |
-| SKEIN512 (2 iterations) | **—** | `dynamic_363` | `SKEIN512 -i2` ✓ |
+| SKEIN512 (2 iterations) | **—** | `dynamic_363` ✓ | `SKEIN512 -i2` ✓ |
 | SKYPE | `23` ✓ | **—** | `SKYPE` |
 | SM3 | `31100` ✓ | `dynamic_450` ✓ | `SM3` ✓ |
-| SM3 (2 iterations) | **—** | `dynamic_453` | `SM3 -i2` ✓ |
-| SM3CRYPT | `35100` ✓ | **—** | `SM3CRYPT` ✓ |
+| SM3 (2 iterations) | **—** | `dynamic_453` ✓ | `SM3 -i2` ✓ |
+| SM3CRYPT | `35100` ✓ | `sm3crypt` ✓ | `SM3CRYPT` ✓ |
 | SMF < v1.1 | `121` ✓ | `dynamic_37` | `SMF` |
 | snefru128(md5($plain)) | · | **—** | `SNE128MD5` ✓ |
 | snefru128(md5($plain).$plain) | · | **—** | `SNE128MD5PASS` ✓ |
 | snefru256(md5($plain)) | · | **—** | `SNE256MD5` ✓ |
 | snefru256(md5($plain).$plain) | · | **—** | `SNE256MD5PASS` ✓ |
-| SOLARWINDS | `21500` ✓ | **—** | `SOLARWINDS` ✓ |
+| SOLARWINDS | `21500` ✓ | `solarwinds` ✓ | `SOLARWINDS` ✓ |
 | SOLARWINDS2 | `21501` ✓ | **—** | `SOLARWINDS2` ✓ |
 | SQLCIPHER | `24600` ✓ | **—** | `SQLCIPHER` ✓ |
-| SSHA1BASE64 | `111` ✓ | **—** | `SSHA1BASE64` ✓ |
+| SSHA1BASE64 | `111` ✓ | `Salted-SHA1` ✓ | `SSHA1BASE64` ✓ |
 | SSHA256BASE64 | `1411` ✓ | **—** | `SSHA256BASE64` ✓ |
-| SSHA512BASE64 | `1711` ✓ | **—** | `SSHA512BASE64` ✓ |
-| SSPR-MD5 | `32000` ✓ | **—** | `SSPR-MD5` ✓ |
-| SSPR-SHA1 | `32010` ✓ | **—** | `SSPR-SHA1` ✓ |
-| SSPR-SHA1S | `32020` ✓ | **—** | `SSPR-SHA1S` ✓ |
-| streebog-32($plain) | **—** | **—** | `STREEBOG-32` ✓ |
-| streebog-64($plain) | **—** | **—** | `STREEBOG-64` ✓ |
-| SYBASE-ASE | `8000` ✓ | **—** | `SYBASE-ASE` ✓ |
+| SSHA512BASE64 | `1711` ✓ | `SSHA512` ✓ | `SSHA512BASE64` ✓ |
+| SSPR-MD5 | `32000` ✓ | `sspr` ✓ | `SSPR-MD5` ✓ |
+| SSPR-SHA1 | `32010` ✓ | `sspr` ✓ | `SSPR-SHA1` ✓ |
+| SSPR-SHA1S | `32020` ✓ | `sspr` ✓ | `SSPR-SHA1S` ✓ |
+| streebog-32($plain) | **—** | `Stribog-256` ✓ | `STREEBOG-32` ✓ |
+| streebog-64($plain) | **—** | `Stribog-512` ✓ | `STREEBOG-64` ✓ |
+| SYBASE-ASE | `8000` ✓ | `SybaseASE` ✓ | `SYBASE-ASE` ✓ |
 | SYMFONY256 | `35800` ✓ | **—** | `SYMFONY256` ✓ |
-| TACACS | `16100` ✓ | **—** | `TACACS` ✓ |
+| TACACS | `16100` ✓ | `tacacs-plus` ✓ | `TACACS` ✓ |
 | TELEGRAM-SHA256 | `22301` ✓ | **—** | `TELEGRAM-SHA256` ✓ |
 | TIGER | **—** | `dynamic_110` ✓ | `TIGER` ✓ |
-| TIGER (2 iterations) | **—** | `dynamic_113` | `TIGER -i2` ✓ |
+| TIGER (2 iterations) | **—** | `dynamic_113` ✓ | `TIGER -i2` ✓ |
 | Tiger Tree Hash | · | **—** | `TTH` ✓ |
 | tiger128_3(md5($plain)) | · | **—** | `TIGERMD5` ✓ |
 | tiger128_3(md5($plain).$plain) | · | **—** | `TIGERMD5PASS` ✓ |
@@ -786,12 +786,12 @@ For sorting, filtering and search, open [index.html](index.html) - or
 | whirlpool(md5($plain)) | · | **—** | `WRLMD5` ✓ |
 | whirlpool(md5($plain).$plain) | · | **—** | `WRLMD5PASS` ✓ |
 | WINPHONE | `13800` ✓ | **—** | `WINPHONE` ✓ |
-| WLR1 | · | **—** | **—** |
+| WLR1 | · | `whirlpool1` ✓ | `WRL1` ✓ |
 | WPA-PMK | `22001` | **—** | `WPA-PMK` ✓ |
 | WPBCRYPT | `35500` ✓ | **—** | `WPBCRYPT` ✓ |
-| WRL (2 iterations) | **—** | `dynamic_103` | `WRL -i2` ✓ |
+| WRL (2 iterations) | **—** | `dynamic_103` ✓ | `WRL -i2` ✓ |
 | wrl(sha512($plain)) | · | **—** | `WRLSHA512` ✓ |
-| WRL0 | · | **—** | `WRL0` ✓ |
+| WRL0 | · | `whirlpool0` ✓ | `WRL0` ✓ |
 | WRLPASSSALT | · | `dynamic_102` | `WRLPASSSALT` |
 | WRLSALTPASS | · | `dynamic_101` | `WRLSALTPASS` |
 | WRLSALTPASSSALT | `32600` ✓ | **—** | `WRLSALTPASSSALT` ✓ |

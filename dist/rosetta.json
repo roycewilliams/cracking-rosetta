@@ -150,8 +150,12 @@
          },
          "id" : "aix-md5",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "md5crypt",
+               "md5crypt-long"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -183,8 +187,11 @@
          },
          "id" : "aix-sha1",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "aix-ssha1"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -216,8 +223,11 @@
          },
          "id" : "aix-sha256",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "aix-ssha256"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -249,8 +259,11 @@
          },
          "id" : "aix-sha512",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "aix-ssha512"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -315,8 +328,11 @@
          },
          "id" : "ansible-vault",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "ansible"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -348,8 +364,12 @@
          },
          "id" : "apache-apr1",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "md5crypt",
+               "md5crypt-long"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "MD5APR1",
          "mdxfind" : {
@@ -381,8 +401,11 @@
          },
          "id" : "apfs",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "FVDE"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -447,8 +470,11 @@
          },
          "id" : "apple-keychain",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "keychain"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -678,8 +704,11 @@
          },
          "id" : "axcrypt",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "AxCrypt"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -777,8 +806,11 @@
          },
          "id" : "bcrypt",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "bcrypt"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "BCRYPT",
          "mdxfind" : {
@@ -1194,8 +1226,11 @@
          },
          "id" : "blake2b512",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "Raw-Blake2"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -1506,8 +1541,11 @@
          },
          "id" : "bsdicrypt",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "bsdicrypt"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -1674,8 +1712,11 @@
          },
          "id" : "ciscoise",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "Iterated-SHA256"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -1708,7 +1749,8 @@
          "id" : "ciscopix",
          "john" : {
             "ids" : [
-               "dynamic_19"
+               "dynamic_19",
+               "pix-md5"
             ],
             "state" : "claimed",
             "tier" : "upstream"
@@ -2028,8 +2070,11 @@
          },
          "id" : "dcc2",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "mscash2"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -2094,8 +2139,11 @@
          },
          "id" : "descrypt-plain",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "descrypt"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "DESCRYPT",
          "mdxfind" : {
@@ -2193,8 +2241,11 @@
          },
          "id" : "domino6",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "dominosec"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -2226,8 +2277,11 @@
          },
          "id" : "domino8",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "dominosec8"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -2259,8 +2313,11 @@
          },
          "id" : "drupal-7",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "Drupal7"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "DRUPAL7",
          "mdxfind" : {
@@ -2289,8 +2346,11 @@
          },
          "id" : "drupal7",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "Drupal7"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -2442,8 +2502,11 @@
          },
          "id" : "ecryptfs",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "eCryptfs"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -2568,8 +2631,11 @@
          },
          "id" : "fortigate",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "Fortigate"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -2601,8 +2667,11 @@
          },
          "id" : "fortigate256",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "Fortigate256"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -2754,8 +2823,8 @@
             "ids" : [
                "dynamic_93"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -2847,8 +2916,11 @@
          },
          "id" : "gost12512crypt",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "streebog512crypt"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -2880,8 +2952,11 @@
          },
          "id" : "gost2012-32",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "Stribog-256"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -2913,8 +2988,11 @@
          },
          "id" : "gost2012-64",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "Stribog-512"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -3243,8 +3321,11 @@
          },
          "id" : "has-160-librhash",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "has-160"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "HAS-160",
          "mdxfind" : {
@@ -3375,8 +3456,8 @@
             "ids" : [
                "dynamic_163"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -3441,8 +3522,8 @@
             "ids" : [
                "dynamic_173"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -3507,8 +3588,8 @@
             "ids" : [
                "dynamic_183"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -3573,8 +3654,8 @@
             "ids" : [
                "dynamic_193"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -3639,8 +3720,8 @@
             "ids" : [
                "dynamic_203"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -3705,8 +3786,8 @@
             "ids" : [
                "dynamic_213"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -3771,8 +3852,8 @@
             "ids" : [
                "dynamic_223"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -3804,19 +3885,19 @@
             "ids" : [
                "dynamic_230"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "HAVAL192-4",
          "mdxfind" : {
             "ids" : [
                "HAV192-4"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "HAV192-4",
-         "notes" : "",
+         "notes" : "sheet vector corrected 2026-08-29: the HAVAL-192 4-pass and 5-pass example hashes were swapped in the source sheet. mdxfind pinned to each type and john dynamic_230/dynamic_240 independently agree on the pairing now recorded.",
          "status" : "needs-review",
          "vecs" : 1
       },
@@ -3837,8 +3918,8 @@
             "ids" : [
                "dynamic_233"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -3870,19 +3951,19 @@
             "ids" : [
                "dynamic_240"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "HAVAL192-5",
          "mdxfind" : {
             "ids" : [
                "HAV192-5"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "HAV192-5",
-         "notes" : "",
+         "notes" : "sheet vector corrected 2026-08-29: the HAVAL-192 4-pass and 5-pass example hashes were swapped in the source sheet. mdxfind pinned to each type and john dynamic_230/dynamic_240 independently agree on the pairing now recorded.",
          "status" : "needs-review",
          "vecs" : 1
       },
@@ -3903,8 +3984,8 @@
             "ids" : [
                "dynamic_243"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -3969,8 +4050,8 @@
             "ids" : [
                "dynamic_253"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -4035,8 +4116,8 @@
             "ids" : [
                "dynamic_263"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -4101,8 +4182,8 @@
             "ids" : [
                "dynamic_273"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -4167,8 +4248,8 @@
             "ids" : [
                "dynamic_283"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -4233,8 +4314,8 @@
             "ids" : [
                "dynamic_293"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -4299,8 +4380,8 @@
             "ids" : [
                "dynamic_303"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -6847,8 +6928,8 @@
             "ids" : [
                "dynamic_433"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -6916,8 +6997,8 @@
             "ids" : [
                "dynamic_413"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -6985,8 +7066,8 @@
             "ids" : [
                "dynamic_443"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -7054,8 +7135,8 @@
             "ids" : [
                "dynamic_423"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -7538,8 +7619,11 @@
          },
          "id" : "macosx7",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "xsha512"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -7604,8 +7688,8 @@
             "ids" : [
                "dynamic_313"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -7885,8 +7969,13 @@
          },
          "id" : "md4-utf16-plain",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "NT",
+               "NT-long",
+               "dynamic_33"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "NTLM",
          "mdxfind" : {
@@ -9494,7 +9583,7 @@
          "name" : "md5(md5($pass))",
          "notes" : "-i2",
          "status" : "needs-review",
-         "vecs" : 2
+         "vecs" : 1
       },
       {
          "alias" : "",
@@ -9733,8 +9822,11 @@
          },
          "id" : "md5-md5-plain-md5-plain",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "dynamic_1003"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "MD5(MD5(PLAIN)MD5(PLAIN))",
          "mdxfind" : {
@@ -9853,8 +9945,11 @@
          },
          "id" : "md5-md5-plain-true",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "dynamic_1300"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "MD5RAWMD5",
          "mdxfind" : {
@@ -9966,7 +10061,7 @@
          "name" : "md5(md5(md5($pass)))",
          "notes" : "-i3; renamed 2026-08-29 - the sheet named this md5(md5($salt).$pass), but the vector is md5^3(\"rosetta\") and hashcat 3500, mdxfind MD5 -i 3, john dynamic_3 and both legacy columns all agree",
          "status" : "needs-review",
-         "vecs" : 2
+         "vecs" : 1
       },
       {
          "alias" : "",
@@ -11536,8 +11631,11 @@
          },
          "id" : "md5-sha1-md5-sha1-plain",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "dynamic_1021"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "(MD5SHA1)X2",
          "mdxfind" : {
@@ -11566,8 +11664,11 @@
          },
          "id" : "md5-sha1-md5-sha1-md5-plain",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "dynamic_1022"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "(MD5SHA1)X2MD5",
          "mdxfind" : {
@@ -11689,8 +11790,11 @@
          },
          "id" : "md5-sha1-sha1-md5-plain",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "dynamic_1019"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "MD5SHA1X2MD5",
          "mdxfind" : {
@@ -12202,8 +12306,11 @@
          },
          "id" : "md5-unix",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "md5crypt"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "MD5CRYPT",
          "mdxfind" : {
@@ -13999,8 +14106,13 @@
          },
          "id" : "md5uc",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "Raw-MD5",
+               "dynamic_0",
+               "dynamic_2000"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -14320,8 +14432,11 @@
          },
          "id" : "mediawiki",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "MediaWiki"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -14485,8 +14600,11 @@
          },
          "id" : "mssntp",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "timeroast"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -14551,8 +14669,11 @@
          },
          "id" : "mssql2005",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "mssql05"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -14584,8 +14705,11 @@
          },
          "id" : "mssql2012",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "mssql12"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -14716,8 +14840,11 @@
          },
          "id" : "mysql-3",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "mysql"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "MYSQL3",
          "mdxfind" : {
@@ -14819,8 +14946,11 @@
          },
          "id" : "mysqlcram",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "mysqlna"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -14918,8 +15048,11 @@
          },
          "id" : "netscaler",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "Citrix_NS10"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -15153,8 +15286,13 @@
          },
          "id" : "ntlmh",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "NT",
+               "NT-long",
+               "dynamic_33"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -15355,8 +15493,8 @@
             "ids" : [
                "dynamic_323"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -15617,10 +15755,11 @@
          "id" : "phpass",
          "john" : {
             "ids" : [
+               "phpass",
                "phpass-opencl"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "WORDPRESS / PHPBB3; n/a",
          "mdxfind" : {
@@ -15781,8 +15920,11 @@
          },
          "id" : "postgrescram",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "postgres"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -15979,8 +16121,11 @@
          },
          "id" : "qnx-md5",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "qnx"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -16012,8 +16157,11 @@
          },
          "id" : "qnx-sha256",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "qnx"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -16886,8 +17034,11 @@
          },
          "id" : "ripemd256",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "dynamic_140"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "RIPEMD256",
          "mdxfind" : {
@@ -16913,8 +17064,11 @@
          },
          "id" : "ripemd320",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "dynamic_150"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "RIPEMD320",
          "mdxfind" : {
@@ -16943,8 +17097,8 @@
             "ids" : [
                "dynamic_123"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -17006,8 +17160,8 @@
             "ids" : [
                "dynamic_133"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -17075,8 +17229,8 @@
             "ids" : [
                "dynamic_153"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -17306,8 +17460,11 @@
          },
          "id" : "sapcodvnh",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "saph"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -17339,8 +17496,11 @@
          },
          "id" : "sapcodvnh512",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "saph"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -19639,8 +19799,11 @@
          },
          "id" : "sha1crypt",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "sha1crypt"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -20233,8 +20396,8 @@
             "ids" : [
                "dynamic_53"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -20502,8 +20665,8 @@
             "ids" : [
                "dynamic_63"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -20865,8 +21028,11 @@
          },
          "id" : "sha256crypt",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "sha256crypt"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "SHA256CRYPT",
          "mdxfind" : {
@@ -21156,8 +21322,8 @@
             "ids" : [
                "dynamic_373"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -21225,8 +21391,8 @@
             "ids" : [
                "dynamic_383"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -21294,8 +21460,8 @@
             "ids" : [
                "dynamic_393"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -21363,8 +21529,8 @@
             "ids" : [
                "dynamic_403"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -21468,8 +21634,8 @@
             "ids" : [
                "dynamic_73"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -21803,8 +21969,8 @@
             "ids" : [
                "dynamic_83"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -22034,8 +22200,11 @@
          },
          "id" : "sha512crypt",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "sha512crypt"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "SHA512CRYPT",
          "mdxfind" : {
@@ -22814,8 +22983,8 @@
             "ids" : [
                "dynamic_333"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -22880,8 +23049,8 @@
             "ids" : [
                "dynamic_343"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -22946,8 +23115,8 @@
             "ids" : [
                "dynamic_353"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -23012,8 +23181,8 @@
             "ids" : [
                "dynamic_363"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -23114,8 +23283,8 @@
             "ids" : [
                "dynamic_453"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -23147,8 +23316,11 @@
          },
          "id" : "sm3crypt",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "sm3crypt"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -23336,8 +23508,11 @@
          },
          "id" : "solarwinds",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "solarwinds"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -23435,8 +23610,11 @@
          },
          "id" : "ssha1base64",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "Salted-SHA1"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -23501,8 +23679,11 @@
          },
          "id" : "ssha512base64",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "SSHA512"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -23534,8 +23715,11 @@
          },
          "id" : "sspr-md5",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "sspr"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -23567,8 +23751,11 @@
          },
          "id" : "sspr-sha1",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "sspr"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -23600,8 +23787,11 @@
          },
          "id" : "sspr-sha1s",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "sspr"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -23630,8 +23820,11 @@
          },
          "id" : "streebog-32-plain",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "Stribog-256"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -23660,8 +23853,11 @@
          },
          "id" : "streebog-64-plain",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "Stribog-512"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -23693,8 +23889,11 @@
          },
          "id" : "sybase-ase",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "SybaseASE"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -23759,8 +23958,11 @@
          },
          "id" : "tacacs",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "tacacs-plus"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -23858,8 +24060,8 @@
             "ids" : [
                "dynamic_113"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -24475,16 +24677,22 @@
          },
          "id" : "wlr1",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "whirlpool1"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "WLR1",
          "mdxfind" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "WRL1"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "WLR1",
-         "notes" : "",
+         "notes" : "the sheet spelled this WLR1 and CLAUDE.md listed it as a non-type; it is mdxfind WRL1 (Whirlpool-1) with the letters transposed. mdxfind pinned to WRL1 and john whirlpool1 both reproduce the vector.",
          "status" : "needs-review",
          "vecs" : 1
       },
@@ -24571,8 +24779,8 @@
             "ids" : [
                "dynamic_103"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -24631,8 +24839,11 @@
          },
          "id" : "wrl0",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "whirlpool0"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "WRL0",
          "mdxfind" : {
