@@ -12,6 +12,11 @@ tools:
     verified: "vector"
     verified_at: "2026-08-29"
     verified_with: "mdxfind"
+  john:
+    cpu: ["descrypt"]
+    verified: "vector"
+    verified_at: "2026-08-29"
+    verified_with: "john"
   crack:
     supported: true
     note: "core algorithm; Eric Young's libdes ships with Crack and is its default"

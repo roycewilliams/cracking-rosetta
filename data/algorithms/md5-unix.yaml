@@ -12,6 +12,11 @@ tools:
     verified: "vector"
     verified_at: "2026-08-29"
     verified_with: "mdxfind"
+  john:
+    cpu: ["md5crypt"]
+    verified: "vector"
+    verified_at: "2026-08-29"
+    verified_with: "john"
   crack:
     supported: true
     note: "via src/util/elcid.c,bsd - the FreeBSD/NetBSD MD5 crypt()"
