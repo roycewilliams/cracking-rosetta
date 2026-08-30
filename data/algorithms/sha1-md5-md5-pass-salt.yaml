@@ -1,5 +1,12 @@
 id: "sha1-md5-md5-pass-salt"
 name: "sha1(md5(md5($pass).$salt))"
+expression: "sha1(md5($p).$s)"
+john_dynamic_expr: "dynamic=sha1(md5($p).$s)"
+expression_proof:
+  verified: "vector"
+  verified_at: "2026-08-30"
+  verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
+  note: "round-tripped as --format=dynamic=<expr> against every vector this entry carries"
 status: "needs-review"
 tools:
   hashcat:
@@ -11,6 +18,11 @@ tools:
     verified_with: "mdxfind"
   crack:
     supported: false
+relations:
+  - kind: "duplicate-of"
+    entry: "sha1-md5-pass-salt"
+    distinction: "none"
+    note: "mdxfind types SHA1MD5SALT (e587) and SHA1-MD5PASSSALT (e578) publish the same example vector and mdxfind -z computes the same digest for both, so they are one computation under two type indices. Perl Digest::MD5/SHA, independent of all three crackers, confirms 18768e97...c76d2c is sha1(md5($p).$s) and NOT the sha1(md5(md5($pass).$salt)) this entry's name asserts -- the name is wrong, and the merge would settle it."
 vectors:
   - hash: "18768e979e77779052a467262d0cf1d486c76d2c:testsalt"
     pass: "password123"
