@@ -6,7 +6,4 @@ tmp/
 # fleet-files library, not this repository.
 fleet-staging/
 
-# Rendered exports are built by tools/render.pl; not yet wired up.
-dist/
-
 *.swp
