@@ -290,6 +290,13 @@ my @files = sort grep { /\.yaml$/ } readdir $dh;
 closedir $dh;
 
 my %seen_id;
+# Tallies for --verbose. Counting here rather than in a separate status script
+# because this pass already loads and parses every entry: any other tool that
+# reported these would be a second implementation of the same walk, free to
+# disagree with the gate about what the corpus contains.
+my %tier_count;      # tool tier -> n
+my %expr_tier;       # expression_proof.verified -> n
+my ($n_expr, $n_denot, $n_novec) = (0, 0, 0);
 my %by_expression;   # expression -> [ ids ] , for the collision rule
 my @rel_edges;       # every edge seen, resolved after the loop
 my $entries = 0;
@@ -315,6 +322,17 @@ for my $file (@files) {
         next;
     }
     $entries++;
+
+    $n_expr++  if defined $d->{expression} && length $d->{expression};
+    $n_denot++ if ref $d->{denotation} eq 'HASH';
+    $n_novec++ unless ref $d->{vectors} eq 'ARRAY' && @{ $d->{vectors} };
+    $expr_tier{ $d->{expression_proof}{verified} // '?' }++
+        if ref $d->{expression_proof} eq 'HASH';
+    for my $t (qw(hashcat john mdxfind crack)) {
+        my $b = $d->{tools}{$t};
+        next unless ref $b eq 'HASH' && defined $b->{verified};
+        $tier_count{ $b->{verified} }++;
+    }
 
     # --- identity -----------------------------------------------------
     my $id = $d->{id};
@@ -757,6 +775,16 @@ unless ($quiet) {
         scalar(keys %hit_mx), scalar(@$mx_list), $pc->(scalar(keys %hit_mx), scalar(@$mx_list));
 
     if ($verbose) {
+        printf STDERR "- Tool tiers:  %s\n",
+            join('  ', map { "$_ $tier_count{$_}" }
+                 grep { $tier_count{$_} } qw(vector upstream asserted absent));
+        printf STDERR "- Expression:  %d of %d entries carry one (%s); "
+                    . "no vector at all %d; denotation %d\n",
+            $n_expr, $entries,
+            join(', ', map { "$_ $expr_tier{$_}" }
+                 grep { $expr_tier{$_} } qw(vector upstream asserted absent)),
+            $n_novec, $n_denot;
+
         my @unmapped = sort { $a <=> $b } grep { !$hit_hc{$_} } map { $_->{mode} } @$hc_list;
         printf STDERR "-   hashcat modes with no entry: %d (first: %s)\n",
             scalar(@unmapped), join(', ', @unmapped[0 .. ($#unmapped > 9 ? 9 : $#unmapped)]);
