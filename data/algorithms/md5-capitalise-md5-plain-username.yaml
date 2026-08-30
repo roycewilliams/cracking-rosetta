@@ -11,5 +11,8 @@ vectors:
   - hash: "05b56c69b512a1c641fc59d1070df60b:abc123"
     pass: "rosetta"
     source: "sheet"
+  - hash: "d4f7dec5b98ac42336b1c9e56f2e5ca8:abc123"
+    pass: "rosetta"
+    source: "sheet"
 legacy:
   hashes_org: "MD5(CAPMD5(PLAIN)SALT)"

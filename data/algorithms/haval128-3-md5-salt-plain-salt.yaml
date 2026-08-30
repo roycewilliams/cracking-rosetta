@@ -1,5 +1,6 @@
 id: "haval128-3-md5-salt-plain-salt"
 name: "haval128_3(md5($salt.$plain).\":\".$salt)"
+aliases: ["haval128_3(md5($salt.$plain).\":\".$salt.\":\")", "haval128_3(md5($salt.$plain).$salt)"]
 status: "needs-review"
 tools:
   hashcat:
@@ -11,6 +12,12 @@ tools:
     verified_with: "mdxfind"
 vectors:
   - hash: "081d80d288b6d5f6f8a2eb796f3504f1:ff"
+    pass: "rosetta"
+    source: "sheet"
+  - hash: "287d170e2e4ffb70dd547427f3e6bdfb:ff"
+    pass: "rosetta"
+    source: "sheet"
+  - hash: "c17bf487649611cf1f4deb05e807c7d7:ff"
     pass: "rosetta"
     source: "sheet"
 legacy:

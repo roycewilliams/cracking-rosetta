@@ -3,7 +3,10 @@ name: "ntlm($plain) / md4(utf16-le($plain))"
 status: "needs-review"
 tools:
   hashcat:
-    verified: "absent"
+    modes: [1000]
+    verified: "vector"
+    verified_at: "2026-08-29"
+    verified_with: "hashcat"
   mdxfind:
     types: ["NTLM"]
     verified: "vector"
@@ -11,6 +14,7 @@ tools:
     verified_with: "mdxfind"
   john:
     cpu: ["dynamic_33"]
+    gpu: ["ntlmv2-opencl"]
     verified: "vector"
     verified_at: "2026-08-29"
     verified_with: "john"
@@ -20,3 +24,4 @@ vectors:
     source: "sheet"
 legacy:
   hashes_org: "NTLM"
+  hashkiller: "NTLM"

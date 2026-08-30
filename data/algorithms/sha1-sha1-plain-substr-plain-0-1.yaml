@@ -1,5 +1,6 @@
 id: "sha1-sha1-plain-substr-plain-0-1"
 name: "sha1(sha1($plain).substr($plain,0,1))"
+aliases: ["sha1(sha1($plain).substr($plain,0,2))", "sha1(sha1($plain).substr($plain,0,3))", "sha1(sha1($plain).substr($plain,0,4))", "sha1(sha1($plain).substr($plain,0,5))", "sha1(sha1($plain).substr($plain,0,6))", "sha1(sha1($plain).substr($plain,0,7))", "sha1(sha1($plain).substr($plain,0,8))"]
 status: "needs-review"
 tools:
   hashcat:
@@ -11,6 +12,27 @@ tools:
     verified_with: "mdxfind"
 vectors:
   - hash: "fc8ee9b8a5de83a40eff442213e983573a6979ac:r"
+    pass: "rosetta"
+    source: "sheet"
+  - hash: "b719f8c34ab7eb268ddd4ced305126e795e512fb:ro"
+    pass: "rosetta"
+    source: "sheet"
+  - hash: "40cc0246bdac99966cd02b3afdf1e59f2de4e885:ros"
+    pass: "rosetta"
+    source: "sheet"
+  - hash: "7802a9adad49381d89eaec6ea0594c4492884d11:rose"
+    pass: "rosetta"
+    source: "sheet"
+  - hash: "a175480de09ea97a352383bb3f877edcf8d5736e:roset"
+    pass: "rosetta"
+    source: "sheet"
+  - hash: "1d767803fa0df6b9aa272537382fcb238946c9fc:rosett"
+    pass: "rosetta"
+    source: "sheet"
+  - hash: "f9cd83bc7ddef917762fcaf5e0ca647e10bc94b0:rosetta"
+    pass: "rosetta"
+    source: "sheet"
+  - hash: "--"
     pass: "rosetta"
     source: "sheet"
 legacy:

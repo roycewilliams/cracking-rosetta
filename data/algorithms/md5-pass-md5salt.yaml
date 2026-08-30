@@ -1,9 +1,0 @@
-id: "md5-pass-md5salt"
-name: "MD5-PASS-MD5SALT"
-status: "needs-review"
-tools:
-  hashcat:
-    verified: "absent"
-  mdxfind:
-    types: ["MD5-PASS-MD5SALT"]
-    verified: "asserted"

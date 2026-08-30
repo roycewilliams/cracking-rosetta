@@ -1,5 +1,6 @@
 id: "md5-md5-plain-md5-md5-plain"
 name: "md5(md5($plain).md5(md5($plain)))"
+aliases: ["md5(md5($plain).\":\".md5(md5($plain)))"]
 status: "needs-review"
 tools:
   hashcat:
@@ -11,6 +12,9 @@ tools:
     verified_with: "mdxfind"
 vectors:
   - hash: "b32c378845e64ed9faf4f97dcc4b0eb5"
+    pass: "rosetta"
+    source: "sheet"
+  - hash: "760a4c50ea64f714dae34238ef39a21d"
     pass: "rosetta"
     source: "sheet"
 legacy:

@@ -1,5 +1,6 @@
 id: "md5-base64-encode-md5-plain-true"
 name: "md5(base64_encode(md5($plain, true)))"
+aliases: ["md5(substr(base64_encode(md5($plain, true)), 0, -2))"]
 status: "needs-review"
 tools:
   hashcat:
@@ -11,6 +12,9 @@ tools:
     verified_with: "mdxfind"
 vectors:
   - hash: "bf0ce280c48de2362bf5f8e921b545e6"
+    pass: "rosetta"
+    source: "sheet"
+  - hash: "295a3f40be632e3a77f92fd0e2dc46d9"
     pass: "rosetta"
     source: "sheet"
 legacy:

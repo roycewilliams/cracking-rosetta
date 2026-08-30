@@ -3,17 +3,26 @@ name: "SHA1.Substr(0, 32)"
 status: "needs-review"
 tools:
   hashcat:
-    verified: "absent"
+    modes: [100]
+    verified: "vector"
+    verified_at: "2026-08-29"
+    verified_with: "hashcat"
   mdxfind:
     types: ["SHA1"]
-    verified: "asserted"
+    verified: "vector"
+    verified_at: "2026-08-29"
+    verified_with: "mdxfind"
   john:
-    cpu: ["dynamic_26"]
+    cpu: ["dynamic_1023", "dynamic_26"]
+    gpu: ["raw-SHA1-opencl"]
     verified: "vector"
     verified_at: "2026-08-29"
     verified_with: "john"
 vectors:
   - hash: "d21af7ece046af0e12d3c38472792cd5"
+    pass: "rosetta"
+    source: "sheet"
+  - hash: "d21af7ece046af0e12d3c38472792cd5f081c39f"
     pass: "rosetta"
     source: "sheet"
 legacy:

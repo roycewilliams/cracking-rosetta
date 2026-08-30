@@ -1,5 +1,6 @@
 id: "md5-md5-salt-plain-salt"
 name: "md5(md5($salt.$plain).\":\".$salt)"
+aliases: ["md5(md5($salt.$plain).$salt)", "md5(md5($salt.$plain).\":\".$salt.\":\")"]
 status: "needs-review"
 tools:
   hashcat:
@@ -11,6 +12,12 @@ tools:
     verified_with: "mdxfind"
 vectors:
   - hash: "e97fcdf8ebe91bdeffee47b2db2aa6d8:ff"
+    pass: "rosetta"
+    source: "sheet"
+  - hash: "fa711dcbeaa6279ce5c8c974bd0b0822:ff"
+    pass: "rosetta"
+    source: "sheet"
+  - hash: "865ca7c85295be0fc1c987d552e4329f:ff"
     pass: "rosetta"
     source: "sheet"
 legacy:

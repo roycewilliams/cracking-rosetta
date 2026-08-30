@@ -1,5 +1,6 @@
 id: "plaintext"
 name: "plaintext"
+aliases: ["null($plain)"]
 status: "needs-review"
 tools:
   hashcat:
@@ -9,12 +10,17 @@ tools:
     verified_with: "hashcat"
   mdxfind:
     types: ["NULL"]
-    verified: "asserted"
+    verified: "vector"
+    verified_at: "2026-08-29"
+    verified_with: "mdxfind"
   john:
     cpu: ["plaintext"]
     verified: "asserted"
 vectors:
   - hash: "rosetta"
+    pass: "rosetta"
+    source: "sheet"
+  - hash: "726f7365747461000000000000000000"
     pass: "rosetta"
     source: "sheet"
 legacy:

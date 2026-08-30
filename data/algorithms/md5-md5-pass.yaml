@@ -1,5 +1,6 @@
 id: "md5-md5-pass"
 name: "md5(md5($pass))"
+aliases: ["MD5 (2 iterations)"]
 status: "needs-review"
 tools:
   hashcat:
@@ -15,11 +16,17 @@ tools:
     verified_with: "mdxfind"
   john:
     cpu: ["dynamic_0", "dynamic_2"]
-    verified: "asserted"
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
+    note: "from hashpipe john_map.h, confirmed upstream by recomputation"
 vectors:
   - hash: "bd62daf88a5f6d734e91228e7f2e540a"
     pass: "rosetta"
     source: "sheet"
+  - hash: "482c811da5d5b4bc6d497ffa98491e38"
+    pass: "password123"
+    source: "mdxfind"
 legacy:
   hashes_org: "MD5X2"
   hashkiller: "md5(md5($pass))"

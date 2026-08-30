@@ -1,9 +1,0 @@
-id: "sha1-md5passsalt"
-name: "SHA1-MD5PASSSALT"
-status: "needs-review"
-tools:
-  hashcat:
-    verified: "absent"
-  mdxfind:
-    types: ["SHA1-MD5PASSSALT"]
-    verified: "asserted"

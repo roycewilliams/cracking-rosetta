@@ -1,5 +1,6 @@
 id: "md5-md5-salt-pass-2"
 name: "md5(md5($salt).$pass)"
+aliases: ["MD5 (3 iterations)"]
 status: "needs-review"
 tools:
   hashcat:
@@ -15,11 +16,17 @@ tools:
     verified_with: "mdxfind"
   john:
     cpu: ["dynamic_0", "dynamic_3"]
-    verified: "asserted"
+    verified: "upstream"
+    verified_at: "2026-08-29"
+    verified_with: "1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
+    note: "from hashpipe john_map.h, confirmed upstream by recomputation"
 vectors:
   - hash: "dea55753a4991cf1d8a5e8bf0871fd48"
     pass: "rosetta"
     source: "sheet"
+  - hash: "482c811da5d5b4bc6d497ffa98491e38"
+    pass: "password123"
+    source: "mdxfind"
 legacy:
   hashes_org: "MD5X3"
   hashkiller: "md5(md5(md5($pass)))"

@@ -1,7 +1,0 @@
-id: "md5saltpass"
-name: "MD5SALTPASS"
-status: "needs-review"
-tools:
-  mdxfind:
-    types: ["MD5SALTPASS"]
-    verified: "asserted"

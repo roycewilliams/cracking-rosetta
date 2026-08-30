@@ -1,7 +1,0 @@
-id: "sha1saltpass"
-name: "SHA1SALTPASS"
-status: "needs-review"
-tools:
-  mdxfind:
-    types: ["SHA1SALTPASS"]
-    verified: "asserted"

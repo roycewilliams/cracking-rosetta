@@ -1,5 +1,6 @@
 id: "sha256-md5-salt-plain-salt"
 name: "sha256(md5($salt.$plain).\":\".$salt)"
+aliases: ["sha256(md5($salt.$plain).$salt)", "sha256(md5($salt.$plain).\":\".$salt.\":\")"]
 status: "needs-review"
 tools:
   hashcat:
@@ -11,6 +12,12 @@ tools:
     verified_with: "mdxfind"
 vectors:
   - hash: "3e4835ecd04f2290041656deff7923abc07f55e19cd5b6bc2c6eec0a7f4dfc4a:ff"
+    pass: "rosetta"
+    source: "sheet"
+  - hash: "7d103c6361bb8141387bb32ede14c24eb9f72062fdd5188aadb0f69960594038:ff"
+    pass: "rosetta"
+    source: "sheet"
+  - hash: "e0c15595ec1e2153c76c013df2fd2d4c00021121fe4543659091ac67ac854723:ff"
     pass: "rosetta"
     source: "sheet"
 legacy:
