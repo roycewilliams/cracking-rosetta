@@ -1,0 +1,64 @@
+name: validate
+
+# The PR gate. CONTRIBUTING tells a contributor to run tools/validate.pl before
+# opening a PR; this is the same command, run where it cannot be forgotten.
+#
+# It is deliberately the SHAPE-AND-NAME check only, never the crackers.
+# Verification needs hashcat, john, mdxfind and a GPU, none of which exist on a
+# hosted runner, and tier 'vector' must never be reachable by anything a PR can
+# influence. So this answers "is the entry well formed and does every
+# identifier it names exist in the committed inventories?", which is the defect
+# the old spreadsheet accumulated for three years, and stops there.
+#
+# Pull requests from forks get a read-only token by default and this job asks
+# for nothing more: it reads, it reports, it writes nothing.
+
+on:
+  pull_request:
+    paths:
+      - 'data/**'
+      - 'schema/**'
+      - 'tools/**'
+      - '.github/workflows/validate.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'data/**'
+      - 'schema/**'
+      - 'tools/**'
+      - '.github/workflows/validate.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: validate-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # YAML::XS is the only non-core dependency, and Debian packages it, which
+      # keeps CI consistent with how the tools are installed on the fleet
+      # rather than pulling from CPAN.
+      - name: Install Perl deps
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends libyaml-libyaml-perl
+
+      # A tool that no longer compiles is a broken gate, not a passing one, so
+      # this runs before the gate itself.
+      - name: Compile the tools
+        run: |
+          status=0
+          for f in tools/*.pl tools/lib/*.pm; do
+            perl -Itools/lib -c "$f" || status=1
+          done
+          exit $status
+
+      - name: Validate
+        run: perl -Itools/lib tools/validate.pl
