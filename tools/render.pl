@@ -217,14 +217,61 @@ close $jf;
 #-----------------------------------------------------------------------
 # docs/ROSETTA.md - flat table, readable straight on GitHub.
 
+# wrap_name($name) - give a long expression name somewhere to break.
+#
+# 12 of 784 names are single unbreakable runs over 45 characters, and because
+# a table is as wide as its widest cell, those 12 rows were forcing horizontal
+# scrolling on GitHub for the whole thing. Composed expressions concatenate at
+# the top level - md5(A).md5(A).md5(A) - so a break at the shallowest '.'
+# splits them into readable chunks.
+sub wrap_name {
+    my ($n) = @_;
+    my $longest = 0;
+    for my $tok (split /\s+/, $n) {
+        $longest = length($tok) if length($tok) > $longest;
+    }
+    return $n if $longest <= 44;
+
+    my @ch = split //, $n;
+
+    # The break depth is wherever the SHALLOWEST '.' sits, not necessarily
+    # zero: md5(A.B.C) wraps the whole composition in an outer call, putting
+    # its separators at depth one. Dots deeper than that are inside a single
+    # operand and are left alone.
+    my ($depth, $min) = (0, undef);
+    for my $c (@ch) {
+        $depth++ if $c eq '(';
+        $depth-- if $c eq ')';
+        $min = $depth if $c eq '.' && (!defined $min || $depth < $min);
+    }
+    return $n unless defined $min;
+
+    my $out = '';
+    $depth = 0;
+    for my $c (@ch) {
+        $depth++ if $c eq '(';
+        $depth-- if $c eq ')';
+        $out .= $c;
+        $out .= '<br>' if $c eq '.' && $depth == $min;
+    }
+    return $out;
+}
+
+# md_cell($cell) - one table cell.
+#
+# Identifiers are stacked with <br> rather than joined with ", ". A cell
+# reading "`dynamic_1`, `dynamic_1016`, `dynamic_2001`" is 43 characters wide
+# and forces the whole table past GitHub's content column, which then scrolls
+# horizontally. Stacked, the same cell is as wide as its longest single
+# identifier. Nothing is lost and the column gets roughly three times narrower.
 sub md_cell {
     my ($c) = @_;
     return '**—**' if $c->{state} eq 'unknown';
     return '·'     if $c->{state} eq 'no';
     # Crack carries a state but never identifiers; saying "yes" for anything
-    # that merely is not 'no' would have claimed Crack supports all 784.
+    # that merely is not 'no' would have claimed Crack supports every entry.
     return 'yes'   unless @{ $c->{ids} };
-    my $t = join(', ', map { "`$_`" } @{ $c->{ids} });
+    my $t = join('<br>', map { "`$_`" } @{ $c->{ids} });
     return $c->{state} eq 'proven' ? "$t ✓" : $t;
 }
 
@@ -238,18 +285,27 @@ print  {$md} <<'LEGEND';
 `x` ✓ verified here by round-trip · `x` claimed, not verified · `·` tool does
 not support it · **—** nobody has said yet (a gap worth filling)
 
+Crack is omitted while no entry claims it; it is historical reference only and
+delegates to the host `crypt(3)` rather than implementing anything itself.
+
 For sorting, filtering and search, open [index.html](index.html) - or
 [dist/rosetta.csv](../dist/rosetta.csv) in a spreadsheet.
 
 LEGEND
-print  {$md} "| Algorithm | hashcat | John | mdxfind | Crack |\n";
-print  {$md} "|---|---|---|---|---|\n";
+# The Crack column is omitted while nothing populates it. Rendering 784
+# identical "nobody has said" cells costs real width and tells the reader
+# nothing they cannot get from one line of prose. It comes back on its own as
+# soon as a single entry carries tools.crack.
+my $any_crack = grep { $_->{crack}{state} ne 'unknown' } @out;
+
+print  {$md} $any_crack
+    ? "| Algorithm | hashcat | John | mdxfind | Crack |\n|---|---|---|---|---|\n"
+    : "| Algorithm | hashcat | John | mdxfind |\n|---|---|---|---|\n";
 for my $r (@out) {
-    my $n = $r->{name}; $n =~ s/\|/\\|/g;
-    printf {$md} "| %s | %s | %s | %s | %s |\n", $n,
-        md_cell($r->{hashcat}), md_cell($r->{john}),
-        md_cell($r->{mdxfind}),
-        md_cell($r->{crack});
+    my $n = wrap_name($r->{name}); $n =~ s/\|/\\|/g;
+    printf {$md} "| %s | %s | %s | %s |%s\n", $n,
+        md_cell($r->{hashcat}), md_cell($r->{john}), md_cell($r->{mdxfind}),
+        $any_crack ? ' ' . md_cell($r->{crack}) . " |" : '';
 }
 close $md;
 
