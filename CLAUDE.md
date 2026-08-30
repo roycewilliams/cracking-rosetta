@@ -119,6 +119,19 @@ mdxfind also accepts hashcat modes directly (`mdxfind -m 0`, `-m e1`,
 - **Upstream can name modes that do not exist.** mdxfind's map references
   hashcat modes `11780`, `46100`, `67000`, none of which exist in hashcat
   v7.1.2-549. Report, do not silently drop.
+- **Scraped tool output can be elided.** `hashcat --hash-info` truncates a
+  long example hash to `48435058...00000 [Truncated, use --mach for full
+  length]`, and 181 of 593 modes were recorded that way before anyone tried
+  to use one — hashcat refuses its own truncated example, so those modes
+  could not be round-tripped and nothing in the data said why.
+  `extract-hashcat.pl` reads `--hash-info --machine-readable` for that
+  reason. Check for an elision marker before trusting a scraped field.
+- **The vendored mdxfind catalog renders 15 types' example digests in
+  uppercase hex**, and mdxfind will not read them back that way. Only
+  `MD5UCBASE64SHA1RAW` turned out to be purely a case problem; `MD5UC`,
+  `SHA256UC` and `RACF` reproduce in neither case. Re-casing on failure is a
+  search for something that passes, not a fix — confirm with `mdxfind -z`
+  first, and say so in the entry.
 - **Sheet-era junk.** `NOTSUPPORTED`, `MD5AUTOMATICPARTIALMATCH` and
   `MD5UCWITHI2MD5UCX2` appear in the mdxfind column but are not types.
   `WLR1` was on that list and should not have been: it is `WRL1`
