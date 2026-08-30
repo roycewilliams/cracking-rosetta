@@ -41,6 +41,19 @@
 # otherwise. mdxfind reaches 70 of the 78 and its example is already stored in
 # the shape entries use ("<hash>[:<salt-or-user>]", plaintext separate).
 #
+# TWO TARGETS
+#
+# By default: entries with no vectors at all. With --fill: entries that DO have
+# a vector, but whose tool block names an identifier and sits below tier
+# 'vector' -- 45 hashcat blocks and 27 mdxfind blocks, mostly container and KDF
+# formats whose recorded vector is in the other tool's encoding. The published
+# example is added ALONGSIDE what is there, never over it (gotcha 27: a vector
+# from hashcat is evidence about hashcat, and replacing an independently
+# sourced one throws that provenance away). A block already at tier 'vector'
+# is left alone: it has nothing to gain, and an extra vector is not free --
+# derive-expressions.pl requires EVERY vector of an entry to fall before it
+# will write an expression.
+#
 # DEPENDENCIES: YAML::XS, tools/lib/RosettaEmit.pm, and the crackers named in
 # --mdxfind / --hashcat. Run from anywhere; paths resolve against the repo.
 #
@@ -69,6 +82,9 @@ Usage: $PROG --report | --apply | -n [options]
    --apply           verify every candidate, write the ones that verified
    -n, --dry-run     list the candidates; run no cracker, write nothing
 
+   --fill            target entries that HAVE a vector but whose tool block
+                     is below tier 'vector', adding the published example
+                     alongside; without it, only entries with no vector at all
    --tool NAME       restrict to 'mdxfind' or 'hashcat' (repeatable)
    --only ID         just this entry (repeatable)
    --limit N         stop after N candidates; for smoke tests
@@ -80,21 +96,22 @@ Usage: $PROG --report | --apply | -n [options]
    -v, --verbose     per-candidate progress on stderr (repeatable)
    -h, --help        this help
 
-   Only entries with no vectors: at all are considered. A vector is written
-   only when the tool that published it reproduces it under the identifier and
-   iteration count the entry declares. Tiers are never touched -- run
-   verify-vectors.pl afterwards to promote what this makes provable.
+   A vector is written only when the tool that published it reproduces it
+   under the identifier and iteration count the entry declares, and only ever
+   in addition to what the entry already carries. Tiers are never touched --
+   run verify-vectors.pl afterwards to promote what this makes provable.
 
    Exit 0 success, 1 error, 2 usage.
 USAGE
 }
 
-my (@tools, @only, $report, $apply, $dry, $limit, $verbose, $help);
+my (@tools, @only, $report, $apply, $dry, $fill, $limit, $verbose, $help);
 my ($mdxfind, $hashcat, $algdir, $workdir, $timeout);
 GetOptions(
     'report'       => \$report,
     'apply'        => \$apply,
     'n|dry-run'    => \$dry,
+    'fill'         => \$fill,
     'tool=s'       => \@tools,
     'only=s'       => \@only,
     'limit=i'      => \$limit,
@@ -169,30 +186,59 @@ my @files = sort grep { /\.yaml$/ } readdir $dh;
 closedir $dh;
 
 my (@cand, @noscore);
-my $vectorless = 0;
+my $targets = 0;
 
 for my $f (@files) {
     my $path = "$algdir/$f";
     my $e    = load_yaml($path);
     my $id   = $e->{id} // ($f =~ s/\.yaml$//r);
-    next if $e->{vectors} && @{ $e->{vectors} };
     next if %only && !$only{$id};
-    $vectorless++;
 
-    my $c = candidate($e, $id, $path);
-    if ($c) { push @cand, $c }
-    else    { push @noscore, $id }
+    my $has_vectors = ($e->{vectors} && @{ $e->{vectors} }) ? 1 : 0;
+    next if $fill ? !$has_vectors : $has_vectors;
+
+    if ($fill) {
+        # A block stands to gain only if it names an identifier and has not
+        # already reached tier 'vector'. Everything else is not a target, and
+        # counting it as one would drown the report.
+        my %below = map { $_ => 1 }
+            grep { my $b = $e->{tools}{$_} || {};
+                   ($b->{ $_ eq 'mdxfind' ? 'types' : 'modes' } || [])->[0]
+                   && ($b->{verified} // '') ne 'vector' }
+            qw(mdxfind hashcat);
+        next unless %below;
+        $targets++;
+
+        # Only a vector the entry does not already carry -- re-adding hashcat's
+        # own example under a block that already proved on it would be noise,
+        # not evidence.
+        my %have = map { ($_->{hash} // '') . "\0" . ($_->{pass} // '') => 1 }
+                   @{ $e->{vectors} };
+        my @c = grep { $below{ $_->{tool} } && !$have{ "$_->{hash}\0$_->{pass}" } }
+                candidates($e, $id, $path);
+        push @cand, @c;
+        push @noscore, $id unless @c;
+    }
+    else {
+        $targets++;
+        # One entry, one vector: the preference order in candidates() decides.
+        my @c = candidates($e, $id, $path);
+        if (@c) { push @cand, $c[0] }
+        else    { push @noscore, $id }
+    }
 }
 
-# candidate($entry, $id, $path) - the first usable published example, or undef.
+# candidates($entry, $id, $path) - at most one published example per tool,
+# mdxfind first, in the order a caller that wants only one should prefer them.
 #
-# mdxfind first: it reaches most of these entries and its example_vector is
+# mdxfind leads because it reaches most entries and its example_vector is
 # already the shape the corpus stores. example_vector is "<hash>[:<extra>]:<pass>"
 # and example_pass is that tail exactly, so the stored hash is the string with
 # ":<pass>" removed -- computed by stripping, never by splitting on ':', because
 # a salt may itself contain colons.
-sub candidate {
+sub candidates {
     my ($e, $id, $path) = @_;
+    my @out;
 
     if ($want{mdxfind}) {
         for my $name (@{ $e->{tools}{mdxfind}{types} || [] }) {
@@ -205,7 +251,7 @@ sub candidate {
             # vector gets stored.
             next unless length($ev) > length($suffix)
                      && substr($ev, -length($suffix)) eq $suffix;
-            return {
+            push @out, {
                 id     => $id,  path => $path, entry => $e,
                 tool   => 'mdxfind',
                 ident  => $t->{name},
@@ -214,6 +260,7 @@ sub candidate {
                 hash   => substr($ev, 0, length($ev) - length($suffix)),
                 pass   => $ep,
             };
+            last;
         }
     }
 
@@ -226,7 +273,7 @@ sub candidate {
             # line; storing it would put something in vectors: that no recipe in
             # CLAUDE.md can feed back to a tool.
             next unless ($m->{example_hash_format} // '') eq 'plain';
-            return {
+            push @out, {
                 id    => $id, path => $path, entry => $e,
                 tool  => 'hashcat',
                 ident => $mode,
@@ -234,10 +281,11 @@ sub candidate {
                 hash  => $eh,
                 pass  => $ep,
             };
+            last;
         }
     }
 
-    return undef;
+    return @out;
 }
 
 #-----------------------------------------------------------------------
@@ -318,8 +366,10 @@ my $today   = strftime('%Y-%m-%d', localtime);
 my (@ok, @bad);
 my $n = 0;
 
-printf "# %s -- %d entr%s with no vector; %d candidate(s), %d with no published example\n",
-    $PROG, $vectorless, ($vectorless == 1 ? 'y' : 'ies'), scalar @cand, scalar @noscore;
+printf "# %s -- %d target entr%s (%s); %d candidate(s), %d with nothing to offer\n",
+    $PROG, $targets, ($targets == 1 ? 'y' : 'ies'),
+    ($fill ? 'have a vector, a tool block below tier vector' : 'no vector at all'),
+    scalar @cand, scalar @noscore;
 print "# columns: result, entry, tool, identifier, hash, pass\n";
 
 for my $c (@cand) {
@@ -356,15 +406,19 @@ print "SKIP\t$_\t-\t-\t-\t-\tno published example\n" for @noscore;
 
 my $written = 0;
 if ($apply) {
+    # Append, never replace: an entry can collect a candidate from each tool in
+    # --fill, and what it already carries is provenance we do not own.
+    my %touched;
     for my $c (@ok) {
         my $e = $c->{entry};
-        $e->{vectors} = [ {
+        push @{ $e->{vectors} }, {
             hash   => $c->{hash},
             pass   => $c->{pass},
             source => $c->{tool},
-        } ];
-        $written += emit_entry($c->{path}, $e);
+        };
+        $touched{ $c->{path} } = $e;
     }
+    $written += emit_entry($_, $touched{$_}) for sort keys %touched;
 }
 
 my $elapsed = time - $started;

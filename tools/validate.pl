@@ -659,6 +659,44 @@ for my $file (@files) {
                     unless defined $v->{hash} && length $v->{hash};
                 err("%s: vectors[%d] is missing 'pass'", $file, $i)
                     unless defined $v->{pass};
+
+            }
+
+            # A mode no vector of this entry could ever exercise.
+            #
+            # hashcat is the only one of the three that publishes password
+            # bounds, and the inventory already carries them per mode, so this
+            # costs a lookup. Mode 14000 is single-DES and wants exactly 8
+            # characters, so an entry whose only vector records 'password123'
+            # under it cannot be round-tripped -- that is a data fault, not a
+            # cracking failure, and it stays invisible precisely because
+            # nothing ever runs.
+            #
+            # Judged per MODE and not per vector: an entry may legitimately
+            # carry one vector per tool in each tool's own encoding, and a
+            # plaintext that is wrong for hashcat can be right for the mdxfind
+            # type beside it. What matters is whether SOME vector could
+            # exercise the mode. Seeding hashcat's own example is therefore
+            # how one of these warnings gets cleared.
+            #
+            # A WARNING, not an error. The ones this finds are inherited from
+            # the source sheet rather than introduced by a contributor, and
+            # failing the gate on them would block every unrelated pull
+            # request until someone re-sourced a vector.
+            my @plen = map  { length $_->{pass} }
+                       grep { ref $_ eq 'HASH' && defined $_->{pass} }
+                       @{ $d->{vectors} };
+            for my $mode (@{ $d->{tools}{hashcat}{modes} || [] }) {
+                my $m = $HC_MODE{$mode} or next;
+                my ($lo, $hi) = ($m->{password_len_min}, $m->{password_len_max});
+                next unless defined $lo && defined $hi;
+                next if grep { $_ >= $lo && $_ <= $hi } @plen;
+                warn_("%s: hashcat mode %d accepts a plaintext of %s, and no "
+                    . "vector here has one (%s) -- the mode cannot be "
+                    . "round-tripped from this entry",
+                    $file, $mode,
+                    ($lo == $hi ? "exactly $lo character(s)" : "$lo to $hi characters"),
+                    join(', ', map { "$_" } @plen));
             }
         }
     }
