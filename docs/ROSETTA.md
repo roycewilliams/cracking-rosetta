@@ -280,7 +280,7 @@ For sorting, filtering and search, open [index.html](index.html) - or
 | md5($salt.$pass.$salt) | `3800` ✓ | `dynamic_2005`<br>`dynamic_5` ✓ | `MD5SALTPASSSALT` ✓ |  |
 | md5($salt.$salt.strtoupper(md5($plain))) | · | **—** | `MD51SALTMD5UC` ✓ |  |
 | md5($salt.md5($pass)) | `3710` ✓ | `dynamic_2009`<br>`dynamic_9` ✓ | `MD5SALTMD5PASS` ✓ | same as md5-userid-md5-plain (salt-convention) |
-| md5($salt.md5($pass.$salt)) | `4110` ✓ | `dynamic_11`<br>`dynamic_14`<br>`dynamic_2011` | `MD5-SALTMD5PASS-SALT` |  |
+| md5($salt.md5($pass.$salt)) | `4110` ✓ | `dynamic_11`<br>`dynamic_14`<br>`dynamic_2011` | `MD5-SALTMD5PASS-SALT` | duplicate of md5-saltmd5passsalt |
 | md5($salt.md5($salt.$pass)) | `4010` ✓ | `dynamic_10`<br>`dynamic_2010` ✓ | `MD5-SALTMD5SALTPASS` ✓ |  |
 | md5($salt.<br>md5(md5($salt.$plain).$salt).<br>$salt) | · | **—** | `MD5-MULTISALT` ✓ |  |
 | md5($salt.sha1($salt.$plain)) | `21300` | **—** | `MD5-SALTSHA1SALTPASS` |  |
@@ -418,7 +418,7 @@ For sorting, filtering and search, open [index.html](index.html) - or
 | MD5-MD5SHA1MD5SHA1MD5SHA1p | · | **—** | `MD5-MD5SHA1MD5SHA1MD5SHA1p` |  |
 | MD5-MD5USERSHA1MD5PASS | · | **—** | `MD5-MD5USERSHA1MD5PASS` |  |
 | MD5-SALT-SHA1PEPPASS | `21310` ✓ | **—** | `MD5-SALT-SHA1PEPPASS` ✓ |  |
-| MD5-SALTMD5PASSSALT | `4110` ✓ | `dynamic_11`<br>`dynamic_2011` ✓ | `MD5-SALTMD5PASSSALT` ✓ |  |
+| MD5-SALTMD5PASSSALT | `4110` ✓ | `dynamic_11`<br>`dynamic_2011` ✓ | `MD5-SALTMD5PASSSALT` ✓ | duplicate of md5-salt-md5-pass-salt |
 | MD5-SHA1numSHA1 | · | **—** | `MD5-SHA1numSHA1` |  |
 | MD5-SHA1SALTPASS | `4430` ✓ | **—** | `MD5-SHA1SALTPASS` ✓ |  |
 | MD5AM | · | **—** | `MD5AM` ✓ |  |
