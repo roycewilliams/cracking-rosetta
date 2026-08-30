@@ -20,6 +20,11 @@ tools:
     note: "format discovered by round-trip search, not by name"
   crack:
     supported: false
+relations:
+  - kind: "duplicate-of"
+    entry: "streebog-32-plain"
+    distinction: "none"
+    note: "Streebog IS GOST R 34.11-2012; mdxfind carries both names as separate types (e427, e430) publishing the same example vector. Proven here rather than assumed: mdxfind pinned to EACH type reproduces BOTH entries' vectors, on two different plaintexts, and both entries already name john's Stribog-256 at tier vector. Nothing distinguishes them; the merge would fold hashcat 11700 into the survivor."
 vectors:
   - hash: "6940451a91df4d17532dd11762b851572bad5362f4d885d2a20e510b2f875870"
     pass: "password123"

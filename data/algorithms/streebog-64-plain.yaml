@@ -15,6 +15,11 @@ tools:
     note: "format discovered by round-trip search, not by name"
   crack:
     supported: false
+relations:
+  - kind: "duplicate-of"
+    entry: "gost2012-64"
+    distinction: "none"
+    note: "Streebog IS GOST R 34.11-2012; mdxfind carries both names as separate types (e428, e431) publishing the same example vector. mdxfind pinned to EACH type reproduces BOTH entries' vectors, on two different plaintexts, and both entries already name john's Stribog-512 at tier vector. Nothing distinguishes them; the merge would fold hashcat 11800 into the survivor."
 vectors:
   - hash: "ef6239cb4ceb087bc3cb8b0f8fe5f7f7c9ca73ec885ec721d641ae1d427092c2c1c3cce546c0edf5041e8a5a3e79dfa0d0345de02dcb62ae999c6a3c7ef73953"
     pass: "rosetta"
