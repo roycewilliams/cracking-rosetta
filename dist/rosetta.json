@@ -12829,7 +12829,7 @@
          "cracknote" : "",
          "denotation" : "",
          "expr" : "md5(md5($p).$s)",
-         "expr_note" : "transcribed from john --list=subformats for an identifier this entry proved by round-trip; TRIAGE 2026-08-30 [vector-anomalous]: the expression is correct -- compiled with --format=dynamic it recovers all 6 of john's own test vectors for dynamic_1007 -- and 1 of this entry's 2 vectors are not of that construction by independent computation. Those vectors are something else and want identifying",
+         "expr_note" : "transcribed from john --list=subformats for an identifier this entry proved by round-trip; TRIAGE 2026-08-30 [vector-anomalous], RESOLVED 2026-08-31 (see notes): the expression is correct -- compiled with --format=dynamic it recovers all 6 of john's own test vectors for dynamic_1007 -- and 1 of this entry's 2 vectors are not of that construction by independent computation. Those vectors are something else and want identifying",
          "expr_tier" : "upstream",
          "hashcat" : {
             "ids" : [],
@@ -12854,7 +12854,7 @@
             "tier" : "vector"
          },
          "name" : "md5(capitalise(md5($plain).$username)",
-         "notes" : "The second vector (d4f7dec5b98ac42336b1c9e56f2e5ca8:abc123, plaintext 'rosetta') is NOT this entry's construction, and identifying it is an open question. Ruled out 2026-08-30: an independent Digest:: computation of md5(md5($p).$s) disagrees; a systematic sweep of 198,534 constructions of the form md5(<1-3 concatenated terms>), where each term is $p, $s or one of md5/sha1/sha256 over them in hex, raw, uppercase or base64, did not reproduce it; and mdxfind unpinned across all 1001 types was started and did not finish within an hour. The entry's other vector is correct.",
+         "notes" : "IDENTIFIED 2026-08-31 by Cynosure Prime's maintainer and confirmed here by an independent Digest::MD5 computation: the vector d4f7dec5b98ac42336b1c9e56f2e5ca8:abc123 (plaintext 'rosetta') is md5(md5($p).\":\".$u) -- mdxfind/hashpipe type MD5CAPMD5USER, which inserts a LITERAL COLON between the inner digest and the userid field (hx.pdf note 24, p.58). The earlier 198,534-construction sweep missed it because it enumerated terms and never a literal separator between them. The colon is not a general convention for userid types: md5-userid-md5-plain (MD5USERIDMD5) and sha1-sha1-plain-salt (SHA1SHA1USER) both reproduce without it, checked the same day. CONSEQUENCE, still open: this entry carries vectors of TWO constructions -- 05b56c69b512a1c641fc59d1070df60b is md5(md5($p).$s), which is this entry's expression and what john's dynamic_1007 proves, while d4f7dec5 is the colon form, which is what this entry's mdxfind type MD5CAPMD5USER denotes and what mdxfind's tier was proven on. One entry, two computations; splitting it is a curation decision. Note also that john's dynamic compiler rejects a literal string ('Invalid token following the . character'), so the colon form can have no john expression at all.",
          "relations" : [
             {
                "distinction" : "application",
@@ -13598,7 +13598,7 @@
          "cracknote" : "",
          "denotation" : "",
          "expr" : "md5(md5($p).$s)",
-         "expr_note" : "transcribed from john --list=subformats for an identifier this entry proved by round-trip; TRIAGE 2026-08-30 [vector-anomalous]: the expression is correct -- compiled with --format=dynamic it recovers all 6 of john's own test vectors for dynamic_1007 -- and 1 of this entry's 2 vectors are not of that construction by independent computation. Those vectors are something else and want identifying",
+         "expr_note" : "transcribed from john --list=subformats for an identifier this entry proved by round-trip; TRIAGE 2026-08-30 [vector-anomalous], RESOLVED 2026-08-31 (see notes): the expression is correct -- compiled with --format=dynamic it recovers all 6 of john's own test vectors for dynamic_1007 -- and 1 of this entry's 2 vectors are not of that construction by independent computation. Those vectors are something else and want identifying",
          "expr_tier" : "upstream",
          "hashcat" : {
             "ids" : [],
@@ -13623,7 +13623,7 @@
             "tier" : "vector"
          },
          "name" : "md5(md5($plain).$salt)",
-         "notes" : "The second vector (d4f7dec5b98ac42336b1c9e56f2e5ca8:abc123, plaintext 'rosetta') is NOT this entry's construction, and identifying it is an open question. Ruled out 2026-08-30: an independent Digest:: computation of md5(md5($p).$s) disagrees; a systematic sweep of 198,534 constructions of the form md5(<1-3 concatenated terms>), where each term is $p, $s or one of md5/sha1/sha256 over them in hex, raw, uppercase or base64, did not reproduce it; and mdxfind unpinned across all 1001 types was started and did not finish within an hour. The entry's other vector is correct.",
+         "notes" : "IDENTIFIED 2026-08-31 by Cynosure Prime's maintainer and confirmed here by an independent Digest::MD5 computation: the vector d4f7dec5b98ac42336b1c9e56f2e5ca8:abc123 (plaintext 'rosetta') is md5(md5($p).\":\".$u) -- mdxfind/hashpipe type MD5MD5USER, which inserts a LITERAL COLON between the inner digest and the userid field (hx.pdf note 24, p.58). The earlier 198,534-construction sweep missed it because it enumerated terms and never a literal separator between them. The colon is not a general convention for userid types: md5-userid-md5-plain (MD5USERIDMD5) and sha1-sha1-plain-salt (SHA1SHA1USER) both reproduce without it, checked the same day. CONSEQUENCE, still open: this entry carries vectors of TWO constructions -- 05b56c69b512a1c641fc59d1070df60b is md5(md5($p).$s), which is this entry's expression and what john's dynamic_1007 proves, while d4f7dec5 is the colon form, which is what this entry's mdxfind type MD5MD5USER denotes and what mdxfind's tier was proven on. One entry, two computations; splitting it is a curation decision. Note also that john's dynamic compiler rejects a literal string ('Invalid token following the . character'), so the colon form can have no john expression at all.",
          "relations" : [
             {
                "distinction" : "application",
