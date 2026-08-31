@@ -119,7 +119,7 @@ my %scope = map { $_ => 1 } @only;
 # and "13 mdxfind asserted, 11 no vector" is the queue it turns them into.
 
 sub reasons_for {
-    my ($d) = @_;
+    my ($d, $tomb) = @_;
     my @why;
 
     push @why, 'no vector'
@@ -139,8 +139,14 @@ sub reasons_for {
         && (ref $d->{expression_proof} ne 'HASH'
             || ($d->{expression_proof}{verified} // '') ne 'vector');
 
+    # An edge with distinction: none says a merge is still owed -- UNLESS the
+    # other end is a tombstone, in which case the merge already happened and
+    # this is the survivor holding the record of it. Without this the three
+    # entries that won a merge are pinned at needs-review permanently, which
+    # is the opposite of what the merge accomplished.
     push @why, 'open duplicate'
-        if grep { ref $_ eq 'HASH' && ($_->{distinction} // '') eq 'none' }
+        if grep { ref $_ eq 'HASH' && ($_->{distinction} // '') eq 'none'
+                  && !$tomb->{ $_->{entry} // '' } }
            @{ ref $d->{relations} eq 'ARRAY' ? $d->{relations} : [] };
 
     return @why;
@@ -160,6 +166,16 @@ my $start = time;
 my ($seen, $tombs, $changed, %to, %why_count) = (0, 0, 0);
 my @moved;
 
+# Which ids are tombstones. A pre-pass, because an entry's status depends on
+# whether the entry its relation names is one, and the walk below is in
+# filename order rather than dependency order.
+my %tomb;
+for my $file (@files) {
+    my $d = eval { YAML::XS::LoadFile("$algdir/$file") } or next;
+    next unless ref $d eq 'HASH' && ($d->{status} // '') eq 'merged';
+    $tomb{ $d->{id} // do { (my $t = $file) =~ s/\.yaml$//; $t } } = 1;
+}
+
 for my $file (@files) {
     my $stem = $file; $stem =~ s/\.yaml$//;
     next if %scope && !$scope{$stem};
@@ -173,7 +189,7 @@ for my $file (@files) {
     if (($d->{status} // '') eq 'merged') { $tombs++; next }
     $seen++;
 
-    my @why    = reasons_for($d);
+    my @why    = reasons_for($d, \%tomb);
     my $want   = @why ? 'needs-review' : 'ok';
     my $have   = $d->{status} // 'ok';
     $to{$want}++;
