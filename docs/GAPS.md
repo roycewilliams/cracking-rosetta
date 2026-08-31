@@ -80,7 +80,7 @@ Real work rather than a one-liner: it means finding out whether the tool
 supports the construction at all, and under which identifier. The counts are
 the honest size of the job.
 
-### john: 538 entries say nothing
+### john: 537 entries say nothing
 
 A few that carry a vector and a proven expression, so there is a definite construction to look for, one per family:
 
@@ -88,11 +88,11 @@ A few that carry a vector and a proven expression, so there is a definite constr
 * [`haval128-3-md5-plain`](index.html#haval128-3-md5-plain) - `haval128_3(md5($p))` (and 29 more starting `haval`)
 * [`md2-md5-plain`](index.html#md2-md5-plain) - `md2(md5($p))` (and 55 more starting `md`)
 * [`ripemd128-md5-plain`](index.html#ripemd128-md5-plain) - `ripemd128(md5($p))` (and 5 more starting `ripemd`)
-* [`sha1-plain-sha1-plain`](index.html#sha1-plain-sha1-plain) - `sha1($p.sha1($p))` (and 43 more starting `sha`)
+* [`sha1-plain-sha1-plain`](index.html#sha1-plain-sha1-plain) - `sha1($p.sha1($p))` (and 42 more starting `sha`)
 * [`tiger128-3-md5-plain`](index.html#tiger128-3-md5-plain) - `tiger(md5($p))` (and 1 more starting `tiger`)
 * [`whirlpool-md5-plain`](index.html#whirlpool-md5-plain) - `whirlpool(md5($p))` (and 3 more starting `whirlpool`)
 
-All 538: filter `john_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
+All 537: filter `john_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
 
 Where such an entry carries an expression, john can already attack it without
 a named format:
