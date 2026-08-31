@@ -1,6 +1,6 @@
 id: "apache-apr1"
 name: "Apache $apr1$"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [1600]

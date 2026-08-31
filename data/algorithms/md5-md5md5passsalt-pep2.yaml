@@ -1,6 +1,6 @@
 id: "md5-md5md5passsalt-pep2"
 name: "MD5-MD5MD5PASSSALT-PEP2"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [21900]

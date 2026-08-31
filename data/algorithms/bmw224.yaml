@@ -1,6 +1,6 @@
 id: "bmw224"
 name: "BMW224"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     verified: "absent"

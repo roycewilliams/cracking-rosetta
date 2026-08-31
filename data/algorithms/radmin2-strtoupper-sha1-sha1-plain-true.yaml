@@ -8,7 +8,7 @@ expression_proof:
 denotation:
   text: "radmin2(strtoupper(sha1(sha1($plain, true))))"
   source: "sheet"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     verified: "absent"

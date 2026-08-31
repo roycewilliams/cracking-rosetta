@@ -1,6 +1,6 @@
 id: "crammd5"
 name: "CRAMMD5"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [10200]

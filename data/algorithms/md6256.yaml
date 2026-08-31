@@ -1,6 +1,6 @@
 id: "md6256"
 name: "MD6256"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [34600]

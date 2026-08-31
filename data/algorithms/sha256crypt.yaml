@@ -1,6 +1,6 @@
 id: "sha256crypt"
 name: "sha256crypt"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [7400]

@@ -8,7 +8,7 @@ expression_proof:
 denotation:
   text: "pomelo($plain)"
   source: "sheet"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     verified: "absent"

@@ -1,6 +1,6 @@
 id: "bcrypt256"
 name: "BCRYPT256"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [30600]

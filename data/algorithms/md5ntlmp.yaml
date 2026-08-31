@@ -1,6 +1,6 @@
 id: "md5ntlmp"
 name: "MD5NTLMp"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     verified: "absent"

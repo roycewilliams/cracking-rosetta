@@ -1,6 +1,6 @@
 id: "aes128-nokdf"
 name: "AES128-NOKDF"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [26401]

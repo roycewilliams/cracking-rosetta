@@ -8,7 +8,7 @@ expression_proof:
 denotation:
   text: "hmac(\"md4\", $plain, $salt)"
   source: "sheet"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     verified: "absent"

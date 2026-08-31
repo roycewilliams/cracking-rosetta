@@ -1,6 +1,6 @@
 id: "ipmi2-sha1"
 name: "IPMI2-SHA1"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [7300]

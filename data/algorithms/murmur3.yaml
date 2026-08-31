@@ -1,6 +1,6 @@
 id: "murmur3"
 name: "MURMUR3"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [27800]

@@ -1,6 +1,6 @@
 id: "solarwinds"
 name: "SOLARWINDS"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [21500]

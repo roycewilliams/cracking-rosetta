@@ -1,6 +1,6 @@
 id: "bcryptsha512"
 name: "BCRYPTSHA512"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [28400]

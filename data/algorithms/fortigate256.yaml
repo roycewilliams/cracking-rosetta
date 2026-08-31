@@ -1,6 +1,6 @@
 id: "fortigate256"
 name: "FORTIGATE256"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [26300]

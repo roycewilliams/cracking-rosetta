@@ -10,7 +10,7 @@ expression_proof:
 category: "application"
 application: "Joomla"
 application_version: "<2.5.18"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [11]

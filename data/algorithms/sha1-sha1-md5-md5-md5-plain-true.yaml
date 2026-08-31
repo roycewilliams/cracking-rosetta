@@ -1,6 +1,6 @@
 id: "sha1-sha1-md5-md5-md5-plain-true"
 name: "sha1(sha1(md5(md5(md5($plain))),true))"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     verified: "absent"

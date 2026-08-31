@@ -1,6 +1,6 @@
 id: "sha1-saltsha1passsalt"
 name: "SHA1-SALTSHA1PASSSALT"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [24300]

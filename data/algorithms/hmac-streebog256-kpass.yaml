@@ -1,6 +1,6 @@
 id: "hmac-streebog256-kpass"
 name: "HMAC-STREEBOG256-KPASS"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [11750]

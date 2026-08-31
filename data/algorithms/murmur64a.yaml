@@ -1,6 +1,6 @@
 id: "murmur64a"
 name: "MURMUR64A"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [34200]

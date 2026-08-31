@@ -1,6 +1,6 @@
 id: "sap-passcode"
 name: "SAP-PASSCODE"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [7800]

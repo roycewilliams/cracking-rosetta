@@ -1,6 +1,6 @@
 id: "md5ucbase64sha1raw"
 name: "MD5UCBASE64SHA1RAW"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     verified: "absent"

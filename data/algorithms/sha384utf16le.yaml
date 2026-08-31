@@ -1,6 +1,6 @@
 id: "sha384utf16le"
 name: "SHA384UTF16LE"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [10870]

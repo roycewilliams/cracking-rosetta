@@ -1,6 +1,6 @@
 id: "sqlcipher"
 name: "SQLCIPHER"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [24600]

@@ -1,6 +1,6 @@
 id: "awssigv4"
 name: "AWSSIGV4"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [28700]

@@ -1,6 +1,6 @@
 id: "argon2"
 name: "ARGON2"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [34000]

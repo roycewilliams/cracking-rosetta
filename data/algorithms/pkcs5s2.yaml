@@ -1,6 +1,6 @@
 id: "pkcs5s2"
 name: "PKCS5S2"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     verified: "absent"

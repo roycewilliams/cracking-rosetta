@@ -1,6 +1,6 @@
 id: "androidfde"
 name: "ANDROIDFDE"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [12900]

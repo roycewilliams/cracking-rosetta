@@ -1,6 +1,6 @@
 id: "leet-sha512-wrl-user"
 name: "LEET-SHA512-WRL-USER"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     verified: "absent"

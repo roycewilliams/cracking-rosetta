@@ -1,6 +1,6 @@
 id: "mssntp"
 name: "MSSNTP"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [31300]

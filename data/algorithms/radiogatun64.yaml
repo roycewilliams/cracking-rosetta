@@ -1,6 +1,6 @@
 id: "radiogatun64"
 name: "RADIOGATUN64"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     verified: "absent"

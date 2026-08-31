@@ -1,6 +1,6 @@
 id: "sha1-8track"
 name: "SHA1-8TRACK"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     verified: "absent"

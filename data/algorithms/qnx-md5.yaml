@@ -1,6 +1,6 @@
 id: "qnx-md5"
 name: "QNX-MD5"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [19000]

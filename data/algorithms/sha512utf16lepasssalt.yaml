@@ -1,6 +1,6 @@
 id: "sha512utf16lepasssalt"
 name: "SHA512UTF16LEPASSSALT"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [1730]

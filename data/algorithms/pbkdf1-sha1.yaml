@@ -1,6 +1,6 @@
 id: "pbkdf1-sha1"
 name: "PBKDF1-SHA1"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [32900]

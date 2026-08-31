@@ -1,6 +1,6 @@
 id: "umbraco"
 name: "UMBRACO"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [24800]

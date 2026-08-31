@@ -1,6 +1,6 @@
 id: "sha1dru"
 name: "SHA1DRU"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     verified: "absent"

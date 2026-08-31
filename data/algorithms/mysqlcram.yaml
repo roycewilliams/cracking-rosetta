@@ -1,6 +1,6 @@
 id: "mysqlcram"
 name: "MYSQLCRAM"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [11200]

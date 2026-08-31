@@ -1,6 +1,6 @@
 id: "aes192-nokdf"
 name: "AES192-NOKDF"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [26402]

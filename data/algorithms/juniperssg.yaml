@@ -1,6 +1,6 @@
 id: "juniperssg"
 name: "JUNIPERSSG"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [22]

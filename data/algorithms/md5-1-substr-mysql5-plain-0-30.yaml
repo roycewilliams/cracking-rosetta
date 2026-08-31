@@ -9,7 +9,7 @@ expression_proof:
 denotation:
   text: "md5(\"1*\".substr(mysql5($plain),0,30))"
   source: "sheet"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     verified: "absent"

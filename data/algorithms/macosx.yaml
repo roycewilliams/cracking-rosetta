@@ -1,6 +1,6 @@
 id: "macosx"
 name: "MACOSX"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [122]

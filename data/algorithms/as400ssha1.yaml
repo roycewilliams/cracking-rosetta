@@ -1,6 +1,6 @@
 id: "as400ssha1"
 name: "AS400SSHA1"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [35200]

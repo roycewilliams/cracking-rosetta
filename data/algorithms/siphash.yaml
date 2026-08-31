@@ -1,6 +1,6 @@
 id: "siphash"
 name: "SIPHASH"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [10100]

@@ -1,6 +1,6 @@
 id: "redhat389ds"
 name: "REDHAT389DS"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [10901]

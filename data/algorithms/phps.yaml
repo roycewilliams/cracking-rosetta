@@ -1,6 +1,6 @@
 id: "phps"
 name: "PHPS"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [2612]

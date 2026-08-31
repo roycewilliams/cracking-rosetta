@@ -1,6 +1,6 @@
 id: "blake2b512passsalt"
 name: "BLAKE2B512PASSSALT"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [610]

@@ -1,6 +1,6 @@
 id: "oracle7"
 name: "ORACLE7"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [3100]

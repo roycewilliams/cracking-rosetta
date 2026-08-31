@@ -1,6 +1,6 @@
 id: "mssql2005"
 name: "MSSQL2005"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [132]

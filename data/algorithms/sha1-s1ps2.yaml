@@ -1,6 +1,6 @@
 id: "sha1-s1ps2"
 name: "SHA1-S1PS2"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [19300]

@@ -1,6 +1,6 @@
 id: "bsdicrypt"
 name: "BSDICRYPT"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [12400]

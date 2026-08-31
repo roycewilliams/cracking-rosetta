@@ -1,6 +1,6 @@
 id: "msonline"
 name: "MSONLINE"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [33700]

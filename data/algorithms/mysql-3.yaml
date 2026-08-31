@@ -1,6 +1,6 @@
 id: "mysql-3"
 name: "MySQL 3"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [200]

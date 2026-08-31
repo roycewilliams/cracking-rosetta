@@ -1,6 +1,6 @@
 id: "hmac-streebog512-kpass"
 name: "HMAC-STREEBOG512-KPASS"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [11850]

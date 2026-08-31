@@ -1,6 +1,6 @@
 id: "bcrypt"
 name: "Bcrypt"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [3200]

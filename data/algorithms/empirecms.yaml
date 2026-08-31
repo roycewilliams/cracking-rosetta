@@ -1,6 +1,6 @@
 id: "empirecms"
 name: "EMPIRECMS"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [32300]

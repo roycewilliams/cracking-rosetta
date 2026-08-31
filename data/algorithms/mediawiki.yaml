@@ -1,6 +1,6 @@
 id: "mediawiki"
 name: "MEDIAWIKI"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [3711]

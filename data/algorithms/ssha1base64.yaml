@@ -1,6 +1,6 @@
 id: "ssha1base64"
 name: "SSHA1BASE64"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [111]

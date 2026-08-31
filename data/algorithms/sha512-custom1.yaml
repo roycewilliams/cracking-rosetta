@@ -1,6 +1,6 @@
 id: "sha512-custom1"
 name: "SHA512-CUSTOM1"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     verified: "absent"

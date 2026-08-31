@@ -1,6 +1,6 @@
 id: "sha1lsb35"
 name: "SHA1lsb35"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     verified: "absent"

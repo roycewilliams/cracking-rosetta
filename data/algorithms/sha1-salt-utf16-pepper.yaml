@@ -1,6 +1,6 @@
 id: "sha1-salt-utf16-pepper"
 name: "SHA1-SALT-UTF16-PEPPER"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     verified: "absent"

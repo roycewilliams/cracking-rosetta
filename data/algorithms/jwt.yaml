@@ -1,6 +1,6 @@
 id: "jwt"
 name: "JWT"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [16500]

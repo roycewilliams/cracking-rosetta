@@ -1,6 +1,6 @@
 id: "sha1-upper-wrl-plain"
 name: "sha1(upper(wrl($plain)))"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     verified: "absent"

@@ -1,6 +1,6 @@
 id: "md5-base64-raw-sha256"
 name: "md5(base64(raw_sha256)) ?"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     verified: "absent"

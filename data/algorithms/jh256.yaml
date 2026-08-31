@@ -1,6 +1,6 @@
 id: "jh256"
 name: "JH256"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     verified: "absent"

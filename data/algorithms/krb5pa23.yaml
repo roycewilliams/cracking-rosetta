@@ -1,6 +1,6 @@
 id: "krb5pa23"
 name: "KRB5PA23"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [7500]

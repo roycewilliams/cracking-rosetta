@@ -1,6 +1,6 @@
 id: "md5-md5-md5-plain-salt1-salt2"
 name: "md5(md5(md5($plain).$salt1).$salt2)"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [31700]

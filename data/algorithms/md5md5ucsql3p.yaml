@@ -1,6 +1,6 @@
 id: "md5md5ucsql3p"
 name: "MD5MD5UCSQL3p"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     verified: "absent"

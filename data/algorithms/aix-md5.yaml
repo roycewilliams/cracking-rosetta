@@ -1,6 +1,6 @@
 id: "aix-md5"
 name: "AIX-MD5"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [6300]

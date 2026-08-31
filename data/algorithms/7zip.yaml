@@ -1,6 +1,6 @@
 id: "7zip"
 name: "7ZIP"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [11600]

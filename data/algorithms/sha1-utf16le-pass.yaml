@@ -1,6 +1,6 @@
 id: "sha1-utf16le-pass"
 name: "sha1(utf16le($pass))"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [170]

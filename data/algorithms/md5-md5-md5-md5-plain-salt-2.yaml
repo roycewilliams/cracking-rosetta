@@ -1,7 +1,7 @@
 id: "md5-md5-md5-md5-plain-salt-2"
 name: "md5(md5(md5(md5($plain))).$salt)"
 aliases: ["md5($salt.md5(md5(md5($plain))))", "md5(substr($salt,0,1).md5(md5(md5($plain))).substr($salt,1,1))"]
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     verified: "absent"

@@ -1,6 +1,6 @@
 id: "winphone"
 name: "WINPHONE"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [13800]

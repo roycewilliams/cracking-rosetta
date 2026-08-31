@@ -1,6 +1,6 @@
 id: "werkzeug-sha256"
 name: "WERKZEUG-SHA256"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [30120]

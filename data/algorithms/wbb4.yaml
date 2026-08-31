@@ -1,6 +1,6 @@
 id: "wbb4"
 name: "WBB4"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [33800]

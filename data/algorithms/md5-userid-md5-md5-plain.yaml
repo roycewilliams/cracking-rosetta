@@ -1,6 +1,6 @@
 id: "md5-userid-md5-md5-plain"
 name: "md5($userid.md5(md5($plain)))"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     verified: "absent"

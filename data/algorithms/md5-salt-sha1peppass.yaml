@@ -1,6 +1,6 @@
 id: "md5-salt-sha1peppass"
 name: "MD5-SALT-SHA1PEPPASS"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [21310]

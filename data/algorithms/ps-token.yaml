@@ -1,6 +1,6 @@
 id: "ps-token"
 name: "PS-TOKEN"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [13500]

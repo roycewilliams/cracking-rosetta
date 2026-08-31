@@ -1,6 +1,6 @@
 id: "racf-kdfaes"
 name: "RACF-KDFAES"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [14200]

@@ -1,6 +1,6 @@
 id: "gost12512crypt"
 name: "GOST12512CRYPT"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [35600]

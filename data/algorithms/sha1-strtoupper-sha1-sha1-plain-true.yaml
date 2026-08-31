@@ -1,6 +1,6 @@
 id: "sha1-strtoupper-sha1-sha1-plain-true"
 name: "sha1(strtoupper(sha1(sha1($plain, true))))"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     verified: "absent"

@@ -1,6 +1,6 @@
 id: "sha256sha256salt"
 name: "SHA256SHA256SALT"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [20710]

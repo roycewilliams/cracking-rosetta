@@ -1,6 +1,6 @@
 id: "hmailserver"
 name: "HMAILSERVER"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [1421]

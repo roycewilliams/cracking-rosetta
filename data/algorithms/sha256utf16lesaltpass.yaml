@@ -1,6 +1,6 @@
 id: "sha256utf16lesaltpass"
 name: "SHA256UTF16LESALTPASS"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [1440]

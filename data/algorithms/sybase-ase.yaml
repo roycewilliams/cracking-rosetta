@@ -1,6 +1,6 @@
 id: "sybase-ase"
 name: "SYBASE-ASE"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [8000]

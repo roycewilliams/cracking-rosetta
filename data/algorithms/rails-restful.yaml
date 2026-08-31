@@ -1,6 +1,6 @@
 id: "rails-restful"
 name: "RAILS-RESTFUL"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [19500]

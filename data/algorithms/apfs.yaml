@@ -1,6 +1,6 @@
 id: "apfs"
 name: "APFS"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [18300]

@@ -1,6 +1,6 @@
 id: "qnx-sha256"
 name: "QNX-SHA256"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [19100]

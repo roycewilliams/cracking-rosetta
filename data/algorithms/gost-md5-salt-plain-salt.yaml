@@ -1,7 +1,7 @@
 id: "gost-md5-salt-plain-salt"
 name: "gost(md5($salt.$plain).\":\".$salt)"
 aliases: ["gost(md5($salt.$plain).$salt)", "gost(md5($salt.$plain).\":\".$salt.\":\")"]
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     verified: "absent"

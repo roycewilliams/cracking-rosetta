@@ -1,6 +1,6 @@
 id: "phpass"
 name: "phpass"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [400]

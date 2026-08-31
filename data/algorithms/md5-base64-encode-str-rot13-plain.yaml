@@ -8,7 +8,7 @@ expression_proof:
 denotation:
   text: "md5(base64_encode(str_rot13($plain)))"
   source: "sheet"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     verified: "absent"

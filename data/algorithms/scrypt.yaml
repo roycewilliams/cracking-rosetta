@@ -1,6 +1,6 @@
 id: "scrypt"
 name: "SCRYPT"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [8900]

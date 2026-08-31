@@ -1,6 +1,6 @@
 id: "md5md5salt-salt"
 name: "MD5MD5SALT-SALT"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     verified: "absent"

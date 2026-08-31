@@ -1,6 +1,6 @@
 id: "drupal7"
 name: "DRUPAL7"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [7900]

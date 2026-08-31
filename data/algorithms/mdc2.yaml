@@ -1,6 +1,6 @@
 id: "mdc2"
 name: "MDC2"
-status: "needs-review"
+status: "ok"
 tools:
   mdxfind:
     types: ["MDC2"]

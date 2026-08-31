@@ -1,6 +1,6 @@
 id: "shiro1"
 name: "SHIRO1"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [12150]

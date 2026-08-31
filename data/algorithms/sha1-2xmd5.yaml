@@ -1,6 +1,6 @@
 id: "sha1-2xmd5"
 name: "SHA1-2xMD5"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     verified: "absent"

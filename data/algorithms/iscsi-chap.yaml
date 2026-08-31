@@ -1,6 +1,6 @@
 id: "iscsi-chap"
 name: "ISCSI-CHAP"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [4800]

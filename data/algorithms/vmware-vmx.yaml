@@ -1,6 +1,6 @@
 id: "vmware-vmx"
 name: "VMWARE-VMX"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [27400]

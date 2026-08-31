@@ -1,6 +1,6 @@
 id: "has-160-librhash"
 name: "has-160 (librhash)"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     verified: "absent"

@@ -1,6 +1,6 @@
 id: "pbkdf2-sha256-plain"
 name: "pbkdf2-sha256($plain)"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [10000]

@@ -9,7 +9,7 @@ expression_proof:
   note: "round-tripped as --format=dynamic=<expr> against every vector this entry carries"
 category: "application"
 application: "OpenCart"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [13900]

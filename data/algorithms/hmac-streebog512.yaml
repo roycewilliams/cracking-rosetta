@@ -1,6 +1,6 @@
 id: "hmac-streebog512"
 name: "HMAC-STREEBOG512"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [11860]

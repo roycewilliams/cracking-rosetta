@@ -8,7 +8,7 @@ expression_proof:
 denotation:
   text: "md4(utf16-le(utf-8($plain)))"
   source: "sheet"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [1000]

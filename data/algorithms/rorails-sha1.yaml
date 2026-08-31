@@ -1,6 +1,6 @@
 id: "rorails-sha1"
 name: "RORAILS-SHA1"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [27200]

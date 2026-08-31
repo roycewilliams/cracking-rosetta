@@ -1,6 +1,6 @@
 id: "md5sha1base64md5raw"
 name: "MD5SHA1BASE64MD5RAW"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     verified: "absent"

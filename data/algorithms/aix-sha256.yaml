@@ -1,6 +1,6 @@
 id: "aix-sha256"
 name: "AIX-SHA256"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [6400]

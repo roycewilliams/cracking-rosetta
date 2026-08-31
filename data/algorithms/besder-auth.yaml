@@ -1,6 +1,6 @@
 id: "besder-auth"
 name: "BESDER-AUTH"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [24901]

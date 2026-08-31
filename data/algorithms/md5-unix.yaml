@@ -1,6 +1,6 @@
 id: "md5-unix"
 name: "md5(unix)"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [500]

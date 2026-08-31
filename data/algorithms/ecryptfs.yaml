@@ -1,6 +1,6 @@
 id: "ecryptfs"
 name: "ECRYPTFS"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [12200]

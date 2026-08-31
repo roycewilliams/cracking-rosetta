@@ -1,6 +1,6 @@
 id: "krb5pa-17"
 name: "KRB5PA-17"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [19800]

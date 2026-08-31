@@ -1,6 +1,6 @@
 id: "md5sha1u32salt"
 name: "MD5SHA1u32SALT"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     verified: "absent"

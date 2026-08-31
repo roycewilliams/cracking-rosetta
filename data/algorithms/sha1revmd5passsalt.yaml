@@ -1,6 +1,6 @@
 id: "sha1revmd5passsalt"
 name: "SHA1revMD5PASSSALT"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     verified: "absent"

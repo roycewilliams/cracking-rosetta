@@ -1,6 +1,6 @@
 id: "web2py-sha512"
 name: "WEB2PY-SHA512"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [21600]

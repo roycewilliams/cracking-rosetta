@@ -1,6 +1,6 @@
 id: "sha1crypt"
 name: "SHA1CRYPT"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [15100]

@@ -1,6 +1,6 @@
 id: "md5-strtoupper-md5-md5-plain-true"
 name: "md5(strtoupper(md5(md5($plain, true))))"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     verified: "absent"

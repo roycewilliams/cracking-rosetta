@@ -1,6 +1,6 @@
 id: "cisco4"
 name: "CISCO4"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [5700]

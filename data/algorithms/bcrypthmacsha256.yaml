@@ -1,6 +1,6 @@
 id: "bcrypthmacsha256"
 name: "BCRYPTHMACSHA256"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [30601]

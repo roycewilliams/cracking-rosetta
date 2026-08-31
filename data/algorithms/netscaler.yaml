@@ -1,6 +1,6 @@
 id: "netscaler"
 name: "NETSCALER"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [8100]

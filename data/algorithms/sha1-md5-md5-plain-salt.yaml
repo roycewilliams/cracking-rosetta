@@ -1,7 +1,7 @@
 id: "sha1-md5-md5-plain-salt"
 name: "sha1(md5(md5($plain).$salt))"
 aliases: ["sha1(md5(md5($plain).$salt.$salt))", "sha1(md5($salt.md5($plain)))", "sha1(md5($salt.md5($plain).$salt))", "sha1(md5($salt.$salt.md5($plain)))"]
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     verified: "absent"

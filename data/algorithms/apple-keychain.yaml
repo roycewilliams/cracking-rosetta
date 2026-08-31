@@ -1,6 +1,6 @@
 id: "apple-keychain"
 name: "APPLE-KEYCHAIN"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [23100]

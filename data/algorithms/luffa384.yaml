@@ -1,6 +1,6 @@
 id: "luffa384"
 name: "LUFFA384"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     verified: "absent"

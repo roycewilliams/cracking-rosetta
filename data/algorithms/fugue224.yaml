@@ -1,6 +1,6 @@
 id: "fugue224"
 name: "FUGUE224"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     verified: "absent"

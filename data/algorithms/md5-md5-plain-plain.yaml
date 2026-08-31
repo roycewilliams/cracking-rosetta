@@ -1,7 +1,7 @@
 id: "md5-md5-plain-plain"
 name: "md5(md5($plain).$plain)"
 aliases: ["md5(md5($plain).\":\".$plain)"]
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     verified: "absent"

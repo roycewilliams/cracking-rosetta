@@ -1,6 +1,6 @@
 id: "hmac-sha512-kpass"
 name: "HMAC-SHA512-KPASS"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [1750]

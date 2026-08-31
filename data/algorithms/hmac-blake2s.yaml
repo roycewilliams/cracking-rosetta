@@ -1,6 +1,6 @@
 id: "hmac-blake2s"
 name: "HMAC-BLAKE2S"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [33300]

@@ -1,6 +1,6 @@
 id: "md5utf16lepasssalt"
 name: "MD5UTF16LEPASSSALT"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [30]

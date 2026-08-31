@@ -1,6 +1,6 @@
 id: "md5-strtoupper-sha1-strtoupper-md5-pass"
 name: "md5(strtoupper(sha1(strtoupper(md5('$pass')))));"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     verified: "absent"

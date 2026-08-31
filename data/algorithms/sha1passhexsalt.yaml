@@ -1,6 +1,6 @@
 id: "sha1passhexsalt"
 name: "SHA1PASSHEXSALT"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [112]

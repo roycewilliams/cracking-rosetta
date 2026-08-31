@@ -1,6 +1,6 @@
 id: "netscape-ldap"
 name: "netscape LDAP"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [101]

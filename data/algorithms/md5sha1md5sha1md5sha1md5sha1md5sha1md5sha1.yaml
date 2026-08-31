@@ -1,6 +1,6 @@
 id: "md5sha1md5sha1md5sha1md5sha1md5sha1md5sha1"
 name: "MD5SHA1MD5SHA1MD5SHA1MD5SHA1MD5SHA1MD5SHA1"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     verified: "absent"

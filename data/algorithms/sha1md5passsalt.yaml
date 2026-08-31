@@ -1,6 +1,6 @@
 id: "sha1md5passsalt"
 name: "SHA1MD5PASSSALT"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [21100]

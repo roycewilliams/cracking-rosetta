@@ -1,6 +1,6 @@
 id: "juniperive"
 name: "JUNIPERIVE"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [501]

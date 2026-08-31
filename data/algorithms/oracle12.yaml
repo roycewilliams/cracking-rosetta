@@ -1,6 +1,6 @@
 id: "oracle12"
 name: "ORACLE12"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [12300]

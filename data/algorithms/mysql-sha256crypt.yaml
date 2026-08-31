@@ -1,6 +1,6 @@
 id: "mysql-sha256crypt"
 name: "MYSQL-SHA256CRYPT"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [7401]

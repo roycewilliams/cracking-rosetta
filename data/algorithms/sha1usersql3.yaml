@@ -1,6 +1,6 @@
 id: "sha1usersql3"
 name: "SHA1USERSQL3"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     verified: "absent"

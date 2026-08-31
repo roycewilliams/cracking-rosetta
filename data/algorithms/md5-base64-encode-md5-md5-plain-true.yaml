@@ -9,7 +9,7 @@ expression_proof:
 denotation:
   text: "md5(base64_encode(md5(md5($plain), true)))"
   source: "sheet"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     verified: "absent"

@@ -1,6 +1,6 @@
 id: "sspr-md5"
 name: "SSPR-MD5"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [32000]

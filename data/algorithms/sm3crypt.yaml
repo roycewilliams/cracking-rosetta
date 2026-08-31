@@ -1,6 +1,6 @@
 id: "sm3crypt"
 name: "SM3CRYPT"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [35100]

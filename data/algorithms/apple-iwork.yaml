@@ -1,6 +1,6 @@
 id: "apple-iwork"
 name: "APPLE-IWORK"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [23300]

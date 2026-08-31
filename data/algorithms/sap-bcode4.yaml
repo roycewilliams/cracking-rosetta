@@ -1,6 +1,6 @@
 id: "sap-bcode4"
 name: "SAP-BCODE4"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [7701]

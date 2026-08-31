@@ -1,6 +1,6 @@
 id: "sha1-customusersalt"
 name: "SHA1-CUSTOMUSERSALT"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     verified: "absent"

@@ -1,6 +1,6 @@
 id: "md5capmd5md5user"
 name: "MD5CAPMD5MD5USER"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     verified: "absent"

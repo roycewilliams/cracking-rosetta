@@ -1,6 +1,6 @@
 id: "peoplesoft"
 name: "PEOPLESOFT"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [133]

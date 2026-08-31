@@ -1,6 +1,6 @@
 id: "sha512sha512rawuser"
 name: "SHA512SHA512RAWUSER"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     verified: "absent"

@@ -1,6 +1,6 @@
 id: "md5-cut8-16-md5-plain"
 name: "md5(cut8-16(md5($plain)))"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     verified: "absent"

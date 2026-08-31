@@ -8,7 +8,7 @@ expression_proof:
 denotation:
   text: "md5(\"*\".substr(mysql5($plain), 0, 39))"
   source: "sheet"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     verified: "absent"

@@ -1,6 +1,6 @@
 id: "ipmi2-md5"
 name: "IPMI2-MD5"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [7350]

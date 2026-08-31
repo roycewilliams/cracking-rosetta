@@ -1,6 +1,6 @@
 id: "nsec3"
 name: "NSEC3"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [8300]

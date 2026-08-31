@@ -1,6 +1,6 @@
 id: "sapcodvnh512"
 name: "SAPCODVNH512"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [35000]

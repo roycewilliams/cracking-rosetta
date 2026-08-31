@@ -1,6 +1,6 @@
 id: "tiger-tree-hash"
 name: "Tiger Tree Hash"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     verified: "absent"

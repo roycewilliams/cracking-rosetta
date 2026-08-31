@@ -1,6 +1,6 @@
 id: "groestl224"
 name: "GROESTL224"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     verified: "absent"

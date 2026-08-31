@@ -1,6 +1,6 @@
 id: "sspr-sha1s"
 name: "SSPR-SHA1S"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [32020]

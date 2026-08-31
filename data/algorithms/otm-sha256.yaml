@@ -1,6 +1,6 @@
 id: "otm-sha256"
 name: "OTM-SHA256"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [20600]

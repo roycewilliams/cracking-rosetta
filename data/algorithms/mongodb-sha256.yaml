@@ -1,6 +1,6 @@
 id: "mongodb-sha256"
 name: "MONGODB-SHA256"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [24200]

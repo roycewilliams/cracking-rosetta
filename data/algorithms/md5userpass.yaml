@@ -1,6 +1,6 @@
 id: "md5userpass"
 name: "MD5USERPASS"
-status: "needs-review"
+status: "ok"
 tools:
   mdxfind:
     types: ["MD5USERPASS"]

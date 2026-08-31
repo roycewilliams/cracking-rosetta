@@ -1,6 +1,6 @@
 id: "cisco9"
 name: "CISCO9"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [9300]

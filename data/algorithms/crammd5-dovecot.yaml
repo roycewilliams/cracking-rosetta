@@ -1,6 +1,6 @@
 id: "crammd5-dovecot"
 name: "CRAMMD5-DOVECOT"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [16400]

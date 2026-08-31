@@ -1,6 +1,6 @@
 id: "echo224"
 name: "ECHO224"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     verified: "absent"

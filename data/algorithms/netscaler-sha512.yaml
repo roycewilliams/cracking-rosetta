@@ -1,6 +1,6 @@
 id: "netscaler-sha512"
 name: "NETSCALER-SHA512"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [22200]

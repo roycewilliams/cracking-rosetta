@@ -1,6 +1,6 @@
 id: "hmac-rmd320-kpass"
 name: "HMAC-RMD320-KPASS"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [33650]

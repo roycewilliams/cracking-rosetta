@@ -1,6 +1,6 @@
 id: "ikepsk-md5"
 name: "IKEPSK-MD5"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [5300]

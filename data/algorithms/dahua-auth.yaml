@@ -1,6 +1,6 @@
 id: "dahua-auth"
 name: "DAHUA-AUTH"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [24900]

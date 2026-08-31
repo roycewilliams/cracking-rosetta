@@ -1,6 +1,6 @@
 id: "md5salt1salt2"
 name: "MD5SALT1SALT2"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [33000]

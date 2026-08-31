@@ -10,7 +10,7 @@ expression_proof:
 category: "application"
 application: "vBulletin"
 application_version: "<3.8.5"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [2611]

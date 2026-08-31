@@ -1,6 +1,6 @@
 id: "pbkdf2-md5-plain"
 name: "pbkdf2-md5($plain)"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [11900]

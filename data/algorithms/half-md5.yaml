@@ -1,6 +1,6 @@
 id: "half-md5"
 name: "Half MD5"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [5100]

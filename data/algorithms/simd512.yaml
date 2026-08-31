@@ -1,6 +1,6 @@
 id: "simd512"
 name: "SIMD512"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     verified: "absent"

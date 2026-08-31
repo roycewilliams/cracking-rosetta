@@ -1,6 +1,6 @@
 id: "jh384"
 name: "JH384"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     verified: "absent"

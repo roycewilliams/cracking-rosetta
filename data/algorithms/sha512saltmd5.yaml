@@ -1,6 +1,6 @@
 id: "sha512saltmd5"
 name: "SHA512SALTMD5"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     verified: "absent"

@@ -1,6 +1,6 @@
 id: "domino8"
 name: "DOMINO8"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [9100]
