@@ -1,5 +1,11 @@
 id: "yaf-sha1"
 name: "YAF-SHA1"
+expression: "base64(sha1_raw(utf16($p).frombase64($s)))"
+expression_proof:
+  verified: "upstream"
+  verified_at: "2026-08-31"
+  verified_with: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A"
+  note: "transcribed from the hx specification's Appendix A entry for mdxfind type YAF-SHA1 (e459), which states base64(sha1_bin(utf16le(pass) . frombase64(salt))). Transcription, not reproduction, so this is upstream and not vector; run derive-expressions.pl to try to promote it. Not checkable locally: the construction uses functions RosettaExpr cannot compile, so this rests on upstream's word alone."
 status: "needs-review"
 tools:
   hashcat:

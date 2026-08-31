@@ -1,5 +1,11 @@
 id: "sha512utf16le"
 name: "SHA512UTF16LE"
+expression: "sha512(utf16($p))"
+expression_proof:
+  verified: "upstream"
+  verified_at: "2026-08-31"
+  verified_with: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A"
+  note: "transcribed from the hx specification's Appendix A entry for mdxfind type SHA512UTF16LE (e808), which states sha512(utf16le(pass)). Transcription, not reproduction, so this is upstream and not vector; run derive-expressions.pl to try to promote it. Not checkable locally: the construction uses functions RosettaExpr cannot compile, so this rests on upstream's word alone."
 status: "ok"
 tools:
   hashcat:

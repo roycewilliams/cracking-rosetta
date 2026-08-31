@@ -1,5 +1,11 @@
 id: "md5salt1salt2"
 name: "MD5SALT1SALT2"
+expression: "md5($s.$p.salt2)(alsoJohndynamic_1560,SocialEngine)"
+expression_proof:
+  verified: "upstream"
+  verified_at: "2026-08-31"
+  verified_with: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A"
+  note: "transcribed from the hx specification's Appendix A entry for mdxfind type MD5SALT1SALT2 (e991), which states md5(salt . pass . salt2) (also John dynamic_1560, SocialEngine). Transcription, not reproduction, so this is upstream and not vector; run derive-expressions.pl to try to promote it. Not checkable locally: the construction uses functions RosettaExpr cannot compile, so this rests on upstream's word alone."
 status: "ok"
 tools:
   hashcat:

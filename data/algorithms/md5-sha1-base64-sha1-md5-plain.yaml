@@ -1,13 +1,11 @@
 id: "md5-sha1-base64-sha1-md5-plain"
 name: "md5(sha1(base64(sha1(md5($plain)))))"
+expression: "md5(sha1(base64(sha1(md5($p)))))"
 expression_proof:
-  verified: "absent"
-  verified_at: "2026-08-29"
-  verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
-  note: "john's dynamic expression vocabulary has no base64(), so this construction cannot be written as an expression; that is separate from whether john has a FORMAT for it"
-denotation:
-  text: "md5(sha1(base64(sha1(md5($plain)))))"
-  source: "sheet"
+  verified: "upstream"
+  verified_at: "2026-08-31"
+  verified_with: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A"
+  note: "transcribed from the hx specification's Appendix A entry for mdxfind type MD5SHA1BASE64SHA1MD5 (e462), which states md5(sha1(base64(sha1(md5(pass))))). Transcription, not reproduction, so this is upstream and not vector; run derive-expressions.pl to try to promote it. Not checkable locally: the construction uses functions RosettaExpr cannot compile, so this rests on upstream's word alone. Superseded the denotation \"md5(sha1(base64(sha1(md5($plain)))))\" (source: sheet), which validate.pl forbids alongside an expression."
 status: "ok"
 tools:
   hashcat:
