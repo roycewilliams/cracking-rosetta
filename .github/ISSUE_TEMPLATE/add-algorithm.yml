@@ -1,0 +1,49 @@
+name: An algorithm is missing
+description: A construction the tools support that has no row here.
+labels: ["new entry"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Gaps are expected — the browsable table marks them loudly on purpose.
+        A missing *row* is different from a gap in an existing row; if the
+        algorithm is already listed and one tool's cell is empty, use
+        "a mapping is wrong" or just say so below.
+  - type: input
+    id: name
+    attributes:
+      label: What is it
+      description: A name, or the construction if it has no name.
+      placeholder: md5(sha1($pass).$salt)
+    validations:
+      required: true
+  - type: textarea
+    id: identifiers
+    attributes:
+      label: What the tools call it
+      description: Whichever you know. Leave the rest blank.
+      value: |
+        hashcat mode:
+        john format:
+        mdxfind type:
+    validations:
+      required: true
+  - type: textarea
+    id: vector
+    attributes:
+      label: A test vector
+      description: >-
+        A hash and the plaintext that produces it, plus the salt if it is not
+        already in the hash. This is the single most useful thing in the
+        issue: nothing here reaches tier "vector" without one, so an entry
+        that arrives with a vector can be proven the same day.
+      render: text
+      placeholder: |
+        hash:  482c811da5d5b4bc6d497ffa98491e38
+        pass:  password123
+        salt:  (none)
+  - type: input
+    id: source
+    attributes:
+      label: Where the vector came from
+      placeholder: hashcat's own example hash / mdxfind -z / I computed it

@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: How to contribute a correction directly
+    url: https://github.com/roycewilliams/cracking-rosetta/blob/main/CONTRIBUTING.md
+    about: The PR path, written for someone with no crackers installed.

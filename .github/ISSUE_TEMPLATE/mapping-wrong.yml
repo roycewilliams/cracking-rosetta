@@ -1,0 +1,51 @@
+name: A mapping is wrong
+description: A row says hashcat mode X is John format Y, and it is not.
+labels: ["correction"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        A wrong row is worse than a missing one, so thank you. You do not need
+        to have run anything — say what you know and how you know it.
+  - type: input
+    id: entry
+    attributes:
+      label: Which entry
+      description: >-
+        The id, or a link to the row. Every row in the browsable table has a
+        permalink (the # that appears when you hover it), and the id is also
+        the first column of dist/rosetta.csv and the filename under
+        data/algorithms/.
+      placeholder: md5-pass-salt
+    validations:
+      required: true
+  - type: dropdown
+    id: tool
+    attributes:
+      label: Which tool's column
+      options: [hashcat, John the Ripper, mdxfind, more than one, "the expression, not a tool"]
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What it says, and what it should say
+      placeholder: |
+        It says john dynamic_12. dynamic_12 is md5(md5($s).$p); this row is
+        md5($p.$s), which is dynamic_1.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: How you know
+      description: >-
+        Best is a command and its output — the tool, pinned to the identifier,
+        against a test vector. Second best is a link to upstream saying so.
+        "I have hit this in practice" is also a real answer.
+      render: shell
+  - type: input
+    id: versions
+    attributes:
+      label: Tool version, if you ran something
+      placeholder: hashcat v7.1.2, john 1.9.0-jumbo-1+bleeding
