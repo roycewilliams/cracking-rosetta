@@ -2281,7 +2281,7 @@
          },
          "cracknote" : "",
          "denotation" : "",
-         "expr" : "md5($p.$s)",
+         "expr" : "cisco_pix_encode(md5_bin(pad($p.$s, 16)))",
          "expr_note" : "transcribed from john --list=subformats for an identifier this entry proved by round-trip; TRIAGE 2026-08-30 [format-encoding]: dynamic_20 has its own ciphertext encoding rather than plain hex, so a generic expression cannot be checked against it however correctly it describes the computation",
          "expr_tier" : "upstream",
          "hashcat" : {
@@ -2324,7 +2324,7 @@
             "john" : "format discovered by round-trip search, not by name",
             "mdxfind" : ""
          },
-         "vecs" : 2
+         "vecs" : 1
       },
       {
          "alias" : "",
@@ -2433,7 +2433,7 @@
          },
          "cracknote" : "",
          "denotation" : "",
-         "expr" : "sha256($s.sha1($p))",
+         "expr" : "sha256($s.upper(sha1($p)))",
          "expr_note" : "transcribed from john --list=subformats for an identifier this entry proved by round-trip; TRIAGE 2026-08-30 [expression-wrong]: the expression does not describe dynamic_1588: computed here with Digest:: it reproduces none of the 6 test vectors john ships for that format, so what --list=subformats prints is not the whole construction",
          "expr_tier" : "upstream",
          "hashcat" : {
@@ -2469,7 +2469,7 @@
             "john" : "format discovered by round-trip search, not by name",
             "mdxfind" : ""
          },
-         "vecs" : 2
+         "vecs" : 1
       },
       {
          "alias" : "",

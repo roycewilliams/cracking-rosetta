@@ -1,7 +1,6 @@
 id: "coldfusion10"
 name: "COLDFUSION10"
-expression: "sha256($s.sha1($p))"
-john_dynamic_expr: "dynamic=sha256($s.sha1($p))"
+expression: "sha256($s.upper(sha1($p)))"
 expression_proof:
   verified: "upstream"
   verified_at: "2026-08-29"
@@ -31,6 +30,3 @@ vectors:
   - hash: "443120b78d8eede52f25e291ce6621499348ba363b0b563a4e98c69a7f24993b:1234567890123456789012345678901234567890123456789012345678901234"
     pass: "password123"
     source: "mdxfind"
-  - hash: "dec0ded2cc8789afb045cd267deba0a9103f17efb02525a42237a23b0257e744:rosettakurjd7"
-    pass: "rosetta"
-    source: "vanity"

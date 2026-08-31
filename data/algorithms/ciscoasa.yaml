@@ -1,7 +1,6 @@
 id: "ciscoasa"
 name: "CISCOASA"
-expression: "md5($p.$s)"
-john_dynamic_expr: "dynamic=md5($p.$s)"
+expression: "cisco_pix_encode(md5_bin(pad($p.$s, 16)))"
 expression_proof:
   verified: "upstream"
   verified_at: "2026-08-29"
@@ -38,6 +37,3 @@ vectors:
   - hash: "iOZ4lbE3GPO/eeeS:36"
     pass: "password123"
     source: "mdxfind"
-  - hash: "dec0ded2ef4c692e26644b8a37b4d563:rosettagxha34"
-    pass: "rosetta"
-    source: "vanity"

@@ -101,6 +101,7 @@ use RosettaEmit qw(emit_entry);
 # the drift this repository exists to prevent.
 use RosettaExpr qw(compile_expression);
 
+my $unproven = 0;
 my $PROG = basename($0);
 my $ROOT = "$RealBin/..";
 
@@ -110,6 +111,9 @@ Usage: $PROG --entry ID [options]
 
    --entry ID       entry to give a vanity vector (repeatable)
    --all            every entry whose expression this can compile
+   --unproven       also use expressions below tier 'vector'; off by
+                    default because a wrong expression yields a hash of
+                    nothing
    --salt TEXT      use this salt instead of searching for one; the digest is
                     still computed here, so a salt found on another machine
                     can be recorded without trusting that machine's arithmetic
@@ -134,6 +138,7 @@ my (@ids, $all, $fixed_salt, $pass, $marker, $salt_base);
 my ($workers, $max, $algdir, $apply, $verbose, $help);
 GetOptions(
     'entry=s'      => \@ids,
+    'unproven'     => \$unproven,
     'all'          => \$all,
     'salt=s'       => \$fixed_salt,
     'pass=s'       => \$pass,
@@ -217,7 +222,9 @@ if ($all) {
         my $e = $entry{$_};
         my $x = $e->{expression};
         # A salted construction only, and one this can actually compute.
-        defined $x && $x =~ /\$s/ && compile_expression($x);
+        my $t = $e->{expression_proof}{verified} // 'none';
+        defined $x && $x =~ /\$s/ && compile_expression($x)
+            && ($t eq 'vector' || $unproven);
     } sort keys %entry;
 }
 
@@ -237,6 +244,20 @@ for my $id (@ids) {
     # that requires them all to fall.
     if (grep { ($_->{source} // '') eq 'vanity' } @{ $e->{vectors} || [] }) {
         print STDERR "- $id: already has a vanity vector; closed\n" if $verbose;
+        next;
+    }
+
+    # An expression that was never round-tripped may simply be WRONG, and a
+    # vanity hash computed from a wrong expression is not a hash of this
+    # algorithm at all -- it is a plausible-looking 32 hex characters that
+    # nothing will ever reproduce. Measured 2026-08-31: ciscoasa carried
+    # md5($p.$s) at tier upstream when a real CISCOASA hash is 16 base64
+    # characters, and coldfusion10's string was missing an upper(). Both got a
+    # vanity vector here before the hx specification exposed them.
+    my $tier = $e->{expression_proof}{verified} // 'none';
+    if ($tier ne 'vector' && !$unproven) {
+        printf STDERR "- %-24s expression is tier '%s', not 'vector'; skipped "
+                    . "(--unproven to override)\n", $id, $tier;
         next;
     }
 

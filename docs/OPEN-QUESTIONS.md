@@ -34,8 +34,8 @@ what those vectors really are.
 
 | Entry | Expression | Proven john format | Note |
 |---|---|---|---|
-| [`ciscoasa`](index.html#ciscoasa) | `md5($p.$s)` | `dynamic_20` | dynamic_20 has its own ciphertext encoding rather than plain hex, so a generic expression cannot be checked against it however correctly it describes the computation |
-| [`coldfusion10`](index.html#coldfusion10) | `sha256($s.sha1($p))` | `dynamic_1588` | the expression does not describe dynamic_1588: computed here with Digest:: it reproduces none of the 6 test vectors john ships for that format, so what --list=subformats prints is not the whole constr... |
+| [`ciscoasa`](index.html#ciscoasa) | `cisco_pix_encode(md5_bin(pad($p.$s, 16)))` | `dynamic_20` | dynamic_20 has its own ciphertext encoding rather than plain hex, so a generic expression cannot be checked against it however correctly it describes the computation |
+| [`coldfusion10`](index.html#coldfusion10) | `sha256($s.upper(sha1($p)))` | `dynamic_1588` | the expression does not describe dynamic_1588: computed here with Digest:: it reproduces none of the 6 test vectors john ships for that format, so what --list=subformats prints is not the whole constr... |
 | [`keccak224`](index.html#keccak224) | `keccak_224($p)` | `dynamic_430` | compiled with --format=dynamic this expression recovers none of john's own test vectors for dynamic_430 either, so john's dynamic compiler and its named format disagree about what the string means; th... |
 | [`keccak224-x2`](index.html#keccak224-x2) | `keccak_224(keccak_224($p))` | `dynamic_433` | compiled with --format=dynamic this expression recovers none of john's own test vectors for dynamic_433 either, so john's dynamic compiler and its named format disagree about what the string means; th... |
 | [`keccak384`](index.html#keccak384) | `keccak_384($p)` | `dynamic_440` | compiled with --format=dynamic this expression recovers none of john's own test vectors for dynamic_440 either, so john's dynamic compiler and its named format disagree about what the string means; th... |
