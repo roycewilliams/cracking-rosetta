@@ -1,5 +1,14 @@
 id: "gost2012-64"
 name: "GOST2012-64"
+expression_proof:
+  verified: "absent"
+  verified_at: "2026-08-31"
+  verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
+  note: "the construction upstream states for mdxfind type GOST2012-64 (e428) names gost2012_64(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:."
+denotation:
+  text: "gost2012_64(pass)"
+  source: "mdxfind"
+  note: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A, entry for mdxfind type GOST2012-64 (e428), which states gost2012_64(pass)."
 status: "ok"
 tools:
   hashcat:

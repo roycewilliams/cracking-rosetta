@@ -10,10 +10,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "sevenzip(pass, salt)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type 7ZIP (e1000) names sevenzip(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                11600
@@ -55,10 +55,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "aes_ecb_encrypt(pad(pass, 16), fromhex(salt))",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type AES128-NOKDF (e963) names aes_ecb_encrypt(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                26401
@@ -100,10 +100,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "aes_ecb_encrypt(pad(pass, 24), fromhex(salt))",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type AES192-NOKDF (e964) names aes_ecb_encrypt(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                26402
@@ -145,10 +145,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "aes_ecb_encrypt(pad(pass, 32), fromhex(salt))",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type AES256-NOKDF (e965) names aes_ecb_encrypt(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                26403
@@ -190,10 +190,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "md5crypt(pass, salt)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type AIX-MD5 (e868) names md5crypt(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                6300
@@ -239,10 +239,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "pbkdf2_sha1(pass, salt, N, 20)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type AIX-SHA1 (e869) names pbkdf2_sha1(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                6700
@@ -287,10 +287,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "pbkdf2_sha256(pass, salt, N, 32)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type AIX-SHA256 (e870) names pbkdf2_sha256(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                6400
@@ -335,10 +335,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "pbkdf2_sha512(pass, salt, N, 64)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type AIX-SHA512 (e871) names pbkdf2_sha512(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                6500
@@ -383,10 +383,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "pbkdf2_sha1(pass, salt, 2000, 16)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type ANDROIDFDE (e913) names pbkdf2_sha1(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                12900
@@ -476,10 +476,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "apr1(pass, salt)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type APR1 (e461) names apr1(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                1600
@@ -573,10 +573,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "pbkdf2_sha1(pass, salt, 50000, 16)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type APPLE-IWORK (e953) names pbkdf2_sha1(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                23300
@@ -618,10 +618,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "pbkdf2_sha1(pass, salt, 1000, 24)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type APPLE-KEYCHAIN (e952) names pbkdf2_sha1(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                23100
@@ -666,10 +666,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "argon2(pass, salt, m, t, p)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type ARGON2 (e987) names argon2(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                34000
@@ -759,10 +759,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "upper(as400_des(pass, salt))",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type AS400-DES (e926) names as400_des(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                8501
@@ -939,10 +939,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "axcrypt(pass, fromhex(salt), iter)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type AXCRYPT (e915) names axcrypt(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                13200
@@ -1032,10 +1032,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "pbkdf2_sha256(pass, salt, 1000, 32)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type AZURESYNC (e912) names pbkdf2_sha256(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                12800
@@ -1077,10 +1077,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "bcrypt(pass, salt, 12)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type BCRYPT (e450) names bcrypt(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                3200
@@ -1209,10 +1209,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "bcrypt(sha256(pass), salt, 12)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type BCRYPT256 (e577) names bcrypt(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                30600
@@ -1254,10 +1254,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "bcrypt(base64(hmac_sha256_bin(salt, pass)), salt, N)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type BCRYPTHMACSHA256 (e989) names bcrypt(), hmac_sha256_bin(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                30601
@@ -1299,10 +1299,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "bcrypt(sha512(pass), salt, cost)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type BCRYPTSHA512 (e967) names bcrypt(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                28400
@@ -1344,10 +1344,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "besder_encode(md5_bin(pass))",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type BESDER-AUTH (e960) names besder_encode(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                24901
@@ -1389,10 +1389,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "pbkdf2_sha256(pass, salt, N, 32)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type BITWARDEN (e954) names pbkdf2_sha256(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                23400
@@ -1434,10 +1434,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "blake224(pass)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type BLAKE224 (e52) names blake224(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -1476,10 +1476,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "blake256(pass)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type BLAKE256 (e53) names blake256(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -1518,10 +1518,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "blake2b256(pass)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type BLAKE2B256 (e845) names blake2b256(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                34800
@@ -1563,10 +1563,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "blake2b256(pass . salt)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type BLAKE2B256PASSSALT (e846) names blake2b256(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                34810
@@ -1608,10 +1608,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "blake2b256(salt . pass)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type BLAKE2B256SALTPASS (e847) names blake2b256(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                34820
@@ -1653,10 +1653,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "blake2b512(pass)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type BLAKE2B512 (e841) names blake2b512(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                600
@@ -1701,10 +1701,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "blake2b512(pass . salt)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type BLAKE2B512PASSSALT (e842) names blake2b512(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                610
@@ -1746,10 +1746,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "blake2b512(salt . pass)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type BLAKE2B512SALTPASS (e843) names blake2b512(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                620
@@ -1791,10 +1791,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "blake2s256(pass)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type BLAKE2S256 (e844) names blake2s256(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                31000
@@ -1836,10 +1836,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "blake384(pass)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type BLAKE384 (e54) names blake384(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -1878,10 +1878,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "blake512(pass)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type BLAKE512 (e55) names blake512(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -1920,10 +1920,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "bmw224(pass)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type BMW224 (e56) names bmw224(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -1962,10 +1962,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "bmw256(pass)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type BMW256 (e57) names bmw256(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -2004,10 +2004,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "bmw384(pass)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type BMW384 (e58) names bmw384(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -2046,10 +2046,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "bmw512(pass)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type BMW512 (e59) names bmw512(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -2088,10 +2088,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "bsdicrypt(pass, salt)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type BSDICRYPT (e997) names bsdicrypt(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                12400
@@ -2184,10 +2184,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "pbkdf2_sha256(pass, salt, 20000, 32)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type CISCO8 (e529) names pbkdf2_sha256(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                9200
@@ -2232,10 +2232,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "scrypt(pass, salt, 16384, 1, 1)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type CISCO9 (e917) names scrypt(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                9300
@@ -2280,10 +2280,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
-         "expr" : "cisco_pix_encode(md5_bin(pad($p.$s, 16)))",
-         "expr_note" : "transcribed from john --list=subformats for an identifier this entry proved by round-trip; TRIAGE 2026-08-30 [format-encoding]: dynamic_20 has its own ciphertext encoding rather than plain hex, so a generic expression cannot be checked against it however correctly it describes the computation",
-         "expr_tier" : "upstream",
+         "denotation" : "cisco_pix_encode(md5_bin(pad(pass . salt, 16)))",
+         "expr" : "",
+         "expr_note" : "Withdrawn 2026-08-31. This entry carried the expression \"cisco_pix_encode(md5_bin(pad($p.$s, 16)))\", transcribed from the hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A entry for mdxfind type CISCOASA (e862) by a parser that has since been corrected: it names cisco_pix_encode(), md5_bin(), which this repository has no expression spelling for. Nothing can compile that string, so it was a claim rather than a fact, and it is withdrawn rather than adjusted -- guessing what upstream meant is exactly what the expression field exists to stop. Re-run seed-hx.pl and denote-hx.pl to settle this entry from the corrected parse. Settled here: the construction upstream states for mdxfind type CISCOASA (e862) names cisco_pix_encode(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                2410
@@ -2335,10 +2335,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "pbkdf2_sha256(pass, salt, 1000, 32)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type CISCOISE (e866) names pbkdf2_sha256(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                5720
@@ -2383,10 +2383,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "cisco_pix_encode(md5_bin(pad(pass, 16)))",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type CISCOPIX (e861) names cisco_pix_encode(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                2400
@@ -2480,10 +2480,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "hmac_md5(pass, challenge)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type CRAMMD5 (e903) names hmac_md5(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                10200
@@ -2528,10 +2528,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "hmac_md5(pass, challenge)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type CRAMMD5-DOVECOT (e932) names hmac_md5(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                16400
@@ -2573,10 +2573,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "cube224(pass)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type CUBE224 (e60) names cube224(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -2615,10 +2615,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "cube256(pass)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type CUBE256 (e61) names cube256(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -2657,10 +2657,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "cube384(pass)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type CUBE384 (e62) names cube384(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -2699,10 +2699,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "cube512(pass)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type CUBE512 (e63) names cube512(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -2742,9 +2742,9 @@
          },
          "cracknote" : "",
          "denotation" : "",
-         "expr" : "md5($s.upper(md5(salt2.$p)))",
-         "expr_note" : "transcribed from the hx specification's Appendix A entry for mdxfind type DAHUA (e864), which states md5(salt . upper(md5(salt2 . pass))). Transcription, not reproduction, so this is upstream and not vector; run derive-expressions.pl to try to promote it. Not checkable locally: the construction uses functions RosettaExpr cannot compile, so this rests on upstream's word alone.",
-         "expr_tier" : "upstream",
+         "expr" : "",
+         "expr_note" : "Withdrawn 2026-08-31. This entry carried the expression \"md5($s.upper(md5(salt2.$p)))\", transcribed from the hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A entry for mdxfind type DAHUA (e864) by a parser that has since been corrected: it carries the bare operand salt2, which john's dynamic language cannot bind. Nothing can compile that string, so it was a claim rather than a fact, and it is withdrawn rather than adjusted -- guessing what upstream meant is exactly what the expression field exists to stop. Re-run seed-hx.pl and denote-hx.pl to settle this entry from the corrected parse.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                3730
@@ -2786,10 +2786,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "dahua_encode(md5_bin(pass))",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type DAHUA-AUTH (e959) names dahua_encode(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                24900
@@ -2831,10 +2831,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "pbkdf2_sha1(md4(utf16le(pass)), utf16le(username), 10240, 16)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type DCC2 (e918) names pbkdf2_sha1(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                2100
@@ -2879,10 +2879,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "des3(pass, fromhex(salt))",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type DES3ENCRYPT (e849) names des3(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                14100
@@ -2972,10 +2972,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "des(pass, fromhex(salt))",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type DESENCRYPT (e848) names des(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                14000
@@ -3017,10 +3017,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "domino5(pass)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type DOMINO5 (e882) names domino5(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                8600
@@ -3062,10 +3062,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "domino6(pass, fromhex(salt))",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type DOMINO6 (e883) names domino6(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                8700
@@ -3203,10 +3203,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "phpass(pass, salt, N)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type DRUPAL7 (e876) names phpass(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                7900
@@ -3251,10 +3251,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "echo224(pass)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type ECHO224 (e64) names echo224(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -3293,10 +3293,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "echo256(pass)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type ECHO256 (e65) names echo256(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -3335,10 +3335,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "echo384(pass)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type ECHO384 (e66) names echo384(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -3377,10 +3377,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "echo512(pass)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type ECHO512 (e67) names echo512(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -3467,10 +3467,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "edon256(pass)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type EDON256 (e23) names edon256(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -3509,10 +3509,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "edon512(pass)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type EDON512 (e24) names edon512(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -3692,10 +3692,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "fugue224(pass)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type FUGUE224 (e68) names fugue224(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -3734,10 +3734,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "fugue256(pass)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type FUGUE256 (e69) names fugue256(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -3776,10 +3776,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "fugue384(pass)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type FUGUE384 (e70) names fugue384(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -3818,10 +3818,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "fugue512(pass)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type FUGUE512 (e71) names fugue512(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -3989,10 +3989,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "gost12_512crypt(pass, salt, rounds)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type GOST12512CRYPT (e994) names gost12_512crypt(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                35600
@@ -4037,10 +4037,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "gost2012_32(pass)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type GOST2012-32 (e427) names gost2012_32(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                11700
@@ -4092,10 +4092,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "gost2012_64(pass)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type GOST2012-64 (e428) names gost2012_64(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                11800
@@ -4189,10 +4189,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "groestl224(pass)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type GROESTL224 (e72) names groestl224(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -4231,10 +4231,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "groestl256(pass)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type GROESTL256 (e73) names groestl256(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -4273,10 +4273,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "groestl384(pass)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type GROESTL384 (e74) names groestl384(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -4315,10 +4315,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "groestl512(pass)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type GROESTL512 (e75) names groestl512(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -4399,10 +4399,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "hamsi224(pass)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type HAMSI224 (e76) names hamsi224(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -4441,10 +4441,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "hamsi256(pass)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type HAMSI256 (e77) names hamsi256(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -4483,10 +4483,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "hamsi384(pass)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type HAMSI384 (e78) names hamsi384(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -4525,10 +4525,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "hamsi512(pass)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type HAMSI512 (e79) names hamsi512(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -4567,10 +4567,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "has160(pass)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type HAS160 (e22) names has160(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -8326,10 +8326,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "hmac_blake2s(pass, salt)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type HMAC-BLAKE2S (e828) names hmac_blake2s(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                33300
@@ -8371,10 +8371,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "hmac_md5(salt, pass)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type HMAC-MD5-KPASS (e792) names hmac_md5(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                50
@@ -8416,10 +8416,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "hmac_rmd160(salt, pass)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type HMAC-RMD160-KPASS (e798) names hmac_rmd160(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                6050
@@ -8461,10 +8461,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "hmac_rmd320(salt, pass)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type HMAC-RMD320-KPASS (e799) names hmac_rmd320(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                33650
@@ -8506,10 +8506,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "hmac_sha1(salt, pass)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type HMAC-SHA1-KPASS (e793) names hmac_sha1(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                150
@@ -8551,10 +8551,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "hmac_sha256(salt, pass)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type HMAC-SHA256-KPASS (e795) names hmac_sha256(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                1450
@@ -8596,10 +8596,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "hmac_sha512(salt, pass)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type HMAC-SHA512-KPASS (e797) names hmac_sha512(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                1750
@@ -8641,10 +8641,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "hmac_streebog256(pass, salt)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type HMAC-STREEBOG256 (e838) names hmac_streebog256(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                11760
@@ -8686,10 +8686,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "hmac_streebog256(salt, pass)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type HMAC-STREEBOG256-KPASS (e837) names hmac_streebog256(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                11750
@@ -8731,10 +8731,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "hmac_streebog512(pass, salt)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type HMAC-STREEBOG512 (e840) names hmac_streebog512(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                11860
@@ -8776,10 +8776,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "hmac_streebog512(salt, pass)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type HMAC-STREEBOG512-KPASS (e839) names hmac_streebog512(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                11850
@@ -8822,9 +8822,9 @@
          },
          "cracknote" : "",
          "denotation" : "",
-         "expr" : "sha256($s.$p)(hMailServer)",
-         "expr_note" : "transcribed from the hx specification's Appendix A entry for mdxfind type HMAILSERVER (e860), which states sha256(salt . pass) (hMailServer). Transcription, not reproduction, so this is upstream and not vector; run derive-expressions.pl to try to promote it. Not checkable locally: the construction uses functions RosettaExpr cannot compile, so this rests on upstream's word alone.",
-         "expr_tier" : "upstream",
+         "expr" : "",
+         "expr_note" : "Withdrawn 2026-08-31. This entry carried the expression \"sha256($s.$p)(hMailServer)\", transcribed from the hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A entry for mdxfind type HMAILSERVER (e860) by a parser that has since been corrected: it carries a parenthesised group after what is already a complete expression, which is how a prose gloss reaches the data; and it carries the bare operand hMailServer, which john's dynamic language cannot bind. Nothing can compile that string, so it was a claim rather than a fact, and it is withdrawn rather than adjusted -- guessing what upstream meant is exactly what the expression field exists to stop. Re-run seed-hx.pl and denote-hx.pl to settle this entry from the corrected parse.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                1421
@@ -9007,10 +9007,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "hmac_md5(pass, rakp_data)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type IPMI2-MD5 (e873) names hmac_md5(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                7350
@@ -9052,10 +9052,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "hmac_sha1(pass, rakp_data)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type IPMI2-SHA1 (e872) names hmac_sha1(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                7300
@@ -9142,10 +9142,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "jh224(pass)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type JH224 (e80) names jh224(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -9184,10 +9184,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "jh256(pass)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type JH256 (e81) names jh256(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -9226,10 +9226,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "jh384(pass)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type JH384 (e82) names jh384(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -9268,10 +9268,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "jh512(pass)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type JH512 (e83) names jh512(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -9413,10 +9413,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "juniper_encode(md5_bin(user . \":Administration Tools:\" . pass))",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type JUNIPERSSG (e856) names juniper_encode(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                22
@@ -9458,10 +9458,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "hmac_sha256(pass, header . \".\" . payload)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type JWT (e933) names hmac_sha256(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                16500
@@ -9878,10 +9878,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "aes128_cts_hmac_sha1(pass, realm, user)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type KRB5DB17 (e970) names aes128_cts_hmac_sha1(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                28800
@@ -9923,10 +9923,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "aes256_cts_hmac_sha1(pass, realm, user)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type KRB5DB18 (e971) names aes256_cts_hmac_sha1(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                28900
@@ -9968,10 +9968,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "aes128_cts_hmac_sha1(pass, realm, user)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type KRB5PA-17 (e940) names aes128_cts_hmac_sha1(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                19800
@@ -10013,10 +10013,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "aes256_cts_hmac_sha1(pass, realm, user)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type KRB5PA-18 (e941) names aes256_cts_hmac_sha1(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                19900
@@ -10058,10 +10058,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "rc4_hmac_md5(pass, realm, user, timestamp)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type KRB5PA23 (e874) names rc4_hmac_md5(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                7500
@@ -10106,10 +10106,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "rc4_hmac_md5(pass, realm, spn)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type KRB5TGS23 (e914) names rc4_hmac_md5(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                13100
@@ -10154,10 +10154,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "pbkdf2_sha256(pass, salt, N, 32)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type LASTPASS (e899) names pbkdf2_sha256(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                6800
@@ -10199,10 +10199,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "emit(sha512(pass . user)); emit(wrl(user . pass))",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "mdxfind type LEET-SHA512-WRL-USER (e444) is MULTI-EMIT: it computes several candidate digests per input and matches if any one reproduces the stored hash. There is therefore no single expression to record, and writing one of the emitted forms into expression: would be a false claim even though the string itself is correct. This is also why two vectors of such a type can disagree with each other, and why a tool matching one of them is not evidence about the other.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -10241,10 +10241,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "lm(pass)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type LM (e379) names lm(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                3000
@@ -10290,10 +10290,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "luffa224(pass)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type LUFFA224 (e92) names luffa224(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -10332,10 +10332,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "luffa256(pass)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type LUFFA256 (e93) names luffa256(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -10374,10 +10374,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "luffa384(pass)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type LUFFA384 (e94) names luffa384(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -10416,10 +10416,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "luffa512(pass)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type LUFFA512 (e95) names luffa512(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -10459,9 +10459,9 @@
          },
          "cracknote" : "",
          "denotation" : "",
-         "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr" : "sha1(fromhex($s).$p)",
+         "expr_note" : "transcribed from the hx specification's Appendix A entry for mdxfind type MACOSX (e853), which states sha1(fromhex(salt) . pass) (macOS 10.4-10.6; salt is hex-decoded). Transcription, not reproduction, so this is upstream and not vector; run derive-expressions.pl to try to promote it. Not checkable locally: the construction uses functions RosettaExpr cannot compile, so this rests on upstream's word alone. Checked by hand on 2026-08-31 anyway: Digest::SHA -- an implementation independent of all three crackers -- computes exactly this construction over the entry's own vector and reproduces its digest. That is corroboration, not tier 'vector', which requires john's own compiler; john has no fromhex() in its dynamic expression language, so derive-expressions.pl cannot promote this.",
+         "expr_tier" : "upstream",
          "hashcat" : {
             "ids" : [
                122
@@ -10503,10 +10503,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "pbkdf2_sha512(pass, salt, N, 128)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type MACOSX7 (e854) names pbkdf2_sha512(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                1722
@@ -13757,10 +13757,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "h=md5(pass); emit(md5(h.md5(h))); emit(md5(h.\":\".md5(h)))",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "mdxfind type MD5-DBL-PASS (e202) is MULTI-EMIT: it computes several candidate digests per input and matches if any one reproduces the stored hash. There is therefore no single expression to record, and writing one of the emitted forms into expression: would be a false claim even though the string itself is correct. This is also why two vectors of such a type can disagree with each other, and why a tool matching one of them is not evidence about the other.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -17137,10 +17137,10 @@
             "state" : "claimed"
          },
          "cracknote" : "via src/util/elcid.c,bsd - the FreeBSD/NetBSD MD5 crypt()",
-         "denotation" : "",
+         "denotation" : "md5crypt(pass, salt)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type MD5CRYPT (e511) names md5crypt(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                500
@@ -17522,9 +17522,9 @@
          },
          "cracknote" : "",
          "denotation" : "",
-         "expr" : "md5(md5(md5($p).$s).pepper)",
-         "expr_note" : "transcribed from the hx specification's Appendix A entry for mdxfind type MD5-MD5MD5PASSSALT-PEP (e819), which states md5(md5(md5(pass) . salt) . pepper). Transcription, not reproduction, so this is upstream and not vector; run derive-expressions.pl to try to promote it. Not checkable locally: the construction uses functions RosettaExpr cannot compile, so this rests on upstream's word alone.",
-         "expr_tier" : "upstream",
+         "expr" : "",
+         "expr_note" : "Withdrawn 2026-08-31. This entry carried the expression \"md5(md5(md5($p).$s).pepper)\", transcribed from the hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A entry for mdxfind type MD5-MD5MD5PASSSALT-PEP (e819) by a parser that has since been corrected: it carries the bare operand pepper, which john's dynamic language cannot bind. Nothing can compile that string, so it was a claim rather than a fact, and it is withdrawn rather than adjusted -- guessing what upstream meant is exactly what the expression field exists to stop. Re-run seed-hx.pl and denote-hx.pl to settle this entry from the corrected parse.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                31700
@@ -17567,9 +17567,9 @@
          },
          "cracknote" : "",
          "denotation" : "",
-         "expr" : "md5(md5(md5($p.$s)).pepper)",
-         "expr_note" : "transcribed from the hx specification's Appendix A entry for mdxfind type MD5-MD5MD5PASSSALT-PEP2 (e821), which states md5(md5(md5(pass . salt)) . pepper). Transcription, not reproduction, so this is upstream and not vector; run derive-expressions.pl to try to promote it. Not checkable locally: the construction uses functions RosettaExpr cannot compile, so this rests on upstream's word alone.",
-         "expr_tier" : "upstream",
+         "expr" : "",
+         "expr_note" : "Withdrawn 2026-08-31. This entry carried the expression \"md5(md5(md5($p.$s)).pepper)\", transcribed from the hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A entry for mdxfind type MD5-MD5MD5PASSSALT-PEP2 (e821) by a parser that has since been corrected: it carries the bare operand pepper, which john's dynamic language cannot bind. Nothing can compile that string, so it was a claim rather than a fact, and it is withdrawn rather than adjusted -- guessing what upstream meant is exactly what the expression field exists to stop. Re-run seed-hx.pl and denote-hx.pl to settle this entry from the corrected parse.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                21900
@@ -17825,9 +17825,9 @@
          },
          "cracknote" : "",
          "denotation" : "",
-         "expr" : "md5($s.sha1(pepper.$p))",
-         "expr_note" : "transcribed from the hx specification's Appendix A entry for mdxfind type MD5-SALT-SHA1PEPPASS (e822), which states md5(salt . sha1(pepper . pass)). Transcription, not reproduction, so this is upstream and not vector; run derive-expressions.pl to try to promote it. Not checkable locally: the construction uses functions RosettaExpr cannot compile, so this rests on upstream's word alone.",
-         "expr_tier" : "upstream",
+         "expr" : "",
+         "expr_note" : "Withdrawn 2026-08-31. This entry carried the expression \"md5($s.sha1(pepper.$p))\", transcribed from the hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A entry for mdxfind type MD5-SALT-SHA1PEPPASS (e822) by a parser that has since been corrected: it carries the bare operand pepper, which john's dynamic language cannot bind. Nothing can compile that string, so it was a claim rather than a fact, and it is withdrawn rather than adjusted -- guessing what upstream meant is exactly what the expression field exists to stop. Re-run seed-hx.pl and denote-hx.pl to settle this entry from the corrected parse.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                21310
@@ -18493,9 +18493,9 @@
          },
          "cracknote" : "",
          "denotation" : "",
-         "expr" : "md5(md5(md5($p).$s).salt2)",
-         "expr_note" : "transcribed from the hx specification's Appendix A entry for mdxfind type MD5DSALT (e408), which states md5(md5(md5(pass) . salt) . salt2). Transcription, not reproduction, so this is upstream and not vector; run derive-expressions.pl to try to promote it. Not checkable locally: the construction uses functions RosettaExpr cannot compile, so this rests on upstream's word alone.",
-         "expr_tier" : "upstream",
+         "expr" : "",
+         "expr_note" : "Withdrawn 2026-08-31. This entry carried the expression \"md5(md5(md5($p).$s).salt2)\", transcribed from the hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A entry for mdxfind type MD5DSALT (e408) by a parser that has since been corrected: it carries the bare operand salt2, which john's dynamic language cannot bind. Nothing can compile that string, so it was a claim rather than a fact, and it is withdrawn rather than adjusted -- guessing what upstream meant is exactly what the expression field exists to stop. Re-run seed-hx.pl and denote-hx.pl to settle this entry from the corrected parse.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -18576,10 +18576,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "emit(md5(md5(pass).S))",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "mdxfind type MD5MD5HUM (e363) is MULTI-EMIT: it computes several candidate digests per input and matches if any one reproduces the stored hash. There is therefore no single expression to record, and writing one of the emitted forms into expression: would be a false claim even though the string itself is correct. This is also why two vectors of such a type can disagree with each other, and why a tool matching one of them is not evidence about the other.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -18786,10 +18786,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "md5(upper(md5(mysql3(pass))) . \" \")",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type MD5MD5UCSQL3p (e416) names mysql3(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -18955,9 +18955,9 @@
          },
          "cracknote" : "",
          "denotation" : "",
-         "expr" : "md5($s.$p.salt2)(alsoJohndynamic_1560,SocialEngine)",
-         "expr_note" : "transcribed from the hx specification's Appendix A entry for mdxfind type MD5SALT1SALT2 (e991), which states md5(salt . pass . salt2) (also John dynamic_1560, SocialEngine). Transcription, not reproduction, so this is upstream and not vector; run derive-expressions.pl to try to promote it. Not checkable locally: the construction uses functions RosettaExpr cannot compile, so this rests on upstream's word alone.",
-         "expr_tier" : "upstream",
+         "expr" : "",
+         "expr_note" : "Withdrawn 2026-08-31. This entry carried the expression \"md5($s.$p.salt2)(alsoJohndynamic_1560,SocialEngine)\", transcribed from the hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A entry for mdxfind type MD5SALT1SALT2 (e991) by a parser that has since been corrected: it carries a parenthesised group after what is already a complete expression, which is how a prose gloss reaches the data; and it carries the bare operands salt2, alsoJohndynamic_1560, SocialEngine, which john's dynamic language cannot bind. Nothing can compile that string, so it was a claim rather than a fact, and it is withdrawn rather than adjusted -- guessing what upstream meant is exactly what the expression field exists to stop. Re-run seed-hx.pl and denote-hx.pl to settle this entry from the corrected parse.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                33000
@@ -19083,10 +19083,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "emit(md5(sha1(pass).S))",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "mdxfind type MD5SHA1HUM (e366) is MULTI-EMIT: it computes several candidate digests per input and matches if any one reproduces the stored hash. There is therefore no single expression to record, and writing one of the emitted forms into expression: would be a false claim even though the string itself is correct. This is also why two vectors of such a type can disagree with each other, and why a tool matching one of them is not evidence about the other.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -19125,10 +19125,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "emit(md5(sha1(md5(pass)).S))",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "mdxfind type MD5SHA1MD5HUM (e378) is MULTI-EMIT: it computes several candidate digests per input and matches if any one reproduces the stored hash. There is therefore no single expression to record, and writing one of the emitted forms into expression: would be a false claim even though the string itself is correct. This is also why two vectors of such a type can disagree with each other, and why a tool matching one of them is not evidence about the other.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -19335,10 +19335,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "md5(sha1(md5^N(pass)))",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type MD5SHA1MD5x (e359) names N(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -19773,10 +19773,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "md5_uc(base64(md5_bin(pass)))",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "mdxfind type MD5UCBASE64MD5RAW (e375) is MULTI-EMIT: it computes several candidate digests per input and matches if any one reproduces the stored hash. There is therefore no single expression to record, and writing one of the emitted forms into expression: would be a false claim even though the string itself is correct. This is also why two vectors of such a type can disagree with each other, and why a tool matching one of them is not evidence about the other.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -19815,10 +19815,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "md5_uc(base64(sha1_bin(pass)))",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "mdxfind type MD5UCBASE64SHA1RAW (e376) is MULTI-EMIT: it computes several candidate digests per input and matches if any one reproduces the stored hash. There is therefore no single expression to record, and writing one of the emitted forms into expression: would be a false claim even though the string itself is correct. This is also why two vectors of such a type can disagree with each other, and why a tool matching one of them is not evidence about the other.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -20084,10 +20084,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "md6256(pass)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type MD6256 (e29) names md6256(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                34600
@@ -20129,10 +20129,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "mdc2(pass)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type MDC2 (e32) names mdc2(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "unknown"
@@ -20222,10 +20222,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "pbkdf2_sha1(pass, salt, N, 20)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type MONGODB-SHA1 (e955) names pbkdf2_sha1(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                24100
@@ -20267,10 +20267,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "pbkdf2_sha256(pass, salt, N, 32)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type MONGODB-SHA256 (e956) names pbkdf2_sha256(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                24200
@@ -20357,10 +20357,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "pbkdf2_sha256(pass, salt, N, 32)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type MSONLINE (e982) names pbkdf2_sha256(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                33700
@@ -20594,10 +20594,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "murmur3(pass, seed)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type MURMUR3 (e972) names murmur3(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                27800
@@ -20639,10 +20639,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "murmur64a(pass)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type MURMUR64A (e829) names murmur64a(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                34200
@@ -20684,10 +20684,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "murmur64a(pass)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type MURMUR64AZERO (e830) names murmur64a(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                34201
@@ -20729,10 +20729,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "mysql3(pass)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type MYSQL3 (e456) names mysql3(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                200
@@ -20777,10 +20777,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "sha256crypt(pass, salt)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type MYSQL-SHA256CRYPT (e875) names sha256crypt(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                7401
@@ -20920,10 +20920,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "des_block(md4(utf16le(pass)), challenge)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type NETNTLMV1 (e897) names des_block(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                5500
@@ -20965,10 +20965,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "hmac_md5(md4(utf16le(pass)), challenge)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type NETNTLMV2 (e898) names hmac_md5(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                5600
@@ -21062,10 +21062,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "pbkdf2_sha256(pass, salt, N, 32)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type NETSCALER-PBKDF2 (e895) names pbkdf2_sha256(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                33900
@@ -21245,10 +21245,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "sha1^N(pass . salt)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type NSEC3 (e879) names N(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                8300
@@ -21347,10 +21347,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "pbkdf2_sha512(pass, salt, 4096, 64)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type ORACLE12 (e910) names pbkdf2_sha512(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                12300
@@ -21392,10 +21392,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "upper(oracle7(pass, salt))",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type ORACLE7 (e896) names oracle7(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                3100
@@ -21673,10 +21673,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "pbkdf1_sha1(pass, salt, iter)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type PBKDF1-SHA1 (e981) names pbkdf1_sha1(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                32900
@@ -21718,10 +21718,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "pbkdf2_md5(pass, salt, N, 32)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type PBKDF2-MD5 (e531) names pbkdf2_md5(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                11900
@@ -21763,10 +21763,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "pbkdf2_sha1(pass, salt, N, 20)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type PBKDF2-SHA1 (e532) names pbkdf2_sha1(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                20400
@@ -21808,10 +21808,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "pbkdf2_sha256(pass, salt, N, 32)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type PBKDF2-SHA256 (e530) names pbkdf2_sha256(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                10000
@@ -21853,10 +21853,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "pbkdf2_sha512(pass, salt, N, 64)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type PBKDF2-SHA512 (e533) names pbkdf2_sha512(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                20200
@@ -22044,10 +22044,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "pbkdf2_sha1(pass, salt, N, 20)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type PKCS5S2 (e534) names pbkdf2_sha1(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -22272,10 +22272,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "pbkdf2_sha256(pass, salt, 4096, 32)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type POSTGRESSCRAM256 (e968) names pbkdf2_sha256(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                28600
@@ -22407,10 +22407,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "sha256^N(pass . salt)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type PWSAFE3 (e919) names N(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                5200
@@ -22452,10 +22452,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "md5crypt(pass, salt)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type QNX-MD5 (e934) names md5crypt(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                19000
@@ -22500,10 +22500,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "sha256crypt(pass, salt, rounds)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type QNX-SHA256 (e935) names sha256crypt(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                19100
@@ -22548,10 +22548,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "sha512crypt(pass, salt, rounds)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type QNX-SHA512 (e936) names sha512crypt(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                19200
@@ -22596,10 +22596,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "sha512crypt(pass, salt, rounds)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type QNX7-SHA512 (e937) names sha512crypt(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                19210
@@ -22641,10 +22641,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "\"$racf$*\" . user . \"*\" . upper(racf_encrypt(pass, user))",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type RACF (e881) names racf_encrypt(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                8500
@@ -22731,10 +22731,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "radiogatun32(pass)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type RADIOGATUN32 (e97) names radiogatun32(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -22773,10 +22773,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "radiogatun64(pass)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type RADIOGATUN64 (e98) names radiogatun64(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -23329,10 +23329,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "pbkdf2_sha256(pass, salt, N, 32)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type REDHAT389DS (e905) names pbkdf2_sha256(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                10901
@@ -24083,10 +24083,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "upper(sap_bcode(pass, salt))",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type SAP-BCODE (e922) names sap_bcode(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                7700
@@ -24131,10 +24131,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "cut(upper(sap_bcode(pass, salt)), 0, 8) . \"00000000\"",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type SAP-BCODE4 (e923) names sap_bcode(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                7701
@@ -24314,10 +24314,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "pbkdf2_sha512(pass, salt, N, 64)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type SAPCODVNH512 (e984) names pbkdf2_sha512(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                35000
@@ -24362,10 +24362,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "scrypt(pass, salt, N, r, p)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type SCRYPT (e884) names scrypt(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                8900
@@ -25270,10 +25270,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "emit(sha1(md5(md5(pass).pass))); emit(sha1(md5(md5(pass).\":\".pass)))",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "mdxfind type SHA1MD5MD5PASS (e663) is MULTI-EMIT: it computes several candidate digests per input and matches if any one reproduces the stored hash. There is therefore no single expression to record, and writing one of the emitted forms into expression: would be a false claim even though the string itself is correct. This is also why two vectors of such a type can disagree with each other, and why a tool matching one of them is not evidence about the other.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -27327,9 +27327,9 @@
          },
          "cracknote" : "",
          "denotation" : "",
-         "expr" : "sha1(utf16($s.rev(lower($p)).pepper))",
-         "expr_note" : "transcribed from the hx specification's Appendix A entry for mdxfind type SHA1-SALT-UTF16-PEPPER (e446), which states sha1(utf16le(salt . rev(lower(pass)) . pepper)). Transcription, not reproduction, so this is upstream and not vector; run derive-expressions.pl to try to promote it. Not checkable locally: the construction uses functions RosettaExpr cannot compile, so this rests on upstream's word alone.",
-         "expr_tier" : "upstream",
+         "expr" : "",
+         "expr_note" : "Withdrawn 2026-08-31. This entry carried the expression \"sha1(utf16($s.rev(lower($p)).pepper))\", transcribed from the hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A entry for mdxfind type SHA1-SALT-UTF16-PEPPER (e446) by a parser that has since been corrected: it carries the bare operand pepper, which john's dynamic language cannot bind. Nothing can compile that string, so it was a claim rather than a fact, and it is withdrawn rather than adjusted -- guessing what upstream meant is exactly what the expression field exists to stop. Re-run seed-hx.pl and denote-hx.pl to settle this entry from the corrected parse.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -27508,10 +27508,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "sha1crypt(pass, salt, rounds)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type SHA1CRYPT (e999) names sha1crypt(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                15100
@@ -27640,10 +27640,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "hex(and(sha1_bin(pass), \"\\x00\\x0f\\xff...\\xff\"))",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type SHA1lsb35 (e409) names and(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -27685,10 +27685,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "emit(sha1(md5(pass).S))",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "mdxfind type SHA1MD5HUM (e364) is MULTI-EMIT: it computes several candidate digests per input and matches if any one reproduces the stored hash. There is therefore no single expression to record, and writing one of the emitted forms into expression: would be a false claim even though the string itself is correct. This is also why two vectors of such a type can disagree with each other, and why a tool matching one of them is not evidence about the other.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -28069,10 +28069,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "emit(sha1(sha1(pass).S))",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "mdxfind type SHA1SHA1HUM (e365) is MULTI-EMIT: it computes several candidate digests per input and matches if any one reproduces the stored hash. There is therefore no single expression to record, and writing one of the emitted forms into expression: would be a false claim even though the string itself is correct. This is also why two vectors of such a type can disagree with each other, and why a tool matching one of them is not evidence about the other.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -28156,10 +28156,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "sha1(user . \":\" . mysql3(pass))",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type SHA1USERSQL3 (e474) names mysql3(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -29207,10 +29207,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "sha256crypt(pass, salt, rounds)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type SHA256CRYPT (e512) names sha256crypt(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                7400
@@ -29444,10 +29444,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "sha256_uc(pass)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type SHA256UC (e488) names sha256_uc(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "unknown"
@@ -30811,10 +30811,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "sha512crypt(pass, salt)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type SHA512CRYPT (e513) names sha512crypt(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                1800
@@ -31210,10 +31210,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "shabal224(pass)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type SHABAL224 (e99) names shabal224(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -31252,10 +31252,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "shabal256(pass)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type SHABAL256 (e100) names shabal256(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -31294,10 +31294,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "shabal384(pass)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type SHABAL384 (e101) names shabal384(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -31336,10 +31336,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "shabal512(pass)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type SHABAL512 (e102) names shabal512(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -31378,10 +31378,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "shavite224(pass)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type SHAVITE224 (e103) names shavite224(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -31420,10 +31420,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "shavite256(pass)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type SHAVITE256 (e104) names shavite256(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -31462,10 +31462,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "shavite384(pass)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type SHAVITE384 (e105) names shavite384(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -31504,10 +31504,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "shavite512(pass)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type SHAVITE512 (e106) names shavite512(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -31546,10 +31546,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "pbkdf2_sha1(pass, salt, N, 16)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type SHIRO1 (e908) names pbkdf2_sha1(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                12150
@@ -31591,10 +31591,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "simd224(pass)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type SIMD224 (e107) names simd224(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -31633,10 +31633,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "simd256(pass)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type SIMD256 (e108) names simd256(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -31675,10 +31675,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "simd384(pass)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type SIMD384 (e109) names simd384(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -31717,10 +31717,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "simd512(pass)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type SIMD512 (e110) names simd512(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -31804,10 +31804,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "siphash(pass, fromhex(salt))",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type SIPHASH (e902) names siphash(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                10100
@@ -32347,10 +32347,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "sm3crypt(pass, salt, rounds)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type SM3CRYPT (e985) names sm3crypt(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                35100
@@ -32705,10 +32705,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "pbkdf2_sha1(pass, salt, N, 32)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type SQLCIPHER (e961) names pbkdf2_sha1(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                24600
@@ -32891,10 +32891,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "md5^N(pass)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type SSPR-MD5 (e975) names N(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                32000
@@ -32939,10 +32939,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "sha1^N(pass)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type SSPR-SHA1 (e976) names N(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                32010
@@ -33035,10 +33035,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "streebog_32(pass)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type STREEBOG-32 (e430) names streebog_32(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "unknown"
@@ -33087,10 +33087,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "streebog_64(pass)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type STREEBOG-64 (e431) names streebog_64(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "unknown"
@@ -33280,10 +33280,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "pbkdf2_sha512(pass, salt, 100000, 56)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type TELEGRAM-SHA256 (e947) names pbkdf2_sha512(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                22301
@@ -33415,10 +33415,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "tth(pass)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type TTH (e19) names tth(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -33541,10 +33541,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "tiger2(pass)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type TIGER2 (e115) names tiger2(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -33583,10 +33583,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "hmac_sha1(pass, salt)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type UMBRACO (e958) names hmac_sha1(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                24800
@@ -33793,10 +33793,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "pbkdf2_sha1(pass, salt, N, 32)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type VMWARE-VMX (e966) names pbkdf2_sha1(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                27400
@@ -33939,10 +33939,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "pbkdf2_sha512(pass, salt, 1000, 64)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type WEB2PY-SHA512 (e948) names pbkdf2_sha512(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                21600
@@ -33984,10 +33984,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "pbkdf2_md5(pass, salt, N, 32)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type WERKZEUG-MD5 (e889) names pbkdf2_md5(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                30000
@@ -34029,10 +34029,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "pbkdf2_sha256(pass, salt, N, 32)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type WERKZEUG-SHA256 (e890) names pbkdf2_sha256(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                30120
@@ -34208,9 +34208,9 @@
          },
          "cracknote" : "",
          "denotation" : "",
-         "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr" : "sha256(utf16($p).fromhex($s))",
+         "expr_note" : "transcribed from the hx specification's Appendix A entry for mdxfind type WINPHONE (e928), which states sha256(utf16le(pass) . fromhex(salt)) (salt = 256-hex / 128 bytes). Transcription, not reproduction, so this is upstream and not vector; run derive-expressions.pl to try to promote it. Not checkable locally: the construction uses functions RosettaExpr cannot compile, so this rests on upstream's word alone. Checked by hand on 2026-08-31 anyway: Digest::SHA -- an implementation independent of all three crackers -- computes exactly this construction over the entry's own vector and reproduces its digest. That is corroboration, not tier 'vector', which requires john's own compiler; john has no fromhex() in its dynamic expression language, so derive-expressions.pl cannot promote this.",
+         "expr_tier" : "upstream",
          "hashcat" : {
             "ids" : [
                13800
@@ -34252,10 +34252,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "wrl1(pass)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type WRL1 (e117) names wrl1(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -34342,10 +34342,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "bcrypt(base64(hmac_sha384_bin(pass, \"wp-sha384\")), salt, N)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type WPBCRYPT (e993) names bcrypt(), hmac_sha384_bin(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                35500
@@ -34474,10 +34474,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "wrl0(pass)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type WRL0 (e116) names wrl0(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "no"

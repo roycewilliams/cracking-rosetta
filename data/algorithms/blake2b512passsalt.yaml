@@ -1,5 +1,14 @@
 id: "blake2b512passsalt"
 name: "BLAKE2B512PASSSALT"
+expression_proof:
+  verified: "absent"
+  verified_at: "2026-08-31"
+  verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
+  note: "the construction upstream states for mdxfind type BLAKE2B512PASSSALT (e842) names blake2b512(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:."
+denotation:
+  text: "blake2b512(pass . salt)"
+  source: "mdxfind"
+  note: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A, entry for mdxfind type BLAKE2B512PASSSALT (e842), which states blake2b512(pass . salt)."
 status: "ok"
 tools:
   hashcat:

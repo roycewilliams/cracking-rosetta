@@ -1,5 +1,14 @@
 id: "krb5pa23"
 name: "KRB5PA23"
+expression_proof:
+  verified: "absent"
+  verified_at: "2026-08-31"
+  verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
+  note: "the construction upstream states for mdxfind type KRB5PA23 (e874) names rc4_hmac_md5(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:."
+denotation:
+  text: "rc4_hmac_md5(pass, realm, user, timestamp)"
+  source: "mdxfind"
+  note: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A, entry for mdxfind type KRB5PA23 (e874), which states rc4_hmac_md5(pass, realm, user, timestamp)."
 status: "ok"
 tools:
   hashcat:

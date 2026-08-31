@@ -1,5 +1,14 @@
 id: "sha1-md5-md5-plain-plain"
 name: "sha1(md5(md5($plain).$plain)"
+expression_proof:
+  verified: "absent"
+  verified_at: "2026-08-31"
+  verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
+  note: "mdxfind type SHA1MD5MD5PASS (e663) is MULTI-EMIT: it computes several candidate digests per input and matches if any one reproduces the stored hash. There is therefore no single expression to record, and writing one of the emitted forms into expression: would be a false claim even though the string itself is correct. This is also why two vectors of such a type can disagree with each other, and why a tool matching one of them is not evidence about the other."
+denotation:
+  text: "emit(sha1(md5(md5(pass).pass))); emit(sha1(md5(md5(pass).\":\".pass)))"
+  source: "mdxfind"
+  note: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A, entry for mdxfind type SHA1MD5MD5PASS (e663), which states emit(sha1(md5(md5(pass).pass))); emit(sha1(md5(md5(pass).\":\".pass))). This is what the type emits, not a single construction -- see expression_proof."
 status: "ok"
 tools:
   hashcat:

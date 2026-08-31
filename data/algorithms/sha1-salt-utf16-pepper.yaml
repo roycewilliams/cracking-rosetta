@@ -1,11 +1,10 @@
 id: "sha1-salt-utf16-pepper"
 name: "SHA1-SALT-UTF16-PEPPER"
-expression: "sha1(utf16($s.rev(lower($p)).pepper))"
 expression_proof:
-  verified: "upstream"
+  verified: "absent"
   verified_at: "2026-08-31"
-  verified_with: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A"
-  note: "transcribed from the hx specification's Appendix A entry for mdxfind type SHA1-SALT-UTF16-PEPPER (e446), which states sha1(utf16le(salt . rev(lower(pass)) . pepper)). Transcription, not reproduction, so this is upstream and not vector; run derive-expressions.pl to try to promote it. Not checkable locally: the construction uses functions RosettaExpr cannot compile, so this rests on upstream's word alone."
+  verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
+  note: "Withdrawn 2026-08-31. This entry carried the expression \"sha1(utf16($s.rev(lower($p)).pepper))\", transcribed from the hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A entry for mdxfind type SHA1-SALT-UTF16-PEPPER (e446) by a parser that has since been corrected: it carries the bare operand pepper, which john's dynamic language cannot bind. Nothing can compile that string, so it was a claim rather than a fact, and it is withdrawn rather than adjusted -- guessing what upstream meant is exactly what the expression field exists to stop. Re-run seed-hx.pl and denote-hx.pl to settle this entry from the corrected parse."
 status: "needs-review"
 tools:
   hashcat:
