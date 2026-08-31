@@ -133,6 +133,13 @@ point at. When they do, the retired `id` stays as a tombstone — a file with
 `status: merged`, `merged_into:` and nothing else — so your bookmark and their
 CSV join keep working.
 
+## Don't edit the generated files
+
+`docs/` and `dist/` are rebuilt from `data/` on every change, so a PR against
+them is overwritten the next time anything renders. `data/algorithms/*.yaml`
+is the source of truth. The same goes for `data/tools/*.yaml`, which is a
+mechanical dump of what each installed tool reports.
+
 ## The one rule: don't inflate tiers
 
 `verified: vector` means **this repository cracked that vector with that tool,

@@ -141,6 +141,18 @@ The rest came from the spreadsheet this replaces, built up over years by multipl
 * https://github.com/Cynosureprime/mdxfind
 * https://github.com/Cynosureprime/hashpipe
 
+## What you can depend on
+
+If you are scripting against this, these are the promises:
+
+* **An `id` never changes.** It is the filename stem, the URL fragment on the browsable page, and the key in the CSV. When two entries merge, the losing id keeps a row as a *tombstone*: `status` is `merged`, `merged_into` names the survivor, every other column is empty. So a join on an id you saw once will keep resolving, and will tell you where the row went.
+* **Read the CSV by header name, not by column position.** Columns get added - `merged_into` was added when the tombstone rule was - and a new one may appear anywhere in the row. Nothing already there gets renamed or removed without a note here.
+* **The four tiers are the vocabulary**: `vector`, `upstream`, `asserted`, `absent`. Their meanings are fixed; what changes is which one a given mapping has earned.
+* **`docs/` and `dist/` are generated** from `data/` on every change. Don't edit them and don't send PRs against them; they'll be overwritten. `data/algorithms/*.yaml` is the source of truth, and `schema/algorithm.schema.json` plus `tools/validate.pl` are its contract.
+* **`data/tools/*.yaml` is a mechanical dump** of what each installed tool reports, regenerated wholesale when a tool is upgraded. Treat it as upstream's data, not ours.
+
 ## Licence
 
-MIT. See [LICENSE](LICENSE).
+MIT, for the code **and the data**. See [LICENSE](LICENSE).
+
+The data matters more than the code here, so to be explicit: the YAML entries, the generated CSV/JSON exports and the test vectors are offered under the same MIT terms. Attribution is welcome and the [Credits](#credits) are the people to give it to.

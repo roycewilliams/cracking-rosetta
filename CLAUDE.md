@@ -347,6 +347,26 @@ and this is a redirect.
 The full design, the options weighed against it and what changed on contact
 with the code are in `ACTION-PLAN.md` §11.
 
+## The published contract
+
+Some things are promised to people outside this repository, in README's "What
+you can depend on". They are cheap to break by accident and expensive to
+un-break, so they are restated here where a tool gets written:
+
+- **An `id` is forever.** Filename stem, URL fragment, CSV key. A merge makes
+  the loser a tombstone (`status: merged` + `merged_into:`), never a deletion
+  and never an `mv`.
+- **CSV columns may be added, never renamed or removed** without saying so in
+  the README. Consumers are told to read by header name, which is what makes
+  adding one safe.
+- **The four tiers are fixed vocabulary.** Adding a fifth, or redefining one,
+  is a breaking change to every consumer's interpretation of every row.
+- **`docs/` and `dist/` are generated.** Anything hand-edited there is lost on
+  the next render, and `render.yml` will do that render without being asked.
+- **Both the code and the data are MIT.** Anything vendored has to be
+  compatible and has to be recorded in `vendor/*/PROVENANCE.md` with the
+  upstream commit.
+
 ## Conventions
 
 - ETL and tooling in **Perl** (see global CLAUDE.md). The one-shot sheet

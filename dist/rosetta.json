@@ -11034,7 +11034,7 @@
             }
          ],
          "sameas" : "duplicate of ntlm-plain-md4-utf16-le-plain; same as ntlmh (naming)",
-         "status" : "needs-review",
+         "status" : "ok",
          "tool_note" : {
             "hashcat" : "",
             "john" : "CPU formats discovered by round-trip search, not by name. The GPU formats were round-tripped on an RTX 4060 Ti on 2026-08-30; they replace the ntlmv2-opencl the merged-away entry claimed, which is john's NTLMv2 C/R format - a challenge-response protocol, not this digest - and was never reproduced.",
@@ -23821,7 +23821,7 @@
             }
          ],
          "sameas" : "duplicate of ripemd320",
-         "status" : "needs-review",
+         "status" : "ok",
          "tool_note" : {
             "hashcat" : "",
             "john" : "",
@@ -25017,7 +25017,7 @@
             }
          ],
          "sameas" : "duplicate of sha1-md5-md5-pass-salt",
-         "status" : "needs-review",
+         "status" : "ok",
          "tool_note" : {
             "hashcat" : "",
             "john" : "",
