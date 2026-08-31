@@ -1,44 +1,38 @@
 id: "md5-capitalise-md5-plain-username"
-name: "md5(capitalise(md5($plain).$username)"
-expression: "md5(md5($p).$s)"
-john_dynamic_expr: "dynamic=md5(md5($p).$s)"
+name: "md5(cap(md5($plain)).\":\".$username)"
 expression_proof:
-  verified: "upstream"
-  verified_at: "2026-08-29"
+  verified: "absent"
+  verified_at: "2026-08-31"
   verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
-  note: "transcribed from john --list=subformats for an identifier this entry proved by round-trip; TRIAGE 2026-08-30 [vector-anomalous], RESOLVED 2026-08-31 (see notes): the expression is correct -- compiled with --format=dynamic it recovers all 6 of john's own test vectors for dynamic_1007 -- and 1 of this entry's 2 vectors are not of that construction by independent computation. Those vectors are something else and want identifying"
-status: "needs-review"
+  note: "john's dynamic expression language has no literal-string token: --format=dynamic='md5(md5($p).\":\".$s)' fails with 'Invalid token following the . character' (checked 2026-08-31), so this construction cannot be written as an expression. That is separate from whether john has a FORMAT for it."
+denotation:
+  text: "md5(cap(md5($p)).\":\".$u)"
+  source: "mdxfind"
+status: "ok"
 tools:
   hashcat:
     verified: "absent"
   mdxfind:
     types: ["MD5CAPMD5USER"]
     verified: "vector"
-    verified_at: "2026-08-29"
-    verified_with: "mdxfind"
+    verified_at: "2026-08-31"
+    verified_with: "mdxfind RCS 1.540 (2026/08/22)"
   john:
-    cpu: ["dynamic_1007", "dynamic_2006", "dynamic_6"]
-    verified: "vector"
-    verified_at: "2026-08-29"
-    verified_with: "john"
-    note: "format discovered by round-trip search, not by name"
+    verified: "absent"
+    verified_at: "2026-08-31"
+    verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
+    note: "no john format reproduces this construction: discover-john.pl ran all 957 formats (439 CPU + 518 disabled dynamics) against this entry's vector in 38.5s with zero matches, 2026-08-31. Separately, the dynamic expression compiler cannot express it either -- it has no literal-string token. The dynamic_1007/2006/6 this entry used to name belong to the colonless md5(md5($p).$s) and do not crack this vector."
   crack:
     supported: false
 relations:
-  - kind: "same-computation"
-    entry: "md5-md5-pass-salt"
-    distinction: "application"
-    note: "same construction; the cap() in the name is a no-op on a lowercase digest"
+  - kind: "collides-on-subset"
+    entry: "md5-md5-plain-salt-3"
+    distinction: "encoding"
+    note: "MD5MD5USER and MD5CAPMD5USER differ only by cap() on the inner hex digest, which is a no-op whenever that digest starts with a digit. md5('rosetta') is 975790df..., so both types reproduce this shared vector identically; they diverge on any plaintext whose md5 starts with a letter."
 vectors:
-  - hash: "05b56c69b512a1c641fc59d1070df60b:abc123"
-    pass: "rosetta"
-    source: "sheet"
   - hash: "d4f7dec5b98ac42336b1c9e56f2e5ca8:abc123"
     pass: "rosetta"
     source: "sheet"
-  - hash: "dec0ded8b80d1519ca9990ebaa03edf8:rosettans91e9"
-    pass: "rosetta"
-    source: "vanity"
 legacy:
   hashes_org: "MD5(CAPMD5(PLAIN)SALT)"
-notes: "IDENTIFIED 2026-08-31 by Cynosure Prime's maintainer and confirmed here by an independent Digest::MD5 computation: the vector d4f7dec5b98ac42336b1c9e56f2e5ca8:abc123 (plaintext 'rosetta') is md5(md5($p).\":\".$u) -- mdxfind/hashpipe type MD5CAPMD5USER, which inserts a LITERAL COLON between the inner digest and the userid field (hx.pdf note 24, p.58). The earlier 198,534-construction sweep missed it because it enumerated terms and never a literal separator between them. The colon is not a general convention for userid types: md5-userid-md5-plain (MD5USERIDMD5) and sha1-sha1-plain-salt (SHA1SHA1USER) both reproduce without it, checked the same day. CONSEQUENCE, still open: this entry carries vectors of TWO constructions -- 05b56c69b512a1c641fc59d1070df60b is md5(md5($p).$s), which is this entry's expression and what john's dynamic_1007 proves, while d4f7dec5 is the colon form, which is what this entry's mdxfind type MD5CAPMD5USER denotes and what mdxfind's tier was proven on. One entry, two computations; splitting it is a curation decision. Note also that john's dynamic compiler rejects a literal string ('Invalid token following the . character'), so the colon form can have no john expression at all."
+notes: "This row is mdxfind type MD5CAPMD5USER, which computes md5(cap(md5($p)).\":\".$u) -- a literal colon between the inner digest and the userid field (hx.pdf note 24, p.58). Identified 2026-08-31 by Cynosure Prime's maintainer and confirmed here twice over: an independent Digest::MD5 computation reproduces the vector, and the local mdxfind pinned to ^MD5CAPMD5USER$ with -F recovers the plaintext. CORRECTED the same day. This entry previously claimed expression md5(md5($p).$s) and john dynamic_1007/2006/6, all of which belong to the DIFFERENT, colonless construction; none of those three dynamics cracks this entry's vector, checked 2026-08-31. The colonless vector 05b56c69b512a1c641fc59d1070df60b and the vanity vector it carried moved to md5-md5-pass-salt, which is that computation's row. The earlier 198,534-construction sweep that failed to identify this missed it because it enumerated terms and never a literal separator between them; the colon is NOT a general convention for userid types -- MD5USERIDMD5 and SHA1SHA1USER both reproduce without it."

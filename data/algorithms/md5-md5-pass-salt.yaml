@@ -28,18 +28,13 @@ tools:
     supported: false
 relations:
   - kind: "same-computation"
-    entry: "md5-capitalise-md5-plain-username"
-    distinction: "application"
-    note: "same construction; the cap() in the name is a no-op on a lowercase digest"
-  - kind: "same-computation"
-    entry: "md5-md5-plain-salt-3"
-    distinction: "application"
-    note: "same construction, mdxfind type MD5MD5USER reading the second field as a userid"
-  - kind: "same-computation"
     entry: "vbulletin-v3-8-5"
     distinction: "application"
     note: "vBulletin's use of md5(md5($p).$s); hashcat gives it mode 2611"
 vectors:
+  - hash: "05b56c69b512a1c641fc59d1070df60b:abc123"
+    pass: "rosetta"
+    source: "sheet"
   - hash: "991adb53a943df0a8907b3541e52a2db:uGh"
     pass: "rosetta"
     source: "sheet"
