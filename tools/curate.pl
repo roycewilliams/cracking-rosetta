@@ -406,7 +406,7 @@ unless (%want_kind && !$want_kind{duplicate}) {
         next if ($entry{$a}{status} // '') eq 'merged'
              || ($entry{$b}{status} // '') eq 'merged';
         push @queue, {
-            kind => 'duplicate', target => $k,
+            kind => 'duplicate', target => $k, ids => [$a, $b],
             prompt  => 'These propose a merge. Which id should survive?',
             context => [ "-- $a", (map { "   $_" } describe($entry{$a})),
                          "-- $b", (map { "   $_" } describe($entry{$b})) ],
@@ -439,7 +439,7 @@ unless (%want_kind && !$want_kind{unproven}) {
                      || $verdict eq 'expression-wrong';
         }
         push @queue, {
-            kind => 'unproven', target => $id,
+            kind => 'unproven', target => $id, ids => [$id],
             prompt  => 'This expression does not reproduce the entry\'s own '
                      . 'vector. What is wrong?',
             context => [ describe($e) ],
@@ -487,7 +487,7 @@ unless (%want_kind && !$want_kind{token}) {
         my @ids = @{ $group{$frag} };
         next if @ids < $min_group;
         push @queue, {
-            kind => 'token', target => "TOKEN:$frag",
+            kind => 'token', target => "TOKEN:$frag", ids => [@ids],
             prompt  => "What does the mdxfind name fragment '$frag' mean?",
             context => [ sprintf('%-12s %d', 'entries', scalar @ids),
                          sprintf('%-12s %s', 'examples',
@@ -610,28 +610,111 @@ if ($issues) {
          . "# Cut the ones you do not want, then: sh thisfile\n"
          . "set -e\n\n";
 
+    # An issue is worth opening only if it saves the reader the work we have
+    # already done. So each one carries what this repository knows about the
+    # entry -- its vectors, its identifiers, the triage verdict if there is one
+    # -- and the exact commands that would settle it, pinned to the entry's own
+    # identifiers. Everything below is read from the data; nothing is typed.
+    my $REPO = 'https://github.com/roycewilliams/cracking-rosetta';
+
+    # vectors_block($id) - the test vectors, ready to paste into a hash file.
+    my $vectors_block = sub {
+        my ($id) = @_;
+        my $e = $entry{$id} or return ();
+        my @v = @{ $e->{vectors} || [] } or return ();
+        my @out = ("Test vectors on `$id` (hash, then plaintext):", '', '```');
+        push @out, sprintf('%-72s %s', $_->{hash} // '', $_->{pass} // '') for @v;
+        push @out, '```', '';
+        return @out;
+    };
+
+    # commands($id) - what to run, with this entry's identifiers already in it.
+    # A reader who owns the tool should not have to look up the pinning rules
+    # (mdxfind needs -F for a vector carrying its salt, and the iteration count
+    # is part of the identity).
+    my $commands = sub {
+        my ($id) = @_;
+        my $e = $entry{$id} or return ();
+        my @c;
+        my ($v) = @{ $e->{vectors} || [] };
+        my $salted = $v && ($v->{hash} // '') =~ /:/ ? 1 : 0;
+        if (my @t = @{ ($e->{tools}{mdxfind} || {})->{types} || [] }) {
+            my $it = ($e->{tools}{mdxfind}{iterations} || 1);
+            push @c, sprintf("mdxfind -h '^%s\$' %s hashes -i %d wordlist",
+                             $t[0], ($salted ? '-F' : '-f'), $it);
+        }
+        if (my @m = @{ ($e->{tools}{hashcat} || {})->{modes} || [] }) {
+            push @c, sprintf('hashcat -m %d -a 0 hashes wordlist', $m[0]);
+        }
+        if (my @j = @{ ($e->{tools}{john} || {})->{cpu} || [] }) {
+            push @c, sprintf("john --format=%s hashes --wordlist=wordlist", $j[0]);
+        }
+        if (my $x = $e->{expression}) {
+            push @c, sprintf("john --format=dynamic='%s' hashes --wordlist=wordlist", $x);
+        }
+        return () unless @c;
+        return ('Commands, with this entry\'s own identifiers:', '', '```sh', @c, '```', '');
+    };
+
+    # triage($id) - the diagnosis triage-expressions.pl recorded, if any. It
+    # is the difference between "this does not work" and "here is what is
+    # wrong with it", and it is what stops a reader repeating the analysis.
+    my $triage = sub {
+        my ($id) = @_;
+        my $e = $entry{$id} or return ();
+        my $n = ($e->{expression_proof} || {})->{note} // '';
+        return () unless $n =~ /TRIAGE \d{4}-\d{2}-\d{2}(?: \[([a-z-]+)\])?: (.+)$/s;
+        my ($verdict, $text) = ($1 // 'triaged', $2);
+        $text =~ s/\s+/ /g;
+        return ("**Already established** (`$verdict`): $text", '');
+    };
+
+    # ruled_out($id) - work already done and recorded on the entry, so nobody
+    # repeats it. notes: is where a tool or a person leaves that.
+    my $ruled_out = sub {
+        my ($id) = @_;
+        my $e = $entry{$id} or return ();
+        my $n = $e->{notes} // '';
+        return () unless length $n;
+        $n =~ s/\s+/ /g;
+        return ("**Already ruled out**: $n", '');
+    };
+
     for my $item (@ask) {
+        my @ids = @{ $item->{ids} || [] };
         my $title = $item->{kind} eq 'duplicate'
             ? sprintf('Are %s one algorithm or two?',
                       join(' and ', split /\+/, $item->{target}))
             : $item->{kind} eq 'token'
-            ? sprintf('What does %s compute?', $item->{target})
-            : sprintf('%s: the expression does not reproduce its own vector',
-                      $item->{target});
+            ? sprintf('What does the mdxfind name fragment %s mean?',
+                      ($item->{target} =~ /^TOKEN:(.+)$/)[0] // $item->{target})
+            : sprintf('%s: what is this vector, if not %s?', $ids[0] // $item->{target},
+                      ($entry{ $ids[0] // '' } || {})->{expression} // 'the recorded expression');
 
         my @body = ($item->{prompt}, '');
-        push @body, 'What the repository already knows:', '', '```';
+        push @body, $triage->($_)    for @ids;
+        push @body, $ruled_out->($_) for @ids;
+
+        push @body, 'What the repository already records:', '', '```';
         push @body, @{ $item->{context} };
         push @body, '```', '';
+
+        push @body, $vectors_block->($_) for @ids;
+        push @body, $commands->($_)      for @ids;
+
         push @body, 'Any of these would settle it:', '';
         push @body, sprintf('* **%s** - %s', $_->[1], $_->[2])
             for @{ $item->{options} };
+
         push @body, '',
             'A comment saying which, and why, is a complete answer - no pull '
-          . 'request needed. "I have seen this format do X" is information '
-          . 'this repository cannot derive.',
-            '',
-            'Generated from the curation queue (`tools/curate.pl`).';
+          . 'request needed, and you do not have to be certain. "I have seen '
+          . 'this format do X" is information this repository cannot derive.',
+            '';
+        push @body, sprintf('Entry: [`%s`](%s/blob/main/data/algorithms/%s.yaml) '
+                          . '&middot; [row](%s/blob/main/docs/ROSETTA.md)', $_,
+                            $REPO, $_, $REPO) for @ids;
+        push @body, '', 'Generated from the curation queue (`tools/curate.pl --issues`).';
 
         printf "gh issue create --label %s --title %s --body %s\n\n",
             $q->('curation'), $q->($title), $q->(join "\n", @body);
