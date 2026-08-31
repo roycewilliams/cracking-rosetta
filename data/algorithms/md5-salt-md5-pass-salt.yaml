@@ -15,29 +15,26 @@ tools:
     verified_at: "2026-08-29"
     verified_with: "hashcat"
   mdxfind:
-    types: ["MD5-SALTMD5PASS-SALT"]
+    types: ["MD5-SALTMD5PASSSALT"]
     verified: "vector"
     verified_at: "2026-08-30"
     verified_with: "mdxfind"
+    note: "corrected 2026-08-30. This entry named MD5-SALTMD5PASS-SALT (e818), which Digest::MD5 shows is md5($s.md5($p).$s) - a different computation, now its own entry md5-saltmd5pass-salt. The type recorded here, e515, reproduces this entry's own vector pinned."
   john:
-    cpu: ["dynamic_11", "dynamic_14", "dynamic_2011"]
+    cpu: ["dynamic_11", "dynamic_2011"]
     verified: "vector"
     verified_at: "2026-08-30"
-    verified_with: "john"
-  crack:
-    supported: false
+    verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a"
+    note: "corrected 2026-08-30: dynamic_14 was dropped with the e818 vector that earned it. john's own --list=subformats gives dynamic_14 as md5($s.md5($p).$s), and it does not crack this entry's vector."
 relations:
-  - kind: "duplicate-of"
+  - kind: "same-computation"
     entry: "md5-saltmd5passsalt"
-    distinction: "none"
-    note: "Both are md5($s.md5($p.$s)); each entry's own vector was round-tripped by hashcat -m 4110 on 2026-08-29. md5-salt-md5-pass-salt additionally names mdxfind type MD5-SALTMD5PASS-SALT, which is e818 -> hashcat 33100 = md5($s.md5($p).$s), a different computation; that type is tier asserted and looks wrong."
+    distinction: "naming"
+    note: "Not a duplicate, decided by Royce on 2026-08-30: this row had mixed e818 md5($s.md5($p).$s) into e515 md5($s.md5($p.$s)), and the fix was to correct the type rather than to merge. This row is the sheet's generic construction with its hashes.org and hashkiller names; md5-saltmd5passsalt is mdxfind's type name for the same computation."
 vectors:
   - hash: "4bea0721f00e194e440c9c2332d55624:tj81ZLT"
     pass: "rosetta"
     source: "sheet"
-  - hash: "44713c51d1c49a189194739742a550d1:salt"
-    pass: "password123"
-    source: "mdxfind"
 legacy:
   hashes_org: "MD5(SALTMD5(PLAINSALT))"
   hashkiller: "md5($salt.md5($pass.$salt))"
