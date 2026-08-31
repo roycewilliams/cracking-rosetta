@@ -541,6 +541,13 @@ if (@tomb_out) {
         . '.';
 }
 
+# The redirect map the page needs at runtime: a visitor following an old link
+# lands on #ripemd320, which is nobody's row any more. Without this the hash
+# silently does nothing, which is the 404 the tombstone decision rejected.
+my $tomb_json = JSON::PP->new->canonical->encode({
+    map { $_->{id} => [ $_->{into}, $_->{name} ] } @tomb_out
+});
+
 my $versions = sprintf('hashcat %s &middot; john %s &middot; mdxfind %s',
     $inv{hashcat}{version} // '?', $inv{john}{version} // '?', $inv{mdxfind}{version} // '?');
 
@@ -612,6 +619,16 @@ legend,.legend{display:flex;flex-wrap:wrap;gap:14px;padding:10px 20px;
 .sw{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;
  vertical-align:-1px}
 footer{padding:16px 20px;color:var(--ink3);font-size:.76rem}
+/* The permalink is the whole point of a row having an id: it is what someone
+   pastes into an issue. Kept faint until the row is hovered so 784 of them do
+   not turn the first column into a field of hashes. */
+.permalink{float:right;margin-left:10px;color:var(--ink3);text-decoration:none;
+ opacity:0;transition:opacity .12s}
+tr:hover .permalink,.permalink:focus{opacity:1}
+tr.hit td{background:var(--claimbg);box-shadow:inset 3px 0 0 var(--claim)}
+#note{display:none;padding:10px 20px;background:var(--claimbg);color:var(--ink);
+ border-bottom:1px solid var(--rule);font-size:.82rem}
+#note.on{display:block}
 a{color:inherit}
 </style>
 </head><body>
@@ -644,7 +661,9 @@ a{color:inherit}
   <span><span class="sw" style="background:var(--nobg);border:1px solid var(--no)"></span><b>not supported</b> &mdash; checked; it cannot</span>
   <span><span class="sw" style="background:var(--gapbg);border:1px solid var(--gap)"></span><b>gap</b> &mdash; nobody has said yet</span>
 </div>
-<div class="wrap"><table>
+<div class="wrap">
+<div id="note"></div>
+<table>
 <thead><tr>
   <th data-c="0">Algorithm</th><th data-c="3">hashcat</th>
   <th data-c="5">John</th><th data-c="7">mdxfind</th><th data-c="11">Vectors</th>
@@ -699,19 +718,60 @@ function render(){
     return x<y?-sortDir:x>y?sortDir:0;
   });
   tb.innerHTML=rows.map(r=>
-    '<td class="alg">'+esc(r[0])+(r[9]?'<span class="al">'+esc(r[9])+'</span>':'')+'</td>'
+    '<tr id="'+esc(r[1])+'">'
+    +'<td class="alg"><a class="permalink" href="#'+esc(r[1])+'" '
+    +'title="link to this row">#</a>'+esc(r[0])
+    +(r[9]?'<span class="al">'+esc(r[9])+'</span>':'')+'</td>'
     +cellHtml(r[2],r[3])+cellHtml(r[4],r[5])+cellHtml(r[6],r[7])
     +'<td>'+(r[11]||0)+'</td>'
     +'<td class="rel">'+esc(r[12]||'')+'</td>'
-  ).map(s=>'<tr>'+s+'</tr>').join('');
+    +'</tr>'
+  ).join('');
   countEl.textContent=rows.length+' of '+D.length;
 }
+
+// Deep links. Every row carries its entry id, which is the same key
+// dist/rosetta.csv joins on and the same stem as the YAML file, so one
+// identifier gets you from a link in an issue to the row to the file to edit.
+// M is the tombstone map: an id that lost a merge still resolves, to a note
+// saying where it went and the survivor's row.
+const M = $tomb_json;
+function focusHash(){
+  const want = decodeURIComponent(location.hash.slice(1));
+  const note = document.getElementById('note');
+  note.className=''; note.textContent='';
+  if(!want) return;
+  const t = M[want];
+  const id = t ? t[0] : want;
+  if(t){
+    note.textContent = want + ' was merged into ' + t[0] + '. Showing that row instead.';
+    note.className = 'on';
+  }
+  // Only reset the filters if the row is not on screen: a permalink clicked
+  // from inside a filtered view should not silently throw the filter away.
+  if(!document.getElementById(id)){
+    q.value=''; toolSel.value=''; stSel.value='';
+    gapsOnly=false; gapsBtn.classList.remove('on');
+    render();
+  }
+  const el = document.getElementById(id);
+  if(!el){
+    note.textContent = 'No row here has the id "' + want + '".';
+    note.className = 'on';
+    return;
+  }
+  document.querySelectorAll('tr.hit').forEach(x=>x.classList.remove('hit'));
+  el.classList.add('hit');
+  el.scrollIntoView({block:'center'});
+}
+window.addEventListener('hashchange', focusHash);
 q.oninput=render; toolSel.onchange=render; stSel.onchange=render;
 gapsBtn.onclick=()=>{gapsOnly=!gapsOnly;gapsBtn.classList.toggle('on',gapsOnly);render();};
 document.querySelectorAll('th').forEach(th=>th.onclick=()=>{
   const c=+th.dataset.c; sortDir = (c===sortCol)? -sortDir : 1; sortCol=c; render();
 });
 render();
+focusHash();
 </script>
 </body></html>
 HTML_HEAD
