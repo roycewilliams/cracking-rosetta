@@ -1,5 +1,5 @@
 {
-   "count" : 784,
+   "count" : 783,
    "entries" : [
       {
          "alias" : "",
@@ -9495,7 +9495,7 @@
          "vecs" : 1
       },
       {
-         "alias" : "",
+         "alias" : "NTLM; ntlm($plain) / md4(utf16-le($plain))",
          "application" : "",
          "category" : "",
          "crack" : {
@@ -9518,15 +9518,18 @@
             "ids" : [
                "NT",
                "NT-long",
-               "dynamic_33"
+               "dynamic_33",
+               "NT-opencl",
+               "NT-long-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
          },
-         "legacy" : "NTLM",
+         "legacy" : "NTLM; NTLM",
          "mdxfind" : {
             "ids" : [
-               "MD4UTF16"
+               "MD4UTF16",
+               "NTLM"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -9538,16 +9541,16 @@
                "distinction" : "none",
                "entry" : "ntlm-plain-md4-utf16-le-plain",
                "kind" : "duplicate-of",
-               "note" : "third spelling of NTLM imported from the sheet"
+               "note" : "merged 2026-08-30 on Royce's answer to the curate.pl duplicate question: keep this entry. That id survives only as a tombstone."
             },
             {
-               "distinction" : "none",
+               "distinction" : "naming",
                "entry" : "ntlmh",
-               "kind" : "duplicate-of",
-               "note" : "both are NTLM: hashcat 1000, john NT, mdxfind MD4UTF16 and NTLMH are the same digest"
+               "kind" : "same-computation",
+               "note" : "Not a duplicate, decided by Royce on 2026-08-30. mdxfind publishes three type indices for one computation - MD4UTF16 (e496), NTLM (e369) and NTLMH (e786) - all with the same example vector; pinned runs of all three also reproduce md4(utf16('rosetta')) on 2026-08-30, so the agreement is not a coincidence of one input. NTLMH keeps a row because that name is what a reader arrives with."
             }
          ],
-         "sameas" : "duplicate of ntlm-plain-md4-utf16-le-plain; duplicate of ntlmh",
+         "sameas" : "duplicate of ntlm-plain-md4-utf16-le-plain; same as ntlmh (naming)",
          "status" : "needs-review",
          "vecs" : 1
       },
@@ -10308,7 +10311,7 @@
          "category" : "",
          "crack" : {
             "ids" : [],
-            "state" : "no"
+            "state" : "unknown"
          },
          "cracknote" : "",
          "denotation" : "",
@@ -10325,7 +10328,6 @@
          "john" : {
             "ids" : [
                "dynamic_11",
-               "dynamic_14",
                "dynamic_2011"
             ],
             "state" : "proven",
@@ -10334,7 +10336,7 @@
          "legacy" : "MD5(SALTMD5(PLAINSALT)); md5($salt.md5($pass.$salt))",
          "mdxfind" : {
             "ids" : [
-               "MD5-SALTMD5PASS-SALT"
+               "MD5-SALTMD5PASSSALT"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -10343,15 +10345,15 @@
          "notes" : "",
          "relations" : [
             {
-               "distinction" : "none",
+               "distinction" : "naming",
                "entry" : "md5-saltmd5passsalt",
-               "kind" : "duplicate-of",
-               "note" : "Both are md5($s.md5($p.$s)); each entry's own vector was round-tripped by hashcat -m 4110 on 2026-08-29. md5-salt-md5-pass-salt additionally names mdxfind type MD5-SALTMD5PASS-SALT, which is e818 -> hashcat 33100 = md5($s.md5($p).$s), a different computation; that type is tier asserted and looks wrong."
+               "kind" : "same-computation",
+               "note" : "Not a duplicate, decided by Royce on 2026-08-30: this row had mixed e818 md5($s.md5($p).$s) into e515 md5($s.md5($p.$s)), and the fix was to correct the type rather than to merge. This row is the sheet's generic construction with its hashes.org and hashkiller names; md5-saltmd5passsalt is mdxfind's type name for the same computation."
             }
          ],
-         "sameas" : "duplicate of md5-saltmd5passsalt",
+         "sameas" : "same as md5-saltmd5passsalt (naming)",
          "status" : "needs-review",
-         "vecs" : 2
+         "vecs" : 1
       },
       {
          "alias" : "",
@@ -15457,6 +15459,49 @@
          "vecs" : 1
       },
       {
+         "alias" : "md5($salt.md5($pass).$salt)",
+         "application" : "",
+         "category" : "",
+         "crack" : {
+            "ids" : [],
+            "state" : "no"
+         },
+         "cracknote" : "",
+         "denotation" : "",
+         "expr" : "md5($s.md5($p).$s)",
+         "expr_tier" : "upstream",
+         "hashcat" : {
+            "ids" : [
+               33100
+            ],
+            "state" : "proven",
+            "tier" : "vector"
+         },
+         "id" : "md5-saltmd5pass-salt",
+         "john" : {
+            "ids" : [
+               "dynamic_14",
+               "dynamic_2014"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
+         },
+         "legacy" : "",
+         "mdxfind" : {
+            "ids" : [
+               "MD5-SALTMD5PASS-SALT"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
+         },
+         "name" : "MD5-SALTMD5PASS-SALT",
+         "notes" : "Split out on 2026-08-30. mdxfind type e818 and hashcat mode 33100 had no entry of their own, and e818's example vector had been seeded onto md5-salt-md5-pass-salt, whose name, id and other vector are the neighbouring construction md5($s.md5($p.$s)) (e515, hashcat 4110). Digest::MD5 - independent of all three crackers - identifies this vector as md5($s.md5($p).$s); hashcat -m 33100, mdxfind pinned to the type, and john dynamic_14 and dynamic_2014 all reproduce it.",
+         "relations" : [],
+         "sameas" : "",
+         "status" : "needs-review",
+         "vecs" : 2
+      },
+      {
          "alias" : "",
          "application" : "",
          "category" : "",
@@ -15496,13 +15541,13 @@
          "notes" : "",
          "relations" : [
             {
-               "distinction" : "none",
+               "distinction" : "naming",
                "entry" : "md5-salt-md5-pass-salt",
-               "kind" : "duplicate-of",
-               "note" : "Both are md5($s.md5($p.$s)); each entry's own vector was round-tripped by hashcat -m 4110 on 2026-08-29. md5-salt-md5-pass-salt additionally names mdxfind type MD5-SALTMD5PASS-SALT, which is e818 -> hashcat 33100 = md5($s.md5($p).$s), a different computation; that type is tier asserted and looks wrong."
+               "kind" : "same-computation",
+               "note" : "Not a duplicate, decided by Royce on 2026-08-30. Both rows are md5($s.md5($p.$s)) = mdxfind e515 = hashcat 4110; the other row had mixed in e818, a different computation, and that was corrected rather than merged. This row is mdxfind's type name; the other is the sheet's generic construction."
             }
          ],
-         "sameas" : "duplicate of md5-salt-md5-pass-salt",
+         "sameas" : "same as md5-salt-md5-pass-salt (naming)",
          "status" : "needs-review",
          "vecs" : 1
       },
@@ -18391,56 +18436,6 @@
             "state" : "proven",
             "tier" : "vector"
          },
-         "id" : "ntlm-plain-md4-utf16-le-plain",
-         "john" : {
-            "ids" : [
-               "dynamic_33",
-               "ntlmv2-opencl"
-            ],
-            "state" : "proven",
-            "tier" : "vector"
-         },
-         "legacy" : "NTLM; NTLM",
-         "mdxfind" : {
-            "ids" : [
-               "NTLM"
-            ],
-            "state" : "proven",
-            "tier" : "vector"
-         },
-         "name" : "ntlm($plain) / md4(utf16-le($plain))",
-         "notes" : "",
-         "relations" : [
-            {
-               "distinction" : "none",
-               "entry" : "md4-utf16-plain",
-               "kind" : "duplicate-of",
-               "note" : "third spelling of NTLM imported from the sheet"
-            }
-         ],
-         "sameas" : "duplicate of md4-utf16-plain",
-         "status" : "needs-review",
-         "vecs" : 1
-      },
-      {
-         "alias" : "",
-         "application" : "",
-         "category" : "",
-         "crack" : {
-            "ids" : [],
-            "state" : "no"
-         },
-         "cracknote" : "",
-         "denotation" : "",
-         "expr" : "md4(utf16($p))",
-         "expr_tier" : "vector",
-         "hashcat" : {
-            "ids" : [
-               1000
-            ],
-            "state" : "proven",
-            "tier" : "vector"
-         },
          "id" : "ntlmh",
          "john" : {
             "ids" : [
@@ -18463,13 +18458,13 @@
          "notes" : "",
          "relations" : [
             {
-               "distinction" : "none",
+               "distinction" : "naming",
                "entry" : "md4-utf16-plain",
-               "kind" : "duplicate-of",
-               "note" : "both are NTLM: hashcat 1000, john NT, mdxfind MD4UTF16 and NTLMH are the same digest"
+               "kind" : "same-computation",
+               "note" : "Not a duplicate, decided by Royce on 2026-08-30. mdxfind publishes three type indices for one computation - MD4UTF16 (e496), NTLM (e369) and NTLMH (e786) - all with the same example vector; pinned runs of all three also reproduce md4(utf16('rosetta')) on 2026-08-30. This row exists because NTLMH is the name a reader arrives with."
             }
          ],
-         "sameas" : "duplicate of md4-utf16-plain",
+         "sameas" : "same as md4-utf16-plain (naming)",
          "status" : "needs-review",
          "vecs" : 1
       },
@@ -20564,7 +20559,7 @@
          "vecs" : 1
       },
       {
-         "alias" : "",
+         "alias" : "RMD320; RIPEMD-320",
          "application" : "",
          "category" : "",
          "crack" : {
@@ -20576,10 +20571,13 @@
          "expr" : "ripemd320($p)",
          "expr_tier" : "vector",
          "hashcat" : {
-            "ids" : [],
-            "state" : "no"
+            "ids" : [
+               33600
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
-         "id" : "ripemd320",
+         "id" : "rmd320",
          "john" : {
             "ids" : [
                "dynamic_150"
@@ -20589,22 +20587,25 @@
          },
          "legacy" : "RIPEMD320",
          "mdxfind" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "RMD320"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "ripemd320",
          "notes" : "",
          "relations" : [
             {
                "distinction" : "none",
-               "entry" : "rmd320",
+               "entry" : "ripemd320",
                "kind" : "duplicate-of",
-               "note" : "one is the sheet's spelling and one is mdxfind's; same computation, same tool identifiers"
+               "note" : "ripemd320 was the sheet's spelling of this row and was merged into it on 2026-08-30; that id survives only as a tombstone. The name here is the sheet's because it is the recognisable one; RMD320 is mdxfind's terse spelling and is kept as an alias."
             }
          ],
-         "sameas" : "duplicate of rmd320",
+         "sameas" : "duplicate of ripemd320",
          "status" : "needs-review",
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -20717,55 +20718,6 @@
          "notes" : "",
          "relations" : [],
          "sameas" : "",
-         "status" : "needs-review",
-         "vecs" : 1
-      },
-      {
-         "alias" : "",
-         "application" : "",
-         "category" : "",
-         "crack" : {
-            "ids" : [],
-            "state" : "no"
-         },
-         "cracknote" : "",
-         "denotation" : "",
-         "expr" : "ripemd320($p)",
-         "expr_tier" : "vector",
-         "hashcat" : {
-            "ids" : [
-               33600
-            ],
-            "state" : "proven",
-            "tier" : "vector"
-         },
-         "id" : "rmd320",
-         "john" : {
-            "ids" : [
-               "dynamic_150"
-            ],
-            "state" : "proven",
-            "tier" : "vector"
-         },
-         "legacy" : "",
-         "mdxfind" : {
-            "ids" : [
-               "RMD320"
-            ],
-            "state" : "proven",
-            "tier" : "vector"
-         },
-         "name" : "RMD320",
-         "notes" : "",
-         "relations" : [
-            {
-               "distinction" : "none",
-               "entry" : "ripemd320",
-               "kind" : "duplicate-of",
-               "note" : "one is the sheet's spelling and one is mdxfind's; same computation, same tool identifiers"
-            }
-         ],
-         "sameas" : "duplicate of ripemd320",
          "status" : "needs-review",
          "vecs" : 1
       },
@@ -30198,6 +30150,23 @@
       }
    ],
    "generated" : "2026-08-30",
+   "merged" : 2,
+   "tombstones" : [
+      {
+         "id" : "ntlm-plain-md4-utf16-le-plain",
+         "merged_into" : "md4-utf16-plain",
+         "name" : "ntlm($plain) / md4(utf16-le($plain))",
+         "relations_text" : "duplicate of md4-utf16-plain",
+         "status" : "merged"
+      },
+      {
+         "id" : "ripemd320",
+         "merged_into" : "rmd320",
+         "name" : "ripemd320",
+         "relations_text" : "duplicate of rmd320",
+         "status" : "merged"
+      }
+   ],
    "tools" : {
       "hashcat" : "v7.1.2-549-g8a15e210b",
       "john" : "1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200",

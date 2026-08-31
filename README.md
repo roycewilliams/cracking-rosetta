@@ -1,6 +1,6 @@
 # cracking-rosetta
 
-A cross-reference of password-cracking algorithm identifiers across [hashcat](https://hashcat.net/hashcat/), [John the Ripper](https://www.openwall.com/john/), [mdxfind](https://github.com/Cynosureprime/mdxfind) / [hashpipe](https://github.com/Cynosureprime/hashpipe), and - for historical reference only - Alec Muffett's [Crack](docs/CRACK.md). <!-- counter --> 784 <!-- endcounter --> algorithms, one file each.
+A cross-reference of password-cracking algorithm identifiers across [hashcat](https://hashcat.net/hashcat/), [John the Ripper](https://www.openwall.com/john/), [mdxfind](https://github.com/Cynosureprime/mdxfind) / [hashpipe](https://github.com/Cynosureprime/hashpipe), and - for historical reference only - Alec Muffett's [Crack](docs/CRACK.md). <!-- counter --> 783 <!-- endcounter --> algorithms, one file each.
 
 It answers the question you actually have at 2am: this thing is hashcat mode 2811 - what does John call it, and can mdxfind do it?
 
