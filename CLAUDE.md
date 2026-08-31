@@ -311,6 +311,20 @@ Three rules that are not the validator's job:
 - **`id` never changes.** It is the filename stem, a URL fragment in
   `docs/index.html` and the key in `dist/rosetta.csv`. A rename is a new entry
   plus a `duplicate-of` edge and an alias on the survivor, never an `mv`.
+- **If a source tracks it separately, it gets its own findable row.** Decided
+  2026-08-31 by Royce. When hashcat, john or mdxfind publishes a distinct
+  identifier, someone will arrive here by that identifier and must land on a
+  row that describes what it actually computes. `MD5MD5USER` (e286) is
+  `md5(md5($p).":".$u)` -- a literal colon before the userid field, hx.pdf note
+  24 p.58 -- and its row had been carrying the expression, the john dynamics
+  and a vector of the colonless `md5(md5($p).$s)` beside it, so the row was
+  findable by name and wrong about the algorithm. Note what this does NOT
+  imply: the fix needed no new `id`, because the row already existed under the
+  right mdxfind type. Check whether the row is merely mis-described before
+  reaching for a split, and remember that separately-tracked is not the same as
+  separately-computed -- `MD5CAPMD5USER` differs only by a `cap()` that is a
+  no-op on a digest starting with a digit, which is a `collides-on-subset`
+  edge, not an equivalence.
 
 ### A merged-away id becomes a tombstone
 
