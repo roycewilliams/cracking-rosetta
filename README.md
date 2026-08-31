@@ -13,7 +13,7 @@ tools:
 
 This is a migration and continuation of the community "rosetta stone" spreadsheet, which had drifted a long way behind its upstreams.
 
-**Were you using the spreadsheet?** The closest equivalent is [`dist/rosetta.csv`](dist/rosetta.csv) - one row per algorithm, one column per tool. Also [`dist/rosetta.json`](dist/rosetta.json) to script against, and [`docs/ROSETTA.md`](docs/ROSETTA.md) to just read.
+**Were you using the spreadsheet?** The closest equivalent is [`dist/rosetta.csv`](dist/rosetta.csv) - one row per algorithm, one column per tool. Also [`dist/rosetta.json`](dist/rosetta.json) to script against, [`docs/ROSETTA.md`](docs/ROSETTA.md) to just read, and [`docs/index.html`](docs/index.html) to search and filter it in a browser. Every row there has a permalink - the `#` that appears when you hover it - so `index.html#md5-pass-salt` is a link you can paste into an issue, and it is the same id the CSV keys on and the same stem as the file under `data/algorithms/`.
 
 Two things are new since the sheet and worth thirty seconds before you rely on a row. Every mapping now says *how well it is known* - the `*_state` columns carry the tier described below, and `vector` is the only one that means proven. And those three files are **generated**: the source of truth is one small YAML file per algorithm under `data/algorithms/`, which is what pull requests edit, so a correction goes there rather than into a cell.
 
@@ -76,6 +76,8 @@ tools/verify-vectors.pl --tool all
 ```
 
 Full instructions: [CONTRIBUTING.md](CONTRIBUTING.md) if you want to add or correct information, [MAINTAINING.md](MAINTAINING.md) if you are reviewing a contribution.
+
+**Looking for something to do?** [`docs/GAPS.md`](docs/GAPS.md) is generated from the data and ranks what is missing by what it costs to fix - starting with the mappings somebody already believes but nobody has ever reproduced, which one command settles, and the entries that need nothing but a test vector, which needs no cracker at all.
 
 ## Layout
 
