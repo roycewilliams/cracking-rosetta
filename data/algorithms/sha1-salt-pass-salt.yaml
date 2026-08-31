@@ -31,6 +31,9 @@ vectors:
   - hash: "1edf02c870b44a560cd6714080fcbb34603e2b36:h9wJfj"
     pass: "rosetta"
     source: "sheet"
+  - hash: "dec0ded12bddfc3d62940f606f487b6f058de47c:rosettae0cyu9"
+    pass: "rosetta"
+    source: "vanity"
 legacy:
   hashes_org: "SHA1(SALTPLAINSALT)"
   hashkiller: "sha1($salt.$pass.$salt)"

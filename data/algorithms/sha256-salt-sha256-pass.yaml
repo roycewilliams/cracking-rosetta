@@ -30,3 +30,6 @@ vectors:
   - hash: "606344e0d3e29c3250e0b4cf2031b8115acdde10c644219107449be678129752:testsalt"
     pass: "password123"
     source: "mdxfind"
+  - hash: "dec0ded552e340477178d855e4afc38a93b6c6241df6a3e8a6231cfebcdf06df:rosettaufl5q3"
+    pass: "rosetta"
+    source: "vanity"

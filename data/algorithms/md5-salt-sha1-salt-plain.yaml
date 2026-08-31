@@ -25,3 +25,6 @@ vectors:
   - hash: "5fd7c63c0507ebe680ae7ac1551e7064:administrator"
     pass: "password123"
     source: "mdxfind"
+  - hash: "dec0ded2c11c214889c158df8121a558:rosetta08kjb1"
+    pass: "rosetta"
+    source: "vanity"

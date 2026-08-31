@@ -2324,7 +2324,7 @@
             "john" : "format discovered by round-trip search, not by name",
             "mdxfind" : ""
          },
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -2469,7 +2469,7 @@
             "john" : "format discovered by round-trip search, not by name",
             "mdxfind" : ""
          },
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -8996,7 +8996,7 @@
             "john" : "format discovered by round-trip search, not by name",
             "mdxfind" : ""
          },
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -9357,7 +9357,7 @@
             "john" : "format discovered by round-trip search, not by name",
             "mdxfind" : ""
          },
-         "vecs" : 2
+         "vecs" : 3
       },
       {
          "alias" : "",
@@ -11519,7 +11519,7 @@
             "john" : "format discovered by round-trip search, not by name",
             "mdxfind" : ""
          },
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -11801,7 +11801,7 @@
             "john" : "format discovered by round-trip search, not by name",
             "mdxfind" : ""
          },
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "md5($salt.strtoupper(md5($plain))); md5($salt.strtoupper(md5($plain)).$salt); md5(strtoupper(md5($plain)).$salt); md5(strtoupper(md5($plain)).$salt.$salt)",
@@ -11899,7 +11899,7 @@
             "john" : "format discovered by round-trip search, not by name",
             "mdxfind" : ""
          },
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -11955,7 +11955,7 @@
             "john" : "corrected 2026-08-30: dynamic_14 was dropped with the e818 vector that earned it. john's own --list=subformats gives dynamic_14 as md5($s.md5($p).$s), and it does not crack this entry's vector.",
             "mdxfind" : "corrected 2026-08-30. This entry named MD5-SALTMD5PASS-SALT (e818), which Digest::MD5 shows is md5($s.md5($p).$s) - a different computation, now its own entry md5-saltmd5pass-salt. The type recorded here, e515, reproduces this entry's own vector pinned."
          },
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -12004,7 +12004,7 @@
             "john" : "format discovered by round-trip search, not by name",
             "mdxfind" : ""
          },
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -12046,7 +12046,7 @@
             "john" : "",
             "mdxfind" : ""
          },
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -12091,7 +12091,7 @@
             "john" : "",
             "mdxfind" : ""
          },
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -12186,7 +12186,7 @@
             "john" : "format discovered by round-trip search, not by name",
             "mdxfind" : ""
          },
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -12870,7 +12870,7 @@
             "john" : "format discovered by round-trip search, not by name",
             "mdxfind" : ""
          },
-         "vecs" : 2
+         "vecs" : 3
       },
       {
          "alias" : "",
@@ -13411,7 +13411,7 @@
             "john" : "format discovered by round-trip search, not by name",
             "mdxfind" : ""
          },
-         "vecs" : 2
+         "vecs" : 3
       },
       {
          "alias" : "",
@@ -13459,7 +13459,7 @@
             "john" : "format discovered by round-trip search, not by name",
             "mdxfind" : ""
          },
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "md5(md5($plain).\":\".$plain)",
@@ -13639,7 +13639,7 @@
             "john" : "format discovered by round-trip search, not by name",
             "mdxfind" : ""
          },
-         "vecs" : 2
+         "vecs" : 3
       },
       {
          "alias" : "md5(md5($plain).$salt.$salt); md5($salt.md5($plain)); md5($salt.md5($plain).$salt); md5($salt.$salt.md5($plain))",
@@ -13943,7 +13943,7 @@
             "john" : "format discovered by round-trip search, not by name",
             "mdxfind" : ""
          },
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "md5(md5($salt.$plain).$salt); md5(md5($salt.$plain).\":\".$salt.\":\")",
@@ -14078,7 +14078,7 @@
             "john" : "",
             "mdxfind" : ""
          },
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "md5($salt.md5(md5($plain))); md5(substr($salt,0,1).md5(md5($plain)).substr($salt,1,1))",
@@ -15621,7 +15621,7 @@
             "john" : "",
             "mdxfind" : ""
          },
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -17929,7 +17929,7 @@
             "john" : "",
             "mdxfind" : ""
          },
-         "vecs" : 2
+         "vecs" : 3
       },
       {
          "alias" : "",
@@ -17985,7 +17985,7 @@
             "john" : "format discovered by round-trip search, not by name",
             "mdxfind" : ""
          },
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -19475,7 +19475,7 @@
             "john" : "",
             "mdxfind" : ""
          },
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -21507,7 +21507,7 @@
             "john" : "",
             "mdxfind" : ""
          },
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -24649,7 +24649,7 @@
             "john" : "format discovered by round-trip search, not by name",
             "mdxfind" : ""
          },
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -24697,7 +24697,7 @@
             "john" : "john's own test vector for this format is reproduced by mdxfind pinned to SHA1SALTSHA1PASS at iteration 1",
             "mdxfind" : ""
          },
-         "vecs" : 2
+         "vecs" : 3
       },
       {
          "alias" : "",
@@ -24752,7 +24752,7 @@
             "john" : "format discovered by round-trip search, not by name",
             "mdxfind" : ""
          },
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -25023,7 +25023,7 @@
             "john" : "",
             "mdxfind" : "Three type indices for one computation, listed in index order: e471, e578, e587. mdxfind's maintainer states e578 and e587 are literal duplicates he added while working through the SHA-1 HIBP hashes; e471 publishes the same example vector and had no entry here at all. All three were run pinned against this vector on 2026-08-30."
          },
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -26180,7 +26180,7 @@
             "john" : "format discovered by round-trip search, not by name",
             "mdxfind" : ""
          },
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -26316,7 +26316,7 @@
             "john" : "format discovered by round-trip search, not by name",
             "mdxfind" : ""
          },
-         "vecs" : 7
+         "vecs" : 8
       },
       {
          "alias" : "",
@@ -27780,7 +27780,7 @@
             "john" : "",
             "mdxfind" : ""
          },
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -28038,7 +28038,7 @@
             "john" : "",
             "mdxfind" : ""
          },
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -28167,7 +28167,7 @@
             "john" : "",
             "mdxfind" : ""
          },
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -28864,7 +28864,7 @@
             "john" : "format discovered by round-trip search, not by name",
             "mdxfind" : ""
          },
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -28912,7 +28912,7 @@
             "john" : "",
             "mdxfind" : ""
          },
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -29308,7 +29308,7 @@
             "john" : "",
             "mdxfind" : ""
          },
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -29361,7 +29361,7 @@
             "john" : "john's own test vector for this format is reproduced by mdxfind pinned to SHA256RAWSALTPASS at iteration 1",
             "mdxfind" : ""
          },
-         "vecs" : 2
+         "vecs" : 3
       },
       {
          "alias" : "",
@@ -29406,7 +29406,7 @@
             "john" : "",
             "mdxfind" : ""
          },
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -30600,7 +30600,7 @@
             "john" : "format discovered by round-trip search, not by name",
             "mdxfind" : ""
          },
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -30648,7 +30648,7 @@
             "john" : "format discovered by round-trip search, not by name",
             "mdxfind" : ""
          },
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -30957,7 +30957,7 @@
             "john" : "",
             "mdxfind" : ""
          },
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -31047,7 +31047,7 @@
             "john" : "",
             "mdxfind" : ""
          },
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -33702,7 +33702,7 @@
             "john" : "format discovered by round-trip search, not by name",
             "mdxfind" : ""
          },
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -33905,7 +33905,7 @@
             "john" : "format discovered by round-trip search, not by name",
             "mdxfind" : ""
          },
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",

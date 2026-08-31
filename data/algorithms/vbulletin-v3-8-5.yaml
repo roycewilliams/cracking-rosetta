@@ -43,6 +43,9 @@ vectors:
   - hash: "896bdefea73a4d4ffd6218267b753530:Hgd"
     pass: "rosetta"
     source: "sheet"
+  - hash: "dec0ded8b80d1519ca9990ebaa03edf8:rosettans91e9"
+    pass: "rosetta"
+    source: "vanity"
 legacy:
   hashes_org: "VBULLETIN"
   hashkiller: "vBulletin < v3.8.5"

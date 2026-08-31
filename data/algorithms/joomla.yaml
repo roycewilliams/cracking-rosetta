@@ -42,6 +42,9 @@ vectors:
   - hash: "b78f863f2c67410c41e617f724e22f34:89384528665349271307465505333378"
     pass: "hashcat"
     source: "hashcat"
+  - hash: "dec0ded2ef4c692e26644b8a37b4d563:rosettagxha34"
+    pass: "rosetta"
+    source: "vanity"
 legacy:
   hashes_org: "JOOMLA"
   hashkiller: "Joomla"

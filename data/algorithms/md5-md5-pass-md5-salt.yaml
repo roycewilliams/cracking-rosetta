@@ -31,6 +31,9 @@ vectors:
   - hash: "cd2ffa74799274cd9fb505038501947d:xHwahMX"
     pass: "rosetta"
     source: "sheet"
+  - hash: "dec0ded3bc81ba4467501fa621b11079:rosettaiqaks"
+    pass: "rosetta"
+    source: "vanity"
 legacy:
   hashes_org: "MD5(MD5(PLAIN)MD5(SALT))"
   hashkiller: "md5(md5($pass).md5($salt))"

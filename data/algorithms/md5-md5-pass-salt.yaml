@@ -46,6 +46,9 @@ vectors:
   - hash: "28f9975808ae2bdc5847b1cda26033ea:308"
     pass: "hashcat"
     source: "hashcat"
+  - hash: "dec0ded8b80d1519ca9990ebaa03edf8:rosettans91e9"
+    pass: "rosetta"
+    source: "vanity"
 legacy:
   hashes_org: "VBULLETIN"
   hashkiller: "md5(md5($pass).$salt)"

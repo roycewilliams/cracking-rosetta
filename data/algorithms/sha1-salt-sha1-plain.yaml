@@ -34,5 +34,8 @@ vectors:
   - hash: "713769f2b8824e8f5abc2d3e4f9326f32ff1d46b:5bfe6f1c0f7a8d802032d1bf85225400"
     pass: "redminefff"
     source: "john"
+  - hash: "dec0dedaf2a8fd58b35ff3cdcbc64da85aed6487:rosettaw6xzt1"
+    pass: "rosetta"
+    source: "vanity"
 legacy:
   hashes_org: "?"

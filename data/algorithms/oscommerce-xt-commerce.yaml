@@ -35,6 +35,9 @@ vectors:
   - hash: "3c415b5a7f60c974c4de8c631e5c05f0:ab"
     pass: "rosetta"
     source: "sheet"
+  - hash: "dec0dedb8b2d4ff878ae6add4128b8ac:rosettagz5gk"
+    pass: "rosetta"
+    source: "vanity"
 legacy:
   hashes_org: "OSCOMMERCE"
   hashkiller: "osCommerce, xt:Commerce"

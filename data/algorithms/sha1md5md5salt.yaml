@@ -22,3 +22,6 @@ vectors:
   - hash: "f63387aeac7aa1d759634f59aecc127cfd7d0298:testsalt"
     pass: "password123"
     source: "mdxfind"
+  - hash: "dec0ded757277dbdd110a3fd3857c3866e2b962e:rosetta2jyh51"
+    pass: "rosetta"
+    source: "vanity"

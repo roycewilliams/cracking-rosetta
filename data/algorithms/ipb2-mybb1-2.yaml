@@ -31,6 +31,9 @@ vectors:
   - hash: "cb5e393cf9d97d19a5d797be77c9ce6a:UhdG"
     pass: "rosetta"
     source: "sheet"
+  - hash: "dec0ded36840f1f956b1c834f2745173:rosettawz3eu3"
+    pass: "rosetta"
+    source: "vanity"
 legacy:
   hashes_org: "IPB / MYBB"
   hashkiller: "IPB2+, MyBB1.2+"

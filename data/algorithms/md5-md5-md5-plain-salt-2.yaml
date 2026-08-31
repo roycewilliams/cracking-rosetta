@@ -22,5 +22,8 @@ vectors:
   - hash: "661bb5e44a125ae81ec14925465ed923:abc123"
     pass: "rosetta"
     source: "sheet"
+  - hash: "dec0ded4bba4b02e5797ceebd0f8f585:rosettagi16p6"
+    pass: "rosetta"
+    source: "vanity"
 legacy:
   hashes_org: "MD5(MD5(MD5(PLAIN))SALT)"

@@ -24,12 +24,40 @@
 # WHY THIS AND NOT hashcat-pattern
 #
 # The hashcat-pattern fork is the general vanity engine and it works -- it
-# reproduced this tool's md5($p.$s) result byte for byte. But it varies the
-# PLAINTEXT and matches the digest, where this needs the plaintext pinned and
-# the SALT varying, and it cannot drive a generic salt at all: outside
-# descrypt/bcrypt/crypt it uses the single salt from the module's own self-test
-# hash. Its numbers on the reference GPU here were 8.95 M/s against this
-# script's 6.5 M/s on 16 cores, so it is not yet buying speed either.
+# reproduced this tool's md5($p.$s) result byte for byte. Two claims that used
+# to stand here were measured again on 2026-08-30 and BOTH were wrong:
+#
+#   "it cannot drive a generic salt at all: outside descrypt/bcrypt/crypt it
+#   uses the single salt from the module's own self-test hash"
+#     -- stale. salt_gen_table[] in src/hash_generate.c now carries 105
+#     kern_types with real salt generators, including 10/20/110/1410/1710 and
+#     the nested-md5 family 3610/3710/3800/3910/4010/4110. It varies salts.
+#
+#   "8.95 M/s against this script's 6.5 M/s, so it is not yet buying speed"
+#     -- stale. Device-side mask generation lifted it to 164.7 M/s, 25x this
+#     script on 16 cores.
+#
+# The reason it is still not used is THROUGHPUT ON THIS SHAPE OF WORK, and it
+# is the one measurement that matters. The fork parallelises over CANDIDATES
+# WITHIN A SALT: 164.7 M/s is many plaintexts against one fixed salt. This job
+# pins the plaintext to `rosetta` and varies the salt, the exact inverse, so
+# the wordlist holds one word and the GPU is handed a batch of one while salt
+# iteration runs host-side, rewinding the wordlist per salt. Measured on the
+# 4060 Ti, mode 3710, 2026-08-30:
+#
+#     558895 salts, 558895 candidates, 0 matches (9315 c/s)
+#
+# 9.3 K/s against this script's 4-6 MH/s -- about 500x SLOWER, ~8 hours per
+# entry against 40-110 seconds. Closing that needs device-side salt batching,
+# which the fork does not have. Do not re-derive this from the throughput
+# headline; the headline is for the other axis.
+#
+# Two fork bugs found while measuring it, both still open:
+#   -o leaks a file descriptor per salt iteration -> "Too many open files",
+#     and the run then records nothing. Matches survive only on stdout.
+#   encoding auto-detection reports base64 for mode 3710, which is hex, so a
+#     hex pattern silently matches the wrong alphabet. --pattern-encoding hex
+#     overrides it.
 #
 # The deciding argument is provenance. A digest computed by a hashcat fork
 # cannot be evidence about hashcat -- gotcha 26, same kernels. Digest::MD5 and

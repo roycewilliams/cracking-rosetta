@@ -33,5 +33,8 @@ vectors:
   - hash: "870b53971d523aaab216b8fca0eba1ea6849b4dc:abc123"
     pass: "rosetta"
     source: "sheet"
+  - hash: "dec0dedfbf676dc22b8b0b12ce6ddafa68f45dfa:rosetta760en3"
+    pass: "rosetta"
+    source: "vanity"
 legacy:
   hashes_org: "SHA1(SHA1(PLAIN)SALT)"

@@ -36,6 +36,9 @@ vectors:
   - hash: "d4f7dec5b98ac42336b1c9e56f2e5ca8:abc123"
     pass: "rosetta"
     source: "sheet"
+  - hash: "dec0ded8b80d1519ca9990ebaa03edf8:rosettans91e9"
+    pass: "rosetta"
+    source: "vanity"
 legacy:
   hashes_org: "MD5(CAPMD5(PLAIN)SALT)"
 notes: "The second vector (d4f7dec5b98ac42336b1c9e56f2e5ca8:abc123, plaintext 'rosetta') is NOT this entry's construction, and identifying it is an open question. Ruled out 2026-08-30: an independent Digest:: computation of md5(md5($p).$s) disagrees; a systematic sweep of 198,534 constructions of the form md5(<1-3 concatenated terms>), where each term is $p, $s or one of md5/sha1/sha256 over them in hex, raw, uppercase or base64, did not reproduce it; and mdxfind unpinned across all 1001 types was started and did not finish within an hour. The entry's other vector is correct."
