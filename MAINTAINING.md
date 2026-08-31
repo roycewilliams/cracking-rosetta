@@ -173,6 +173,31 @@ refused: mdxfind publishes three type indices for `md4(utf16($p))` and the
 was considered and declined — as opposed to `none`, which records that one is
 still owed.
 
+## At publication
+
+The repository is private on purpose until it is ready. When it flips, in this
+order:
+
+1. **Make it public, and enable Pages on main / `/docs`.** Both are GitHub UI
+   settings. `docs/index.html` is the front door; nothing else here is.
+2. **File the question queue, regenerated at that moment:**
+
+   ```sh
+   tools/curate.pl --issues > tmp/issues.sh   # writes nothing, files nothing
+   $EDITOR tmp/issues.sh                      # read it; cut what you do not want
+   sh tmp/issues.sh
+   ```
+
+   Regenerate rather than filing a saved batch. The queue shrinks as the tools
+   resolve things — it went from 22 questions to 10 in a single session — and a
+   stale batch files questions that already have answers. The script creates
+   its own `curation` label and files nothing until you run it.
+
+3. **Re-render**, so the counter, `GAPS.md` and `OPEN-QUESTIONS.md` match what
+   is being published: `tools/render.pl`, then `tools/validate.pl`.
+4. **Tell Cynosure Prime it is live.** Much of the verified seed data is
+   theirs and they are expecting it.
+
 ## Things that will bite you
 
 - **`RosettaEmit`'s key order is an allowlist.** A key it doesn't know isn't

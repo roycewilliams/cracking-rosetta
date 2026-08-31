@@ -608,7 +608,12 @@ if ($issues) {
          . "tools/%s on %s.\n", scalar @ask, $PROG, $TODAY;
     print  "# Read this before running it: every line files an issue.\n"
          . "# Cut the ones you do not want, then: sh thisfile\n"
-         . "set -e\n\n";
+         . "set -e\n\n"
+         # gh refuses --label for a label that does not exist, and set -e
+         # would then abort the batch on its first line. Creating it here is
+         # idempotent and costs nothing on a repository that already has it.
+         . "gh label create curation --color 0e8a16 \\\n"
+         . "    --description 'A question the data cannot answer' 2>/dev/null || true\n\n";
 
     # An issue is worth opening only if it saves the reader the work we have
     # already done. So each one carries what this repository knows about the
