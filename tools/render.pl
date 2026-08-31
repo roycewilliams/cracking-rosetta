@@ -689,7 +689,7 @@ for my $r (sort { $a->{id} cmp $b->{id} } @expr_unproven) {
     # provenance the note already carried. The diagnosis is the useful half
     # here, so show that when it exists and drop the boilerplate.
     (my $note = $r->{expr_note}) =~ s/\s+/ /g;
-    $note = $1 if $note =~ /TRIAGE \d{4}-\d{2}-\d{2}: (.+)$/;
+    $note = $1 if $note =~ /TRIAGE \d{4}-\d{2}-\d{2}(?: \[[a-z-]+\])?: (.+)$/;
     $note = '' if $note =~ /^transcribed from john/;
     $note = substr($note, 0, 200) . '...' if length $note > 203;
     printf {$oq} "| %s | `%s` | `%s` | %s |\n", gaps_link($r), $r->{expr},

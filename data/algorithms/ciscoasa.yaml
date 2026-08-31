@@ -6,7 +6,7 @@ expression_proof:
   verified: "upstream"
   verified_at: "2026-08-29"
   verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
-  note: "transcribed from john --list=subformats for an identifier this entry proved by round-trip; TRIAGE 2026-08-30: dynamic_20 has its own ciphertext encoding rather than plain hex, so a generic expression cannot be checked against it however correctly it describes the computation"
+  note: "transcribed from john --list=subformats for an identifier this entry proved by round-trip; TRIAGE 2026-08-30 [format-encoding]: dynamic_20 has its own ciphertext encoding rather than plain hex, so a generic expression cannot be checked against it however correctly it describes the computation"
 category: "application"
 application: "Cisco ASA"
 status: "needs-review"

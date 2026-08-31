@@ -6,7 +6,7 @@ expression_proof:
   verified: "upstream"
   verified_at: "2026-08-29"
   verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
-  note: "transcribed from john --list=subformats for an identifier this entry proved by round-trip; TRIAGE 2026-08-30: the expression is correct -- compiled with --format=dynamic it recovers all 6 of john's own test vectors for dynamic_1007 -- and 1 of this entry's 2 vectors are not of that construction by independent computation. Those vectors are something else and want identifying"
+  note: "transcribed from john --list=subformats for an identifier this entry proved by round-trip; TRIAGE 2026-08-30 [vector-anomalous]: the expression is correct -- compiled with --format=dynamic it recovers all 6 of john's own test vectors for dynamic_1007 -- and 1 of this entry's 2 vectors are not of that construction by independent computation. Those vectors are something else and want identifying"
 status: "needs-review"
 tools:
   hashcat:

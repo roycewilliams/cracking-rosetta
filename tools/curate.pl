@@ -425,6 +425,19 @@ unless (%want_kind && !$want_kind{unproven}) {
         next unless ref $e->{expression_proof} eq 'HASH';
         next unless ($e->{expression_proof}{verified} // '') eq 'upstream';
         next unless defined $e->{expression} && length $e->{expression};
+
+        # triage-expressions.pl records WHY the expression does not reproduce.
+        # Most of the verdicts are about john -- its compiler cannot execute a
+        # string it printed, the format encodes its ciphertext its own way, it
+        # truncates, it will not take a long salt -- and no contributor can
+        # answer those. Asking anyway is how a queue of real questions gets
+        # buried. Only a wrong expression or an anomalous vector needs a human.
+        my $tnote = $e->{expression_proof}{note} // '';
+        if ($tnote =~ /TRIAGE \d{4}-\d{2}-\d{2} \[([a-z-]+)\]:/) {
+            my $verdict = $1;
+            next unless $verdict eq 'vector-anomalous'
+                     || $verdict eq 'expression-wrong';
+        }
         push @queue, {
             kind => 'unproven', target => $id,
             prompt  => 'This expression does not reproduce the entry\'s own '

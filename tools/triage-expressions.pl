@@ -397,9 +397,17 @@ for my $file (@files) {
     next unless $apply;
     # Keep whatever the note already said about provenance, and add the
     # diagnosis after it, so the audit trail is not overwritten by it.
+    # The verdict slug is in the note on purpose: it is the only place a
+    # later tool can read it from, and curate.pl uses it to stop asking a
+    # human about failures that are john's rather than ours. Re-running
+    # REPLACES a previous triage rather than appending to it, so the note
+    # cannot grow a stack of stale diagnoses.
     my $old = $pf->{note} // '';
-    next if index($old, $note) >= 0;
-    $pf->{note} = (length $old ? "$old; " : '') . "TRIAGE $TODAY: $note";
+    $old =~ s/;?\s*TRIAGE \d{4}-\d{2}-\d{2}(?: \[[a-z-]+\])?:.*$//s;
+    $old =~ s/\s+$//;
+    my $new = (length $old ? "$old; " : '') . "TRIAGE $TODAY [$verdict]: $note";
+    next if ($pf->{note} // '') eq $new;
+    $pf->{note} = $new;
     emit_entry($path, $d);
     $wrote++;
 }
