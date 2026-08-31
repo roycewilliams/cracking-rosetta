@@ -1,29 +1,10 @@
 id: "sha1-md5-md5-pass-salt"
 name: "sha1(md5(md5($pass).$salt))"
-expression: "sha1(md5($p).$s)"
-john_dynamic_expr: "dynamic=sha1(md5($p).$s)"
-expression_proof:
-  verified: "vector"
-  verified_at: "2026-08-30"
-  verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
-  note: "round-tripped as --format=dynamic=<expr> against every vector this entry carries"
-status: "needs-review"
-tools:
-  hashcat:
-    verified: "absent"
-  mdxfind:
-    types: ["SHA1MD5SALT"]
-    verified: "vector"
-    verified_at: "2026-08-30"
-    verified_with: "mdxfind"
-  crack:
-    supported: false
+status: "merged"
+merged_into: "sha1-md5-pass-salt"
 relations:
   - kind: "duplicate-of"
     entry: "sha1-md5-pass-salt"
     distinction: "none"
-    note: "CONFIRMED BY UPSTREAM: mdxfind's maintainer states e578 and e587 are literal duplicates, added while working through the SHA-1 HIBP hashes. Both compute sha1(md5(pass).salt), which is also what Perl's Digest::MD5/SHA says and what hashcat 4710 is -- so this entry's name, sha1(md5(md5($pass).$salt)), is simply wrong and the merge settles it. Note e471 SHA1MD5PASS-SALT publishes the same example vector and is a third member of the set, unnamed by any entry here."
-vectors:
-  - hash: "18768e979e77779052a467262d0cf1d486c76d2c:testsalt"
-    pass: "password123"
-    source: "mdxfind"
+    note: "merged 2026-08-30 on Royce's answer to the curate.pl duplicate question, confirmed by mdxfind's maintainer: e587 and e578 are literal duplicates added while working through the SHA-1 HIBP hashes."
+notes: "Tombstone. The name above is WRONG and is kept only because it is what this id was published as: the digest is sha1(md5($pass).$salt), which Perl's Digest::MD5/Digest::SHA, hashcat -m 4710 and mdxfind pinned to all three type indices agree on. Its mdxfind type SHA1MD5SALT (e587) moved to sha1-md5-pass-salt.yaml, along with e471 SHA1MD5PASS-SALT, which had no entry at all. Its hashcat block claimed 'absent'; 4710 cracks the vector it carried."
