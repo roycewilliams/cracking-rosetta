@@ -311,6 +311,20 @@ Three rules that are not the validator's job:
 - **`id` never changes.** It is the filename stem, a URL fragment in
   `docs/index.html` and the key in `dist/rosetta.csv`. A rename is a new entry
   plus a `duplicate-of` edge and an alias on the survivor, never an `mv`.
+- **Some mdxfind types are MULTI-EMIT and cannot have one `expression:`.**
+  Found 2026-08-31 in the hx specification (rev 1.15) Appendix A, Note [24].
+  Such a type computes SEVERAL candidate digests per input and matches if any
+  one reproduces the stored hash. `MD5MD5USER` emits both `md5(md5($p).$u)` and
+  `md5(md5($p).":".$u)`; the HEXSALT family emits three digests per candidate
+  byte across all 256; the TRUNC family sweeps a truncation length and emits
+  both a left and a right truncation at each; the DSALT types emit four
+  colon-aware variants plus a 119-value byte search. **34 types are named as
+  multi-emit and 16 entries here name one.** A single `expression:` on such an
+  entry is a false claim even when the string is one of the forms, so use
+  `denotation:` and say in it that the type is multi-emit. This is also the
+  explanation for entries whose vectors "disagree with each other": two vectors
+  of one multi-emit type are both correct, and a tool matching one of them is
+  not evidence about the other.
 - **If a source tracks it separately, it gets its own findable row.** Decided
   2026-08-31 by Royce. When hashcat, john or mdxfind publishes a distinct
   identifier, someone will arrive here by that identifier and must land on a
