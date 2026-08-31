@@ -130,6 +130,8 @@ One file per algorithm rather than one big table is deliberate: you touch one sm
 
 The verified seed data is [Cynosure Prime](https://github.com/Cynosureprime)'s. mdxfind ships a hashcat mapping for 298 of its types, and hashpipe's `john_map.h` maps 125 John dynamic formats to mdxfind types - each confirmed by recomputation across 9672 harvested vectors, with the rows that wouldn't verify omitted rather than guessed. That practice is the model this repo follows.
 
+The rest came from the spreadsheet this replaces, built up over years by multiple [HashMob](https://hashmob.net/) members. Most of the algorithms here, and most of the names people actually search for, were entered by someone working a real list who wrote down what they found. The tiers in this repo are not a verdict on that work - they record what has been re-checked since, and the great majority of what has been re-checked has held.
+
 ## References
 
 * https://hashcat.net/wiki/doku.php?id=example_hashes

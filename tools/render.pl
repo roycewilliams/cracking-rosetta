@@ -863,6 +863,10 @@ a{color:inherit}
   &quot;Same as&quot; names another row that is the same computation, and why both
   rows exist; the full typed edges are in <code>rosetta.json</code>.
   Alec Muffett's Crack is covered separately in <a href="CRACK.md">CRACK.md</a>.
+  Built on the community spreadsheet this replaces &mdash; years of work by
+  multiple <a href="https://hashmob.net/">HashMob</a> members &mdash; and on
+  <a href="https://github.com/Cynosureprime">Cynosure Prime</a>'s verified
+  mdxfind and hashpipe data.
   $merged_note
 </footer>
 <script>
