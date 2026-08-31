@@ -1,41 +1,10 @@
 id: "ntlm-plain-md4-utf16-le-plain"
 name: "ntlm($plain) / md4(utf16-le($plain))"
-expression: "md4(utf16($p))"
-john_dynamic_expr: "dynamic=md4(utf16($p))"
-expression_proof:
-  verified: "vector"
-  verified_at: "2026-08-29"
-  verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
-  note: "round-tripped as --format=dynamic=<expr> against every vector this entry carries"
-status: "needs-review"
-tools:
-  hashcat:
-    modes: [1000]
-    verified: "vector"
-    verified_at: "2026-08-29"
-    verified_with: "hashcat"
-  mdxfind:
-    types: ["NTLM"]
-    verified: "vector"
-    verified_at: "2026-08-29"
-    verified_with: "mdxfind"
-  john:
-    cpu: ["dynamic_33"]
-    gpu: ["ntlmv2-opencl"]
-    verified: "vector"
-    verified_at: "2026-08-29"
-    verified_with: "john"
-  crack:
-    supported: false
+status: "merged"
+merged_into: "md4-utf16-plain"
 relations:
   - kind: "duplicate-of"
     entry: "md4-utf16-plain"
     distinction: "none"
-    note: "third spelling of NTLM imported from the sheet"
-vectors:
-  - hash: "a2dde7c8056b54f9f419fc9b62cb6611"
-    pass: "rosetta"
-    source: "sheet"
-legacy:
-  hashes_org: "NTLM"
-  hashkiller: "NTLM"
+    note: "merged 2026-08-30 on Royce's answer to the curate.pl duplicate question: keep md4-utf16-plain. This was the sheet's third spelling of NTLM."
+notes: "Tombstone. This id is kept so links and dist/rosetta.csv keys still resolve. Its mdxfind type NTLM, its hashkiller legacy name and its name as an alias moved to md4-utf16-plain.yaml. Its one GPU claim, john's ntlmv2-opencl, did NOT move: that format is NTLMv2 C/R, a challenge-response protocol rather than this digest, and nothing here ever reproduced it."

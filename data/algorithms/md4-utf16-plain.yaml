@@ -1,5 +1,6 @@
 id: "md4-utf16-plain"
 name: "md4(utf16($plain))"
+aliases: ["NTLM", "ntlm($plain) / md4(utf16-le($plain))"]
 expression: "md4(utf16($p))"
 john_dynamic_expr: "dynamic=md4(utf16($p))"
 expression_proof:
@@ -15,30 +16,33 @@ tools:
     verified_at: "2026-08-29"
     verified_with: "hashcat"
   mdxfind:
-    types: ["MD4UTF16"]
+    types: ["MD4UTF16", "NTLM"]
     verified: "vector"
-    verified_at: "2026-08-29"
+    verified_at: "2026-08-30"
     verified_with: "mdxfind"
+    note: "NTLM (e369) came in with the merge of ntlm-plain-md4-utf16-le-plain; both types were re-run pinned against this entry's vector on 2026-08-30. mdxfind's third spelling, NTLMH (e786), keeps its own entry - see the relation."
   john:
     cpu: ["NT", "NT-long", "dynamic_33"]
+    gpu: ["NT-opencl", "NT-long-opencl"]
     verified: "vector"
-    verified_at: "2026-08-29"
-    verified_with: "john"
-    note: "format discovered by round-trip search, not by name"
+    verified_at: "2026-08-30"
+    verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a"
+    note: "CPU formats discovered by round-trip search, not by name. The GPU formats were round-tripped on an RTX 4060 Ti on 2026-08-30; they replace the ntlmv2-opencl the merged-away entry claimed, which is john's NTLMv2 C/R format - a challenge-response protocol, not this digest - and was never reproduced."
   crack:
     supported: false
 relations:
   - kind: "duplicate-of"
     entry: "ntlm-plain-md4-utf16-le-plain"
     distinction: "none"
-    note: "third spelling of NTLM imported from the sheet"
-  - kind: "duplicate-of"
+    note: "merged 2026-08-30 on Royce's answer to the curate.pl duplicate question: keep this entry. That id survives only as a tombstone."
+  - kind: "same-computation"
     entry: "ntlmh"
-    distinction: "none"
-    note: "both are NTLM: hashcat 1000, john NT, mdxfind MD4UTF16 and NTLMH are the same digest"
+    distinction: "naming"
+    note: "Not a duplicate, decided by Royce on 2026-08-30. mdxfind publishes three type indices for one computation - MD4UTF16 (e496), NTLM (e369) and NTLMH (e786) - all with the same example vector; pinned runs of all three also reproduce md4(utf16('rosetta')) on 2026-08-30, so the agreement is not a coincidence of one input. NTLMH keeps a row because that name is what a reader arrives with."
 vectors:
   - hash: "a2dde7c8056b54f9f419fc9b62cb6611"
     pass: "rosetta"
     source: "sheet"
 legacy:
   hashes_org: "NTLM"
+  hashkiller: "NTLM"

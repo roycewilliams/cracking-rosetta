@@ -28,10 +28,10 @@ tools:
   crack:
     supported: false
 relations:
-  - kind: "duplicate-of"
+  - kind: "same-computation"
     entry: "md4-utf16-plain"
-    distinction: "none"
-    note: "both are NTLM: hashcat 1000, john NT, mdxfind MD4UTF16 and NTLMH are the same digest"
+    distinction: "naming"
+    note: "Not a duplicate, decided by Royce on 2026-08-30. mdxfind publishes three type indices for one computation - MD4UTF16 (e496), NTLM (e369) and NTLMH (e786) - all with the same example vector; pinned runs of all three also reproduce md4(utf16('rosetta')) on 2026-08-30. This row exists because NTLMH is the name a reader arrives with."
 vectors:
   - hash: "a9fdfa038c4b75ebc76dc855dd74f0da"
     pass: "password123"
