@@ -153,6 +153,7 @@ use YAML::XS ();
 
 use lib "$RealBin/lib";
 use RosettaEmit qw(emit_entry);
+use RosettaTools qw(tool_path tool_env_help);
 
 my $PROG = basename($0);
 my $ROOT = "$RealBin/..";
@@ -162,7 +163,7 @@ sub usage {
 
 Usage: $PROG [options]
 
-   --john PATH       john binary (default: the john-latest run/john)
+   --john PATH       john binary (default: @{[tool_env_help('john')]})
    --algorithms DIR  curated entries  (default: data/algorithms)
    --inventory PATH  john inventory   (default: data/tools/john.yaml)
    --work DIR        scratch          (default: tmp/discover-john)
@@ -229,7 +230,7 @@ if ($help) { usage(); exit 0 }
 # No arguments at all: show usage rather than silently starting an hour of work.
 if (!$had_args) { usage(); exit 2 }
 
-$john      //= '/usr/local/src/sec/crack/john-latest/run/john';
+$john = tool_path('john', $john);
 $algdir    //= "$ROOT/data/algorithms";
 $inventory //= "$ROOT/data/tools/john.yaml";
 $workdir   //= "$ROOT/tmp/discover-john";

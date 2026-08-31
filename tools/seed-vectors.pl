@@ -70,6 +70,7 @@ use File::Basename qw(basename);
 use POSIX qw(strftime);
 use Time::HiRes qw(time);
 use RosettaEmit qw(emit_entry);
+use RosettaTools qw(tool_path tool_env_help);
 
 my $PROG = basename($0);
 my $ROOT = "$RealBin/..";
@@ -88,8 +89,8 @@ Usage: $PROG --report | --apply | -n [options]
    --tool NAME       restrict to 'mdxfind' or 'hashcat' (repeatable)
    --only ID         just this entry (repeatable)
    --limit N         stop after N candidates; for smoke tests
-   --mdxfind PATH    mdxfind binary  (default: /usr/local/bin/mdxfind)
-   --hashcat PATH    hashcat binary  (default: /usr/local/bin/hashcat)
+   --mdxfind PATH    mdxfind binary  (default: @{[tool_env_help('mdxfind')]})
+   --hashcat PATH    hashcat binary  (default: @{[tool_env_help('hashcat')]})
    --algorithms DIR  curated entries (default: data/algorithms)
    --work DIR        scratch files   (default: tmp/seed-vectors)
    --timeout SECS    per invocation  (default: 120)
@@ -134,8 +135,8 @@ if (($report ? 1 : 0) + ($apply ? 1 : 0) + ($dry ? 1 : 0) > 1) {
     exit 2;
 }
 
-$mdxfind //= '/usr/local/bin/mdxfind';
-$hashcat //= '/usr/local/bin/hashcat';
+$mdxfind = tool_path('mdxfind', $mdxfind);
+$hashcat = tool_path('hashcat', $hashcat);
 $algdir  //= "$ROOT/data/algorithms";
 $workdir //= "$ROOT/tmp/seed-vectors";
 $timeout //= 120;

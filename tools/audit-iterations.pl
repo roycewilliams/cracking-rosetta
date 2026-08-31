@@ -77,6 +77,7 @@ use YAML::XS ();
 
 use lib "$RealBin/lib";
 use RosettaEmit qw(emit_entry);
+use RosettaTools qw(tool_path tool_env_help);
 
 my $PROG = basename($0);
 my $ROOT = "$RealBin/..";
@@ -86,8 +87,8 @@ sub usage {
 
 Usage: $PROG [options]
 
-   --mdxfind PATH    mdxfind binary  (default: /usr/local/bin/mdxfind)
-   --john PATH       john binary     (default: the john-latest run/john)
+   --mdxfind PATH    mdxfind binary  (default: @{[tool_env_help('mdxfind')]})
+   --john PATH       john binary     (default: @{[tool_env_help('john')]})
    --algorithms DIR  curated entries (default: data/algorithms)
    --work DIR        scratch         (default: tmp/audit-iterations)
    --timeout SECS    per invocation  (default: 120)
@@ -128,8 +129,8 @@ GetOptions(
 if ($help)      { usage(); exit 0 }
 if (!$had_args) { usage(); exit 2 }
 
-$mdxfind //= '/usr/local/bin/mdxfind';
-$john    //= '/usr/local/src/sec/crack/john-latest/run/john';
+$mdxfind = tool_path('mdxfind', $mdxfind);
+$john = tool_path('john', $john);
 $algdir  //= "$ROOT/data/algorithms";
 $workdir //= "$ROOT/tmp/audit-iterations";
 

@@ -1,6 +1,6 @@
 # cracking-rosetta
 
-A cross-reference of password-cracking algorithm identifiers across [hashcat](https://hashcat.net/hashcat/), [John the Ripper](https://www.openwall.com/john/), [mdxfind](https://github.com/Cynosureprime/mdxfind) / [hashpipe](https://github.com/Cynosureprime/hashpipe), and - for historical reference only - Alec Muffett's [Crack](docs/CRACK.md). <!-- counter --> 783 <!-- endcounter --> algorithms, one file each.
+A cross-reference of password-cracking algorithm identifiers across [hashcat](https://hashcat.net/hashcat/), [John the Ripper](https://www.openwall.com/john/), [mdxfind](https://github.com/Cynosureprime/mdxfind) / [hashpipe](https://github.com/Cynosureprime/hashpipe), and - for historical reference only - Alec Muffett's [Crack](docs/CRACK.md). <!-- counter --> 782 <!-- endcounter --> algorithms, one file each.
 
 It answers the question you actually have at 2am: this thing is hashcat mode 2811 - what does John call it, and can mdxfind do it?
 
@@ -74,6 +74,8 @@ tools/review-delta.pl           # what your change actually claims
 ```
 tools/verify-vectors.pl --tool all
 ```
+
+The tools look for `$JOHN`, `$HASHCAT` and `$MDXFIND` before falling back to the paths this data was generated with, then to `PATH`. An explicit `--john` / `--hashcat` / `--mdxfind` always wins, so a clone on a different machine sets three environment variables once instead of passing a flag every time.
 
 Full instructions: [CONTRIBUTING.md](CONTRIBUTING.md) if you want to add or correct information, [MAINTAINING.md](MAINTAINING.md) if you are reviewing a contribution.
 

@@ -155,6 +155,7 @@ use YAML::XS ();
 
 use lib "$RealBin/lib";
 use RosettaEmit qw(emit_entry);
+use RosettaTools qw(tool_path tool_env_help);
 
 my $PROG = basename($0);
 my $ROOT = "$RealBin/..";
@@ -165,9 +166,9 @@ sub usage {
 Usage: $PROG --tool hashcat|mdxfind|john|all [options]
 
    --tool NAME       which tool to verify (repeatable; 'all' for every one)
-   --hashcat PATH    hashcat binary   (default: /usr/local/bin/hashcat)
-   --mdxfind PATH    mdxfind binary   (default: /usr/local/bin/mdxfind)
-   --john PATH       john binary      (default: the john-latest run/john)
+   --hashcat PATH    hashcat binary   (default: @{[tool_env_help('hashcat')]})
+   --mdxfind PATH    mdxfind binary   (default: @{[tool_env_help('mdxfind')]})
+   --john PATH       john binary      (default: @{[tool_env_help('john')]})
    --algorithms DIR  curated entries  (default: data/algorithms)
    --work DIR        scratch for hash/word/pot files (default: tmp/verify)
    --timeout SECS    per invocation   (default: 120)
@@ -218,9 +219,9 @@ GetOptions(
 if ($help)  { usage(); exit 0 }
 if (!@tools) { usage(); exit 2 }
 
-$hashcat //= '/usr/local/bin/hashcat';
-$mdxfind //= '/usr/local/bin/mdxfind';
-$john    //= '/usr/local/src/sec/crack/john-latest/run/john';
+$hashcat = tool_path('hashcat', $hashcat);
+$mdxfind = tool_path('mdxfind', $mdxfind);
+$john = tool_path('john', $john);
 $algdir  //= "$ROOT/data/algorithms";
 $workdir //= "$ROOT/tmp/verify";
 
