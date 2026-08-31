@@ -706,7 +706,12 @@ my $compact = JSON::PP->new->canonical->encode([
             $_->{john}{state},    join(', ', @{ $_->{john}{ids} }),
             $_->{mdxfind}{state}, join(', ', @{ $_->{mdxfind}{ids} }),
             $_->{crack}{state},
-            $_->{alias}, $_->{legacy}, $_->{vecs}, $_->{sameas} ] } @out
+            $_->{alias}, $_->{legacy}, $_->{vecs}, $_->{sameas},
+            # 13, 14: what the algorithm IS. Absent from this array until
+            # 2026-08-30, which meant the page could not find a row from the
+            # one thing a person holding a hash actually has -- a guess at the
+            # construction. Searching "md5($p.$s)" returned nothing.
+            $_->{expr}, $_->{denotation} ] } @out
 ]);
 
 # The footer sentence about merged ids, built here so the heredoc below stays
@@ -779,6 +784,8 @@ td.alg{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.82rem;
  max-width:32ch;word-break:break-word}
 td.alg .al{display:block;color:var(--ink3);font-size:.74rem;
  font-family:ui-sans-serif,system-ui,sans-serif}
+td.alg .ex{display:block;color:var(--ink2);font-size:.76rem;
+ font-family:ui-monospace,SFMono-Regular,Menlo,monospace;word-break:break-all}
 td.rel{color:var(--ink3);font-size:.74rem;max-width:30ch;word-break:break-word;
  font-family:ui-sans-serif,system-ui,sans-serif}
 .ids{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.8rem}
@@ -819,7 +826,7 @@ a{color:inherit}
   <p class="ver">$versions &middot; generated $today</p>
 </header>
 <div class="controls">
-  <input type="search" id="q" placeholder="Search name, alias, mode, format, type&hellip;" autocomplete="off">
+  <input type="search" id="q" placeholder="Search name, expression, id, alias, mode, format, type&hellip;" autocomplete="off">
   <select id="tool">
     <option value="">any tool</option>
     <option value="0">hashcat</option>
@@ -890,7 +897,10 @@ function render(){
   const term=q.value.trim().toLowerCase(), tool=toolSel.value, st=stSel.value;
   let rows=D.filter(r=>{
     if(term){
-      const hay=(r[0]+' '+r[3]+' '+r[5]+' '+r[7]+' '+r[9]+' '+r[10]+' '+r[12]).toLowerCase();
+      // name, id, tool identifiers, aliases, legacy names, relations, and
+      // the expression or denotation -- everything a person might arrive with.
+      const hay=(r[0]+' '+r[1]+' '+r[3]+' '+r[5]+' '+r[7]+' '+r[9]+' '+r[10]
+                +' '+r[12]+' '+(r[13]||'')+' '+(r[14]||'')).toLowerCase();
       if(hay.indexOf(term)<0) return false;
     }
     const idx = tool===''? null : COLS[+tool][0];
@@ -909,6 +919,11 @@ function render(){
     '<tr id="'+esc(r[1])+'">'
     +'<td class="alg"><a class="permalink" href="#'+esc(r[1])+'" '
     +'title="link to this row">#</a>'+esc(r[0])
+    // The expression is the semantic key, so it is worth a line of its own --
+    // but only when it says something the name has not already said, which
+    // for 259 of these rows it has.
+    +((r[13]&&r[13]!==r[0])?'<span class="ex">'+esc(r[13])+'</span>':
+      (r[14]&&r[14]!==r[0])?'<span class="ex">'+esc(r[14])+'</span>':'')
     +(r[9]?'<span class="al">'+esc(r[9])+'</span>':'')+'</td>'
     +cellHtml(r[2],r[3])+cellHtml(r[4],r[5])+cellHtml(r[6],r[7])
     +'<td>'+(r[11]||0)+'</td>'

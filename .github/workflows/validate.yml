@@ -19,6 +19,7 @@ on:
       - 'data/**'
       - 'schema/**'
       - 'tools/**'
+      - 'docs/index.html'
       - '.github/workflows/validate.yml'
   push:
     branches: [main]
@@ -26,6 +27,7 @@ on:
       - 'data/**'
       - 'schema/**'
       - 'tools/**'
+      - 'docs/index.html'
       - '.github/workflows/validate.yml'
   workflow_dispatch:
 
@@ -69,3 +71,10 @@ jobs:
       # --check writes nothing.
       - name: Check formatting
         run: perl -Itools/lib tools/fmt.pl --all --check
+
+      # docs/index.html is the front door, and its behaviour is a string that
+      # render.pl builds -- so a wrong array index or selector passes perl -c,
+      # passes validate.pl, and silently breaks the page's search. node is
+      # preinstalled on the runner; this needs nothing else.
+      - name: Exercise the browsable page
+        run: node tools/test-index-page.js docs/index.html
