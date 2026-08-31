@@ -121,13 +121,21 @@ opendir(my $dh, $algdir) or do { print STDERR "$PROG: cannot read $algdir: $!\n"
 my @files = sort grep { /\.yaml$/ } readdir $dh;
 closedir $dh;
 
-my @rows;
+# A tombstone (status: merged) is separated here, once, rather than tested for
+# in every view below. It is not an algorithm: it is the id of one that lost a
+# merge, kept alive because that id is the key in dist/rosetta.csv and the
+# name someone may still search for. It appears in the exports as a row that
+# makes no claims and names its survivor, and in the two human views as a
+# short list at the end -- never as a row of dashes in the middle of the
+# table, which would read as a gap rather than as a redirect.
+my (@rows, @tombs);
 for my $f (@files) {
     my $e = eval { YAML::XS::LoadFile("$algdir/$f") } or next;
     next unless $e->{id};
-    push @rows, $e;
+    push @{ ($e->{status} // '') eq 'merged' ? \@tombs : \@rows }, $e;
 }
-@rows = sort { lc($a->{name} // $a->{id}) cmp lc($b->{name} // $b->{id}) } @rows;
+@rows  = sort { lc($a->{name} // $a->{id}) cmp lc($b->{name} // $b->{id}) } @rows;
+@tombs = sort { $a->{id} cmp $b->{id} } @tombs;
 
 #-----------------------------------------------------------------------
 # Reduce one tool block to a cell: state plus the identifiers to show.
@@ -226,6 +234,18 @@ for my $e (@rows) {
     push @out, \%r;
 }
 
+# The export shape of a tombstone: the id, the name it had, where it went, and
+# nothing else. Every claim column is empty on purpose -- an empty cell says
+# "this row asserts nothing", where 'unknown' would say "nobody has checked",
+# which is a statement about an algorithm this row no longer is.
+my @tomb_out = map { {
+    id     => $_->{id},
+    name   => $_->{name} // $_->{id},
+    into   => $_->{merged_into} // '',
+    sameas => same_as($_),
+    notes  => $_->{notes} // '',
+} } @tombs;
+
 #-----------------------------------------------------------------------
 # dist/rosetta.csv - the closest thing to "open it in a spreadsheet".
 
@@ -237,8 +257,12 @@ sub csv_field {
     return qq{"$v"};
 }
 
+# merged_into follows status because it qualifies it, and is empty on every
+# live row. It is a column rather than something to be dug out of the
+# relations prose: the whole reason a merged id keeps a row is that a machine
+# joining on it should be told where the row went.
 my @CSV = qw(id name aliases expression expression_tier denotation
-             category application status
+             category application status merged_into
              hashcat hashcat_state john john_state mdxfind mdxfind_state
              crack_state vectors relations legacy notes);
 
@@ -248,11 +272,19 @@ for my $r (@out) {
     print {$csv} join(',', map { csv_field($_) } (
         $r->{id}, $r->{name}, $r->{alias}, $r->{expr},
         $r->{expr_tier}, $r->{denotation},
-        $r->{category}, $r->{application}, $r->{status},
+        $r->{category}, $r->{application}, $r->{status}, '',
         join(' ', @{ $r->{hashcat}{ids} }), $r->{hashcat}{state},
         join(' ', @{ $r->{john}{ids} }),    $r->{john}{state},
         join(' ', @{ $r->{mdxfind}{ids} }), $r->{mdxfind}{state},
         $r->{crack}{state}, $r->{vecs}, $r->{sameas}, $r->{legacy}, $r->{notes},
+    )), "\n";
+}
+# Tombstones last, so the live table stays one contiguous block for anyone
+# reading the file by eye rather than by key.
+for my $t (@tomb_out) {
+    print {$csv} join(',', map { csv_field($_) } (
+        $t->{id}, $t->{name}, '', '', '', '', '', '', 'merged', $t->{into},
+        '', '', '', '', '', '', '', '', $t->{sameas}, '', $t->{notes},
     )), "\n";
 }
 close $csv;
@@ -265,8 +297,15 @@ open my $jf, '>', "$distdir/rosetta.json" or die "cannot write json: $!\n";
 print {$jf} $json->encode({
     generated => $today,
     tools     => { map { $_ => ($inv{$_}{version} // 'unknown') } qw(hashcat john mdxfind) },
+    # count is the number of algorithms, which is what it has always meant.
+    # Tombstones are counted separately rather than folded in, so a merge
+    # cannot look like the corpus growing.
     count     => scalar @out,
+    merged    => scalar @tomb_out,
     entries   => \@out,
+    tombstones=> [ map { { id     => $_->{id}, name => $_->{name},
+                           status => 'merged', merged_into => $_->{into},
+                           relations_text => $_->{sameas} } } @tomb_out ],
 });
 close $jf;
 
@@ -359,6 +398,22 @@ for my $r (@out) {
     printf {$md} "| %s | %s | %s | %s | %s |\n", $n,
         md_cell($r->{hashcat}), md_cell($r->{john}), md_cell($r->{mdxfind}),
         (length $rel ? $rel : '');
+}
+
+# Merged ids go under the table, not in it. Someone who followed an old link
+# or searched an old name needs one sentence telling them where it went; a row
+# of empty cells in the main table would tell them the opposite.
+if (@tomb_out) {
+    print {$md} "\n## Merged ids\n\n";
+    print {$md} "These ids no longer name an algorithm of their own. Each was folded\n"
+              . "into the entry beside it and is kept so old links and\n"
+              . "[dist/rosetta.csv](../dist/rosetta.csv) keys still resolve.\n\n";
+    print {$md} "| Merged id | Now see |\n|---|---|\n";
+    my %name_of = map { $_->{id} => $_->{name} } @out;
+    for my $t (@tomb_out) {
+        printf {$md} "| `%s` | %s (`%s`) |\n", $t->{id},
+            $name_of{ $t->{into} } // $t->{into}, $t->{into};
+    }
 }
 close $md;
 
@@ -472,6 +527,19 @@ my $compact = JSON::PP->new->canonical->encode([
             $_->{crack}{state},
             $_->{alias}, $_->{legacy}, $_->{vecs}, $_->{sameas} ] } @out
 ]);
+
+# The footer sentence about merged ids, built here so the heredoc below stays
+# a template. Empty string when nothing has been merged, which is the common
+# case and should leave the page exactly as it was.
+my $merged_note = '';
+if (@tomb_out) {
+    my %name_of = map { $_->{id} => $_->{name} } @out;
+    $merged_note = 'Merged ids, kept so old links resolve: '
+        . join('; ', map { sprintf('<code>%s</code> &rarr; %s',
+                                   $_->{id}, $name_of{ $_->{into} } // $_->{into}) }
+                     @tomb_out)
+        . '.';
+}
 
 my $versions = sprintf('hashcat %s &middot; john %s &middot; mdxfind %s',
     $inv{hashcat}{version} // '?', $inv{john}{version} // '?', $inv{mdxfind}{version} // '?');
@@ -592,6 +660,7 @@ a{color:inherit}
   &quot;Same as&quot; names another row that is the same computation, and why both
   rows exist; the full typed edges are in <code>rosetta.json</code>.
   Alec Muffett's Crack is covered separately in <a href="CRACK.md">CRACK.md</a>.
+  $merged_note
 </footer>
 <script>
 const D = $compact;

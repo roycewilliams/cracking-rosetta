@@ -159,11 +159,21 @@ my $scoped = %scope ? 1 : 0;
 
 my @TIERS      = qw(vector upstream asserted absent);
 my %IS_TIER    = map { $_ => 1 } @TIERS;
-my %IS_STATUS  = map { $_ => 1 } qw(ok needs-review);
+my %IS_STATUS  = map { $_ => 1 } qw(ok needs-review merged);
+
+# A tombstone (status: merged) is a redirect, not an entry: its content moved
+# to the survivor and the file survives only so the published id keeps
+# resolving. So it may carry nothing that asserts anything -- these keys are
+# the survivor's job, and a tombstone holding a stale copy of them is exactly
+# the drift the merge was meant to remove.
+my @TOMB_FORBIDDEN = qw(
+    expression john_dynamic_expr expression_proof denotation category
+    application application_version tools vectors aliases legacy
+);
 
 my %TOP_KEY = map { $_ => 1 } qw(
     id name aliases expression john_dynamic_expr expression_proof denotation
-    category application application_version status
+    category application application_version status merged_into
     tools relations vectors legacy notes
 );
 
@@ -183,9 +193,15 @@ my %IS_REL_KIND = map { $_ => 1 } qw(
     same-computation encodes input-encoding iterates truncates
     collides-on-subset duplicate-of
 );
+# 'naming' is deliberately in this list and not in %JOINS_EXPRESSION's
+# reasoning: it is the answer a curator gives when a proposed duplicate turns
+# out to be two tool names for one computation and both names are worth a row.
+# It distinguishes nothing about the algorithm, which is why it is separate
+# from 'none' -- 'none' says a merge is still owed, 'naming' says it was
+# considered and declined.
 my %IS_REL_DISTINCTION = map { $_ => 1 } qw(
     application encoding input-encoding iteration truncation
-    salt-convention none
+    salt-convention naming none
 );
 
 # An edge of one of these kinds is what makes two entries allowed to share an
@@ -297,6 +313,8 @@ my %seen_id;
 my %tier_count;      # tool tier -> n
 my %expr_tier;       # expression_proof.verified -> n
 my ($n_expr, $n_denot, $n_novec) = (0, 0, 0);
+my $tombstones = 0;
+my %tomb;            # tombstone id -> { into => survivor id, file => ... }
 my %by_expression;   # expression -> [ ids ] , for the collision rule
 my @rel_edges;       # every edge seen, resolved after the loop
 my $entries = 0;
@@ -323,15 +341,29 @@ for my $file (@files) {
     }
     $entries++;
 
-    $n_expr++  if defined $d->{expression} && length $d->{expression};
-    $n_denot++ if ref $d->{denotation} eq 'HASH';
-    $n_novec++ unless ref $d->{vectors} eq 'ARRAY' && @{ $d->{vectors} };
-    $expr_tier{ $d->{expression_proof}{verified} // '?' }++
-        if ref $d->{expression_proof} eq 'HASH';
-    for my $t (qw(hashcat john mdxfind crack)) {
-        my $b = $d->{tools}{$t};
-        next unless ref $b eq 'HASH' && defined $b->{verified};
-        $tier_count{ $b->{verified} }++;
+    # --- tombstone ----------------------------------------------------
+    #
+    # Decided 2026-08-30: a merged-away id keeps its file as a tombstone
+    # rather than 404ing, because the id is a filename stem, a URL fragment
+    # and the key in dist/rosetta.csv, and a consumer that joins on it should
+    # be told where the row went rather than told nothing. A tombstone is
+    # counted separately everywhere below: it is not a 785th algorithm, and
+    # letting it into the coverage denominators would make every merge look
+    # like a small regression.
+    my $is_tomb = defined $d->{status} && $d->{status} eq 'merged';
+    $tombstones++ if $is_tomb;
+
+    unless ($is_tomb) {
+        $n_expr++  if defined $d->{expression} && length $d->{expression};
+        $n_denot++ if ref $d->{denotation} eq 'HASH';
+        $n_novec++ unless ref $d->{vectors} eq 'ARRAY' && @{ $d->{vectors} };
+        $expr_tier{ $d->{expression_proof}{verified} // '?' }++
+            if ref $d->{expression_proof} eq 'HASH';
+        for my $t (qw(hashcat john mdxfind crack)) {
+            my $b = $d->{tools}{$t};
+            next unless ref $b eq 'HASH' && defined $b->{verified};
+            $tier_count{ $b->{verified} }++;
+        }
     }
 
     # --- identity -----------------------------------------------------
@@ -360,6 +392,45 @@ for my $file (@files) {
     if (defined $d->{status} && !$IS_STATUS{ $d->{status} }) {
         err("%s: status '%s' is not one of: %s", $file, $d->{status},
             join(', ', sort keys %IS_STATUS));
+    }
+
+    # --- tombstone shape ----------------------------------------------
+    #
+    # The two halves of the rule are stated together so neither can be met
+    # alone: 'merged' without a destination is a dead end, and a destination
+    # without 'merged' is a live entry quietly claiming to be a redirect.
+    my $into = $d->{merged_into};
+    if ($is_tomb) {
+        if (!defined $into || !length $into) {
+            err("%s: status 'merged' needs merged_into naming the survivor", $file);
+        }
+        elsif ($into eq ($id // '')) {
+            err("%s: merged_into names itself", $file);
+        }
+        else {
+            $tomb{$id} = { into => $into, file => $file } if defined $id;
+        }
+
+        for my $k (@TOMB_FORBIDDEN) {
+            next unless exists $d->{$k};
+            err("%s: a tombstone (status: merged) must not carry '%s' -- fold "
+              . "it into %s.yaml and delete it here", $file, $k, $into // 'the survivor');
+        }
+
+        # The redirect is stated twice on purpose, as a scalar a machine can
+        # follow and as an edge the relation checks can mirror onto the
+        # survivor. Requiring both is what stops a tombstone from pointing
+        # somewhere the survivor has never heard of.
+        my $edge = grep { ref $_ eq 'HASH'
+                          && ($_->{kind}  // '') eq 'duplicate-of'
+                          && ($_->{entry} // '') eq ($into // '') }
+                   @{ ref $d->{relations} eq 'ARRAY' ? $d->{relations} : [] };
+        err("%s: a tombstone needs a duplicate-of relation to %s as well as "
+          . "merged_into (tools/relate.pl writes both sides)", $file, $into // '?')
+            if defined $into && length $into && !$edge;
+    }
+    elsif (defined $into) {
+        err("%s: merged_into is only legal with status: merged", $file);
     }
 
     # --- expression_proof ---------------------------------------------
@@ -709,6 +780,23 @@ for my $file (@files) {
 # Everything above validates one file at a time; a relation is by definition
 # about two, and the collision rule is about the whole corpus at once.
 
+# 0. A tombstone's destination has to exist and has to be alive. A chain
+#    (a -> b where b is itself merged) is rejected rather than followed: the
+#    second merge should repoint the first tombstone, so that every dead id
+#    costs a consumer exactly one lookup and can never loop.
+for my $t (sort keys %tomb) {
+    local @ABOUT = ($t, $tomb{$t}{into});
+    my $into = $tomb{$t}{into};
+    if (!$seen_id{$into}) {
+        err("%s: merged_into names '%s', which is not an entry",
+            $tomb{$t}{file}, $into);
+    }
+    elsif ($tomb{$into}) {
+        err("%s: merged_into names '%s', which is itself a tombstone -- "
+          . "point it at %s instead", $tomb{$t}{file}, $into, $tomb{$into}{into});
+    }
+}
+
 {
     my %edge;                       # "from\0to\0kind" -> 1
     $edge{"$_->{from}\0$_->{to}\0$_->{kind}"} = 1 for @rel_edges;
@@ -790,7 +878,11 @@ unless ($quiet) {
         scalar(@$jn_list), $jn_doc->{version},
         scalar(@$mx_list), $mx_doc->{version};
 
-    printf STDERR "- Entries:     %d file(s) in %s\n", $entries, $algdir;
+    printf STDERR "- Entries:     %d file(s) in %s%s\n", $entries, $algdir,
+        $tombstones ? sprintf(", of which %d tombstone(s) redirecting a "
+                            . "merged-away id and counted in nothing below",
+                              $tombstones)
+                    : '';
 
     if ($scoped) {
         printf STDERR "- Scope:       reporting on %d entry/entries: %s\n",
@@ -818,7 +910,10 @@ unless ($quiet) {
                  grep { $tier_count{$_} } qw(vector upstream asserted absent));
         printf STDERR "- Expression:  %d of %d entries carry one (%s); "
                     . "no vector at all %d; denotation %d\n",
-            $n_expr, $entries,
+            # Live entries only: a tombstone carries no expression by rule,
+            # so counting it in the denominator would report a slow decline
+            # every time a merge succeeded.
+            $n_expr, $entries - $tombstones,
             join(', ', map { "$_ $expr_tier{$_}" }
                  grep { $expr_tier{$_} } qw(vector upstream asserted absent)),
             $n_novec, $n_denot;

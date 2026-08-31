@@ -111,17 +111,22 @@
           },
           "distinction": {
             "enum": ["application", "encoding", "input-encoding", "iteration",
-                     "truncation", "salt-convention", "none"],
-            "description": "Why both rows exist despite the relation. 'none' is legal only with kind duplicate-of, which is how a merge is proposed in data rather than in a comment."
+                     "truncation", "salt-convention", "naming", "none"],
+            "description": "Why both rows exist despite the relation. 'none' is legal only with kind duplicate-of, which is how a merge is proposed in data rather than in a comment. 'naming' is the weakest distinction and says nothing about the algorithm: the tools publish several identifiers for one computation (mdxfind alone has MD4UTF16, NTLM and NTLMH for md4(utf16($p))), and each row is where a reader arrives from a different name. Use it only where a curator has looked at a proposed duplicate and decided both names should keep a row of their own; a machine proposing a merge still writes duplicate-of."
           },
           "note": { "type": "string" }
         }
       }
     },
     "status": {
-      "enum": ["ok", "needs-review"],
+      "enum": ["ok", "needs-review", "merged"],
       "default": "ok",
-      "description": "needs-review marks an entry a machine created and a human has not yet confirmed - what the upstream-drift PRs emit."
+      "description": "needs-review marks an entry a machine created and a human has not yet confirmed - what the upstream-drift PRs emit. merged marks a TOMBSTONE: the entry lost a merge, its content now lives on the entry merged_into names, and this file survives only so the published id keeps resolving - it is a filename stem, a URL fragment in docs/index.html and the key in dist/rosetta.csv. A tombstone asserts nothing: no tools, vectors, expression, denotation or category, and validate.pl excludes it from every coverage count."
+    },
+    "merged_into": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9._-]*$",
+      "description": "Required by status: merged and illegal without it. The id of the surviving entry this one was folded into, stated as data so a consumer can follow it without parsing the relations prose. The survivor must exist and must not itself be a tombstone - chains are rejected, so a second merge repoints the first tombstone rather than lengthening a trail."
     },
     "tools": {
       "type": "object",

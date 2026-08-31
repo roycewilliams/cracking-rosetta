@@ -139,7 +139,7 @@ sub emit_records {
 
 my @ENTRY_ORDER = qw(
     id name aliases expression john_dynamic_expr expression_proof denotation
-    category application application_version status
+    category application application_version status merged_into
     tools relations vectors legacy notes
 );
 my @TOOL_ORDER   = qw(hashcat mdxfind john crack);
