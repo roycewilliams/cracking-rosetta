@@ -2282,7 +2282,7 @@
          "cracknote" : "",
          "denotation" : "",
          "expr" : "md5($p.$s)",
-         "expr_note" : "transcribed from john --list=subformats for an identifier this entry proved by round-trip",
+         "expr_note" : "transcribed from john --list=subformats for an identifier this entry proved by round-trip; TRIAGE 2026-08-30: dynamic_20 has its own ciphertext encoding rather than plain hex, so a generic expression cannot be checked against it however correctly it describes the computation",
          "expr_tier" : "upstream",
          "hashcat" : {
             "ids" : [
@@ -2434,7 +2434,7 @@
          "cracknote" : "",
          "denotation" : "",
          "expr" : "sha256($s.sha1($p))",
-         "expr_note" : "transcribed from john --list=subformats for an identifier this entry proved by round-trip",
+         "expr_note" : "transcribed from john --list=subformats for an identifier this entry proved by round-trip; TRIAGE 2026-08-30: the expression does not describe dynamic_1588: computed here with Digest:: it reproduces none of the 6 test vectors john ships for that format, so what --list=subformats prints is not the whole construction",
          "expr_tier" : "upstream",
          "hashcat" : {
             "ids" : [
@@ -9508,7 +9508,7 @@
          "cracknote" : "",
          "denotation" : "",
          "expr" : "keccak_224($p)",
-         "expr_note" : "transcribed from john --list=subformats for an identifier this entry proved by round-trip",
+         "expr_note" : "transcribed from john --list=subformats for an identifier this entry proved by round-trip; TRIAGE 2026-08-30: compiled with --format=dynamic this expression recovers none of john's own test vectors for dynamic_430 either, so john's dynamic compiler and its named format disagree about what the string means; this is an upstream question, not a data error here",
          "expr_tier" : "upstream",
          "hashcat" : {
             "ids" : [
@@ -9556,7 +9556,7 @@
          "cracknote" : "",
          "denotation" : "",
          "expr" : "keccak_224(keccak_224($p))",
-         "expr_note" : "transcribed from john --list=subformats for an identifier this entry proved by round-trip",
+         "expr_note" : "transcribed from john --list=subformats for an identifier this entry proved by round-trip; TRIAGE 2026-08-30: compiled with --format=dynamic this expression recovers none of john's own test vectors for dynamic_433 either, so john's dynamic compiler and its named format disagree about what the string means; this is an upstream question, not a data error here",
          "expr_tier" : "upstream",
          "hashcat" : {
             "ids" : [],
@@ -9694,7 +9694,7 @@
          "cracknote" : "",
          "denotation" : "",
          "expr" : "keccak_384($p)",
-         "expr_note" : "transcribed from john --list=subformats for an identifier this entry proved by round-trip",
+         "expr_note" : "transcribed from john --list=subformats for an identifier this entry proved by round-trip; TRIAGE 2026-08-30: compiled with --format=dynamic this expression recovers none of john's own test vectors for dynamic_440 either, so john's dynamic compiler and its named format disagree about what the string means; this is an upstream question, not a data error here",
          "expr_tier" : "upstream",
          "hashcat" : {
             "ids" : [
@@ -9742,7 +9742,7 @@
          "cracknote" : "",
          "denotation" : "",
          "expr" : "keccak_384(keccak_384($p))",
-         "expr_note" : "transcribed from john --list=subformats for an identifier this entry proved by round-trip",
+         "expr_note" : "transcribed from john --list=subformats for an identifier this entry proved by round-trip; TRIAGE 2026-08-30: compiled with --format=dynamic this expression recovers none of john's own test vectors for dynamic_443 either, so john's dynamic compiler and its named format disagree about what the string means; this is an upstream question, not a data error here",
          "expr_tier" : "upstream",
          "hashcat" : {
             "ids" : [],
@@ -12829,7 +12829,7 @@
          "cracknote" : "",
          "denotation" : "",
          "expr" : "md5(md5($p).$s)",
-         "expr_note" : "transcribed from john --list=subformats for an identifier this entry proved by round-trip",
+         "expr_note" : "transcribed from john --list=subformats for an identifier this entry proved by round-trip; TRIAGE 2026-08-30: the expression is correct -- compiled with --format=dynamic it recovers all 6 of john's own test vectors for dynamic_1007 -- and 1 of this entry's 2 vectors are not of that construction by independent computation. Those vectors are something else and want identifying",
          "expr_tier" : "upstream",
          "hashcat" : {
             "ids" : [],
@@ -13598,7 +13598,7 @@
          "cracknote" : "",
          "denotation" : "",
          "expr" : "md5(md5($p).$s)",
-         "expr_note" : "transcribed from john --list=subformats for an identifier this entry proved by round-trip",
+         "expr_note" : "transcribed from john --list=subformats for an identifier this entry proved by round-trip; TRIAGE 2026-08-30: the expression is correct -- compiled with --format=dynamic it recovers all 6 of john's own test vectors for dynamic_1007 -- and 1 of this entry's 2 vectors are not of that construction by independent computation. Those vectors are something else and want identifying",
          "expr_tier" : "upstream",
          "hashcat" : {
             "ids" : [],
@@ -13956,7 +13956,7 @@
          "cracknote" : "",
          "denotation" : "",
          "expr" : "md5(md5($s.$p):$s)",
-         "expr_note" : "transcribed from john --list=subformats for an identifier this entry proved by round-trip",
+         "expr_note" : "transcribed from john --list=subformats for an identifier this entry proved by round-trip; TRIAGE 2026-08-30: the expression john prints contains a literal ':', which its own dynamic compiler then rejects, so this string cannot be round-tripped as written",
          "expr_tier" : "upstream",
          "hashcat" : {
             "ids" : [],
@@ -15412,8 +15412,8 @@
          "cracknote" : "",
          "denotation" : "",
          "expr" : "md5(sha1($p).md5($p).sha1($p))",
-         "expr_note" : "transcribed from john --list=subformats for an identifier this entry proved by round-trip",
-         "expr_tier" : "upstream",
+         "expr_note" : "round-tripped as --format=dynamic=<expr> against every vector this entry carries",
+         "expr_tier" : "vector",
          "hashcat" : {
             "ids" : [
                20900
@@ -15441,7 +15441,7 @@
          "notes" : "",
          "relations" : [],
          "sameas" : "",
-         "status" : "needs-review",
+         "status" : "ok",
          "tool_note" : {
             "hashcat" : "",
             "john" : "john's own test vector for this format is reproduced by mdxfind pinned to MD5SHA1PASSMD5PASSSHA1PASS at iteration 1",
@@ -17893,7 +17893,7 @@
          "cracknote" : "",
          "denotation" : "",
          "expr" : "md5($s.md5($p).$s)",
-         "expr_note" : "john's --list=subformats states this string for dynamic_14, which this entry proved by round-trip; the string itself has not been compiled as --format=dynamic=<expr> here",
+         "expr_note" : "john's --list=subformats states this string for dynamic_14, which this entry proved by round-trip; the string itself has not been compiled as --format=dynamic=<expr> here; TRIAGE 2026-08-30: both the expression and this entry's vector are correct and independently checked: compiled with --format=dynamic the expression recovers all 6 of john's own test vectors for dynamic_14, and computed here with Digest:: it reproduces all 2 of this entry's. john's ad-hoc compiler simply will not crack this particular vector -- a salt string it mishandles is the known cause",
          "expr_tier" : "upstream",
          "hashcat" : {
             "ids" : [
@@ -24662,8 +24662,8 @@
          "cracknote" : "",
          "denotation" : "",
          "expr" : "sha1($s.sha1($p))",
-         "expr_note" : "transcribed from john --list=subformats for an identifier this entry proved by round-trip",
-         "expr_tier" : "upstream",
+         "expr_note" : "round-tripped as --format=dynamic=<expr> against every vector this entry carries",
+         "expr_tier" : "vector",
          "hashcat" : {
             "ids" : [
                4520
@@ -24691,7 +24691,7 @@
          "notes" : "",
          "relations" : [],
          "sameas" : "",
-         "status" : "needs-review",
+         "status" : "ok",
          "tool_note" : {
             "hashcat" : "",
             "john" : "john's own test vector for this format is reproduced by mdxfind pinned to SHA1SALTSHA1PASS at iteration 1",
@@ -26277,8 +26277,8 @@
          "cracknote" : "",
          "denotation" : "",
          "expr" : "sha1(sha1($p).$s)",
-         "expr_note" : "transcribed from john --list=subformats for an identifier this entry proved by round-trip",
-         "expr_tier" : "upstream",
+         "expr_note" : "round-tripped as --format=dynamic=<expr> against every vector this entry carries",
+         "expr_tier" : "vector",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -26310,13 +26310,13 @@
             }
          ],
          "sameas" : "same as sha1-sha1-plain-salt (application)",
-         "status" : "needs-review",
+         "status" : "ok",
          "tool_note" : {
             "hashcat" : "",
             "john" : "format discovered by round-trip search, not by name",
             "mdxfind" : ""
          },
-         "vecs" : 8
+         "vecs" : 7
       },
       {
          "alias" : "",
@@ -27482,7 +27482,7 @@
          "cracknote" : "",
          "denotation" : "",
          "expr" : "sha1($p)",
-         "expr_note" : "transcribed from john --list=subformats for an identifier this entry proved by round-trip",
+         "expr_note" : "transcribed from john --list=subformats for an identifier this entry proved by round-trip; TRIAGE 2026-08-30: dynamic_1023 truncates: computed here, the expression produces a digest of which the stored 32-character ciphertext is exactly the leading part, on all 6 of john's own test vectors. The expression describes the computation, not the cut",
          "expr_tier" : "upstream",
          "hashcat" : {
             "ids" : [
@@ -33862,7 +33862,7 @@
          "cracknote" : "",
          "denotation" : "",
          "expr" : "sha1($s.sha1($s.sha1($p)))",
-         "expr_note" : "transcribed from john --list=subformats for an identifier this entry proved by round-trip",
+         "expr_note" : "transcribed from john --list=subformats for an identifier this entry proved by round-trip; TRIAGE 2026-08-30: the expression is correct -- computed here with Digest:: it reproduces all 6 of john's own test vectors for dynamic_1592 -- but john's ad-hoc compiler will not take it with this format's 40-character salt, while the same expression recovers a control vector with a 2-character salt. A limit in the compiled form, not a disagreement about the algorithm",
          "expr_tier" : "upstream",
          "hashcat" : {
             "ids" : [

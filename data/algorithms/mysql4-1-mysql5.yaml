@@ -25,7 +25,7 @@ vectors:
   - hash: "8236c4133430071e41c5103876d103299d348814"
     pass: "rosetta"
     source: "sheet"
-  - hash: "$dynamic_1028$06c0bf5b64ece2f648b5f048a7190390"
+  - hash: "06c0bf5b64ece2f648b5f048a7190390"
     pass: "test1"
     source: "john"
 legacy:

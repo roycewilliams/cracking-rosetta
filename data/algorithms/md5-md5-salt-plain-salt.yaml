@@ -7,7 +7,7 @@ expression_proof:
   verified: "upstream"
   verified_at: "2026-08-29"
   verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
-  note: "transcribed from john --list=subformats for an identifier this entry proved by round-trip"
+  note: "transcribed from john --list=subformats for an identifier this entry proved by round-trip; TRIAGE 2026-08-30: the expression john prints contains a literal ':', which its own dynamic compiler then rejects, so this string cannot be round-tripped as written"
 status: "needs-review"
 tools:
   hashcat:

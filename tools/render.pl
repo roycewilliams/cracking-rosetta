@@ -669,10 +669,13 @@ about what the string means.
 The tier stays `upstream` rather than being promoted or deleted, which is the
 honest state: john says it, we could not reproduce it.
 
-Two of the groups have a shape already: the four `keccak*` rows look like an
-encoding difference between john's dynamic compiler and its named format
-rather than a data error, and `md5-md5-salt-plain-salt` is john printing an
-expression containing a literal `:`, which its own compiler then rejects.
+`tools/triage-expressions.pl` has been over all of these, using john's own
+test vectors for the format as a control and an independent Digest::
+implementation as a second opinion, so the note on each says what is actually
+wrong rather than that something is. Most are john-side and nothing a
+contributor here can fix; the ones worth an outside answer are the rows whose
+own vector turns out not to be the construction, because somebody has to say
+what those vectors really are.
 
 | Entry | Expression | Proven john format | Note |
 |---|---|---|---|
@@ -682,9 +685,13 @@ for my $r (sort { $a->{id} cmp $b->{id} } @expr_unproven) {
     # of them, and that identifier does crack the vector. Whatever is wrong
     # sits between the two, so a reader needs both in front of them. The note
     # column carries only what is not the standard transcription boilerplate.
+    # triage-expressions.pl appends "TRIAGE <date>: <diagnosis>" after the
+    # provenance the note already carried. The diagnosis is the useful half
+    # here, so show that when it exists and drop the boilerplate.
     (my $note = $r->{expr_note}) =~ s/\s+/ /g;
+    $note = $1 if $note =~ /TRIAGE \d{4}-\d{2}-\d{2}: (.+)$/;
     $note = '' if $note =~ /^transcribed from john/;
-    $note = substr($note, 0, 110) . '...' if length $note > 113;
+    $note = substr($note, 0, 200) . '...' if length $note > 203;
     printf {$oq} "| %s | `%s` | `%s` | %s |\n", gaps_link($r), $r->{expr},
         (join('`, `', @{ $r->{john}{ids} }) || '-'), $note;
 }

@@ -30,7 +30,7 @@ relations:
     distinction: "encoding"
     note: "same digest; the RAW form differs in how the salt is fed, not in the hash computed"
 vectors:
-  - hash: "$dynamic_61$2a4fa0bf8c6a01dd625d3141746451ba51e07f99dc9143f1e25a37f65cb02eb4$RA"
+  - hash: "2a4fa0bf8c6a01dd625d3141746451ba51e07f99dc9143f1e25a37f65cb02eb4:RA"
     pass: "test1"
     source: "john"
   - hash: "5ac28834ed8be26198bde055d77ba012ef5207441d415de9ea8e55b504d07afa:Salt"

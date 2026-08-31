@@ -16,10 +16,10 @@ tools:
   crack:
     supported: false
 vectors:
-  - hash: "$dynamic_1009$0b9b9fdf75fc79d85c5b69aa1de26288$Salt"
+  - hash: "0b9b9fdf75fc79d85c5b69aa1de26288:Salt"
     pass: "test1"
     source: "john"
-  - hash: "$dynamic_2004$3a032e36a9609df6411b8004070431d3$aaaaa"
+  - hash: "3a032e36a9609df6411b8004070431d3:aaaaa"
     pass: "test3"
     source: "john"
   - hash: "4e48abb76d3e0295f3f89eb02d05b344:testsalt"

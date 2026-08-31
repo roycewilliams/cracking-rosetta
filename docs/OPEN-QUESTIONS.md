@@ -11,7 +11,7 @@ If you can settle one, an issue saying so is a complete contribution. You do
 not need to open a pull request, and you do not need to be certain: "I have
 seen this format do X" is information this cannot derive.
 
-## Expressions that do not reproduce their own vectors (15)
+## Expressions that do not reproduce their own vectors (12)
 
 Each of these carries an expression that john's own `--list=subformats`
 states for a format the entry has already proven - and yet compiling that
@@ -24,28 +24,28 @@ about what the string means.
 The tier stays `upstream` rather than being promoted or deleted, which is the
 honest state: john says it, we could not reproduce it.
 
-Two of the groups have a shape already: the four `keccak*` rows look like an
-encoding difference between john's dynamic compiler and its named format
-rather than a data error, and `md5-md5-salt-plain-salt` is john printing an
-expression containing a literal `:`, which its own compiler then rejects.
+`tools/triage-expressions.pl` has been over all of these, using john's own
+test vectors for the format as a control and an independent Digest::
+implementation as a second opinion, so the note on each says what is actually
+wrong rather than that something is. Most are john-side and nothing a
+contributor here can fix; the ones worth an outside answer are the rows whose
+own vector turns out not to be the construction, because somebody has to say
+what those vectors really are.
 
 | Entry | Expression | Proven john format | Note |
 |---|---|---|---|
-| [`ciscoasa`](index.html#ciscoasa) | `md5($p.$s)` | `dynamic_20` |  |
-| [`coldfusion10`](index.html#coldfusion10) | `sha256($s.sha1($p))` | `dynamic_1588` |  |
-| [`keccak224`](index.html#keccak224) | `keccak_224($p)` | `dynamic_430` |  |
-| [`keccak224-x2`](index.html#keccak224-x2) | `keccak_224(keccak_224($p))` | `dynamic_433` |  |
-| [`keccak384`](index.html#keccak384) | `keccak_384($p)` | `dynamic_440` |  |
-| [`keccak384-x2`](index.html#keccak384-x2) | `keccak_384(keccak_384($p))` | `dynamic_443` |  |
-| [`md5-capitalise-md5-plain-username`](index.html#md5-capitalise-md5-plain-username) | `md5(md5($p).$s)` | `dynamic_1007`, `dynamic_2006`, `dynamic_6` |  |
-| [`md5-md5-plain-salt-3`](index.html#md5-md5-plain-salt-3) | `md5(md5($p).$s)` | `dynamic_1007`, `dynamic_2006`, `dynamic_6` |  |
-| [`md5-md5-salt-plain-salt`](index.html#md5-md5-salt-plain-salt) | `md5(md5($s.$p):$s)` | `dynamic_1350` |  |
-| [`md5-saltmd5pass-salt`](index.html#md5-saltmd5pass-salt) | `md5($s.md5($p).$s)` | `dynamic_14`, `dynamic_2014` | john's --list=subformats states this string for dynamic_14, which this entry proved by round-trip; the string ... |
-| [`md5-sha1-plain-md5-pass-sha1-plain`](index.html#md5-sha1-plain-md5-pass-sha1-plain) | `md5(sha1($p).md5($p).sha1($p))` | `dynamic_1518` |  |
-| [`sha1-salt-sha1-plain`](index.html#sha1-salt-sha1-plain) | `sha1($s.sha1($p))` | `dynamic_1501` |  |
-| [`sha1-sha1-plain-substr-plain-0-1`](index.html#sha1-sha1-plain-substr-plain-0-1) | `sha1(sha1($p).$s)` | `dynamic_1502` |  |
-| [`sha1-substr-0-32`](index.html#sha1-substr-0-32) | `sha1($p)` | `dynamic_1023`, `dynamic_26`, `raw-SHA1-opencl` |  |
-| [`wbb3`](index.html#wbb3) | `sha1($s.sha1($s.sha1($p)))` | `dynamic_1592`, `dynamic_38` |  |
+| [`ciscoasa`](index.html#ciscoasa) | `md5($p.$s)` | `dynamic_20` | dynamic_20 has its own ciphertext encoding rather than plain hex, so a generic expression cannot be checked against it however correctly it describes the computation |
+| [`coldfusion10`](index.html#coldfusion10) | `sha256($s.sha1($p))` | `dynamic_1588` | the expression does not describe dynamic_1588: computed here with Digest:: it reproduces none of the 6 test vectors john ships for that format, so what --list=subformats prints is not the whole constr... |
+| [`keccak224`](index.html#keccak224) | `keccak_224($p)` | `dynamic_430` | compiled with --format=dynamic this expression recovers none of john's own test vectors for dynamic_430 either, so john's dynamic compiler and its named format disagree about what the string means; th... |
+| [`keccak224-x2`](index.html#keccak224-x2) | `keccak_224(keccak_224($p))` | `dynamic_433` | compiled with --format=dynamic this expression recovers none of john's own test vectors for dynamic_433 either, so john's dynamic compiler and its named format disagree about what the string means; th... |
+| [`keccak384`](index.html#keccak384) | `keccak_384($p)` | `dynamic_440` | compiled with --format=dynamic this expression recovers none of john's own test vectors for dynamic_440 either, so john's dynamic compiler and its named format disagree about what the string means; th... |
+| [`keccak384-x2`](index.html#keccak384-x2) | `keccak_384(keccak_384($p))` | `dynamic_443` | compiled with --format=dynamic this expression recovers none of john's own test vectors for dynamic_443 either, so john's dynamic compiler and its named format disagree about what the string means; th... |
+| [`md5-capitalise-md5-plain-username`](index.html#md5-capitalise-md5-plain-username) | `md5(md5($p).$s)` | `dynamic_1007`, `dynamic_2006`, `dynamic_6` | the expression is correct -- compiled with --format=dynamic it recovers all 6 of john's own test vectors for dynamic_1007 -- and 1 of this entry's 2 vectors are not of that construction by independent... |
+| [`md5-md5-plain-salt-3`](index.html#md5-md5-plain-salt-3) | `md5(md5($p).$s)` | `dynamic_1007`, `dynamic_2006`, `dynamic_6` | the expression is correct -- compiled with --format=dynamic it recovers all 6 of john's own test vectors for dynamic_1007 -- and 1 of this entry's 2 vectors are not of that construction by independent... |
+| [`md5-md5-salt-plain-salt`](index.html#md5-md5-salt-plain-salt) | `md5(md5($s.$p):$s)` | `dynamic_1350` | the expression john prints contains a literal ':', which its own dynamic compiler then rejects, so this string cannot be round-tripped as written |
+| [`md5-saltmd5pass-salt`](index.html#md5-saltmd5pass-salt) | `md5($s.md5($p).$s)` | `dynamic_14`, `dynamic_2014` | both the expression and this entry's vector are correct and independently checked: compiled with --format=dynamic the expression recovers all 6 of john's own test vectors for dynamic_14, and computed ... |
+| [`sha1-substr-0-32`](index.html#sha1-substr-0-32) | `sha1($p)` | `dynamic_1023`, `dynamic_26`, `raw-SHA1-opencl` | dynamic_1023 truncates: computed here, the expression produces a digest of which the stored 32-character ciphertext is exactly the leading part, on all 6 of john's own test vectors. The expression des... |
+| [`wbb3`](index.html#wbb3) | `sha1($s.sha1($s.sha1($p)))` | `dynamic_1592`, `dynamic_38` | the expression is correct -- computed here with Digest:: it reproduces all 6 of john's own test vectors for dynamic_1592 -- but john's ad-hoc compiler will not take it with this format's 40-character ... |
 
 ## Cracked, but not by that name (6)
 

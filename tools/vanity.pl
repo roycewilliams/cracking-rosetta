@@ -68,18 +68,13 @@ use POSIX qw(:sys_wait_h);
 use Time::HiRes qw(time);
 use File::Basename qw(basename);
 use RosettaEmit qw(emit_entry);
+# The expression compiler moved to RosettaExpr the moment triage-expressions
+# needed it too: two implementations of "what does this expression mean" is
+# the drift this repository exists to prevent.
+use RosettaExpr qw(compile_expression);
 
 my $PROG = basename($0);
 my $ROOT = "$RealBin/..";
-
-# The hash functions the expression language may name here. Deliberately the
-# fast ones: the whole method depends on the search being cheap.
-my %HASH = (
-    md5    => \&md5_hex,
-    sha1   => \&sha1_hex,
-    sha256 => \&sha256_hex,
-    sha512 => \&sha512_hex,
-);
 
 sub usage {
     print <<"USAGE";
@@ -156,77 +151,6 @@ if (defined $fixed_salt && index($fixed_salt, $salt_base) < 0) {
 # a regex that "mostly" parses nested calls is how a wrong construction gets
 # computed and then stored as fact.
 
-sub tokenize {
-    my ($e) = @_;
-    my @t;
-    while (length $e) {
-        $e =~ s/^\s+// and next;
-        if ($e =~ s/^([A-Za-z][A-Za-z0-9_]*)//) { push @t, [ name => $1 ]; next }
-        if ($e =~ s/^\$([ps])//)                { push @t, [ var  => $1 ]; next }
-        if ($e =~ s/^([().])//)                 { push @t, [ punc => $1 ]; next }
-        return;                                  # a token we do not know: bail
-    }
-    return \@t;
-}
-
-# parse_concat / parse_term - return a fragment of PERL SOURCE, or undef.
-# $pos is an index into the token list, advanced in place.
-#
-# Source rather than nested closures because this runs 2.7e8 times per hit and
-# a closure chain measured 1.8x slower than the flat expression it stands for
-# (0.88 vs 1.55 MH/s on this host). Everything in the emitted string comes from
-# the whitelisted grammar below -- a function name is looked up in %HASH and
-# never interpolated from the input -- so nothing from an entry file reaches
-# the eval except its shape.
-sub parse_concat {
-    my ($t, $pos) = @_;
-    my $left = parse_term($t, $pos) or return;
-    while ($pos->[0] < @$t
-        && $t->[ $pos->[0] ][0] eq 'punc' && $t->[ $pos->[0] ][1] eq '.') {
-        $pos->[0]++;
-        my $right = parse_term($t, $pos) or return;
-        $left = "$left . $right";
-    }
-    return $left;
-}
-
-sub parse_term {
-    my ($t, $pos) = @_;
-    return unless $pos->[0] < @$t;
-    my ($kind, $val) = @{ $t->[ $pos->[0] ] };
-
-    if ($kind eq 'var') {
-        $pos->[0]++;
-        return $val eq 'p' ? '$_[0]' : '$_[1]';
-    }
-    if ($kind eq 'name') {
-        my $name = lc $val;
-        return unless $HASH{$name};              # unknown function: bail
-        $pos->[0]++;
-        return unless $pos->[0] < @$t
-                   && $t->[ $pos->[0] ][0] eq 'punc' && $t->[ $pos->[0] ][1] eq '(';
-        $pos->[0]++;
-        my $inner = parse_concat($t, $pos) or return;
-        return unless $pos->[0] < @$t
-                   && $t->[ $pos->[0] ][0] eq 'punc' && $t->[ $pos->[0] ][1] eq ')';
-        $pos->[0]++;
-        # $HASH{...} resolves at eval time against this file's own table.
-        return "\$HASH{'$name'}->($inner)";
-    }
-    return;
-}
-
-# compile($expression) - a sub($pass,$salt) returning the hex digest, or undef.
-sub compile {
-    my ($expr) = @_;
-    return unless defined $expr && length $expr;
-    my $t = tokenize($expr) or return;
-    my $pos = [0];
-    my $body = parse_concat($t, $pos) or return;
-    return unless $pos->[0] == @$t;              # trailing junk: bail
-    return scalar eval "sub { $body }";
-}
-
 #-----------------------------------------------------------------------
 # The salt affix. 36 characters, so each one buys log2(36) = 5.17 bits and six
 # of them already cover the 28 bits 'dec0ded' costs. ':' and tab are excluded
@@ -265,7 +189,7 @@ if ($all) {
         my $e = $entry{$_};
         my $x = $e->{expression};
         # A salted construction only, and one this can actually compute.
-        defined $x && $x =~ /\$s/ && compile($x);
+        defined $x && $x =~ /\$s/ && compile_expression($x);
     } sort keys %entry;
 }
 
@@ -289,7 +213,7 @@ for my $id (@ids) {
     }
 
     my $expr = $e->{expression};
-    my $fn   = compile($expr);
+    my $fn   = compile_expression($expr);
     unless ($fn) {
         printf STDERR "- %-24s no compilable expression (%s); skipped\n",
             $id, (defined $expr && length $expr ? $expr : 'none');
