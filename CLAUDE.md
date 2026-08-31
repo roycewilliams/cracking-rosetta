@@ -280,8 +280,13 @@ So an entry carries three fields for it. `category:` names the axis it sits on
 `input-encoding`, `iterates`, `truncates`, `collides-on-subset`,
 `duplicate-of`. `distinction` says why both rows nonetheless exist —
 `application`, `encoding`, `input-encoding`, `iteration`, `truncation`,
-`salt-convention`, `none`. `none` is legal only with `duplicate-of`, which is
-how a merge gets proposed in data rather than in a comment.
+`salt-convention`, `naming`, `none`. `none` is legal only with
+`duplicate-of`, which is how a merge gets proposed in data rather than in a
+comment. `naming` is its answer: a curator looked at a proposed duplicate and
+decided both names keep a row, because the tools publish several identifiers
+for one computation and each row is where a reader arrives from a different
+name. mdxfind alone has `MD4UTF16`, `NTLM` and `NTLMH` for `md4(utf16($p))`.
+A machine still writes `duplicate-of`; only a person writes `naming`.
 
 `tools/relate.pl` writes edges, both sides at once. Never hand-write one side:
 a relation only one of the two files states is a fact whichever file the
@@ -306,6 +311,38 @@ Three rules that are not the validator's job:
 - **`id` never changes.** It is the filename stem, a URL fragment in
   `docs/index.html` and the key in `dist/rosetta.csv`. A rename is a new entry
   plus a `duplicate-of` edge and an alias on the survivor, never an `mv`.
+
+### A merged-away id becomes a tombstone
+
+Decided 2026-08-30, and it is what unblocks acting on a `duplicate-of` /
+`distinction: none` proposal. The loser's file stays, emptied of every claim:
+
+    id: "ripemd320"
+    name: "ripemd320"
+    status: "merged"
+    merged_into: "rmd320"
+    relations:
+      - kind: "duplicate-of"
+        entry: "rmd320"
+        distinction: "none"
+        note: "merged 2026-08-30; ..."
+    notes: "Tombstone. ..."
+
+`aliases:`, `legacy:`, `vectors:` and every tool identifier move to the
+survivor — that is the merge — and the tombstone keeps nothing but the
+redirect. `validate.pl` enforces that: `merged_into` and a mirrored
+`duplicate-of` edge are both required, the destination must exist and must not
+itself be a tombstone (repoint the first one instead of building a chain), and
+any of `expression`, `tools`, `vectors`, `aliases`, `legacy`, `category` on a
+tombstone is an error. A tombstone is excluded from every count and coverage
+denominator: it is not an algorithm.
+
+`render.pl` gives it a row in `dist/rosetta.csv` and `rosetta.json` — the old
+`id` still joins — with every claim column empty, `status` `merged` and a
+`merged_into` column naming the survivor, so a consumer is told where the row
+went instead of having to parse the relations prose. The two human views list
+it under the table rather than in it, because a row of dashes reads as a gap
+and this is a redirect.
 
 The full design, the options weighed against it and what changed on contact
 with the code are in `ACTION-PLAN.md` §11.

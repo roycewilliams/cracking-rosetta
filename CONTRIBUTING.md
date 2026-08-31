@@ -115,12 +115,16 @@ That writes **both** sides of the relation, which is required. `kind` is one
 of `same-computation`, `encodes`, `input-encoding`, `iterates`, `truncates`,
 `collides-on-subset`, `duplicate-of`. `distinction` says why both rows still
 exist: `application`, `encoding`, `input-encoding`, `iteration`, `truncation`,
-`salt-convention`, or `none`.
+`salt-convention`, `naming`, or `none`. (`naming` is a maintainer's answer to
+a proposed duplicate — the tools publish two names for one computation and
+both keep a row. Propose `none`; let them decide.)
 
 If you think there's genuinely no difference left, use
 `--kind duplicate-of --distinction none`. That's the proposal; a maintainer
 does the merge, because an `id` is a published key that other people's scripts
-point at.
+point at. When they do, the retired `id` stays as a tombstone — a file with
+`status: merged`, `merged_into:` and nothing else — so your bookmark and their
+CSV join keep working.
 
 ## The one rule: don't inflate tiers
 

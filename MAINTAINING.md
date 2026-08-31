@@ -121,8 +121,8 @@ two kinds:
 - `denotation` — free text with `source: human`, which is what that field is
   for: untiered, because nothing can round-trip it.
 
-Everything else is recorded and reported, never applied. A merge needs an
-id-resolution policy this repo hasn't decided; an expression must be proven by
+Everything else is recorded and reported, never applied. A merge is a
+maintainer's edit — see the next section — and an expression must be proven by
 john, not accepted because someone typed it. `--report` prints the held
 answers as Markdown, which is the format to hand to whoever — or whatever —
 acts on them next.
@@ -137,9 +137,41 @@ published key: it's the filename, a link fragment in `docs/index.html`, and
 the column `dist/rosetta.csv` is keyed on. Deleting one breaks whatever points
 at it.
 
-There is no settled policy yet for what a retired `id` should resolve to. Until
-there is, merges stay proposals in the data. `tools/dedupe.pl` holds the
-mechanics and is dry-run by default.
+A retired `id` becomes a **tombstone** (decided 2026-08-30), so acting on a
+proposal no longer breaks anything that points at it. The merge itself is
+ordinary: fold the loser's `aliases:`, `legacy:`, `vectors:` and tool
+identifiers into the survivor, re-verifying anything you fold that the
+survivor has not proven for itself. Then reduce the loser's file to the
+redirect:
+
+```yaml
+id: "ripemd320"
+name: "ripemd320"
+status: "merged"
+merged_into: "rmd320"
+relations:
+  - kind: "duplicate-of"
+    entry: "rmd320"
+    distinction: "none"
+    note: "merged 2026-08-30 on <who decided>, because <why>"
+notes: "Tombstone. ..."
+```
+
+`validate.pl` checks the shape: a tombstone must carry `merged_into` and a
+mirrored `duplicate-of` edge, must name a survivor that exists and is not
+itself a tombstone, and must carry no claims at all. It is left out of every
+count. `dist/rosetta.csv` keeps a row for the dead id with a `merged_into`
+column, so a consumer joining on it is told where it went.
+
+`tools/dedupe.pl` holds the mechanics and is dry-run by default; it predates
+this decision and does not yet write the tombstone, so check its output.
+
+**Not every proposal should be merged.** Two of the first four answered were
+refused: mdxfind publishes three type indices for `md4(utf16($p))` and the
+`NTLMH` row is where a reader arrives with that name. That answer is
+`same-computation` with `distinction: naming`, which records that the merge
+was considered and declined — as opposed to `none`, which records that one is
+still owed.
 
 ## Things that will bite you
 
