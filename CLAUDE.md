@@ -255,6 +255,34 @@ Entries whose name is not expression-shaped (`7ZIP`, `AIX-MD5`, `Tiger Tree
 Hash`) are left alone rather than bulk-marked, because "no candidate could be
 generated" is a fact about our generators, not about john.
 
+`tools/denote-hx.pl` does the same job from a far better source: the hx
+specification's own statement of what an mdxfind type computes. `--denote`
+reads the entry's `name:`, which for most of these is just the mdxfind type
+name and denotes nothing; Appendix A states the construction. So the
+denotation is `source: "mdxfind"` in the schema's literal sense — the tool's
+own label for its own type, which is already in `tools.mdxfind.types`.
+
+It qualifies an entry on two facts and nothing else: a function outside
+**both** boundaries — `RosettaHx`'s `%FUNC` and the vocabulary harvested from
+john — or a multi-emit type. Both boundaries are checked because `%FUNC`
+admits `cut()` and `pad()` deliberately, so `%FUNC` alone would call them
+grounds for `absent` and contradict `seed-hx.pl` on the same type. It refuses
+a row that is prose rather than an expression (`Note [20]`, `(complex: ...)`),
+because there upstream declined to state the construction and that is a shrug.
+
+**`denotation:` forecloses an `expression:`,** because `validate.pl` forbids
+both, so never denote something that might yet be provable. Concretely:
+**john's dynamic language has constants and a second salt** —
+`md5($c1.$p),c1=x` compiles and cracks, and `$s2` is real (`doc/DYNAMIC_EXPRESSIONS`
+lines 53-73). None of the generators here know that yet, which is why
+`denote-hx.pl` leaves the `stray-literal` and `unknown-operand` residue alone.
+
+`--repair` withdraws an `expression:` that is not well-formed in this
+repository's notation. A claim nothing can compile is withdrawn, never
+adjusted: guessing what upstream meant is the thing the expression field
+exists to prevent. The withdrawal note stays on the entry even after a
+denotation settles it.
+
 ## Collisions: when two entries mean the same thing
 
 The moment expressions existed, nine of them turned out to be claimed by more
@@ -318,13 +346,23 @@ Three rules that are not the validator's job:
   `md5(md5($p).":".$u)`; the HEXSALT family emits three digests per candidate
   byte across all 256; the TRUNC family sweeps a truncation length and emits
   both a left and a right truncation at each; the DSALT types emit four
-  colon-aware variants plus a 119-value byte search. **34 types are named as
-  multi-emit and 16 entries here name one.** A single `expression:` on such an
-  entry is a false claim even when the string is one of the forms, so use
-  `denotation:` and say in it that the type is multi-emit. This is also the
+  colon-aware variants plus a 119-value byte search. A single `expression:` on
+  such an entry is a false claim even when the string is one of the forms, so
+  use `denotation:` and say in it that the type is multi-emit. This is also the
   explanation for entries whose vectors "disagree with each other": two vectors
   of one multi-emit type are both correct, and a tool matching one of them is
   not evidence about the other.
+  **Note [24] is not the whole population.** It names 34 types; Appendix A
+  ALSO spells `emit()` in the expression for 14 more, and the two sets are
+  disjoint (measured 2026-08-31), so at least 48 types are multi-emit. Ask
+  `RosettaHx::is_multi_emit()`, which reads both, and never re-derive the list
+  from the note alone.
+  **And Appendix A's row can be wrong about the very types the note covers.**
+  e308 `SHA1MD5USER` reads `sha1(md5(user))` and e354/e355 likewise -- the
+  password operand is missing, where e286 `MD5MD5USER` writes it correctly.
+  Note [24] gives the real forms. Any transcription must refuse a row that
+  never mentions the password; that is the same `$p` guard the expression
+  generators use, and it is why upstream's own statement still gets checked.
 - **If a source tracks it separately, it gets its own findable row.** Decided
   2026-08-31 by Royce. When hashcat, john or mdxfind publishes a distinct
   identifier, someone will arrive here by that identifier and must land on a
