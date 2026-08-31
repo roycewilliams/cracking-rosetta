@@ -1,11 +1,12 @@
 id: "md5-md5salt-md5md5pass"
 name: "MD5-MD5SALT-MD5MD5PASS"
 expression: "md5(md5($s).md5(md5($p)))"
+john_dynamic_expr: "dynamic=md5(md5($s).md5(md5($p)))"
 expression_proof:
-  verified: "upstream"
+  verified: "vector"
   verified_at: "2026-08-31"
-  verified_with: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A"
-  note: "transcribed from the hx specification's Appendix A entry for mdxfind type MD5-MD5SALT-MD5MD5PASS (e820), which states md5(md5(salt) . md5(md5(pass))). Transcription, not reproduction, so this is upstream and not vector; run derive-expressions.pl to try to promote it. An independent Digest:: computation of this string DOES reproduce this entry's own vector, checked 2026-08-31."
+  verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
+  note: "round-tripped as --format=dynamic=<expr> against every vector this entry carries"
 status: "ok"
 tools:
   hashcat:

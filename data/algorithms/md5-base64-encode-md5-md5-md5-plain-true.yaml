@@ -7,7 +7,7 @@ expression_proof:
   verified_at: "2026-08-31"
   verified_with: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A"
   note: "transcribed from the hx specification's Appendix A entry for mdxfind type MD5BASE64MD5RAWMD5MD5 (e244), which states md5(base64(md5_bin(md5(md5(pass))))). Transcription, not reproduction, so this is upstream and not vector; run derive-expressions.pl to try to promote it. Not checkable locally: the construction uses functions RosettaExpr cannot compile, so this rests on upstream's word alone. Superseded the denotation \"md5(base64_encode(md5(md5(md5($plain), true))))\" (source: sheet), which validate.pl forbids alongside an expression."
-status: "ok"
+status: "needs-review"
 tools:
   hashcat:
     verified: "absent"
