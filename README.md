@@ -81,6 +81,8 @@ Full instructions: [CONTRIBUTING.md](CONTRIBUTING.md) if you want to add or corr
 
 **Looking for something to do?** [`docs/GAPS.md`](docs/GAPS.md) is generated from the data and ranks what is missing by what it costs to fix - starting with the mappings somebody already believes but nobody has ever reproduced, which one command settles, and the entries that need nothing but a test vector, which needs no cracker at all.
 
+**Know one of these formats well?** [`docs/OPEN-QUESTIONS.md`](docs/OPEN-QUESTIONS.md) is the other list: rows where something is known to be odd and the answer needs a person rather than a command - an expression john states but cannot reproduce, a tool that cracks a vector without implementing the algorithm, an entry that may be two algorithms collated into one row. An issue saying what you know is a complete contribution.
+
 ## Layout
 
 ```

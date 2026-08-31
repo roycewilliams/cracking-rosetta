@@ -14,6 +14,8 @@ Two ways in, and the first needs no cracker installed:
   `data/algorithms/`. `CONTRIBUTING.md` walks through it.
 
 Each row below links to its entry in the [browsable table](index.html).
+Gaps are absences; for the rows where something is known to be *odd*, see
+[OPEN-QUESTIONS.md](OPEN-QUESTIONS.md).
 
 ## 1. Believed but never reproduced (23)
 

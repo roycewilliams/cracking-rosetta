@@ -12,6 +12,8 @@ checks you run before opening a PR are pure text.
 the data and ordered by what a fix costs. The top of it is mappings somebody
 already believes but nobody has reproduced, and entries that need only a test
 vector - which needs no cracker installed.
+[`docs/OPEN-QUESTIONS.md`](docs/OPEN-QUESTIONS.md) is the harder list: rows
+where the repository knows something is odd and cannot settle it alone.
 
 ## What you'll need
 
