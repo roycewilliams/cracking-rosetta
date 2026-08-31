@@ -1,6 +1,6 @@
 id: "gost2012-64"
 name: "GOST2012-64"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [11800]
@@ -21,10 +21,10 @@ tools:
   crack:
     supported: false
 relations:
-  - kind: "duplicate-of"
+  - kind: "same-computation"
     entry: "streebog-64-plain"
-    distinction: "none"
-    note: "Streebog IS GOST R 34.11-2012; mdxfind carries both names as separate types (e428, e431) publishing the same example vector. mdxfind pinned to EACH type reproduces BOTH entries' vectors, on two different plaintexts, and both entries already name john's Stribog-512 at tier vector. Nothing distinguishes them; the merge would fold hashcat 11800 into the survivor."
+    distinction: "naming"
+    note: "Not a duplicate, decided by Royce on 2026-08-30. Streebog IS GOST R 34.11-2012, and this was proven rather than assumed: mdxfind pinned to EACH type reproduces BOTH entries' vectors, on two different plaintexts. Both rows exist because both names are in use and each is where a reader arrives; hashcat and mdxfind spell it GOST2012-64, mdxfind also publishes STREEBOG-64, and john calls the same thing Stribog-512."
 vectors:
   - hash: "9b7ce5af74589324a811f467795a93ad4fb5e6a62ea10e4116d134beae36dba62c29cee821927cc5ec4da0fe4c9ac6cfd9274cb78ac0e63c968ef55da20effc6"
     pass: "password123"

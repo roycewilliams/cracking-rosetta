@@ -1,6 +1,6 @@
 id: "streebog-32-plain"
 name: "streebog-32($plain)"
-status: "needs-review"
+status: "ok"
 tools:
   mdxfind:
     types: ["STREEBOG-32"]
@@ -16,10 +16,10 @@ tools:
   crack:
     supported: false
 relations:
-  - kind: "duplicate-of"
+  - kind: "same-computation"
     entry: "gost2012-32"
-    distinction: "none"
-    note: "Streebog IS GOST R 34.11-2012; mdxfind carries both names as separate types (e427, e430) publishing the same example vector. Proven here rather than assumed: mdxfind pinned to EACH type reproduces BOTH entries' vectors, on two different plaintexts, and both entries already name john's Stribog-256 at tier vector. Nothing distinguishes them; the merge would fold hashcat 11700 into the survivor."
+    distinction: "naming"
+    note: "Not a duplicate, decided by Royce on 2026-08-30. Streebog IS GOST R 34.11-2012, and this was proven rather than assumed: mdxfind pinned to EACH type reproduces BOTH entries' vectors, on two different plaintexts. Both rows exist because both names are in use and each is where a reader arrives; hashcat and mdxfind spell it GOST2012-32, mdxfind also publishes STREEBOG-32, and john calls the same thing Stribog-256."
 vectors:
   - hash: "f7359dde49e3a47e6046322f016b0cf7b5de4a62cdaf174a06330f43ca329210"
     pass: "rosetta"
