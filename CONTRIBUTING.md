@@ -8,7 +8,6 @@ proves it, that's a contribution.
 You do **not** need hashcat, John or mdxfind installed to contribute. The
 checks you run before opening a PR are pure text.
 
-
 **Not sure what to work on?** [`docs/GAPS.md`](docs/GAPS.md) is generated from
 the data and ordered by what a fix costs. The top of it is mappings somebody
 already believes but nobody has reproduced, and entries that need only a test
