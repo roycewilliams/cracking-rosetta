@@ -53,8 +53,19 @@
 # it hashes anything. That reads exactly like "the format did not crack it",
 # which is the worst possible failure mode for a tool whose entire output is
 # did-it-crack. Every invocation here passes --session into the work dir.
-# --field-separator-char=tab for the same class of reason: a $krb5asrep$ or
-# NTLMv2 line is full of colons and --show would otherwise be split wrong.
+#
+# WHY --field-separator-char IS NOT PASSED
+#
+# It was, set to tab, on the theory that a $krb5asrep$ or NTLMv2 line is full
+# of colons and --show would otherwise split wrong. That reasoning is backwards:
+# the separator governs how john splits LOGIN from HASH when READING the file
+# too, so a tab separator makes john treat a whole netntlmv2 line as one login
+# and report "No password hashes loaded" -- again indistinguishable from a
+# format that simply did not crack. Measured 2026-09-01: ntlmv2-opencl and
+# netntlmv2 both load and crack the same file once the flag is dropped.
+# So the separator stays at john's default and --show is read by asking
+# whether a line ENDS with one of the plaintexts this entry states, which needs
+# no field splitting at all.
 #
 # WHY A TIER IS NEVER RAISED
 #
@@ -183,14 +194,13 @@ sub run_john {
 
     my $out = '(reusing cached pot)';
     unless ($cached) {
-        my $c = sprintf('timeout %d %s --format=%s --field-separator-char=tab '
+        my $c = sprintf('timeout %d %s --format=%s '
                       . '--wordlist=%s --pot=%s --session=%s %s 2>&1',
                         $timeout, $JOHN, $fmt, $wf, $pot, $sess, $hf);
         $out = qx{$c};
     }
 
-    my $s = sprintf('timeout 120 %s --format=%s --field-separator-char=tab '
-                  . '--pot=%s --show %s 2>/dev/null',
+    my $s = sprintf('timeout 120 %s --format=%s --pot=%s --show %s 2>/dev/null',
                     $JOHN, $fmt, $pot, $hf);
     my $show = qx{$s};
 
@@ -224,15 +234,21 @@ for my $job (@jobs) {
 
     my ($out, $show) = run_john($fmt, $hf, $wf, $pot, "$WORK/s.$slug");
 
-    # --show prints tab-separated fields ending in the recovered plaintext.
-    # The test is that the LAST field is a plaintext this entry already states
-    # -- not merely that john cracked something.
-    my %want = map {; $_->{pass} => 1 } @vec;
-    my $hit  = 0;
+    # --show prints ONLY cracked entries, one per line, plus a summary line.
+    # Where the format has no login field the plaintext lands at the end
+    # ("$SHA512$abc...:rosetta"); where it has one, john re-inserts the
+    # plaintext into the original line structure instead
+    # ("TESTWORKGROUP\NTlmv2:password::1122...:blob"), so anchoring at the end
+    # silently misses a real crack. Match a whole colon-delimited FIELD
+    # anywhere in the line instead. The residual risk -- a plaintext that also
+    # occurs as a field of the hash -- can only over-count a line john already
+    # reported as cracked; it cannot invent one, because --show lists nothing
+    # else and the wordlist held only this entry's own plaintexts.
+    my $hit = 0;
     for my $line (split /\n/, $show) {
-        next unless $line =~ /\t/;
-        my @f = split /\t/, $line;
-        $hit++ if defined $f[-1] && $want{ $f[-1] };
+        next unless length $line;
+        next if $line =~ /password hash(?:es)? cracked/;   # the summary line
+        $hit++ if grep { $line =~ /(?:^|:)\Q$_->{pass}\E(?::|$)/ } @vec;
     }
 
     my $n = scalar @vec;
