@@ -10,7 +10,11 @@ expression_proof:
 status: "ok"
 tools:
   hashcat:
-    verified: "absent"
+    modes: [4510]
+    verified: "vector"
+    verified_at: "2026-08-31"
+    verified_with: "hashcat v7.1.2-549-g8a15e210b"
+    note: "mode 4510 added 2026-08-31 by seed-hashcat-orphans.pl: hashcat names it \"sha1(sha1($pass).$salt)\", which is this entry's own expression, and hashcat at that mode recovers this entry's own vector. It had no entry at all before."
   mdxfind:
     types: ["SHA1SHA1USER"]
     verified: "vector"

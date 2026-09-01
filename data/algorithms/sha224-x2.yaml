@@ -9,6 +9,12 @@ expression_proof:
   note: "round-tripped as --format=dynamic=<expr> against every vector this entry carries"
 status: "ok"
 tools:
+  hashcat:
+    modes: [34400]
+    verified: "vector"
+    verified_at: "2026-08-31"
+    verified_with: "hashcat v7.1.2-549-g8a15e210b"
+    note: "mode 34400 added 2026-08-31 by seed-hashcat-orphans.pl: hashcat names it \"sha224(sha224($pass))\", which is this entry's own expression, and hashcat at that mode recovers this entry's own vector. It had no entry at all before."
   mdxfind:
     types: ["SHA224"]
     iterations: 2

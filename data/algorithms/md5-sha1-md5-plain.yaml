@@ -10,7 +10,11 @@ expression_proof:
 status: "ok"
 tools:
   hashcat:
-    verified: "absent"
+    modes: [32800]
+    verified: "vector"
+    verified_at: "2026-08-31"
+    verified_with: "hashcat v7.1.2-549-g8a15e210b"
+    note: "mode 32800 added 2026-08-31 by seed-hashcat-orphans.pl: hashcat names it \"md5(sha1(md5($pass)))\", which is this entry's own expression, and hashcat at that mode recovers this entry's own vector. It had no entry at all before."
   mdxfind:
     types: ["MD5SHA1MD5"]
     verified: "vector"

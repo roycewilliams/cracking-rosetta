@@ -1,0 +1,26 @@
+id: "hmac-sha512-key-salt"
+name: "HMAC-SHA512 (key = $salt)"
+expression_proof:
+  verified: "absent"
+  verified_at: "2026-08-31"
+  verified_with: "hashcat v7.1.2-549-g8a15e210b"
+  note: "hashcat mode 1760 is \"HMAC-SHA512 (key = $salt)\" (Raw Hash authenticated). It is a bare construction, but john's dynamic EXPRESSION language has no token for it, so it cannot be written as an expression here. That says nothing about whether john can CRACK it -- run discover-john.pl, and if john has a format it goes in tools.john."
+denotation:
+  text: "HMAC-SHA512 (key = $salt)"
+  source: "hashcat"
+  note: "hashcat's own label for mode 1760, category \"Raw Hash authenticated\", in v7.1.2-549-g8a15e210b."
+category: "composite"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [1760]
+    verified: "vector"
+    verified_at: "2026-08-31"
+    verified_with: "hashcat v7.1.2-549-g8a15e210b"
+    note: "hashcat's own published example hash for this mode, recovered by hashcat at this mode with hashcat's own published plaintext."
+  crack:
+    supported: false
+vectors:
+  - hash: "7d02921299935179d509e6dd4f3d0f2944e3451ea9de3af16baead6a7297e5653577d2473a0fff743d9fe78a89bd49296114319989dc7e7870fc7f62bc96accb:114"
+    pass: "hashcat"
+    source: "hashcat"
