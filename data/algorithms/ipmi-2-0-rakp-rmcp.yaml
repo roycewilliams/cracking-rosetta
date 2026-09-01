@@ -1,0 +1,25 @@
+id: "ipmi-2-0-rakp-rmcp"
+name: "IPMI 2.0 RAKP (RMCP+)"
+expression_proof:
+  verified: "absent"
+  verified_at: "2026-08-31"
+  verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
+  note: "john publishes this as \"IPMI 2.0 RAKP (RMCP+)\" and no category, so what kind of construction it is has not been established here. Its name is not expression-shaped and john's dynamic EXPRESSION language cannot be handed it, so there is no expression on this row. That says nothing about whether any tool can CRACK it, and it is not a claim that the algorithm HAS no expression -- run seed-hx.pl and derive-expressions.pl, which can settle that from evidence."
+denotation:
+  text: "IPMI 2.0 RAKP (RMCP+)"
+  source: "john"
+  note: "john's own label for RAKP-MD5, in 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200."
+status: "needs-review"
+tools:
+  john:
+    cpu: ["RAKP-MD5"]
+    verified: "vector"
+    verified_at: "2026-08-31"
+    verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
+    note: "john's own published example ciphertext for this format, recovered by john under this format. john publishes no plaintext, so the plaintext was found by handing john its own example and a candidate list -- what john recovered IS the plaintext, by construction."
+  crack:
+    supported: false
+vectors:
+  - hash: "$rakp$000476044b237ebb4f2a415ce488ebc91996043c8011e26079633b706424119e09dcaad4acf21b10535000000000000000000000000000001404726f6f74$102546a8888f78d420fc48ba84108ee2"
+    pass: "superuser"
+    source: "john"

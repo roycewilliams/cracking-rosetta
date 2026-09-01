@@ -1,0 +1,25 @@
+id: "padlock"
+name: "Padlock"
+expression_proof:
+  verified: "absent"
+  verified_at: "2026-08-31"
+  verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
+  note: "john publishes this as \"Padlock\" and no category, so what kind of construction it is has not been established here. Its name is not expression-shaped and john's dynamic EXPRESSION language cannot be handed it, so there is no expression on this row. That says nothing about whether any tool can CRACK it, and it is not a claim that the algorithm HAS no expression -- run seed-hx.pl and derive-expressions.pl, which can settle that from evidence."
+denotation:
+  text: "Padlock"
+  source: "john"
+  note: "john's own label for Padlock, in 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200."
+status: "needs-review"
+tools:
+  john:
+    cpu: ["Padlock"]
+    verified: "vector"
+    verified_at: "2026-08-31"
+    verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
+    note: "john's own published example ciphertext for this format, recovered by john under this format. john publishes no plaintext, so the plaintext was found by handing john its own example and a candidate list -- what john recovered IS the plaintext, by construction."
+  crack:
+    supported: false
+vectors:
+  - hash: "$padlock$1$10000$64$16$bc5ce69b9b9dadafb4566f570cccd15d$6c0f57ec2a0a98974c567cc25a12fff1$16$226683e36d47dc8a3bf7c49fedfdae88$10$07ccbca4012cfa37997d"
+    pass: "openwall"
+    source: "john"

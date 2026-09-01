@@ -108,7 +108,7 @@ That string is in the entry's `john_dynamic_expr:` field and in the
 which lists formats `--list=formats` will show; the gap worth filling is
 whether a named one exists.
 
-### hashcat: 271 entries say nothing
+### hashcat: 427 entries say nothing
 
 A few that carry a vector and a proven expression, so there is a definite construction to look for, one per family:
 
@@ -124,9 +124,9 @@ A few that carry a vector and a proven expression, so there is a definite constr
 * [`tiger`](index.html#tiger) - `tiger($p)` (and 1 more starting `tiger`)
 * [`wrl-x2`](index.html#wrl-x2) - `whirlpool(whirlpool($p))`
 
-All 271: filter `hashcat_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
+All 427: filter `hashcat_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
 
-### mdxfind: 250 entries say nothing
+### mdxfind: 406 entries say nothing
 
 A few that carry a vector and a proven expression, so there is a definite construction to look for, one per family:
 
@@ -134,7 +134,7 @@ A few that carry a vector and a proven expression, so there is a definite constr
 * [`ripemd256`](index.html#ripemd256) - `ripemd256($p)`
 * [`sha256-sha256-pass-salt`](index.html#sha256-sha256-pass-salt) - `sha256(sha256($p.$s))`
 
-All 250: filter `mdxfind_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
+All 406: filter `mdxfind_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
 
 ## 4. hashcat modes with no row here (62)
 

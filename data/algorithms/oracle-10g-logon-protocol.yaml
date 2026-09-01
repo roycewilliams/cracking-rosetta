@@ -1,0 +1,25 @@
+id: "oracle-10g-logon-protocol"
+name: "Oracle 10g-logon protocol"
+expression_proof:
+  verified: "absent"
+  verified_at: "2026-08-31"
+  verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
+  note: "john publishes this as \"Oracle 10g-logon protocol\" and no category, so what kind of construction it is has not been established here. Its name is not expression-shaped and john's dynamic EXPRESSION language cannot be handed it, so there is no expression on this row. That says nothing about whether any tool can CRACK it, and it is not a claim that the algorithm HAS no expression -- run seed-hx.pl and derive-expressions.pl, which can settle that from evidence."
+denotation:
+  text: "Oracle 10g-logon protocol"
+  source: "john"
+  note: "john's own label for o10glogon, in 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200."
+status: "needs-review"
+tools:
+  john:
+    cpu: ["o10glogon"]
+    verified: "vector"
+    verified_at: "2026-08-31"
+    verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
+    note: "john's own published example ciphertext for this format, recovered by john under this format. john publishes no plaintext, so the plaintext was found by handing john its own example and a candidate list -- what john recovered IS the plaintext, by construction."
+  crack:
+    supported: false
+vectors:
+  - hash: "$o10glogon$jimf$6DA8BE6D9713B7F9190DC0F87F1BB1BDFFE44EB1892E40915592980ECCE60AA3$1C08586339E5806DD45CF8E6D83CC6EA2B8CDCDE7CC9F00ADF43DA0F07309090$E2F3D778138213BF01FD743F2092FC976FD60AB2C9F4A1B1D9B08439325421B1"
+    pass: "JimF"
+    source: "john"

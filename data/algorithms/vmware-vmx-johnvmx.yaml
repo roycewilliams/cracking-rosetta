@@ -1,0 +1,25 @@
+id: "vmware-vmx-johnvmx"
+name: "VMware VMX"
+expression_proof:
+  verified: "absent"
+  verified_at: "2026-08-31"
+  verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
+  note: "john publishes this as \"VMware VMX\" and no category, so what kind of construction it is has not been established here. Its name is not expression-shaped and john's dynamic EXPRESSION language cannot be handed it, so there is no expression on this row. That says nothing about whether any tool can CRACK it, and it is not a claim that the algorithm HAS no expression -- run seed-hx.pl and derive-expressions.pl, which can settle that from evidence."
+denotation:
+  text: "VMware VMX"
+  source: "john"
+  note: "john's own label for vmx, in 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200."
+status: "needs-review"
+tools:
+  john:
+    cpu: ["vmx"]
+    verified: "vector"
+    verified_at: "2026-08-31"
+    verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
+    note: "john's own published example ciphertext for this format, recovered by john under this format. john publishes no plaintext, so the plaintext was found by handing john its own example and a candidate list -- what john recovered IS the plaintext, by construction."
+  crack:
+    supported: false
+vectors:
+  - hash: "$vmx$1$0$0$10000$514fb565d74db333352661023874f07d$81dc8986e299d55dee724198a572619b87de0b96501dd2285fbe928c831446fb92c056e02e6ca0119213e9cf094222c0e4d0df6f014615c915412cb0c892d4528070ead0d2443d0c457a7db445fd17b060899033a5c69d43315abd3d262ad3570379c12c97fc2490d7a42b04f99a24386f27aa56"
+    pass: "openwall"
+    source: "john"

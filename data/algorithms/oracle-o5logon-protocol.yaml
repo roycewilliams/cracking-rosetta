@@ -1,0 +1,25 @@
+id: "oracle-o5logon-protocol"
+name: "Oracle O5LOGON protocol"
+expression_proof:
+  verified: "absent"
+  verified_at: "2026-08-31"
+  verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
+  note: "john publishes this as \"Oracle O5LOGON protocol\" and no category, so what kind of construction it is has not been established here. Its name is not expression-shaped and john's dynamic EXPRESSION language cannot be handed it, so there is no expression on this row. That says nothing about whether any tool can CRACK it, and it is not a claim that the algorithm HAS no expression -- run seed-hx.pl and derive-expressions.pl, which can settle that from evidence."
+denotation:
+  text: "Oracle O5LOGON protocol"
+  source: "john"
+  note: "john's own label for o5logon, in 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200."
+status: "needs-review"
+tools:
+  john:
+    cpu: ["o5logon"]
+    verified: "vector"
+    verified_at: "2026-08-31"
+    verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
+    note: "john's own published example ciphertext for this format, recovered by john under this format. john publishes no plaintext, so the plaintext was found by handing john its own example and a candidate list -- what john recovered IS the plaintext, by construction."
+  crack:
+    supported: false
+vectors:
+  - hash: "$o5logon$566499330E8896301A1D2711EFB59E756D41AF7A550488D82FE7C8A418E5BE08B4052C0DC404A805C1D7D43FE3350873*4F739806EBC1D7742BC6"
+    pass: "password"
+    source: "john"

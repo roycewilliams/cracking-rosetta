@@ -1,0 +1,25 @@
+id: "psk"
+name: "PSK"
+expression_proof:
+  verified: "absent"
+  verified_at: "2026-08-31"
+  verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
+  note: "john publishes this as \"PSK\" and no category, so what kind of construction it is has not been established here. Its name is not expression-shaped and john's dynamic EXPRESSION language cannot be handed it, so there is no expression on this row. That says nothing about whether any tool can CRACK it, and it is not a claim that the algorithm HAS no expression -- run seed-hx.pl and derive-expressions.pl, which can settle that from evidence."
+denotation:
+  text: "PSK"
+  source: "john"
+  note: "john's own label for IKE, in 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200."
+status: "needs-review"
+tools:
+  john:
+    cpu: ["IKE"]
+    verified: "vector"
+    verified_at: "2026-08-31"
+    verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
+    note: "john's own published example ciphertext for this format, recovered by john under this format. john publishes no plaintext, so the plaintext was found by handing john its own example and a candidate list -- what john recovered IS the plaintext, by construction."
+  crack:
+    supported: false
+vectors:
+  - hash: "$ike$*0*5c7916ddf8db4d233b3b36005bb3ccc115a73807e11a897be943fd4a2d0f942624cb00588d8b3a0a26502b73e639df217ef6c4cb90f96b0a3c3ef2f62ed025b4a705df9de65e33e380c1ba5fa23bf1f9911bbf388d0844256fa0131fc5cf8acb396936ba3295b4637b039d93f58db90a3a1cf1ef5051103bacf6e1a3334f9f89*fde8c68c5f324c7dbcbadde1d757af6962c63496c009f77cad647f2997fd4295e50821453a6dc2f6279fd7fef68768584d9cee0da6e68a534a097ce206bf77ecc798310206f3f82d92d02c885794e0a430ceb2d6b43c2aff45a6e14c6558382df0692ff65c2724eef750764ee456f31424a5ebd9e115d826bbb9722111aa4e01*b2a3c7aa4be95e85*756e3fa11c1b102c*00000001000000010000002c01010001000000240101000080010001800200018003000180040002800b0001000c000400007080*01000000ac100202*251d7ace920b17cb34f9d561bca46d037b337d19*e045819a64edbf022620bff3efdb935216584cc4*b9c594fa3fca6bb30a85c4208a8df348"
+    pass: "abc123"
+    source: "john"
