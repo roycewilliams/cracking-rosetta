@@ -27,6 +27,11 @@ tools:
     verified_with: "john"
   crack:
     supported: false
+relations:
+  - kind: "duplicate-of"
+    entry: "shangmi-3"
+    distinction: "none"
+    note: "Both compute sm3($p), proven 2026-09-01. shangmi-3 spells out ShangMi 3, sm3 is the standard's short name."
 vectors:
   - hash: "2d31559bd1c4a05661c984d1c50a22ae2df2323d64756569e40b3e2f8e24884a"
     pass: "password123"

@@ -33,6 +33,10 @@ relations:
     entry: "oscommerce-xt-commerce"
     distinction: "application"
     note: "osCommerce and xt:Commerce use md5($s.$p); hashcat gives that mode 21 against 20 for the generic form"
+  - kind: "same-computation"
+    entry: "solarwinds-serv-u"
+    distinction: "application"
+    note: "SolarWinds Serv-U stores md5($s.$p); the generic construction is md5-salt-pass. Proven here by john --format=dynamic='md5($s.$p)' against this entry's own vector, 2026-09-01."
 vectors:
   - hash: "6812da91ee7426c161a69aa4d5d373c5:6lg3p16"
     pass: "rosetta"

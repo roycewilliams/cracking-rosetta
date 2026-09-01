@@ -24,6 +24,11 @@ tools:
     verified_with: "john"
   crack:
     supported: false
+relations:
+  - kind: "duplicate-of"
+    entry: "haval-256-3"
+    distinction: "none"
+    note: "Both compute haval256_3($p), proven 2026-09-01 by john's dynamic compiler against each entry's own vector. haval-256-3 is john's spelling, hav256 mdxfind's. A curator decides whether both names keep a row (distinction: naming) or one becomes a tombstone."
 vectors:
   - hash: "f7d3b3936e52b5c7e36d76ed06d31c1fd92761b002ddc6426dccbac1a598bee9"
     pass: "rosetta"

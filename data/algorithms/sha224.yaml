@@ -27,6 +27,11 @@ tools:
     verified_with: "john"
   crack:
     supported: false
+relations:
+  - kind: "duplicate-of"
+    entry: "raw-sha224"
+    distinction: "none"
+    note: "Both compute sha224($p), proven 2026-09-01. raw-sha224 is john's Raw-SHA224 spelling."
 vectors:
   - hash: "223b5c5625a10b045533f2f731dc47f572b3070feaf0838dffba0dbb"
     pass: "rosetta"

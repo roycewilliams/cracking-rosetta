@@ -1,13 +1,13 @@
 id: "md4-utf16-le-utf-8-plain"
 name: "md4(utf16-le(utf-8($plain)))"
+expression: "md4(utf16($p))"
+john_dynamic_expr: "dynamic=md4(utf16($p))"
 expression_proof:
-  verified: "absent"
-  verified_at: "2026-08-29"
+  verified: "vector"
+  verified_at: "2026-09-01"
   verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
-  note: "john's dynamic expression vocabulary has no le(), so this construction cannot be written as an expression; that is separate from whether john has a FORMAT for it"
-denotation:
-  text: "md4(utf16-le(utf-8($plain)))"
-  source: "sheet"
+  note: "round-tripped as --format=dynamic=<expr> against every vector this entry carries"
+category: "composite"
 status: "ok"
 tools:
   hashcat:
@@ -29,6 +29,15 @@ tools:
     note: "format discovered by round-trip search, not by name"
   crack:
     supported: false
+relations:
+  - kind: "duplicate-of"
+    entry: "md4-utf16-plain"
+    distinction: "none"
+    note: "Both compute md4(utf16($p)) -- NTLM. Proven 2026-09-01 against this entry's own vector. Same question as the other NTLM-named rows: several names, one computation."
+  - kind: "duplicate-of"
+    entry: "ntlmh"
+    distinction: "none"
+    note: "Both compute md4(utf16($p)). See the edge to md4-utf16-plain."
 vectors:
   - hash: "b4b9b02e6f09a9bd760f388b67351e2b"
     pass: "hashcat"

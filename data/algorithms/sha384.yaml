@@ -27,6 +27,11 @@ tools:
     verified_with: "john"
   crack:
     supported: false
+relations:
+  - kind: "duplicate-of"
+    entry: "raw-sha384"
+    distinction: "none"
+    note: "Both compute sha384($p), proven 2026-09-01. raw-sha384 is john's Raw-SHA384 spelling."
 vectors:
   - hash: "c91ac188daac08cf79159835683e3f907c97b25652e01c9c779874589da77e0719bfc0216bba661205d1384536288343"
     pass: "rosetta"

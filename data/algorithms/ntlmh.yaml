@@ -29,6 +29,10 @@ tools:
   crack:
     supported: false
 relations:
+  - kind: "duplicate-of"
+    entry: "md4-utf16-le-utf-8-plain"
+    distinction: "none"
+    note: "Both compute md4(utf16($p)). See the edge to md4-utf16-plain."
   - kind: "same-computation"
     entry: "md4-utf16-plain"
     distinction: "naming"

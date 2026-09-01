@@ -1,14 +1,13 @@
 id: "shangmi-3"
 name: "ShangMi 3"
+expression: "sm3($p)"
+john_dynamic_expr: "dynamic=sm3($p)"
 expression_proof:
-  verified: "absent"
-  verified_at: "2026-08-31"
+  verified: "vector"
+  verified_at: "2026-09-01"
   verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
-  note: "john publishes this as \"ShangMi 3\" and no category, so what kind of construction it is has not been established here. Its name is not expression-shaped and john's dynamic EXPRESSION language cannot be handed it, so there is no expression on this row. That says nothing about whether any tool can CRACK it, and it is not a claim that the algorithm HAS no expression -- run seed-hx.pl and derive-expressions.pl, which can settle that from evidence."
-denotation:
-  text: "ShangMi 3"
-  source: "john"
-  note: "john's own label for Raw-SM3, in 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200."
+  note: "round-tripped as --format=dynamic=<expr> against every vector this entry carries"
+category: "primitive"
 status: "needs-review"
 tools:
   hashcat:
@@ -31,6 +30,11 @@ tools:
     note: "john's own published example ciphertext for this format, recovered by john under this format. john publishes no plaintext, so the plaintext was found by handing john its own example and a candidate list -- what john recovered IS the plaintext, by construction."
   crack:
     supported: false
+relations:
+  - kind: "duplicate-of"
+    entry: "sm3"
+    distinction: "none"
+    note: "Both compute sm3($p), proven 2026-09-01. shangmi-3 spells out ShangMi 3, sm3 is the standard's short name."
 vectors:
   - hash: "66c7f0f462eeedd9d1f2d46bdc10e4e24167c4875cf2f7a2297da02b8f4ba8e0"
     pass: "abc"

@@ -1,14 +1,12 @@
 id: "solarwinds-serv-u"
 name: "SolarWinds Serv-U"
+expression: "md5($s.$p)"
+john_dynamic_expr: "dynamic=md5($s.$p)"
 expression_proof:
-  verified: "absent"
-  verified_at: "2026-08-31"
-  verified_with: "hashcat v7.1.2-549-g8a15e210b"
-  note: "hashcat mode 24 is a Enterprise Application Software (EAS) format. john's dynamic expression language describes constructions over a password and a salt; it cannot express a container's KDF-plus-cipher, so this has no expression and will not acquire one. That says nothing about whether john can CRACK it -- run discover-john.pl, and if john has a format it goes in tools.john."
-denotation:
-  text: "SolarWinds Serv-U"
-  source: "hashcat"
-  note: "hashcat's own label for mode 24, category \"Enterprise Application Software (EAS)\", in v7.1.2-549-g8a15e210b. This is a container or application format rather than a bare construction, so there is no single digest expression to record."
+  verified: "vector"
+  verified_at: "2026-09-01"
+  verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
+  note: "round-tripped as --format=dynamic=<expr> against every vector this entry carries"
 category: "application"
 status: "needs-review"
 tools:
@@ -32,6 +30,15 @@ tools:
     note: "format discovered by round-trip search, not by name"
   crack:
     supported: false
+relations:
+  - kind: "same-computation"
+    entry: "md5-salt-pass"
+    distinction: "application"
+    note: "SolarWinds Serv-U stores md5($s.$p); the generic construction is md5-salt-pass. Proven here by john --format=dynamic='md5($s.$p)' against this entry's own vector, 2026-09-01."
+  - kind: "same-computation"
+    entry: "oscommerce-xt-commerce"
+    distinction: "application"
+    note: "Both are products storing md5($s.$p); hashcat gives them separate modes, so both rows stay."
 vectors:
   - hash: "e983672a03adcc9767b24584338eb378:00"
     pass: "hashcat"
