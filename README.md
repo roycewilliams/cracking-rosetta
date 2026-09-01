@@ -156,3 +156,9 @@ If you are scripting against this, these are the promises:
 MIT, for the code **and the data**. See [LICENSE](LICENSE).
 
 The data matters more than the code here, so to be explicit: the YAML entries, the generated CSV/JSON exports and the test vectors are offered under the same MIT terms. Attribution is welcome and the [Credits](#credits) are the people to give it to.
+
+Three questions come up often enough to answer here:
+
+* **The individual facts are not ours to license.** That hashcat mode 2811 is what John calls `dynamic_12` is a fact, and facts do not carry copyright. What MIT covers is the tooling, the schema, the prose, and the selection and arrangement of the whole - the parts that took judgement. Use the mappings however you like; the licence is there so everything around them travels too.
+* **`data/tools/*.yaml` is upstream's output**, dumped from hashcat, John and mdxfind by the extractors in `tools/`. It is here so the cross-references can be checked against something, not because this project claims it.
+* **Database rights, if any, are licensed too.** In jurisdictions recognising a *sui generis* database right, any such right in this collection is licensed on the same MIT terms, so your permission over the data is your permission over everything else here, including the condition that the notice travels with it.

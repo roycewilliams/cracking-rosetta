@@ -272,6 +272,22 @@ Open an issue, or send the facts however is convenient. A mode number, a
 format label and a test vector in a plain email is a perfectly good
 contribution; someone will turn it into a file and credit you.
 
+## Licensing your contribution
+
+Everything here is MIT, code and data alike. Opening a pull request, or sending
+facts in by any other route, means you are offering them under those same
+terms. See [LICENSE](LICENSE). That is the whole agreement: there is no CLA to
+sign and nothing to countersign.
+
+You keep the copyright in what you write. The notice in `LICENSE` reads
+"Royce D. Williams and cracking-rosetta contributors" because that is literally
+who holds it.
+
+One thing worth saying plainly: **do not send data you are not free to send.**
+A vector you generated yourself, or one a tool publishes as its own example, is
+fine. A hash out of a corpus you are under an agreement not to redistribute is
+not, however useful it would be.
+
 ## Be nice
 
 Keep PR descriptions lean. Using an LLM to help is fine — strip the padding
