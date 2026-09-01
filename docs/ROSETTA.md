@@ -453,9 +453,9 @@ For sorting, filtering and search, open [index.html](index.html) - or
 | Kerberos 5 DB etype 17 | **—** | `krb5-17` ✓ | **—** |  |
 | Kerberos 5 DB etype 18 | **—** | `krb5-18` ✓ | **—** |  |
 | Kerberos 5 DB etype 3 | **—** | `krb5-3` ✓ | **—** |  |
-| Kerberos 5, etype 17, AS-REP | `32100` ✓ | **—** | **—** |  |
+| Kerberos 5, etype 17, AS-REP | `32100` ✓ | `krb5asrep`<br>`krb5asrep-aes-opencl` ✓ | **—** |  |
 | Kerberos 5, etype 17, TGS-REP | `19600` ✓ | `krb5tgs-sha1`<br>`krb5tgs-sha1-opencl` ✓ | **—** |  |
-| Kerberos 5, etype 18, AS-REP | `32200` ✓ | **—** | **—** |  |
+| Kerberos 5, etype 18, AS-REP | `32200` ✓ | `krb5asrep`<br>`krb5asrep-aes-opencl` ✓ | **—** |  |
 | Kerberos 5, etype 18, TGS-REP | `19700` ✓ | `krb5tgs-sha1`<br>`krb5tgs-sha1-opencl` ✓ | **—** |  |
 | Kerberos 5, etype 23, AS-REP | `18200` ✓ | **—** | **—** |  |
 | Kerberos 5, etype 23, AS-REP (NT) | `35400` ✓ | **—** | **—** |  |
@@ -834,7 +834,7 @@ For sorting, filtering and search, open [index.html](index.html) - or
 | NetIQ SSPR (SHA-512 with Salt) | `32040` ✓ | `sspr`<br>`sspr-opencl` ✓ | **—** |  |
 | NETNTLMV1 | `5500` ✓ | **—** | `NETNTLMV1` ✓ |  |
 | NetNTLMv1 / NetNTLMv1+ESS (NT) | `27000` ✓ | **—** | **—** |  |
-| NETNTLMV2 | `5600` ✓ | `netlmv2`<br>`netntlmv2` | `NETNTLMV2` ✓ |  |
+| NETNTLMV2 | `5600` ✓ | `netlmv2`<br>`netntlmv2`<br>`ntlmv2-opencl` | `NETNTLMV2` ✓ |  |
 | NetNTLMv2 (NT) | `27100` ✓ | **—** | **—** |  |
 | NETSCALER | `8100` ✓ | `Citrix_NS10` ✓ | `NETSCALER` ✓ |  |
 | NETSCALER-PBKDF2 | `33900` ✓ | **—** | `NETSCALER-PBKDF2` ✓ |  |

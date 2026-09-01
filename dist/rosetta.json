@@ -2416,7 +2416,7 @@
             "state" : "unknown"
          },
          "name" : "AxCrypt 2 AES-128",
-         "notes" : "",
+         "notes" : "john has an AxCrypt 2.x format and it is NOT recorded here, because the measurement is ambiguous and a guess would be a false claim either way. Measured 2026-09-01: john --format=axcrypt2-opencl LOADS this entry's vector (\"Loaded 1 password hash ... AxCrypt 2.x [PBKDF2-SHA512 AES OpenCL]\") and then does not recover \"hashcat\" from it, while the same format recovers axcrypt-2-aes-256's vector on the first candidate. That is not a parse failure -- john accepted the hash and rejected the password -- so either john's format does not implement the AES-128 key wrap, or this vector is not what it says. The vector itself is sound: hashcat mode 23500 round-trips it, tier vector. Left open for upstream rather than resolved by picking a side.",
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
@@ -19264,8 +19264,12 @@
          },
          "id" : "kerberos-5-etype-17-as-rep",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "krb5asrep",
+               "krb5asrep-aes-opencl"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -19273,16 +19277,16 @@
             "state" : "unknown"
          },
          "name" : "Kerberos 5, etype 17, AS-REP",
-         "notes" : "",
+         "notes" : "Vector(s) 'hashcat' added 2026-09-01: the SAME Kerberos 5 AS-REP credential(s) already above, re-serialized into the form john reads. They are not independent evidence -- do not read two agreeing vectors here as corroboration. hashcat writes $krb5asrep$<et>$<user>$<REALM>$<checksum>$<data>; john writes $krb5asrep$<et>$<REALM><user>$<data>$<checksum>. The re-encoding was not assumed: each transcoded string was handed to john with only the plaintext the hashcat vector already states, and fell under both the CPU format and the GPU build.",
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
          "tool_note" : {
             "hashcat" : "hashcat's own published example hash for this mode, recovered by hashcat at this mode with hashcat's own published plaintext.",
-            "john" : "",
+            "john" : "GPU build(s) krb5asrep-aes-opencl proven on 2026-09-01 by cracking this entry's own vector(s) under that exact format; john ships no CPU format of that name, so discover-john.pl --mirror-gpu could not place them. CPU format krb5asrep added the same day and on the same evidence: it loads and cracks the transcoded vector too. john covers etypes 17, 18 and 23 under this one identifier, which is why kerberos-5-as-rep-etype-17-18-23 names it as well.",
             "mdxfind" : ""
          },
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -19352,8 +19356,12 @@
          },
          "id" : "kerberos-5-etype-18-as-rep",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "krb5asrep",
+               "krb5asrep-aes-opencl"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -19361,16 +19369,16 @@
             "state" : "unknown"
          },
          "name" : "Kerberos 5, etype 18, AS-REP",
-         "notes" : "",
+         "notes" : "Vector(s) 'hashcat' added 2026-09-01: the SAME Kerberos 5 AS-REP credential(s) already above, re-serialized into the form john reads. They are not independent evidence -- do not read two agreeing vectors here as corroboration. hashcat writes $krb5asrep$<et>$<user>$<REALM>$<checksum>$<data>; john writes $krb5asrep$<et>$<REALM><user>$<data>$<checksum>. The re-encoding was not assumed: each transcoded string was handed to john with only the plaintext the hashcat vector already states, and fell under both the CPU format and the GPU build.",
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
          "tool_note" : {
             "hashcat" : "hashcat's own published example hash for this mode, recovered by hashcat at this mode with hashcat's own published plaintext.",
-            "john" : "",
+            "john" : "GPU build(s) krb5asrep-aes-opencl proven on 2026-09-01 by cracking this entry's own vector(s) under that exact format; john ships no CPU format of that name, so discover-john.pl --mirror-gpu could not place them. CPU format krb5asrep added the same day and on the same evidence: it loads and cracks the transcoded vector too. john covers etypes 17, 18 and 23 under this one identifier, which is why kerberos-5-as-rep-etype-17-18-23 names it as well.",
             "mdxfind" : ""
          },
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -35940,7 +35948,8 @@
          "john" : {
             "ids" : [
                "netlmv2",
-               "netntlmv2"
+               "netntlmv2",
+               "ntlmv2-opencl"
             ],
             "state" : "claimed",
             "tier" : "asserted"
@@ -35954,13 +35963,13 @@
             "tier" : "vector"
          },
          "name" : "NETNTLMV2",
-         "notes" : "",
+         "notes" : "john reads BOTH tools' NTLMv2 serializations: measured 2026-09-01, netntlmv2 and ntlmv2-opencl load and crack this entry's hashcat-form vectors (USER::DOMAIN:challenge:response:blob) unchanged. An earlier run of this session reported \"No password hashes loaded\" and three re-serialized vectors were briefly added on that basis; the cause was a --field-separator-char=tab passed by the probing tool, which governs how john splits LOGIN from HASH when READING a file, so a tab made john treat each whole line as one login. The vectors were withdrawn and the tool fixed. Kerberos AS-REP is NOT like this: john genuinely cannot read hashcat's $krb5asrep$ field order, which is why those rows do carry a transcoded vector. Two reasons this block is still tier asserted, neither of which is doubt about NETNTLMv2 itself. (1) It names netlmv2, a DIFFERENT computation, and a block carries one tier for every identifier in it; netlmv2 recovers none of these vectors, and the fourth vector (aTest:::...:A1E7281FE8C10E53, an 8-byte blob far short of an NTLMv2 one) looks like the NETLMv2 one. That is a row holding two computations, which CLAUDE.md forbids, and splitting it is curation. (2) verify-vectors.pl cannot check this format at all: it writes a synthetic login and a TAB before each hash, which is right for a hash that is only a digest and wrong here, because a NETNTLMv2 ciphertext EMBEDS its own login (USER::DOMAIN:...) and john will not parse it once that field has been displaced. Measured 2026-09-01: the same vectors load and crack under netntlmv2 and ntlmv2-opencl when handed to john natively, 3 of 4, and verify-vectors.pl reports 0 of 4 for all three identifiers.",
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
          "tool_note" : {
             "hashcat" : "",
-            "john" : "john's own test vector for this format is reproduced by mdxfind pinned to NETNTLMV2 at iteration 1",
+            "john" : "john's own test vector for this format is reproduced by mdxfind pinned to NETNTLMV2 at iteration 1 GPU build(s) ntlmv2-opencl proven on 2026-09-01 by cracking this entry's own vector(s) under that exact format; john ships no CPU format of that name, so discover-john.pl --mirror-gpu could not place them.",
             "mdxfind" : ""
          },
          "vecs" : 4

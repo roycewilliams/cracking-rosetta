@@ -52,7 +52,7 @@ tools/verify-vectors.pl --tool <tool> --only <id> -v
 | [`ms-office-le-2003-0-1-md5-rc4-collider-1`](index.html#ms-office-le-2003-0-1-md5-rc4-collider-1) | hashcat | `9710` | upstream |
 | [`ms-office-le-2003-3-sha1-rc4-collider-1`](index.html#ms-office-le-2003-3-sha1-rc4-collider-1) | hashcat | `9810` | upstream |
 | [`mysql4-1-mysql5`](index.html#mysql4-1-mysql5) | john | `dynamic_1028`, `mysql-sha1`, `mysql-sha1-opencl` | asserted |
-| [`netntlmv2`](index.html#netntlmv2) | john | `netlmv2`, `netntlmv2` | asserted |
+| [`netntlmv2`](index.html#netntlmv2) | john | `netlmv2`, `netntlmv2`, `ntlmv2-opencl` | asserted |
 | [`oscommerce-xt-commerce`](index.html#oscommerce-xt-commerce) | john | `dynamic_1009`, `dynamic_1017`, `dynamic_2004`, `dynamic_4`, `osc` | asserted |
 | [`password-safe-v2`](index.html#password-safe-v2) | hashcat | `9000` | upstream |
 | [`pdf-1-1-1-3-acrobat-2-4-collider-1`](index.html#pdf-1-1-1-3-acrobat-2-4-collider-1) | hashcat | `10410` | upstream |
@@ -234,7 +234,7 @@ Real work rather than a one-liner: it means finding out whether the tool
 supports the construction at all, and under which identifier. The counts are
 the honest size of the job.
 
-### john: 997 entries say nothing
+### john: 995 entries say nothing
 
 A few that carry a vector and a proven expression, so there is a definite construction to look for, one per family:
 
@@ -246,7 +246,7 @@ A few that carry a vector and a proven expression, so there is a definite constr
 * [`tiger128-3-md5-plain`](index.html#tiger128-3-md5-plain) - `tiger(md5($p))` (and 1 more starting `tiger`)
 * [`whirlpool-md5-plain`](index.html#whirlpool-md5-plain) - `whirlpool(md5($p))` (and 3 more starting `whirlpool`)
 
-All 997: filter `john_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
+All 995: filter `john_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
 
 Where such an entry carries an expression, john can already attack it without
 a named format:
