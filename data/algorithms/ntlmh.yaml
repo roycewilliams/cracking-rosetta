@@ -22,6 +22,7 @@ tools:
     verified_with: "mdxfind"
   john:
     cpu: ["NT", "NT-long", "dynamic_33"]
+    gpu: ["NT-long-opencl", "NT-opencl"]
     verified: "vector"
     verified_at: "2026-08-29"
     verified_with: "john"

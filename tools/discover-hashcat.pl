@@ -143,6 +143,27 @@
 # the container formats whose example hashes run to thousands of hex
 # characters.
 #
+#
+# THE MUTATION IS CONFINED TO A LEADING HEX RUN
+#
+# Measured 2026-09-01 while porting this canary to discover-john.pl: mutating
+# a BASE64 digest reports positions the format does not actually ignore. john's
+# Raw-SHA1 "ignored" position 31 of {SHA}0ijZPTcJXMa+t2XnEbEwSOkvQu0=, which is
+# the last base64 character before the padding -- 27 base64 characters carry
+# 162 bits and a SHA-1 digest is 160, so its bottom two bits encode nothing.
+# The mutant is a different STRING that decodes to the SAME DIGEST.
+#
+# The mutation is defined on text; the claim is about a digest. Those coincide
+# only where the text IS the digest, so only a leading run of at least 16 hex
+# characters is mutated -- the bare digests and the "<digest>:<salt>" shapes
+# the masked and truncated families use -- and any other encoding is left
+# unchallenged and reported as unmeasured rather than as clean.
+#
+# Getting this wrong is one-directional: a bogus ignored position can only ever
+# WITHHOLD a claim, never invent one. Verdicts cached before this rule existed
+# therefore cost coverage, not correctness -- but delete canary.positions so
+# the next run re-measures.
+#
 # WHAT DOES NOT GET APPLIED AUTOMATICALLY
 #
 # A hash can honestly fall to several modes: a bare MD5 digest is mode 0 and
@@ -542,6 +563,7 @@ my $elapsed = time - $started;
 
 my %vec_of = map { $_->{vid} => $_ } @vectors;
 my %ignored_pos;       # mode -> { position => 1 }, the digest it never checks
+my %unmeasured;        # mode -> vectors whose encoding cannot be mutated
 
 # The challenge costs an order of magnitude more than replaying the cracks it
 # is challenging -- 731s against 10s on the first full sweep -- so its verdict
@@ -574,13 +596,17 @@ elsif (!$dry && !$no_canary && %mode_hits) {
         next unless %credited;
 
         my (%mutant_pos, @pending, %words);
+        my $unmeasurable = 0;
         for my $v (values %credited) {
             $words{ $v->{pass} } = 1;
-            my $h   = $v->{hash};
-            my $max = length($h) < $canary_span ? length($h) : $canary_span;
+            my $h = $v->{hash};
+            # Only the leading hex run, and only if it is long enough to BE a
+            # digest; see the methodology note on base64 padding bits.
+            my ($hex) = $h =~ /^([0-9a-fA-F]{16,})/;
+            unless (defined $hex) { $unmeasurable++; next }
+            my $max = length($hex) < $canary_span ? length($hex) : $canary_span;
             for my $i (0 .. $max - 1) {
                 my $c = substr($h, $i, 1);
-                next unless $c =~ /[0-9A-Fa-f]/;
                 my $m = $h;
                 # Any different hex digit will do; '0' unless it already is.
                 substr($m, $i, 1) = ($c eq '0') ? '1' : '0';
@@ -590,6 +616,7 @@ elsif (!$dry && !$no_canary && %mode_hits) {
                 push @pending, $m;
             }
         }
+        $unmeasured{$mode} = $unmeasurable if $unmeasurable;
         next unless @pending;
 
         my $mw = write_file("$workdir/canary.$mode.word", sort keys %words);
@@ -626,6 +653,11 @@ elsif (!$dry && !$no_canary && %mode_hits) {
                 . "%d do not compare the whole digest\n",
         scalar keys %mode_hits, $rounds_total, time - $canary_started,
         scalar keys %ignored_pos;
+    printf STDERR "-   %d mode(s) had cracked vector(s) in an encoding this "
+                . "cannot safely mutate\n-   and are reported unmeasured rather "
+                . "than clean: %s\n", scalar keys %unmeasured,
+        join(' ', map { "$_=$unmeasured{$_}" } sort { $a <=> $b } keys %unmeasured)
+        if %unmeasured;
     if (open my $fh, '>', $canary_cache) {
         print {$fh} join(' ', $_, sort { $a <=> $b } keys %{ $ignored_pos{$_} }), "\n"
             for sort { $a <=> $b } keys %ignored_pos;

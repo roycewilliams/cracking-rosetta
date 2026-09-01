@@ -25,6 +25,7 @@ tools:
     note: "mdxfind's own published example for this identifier, recovered by mdxfind at this identifier with mdxfind's own published plaintext."
   john:
     cpu: ["sspr"]
+    gpu: ["sspr-opencl"]
     verified: "vector"
     verified_at: "2026-08-31"
     verified_with: "john"

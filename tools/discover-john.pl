@@ -120,6 +120,73 @@
 # in. Writing the union would put two contradictory algorithms in one row --
 # and it is the row a reader trusts to say what to run.
 #
+# THE CANARY: SOME FORMATS DO NOT COMPARE THE WHOLE DIGEST
+#
+# This is not hypothetical and it is not hashcat's problem alone. john's
+# Raw-SHA1-Linkedin reads the LinkedIn leak, whose hashes have their leading
+# nibbles zeroed, so it ignores hash positions 0-7 exactly as hashcat's -m 100
+# does -- measured position by position on 2026-08-31. An earlier run of THIS
+# script duly wrote it onto aich and sha1uc, and it had to be withdrawn by
+# hand. Raw-SHA1 and dynamic_26 compare the whole digest, so it is per-format,
+# not universal.
+#
+# So every format that scored a hit is now challenged before anything is
+# written: take each hash it cracked and, for every hex position in it, offer
+# one copy with that character changed. A format that compares the whole digest
+# refuses all of them. A format that accepts one has just proved it ignores
+# that position.
+#
+# The challenge iterates, and the reason is a property of every cracker's
+# target list rather than of any one of them: john deduplicates the hashes it
+# loads by what it actually compares, so all the mutants of an ignored field
+# collapse and only one is ever reported. Each round drops the mutants that
+# fell and re-runs the rest, converging in as many rounds as the widest ignored
+# field is wide.
+#
+#
+# THE MUTATION IS CONFINED TO A LEADING HEX RUN, AND THAT IS NOT FUSSINESS
+#
+# Measured 2026-09-01: challenging john's Raw-SHA1 reported that it "ignores"
+# position 31 of netscape-ldap's {SHA}0ijZPTcJXMa+t2XnEbEwSOkvQu0=. It does
+# not. That position is the last base64 character before the padding, and a
+# SHA-1 digest is 160 bits where 27 base64 characters carry 162, so its bottom
+# two bits encode nothing. Changing '0' to '1' there produces a DIFFERENT
+# STRING that decodes to the SAME DIGEST, and the crack that follows is not
+# evidence about the format at all.
+#
+# The canary's mutation is defined on text; the claim it makes is about a
+# digest. Those coincide only where the text IS the digest. So only a leading
+# run of hex characters at least 16 long is mutated -- which covers the bare
+# digests and the "<digest>:<salt>" shapes the masked and truncated families
+# use -- and a vector in any other encoding is left unchallenged and counted as
+# such. An unmeasured format is reported as unmeasured; it is not guessed at in
+# either direction.
+#
+# The cost of having got this wrong is one-directional: a bogus ignored
+# position can only ever WITHHOLD a claim, never invent one. So verdicts
+# recorded before this rule existed cost coverage, not correctness.
+#
+# WHAT THE CANARY LICENSES, AND WHAT IT DOES NOT
+#
+# A format that skips part of the digest has NOT been shown to be wrong. Under
+# Raw-SHA1-Linkedin john still proved 128 of the 160 bits match, which an
+# unrelated hash manages with probability 2^-128. A false mapping arises only
+# when the corpus holds a hash DELIBERATELY related to a true digest, which is
+# exactly what mdxfind's masked and truncated families are.
+#
+# So a claim is withheld only where the corpus itself realises the ambiguity:
+# two DIFFERENT hashes in it that the format cannot tell apart. Excluding every
+# format that skips a word would throw away correct mappings in order to refuse
+# one that is not. This is the same rule discover-hashcat.pl arrived at, and it
+# is stated once here rather than cross-referenced because the two tools must
+# not drift.
+#
+# --mirror-gpu does not run the canary, and that is deliberate rather than an
+# omission. A mirror adds no algorithmic claim: the row already names the CPU
+# format, and the GPU twin is the same format on another device. Withdrawing
+# the GPU label while leaving the CPU one would leave the data saying something
+# nobody believes.
+#
 # ONE FORMAT IS NEVER RECORDED: crypt
 #
 # john's "crypt" format is a wrapper around the host's crypt(3), so what it
@@ -129,6 +196,43 @@
 # in the table that a reader on another host cannot reproduce, which is the
 # same reason john.yaml keeps the disabled dynamics as data rather than
 # depending on this host's dynamic_disabled.conf.
+#
+# --mirror-gpu: THE GPU COLUMN IS A NARROWER CLAIM AND GETS A NARROWER SEARCH
+#
+# john ships 113 -opencl/-ztex builds beside its CPU formats, and until now
+# nothing populated tools.john.gpu, so 103 of john's 552 formats were counted
+# against this repository as uncovered while being nothing more than the same
+# formats on another device.
+#
+# They are NOT discovered the way a CPU format is. --mirror-gpu writes a GPU
+# label onto an entry only when BOTH of these hold:
+#
+#   (a) the entry already names the CPU format the GPU label mirrors -- label
+#       with '-opencl'/'-ztex' stripped, matched case-insensitively against the
+#       inventory's own CPU labels; and
+#   (b) the entry's own vector round-trips under the GPU label here.
+#
+# (b) alone is the ordinary standard and would be tempting, since it is a
+# genuine round-trip. It is not enough. 22 hashcat modes and john's own
+# Raw-SHA1-Linkedin do not compare the whole digest, so a crack under such a
+# format is not by itself evidence about a truncated or masked entry, and the
+# canary that measures this (discover-hashcat.pl) has not been ported here.
+# Requiring (a) keeps the incremental claim to "the format this row already
+# names also exists for the GPU", which inherits whatever scrutiny the CPU
+# mapping already had rather than minting a new one.
+#
+# A GPU format with no CPU counterpart -- diskcryptor-aes-opencl, which is an
+# AES-XTS-only build, KeePass-Argon2-opencl, ethereum-presale-opencl -- is
+# therefore reported and never written. Those are curation: they may deserve
+# their own entry, and that is a person's call.
+#
+# THE DEVICE DECIDES THE LIST, NOT THE CALLER
+#
+# tools.john.cpu and tools.john.gpu are separate lists and validate.pl rejects
+# a label filed under the wrong one. So every applied label is routed by the
+# inventory's own device field. Before this, --include-gpu --apply would have
+# written opencl labels into cpu: a search that could only ever produce an
+# invalid tree.
 #
 # FAILURE NEVER DEMOTES, AND NEITHER DOES SILENCE
 #
@@ -175,7 +279,15 @@ Usage: $PROG [options]
                      still measured and reported, so the reason stays visible
    --all             target every entry with a vector, not just the unmapped
    --include-gpu     also try opencl/ztex formats
+   --mirror-gpu      populate tools.john.gpu only: try each opencl/ztex format
+                     against the entries that already name the CPU format it
+                     mirrors. Implies --include-gpu --all --skip-disabled.
    --skip-disabled   do not try the dynamics disabled by dynamic_disabled.conf
+   --no-canary       skip the whole-digest challenge (see the methodology
+                     note; it only ever WITHDRAWS claims)
+   --canary-rounds N how many refinement rounds the challenge may take
+                     (default 12)
+   --canary-span N   how far into a hash to mutate (default 512 characters)
    --max-per-entry N hold back entries matched by more than N formats
                      (default 6; they are reported, never written)
    --max-share PCT   hold back a format matching more than PCT% of the corpus
@@ -194,7 +306,7 @@ END_USAGE
 }
 
 my ($john, $algdir, $inventory, $workdir, $only, $help, $dry, $apply);
-my ($all, $include_gpu, $skip_disabled, $resume);
+my ($all, $include_gpu, $skip_disabled, $resume, $mirror_gpu);
 my @fmt_re;
 my @exclude;
 my $timeout       = 60;
@@ -203,6 +315,9 @@ my $verbose       = 0;
 my $had_args      = scalar @ARGV;   # house rule: no arguments means show usage
 my $max_per_entry = 6;
 my $max_share     = 20;
+my $canary_rounds = 12;
+my $canary_span   = 512;
+my $no_canary;
 
 GetOptions(
     'john=s'          => \$john,
@@ -216,7 +331,11 @@ GetOptions(
     'exclude=s'       => \@exclude,
     'all'             => \$all,
     'include-gpu'     => \$include_gpu,
+    'mirror-gpu'      => \$mirror_gpu,
     'skip-disabled'   => \$skip_disabled,
+    'no-canary'       => \$no_canary,
+    'canary-rounds=i' => \$canary_rounds,
+    'canary-span=i'   => \$canary_span,
     'max-per-entry=i' => \$max_per_entry,
     'max-share=i'     => \$max_share,
     'resume'          => \$resume,
@@ -227,6 +346,9 @@ GetOptions(
 ) or do { usage(); exit 2 };
 
 if ($help) { usage(); exit 0 }
+# --mirror-gpu is a narrower search wearing the same machinery: GPU builds only,
+# against entries chosen by what they already name rather than by what they lack.
+if ($mirror_gpu) { $include_gpu = $all = $skip_disabled = 1 }
 # No arguments at all: show usage rather than silently starting an hour of work.
 if (!$had_args) { usage(); exit 2 }
 
@@ -253,13 +375,40 @@ my $inv = eval { YAML::XS::LoadFile($inventory) }
 
 my $john_version = $inv->{version} // 'john';
 
+# The device of every label, so an applied mapping is filed under the list
+# validate.pl expects instead of under the one the caller happened to be in.
+my %device = map { $_->{label} => ($_->{device} // 'cpu') } @{ $inv->{formats} || [] };
+$device{$_} //= 'cpu' for @{ $inv->{disabled_dynamic} || [] };
+
+# gpu label -> the CPU label it mirrors. The join is the label with the device
+# suffix stripped, matched case-insensitively because john spells the pair
+# inconsistently: Raw-MD5 has raw-MD5-opencl, xsha512 has XSHA512-opencl.
+my %cpu_by_lc = map  { lc($_) => $_ }
+                grep { $device{$_} eq 'cpu' } keys %device;
+my %mirrors;
+for my $l (grep { $device{$_} ne 'cpu' } keys %device) {
+    (my $base = $l) =~ s/-(?:opencl|ztex)$//;
+    my $cpu = $cpu_by_lc{ lc $base } or next;
+    $mirrors{$l} = $cpu;
+}
+
 my @candidates;
 for my $f (@{ $inv->{formats} || [] }) {
     my $dev = $f->{device} // 'cpu';
     next if $dev ne 'cpu' && !$include_gpu;
+    next if $mirror_gpu && ($dev eq 'cpu' || !$mirrors{ $f->{label} });
     push @candidates, $f->{label};
 }
 push @candidates, @{ $inv->{disabled_dynamic} || [] } unless $skip_disabled;
+
+# The GPU builds with no CPU counterpart are not failures and not candidates;
+# say so once, because "103 of 113" otherwise looks like something went wrong.
+if ($mirror_gpu) {
+    my @orphan = sort grep { $device{$_} ne 'cpu' && !$mirrors{$_} } keys %device;
+    printf STDERR "- %d GPU build(s) mirror a CPU format; %d have none and are "
+                . "left for curation: %s\n",
+        scalar(keys %mirrors), scalar @orphan, join(' ', @orphan) if @orphan;
+}
 
 if (@fmt_re) {
     my @re = map { qr/$_/i } @fmt_re;
@@ -289,10 +438,26 @@ for my $f (@files) {
     $path{  $e->{id} } = $p;
 }
 
+# In mirror mode: entry id -> gpu label -> 1, for every gpu build whose CPU
+# format this entry ALREADY names. Nothing outside this map may be written; see
+# the methodology note on why (b) alone is not the standard here.
+my %wants;
+if ($mirror_gpu) {
+    my %entries_of;                      # lc cpu label -> [ entry ids ]
+    for my $id (keys %entry) {
+        push @{ $entries_of{ lc $_ } }, $id
+            for @{ $entry{$id}{tools}{john}{cpu} || [] };
+    }
+    for my $g (sort keys %mirrors) {
+        $wants{$_}{$g} = 1 for @{ $entries_of{ lc $mirrors{$g} } || [] };
+    }
+}
+
 my @vectors;   # { id, hash, pass }
 my %targets;
 for my $id (sort keys %entry) {
     my $e = $entry{$id};
+    next if $mirror_gpu && !$wants{$id};
     unless ($all) {
         my $j = $e->{tools}{john};
         next if $j && ($j->{verified} // '') eq 'vector';
@@ -456,6 +621,178 @@ FORMAT: for my $label (@candidates) {
 my $elapsed = time - $started;
 
 #-----------------------------------------------------------------------
+# The canary. Challenge every format that scored a hit with digests differing
+# from the ones it cracked by exactly one hex character; see the methodology
+# note. --mirror-gpu skips it, also per that note.
+
+my %vec_of    = map { $_->{vid}     => $_ } @vectors;
+my %uniq_hash = map { lc $_->{hash} => 1 } @vectors;
+my %ignored_pos;     # format label -> { position => 1 }
+my %unmeasured;      # format label -> vectors whose encoding cannot be mutated
+
+# The challenge costs far more than replaying the cracks it is challenging, so
+# its verdict is written beside the pot files and reused by --resume like any
+# other evidence in the work dir. Delete canary.positions to re-measure, which
+# is what a new john release calls for: it is a property of the formats.
+my $canary_cache = "$workdir/canary.positions";
+if ($resume && -s $canary_cache && open my $cfh, '<', $canary_cache) {
+    while (my $line = <$cfh>) {
+        chomp $line;
+        my ($label, @pos) = split /\s+/, $line;
+        next unless defined $label && @pos;
+        $ignored_pos{$label}{$_} = 1 for @pos;
+    }
+    close $cfh;
+    printf STDERR "- canary: %d format(s) read from %s\n",
+        scalar keys %ignored_pos, $canary_cache;
+}
+elsif (!$dry && !$no_canary && !$mirror_gpu && %fmt_hits) {
+    my $canary_started = time;
+    my $rounds_total   = 0;
+
+    for my $label (sort keys %fmt_hits) {
+        (my $safe = $label) =~ s/[^A-Za-z0-9]/_/g;
+
+        # Every (hash, plaintext) this format was credited with.
+        my %credited;
+        for my $vid (keys %per_vector) {
+            next unless $per_vector{$vid}{$label};
+            my $v = $vec_of{$vid} or next;
+            $credited{ $v->{hash} . "\0" . $v->{pass} } = $v;
+        }
+        next unless %credited;
+
+        my (%mutant_pos, @pending, %words);
+        my $unmeasurable = 0;
+        for my $v (values %credited) {
+            $words{ $v->{pass} } = 1;
+            my $h = $v->{hash};
+            # Only the leading hex run, and only if it is long enough to BE a
+            # digest; see the methodology note on base64 padding bits.
+            my ($hex) = $h =~ /^([0-9a-fA-F]{16,})/;
+            unless (defined $hex) { $unmeasurable++; next }
+            my $max = length($hex) < $canary_span ? length($hex) : $canary_span;
+            for my $i (0 .. $max - 1) {
+                my $c = substr($h, $i, 1);
+                my $m = $h;
+                # Any different hex digit will do; '0' unless it already is.
+                substr($m, $i, 1) = ($c eq '0') ? '1' : '0';
+                next if $uniq_hash{ lc $m };     # a real corpus hash, not a mutant
+                next if exists $mutant_pos{ lc $m };
+                $mutant_pos{ lc $m } = $i;
+                push @pending, $m;
+            }
+        }
+        $unmeasured{$label} = $unmeasurable if $unmeasurable;
+        next unless @pending;
+
+        my $mw = write_file("$workdir/canary.$safe.word", sort keys %words);
+
+        for my $round (1 .. $canary_rounds) {
+            last unless @pending;
+            $rounds_total++;
+
+            # Same shape the search itself used, including the dynamic rewrite:
+            # a mapping proven only in john's own encoding must be challenged
+            # in that encoding too, or the canary is silent exactly where it
+            # was needed.
+            my (@lines, %mutant_of);
+            my $seq = 0;
+            for my $m (@pending) {
+                my $login = 'c' . $seq++;
+                $mutant_of{$login} = $m;
+                push @lines, "$login\t$m";
+                next unless $label =~ /^dynamic_\d+$/;
+                my ($h, $salt) = split /:/, $m, 2;
+                push @lines, "$login\t\$$label\$$h\$$salt"
+                    if defined $salt && length $salt && $salt !~ /:/;
+            }
+            my $mf = write_file("$workdir/canary.$safe.hash", @lines);
+            my $mp = "$workdir/pot/canary.$safe.pot";
+            unlink $mp;
+
+            run_capture($timeout, '/bin/sh', '-c',
+                sprintf('cd %s && exec ./%s --format=%s --field-separator-char=tab '
+                      . '--wordlist=%s --pot=%s --session=%s %s >/dev/null 2>&1',
+                        quotemeta($jdir), quotemeta($jbin), quotemeta($label),
+                        quotemeta($mw), quotemeta($mp),
+                        quotemeta("$workdir/c.$safe"), quotemeta($mf)));
+            last unless -s $mp;
+
+            my (undef, $shown) = run_capture($timeout, '/bin/sh', '-c',
+                sprintf('cd %s && exec ./%s --show --format=%s '
+                      . '--field-separator-char=tab --pot=%s %s 2>/dev/null',
+                        quotemeta($jdir), quotemeta($jbin), quotemeta($label),
+                        quotemeta($mp), quotemeta($mf)));
+
+            my %fell;
+            for my $line (split /\n/, $shown // '') {
+                my ($login, $pw) = split /\t/, $line, 2;
+                next unless defined $login && defined $pw && $words{$pw};
+                my $m   = $mutant_of{$login} or next;
+                my $pos = $mutant_pos{ lc $m };
+                next unless defined $pos;
+                $ignored_pos{$label}{$pos} = 1;
+                $fell{ lc $m } = 1;
+            }
+            last unless %fell;
+            @pending = grep { !$fell{ lc $_ } } @pending;
+        }
+    }
+
+    printf STDERR "- canary: challenged %d format(s) in %d round(s), %.1fs; "
+                . "%d do not compare the whole digest\n",
+        scalar keys %fmt_hits, $rounds_total, time - $canary_started,
+        scalar keys %ignored_pos;
+    printf STDERR "-   %d format(s) had cracked vector(s) in an encoding this "
+                . "cannot safely mutate\n-   and are reported unmeasured rather "
+                . "than clean: %s\n", scalar keys %unmeasured,
+        join(' ', map { "$_=$unmeasured{$_}" } sort keys %unmeasured)
+        if %unmeasured;
+    if (open my $cfh, '>', $canary_cache) {
+        print {$cfh} join(' ', $_, sort { $a <=> $b } keys %{ $ignored_pos{$_} }), "\n"
+            for sort keys %ignored_pos;
+        close $cfh;
+    }
+}
+
+# range_summary(@positions) - "0-7,32" rather than a wall of numbers.
+sub range_summary {
+    my @p = sort { $a <=> $b } @_;
+    my @runs;
+    for (my $i = 0; $i <= $#p; ) {
+        my $j = $i;
+        $j++ while $j < $#p && $p[$j + 1] == $p[$j] + 1;
+        push @runs, $i == $j ? $p[$i] : "$p[$i]-$p[$j]";
+        $i = $j + 1;
+    }
+    return join ',', @runs;
+}
+
+# Where the corpus itself realises the ambiguity: two DIFFERENT hashes this
+# format cannot tell apart. Only there is a claim withheld.
+my %ambiguous;    # "label\0id" -> the other ids the format cannot distinguish
+for my $label (keys %ignored_pos) {
+    my @pos = keys %{ $ignored_pos{$label} };
+    my %group;
+    for my $v (@vectors) {
+        my $k = lc $v->{hash};
+        substr($k, $_, 1) = '.' for grep { $_ < length $k } @pos;
+        # Keyed by the masked hash so two entries carrying the SAME hash are
+        # not ambiguity; valued by every id carrying it, so neither is lost
+        # when they do collide with a third.
+        $group{$k}{ lc $v->{hash} }{ $v->{id} } = 1;
+    }
+    for my $k (keys %group) {
+        next if keys %{ $group{$k} } < 2;
+        my @ids = sort keys %{ { map { %$_ } values %{ $group{$k} } } };
+        for my $id (@ids) {
+            $ambiguous{"$label\0$id"} = join ' ', grep { $_ ne $id } @ids;
+        }
+    }
+}
+
+#-----------------------------------------------------------------------
 # Decide what may be written. Two guards, both about not letting one
 # degenerate vector or one over-permissive format spray identifiers around.
 
@@ -473,11 +810,24 @@ my %host_dependent = map { $_ => 1 } qw(crypt crypt-opencl);
 my (@apply_list, @held);
 for my $id (sort keys %hits) {
     my @f = sort keys %{ $hits{$id} };
-    my @clean = grep { !$noisy_fmt{$_} && !$host_dependent{$_} } @f;
+    my @clean = grep { !$noisy_fmt{$_} && !$host_dependent{$_}
+                       && !$ambiguous{"$_\0$id"} } @f;
+    my @amb   = grep { $ambiguous{"$_\0$id"} } @f;
+
+    # A GPU build that cracked this entry's vector without being the twin of a
+    # format the entry already names is a discovery, not a mirror. It is
+    # reported so it is not lost, and never written: see the methodology note.
+    if ($mirror_gpu) {
+        my @stray = grep { !$wants{$id}{$_} } @clean;
+        @clean = grep { $wants{$id}{$_} } @clean;
+        push @held, [$id, \@stray, 'cracked but mirrors no CPU format this '
+                                 . 'entry names'] if @stray;
+    }
 
     # Every vector of this entry that cracked at all must have cracked under
     # the same formats; see the methodology note.
-    my @sets = map  { join ' ', sort grep { !$noisy_fmt{$_} && !$host_dependent{$_} }
+    my @sets = map  { join ' ', sort grep { !$noisy_fmt{$_} && !$host_dependent{$_}
+                                            && (!$mirror_gpu || $wants{$id}{$_}) }
                                      keys %{ $per_vector{$_} } }
                grep { %{ $per_vector{$_} } }
                grep { (split /\0/)[0] eq $id } keys %per_vector;
@@ -491,8 +841,17 @@ for my $id (sort keys %hits) {
     elsif ($excluded{$id}) {
         push @held, [$id, \@f, 'named in --exclude'];
     }
+    elsif (!@clean && @amb) {
+        push @held, [$id, \@amb, join('; ', map {
+            sprintf('%s skips hash position(s) %s and so cannot tell this row '
+                  . 'from %s', $_, range_summary(keys %{ $ignored_pos{$_} }),
+                    $ambiguous{"$_\0$id"}) } @amb)];
+    }
     elsif (!@clean) {
-        push @held, [$id, \@f, 'every matching format is over-broad'];
+        # In mirror mode the stray hits were already reported above with the
+        # reason that actually applies; do not report them again as over-broad.
+        push @held, [$id, \@f, 'every matching format is over-broad']
+            unless $mirror_gpu;
     }
     elsif (@clean > $max_per_entry) {
         push @held, [$id, \@clean, sprintf('%d formats > --max-per-entry %d',
@@ -532,6 +891,18 @@ if (%timed_out) {
     printf STDERR "-   %d format(s) hit the %ds timeout: %s\n",
         scalar keys %timed_out, $timeout, join(' ', sort keys %timed_out);
 }
+if (%ignored_pos) {
+    printf STDERR "-   %d format(s) do not compare the whole digest. That is not "
+                . "by itself\n-   a wrong mapping -- see the methodology note -- "
+                . "but a claim is withheld\n-   wherever the corpus holds two "
+                . "hashes the format cannot tell apart:\n", scalar keys %ignored_pos;
+    printf STDERR "-     %-28s skips hash position(s) %s\n",
+        $_, range_summary(keys %{ $ignored_pos{$_} })
+        for sort keys %ignored_pos;
+    my %amb_ids = map { (split /\0/)[1] => 1 } keys %ambiguous;
+    printf STDERR "-     %d entry/entries are affected: %s\n",
+        scalar keys %amb_ids, join(' ', sort keys %amb_ids) if %amb_ids;
+}
 
 #-----------------------------------------------------------------------
 # Apply. A discovered mapping is tier 'vector' because it was round-tripped
@@ -545,16 +916,26 @@ if ($apply && !$dry) {
         my $blk = $e->{tools}{john} ||= {};
 
         # Keep identifiers a human already recorded even if this run did not
-        # reach or prove them; dropping them would be a silent demotion.
-        my %cpu = map { $_ => 1 } @{ $blk->{cpu} || [] }, @$f;
-        $blk->{cpu} = [ sort keys %cpu ];
+        # reach or prove them; dropping them would be a silent demotion. Each
+        # label goes to the list its DEVICE says it belongs in -- validate.pl
+        # rejects an opencl build filed under cpu, and the caller does not get
+        # to decide which it was.
+        for my $key (qw(cpu gpu)) {
+            my @mine = grep { ($key eq 'gpu') == ($device{$_} ne 'cpu') } @$f;
+            next unless @mine || @{ $blk->{$key} || [] };
+            my %set = map { $_ => 1 } @{ $blk->{$key} || [] }, @mine;
+            $blk->{$key} = [ sort keys %set ];
+        }
         delete $blk->{supported};
 
         # Only a block whose every identifier cracked here may claim tier
         # 'vector'; a block that gained one proven identifier alongside an
         # unproven one keeps the tier and the date it already had, because
-        # nothing about that older claim was tested.
-        my $proven = !grep { !$hits{$id}{$_} } @{ $blk->{cpu} };
+        # nothing about that older claim was tested. In mirror mode that is
+        # always the case -- the CPU labels were deliberately not re-run -- so
+        # the tier and its note are left exactly as they were.
+        my $proven = !grep { !$hits{$id}{$_} }
+                      (@{ $blk->{cpu} || [] }, @{ $blk->{gpu} || [] });
         if ($proven) {
             $blk->{verified}      = 'vector';
             $blk->{verified_at}   = $today;

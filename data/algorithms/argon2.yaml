@@ -23,6 +23,7 @@ tools:
     verified_with: "mdxfind"
   john:
     cpu: ["Argon2"]
+    gpu: ["argon2-opencl"]
     verified: "vector"
     verified_at: "2026-08-29"
     verified_with: "john"

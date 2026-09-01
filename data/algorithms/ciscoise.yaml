@@ -23,6 +23,7 @@ tools:
     verified_with: "mdxfind"
   john:
     cpu: ["Iterated-SHA256"]
+    gpu: ["Iterated-SHA256-opencl"]
     verified: "vector"
     verified_at: "2026-08-29"
     verified_with: "john"

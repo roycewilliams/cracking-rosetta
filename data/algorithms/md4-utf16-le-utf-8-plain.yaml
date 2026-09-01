@@ -23,6 +23,7 @@ tools:
     note: "type discovered by round-trip search, not by name"
   john:
     cpu: ["NT", "NT-long", "dynamic_33"]
+    gpu: ["NT-long-opencl", "NT-opencl"]
     verified: "vector"
     verified_at: "2026-08-30"
     verified_with: "john"

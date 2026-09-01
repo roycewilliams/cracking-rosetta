@@ -25,17 +25,18 @@ tools:
     note: "mdxfind's own published example for this identifier, recovered by mdxfind at this identifier with mdxfind's own published plaintext."
   john:
     cpu: ["Raw-SHA1", "dynamic_26"]
+    gpu: ["raw-SHA1-opencl"]
     verified: "vector"
     verified_at: "2026-08-31"
     verified_with: "john"
-    note: "format discovered by round-trip search, not by name. Raw-SHA1-Linkedin was recorded here by discover-john.pl on 2026-08-31 and WITHDRAWN the same day. It is john's format for the LinkedIn leak, whose hashes have their leading nibbles zeroed, and it ignores hash positions 0-7 to read them -- measured here, the same defect the hashcat canary found in -m 100. It therefore cracks any full SHA-1 digest as well, which is a collision and not a denotation. Raw-SHA1 and dynamic_26 both compare the whole digest and were re-checked position by position."
+    note: "format discovered by round-trip search, not by name. Raw-SHA1-Linkedin was recorded here by discover-john.pl on 2026-08-31 and WITHDRAWN the same day. It is john's format for the LinkedIn leak, whose hashes have their leading nibbles zeroed, and it ignores hash positions 0-4 -- the 20 bits that leak zeroed -- measured position by position on 2026-09-01. That is the same defect the hashcat canary found in -m 100, at a different width: -m 100 skips 0-7. It therefore cracks any full SHA-1 digest as well, which is a collision and not a denotation. Raw-SHA1 and dynamic_26 both compare the whole digest and were re-checked position by position."
   crack:
     supported: false
 relations:
   - kind: "collides-on-subset"
     entry: "sha1lsb35"
     distinction: "truncation"
-    note: "AICH of a single block is SHA-1, and SHA1lsb35 is SHA-1 with the leading nibbles masked to zero, so any tool that ignores that field -- hashcat -m 100 and john Raw-SHA1-Linkedin both do, measured 2026-08-31 -- reports one for the other. They agree on every input outside those nibbles and differ nowhere else that such a tool looks."
+    note: "AICH of a single block is SHA-1, and SHA1lsb35 is SHA-1 with the leading nibbles masked to zero, so any tool that ignores that field -- hashcat -m 100 skips positions 0-7 and john Raw-SHA1-Linkedin skips 0-4, measured 2026-09-01, and the mask is 5 nibbles wide -- reports one for the other. They agree on every input outside those nibbles and differ nowhere else that such a tool looks."
 vectors:
   - hash: "cbfdac6008f9cab4083784cbd1874f76618d2a97"
     pass: "password123"

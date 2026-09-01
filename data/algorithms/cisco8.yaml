@@ -23,6 +23,7 @@ tools:
     verified_with: "mdxfind"
   john:
     cpu: ["PBKDF2-HMAC-SHA256"]
+    gpu: ["PBKDF2-HMAC-SHA256-opencl"]
     verified: "vector"
     verified_at: "2026-08-29"
     verified_with: "john"

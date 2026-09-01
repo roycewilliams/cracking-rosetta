@@ -20,6 +20,7 @@ tools:
     note: "hashcat's own published example hash for this mode, recovered by hashcat at this mode with hashcat's own published plaintext."
   john:
     cpu: ["Blockchain"]
+    gpu: ["blockchain-opencl"]
     verified: "vector"
     verified_at: "2026-08-31"
     verified_with: "john"

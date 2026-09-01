@@ -23,6 +23,7 @@ tools:
     verified_with: "mdxfind"
   john:
     cpu: ["bcrypt"]
+    gpu: ["bcrypt-opencl"]
     verified: "vector"
     verified_at: "2026-08-29"
     verified_with: "john"

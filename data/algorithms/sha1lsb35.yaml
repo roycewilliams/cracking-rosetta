@@ -31,11 +31,11 @@ relations:
   - kind: "collides-on-subset"
     entry: "aich"
     distinction: "truncation"
-    note: "AICH of a single block is SHA-1, and SHA1lsb35 is SHA-1 with the leading nibbles masked to zero, so any tool that ignores that field -- hashcat -m 100 and john Raw-SHA1-Linkedin both do, measured 2026-08-31 -- reports one for the other. They agree on every input outside those nibbles and differ nowhere else that such a tool looks."
+    note: "AICH of a single block is SHA-1, and SHA1lsb35 is SHA-1 with the leading nibbles masked to zero, so any tool that ignores that field -- hashcat -m 100 skips positions 0-7 and john Raw-SHA1-Linkedin skips 0-4, measured 2026-09-01, and the mask is 5 nibbles wide -- reports one for the other. They agree on every input outside those nibbles and differ nowhere else that such a tool looks."
   - kind: "collides-on-subset"
     entry: "sha1uc"
     distinction: "truncation"
-    note: "SHA1UC is SHA-1 written in uppercase hex and SHA1lsb35 is SHA-1 with the leading nibbles masked to zero, so a tool that skips that field cannot tell them apart: hashcat -m 100 skips hash positions 0-7 and john Raw-SHA1-Linkedin skips the same, measured 2026-08-31. The digests are identical from position 8 onward."
+    note: "SHA1UC is SHA-1 written in uppercase hex and SHA1lsb35 is SHA-1 with the leading nibbles masked to zero, so a tool that skips that field cannot tell them apart: hashcat -m 100 skips hash positions 0-7 and john Raw-SHA1-Linkedin skips 0-4, measured 2026-09-01. SHA1lsb35 masks exactly 5 nibbles, so either blind spot covers the whole difference: the digests are identical from position 5 onward."
 vectors:
   - hash: "0000012f25e64931f3833b26e999e26e81f9ad24"
     pass: "azertyuiop3"

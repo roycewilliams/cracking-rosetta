@@ -24,7 +24,7 @@ tools:
     note: "NTLM (e369) came in with the merge of ntlm-plain-md4-utf16-le-plain; both types were re-run pinned against this entry's vector on 2026-08-30. mdxfind's third spelling, NTLMH (e786), keeps its own entry - see the relation."
   john:
     cpu: ["NT", "NT-long", "dynamic_33"]
-    gpu: ["NT-opencl", "NT-long-opencl"]
+    gpu: ["NT-long-opencl", "NT-opencl"]
     verified: "vector"
     verified_at: "2026-08-30"
     verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a"
