@@ -1,0 +1,16 @@
+id: "sha1sha256truncsalt"
+name: "SHA1SHA256TRUNCSALT"
+status: "needs-review"
+tools:
+  mdxfind:
+    types: ["SHA1SHA256TRUNCSALT"]
+    verified: "upstream"
+    verified_at: "2026-08-31"
+    verified_with: "mdxfind RCS 1.540 (2026/08/22)"
+    note: "NOT REPRODUCED HERE. mdxfind publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: the tool pinned to this identifier did not reproduce its own published example. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool mdxfind --only SHA1SHA256TRUNCSALT to retry."
+  crack:
+    supported: false
+vectors:
+  - hash: "dacff3bff50db6dcacee1f52d6bc22ccbe8184b9:Salt 63"
+    pass: "password123"
+    source: "mdxfind"

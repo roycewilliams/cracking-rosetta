@@ -1,0 +1,16 @@
+id: "sha1sha384trunc"
+name: "SHA1SHA384TRUNC"
+status: "needs-review"
+tools:
+  mdxfind:
+    types: ["SHA1SHA384TRUNC"]
+    verified: "upstream"
+    verified_at: "2026-08-31"
+    verified_with: "mdxfind RCS 1.540 (2026/08/22)"
+    note: "NOT REPRODUCED HERE. mdxfind publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: the tool pinned to this identifier did not reproduce its own published example. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool mdxfind --only SHA1SHA384TRUNC to retry."
+  crack:
+    supported: false
+vectors:
+  - hash: "8954403705dae6fa5d10b96de809a365"
+    pass: "password123"
+    source: "mdxfind"

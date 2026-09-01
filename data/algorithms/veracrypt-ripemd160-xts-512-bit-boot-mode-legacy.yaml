@@ -1,0 +1,26 @@
+id: "veracrypt-ripemd160-xts-512-bit-boot-mode-legacy"
+name: "VeraCrypt RIPEMD160 + XTS 512 bit + boot-mode (legacy)"
+expression_proof:
+  verified: "absent"
+  verified_at: "2026-08-31"
+  verified_with: "hashcat v7.1.2-549-g8a15e210b"
+  note: "hashcat 13741 is a container or application format. john's dynamic expression language describes constructions over a password and a salt; it cannot express a container's KDF-plus-cipher, so this has no expression and will not acquire one. That says nothing about whether john can CRACK it -- run discover-john.pl, and if john has a format it goes in tools.john."
+denotation:
+  text: "VeraCrypt RIPEMD160 + XTS 512 bit + boot-mode (legacy)"
+  source: "hashcat"
+  note: "hashcat's own label for 13741, category \"Full-Disk Encryption (FDE)\", in v7.1.2-549-g8a15e210b. This is a container or application format rather than a bare construction, so there is no single digest expression to record."
+category: "application"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [13741]
+    verified: "upstream"
+    verified_at: "2026-08-31"
+    verified_with: "hashcat v7.1.2-549-g8a15e210b"
+    note: "NOT REPRODUCED HERE. hashcat publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: hashcat's example for this mode is a volume header rather than a digest, so a plain -a 0 wordlist attack cannot consume it. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool hashcat --only 13741 to retry."
+  crack:
+    supported: false
+vectors:
+  - hash: "528c2997054ce1d22cbc5233463df8119a0318ab94aa715e6e686c898f36690b443221a18f578fb893e0db1e4b875cc711eab542e70e13b55d6aa26134e1a8d34f5ae6caaea7390a5e2f50130e85f9e551216dd0895f4fb0bcdec219246c249236771e1f2a1f447054d363c398ab367ed7f9574eb0611211e742f429cd53b56fcdb42d2eb183c134847dc6efc7c8293d6481aa53406f0446398591956f79ca3ce76e80208fd409d0f6f14c68312fc119ab4292972338b1457c73585ae2fc863bf202f141495de50253799cbc27010fba6de6b0a36888d12f4e3964aaaf43a830097aee7d40c5e79e5e80e7b0228a67a95bb4969dd8afa0d51d6fff340f82e824547c708b5aa59274009d7d847c53a8019e73c068c6e96a4c3c6c27d0e9f4a8c3a9c52c964eebc00128e9a539f4f569606c92bfc2d4662494a1a6aca239d73399645c86bd66b8985b5bf217b29eeba0507a388aeec85fe94f6b42a1b805ecb90a08b2c8081fe51e76bc1d97f73ae10c72a9b2db694304e04807820c088f91bb97d4585493f3e6cc392a7e56a64a66b8e11b51898b4f956d1b5fe8cf55772fd6f8c0f2a2bb2d9fef05ab2bb90f251ff2e6aa0dfffeac9e045be2ec44ebc8dd4d260748e308205475dcc2cef369e869bfc1e6d7335620c694f524260770838c768346d83af7b467cdc80814d8f55a535dbac35fc278d0d1f6101db95019cee097bb"
+    pass: "hashcat"
+    source: "hashcat"

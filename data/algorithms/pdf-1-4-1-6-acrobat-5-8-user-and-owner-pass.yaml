@@ -1,0 +1,26 @@
+id: "pdf-1-4-1-6-acrobat-5-8-user-and-owner-pass"
+name: "PDF 1.4 - 1.6 (Acrobat 5 - 8) - user and owner pass"
+expression_proof:
+  verified: "absent"
+  verified_at: "2026-08-31"
+  verified_with: "hashcat v7.1.2-549-g8a15e210b"
+  note: "hashcat 25400 is a container or application format. john's dynamic expression language describes constructions over a password and a salt; it cannot express a container's KDF-plus-cipher, so this has no expression and will not acquire one. That says nothing about whether john can CRACK it -- run discover-john.pl, and if john has a format it goes in tools.john."
+denotation:
+  text: "PDF 1.4 - 1.6 (Acrobat 5 - 8) - user and owner pass"
+  source: "hashcat"
+  note: "hashcat's own label for 25400, category \"Document\", in v7.1.2-549-g8a15e210b. This is a container or application format rather than a bare construction, so there is no single digest expression to record."
+category: "application"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [25400]
+    verified: "upstream"
+    verified_at: "2026-08-31"
+    verified_with: "hashcat v7.1.2-549-g8a15e210b"
+    note: "NOT REPRODUCED HERE. hashcat publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: the tool pinned to this identifier did not reproduce its own published example. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool hashcat --only 25400 to retry."
+  crack:
+    supported: false
+vectors:
+  - hash: "$pdf$2*3*128*-3904*1*16*631ed33746e50fba5caf56bcc39e09c6*32*5f9d0e4f0b39835dace0d306c40cd6b700000000000000000000000000000000*32*842103b0a0dc886db9223b94afe2d7cd63389079b61986a4fcf70095ad630c24"
+    pass: "hashcat"
+    source: "hashcat"

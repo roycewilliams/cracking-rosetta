@@ -17,7 +17,7 @@ Each row below links to its entry in the [browsable table](index.html).
 Gaps are absences; for the rows where something is known to be *odd*, see
 [OPEN-QUESTIONS.md](OPEN-QUESTIONS.md).
 
-## 1. Believed but never reproduced (23)
+## 1. Believed but never reproduced (131)
 
 The cheapest contribution in the repository, if you own the tool. Each of
 these already names an identifier and already carries a test vector; nobody
@@ -31,16 +31,34 @@ tools/verify-vectors.pl --tool <tool> --only <id> -v
 
 | Entry | Tool | Says | Tier |
 |---|---|---|---|
+| [`apple-secure-notes-mdxfindapple-secure-notes`](index.html#apple-secure-notes-mdxfindapple-secure-notes) | mdxfind | `APPLE-SECURE-NOTES` | upstream |
 | [`blake2s256`](index.html#blake2s256) | mdxfind | `BLAKE2S256` | upstream |
 | [`ciscopix`](index.html#ciscopix) | john | `dynamic_19`, `pix-md5` | upstream |
 | [`dahua`](index.html#dahua) | mdxfind | `DAHUA` | upstream |
+| [`generic-hash-bridged-python-interpreter-free-threading`](index.html#generic-hash-bridged-python-interpreter-free-threading) | hashcat | `72000` | upstream |
+| [`generic-hash-bridged-python-interpreter-with-gil`](index.html#generic-hash-bridged-python-interpreter-with-gil) | hashcat | `73000` | upstream |
+| [`generic-hash-bridged-rust`](index.html#generic-hash-bridged-rust) | hashcat | `74000` | upstream |
 | [`lm`](index.html#lm) | john | `LM`, `LM-opencl` | asserted |
+| [`luks-v1-ripemd-160-twofish`](index.html#luks-v1-ripemd-160-twofish) | hashcat | `29543` | upstream |
+| [`luks-v1-sha-512-twofish`](index.html#luks-v1-sha-512-twofish) | hashcat | `29533` | upstream |
+| [`md4utf16md5x`](index.html#md4utf16md5x) | mdxfind | `MD4UTF16MD5x` | upstream |
+| [`md4utf16sha1x`](index.html#md4utf16sha1x) | mdxfind | `MD4UTF16SHA1x` | upstream |
+| [`md4utf16sha256x`](index.html#md4utf16sha256x) | mdxfind | `MD4UTF16SHA256x` | upstream |
+| [`md4utf16uc`](index.html#md4utf16uc) | mdxfind | `MD4UTF16UC` | upstream |
 | [`md5-md5-pass-salt`](index.html#md5-md5-pass-salt) | hashcat | `2611`, `2711` | asserted |
 | [`md5md5hum`](index.html#md5md5hum) | mdxfind | `MD5MD5HUM` | asserted |
+| [`md5sha1x`](index.html#md5sha1x) | mdxfind | `MD5SHA1x` | upstream |
 | [`md5uc`](index.html#md5uc) | mdxfind | `MD5UC` | upstream |
+| [`md5ucmd5`](index.html#md5ucmd5) | mdxfind | `MD5UCMD5` | upstream |
+| [`ms-office-le-2003-0-1-md5-rc4-collider-1`](index.html#ms-office-le-2003-0-1-md5-rc4-collider-1) | hashcat | `9710` | upstream |
+| [`ms-office-le-2003-3-sha1-rc4-collider-1`](index.html#ms-office-le-2003-3-sha1-rc4-collider-1) | hashcat | `9810` | upstream |
 | [`mysql4-1-mysql5`](index.html#mysql4-1-mysql5) | john | `dynamic_1028`, `mysql-sha1`, `mysql-sha1-opencl` | asserted |
 | [`netntlmv2`](index.html#netntlmv2) | john | `netlmv2`, `netntlmv2` | asserted |
 | [`oscommerce-xt-commerce`](index.html#oscommerce-xt-commerce) | john | `dynamic_1009`, `dynamic_1017`, `dynamic_2004`, `dynamic_4`, `osc` | asserted |
+| [`password-safe-v2`](index.html#password-safe-v2) | hashcat | `9000` | upstream |
+| [`pdf-1-1-1-3-acrobat-2-4-collider-1`](index.html#pdf-1-1-1-3-acrobat-2-4-collider-1) | hashcat | `10410` | upstream |
+| [`pdf-1-4-1-6-acrobat-5-8-user-and-owner-pass`](index.html#pdf-1-4-1-6-acrobat-5-8-user-and-owner-pass) | hashcat | `25400` | upstream |
+| [`pkzip-master-key-6-byte-optimization`](index.html#pkzip-master-key-6-byte-optimization) | hashcat | `20510` | upstream |
 | [`plaintext`](index.html#plaintext) | john | `plaintext` | asserted |
 | [`progressencode-plain`](index.html#progressencode-plain) | mdxfind | `PROGRESSENCODE` | asserted |
 | [`pwsafe3`](index.html#pwsafe3) | hashcat | `5200` | upstream |
@@ -49,13 +67,103 @@ tools/verify-vectors.pl --tool <tool> --only <id> -v
 | [`radmin`](index.html#radmin) | john | `RAdmin`, `dynamic_1010` | asserted |
 | [`sha1-md5-md5-plain`](index.html#sha1-md5-md5-plain) | john | `dynamic_1025` | asserted |
 | [`sha1-md5-pass`](index.html#sha1-md5-pass) | john | `dynamic_1024`, `dynamic_23` | asserted |
+| [`sha1-md5cappepper-md5salt`](index.html#sha1-md5cappepper-md5salt) | mdxfind | `SHA1-MD5CAPPEPPER-MD5SALT` | upstream |
+| [`sha1-md5pepper-md5md5salt`](index.html#sha1-md5pepper-md5md5salt) | mdxfind | `SHA1-MD5PEPPER-MD5MD5SALT` | upstream |
+| [`sha1-md5pepper-md5salt`](index.html#sha1-md5pepper-md5salt) | mdxfind | `SHA1-MD5PEPPER-MD5SALT` | upstream |
+| [`sha1-md5pepper-md5saltmd5pass`](index.html#sha1-md5pepper-md5saltmd5pass) | mdxfind | `SHA1-MD5PEPPER-MD5SALTMD5PASS` | upstream |
+| [`sha1-pepper-md5salt`](index.html#sha1-pepper-md5salt) | mdxfind | `SHA1-PEPPER-MD5SALT` | upstream |
 | [`sha1-sha1-pass`](index.html#sha1-sha1-pass) | john | `dynamic_1026`, `dynamic_26` | asserted |
 | [`sha1-sha1-sha1-pass`](index.html#sha1-sha1-sha1-pass) | john | `dynamic_1027`, `dynamic_26` | asserted |
+| [`sha1md5md5ucx`](index.html#sha1md5md5ucx) | mdxfind | `SHA1MD5MD5UCx` | upstream |
+| [`sha1md5saltpasspepper`](index.html#sha1md5saltpasspepper) | mdxfind | `SHA1MD5SALTPASSPEPPER` | upstream |
+| [`sha1md5truncsalt`](index.html#sha1md5truncsalt) | mdxfind | `SHA1MD5TRUNCSALT` | upstream |
+| [`sha1md5uc1lc`](index.html#sha1md5uc1lc) | mdxfind | `SHA1MD5UC1LC` | upstream |
+| [`sha1md5ucx`](index.html#sha1md5ucx) | mdxfind | `SHA1MD5UCx` | upstream |
+| [`sha1md5xsalt`](index.html#sha1md5xsalt) | mdxfind | `SHA1MD5xSALT` | upstream |
+| [`sha1md6trunc`](index.html#sha1md6trunc) | mdxfind | `SHA1MD6TRUNC` | upstream |
+| [`sha1raw`](index.html#sha1raw) | mdxfind | `SHA1RAW` | upstream |
+| [`sha1rmd160trunc`](index.html#sha1rmd160trunc) | mdxfind | `SHA1RMD160TRUNC` | upstream |
+| [`sha1saltmd5md5passpepper`](index.html#sha1saltmd5md5passpepper) | mdxfind | `SHA1SALTMD5MD5PASSPEPPER` | upstream |
+| [`sha1saltmd5passpepper`](index.html#sha1saltmd5passpepper) | mdxfind | `SHA1SALTMD5PASSPEPPER` | upstream |
+| [`sha1saltmd5sha1passpepper`](index.html#sha1saltmd5sha1passpepper) | mdxfind | `SHA1SALTMD5SHA1PASSPEPPER` | upstream |
+| [`sha1saltmd5ucpasspepper`](index.html#sha1saltmd5ucpasspepper) | mdxfind | `SHA1SALTMD5UCPASSPEPPER` | upstream |
+| [`sha1saltsha1passpepper`](index.html#sha1saltsha1passpepper) | mdxfind | `SHA1SALTSHA1PASSPEPPER` | upstream |
+| [`sha1saltsha256trunc`](index.html#sha1saltsha256trunc) | mdxfind | `SHA1SALTSHA256TRUNC` | upstream |
+| [`sha1saltsha256truncmd5`](index.html#sha1saltsha256truncmd5) | mdxfind | `SHA1SALTSHA256TRUNCMD5` | upstream |
+| [`sha1saltsha256uctrunc`](index.html#sha1saltsha256uctrunc) | mdxfind | `SHA1SALTSHA256UCTRUNC` | upstream |
+| [`sha1saltsha512uctrunc`](index.html#sha1saltsha512uctrunc) | mdxfind | `SHA1SALTSHA512UCTRUNC` | upstream |
+| [`sha1sha1trunc`](index.html#sha1sha1trunc) | mdxfind | `SHA1SHA1TRUNC` | upstream |
+| [`sha1sha1truncsalt`](index.html#sha1sha1truncsalt) | mdxfind | `SHA1SHA1TRUNCSALT` | upstream |
+| [`sha1sha1uctrunc`](index.html#sha1sha1uctrunc) | mdxfind | `SHA1SHA1UCTRUNC` | upstream |
+| [`sha1sha256trunc`](index.html#sha1sha256trunc) | mdxfind | `SHA1SHA256TRUNC` | upstream |
+| [`sha1sha256truncmd5`](index.html#sha1sha256truncmd5) | mdxfind | `SHA1SHA256TRUNCMD5` | upstream |
+| [`sha1sha256truncmd5salt`](index.html#sha1sha256truncmd5salt) | mdxfind | `SHA1SHA256TRUNCMD5SALT` | upstream |
+| [`sha1sha256truncsalt`](index.html#sha1sha256truncsalt) | mdxfind | `SHA1SHA256TRUNCSALT` | upstream |
+| [`sha1sha256uctrunc`](index.html#sha1sha256uctrunc) | mdxfind | `SHA1SHA256UCTRUNC` | upstream |
+| [`sha1sha256ucx`](index.html#sha1sha256ucx) | mdxfind | `SHA1SHA256UCx` | upstream |
+| [`sha1sha256ucxsha256`](index.html#sha1sha256ucxsha256) | mdxfind | `SHA1SHA256UCxSHA256` | upstream |
+| [`sha1sha256x`](index.html#sha1sha256x) | mdxfind | `SHA1SHA256x` | upstream |
+| [`sha1sha3-256trunc`](index.html#sha1sha3-256trunc) | mdxfind | `SHA1SHA3-256TRUNC` | upstream |
+| [`sha1sha384trunc`](index.html#sha1sha384trunc) | mdxfind | `SHA1SHA384TRUNC` | upstream |
+| [`sha1sha512trunc`](index.html#sha1sha512trunc) | mdxfind | `SHA1SHA512TRUNC` | upstream |
+| [`sha1sha512uctrunc`](index.html#sha1sha512uctrunc) | mdxfind | `SHA1SHA512UCTRUNC` | upstream |
+| [`sha1uc`](index.html#sha1uc) | mdxfind | `SHA1UC` | upstream |
+| [`sha1ucutf16le`](index.html#sha1ucutf16le) | mdxfind | `SHA1UCUTF16LE` | upstream |
+| [`sha1wrltrunc`](index.html#sha1wrltrunc) | mdxfind | `SHA1WRLTRUNC` | upstream |
+| [`sha1wrluctrunc`](index.html#sha1wrluctrunc) | mdxfind | `SHA1WRLUCTRUNC` | upstream |
+| [`sha1wrluctruncsalt`](index.html#sha1wrluctruncsalt) | mdxfind | `SHA1WRLUCTRUNCSALT` | upstream |
 | [`smf-v1-1`](index.html#smf-v1-1) | john | `dynamic_25`, `dynamic_37` | asserted |
+| [`snmpv3-hmac-sha384-256`](index.html#snmpv3-hmac-sha384-256) | hashcat | `26900` | upstream |
+| [`stdout`](index.html#stdout) | hashcat | `2000` | upstream |
+| [`totp-hmac-sha1`](index.html#totp-hmac-sha1) | hashcat | `18100` | upstream |
+| [`truecrypt-ripemd160-xts-1024-bit-boot-mode-legacy`](index.html#truecrypt-ripemd160-xts-1024-bit-boot-mode-legacy) | hashcat | `6242` | upstream |
+| [`truecrypt-ripemd160-xts-1024-bit-legacy`](index.html#truecrypt-ripemd160-xts-1024-bit-legacy) | hashcat | `6212` | upstream |
+| [`truecrypt-ripemd160-xts-1536-bit-boot-mode-legacy`](index.html#truecrypt-ripemd160-xts-1536-bit-boot-mode-legacy) | hashcat | `6243` | upstream |
+| [`truecrypt-ripemd160-xts-1536-bit-legacy`](index.html#truecrypt-ripemd160-xts-1536-bit-legacy) | hashcat | `6213` | upstream |
+| [`truecrypt-ripemd160-xts-512-bit-boot-mode-legacy`](index.html#truecrypt-ripemd160-xts-512-bit-boot-mode-legacy) | hashcat | `6241` | upstream |
+| [`truecrypt-ripemd160-xts-512-bit-legacy`](index.html#truecrypt-ripemd160-xts-512-bit-legacy) | hashcat | `6211` | upstream |
+| [`truecrypt-sha512-xts-1024-bit-legacy`](index.html#truecrypt-sha512-xts-1024-bit-legacy) | hashcat | `6222` | upstream |
+| [`truecrypt-sha512-xts-1536-bit-legacy`](index.html#truecrypt-sha512-xts-1536-bit-legacy) | hashcat | `6223` | upstream |
+| [`truecrypt-sha512-xts-512-bit-legacy`](index.html#truecrypt-sha512-xts-512-bit-legacy) | hashcat | `6221` | upstream |
+| [`truecrypt-whirlpool-xts-1024-bit-legacy`](index.html#truecrypt-whirlpool-xts-1024-bit-legacy) | hashcat | `6232` | upstream |
+| [`truecrypt-whirlpool-xts-1536-bit-legacy`](index.html#truecrypt-whirlpool-xts-1536-bit-legacy) | hashcat | `6233` | upstream |
+| [`truecrypt-whirlpool-xts-512-bit-legacy`](index.html#truecrypt-whirlpool-xts-512-bit-legacy) | hashcat | `6231` | upstream |
 | [`vbulletin-v3-8-5-2`](index.html#vbulletin-v3-8-5-2) | john | `dynamic_1007`, `dynamic_2006`, `dynamic_6` | asserted |
+| [`veracrypt-ripemd160-xts-1024-bit-boot-mode-legacy`](index.html#veracrypt-ripemd160-xts-1024-bit-boot-mode-legacy) | hashcat | `13742` | upstream |
+| [`veracrypt-ripemd160-xts-1024-bit-legacy`](index.html#veracrypt-ripemd160-xts-1024-bit-legacy) | hashcat | `13712` | upstream |
+| [`veracrypt-ripemd160-xts-1536-bit-boot-mode-legacy`](index.html#veracrypt-ripemd160-xts-1536-bit-boot-mode-legacy) | hashcat | `13743` | upstream |
+| [`veracrypt-ripemd160-xts-1536-bit-legacy`](index.html#veracrypt-ripemd160-xts-1536-bit-legacy) | hashcat | `13713` | upstream |
+| [`veracrypt-ripemd160-xts-512-bit-boot-mode-legacy`](index.html#veracrypt-ripemd160-xts-512-bit-boot-mode-legacy) | hashcat | `13741` | upstream |
+| [`veracrypt-ripemd160-xts-512-bit-legacy`](index.html#veracrypt-ripemd160-xts-512-bit-legacy) | hashcat | `13711` | upstream |
+| [`veracrypt-sha256-xts-1024-bit-boot-mode-legacy`](index.html#veracrypt-sha256-xts-1024-bit-boot-mode-legacy) | hashcat | `13762` | upstream |
+| [`veracrypt-sha256-xts-1024-bit-legacy`](index.html#veracrypt-sha256-xts-1024-bit-legacy) | hashcat | `13752` | upstream |
+| [`veracrypt-sha256-xts-1536-bit-boot-mode-legacy`](index.html#veracrypt-sha256-xts-1536-bit-boot-mode-legacy) | hashcat | `13763` | upstream |
+| [`veracrypt-sha256-xts-1536-bit-legacy`](index.html#veracrypt-sha256-xts-1536-bit-legacy) | hashcat | `13753` | upstream |
+| [`veracrypt-sha256-xts-512-bit-boot-mode-legacy`](index.html#veracrypt-sha256-xts-512-bit-boot-mode-legacy) | hashcat | `13761` | upstream |
+| [`veracrypt-sha256-xts-512-bit-legacy`](index.html#veracrypt-sha256-xts-512-bit-legacy) | hashcat | `13751` | upstream |
+| [`veracrypt-sha512-xts-1024-bit-legacy`](index.html#veracrypt-sha512-xts-1024-bit-legacy) | hashcat | `13722` | upstream |
+| [`veracrypt-sha512-xts-1536-bit-legacy`](index.html#veracrypt-sha512-xts-1536-bit-legacy) | hashcat | `13723` | upstream |
+| [`veracrypt-sha512-xts-512-bit-legacy`](index.html#veracrypt-sha512-xts-512-bit-legacy) | hashcat | `13721` | upstream |
+| [`veracrypt-streebog-512-xts-1024-bit`](index.html#veracrypt-streebog-512-xts-1024-bit) | hashcat | `29472` | upstream |
+| [`veracrypt-streebog-512-xts-1024-bit-boot-mode-legacy`](index.html#veracrypt-streebog-512-xts-1024-bit-boot-mode-legacy) | hashcat | `13782` | upstream |
+| [`veracrypt-streebog-512-xts-1024-bit-legacy`](index.html#veracrypt-streebog-512-xts-1024-bit-legacy) | hashcat | `13772` | upstream |
+| [`veracrypt-streebog-512-xts-1536-bit`](index.html#veracrypt-streebog-512-xts-1536-bit) | hashcat | `29473` | upstream |
+| [`veracrypt-streebog-512-xts-1536-bit-boot-mode-legacy`](index.html#veracrypt-streebog-512-xts-1536-bit-boot-mode-legacy) | hashcat | `13783` | upstream |
+| [`veracrypt-streebog-512-xts-1536-bit-legacy`](index.html#veracrypt-streebog-512-xts-1536-bit-legacy) | hashcat | `13773` | upstream |
+| [`veracrypt-streebog-512-xts-512-bit-boot-mode-legacy`](index.html#veracrypt-streebog-512-xts-512-bit-boot-mode-legacy) | hashcat | `13781` | upstream |
+| [`veracrypt-streebog-512-xts-512-bit-legacy`](index.html#veracrypt-streebog-512-xts-512-bit-legacy) | hashcat | `13771` | upstream |
+| [`veracrypt-whirlpool-xts-1024-bit-legacy`](index.html#veracrypt-whirlpool-xts-1024-bit-legacy) | hashcat | `13732` | upstream |
+| [`veracrypt-whirlpool-xts-1536-bit`](index.html#veracrypt-whirlpool-xts-1536-bit) | hashcat | `29433` | upstream |
+| [`veracrypt-whirlpool-xts-1536-bit-legacy`](index.html#veracrypt-whirlpool-xts-1536-bit-legacy) | hashcat | `13733` | upstream |
+| [`veracrypt-whirlpool-xts-512-bit-legacy`](index.html#veracrypt-whirlpool-xts-512-bit-legacy) | hashcat | `13731` | upstream |
+| [`wpa-eapol-pbkdf2`](index.html#wpa-eapol-pbkdf2) | hashcat | `2500` | upstream |
+| [`wpa-eapol-pmk`](index.html#wpa-eapol-pmk) | hashcat | `2501` | upstream |
+| [`wpa-pbkdf2-pmkid-eapol`](index.html#wpa-pbkdf2-pmkid-eapol) | hashcat | `22000` | upstream |
 | [`wpa-pmk`](index.html#wpa-pmk) | hashcat | `22001` | upstream |
+| [`wpa-pmkid-pbkdf2`](index.html#wpa-pmkid-pbkdf2) | hashcat | `16800` | upstream |
+| [`wpa-pmkid-pmk`](index.html#wpa-pmkid-pmk) | hashcat | `16801` | upstream |
 
-## 2. No test vector at all (11)
+## 2. No test vector at all (59)
 
 Blocked on one piece of data, and it is the piece that does not require any
 tool: a hash and the plaintext that produces it. Nothing here can reach tier
@@ -64,16 +172,64 @@ equipped. If you have a vector for one of these - from a tool's own test
 suite, from your own scratch implementation, from a wordlist you cracked -
 that is the whole contribution.
 
+* [`pfx-p12`](index.html#pfx-p12) - (.pfx, .p12)
+* [`1password-agile-keychain`](index.html#1password-agile-keychain) - 1Password Agile Keychain
+* [`1password-cloud-keychain`](index.html#1password-cloud-keychain) - 1Password Cloud Keychain
+* [`apple-dmg`](index.html#apple-dmg) - Apple DMG
+* [`battlenet`](index.html#battlenet) - Battlenet
+* [`bouncycastle`](index.html#bouncycastle) - BouncyCastle
+* [`cardano-encrypted-128-byte-secret-key-a-k-a-xprv`](index.html#cardano-encrypted-128-byte-secret-key-a-k-a-xprv) - Cardano Encrypted 128-byte Secret Key (a.k.a XPrv)
+* [`clearquest`](index.html#clearquest) - ClearQuest
+* [`diskcryptor`](index.html#diskcryptor) - DiskCryptor
+* [`dnssec-nsec3`](index.html#dnssec-nsec3) - DNSSEC NSEC3
+* [`dynamic-1015`](index.html#dynamic-1015) - dynamic_1015
+* [`dynamic-1030`](index.html#dynamic-1030) - dynamic_1030
+* [`dynamic-1034`](index.html#dynamic-1034) - dynamic_1034
+* [`dynamic-1401`](index.html#dynamic-1401) - dynamic_1401
+* [`dynamic-1506`](index.html#dynamic-1506) - dynamic_1506
+* [`dynamic-1507`](index.html#dynamic-1507) - dynamic_1507
+* [`dynamic-1529`](index.html#dynamic-1529) - dynamic_1529
+* [`dynamic-1602`](index.html#dynamic-1602) - dynamic_1602
+* [`enpass-password-manager`](index.html#enpass-password-manager) - Enpass Password Manager
+* [`freebsd-geli`](index.html#freebsd-geli) - FreeBSD GELI
+* [`gost-r-34-11-94`](index.html#gost-r-34-11-94) - GOST R 34.11-94
+* [`halflm-c-r`](index.html#halflm-c-r) - HalfLM C/R
+* [`haval-128-4`](index.html#haval-128-4) - HAVAL-128-4
+* [`java-keystore`](index.html#java-keystore) - Java KeyStore
+* [`lm-c-r`](index.html#lm-c-r) - LM C/R
+* [`luks`](index.html#luks) - LUKS
 * [`md5dsalt`](index.html#md5dsalt) - MD5DSALT
 * [`md5sha1hum`](index.html#md5sha1hum) - MD5SHA1HUM
 * [`md5sha1md5hum`](index.html#md5sha1md5hum) - MD5SHA1MD5HUM
 * [`md5specam`](index.html#md5specam) - MD5SPECAM
 * [`md5ucbase64md5raw`](index.html#md5ucbase64md5raw) - MD5UCBASE64MD5RAW
+* [`monero-wallet`](index.html#monero-wallet) - Monero Wallet
+* [`ms-cache-hash-dcc`](index.html#ms-cache-hash-dcc) - MS Cache Hash (DCC)
+* [`mschapv2-c-r`](index.html#mschapv2-c-r) - MSCHAPv2 C/R
+* [`ntlmv1-c-r-johnnetntlm-naive`](index.html#ntlmv1-c-r-johnnetntlm-naive) - NTLMv1 C/R
+* [`openbsd-softraid`](index.html#openbsd-softraid) - OpenBSD-SoftRAID
 * [`parallel`](index.html#parallel) - PARALLEL
+* [`password-manager`](index.html#password-manager) - Password Manager
+* [`private-key-rsa-dsa-ecdsa-ed25519`](index.html#private-key-rsa-dsa-ecdsa-ed25519) - Private Key (RSA/DSA/ECDSA/ED25519)
+* [`raw-keccak`](index.html#raw-keccak) - Raw-Keccak
+* [`raw-sha3`](index.html#raw-sha3) - Raw-SHA3
+* [`restic-repository`](index.html#restic-repository) - Restic Repository
+* [`ripemd-128`](index.html#ripemd-128) - RIPEMD 128
+* [`ripemd-160`](index.html#ripemd-160) - RIPEMD 160
 * [`sha1md5hum`](index.html#sha1md5hum) - SHA1MD5HUM
 * [`sha1saltcx`](index.html#sha1saltcx) - SHA1SALTCX
 * [`sha1sha1hum`](index.html#sha1sha1hum) - SHA1SHA1HUM
 * [`sha256uc`](index.html#sha256uc) - SHA256UC
+* [`skein-256`](index.html#skein-256) - Skein 256
+* [`skein-512`](index.html#skein-512) - Skein 512
+* [`tiger-johntiger`](index.html#tiger-johntiger) - Tiger
+* [`truecrypt-aes-twofish-serpent`](index.html#truecrypt-aes-twofish-serpent) - TrueCrypt AES/Twofish/Serpent
+* [`truecrypt-aes256-xts-johntc-ripemd160`](index.html#truecrypt-aes256-xts-johntc-ripemd160) - TrueCrypt AES256_XTS
+* [`truecrypt-aes256-xts-johntc-sha512`](index.html#truecrypt-aes256-xts-johntc-sha512) - TrueCrypt AES256_XTS
+* [`truecrypt-aes256-xts-johntc-whirlpool`](index.html#truecrypt-aes256-xts-johntc-whirlpool) - TrueCrypt AES256_XTS
+* [`truecrypt-aes256-xts`](index.html#truecrypt-aes256-xts) - TrueCrypt AES256_XTS
+* [`wpa-wpa2-pmf-pmkid-master-key`](index.html#wpa-wpa2-pmf-pmkid-master-key) - WPA/WPA2/PMF/PMKID master key
+* [`wpa-wpa2-pmf-pmkid-psk`](index.html#wpa-wpa2-pmf-pmkid-psk) - WPA/WPA2/PMF/PMKID PSK
 * [`yaf-sha1`](index.html#yaf-sha1) - YAF-SHA1
 
 ## 3. A tool column nobody has filled
@@ -82,7 +238,7 @@ Real work rather than a one-liner: it means finding out whether the tool
 supports the construction at all, and under which identifier. The counts are
 the honest size of the job.
 
-### john: 901 entries say nothing
+### john: 1012 entries say nothing
 
 A few that carry a vector and a proven expression, so there is a definite construction to look for, one per family:
 
@@ -94,7 +250,7 @@ A few that carry a vector and a proven expression, so there is a definite constr
 * [`tiger128-3-md5-plain`](index.html#tiger128-3-md5-plain) - `tiger(md5($p))` (and 1 more starting `tiger`)
 * [`whirlpool-md5-plain`](index.html#whirlpool-md5-plain) - `whirlpool(md5($p))` (and 3 more starting `whirlpool`)
 
-All 901: filter `john_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
+All 1012: filter `john_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
 
 Where such an entry carries an expression, john can already attack it without
 a named format:
@@ -108,7 +264,7 @@ That string is in the entry's `john_dynamic_expr:` field and in the
 which lists formats `--list=formats` will show; the gap worth filling is
 whether a named one exists.
 
-### hashcat: 427 entries say nothing
+### hashcat: 525 entries say nothing
 
 A few that carry a vector and a proven expression, so there is a definite construction to look for, one per family:
 
@@ -124,9 +280,9 @@ A few that carry a vector and a proven expression, so there is a definite constr
 * [`tiger`](index.html#tiger) - `tiger($p)` (and 1 more starting `tiger`)
 * [`wrl-x2`](index.html#wrl-x2) - `whirlpool(whirlpool($p))`
 
-All 427: filter `hashcat_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
+All 525: filter `hashcat_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
 
-### mdxfind: 406 entries say nothing
+### mdxfind: 515 entries say nothing
 
 A few that carry a vector and a proven expression, so there is a definite construction to look for, one per family:
 
@@ -134,39 +290,15 @@ A few that carry a vector and a proven expression, so there is a definite constr
 * [`ripemd256`](index.html#ripemd256) - `ripemd256($p)`
 * [`sha256-sha256-pass-salt`](index.html#sha256-sha256-pass-salt) - `sha256(sha256($p.$s))`
 
-All 406: filter `mdxfind_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
+All 515: filter `mdxfind_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
 
-## 4. hashcat modes with no row here (62)
+## 4. hashcat modes with no row here (1)
 
 Whole algorithms rather than gaps in a row. Many are full-disk-encryption and
 wallet formats whose place in this table is still an open question; others are
 simply not written yet. hashcat publishes an example hash for each, so an
 entry can usually be created and proven in one sitting.
 
-* `2000` - STDOUT
-* `2500` - WPA-EAPOL-PBKDF2
-* `2501` - WPA-EAPOL-PMK
-* `6211` - TrueCrypt RIPEMD160 + XTS 512 bit (legacy)
-* `6212` - TrueCrypt RIPEMD160 + XTS 1024 bit (legacy)
-* `6213` - TrueCrypt RIPEMD160 + XTS 1536 bit (legacy)
-* `6221` - TrueCrypt SHA512 + XTS 512 bit (legacy)
-* `6222` - TrueCrypt SHA512 + XTS 1024 bit (legacy)
-* `6223` - TrueCrypt SHA512 + XTS 1536 bit (legacy)
-* `6231` - TrueCrypt Whirlpool + XTS 512 bit (legacy)
-* `6232` - TrueCrypt Whirlpool + XTS 1024 bit (legacy)
-* `6233` - TrueCrypt Whirlpool + XTS 1536 bit (legacy)
-* `6241` - TrueCrypt RIPEMD160 + XTS 512 bit + boot-mode (legacy)
-* `6242` - TrueCrypt RIPEMD160 + XTS 1024 bit + boot-mode (legacy)
-* `6243` - TrueCrypt RIPEMD160 + XTS 1536 bit + boot-mode (legacy)
-* `9000` - Password Safe v2
-* `9710` - MS Office <= 2003 $0/$1, MD5 + RC4, collider #1
-* `9810` - MS Office <= 2003 $3, SHA1 + RC4, collider #1
-* `10410` - PDF 1.1 - 1.3 (Acrobat 2 - 4), collider #1
-* `13711` - VeraCrypt RIPEMD160 + XTS 512 bit (legacy)
-* `13712` - VeraCrypt RIPEMD160 + XTS 1024 bit (legacy)
-* `13713` - VeraCrypt RIPEMD160 + XTS 1536 bit (legacy)
-* `13721` - VeraCrypt SHA512 + XTS 512 bit (legacy)
-* `13722` - VeraCrypt SHA512 + XTS 1024 bit (legacy)
-* `13723` - VeraCrypt SHA512 + XTS 1536 bit (legacy)
+* `14600` - LUKS v1 (legacy)
 
-All 62 are listed by `tools/validate.pl -v`.
+All 1 are listed by `tools/validate.pl -v`.

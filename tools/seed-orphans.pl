@@ -26,7 +26,29 @@
 # tools disagree about what a row means. So the shared part is written once
 # and %TOOL carries the differences.
 #
-# NOTHING IS WRITTEN THAT WAS NOT REPRODUCED
+# --unverified: A VISIBLE ROW THAT SAYS IT IS NOT PROVEN
+#
+# 160 identifiers across the three tools publish an example that does not
+# round-trip here -- TrueCrypt and VeraCrypt want the volume header, the
+# collider modes recover a cipher key rather than the password, WPA/EAPOL
+# wants binary capture input, john's example may not fall to the candidate
+# list. Refusing them entirely leaves a dead end for the person who arrives
+# by one, which is the gap this tool exists to close.
+#
+# Royce decided 2026-08-31: give them a row, flagged as failing verification.
+# So --unverified writes the row at tier `upstream` and NEVER `vector`. That
+# is not a weakening of the rule, it is the rule: `upstream` means "asserted
+# by an upstream project that verifies by recomputation", and a tool
+# publishing an identifier plus a worked example is exactly that. The tool
+# block's note then says, in words, that the local round-trip FAILED and
+# which class of failure it was, so a reader is never left inferring it from
+# a tier alone.
+#
+# The tier is also the machine-readable signal, which is why no new field was
+# invented for this: an entry whose tool block is `upstream` rather than
+# `vector` has, by the existing definition, not been reproduced here.
+#
+# NOTHING ELSE IS WRITTEN THAT WAS NOT REPRODUCED
 #
 # Each tool publishes an example for almost every identifier. That is a
 # round-trip waiting to happen: run the tool at that identifier against its
@@ -118,7 +140,7 @@ my $ROOT = "$RealBin/..";
 my $algdir  = "$ROOT/data/algorithms";
 my $workdir = "$ROOT/tmp/orphans";
 my ($tool, $binary, $candfile);
-my ($apply, $attach, $verbose, $help, $dry) = (0,0,0,0,0);
+my ($apply, $attach, $verbose, $help, $dry, $unverified) = (0,0,0,0,0,0);
 my $timeout = 60;
 my $limit   = 0;
 my @only;
@@ -135,6 +157,9 @@ Usage: $PROG --tool hashcat|mdxfind|john [options]
    --algorithms DIR curated entries  (default: data/algorithms)
    --candidates F   john only: candidate plaintexts, one per line. Without
                     it they are harvested from john's own src/*.c.
+   --unverified     ALSO write a row for an identifier whose example does
+                    not round-trip, at tier `upstream` with the failure
+                    named in the note. Without this they are only reported.
    --attach         add orphan identifiers to entries that ALREADY describe
                     the computation, instead of creating a new entry.
                     Requires the tool to crack the existing entry's own
@@ -160,6 +185,7 @@ GetOptions(
     'algorithms=s' => \$algdir,
     'candidates=s' => \$candfile,
     'attach'       => \$attach,
+    'unverified'   => \$unverified,
     'only=s'       => \@only,
     'limit=i'      => \$limit,
     'timeout=i'    => \$timeout,
@@ -301,6 +327,32 @@ sub load_candidates {
     $seen{$_} = 1 for qw(password openwall john test 12345 123456 abc123
                          hashcat secret magnum password123);
     return sort keys %seen;
+}
+
+# why_failed($tool, $label, $err) - the class of failure, in words a reader
+# can act on. Generic "did not round-trip" tells nobody whether to retry.
+sub why_failed {
+    my ($tl, $lab, $err) = @_;
+    return "the run exceeded the ${timeout}s timeout; it may simply need longer"
+        if ($err // '') eq 'timeout';
+    return "hashcat's example for this mode is a volume header rather than a "
+         . "digest, so a plain -a 0 wordlist attack cannot consume it"
+        if $lab =~ /TrueCrypt|VeraCrypt|LUKS|BestCrypt|BitLocker/i;
+    return "this is a collider mode: it recovers a cipher key, not the "
+         . "password, so the published plaintext is not what comes back"
+        if $lab =~ /collider/i;
+    return "this mode wants binary capture input rather than a hash line"
+        if $lab =~ /WPA|EAPOL|PMKID/i;
+    return "this is a pseudo-mode rather than a hash" if $lab =~ /STDOUT/i;
+    return "this is a bridged plugin and needs its interpreter configured"
+        if $lab =~ /Bridged/i;
+    return "john publishes no plaintext for its example, and the example did "
+         . "not fall to the ~" . scalar(@CANDIDATES) . " candidate plaintexts "
+         . "harvested from john's own source. The plaintext is findable, it "
+         . "was simply not in the list"
+        if $tl eq 'john';
+    return "the tool pinned to this identifier did not reproduce its own "
+         . "published example";
 }
 
 #-----------------------------------------------------------------------
@@ -578,14 +630,16 @@ for my $r (@orphans) {
         ? (1, '', (defined $pass ? $pass : '(discovered at run time)'))
         : $T->{verify}->($ident, $hash, $pass, $r);
     $pass = $found if defined $found;
-    unless ($cracked && defined $pass) {
+    my $proven = ($cracked && defined $pass) ? 1 : 0;
+    unless ($proven) {
         $failed++;
         $why{"example did not round-trip: " . ($err || 'no plaintext')}++;
-        printf STDERR "  FAIL  %-24s %-34s %s\n", $ident, $label,
+        printf STDERR "  %-5s %-24s %-34s %s\n",
+            ($unverified ? 'UNVER' : 'FAIL'), $ident, $label,
             ($err || 'no plaintext');
-        next;
+        next unless $unverified;
     }
-    $ok++;
+    else { $ok++ }
 
     my $id = slug($label);
     $id = slug("$tool-$ident") unless length $id;
@@ -602,10 +656,18 @@ for my $r (@orphans) {
         tools  => {
             $T->{tool_key} => {
                 $T->{id_key}  => [ $ident ],
-                verified      => 'vector',
+                verified      => ($proven ? 'vector' : 'upstream'),
                 verified_at   => '2026-08-31',
                 verified_with => "$tool $VER",
-                note          => $tool eq 'john'
+                note          => !$proven
+                    ? "NOT REPRODUCED HERE. $tool publishes this identifier and a "
+                    . "worked example, which is what tier `upstream` means, but the "
+                    . "local round-trip FAILED: " . why_failed($tool, $label, $err)
+                    . ". The row exists so that someone arriving by this identifier "
+                    . "is not met with nothing; the claim is upstream's, not this "
+                    . "repository's, until a vector is round-tripped here. Re-run "
+                    . "seed-orphans.pl --tool $tool --only $ident to retry."
+                    : $tool eq 'john'
                     ? "john's own published example ciphertext for this format, "
                     . "recovered by john under this format. john publishes no "
                     . "plaintext, so the plaintext was found by handing john its "
@@ -617,7 +679,12 @@ for my $r (@orphans) {
             },
             crack => { supported => 0 },
         },
-        vectors => [ { hash => $hash, pass => $pass, source => $tool } ],
+        # A vector needs both a hash and a plaintext. john's unproven rows have
+        # no plaintext -- that IS the failure -- so they carry no vector, which
+        # is honest rather than a placeholder somebody might trust.
+        (defined $pass
+            ? (vectors => [ { hash => $hash, pass => $pass, source => $tool } ])
+            : ()),
     };
     if (my $c = $T->{category}->($r)) { $entry->{category} = $c }
 

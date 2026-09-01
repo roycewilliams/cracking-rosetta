@@ -1,0 +1,16 @@
+id: "md4utf16md5x"
+name: "MD4UTF16MD5x"
+status: "needs-review"
+tools:
+  mdxfind:
+    types: ["MD4UTF16MD5x"]
+    verified: "upstream"
+    verified_at: "2026-08-31"
+    verified_with: "mdxfind RCS 1.540 (2026/08/22)"
+    note: "NOT REPRODUCED HERE. mdxfind publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: the tool pinned to this identifier did not reproduce its own published example. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool mdxfind --only MD4UTF16MD5x to retry."
+  crack:
+    supported: false
+vectors:
+  - hash: "b4c89d27458fd978c7c9bec66214f6b1:salt"
+    pass: "password123"
+    source: "mdxfind"
