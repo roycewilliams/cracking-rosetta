@@ -236,7 +236,7 @@ Real work rather than a one-liner: it means finding out whether the tool
 supports the construction at all, and under which identifier. The counts are
 the honest size of the job.
 
-### john: 998 entries say nothing
+### john: 997 entries say nothing
 
 A few that carry a vector and a proven expression, so there is a definite construction to look for, one per family:
 
@@ -248,7 +248,7 @@ A few that carry a vector and a proven expression, so there is a definite constr
 * [`tiger128-3-md5-plain`](index.html#tiger128-3-md5-plain) - `tiger(md5($p))` (and 1 more starting `tiger`)
 * [`whirlpool-md5-plain`](index.html#whirlpool-md5-plain) - `whirlpool(md5($p))` (and 3 more starting `whirlpool`)
 
-All 998: filter `john_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
+All 997: filter `john_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
 
 Where such an entry carries an expression, john can already attack it without
 a named format:
@@ -262,15 +262,15 @@ That string is in the entry's `john_dynamic_expr:` field and in the
 which lists formats `--list=formats` will show; the gap worth filling is
 whether a named one exists.
 
-### hashcat: 497 entries say nothing
+### hashcat: 495 entries say nothing
 
 A few that carry a vector and a proven expression, so there is a definite construction to look for, one per family:
 
 * [`gost-x2`](index.html#gost-x2) - `gost(gost($p))`
-* [`hav128-x2`](index.html#hav128-x2) - `haval128_3(haval128_3($p))` (and 15 more starting `haval`)
+* [`hav128-x2`](index.html#hav128-x2) - `haval128_3(haval128_3($p))` (and 14 more starting `haval`)
 * [`keccak256-x2`](index.html#keccak256-x2) - `keccak_256(keccak_256($p))` (and 1 more starting `keccak`)
 * [`md2-x2`](index.html#md2-x2) - `md2(md2($p))` (and 27 more starting `md`)
-* [`panama-johnpanama`](index.html#panama-johnpanama) - `panama($p)` (and 1 more starting `panama`)
+* [`panama-x2`](index.html#panama-x2) - `panama(panama($p))`
 * [`rmd128-x2`](index.html#rmd128-x2) - `ripemd128(ripemd128($p))` (and 2 more starting `ripemd`)
 * [`sha1-md5-md5saltmd5pass`](index.html#sha1-md5-md5saltmd5pass) - `sha1(md5(md5($s).md5($p)))` (and 46 more starting `sha`)
 * [`skein224-x2`](index.html#skein224-x2) - `skein224(skein224($p))` (and 3 more starting `skein`)
@@ -278,7 +278,7 @@ A few that carry a vector and a proven expression, so there is a definite constr
 * [`tiger`](index.html#tiger) - `tiger($p)` (and 1 more starting `tiger`)
 * [`wrl-x2`](index.html#wrl-x2) - `whirlpool(whirlpool($p))`
 
-All 497: filter `hashcat_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
+All 495: filter `hashcat_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
 
 ### mdxfind: 500 entries say nothing
 

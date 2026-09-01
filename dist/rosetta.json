@@ -1,5 +1,5 @@
 {
-   "count" : 1557,
+   "count" : 1551,
    "entries" : [
       {
          "alias" : "",
@@ -13407,58 +13407,6 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "primitive",
-         "crack" : {
-            "ids" : [],
-            "state" : "no"
-         },
-         "cracknote" : "",
-         "denotation" : "",
-         "expr" : "haval256_3($p)",
-         "expr_note" : "round-tripped as --format=dynamic=<expr> against every vector this entry carries",
-         "expr_tier" : "vector",
-         "hashcat" : {
-            "ids" : [],
-            "state" : "no"
-         },
-         "id" : "hav256",
-         "john" : {
-            "ids" : [
-               "dynamic_280"
-            ],
-            "state" : "proven",
-            "tier" : "vector"
-         },
-         "legacy" : "HAVAL256-3",
-         "mdxfind" : {
-            "ids" : [
-               "HAV256"
-            ],
-            "state" : "proven",
-            "tier" : "vector"
-         },
-         "name" : "HAV256",
-         "notes" : "",
-         "relations" : [
-            {
-               "distinction" : "none",
-               "entry" : "haval-256-3",
-               "kind" : "duplicate-of",
-               "note" : "Both compute haval256_3($p), proven 2026-09-01 by john's dynamic compiler against each entry's own vector. haval-256-3 is john's spelling, hav256 mdxfind's. A curator decides whether both names keep a row (distinction: naming) or one becomes a tombstone."
-            }
-         ],
-         "sameas" : "duplicate of haval-256-3",
-         "status" : "ok",
-         "tool_note" : {
-            "hashcat" : "",
-            "john" : "",
-            "mdxfind" : ""
-         },
-         "vecs" : 1
-      },
-      {
-         "alias" : "",
-         "application" : "",
          "category" : "iterated",
          "crack" : {
             "ids" : [],
@@ -13724,7 +13672,7 @@
          "vecs" : 0
       },
       {
-         "alias" : "",
+         "alias" : "HAV256",
          "application" : "",
          "category" : "primitive",
          "crack" : {
@@ -13738,17 +13686,18 @@
          "expr_tier" : "vector",
          "hashcat" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "id" : "haval-256-3",
          "john" : {
             "ids" : [
-               "HAVAL-256-3"
+               "HAVAL-256-3",
+               "dynamic_280"
             ],
             "state" : "proven",
             "tier" : "vector"
          },
-         "legacy" : "",
+         "legacy" : "HAVAL256-3",
          "mdxfind" : {
             "ids" : [
                "HAV256"
@@ -13763,17 +13712,17 @@
                "distinction" : "none",
                "entry" : "hav256",
                "kind" : "duplicate-of",
-               "note" : "Both compute haval256_3($p), proven 2026-09-01 by john's dynamic compiler against each entry's own vector. haval-256-3 is john's spelling, hav256 mdxfind's. A curator decides whether both names keep a row (distinction: naming) or one becomes a tombstone."
+               "note" : "merged 2026-09-01: one computation under two names, proven by john's dynamic compiler against both vectors. Royce chose the john-named row on 2026-09-01: haval-256-3 is john's own HAVAL-256-3 spelling, and dynamic_280 now sits beside it so a reader arriving by either name lands here"
             }
          ],
          "sameas" : "duplicate of hav256",
          "status" : "needs-review",
          "tool_note" : {
             "hashcat" : "",
-            "john" : "john's own published example ciphertext for this format, recovered by john under this format. john publishes no plaintext, so the plaintext was found by handing john its own example and a candidate list -- what john recovered IS the plaintext, by construction.",
+            "john" : "john's own published example ciphertext for this format, recovered by john under this format. john publishes no plaintext, so the plaintext was found by handing john its own example and a candidate list -- what john recovered IS the plaintext, by construction. dynamic_280 came from hav256 in the 2026-09-01 merge, proven there at tier vector.",
             "mdxfind" : "type discovered by round-trip search, not by name"
          },
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -22018,15 +21967,15 @@
          "relations" : [
             {
                "distinction" : "none",
-               "entry" : "md4-utf16-le-utf-8-plain",
-               "kind" : "duplicate-of",
-               "note" : "Both compute md4(utf16($p)) -- NTLM. Proven 2026-09-01 against this entry's own vector. Same question as the other NTLM-named rows: several names, one computation."
-            },
-            {
-               "distinction" : "none",
                "entry" : "ntlm-plain-md4-utf16-le-plain",
                "kind" : "duplicate-of",
                "note" : "merged 2026-08-30 on Royce's answer to the curate.pl duplicate question: keep this entry. That id survives only as a tombstone."
+            },
+            {
+               "distinction" : "naming",
+               "entry" : "md4-utf16-le-utf-8-plain",
+               "kind" : "same-computation",
+               "note" : "Not a duplicate, decided by Royce on 2026-09-01, on the same grounds as the md4-utf16-plain <-> ntlmh edge of 2026-08-30. mdxfind publishes three type indices for one computation -- MD4UTF16 (e496), NTLM (e369) and NTLMH (e786) -- and each name keeps a row because it is the name a reader arrives with. This row additionally carries MD4UTF16UC, the same digest in uppercase hex."
             },
             {
                "distinction" : "naming",
@@ -22035,7 +21984,7 @@
                "note" : "Not a duplicate, decided by Royce on 2026-08-30. mdxfind publishes three type indices for one computation - MD4UTF16 (e496), NTLM (e369) and NTLMH (e786) - all with the same example vector; pinned runs of all three also reproduce md4(utf16('rosetta')) on 2026-08-30, so the agreement is not a coincidence of one input. NTLMH keeps a row because that name is what a reader arrives with."
             }
          ],
-         "sameas" : "duplicate of md4-utf16-le-utf-8-plain; duplicate of ntlm-plain-md4-utf16-le-plain; same as ntlmh (naming)",
+         "sameas" : "duplicate of ntlm-plain-md4-utf16-le-plain; same as md4-utf16-le-utf-8-plain (naming); same as ntlmh (naming)",
          "status" : "ok",
          "tool_note" : {
             "hashcat" : "",
@@ -22133,19 +22082,19 @@
          "notes" : "",
          "relations" : [
             {
-               "distinction" : "none",
+               "distinction" : "naming",
                "entry" : "md4-utf16-plain",
-               "kind" : "duplicate-of",
-               "note" : "Both compute md4(utf16($p)) -- NTLM. Proven 2026-09-01 against this entry's own vector. Same question as the other NTLM-named rows: several names, one computation."
+               "kind" : "same-computation",
+               "note" : "Not a duplicate, decided by Royce on 2026-09-01, on the same grounds as the md4-utf16-plain <-> ntlmh edge of 2026-08-30. mdxfind publishes three type indices for one computation -- MD4UTF16 (e496), NTLM (e369) and NTLMH (e786) -- and each name keeps a row because it is the name a reader arrives with. This row additionally carries MD4UTF16UC, the same digest in uppercase hex."
             },
             {
-               "distinction" : "none",
+               "distinction" : "naming",
                "entry" : "ntlmh",
-               "kind" : "duplicate-of",
-               "note" : "Both compute md4(utf16($p)). See the edge to md4-utf16-plain."
+               "kind" : "same-computation",
+               "note" : "Not a duplicate, decided by Royce on 2026-09-01, on the same grounds as the md4-utf16-plain <-> ntlmh edge of 2026-08-30. mdxfind publishes three type indices for one computation -- MD4UTF16 (e496), NTLM (e369) and NTLMH (e786) -- and each name keeps a row because it is the name a reader arrives with. This row additionally carries MD4UTF16UC, the same digest in uppercase hex."
             }
          ],
-         "sameas" : "duplicate of md4-utf16-plain; duplicate of ntlmh",
+         "sameas" : "same as md4-utf16-plain (naming); same as ntlmh (naming)",
          "status" : "ok",
          "tool_note" : {
             "hashcat" : "",
@@ -29155,18 +29104,18 @@
          "vecs" : 1
       },
       {
-         "alias" : "",
+         "alias" : "MD5MD5UC",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
          },
          "cracknote" : "",
          "denotation" : "",
-         "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr" : "md5(upper(md5($p)))",
+         "expr_note" : "transcribed from the hx specification's Appendix A entry for mdxfind type MD5MD5UC (e262), which states md5(upper(md5(pass))). Transcription, not reproduction, so this is upstream and not vector; run derive-expressions.pl to try to promote it. Not checkable locally: the construction uses functions RosettaExpr cannot compile, so this rests on upstream's word alone.",
+         "expr_tier" : "upstream",
          "hashcat" : {
             "ids" : [
                4300
@@ -29189,15 +29138,22 @@
          },
          "name" : "md5(strtoupper(md5($pass)))",
          "notes" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "none",
+               "entry" : "md5md5uc",
+               "kind" : "duplicate-of",
+               "note" : "merged 2026-09-01: one computation under two names: both carry hashcat mode 4300 and mdxfind type MD5MD5UC. The collision gate never flagged the pair because only md5md5uc carried an expression. Royce chose md5-strtoupper-md5-pass on 2026-09-01: its name states the construction and it holds the hashes.org and hashkiller legacy names"
+            }
+         ],
+         "sameas" : "duplicate of md5md5uc",
          "status" : "ok",
          "tool_note" : {
             "hashcat" : "",
             "john" : "",
             "mdxfind" : "type discovered by round-trip search, not by name"
          },
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -31610,51 +31566,6 @@
          "status" : "needs-review",
          "tool_note" : {
             "hashcat" : "",
-            "john" : "",
-            "mdxfind" : "mdxfind's own published example for this identifier, recovered by mdxfind at this identifier with mdxfind's own published plaintext."
-         },
-         "vecs" : 1
-      },
-      {
-         "alias" : "",
-         "application" : "",
-         "category" : "composite",
-         "crack" : {
-            "ids" : [],
-            "state" : "no"
-         },
-         "cracknote" : "",
-         "denotation" : "",
-         "expr" : "md5(upper(md5($p)))",
-         "expr_note" : "transcribed from the hx specification's Appendix A entry for mdxfind type MD5MD5UC (e262), which states md5(upper(md5(pass))). Transcription, not reproduction, so this is upstream and not vector; run derive-expressions.pl to try to promote it. Not checkable locally: the construction uses functions RosettaExpr cannot compile, so this rests on upstream's word alone.",
-         "expr_tier" : "upstream",
-         "hashcat" : {
-            "ids" : [
-               4300
-            ],
-            "state" : "proven",
-            "tier" : "vector"
-         },
-         "id" : "md5md5uc",
-         "john" : {
-            "ids" : [],
-            "state" : "unknown"
-         },
-         "legacy" : "",
-         "mdxfind" : {
-            "ids" : [
-               "MD5MD5UC"
-            ],
-            "state" : "proven",
-            "tier" : "vector"
-         },
-         "name" : "MD5MD5UC",
-         "notes" : "",
-         "relations" : [],
-         "sameas" : "",
-         "status" : "needs-review",
-         "tool_note" : {
-            "hashcat" : "mode discovered by round-trip search, not by name",
             "john" : "",
             "mdxfind" : "mdxfind's own published example for this identifier, recovered by mdxfind at this identifier with mdxfind's own published plaintext."
          },
@@ -36495,10 +36406,10 @@
          "notes" : "",
          "relations" : [
             {
-               "distinction" : "none",
+               "distinction" : "naming",
                "entry" : "md4-utf16-le-utf-8-plain",
-               "kind" : "duplicate-of",
-               "note" : "Both compute md4(utf16($p)). See the edge to md4-utf16-plain."
+               "kind" : "same-computation",
+               "note" : "Not a duplicate, decided by Royce on 2026-09-01, on the same grounds as the md4-utf16-plain <-> ntlmh edge of 2026-08-30. mdxfind publishes three type indices for one computation -- MD4UTF16 (e496), NTLM (e369) and NTLMH (e786) -- and each name keeps a row because it is the name a reader arrives with. This row additionally carries MD4UTF16UC, the same digest in uppercase hex."
             },
             {
                "distinction" : "naming",
@@ -36507,7 +36418,7 @@
                "note" : "Not a duplicate, decided by Royce on 2026-08-30. mdxfind publishes three type indices for one computation - MD4UTF16 (e496), NTLM (e369) and NTLMH (e786) - all with the same example vector; pinned runs of all three also reproduce md4(utf16('rosetta')) on 2026-08-30. This row exists because NTLMH is the name a reader arrives with."
             }
          ],
-         "sameas" : "duplicate of md4-utf16-le-utf-8-plain; same as md4-utf16-plain (naming)",
+         "sameas" : "same as md4-utf16-le-utf-8-plain (naming); same as md4-utf16-plain (naming)",
          "status" : "ok",
          "tool_note" : {
             "hashcat" : "",
@@ -37453,17 +37364,18 @@
          "expr_tier" : "vector",
          "hashcat" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "id" : "panama-johnpanama",
          "john" : {
             "ids" : [
-               "Panama"
+               "Panama",
+               "dynamic_320"
             ],
             "state" : "proven",
             "tier" : "vector"
          },
-         "legacy" : "",
+         "legacy" : "PANAMA",
          "mdxfind" : {
             "ids" : [
                "PANAMA"
@@ -37478,69 +37390,17 @@
                "distinction" : "none",
                "entry" : "panama",
                "kind" : "duplicate-of",
-               "note" : "Both compute panama($p), proven 2026-09-01. panama-johnpanama is john's row, panama the generic one."
+               "note" : "merged 2026-09-01: one computation under two names, proven by john's dynamic compiler against both vectors. Royce chose the john-named row on 2026-09-01: panama-johnpanama carries john's Panama format, and dynamic_320 now sits beside it so a reader arriving by either name lands here"
             }
          ],
          "sameas" : "duplicate of panama",
          "status" : "needs-review",
          "tool_note" : {
             "hashcat" : "",
-            "john" : "john's own published example ciphertext for this format, recovered by john under this format. john publishes no plaintext, so the plaintext was found by handing john its own example and a candidate list -- what john recovered IS the plaintext, by construction.",
+            "john" : "john's own published example ciphertext for this format, recovered by john under this format. john publishes no plaintext, so the plaintext was found by handing john its own example and a candidate list -- what john recovered IS the plaintext, by construction. dynamic_320 came from panama in the 2026-09-01 merge, proven there at tier vector.",
             "mdxfind" : "type discovered by round-trip search, not by name"
          },
-         "vecs" : 1
-      },
-      {
-         "alias" : "",
-         "application" : "",
-         "category" : "primitive",
-         "crack" : {
-            "ids" : [],
-            "state" : "no"
-         },
-         "cracknote" : "",
-         "denotation" : "",
-         "expr" : "panama($p)",
-         "expr_note" : "round-tripped as --format=dynamic=<expr> against every vector this entry carries",
-         "expr_tier" : "vector",
-         "hashcat" : {
-            "ids" : [],
-            "state" : "no"
-         },
-         "id" : "panama",
-         "john" : {
-            "ids" : [
-               "dynamic_320"
-            ],
-            "state" : "proven",
-            "tier" : "vector"
-         },
-         "legacy" : "PANAMA",
-         "mdxfind" : {
-            "ids" : [
-               "PANAMA"
-            ],
-            "state" : "proven",
-            "tier" : "vector"
-         },
-         "name" : "PANAMA",
-         "notes" : "",
-         "relations" : [
-            {
-               "distinction" : "none",
-               "entry" : "panama-johnpanama",
-               "kind" : "duplicate-of",
-               "note" : "Both compute panama($p), proven 2026-09-01. panama-johnpanama is john's row, panama the generic one."
-            }
-         ],
-         "sameas" : "duplicate of panama-johnpanama",
-         "status" : "ok",
-         "tool_note" : {
-            "hashcat" : "",
-            "john" : "",
-            "mdxfind" : ""
-         },
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -41437,7 +41297,7 @@
          "vecs" : 1
       },
       {
-         "alias" : "",
+         "alias" : "SHA224",
          "application" : "",
          "category" : "primitive",
          "crack" : {
@@ -41459,12 +41319,13 @@
          "id" : "raw-sha224",
          "john" : {
             "ids" : [
-               "Raw-SHA224"
+               "Raw-SHA224",
+               "dynamic_50"
             ],
             "state" : "proven",
             "tier" : "vector"
          },
-         "legacy" : "",
+         "legacy" : "SHA224; n/a",
          "mdxfind" : {
             "ids" : [
                "SHA224",
@@ -41480,17 +41341,17 @@
                "distinction" : "none",
                "entry" : "sha224",
                "kind" : "duplicate-of",
-               "note" : "Both compute sha224($p), proven 2026-09-01. raw-sha224 is john's Raw-SHA224 spelling."
+               "note" : "merged 2026-09-01: one computation under two names, proven by john's dynamic compiler against both vectors. Royce chose the john-named row on 2026-09-01: raw-sha224 is john's own Raw-SHA224 spelling, and dynamic_50 now sits beside it so a reader arriving by either name lands here"
             }
          ],
          "sameas" : "duplicate of sha224",
          "status" : "needs-review",
          "tool_note" : {
             "hashcat" : "mode discovered by round-trip search, not by name",
-            "john" : "john's own published example ciphertext for this format, recovered by john under this format. john publishes no plaintext, so the plaintext was found by handing john its own example and a candidate list -- what john recovered IS the plaintext, by construction.",
+            "john" : "john's own published example ciphertext for this format, recovered by john under this format. john publishes no plaintext, so the plaintext was found by handing john its own example and a candidate list -- what john recovered IS the plaintext, by construction. dynamic_50 came from sha224 in the 2026-09-01 merge, proven there at tier vector.",
             "mdxfind" : "type discovered by round-trip search, not by name"
          },
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -41535,7 +41396,7 @@
          "vecs" : 0
       },
       {
-         "alias" : "",
+         "alias" : "sha384",
          "application" : "",
          "category" : "primitive",
          "crack" : {
@@ -41557,12 +41418,13 @@
          "id" : "raw-sha384",
          "john" : {
             "ids" : [
-               "Raw-SHA384"
+               "Raw-SHA384",
+               "dynamic_70"
             ],
             "state" : "proven",
             "tier" : "vector"
          },
-         "legacy" : "",
+         "legacy" : "SHA384",
          "mdxfind" : {
             "ids" : [
                "SHA384",
@@ -41578,17 +41440,17 @@
                "distinction" : "none",
                "entry" : "sha384",
                "kind" : "duplicate-of",
-               "note" : "Both compute sha384($p), proven 2026-09-01. raw-sha384 is john's Raw-SHA384 spelling."
+               "note" : "merged 2026-09-01: one computation under two names, proven by john's dynamic compiler against both vectors. Royce chose the john-named row on 2026-09-01: raw-sha384 is john's own Raw-SHA384 spelling, and dynamic_70 now sits beside it so a reader arriving by either name lands here"
             }
          ],
          "sameas" : "duplicate of sha384",
          "status" : "needs-review",
          "tool_note" : {
             "hashcat" : "mode discovered by round-trip search, not by name",
-            "john" : "john's own published example ciphertext for this format, recovered by john under this format. john publishes no plaintext, so the plaintext was found by handing john its own example and a candidate list -- what john recovered IS the plaintext, by construction.",
+            "john" : "john's own published example ciphertext for this format, recovered by john under this format. john publishes no plaintext, so the plaintext was found by handing john its own example and a candidate list -- what john recovered IS the plaintext, by construction. dynamic_70 came from sha384 in the 2026-09-01 merge, proven there at tier vector.",
             "mdxfind" : "type discovered by round-trip search, not by name"
          },
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -55690,61 +55552,6 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "primitive",
-         "crack" : {
-            "ids" : [],
-            "state" : "no"
-         },
-         "cracknote" : "",
-         "denotation" : "",
-         "expr" : "sha224($p)",
-         "expr_note" : "round-tripped as --format=dynamic=<expr> against every vector this entry carries",
-         "expr_tier" : "vector",
-         "hashcat" : {
-            "ids" : [
-               1300
-            ],
-            "state" : "proven",
-            "tier" : "vector"
-         },
-         "id" : "sha224",
-         "john" : {
-            "ids" : [
-               "dynamic_50"
-            ],
-            "state" : "proven",
-            "tier" : "vector"
-         },
-         "legacy" : "SHA224; n/a",
-         "mdxfind" : {
-            "ids" : [
-               "SHA224"
-            ],
-            "state" : "proven",
-            "tier" : "vector"
-         },
-         "name" : "SHA224",
-         "notes" : "",
-         "relations" : [
-            {
-               "distinction" : "none",
-               "entry" : "raw-sha224",
-               "kind" : "duplicate-of",
-               "note" : "Both compute sha224($p), proven 2026-09-01. raw-sha224 is john's Raw-SHA224 spelling."
-            }
-         ],
-         "sameas" : "duplicate of raw-sha224",
-         "status" : "ok",
-         "tool_note" : {
-            "hashcat" : "",
-            "john" : "",
-            "mdxfind" : ""
-         },
-         "vecs" : 1
-      },
-      {
-         "alias" : "",
-         "application" : "",
          "category" : "iterated",
          "crack" : {
             "ids" : [],
@@ -57489,61 +57296,6 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "primitive",
-         "crack" : {
-            "ids" : [],
-            "state" : "no"
-         },
-         "cracknote" : "",
-         "denotation" : "",
-         "expr" : "sha384($p)",
-         "expr_note" : "round-tripped as --format=dynamic=<expr> against every vector this entry carries",
-         "expr_tier" : "vector",
-         "hashcat" : {
-            "ids" : [
-               10800
-            ],
-            "state" : "proven",
-            "tier" : "vector"
-         },
-         "id" : "sha384",
-         "john" : {
-            "ids" : [
-               "dynamic_70"
-            ],
-            "state" : "proven",
-            "tier" : "vector"
-         },
-         "legacy" : "SHA384",
-         "mdxfind" : {
-            "ids" : [
-               "SHA384"
-            ],
-            "state" : "proven",
-            "tier" : "vector"
-         },
-         "name" : "sha384",
-         "notes" : "",
-         "relations" : [
-            {
-               "distinction" : "none",
-               "entry" : "raw-sha384",
-               "kind" : "duplicate-of",
-               "note" : "Both compute sha384($p), proven 2026-09-01. raw-sha384 is john's Raw-SHA384 spelling."
-            }
-         ],
-         "sameas" : "duplicate of raw-sha384",
-         "status" : "ok",
-         "tool_note" : {
-            "hashcat" : "",
-            "john" : "",
-            "mdxfind" : ""
-         },
-         "vecs" : 1
-      },
-      {
-         "alias" : "",
-         "application" : "",
          "category" : "iterated",
          "crack" : {
             "ids" : [],
@@ -58967,7 +58719,7 @@
          "vecs" : 1
       },
       {
-         "alias" : "",
+         "alias" : "SM3",
          "application" : "",
          "category" : "primitive",
          "crack" : {
@@ -58989,7 +58741,8 @@
          "id" : "shangmi-3",
          "john" : {
             "ids" : [
-               "Raw-SM3"
+               "Raw-SM3",
+               "dynamic_450"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -59009,17 +58762,17 @@
                "distinction" : "none",
                "entry" : "sm3",
                "kind" : "duplicate-of",
-               "note" : "Both compute sm3($p), proven 2026-09-01. shangmi-3 spells out ShangMi 3, sm3 is the standard's short name."
+               "note" : "merged 2026-09-01: one computation under two names, proven by john's dynamic compiler against both vectors. Royce chose the john-named row on 2026-09-01: shangmi-3 carries john's Raw-SM3, and dynamic_450 now sits beside it so a reader arriving by either name lands here"
             }
          ],
          "sameas" : "duplicate of sm3",
          "status" : "needs-review",
          "tool_note" : {
             "hashcat" : "mode discovered by round-trip search, not by name",
-            "john" : "john's own published example ciphertext for this format, recovered by john under this format. john publishes no plaintext, so the plaintext was found by handing john its own example and a candidate list -- what john recovered IS the plaintext, by construction.",
+            "john" : "john's own published example ciphertext for this format, recovered by john under this format. john publishes no plaintext, so the plaintext was found by handing john its own example and a candidate list -- what john recovered IS the plaintext, by construction. dynamic_450 came from sm3 in the 2026-09-01 merge, proven there at tier vector.",
             "mdxfind" : "type discovered by round-trip search, not by name"
          },
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -60144,61 +59897,6 @@
          "notes" : "",
          "relations" : [],
          "sameas" : "",
-         "status" : "ok",
-         "tool_note" : {
-            "hashcat" : "",
-            "john" : "",
-            "mdxfind" : ""
-         },
-         "vecs" : 1
-      },
-      {
-         "alias" : "",
-         "application" : "",
-         "category" : "primitive",
-         "crack" : {
-            "ids" : [],
-            "state" : "no"
-         },
-         "cracknote" : "",
-         "denotation" : "",
-         "expr" : "sm3($p)",
-         "expr_note" : "round-tripped as --format=dynamic=<expr> against every vector this entry carries",
-         "expr_tier" : "vector",
-         "hashcat" : {
-            "ids" : [
-               31100
-            ],
-            "state" : "proven",
-            "tier" : "vector"
-         },
-         "id" : "sm3",
-         "john" : {
-            "ids" : [
-               "dynamic_450"
-            ],
-            "state" : "proven",
-            "tier" : "vector"
-         },
-         "legacy" : "",
-         "mdxfind" : {
-            "ids" : [
-               "SM3"
-            ],
-            "state" : "proven",
-            "tier" : "vector"
-         },
-         "name" : "SM3",
-         "notes" : "",
-         "relations" : [
-            {
-               "distinction" : "none",
-               "entry" : "shangmi-3",
-               "kind" : "duplicate-of",
-               "note" : "Both compute sm3($p), proven 2026-09-01. shangmi-3 spells out ShangMi 3, sm3 is the standard's short name."
-            }
-         ],
-         "sameas" : "duplicate of shangmi-3",
          "status" : "ok",
          "tool_note" : {
             "hashcat" : "",
@@ -68155,13 +67853,34 @@
       }
    ],
    "generated" : "2026-09-01",
-   "merged" : 3,
+   "merged" : 9,
    "tombstones" : [
+      {
+         "id" : "hav256",
+         "merged_into" : "haval-256-3",
+         "name" : "HAV256",
+         "relations_text" : "duplicate of haval-256-3",
+         "status" : "merged"
+      },
+      {
+         "id" : "md5md5uc",
+         "merged_into" : "md5-strtoupper-md5-pass",
+         "name" : "MD5MD5UC",
+         "relations_text" : "duplicate of md5-strtoupper-md5-pass",
+         "status" : "merged"
+      },
       {
          "id" : "ntlm-plain-md4-utf16-le-plain",
          "merged_into" : "md4-utf16-plain",
          "name" : "ntlm($plain) / md4(utf16-le($plain))",
          "relations_text" : "duplicate of md4-utf16-plain",
+         "status" : "merged"
+      },
+      {
+         "id" : "panama",
+         "merged_into" : "panama-johnpanama",
+         "name" : "PANAMA",
+         "relations_text" : "duplicate of panama-johnpanama",
          "status" : "merged"
       },
       {
@@ -68176,6 +67895,27 @@
          "merged_into" : "sha1-md5-pass-salt",
          "name" : "sha1(md5(md5($pass).$salt))",
          "relations_text" : "duplicate of sha1-md5-pass-salt",
+         "status" : "merged"
+      },
+      {
+         "id" : "sha224",
+         "merged_into" : "raw-sha224",
+         "name" : "SHA224",
+         "relations_text" : "duplicate of raw-sha224",
+         "status" : "merged"
+      },
+      {
+         "id" : "sha384",
+         "merged_into" : "raw-sha384",
+         "name" : "sha384",
+         "relations_text" : "duplicate of raw-sha384",
+         "status" : "merged"
+      },
+      {
+         "id" : "sm3",
+         "merged_into" : "shangmi-3",
+         "name" : "SM3",
+         "relations_text" : "duplicate of shangmi-3",
          "status" : "merged"
       }
    ],
