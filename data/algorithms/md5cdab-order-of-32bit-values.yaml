@@ -14,6 +14,11 @@ tools:
     verified: "absent"
   crack:
     supported: false
+relations:
+  - kind: "encodes"
+    entry: "md5"
+    distinction: "encoding"
+    note: "the vector is md5($p) with its four 32-bit output words reordered c,d,a,b: md5('rosetta') is 975790df b2854c88 094fe624 77a7d5f3 and the entry carries 094fe62477a7d5f3975790dfb2854c88. Confirmed 2026-08-31 with Digest::MD5, independent of all three crackers. No tool implements the reordering: mdxfind ships MD5dcab and MD5bcad but no cdab, and neither reproduces this vector when pinned"
 vectors:
   - hash: "094fe62477a7d5f3975790dfb2854c88"
     pass: "rosetta"
