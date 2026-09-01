@@ -11,6 +11,12 @@ denotation:
   note: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A, entry for mdxfind type AICH (e21), which states aich(pass)."
 status: "needs-review"
 tools:
+  hashcat:
+    modes: [100]
+    verified: "vector"
+    verified_at: "2026-08-31"
+    verified_with: "hashcat v7.1.2-549-g8a15e210b"
+    note: "proven three ways because -m 100 alone is not enough: hashcat cracked this row's own vector under mode 100, john's Raw-SHA1 and dynamic_26 cracked it too with a FULL digest comparison, and Digest::SHA confirms sha1(\"password123\") is cbfdac6008f9cab4083784cbd1874f76618d2a97 character for character. The third step is required here: measured 2026-08-31, hashcat -m 100 skips hash positions 0-7, so on its own it cannot tell this row from sha1lsb35, which is the same digest with those nibbles masked. discover-hashcat.pl's canary withheld the claim for exactly that reason; this is a human overriding it with the independent recomputation, not the tool's word."
   mdxfind:
     types: ["AICH"]
     verified: "vector"
@@ -18,13 +24,18 @@ tools:
     verified_with: "mdxfind RCS 1.540 (2026/08/22)"
     note: "mdxfind's own published example for this identifier, recovered by mdxfind at this identifier with mdxfind's own published plaintext."
   john:
-    cpu: ["Raw-SHA1", "Raw-SHA1-Linkedin", "dynamic_26"]
+    cpu: ["Raw-SHA1", "dynamic_26"]
     verified: "vector"
     verified_at: "2026-08-31"
     verified_with: "john"
-    note: "format discovered by round-trip search, not by name"
+    note: "format discovered by round-trip search, not by name. Raw-SHA1-Linkedin was recorded here by discover-john.pl on 2026-08-31 and WITHDRAWN the same day. It is john's format for the LinkedIn leak, whose hashes have their leading nibbles zeroed, and it ignores hash positions 0-7 to read them -- measured here, the same defect the hashcat canary found in -m 100. It therefore cracks any full SHA-1 digest as well, which is a collision and not a denotation. Raw-SHA1 and dynamic_26 both compare the whole digest and were re-checked position by position."
   crack:
     supported: false
+relations:
+  - kind: "collides-on-subset"
+    entry: "sha1lsb35"
+    distinction: "truncation"
+    note: "AICH of a single block is SHA-1, and SHA1lsb35 is SHA-1 with the leading nibbles masked to zero, so any tool that ignores that field -- hashcat -m 100 and john Raw-SHA1-Linkedin both do, measured 2026-08-31 -- reports one for the other. They agree on every input outside those nibbles and differ nowhere else that such a tool looks."
 vectors:
   - hash: "cbfdac6008f9cab4083784cbd1874f76618d2a97"
     pass: "password123"

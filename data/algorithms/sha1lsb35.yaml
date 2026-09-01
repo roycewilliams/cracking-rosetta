@@ -13,6 +13,7 @@ status: "ok"
 tools:
   hashcat:
     verified: "absent"
+    note: "hashcat -m 100 DOES report cracking both of this row's vectors, and that is not a mapping. Measured 2026-08-31: -m 100 skips hash positions 0-7, which is exactly the field this type masks, so it cannot tell this row from a plain SHA-1. discover-hashcat.pl's canary withheld the claim. hashcat has no mode for the masked construction; john does, and it is in tools.john.cpu."
   mdxfind:
     types: ["SHA1lsb35"]
     verified: "vector"
@@ -26,6 +27,15 @@ tools:
     note: "john's own test vector for this format is reproduced by mdxfind pinned to SHA1lsb35 at iteration 1"
   crack:
     supported: false
+relations:
+  - kind: "collides-on-subset"
+    entry: "aich"
+    distinction: "truncation"
+    note: "AICH of a single block is SHA-1, and SHA1lsb35 is SHA-1 with the leading nibbles masked to zero, so any tool that ignores that field -- hashcat -m 100 and john Raw-SHA1-Linkedin both do, measured 2026-08-31 -- reports one for the other. They agree on every input outside those nibbles and differ nowhere else that such a tool looks."
+  - kind: "collides-on-subset"
+    entry: "sha1uc"
+    distinction: "truncation"
+    note: "SHA1UC is SHA-1 written in uppercase hex and SHA1lsb35 is SHA-1 with the leading nibbles masked to zero, so a tool that skips that field cannot tell them apart: hashcat -m 100 skips hash positions 0-7 and john Raw-SHA1-Linkedin skips the same, measured 2026-08-31. The digests are identical from position 8 onward."
 vectors:
   - hash: "0000012f25e64931f3833b26e999e26e81f9ad24"
     pass: "azertyuiop3"
