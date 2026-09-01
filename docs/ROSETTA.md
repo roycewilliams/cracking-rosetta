@@ -68,7 +68,7 @@ For sorting, filtering and search, open [index.html](index.html) - or
 | AWSSIGV4 | `28700` ✓ | **—** | `AWSSIGV4` ✓ |  |
 | AXCRYPT | `13200` ✓ | `AxCrypt`<br>`axcrypt-opencl` ✓ | `AXCRYPT` ✓ |  |
 | AxCrypt 2 AES-128 | `23500` ✓ | **—** | **—** |  |
-| AxCrypt 2 AES-256 | `23600` ✓ | `AxCrypt` ✓ | **—** |  |
+| AxCrypt 2 AES-256 | `23600` ✓ | `AxCrypt`<br>`axcrypt2-opencl` ✓ | **—** |  |
 | AXCRYPTSHA1 | `13300` ✓ | **—** | `AXCRYPTSHA1` ✓ |  |
 | AzureAD | **—** | `AzureAD` ✓ | **—** |  |
 | AZURESYNC | `12800` ✓ | **—** | `AZURESYNC` ✓ |  |
@@ -160,7 +160,7 @@ For sorting, filtering and search, open [index.html](index.html) - or
 | descrypt($plain) † | `1500` ✓ | `descrypt`<br>`descrypt-opencl` ✓ | `DESCRYPT` ✓ |  |
 | DESENCRYPT | `14000` ✓ | **—** | `DESENCRYPT` ✓ |  |
 | DIGEST-MD5 C/R | **—** | `dmd5` ✓ | **—** |  |
-| DiskCryptor | **—** | `diskcryptor` | **—** |  |
+| DiskCryptor | **—** | `diskcryptor`<br>`diskcryptor-aes-opencl` ✓ | **—** |  |
 | DiskCryptor SHA512 + XTS 1024 bit | `20012` ✓ | **—** | **—** |  |
 | DiskCryptor SHA512 + XTS 1536 bit | `20013` ✓ | **—** | **—** |  |
 | DiskCryptor SHA512 + XTS 512 bit | `20011` ✓ | **—** | **—** |  |
@@ -231,7 +231,7 @@ For sorting, filtering and search, open [index.html](index.html) - or
 | Eggdrop | **—** | `bfegg` ✓ | **—** |  |
 | EIGRP MD5 / HMAC-SHA-256 authentication | **—** | `eigrp` ✓ | **—** |  |
 | Electrum Wallet (Salt-Type 1-3) | `16600` ✓ | `electrum` ✓ | **—** |  |
-| Electrum Wallet (Salt-Type 4) | `21700` ✓ | `electrum` ✓ | **—** |  |
+| Electrum Wallet (Salt-Type 4) | `21700` ✓ | `electrum`<br>`electrum-modern-opencl` ✓ | **—** |  |
 | Electrum Wallet (Salt-Type 5) | `21800` ✓ | `electrum` ✓ | **—** |  |
 | EMPIRECMS | `32300` ✓ | **—** | `EMPIRECMS` ✓ |  |
 | EncFS | **—** | `EncFS`<br>`EncFS-opencl` ✓ | **—** |  |
@@ -245,7 +245,7 @@ For sorting, filtering and search, open [index.html](index.html) - or
 | Episerver 6.x < .NET 4 | `141` ✓ | **—** | **—** |  |
 | Episerver 6.x >= .NET 4 | `1441` ✓ | **—** | **—** |  |
 | EPiServer SID | **—** | `EPI` ✓ | **—** |  |
-| Ethereum Pre-Sale Wallet, PBKDF2-HMAC-SHA256 | `16300` ✓ | `ethereum` ✓ | **—** |  |
+| Ethereum Pre-Sale Wallet, PBKDF2-HMAC-SHA256 | `16300` ✓ | `ethereum`<br>`ethereum-presale-opencl` ✓ | **—** |  |
 | Ethereum Wallet, PBKDF2-HMAC-SHA256 | `15600` ✓ | `ethereum`<br>`ethereum-opencl` ✓ | **—** |  |
 | Ethereum Wallet, SCRYPT | `15700` ✓ | `ethereum` ✓ | **—** |  |
 | Exodus Desktop Wallet (scrypt) | `28200` ✓ | **—** | **—** |  |
@@ -446,9 +446,9 @@ For sorting, filtering and search, open [index.html](index.html) - or
 | KeePass (KDBX v2/v3) | `13400` ✓ | `KeePass`<br>`KeePass-opencl` ✓ | **—** |  |
 | KeePass (KDBX v2/v3) - keyfile only | `29700` ✓ | **—** | **—** |  |
 | KeePass AESKDF (KDBX v4) | `34301` ✓ | `KeePass`<br>`KeePass-opencl` ✓ | **—** |  |
-| KeePass Argon2 (KDBX v4) | `34300` ✓ | `KeePass` ✓ | **—** |  |
+| KeePass Argon2 (KDBX v4) | `34300` ✓ | `KeePass`<br>`KeePass-Argon2-opencl` ✓ | **—** |  |
 | Keplr Wallet | **—** | `keplr` ✓ | **—** |  |
-| Kerberos 5 AS-REP etype 17/18/23 | `32100` ✓ | `krb5asrep` ✓ | **—** |  |
+| Kerberos 5 AS-REP etype 17/18/23 | `32100` ✓ | `krb5asrep`<br>`krb5asrep-aes-opencl` ✓ | **—** |  |
 | Kerberos 5 AS-REQ Pre-Auth etype 17/18 | **—** | `krb5pa-sha1`<br>`krb5pa-sha1-opencl` ✓ | **—** |  |
 | Kerberos 5 DB etype 17 | **—** | `krb5-17` ✓ | **—** |  |
 | Kerberos 5 DB etype 18 | **—** | `krb5-18` ✓ | **—** |  |
@@ -502,7 +502,7 @@ For sorting, filtering and search, open [index.html](index.html) - or
 | Mac OS X 10.4 - 10.6 | `122` ✓ | `xsha` ✓ | **—** |  |
 | macOS v10.8+ (PBKDF2-SHA512) | `7100` ✓ | `PBKDF2-HMAC-SHA512`<br>`PBKDF2-HMAC-SHA512-opencl` ✓ | **—** |  |
 | MACOSX | `122` ✓ | **—** | `MACOSX` ✓ |  |
-| MACOSX7 | `1722` ✓ | `xsha512`<br>`XSHA512-opencl` ✓ | `MACOSX7` ✓ |  |
+| MACOSX7 | `1722` ✓ | `xsha512`<br>`XSHA512-opencl`<br>`XSHA512-free-opencl` ✓ | `MACOSX7` ✓ |  |
 | MANGOS | **—** | **—** | `MANGOS` ✓ |  |
 | MD2 | **—** | `MD2` ✓ | **—** |  |
 | MD2 | · | `dynamic_310` ✓ | `MD2` ✓ |  |
@@ -1333,7 +1333,7 @@ For sorting, filtering and search, open [index.html](index.html) - or
 | SHA384UTF16LE | `10870` ✓ | **—** | `SHA384UTF16LE` ✓ |  |
 | SHA384UTF16LEPASSSALT | `10830` ✓ | **—** | `SHA384UTF16LEPASSSALT` ✓ |  |
 | SHA384UTF16LESALTPASS | `10840` ✓ | **—** | `SHA384UTF16LESALTPASS` ✓ |  |
-| SHA512 | `1700` ✓ | `Raw-SHA512`<br>`dynamic_80`<br>`raw-SHA512-opencl` ✓ | `SHA512` ✓ |  |
+| SHA512 | `1700` ✓ | `Raw-SHA512`<br>`dynamic_80`<br>`raw-SHA512-opencl`<br>`raw-SHA512-free-opencl` ✓ | `SHA512` ✓ |  |
 | SHA512 (2 iterations) | **—** | `dynamic_83` ✓ | `SHA512 -i2` ✓ |  |
 | sha512($pass.$salt) | `1710` ✓ | `dynamic_82` ✓ | `SHA512PASSSALT` ✓ |  |
 | sha512($salt.$pass) | `1720` ✓ | `dynamic_81` ✓ | `SHA512SALTPASS` ✓ |  |
@@ -1443,7 +1443,7 @@ For sorting, filtering and search, open [index.html](index.html) - or
 | TOTP (HMAC-SHA1) | `18100` | **—** | **—** |  |
 | Tripcode | `16000` ✓ | `tripcode` ✓ | **—** |  |
 | TrueCrypt AES/Twofish/Serpent | **—** | `tc_ripemd160boot` | **—** |  |
-| TrueCrypt AES256_XTS | **—** | `tc_ripemd160` | **—** |  |
+| TrueCrypt AES256_XTS | **—** | `tc_ripemd160`<br>`TrueCrypt-opencl` ✓ | **—** |  |
 | TrueCrypt AES256_XTS | **—** | `tc_sha512` | **—** |  |
 | TrueCrypt AES256_XTS | **—** | `tc_whirlpool` | **—** |  |
 | TrueCrypt AES256_XTS | **—** | `tc_aes_xts` | **—** |  |

@@ -161,7 +161,7 @@ tools/verify-vectors.pl --tool <tool> --only <id> -v
 | [`wpa-pmkid-pbkdf2`](index.html#wpa-pmkid-pbkdf2) | hashcat | `16800` | upstream |
 | [`wpa-pmkid-pmk`](index.html#wpa-pmkid-pmk) | hashcat | `16801` | upstream |
 
-## 2. No test vector at all (59)
+## 2. No test vector at all (57)
 
 Blocked on one piece of data, and it is the piece that does not require any
 tool: a hash and the plaintext that produces it. Nothing here can reach tier
@@ -178,7 +178,6 @@ that is the whole contribution.
 * [`bouncycastle`](index.html#bouncycastle) - BouncyCastle
 * [`cardano-encrypted-128-byte-secret-key-a-k-a-xprv`](index.html#cardano-encrypted-128-byte-secret-key-a-k-a-xprv) - Cardano Encrypted 128-byte Secret Key (a.k.a XPrv)
 * [`clearquest`](index.html#clearquest) - ClearQuest
-* [`diskcryptor`](index.html#diskcryptor) - DiskCryptor
 * [`dnssec-nsec3`](index.html#dnssec-nsec3) - DNSSEC NSEC3
 * [`dynamic-1015`](index.html#dynamic-1015) - dynamic_1015
 * [`dynamic-1030`](index.html#dynamic-1030) - dynamic_1030
@@ -222,7 +221,6 @@ that is the whole contribution.
 * [`skein-512`](index.html#skein-512) - Skein 512
 * [`tiger-johntiger`](index.html#tiger-johntiger) - Tiger
 * [`truecrypt-aes-twofish-serpent`](index.html#truecrypt-aes-twofish-serpent) - TrueCrypt AES/Twofish/Serpent
-* [`truecrypt-aes256-xts-johntc-ripemd160`](index.html#truecrypt-aes256-xts-johntc-ripemd160) - TrueCrypt AES256_XTS
 * [`truecrypt-aes256-xts-johntc-sha512`](index.html#truecrypt-aes256-xts-johntc-sha512) - TrueCrypt AES256_XTS
 * [`truecrypt-aes256-xts-johntc-whirlpool`](index.html#truecrypt-aes256-xts-johntc-whirlpool) - TrueCrypt AES256_XTS
 * [`truecrypt-aes256-xts`](index.html#truecrypt-aes256-xts) - TrueCrypt AES256_XTS

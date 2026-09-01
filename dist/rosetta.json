@@ -2450,7 +2450,8 @@
          "id" : "axcrypt-2-aes-256",
          "john" : {
             "ids" : [
-               "AxCrypt"
+               "AxCrypt",
+               "axcrypt2-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -2467,7 +2468,7 @@
          "status" : "needs-review",
          "tool_note" : {
             "hashcat" : "hashcat's own published example hash for this mode, recovered by hashcat at this mode with hashcat's own published plaintext.",
-            "john" : "format discovered by round-trip search, not by name",
+            "john" : "format discovered by round-trip search, not by name GPU build(s) axcrypt2-opencl proven on 2026-09-01 by cracking this entry's own vector(s) under that exact format; john ships no CPU format of that name, so discover-john.pl --mirror-gpu could not place them.",
             "mdxfind" : ""
          },
          "vecs" : 1
@@ -6489,10 +6490,11 @@
          "id" : "diskcryptor",
          "john" : {
             "ids" : [
-               "diskcryptor"
+               "diskcryptor",
+               "diskcryptor-aes-opencl"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -6500,16 +6502,16 @@
             "state" : "unknown"
          },
          "name" : "DiskCryptor",
-         "notes" : "",
+         "notes" : "Vector(s) added 2026-09-01 from john's own src test data, because john --list=format-details truncates example_ciphertext at 896 characters and every container example is longer than that. The plaintext is john's finding, not the source's claim: each hash was cracked under the CPU format this entry names and under the GPU build that has no CPU twin, and both recovered the plaintext recorded here.",
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
          "tool_note" : {
             "hashcat" : "",
-            "john" : "NOT REPRODUCED HERE. john publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: john publishes no plaintext for its example, and the example did not fall to the ~819 candidate plaintexts harvested from john's own source. The plaintext is findable, it was simply not in the list. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool john --only diskcryptor to retry.",
+            "john" : "Round-tripped here on 2026-09-01, under both diskcryptor and diskcryptor-aes-opencl, against both vectors this entry carries. It had been tier upstream with a note blaming the ~819 candidate plaintexts harvested from john's source for not containing the answer; that diagnosis was wrong. john --list=format-details truncates example_ciphertext at 896 characters, so the header being attacked was never a loadable hash and no wordlist could have cracked it. The vectors here come from john's own src/diskcryptor_common_plug.c test array. Only the two AES-XTS vectors are carried, so the AES-only GPU build round-trips every one of them; john's CPU format also reads the Twofish and Serpent examples. GPU build diskcryptor-aes-opencl has no CPU format of that name, so discover-john.pl --mirror-gpu could not place it; tools/probe-gpu.pl proved it.",
             "mdxfind" : ""
          },
-         "vecs" : 0
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -9527,7 +9529,8 @@
          "id" : "electrum-wallet-salt-type-4",
          "john" : {
             "ids" : [
-               "electrum"
+               "electrum",
+               "electrum-modern-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -9544,7 +9547,7 @@
          "status" : "needs-review",
          "tool_note" : {
             "hashcat" : "hashcat's own published example hash for this mode, recovered by hashcat at this mode with hashcat's own published plaintext.",
-            "john" : "format discovered by round-trip search, not by name",
+            "john" : "format discovered by round-trip search, not by name GPU build(s) electrum-modern-opencl proven on 2026-09-01 by cracking this entry's own vector(s) under that exact format; john ships no CPU format of that name, so discover-john.pl --mirror-gpu could not place them.",
             "mdxfind" : ""
          },
          "vecs" : 1
@@ -10140,7 +10143,8 @@
          "id" : "ethereum-pre-sale-wallet-pbkdf2-hmac-sha256",
          "john" : {
             "ids" : [
-               "ethereum"
+               "ethereum",
+               "ethereum-presale-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -10157,7 +10161,7 @@
          "status" : "needs-review",
          "tool_note" : {
             "hashcat" : "hashcat's own published example hash for this mode, recovered by hashcat at this mode with hashcat's own published plaintext.",
-            "john" : "format discovered by round-trip search, not by name",
+            "john" : "format discovered by round-trip search, not by name GPU build(s) ethereum-presale-opencl proven on 2026-09-01 by cracking this entry's own vector(s) under that exact format; john ships no CPU format of that name, so discover-john.pl --mirror-gpu could not place them.",
             "mdxfind" : ""
          },
          "vecs" : 1
@@ -18958,7 +18962,8 @@
          "id" : "keepass-argon2-kdbx-v4",
          "john" : {
             "ids" : [
-               "KeePass"
+               "KeePass",
+               "KeePass-Argon2-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -18975,7 +18980,7 @@
          "status" : "needs-review",
          "tool_note" : {
             "hashcat" : "hashcat's own published example hash for this mode, recovered by hashcat at this mode with hashcat's own published plaintext.",
-            "john" : "format discovered by round-trip search, not by name",
+            "john" : "format discovered by round-trip search, not by name GPU build(s) KeePass-Argon2-opencl proven on 2026-09-01 by cracking this entry's own vector(s) under that exact format; john ships no CPU format of that name, so discover-john.pl --mirror-gpu could not place them.",
             "mdxfind" : ""
          },
          "vecs" : 1
@@ -19045,7 +19050,8 @@
          "id" : "kerberos-5-as-rep-etype-17-18-23",
          "john" : {
             "ids" : [
-               "krb5asrep"
+               "krb5asrep",
+               "krb5asrep-aes-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -19062,7 +19068,7 @@
          "status" : "needs-review",
          "tool_note" : {
             "hashcat" : "mode discovered by round-trip search, not by name",
-            "john" : "john's own published example ciphertext for this format, recovered by john under this format. john publishes no plaintext, so the plaintext was found by handing john its own example and a candidate list -- what john recovered IS the plaintext, by construction.",
+            "john" : "john's own published example ciphertext for this format, recovered by john under this format. john publishes no plaintext, so the plaintext was found by handing john its own example and a candidate list -- what john recovered IS the plaintext, by construction. GPU build(s) krb5asrep-aes-opencl proven on 2026-09-01 by cracking this entry's own vector(s) under that exact format; john ships no CPU format of that name, so discover-john.pl --mirror-gpu could not place them.",
             "mdxfind" : ""
          },
          "vecs" : 1
@@ -21378,7 +21384,8 @@
          "john" : {
             "ids" : [
                "xsha512",
-               "XSHA512-opencl"
+               "XSHA512-opencl",
+               "XSHA512-free-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -21398,7 +21405,7 @@
          "status" : "ok",
          "tool_note" : {
             "hashcat" : "",
-            "john" : "format discovered by round-trip search, not by name",
+            "john" : "format discovered by round-trip search, not by name GPU build(s) XSHA512-free-opencl proven on 2026-09-01 by cracking this entry's own vector(s) under that exact format; john ships no CPU format of that name, so discover-john.pl --mirror-gpu could not place them.",
             "mdxfind" : ""
          },
          "vecs" : 1
@@ -57723,7 +57730,8 @@
             "ids" : [
                "Raw-SHA512",
                "dynamic_80",
-               "raw-SHA512-opencl"
+               "raw-SHA512-opencl",
+               "raw-SHA512-free-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -57743,7 +57751,7 @@
          "status" : "ok",
          "tool_note" : {
             "hashcat" : "",
-            "john" : "",
+            "john" : "GPU build(s) raw-SHA512-free-opencl proven on 2026-09-01 by cracking this entry's own vector(s) under that exact format; john ships no CPU format of that name, so discover-john.pl --mirror-gpu could not place them.",
             "mdxfind" : ""
          },
          "vecs" : 1
@@ -62625,10 +62633,11 @@
          "id" : "truecrypt-aes256-xts-johntc-ripemd160",
          "john" : {
             "ids" : [
-               "tc_ripemd160"
+               "tc_ripemd160",
+               "TrueCrypt-opencl"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -62636,16 +62645,16 @@
             "state" : "unknown"
          },
          "name" : "TrueCrypt AES256_XTS",
-         "notes" : "",
+         "notes" : "Vector(s) added 2026-09-01 from john's own src test data, because john --list=format-details truncates example_ciphertext at 896 characters and every container example is longer than that. The plaintext is john's finding, not the source's claim: each hash was cracked under the CPU format this entry names and under the GPU build that has no CPU twin, and both recovered the plaintext recorded here.",
          "relations" : [],
          "sameas" : "",
          "status" : "needs-review",
          "tool_note" : {
             "hashcat" : "",
-            "john" : "NOT REPRODUCED HERE. john publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: hashcat's example for this mode is a volume header rather than a digest, so a plain -a 0 wordlist attack cannot consume it. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool john --only tc_ripemd160 to retry.",
+            "john" : "Round-tripped here on 2026-09-01, under both tc_ripemd160 and TrueCrypt-opencl, against both vectors this entry carries. It had been tier upstream with a note saying the local round trip FAILED; the real obstacle was that john --list=format-details truncates example_ciphertext at 896 characters, so the volume header in data/tools/john.yaml is not a loadable hash. The vectors here come from john's own src/opencl_tc_fmt_plug.c test array, and john found their plaintexts -- see notes:. GPU build TrueCrypt-opencl has no CPU format of that name, so discover-john.pl --mirror-gpu could not place it; tools/probe-gpu.pl proved it.",
             "mdxfind" : ""
          },
-         "vecs" : 0
+         "vecs" : 2
       },
       {
          "alias" : "",

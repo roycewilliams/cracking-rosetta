@@ -268,7 +268,7 @@ promote it.
 | [`sha1lsb35`](index.html#sha1lsb35) | `sha1uc` | SHA1UC is SHA-1 written in uppercase hex and SHA1lsb35 is SHA-1 with the leading nibbles masked to zero, so a tool that skips that field cannot tell t... |
 | [`sha1uc`](index.html#sha1uc) | `sha1lsb35` | SHA1UC is SHA-1 written in uppercase hex and SHA1lsb35 is SHA-1 with the leading nibbles masked to zero, so a tool that skips that field cannot tell t... |
 
-## Entries nothing can prove yet (59)
+## Entries nothing can prove yet (57)
 
 No test vector, so no tier above `asserted` is reachable for any tool, however
 well equipped. Several are types whose publisher's own example does not
@@ -282,7 +282,6 @@ hash-and-plaintext pair settles one.
 * [`bouncycastle`](index.html#bouncycastle) - BouncyCastle
 * [`cardano-encrypted-128-byte-secret-key-a-k-a-xprv`](index.html#cardano-encrypted-128-byte-secret-key-a-k-a-xprv) - Cardano Encrypted 128-byte Secret Key (a.k.a XPrv)
 * [`clearquest`](index.html#clearquest) - ClearQuest
-* [`diskcryptor`](index.html#diskcryptor) - DiskCryptor
 * [`dnssec-nsec3`](index.html#dnssec-nsec3) - DNSSEC NSEC3
 * [`dynamic-1015`](index.html#dynamic-1015) - dynamic_1015
 * [`dynamic-1030`](index.html#dynamic-1030) - dynamic_1030
@@ -328,7 +327,6 @@ hash-and-plaintext pair settles one.
 * [`tiger-johntiger`](index.html#tiger-johntiger) - Tiger
 * [`truecrypt-aes-twofish-serpent`](index.html#truecrypt-aes-twofish-serpent) - TrueCrypt AES/Twofish/Serpent
 * [`truecrypt-aes256-xts`](index.html#truecrypt-aes256-xts) - TrueCrypt AES256_XTS
-* [`truecrypt-aes256-xts-johntc-ripemd160`](index.html#truecrypt-aes256-xts-johntc-ripemd160) - TrueCrypt AES256_XTS
 * [`truecrypt-aes256-xts-johntc-sha512`](index.html#truecrypt-aes256-xts-johntc-sha512) - TrueCrypt AES256_XTS
 * [`truecrypt-aes256-xts-johntc-whirlpool`](index.html#truecrypt-aes256-xts-johntc-whirlpool) - TrueCrypt AES256_XTS
 * [`wpa-wpa2-pmf-pmkid-master-key`](index.html#wpa-wpa2-pmf-pmkid-master-key) - WPA/WPA2/PMF/PMKID master key
@@ -346,7 +344,7 @@ deliberately and splitting them is a judgement about what the row is *for* -
 one construction, or one thing people search for. Whoever put them together
 knew something; if that was you, say so.
 
-## Mappings believed but never reproduced (188)
+## Mappings believed but never reproduced (186)
 
 Counted here, listed in [GAPS.md](GAPS.md#1-believed-but-never-reproduced),
 because filling one is mechanical rather than a judgement call: the identifier
