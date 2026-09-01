@@ -353,6 +353,32 @@ sub vectors_for {
     return @v;
 }
 
+# mx_echo_is($rest, $vec) - does mdxfind's "<hash>:<plain>" tail name THIS
+# vector? The plaintext must match exactly. The digest must too, except for
+# hex case: mdxfind normalises hex on read and echoes its OWN lowercase form,
+# so an entry whose vector is recorded in uppercase -- which is how the
+# vendored catalog renders 15 types, and how the *UC types are published --
+# had its own successful round-trip rejected by a string compare and was left
+# saying "NOT REPRODUCED HERE" on rows that reproduce fine. Measured
+# 2026-08-31: mdxfind -h '^MD4UTF16UC$' on A9FDFA...F0DA prints
+# a9fdfa...f0da:password123.
+#
+# The fold is deliberately narrow. It applies only when the recorded digest is
+# pure hex, so a salted "<hash>:<salt>" line -- where the salt is a string and
+# its case is part of the algorithm's input -- is still compared exactly. Two
+# hex strings differing only in case are the same digest, so nothing that was
+# a failure becomes a pass.
+sub mx_echo_is {
+    my ($rest, $vec) = @_;
+    my $want = "$vec->{hash}:$vec->{pass}";
+    return 1 if $rest eq $want;
+    return 0 unless $vec->{hash} =~ /^[0-9A-Fa-f]+$/;
+    my $tail = ":$vec->{pass}";
+    return 0 unless length($rest) > length($tail);
+    return 0 unless substr($rest, -length($tail)) eq $tail;
+    return lc(substr($rest, 0, length($rest) - length($tail))) eq lc($vec->{hash});
+}
+
 my (%cracked, %attempted, %failed_job, %mx_job_ids, %ran_ident);
 my $ran = 0;
 
@@ -430,7 +456,7 @@ if ($want{mdxfind} && $job{mdxfind}) {
             my $rest = $2;
             for my $vec (@v) {
                 $cracked{mdxfind}{ $vec->{id} }{$type} = 1
-                    if $rest eq "$vec->{hash}:$vec->{pass}";
+                    if mx_echo_is($rest, $vec);
             }
         }
         # Accumulate: one type has a separate job per declared iteration
