@@ -126,6 +126,19 @@ mdxfind also accepts hashcat modes directly (`mdxfind -m 0`, `-m e1`,
   could not be round-tripped and nothing in the data said why.
   `extract-hashcat.pl` reads `--hash-info --machine-readable` for that
   reason. Check for an elision marker before trusting a scraped field.
+  **john elides too, and silently, at 896 characters.**
+  `john --list=format-details` truncates `example_ciphertext` to 896
+  characters with no marker at all; `--list=format-all-details` gives the same
+  field away by labelling it "Example ciphertext (truncated here)". 46 of this
+  build's 552 formats are affected, and EVERY container format is, because
+  their examples are whole volume headers. Measured 2026-09-01. The failure is
+  worse than hashcat's because there is no marker: `diskcryptor` carried a note
+  blaming the ~819 candidate plaintexts harvested from john's source for not
+  containing the answer, when no wordlist could have cracked a header that was
+  never a loadable hash. **When a john example will not load, check its length
+  against 896 before concluding anything about the plaintext.** The full hash
+  is in john's own `src/*_fmt_plug.c` test array; the rule that the source
+  PROPOSES and john's crack PROVES still applies to the plaintext.
 - **Many hashcat modes do not compare the whole digest, so a crack is not
   automatically proof.** Measured on v7.1.2-549-g8a15e210b, 2026-08-31: `-m
   100` accepts any 40-hex string whose LAST 128 bits match `sha1($p)` --
@@ -145,6 +158,17 @@ mdxfind also accepts hashcat modes directly (`mdxfind -m 0`, `-m e1`,
   indistinguishable under it. Do not record a hashcat mapping for a truncated,
   masked or re-prefixed digest without that check or an independent
   recomputation.
+  **The withholding rule is CORPUS-dependent and can fail to fire.** It needs
+  TWO hashes in the target set that the mode cannot tell apart; once the
+  colliding partner is mapped, it leaves the target set and the survivor is
+  proposed with nothing withheld. Measured 2026-09-01: a re-run listed
+  `sha1lsb35 <- -m 100` as applicable, although that entry already carries
+  `hashcat: verified: absent` recording that the 2026-08-31 canary withheld
+  exactly that claim, and although the canary re-measured -m 100 as skipping
+  positions 0-7 in the same run. The same run proposed `md5cap <- -m 2600`,
+  another already-modelled trap. So the canary is a guard, not THE guard:
+  **never run `discover-hashcat.pl --apply` without reading its applicable
+  list against the entries it names.**
 - **john has the same defect, at its own widths.** `Raw-SHA1-Linkedin` reads a
   leak whose hashes have their leading nibbles zeroed and so ignores hash
   positions **0-4** -- the 20 bits that were zeroed, measured position by
@@ -449,6 +473,19 @@ denominator: it is not an algorithm.
 went instead of having to parse the relations prose. The two human views list
 it under the table rather than in it, because a row of dashes reads as a gap
 and this is a redirect.
+
+`tools/merge.pl` performs the merge, both sides at once. **`tools/dedupe.pl`
+does not** -- it predates this decision and DELETES the loser, which breaks the
+promise that an id is forever; treat it as retired. merge.pl refuses rather
+than resolves two things, because both would launder an unproven claim into a
+proven one: a loser whose tool block is at a WEAKER tier than the winner's,
+since a block carries one tier for every identifier in it and unioning would
+extend the winner's over identifiers nothing proved at that strength; and a
+single-valued field the two entries fill differently, which means they are not
+one computation. Note what validate.pl does NOT check: it requires every edge
+to be mirrored and to point at a real entry, but not that an entry states a
+given edge only once, so a merge that leaves the stale pre-merge `duplicate-of`
+beside the new one passes.
 
 The full design, the options weighed against it and what changed on contact
 with the code are in `ACTION-PLAN.md` §11.
