@@ -229,8 +229,8 @@ what those vectors really are.
 | [`sha256sha256salt`](index.html#sha256sha256salt) | `sha256(sha256($p).$s)` | `dynamic_1503`, `dynamic_65` | transcribed from the hx specification's Appendix A entry for mdxfind type SHA256SHA256SALT (e382), which states sha256(sha256(pass) . salt). Transcription, not reproduction, so this is upstream and no... |
 | [`sha512saltmd5`](index.html#sha512saltmd5) | `sha512($s.md5($p))` | `-` | transcribed from the hx specification's Appendix A entry for mdxfind type SHA512SALTMD5 (e514), which states sha512(salt . md5(pass)). Transcription, not reproduction, so this is upstream and not vect... |
 | [`smf-v1-1`](index.html#smf-v1-1) | `sha1(lower($s).$p)` | `dynamic_25`, `dynamic_37` | transcribed from the hx specification's Appendix A entry for mdxfind type SMF (e414), which states sha1(lower(user) . pass). Transcription, not reproduction, so this is upstream and not vector; run de... |
-| [`sne128`](index.html#sne128) | `snefru128($p)` | `-` | transcribed from the hx specification's Appendix A entry for mdxfind type SNE128 (e25), which states sne128(pass). Transcription, not reproduction, so this is upstream and not vector; run derive-expre... |
-| [`sne256`](index.html#sne256) | `snefru256($p)` | `-` | transcribed from the hx specification's Appendix A entry for mdxfind type SNE256 (e26), which states sne256(pass). Transcription, not reproduction, so this is upstream and not vector; run derive-expre... |
+| [`sne128`](index.html#sne128) | `snefru128($p)` | `Snefru-128` | transcribed from the hx specification's Appendix A entry for mdxfind type SNE128 (e25), which states sne128(pass). Transcription, not reproduction, so this is upstream and not vector; run derive-expre... |
+| [`sne256`](index.html#sne256) | `snefru256($p)` | `Snefru-256` | transcribed from the hx specification's Appendix A entry for mdxfind type SNE256 (e26), which states sne256(pass). Transcription, not reproduction, so this is upstream and not vector; run derive-expre... |
 | [`snefru128-md5-plain`](index.html#snefru128-md5-plain) | `snefru128(md5($p))` | `-` | transcribed from the hx specification's Appendix A entry for mdxfind type SNE128MD5 (e174), which states sne128(md5(pass)). Transcription, not reproduction, so this is upstream and not vector; run der... |
 | [`snefru128-md5-plain-plain`](index.html#snefru128-md5-plain-plain) | `snefru128(md5($p).$p)` | `-` | transcribed from the hx specification's Appendix A entry for mdxfind type SNE128MD5PASS (e175), which states sne128(md5(pass).pass). Transcription, not reproduction, so this is upstream and not vector... |
 | [`snefru256-md5-plain`](index.html#snefru256-md5-plain) | `snefru256(md5($p))` | `-` | transcribed from the hx specification's Appendix A entry for mdxfind type SNE256MD5 (e176), which states sne256(md5(pass)). Transcription, not reproduction, so this is upstream and not vector; run der... |
@@ -239,7 +239,7 @@ what those vectors really are.
 | [`winphone`](index.html#winphone) | `sha256(utf16($p).fromhex($s))` | `-` | transcribed from the hx specification's Appendix A entry for mdxfind type WINPHONE (e928), which states sha256(utf16le(pass) . fromhex(salt)) (salt = 256-hex / 128 bytes). Transcription, not reproduct... |
 | [`yaf-sha1`](index.html#yaf-sha1) | `base64(sha1_raw(utf16($p).frombase64($s)))` | `-` | transcribed from the hx specification's Appendix A entry for mdxfind type YAF-SHA1 (e459), which states base64(sha1_bin(utf16le(pass) . frombase64(salt))). Transcription, not reproduction, so this is ... |
 
-## Cracked, but not by that name (8)
+## Cracked, but not by that name (12)
 
 A tool recovers the plaintext from one of these vectors without implementing
 the algorithm the row is about, so the identifier is deliberately **not**
@@ -255,6 +255,7 @@ promote it.
 
 | Entry | Collides with | Why |
 |---|---|---|
+| [`aich`](index.html#aich) | `sha1lsb35` | AICH of a single block is SHA-1, and SHA1lsb35 is SHA-1 with the leading nibbles masked to zero, so any tool that ignores that field -- hashcat -m 100... |
 | [`md5`](index.html#md5) | `md5cap` | MD5CAP is cap(md5($p)), a no-op whenever the digest contains no letters to capitalise, so john's dynamic_2 and plain MD5 crack its vector without deno... |
 | [`md5-capitalise-md5-plain-username`](index.html#md5-capitalise-md5-plain-username) | `md5-md5-plain-salt-3` | MD5MD5USER and MD5CAPMD5USER differ only by cap() on the inner hex digest, which is a no-op whenever that digest starts with a digit. md5('rosetta') i... |
 | [`md5-md5-plain-salt-3`](index.html#md5-md5-plain-salt-3) | `md5-capitalise-md5-plain-username` | MD5MD5USER and MD5CAPMD5USER differ only by cap() on the inner hex digest, which is a no-op whenever that digest starts with a digit. md5('rosetta') i... |
@@ -263,6 +264,9 @@ promote it.
 | [`md5-sha1-pass`](index.html#md5-sha1-pass) | `md5capsha1` | MD5CAPSHA1 is md5(cap(sha1($p))) and cap() is a no-op on a lowercase digest, so john's dynamic_22 (md5(sha1($p))) cracks its vector without denoting it |
 | [`md5cap`](index.html#md5cap) | `md5` | MD5CAP is cap(md5($p)), a no-op whenever the digest contains no letters to capitalise, so john's dynamic_2 and plain MD5 crack its vector without deno... |
 | [`md5capsha1`](index.html#md5capsha1) | `md5-sha1-pass` | MD5CAPSHA1 is md5(cap(sha1($p))) and cap() is a no-op on a lowercase digest, so john's dynamic_22 (md5(sha1($p))) cracks its vector without denoting it |
+| [`sha1lsb35`](index.html#sha1lsb35) | `aich` | AICH of a single block is SHA-1, and SHA1lsb35 is SHA-1 with the leading nibbles masked to zero, so any tool that ignores that field -- hashcat -m 100... |
+| [`sha1lsb35`](index.html#sha1lsb35) | `sha1uc` | SHA1UC is SHA-1 written in uppercase hex and SHA1lsb35 is SHA-1 with the leading nibbles masked to zero, so a tool that skips that field cannot tell t... |
+| [`sha1uc`](index.html#sha1uc) | `sha1lsb35` | SHA1UC is SHA-1 written in uppercase hex and SHA1lsb35 is SHA-1 with the leading nibbles masked to zero, so a tool that skips that field cannot tell t... |
 
 ## Entries nothing can prove yet (59)
 
@@ -342,7 +346,7 @@ deliberately and splitting them is a judgement about what the row is *for* -
 one construction, or one thing people search for. Whoever put them together
 knew something; if that was you, say so.
 
-## Mappings believed but never reproduced (190)
+## Mappings believed but never reproduced (188)
 
 Counted here, listed in [GAPS.md](GAPS.md#1-believed-but-never-reproduced),
 because filling one is mechanical rather than a judgement call: the identifier

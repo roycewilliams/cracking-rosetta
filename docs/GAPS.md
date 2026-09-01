@@ -17,7 +17,7 @@ Each row below links to its entry in the [browsable table](index.html).
 Gaps are absences; for the rows where something is known to be *odd*, see
 [OPEN-QUESTIONS.md](OPEN-QUESTIONS.md).
 
-## 1. Believed but never reproduced (131)
+## 1. Believed but never reproduced (129)
 
 The cheapest contribution in the repository, if you own the tool. Each of
 these already names an identifier and already carries a test vector; nobody
@@ -44,7 +44,6 @@ tools/verify-vectors.pl --tool <tool> --only <id> -v
 | [`md4utf16md5x`](index.html#md4utf16md5x) | mdxfind | `MD4UTF16MD5x` | upstream |
 | [`md4utf16sha1x`](index.html#md4utf16sha1x) | mdxfind | `MD4UTF16SHA1x` | upstream |
 | [`md4utf16sha256x`](index.html#md4utf16sha256x) | mdxfind | `MD4UTF16SHA256x` | upstream |
-| [`md4utf16uc`](index.html#md4utf16uc) | mdxfind | `MD4UTF16UC` | upstream |
 | [`md5-md5-pass-salt`](index.html#md5-md5-pass-salt) | hashcat | `2611`, `2711` | asserted |
 | [`md5md5hum`](index.html#md5md5hum) | mdxfind | `MD5MD5HUM` | asserted |
 | [`md5sha1x`](index.html#md5sha1x) | mdxfind | `MD5SHA1x` | upstream |
@@ -108,7 +107,6 @@ tools/verify-vectors.pl --tool <tool> --only <id> -v
 | [`sha1sha512trunc`](index.html#sha1sha512trunc) | mdxfind | `SHA1SHA512TRUNC` | upstream |
 | [`sha1sha512uctrunc`](index.html#sha1sha512uctrunc) | mdxfind | `SHA1SHA512UCTRUNC` | upstream |
 | [`sha1uc`](index.html#sha1uc) | mdxfind | `SHA1UC` | upstream |
-| [`sha1ucutf16le`](index.html#sha1ucutf16le) | mdxfind | `SHA1UCUTF16LE` | upstream |
 | [`sha1wrltrunc`](index.html#sha1wrltrunc) | mdxfind | `SHA1WRLTRUNC` | upstream |
 | [`sha1wrluctrunc`](index.html#sha1wrluctrunc) | mdxfind | `SHA1WRLUCTRUNC` | upstream |
 | [`sha1wrluctruncsalt`](index.html#sha1wrluctruncsalt) | mdxfind | `SHA1WRLUCTRUNCSALT` | upstream |
@@ -238,7 +236,7 @@ Real work rather than a one-liner: it means finding out whether the tool
 supports the construction at all, and under which identifier. The counts are
 the honest size of the job.
 
-### john: 1012 entries say nothing
+### john: 998 entries say nothing
 
 A few that carry a vector and a proven expression, so there is a definite construction to look for, one per family:
 
@@ -250,7 +248,7 @@ A few that carry a vector and a proven expression, so there is a definite constr
 * [`tiger128-3-md5-plain`](index.html#tiger128-3-md5-plain) - `tiger(md5($p))` (and 1 more starting `tiger`)
 * [`whirlpool-md5-plain`](index.html#whirlpool-md5-plain) - `whirlpool(md5($p))` (and 3 more starting `whirlpool`)
 
-All 1012: filter `john_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
+All 998: filter `john_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
 
 Where such an entry carries an expression, john can already attack it without
 a named format:
@@ -264,7 +262,7 @@ That string is in the entry's `john_dynamic_expr:` field and in the
 which lists formats `--list=formats` will show; the gap worth filling is
 whether a named one exists.
 
-### hashcat: 525 entries say nothing
+### hashcat: 497 entries say nothing
 
 A few that carry a vector and a proven expression, so there is a definite construction to look for, one per family:
 
@@ -280,9 +278,9 @@ A few that carry a vector and a proven expression, so there is a definite constr
 * [`tiger`](index.html#tiger) - `tiger($p)` (and 1 more starting `tiger`)
 * [`wrl-x2`](index.html#wrl-x2) - `whirlpool(whirlpool($p))`
 
-All 525: filter `hashcat_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
+All 497: filter `hashcat_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
 
-### mdxfind: 515 entries say nothing
+### mdxfind: 500 entries say nothing
 
 A few that carry a vector and a proven expression, so there is a definite construction to look for, one per family:
 
@@ -290,7 +288,7 @@ A few that carry a vector and a proven expression, so there is a definite constr
 * [`ripemd256`](index.html#ripemd256) - `ripemd256($p)`
 * [`sha256-sha256-pass-salt`](index.html#sha256-sha256-pass-salt) - `sha256(sha256($p.$s))`
 
-All 515: filter `mdxfind_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
+All 500: filter `mdxfind_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
 
 ## 4. hashcat modes with no row here (1)
 

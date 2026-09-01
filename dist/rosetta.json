@@ -831,13 +831,20 @@
          "expr_note" : "the construction upstream states for mdxfind type AICH (e21) names aich(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
          "expr_tier" : "absent",
          "hashcat" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               100
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "aich",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "Raw-SHA1",
+               "dynamic_26"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -849,12 +856,19 @@
          },
          "name" : "AICH",
          "notes" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "truncation",
+               "entry" : "sha1lsb35",
+               "kind" : "collides-on-subset",
+               "note" : "AICH of a single block is SHA-1, and SHA1lsb35 is SHA-1 with the leading nibbles masked to zero, so any tool that ignores that field -- hashcat -m 100 and john Raw-SHA1-Linkedin both do, measured 2026-08-31 -- reports one for the other. They agree on every input outside those nibbles and differ nowhere else that such a tool looks."
+            }
+         ],
+         "sameas" : "collides with sha1lsb35 (truncation)",
          "status" : "needs-review",
          "tool_note" : {
-            "hashcat" : "",
-            "john" : "",
+            "hashcat" : "proven three ways because -m 100 alone is not enough: hashcat cracked this row's own vector under mode 100, john's Raw-SHA1 and dynamic_26 cracked it too with a FULL digest comparison, and Digest::SHA confirms sha1(\"password123\") is cbfdac6008f9cab4083784cbd1874f76618d2a97 character for character. The third step is required here: measured 2026-08-31, hashcat -m 100 skips hash positions 0-7, so on its own it cannot tell this row from sha1lsb35, which is the same digest with those nibbles masked. discover-hashcat.pl's canary withheld the claim for exactly that reason; this is a human overriding it with the independent recomputation, not the tool's word.",
+            "john" : "format discovered by round-trip search, not by name. Raw-SHA1-Linkedin was recorded here by discover-john.pl on 2026-08-31 and WITHDRAWN the same day. It is john's format for the LinkedIn leak, whose hashes have their leading nibbles zeroed, and it ignores hash positions 0-7 to read them -- measured here, the same defect the hashcat canary found in -m 100. It therefore cracks any full SHA-1 digest as well, which is a collision and not a denotation. Raw-SHA1 and dynamic_26 both compare the whole digest and were re-checked position by position.",
             "mdxfind" : "mdxfind's own published example for this identifier, recovered by mdxfind at this identifier with mdxfind's own published plaintext."
          },
          "vecs" : 1
@@ -1195,8 +1209,11 @@
          "expr_note" : "john publishes this as \"AndroidBackup\" and no category, so what kind of construction it is has not been established here. Its name is not expression-shaped and john's dynamic EXPRESSION language cannot be handed it, so there is no expression on this row. That says nothing about whether any tool can CRACK it, and it is not a claim that the algorithm HAS no expression -- run seed-hx.pl and derive-expressions.pl, which can settle that from evidence.",
          "expr_tier" : "absent",
          "hashcat" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               18900
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "androidbackup",
          "john" : {
@@ -1217,7 +1234,7 @@
          "sameas" : "",
          "status" : "needs-review",
          "tool_note" : {
-            "hashcat" : "",
+            "hashcat" : "mode discovered by round-trip search, not by name",
             "john" : "john's own published example ciphertext for this format, recovered by john under this format. john publishes no plaintext, so the plaintext was found by handing john its own example and a candidate list -- what john recovered IS the plaintext, by construction.",
             "mdxfind" : ""
          },
@@ -1511,8 +1528,11 @@
          "expr_note" : "john publishes this as \"Apple iWork '09 or newer\" and no category, so what kind of construction it is has not been established here. Its name is not expression-shaped and john's dynamic EXPRESSION language cannot be handed it, so there is no expression on this row. That says nothing about whether any tool can CRACK it, and it is not a claim that the algorithm HAS no expression -- run seed-hx.pl and derive-expressions.pl, which can settle that from evidence.",
          "expr_tier" : "absent",
          "hashcat" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               23300
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "apple-iwork-09-or-newer",
          "john" : {
@@ -1533,7 +1553,7 @@
          "sameas" : "",
          "status" : "needs-review",
          "tool_note" : {
-            "hashcat" : "",
+            "hashcat" : "mode discovered by round-trip search, not by name",
             "john" : "john's own published example ciphertext for this format, recovered by john under this format. john publishes no plaintext, so the plaintext was found by handing john its own example and a candidate list -- what john recovered IS the plaintext, by construction.",
             "mdxfind" : ""
          },
@@ -1691,13 +1711,19 @@
          "expr_note" : "",
          "expr_tier" : "",
          "hashcat" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               16700
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "apple-secure-notes-mdxfindapple-secure-notes",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "FVDE"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -1713,8 +1739,8 @@
          "sameas" : "",
          "status" : "needs-review",
          "tool_note" : {
-            "hashcat" : "",
-            "john" : "",
+            "hashcat" : "mode discovered by round-trip search, not by name",
+            "john" : "format discovered by round-trip search, not by name",
             "mdxfind" : "NOT REPRODUCED HERE. mdxfind publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: the tool pinned to this identifier did not reproduce its own published example. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool mdxfind --only APPLE-SECURE-NOTES to retry."
          },
          "vecs" : 1
@@ -2705,8 +2731,11 @@
          "expr_note" : "john's dynamic expression vocabulary has no bcrypt(), so this construction cannot be written as an expression; that is separate from whether john has a FORMAT for it",
          "expr_tier" : "absent",
          "hashcat" : {
-            "ids" : [],
-            "state" : "no"
+            "ids" : [
+               25600
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "bcrypt-md5-plain",
          "john" : {
@@ -2727,7 +2756,7 @@
          "sameas" : "",
          "status" : "ok",
          "tool_note" : {
-            "hashcat" : "",
+            "hashcat" : "mode discovered by round-trip search, not by name",
             "john" : "",
             "mdxfind" : ""
          },
@@ -2789,8 +2818,11 @@
          "expr_note" : "john's dynamic expression vocabulary has no bcrypt(), so this construction cannot be written as an expression; that is separate from whether john has a FORMAT for it",
          "expr_tier" : "absent",
          "hashcat" : {
-            "ids" : [],
-            "state" : "no"
+            "ids" : [
+               25800
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "bcrypt-sha1-plain",
          "john" : {
@@ -2811,7 +2843,7 @@
          "sameas" : "",
          "status" : "ok",
          "tool_note" : {
-            "hashcat" : "",
+            "hashcat" : "mode discovered by round-trip search, not by name",
             "john" : "",
             "mdxfind" : ""
          },
@@ -6116,8 +6148,12 @@
          },
          "legacy" : "",
          "mdxfind" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "SHA256",
+               "SHA256RAW"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "DANE RFC7929/RFC8162 SHA2-256",
          "notes" : "",
@@ -6127,7 +6163,7 @@
          "tool_note" : {
             "hashcat" : "hashcat's own published example hash for this mode, recovered by hashcat at this mode with hashcat's own published plaintext.",
             "john" : "",
-            "mdxfind" : ""
+            "mdxfind" : "type discovered by round-trip search, not by name"
          },
          "vecs" : 1
       },
@@ -9187,13 +9223,20 @@
          "expr_note" : "the construction upstream states for mdxfind type ED2K (e20) names ed2k(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
          "expr_tier" : "absent",
          "hashcat" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               900
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "ed2k",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "Raw-MD4",
+               "dynamic_30"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -9209,8 +9252,8 @@
          "sameas" : "",
          "status" : "needs-review",
          "tool_note" : {
-            "hashcat" : "",
-            "john" : "",
+            "hashcat" : "mode discovered by round-trip search, not by name",
+            "john" : "format discovered by round-trip search, not by name",
             "mdxfind" : "mdxfind's own published example for this identifier, recovered by mdxfind at this identifier with mdxfind's own published plaintext."
          },
          "vecs" : 1
@@ -9883,8 +9926,11 @@
          "expr_note" : "transcribed from the hx specification's Appendix A entry for mdxfind type EPISERVER (e859), which states base64(sha1_bin(salt . pass)) (EPiServer v0). Transcription, not reproduction, so this is upstream and not vector; run derive-expressions.pl to try to promote it. Not checkable locally: the construction uses functions RosettaExpr cannot compile, so this rests on upstream's word alone.",
          "expr_tier" : "upstream",
          "hashcat" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               141
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "episerver",
          "john" : {
@@ -9905,7 +9951,7 @@
          "sameas" : "",
          "status" : "needs-review",
          "tool_note" : {
-            "hashcat" : "",
+            "hashcat" : "mode discovered by round-trip search, not by name",
             "john" : "",
             "mdxfind" : "mdxfind's own published example for this identifier, recovered by mdxfind at this identifier with mdxfind's own published plaintext."
          },
@@ -10289,8 +10335,11 @@
          },
          "legacy" : "",
          "mdxfind" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "SHA512PASSSALT"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "FileZilla Server >= 0.9.55",
          "notes" : "",
@@ -10300,7 +10349,7 @@
          "tool_note" : {
             "hashcat" : "hashcat's own published example hash for this mode, recovered by hashcat at this mode with hashcat's own published plaintext.",
             "john" : "format discovered by round-trip search, not by name",
-            "mdxfind" : ""
+            "mdxfind" : "type discovered by round-trip search, not by name"
          },
          "vecs" : 1
       },
@@ -10666,8 +10715,11 @@
          "expr_note" : "john publishes this as \"generic crypt(3)\" and no category, so what kind of construction it is has not been established here. Its name is not expression-shaped and john's dynamic EXPRESSION language cannot be handed it, so there is no expression on this row. That says nothing about whether any tool can CRACK it, and it is not a claim that the algorithm HAS no expression -- run seed-hx.pl and derive-expressions.pl, which can settle that from evidence.",
          "expr_tier" : "absent",
          "hashcat" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               1500
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "generic-crypt-3",
          "john" : {
@@ -10688,7 +10740,7 @@
          "sameas" : "",
          "status" : "needs-review",
          "tool_note" : {
-            "hashcat" : "",
+            "hashcat" : "mode discovered by round-trip search, not by name",
             "john" : "john's own published example ciphertext for this format, recovered by john under this format. john publishes no plaintext, so the plaintext was found by handing john its own example and a candidate list -- what john recovered IS the plaintext, by construction.",
             "mdxfind" : ""
          },
@@ -11047,8 +11099,11 @@
          "expr_note" : "the construction upstream states for mdxfind type GOST-YESCRYPT (e998) names gost_yescrypt(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
          "expr_tier" : "absent",
          "hashcat" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               36200
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "gost-yescrypt-mdxfindgost-yescrypt",
          "john" : {
@@ -11069,7 +11124,7 @@
          "sameas" : "",
          "status" : "needs-review",
          "tool_note" : {
-            "hashcat" : "",
+            "hashcat" : "mode discovered by round-trip search, not by name",
             "john" : "",
             "mdxfind" : "mdxfind's own published example for this identifier, recovered by mdxfind at this identifier with mdxfind's own published plaintext."
          },
@@ -11821,8 +11876,12 @@
          },
          "legacy" : "CUTn-16MD5; n/a",
          "mdxfind" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "MD5",
+               "MD5RAW"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "Half MD5",
          "notes" : "(n denoting the starting position n>=0)",
@@ -11832,7 +11891,7 @@
          "tool_note" : {
             "hashcat" : "",
             "john" : "",
-            "mdxfind" : ""
+            "mdxfind" : "type discovered by round-trip search, not by name"
          },
          "vecs" : 1
       },
@@ -13642,8 +13701,11 @@
          },
          "legacy" : "",
          "mdxfind" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "HAV256"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "HAVAL-256-3",
          "notes" : "",
@@ -13653,7 +13715,7 @@
          "tool_note" : {
             "hashcat" : "",
             "john" : "john's own published example ciphertext for this format, recovered by john under this format. john publishes no plaintext, so the plaintext was found by handing john its own example and a candidate list -- what john recovered IS the plaintext, by construction.",
-            "mdxfind" : ""
+            "mdxfind" : "type discovered by round-trip search, not by name"
          },
          "vecs" : 1
       },
@@ -15396,8 +15458,11 @@
          "expr_note" : "john's dynamic expression vocabulary has no hmac(), so this construction cannot be written as an expression; that is separate from whether john has a FORMAT for it",
          "expr_tier" : "absent",
          "hashcat" : {
-            "ids" : [],
-            "state" : "no"
+            "ids" : [
+               6060
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "hmac-ripemd160-plain-salt",
          "john" : {
@@ -15418,7 +15483,7 @@
          "sameas" : "",
          "status" : "ok",
          "tool_note" : {
-            "hashcat" : "",
+            "hashcat" : "mode discovered by round-trip search, not by name",
             "john" : "",
             "mdxfind" : ""
          },
@@ -15480,8 +15545,11 @@
          "expr_note" : "john's dynamic expression vocabulary has no hmac(), so this construction cannot be written as an expression; that is separate from whether john has a FORMAT for it",
          "expr_tier" : "absent",
          "hashcat" : {
-            "ids" : [],
-            "state" : "no"
+            "ids" : [
+               33660
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "hmac-ripemd320-plain-salt",
          "john" : {
@@ -15502,7 +15570,7 @@
          "sameas" : "",
          "status" : "ok",
          "tool_note" : {
-            "hashcat" : "",
+            "hashcat" : "mode discovered by round-trip search, not by name",
             "john" : "",
             "mdxfind" : ""
          },
@@ -15609,8 +15677,11 @@
          "expr_note" : "john's dynamic expression vocabulary has no hmac(), so this construction cannot be written as an expression; that is separate from whether john has a FORMAT for it",
          "expr_tier" : "absent",
          "hashcat" : {
-            "ids" : [],
-            "state" : "no"
+            "ids" : [
+               1460
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "hmac-sha256-plain-salt",
          "john" : {
@@ -15631,7 +15702,7 @@
          "sameas" : "",
          "status" : "ok",
          "tool_note" : {
-            "hashcat" : "",
+            "hashcat" : "mode discovered by round-trip search, not by name",
             "john" : "",
             "mdxfind" : ""
          },
@@ -15651,8 +15722,11 @@
          "expr_note" : "john's dynamic expression vocabulary has no hmac(), so this construction cannot be written as an expression; that is separate from whether john has a FORMAT for it",
          "expr_tier" : "absent",
          "hashcat" : {
-            "ids" : [],
-            "state" : "no"
+            "ids" : [
+               1760
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "hmac-sha512-plain-salt",
          "john" : {
@@ -15673,7 +15747,7 @@
          "sameas" : "",
          "status" : "ok",
          "tool_note" : {
-            "hashcat" : "",
+            "hashcat" : "mode discovered by round-trip search, not by name",
             "john" : "",
             "mdxfind" : ""
          },
@@ -17047,8 +17121,12 @@
          },
          "legacy" : "",
          "mdxfind" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "SHA1MD5PASS-SALT",
+               "SHA1MD5SALT"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "Huawei sha1(md5($pass).$salt)",
          "notes" : "",
@@ -17058,7 +17136,7 @@
          "tool_note" : {
             "hashcat" : "hashcat's own published example hash for this mode, recovered by hashcat at this mode with hashcat's own published plaintext.",
             "john" : "",
-            "mdxfind" : ""
+            "mdxfind" : "type discovered by round-trip search, not by name"
          },
          "vecs" : 1
       },
@@ -18941,8 +19019,11 @@
          "expr_note" : "john publishes this as \"Kerberos 5 AS-REP etype 17/18/23\" and no category, so what kind of construction it is has not been established here. Its name is not expression-shaped and john's dynamic EXPRESSION language cannot be handed it, so there is no expression on this row. That says nothing about whether any tool can CRACK it, and it is not a claim that the algorithm HAS no expression -- run seed-hx.pl and derive-expressions.pl, which can settle that from evidence.",
          "expr_tier" : "absent",
          "hashcat" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               32100
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "kerberos-5-as-rep-etype-17-18-23",
          "john" : {
@@ -18963,7 +19044,7 @@
          "sameas" : "",
          "status" : "needs-review",
          "tool_note" : {
-            "hashcat" : "",
+            "hashcat" : "mode discovered by round-trip search, not by name",
             "john" : "john's own published example ciphertext for this format, recovered by john under this format. john publishes no plaintext, so the plaintext was found by handing john its own example and a candidate list -- what john recovered IS the plaintext, by construction.",
             "mdxfind" : ""
          },
@@ -20283,8 +20364,11 @@
          "expr_note" : "john publishes this as \"Lotus Notes/Domino 5\" and no category, so what kind of construction it is has not been established here. Its name is not expression-shaped and john's dynamic EXPRESSION language cannot be handed it, so there is no expression on this row. That says nothing about whether any tool can CRACK it, and it is not a claim that the algorithm HAS no expression -- run seed-hx.pl and derive-expressions.pl, which can settle that from evidence.",
          "expr_tier" : "absent",
          "hashcat" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               8600
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "lotus-notes-domino-5",
          "john" : {
@@ -20305,7 +20389,7 @@
          "sameas" : "",
          "status" : "needs-review",
          "tool_note" : {
-            "hashcat" : "",
+            "hashcat" : "mode discovered by round-trip search, not by name",
             "john" : "john's own published example ciphertext for this format, recovered by john under this format. john publishes no plaintext, so the plaintext was found by handing john its own example and a candidate list -- what john recovered IS the plaintext, by construction.",
             "mdxfind" : ""
          },
@@ -21123,8 +21207,11 @@
          "expr_note" : "john publishes this as \"Mac OS X 10.4 - 10.6\" and no category, so what kind of construction it is has not been established here. Its name is not expression-shaped and john's dynamic EXPRESSION language cannot be handed it, so there is no expression on this row. That says nothing about whether any tool can CRACK it, and it is not a claim that the algorithm HAS no expression -- run seed-hx.pl and derive-expressions.pl, which can settle that from evidence.",
          "expr_tier" : "absent",
          "hashcat" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               122
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "mac-os-x-10-4-10-6",
          "john" : {
@@ -21145,7 +21232,7 @@
          "sameas" : "",
          "status" : "needs-review",
          "tool_note" : {
-            "hashcat" : "",
+            "hashcat" : "mode discovered by round-trip search, not by name",
             "john" : "john's own published example ciphertext for this format, recovered by john under this format. john publishes no plaintext, so the plaintext was found by handing john its own example and a candidate list -- what john recovered IS the plaintext, by construction.",
             "mdxfind" : ""
          },
@@ -21947,8 +22034,14 @@
          },
          "legacy" : "TROLLHUNTNTLM",
          "mdxfind" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "MD4UTF16",
+               "MD4UTF16UC",
+               "NTLM",
+               "NTLMH"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "md4(utf16-le(utf-8($plain)))",
          "notes" : "",
@@ -21958,7 +22051,7 @@
          "tool_note" : {
             "hashcat" : "",
             "john" : "format discovered by round-trip search, not by name",
-            "mdxfind" : ""
+            "mdxfind" : "type discovered by round-trip search, not by name"
          },
          "vecs" : 1
       },
@@ -23236,21 +23329,29 @@
          "expr_note" : "",
          "expr_tier" : "",
          "hashcat" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               1000
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "md4utf16uc",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "NT",
+               "NT-long",
+               "dynamic_33"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
             "ids" : [
                "MD4UTF16UC"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "MD4UTF16UC",
          "notes" : "",
@@ -23258,8 +23359,8 @@
          "sameas" : "",
          "status" : "needs-review",
          "tool_note" : {
-            "hashcat" : "",
-            "john" : "",
+            "hashcat" : "mode discovered by round-trip search, not by name",
+            "john" : "format discovered by round-trip search, not by name",
             "mdxfind" : "NOT REPRODUCED HERE. mdxfind publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: the tool pinned to this identifier did not reproduce its own published example. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool mdxfind --only MD4UTF16UC to retry."
          },
          "vecs" : 1
@@ -23313,12 +23414,18 @@
             },
             {
                "distinction" : "encoding",
+               "entry" : "md5cdab-order-of-32bit-values",
+               "kind" : "encodes",
+               "note" : "the vector is md5($p) with its four 32-bit output words reordered c,d,a,b: md5('rosetta') is 975790df b2854c88 094fe624 77a7d5f3 and the entry carries 094fe62477a7d5f3975790dfb2854c88. Confirmed 2026-08-31 with Digest::MD5, independent of all three crackers. No tool implements the reordering: mdxfind ships MD5dcab and MD5bcad but no cdab, and neither reproduces this vector when pinned"
+            },
+            {
+               "distinction" : "encoding",
                "entry" : "md5uc",
                "kind" : "encodes",
                "note" : "MD5UC is the same digest written in uppercase hex; john and hashcat both fold the case on load, which is why the same identifiers crack both"
             }
          ],
-         "sameas" : "collides with md5cap (encoding); encoding of md5uc (encoding)",
+         "sameas" : "collides with md5cap (encoding); encoding of md5cdab-order-of-32bit-values (encoding); encoding of md5uc (encoding)",
          "status" : "ok",
          "tool_note" : {
             "hashcat" : "",
@@ -24282,8 +24389,11 @@
          "expr_note" : "round-tripped as --format=dynamic=<expr> against every vector this entry carries",
          "expr_tier" : "vector",
          "hashcat" : {
-            "ids" : [],
-            "state" : "no"
+            "ids" : [
+               3710
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "md5-userid-md5-plain",
          "john" : {
@@ -24315,7 +24425,7 @@
          "sameas" : "same as md5-salt-md5-pass (salt-convention)",
          "status" : "ok",
          "tool_note" : {
-            "hashcat" : "",
+            "hashcat" : "mode discovered by round-trip search, not by name",
             "john" : "format discovered by round-trip search, not by name",
             "mdxfind" : ""
          },
@@ -26250,8 +26360,11 @@
          "expr_note" : "",
          "expr_tier" : "",
          "hashcat" : {
-            "ids" : [],
-            "state" : "no"
+            "ids" : [
+               3610
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "md5-md5-md5-plain-salt-3",
          "john" : {
@@ -26272,7 +26385,7 @@
          "sameas" : "",
          "status" : "ok",
          "tool_note" : {
-            "hashcat" : "",
+            "hashcat" : "mode discovered by round-trip search, not by name",
             "john" : "",
             "mdxfind" : ""
          },
@@ -26292,8 +26405,11 @@
          "expr_note" : "",
          "expr_tier" : "",
          "hashcat" : {
-            "ids" : [],
-            "state" : "no"
+            "ids" : [
+               3610
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "md5-md5-md5-plain-salt",
          "john" : {
@@ -26314,7 +26430,7 @@
          "sameas" : "",
          "status" : "ok",
          "tool_note" : {
-            "hashcat" : "",
+            "hashcat" : "mode discovered by round-trip search, not by name",
             "john" : "",
             "mdxfind" : ""
          },
@@ -28958,8 +29074,11 @@
          },
          "legacy" : "MD5UCMD5; md5(strtoupper(md5($pass)))",
          "mdxfind" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "MD5MD5UC"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "md5(strtoupper(md5($pass)))",
          "notes" : "",
@@ -28969,7 +29088,7 @@
          "tool_note" : {
             "hashcat" : "",
             "john" : "",
-            "mdxfind" : ""
+            "mdxfind" : "type discovered by round-trip search, not by name"
          },
          "vecs" : 1
       },
@@ -30906,8 +31025,15 @@
          },
          "name" : "md5cdab (order of 32bit values)",
          "notes" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "encoding",
+               "entry" : "md5",
+               "kind" : "encodes",
+               "note" : "the vector is md5($p) with its four 32-bit output words reordered c,d,a,b: md5('rosetta') is 975790df b2854c88 094fe624 77a7d5f3 and the entry carries 094fe62477a7d5f3975790dfb2854c88. Confirmed 2026-08-31 with Digest::MD5, independent of all three crackers. No tool implements the reordering: mdxfind ships MD5dcab and MD5bcad but no cdab, and neither reproduces this vector when pinned"
+            }
+         ],
+         "sameas" : "encoding of md5 (encoding)",
          "status" : "ok",
          "tool_note" : {
             "hashcat" : "",
@@ -31224,8 +31350,11 @@
          "expr_note" : "",
          "expr_tier" : "",
          "hashcat" : {
-            "ids" : [],
-            "state" : "no"
+            "ids" : [
+               3610
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "md5md5md5user",
          "john" : {
@@ -31246,7 +31375,7 @@
          "sameas" : "",
          "status" : "ok",
          "tool_note" : {
-            "hashcat" : "",
+            "hashcat" : "mode discovered by round-trip search, not by name",
             "john" : "",
             "mdxfind" : ""
          },
@@ -31392,8 +31521,11 @@
          "expr_note" : "transcribed from the hx specification's Appendix A entry for mdxfind type MD5MD5UC (e262), which states md5(upper(md5(pass))). Transcription, not reproduction, so this is upstream and not vector; run derive-expressions.pl to try to promote it. Not checkable locally: the construction uses functions RosettaExpr cannot compile, so this rests on upstream's word alone.",
          "expr_tier" : "upstream",
          "hashcat" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               4300
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "md5md5uc",
          "john" : {
@@ -31414,7 +31546,7 @@
          "sameas" : "",
          "status" : "needs-review",
          "tool_note" : {
-            "hashcat" : "",
+            "hashcat" : "mode discovered by round-trip search, not by name",
             "john" : "",
             "mdxfind" : "mdxfind's own published example for this identifier, recovered by mdxfind at this identifier with mdxfind's own published plaintext."
          },
@@ -32490,13 +32622,19 @@
          "expr_note" : "",
          "expr_tier" : "",
          "hashcat" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               4400
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "md5sha1x",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "dynamic_22"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -32512,8 +32650,8 @@
          "sameas" : "",
          "status" : "needs-review",
          "tool_note" : {
-            "hashcat" : "",
-            "john" : "",
+            "hashcat" : "mode discovered by round-trip search, not by name",
+            "john" : "format discovered by round-trip search, not by name",
             "mdxfind" : "NOT REPRODUCED HERE. mdxfind publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: the tool pinned to this identifier did not reproduce its own published example. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool mdxfind --only MD5SHA1x to retry."
          },
          "vecs" : 1
@@ -33135,8 +33273,11 @@
          "expr_note" : "",
          "expr_tier" : "",
          "hashcat" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               20
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "md5userpass",
          "john" : {
@@ -33162,7 +33303,7 @@
          "sameas" : "",
          "status" : "ok",
          "tool_note" : {
-            "hashcat" : "",
+            "hashcat" : "mode discovered by round-trip search, not by name",
             "john" : "john's own test vector for this format is reproduced by mdxfind pinned to MD5USERPASS at iteration 1",
             "mdxfind" : ""
          },
@@ -37187,8 +37328,11 @@
          },
          "legacy" : "",
          "mdxfind" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "PANAMA"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "Panama",
          "notes" : "",
@@ -37198,7 +37342,7 @@
          "tool_note" : {
             "hashcat" : "",
             "john" : "john's own published example ciphertext for this format, recovered by john under this format. john publishes no plaintext, so the plaintext was found by handing john its own example and a candidate list -- what john recovered IS the plaintext, by construction.",
-            "mdxfind" : ""
+            "mdxfind" : "type discovered by round-trip search, not by name"
          },
          "vecs" : 1
       },
@@ -38567,8 +38711,11 @@
          "expr_note" : "",
          "expr_tier" : "",
          "hashcat" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               35700
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "phpbb3md5",
          "john" : {
@@ -38589,7 +38736,7 @@
          "sameas" : "",
          "status" : "needs-review",
          "tool_note" : {
-            "hashcat" : "",
+            "hashcat" : "mode discovered by round-trip search, not by name",
             "john" : "",
             "mdxfind" : "mdxfind's own published example for this identifier, recovered by mdxfind at this identifier with mdxfind's own published plaintext."
          },
@@ -38745,8 +38892,11 @@
          "expr_note" : "the construction upstream states for mdxfind type PKCS5S2 (e534) names pbkdf2_sha1(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
          "expr_tier" : "absent",
          "hashcat" : {
-            "ids" : [],
-            "state" : "no"
+            "ids" : [
+               12001
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "pkcs5s2",
          "john" : {
@@ -38770,7 +38920,7 @@
          "sameas" : "",
          "status" : "ok",
          "tool_note" : {
-            "hashcat" : "",
+            "hashcat" : "mode discovered by round-trip search, not by name",
             "john" : "format discovered by round-trip search, not by name",
             "mdxfind" : ""
          },
@@ -39380,13 +39530,20 @@
          },
          "id" : "prestashop",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "dynamic_1017",
+               "dynamic_2004"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "MD5SALTPASS"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "PrestaShop",
          "notes" : "",
@@ -39395,8 +39552,8 @@
          "status" : "needs-review",
          "tool_note" : {
             "hashcat" : "hashcat's own published example hash for this mode, recovered by hashcat at this mode with hashcat's own published plaintext.",
-            "john" : "",
-            "mdxfind" : ""
+            "john" : "format discovered by round-trip search, not by name",
+            "mdxfind" : "type discovered by round-trip search, not by name"
          },
          "vecs" : 1
       },
@@ -41032,8 +41189,11 @@
          "expr_note" : "john publishes this as \"Raw-MD5u\" and no category, so what kind of construction it is has not been established here. Its name is not expression-shaped and john's dynamic EXPRESSION language cannot be handed it, so there is no expression on this row. That says nothing about whether any tool can CRACK it, and it is not a claim that the algorithm HAS no expression -- run seed-hx.pl and derive-expressions.pl, which can settle that from evidence.",
          "expr_tier" : "absent",
          "hashcat" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               70
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "raw-md5u",
          "john" : {
@@ -41045,8 +41205,11 @@
          },
          "legacy" : "",
          "mdxfind" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "MD5UTF16LE"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "Raw-MD5u",
          "notes" : "",
@@ -41054,9 +41217,9 @@
          "sameas" : "",
          "status" : "needs-review",
          "tool_note" : {
-            "hashcat" : "",
+            "hashcat" : "mode discovered by round-trip search, not by name",
             "john" : "john's own published example ciphertext for this format, recovered by john under this format. john publishes no plaintext, so the plaintext was found by handing john its own example and a candidate list -- what john recovered IS the plaintext, by construction.",
-            "mdxfind" : ""
+            "mdxfind" : "type discovered by round-trip search, not by name"
          },
          "vecs" : 1
       },
@@ -41116,8 +41279,11 @@
          "expr_note" : "john publishes this as \"Raw-SHA224\" and no category, so what kind of construction it is has not been established here. Its name is not expression-shaped and john's dynamic EXPRESSION language cannot be handed it, so there is no expression on this row. That says nothing about whether any tool can CRACK it, and it is not a claim that the algorithm HAS no expression -- run seed-hx.pl and derive-expressions.pl, which can settle that from evidence.",
          "expr_tier" : "absent",
          "hashcat" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               1300
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "raw-sha224",
          "john" : {
@@ -41129,8 +41295,12 @@
          },
          "legacy" : "",
          "mdxfind" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "SHA224",
+               "SHA224RAW"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "Raw-SHA224",
          "notes" : "",
@@ -41138,9 +41308,9 @@
          "sameas" : "",
          "status" : "needs-review",
          "tool_note" : {
-            "hashcat" : "",
+            "hashcat" : "mode discovered by round-trip search, not by name",
             "john" : "john's own published example ciphertext for this format, recovered by john under this format. john publishes no plaintext, so the plaintext was found by handing john its own example and a candidate list -- what john recovered IS the plaintext, by construction.",
-            "mdxfind" : ""
+            "mdxfind" : "type discovered by round-trip search, not by name"
          },
          "vecs" : 1
       },
@@ -41200,8 +41370,11 @@
          "expr_note" : "john publishes this as \"Raw-SHA384\" and no category, so what kind of construction it is has not been established here. Its name is not expression-shaped and john's dynamic EXPRESSION language cannot be handed it, so there is no expression on this row. That says nothing about whether any tool can CRACK it, and it is not a claim that the algorithm HAS no expression -- run seed-hx.pl and derive-expressions.pl, which can settle that from evidence.",
          "expr_tier" : "absent",
          "hashcat" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               10800
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "raw-sha384",
          "john" : {
@@ -41213,8 +41386,12 @@
          },
          "legacy" : "",
          "mdxfind" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "SHA384",
+               "SHA384RAW"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "Raw-SHA384",
          "notes" : "",
@@ -41222,9 +41399,9 @@
          "sameas" : "",
          "status" : "needs-review",
          "tool_note" : {
-            "hashcat" : "",
+            "hashcat" : "mode discovered by round-trip search, not by name",
             "john" : "john's own published example ciphertext for this format, recovered by john under this format. john publishes no plaintext, so the plaintext was found by handing john its own example and a candidate list -- what john recovered IS the plaintext, by construction.",
-            "mdxfind" : ""
+            "mdxfind" : "type discovered by round-trip search, not by name"
          },
          "vecs" : 1
       },
@@ -44134,8 +44311,11 @@
          "expr_note" : "",
          "expr_tier" : "",
          "hashcat" : {
-            "ids" : [],
-            "state" : "no"
+            "ids" : [
+               4710
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "sha1-md5-plain-salt-3",
          "john" : {
@@ -44156,7 +44336,7 @@
          "sameas" : "",
          "status" : "ok",
          "tool_note" : {
-            "hashcat" : "",
+            "hashcat" : "mode discovered by round-trip search, not by name",
             "john" : "",
             "mdxfind" : ""
          },
@@ -44176,8 +44356,11 @@
          "expr_note" : "",
          "expr_tier" : "",
          "hashcat" : {
-            "ids" : [],
-            "state" : "no"
+            "ids" : [
+               4710
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "sha1-md5-plain-salt",
          "john" : {
@@ -44198,7 +44381,7 @@
          "sameas" : "",
          "status" : "ok",
          "tool_note" : {
-            "hashcat" : "",
+            "hashcat" : "mode discovered by round-trip search, not by name",
             "john" : "",
             "mdxfind" : ""
          },
@@ -45337,8 +45520,11 @@
          "expr_note" : "round-tripped as --format=dynamic=<expr> against every vector this entry carries",
          "expr_tier" : "vector",
          "hashcat" : {
-            "ids" : [],
-            "state" : "no"
+            "ids" : [
+               4510
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "sha1-sha1-plain-substr-plain-0-1",
          "john" : {
@@ -45369,7 +45555,7 @@
          "sameas" : "same as sha1-sha1-plain-salt (application)",
          "status" : "ok",
          "tool_note" : {
-            "hashcat" : "",
+            "hashcat" : "mode discovered by round-trip search, not by name",
             "john" : "format discovered by round-trip search, not by name",
             "mdxfind" : ""
          },
@@ -47209,8 +47395,11 @@
          "expr_note" : "",
          "expr_tier" : "",
          "hashcat" : {
-            "ids" : [],
-            "state" : "no"
+            "ids" : [
+               14400
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "sha1-salt-special",
          "john" : {
@@ -47231,7 +47420,7 @@
          "sameas" : "",
          "status" : "ok",
          "tool_note" : {
-            "hashcat" : "",
+            "hashcat" : "mode discovered by round-trip search, not by name",
             "john" : "",
             "mdxfind" : ""
          },
@@ -48090,11 +48279,24 @@
          },
          "name" : "SHA1lsb35",
          "notes" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "truncation",
+               "entry" : "aich",
+               "kind" : "collides-on-subset",
+               "note" : "AICH of a single block is SHA-1, and SHA1lsb35 is SHA-1 with the leading nibbles masked to zero, so any tool that ignores that field -- hashcat -m 100 and john Raw-SHA1-Linkedin both do, measured 2026-08-31 -- reports one for the other. They agree on every input outside those nibbles and differ nowhere else that such a tool looks."
+            },
+            {
+               "distinction" : "truncation",
+               "entry" : "sha1uc",
+               "kind" : "collides-on-subset",
+               "note" : "SHA1UC is SHA-1 written in uppercase hex and SHA1lsb35 is SHA-1 with the leading nibbles masked to zero, so a tool that skips that field cannot tell them apart: hashcat -m 100 skips hash positions 0-7 and john Raw-SHA1-Linkedin skips the same, measured 2026-08-31. The digests are identical from position 8 onward."
+            }
+         ],
+         "sameas" : "collides with aich (truncation); collides with sha1uc (truncation)",
          "status" : "ok",
          "tool_note" : {
-            "hashcat" : "",
+            "hashcat" : "hashcat -m 100 DOES report cracking both of this row's vectors, and that is not a mapping. Measured 2026-08-31: -m 100 skips hash positions 0-7, which is exactly the field this type masks, so it cannot tell this row from a plain SHA-1. discover-hashcat.pl's canary withheld the claim. hashcat has no mode for the masked construction; john does, and it is in tools.john.cpu.",
             "john" : "john's own test vector for this format is reproduced by mdxfind pinned to SHA1lsb35 at iteration 1",
             "mdxfind" : ""
          },
@@ -51102,8 +51304,11 @@
          "expr_note" : "",
          "expr_tier" : "",
          "hashcat" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               300
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "sha1raw",
          "john" : {
@@ -51124,7 +51329,7 @@
          "sameas" : "",
          "status" : "needs-review",
          "tool_note" : {
-            "hashcat" : "",
+            "hashcat" : "mode discovered by round-trip search, not by name",
             "john" : "",
             "mdxfind" : "NOT REPRODUCED HERE. mdxfind publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: the tool pinned to this identifier did not reproduce its own published example. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool mdxfind --only SHA1RAW to retry."
          },
@@ -52748,8 +52953,11 @@
          },
          "id" : "sha1sha1trunc",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "dynamic_1026"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -52766,7 +52974,7 @@
          "status" : "needs-review",
          "tool_note" : {
             "hashcat" : "",
-            "john" : "",
+            "john" : "format discovered by round-trip search, not by name",
             "mdxfind" : "NOT REPRODUCED HERE. mdxfind publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: the tool pinned to this identifier did not reproduce its own published example. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool mdxfind --only SHA1SHA1TRUNC to retry."
          },
          "vecs" : 1
@@ -54759,13 +54967,20 @@
          "expr_note" : "",
          "expr_tier" : "",
          "hashcat" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               100
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "sha1uc",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "Raw-SHA1",
+               "dynamic_26"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -54777,12 +54992,19 @@
          },
          "name" : "SHA1UC",
          "notes" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "truncation",
+               "entry" : "sha1lsb35",
+               "kind" : "collides-on-subset",
+               "note" : "SHA1UC is SHA-1 written in uppercase hex and SHA1lsb35 is SHA-1 with the leading nibbles masked to zero, so a tool that skips that field cannot tell them apart: hashcat -m 100 skips hash positions 0-7 and john Raw-SHA1-Linkedin skips the same, measured 2026-08-31. The digests are identical from position 8 onward."
+            }
+         ],
+         "sameas" : "collides with sha1lsb35 (truncation)",
          "status" : "needs-review",
          "tool_note" : {
-            "hashcat" : "",
-            "john" : "",
+            "hashcat" : "proven three ways because -m 100 alone is not enough: hashcat cracked this row's own vector under mode 100, john's Raw-SHA1 and dynamic_26 cracked it too with a FULL digest comparison, and Digest::SHA confirms sha1(\"password123\") is cbfdac6008f9cab4083784cbd1874f76618d2a97 character for character. The third step is required here: measured 2026-08-31, hashcat -m 100 skips hash positions 0-7, so on its own it cannot tell this row from sha1lsb35, which is the same digest with those nibbles masked. discover-hashcat.pl's canary withheld the claim for exactly that reason; this is a human overriding it with the independent recomputation, not the tool's word.",
+            "john" : "format discovered by round-trip search, not by name. Raw-SHA1-Linkedin was recorded here by discover-john.pl on 2026-08-31 and WITHDRAWN the same day. It is john's format for the LinkedIn leak, whose hashes have their leading nibbles zeroed, and it ignores hash positions 0-7 to read them -- measured here, the same defect the hashcat canary found in -m 100. It therefore cracks any full SHA-1 digest as well, which is a collision and not a denotation. Raw-SHA1 and dynamic_26 both compare the whole digest and were re-checked position by position.",
             "mdxfind" : "NOT REPRODUCED HERE. mdxfind publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: the tool pinned to this identifier did not reproduce its own published example. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool mdxfind --only SHA1UC to retry."
          },
          "vecs" : 1
@@ -54801,21 +55023,27 @@
          "expr_note" : "",
          "expr_tier" : "",
          "hashcat" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               170
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "sha1ucutf16le",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "dynamic_1400"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
             "ids" : [
                "SHA1UCUTF16LE"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "SHA1UCUTF16LE",
          "notes" : "",
@@ -54823,8 +55051,8 @@
          "sameas" : "",
          "status" : "needs-review",
          "tool_note" : {
-            "hashcat" : "",
-            "john" : "",
+            "hashcat" : "mode discovered by round-trip search, not by name",
+            "john" : "format discovered by round-trip search, not by name",
             "mdxfind" : "NOT REPRODUCED HERE. mdxfind publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: the tool pinned to this identifier did not reproduce its own published example. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool mdxfind --only SHA1UCUTF16LE to retry."
          },
          "vecs" : 1
@@ -56365,8 +56593,11 @@
          "expr_note" : "round-tripped as --format=dynamic=<expr> against every vector this entry carries",
          "expr_tier" : "vector",
          "hashcat" : {
-            "ids" : [],
-            "state" : "no"
+            "ids" : [
+               1420
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "sha256rawsaltpass",
          "john" : {
@@ -56398,7 +56629,7 @@
          "sameas" : "encoding of sha256-salt-pass (encoding)",
          "status" : "ok",
          "tool_note" : {
-            "hashcat" : "",
+            "hashcat" : "mode discovered by round-trip search, not by name",
             "john" : "john's own test vector for this format is reproduced by mdxfind pinned to SHA256RAWSALTPASS at iteration 1",
             "mdxfind" : ""
          },
@@ -58098,8 +58329,11 @@
          "expr_note" : "round-tripped as --format=dynamic=<expr> against every vector this entry carries",
          "expr_tier" : "vector",
          "hashcat" : {
-            "ids" : [],
-            "state" : "no"
+            "ids" : [
+               32420
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "sha512sha512rawuser",
          "john" : {
@@ -58120,7 +58354,7 @@
          "sameas" : "",
          "status" : "ok",
          "tool_note" : {
-            "hashcat" : "",
+            "hashcat" : "mode discovered by round-trip search, not by name",
             "john" : "",
             "mdxfind" : ""
          },
@@ -58530,8 +58764,11 @@
          "expr_note" : "john publishes this as \"ShangMi 3\" and no category, so what kind of construction it is has not been established here. Its name is not expression-shaped and john's dynamic EXPRESSION language cannot be handed it, so there is no expression on this row. That says nothing about whether any tool can CRACK it, and it is not a claim that the algorithm HAS no expression -- run seed-hx.pl and derive-expressions.pl, which can settle that from evidence.",
          "expr_tier" : "absent",
          "hashcat" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               31100
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "shangmi-3",
          "john" : {
@@ -58543,8 +58780,11 @@
          },
          "legacy" : "",
          "mdxfind" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "SM3"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "ShangMi 3",
          "notes" : "",
@@ -58552,9 +58792,9 @@
          "sameas" : "",
          "status" : "needs-review",
          "tool_note" : {
-            "hashcat" : "",
+            "hashcat" : "mode discovered by round-trip search, not by name",
             "john" : "john's own published example ciphertext for this format, recovered by john under this format. john publishes no plaintext, so the plaintext was found by handing john its own example and a candidate list -- what john recovered IS the plaintext, by construction.",
-            "mdxfind" : ""
+            "mdxfind" : "type discovered by round-trip search, not by name"
          },
          "vecs" : 1
       },
@@ -59898,8 +60138,11 @@
          },
          "id" : "sne128",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "Snefru-128"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -59916,7 +60159,7 @@
          "status" : "needs-review",
          "tool_note" : {
             "hashcat" : "",
-            "john" : "",
+            "john" : "format discovered by round-trip search, not by name",
             "mdxfind" : "mdxfind's own published example for this identifier, recovered by mdxfind at this identifier with mdxfind's own published plaintext."
          },
          "vecs" : 1
@@ -59940,8 +60183,11 @@
          },
          "id" : "sne256",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "Snefru-256"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -59958,7 +60204,7 @@
          "status" : "needs-review",
          "tool_note" : {
             "hashcat" : "",
-            "john" : "",
+            "john" : "format discovered by round-trip search, not by name",
             "mdxfind" : "mdxfind's own published example for this identifier, recovered by mdxfind at this identifier with mdxfind's own published plaintext."
          },
          "vecs" : 1
@@ -59990,8 +60236,11 @@
          },
          "legacy" : "",
          "mdxfind" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "SNE128"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "Snefru-128",
          "notes" : "",
@@ -60001,7 +60250,7 @@
          "tool_note" : {
             "hashcat" : "",
             "john" : "john's own published example ciphertext for this format, recovered by john under this format. john publishes no plaintext, so the plaintext was found by handing john its own example and a candidate list -- what john recovered IS the plaintext, by construction.",
-            "mdxfind" : ""
+            "mdxfind" : "type discovered by round-trip search, not by name"
          },
          "vecs" : 1
       },
@@ -60630,13 +60879,22 @@
          },
          "id" : "solarwinds-serv-u",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "dynamic_1009",
+               "dynamic_1017",
+               "dynamic_2004",
+               "dynamic_4"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "MD5SALTPASS"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "SolarWinds Serv-U",
          "notes" : "",
@@ -60645,8 +60903,8 @@
          "status" : "needs-review",
          "tool_note" : {
             "hashcat" : "hashcat's own published example hash for this mode, recovered by hashcat at this mode with hashcat's own published plaintext.",
-            "john" : "",
-            "mdxfind" : ""
+            "john" : "format discovered by round-trip search, not by name",
+            "mdxfind" : "type discovered by round-trip search, not by name"
          },
          "vecs" : 1
       },
@@ -61081,13 +61339,19 @@
          "expr_note" : "the construction upstream states for mdxfind type SSPR-SHA256 (e978) names N(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
          "expr_tier" : "absent",
          "hashcat" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               32030
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "sspr-sha256",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "sspr"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -61103,8 +61367,8 @@
          "sameas" : "",
          "status" : "needs-review",
          "tool_note" : {
-            "hashcat" : "",
-            "john" : "",
+            "hashcat" : "mode discovered by round-trip search, not by name",
+            "john" : "format discovered by round-trip search, not by name",
             "mdxfind" : "mdxfind's own published example for this identifier, recovered by mdxfind at this identifier with mdxfind's own published plaintext."
          },
          "vecs" : 1
@@ -61123,13 +61387,19 @@
          "expr_note" : "the construction upstream states for mdxfind type SSPR-SHA512 (e979) names N(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
          "expr_tier" : "absent",
          "hashcat" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               32040
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "sspr-sha512",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "sspr"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "legacy" : "",
          "mdxfind" : {
@@ -61145,8 +61415,8 @@
          "sameas" : "",
          "status" : "needs-review",
          "tool_note" : {
-            "hashcat" : "",
-            "john" : "",
+            "hashcat" : "mode discovered by round-trip search, not by name",
+            "john" : "format discovered by round-trip search, not by name",
             "mdxfind" : "mdxfind's own published example for this identifier, recovered by mdxfind at this identifier with mdxfind's own published plaintext."
          },
          "vecs" : 1
@@ -61249,8 +61519,11 @@
          "expr_note" : "the construction upstream states for mdxfind type STREEBOG-32 (e430) names streebog_32(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
          "expr_tier" : "absent",
          "hashcat" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               11700
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "streebog-32-plain",
          "john" : {
@@ -61281,7 +61554,7 @@
          "sameas" : "same as gost2012-32 (naming)",
          "status" : "ok",
          "tool_note" : {
-            "hashcat" : "",
+            "hashcat" : "mode discovered by round-trip search, not by name",
             "john" : "format discovered by round-trip search, not by name",
             "mdxfind" : ""
          },
@@ -61301,8 +61574,11 @@
          "expr_note" : "the construction upstream states for mdxfind type STREEBOG-64 (e431) names streebog_64(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
          "expr_tier" : "absent",
          "hashcat" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               11800
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "streebog-64-plain",
          "john" : {
@@ -61333,7 +61609,7 @@
          "sameas" : "same as gost2012-64 (naming)",
          "status" : "ok",
          "tool_note" : {
-            "hashcat" : "",
+            "hashcat" : "mode discovered by round-trip search, not by name",
             "john" : "format discovered by round-trip search, not by name",
             "mdxfind" : ""
          },
@@ -67551,8 +67827,11 @@
          "expr_note" : "the construction upstream states for mdxfind type YESCRYPT (e995) names yescrypt(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
          "expr_tier" : "absent",
          "hashcat" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               36100
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "yescrypt-mdxfindyescrypt",
          "john" : {
@@ -67573,7 +67852,7 @@
          "sameas" : "",
          "status" : "needs-review",
          "tool_note" : {
-            "hashcat" : "",
+            "hashcat" : "mode discovered by round-trip search, not by name",
             "john" : "",
             "mdxfind" : "mdxfind's own published example for this identifier, recovered by mdxfind at this identifier with mdxfind's own published plaintext."
          },
