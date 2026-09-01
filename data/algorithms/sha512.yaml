@@ -22,10 +22,11 @@ tools:
     verified_with: "mdxfind"
   john:
     cpu: ["Raw-SHA512", "dynamic_80"]
-    gpu: ["raw-SHA512-opencl"]
+    gpu: ["raw-SHA512-opencl", "raw-SHA512-free-opencl"]
     verified: "vector"
-    verified_at: "2026-08-29"
+    verified_at: "2026-09-01"
     verified_with: "john"
+    note: "GPU build(s) raw-SHA512-free-opencl proven on 2026-09-01 by cracking this entry's own vector(s) under that exact format; john ships no CPU format of that name, so discover-john.pl --mirror-gpu could not place them."
   crack:
     supported: false
 vectors:
