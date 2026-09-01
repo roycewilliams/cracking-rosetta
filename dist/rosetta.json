@@ -483,7 +483,8 @@
          "id" : "7-zip-archive-encryption",
          "john" : {
             "ids" : [
-               "7z"
+               "7z",
+               "7z-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -573,7 +574,8 @@
          "id" : "adobe-aem-sspr-sha-256-with-salt",
          "john" : {
             "ids" : [
-               "sspr"
+               "sspr",
+               "sspr-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -618,7 +620,8 @@
          "id" : "adobe-aem-sspr-sha-512-with-salt",
          "john" : {
             "ids" : [
-               "sspr"
+               "sspr",
+               "sspr-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -841,7 +844,8 @@
          "john" : {
             "ids" : [
                "Raw-SHA1",
-               "dynamic_26"
+               "dynamic_26",
+               "raw-SHA1-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -861,14 +865,14 @@
                "distinction" : "truncation",
                "entry" : "sha1lsb35",
                "kind" : "collides-on-subset",
-               "note" : "AICH of a single block is SHA-1, and SHA1lsb35 is SHA-1 with the leading nibbles masked to zero, so any tool that ignores that field -- hashcat -m 100 and john Raw-SHA1-Linkedin both do, measured 2026-08-31 -- reports one for the other. They agree on every input outside those nibbles and differ nowhere else that such a tool looks."
+               "note" : "AICH of a single block is SHA-1, and SHA1lsb35 is SHA-1 with the leading nibbles masked to zero, so any tool that ignores that field -- hashcat -m 100 skips positions 0-7 and john Raw-SHA1-Linkedin skips 0-4, measured 2026-09-01, and the mask is 5 nibbles wide -- reports one for the other. They agree on every input outside those nibbles and differ nowhere else that such a tool looks."
             }
          ],
          "sameas" : "collides with sha1lsb35 (truncation)",
          "status" : "needs-review",
          "tool_note" : {
             "hashcat" : "proven three ways because -m 100 alone is not enough: hashcat cracked this row's own vector under mode 100, john's Raw-SHA1 and dynamic_26 cracked it too with a FULL digest comparison, and Digest::SHA confirms sha1(\"password123\") is cbfdac6008f9cab4083784cbd1874f76618d2a97 character for character. The third step is required here: measured 2026-08-31, hashcat -m 100 skips hash positions 0-7, so on its own it cannot tell this row from sha1lsb35, which is the same digest with those nibbles masked. discover-hashcat.pl's canary withheld the claim for exactly that reason; this is a human overriding it with the independent recomputation, not the tool's word.",
-            "john" : "format discovered by round-trip search, not by name. Raw-SHA1-Linkedin was recorded here by discover-john.pl on 2026-08-31 and WITHDRAWN the same day. It is john's format for the LinkedIn leak, whose hashes have their leading nibbles zeroed, and it ignores hash positions 0-7 to read them -- measured here, the same defect the hashcat canary found in -m 100. It therefore cracks any full SHA-1 digest as well, which is a collision and not a denotation. Raw-SHA1 and dynamic_26 both compare the whole digest and were re-checked position by position.",
+            "john" : "format discovered by round-trip search, not by name. Raw-SHA1-Linkedin was recorded here by discover-john.pl on 2026-08-31 and WITHDRAWN the same day. It is john's format for the LinkedIn leak, whose hashes have their leading nibbles zeroed, and it ignores hash positions 0-4 -- the 20 bits that leak zeroed -- measured position by position on 2026-09-01. That is the same defect the hashcat canary found in -m 100, at a different width: -m 100 skips 0-7. It therefore cracks any full SHA-1 digest as well, which is a collision and not a denotation. Raw-SHA1 and dynamic_26 both compare the whole digest and were re-checked position by position.",
             "mdxfind" : "mdxfind's own published example for this identifier, recovered by mdxfind at this identifier with mdxfind's own published plaintext."
          },
          "vecs" : 1
@@ -897,7 +901,8 @@
          "john" : {
             "ids" : [
                "md5crypt",
-               "md5crypt-long"
+               "md5crypt-long",
+               "md5crypt-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -1218,7 +1223,8 @@
          "id" : "androidbackup",
          "john" : {
             "ids" : [
-               "AndroidBackup"
+               "AndroidBackup",
+               "AndroidBackup-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -1350,7 +1356,8 @@
          "id" : "ansible-vault",
          "john" : {
             "ids" : [
-               "ansible"
+               "ansible",
+               "ansible-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -1399,7 +1406,8 @@
          "john" : {
             "ids" : [
                "md5crypt",
-               "md5crypt-long"
+               "md5crypt-long",
+               "md5crypt-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -1447,7 +1455,8 @@
          "id" : "apfs",
          "john" : {
             "ids" : [
-               "FVDE"
+               "FVDE",
+               "FVDE-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -1537,7 +1546,8 @@
          "id" : "apple-iwork-09-or-newer",
          "john" : {
             "ids" : [
-               "iwork"
+               "iwork",
+               "iwork-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -1582,7 +1592,8 @@
          "id" : "apple-secure-notes",
          "john" : {
             "ids" : [
-               "notes"
+               "notes",
+               "notes-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -1672,7 +1683,8 @@
          "id" : "apple-keychain",
          "john" : {
             "ids" : [
-               "keychain"
+               "keychain",
+               "keychain-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -1720,7 +1732,8 @@
          "id" : "apple-secure-notes-mdxfindapple-secure-notes",
          "john" : {
             "ids" : [
-               "FVDE"
+               "FVDE",
+               "FVDE-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -1768,7 +1781,8 @@
          "id" : "argon2",
          "john" : {
             "ids" : [
-               "Argon2"
+               "Argon2",
+               "argon2-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -1816,7 +1830,8 @@
          "id" : "argon2id-bridged-reference-implementation-tunings",
          "john" : {
             "ids" : [
-               "Argon2"
+               "Argon2",
+               "argon2-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -2119,7 +2134,8 @@
          "id" : "astra-linux-gost12256hash",
          "john" : {
             "ids" : [
-               "streebog256crypt"
+               "streebog256crypt",
+               "streebog256crypt-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -2161,7 +2177,8 @@
          "id" : "astra-linux-gost94hash",
          "john" : {
             "ids" : [
-               "gost94crypt"
+               "gost94crypt",
+               "gost94crypt-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -2206,7 +2223,8 @@
          "id" : "atlassian-pbkdf2-hmac-sha1",
          "john" : {
             "ids" : [
-               "PBKDF2-HMAC-SHA1"
+               "PBKDF2-HMAC-SHA1",
+               "PBKDF2-HMAC-SHA1-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -2341,7 +2359,8 @@
          "id" : "axcrypt",
          "john" : {
             "ids" : [
-               "AxCrypt"
+               "AxCrypt",
+               "axcrypt-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -2456,7 +2475,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -2650,7 +2669,8 @@
          "id" : "bcrypt",
          "john" : {
             "ids" : [
-               "bcrypt"
+               "bcrypt",
+               "bcrypt-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -3685,7 +3705,8 @@
          "id" : "bitcoin-litecoin-wallet-dat",
          "john" : {
             "ids" : [
-               "Bitcoin"
+               "Bitcoin",
+               "Bitcoin-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -3727,7 +3748,8 @@
          "id" : "bitlocker-johnbitlocker",
          "john" : {
             "ids" : [
-               "BitLocker"
+               "BitLocker",
+               "BitLocker-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -3898,7 +3920,8 @@
          "id" : "bitwarden-password-manager",
          "john" : {
             "ids" : [
-               "Bitwarden"
+               "Bitwarden",
+               "bitwarden-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -4471,7 +4494,8 @@
          "id" : "blockchain-my-wallet",
          "john" : {
             "ids" : [
-               "Blockchain"
+               "Blockchain",
+               "blockchain-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -4600,7 +4624,8 @@
          "id" : "blockchain-my-wallet-v2",
          "john" : {
             "ids" : [
-               "Blockchain"
+               "Blockchain",
+               "blockchain-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -5071,7 +5096,8 @@
          "id" : "cisco4",
          "john" : {
             "ids" : [
-               "Raw-SHA256"
+               "Raw-SHA256",
+               "raw-SHA256-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -5119,7 +5145,8 @@
          "id" : "cisco8",
          "john" : {
             "ids" : [
-               "PBKDF2-HMAC-SHA256"
+               "PBKDF2-HMAC-SHA256",
+               "PBKDF2-HMAC-SHA256-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -5270,7 +5297,8 @@
          "id" : "ciscoise",
          "john" : {
             "ids" : [
-               "Iterated-SHA256"
+               "Iterated-SHA256",
+               "Iterated-SHA256-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -5431,7 +5459,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -5799,7 +5827,8 @@
          "id" : "cryptosafe",
          "john" : {
             "ids" : [
-               "cryptoSafe"
+               "cryptoSafe",
+               "cryptosafe-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -6187,7 +6216,8 @@
          "id" : "dashlane-password-manager",
          "john" : {
             "ids" : [
-               "dashlane"
+               "dashlane",
+               "dashlane-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -6232,7 +6262,8 @@
          "id" : "dcc2",
          "john" : {
             "ids" : [
-               "mscash2"
+               "mscash2",
+               "mscash2-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -6325,7 +6356,8 @@
          "id" : "descrypt-plain",
          "john" : {
             "ids" : [
-               "descrypt"
+               "descrypt",
+               "descrypt-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -9233,7 +9265,8 @@
          "john" : {
             "ids" : [
                "Raw-MD4",
-               "dynamic_30"
+               "dynamic_30",
+               "raw-MD4-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -9626,7 +9659,8 @@
          "id" : "encfs",
          "john" : {
             "ids" : [
-               "EncFS"
+               "EncFS",
+               "EncFS-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -9915,7 +9949,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -10151,7 +10185,8 @@
          "id" : "ethereum-wallet-pbkdf2-hmac-sha256",
          "john" : {
             "ids" : [
-               "ethereum"
+               "ethereum",
+               "ethereum-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -10283,7 +10318,8 @@
          "id" : "filevault-2",
          "john" : {
             "ids" : [
-               "FVDE"
+               "FVDE",
+               "FVDE-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -10892,7 +10928,8 @@
          "id" : "gnome-keyring",
          "john" : {
             "ids" : [
-               "keyring"
+               "keyring",
+               "keyring-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -10917,7 +10954,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "iterated",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -11004,7 +11041,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -11195,7 +11232,8 @@
          "id" : "gost12512crypt",
          "john" : {
             "ids" : [
-               "streebog512crypt"
+               "streebog512crypt",
+               "streebog512crypt-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -11333,7 +11371,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -11395,7 +11433,8 @@
          "id" : "gpg-aes-128-aes-256-sha-1-pass",
          "john" : {
             "ids" : [
-               "gpg"
+               "gpg",
+               "gpg-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -11440,7 +11479,8 @@
          "id" : "gpg-aes-128-aes-256-sha-256-pass",
          "john" : {
             "ids" : [
-               "gpg"
+               "gpg",
+               "gpg-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -11485,7 +11525,8 @@
          "id" : "gpg-aes-128-aes-256-sha-512-pass",
          "john" : {
             "ids" : [
-               "gpg"
+               "gpg",
+               "gpg-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -11785,7 +11826,8 @@
          "id" : "grub-2",
          "john" : {
             "ids" : [
-               "PBKDF2-HMAC-SHA512"
+               "PBKDF2-HMAC-SHA512",
+               "PBKDF2-HMAC-SHA512-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -12153,7 +12195,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "primitive",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -12285,7 +12327,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "primitive",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -12330,7 +12372,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "iterated",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -12375,7 +12417,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "primitive",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -12420,7 +12462,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "iterated",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -12465,7 +12507,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "primitive",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -12510,7 +12552,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "iterated",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -12555,7 +12597,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "primitive",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -12600,7 +12642,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "iterated",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -12645,7 +12687,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "primitive",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -12690,7 +12732,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "iterated",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -12735,7 +12777,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "primitive",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -12780,7 +12822,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "iterated",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -12825,7 +12867,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "primitive",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -12870,7 +12912,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "iterated",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -12915,7 +12957,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "primitive",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -12960,7 +13002,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "iterated",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -13005,7 +13047,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "primitive",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -13050,7 +13092,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "iterated",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -13095,7 +13137,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "primitive",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -13140,7 +13182,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "iterated",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -13185,7 +13227,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "primitive",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -13230,7 +13272,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "iterated",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -13275,7 +13317,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "primitive",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -13320,7 +13362,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "iterated",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -13365,7 +13407,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "primitive",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -13397,8 +13439,15 @@
          },
          "name" : "HAV256",
          "notes" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "none",
+               "entry" : "haval-256-3",
+               "kind" : "duplicate-of",
+               "note" : "Both compute haval256_3($p), proven 2026-09-01 by john's dynamic compiler against each entry's own vector. haval-256-3 is john's spelling, hav256 mdxfind's. A curator decides whether both names keep a row (distinction: naming) or one becomes a tombstone."
+            }
+         ],
+         "sameas" : "duplicate of haval-256-3",
          "status" : "ok",
          "tool_note" : {
             "hashcat" : "",
@@ -13410,7 +13459,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "iterated",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -13455,7 +13504,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "primitive",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -13500,7 +13549,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "iterated",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -13545,7 +13594,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "primitive",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -13590,7 +13639,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "iterated",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -13677,16 +13726,16 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "primitive",
          "crack" : {
             "ids" : [],
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "HAVAL-256-3",
-         "expr" : "",
-         "expr_note" : "john publishes this as \"HAVAL-256-3\" and no category, so what kind of construction it is has not been established here. Its name is not expression-shaped and john's dynamic EXPRESSION language cannot be handed it, so there is no expression on this row. That says nothing about whether any tool can CRACK it, and it is not a claim that the algorithm HAS no expression -- run seed-hx.pl and derive-expressions.pl, which can settle that from evidence.",
-         "expr_tier" : "absent",
+         "denotation" : "",
+         "expr" : "haval256_3($p)",
+         "expr_note" : "round-tripped as --format=dynamic=<expr> against every vector this entry carries",
+         "expr_tier" : "vector",
          "hashcat" : {
             "ids" : [],
             "state" : "unknown"
@@ -13709,8 +13758,15 @@
          },
          "name" : "HAVAL-256-3",
          "notes" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "none",
+               "entry" : "hav256",
+               "kind" : "duplicate-of",
+               "note" : "Both compute haval256_3($p), proven 2026-09-01 by john's dynamic compiler against each entry's own vector. haval-256-3 is john's spelling, hav256 mdxfind's. A curator decides whether both names keep a row (distinction: naming) or one becomes a tombstone."
+            }
+         ],
+         "sameas" : "duplicate of hav256",
          "status" : "needs-review",
          "tool_note" : {
             "hashcat" : "",
@@ -13722,7 +13778,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -13764,7 +13820,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -13848,7 +13904,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -13890,7 +13946,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -13932,7 +13988,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -13974,7 +14030,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -14016,7 +14072,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -14058,7 +14114,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -14100,7 +14156,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -14142,7 +14198,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -14184,7 +14240,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -14226,7 +14282,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -14268,7 +14324,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -14310,7 +14366,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -14352,7 +14408,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -14394,7 +14450,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -14436,7 +14492,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -14478,7 +14534,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -14520,7 +14576,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -14562,7 +14618,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -14604,7 +14660,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -14646,7 +14702,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -14688,7 +14744,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -14730,7 +14786,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -14772,7 +14828,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -14814,7 +14870,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -14856,7 +14912,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -14898,7 +14954,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -14940,7 +14996,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -14982,7 +15038,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -17103,10 +17159,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "Huawei sha1(md5($pass).$salt)",
-         "expr" : "",
-         "expr_note" : "hashcat mode 4711 is a Enterprise Application Software (EAS) format. john's dynamic expression language describes constructions over a password and a salt; it cannot express a container's KDF-plus-cipher, so this has no expression and will not acquire one. That says nothing about whether john can CRACK it -- run discover-john.pl, and if john has a format it goes in tools.john.",
-         "expr_tier" : "absent",
+         "denotation" : "",
+         "expr" : "sha1(md5($p).$s)",
+         "expr_note" : "round-tripped as --format=dynamic=<expr> against every vector this entry carries",
+         "expr_tier" : "vector",
          "hashcat" : {
             "ids" : [
                4711
@@ -17130,8 +17186,15 @@
          },
          "name" : "Huawei sha1(md5($pass).$salt)",
          "notes" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "application",
+               "entry" : "sha1-md5-pass-salt",
+               "kind" : "same-computation",
+               "note" : "Huawei's row is the product's use of sha1(md5($p).$s); sha1-md5-pass-salt is the generic construction. Proven here by john --format=dynamic= against this entry's own vector, 2026-09-01."
+            }
+         ],
+         "sameas" : "same as sha1-md5-pass-salt (application)",
          "status" : "needs-review",
          "tool_note" : {
             "hashcat" : "hashcat's own published example hash for this mode, recovered by hashcat at this mode with hashcat's own published plaintext.",
@@ -17317,7 +17380,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -17424,7 +17487,8 @@
          "id" : "ipmi-2-0-rakp-rmcp-johnrakp-sha1",
          "john" : {
             "ids" : [
-               "RAKP-SHA1"
+               "RAKP-SHA1",
+               "RAKP-SHA1-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -17466,7 +17530,8 @@
          "id" : "ipmi-2-0-rakp-rmcp-johnrakp-sha256",
          "john" : {
             "ids" : [
-               "RAKP-SHA256"
+               "RAKP-SHA256",
+               "RAKP-SHA256-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -17508,7 +17573,8 @@
          "id" : "ipmi-2-0-rakp-rmcp",
          "john" : {
             "ids" : [
-               "RAKP-MD5"
+               "RAKP-MD5",
+               "RAKP-MD5-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -18416,7 +18482,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "primitive",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -18464,7 +18530,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "iterated",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -18509,7 +18575,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "primitive",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -18558,7 +18624,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "iterated",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -18603,7 +18669,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "primitive",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -18651,7 +18717,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "iterated",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -18696,7 +18762,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "primitive",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -18744,7 +18810,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "iterated",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -18809,7 +18875,8 @@
          "id" : "keepass-kdbx-v2-v3",
          "john" : {
             "ids" : [
-               "KeePass"
+               "KeePass",
+               "KeePass-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -18896,7 +18963,8 @@
          "id" : "keepass-aeskdf-kdbx-v4",
          "john" : {
             "ids" : [
-               "KeePass"
+               "KeePass",
+               "KeePass-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -19070,7 +19138,8 @@
          "id" : "kerberos-5-as-req-pre-auth-etype-17-18",
          "john" : {
             "ids" : [
-               "krb5pa-sha1"
+               "krb5pa-sha1",
+               "krb5pa-sha1-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -19283,7 +19352,8 @@
          "id" : "kerberos-5-etype-17-tgs-rep",
          "john" : {
             "ids" : [
-               "krb5tgs-sha1"
+               "krb5tgs-sha1",
+               "krb5tgs-sha1-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -19370,7 +19440,8 @@
          "id" : "kerberos-5-etype-18-tgs-rep",
          "john" : {
             "ids" : [
-               "krb5tgs-sha1"
+               "krb5tgs-sha1",
+               "krb5tgs-sha1-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -19889,7 +19960,8 @@
          "id" : "krb5pa23",
          "john" : {
             "ids" : [
-               "krb5pa-md5"
+               "krb5pa-md5",
+               "krb5pa-md5-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -19937,7 +20009,8 @@
          "id" : "krb5tgs23",
          "john" : {
             "ids" : [
-               "krb5tgs"
+               "krb5tgs",
+               "krb5tgs-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -20069,7 +20142,8 @@
          "id" : "lastpass-cli",
          "john" : {
             "ids" : [
-               "lpcli"
+               "lpcli",
+               "lpcli-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -20111,7 +20185,8 @@
          "id" : "lastpass-offline",
          "john" : {
             "ids" : [
-               "lp"
+               "lp",
+               "lp-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -20373,7 +20448,8 @@
          "id" : "lotus-notes-domino-5",
          "john" : {
             "ids" : [
-               "lotus5"
+               "lotus5",
+               "lotus5-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -21261,7 +21337,8 @@
          "id" : "macos-v10-8-pbkdf2-sha512",
          "john" : {
             "ids" : [
-               "PBKDF2-HMAC-SHA512"
+               "PBKDF2-HMAC-SHA512",
+               "PBKDF2-HMAC-SHA512-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -21286,7 +21363,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -21351,7 +21428,8 @@
          "id" : "macosx7",
          "john" : {
             "ids" : [
-               "xsha512"
+               "xsha512",
+               "XSHA512-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -21463,7 +21541,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "primitive",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -21508,7 +21586,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "iterated",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -21553,7 +21631,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -21595,7 +21673,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -21637,7 +21715,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "primitive",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -21729,7 +21807,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -21771,7 +21849,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -21855,7 +21933,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -21897,7 +21975,7 @@
       {
          "alias" : "NTLM; ntlm($plain) / md4(utf16-le($plain))",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -21920,8 +21998,8 @@
                "NT",
                "NT-long",
                "dynamic_33",
-               "NT-opencl",
-               "NT-long-opencl"
+               "NT-long-opencl",
+               "NT-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -21940,6 +22018,12 @@
          "relations" : [
             {
                "distinction" : "none",
+               "entry" : "md4-utf16-le-utf-8-plain",
+               "kind" : "duplicate-of",
+               "note" : "Both compute md4(utf16($p)) -- NTLM. Proven 2026-09-01 against this entry's own vector. Same question as the other NTLM-named rows: several names, one computation."
+            },
+            {
+               "distinction" : "none",
                "entry" : "ntlm-plain-md4-utf16-le-plain",
                "kind" : "duplicate-of",
                "note" : "merged 2026-08-30 on Royce's answer to the curate.pl duplicate question: keep this entry. That id survives only as a tombstone."
@@ -21951,7 +22035,7 @@
                "note" : "Not a duplicate, decided by Royce on 2026-08-30. mdxfind publishes three type indices for one computation - MD4UTF16 (e496), NTLM (e369) and NTLMH (e786) - all with the same example vector; pinned runs of all three also reproduce md4(utf16('rosetta')) on 2026-08-30, so the agreement is not a coincidence of one input. NTLMH keeps a row because that name is what a reader arrives with."
             }
          ],
-         "sameas" : "duplicate of ntlm-plain-md4-utf16-le-plain; same as ntlmh (naming)",
+         "sameas" : "duplicate of md4-utf16-le-utf-8-plain; duplicate of ntlm-plain-md4-utf16-le-plain; same as ntlmh (naming)",
          "status" : "ok",
          "tool_note" : {
             "hashcat" : "",
@@ -21963,7 +22047,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -22005,16 +22089,16 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "md4(utf16-le(utf-8($plain)))",
-         "expr" : "",
-         "expr_note" : "john's dynamic expression vocabulary has no le(), so this construction cannot be written as an expression; that is separate from whether john has a FORMAT for it",
-         "expr_tier" : "absent",
+         "denotation" : "",
+         "expr" : "md4(utf16($p))",
+         "expr_note" : "round-tripped as --format=dynamic=<expr> against every vector this entry carries",
+         "expr_tier" : "vector",
          "hashcat" : {
             "ids" : [
                1000
@@ -22027,7 +22111,9 @@
             "ids" : [
                "NT",
                "NT-long",
-               "dynamic_33"
+               "dynamic_33",
+               "NT-long-opencl",
+               "NT-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -22045,8 +22131,21 @@
          },
          "name" : "md4(utf16-le(utf-8($plain)))",
          "notes" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "none",
+               "entry" : "md4-utf16-plain",
+               "kind" : "duplicate-of",
+               "note" : "Both compute md4(utf16($p)) -- NTLM. Proven 2026-09-01 against this entry's own vector. Same question as the other NTLM-named rows: several names, one computation."
+            },
+            {
+               "distinction" : "none",
+               "entry" : "ntlmh",
+               "kind" : "duplicate-of",
+               "note" : "Both compute md4(utf16($p)). See the edge to md4-utf16-plain."
+            }
+         ],
+         "sameas" : "duplicate of md4-utf16-plain; duplicate of ntlmh",
          "status" : "ok",
          "tool_note" : {
             "hashcat" : "",
@@ -22058,7 +22157,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -22100,7 +22199,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -22142,7 +22241,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -22226,7 +22325,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -22268,7 +22367,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -22310,7 +22409,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -22394,7 +22493,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -22436,7 +22535,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -22478,7 +22577,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -22520,7 +22619,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -22562,7 +22661,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -22646,7 +22745,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -22688,7 +22787,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -22730,7 +22829,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -22772,7 +22871,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -22814,7 +22913,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -22898,7 +22997,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -22940,7 +23039,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -22982,7 +23081,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -23024,7 +23123,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -23066,7 +23165,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -23108,7 +23207,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -23150,7 +23249,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -23192,7 +23291,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -23340,7 +23439,9 @@
             "ids" : [
                "NT",
                "NT-long",
-               "dynamic_33"
+               "dynamic_33",
+               "NT-long-opencl",
+               "NT-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -23437,7 +23538,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -23711,7 +23812,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -23764,7 +23865,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -23855,7 +23956,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -23897,7 +23998,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -23983,9 +24084,15 @@
                "entry" : "oscommerce-xt-commerce",
                "kind" : "same-computation",
                "note" : "osCommerce and xt:Commerce use md5($s.$p); hashcat gives that mode 21 against 20 for the generic form"
+            },
+            {
+               "distinction" : "application",
+               "entry" : "solarwinds-serv-u",
+               "kind" : "same-computation",
+               "note" : "SolarWinds Serv-U stores md5($s.$p); the generic construction is md5-salt-pass. Proven here by john --format=dynamic='md5($s.$p)' against this entry's own vector, 2026-09-01."
             }
          ],
-         "sameas" : "same as oscommerce-xt-commerce (application)",
+         "sameas" : "same as oscommerce-xt-commerce (application); same as solarwinds-serv-u (application)",
          "status" : "ok",
          "tool_note" : {
             "hashcat" : "",
@@ -23997,7 +24104,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -24088,7 +24195,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -24144,7 +24251,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "unknown"
@@ -24200,7 +24307,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -24249,7 +24356,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -24291,7 +24398,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -24378,7 +24485,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -24434,7 +24541,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -24476,7 +24583,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -24518,7 +24625,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -24560,7 +24667,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -24602,7 +24709,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -24686,7 +24793,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -24728,7 +24835,7 @@
       {
          "alias" : "md5(substr(base64_encode(md5(md5($plain), true)), 0, -2))",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -24770,7 +24877,7 @@
       {
          "alias" : "md5(substr(base64_encode(md5(md5(md5($plain)), true)), 0, -2))",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -24812,7 +24919,7 @@
       {
          "alias" : "md5(substr(base64_encode(md5(sha1($plain), true)), 0, -2))",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -24896,7 +25003,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -24938,7 +25045,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -25022,7 +25129,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -25113,7 +25220,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -25197,7 +25304,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -25239,7 +25346,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -25281,7 +25388,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -25449,7 +25556,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -25491,7 +25598,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -25536,7 +25643,7 @@
       {
          "alias" : "MD5 (2 iterations)",
          "application" : "",
-         "category" : "",
+         "category" : "iterated",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -25642,7 +25749,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -25823,7 +25930,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -25949,7 +26056,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -25994,7 +26101,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -26078,7 +26185,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -26120,7 +26227,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "iterated",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -26165,7 +26272,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -26211,7 +26318,7 @@
       {
          "alias" : "md5(md5($salt.$plain).$salt); md5(md5($salt.$plain).\":\".$salt.\":\")",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -26256,7 +26363,7 @@
       {
          "alias" : "MD5 (3 iterations)",
          "application" : "",
-         "category" : "",
+         "category" : "iterated",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -26304,7 +26411,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -26439,7 +26546,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -26481,7 +26588,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -26523,7 +26630,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -26607,7 +26714,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "iterated",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -26736,7 +26843,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -26778,7 +26885,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -26820,7 +26927,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -26862,7 +26969,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "iterated",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -26949,7 +27056,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -26991,7 +27098,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -27075,7 +27182,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -27117,7 +27224,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -27159,7 +27266,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "iterated",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -27243,7 +27350,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -27327,7 +27434,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -27369,7 +27476,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -27411,7 +27518,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -27453,7 +27560,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -27495,7 +27602,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -27537,7 +27644,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -27579,7 +27686,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -27621,7 +27728,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -27663,7 +27770,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -27718,7 +27825,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -27766,7 +27873,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -27808,7 +27915,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -27850,7 +27957,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -27895,7 +28002,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -27940,7 +28047,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -27982,7 +28089,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -28024,7 +28131,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -28066,7 +28173,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -28108,7 +28215,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -28156,7 +28263,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -28198,7 +28305,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -28240,7 +28347,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -28282,7 +28389,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -28324,7 +28431,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -28366,7 +28473,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -28408,7 +28515,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -28450,7 +28557,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -28492,7 +28599,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -28534,7 +28641,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -28579,7 +28686,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -28624,7 +28731,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -28666,7 +28773,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -28711,7 +28818,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -28753,7 +28860,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -28798,7 +28905,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -28840,7 +28947,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -28882,7 +28989,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -28924,7 +29031,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -28966,7 +29073,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -29008,7 +29115,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -29095,7 +29202,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -29137,7 +29244,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -29179,7 +29286,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "iterated",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -29221,7 +29328,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -29263,7 +29370,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -29305,7 +29412,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -29347,7 +29454,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -29389,7 +29496,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -29493,7 +29600,8 @@
          "id" : "md5-unix",
          "john" : {
             "ids" : [
-               "md5crypt"
+               "md5crypt",
+               "md5crypt-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -29521,7 +29629,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -29563,7 +29671,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -29605,7 +29713,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -29647,7 +29755,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -29731,7 +29839,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -29773,7 +29881,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -29815,7 +29923,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -29857,7 +29965,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -29899,7 +30007,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -29941,7 +30049,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -29983,7 +30091,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -30115,7 +30223,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -30199,7 +30307,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -30286,7 +30394,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -30328,7 +30436,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -30415,7 +30523,7 @@
       {
          "alias" : "md5($salt.md5($pass).$salt)",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -30464,7 +30572,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -30562,7 +30670,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -30691,7 +30799,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -30733,7 +30841,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -30775,7 +30883,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -30859,7 +30967,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "iterated",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -30950,7 +31058,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -31087,7 +31195,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -31129,7 +31237,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -31213,7 +31321,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -31426,7 +31534,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -31468,7 +31576,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -31510,7 +31618,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -31597,7 +31705,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -31765,7 +31873,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -31807,7 +31915,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -31894,7 +32002,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -31936,7 +32044,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -32104,7 +32212,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -32146,7 +32254,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -32188,7 +32296,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -32272,7 +32380,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -32356,7 +32464,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -32398,7 +32506,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -32443,7 +32551,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -32485,7 +32593,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -32527,7 +32635,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -32569,7 +32677,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -32659,7 +32767,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -32701,7 +32809,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -32743,7 +32851,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -32869,7 +32977,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -32911,7 +33019,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -32953,7 +33061,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -32995,7 +33103,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -33037,7 +33145,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -33312,7 +33420,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -33360,7 +33468,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -33405,7 +33513,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -33450,7 +33558,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -34286,7 +34394,8 @@
          "id" : "ms-office-2007",
          "john" : {
             "ids" : [
-               "Office"
+               "Office",
+               "office-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -34331,7 +34440,8 @@
          "id" : "ms-office-2010",
          "john" : {
             "ids" : [
-               "Office"
+               "Office",
+               "office-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -34376,7 +34486,8 @@
          "id" : "ms-office-2013",
          "john" : {
             "ids" : [
-               "Office"
+               "Office",
+               "office-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -34463,7 +34574,8 @@
          "id" : "ms-office-le-2003-0-1-md5-rc4",
          "john" : {
             "ids" : [
-               "oldoffice"
+               "oldoffice",
+               "oldoffice-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -34676,7 +34788,8 @@
          "id" : "ms-office-le-2003-3-4-sha1-rc4",
          "john" : {
             "ids" : [
-               "oldoffice"
+               "oldoffice",
+               "oldoffice-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -34701,7 +34814,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -34853,7 +34966,8 @@
          "id" : "mssntp",
          "john" : {
             "ids" : [
-               "timeroast"
+               "timeroast",
+               "timeroast-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -34881,7 +34995,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -34977,7 +35091,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -35522,7 +35636,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -35590,7 +35704,8 @@
          "id" : "netiq-sspr-pbkdf2withhmacsha1",
          "john" : {
             "ids" : [
-               "PBKDF2-HMAC-SHA1"
+               "PBKDF2-HMAC-SHA1",
+               "PBKDF2-HMAC-SHA1-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -35635,7 +35750,8 @@
          "id" : "netiq-sspr-pbkdf2withhmacsha256",
          "john" : {
             "ids" : [
-               "PBKDF2-HMAC-SHA256"
+               "PBKDF2-HMAC-SHA256",
+               "PBKDF2-HMAC-SHA256-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -35680,7 +35796,8 @@
          "id" : "netiq-sspr-pbkdf2withhmacsha512",
          "john" : {
             "ids" : [
-               "PBKDF2-HMAC-SHA512"
+               "PBKDF2-HMAC-SHA512",
+               "PBKDF2-HMAC-SHA512-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -35725,7 +35842,8 @@
          "id" : "netiq-sspr-sha-256-with-salt",
          "john" : {
             "ids" : [
-               "sspr"
+               "sspr",
+               "sspr-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -35770,7 +35888,8 @@
          "id" : "netiq-sspr-sha-512-with-salt",
          "john" : {
             "ids" : [
-               "sspr"
+               "sspr",
+               "sspr-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -36131,7 +36250,8 @@
          "id" : "netscape-ldap",
          "john" : {
             "ids" : [
-               "Raw-SHA1"
+               "Raw-SHA1",
+               "raw-SHA1-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -36263,7 +36383,8 @@
          "id" : "nokia-operator-unlock",
          "john" : {
             "ids" : [
-               "SL3"
+               "SL3",
+               "SL3-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -36333,7 +36454,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -36355,7 +36476,9 @@
             "ids" : [
                "NT",
                "NT-long",
-               "dynamic_33"
+               "dynamic_33",
+               "NT-long-opencl",
+               "NT-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -36372,13 +36495,19 @@
          "notes" : "",
          "relations" : [
             {
+               "distinction" : "none",
+               "entry" : "md4-utf16-le-utf-8-plain",
+               "kind" : "duplicate-of",
+               "note" : "Both compute md4(utf16($p)). See the edge to md4-utf16-plain."
+            },
+            {
                "distinction" : "naming",
                "entry" : "md4-utf16-plain",
                "kind" : "same-computation",
                "note" : "Not a duplicate, decided by Royce on 2026-08-30. mdxfind publishes three type indices for one computation - MD4UTF16 (e496), NTLM (e369) and NTLMH (e786) - all with the same example vector; pinned runs of all three also reproduce md4(utf16('rosetta')) on 2026-08-30. This row exists because NTLMH is the name a reader arrives with."
             }
          ],
-         "sameas" : "same as md4-utf16-plain (naming)",
+         "sameas" : "duplicate of md4-utf16-le-utf-8-plain; same as md4-utf16-plain (naming)",
          "status" : "ok",
          "tool_note" : {
             "hashcat" : "",
@@ -36536,7 +36665,8 @@
          "id" : "open-document-format-odf-1-1-sha-1-blowfish",
          "john" : {
             "ids" : [
-               "ODF"
+               "ODF",
+               "ODF-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -36581,7 +36711,8 @@
          "id" : "open-document-format-odf-1-2-sha-256-aes",
          "john" : {
             "ids" : [
-               "ODF"
+               "ODF",
+               "ODF-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -37077,9 +37208,15 @@
                "entry" : "md5-salt-pass",
                "kind" : "same-computation",
                "note" : "osCommerce and xt:Commerce use md5($s.$p); hashcat gives that mode 21 against 20 for the generic form"
+            },
+            {
+               "distinction" : "application",
+               "entry" : "solarwinds-serv-u",
+               "kind" : "same-computation",
+               "note" : "Both are products storing md5($s.$p); hashcat gives them separate modes, so both rows stay."
             }
          ],
-         "sameas" : "same as md5-salt-pass (application)",
+         "sameas" : "same as md5-salt-pass (application); same as solarwinds-serv-u (application)",
          "status" : "needs-review",
          "tool_note" : {
             "hashcat" : "",
@@ -37304,16 +37441,16 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "primitive",
          "crack" : {
             "ids" : [],
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "Panama",
-         "expr" : "",
-         "expr_note" : "john publishes this as \"Panama\" and no category, so what kind of construction it is has not been established here. Its name is not expression-shaped and john's dynamic EXPRESSION language cannot be handed it, so there is no expression on this row. That says nothing about whether any tool can CRACK it, and it is not a claim that the algorithm HAS no expression -- run seed-hx.pl and derive-expressions.pl, which can settle that from evidence.",
-         "expr_tier" : "absent",
+         "denotation" : "",
+         "expr" : "panama($p)",
+         "expr_note" : "round-tripped as --format=dynamic=<expr> against every vector this entry carries",
+         "expr_tier" : "vector",
          "hashcat" : {
             "ids" : [],
             "state" : "unknown"
@@ -37336,8 +37473,15 @@
          },
          "name" : "Panama",
          "notes" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "none",
+               "entry" : "panama",
+               "kind" : "duplicate-of",
+               "note" : "Both compute panama($p), proven 2026-09-01. panama-johnpanama is john's row, panama the generic one."
+            }
+         ],
+         "sameas" : "duplicate of panama",
          "status" : "needs-review",
          "tool_note" : {
             "hashcat" : "",
@@ -37349,7 +37493,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "primitive",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -37381,8 +37525,15 @@
          },
          "name" : "PANAMA",
          "notes" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "none",
+               "entry" : "panama-johnpanama",
+               "kind" : "duplicate-of",
+               "note" : "Both compute panama($p), proven 2026-09-01. panama-johnpanama is john's row, panama the generic one."
+            }
+         ],
+         "sameas" : "duplicate of panama-johnpanama",
          "status" : "ok",
          "tool_note" : {
             "hashcat" : "",
@@ -37394,7 +37545,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "iterated",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -37540,7 +37691,8 @@
          "id" : "password-safe",
          "john" : {
             "ids" : [
-               "pwsafe"
+               "pwsafe",
+               "pwsafe-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -37669,7 +37821,8 @@
          "id" : "pbkdf2-hmac-md4",
          "john" : {
             "ids" : [
-               "PBKDF2-HMAC-MD4"
+               "PBKDF2-HMAC-MD4",
+               "PBKDF2-HMAC-MD4-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -37711,7 +37864,8 @@
          "id" : "pbkdf2-hmac-md5",
          "john" : {
             "ids" : [
-               "PBKDF2-HMAC-MD5"
+               "PBKDF2-HMAC-MD5",
+               "PBKDF2-HMAC-MD5-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -38017,7 +38171,8 @@
          "id" : "pbkdf2-sha512-plain",
          "john" : {
             "ids" : [
-               "PBKDF2-HMAC-SHA512"
+               "PBKDF2-HMAC-SHA512",
+               "PBKDF2-HMAC-SHA512-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -38065,7 +38220,8 @@
          "id" : "pdf-1-1-1-3-acrobat-2-4",
          "john" : {
             "ids" : [
-               "PDF"
+               "PDF",
+               "pdf-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -38194,7 +38350,8 @@
          "id" : "pdf-1-3-1-6-acrobat-4-8-w-rc4-40",
          "john" : {
             "ids" : [
-               "PDF"
+               "PDF",
+               "pdf-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -38239,7 +38396,8 @@
          "id" : "pdf-1-4-1-6-acrobat-5-8",
          "john" : {
             "ids" : [
-               "PDF"
+               "PDF",
+               "pdf-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -38326,7 +38484,8 @@
          "id" : "pdf-1-7-level-3-acrobat-9",
          "john" : {
             "ids" : [
-               "PDF"
+               "PDF",
+               "pdf-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -38371,7 +38530,8 @@
          "id" : "pdf-1-7-level-8-acrobat-10-11",
          "john" : {
             "ids" : [
-               "PDF"
+               "PDF",
+               "pdf-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -38396,7 +38556,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -38500,7 +38660,8 @@
          "id" : "pgp-disk-virtual-disk",
          "john" : {
             "ids" : [
-               "pgpdisk"
+               "pgpdisk",
+               "pgpdisk-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -38542,7 +38703,8 @@
          "id" : "pgp-self-decrypting-archive",
          "john" : {
             "ids" : [
-               "pgpsda"
+               "pgpsda",
+               "pgpsda-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -38584,7 +38746,8 @@
          "id" : "pgp-whole-disk-encryption",
          "john" : {
             "ids" : [
-               "pgpwde"
+               "pgpwde",
+               "pgpwde-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -38814,7 +38977,8 @@
          "id" : "pkcs-8-private-keys-pbkdf2-hmac-sha1-3des-aes",
          "john" : {
             "ids" : [
-               "PEM"
+               "PEM",
+               "pem-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -38901,7 +39065,8 @@
          "id" : "pkcs5s2",
          "john" : {
             "ids" : [
-               "PBKDF2-HMAC-SHA1"
+               "PBKDF2-HMAC-SHA1",
+               "PBKDF2-HMAC-SHA1-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -39577,7 +39742,8 @@
          "id" : "prim-x-zed-encrypted-archives",
          "john" : {
             "ids" : [
-               "zed"
+               "zed",
+               "zed-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -39689,7 +39855,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -39925,7 +40091,8 @@
          "id" : "python-passlib-pbkdf2-sha256",
          "john" : {
             "ids" : [
-               "PBKDF2-HMAC-SHA256"
+               "PBKDF2-HMAC-SHA256",
+               "PBKDF2-HMAC-SHA256-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -40400,7 +40567,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -40449,7 +40616,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -40491,7 +40658,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -40533,7 +40700,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -40575,7 +40742,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -40617,7 +40784,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -40701,7 +40868,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -40743,7 +40910,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -40785,7 +40952,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -40827,7 +40994,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -40976,7 +41143,8 @@
          "id" : "rar3-hp",
          "john" : {
             "ids" : [
-               "rar"
+               "rar",
+               "rar-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -41021,7 +41189,8 @@
          "id" : "rar3-p-compressed",
          "john" : {
             "ids" : [
-               "rar"
+               "rar",
+               "rar-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -41066,7 +41235,8 @@
          "id" : "rar3-p-uncompressed",
          "john" : {
             "ids" : [
-               "rar"
+               "rar",
+               "rar-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -41111,7 +41281,8 @@
          "id" : "rar5",
          "john" : {
             "ids" : [
-               "RAR5"
+               "RAR5",
+               "RAR5-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -41268,16 +41439,16 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "primitive",
          "crack" : {
             "ids" : [],
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "Raw-SHA224",
-         "expr" : "",
-         "expr_note" : "john publishes this as \"Raw-SHA224\" and no category, so what kind of construction it is has not been established here. Its name is not expression-shaped and john's dynamic EXPRESSION language cannot be handed it, so there is no expression on this row. That says nothing about whether any tool can CRACK it, and it is not a claim that the algorithm HAS no expression -- run seed-hx.pl and derive-expressions.pl, which can settle that from evidence.",
-         "expr_tier" : "absent",
+         "denotation" : "",
+         "expr" : "sha224($p)",
+         "expr_note" : "round-tripped as --format=dynamic=<expr> against every vector this entry carries",
+         "expr_tier" : "vector",
          "hashcat" : {
             "ids" : [
                1300
@@ -41304,8 +41475,15 @@
          },
          "name" : "Raw-SHA224",
          "notes" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "none",
+               "entry" : "sha224",
+               "kind" : "duplicate-of",
+               "note" : "Both compute sha224($p), proven 2026-09-01. raw-sha224 is john's Raw-SHA224 spelling."
+            }
+         ],
+         "sameas" : "duplicate of sha224",
          "status" : "needs-review",
          "tool_note" : {
             "hashcat" : "mode discovered by round-trip search, not by name",
@@ -41359,16 +41537,16 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "primitive",
          "crack" : {
             "ids" : [],
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "Raw-SHA384",
-         "expr" : "",
-         "expr_note" : "john publishes this as \"Raw-SHA384\" and no category, so what kind of construction it is has not been established here. Its name is not expression-shaped and john's dynamic EXPRESSION language cannot be handed it, so there is no expression on this row. That says nothing about whether any tool can CRACK it, and it is not a claim that the algorithm HAS no expression -- run seed-hx.pl and derive-expressions.pl, which can settle that from evidence.",
-         "expr_tier" : "absent",
+         "denotation" : "",
+         "expr" : "sha384($p)",
+         "expr_note" : "round-tripped as --format=dynamic=<expr> against every vector this entry carries",
+         "expr_tier" : "vector",
          "hashcat" : {
             "ids" : [
                10800
@@ -41395,8 +41573,15 @@
          },
          "name" : "Raw-SHA384",
          "notes" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "none",
+               "entry" : "sha384",
+               "kind" : "duplicate-of",
+               "note" : "Both compute sha384($p), proven 2026-09-01. raw-sha384 is john's Raw-SHA384 spelling."
+            }
+         ],
+         "sameas" : "duplicate of sha384",
          "status" : "needs-review",
          "tool_note" : {
             "hashcat" : "mode discovered by round-trip search, not by name",
@@ -41792,7 +41977,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "primitive",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -41837,7 +42022,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -41879,7 +42064,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -41921,7 +42106,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -41963,7 +42148,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "primitive",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -42011,7 +42196,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -42053,7 +42238,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -42095,7 +42280,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "primitive",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -42137,7 +42322,7 @@
       {
          "alias" : "RMD320; RIPEMD-320",
          "application" : "",
-         "category" : "",
+         "category" : "primitive",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -42192,7 +42377,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "iterated",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -42237,7 +42422,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -42279,7 +42464,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "iterated",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -42324,7 +42509,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "iterated",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -42434,7 +42619,8 @@
          "id" : "rsa-dsa-ec-openssh-private-keys-0",
          "john" : {
             "ids" : [
-               "SSH"
+               "SSH",
+               "ssh-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -42479,7 +42665,8 @@
          "id" : "rsa-dsa-ec-openssh-private-keys-1-3",
          "john" : {
             "ids" : [
-               "SSH"
+               "SSH",
+               "ssh-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -42524,7 +42711,8 @@
          "id" : "rsa-dsa-ec-openssh-private-keys-4",
          "john" : {
             "ids" : [
-               "SSH"
+               "SSH",
+               "ssh-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -42569,7 +42757,8 @@
          "id" : "rsa-dsa-ec-openssh-private-keys-5",
          "john" : {
             "ids" : [
-               "SSH"
+               "SSH",
+               "ssh-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -42614,7 +42803,8 @@
          "id" : "rsa-dsa-ec-openssh-private-keys-6",
          "john" : {
             "ids" : [
-               "SSH"
+               "SSH",
+               "ssh-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -42740,7 +42930,8 @@
          "id" : "salted",
          "john" : {
             "ids" : [
-               "Iterated-SHA1"
+               "Iterated-SHA1",
+               "Iterated-SHA1-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -42827,7 +43018,8 @@
          "id" : "sap-pse",
          "john" : {
             "ids" : [
-               "sappse"
+               "sappse",
+               "sappse-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -43572,7 +43764,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "primitive",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -43656,7 +43848,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -43704,7 +43896,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -43746,7 +43938,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -43794,7 +43986,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -43842,7 +44034,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -43945,7 +44137,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -43987,7 +44179,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -44029,7 +44221,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -44155,7 +44347,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -44204,7 +44396,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -44244,9 +44436,15 @@
                "entry" : "sha1-md5-md5-pass-salt",
                "kind" : "duplicate-of",
                "note" : "merged 2026-08-30 on Royce's answer to the curate.pl duplicate question, with upstream's confirmation that the underlying types are duplicates. That entry's name asserted sha1(md5(md5($pass).$salt)), which its own digest does not perform, and its hashcat block claimed absent -- which mode 4710 disproves on the vector both entries carried."
+            },
+            {
+               "distinction" : "application",
+               "entry" : "huawei-sha1-md5-pass-salt",
+               "kind" : "same-computation",
+               "note" : "Huawei's row is the product's use of sha1(md5($p).$s); sha1-md5-pass-salt is the generic construction. Proven here by john --format=dynamic= against this entry's own vector, 2026-09-01."
             }
          ],
-         "sameas" : "duplicate of sha1-md5-md5-pass-salt",
+         "sameas" : "duplicate of sha1-md5-md5-pass-salt; same as huawei-sha1-md5-pass-salt (application)",
          "status" : "ok",
          "tool_note" : {
             "hashcat" : "",
@@ -44258,7 +44456,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -44390,7 +44588,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -44474,7 +44672,7 @@
       {
          "alias" : "sha1(md5(md5($pass)))",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -44606,7 +44804,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -44648,7 +44846,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -44690,7 +44888,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -44732,7 +44930,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -44774,7 +44972,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -44816,7 +45014,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -44858,7 +45056,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -44900,7 +45098,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -44942,7 +45140,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -44984,7 +45182,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -45026,7 +45224,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -45110,7 +45308,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -45152,7 +45350,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -45194,7 +45392,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -45236,7 +45434,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -45278,7 +45476,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -45320,7 +45518,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "iterated",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -45369,7 +45567,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -45425,7 +45623,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -45467,7 +45665,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -45509,7 +45707,7 @@
       {
          "alias" : "sha1(sha1($plain).substr($plain,0,2)); sha1(sha1($plain).substr($plain,0,3)); sha1(sha1($plain).substr($plain,0,4)); sha1(sha1($plain).substr($plain,0,5)); sha1(sha1($plain).substr($plain,0,6)); sha1(sha1($plain).substr($plain,0,7)); sha1(sha1($plain).substr($plain,0,8))",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -45564,7 +45762,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -45606,7 +45804,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -45648,7 +45846,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "iterated",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -45691,7 +45889,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -45733,7 +45931,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "iterated",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -45775,7 +45973,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -45817,7 +46015,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "iterated",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -45859,7 +46057,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "iterated",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -45905,7 +46103,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -45947,7 +46145,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -45989,7 +46187,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -46031,7 +46229,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -46073,7 +46271,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -46115,7 +46313,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -46157,7 +46355,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -46199,7 +46397,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -46247,7 +46445,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -46289,7 +46487,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -46331,7 +46529,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -46499,7 +46697,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -46583,7 +46781,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -46667,7 +46865,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -46709,7 +46907,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -46793,7 +46991,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -46961,7 +47159,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -47045,7 +47243,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -47087,7 +47285,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -47129,7 +47327,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -47171,7 +47369,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -47213,7 +47411,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -47297,7 +47495,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -47471,7 +47669,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -47561,7 +47759,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -47603,7 +47801,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -47645,7 +47843,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "primitive",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -47821,7 +48019,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -47863,7 +48061,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -47905,7 +48103,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -47967,7 +48165,8 @@
          "id" : "sha1crypt",
          "john" : {
             "ids" : [
-               "sha1crypt"
+               "sha1crypt",
+               "sha1crypt-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -47995,7 +48194,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -48121,7 +48320,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -48163,7 +48362,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -48284,13 +48483,13 @@
                "distinction" : "truncation",
                "entry" : "aich",
                "kind" : "collides-on-subset",
-               "note" : "AICH of a single block is SHA-1, and SHA1lsb35 is SHA-1 with the leading nibbles masked to zero, so any tool that ignores that field -- hashcat -m 100 and john Raw-SHA1-Linkedin both do, measured 2026-08-31 -- reports one for the other. They agree on every input outside those nibbles and differ nowhere else that such a tool looks."
+               "note" : "AICH of a single block is SHA-1, and SHA1lsb35 is SHA-1 with the leading nibbles masked to zero, so any tool that ignores that field -- hashcat -m 100 skips positions 0-7 and john Raw-SHA1-Linkedin skips 0-4, measured 2026-09-01, and the mask is 5 nibbles wide -- reports one for the other. They agree on every input outside those nibbles and differ nowhere else that such a tool looks."
             },
             {
                "distinction" : "truncation",
                "entry" : "sha1uc",
                "kind" : "collides-on-subset",
-               "note" : "SHA1UC is SHA-1 written in uppercase hex and SHA1lsb35 is SHA-1 with the leading nibbles masked to zero, so a tool that skips that field cannot tell them apart: hashcat -m 100 skips hash positions 0-7 and john Raw-SHA1-Linkedin skips the same, measured 2026-08-31. The digests are identical from position 8 onward."
+               "note" : "SHA1UC is SHA-1 written in uppercase hex and SHA1lsb35 is SHA-1 with the leading nibbles masked to zero, so a tool that skips that field cannot tell them apart: hashcat -m 100 skips hash positions 0-7 and john Raw-SHA1-Linkedin skips 0-4, measured 2026-09-01. SHA1lsb35 masks exactly 5 nibbles, so either blind spot covers the whole difference: the digests are identical from position 5 onward."
             }
          ],
          "sameas" : "collides with aich (truncation); collides with sha1uc (truncation)",
@@ -48305,7 +48504,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -48347,7 +48546,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -48389,7 +48588,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -48431,7 +48630,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -48473,7 +48672,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -48515,7 +48714,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -48557,7 +48756,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -48767,7 +48966,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -48851,7 +49050,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -48893,7 +49092,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -48935,7 +49134,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -48977,7 +49176,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -49019,7 +49218,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -49187,7 +49386,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -49229,7 +49428,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -49271,7 +49470,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -49355,7 +49554,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -49397,7 +49596,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -49439,7 +49638,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -49523,7 +49722,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -49565,7 +49764,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -49610,7 +49809,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -49694,7 +49893,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -49736,7 +49935,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -49820,7 +50019,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -49862,7 +50061,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -49904,7 +50103,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -49946,7 +50145,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -49988,7 +50187,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -50030,7 +50229,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -50114,7 +50313,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -50156,7 +50355,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -50198,7 +50397,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -50240,7 +50439,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -50282,7 +50481,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -50324,7 +50523,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -50408,7 +50607,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -50450,7 +50649,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -50534,7 +50733,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -50576,7 +50775,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -50618,7 +50817,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -50660,7 +50859,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -50702,7 +50901,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -50744,7 +50943,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -50786,7 +50985,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -50870,7 +51069,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -51122,7 +51321,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -51164,7 +51363,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -51206,7 +51405,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -51248,7 +51447,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -51338,7 +51537,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -51422,7 +51621,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -51464,7 +51663,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -51506,7 +51705,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -51632,7 +51831,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -51716,7 +51915,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -51758,7 +51957,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -51842,7 +52041,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -51926,7 +52125,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -51968,7 +52167,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -52052,7 +52251,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -52094,7 +52293,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -52136,7 +52335,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -52220,7 +52419,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -52262,7 +52461,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -52472,7 +52671,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -52514,7 +52713,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -52556,7 +52755,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -52724,7 +52923,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -52808,7 +53007,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -52895,7 +53094,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -53108,7 +53307,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -53150,7 +53349,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -53192,7 +53391,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -53234,7 +53433,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -53276,7 +53475,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -53318,7 +53517,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -53360,7 +53559,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -53444,7 +53643,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -53486,7 +53685,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -53528,7 +53727,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -53570,7 +53769,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -53612,7 +53811,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -53654,7 +53853,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -53696,7 +53895,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -53738,7 +53937,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -53780,7 +53979,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -53990,7 +54189,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -54032,7 +54231,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -54074,7 +54273,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -54116,7 +54315,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -54158,7 +54357,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -54200,7 +54399,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -54242,7 +54441,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -54284,7 +54483,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -54326,7 +54525,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -54368,7 +54567,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -54578,7 +54777,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -54830,7 +55029,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -54914,7 +55113,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -54977,7 +55176,8 @@
          "john" : {
             "ids" : [
                "Raw-SHA1",
-               "dynamic_26"
+               "dynamic_26",
+               "raw-SHA1-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -54997,14 +55197,14 @@
                "distinction" : "truncation",
                "entry" : "sha1lsb35",
                "kind" : "collides-on-subset",
-               "note" : "SHA1UC is SHA-1 written in uppercase hex and SHA1lsb35 is SHA-1 with the leading nibbles masked to zero, so a tool that skips that field cannot tell them apart: hashcat -m 100 skips hash positions 0-7 and john Raw-SHA1-Linkedin skips the same, measured 2026-08-31. The digests are identical from position 8 onward."
+               "note" : "SHA1UC is SHA-1 written in uppercase hex and SHA1lsb35 is SHA-1 with the leading nibbles masked to zero, so a tool that skips that field cannot tell them apart: hashcat -m 100 skips hash positions 0-7 and john Raw-SHA1-Linkedin skips 0-4, measured 2026-09-01. SHA1lsb35 masks exactly 5 nibbles, so either blind spot covers the whole difference: the digests are identical from position 5 onward."
             }
          ],
          "sameas" : "collides with sha1lsb35 (truncation)",
          "status" : "needs-review",
          "tool_note" : {
             "hashcat" : "proven three ways because -m 100 alone is not enough: hashcat cracked this row's own vector under mode 100, john's Raw-SHA1 and dynamic_26 cracked it too with a FULL digest comparison, and Digest::SHA confirms sha1(\"password123\") is cbfdac6008f9cab4083784cbd1874f76618d2a97 character for character. The third step is required here: measured 2026-08-31, hashcat -m 100 skips hash positions 0-7, so on its own it cannot tell this row from sha1lsb35, which is the same digest with those nibbles masked. discover-hashcat.pl's canary withheld the claim for exactly that reason; this is a human overriding it with the independent recomputation, not the tool's word.",
-            "john" : "format discovered by round-trip search, not by name. Raw-SHA1-Linkedin was recorded here by discover-john.pl on 2026-08-31 and WITHDRAWN the same day. It is john's format for the LinkedIn leak, whose hashes have their leading nibbles zeroed, and it ignores hash positions 0-7 to read them -- measured here, the same defect the hashcat canary found in -m 100. It therefore cracks any full SHA-1 digest as well, which is a collision and not a denotation. Raw-SHA1 and dynamic_26 both compare the whole digest and were re-checked position by position.",
+            "john" : "format discovered by round-trip search, not by name. Raw-SHA1-Linkedin was recorded here by discover-john.pl on 2026-08-31 and WITHDRAWN the same day. It is john's format for the LinkedIn leak, whose hashes have their leading nibbles zeroed, and it ignores hash positions 0-4 -- the 20 bits that leak zeroed -- measured position by position on 2026-09-01. That is the same defect the hashcat canary found in -m 100, at a different width: -m 100 skips 0-7. It therefore cracks any full SHA-1 digest as well, which is a collision and not a denotation. Raw-SHA1 and dynamic_26 both compare the whole digest and were re-checked position by position.",
             "mdxfind" : "NOT REPRODUCED HERE. mdxfind publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: the tool pinned to this identifier did not reproduce its own published example. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool mdxfind --only SHA1UC to retry."
          },
          "vecs" : 1
@@ -55102,7 +55302,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -55231,7 +55431,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -55490,7 +55690,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "primitive",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -55525,8 +55725,15 @@
          },
          "name" : "SHA224",
          "notes" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "none",
+               "entry" : "raw-sha224",
+               "kind" : "duplicate-of",
+               "note" : "Both compute sha224($p), proven 2026-09-01. raw-sha224 is john's Raw-SHA224 spelling."
+            }
+         ],
+         "sameas" : "duplicate of raw-sha224",
          "status" : "ok",
          "tool_note" : {
             "hashcat" : "",
@@ -55538,7 +55745,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "iterated",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -55586,7 +55793,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -55628,7 +55835,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -55670,7 +55877,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "iterated",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -55715,7 +55922,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -55763,7 +55970,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -55811,7 +56018,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -55856,7 +56063,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "primitive",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -55906,7 +56113,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "iterated",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -55951,7 +56158,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -56054,7 +56261,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -56102,7 +56309,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -56147,7 +56354,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -56231,7 +56438,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -56315,7 +56522,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "iterated",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -56363,7 +56570,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -56405,7 +56612,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -56470,7 +56677,8 @@
          "id" : "sha256crypt",
          "john" : {
             "ids" : [
-               "sha256crypt"
+               "sha256crypt",
+               "sha256crypt-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -56498,7 +56706,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -56540,7 +56748,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -56638,7 +56846,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -56683,7 +56891,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -56774,7 +56982,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -56819,7 +57027,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -56864,7 +57072,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -56909,7 +57117,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "iterated",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -56954,7 +57162,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "primitive",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -57002,7 +57210,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "iterated",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -57047,7 +57255,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "primitive",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -57095,7 +57303,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "iterated",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -57140,7 +57348,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "primitive",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -57188,7 +57396,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "iterated",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -57233,7 +57441,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "primitive",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -57281,7 +57489,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "primitive",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -57316,8 +57524,15 @@
          },
          "name" : "sha384",
          "notes" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "none",
+               "entry" : "raw-sha384",
+               "kind" : "duplicate-of",
+               "note" : "Both compute sha384($p), proven 2026-09-01. raw-sha384 is john's Raw-SHA384 spelling."
+            }
+         ],
+         "sameas" : "duplicate of raw-sha384",
          "status" : "ok",
          "tool_note" : {
             "hashcat" : "",
@@ -57329,7 +57544,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "iterated",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -57374,7 +57589,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -57416,7 +57631,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -57458,7 +57673,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "iterated",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -57503,7 +57718,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -57551,7 +57766,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -57599,7 +57814,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -57644,7 +57859,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -57689,7 +57904,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -57734,7 +57949,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "primitive",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -57784,7 +57999,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "iterated",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -57829,7 +58044,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -57877,7 +58092,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -57925,7 +58140,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -57967,7 +58182,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -58009,7 +58224,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "iterated",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -58161,7 +58376,8 @@
          "id" : "sha512crypt",
          "john" : {
             "ids" : [
-               "sha512crypt"
+               "sha512crypt",
+               "sha512crypt-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -58231,7 +58447,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -58273,7 +58489,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -58318,7 +58534,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -58363,7 +58579,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -58411,7 +58627,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -58501,7 +58717,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -58753,16 +58969,16 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "primitive",
          "crack" : {
             "ids" : [],
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "ShangMi 3",
-         "expr" : "",
-         "expr_note" : "john publishes this as \"ShangMi 3\" and no category, so what kind of construction it is has not been established here. Its name is not expression-shaped and john's dynamic EXPRESSION language cannot be handed it, so there is no expression on this row. That says nothing about whether any tool can CRACK it, and it is not a claim that the algorithm HAS no expression -- run seed-hx.pl and derive-expressions.pl, which can settle that from evidence.",
-         "expr_tier" : "absent",
+         "denotation" : "",
+         "expr" : "sm3($p)",
+         "expr_note" : "round-tripped as --format=dynamic=<expr> against every vector this entry carries",
+         "expr_tier" : "vector",
          "hashcat" : {
             "ids" : [
                31100
@@ -58788,8 +59004,15 @@
          },
          "name" : "ShangMi 3",
          "notes" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "none",
+               "entry" : "sm3",
+               "kind" : "duplicate-of",
+               "note" : "Both compute sm3($p), proven 2026-09-01. shangmi-3 spells out ShangMi 3, sm3 is the standard's short name."
+            }
+         ],
+         "sameas" : "duplicate of sm3",
          "status" : "needs-review",
          "tool_note" : {
             "hashcat" : "mode discovered by round-trip search, not by name",
@@ -59266,7 +59489,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -59485,7 +59708,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "primitive",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -59530,7 +59753,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "iterated",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -59575,7 +59798,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "primitive",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -59620,7 +59843,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "iterated",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -59665,7 +59888,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "primitive",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -59710,7 +59933,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "iterated",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -59755,7 +59978,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "primitive",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -59800,7 +60023,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "iterated",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -59932,7 +60155,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "primitive",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -59967,8 +60190,15 @@
          },
          "name" : "SM3",
          "notes" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "none",
+               "entry" : "shangmi-3",
+               "kind" : "duplicate-of",
+               "note" : "Both compute sm3($p), proven 2026-09-01. shangmi-3 spells out ShangMi 3, sm3 is the standard's short name."
+            }
+         ],
+         "sameas" : "duplicate of shangmi-3",
          "status" : "ok",
          "tool_note" : {
             "hashcat" : "",
@@ -59980,7 +60210,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "iterated",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -60073,7 +60303,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -60122,7 +60352,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "primitive",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -60167,7 +60397,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "primitive",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -60299,7 +60529,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -60341,7 +60571,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -60383,7 +60613,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -60425,7 +60655,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -60866,10 +61096,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "SolarWinds Serv-U",
-         "expr" : "",
-         "expr_note" : "hashcat mode 24 is a Enterprise Application Software (EAS) format. john's dynamic expression language describes constructions over a password and a salt; it cannot express a container's KDF-plus-cipher, so this has no expression and will not acquire one. That says nothing about whether john can CRACK it -- run discover-john.pl, and if john has a format it goes in tools.john.",
-         "expr_tier" : "absent",
+         "denotation" : "",
+         "expr" : "md5($s.$p)",
+         "expr_note" : "round-tripped as --format=dynamic=<expr> against every vector this entry carries",
+         "expr_tier" : "vector",
          "hashcat" : {
             "ids" : [
                24
@@ -60898,8 +61128,21 @@
          },
          "name" : "SolarWinds Serv-U",
          "notes" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "application",
+               "entry" : "md5-salt-pass",
+               "kind" : "same-computation",
+               "note" : "SolarWinds Serv-U stores md5($s.$p); the generic construction is md5-salt-pass. Proven here by john --format=dynamic='md5($s.$p)' against this entry's own vector, 2026-09-01."
+            },
+            {
+               "distinction" : "application",
+               "entry" : "oscommerce-xt-commerce",
+               "kind" : "same-computation",
+               "note" : "Both are products storing md5($s.$p); hashcat gives them separate modes, so both rows stay."
+            }
+         ],
+         "sameas" : "same as md5-salt-pass (application); same as oscommerce-xt-commerce (application)",
          "status" : "needs-review",
          "tool_note" : {
             "hashcat" : "hashcat's own published example hash for this mode, recovered by hashcat at this mode with hashcat's own published plaintext.",
@@ -61063,7 +61306,8 @@
          "id" : "ssha1base64",
          "john" : {
             "ids" : [
-               "Salted-SHA1"
+               "Salted-SHA1",
+               "salted-SHA1-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -61204,7 +61448,8 @@
          "id" : "sspr-md5",
          "john" : {
             "ids" : [
-               "sspr"
+               "sspr",
+               "sspr-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -61252,7 +61497,8 @@
          "id" : "sspr-sha1",
          "john" : {
             "ids" : [
-               "sspr"
+               "sspr",
+               "sspr-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -61300,7 +61546,8 @@
          "id" : "sspr-sha1s",
          "john" : {
             "ids" : [
-               "sspr"
+               "sspr",
+               "sspr-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -61348,7 +61595,8 @@
          "id" : "sspr-sha256",
          "john" : {
             "ids" : [
-               "sspr"
+               "sspr",
+               "sspr-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -61396,7 +61644,8 @@
          "id" : "sspr-sha512",
          "john" : {
             "ids" : [
-               "sspr"
+               "sspr",
+               "sspr-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -62031,7 +62280,8 @@
          "id" : "telegram-desktop-lt-v2-1-14-pbkdf2-hmac-sha1",
          "john" : {
             "ids" : [
-               "telegram"
+               "telegram",
+               "telegram-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -62205,7 +62455,8 @@
          "id" : "tezos-key",
          "john" : {
             "ids" : [
-               "tezos"
+               "tezos",
+               "tezos-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -62272,7 +62523,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "primitive",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -62317,7 +62568,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "iterated",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -62404,7 +62655,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -62446,7 +62697,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -66204,7 +66455,8 @@
          "id" : "vmware-vmx-johnvmx",
          "john" : {
             "ids" : [
-               "vmx"
+               "vmx",
+               "vmx-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -66552,7 +66804,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "primitive",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -66601,7 +66853,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -66643,7 +66895,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -66727,7 +66979,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -66792,7 +67044,8 @@
          "id" : "winzip",
          "john" : {
             "ids" : [
-               "ZIP"
+               "ZIP",
+               "ZIP-opencl"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -67372,7 +67625,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "iterated",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -67417,7 +67670,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -67504,7 +67757,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -67549,7 +67802,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -67594,7 +67847,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -67639,7 +67892,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -67684,7 +67937,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -67774,7 +68027,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -67901,7 +68154,7 @@
          "vecs" : 1
       }
    ],
-   "generated" : "2026-08-31",
+   "generated" : "2026-09-01",
    "merged" : 3,
    "tombstones" : [
       {
