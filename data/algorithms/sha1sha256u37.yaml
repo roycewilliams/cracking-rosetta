@@ -1,5 +1,11 @@
 id: "sha1sha256u37"
 name: "SHA1SHA256u37"
+expression: "sha1(cut(sha256($p),0,37))"
+expression_proof:
+  verified: "upstream"
+  verified_at: "2026-08-31"
+  verified_with: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A"
+  note: "transcribed from the hx specification's Appendix A entry for mdxfind type SHA1SHA256u37 (e621), which states sha1(cut(sha256(pass), 0, 37)). Transcription, not reproduction, so this is upstream and not vector; run derive-expressions.pl to try to promote it. Not checkable locally: the construction uses functions RosettaExpr cannot compile, so this rests on upstream's word alone."
 status: "needs-review"
 tools:
   mdxfind:

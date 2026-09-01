@@ -1,5 +1,11 @@
 id: "md5sub1-20md5"
 name: "MD5sub1-20MD5"
+expression: "md5(cut(md5($p),0,20))"
+expression_proof:
+  verified: "upstream"
+  verified_at: "2026-08-31"
+  verified_with: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A"
+  note: "transcribed from the hx specification's Appendix A entry for mdxfind type MD5sub1-20MD5 (e546), which states md5(cut(md5(pass), 0, 20)). Transcription, not reproduction, so this is upstream and not vector; run derive-expressions.pl to try to promote it. Not checkable locally: the construction uses functions RosettaExpr cannot compile, so this rests on upstream's word alone."
 status: "needs-review"
 tools:
   mdxfind:

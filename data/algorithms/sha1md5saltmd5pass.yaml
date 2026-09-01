@@ -1,5 +1,11 @@
 id: "sha1md5saltmd5pass"
 name: "SHA1MD5SALTMD5PASS"
+expression: "sha1(md5($s).md5($p))"
+expression_proof:
+  verified: "upstream"
+  verified_at: "2026-08-31"
+  verified_with: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A"
+  note: "transcribed from the hx specification's Appendix A entry for mdxfind type SHA1MD5SALTMD5PASS (e603), which states sha1(md5(salt) . md5(pass)). Transcription, not reproduction, so this is upstream and not vector; run derive-expressions.pl to try to promote it. An independent Digest:: computation of this string DOES reproduce this entry's own vector, checked 2026-08-31."
 status: "needs-review"
 tools:
   mdxfind:

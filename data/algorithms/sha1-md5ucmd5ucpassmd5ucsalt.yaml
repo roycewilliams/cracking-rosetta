@@ -1,5 +1,11 @@
 id: "sha1-md5ucmd5ucpassmd5ucsalt"
 name: "SHA1-MD5UCMD5UCPASSMD5UCSALT"
+expression: "sha1(upper(md5(upper(md5($p)))).upper(md5($s)))"
+expression_proof:
+  verified: "upstream"
+  verified_at: "2026-08-31"
+  verified_with: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A"
+  note: "transcribed from the hx specification's Appendix A entry for mdxfind type SHA1-MD5UCMD5UCPASSMD5UCSALT (e662), which states sha1(upper(md5(upper(md5(pass)))) . upper(md5(salt))). Transcription, not reproduction, so this is upstream and not vector; run derive-expressions.pl to try to promote it. Not checkable locally: the construction uses functions RosettaExpr cannot compile, so this rests on upstream's word alone."
 status: "needs-review"
 tools:
   mdxfind:

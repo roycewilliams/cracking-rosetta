@@ -10,17 +10,18 @@ expression_proof:
 status: "ok"
 tools:
   hashcat:
-    modes: [5000]
+    modes: [17800]
     verified: "vector"
-    verified_at: "2026-08-30"
-    verified_with: "hashcat"
+    verified_at: "2026-08-31"
+    verified_with: "hashcat v7.1.2-549-g8a15e210b"
+    note: "was mode 5000 until 2026-08-31, which is a stale number: hashcat v7 assigns 5000 to sha1(sha1($salt.$pass.$salt)), and older hashcat assigned it to Keccak. Mode 5000 will not even load this entry's vector; 17800 recovers it."
   mdxfind:
     types: ["KECCAK256"]
     verified: "vector"
     verified_at: "2026-08-29"
     verified_with: "mdxfind"
   john:
-    cpu: ["dynamic_410"]
+    cpu: ["Raw-Keccak-256", "dynamic_410"]
     verified: "vector"
     verified_at: "2026-08-29"
     verified_with: "john"
@@ -30,8 +31,5 @@ vectors:
   - hash: "6b7bc1ebe35cf833944033160b3ae7752ca0b8d1ff8c48b3a26687786e4942ab"
     pass: "rosetta"
     source: "sheet"
-  - hash: "05ac0c544060af48f993f9c3cdf2fc03937ea35b:232725102020"
-    pass: "hashcat"
-    source: "hashcat"
 legacy:
   hashes_org: "KECCAK256"

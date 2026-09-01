@@ -82,19 +82,19 @@ Real work rather than a one-liner: it means finding out whether the tool
 supports the construction at all, and under which identifier. The counts are
 the honest size of the job.
 
-### john: 683 entries say nothing
+### john: 901 entries say nothing
 
 A few that carry a vector and a proven expression, so there is a definite construction to look for, one per family:
 
 * [`gost-md5-plain-plain`](index.html#gost-md5-plain-plain) - `gost(md5($p).$p)` (and 1 more starting `gost`)
 * [`haval128-3-md5-plain`](index.html#haval128-3-md5-plain) - `haval128_3(md5($p))` (and 29 more starting `haval`)
-* [`md2-md5-plain`](index.html#md2-md5-plain) - `md2(md5($p))` (and 67 more starting `md`)
+* [`md2-md5-plain`](index.html#md2-md5-plain) - `md2(md5($p))` (and 93 more starting `md`)
 * [`ripemd128-md5-plain`](index.html#ripemd128-md5-plain) - `ripemd128(md5($p))` (and 5 more starting `ripemd`)
-* [`sha1-plain-sha1-plain`](index.html#sha1-plain-sha1-plain) - `sha1($p.sha1($p))` (and 58 more starting `sha`)
+* [`sha1-plain-sha1-plain`](index.html#sha1-plain-sha1-plain) - `sha1($p.sha1($p))` (and 95 more starting `sha`)
 * [`tiger128-3-md5-plain`](index.html#tiger128-3-md5-plain) - `tiger(md5($p))` (and 1 more starting `tiger`)
 * [`whirlpool-md5-plain`](index.html#whirlpool-md5-plain) - `whirlpool(md5($p))` (and 3 more starting `whirlpool`)
 
-All 683: filter `john_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
+All 901: filter `john_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
 
 Where such an entry carries an expression, john can already attack it without
 a named format:
@@ -108,25 +108,25 @@ That string is in the entry's `john_dynamic_expr:` field and in the
 which lists formats `--list=formats` will show; the gap worth filling is
 whether a named one exists.
 
-### hashcat: 50 entries say nothing
+### hashcat: 271 entries say nothing
 
 A few that carry a vector and a proven expression, so there is a definite construction to look for, one per family:
 
 * [`gost-x2`](index.html#gost-x2) - `gost(gost($p))`
 * [`hav128-x2`](index.html#hav128-x2) - `haval128_3(haval128_3($p))` (and 14 more starting `haval`)
 * [`keccak256-x2`](index.html#keccak256-x2) - `keccak_256(keccak_256($p))` (and 1 more starting `keccak`)
-* [`md2-x2`](index.html#md2-x2) - `md2(md2($p))` (and 1 more starting `md`)
+* [`md2-x2`](index.html#md2-x2) - `md2(md2($p))` (and 27 more starting `md`)
 * [`panama-x2`](index.html#panama-x2) - `panama(panama($p))`
 * [`rmd128-x2`](index.html#rmd128-x2) - `ripemd128(ripemd128($p))` (and 2 more starting `ripemd`)
-* [`sha224-sha224-plain-true`](index.html#sha224-sha224-plain-true) - `sha224(sha224_raw($p))` (and 9 more starting `sha`)
+* [`sha1-md5-md5saltmd5pass`](index.html#sha1-md5-md5saltmd5pass) - `sha1(md5(md5($s).md5($p)))` (and 46 more starting `sha`)
 * [`skein224-x2`](index.html#skein224-x2) - `skein224(skein224($p))` (and 3 more starting `skein`)
 * [`sm3-x2`](index.html#sm3-x2) - `sm3(sm3($p))`
 * [`tiger`](index.html#tiger) - `tiger($p)` (and 1 more starting `tiger`)
 * [`wrl-x2`](index.html#wrl-x2) - `whirlpool(whirlpool($p))`
 
-All 50: filter `hashcat_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
+All 271: filter `hashcat_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
 
-### mdxfind: 248 entries say nothing
+### mdxfind: 250 entries say nothing
 
 A few that carry a vector and a proven expression, so there is a definite construction to look for, one per family:
 
@@ -134,7 +134,7 @@ A few that carry a vector and a proven expression, so there is a definite constr
 * [`ripemd256`](index.html#ripemd256) - `ripemd256($p)`
 * [`sha256-sha256-pass-salt`](index.html#sha256-sha256-pass-salt) - `sha256(sha256($p.$s))`
 
-All 248: filter `mdxfind_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
+All 250: filter `mdxfind_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
 
 ## 4. hashcat modes with no row here (62)
 
