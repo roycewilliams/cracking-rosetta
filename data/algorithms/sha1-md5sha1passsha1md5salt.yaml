@@ -6,6 +6,7 @@ expression_proof:
   verified_at: "2026-08-31"
   verified_with: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A"
   note: "transcribed from the hx specification's Appendix A entry for mdxfind type SHA1-MD5SHA1PASSSHA1MD5SALT (e627), which states sha1(md5(sha1(pass)) . sha1(md5(salt))). Transcription, not reproduction, so this is upstream and not vector; run derive-expressions.pl to try to promote it. An independent Digest:: computation of this string DOES reproduce this entry's own vector, checked 2026-08-31."
+category: "composite"
 status: "needs-review"
 tools:
   mdxfind:

@@ -6,6 +6,7 @@ expression_proof:
   verified_at: "2026-08-31"
   verified_with: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A"
   note: "transcribed from the hx specification's Appendix A entry for mdxfind type WINPHONE (e928), which states sha256(utf16le(pass) . fromhex(salt)) (salt = 256-hex / 128 bytes). Transcription, not reproduction, so this is upstream and not vector; run derive-expressions.pl to try to promote it. Not checkable locally: the construction uses functions RosettaExpr cannot compile, so this rests on upstream's word alone. Checked by hand on 2026-08-31 anyway: Digest::SHA -- an implementation independent of all three crackers -- computes exactly this construction over the entry's own vector and reproduces its digest. That is corroboration, not tier 'vector', which requires john's own compiler; john has no fromhex() in its dynamic expression language, so derive-expressions.pl cannot promote this."
+category: "composite"
 status: "ok"
 tools:
   hashcat:

@@ -6,6 +6,7 @@ expression_proof:
   verified_at: "2026-08-31"
   verified_with: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A"
   note: "transcribed from the hx specification's Appendix A entry for mdxfind type SHA1SHA256u40 (e609), which states sha1(cut(sha256(pass), 0, 40)). Transcription, not reproduction, so this is upstream and not vector; run derive-expressions.pl to try to promote it. Not checkable locally: the construction uses functions RosettaExpr cannot compile, so this rests on upstream's word alone."
+category: "composite"
 status: "needs-review"
 tools:
   mdxfind:
