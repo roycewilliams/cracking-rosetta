@@ -1,0 +1,26 @@
+id: "ethereum-wallet-scrypt"
+name: "Ethereum Wallet, SCRYPT"
+expression_proof:
+  verified: "absent"
+  verified_at: "2026-08-31"
+  verified_with: "hashcat v7.1.2-549-g8a15e210b"
+  note: "hashcat mode 15700 is a Cryptocurrency Wallet format. john's dynamic expression language describes constructions over a password and a salt; it cannot express a container's KDF-plus-cipher, so this has no expression and will not acquire one. That says nothing about whether john can CRACK it -- run discover-john.pl, and if john has a format it goes in tools.john."
+denotation:
+  text: "Ethereum Wallet, SCRYPT"
+  source: "hashcat"
+  note: "hashcat's own label for mode 15700, category \"Cryptocurrency Wallet\", in v7.1.2-549-g8a15e210b. This is a container or application format rather than a bare construction, so there is no single digest expression to record."
+category: "application"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [15700]
+    verified: "vector"
+    verified_at: "2026-08-31"
+    verified_with: "hashcat v7.1.2-549-g8a15e210b"
+    note: "hashcat's own published example hash for this mode, recovered by hashcat at this mode with hashcat's own published plaintext."
+  crack:
+    supported: false
+vectors:
+  - hash: "$ethereum$s*262144*8*1*3134313837333434333838303231333633373433323633373534333136363537*73da7f80ec3bd4f2a128c3a815cfb4d576ecb1a9b47024c902e62ea926f7795b*910e0f8dc1f7ba41959e1089bb769f3e919109591913cc33ba03953d7a905efd"
+    pass: "hashcat"
+    source: "hashcat"

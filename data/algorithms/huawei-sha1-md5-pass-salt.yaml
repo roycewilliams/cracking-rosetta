@@ -1,0 +1,26 @@
+id: "huawei-sha1-md5-pass-salt"
+name: "Huawei sha1(md5($pass).$salt)"
+expression_proof:
+  verified: "absent"
+  verified_at: "2026-08-31"
+  verified_with: "hashcat v7.1.2-549-g8a15e210b"
+  note: "hashcat mode 4711 is a Enterprise Application Software (EAS) format. john's dynamic expression language describes constructions over a password and a salt; it cannot express a container's KDF-plus-cipher, so this has no expression and will not acquire one. That says nothing about whether john can CRACK it -- run discover-john.pl, and if john has a format it goes in tools.john."
+denotation:
+  text: "Huawei sha1(md5($pass).$salt)"
+  source: "hashcat"
+  note: "hashcat's own label for mode 4711, category \"Enterprise Application Software (EAS)\", in v7.1.2-549-g8a15e210b. This is a container or application format rather than a bare construction, so there is no single digest expression to record."
+category: "application"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [4711]
+    verified: "vector"
+    verified_at: "2026-08-31"
+    verified_with: "hashcat v7.1.2-549-g8a15e210b"
+    note: "hashcat's own published example hash for this mode, recovered by hashcat at this mode with hashcat's own published plaintext."
+  crack:
+    supported: false
+vectors:
+  - hash: "53c724b7f34f09787ed3f1b316215fc35c789504:hashcat1"
+    pass: "hashcat"
+    source: "hashcat"

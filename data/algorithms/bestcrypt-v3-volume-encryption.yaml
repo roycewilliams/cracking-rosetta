@@ -1,0 +1,26 @@
+id: "bestcrypt-v3-volume-encryption"
+name: "BestCrypt v3 Volume Encryption"
+expression_proof:
+  verified: "absent"
+  verified_at: "2026-08-31"
+  verified_with: "hashcat v7.1.2-549-g8a15e210b"
+  note: "hashcat mode 23900 is a Full-Disk Encryption (FDE) format. john's dynamic expression language describes constructions over a password and a salt; it cannot express a container's KDF-plus-cipher, so this has no expression and will not acquire one. That says nothing about whether john can CRACK it -- run discover-john.pl, and if john has a format it goes in tools.john."
+denotation:
+  text: "BestCrypt v3 Volume Encryption"
+  source: "hashcat"
+  note: "hashcat's own label for mode 23900, category \"Full-Disk Encryption (FDE)\", in v7.1.2-549-g8a15e210b. This is a container or application format rather than a bare construction, so there is no single digest expression to record."
+category: "application"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [23900]
+    verified: "vector"
+    verified_at: "2026-08-31"
+    verified_with: "hashcat v7.1.2-549-g8a15e210b"
+    note: "hashcat's own published example hash for this mode, recovered by hashcat at this mode with hashcat's own published plaintext."
+  crack:
+    supported: false
+vectors:
+  - hash: "$bcve$3$08$234b8182cee7098b$35c12ef76a1e88175c4c222da3558310a0075bc7a06ecf46746d149c02a81fb8a97637d1103d2e13ddd5deaf982889594b18c12d7ca18a54875c5da4a47f90ae615ab94b8e3ed9e3c793d872a1b5ac35cfdb66c221d6d0853e9ff2e0f4435b43"
+    pass: "hashcat"
+    source: "hashcat"

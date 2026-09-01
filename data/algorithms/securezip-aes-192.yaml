@@ -1,0 +1,26 @@
+id: "securezip-aes-192"
+name: "SecureZIP AES-192"
+expression_proof:
+  verified: "absent"
+  verified_at: "2026-08-31"
+  verified_with: "hashcat v7.1.2-549-g8a15e210b"
+  note: "hashcat mode 23002 is a Archive format. john's dynamic expression language describes constructions over a password and a salt; it cannot express a container's KDF-plus-cipher, so this has no expression and will not acquire one. That says nothing about whether john can CRACK it -- run discover-john.pl, and if john has a format it goes in tools.john."
+denotation:
+  text: "SecureZIP AES-192"
+  source: "hashcat"
+  note: "hashcat's own label for mode 23002, category \"Archive\", in v7.1.2-549-g8a15e210b. This is a container or application format rather than a bare construction, so there is no single digest expression to record."
+category: "application"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [23002]
+    verified: "vector"
+    verified_at: "2026-08-31"
+    verified_with: "hashcat v7.1.2-549-g8a15e210b"
+    note: "hashcat's own published example hash for this mode, recovered by hashcat at this mode with hashcat's own published plaintext."
+  crack:
+    supported: false
+vectors:
+  - hash: "$zip3$*0*1*192*0*53ff2de8c280778e1e0ab997*603eb37dbab9ea109e2c405e37d8cae1ec89e1e0d0b9ce5bf55d1b571c343b6a3df35fe381c30249cb0738a9b956ba8e52dfc5552894296300446a771032776c811ff8a71d9bb3c4d6c37016c027e41fea2d157d5b0ce17804b1d7c1606b7c1121d37851bd705e001f2cd755bbf305966d129a17c1d48ff8e87cfa41f479090cd456527db7d1d43f9020ad8e73f851a5*0*0*0*file.txt"
+    pass: "hashcat"
+    source: "hashcat"

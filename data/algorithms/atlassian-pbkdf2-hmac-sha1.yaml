@@ -1,0 +1,26 @@
+id: "atlassian-pbkdf2-hmac-sha1"
+name: "Atlassian (PBKDF2-HMAC-SHA1)"
+expression_proof:
+  verified: "absent"
+  verified_at: "2026-08-31"
+  verified_with: "hashcat v7.1.2-549-g8a15e210b"
+  note: "hashcat mode 12001 is a Framework format. john's dynamic expression language describes constructions over a password and a salt; it cannot express a container's KDF-plus-cipher, so this has no expression and will not acquire one. That says nothing about whether john can CRACK it -- run discover-john.pl, and if john has a format it goes in tools.john."
+denotation:
+  text: "Atlassian (PBKDF2-HMAC-SHA1)"
+  source: "hashcat"
+  note: "hashcat's own label for mode 12001, category \"Framework\", in v7.1.2-549-g8a15e210b. This is a container or application format rather than a bare construction, so there is no single digest expression to record."
+category: "application"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [12001]
+    verified: "vector"
+    verified_at: "2026-08-31"
+    verified_with: "hashcat v7.1.2-549-g8a15e210b"
+    note: "hashcat's own published example hash for this mode, recovered by hashcat at this mode with hashcat's own published plaintext."
+  crack:
+    supported: false
+vectors:
+  - hash: "{PKCS5S2}NTczNTY0NDY2NjQyNzU1Mx8gGiRGobaZYwumctGHbn2ZOHB8LkwzH+Z1gkWfy1zD"
+    pass: "hashcat"
+    source: "hashcat"

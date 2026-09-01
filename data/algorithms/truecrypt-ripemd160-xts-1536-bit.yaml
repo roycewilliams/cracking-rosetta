@@ -1,0 +1,26 @@
+id: "truecrypt-ripemd160-xts-1536-bit"
+name: "TrueCrypt RIPEMD160 + XTS 1536 bit"
+expression_proof:
+  verified: "absent"
+  verified_at: "2026-08-31"
+  verified_with: "hashcat v7.1.2-549-g8a15e210b"
+  note: "hashcat mode 29313 is a Full-Disk Encryption (FDE) format. john's dynamic expression language describes constructions over a password and a salt; it cannot express a container's KDF-plus-cipher, so this has no expression and will not acquire one. That says nothing about whether john can CRACK it -- run discover-john.pl, and if john has a format it goes in tools.john."
+denotation:
+  text: "TrueCrypt RIPEMD160 + XTS 1536 bit"
+  source: "hashcat"
+  note: "hashcat's own label for mode 29313, category \"Full-Disk Encryption (FDE)\", in v7.1.2-549-g8a15e210b. This is a container or application format rather than a bare construction, so there is no single digest expression to record."
+category: "application"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [29313]
+    verified: "vector"
+    verified_at: "2026-08-31"
+    verified_with: "hashcat v7.1.2-549-g8a15e210b"
+    note: "hashcat's own published example hash for this mode, recovered by hashcat at this mode with hashcat's own published plaintext."
+  crack:
+    supported: false
+vectors:
+  - hash: "$truecrypt$3916e924d246e5ceb17b140211fff57b67150b3dee53fa475261d465b0ee3e56ee820e6ba3958d84c61508f028b2a112e9005877784e07deddcf310d01ba8171$0b620533790456d20d17c8fda84f9d93bbfe41509b931a417b82d68ed9b0bc9641b79a5bf8f71bcdbba979dfb7566a5b8ccc221f80722c1ce7ec81be4a8c880b1b057e681c187504eabf4eea32f7b81383defd4616618a99852d1678a6520883c8f3564e6dcf874150a060b9a44748d97f95b223b089ac847e31fb5a2db3656d7b57decff65e2c5c9af5bdece7a1845caa9df805fc1f7e56bf545d854beec27a9640bf1697c195e5f95b82c20d76c5a56ff4283219caa5a618e8caace9d0fcde0df6ee6e043ccbc78fd06a602cc638f7ae4675063b840ee08ffa9e143553bffd20126fa30f95e013aabf103f12c3ceeb284c80dc335fe2e78580d6ddfa80511aba9db7c93838cae0db40b9dbeccbf9d160032d334a9c35156721c746b51131baf6855fdfc1edee3099b8e4abc619e1c60e3ce68615e1eb42bd8d338046f7c854a60defe395e0d7168786a3035c9735cd42433dd0c46dcf8b5cb2c28905df80476561e55d6310b25f74d78b651ccd3484332c59a6ad490e29ea267db5ce4a47c9dcde39f420ba0755ea7e5583a3a562925acaa125d5056795b98135825232aa543a460137cc84235b85dd44d65e01e6eb1ade1b970f3ffe2b9762f5a7f261037e"
+    pass: "hashcat"
+    source: "hashcat"

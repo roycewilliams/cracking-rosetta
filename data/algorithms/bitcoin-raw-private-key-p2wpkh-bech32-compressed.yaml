@@ -1,0 +1,26 @@
+id: "bitcoin-raw-private-key-p2wpkh-bech32-compressed"
+name: "Bitcoin raw private key (P2WPKH, Bech32), compressed"
+expression_proof:
+  verified: "absent"
+  verified_at: "2026-08-31"
+  verified_with: "hashcat v7.1.2-549-g8a15e210b"
+  note: "hashcat mode 30903 is a Cryptocurrency Wallet format. john's dynamic expression language describes constructions over a password and a salt; it cannot express a container's KDF-plus-cipher, so this has no expression and will not acquire one. That says nothing about whether john can CRACK it -- run discover-john.pl, and if john has a format it goes in tools.john."
+denotation:
+  text: "Bitcoin raw private key (P2WPKH, Bech32), compressed"
+  source: "hashcat"
+  note: "hashcat's own label for mode 30903, category \"Cryptocurrency Wallet\", in v7.1.2-549-g8a15e210b. This is a container or application format rather than a bare construction, so there is no single digest expression to record."
+category: "application"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [30903]
+    verified: "vector"
+    verified_at: "2026-08-31"
+    verified_with: "hashcat v7.1.2-549-g8a15e210b"
+    note: "hashcat's own published example hash for this mode, recovered by hashcat at this mode with hashcat's own published plaintext."
+  crack:
+    supported: false
+vectors:
+  - hash: "bc1q926ca6n7wz7gm2gfd8xc5p0vu687ngvnknpx74"
+    pass: "4d1987d7a341d51557af59996845740135ab2506515426ada57cc8ec05adf794"
+    source: "hashcat"

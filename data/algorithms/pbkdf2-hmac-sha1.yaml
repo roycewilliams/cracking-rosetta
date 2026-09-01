@@ -1,0 +1,26 @@
+id: "pbkdf2-hmac-sha1"
+name: "PBKDF2-HMAC-SHA1"
+expression_proof:
+  verified: "absent"
+  verified_at: "2026-08-31"
+  verified_with: "hashcat v7.1.2-549-g8a15e210b"
+  note: "hashcat mode 12000 is \"PBKDF2-HMAC-SHA1\" (Generic KDF). It is a bare construction, but john's dynamic EXPRESSION language has no token for it, so it cannot be written as an expression here. That says nothing about whether john can CRACK it -- run discover-john.pl, and if john has a format it goes in tools.john."
+denotation:
+  text: "PBKDF2-HMAC-SHA1"
+  source: "hashcat"
+  note: "hashcat's own label for mode 12000, category \"Generic KDF\", in v7.1.2-549-g8a15e210b."
+category: "kdf"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [12000]
+    verified: "vector"
+    verified_at: "2026-08-31"
+    verified_with: "hashcat v7.1.2-549-g8a15e210b"
+    note: "hashcat's own published example hash for this mode, recovered by hashcat at this mode with hashcat's own published plaintext."
+  crack:
+    supported: false
+vectors:
+  - hash: "sha1:1000:MTYwNTM4MDU4Mzc4MzA=:aGghFQBtQ8+WVlMk5GEaMw=="
+    pass: "hashcat"
+    source: "hashcat"

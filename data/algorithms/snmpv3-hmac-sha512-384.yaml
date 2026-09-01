@@ -1,0 +1,26 @@
+id: "snmpv3-hmac-sha512-384"
+name: "SNMPv3 HMAC-SHA512-384"
+expression_proof:
+  verified: "absent"
+  verified_at: "2026-08-31"
+  verified_with: "hashcat v7.1.2-549-g8a15e210b"
+  note: "hashcat mode 27300 is a Network Protocol format. john's dynamic expression language describes constructions over a password and a salt; it cannot express a container's KDF-plus-cipher, so this has no expression and will not acquire one. That says nothing about whether john can CRACK it -- run discover-john.pl, and if john has a format it goes in tools.john."
+denotation:
+  text: "SNMPv3 HMAC-SHA512-384"
+  source: "hashcat"
+  note: "hashcat's own label for mode 27300, category \"Network Protocol\", in v7.1.2-549-g8a15e210b. This is a container or application format rather than a bare construction, so there is no single digest expression to record."
+category: "protocol"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [27300]
+    verified: "vector"
+    verified_at: "2026-08-31"
+    verified_with: "hashcat v7.1.2-549-g8a15e210b"
+    note: "hashcat's own published example hash for this mode, recovered by hashcat at this mode with hashcat's own published plaintext."
+  crack:
+    supported: false
+vectors:
+  - hash: "$SNMPv3$6$45889431$3081b702010330110204367c80d4020300ffe30401010201030460305e041180001f88808106d566db57fd600000000002011002020118040e6d61747269785f5348412d35313204300000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000400303d041180001f88808106d566db57fd60000000000400a22602046ea3546f0201000201003018301606082b06010201010200060a2b06010401bf0803020a$80001f88808106d566db57fd6000000000$9e4681768d5dee9e2d0ca7380dfa19f0a0f805c550142b889af548f5506c2c3587df980707600b58d97ed1beaa9feaf9"
+    pass: "hashcat1"
+    source: "hashcat"

@@ -1,0 +1,26 @@
+id: "encsecurity-datavault-pbkdf2-no-keychain"
+name: "ENCsecurity Datavault (PBKDF2/no keychain)"
+expression_proof:
+  verified: "absent"
+  verified_at: "2026-08-31"
+  verified_with: "hashcat v7.1.2-549-g8a15e210b"
+  note: "hashcat mode 29910 is a File-Based Encryption (FBE) format. john's dynamic expression language describes constructions over a password and a salt; it cannot express a container's KDF-plus-cipher, so this has no expression and will not acquire one. That says nothing about whether john can CRACK it -- run discover-john.pl, and if john has a format it goes in tools.john."
+denotation:
+  text: "ENCsecurity Datavault (PBKDF2/no keychain)"
+  source: "hashcat"
+  note: "hashcat's own label for mode 29910, category \"File-Based Encryption (FBE)\", in v7.1.2-549-g8a15e210b. This is a container or application format rather than a bare construction, so there is no single digest expression to record."
+category: "application"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [29910]
+    verified: "vector"
+    verified_at: "2026-08-31"
+    verified_with: "hashcat v7.1.2-549-g8a15e210b"
+    note: "hashcat's own published example hash for this mode, recovered by hashcat at this mode with hashcat's own published plaintext."
+  crack:
+    supported: false
+vectors:
+  - hash: "$encdv-pbkdf2$1$1$121f898edc51ffb2$14e6bf4e9256f9e4$32$1972489853882254644795101599063579097812661888813652597380052274$100000"
+    pass: "hashcat"
+    source: "hashcat"

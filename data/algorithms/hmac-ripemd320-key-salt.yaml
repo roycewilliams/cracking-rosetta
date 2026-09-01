@@ -1,0 +1,26 @@
+id: "hmac-ripemd320-key-salt"
+name: "HMAC-RIPEMD320 (key = $salt)"
+expression_proof:
+  verified: "absent"
+  verified_at: "2026-08-31"
+  verified_with: "hashcat v7.1.2-549-g8a15e210b"
+  note: "hashcat mode 33660 is \"HMAC-RIPEMD320 (key = $salt)\" (Raw Hash authenticated). It is a bare construction, but john's dynamic EXPRESSION language has no token for it, so it cannot be written as an expression here. That says nothing about whether john can CRACK it -- run discover-john.pl, and if john has a format it goes in tools.john."
+denotation:
+  text: "HMAC-RIPEMD320 (key = $salt)"
+  source: "hashcat"
+  note: "hashcat's own label for mode 33660, category \"Raw Hash authenticated\", in v7.1.2-549-g8a15e210b."
+category: "composite"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [33660]
+    verified: "vector"
+    verified_at: "2026-08-31"
+    verified_with: "hashcat v7.1.2-549-g8a15e210b"
+    note: "hashcat's own published example hash for this mode, recovered by hashcat at this mode with hashcat's own published plaintext."
+  crack:
+    supported: false
+vectors:
+  - hash: "345136b13b3a6e52901e2a414efa0cf5fca2fecf8b03279656d3b0f42c30df3006c5ad186494996b:2436077107013929602"
+    pass: "hashcat"
+    source: "hashcat"

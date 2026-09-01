@@ -1,0 +1,26 @@
+id: "scryptcrypt-scrypt-unix"
+name: "scryptcrypt, scrypt (Unix)"
+expression_proof:
+  verified: "absent"
+  verified_at: "2026-08-31"
+  verified_with: "hashcat v7.1.2-549-g8a15e210b"
+  note: "hashcat mode 36300 is a Operating System format. john's dynamic expression language describes constructions over a password and a salt; it cannot express a container's KDF-plus-cipher, so this has no expression and will not acquire one. That says nothing about whether john can CRACK it -- run discover-john.pl, and if john has a format it goes in tools.john."
+denotation:
+  text: "scryptcrypt, scrypt (Unix)"
+  source: "hashcat"
+  note: "hashcat's own label for mode 36300, category \"Operating System\", in v7.1.2-549-g8a15e210b. This is a container or application format rather than a bare construction, so there is no single digest expression to record."
+category: "application"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [36300]
+    verified: "vector"
+    verified_at: "2026-08-31"
+    verified_with: "hashcat v7.1.2-549-g8a15e210b"
+    note: "hashcat's own published example hash for this mode, recovered by hashcat at this mode with hashcat's own published plaintext."
+  crack:
+    supported: false
+vectors:
+  - hash: "$7$C6..../....nRiFmykMMn62$SxIhqyA0SkQFM1dimuhCTqWH4zlIFIvfF.1IzSL.Rb/"
+    pass: "hashcat"
+    source: "hashcat"

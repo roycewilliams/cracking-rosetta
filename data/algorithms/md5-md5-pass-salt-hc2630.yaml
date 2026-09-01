@@ -1,0 +1,17 @@
+id: "md5-md5-pass-salt-hc2630"
+name: "md5(md5($pass.$salt))"
+category: "composite"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [2630]
+    verified: "vector"
+    verified_at: "2026-08-31"
+    verified_with: "hashcat v7.1.2-549-g8a15e210b"
+    note: "hashcat's own published example hash for this mode, recovered by hashcat at this mode with hashcat's own published plaintext."
+  crack:
+    supported: false
+vectors:
+  - hash: "0127eecea3120e34c8934ba3b72a390a:0"
+    pass: "hashcat"
+    source: "hashcat"

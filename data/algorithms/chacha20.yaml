@@ -1,0 +1,26 @@
+id: "chacha20"
+name: "ChaCha20"
+expression_proof:
+  verified: "absent"
+  verified_at: "2026-08-31"
+  verified_with: "hashcat v7.1.2-549-g8a15e210b"
+  note: "hashcat mode 15400 is \"ChaCha20\" (Raw Cipher, Known-plaintext attack). It is a bare construction, but john's dynamic EXPRESSION language has no token for it, so it cannot be written as an expression here. That says nothing about whether john can CRACK it -- run discover-john.pl, and if john has a format it goes in tools.john."
+denotation:
+  text: "ChaCha20"
+  source: "hashcat"
+  note: "hashcat's own label for mode 15400, category \"Raw Cipher, Known-plaintext attack\", in v7.1.2-549-g8a15e210b."
+category: "primitive"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [15400]
+    verified: "vector"
+    verified_at: "2026-08-31"
+    verified_with: "hashcat v7.1.2-549-g8a15e210b"
+    note: "hashcat's own published example hash for this mode, recovered by hashcat at this mode with hashcat's own published plaintext."
+  crack:
+    supported: false
+vectors:
+  - hash: "$chacha20$*0400000000000003*16*0200000000000001*5152535455565758*6b05fe554b0bc3b3"
+    pass: "hashcat_hashcat_hashcat_hashcat_"
+    source: "hashcat"

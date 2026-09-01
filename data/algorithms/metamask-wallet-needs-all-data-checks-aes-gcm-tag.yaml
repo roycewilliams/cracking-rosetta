@@ -1,0 +1,26 @@
+id: "metamask-wallet-needs-all-data-checks-aes-gcm-tag"
+name: "MetaMask Wallet (needs all data, checks AES-GCM tag)"
+expression_proof:
+  verified: "absent"
+  verified_at: "2026-08-31"
+  verified_with: "hashcat v7.1.2-549-g8a15e210b"
+  note: "hashcat mode 26600 is a Cryptocurrency Wallet format. john's dynamic expression language describes constructions over a password and a salt; it cannot express a container's KDF-plus-cipher, so this has no expression and will not acquire one. That says nothing about whether john can CRACK it -- run discover-john.pl, and if john has a format it goes in tools.john."
+denotation:
+  text: "MetaMask Wallet (needs all data, checks AES-GCM tag)"
+  source: "hashcat"
+  note: "hashcat's own label for mode 26600, category \"Cryptocurrency Wallet\", in v7.1.2-549-g8a15e210b. This is a container or application format rather than a bare construction, so there is no single digest expression to record."
+category: "application"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [26600]
+    verified: "vector"
+    verified_at: "2026-08-31"
+    verified_with: "hashcat v7.1.2-549-g8a15e210b"
+    note: "hashcat's own published example hash for this mode, recovered by hashcat at this mode with hashcat's own published plaintext."
+  crack:
+    supported: false
+vectors:
+  - hash: "$metamask$jfGI3TXguhb8GPnKSXFrMzRk2NCEc131Gt5G3kZr5+s=$h+BoIf2CQ5BEjaIOShFE7g==$R95fzGt4UQ0uwrcrVYnIi4UcSlWn9wlmer+//526ZDwYAp50K82F1u1oacYcdjjhuEvbZnWk/uBG00UkgLLlO3WbINljqmu2QWdDEwjTgo/qWR6MU9d/82rxNiONHQE8UrZ8SV+htVr6XIB0ze3aCV0E+fwI93EeP79ZeDxuOEhuHoiYT0bHWMv5nA48AdluG4DbOo7SrDAWBVCBsEdXsOfYsS3/TIh0a/iFCMX4uhxY2824JwcWp4H36SFWyBYMZCJ3/U4DYFbbjWZtGRthoJlIik5BJq4FLu3Y1jEgza0AWlAvu4MKTEqrYSpUIghfxf1a1f+kPvxsHNq0as0kRwCXu09DObbdsiggbmeoBkxMZiFq0d9ar/3Gon0r3hfc3c124Wlivzbzu1JcZ3wURhLSsUS7b5cfG86aXHJkxmQDA5urBz6lw3bsIvlEUB2ErkQy/zD+cPwCG1Rs/WKt7KNh45lppCUkHccbf+xlpdc8OfUwj01Xp7BdH8LMR7Vx1C4hZCvSdtURVl0VaAMxHDX0MjRkwmqS"
+    pass: "hashcat1"
+    source: "hashcat"

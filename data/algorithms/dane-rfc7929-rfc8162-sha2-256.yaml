@@ -1,0 +1,26 @@
+id: "dane-rfc7929-rfc8162-sha2-256"
+name: "DANE RFC7929/RFC8162 SHA2-256"
+expression_proof:
+  verified: "absent"
+  verified_at: "2026-08-31"
+  verified_with: "hashcat v7.1.2-549-g8a15e210b"
+  note: "hashcat mode 30420 is a Network Protocol format. john's dynamic expression language describes constructions over a password and a salt; it cannot express a container's KDF-plus-cipher, so this has no expression and will not acquire one. That says nothing about whether john can CRACK it -- run discover-john.pl, and if john has a format it goes in tools.john."
+denotation:
+  text: "DANE RFC7929/RFC8162 SHA2-256"
+  source: "hashcat"
+  note: "hashcat's own label for mode 30420, category \"Network Protocol\", in v7.1.2-549-g8a15e210b. This is a container or application format rather than a bare construction, so there is no single digest expression to record."
+category: "protocol"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [30420]
+    verified: "vector"
+    verified_at: "2026-08-31"
+    verified_with: "hashcat v7.1.2-549-g8a15e210b"
+    note: "hashcat's own published example hash for this mode, recovered by hashcat at this mode with hashcat's own published plaintext."
+  crack:
+    supported: false
+vectors:
+  - hash: "127e6fbfe24a750e72930c220a8e138275656b8e5d8f48a98c3c92df"
+    pass: "hashcat"
+    source: "hashcat"

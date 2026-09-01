@@ -1,0 +1,17 @@
+id: "phpass-md5-pass"
+name: "phpass(md5($pass))"
+category: "kdf"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [35700]
+    verified: "vector"
+    verified_at: "2026-08-31"
+    verified_with: "hashcat v7.1.2-549-g8a15e210b"
+    note: "hashcat's own published example hash for this mode, recovered by hashcat at this mode with hashcat's own published plaintext."
+  crack:
+    supported: false
+vectors:
+  - hash: "$H$9ZtU3uM7Twc8X53ImNRhaec4b3QHJ91"
+    pass: "hashcat"
+    source: "hashcat"

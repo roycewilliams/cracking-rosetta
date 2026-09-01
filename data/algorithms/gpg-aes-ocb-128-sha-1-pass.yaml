@@ -1,0 +1,26 @@
+id: "gpg-aes-ocb-128-sha-1-pass"
+name: "GPG (AES-OCB-128 (SHA-1($pass)))"
+expression_proof:
+  verified: "absent"
+  verified_at: "2026-08-31"
+  verified_with: "hashcat v7.1.2-549-g8a15e210b"
+  note: "hashcat mode 17050 is a Private Key format. john's dynamic expression language describes constructions over a password and a salt; it cannot express a container's KDF-plus-cipher, so this has no expression and will not acquire one. That says nothing about whether john can CRACK it -- run discover-john.pl, and if john has a format it goes in tools.john."
+denotation:
+  text: "GPG (AES-OCB-128 (SHA-1($pass)))"
+  source: "hashcat"
+  note: "hashcat's own label for mode 17050, category \"Private Key\", in v7.1.2-549-g8a15e210b. This is a container or application format rather than a bare construction, so there is no single digest expression to record."
+category: "application"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [17050]
+    verified: "vector"
+    verified_at: "2026-08-31"
+    verified_with: "hashcat v7.1.2-549-g8a15e210b"
+    note: "hashcat's own published example hash for this mode, recovered by hashcat at this mode with hashcat's own published plaintext."
+  crack:
+    supported: false
+vectors:
+  - hash: "$gpg$*1*60*4096*71cdae39dd004b5fd4571575c683a33ecb0d2ea4495655b2544a63397b4f92e1b7d2c5243143398f9d44aba1e7b97c88b7030080b97c811d757264be*1*254*2*7*12*07f4ca8d366ae2e0ab55da75*329368576*199d8afecccd9dd6"
+    pass: "hashcat"
+    source: "hashcat"

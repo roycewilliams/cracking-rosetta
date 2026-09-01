@@ -1,0 +1,26 @@
+id: "crc64jones"
+name: "CRC64Jones"
+expression_proof:
+  verified: "absent"
+  verified_at: "2026-08-31"
+  verified_with: "hashcat v7.1.2-549-g8a15e210b"
+  note: "hashcat mode 28000 is \"CRC64Jones\" (Raw Checksum). It is a bare construction, but john's dynamic EXPRESSION language has no token for it, so it cannot be written as an expression here. That says nothing about whether john can CRACK it -- run discover-john.pl, and if john has a format it goes in tools.john."
+denotation:
+  text: "CRC64Jones"
+  source: "hashcat"
+  note: "hashcat's own label for mode 28000, category \"Raw Checksum\", in v7.1.2-549-g8a15e210b."
+category: "primitive"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [28000]
+    verified: "vector"
+    verified_at: "2026-08-31"
+    verified_with: "hashcat v7.1.2-549-g8a15e210b"
+    note: "hashcat's own published example hash for this mode, recovered by hashcat at this mode with hashcat's own published plaintext."
+  crack:
+    supported: false
+vectors:
+  - hash: "65c1f848fe38cce6:4260950400318054"
+    pass: "hashcat"
+    source: "hashcat"

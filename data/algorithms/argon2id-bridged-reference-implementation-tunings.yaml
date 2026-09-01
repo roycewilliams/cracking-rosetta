@@ -1,0 +1,26 @@
+id: "argon2id-bridged-reference-implementation-tunings"
+name: "Argon2id [Bridged: reference implementation + tunings]"
+expression_proof:
+  verified: "absent"
+  verified_at: "2026-08-31"
+  verified_with: "hashcat v7.1.2-549-g8a15e210b"
+  note: "hashcat mode 70000 is \"Argon2id [Bridged: reference implementation + tunings]\" (Generic KDF). It is a bare construction, but john's dynamic EXPRESSION language has no token for it, so it cannot be written as an expression here. That says nothing about whether john can CRACK it -- run discover-john.pl, and if john has a format it goes in tools.john."
+denotation:
+  text: "Argon2id [Bridged: reference implementation + tunings]"
+  source: "hashcat"
+  note: "hashcat's own label for mode 70000, category \"Generic KDF\", in v7.1.2-549-g8a15e210b."
+category: "kdf"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [70000]
+    verified: "vector"
+    verified_at: "2026-08-31"
+    verified_with: "hashcat v7.1.2-549-g8a15e210b"
+    note: "hashcat's own published example hash for this mode, recovered by hashcat at this mode with hashcat's own published plaintext."
+  crack:
+    supported: false
+vectors:
+  - hash: "$argon2id$v=19$m=65536,t=3,p=1$FBMjI4RJBhIykCgol1KEJA$2ky5GAdhT1kH4kIgPN/oERE3Taiy43vNN70a3HpiKQU"
+    pass: "hashcat"
+    source: "hashcat"

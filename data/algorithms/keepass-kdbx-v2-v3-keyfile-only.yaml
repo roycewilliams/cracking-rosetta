@@ -1,0 +1,26 @@
+id: "keepass-kdbx-v2-v3-keyfile-only"
+name: "KeePass (KDBX v2/v3) - keyfile only"
+expression_proof:
+  verified: "absent"
+  verified_at: "2026-08-31"
+  verified_with: "hashcat v7.1.2-549-g8a15e210b"
+  note: "hashcat mode 29700 is a Password Manager format. john's dynamic expression language describes constructions over a password and a salt; it cannot express a container's KDF-plus-cipher, so this has no expression and will not acquire one. That says nothing about whether john can CRACK it -- run discover-john.pl, and if john has a format it goes in tools.john."
+denotation:
+  text: "KeePass (KDBX v2/v3) - keyfile only"
+  source: "hashcat"
+  note: "hashcat's own label for mode 29700, category \"Password Manager\", in v7.1.2-549-g8a15e210b. This is a container or application format rather than a bare construction, so there is no single digest expression to record."
+category: "application"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [29700]
+    verified: "vector"
+    verified_at: "2026-08-31"
+    verified_with: "hashcat v7.1.2-549-g8a15e210b"
+    note: "hashcat's own published example hash for this mode, recovered by hashcat at this mode with hashcat's own published plaintext."
+  crack:
+    supported: false
+vectors:
+  - hash: "$keepass$*2*60000*0*02078d460c3c837003f22ee2ba42b3ac2a9ad9e913efb61349b3f91aacd0b004*c901781373cb6806df4b4c7b427ba698440f9e9dd68101e6a198e4a95cb10098*c602f182f8b03671c944a5af357eede7*135443633e6d2b6dba314dee0a1e2b5d0c025ca5fcaf692a20d77fb62cc44f63*51b0b2d19d82c88a0d1a646151be0b68c5e3c841a7a21b4abb2e9be14f298ed1"
+    pass: "127e6fbfe24a750e72930c220a8e138275656b8e5d8f48a98c3c92df2caba935"
+    source: "hashcat"
