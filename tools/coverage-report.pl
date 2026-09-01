@@ -20,6 +20,19 @@
 # is the number to move, and moving it is what discover-hashcat.pl and
 # discover-mdxfind.pl are for (see STATE.md, START HERE).
 #
+# ONE CAVEAT ON "SINGLE", AND IT IS NOT A LOOPHOLE
+#
+# A row with an mdxfind type and a PROVEN `john_dynamic_expr:` answers "what
+# do I run in john?" with a command that has been round-tripped against that
+# row's own vector -- `john --format=dynamic='haval128_3(md5($p))'` -- even
+# though it names no john FORMAT. CLAUDE.md is explicit that an ad-hoc
+# expression must never go in `tools.john.cpu`, because it is not an
+# identifier any `--list=formats` will ever show, and inflating john's
+# coverage with it would be a lie about a different number. Both things are
+# true at once, so both are printed: the column count is unchanged and a
+# second line says how many of those rows a reader can nonetheless act on in a
+# second tool. Measured 2026-08-31: 211 of 1050.
+#
 # Tombstones are excluded: a merged-away id is a redirect, not an algorithm.
 # Crack is not counted as a column -- it is historical reference only and
 # implements nothing itself, so it can never be the thing a reader is
@@ -88,7 +101,7 @@ opendir my $dh, $algdir or die "$PROG: $algdir: $!\n";
 my @files = sort grep { /\.yaml$/ } readdir $dh;
 closedir $dh;
 
-my (%bucket, %only, @singles, @nones, $total, $tomb);
+my (%bucket, %only, @singles, @nones, $total, $tomb, $single_expr);
 for my $f (@files) {
     my $e = eval { LoadFile("$algdir/$f") } or next;
     next unless $e->{id};
@@ -96,7 +109,14 @@ for my $f (@files) {
     $total++;
     my @t = tools_named($e);
     $bucket{ scalar @t }++;
-    if (@t == 1) { $only{ $t[0] }++; push @singles, [ $e->{id}, $t[0], $e->{name} // '' ] }
+    if (@t == 1) {
+        $only{ $t[0] }++;
+        push @singles, [ $e->{id}, $t[0], $e->{name} // '' ];
+        # A proven dynamic expression is a runnable john answer on a row that
+        # names no john format; see the note at the top.
+        $single_expr++ if $e->{john_dynamic_expr}
+                       && ($e->{expression_proof}{verified} // '') eq 'vector';
+    }
     push @nones, [ $e->{id}, $e->{name} // '' ] unless @t;
 }
 
@@ -109,6 +129,11 @@ printf "- JOINED:   %d of %d (%.1f%%) name more than one tool\n",
 printf "- SINGLE:   %d of %d (%.1f%%) name exactly one -- the number to move\n",
     $bucket{1}//0, $total, $total ? 100 * ($bucket{1}//0) / $total : 0;
 
+if ($single_expr) {
+    printf "-   of those, %d carry a PROVEN john_dynamic_expr: no john format, but a\n"
+         . "-   john command a reader can run today. Still single-column, by design.\n",
+        $single_expr;
+}
 if ($verbose) {
     printf "-   single-column by tool: %s\n",
         join('  ', map { "$_ $only{$_}" } sort { $only{$b} <=> $only{$a} } keys %only);
