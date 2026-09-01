@@ -1,5 +1,6 @@
 id: "raw-sha224"
 name: "Raw-SHA224"
+aliases: ["SHA224"]
 expression: "sha224($p)"
 john_dynamic_expr: "dynamic=sha224($p)"
 expression_proof:
@@ -23,19 +24,25 @@ tools:
     verified_with: "mdxfind RCS 1.540 (2026/08/22)"
     note: "type discovered by round-trip search, not by name"
   john:
-    cpu: ["Raw-SHA224"]
+    cpu: ["Raw-SHA224", "dynamic_50"]
     verified: "vector"
     verified_at: "2026-08-31"
     verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
-    note: "john's own published example ciphertext for this format, recovered by john under this format. john publishes no plaintext, so the plaintext was found by handing john its own example and a candidate list -- what john recovered IS the plaintext, by construction."
+    note: "john's own published example ciphertext for this format, recovered by john under this format. john publishes no plaintext, so the plaintext was found by handing john its own example and a candidate list -- what john recovered IS the plaintext, by construction. dynamic_50 came from sha224 in the 2026-09-01 merge, proven there at tier vector."
   crack:
     supported: false
 relations:
   - kind: "duplicate-of"
     entry: "sha224"
     distinction: "none"
-    note: "Both compute sha224($p), proven 2026-09-01. raw-sha224 is john's Raw-SHA224 spelling."
+    note: "merged 2026-09-01: one computation under two names, proven by john's dynamic compiler against both vectors. Royce chose the john-named row on 2026-09-01: raw-sha224 is john's own Raw-SHA224 spelling, and dynamic_50 now sits beside it so a reader arriving by either name lands here"
 vectors:
   - hash: "d63dc919e201d7bc4c825630d2cf25fdc93d4b2f0d46706d29038d01"
     pass: "password"
     source: "john"
+  - hash: "223b5c5625a10b045533f2f731dc47f572b3070feaf0838dffba0dbb"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "SHA224"
+  hashkiller: "n/a"

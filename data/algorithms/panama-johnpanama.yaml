@@ -10,6 +10,8 @@ expression_proof:
 category: "primitive"
 status: "needs-review"
 tools:
+  hashcat:
+    verified: "absent"
   mdxfind:
     types: ["PANAMA"]
     verified: "vector"
@@ -17,19 +19,24 @@ tools:
     verified_with: "mdxfind RCS 1.540 (2026/08/22)"
     note: "type discovered by round-trip search, not by name"
   john:
-    cpu: ["Panama"]
+    cpu: ["Panama", "dynamic_320"]
     verified: "vector"
     verified_at: "2026-08-31"
     verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
-    note: "john's own published example ciphertext for this format, recovered by john under this format. john publishes no plaintext, so the plaintext was found by handing john its own example and a candidate list -- what john recovered IS the plaintext, by construction."
+    note: "john's own published example ciphertext for this format, recovered by john under this format. john publishes no plaintext, so the plaintext was found by handing john its own example and a candidate list -- what john recovered IS the plaintext, by construction. dynamic_320 came from panama in the 2026-09-01 merge, proven there at tier vector."
   crack:
     supported: false
 relations:
   - kind: "duplicate-of"
     entry: "panama"
     distinction: "none"
-    note: "Both compute panama($p), proven 2026-09-01. panama-johnpanama is john's row, panama the generic one."
+    note: "merged 2026-09-01: one computation under two names, proven by john's dynamic compiler against both vectors. Royce chose the john-named row on 2026-09-01: panama-johnpanama carries john's Panama format, and dynamic_320 now sits beside it so a reader arriving by either name lands here"
 vectors:
   - hash: "049d698307d8541f22870dfa0a551099d3d02bc6d57c610a06a4585ed8d35ff8"
     pass: "T"
     source: "john"
+  - hash: "8f8d192270e3e7f8fbbeb35b544dd0c893771628cb4163ea68bc9d815736b896"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "PANAMA"

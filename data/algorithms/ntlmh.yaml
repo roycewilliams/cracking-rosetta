@@ -30,10 +30,10 @@ tools:
   crack:
     supported: false
 relations:
-  - kind: "duplicate-of"
+  - kind: "same-computation"
     entry: "md4-utf16-le-utf-8-plain"
-    distinction: "none"
-    note: "Both compute md4(utf16($p)). See the edge to md4-utf16-plain."
+    distinction: "naming"
+    note: "Not a duplicate, decided by Royce on 2026-09-01, on the same grounds as the md4-utf16-plain <-> ntlmh edge of 2026-08-30. mdxfind publishes three type indices for one computation -- MD4UTF16 (e496), NTLM (e369) and NTLMH (e786) -- and each name keeps a row because it is the name a reader arrives with. This row additionally carries MD4UTF16UC, the same digest in uppercase hex."
   - kind: "same-computation"
     entry: "md4-utf16-plain"
     distinction: "naming"

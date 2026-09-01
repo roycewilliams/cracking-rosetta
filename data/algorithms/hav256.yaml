@@ -1,37 +1,10 @@
 id: "hav256"
 name: "HAV256"
-expression: "haval256_3($p)"
-john_dynamic_expr: "dynamic=haval256_3($p)"
-expression_proof:
-  verified: "vector"
-  verified_at: "2026-08-29"
-  verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
-  note: "round-tripped as --format=dynamic=<expr> against every vector this entry carries"
-category: "primitive"
-status: "ok"
-tools:
-  hashcat:
-    verified: "absent"
-  mdxfind:
-    types: ["HAV256"]
-    verified: "vector"
-    verified_at: "2026-08-29"
-    verified_with: "mdxfind"
-  john:
-    cpu: ["dynamic_280"]
-    verified: "vector"
-    verified_at: "2026-08-29"
-    verified_with: "john"
-  crack:
-    supported: false
+status: "merged"
+merged_into: "haval-256-3"
 relations:
   - kind: "duplicate-of"
     entry: "haval-256-3"
     distinction: "none"
-    note: "Both compute haval256_3($p), proven 2026-09-01 by john's dynamic compiler against each entry's own vector. haval-256-3 is john's spelling, hav256 mdxfind's. A curator decides whether both names keep a row (distinction: naming) or one becomes a tombstone."
-vectors:
-  - hash: "f7d3b3936e52b5c7e36d76ed06d31c1fd92761b002ddc6426dccbac1a598bee9"
-    pass: "rosetta"
-    source: "sheet"
-legacy:
-  hashes_org: "HAVAL256-3"
+    note: "merged 2026-09-01: one computation under two names, proven by john's dynamic compiler against both vectors. Royce chose the john-named row on 2026-09-01: haval-256-3 is john's own HAVAL-256-3 spelling, and dynamic_280 now sits beside it so a reader arriving by either name lands here"
+notes: "Tombstone. This id is kept so links and dist/rosetta.csv keys still resolve; every claim it made now lives in haval-256-3.yaml. One computation under two names, proven by john's dynamic compiler against both vectors. Royce chose the john-named row on 2026-09-01: haval-256-3 is john's own HAVAL-256-3 spelling, and dynamic_280 now sits beside it so a reader arriving by either name lands here"

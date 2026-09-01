@@ -234,6 +234,14 @@ for my $f (@files) {
     my $p = "$algdir/$f";
     my $e = eval { YAML::XS::LoadFile($p) } or next;
     next unless $e->{id};
+    # A tombstone is a redirect, not an algorithm: CLAUDE.md excludes it from
+    # every count and denominator, and there is nothing to curate about one --
+    # it has no category, no expression and no tool identifiers by design.
+    # Skipping it here rather than in each builder is what keeps the five
+    # question kinds from having to remember. The duplicate builder already
+    # refused a pair with a tombstone in it; that check is now redundant but
+    # harmless.
+    next if ($e->{status} // q()) eq q(merged);
     $entry{ $e->{id} } = $e;
     $path{  $e->{id} } = $p;
 }

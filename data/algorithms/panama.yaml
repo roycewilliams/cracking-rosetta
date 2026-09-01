@@ -1,37 +1,10 @@
 id: "panama"
 name: "PANAMA"
-expression: "panama($p)"
-john_dynamic_expr: "dynamic=panama($p)"
-expression_proof:
-  verified: "vector"
-  verified_at: "2026-08-29"
-  verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
-  note: "round-tripped as --format=dynamic=<expr> against every vector this entry carries"
-category: "primitive"
-status: "ok"
-tools:
-  hashcat:
-    verified: "absent"
-  mdxfind:
-    types: ["PANAMA"]
-    verified: "vector"
-    verified_at: "2026-08-29"
-    verified_with: "mdxfind"
-  john:
-    cpu: ["dynamic_320"]
-    verified: "vector"
-    verified_at: "2026-08-29"
-    verified_with: "john"
-  crack:
-    supported: false
+status: "merged"
+merged_into: "panama-johnpanama"
 relations:
   - kind: "duplicate-of"
     entry: "panama-johnpanama"
     distinction: "none"
-    note: "Both compute panama($p), proven 2026-09-01. panama-johnpanama is john's row, panama the generic one."
-vectors:
-  - hash: "8f8d192270e3e7f8fbbeb35b544dd0c893771628cb4163ea68bc9d815736b896"
-    pass: "rosetta"
-    source: "sheet"
-legacy:
-  hashes_org: "PANAMA"
+    note: "merged 2026-09-01: one computation under two names, proven by john's dynamic compiler against both vectors. Royce chose the john-named row on 2026-09-01: panama-johnpanama carries john's Panama format, and dynamic_320 now sits beside it so a reader arriving by either name lands here"
+notes: "Tombstone. This id is kept so links and dist/rosetta.csv keys still resolve; every claim it made now lives in panama-johnpanama.yaml. One computation under two names, proven by john's dynamic compiler against both vectors. Royce chose the john-named row on 2026-09-01: panama-johnpanama carries john's Panama format, and dynamic_320 now sits beside it so a reader arriving by either name lands here"

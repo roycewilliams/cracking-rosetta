@@ -1,5 +1,13 @@
 id: "md5-strtoupper-md5-pass"
 name: "md5(strtoupper(md5($pass)))"
+aliases: ["MD5MD5UC"]
+expression: "md5(upper(md5($p)))"
+expression_proof:
+  verified: "upstream"
+  verified_at: "2026-08-31"
+  verified_with: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A"
+  note: "transcribed from the hx specification's Appendix A entry for mdxfind type MD5MD5UC (e262), which states md5(upper(md5(pass))). Transcription, not reproduction, so this is upstream and not vector; run derive-expressions.pl to try to promote it. Not checkable locally: the construction uses functions RosettaExpr cannot compile, so this rests on upstream's word alone."
+category: "composite"
 status: "ok"
 tools:
   hashcat:
@@ -15,10 +23,18 @@ tools:
     note: "type discovered by round-trip search, not by name"
   crack:
     supported: false
+relations:
+  - kind: "duplicate-of"
+    entry: "md5md5uc"
+    distinction: "none"
+    note: "merged 2026-09-01: one computation under two names: both carry hashcat mode 4300 and mdxfind type MD5MD5UC. The collision gate never flagged the pair because only md5md5uc carried an expression. Royce chose md5-strtoupper-md5-pass on 2026-09-01: its name states the construction and it holds the hashes.org and hashkiller legacy names"
 vectors:
   - hash: "94b9a9d316bf89ef7e0ef48c36fac57c"
     pass: "rosetta"
     source: "sheet"
+  - hash: "cb8bca2e221b4ae44c95ca2f70f8f407"
+    pass: "password123"
+    source: "mdxfind"
 legacy:
   hashes_org: "MD5UCMD5"
   hashkiller: "md5(strtoupper(md5($pass)))"

@@ -1,40 +1,10 @@
 id: "sha384"
 name: "sha384"
-expression: "sha384($p)"
-john_dynamic_expr: "dynamic=sha384($p)"
-expression_proof:
-  verified: "vector"
-  verified_at: "2026-08-29"
-  verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
-  note: "round-tripped as --format=dynamic=<expr> against every vector this entry carries"
-category: "primitive"
-status: "ok"
-tools:
-  hashcat:
-    modes: [10800]
-    verified: "vector"
-    verified_at: "2026-08-29"
-    verified_with: "hashcat"
-  mdxfind:
-    types: ["SHA384"]
-    verified: "vector"
-    verified_at: "2026-08-29"
-    verified_with: "mdxfind"
-  john:
-    cpu: ["dynamic_70"]
-    verified: "vector"
-    verified_at: "2026-08-29"
-    verified_with: "john"
-  crack:
-    supported: false
+status: "merged"
+merged_into: "raw-sha384"
 relations:
   - kind: "duplicate-of"
     entry: "raw-sha384"
     distinction: "none"
-    note: "Both compute sha384($p), proven 2026-09-01. raw-sha384 is john's Raw-SHA384 spelling."
-vectors:
-  - hash: "c91ac188daac08cf79159835683e3f907c97b25652e01c9c779874589da77e0719bfc0216bba661205d1384536288343"
-    pass: "rosetta"
-    source: "sheet"
-legacy:
-  hashes_org: "SHA384"
+    note: "merged 2026-09-01: one computation under two names, proven by john's dynamic compiler against both vectors. Royce chose the john-named row on 2026-09-01: raw-sha384 is john's own Raw-SHA384 spelling, and dynamic_70 now sits beside it so a reader arriving by either name lands here"
+notes: "Tombstone. This id is kept so links and dist/rosetta.csv keys still resolve; every claim it made now lives in raw-sha384.yaml. One computation under two names, proven by john's dynamic compiler against both vectors. Royce chose the john-named row on 2026-09-01: raw-sha384 is john's own Raw-SHA384 spelling, and dynamic_70 now sits beside it so a reader arriving by either name lands here"

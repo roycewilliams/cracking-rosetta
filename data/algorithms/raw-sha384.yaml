@@ -1,5 +1,6 @@
 id: "raw-sha384"
 name: "Raw-SHA384"
+aliases: ["sha384"]
 expression: "sha384($p)"
 john_dynamic_expr: "dynamic=sha384($p)"
 expression_proof:
@@ -23,19 +24,24 @@ tools:
     verified_with: "mdxfind RCS 1.540 (2026/08/22)"
     note: "type discovered by round-trip search, not by name"
   john:
-    cpu: ["Raw-SHA384"]
+    cpu: ["Raw-SHA384", "dynamic_70"]
     verified: "vector"
     verified_at: "2026-08-31"
     verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
-    note: "john's own published example ciphertext for this format, recovered by john under this format. john publishes no plaintext, so the plaintext was found by handing john its own example and a candidate list -- what john recovered IS the plaintext, by construction."
+    note: "john's own published example ciphertext for this format, recovered by john under this format. john publishes no plaintext, so the plaintext was found by handing john its own example and a candidate list -- what john recovered IS the plaintext, by construction. dynamic_70 came from sha384 in the 2026-09-01 merge, proven there at tier vector."
   crack:
     supported: false
 relations:
   - kind: "duplicate-of"
     entry: "sha384"
     distinction: "none"
-    note: "Both compute sha384($p), proven 2026-09-01. raw-sha384 is john's Raw-SHA384 spelling."
+    note: "merged 2026-09-01: one computation under two names, proven by john's dynamic compiler against both vectors. Royce chose the john-named row on 2026-09-01: raw-sha384 is john's own Raw-SHA384 spelling, and dynamic_70 now sits beside it so a reader arriving by either name lands here"
 vectors:
   - hash: "a8b64babd0aca91a59bdbb7761b421d4f2bb38280d3a75ba0f21f2bebc45583d446c598660c94ce680c47d19c30783a7"
     pass: "password"
     source: "john"
+  - hash: "c91ac188daac08cf79159835683e3f907c97b25652e01c9c779874589da77e0719bfc0216bba661205d1384536288343"
+    pass: "rosetta"
+    source: "sheet"
+legacy:
+  hashes_org: "SHA384"

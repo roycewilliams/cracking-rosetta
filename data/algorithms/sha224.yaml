@@ -1,41 +1,10 @@
 id: "sha224"
 name: "SHA224"
-expression: "sha224($p)"
-john_dynamic_expr: "dynamic=sha224($p)"
-expression_proof:
-  verified: "vector"
-  verified_at: "2026-08-29"
-  verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
-  note: "round-tripped as --format=dynamic=<expr> against every vector this entry carries"
-category: "primitive"
-status: "ok"
-tools:
-  hashcat:
-    modes: [1300]
-    verified: "vector"
-    verified_at: "2026-08-29"
-    verified_with: "hashcat"
-  mdxfind:
-    types: ["SHA224"]
-    verified: "vector"
-    verified_at: "2026-08-29"
-    verified_with: "mdxfind"
-  john:
-    cpu: ["dynamic_50"]
-    verified: "vector"
-    verified_at: "2026-08-29"
-    verified_with: "john"
-  crack:
-    supported: false
+status: "merged"
+merged_into: "raw-sha224"
 relations:
   - kind: "duplicate-of"
     entry: "raw-sha224"
     distinction: "none"
-    note: "Both compute sha224($p), proven 2026-09-01. raw-sha224 is john's Raw-SHA224 spelling."
-vectors:
-  - hash: "223b5c5625a10b045533f2f731dc47f572b3070feaf0838dffba0dbb"
-    pass: "rosetta"
-    source: "sheet"
-legacy:
-  hashes_org: "SHA224"
-  hashkiller: "n/a"
+    note: "merged 2026-09-01: one computation under two names, proven by john's dynamic compiler against both vectors. Royce chose the john-named row on 2026-09-01: raw-sha224 is john's own Raw-SHA224 spelling, and dynamic_50 now sits beside it so a reader arriving by either name lands here"
+notes: "Tombstone. This id is kept so links and dist/rosetta.csv keys still resolve; every claim it made now lives in raw-sha224.yaml. One computation under two names, proven by john's dynamic compiler against both vectors. Royce chose the john-named row on 2026-09-01: raw-sha224 is john's own Raw-SHA224 spelling, and dynamic_50 now sits beside it so a reader arriving by either name lands here"

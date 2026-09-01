@@ -1,29 +1,10 @@
 id: "md5md5uc"
 name: "MD5MD5UC"
-expression: "md5(upper(md5($p)))"
-expression_proof:
-  verified: "upstream"
-  verified_at: "2026-08-31"
-  verified_with: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A"
-  note: "transcribed from the hx specification's Appendix A entry for mdxfind type MD5MD5UC (e262), which states md5(upper(md5(pass))). Transcription, not reproduction, so this is upstream and not vector; run derive-expressions.pl to try to promote it. Not checkable locally: the construction uses functions RosettaExpr cannot compile, so this rests on upstream's word alone."
-category: "composite"
-status: "needs-review"
-tools:
-  hashcat:
-    modes: [4300]
-    verified: "vector"
-    verified_at: "2026-08-31"
-    verified_with: "v7.1.2-549-g8a15e210b"
-    note: "mode discovered by round-trip search, not by name"
-  mdxfind:
-    types: ["MD5MD5UC"]
-    verified: "vector"
-    verified_at: "2026-08-31"
-    verified_with: "mdxfind RCS 1.540 (2026/08/22)"
-    note: "mdxfind's own published example for this identifier, recovered by mdxfind at this identifier with mdxfind's own published plaintext."
-  crack:
-    supported: false
-vectors:
-  - hash: "cb8bca2e221b4ae44c95ca2f70f8f407"
-    pass: "password123"
-    source: "mdxfind"
+status: "merged"
+merged_into: "md5-strtoupper-md5-pass"
+relations:
+  - kind: "duplicate-of"
+    entry: "md5-strtoupper-md5-pass"
+    distinction: "none"
+    note: "merged 2026-09-01: one computation under two names: both carry hashcat mode 4300 and mdxfind type MD5MD5UC. The collision gate never flagged the pair because only md5md5uc carried an expression. Royce chose md5-strtoupper-md5-pass on 2026-09-01: its name states the construction and it holds the hashes.org and hashkiller legacy names"
+notes: "Tombstone. This id is kept so links and dist/rosetta.csv keys still resolve; every claim it made now lives in md5-strtoupper-md5-pass.yaml. One computation under two names: both carry hashcat mode 4300 and mdxfind type MD5MD5UC. The collision gate never flagged the pair because only md5md5uc carried an expression. Royce chose md5-strtoupper-md5-pass on 2026-09-01: its name states the construction and it holds the hashes.org and hashkiller legacy names"
