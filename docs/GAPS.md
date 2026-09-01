@@ -82,19 +82,19 @@ Real work rather than a one-liner: it means finding out whether the tool
 supports the construction at all, and under which identifier. The counts are
 the honest size of the job.
 
-### john: 537 entries say nothing
+### john: 683 entries say nothing
 
 A few that carry a vector and a proven expression, so there is a definite construction to look for, one per family:
 
 * [`gost-md5-plain-plain`](index.html#gost-md5-plain-plain) - `gost(md5($p).$p)` (and 1 more starting `gost`)
 * [`haval128-3-md5-plain`](index.html#haval128-3-md5-plain) - `haval128_3(md5($p))` (and 29 more starting `haval`)
-* [`md2-md5-plain`](index.html#md2-md5-plain) - `md2(md5($p))` (and 66 more starting `md`)
+* [`md2-md5-plain`](index.html#md2-md5-plain) - `md2(md5($p))` (and 67 more starting `md`)
 * [`ripemd128-md5-plain`](index.html#ripemd128-md5-plain) - `ripemd128(md5($p))` (and 5 more starting `ripemd`)
-* [`sha1-plain-sha1-plain`](index.html#sha1-plain-sha1-plain) - `sha1($p.sha1($p))` (and 57 more starting `sha`)
+* [`sha1-plain-sha1-plain`](index.html#sha1-plain-sha1-plain) - `sha1($p.sha1($p))` (and 58 more starting `sha`)
 * [`tiger128-3-md5-plain`](index.html#tiger128-3-md5-plain) - `tiger(md5($p))` (and 1 more starting `tiger`)
 * [`whirlpool-md5-plain`](index.html#whirlpool-md5-plain) - `whirlpool(md5($p))` (and 3 more starting `whirlpool`)
 
-All 537: filter `john_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
+All 683: filter `john_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
 
 Where such an entry carries an expression, john can already attack it without
 a named format:
@@ -108,7 +108,7 @@ That string is in the entry's `john_dynamic_expr:` field and in the
 which lists formats `--list=formats` will show; the gap worth filling is
 whether a named one exists.
 
-### hashcat: 51 entries say nothing
+### hashcat: 50 entries say nothing
 
 A few that carry a vector and a proven expression, so there is a definite construction to look for, one per family:
 
@@ -118,45 +118,34 @@ A few that carry a vector and a proven expression, so there is a definite constr
 * [`md2-x2`](index.html#md2-x2) - `md2(md2($p))` (and 1 more starting `md`)
 * [`panama-x2`](index.html#panama-x2) - `panama(panama($p))`
 * [`rmd128-x2`](index.html#rmd128-x2) - `ripemd128(ripemd128($p))` (and 2 more starting `ripemd`)
-* [`sha224-x2`](index.html#sha224-x2) - `sha224(sha224($p))` (and 10 more starting `sha`)
+* [`sha224-sha224-plain-true`](index.html#sha224-sha224-plain-true) - `sha224(sha224_raw($p))` (and 9 more starting `sha`)
 * [`skein224-x2`](index.html#skein224-x2) - `skein224(skein224($p))` (and 3 more starting `skein`)
 * [`sm3-x2`](index.html#sm3-x2) - `sm3(sm3($p))`
 * [`tiger`](index.html#tiger) - `tiger($p)` (and 1 more starting `tiger`)
 * [`wrl-x2`](index.html#wrl-x2) - `whirlpool(whirlpool($p))`
 
-All 51: filter `hashcat_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
+All 50: filter `hashcat_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
 
-### mdxfind: 8 entries say nothing
+### mdxfind: 248 entries say nothing
 
 A few that carry a vector and a proven expression, so there is a definite construction to look for, one per family:
 
+* [`md5-md5-pass-salt-hc2630`](index.html#md5-md5-pass-salt-hc2630) - `md5(md5($p.$s))`
 * [`ripemd256`](index.html#ripemd256) - `ripemd256($p)`
+* [`sha256-sha256-pass-salt`](index.html#sha256-sha256-pass-salt) - `sha256(sha256($p.$s))`
 
-All 8: filter `mdxfind_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
+All 248: filter `mdxfind_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
 
-## 4. hashcat modes with no row here (306)
+## 4. hashcat modes with no row here (62)
 
 Whole algorithms rather than gaps in a row. Many are full-disk-encryption and
 wallet formats whose place in this table is still an open question; others are
 simply not written yet. hashcat publishes an example hash for each, so an
 entry can usually be created and proven in one sitting.
 
-* `24` - SolarWinds Serv-U
-* `124` - Django (SHA-1)
-* `141` - Episerver 6.x < .NET 4
-* `1441` - Episerver 6.x >= .NET 4
-* `1460` - HMAC-SHA256 (key = $salt)
-* `1760` - HMAC-SHA512 (key = $salt)
 * `2000` - STDOUT
 * `2500` - WPA-EAPOL-PBKDF2
 * `2501` - WPA-EAPOL-PMK
-* `2630` - md5(md5($pass.$salt))
-* `3610` - md5(md5(md5($pass)).$salt)
-* `4510` - sha1(sha1($pass).$salt)
-* `4521` - Redmine
-* `4522` - PunBB
-* `4711` - Huawei sha1(md5($pass).$salt)
-* `6060` - HMAC-RIPEMD160 (key = $salt)
 * `6211` - TrueCrypt RIPEMD160 + XTS 512 bit (legacy)
 * `6212` - TrueCrypt RIPEMD160 + XTS 1024 bit (legacy)
 * `6213` - TrueCrypt RIPEMD160 + XTS 1536 bit (legacy)
@@ -166,5 +155,18 @@ entry can usually be created and proven in one sitting.
 * `6231` - TrueCrypt Whirlpool + XTS 512 bit (legacy)
 * `6232` - TrueCrypt Whirlpool + XTS 1024 bit (legacy)
 * `6233` - TrueCrypt Whirlpool + XTS 1536 bit (legacy)
+* `6241` - TrueCrypt RIPEMD160 + XTS 512 bit + boot-mode (legacy)
+* `6242` - TrueCrypt RIPEMD160 + XTS 1024 bit + boot-mode (legacy)
+* `6243` - TrueCrypt RIPEMD160 + XTS 1536 bit + boot-mode (legacy)
+* `9000` - Password Safe v2
+* `9710` - MS Office <= 2003 $0/$1, MD5 + RC4, collider #1
+* `9810` - MS Office <= 2003 $3, SHA1 + RC4, collider #1
+* `10410` - PDF 1.1 - 1.3 (Acrobat 2 - 4), collider #1
+* `13711` - VeraCrypt RIPEMD160 + XTS 512 bit (legacy)
+* `13712` - VeraCrypt RIPEMD160 + XTS 1024 bit (legacy)
+* `13713` - VeraCrypt RIPEMD160 + XTS 1536 bit (legacy)
+* `13721` - VeraCrypt SHA512 + XTS 512 bit (legacy)
+* `13722` - VeraCrypt SHA512 + XTS 1024 bit (legacy)
+* `13723` - VeraCrypt SHA512 + XTS 1536 bit (legacy)
 
-All 306 are listed by `tools/validate.pl -v`.
+All 62 are listed by `tools/validate.pl -v`.
