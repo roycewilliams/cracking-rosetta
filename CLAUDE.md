@@ -126,6 +126,25 @@ mdxfind also accepts hashcat modes directly (`mdxfind -m 0`, `-m e1`,
   could not be round-tripped and nothing in the data said why.
   `extract-hashcat.pl` reads `--hash-info --machine-readable` for that
   reason. Check for an elision marker before trusting a scraped field.
+- **Many hashcat modes do not compare the whole digest, so a crack is not
+  automatically proof.** Measured on v7.1.2-549-g8a15e210b, 2026-08-31: `-m
+  100` accepts any 40-hex string whose LAST 128 bits match `sha1($p)` --
+  `deadbeefe046af0e12d3c38472792cd5f081c39f` "cracks" to `rosetta` although
+  `sha1("rosetta")` begins `d21af7ec`. `-m 0` compares all four MD5 words, so
+  this is per-mode, not universal; 22 of the 44 modes that scored a hit in the
+  first full discovery sweep skip a word. It is the SHA-family kernels'
+  reversal of the final round, and hashcat also INDEXES its target list by the
+  words it compares, so several hashes that differ only there collapse to one
+  entry and only one of them is ever reported cracked.
+  This is only fatal where the corpus holds a hash DELIBERATELY related to a
+  true digest, which is precisely what mdxfind's masked and truncated families
+  are: `-m 100` duly "cracked" `SHA1lsb35`, `and(sha1($p), 0x00000fff..ff)`.
+  `discover-hashcat.pl` challenges every mode that scores a hit with
+  one-character mutants of the digests it cracked, learns which positions it
+  skips, and withholds a claim wherever two different corpus hashes are
+  indistinguishable under it. Do not record a hashcat mapping for a truncated,
+  masked or re-prefixed digest without that check or an independent
+  recomputation.
 - **The vendored mdxfind catalog renders 15 types' example digests in
   uppercase hex**, and mdxfind will not read them back that way. Only
   `MD5UCBASE64SHA1RAW` turned out to be purely a case problem; `MD5UC`,

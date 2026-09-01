@@ -10,7 +10,11 @@ expression_proof:
 status: "ok"
 tools:
   hashcat:
-    verified: "absent"
+    modes: [32420]
+    verified: "vector"
+    verified_at: "2026-08-31"
+    verified_with: "v7.1.2-549-g8a15e210b"
+    note: "mode discovered by round-trip search, not by name"
   mdxfind:
     types: ["SHA512SHA512RAWUSER"]
     verified: "vector"

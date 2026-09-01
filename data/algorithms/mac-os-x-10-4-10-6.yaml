@@ -11,6 +11,12 @@ denotation:
   note: "john's own label for xsha, in 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200."
 status: "needs-review"
 tools:
+  hashcat:
+    modes: [122]
+    verified: "vector"
+    verified_at: "2026-08-31"
+    verified_with: "v7.1.2-549-g8a15e210b"
+    note: "mode discovered by round-trip search, not by name"
   john:
     cpu: ["xsha"]
     verified: "vector"

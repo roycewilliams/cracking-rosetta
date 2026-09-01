@@ -11,6 +11,12 @@ denotation:
   note: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A, entry for mdxfind type SSPR-SHA512 (e979), which states sha512^N(salt . pass) (Note [37])."
 status: "needs-review"
 tools:
+  hashcat:
+    modes: [32040]
+    verified: "vector"
+    verified_at: "2026-08-31"
+    verified_with: "v7.1.2-549-g8a15e210b"
+    note: "mode discovered by round-trip search, not by name"
   mdxfind:
     types: ["SSPR-SHA512"]
     verified: "vector"

@@ -8,6 +8,12 @@ expression_proof:
   note: "transcribed from the hx specification's Appendix A entry for mdxfind type EPISERVER (e859), which states base64(sha1_bin(salt . pass)) (EPiServer v0). Transcription, not reproduction, so this is upstream and not vector; run derive-expressions.pl to try to promote it. Not checkable locally: the construction uses functions RosettaExpr cannot compile, so this rests on upstream's word alone."
 status: "needs-review"
 tools:
+  hashcat:
+    modes: [141]
+    verified: "vector"
+    verified_at: "2026-08-31"
+    verified_with: "v7.1.2-549-g8a15e210b"
+    note: "mode discovered by round-trip search, not by name"
   mdxfind:
     types: ["EPISERVER"]
     verified: "vector"
