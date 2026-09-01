@@ -1,0 +1,16 @@
+id: "sha1sha512truncmd5"
+name: "SHA1SHA512TRUNCMD5"
+status: "needs-review"
+tools:
+  mdxfind:
+    types: ["SHA1SHA512TRUNCMD5"]
+    verified: "vector"
+    verified_at: "2026-08-31"
+    verified_with: "mdxfind RCS 1.540 (2026/08/22)"
+    note: "mdxfind's own published example for this identifier, recovered by mdxfind at this identifier with mdxfind's own published plaintext."
+  crack:
+    supported: false
+vectors:
+  - hash: "b34d9b3da5eb378180825a657a7e955ce260fd31:128"
+    pass: "password123"
+    source: "mdxfind"

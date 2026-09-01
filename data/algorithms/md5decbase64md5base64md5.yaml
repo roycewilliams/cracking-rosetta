@@ -1,0 +1,16 @@
+id: "md5decbase64md5base64md5"
+name: "MD5DECBASE64MD5BASE64MD5"
+status: "needs-review"
+tools:
+  mdxfind:
+    types: ["MD5DECBASE64MD5BASE64MD5"]
+    verified: "vector"
+    verified_at: "2026-08-31"
+    verified_with: "mdxfind RCS 1.540 (2026/08/22)"
+    note: "mdxfind's own published example for this identifier, recovered by mdxfind at this identifier with mdxfind's own published plaintext."
+  crack:
+    supported: false
+vectors:
+  - hash: "9f9f634ab9e3e48f188f2021f82b78a7"
+    pass: "password123"
+    source: "mdxfind"

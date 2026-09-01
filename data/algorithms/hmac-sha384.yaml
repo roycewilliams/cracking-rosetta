@@ -1,0 +1,16 @@
+id: "hmac-sha384"
+name: "HMAC-SHA384"
+status: "needs-review"
+tools:
+  mdxfind:
+    types: ["HMAC-SHA384"]
+    verified: "vector"
+    verified_at: "2026-08-31"
+    verified_with: "mdxfind RCS 1.540 (2026/08/22)"
+    note: "mdxfind's own published example for this identifier, recovered by mdxfind at this identifier with mdxfind's own published plaintext."
+  crack:
+    supported: false
+vectors:
+  - hash: "2264b82fed84e6b06c61ca89f5f4e6eef158ad71b6be075b67bafec9110476d88966e52f757ae1028db61087964434b4:testsalt"
+    pass: "password123"
+    source: "mdxfind"

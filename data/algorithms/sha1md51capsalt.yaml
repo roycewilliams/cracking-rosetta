@@ -1,0 +1,16 @@
+id: "sha1md51capsalt"
+name: "SHA1MD51CAPSALT"
+status: "needs-review"
+tools:
+  mdxfind:
+    types: ["SHA1MD51CAPSALT"]
+    verified: "vector"
+    verified_at: "2026-08-31"
+    verified_with: "mdxfind RCS 1.540 (2026/08/22)"
+    note: "mdxfind's own published example for this identifier, recovered by mdxfind at this identifier with mdxfind's own published plaintext."
+  crack:
+    supported: false
+vectors:
+  - hash: "ae90cba55af617eadcffefdffcf808340f67d37e:salt"
+    pass: "password123"
+    source: "mdxfind"

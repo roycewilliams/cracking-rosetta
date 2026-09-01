@@ -1,0 +1,16 @@
+id: "cryptext"
+name: "CRYPTEXT"
+status: "needs-review"
+tools:
+  mdxfind:
+    types: ["CRYPTEXT"]
+    verified: "vector"
+    verified_at: "2026-08-31"
+    verified_with: "mdxfind RCS 1.540 (2026/08/22)"
+    note: "mdxfind's own published example for this identifier, recovered by mdxfind at this identifier with mdxfind's own published plaintext."
+  crack:
+    supported: false
+vectors:
+  - hash: "e2ebed1cf4f2e40f4f0fc57c74d403879f6cf15f"
+    pass: "password123"
+    source: "mdxfind"

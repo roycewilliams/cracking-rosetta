@@ -1,0 +1,16 @@
+id: "md5lmuc"
+name: "MD5LMUC"
+status: "needs-review"
+tools:
+  mdxfind:
+    types: ["MD5LMUC"]
+    verified: "vector"
+    verified_at: "2026-08-31"
+    verified_with: "mdxfind RCS 1.540 (2026/08/22)"
+    note: "mdxfind's own published example for this identifier, recovered by mdxfind at this identifier with mdxfind's own published plaintext."
+  crack:
+    supported: false
+vectors:
+  - hash: "f762f0da0424f3c16520548989b5a960"
+    pass: "PASSWORD123"
+    source: "mdxfind"

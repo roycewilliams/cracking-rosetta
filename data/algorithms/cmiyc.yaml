@@ -1,0 +1,16 @@
+id: "cmiyc"
+name: "CMIYC"
+status: "needs-review"
+tools:
+  mdxfind:
+    types: ["CMIYC"]
+    verified: "vector"
+    verified_at: "2026-08-31"
+    verified_with: "mdxfind RCS 1.540 (2026/08/22)"
+    note: "mdxfind's own published example for this identifier, recovered by mdxfind at this identifier with mdxfind's own published plaintext."
+  crack:
+    supported: false
+vectors:
+  - hash: "$cmiyc$2026$1$10$AAAAAAAAAAAAAAAAAAAAAA$YreQXc5mD8bWReTEZqohX4CGrA7xWIXFX_JzDhJkLfo"
+    pass: "password123"
+    source: "mdxfind"

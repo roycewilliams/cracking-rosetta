@@ -1,0 +1,16 @@
+id: "wpa-eapol"
+name: "WPA-EAPOL"
+status: "needs-review"
+tools:
+  mdxfind:
+    types: ["WPA-EAPOL"]
+    verified: "vector"
+    verified_at: "2026-08-31"
+    verified_with: "mdxfind RCS 1.540 (2026/08/22)"
+    note: "mdxfind's own published example for this identifier, recovered by mdxfind at this identifier with mdxfind's own published plaintext."
+  crack:
+    supported: false
+vectors:
+  - hash: "WPA*02*7703121020ac20025ce3347aba2ccf55*fc690c158264*f4747f87f9f4*686173686361742d6573736964*10e3be3b005a629e89de088d6a2fdc489db83ad4764f2d186b9cde15446e972e*0103007502010a0000000000000000000148ce2ccba9c1fda130ff2fbbfb4fd3b063d1a93920b0f7df54a5cbf787b16171000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001630140100000fac040100000fac040100000fac028000*00"
+    pass: "password123"
+    source: "mdxfind"

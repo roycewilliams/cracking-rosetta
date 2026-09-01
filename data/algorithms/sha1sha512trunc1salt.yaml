@@ -1,0 +1,16 @@
+id: "sha1sha512trunc1salt"
+name: "SHA1SHA512TRUNC1SALT"
+status: "needs-review"
+tools:
+  mdxfind:
+    types: ["SHA1SHA512TRUNC1SALT"]
+    verified: "vector"
+    verified_at: "2026-08-31"
+    verified_with: "mdxfind RCS 1.540 (2026/08/22)"
+    note: "mdxfind's own published example for this identifier, recovered by mdxfind at this identifier with mdxfind's own published plaintext."
+  crack:
+    supported: false
+vectors:
+  - hash: "7a41e88b8e77d5fcf190144f31d90f96205b71a1:128 0x09"
+    pass: "password123"
+    source: "mdxfind"

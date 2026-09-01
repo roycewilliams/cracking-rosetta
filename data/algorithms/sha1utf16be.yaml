@@ -1,0 +1,16 @@
+id: "sha1utf16be"
+name: "SHA1UTF16BE"
+status: "needs-review"
+tools:
+  mdxfind:
+    types: ["SHA1UTF16BE"]
+    verified: "vector"
+    verified_at: "2026-08-31"
+    verified_with: "mdxfind RCS 1.540 (2026/08/22)"
+    note: "mdxfind's own published example for this identifier, recovered by mdxfind at this identifier with mdxfind's own published plaintext."
+  crack:
+    supported: false
+vectors:
+  - hash: "18527af6a7e3c4439dae6b7ef6afb40b0daecfad"
+    pass: "password123"
+    source: "mdxfind"

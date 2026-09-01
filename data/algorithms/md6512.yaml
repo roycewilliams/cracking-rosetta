@@ -1,0 +1,16 @@
+id: "md6512"
+name: "MD6512"
+status: "needs-review"
+tools:
+  mdxfind:
+    types: ["MD6512"]
+    verified: "vector"
+    verified_at: "2026-08-31"
+    verified_with: "mdxfind RCS 1.540 (2026/08/22)"
+    note: "mdxfind's own published example for this identifier, recovered by mdxfind at this identifier with mdxfind's own published plaintext."
+  crack:
+    supported: false
+vectors:
+  - hash: "099cc4f53aebc83286c2e3f4e0b2c6d3c53638a83d54b1225deb34614cd13e7170c1650df3c6afef0a848b1f4e86ab97c013c3852bd6fe2f0b5dc94b6c1fb67d"
+    pass: "password123"
+    source: "mdxfind"

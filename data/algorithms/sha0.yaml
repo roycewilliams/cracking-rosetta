@@ -1,0 +1,16 @@
+id: "sha0"
+name: "SHA0"
+status: "needs-review"
+tools:
+  mdxfind:
+    types: ["SHA0"]
+    verified: "vector"
+    verified_at: "2026-08-31"
+    verified_with: "mdxfind RCS 1.540 (2026/08/22)"
+    note: "mdxfind's own published example for this identifier, recovered by mdxfind at this identifier with mdxfind's own published plaintext."
+  crack:
+    supported: false
+vectors:
+  - hash: "40e43bfb5f73a156bfc863708ba7c66ce9e69b9d"
+    pass: "password123"
+    source: "mdxfind"

@@ -1,0 +1,16 @@
+id: "hmac-sha224-kpass"
+name: "HMAC-SHA224-KPASS"
+status: "needs-review"
+tools:
+  mdxfind:
+    types: ["HMAC-SHA224-KPASS"]
+    verified: "vector"
+    verified_at: "2026-08-31"
+    verified_with: "mdxfind RCS 1.540 (2026/08/22)"
+    note: "mdxfind's own published example for this identifier, recovered by mdxfind at this identifier with mdxfind's own published plaintext."
+  crack:
+    supported: false
+vectors:
+  - hash: "b1e6b34e060f415820939daa65d3b9681f6c5a89ef84b05b227ec74b:testsalt"
+    pass: "password123"
+    source: "mdxfind"

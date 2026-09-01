@@ -1,0 +1,16 @@
+id: "sha1-hmac-md5"
+name: "SHA1-HMAC-MD5"
+status: "needs-review"
+tools:
+  mdxfind:
+    types: ["SHA1-HMAC-MD5"]
+    verified: "vector"
+    verified_at: "2026-08-31"
+    verified_with: "mdxfind RCS 1.540 (2026/08/22)"
+    note: "mdxfind's own published example for this identifier, recovered by mdxfind at this identifier with mdxfind's own published plaintext."
+  crack:
+    supported: false
+vectors:
+  - hash: "359c696447a6e84ab2532c38c6c0f081ec58c09a:1122334455667788"
+    pass: "password123"
+    source: "mdxfind"

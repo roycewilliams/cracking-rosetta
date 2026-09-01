@@ -1,0 +1,16 @@
+id: "wpa-pmkid"
+name: "WPA-PMKID"
+status: "needs-review"
+tools:
+  mdxfind:
+    types: ["WPA-PMKID"]
+    verified: "vector"
+    verified_at: "2026-08-31"
+    verified_with: "mdxfind RCS 1.540 (2026/08/22)"
+    note: "mdxfind's own published example for this identifier, recovered by mdxfind at this identifier with mdxfind's own published plaintext."
+  crack:
+    supported: false
+vectors:
+  - hash: "WPA*01*73e1a080000ac80417aa784bec8627fa*fc690c158264*f4747f87f9f4*686173686361742d6573736964***"
+    pass: "password123"
+    source: "mdxfind"

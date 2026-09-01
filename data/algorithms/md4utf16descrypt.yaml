@@ -1,0 +1,16 @@
+id: "md4utf16descrypt"
+name: "MD4UTF16DESCRYPT"
+status: "needs-review"
+tools:
+  mdxfind:
+    types: ["MD4UTF16DESCRYPT"]
+    verified: "vector"
+    verified_at: "2026-08-31"
+    verified_with: "mdxfind RCS 1.540 (2026/08/22)"
+    note: "mdxfind's own published example for this identifier, recovered by mdxfind at this identifier with mdxfind's own published plaintext."
+  crack:
+    supported: false
+vectors:
+  - hash: "6c29032ff65d0cab0b4f83cda5af788e:.."
+    pass: "password"
+    source: "mdxfind"

@@ -1,0 +1,16 @@
+id: "sspr-sha256"
+name: "SSPR-SHA256"
+status: "needs-review"
+tools:
+  mdxfind:
+    types: ["SSPR-SHA256"]
+    verified: "vector"
+    verified_at: "2026-08-31"
+    verified_with: "mdxfind RCS 1.540 (2026/08/22)"
+    note: "mdxfind's own published example for this identifier, recovered by mdxfind at this identifier with mdxfind's own published plaintext."
+  crack:
+    supported: false
+vectors:
+  - hash: "$sspr$3$100000$ODk2NDA5Mjc2NDIwMjMwMjQyMTQ1NzMz$3cce91a82abf97b70c3836516ce2c4033cff16bffe10de6a1d4a900e1789e0b8"
+    pass: "password123"
+    source: "mdxfind"

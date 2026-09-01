@@ -1,0 +1,16 @@
+id: "sha1saltsha1ucpass"
+name: "SHA1SALTSHA1UCPASS"
+status: "needs-review"
+tools:
+  mdxfind:
+    types: ["SHA1SALTSHA1UCPASS"]
+    verified: "vector"
+    verified_at: "2026-08-31"
+    verified_with: "mdxfind RCS 1.540 (2026/08/22)"
+    note: "mdxfind's own published example for this identifier, recovered by mdxfind at this identifier with mdxfind's own published plaintext."
+  crack:
+    supported: false
+vectors:
+  - hash: "b720d4ed00467338d4a4bd144c46bded78ac6c16:salt"
+    pass: "password123"
+    source: "mdxfind"

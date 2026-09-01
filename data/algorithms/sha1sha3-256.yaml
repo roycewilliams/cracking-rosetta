@@ -1,0 +1,16 @@
+id: "sha1sha3-256"
+name: "SHA1SHA3-256"
+status: "needs-review"
+tools:
+  mdxfind:
+    types: ["SHA1SHA3-256"]
+    verified: "vector"
+    verified_at: "2026-08-31"
+    verified_with: "mdxfind RCS 1.540 (2026/08/22)"
+    note: "mdxfind's own published example for this identifier, recovered by mdxfind at this identifier with mdxfind's own published plaintext."
+  crack:
+    supported: false
+vectors:
+  - hash: "3a1f71639a8dc528b489817cd26225e9ce875524"
+    pass: "password123"
+    source: "mdxfind"

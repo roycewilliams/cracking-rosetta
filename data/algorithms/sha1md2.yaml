@@ -1,0 +1,16 @@
+id: "sha1md2"
+name: "SHA1MD2"
+status: "needs-review"
+tools:
+  mdxfind:
+    types: ["SHA1MD2"]
+    verified: "vector"
+    verified_at: "2026-08-31"
+    verified_with: "mdxfind RCS 1.540 (2026/08/22)"
+    note: "mdxfind's own published example for this identifier, recovered by mdxfind at this identifier with mdxfind's own published plaintext."
+  crack:
+    supported: false
+vectors:
+  - hash: "3a34b827a4ca0c5c026e8c1d7325fd221094611b"
+    pass: "password123"
+    source: "mdxfind"

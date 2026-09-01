@@ -1,0 +1,16 @@
+id: "mangos"
+name: "MANGOS"
+status: "needs-review"
+tools:
+  mdxfind:
+    types: ["MANGOS"]
+    verified: "vector"
+    verified_at: "2026-08-31"
+    verified_with: "mdxfind RCS 1.540 (2026/08/22)"
+    note: "mdxfind's own published example for this identifier, recovered by mdxfind at this identifier with mdxfind's own published plaintext."
+  crack:
+    supported: false
+vectors:
+  - hash: "716717f7db22169656a82f9c35fe0537458c90c7:Admin"
+    pass: "password123"
+    source: "mdxfind"

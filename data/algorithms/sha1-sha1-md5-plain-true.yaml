@@ -12,11 +12,12 @@ tools:
   hashcat:
     verified: "absent"
   mdxfind:
-    types: ["SHA1SHA1RAWMD5"]
+    types: ["MYSQL5MD5", "SHA1SHA1RAWMD5"]
     iterations: 2
     verified: "vector"
-    verified_at: "2026-08-29"
-    verified_with: "mdxfind"
+    verified_at: "2026-08-31"
+    verified_with: "mdxfind RCS 1.540 (2026/08/22)"
+    note: "MYSQL5MD5 added 2026-08-31 by seed-orphans.pl: mdxfind names it \"MYSQL5MD5\", which is this entry's own expression, and mdxfind at that identifier recovers this entry's own vector. It had no entry at all before."
   crack:
     supported: false
 vectors:

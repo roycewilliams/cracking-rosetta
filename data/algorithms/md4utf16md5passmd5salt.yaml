@@ -1,0 +1,16 @@
+id: "md4utf16md5passmd5salt"
+name: "MD4UTF16MD5PASSMD5SALT"
+status: "needs-review"
+tools:
+  mdxfind:
+    types: ["MD4UTF16MD5PASSMD5SALT"]
+    verified: "vector"
+    verified_at: "2026-08-31"
+    verified_with: "mdxfind RCS 1.540 (2026/08/22)"
+    note: "mdxfind's own published example for this identifier, recovered by mdxfind at this identifier with mdxfind's own published plaintext."
+  crack:
+    supported: false
+vectors:
+  - hash: "6adbba6f0d932b60b5976c680e9bf785:12345"
+    pass: "password123"
+    source: "mdxfind"

@@ -1,0 +1,16 @@
+id: "sha1sha1u37"
+name: "SHA1SHA1u37"
+status: "needs-review"
+tools:
+  mdxfind:
+    types: ["SHA1SHA1u37"]
+    verified: "vector"
+    verified_at: "2026-08-31"
+    verified_with: "mdxfind RCS 1.540 (2026/08/22)"
+    note: "mdxfind's own published example for this identifier, recovered by mdxfind at this identifier with mdxfind's own published plaintext."
+  crack:
+    supported: false
+vectors:
+  - hash: "62c88672d5c8bd2e1a693251d5a4adc2fc08bde1"
+    pass: "password123"
+    source: "mdxfind"

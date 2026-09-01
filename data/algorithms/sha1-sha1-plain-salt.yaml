@@ -16,10 +16,11 @@ tools:
     verified_with: "hashcat v7.1.2-549-g8a15e210b"
     note: "mode 4510 added 2026-08-31 by seed-hashcat-orphans.pl: hashcat names it \"sha1(sha1($pass).$salt)\", which is this entry's own expression, and hashcat at that mode recovers this entry's own vector. It had no entry at all before."
   mdxfind:
-    types: ["SHA1SHA1USER"]
+    types: ["SHA1SHA1PASSSALT", "SHA1SHA1USER"]
     verified: "vector"
-    verified_at: "2026-08-29"
-    verified_with: "mdxfind"
+    verified_at: "2026-08-31"
+    verified_with: "mdxfind RCS 1.540 (2026/08/22)"
+    note: "SHA1SHA1PASSSALT added 2026-08-31 by seed-orphans.pl: mdxfind names it \"SHA1SHA1PASSSALT\", which is this entry's own expression, and mdxfind at that identifier recovers this entry's own vector. It had no entry at all before."
   john:
     cpu: ["dynamic_1502"]
     verified: "vector"

@@ -1,0 +1,16 @@
+id: "md4utf16sha256sha1"
+name: "MD4UTF16SHA256SHA1"
+status: "needs-review"
+tools:
+  mdxfind:
+    types: ["MD4UTF16SHA256SHA1"]
+    verified: "vector"
+    verified_at: "2026-08-31"
+    verified_with: "mdxfind RCS 1.540 (2026/08/22)"
+    note: "mdxfind's own published example for this identifier, recovered by mdxfind at this identifier with mdxfind's own published plaintext."
+  crack:
+    supported: false
+vectors:
+  - hash: "fd6f1cbb282b01937df4289b94f0e04b"
+    pass: "password123"
+    source: "mdxfind"

@@ -1,0 +1,16 @@
+id: "sha1md5md5sha1sha1md5"
+name: "SHA1MD5MD5SHA1SHA1MD5"
+status: "needs-review"
+tools:
+  mdxfind:
+    types: ["SHA1MD5MD5SHA1SHA1MD5"]
+    verified: "vector"
+    verified_at: "2026-08-31"
+    verified_with: "mdxfind RCS 1.540 (2026/08/22)"
+    note: "mdxfind's own published example for this identifier, recovered by mdxfind at this identifier with mdxfind's own published plaintext."
+  crack:
+    supported: false
+vectors:
+  - hash: "62de7e8b0f57ae312ad2c18324480ee85e77b00b"
+    pass: "password123"
+    source: "mdxfind"

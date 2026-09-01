@@ -1,0 +1,16 @@
+id: "sne128"
+name: "SNE128"
+status: "needs-review"
+tools:
+  mdxfind:
+    types: ["SNE128"]
+    verified: "vector"
+    verified_at: "2026-08-31"
+    verified_with: "mdxfind RCS 1.540 (2026/08/22)"
+    note: "mdxfind's own published example for this identifier, recovered by mdxfind at this identifier with mdxfind's own published plaintext."
+  crack:
+    supported: false
+vectors:
+  - hash: "e3558e2a3a7878e2055ad7391baa6f42"
+    pass: "password123"
+    source: "mdxfind"

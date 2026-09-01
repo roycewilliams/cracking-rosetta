@@ -1,0 +1,16 @@
+id: "sha1utf7"
+name: "SHA1UTF7"
+status: "needs-review"
+tools:
+  mdxfind:
+    types: ["SHA1UTF7"]
+    verified: "vector"
+    verified_at: "2026-08-31"
+    verified_with: "mdxfind RCS 1.540 (2026/08/22)"
+    note: "mdxfind's own published example for this identifier, recovered by mdxfind at this identifier with mdxfind's own published plaintext."
+  crack:
+    supported: false
+vectors:
+  - hash: "a88edb266aa984a409f3818e78d237af1005ce06"
+    pass: "password123+"
+    source: "mdxfind"

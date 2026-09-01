@@ -1,0 +1,16 @@
+id: "md5sub1-20md5md5"
+name: "MD5sub1-20MD5MD5"
+status: "needs-review"
+tools:
+  mdxfind:
+    types: ["MD5sub1-20MD5MD5"]
+    verified: "vector"
+    verified_at: "2026-08-31"
+    verified_with: "mdxfind RCS 1.540 (2026/08/22)"
+    note: "mdxfind's own published example for this identifier, recovered by mdxfind at this identifier with mdxfind's own published plaintext."
+  crack:
+    supported: false
+vectors:
+  - hash: "41df380cbe28c769b1d820a11c484ee8"
+    pass: "password123"
+    source: "mdxfind"

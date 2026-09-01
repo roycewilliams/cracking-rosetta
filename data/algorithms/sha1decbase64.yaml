@@ -1,0 +1,16 @@
+id: "sha1decbase64"
+name: "SHA1DECBASE64"
+status: "needs-review"
+tools:
+  mdxfind:
+    types: ["SHA1DECBASE64"]
+    verified: "vector"
+    verified_at: "2026-08-31"
+    verified_with: "mdxfind RCS 1.540 (2026/08/22)"
+    note: "mdxfind's own published example for this identifier, recovered by mdxfind at this identifier with mdxfind's own published plaintext."
+  crack:
+    supported: false
+vectors:
+  - hash: "95f87b18c1cf3b5d654accd50e392986eee800f5"
+    pass: "password123"
+    source: "mdxfind"

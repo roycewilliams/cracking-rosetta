@@ -1,0 +1,16 @@
+id: "sha1hav128"
+name: "SHA1HAV128"
+status: "needs-review"
+tools:
+  mdxfind:
+    types: ["SHA1HAV128"]
+    verified: "vector"
+    verified_at: "2026-08-31"
+    verified_with: "mdxfind RCS 1.540 (2026/08/22)"
+    note: "mdxfind's own published example for this identifier, recovered by mdxfind at this identifier with mdxfind's own published plaintext."
+  crack:
+    supported: false
+vectors:
+  - hash: "b9659eb6e6578110b759f0c4e78147ee12332691"
+    pass: "password123"
+    source: "mdxfind"

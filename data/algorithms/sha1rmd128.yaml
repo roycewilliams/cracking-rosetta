@@ -1,0 +1,16 @@
+id: "sha1rmd128"
+name: "SHA1RMD128"
+status: "needs-review"
+tools:
+  mdxfind:
+    types: ["SHA1RMD128"]
+    verified: "vector"
+    verified_at: "2026-08-31"
+    verified_with: "mdxfind RCS 1.540 (2026/08/22)"
+    note: "mdxfind's own published example for this identifier, recovered by mdxfind at this identifier with mdxfind's own published plaintext."
+  crack:
+    supported: false
+vectors:
+  - hash: "8938ac86890fbabe1960983a84a4f8c756272526"
+    pass: "password123"
+    source: "mdxfind"

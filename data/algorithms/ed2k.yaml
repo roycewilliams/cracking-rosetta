@@ -1,0 +1,16 @@
+id: "ed2k"
+name: "ED2K"
+status: "needs-review"
+tools:
+  mdxfind:
+    types: ["ED2K"]
+    verified: "vector"
+    verified_at: "2026-08-31"
+    verified_with: "mdxfind RCS 1.540 (2026/08/22)"
+    note: "mdxfind's own published example for this identifier, recovered by mdxfind at this identifier with mdxfind's own published plaintext."
+  crack:
+    supported: false
+vectors:
+  - hash: "fc7b71b67e964466cec486ab12f4b558"
+    pass: "password123"
+    source: "mdxfind"

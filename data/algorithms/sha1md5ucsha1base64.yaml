@@ -1,0 +1,16 @@
+id: "sha1md5ucsha1base64"
+name: "SHA1MD5UCSHA1BASE64"
+status: "needs-review"
+tools:
+  mdxfind:
+    types: ["SHA1MD5UCSHA1BASE64"]
+    verified: "vector"
+    verified_at: "2026-08-31"
+    verified_with: "mdxfind RCS 1.540 (2026/08/22)"
+    note: "mdxfind's own published example for this identifier, recovered by mdxfind at this identifier with mdxfind's own published plaintext."
+  crack:
+    supported: false
+vectors:
+  - hash: "fe7995dc1f0a5bfcbe57f0e9db45ee5e5c4c921b"
+    pass: "password123"
+    source: "mdxfind"

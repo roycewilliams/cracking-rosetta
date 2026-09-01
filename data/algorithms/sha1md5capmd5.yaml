@@ -1,0 +1,16 @@
+id: "sha1md5capmd5"
+name: "SHA1MD5CAPMD5"
+status: "needs-review"
+tools:
+  mdxfind:
+    types: ["SHA1MD5CAPMD5"]
+    verified: "vector"
+    verified_at: "2026-08-31"
+    verified_with: "mdxfind RCS 1.540 (2026/08/22)"
+    note: "mdxfind's own published example for this identifier, recovered by mdxfind at this identifier with mdxfind's own published plaintext."
+  crack:
+    supported: false
+vectors:
+  - hash: "997954278c421be1a92bf24cd50f6a8ba9c14016"
+    pass: "password123"
+    source: "mdxfind"

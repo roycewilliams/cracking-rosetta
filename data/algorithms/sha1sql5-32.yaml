@@ -1,0 +1,16 @@
+id: "sha1sql5-32"
+name: "SHA1SQL5-32"
+status: "needs-review"
+tools:
+  mdxfind:
+    types: ["SHA1SQL5-32"]
+    verified: "vector"
+    verified_at: "2026-08-31"
+    verified_with: "mdxfind RCS 1.540 (2026/08/22)"
+    note: "mdxfind's own published example for this identifier, recovered by mdxfind at this identifier with mdxfind's own published plaintext."
+  crack:
+    supported: false
+vectors:
+  - hash: "5739376a1bd807fca1068819f1678880d2b28d8f"
+    pass: "password123"
+    source: "mdxfind"

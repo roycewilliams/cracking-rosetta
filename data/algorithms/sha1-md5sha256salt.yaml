@@ -1,0 +1,16 @@
+id: "sha1-md5sha256salt"
+name: "SHA1-MD5SHA256SALT"
+status: "needs-review"
+tools:
+  mdxfind:
+    types: ["SHA1-MD5SHA256SALT"]
+    verified: "vector"
+    verified_at: "2026-08-31"
+    verified_with: "mdxfind RCS 1.540 (2026/08/22)"
+    note: "mdxfind's own published example for this identifier, recovered by mdxfind at this identifier with mdxfind's own published plaintext."
+  crack:
+    supported: false
+vectors:
+  - hash: "f07fc36baa11bb092a312cd97d016009c4a3897e:ts"
+    pass: "password123"
+    source: "mdxfind"

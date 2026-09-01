@@ -110,6 +110,7 @@ use File::Path qw(make_path);
 use YAML::XS qw(LoadFile);
 use RosettaEmit qw(emit_entry);
 use RosettaTools qw(tool_path tool_env_help);
+use RosettaHx qw(parse_appendix translate_hx);
 
 my $PROG = basename($0);
 my $ROOT = "$RealBin/..";
@@ -306,6 +307,7 @@ sub load_candidates {
 # Per-tool adapters.
 
 my %MX_SALTED;   # filled for mdxfind
+my $HX;          # hx Appendix A, loaded for mdxfind --attach
 
 my %TOOL = (
     hashcat => {
@@ -352,6 +354,21 @@ my %TOOL = (
         label    => sub { $_[0]{name} },
         category => sub { undef },
         kind     => sub { 'mdxfind type' },
+        # An mdxfind TYPE NAME is not expression-shaped, so the default
+        # name-based attach can never fire for this tool -- and without an
+        # attach path a type describing a computation an entry already has
+        # would silently become a duplicate row. The hx appendix is the join
+        # that can see it: it states what each type computes. Measured
+        # 2026-08-31, exactly 2 of 274 orphan types would have duplicated
+        # (MYSQL5MD5, SHA1SHA1PASSSALT). Small, but it is the correct
+        # mechanism and the next mdxfind release gets it for free.
+        attach_expr => sub {
+            my ($r) = @_;
+            return undef unless $HX;
+            my $h = $HX->{ $r->{name} } or return undef;
+            my ($e) = translate_hx($h->{expr});
+            return $e;
+        },
         example  => sub {
             my ($r) = @_;
             my ($v, $p) = ($r->{example_vector} // '', $r->{example_pass} // '');
@@ -428,11 +445,25 @@ my %TOOL = (
 
 my $T = $TOOL{$tool};
 $binary //= tool_path($tool);
+# default: the tool's own label, read as an expression
+$T->{attach_expr} //= sub { to_expr($TOOL{$tool}{label}->($_[0])) };
 
 #-----------------------------------------------------------------------
 # Tool-specific setup.
 
 if ($tool eq 'mdxfind') {
+    my $appx = "$ROOT/tmp/hx/appA.txt";
+    if (-f $appx) {
+        $HX = parse_appendix($appx);
+        printf STDERR "- hx appendix: %d type(s), used to attach\n", scalar keys %$HX;
+    }
+    elsif ($attach) {
+        print STDERR "$PROG: no hx appendix at $appx, so --attach has nothing to "
+                   . "match on for mdxfind (type names are not expression-shaped). "
+                   . "Re-fetch hx.pdf -- see STATE.md -- or skip --attach and "
+                   . "accept that a type describing a computation an entry already "
+                   . "has will become a duplicate row.\n";
+    }
     my $mx = LoadFile("$ROOT/data/tools/mdxfind.yaml");
     for my $t (@{ $mx->{types} }) {
         # 's' is a salt carried in the hash line; 'u' is a userid field
@@ -495,7 +526,7 @@ for my $r (@orphans) {
     my ($hash, $pass) = @ex;
 
     #-- attach ------------------------------------------------------------
-    my $expr = to_expr($label);
+    my $expr = $T->{attach_expr}->($r);
     if ($attach && $expr && $by_expr{$expr}) {
         my @cand = @{ $by_expr{$expr} };
         $tried++;
