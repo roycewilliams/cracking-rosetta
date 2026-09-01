@@ -202,6 +202,34 @@ mdxfind also accepts hashcat modes directly (`mdxfind -m 0`, `-m e1`,
   (Whirlpool-1) with the letters transposed, and both mdxfind pinned to
   `WRL1` and john's `whirlpool1` reproduce the sheet's vector. Check a
   suspected non-type against the inventory before writing it off.
+- **`--field-separator-char` governs READING, not just printing.** It is how
+  john splits LOGIN from HASH on the way in, so setting it to tab makes john
+  treat a whole `USER::DOMAIN:challenge:response:blob` line as one login and
+  answer "No password hashes loaded" -- which is indistinguishable from a
+  format that did not crack, and is how netntlmv2 sat at tier `asserted` while
+  its mapping was fine. Measured 2026-09-01. The flag exists for a real reason
+  (a vector that contains a colon is otherwise truncated), and `verify-vectors.pl`
+  and `discover-john.pl` use it correctly by writing a synthetic login and a
+  TAB before each hash. That scheme cannot work for a format whose ciphertext
+  EMBEDS its own login -- NETNTLMv2, NETLMv2 and the other challenge-response
+  formats -- because displacing that field is exactly what breaks the parse.
+  Such a format has to be handed to john natively. `tools/probe-gpu.pl` does.
+- **`--show` does not always put the plaintext last.** Where the format has no
+  login field john appends it (`$SHA512$abc...:rosetta`); where it has one, john
+  re-inserts it into the original line structure instead
+  (`TESTWORKGROUP\NTlmv2:password::1122...:blob`). A checker anchored on the end
+  of the line silently misses a real crack. Match a whole colon-delimited FIELD.
+- **Some tool serializations of one credential genuinely differ, and a
+  transcode must be PROVEN, not assumed.** john reads both NTLMv2 spellings,
+  but for Kerberos AS-REP hashcat writes
+  `$krb5asrep$<et>$<user>$<REALM>$<checksum>$<data>` and john wants
+  `$krb5asrep$<et>$<REALM><user>$<data>$<checksum>` -- the checksum moves to the
+  END. A transcode that kept it where hashcat puts it produced a string of
+  exactly the right shape that john refused to load. Hand the transcoded string
+  to john with ONLY the plaintext the original vector states: a wrong rule
+  fails to load or fails to crack. And say in the entry that the two strings are
+  ONE piece of evidence written twice, or a later reader counts two agreeing
+  vectors as corroboration.
 - **john is not executable by every user here.** `run/john` and `run/*.conf`
   are `0750 royce:royce`. Extraction must run as `royce`, or the mode must be
   widened. `src/*.c` is world-readable but only yields ~114 of ~403 formats;
