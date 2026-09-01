@@ -11,10 +11,11 @@ category: "encoding"
 status: "needs-review"
 tools:
   hashcat:
-    modes: [4300]
+    modes: [0]
     verified: "vector"
-    verified_at: "2026-08-30"
-    verified_with: "hashcat"
+    verified_at: "2026-08-31"
+    verified_with: "hashcat v7.1.2-549-g8a15e210b"
+    note: "was mode 4300 until 2026-08-31, which is a DIFFERENT computation: 4300 is md5(strtoupper(md5($pass))), already carried correctly by md5-strtoupper-md5-pass. MD5UC is md5 written in uppercase hex -- an encoding, not a second hashing round -- and hashcat folds hex case on load, so mode 0 reads this entry's uppercase vector and echoes it back lowercase. Verified 2026-08-31 against this entry's own vector."
   mdxfind:
     types: ["MD5UC"]
     verified: "upstream"
@@ -37,6 +38,3 @@ vectors:
   - hash: "482C811DA5D5B4BC6D497FFA98491E38"
     pass: "password123"
     source: "mdxfind"
-  - hash: "b8c385461bb9f9d733d3af832cf60b27"
-    pass: "hashcat"
-    source: "hashcat"
