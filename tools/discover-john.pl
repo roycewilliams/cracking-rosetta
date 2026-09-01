@@ -235,6 +235,13 @@ $algdir    //= "$ROOT/data/algorithms";
 $inventory //= "$ROOT/data/tools/john.yaml";
 $workdir   //= "$ROOT/tmp/discover-john";
 
+# john is run from its own run/ directory -- it resolves john.conf against the
+# cwd -- so a RELATIVE --work would be resolved there, where this user cannot
+# write, and every pot file would silently fail to appear. That happened
+# 2026-08-31: 957 formats "ran" in 35s and found nothing. Make it absolute
+# once, here.
+$workdir = "$ROOT/$workdir" unless $workdir =~ m{^/};
+
 make_path($workdir) unless -d $workdir;
 my $today = strftime('%Y-%m-%d', localtime);
 

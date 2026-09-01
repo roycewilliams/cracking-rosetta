@@ -84,6 +84,7 @@ Two rules that have each cost real time here:
 | Data changed | `tools/render.pl` — but CI does this on push; you rarely need to |
 | Vectors added anywhere | `tools/verify-vectors.pl --tool all` (`--only` is repeatable, so verify just the delta) |
 | An entry has no vector, or a tool block is stuck below tier `vector` | `tools/seed-vectors.pl --report`, then `--apply` (add `--fill` for the second case) — it seeds the publishing tool's own published example and verifies before writing |
+| A row names one tool and should name three | `tools/discover-hashcat.pl`, `tools/discover-mdxfind.pl`, `tools/discover-john.pl` — one per column, same proof standard: the identifier goes on the row because that tool cracked THAT ROW'S vector under it |
 | Looking for missing John mappings | `tools/discover-john.pl`, then `tools/identify-john.pl` (the two search directions) |
 | Expressions | `tools/expressions.pl` (transcribe, tier `upstream`), then `tools/derive-expressions.pl` (prove, tier `vector`) |
 | Two entries share an expression | `tools/relate.pl` — writes both sides; never hand-write one |

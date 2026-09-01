@@ -18,6 +18,12 @@ tools:
     verified_at: "2026-08-31"
     verified_with: "hashcat v7.1.2-549-g8a15e210b"
     note: "hashcat's own published example hash for this mode, recovered by hashcat at this mode with hashcat's own published plaintext."
+  mdxfind:
+    types: ["SHA512PASSSALT"]
+    verified: "vector"
+    verified_at: "2026-08-31"
+    verified_with: "mdxfind RCS 1.540 (2026/08/22)"
+    note: "type discovered by round-trip search, not by name"
   john:
     cpu: ["dynamic_82"]
     verified: "vector"

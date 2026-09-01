@@ -15,6 +15,12 @@ tools:
     verified: "vector"
     verified_at: "2026-08-30"
     verified_with: "hashcat"
+  mdxfind:
+    types: ["MD4UTF16", "MD4UTF16UC", "NTLM", "NTLMH"]
+    verified: "vector"
+    verified_at: "2026-08-31"
+    verified_with: "mdxfind RCS 1.540 (2026/08/22)"
+    note: "type discovered by round-trip search, not by name"
   john:
     cpu: ["NT", "NT-long", "dynamic_33"]
     verified: "vector"

@@ -7,6 +7,12 @@ tools:
     verified: "vector"
     verified_at: "2026-08-29"
     verified_with: "hashcat"
+  mdxfind:
+    types: ["MD5MD5UC"]
+    verified: "vector"
+    verified_at: "2026-08-31"
+    verified_with: "mdxfind RCS 1.540 (2026/08/22)"
+    note: "type discovered by round-trip search, not by name"
   crack:
     supported: false
 vectors:
