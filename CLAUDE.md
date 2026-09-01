@@ -145,6 +145,27 @@ mdxfind also accepts hashcat modes directly (`mdxfind -m 0`, `-m e1`,
   indistinguishable under it. Do not record a hashcat mapping for a truncated,
   masked or re-prefixed digest without that check or an independent
   recomputation.
+- **john has the same defect, at its own widths.** `Raw-SHA1-Linkedin` reads a
+  leak whose hashes have their leading nibbles zeroed and so ignores hash
+  positions **0-4** -- the 20 bits that were zeroed, measured position by
+  position 2026-09-01. It is NOT 0-7; that is hashcat `-m 100`'s width and was
+  carried across by assumption for a while. `Raw-SHA1` and `dynamic_26` compare
+  the whole digest. `discover-john.pl` now carries the same canary, and
+  `--mirror-gpu` skips it on purpose because a GPU mirror of an already-named
+  CPU format adds no algorithmic claim. `discover-mdxfind.pl` has no canary;
+  mdxfind matches on a full raw digest, so it is lower risk, but nobody has
+  measured it.
+- **A canary must never mutate a base64 digest.** The mutation is defined on
+  TEXT and the claim is about a DIGEST, and those coincide only where the text
+  IS the digest. Measured 2026-09-01: challenging john's `Raw-SHA1` reported
+  that it ignores position 31 of `{SHA}0ijZPTcJXMa+t2XnEbEwSOkvQu0=`. It does
+  not -- 27 base64 characters carry 162 bits and SHA-1 is 160, so the last
+  character's bottom two bits encode nothing and the mutant decodes to the same
+  digest. Both discovery tools therefore mutate only a leading run of at least
+  16 hex characters and report anything else as **unmeasured** rather than
+  clean. The error is one-directional: a bogus ignored position can only ever
+  WITHHOLD a claim, never invent one, so a stale cached verdict costs coverage
+  and not correctness.
 - **The vendored mdxfind catalog renders 15 types' example digests in
   uppercase hex**, and mdxfind will not read them back that way. Only
   `MD5UCBASE64SHA1RAW` turned out to be purely a case problem; `MD5UC`,
