@@ -14,6 +14,12 @@ tools:
     verified_at: "2026-08-31"
     verified_with: "mdxfind RCS 1.540 (2026/08/22)"
     note: "mdxfind's own published example for this identifier, recovered by mdxfind at this identifier with mdxfind's own published plaintext."
+  john:
+    cpu: ["Snefru-256"]
+    verified: "vector"
+    verified_at: "2026-08-31"
+    verified_with: "john"
+    note: "format discovered by round-trip search, not by name"
   crack:
     supported: false
 vectors:
