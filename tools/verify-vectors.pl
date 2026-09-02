@@ -281,6 +281,11 @@ for my $f (@files) {
 # names it and has a vector.
 
 my %job;   # tool -> identifier -> { entries => {id=>1}, iterations => n }
+my %read;  # tool -> entry id -> vector index -> 1, when that tool read THAT
+           # string. %cracked answers "did this entry verify", which is what a
+           # tier needs; this answers "which serialization did each tool
+           # accept", which is what a reader holding one of them needs, and it
+           # was already being computed and thrown away.
 
 for my $id (sort keys %entry) {
     my $e = $entry{$id};
@@ -345,9 +350,15 @@ sub vectors_for {
     my (@ids) = @_;
     my @v;
     for my $id (@ids) {
+        my $i = -1;
         for my $vec (@{ $entry{$id}{vectors} || [] }) {
+            $i++;
             next unless defined $vec->{hash} && defined $vec->{pass};
-            push @v, { id => $id, hash => $vec->{hash}, pass => $vec->{pass} };
+            # vi is the vector's position in its entry's list. Without it a
+            # result can be attributed only to the ENTRY, which is all a tier
+            # needs and not enough to say which SERIALIZATION a tool read.
+            push @v, { id => $id, vi => $i,
+                       hash => $vec->{hash}, pass => $vec->{pass} };
         }
     }
     return @v;
@@ -407,8 +418,10 @@ if ($want{hashcat} && $job{hashcat}) {
         my %got;
         $got{$1} = 1 while $out =~ /^(.+?):[^:]*$/mg;
         for my $vec (@v) {
-            $cracked{hashcat}{ $vec->{id} }{$mode} = 1
-                if index($out, $vec->{hash}) >= 0 && $out =~ /\Q$vec->{hash}\E:/;
+            next unless index($out, $vec->{hash}) >= 0
+                     && $out =~ /\Q$vec->{hash}\E:/;
+            $cracked{hashcat}{ $vec->{id} }{$mode} = 1;
+            $read{hashcat}{ $vec->{id} }{ $vec->{vi} } = 1;
         }
         $failed_job{hashcat}{$mode} = $code if $code == -2;
         printf STDERR "-   hashcat -m %-6s %d hash(es) -> %d cracked%s\n",
@@ -455,8 +468,9 @@ if ($want{mdxfind} && $job{mdxfind}) {
             next unless $got == $it;
             my $rest = $2;
             for my $vec (@v) {
-                $cracked{mdxfind}{ $vec->{id} }{$type} = 1
-                    if mx_echo_is($rest, $vec);
+                next unless mx_echo_is($rest, $vec);
+                $cracked{mdxfind}{ $vec->{id} }{$type} = 1;
+                $read{mdxfind}{ $vec->{id} }{ $vec->{vi} } = 1;
             }
         }
         # Accumulate: one type has a separate job per declared iteration
@@ -542,8 +556,9 @@ if ($want{john} && $job{john}) {
             $won{"$vec->{hash}\0$vec->{pass}"} = 1;
         }
         for my $vec (@v) {
-            $cracked{john}{ $vec->{id} }{$label} = 1
-                if $won{"$vec->{hash}\0$vec->{pass}"};
+            next unless $won{"$vec->{hash}\0$vec->{pass}"};
+            $cracked{john}{ $vec->{id} }{$label} = 1;
+            $read{john}{ $vec->{id} }{ $vec->{vi} } = 1;
         }
         $failed_job{john}{$label} = $code if $code == -2;
         printf STDERR "-   john --format=%-22s %d hash(es) -> %d cracked%s\n",
@@ -612,8 +627,35 @@ if (!$dry) {
                                                $john_gpu ? @{ $blk->{gpu} || [] } : ());
             next unless @idents;
 
+            my $all_ran = !grep { !$ran_ident{$tool}{$_} } @idents;
+
+            # reads_in: which tools were proven to READ this exact string.
+            # Three states, and the third is the point -- a tool that did not
+            # run tells us nothing, and recording that as "does not read" would
+            # invent a negative. So: a read sets it; a complete run that read
+            # nothing clears it; anything else leaves the vector alone.
+            #
+            # This is what makes a divergent serialization visible. Where one
+            # string reads in hashcat and john both, they agree on the format;
+            # where an entry needs one string per tool, they do not, and until
+            # now that was only ever stated in prose on three entries.
+            my $vi = -1;
+            for my $vec (@{ $e->{vectors} || [] }) {
+                $vi++;
+                my %in = map { $_ => 1 } @{ $vec->{reads_in} || [] };
+                my $was = join ',', sort keys %in;
+                if ($read{$tool}{$id}{$vi})  { $in{$tool} = 1 }
+                elsif ($all_ran)             { delete $in{$tool} }
+                else                         { next }
+                my @now = sort keys %in;
+                next if join(',', @now) eq $was;
+                if (@now) { $vec->{reads_in} = \@now }
+                else      { delete $vec->{reads_in} }
+                $touched = 1;
+            }
+
             # Every identifier must have actually run; see methodology.
-            next if grep { !$ran_ident{$tool}{$_} } @idents;
+            next unless $all_ran;
 
             my @ok  = grep {  $cracked{$tool}{$id}{$_} } @idents;
             my @bad = grep { !$cracked{$tool}{$id}{$_} } @idents;

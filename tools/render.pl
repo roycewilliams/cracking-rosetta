@@ -210,6 +210,33 @@ for my $e (@rows) {
                        ? ($e->{denotation}{text} // '') : ''),
         status => $e->{status} // 'ok',
         vecs   => scalar @{ $e->{vectors} || [] },
+        # serialization: do the tools agree about the STRING, not just the
+        # algorithm? Derived, never asserted -- from reads_in, which
+        # verify-vectors.pl measures, and credential, which a curator sets to
+        # say two spellings are one credential.
+        #
+        #   divergent  the entry holds one credential written more than one
+        #              way, so a hash in one tool's form must be re-encoded
+        #              for the other
+        #   shared     one string was proven to load in two or more tools
+        #   unknown    nothing has established either way
+        #
+        # Until this column existed, 197 entries had PROVEN that a single
+        # string satisfies both hashcat and john and said so nowhere, and a
+        # reader holding one could not tell that from "nobody checked".
+        serialization => do {
+            my %cred;
+            my $shared = 0;
+            for my $v (@{ $e->{vectors} || [] }) {
+                $cred{ $v->{credential} }++
+                    if defined $v->{credential} && !ref $v->{credential};
+                $shared = 1 if ref $v->{reads_in} eq 'ARRAY'
+                            && @{ $v->{reads_in} } > 1;
+            }
+            (grep { $cred{$_} > 1 } keys %cred) ? 'divergent'
+                                    : $shared   ? 'shared'
+                                    :             'unknown';
+        },
         notes  => $e->{notes} // '',
         legacy => join('; ', grep { defined && length }
                         ($e->{legacy}{hashes_org}, $e->{legacy}{hashkiller})),
@@ -271,7 +298,7 @@ sub csv_field {
 my @CSV = qw(id name aliases expression expression_tier denotation
              category application status merged_into
              hashcat hashcat_state john john_state mdxfind mdxfind_state
-             crack_state vectors relations legacy notes);
+             crack_state vectors serialization relations legacy notes);
 
 open my $csv, '>', "$distdir/rosetta.csv" or die "cannot write csv: $!\n";
 print {$csv} join(',', @CSV), "\n";
@@ -283,7 +310,8 @@ for my $r (@out) {
         join(' ', @{ $r->{hashcat}{ids} }), $r->{hashcat}{state},
         join(' ', @{ $r->{john}{ids} }),    $r->{john}{state},
         join(' ', @{ $r->{mdxfind}{ids} }), $r->{mdxfind}{state},
-        $r->{crack}{state}, $r->{vecs}, $r->{sameas}, $r->{legacy}, $r->{notes},
+        $r->{crack}{state}, $r->{vecs}, $r->{serialization},
+        $r->{sameas}, $r->{legacy}, $r->{notes},
     )), "\n";
 }
 # Tombstones last, so the live table stays one contiguous block for anyone
@@ -291,7 +319,7 @@ for my $r (@out) {
 for my $t (@tomb_out) {
     print {$csv} join(',', map { csv_field($_) } (
         $t->{id}, $t->{name}, '', '', '', '', '', '', 'merged', $t->{into},
-        '', '', '', '', '', '', '', '', $t->{sameas}, '', $t->{notes},
+        '', '', '', '', '', '', '', '', '', $t->{sameas}, '', $t->{notes},
     )), "\n";
 }
 close $csv;

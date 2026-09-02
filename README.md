@@ -108,6 +108,8 @@ One file per algorithm rather than one big table is deliberate: you touch one sm
 
 * A missing tool column is an open question, not a claim of absence. `absent` is a claim, and it's stated explicitly.
 
+* **Two tools can agree on the algorithm and disagree about the string.** The `serialization` column says which: `shared` means one test vector was proven to load in more than one tool, so a hash in that form is portable between them; `divergent` means this row holds one credential written more than one way, so a hash in one tool's form has to be re-encoded before the other will read it - hashcat writes Kerberos AS-REP as `$krb5asrep$<etype>$<user>$<REALM>$<checksum>$<data>` and John wants the checksum last; `unknown` means nobody has established either way, which is most rows. The underlying facts are per test vector, in `data/algorithms/`: `reads_in` lists the tools measured to read that exact string, and `credential` groups two spellings of one credential so nobody counts them as two agreeing pieces of evidence.
+
 * **The mdxfind iteration count is part of the identity.** `MD5` at `-i 2` is `md5(md5($pass))`, which is John's `dynamic_2`, not `dynamic_0`. The spreadsheet lost these; 17 were recovered by reading mdxfind's own output suffix.
 
 * **mdxfind's hashcat column lists *related* modes, not equivalents.** Type `MD5` names modes 0, 2600, 3500 and 5100 - four different algorithms it reaches by varying `-i` and truncation. Only its 279 one-to-one mappings were seeded; the other 18 are left for a human.

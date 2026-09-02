@@ -720,6 +720,7 @@ for my $file (@files) {
         }
         else {
             my $i = 0;
+            my %cred;      # credential label -> how many vectors carry it
             for my $v (@{ $d->{vectors} }) {
                 $i++;
                 if (ref $v ne 'HASH') {
@@ -731,6 +732,55 @@ for my $file (@files) {
                 err("%s: vectors[%d] is missing 'pass'", $file, $i)
                     unless defined $v->{pass};
 
+                # reads_in is a measurement and only verify-vectors.pl writes
+                # it, so the only thing to check is that it names real tools.
+                if (defined $v->{reads_in}) {
+                    if (ref $v->{reads_in} ne 'ARRAY') {
+                        err("%s: vectors[%d].reads_in must be a list", $file, $i);
+                    }
+                    else {
+                        my %ok = map { $_ => 1 } qw(hashcat john mdxfind);
+                        my %seen;
+                        for my $t (@{ $v->{reads_in} }) {
+                            err("%s: vectors[%d].reads_in names '%s', which is "
+                              . "not a tool", $file, $i, $t) unless $ok{$t};
+                            err("%s: vectors[%d].reads_in names '%s' twice",
+                                $file, $i, $t) if $seen{$t}++;
+                        }
+                    }
+                }
+                err("%s: vectors[%d].credential must be a scalar", $file, $i)
+                    if defined $v->{credential} && ref $v->{credential};
+
+                $cred{ $v->{credential} }++ if defined $v->{credential}
+                                            && !ref $v->{credential};
+            }
+
+            # A credential group is the statement "these are ONE credential
+            # written in two tools' serializations, so they are not
+            # independent evidence". Two things follow, and neither was
+            # checkable while the claim lived in prose:
+            #
+            #   - a group of one asserts nothing and is almost always a typo
+            #     in the other member's label;
+            #   - a real group needs the entry to SAY how the forms differ and
+            #     that the re-encoding was proven rather than assumed, which
+            #     is the rule CLAUDE.md sets for the Kerberos AS-REP transcode.
+            #     Seven entries carried two tool-sourced vectors with no such
+            #     note on 2026-09-02, and a reader would rightly have read them
+            #     as two agreeing pieces of evidence.
+            for my $c (sort keys %cred) {
+                if ($cred{$c} < 2) {
+                    err("%s: credential '%s' is on one vector only; a group "
+                      . "says two spellings are ONE credential, so a group of "
+                      . "one says nothing", $file, $c);
+                }
+                elsif (($d->{notes} // '') !~ /\S/) {
+                    err("%s: credential '%s' groups %d vectors, so they are "
+                      . "not independent evidence -- notes: must say how the "
+                      . "serializations differ and that the re-encoding was "
+                      . "proven, not assumed", $file, $c, $cred{$c});
+                }
             }
 
             # A mode no vector of this entry could ever exercise.

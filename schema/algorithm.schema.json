@@ -5,7 +5,10 @@
   "description": "One curated algorithm in data/algorithms/. This schema documents the shape for editors and external consumers; tools/validate.pl is what actually gates a PR, because the checks that matter most (does hashcat mode 2811 exist in this hashcat? does dynamic_12 exist in this john?) are cross-references no schema can express.",
   "type": "object",
   "additionalProperties": false,
-  "required": ["id", "name"],
+  "required": [
+    "id",
+    "name"
+  ],
   "properties": {
     "id": {
       "type": "string",
@@ -19,7 +22,9 @@
     },
     "aliases": {
       "type": "array",
-      "items": { "type": "string" },
+      "items": {
+        "type": "string"
+      },
       "description": "Other names this algorithm is known by, for search."
     },
     "expression": {
@@ -33,11 +38,18 @@
     "expression_proof": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["verified"],
+      "required": [
+        "verified"
+      ],
       "description": "The tier on expression:, in the same vocabulary the per-tool blocks use, because it is the same kind of claim. An expression is a statement about what the algorithm IS, and validate.pl fails a build when two entries share one - so a key whose provenance cannot be audited is a key that will eventually have to be weakened. 'vector' means the expression string itself was compiled by john --format=dynamic='...' and recovered this entry's own plaintext from its own hash. 'upstream' means a project that verifies by recomputation stated it - john's own --list=subformats for a locally proven identifier. 'asserted' means a human said so. 'absent' means this algorithm has no expression in the dynamic language at all, which is a decision worth recording once rather than re-asking every run; pair it with denotation:.",
       "properties": {
         "verified": {
-          "enum": ["vector", "upstream", "asserted", "absent"],
+          "enum": [
+            "vector",
+            "upstream",
+            "asserted",
+            "absent"
+          ],
           "description": "Same four tiers, same meanings as a per-tool block."
         },
         "verified_at": {
@@ -58,7 +70,9 @@
     "denotation": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["text"],
+      "required": [
+        "text"
+      ],
       "description": "How people refer to this algorithm when there is no machine-checkable expression: a pseudo-expression in a language richer than john's dynamic ('hmac(\"sha1\", $plain, $salt)', 'md5(base64_encode($plain))'), or simply the label a suite or a standard uses ('PBKDF2-HMAC-SHA256', '7-Zip'). It is deliberately NOT tiered, because nothing can round-trip it; instead it carries a source, so it is never an unattributed human claim. Illegal alongside expression:, which would make the entry say the same thing twice in two strengths.",
       "properties": {
         "text": {
@@ -67,8 +81,15 @@
           "description": "The denotation itself, exactly as the source spells it."
         },
         "source": {
-          "enum": ["sheet", "mdxfind", "hashcat", "john", "hashpipe",
-                   "hashes.org", "human"],
+          "enum": [
+            "sheet",
+            "mdxfind",
+            "hashcat",
+            "john",
+            "hashpipe",
+            "hashes.org",
+            "human"
+          ],
           "description": "Where the wording came from. 'sheet' is the migrated Google Sheet; a tool name means it restates that tool's own label, which is then also in tools.<tool>."
         },
         "note": {
@@ -78,8 +99,15 @@
       }
     },
     "category": {
-      "enum": ["primitive", "composite", "iterated", "encoding",
-               "application", "protocol", "kdf"],
+      "enum": [
+        "primitive",
+        "composite",
+        "iterated",
+        "encoding",
+        "application",
+        "protocol",
+        "kdf"
+      ],
       "description": "The human axis this entry sits on. primitive: one hash function over the plaintext. composite: a construction over several. iterated: another entry applied N times. encoding: another entry's digest written differently. application: a product's use of a computation another entry also names. protocol: a challenge-response or wire format. kdf: a deliberately slow derivation."
     },
     "application": {
@@ -96,12 +124,21 @@
       "items": {
         "type": "object",
         "additionalProperties": false,
-        "required": ["kind", "entry"],
+        "required": [
+          "kind",
+          "entry"
+        ],
         "properties": {
           "kind": {
-            "enum": ["same-computation", "encodes", "input-encoding",
-                     "iterates", "truncates", "collides-on-subset",
-                     "duplicate-of"],
+            "enum": [
+              "same-computation",
+              "encodes",
+              "input-encoding",
+              "iterates",
+              "truncates",
+              "collides-on-subset",
+              "duplicate-of"
+            ],
             "description": "same-computation: identical bytes in, identical bytes out. encodes: same digest, different textual encoding. input-encoding: same primitive over a re-encoded plaintext. iterates: this entry is the other applied N times. truncates: this entry is the other, cut short. collides-on-subset: agrees only on a degenerate class of inputs, so a tool may crack one entry's vector without denoting it. duplicate-of: no distinction survives and one of these should go."
           },
           "entry": {
@@ -110,16 +147,30 @@
             "description": "The id of the other entry."
           },
           "distinction": {
-            "enum": ["application", "encoding", "input-encoding", "iteration",
-                     "truncation", "salt-convention", "naming", "none"],
+            "enum": [
+              "application",
+              "encoding",
+              "input-encoding",
+              "iteration",
+              "truncation",
+              "salt-convention",
+              "naming",
+              "none"
+            ],
             "description": "Why both rows exist despite the relation. 'none' is legal only with kind duplicate-of, which is how a merge is proposed in data rather than in a comment. 'naming' is the weakest distinction and says nothing about the algorithm: the tools publish several identifiers for one computation (mdxfind alone has MD4UTF16, NTLM and NTLMH for md4(utf16($p))), and each row is where a reader arrives from a different name. Use it only where a curator has looked at a proposed duplicate and decided both names should keep a row of their own; a machine proposing a merge still writes duplicate-of."
           },
-          "note": { "type": "string" }
+          "note": {
+            "type": "string"
+          }
         }
       }
     },
     "status": {
-      "enum": ["ok", "needs-review", "merged"],
+      "enum": [
+        "ok",
+        "needs-review",
+        "merged"
+      ],
       "default": "ok",
       "description": "needs-review marks an entry a machine created and a human has not yet confirmed - what the upstream-drift PRs emit. merged marks a TOMBSTONE: the entry lost a merge, its content now lives on the entry merged_into names, and this file survives only so the published id keeps resolving - it is a filename stem, a URL fragment in docs/index.html and the key in dist/rosetta.csv. A tombstone asserts nothing: no tools, vectors, expression, denotation or category, and validate.pl excludes it from every coverage count."
     },
@@ -136,40 +187,85 @@
           "type": "object",
           "additionalProperties": false,
           "properties": {
-            "modes": { "type": "array", "items": { "type": "integer", "minimum": 0 } },
-            "verified": { "$ref": "#/$defs/tier" },
-            "verified_at": { "$ref": "#/$defs/date" },
-            "verified_with": { "type": "string" },
-            "note": { "type": "string" }
+            "modes": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "minimum": 0
+              }
+            },
+            "verified": {
+              "$ref": "#/$defs/tier"
+            },
+            "verified_at": {
+              "$ref": "#/$defs/date"
+            },
+            "verified_with": {
+              "type": "string"
+            },
+            "note": {
+              "type": "string"
+            }
           }
         },
         "john": {
           "type": "object",
           "additionalProperties": false,
           "properties": {
-            "cpu": { "type": "array", "items": { "type": "string" } },
-            "gpu": { "type": "array", "items": { "type": "string" } },
-            "verified": { "$ref": "#/$defs/tier" },
-            "verified_at": { "$ref": "#/$defs/date" },
-            "verified_with": { "type": "string" },
-            "note": { "type": "string" }
+            "cpu": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "gpu": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "verified": {
+              "$ref": "#/$defs/tier"
+            },
+            "verified_at": {
+              "$ref": "#/$defs/date"
+            },
+            "verified_with": {
+              "type": "string"
+            },
+            "note": {
+              "type": "string"
+            }
           }
         },
         "mdxfind": {
           "type": "object",
           "additionalProperties": false,
           "properties": {
-            "types": { "type": "array", "items": { "type": "string" } },
+            "types": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
             "iterations": {
               "type": "integer",
               "minimum": 1,
               "default": 1,
               "description": "mdxfind -i value. Part of the identity, not a tuning knob: MD5x02 is john's dynamic_2 and MD5x03 is dynamic_3, so the same type at a different iteration count is a different algorithm."
             },
-            "verified": { "$ref": "#/$defs/tier" },
-            "verified_at": { "$ref": "#/$defs/date" },
-            "verified_with": { "type": "string" },
-            "note": { "type": "string" }
+            "verified": {
+              "$ref": "#/$defs/tier"
+            },
+            "verified_at": {
+              "$ref": "#/$defs/date"
+            },
+            "verified_with": {
+              "type": "string"
+            },
+            "note": {
+              "type": "string"
+            }
           }
         },
         "crack": {
@@ -177,26 +273,56 @@
           "additionalProperties": false,
           "description": "Alec Muffett's Crack, historical reference only. Crack delegates to the host crypt(3) and implements nothing itself; see docs/REFERENCES.md.",
           "properties": {
-            "supported": { "type": "boolean" },
-            "note": { "type": "string" }
+            "supported": {
+              "type": "boolean"
+            },
+            "note": {
+              "type": "string"
+            }
           }
         }
       }
     },
     "vectors": {
       "type": "array",
-      "description": "Test vectors. A vector is what promotes a mapping to tier 'vector'.",
+      "description": "Test vectors. A vector is what promotes a mapping to tier 'vector'. Where two tools expect different serializations of one credential, both strings live here, grouped by credential: and distinguished by which tools reads_in says actually read each.",
       "items": {
         "type": "object",
         "additionalProperties": false,
-        "required": ["hash", "pass"],
+        "required": [
+          "hash",
+          "pass"
+        ],
         "properties": {
-          "hash": { "type": "string", "minLength": 1 },
-          "pass": { "type": "string" },
-          "salt": { "type": "string" },
+          "hash": {
+            "type": "string",
+            "minLength": 1
+          },
+          "pass": {
+            "type": "string"
+          },
+          "salt": {
+            "type": "string"
+          },
           "source": {
             "type": "string",
             "description": "Where this vector came from: hashcat, mdxfind, john, sheet, or a person."
+          },
+          "reads_in": {
+            "type": "array",
+            "items": {
+              "enum": [
+                "hashcat",
+                "john",
+                "mdxfind"
+              ]
+            },
+            "uniqueItems": true,
+            "description": "Which tools were PROVEN to read this exact string, written by tools/verify-vectors.pl and never by hand. A tool is listed only when it loaded and cracked this serialization under an identifier this entry names; it is removed when every identifier of that tool ran and none did; and the vector is left alone when the tool did not run, because a tool that was not run says nothing. Where one vector reads in two tools they agree on the format; where an entry needs one vector per tool they do not, which is what makes a divergent serialization discoverable."
+          },
+          "credential": {
+            "type": "string",
+            "description": "Groups vectors that are ONE credential written in different tools' serializations. Two vectors sharing a credential are not independent evidence and must never be read as corroboration. An entry holding a group of more than one must say in notes: how the forms differ and that the re-encoding was proven rather than assumed."
           }
         }
       }
@@ -206,17 +332,31 @@
       "additionalProperties": false,
       "description": "Identifiers from services that no longer exist. Kept because they make old cracking write-ups readable, not because anything can be verified against them.",
       "properties": {
-        "hashes_org": { "type": "string" },
-        "hashkiller": { "type": "string" }
+        "hashes_org": {
+          "type": "string"
+        },
+        "hashkiller": {
+          "type": "string"
+        }
       }
     },
-    "notes": { "type": "string" }
+    "notes": {
+      "type": "string"
+    }
   },
   "$defs": {
     "tier": {
-      "enum": ["vector", "upstream", "asserted", "absent"],
+      "enum": [
+        "vector",
+        "upstream",
+        "asserted",
+        "absent"
+      ],
       "description": "vector: round-tripped locally by that tool under that exact identifier - the only tier meaning proven. upstream: asserted by a project that verifies by recomputation. asserted: a human said so. absent: the tool does not support this algorithm."
     },
-    "date": { "type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$" }
+    "date": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+    }
   }
 }
