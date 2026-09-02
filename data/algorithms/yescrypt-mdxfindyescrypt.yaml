@@ -10,7 +10,7 @@ denotation:
   source: "mdxfind"
   note: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A, entry for mdxfind type YESCRYPT (e995), which states yescrypt(pass, salt, N, r, p)."
 category: "kdf"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [36100]

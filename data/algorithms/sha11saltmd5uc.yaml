@@ -1,6 +1,6 @@
 id: "sha11saltmd5uc"
 name: "SHA11SALTMD5UC"
-status: "needs-review"
+status: "ok"
 tools:
   mdxfind:
     types: ["SHA11SALTMD5UC"]

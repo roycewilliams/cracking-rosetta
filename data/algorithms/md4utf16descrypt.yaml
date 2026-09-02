@@ -9,7 +9,7 @@ denotation:
   text: "descrypt(md4(utf16le(pass)), salt)"
   source: "mdxfind"
   note: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A, entry for mdxfind type MD4UTF16DESCRYPT (e574), which states descrypt(md4(utf16le(pass)), salt)."
-status: "needs-review"
+status: "ok"
 tools:
   mdxfind:
     types: ["MD4UTF16DESCRYPT"]

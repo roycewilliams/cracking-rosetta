@@ -1,6 +1,6 @@
 id: "sha11saltmd5sha256"
 name: "SHA11SALTMD5SHA256"
-status: "needs-review"
+status: "ok"
 tools:
   mdxfind:
     types: ["SHA11SALTMD5SHA256"]

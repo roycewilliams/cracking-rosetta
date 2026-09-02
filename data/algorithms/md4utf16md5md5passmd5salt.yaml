@@ -1,6 +1,6 @@
 id: "md4utf16md5md5passmd5salt"
 name: "MD4UTF16MD5MD5PASSMD5SALT"
-status: "needs-review"
+status: "ok"
 tools:
   mdxfind:
     types: ["MD4UTF16MD5MD5PASSMD5SALT"]

@@ -1,7 +1,7 @@
 id: "sha1-cx"
 name: "sha1(CX)"
 category: "composite"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [14400]

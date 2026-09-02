@@ -9,7 +9,7 @@ denotation:
   text: "\"MD5 authentication\" HSRP, HSRPv2, VRRP, GLBP"
   source: "john"
   note: "john's own label for hsrp, in 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200."
-status: "needs-review"
+status: "ok"
 tools:
   john:
     cpu: ["hsrp"]

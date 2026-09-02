@@ -1,7 +1,7 @@
 id: "bcrypt-md5-pass"
 name: "bcrypt(md5($pass))"
 category: "kdf"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [25600]

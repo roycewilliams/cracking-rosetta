@@ -1,7 +1,7 @@
 id: "bcrypt-sha1-pass"
 name: "bcrypt(sha1($pass))"
 category: "kdf"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [25800]

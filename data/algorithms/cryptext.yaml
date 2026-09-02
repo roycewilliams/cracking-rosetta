@@ -1,6 +1,6 @@
 id: "cryptext"
 name: "CRYPTEXT"
-status: "needs-review"
+status: "ok"
 tools:
   mdxfind:
     types: ["CRYPTEXT"]

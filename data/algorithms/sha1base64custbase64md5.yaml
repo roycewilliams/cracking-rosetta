@@ -1,6 +1,6 @@
 id: "sha1base64custbase64md5"
 name: "SHA1BASE64CUSTBASE64MD5"
-status: "needs-review"
+status: "ok"
 tools:
   mdxfind:
     types: ["SHA1BASE64CUSTBASE64MD5"]

@@ -10,7 +10,7 @@ denotation:
   source: "hashcat"
   note: "hashcat's own label for mode 6060, category \"Raw Hash authenticated\", in v7.1.2-549-g8a15e210b."
 category: "composite"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [6060]

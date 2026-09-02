@@ -9,7 +9,7 @@ denotation:
   text: "sha512crypt(md5(pass), salt)"
   source: "mdxfind"
   note: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A, entry for mdxfind type SHA512CRYPTMD5 (e538), which states sha512crypt(md5(pass), salt)."
-status: "needs-review"
+status: "ok"
 tools:
   mdxfind:
     types: ["SHA512CRYPTMD5"]

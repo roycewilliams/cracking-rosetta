@@ -9,7 +9,7 @@ denotation:
   text: "md5(upper(lm(pass)))"
   source: "mdxfind"
   note: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A, entry for mdxfind type MD5LMUC (e381), which states md5(upper(lm(pass)))."
-status: "needs-review"
+status: "ok"
 tools:
   mdxfind:
     types: ["MD5LMUC"]

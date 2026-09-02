@@ -1,6 +1,6 @@
 id: "wpa-pmkid"
 name: "WPA-PMKID"
-status: "needs-review"
+status: "ok"
 tools:
   mdxfind:
     types: ["WPA-PMKID"]

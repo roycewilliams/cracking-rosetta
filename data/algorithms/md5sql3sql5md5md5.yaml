@@ -9,7 +9,7 @@ denotation:
   text: "md5(md5(mysql3(\"*\".upper(sha1(sha1_bin(pass))))))"
   source: "mdxfind"
   note: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A, entry for mdxfind type MD5SQL3SQL5MD5MD5 (e548), which states md5(md5(mysql3(\"*\".upper(sha1(sha1_bin(pass))))))."
-status: "needs-review"
+status: "ok"
 tools:
   mdxfind:
     types: ["MD5SQL3SQL5MD5MD5"]

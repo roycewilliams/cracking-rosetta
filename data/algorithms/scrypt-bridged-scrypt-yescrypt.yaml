@@ -10,7 +10,7 @@ denotation:
   source: "hashcat"
   note: "hashcat's own label for mode 70200, category \"Generic KDF\", in v7.1.2-549-g8a15e210b."
 category: "kdf"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [70200]

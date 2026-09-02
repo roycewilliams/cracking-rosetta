@@ -1,6 +1,6 @@
 id: "sha1ucutf16le"
 name: "SHA1UCUTF16LE"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [170]

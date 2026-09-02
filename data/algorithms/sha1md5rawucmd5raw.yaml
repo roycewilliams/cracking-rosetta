@@ -1,6 +1,6 @@
 id: "sha1md5rawucmd5raw"
 name: "SHA1MD5RAWUCMD5RAW"
-status: "needs-review"
+status: "ok"
 tools:
   mdxfind:
     types: ["SHA1MD5RAWUCMD5RAW"]

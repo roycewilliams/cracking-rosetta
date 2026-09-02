@@ -9,7 +9,7 @@ denotation:
   text: "sha1(cut(cap(sha1(pass)), 0, N))"
   source: "mdxfind"
   note: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A, entry for mdxfind type SHA1SHA1CAPTRUNC (e656), which states sha1(cut(cap(sha1(pass)), 0, N)) (N = 20-40; see Note [24]). This is what the type emits, not a single construction -- see expression_proof."
-status: "needs-review"
+status: "ok"
 tools:
   mdxfind:
     types: ["SHA1SHA1CAPTRUNC"]

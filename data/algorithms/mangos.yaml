@@ -1,6 +1,6 @@
 id: "mangos"
 name: "MANGOS"
-status: "needs-review"
+status: "ok"
 tools:
   mdxfind:
     types: ["MANGOS"]

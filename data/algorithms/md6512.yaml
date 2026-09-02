@@ -9,7 +9,7 @@ denotation:
   text: "md6512(pass)"
   source: "mdxfind"
   note: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A, entry for mdxfind type MD6512 (e30), which states md6512(pass)."
-status: "needs-review"
+status: "ok"
 tools:
   mdxfind:
     types: ["MD6512"]

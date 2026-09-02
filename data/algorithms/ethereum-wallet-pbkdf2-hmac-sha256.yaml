@@ -10,7 +10,7 @@ denotation:
   source: "hashcat"
   note: "hashcat's own label for mode 15600, category \"Cryptocurrency Wallet\", in v7.1.2-549-g8a15e210b. This is a container or application format rather than a bare construction, so there is no single digest expression to record."
 category: "application"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [15600]

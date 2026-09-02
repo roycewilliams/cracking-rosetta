@@ -1,6 +1,6 @@
 id: "sha1zutf16le"
 name: "SHA1ZUTF16LE"
-status: "needs-review"
+status: "ok"
 tools:
   mdxfind:
     types: ["SHA1ZUTF16LE"]

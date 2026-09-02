@@ -9,7 +9,7 @@ denotation:
   text: "sha1(md5^N(pass))"
   source: "mdxfind"
   note: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A, entry for mdxfind type SHA1MD5x (e298), which states sha1(md5^N(pass)) (N = iteration count)."
-status: "needs-review"
+status: "ok"
 tools:
   mdxfind:
     types: ["SHA1MD5x"]

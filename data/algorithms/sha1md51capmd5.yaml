@@ -1,6 +1,6 @@
 id: "sha1md51capmd5"
 name: "SHA1MD51CAPMD5"
-status: "needs-review"
+status: "ok"
 tools:
   mdxfind:
     types: ["SHA1MD51CAPMD5"]

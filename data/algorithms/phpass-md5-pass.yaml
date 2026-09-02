@@ -1,7 +1,7 @@
 id: "phpass-md5-pass"
 name: "phpass(md5($pass))"
 category: "kdf"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [35700]

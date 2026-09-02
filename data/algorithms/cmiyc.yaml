@@ -9,7 +9,7 @@ denotation:
   text: "cmiyc(pass, salt)"
   source: "mdxfind"
   note: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A, entry for mdxfind type CMIYC (e1001), which states cmiyc(pass, salt)."
-status: "needs-review"
+status: "ok"
 tools:
   mdxfind:
     types: ["CMIYC"]

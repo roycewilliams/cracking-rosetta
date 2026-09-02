@@ -9,7 +9,7 @@ denotation:
   text: "aich(pass)"
   source: "mdxfind"
   note: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A, entry for mdxfind type AICH (e21), which states aich(pass)."
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [100]

@@ -1,6 +1,6 @@
 id: "sha1utf16bez"
 name: "SHA1UTF16BEZ"
-status: "needs-review"
+status: "ok"
 tools:
   mdxfind:
     types: ["SHA1UTF16BEZ"]

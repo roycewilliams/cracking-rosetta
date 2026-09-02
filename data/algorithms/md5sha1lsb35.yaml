@@ -9,7 +9,7 @@ denotation:
   text: "md5(hex(and(sha1_bin(pass), fromhex(\"00000fffffffffffffffffffffffffffffffffff\"))))"
   source: "mdxfind"
   note: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A, entry for mdxfind type MD5SHA1lsb35 (e545), which states md5(hex(and(sha1_bin(pass), fromhex(\"00000fffffffffffffffffffffffffffffffffff\"))))."
-status: "needs-review"
+status: "ok"
 tools:
   mdxfind:
     types: ["MD5SHA1lsb35"]

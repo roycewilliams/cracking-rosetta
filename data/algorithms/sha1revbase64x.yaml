@@ -9,7 +9,7 @@ denotation:
   text: "sha1(rev(base64^N(pass)))"
   source: "mdxfind"
   note: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A, entry for mdxfind type SHA1revBASE64x (e769), which states sha1(rev(base64^N(pass))) (N = iteration count)."
-status: "needs-review"
+status: "ok"
 tools:
   mdxfind:
     types: ["SHA1revBASE64x"]

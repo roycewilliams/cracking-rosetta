@@ -1,6 +1,6 @@
 id: "wpa-eapol"
 name: "WPA-EAPOL"
-status: "needs-review"
+status: "ok"
 tools:
   mdxfind:
     types: ["WPA-EAPOL"]

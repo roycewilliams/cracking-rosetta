@@ -10,7 +10,7 @@ denotation:
   source: "hashcat"
   note: "hashcat's own label for mode 25700, category \"Raw Checksum\", in v7.1.2-549-g8a15e210b."
 category: "primitive"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [25700]

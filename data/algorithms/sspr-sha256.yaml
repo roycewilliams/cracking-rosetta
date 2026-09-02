@@ -10,7 +10,7 @@ denotation:
   source: "mdxfind"
   note: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A, entry for mdxfind type SSPR-SHA256 (e978), which states sha256^N(salt . pass) (Note [37])."
 category: "application"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [32030]

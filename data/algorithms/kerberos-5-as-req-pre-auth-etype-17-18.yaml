@@ -9,7 +9,7 @@ denotation:
   text: "Kerberos 5 AS-REQ Pre-Auth etype 17/18"
   source: "john"
   note: "john's own label for krb5pa-sha1, in 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200."
-status: "needs-review"
+status: "ok"
 tools:
   john:
     cpu: ["krb5pa-sha1"]

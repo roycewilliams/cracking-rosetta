@@ -9,7 +9,7 @@ denotation:
   text: "sha1(utf7(pass))"
   source: "mdxfind"
   note: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A, entry for mdxfind type SHA1UTF7 (e732), which states sha1(utf7(pass)) (Note [9])."
-status: "needs-review"
+status: "ok"
 tools:
   mdxfind:
     types: ["SHA1UTF7"]

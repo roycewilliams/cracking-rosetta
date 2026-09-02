@@ -9,7 +9,7 @@ denotation:
   text: "IPMI 2.0 RAKP (RMCP+)"
   source: "john"
   note: "john's own label for RAKP-SHA256, in 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200."
-status: "needs-review"
+status: "ok"
 tools:
   john:
     cpu: ["RAKP-SHA256"]

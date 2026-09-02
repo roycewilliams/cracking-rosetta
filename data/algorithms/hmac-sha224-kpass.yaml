@@ -9,7 +9,7 @@ denotation:
   text: "hmac_sha224(salt, pass)"
   source: "mdxfind"
   note: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A, entry for mdxfind type HMAC-SHA224-KPASS (e794), which states hmac_sha224(salt, pass)."
-status: "needs-review"
+status: "ok"
 tools:
   mdxfind:
     types: ["HMAC-SHA224-KPASS"]

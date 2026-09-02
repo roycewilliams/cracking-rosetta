@@ -1,7 +1,7 @@
 id: "sha512-sha512-bin-pass-salt"
 name: "sha512(sha512_bin($pass).$salt)"
 category: "composite"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     modes: [32420]

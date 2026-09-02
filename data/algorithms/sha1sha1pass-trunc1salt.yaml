@@ -1,6 +1,6 @@
 id: "sha1sha1pass-trunc1salt"
 name: "SHA1SHA1PASS-TRUNC1SALT"
-status: "needs-review"
+status: "ok"
 tools:
   mdxfind:
     types: ["SHA1SHA1PASS-TRUNC1SALT"]

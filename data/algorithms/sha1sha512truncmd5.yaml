@@ -1,6 +1,6 @@
 id: "sha1sha512truncmd5"
 name: "SHA1SHA512TRUNCMD5"
-status: "needs-review"
+status: "ok"
 tools:
   mdxfind:
     types: ["SHA1SHA512TRUNCMD5"]

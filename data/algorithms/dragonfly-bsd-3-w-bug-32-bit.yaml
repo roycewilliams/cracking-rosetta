@@ -9,7 +9,7 @@ denotation:
   text: "DragonFly BSD $3$ w/ bug, 32-bit"
   source: "john"
   note: "john's own label for dragonfly3-32, in 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200."
-status: "needs-review"
+status: "ok"
 tools:
   john:
     cpu: ["dragonfly3-32"]

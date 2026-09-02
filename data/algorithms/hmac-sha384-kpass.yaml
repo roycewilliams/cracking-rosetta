@@ -9,7 +9,7 @@ denotation:
   text: "hmac_sha384(salt, pass)"
   source: "mdxfind"
   note: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A, entry for mdxfind type HMAC-SHA384-KPASS (e796), which states hmac_sha384(salt, pass)."
-status: "needs-review"
+status: "ok"
 tools:
   mdxfind:
     types: ["HMAC-SHA384-KPASS"]
