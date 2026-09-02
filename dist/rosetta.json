@@ -21428,9 +21428,9 @@
          },
          "cracknote" : "",
          "denotation" : "",
-         "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr" : "sha1(upper($s).$c1.upper($p)),c1=\\x3a",
+         "expr_note" : "transcribed from the hx specification's Appendix A entry for mdxfind type MANGOS (e540), which states sha1(upper(user) . \":\" . upper(pass)) (Note [31]). Transcription, not reproduction, so this is upstream and not vector; run derive-expressions.pl to try to promote it. Not checkable locally: the construction uses functions RosettaExpr cannot compile, so this rests on upstream's word alone.; TRIAGE 2026-09-02 [no-john-format]: no john format on this entry, so john ships no control vectors, and RosettaExpr cannot compile this expression either -- nothing here can check it",
+         "expr_tier" : "upstream",
          "hashcat" : {
             "ids" : [],
             "state" : "unknown"
@@ -23388,9 +23388,9 @@
          },
          "cracknote" : "",
          "denotation" : "",
-         "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr" : "upper(md4(utf16($p)))",
+         "expr_note" : "transcribed from the hx specification's Appendix A entry for mdxfind type MD4UTF16UC (e570), which states upper(md4(utf16le(pass))) (Note [28]). Transcription, not reproduction, so this is upstream and not vector; run derive-expressions.pl to try to promote it. Not checkable locally: the construction uses functions RosettaExpr cannot compile, so this rests on upstream's word alone.; TRIAGE 2026-09-02 [compiler-disagrees]: compiled with --format=dynamic this expression recovers none of john's own test vectors for NT either, so john's dynamic compiler and its named format disagree about what the string means; this is an upstream question, not a data error here",
+         "expr_tier" : "upstream",
          "hashcat" : {
             "ids" : [
                1000
@@ -23550,10 +23550,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "md5(\"*\".mysql5($plain))",
-         "expr" : "",
-         "expr_note" : "john's dynamic expression vocabulary has no mysql5(), so this construction cannot be written as an expression; that is separate from whether john has a FORMAT for it",
-         "expr_tier" : "absent",
+         "denotation" : "",
+         "expr" : "md5($c1.upper(sha1(sha1_raw($p)))),c1=*",
+         "expr_note" : "transcribed from the hx specification's Appendix A entry for mdxfind type MD5SQL5 (e205), which states md5(\"*\" . upper(sha1(sha1_bin(pass)))). Transcription, not reproduction, so this is upstream and not vector; run derive-expressions.pl to try to promote it. Not checkable locally: the construction uses functions RosettaExpr cannot compile, so this rests on upstream's word alone. Superseded the denotation \"md5(\"*\".mysql5($plain))\" (source: sheet), which validate.pl forbids alongside an expression.; TRIAGE 2026-09-02 [no-john-format]: no john format on this entry, so john ships no control vectors, and RosettaExpr cannot compile this expression either -- nothing here can check it",
+         "expr_tier" : "upstream",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -23592,10 +23592,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "md5(\"*\".mysql5(md5($plain)))",
-         "expr" : "",
-         "expr_note" : "john's dynamic expression vocabulary has no mysql5(), so this construction cannot be written as an expression; that is separate from whether john has a FORMAT for it",
-         "expr_tier" : "absent",
+         "denotation" : "",
+         "expr" : "md5($c1.upper(sha1(sha1_raw(md5($p))))),c1=*",
+         "expr_note" : "transcribed from the hx specification's Appendix A entry for mdxfind type MD5SQL5MD5 (e301), which states md5(\"*\" . upper(sha1(sha1_bin(md5(pass))))). Transcription, not reproduction, so this is upstream and not vector; run derive-expressions.pl to try to promote it. Not checkable locally: the construction uses functions RosettaExpr cannot compile, so this rests on upstream's word alone. Superseded the denotation \"md5(\"*\".mysql5(md5($plain)))\" (source: sheet), which validate.pl forbids alongside an expression.; TRIAGE 2026-09-02 [no-john-format]: no john format on this entry, so john ships no control vectors, and RosettaExpr cannot compile this expression either -- nothing here can check it",
+         "expr_tier" : "upstream",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -23634,10 +23634,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "md5(\"*\".substr(mysql5($plain), 0, 39))",
-         "expr" : "",
-         "expr_note" : "john's dynamic expression vocabulary has no substr(), mysql5(), so this construction cannot be written as an expression; that is separate from whether john has a FORMAT for it",
-         "expr_tier" : "absent",
+         "denotation" : "",
+         "expr" : "md5(cut($c1.upper(sha1(sha1_raw($p))),0,40)),c1=*",
+         "expr_note" : "transcribed from the hx specification's Appendix A entry for mdxfind type MD5SQL5-chop40 (e302), which states md5(cut(\"*\" . upper(sha1(sha1_bin(pass))), 0, 40)). Transcription, not reproduction, so this is upstream and not vector; run derive-expressions.pl to try to promote it. Not checkable locally: the construction uses functions RosettaExpr cannot compile, so this rests on upstream's word alone. Superseded the denotation \"md5(\"*\".substr(mysql5($plain), 0, 39))\" (source: sheet), which validate.pl forbids alongside an expression.; TRIAGE 2026-09-02 [no-john-format]: no john format on this entry, so john ships no control vectors, and RosettaExpr cannot compile this expression either -- nothing here can check it",
+         "expr_tier" : "upstream",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -23676,10 +23676,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "md5(\"1*\".substr(mysql5($plain),0,30))",
-         "expr" : "",
-         "expr_note" : "john's dynamic expression vocabulary has no substr(), mysql5(), so this construction cannot be written as an expression; that is separate from whether john has a FORMAT for it",
-         "expr_tier" : "absent",
+         "denotation" : "",
+         "expr" : "md5(cut($c1.upper(sha1(sha1_raw($p))),0,32)),c1=*",
+         "expr_note" : "transcribed from the hx specification's Appendix A entry for mdxfind type MD5SQL5-32 (e342), which states md5(cut(\"*\" . upper(sha1(sha1_bin(pass))), 0, 32)). Transcription, not reproduction, so this is upstream and not vector; run derive-expressions.pl to try to promote it. Not checkable locally: the construction uses functions RosettaExpr cannot compile, so this rests on upstream's word alone. Superseded the denotation \"md5(\"1*\".substr(mysql5($plain),0,30))\" (source: sheet), which validate.pl forbids alongside an expression.; TRIAGE 2026-09-02 [no-john-format]: no john format on this entry, so john ships no control vectors, and RosettaExpr cannot compile this expression either -- nothing here can check it",
+         "expr_tier" : "upstream",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -24414,9 +24414,9 @@
          },
          "cracknote" : "",
          "denotation" : "",
-         "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr" : "md5($s.$c1.$p),c1=\\x00",
+         "expr_note" : "round-tripped as --format=dynamic=<expr> against every vector this entry carries",
+         "expr_tier" : "vector",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -30330,9 +30330,9 @@
          },
          "cracknote" : "",
          "denotation" : "",
-         "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr" : "md5(md5(sha1(md5(sha1(md5(sha1($p)))))).$c1),c1= ",
+         "expr_note" : "transcribed from the hx specification's Appendix A entry for mdxfind type MD5-MD5SHA1MD5SHA1MD5SHA1p (e415), which states md5(md5(sha1(md5(sha1(md5(sha1(pass)))))) . \" \"). Transcription, not reproduction, so this is upstream and not vector; run derive-expressions.pl to try to promote it. Not checkable locally: the construction uses functions RosettaExpr cannot compile, so this rests on upstream's word alone.; TRIAGE 2026-09-02 [no-john-format]: no john format on this entry, so john ships no control vectors, and RosettaExpr cannot compile this expression either -- nothing here can check it",
+         "expr_tier" : "upstream",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -30693,9 +30693,9 @@
          },
          "cracknote" : "",
          "denotation" : "",
-         "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr" : "md5($s.$c1.lower($p)),c1=\\x3a\\x3a",
+         "expr_note" : "transcribed from the hx specification's Appendix A entry for mdxfind type MD5AM (e432), which states md5(user . \"::\" . lower(pass)) (Note [26]). Transcription, not reproduction, so this is upstream and not vector; run derive-expressions.pl to try to promote it. Not checkable locally: the construction uses functions RosettaExpr cannot compile, so this rests on upstream's word alone.; TRIAGE 2026-09-02 [no-john-format]: no john format on this entry, so john ships no control vectors, and RosettaExpr cannot compile this expression either -- nothing here can check it",
+         "expr_tier" : "upstream",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -31470,9 +31470,9 @@
          },
          "cracknote" : "",
          "denotation" : "",
-         "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr" : "md5(md5($p.$s).$c1.$s),c1=\\x3a",
+         "expr_note" : "round-tripped as --format=dynamic=<expr> against every vector this entry carries",
+         "expr_tier" : "vector",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -31596,9 +31596,9 @@
          },
          "cracknote" : "",
          "denotation" : "",
-         "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr" : "md5(upper(md5($p)).$c1),c1= ",
+         "expr_note" : "transcribed from the hx specification's Appendix A entry for mdxfind type MD5MD5UCp (e417), which states md5(upper(md5(pass)) . \" \"). Transcription, not reproduction, so this is upstream and not vector; run derive-expressions.pl to try to promote it. Not checkable locally: the construction uses functions RosettaExpr cannot compile, so this rests on upstream's word alone.; TRIAGE 2026-09-02 [no-john-format]: no john format on this entry, so john ships no control vectors, and RosettaExpr cannot compile this expression either -- nothing here can check it",
+         "expr_tier" : "upstream",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -31722,9 +31722,9 @@
          },
          "cracknote" : "",
          "denotation" : "",
-         "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr" : "md5(md4(utf16($p)).$c1),c1= ",
+         "expr_note" : "transcribed from the hx specification's Appendix A entry for mdxfind type MD5NTLMp (e418), which states md5(md4(utf16le(pass)) . \" \"). Transcription, not reproduction, so this is upstream and not vector; run derive-expressions.pl to try to promote it. Not checkable locally: the construction uses functions RosettaExpr cannot compile, so this rests on upstream's word alone.; TRIAGE 2026-09-02 [no-john-format]: no john format on this entry, so john ships no control vectors, and RosettaExpr cannot compile this expression either -- nothing here can check it",
+         "expr_tier" : "upstream",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -31764,9 +31764,9 @@
          },
          "cracknote" : "",
          "denotation" : "",
-         "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr" : "md5($c1.md5($p).$c1),c1= ",
+         "expr_note" : "transcribed from the hx specification's Appendix A entry for mdxfind type MD5padMD5 (e407), which states md5(\" \" . md5(pass) . \" \"). Transcription, not reproduction, so this is upstream and not vector; run derive-expressions.pl to try to promote it. Not checkable locally: the construction uses functions RosettaExpr cannot compile, so this rests on upstream's word alone.; TRIAGE 2026-09-02 [no-john-format]: no john format on this entry, so john ships no control vectors, and RosettaExpr cannot compile this expression either -- nothing here can check it",
+         "expr_tier" : "upstream",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -33749,9 +33749,9 @@
          },
          "cracknote" : "",
          "denotation" : "",
-         "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr" : "md5($s.$c1.md5($p)),c1=-",
+         "expr_note" : "transcribed from the hx specification's Appendix A entry for mdxfind type MEDIAWIKI (e863), which states md5(salt . \"-\" . md5(pass)) (MediaWiki B-type). Transcription, not reproduction, so this is upstream and not vector; run derive-expressions.pl to try to promote it. Not checkable locally: the construction uses functions RosettaExpr cannot compile, so this rests on upstream's word alone.; TRIAGE 2026-09-02 [format-encoding]: MediaWiki has its own ciphertext encoding rather than plain hex, so a generic expression cannot be checked against it however correctly it describes the computation",
+         "expr_tier" : "upstream",
          "hashcat" : {
             "ids" : [
                3711
@@ -35519,9 +35519,9 @@
          },
          "cracknote" : "",
          "denotation" : "",
-         "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr" : "$c1.upper(sha1(sha1_raw($p))),c1=*",
+         "expr_note" : "transcribed from the hx specification's Appendix A entry for mdxfind type SQL5 (e259), which states \"*\" . upper(sha1(sha1_bin(pass))). Transcription, not reproduction, so this is upstream and not vector; run derive-expressions.pl to try to promote it. Not checkable locally: the construction uses functions RosettaExpr cannot compile, so this rests on upstream's word alone.; TRIAGE 2026-09-02 [compiler-disagrees]: compiled with --format=dynamic this expression recovers none of john's own test vectors for dynamic_1028 either, so john's dynamic compiler and its named format disagree about what the string means; this is an upstream question, not a data error here",
+         "expr_tier" : "upstream",
          "hashcat" : {
             "ids" : [
                300
@@ -36026,9 +36026,9 @@
          },
          "cracknote" : "",
          "denotation" : "",
-         "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr" : "sha1($s.$p.$c1),c1=\\x00",
+         "expr_note" : "transcribed from the hx specification's Appendix A entry for mdxfind type NETSCALER (e878), which states sha1(salt . pass . fromhex(\"00\")) (NetScaler; trailing NUL byte). Transcription, not reproduction, so this is upstream and not vector; run derive-expressions.pl to try to promote it. Not checkable locally: the construction uses functions RosettaExpr cannot compile, so this rests on upstream's word alone.; TRIAGE 2026-09-02 [compiler-disagrees]: compiled with --format=dynamic this expression recovers none of john's own test vectors for Citrix_NS10 either, so john's dynamic compiler and its named format disagree about what the string means; this is an upstream question, not a data error here",
+         "expr_tier" : "upstream",
          "hashcat" : {
             "ids" : [
                8100
@@ -36119,9 +36119,9 @@
          },
          "cracknote" : "",
          "denotation" : "",
-         "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr" : "sha512($s.$p.$c1),c1=\\x00",
+         "expr_note" : "transcribed from the hx specification's Appendix A entry for mdxfind type NETSCALER-SHA512 (e893), which states sha512(salt . pass . fromhex(\"00\")) (NetScaler; trailing NUL byte). Transcription, not reproduction, so this is upstream and not vector; run derive-expressions.pl to try to promote it. Not checkable locally: the construction uses functions RosettaExpr cannot compile, so this rests on upstream's word alone.; TRIAGE 2026-09-02 [no-john-format]: no john format on this entry, so john ships no control vectors, and RosettaExpr cannot compile this expression either -- nothing here can check it",
+         "expr_tier" : "upstream",
          "hashcat" : {
             "ids" : [
                22200
@@ -36164,9 +36164,9 @@
          },
          "cracknote" : "",
          "denotation" : "",
-         "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr" : "$c1.base64(sha1_raw($p)),c1={SHA}",
+         "expr_note" : "transcribed from the hx specification's Appendix A entry for mdxfind type APACHE-SHA (e457), which states \"{SHA}\" . base64(sha1_bin(pass)). Transcription, not reproduction, so this is upstream and not vector; run derive-expressions.pl to try to promote it. Not checkable locally: the construction uses functions RosettaExpr cannot compile, so this rests on upstream's word alone.; TRIAGE 2026-09-02 [format-encoding]: Raw-SHA1 has its own ciphertext encoding rather than plain hex, so a generic expression cannot be checked against it however correctly it describes the computation",
+         "expr_tier" : "upstream",
          "hashcat" : {
             "ids" : [
                101
@@ -42439,9 +42439,9 @@
          },
          "cracknote" : "",
          "denotation" : "",
-         "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr" : "sha1($c1.$s.$c1.$p.$c1),c1=--",
+         "expr_note" : "transcribed from the hx specification's Appendix A entry for mdxfind type RORAILS-SHA1 (e962), which states sha1(\"--\" . salt . \"--\" . pass . \"--\") (Rails Restful Auth). Transcription, not reproduction, so this is upstream and not vector; run derive-expressions.pl to try to promote it. Not checkable locally: the construction uses functions RosettaExpr cannot compile, so this rests on upstream's word alone.; TRIAGE 2026-09-02 [no-john-format]: no john format on this entry, so john ships no control vectors, and RosettaExpr cannot compile this expression either -- nothing here can check it",
+         "expr_tier" : "upstream",
          "hashcat" : {
             "ids" : [
                27200
@@ -46456,9 +46456,9 @@
          },
          "cracknote" : "",
          "denotation" : "",
-         "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr" : "sha1($s.$p.$c1),c1=--",
+         "expr_note" : "round-tripped as --format=dynamic=<expr> against every vector this entry carries",
+         "expr_tier" : "vector",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -46624,9 +46624,9 @@
          },
          "cracknote" : "",
          "denotation" : "",
-         "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr" : "sha1(md5(md5($s).md5($p)).$c1.$s),c1=\\x3a",
+         "expr_note" : "transcribed from the hx specification's Appendix A entry for mdxfind type SHA1-MD5-MD5SALTMD5PASS-SALT (e592), which states sha1(md5(md5(salt) . md5(pass)) . \":\" . salt). Transcription, not reproduction, so this is upstream and not vector; run derive-expressions.pl to try to promote it. Not checkable locally: the construction uses functions RosettaExpr cannot compile, so this rests on upstream's word alone.; TRIAGE 2026-09-02 [no-john-format]: no john format on this entry, so john ships no control vectors, and RosettaExpr cannot compile this expression either -- nothing here can check it",
+         "expr_tier" : "upstream",
          "hashcat" : {
             "ids" : [],
             "state" : "unknown"
@@ -46834,9 +46834,9 @@
          },
          "cracknote" : "",
          "denotation" : "",
-         "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr" : "sha1(md5(md5(md5($p)).$s).$c1),c1=\\x0d",
+         "expr_note" : "round-tripped as --format=dynamic=<expr> against every vector this entry carries",
+         "expr_tier" : "vector",
          "hashcat" : {
             "ids" : [],
             "state" : "unknown"
@@ -47086,9 +47086,9 @@
          },
          "cracknote" : "",
          "denotation" : "",
-         "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr" : "sha1(md5(md5($p).$s).$c1),c1=\\x0d",
+         "expr_note" : "round-tripped as --format=dynamic=<expr> against every vector this entry carries",
+         "expr_tier" : "vector",
          "hashcat" : {
             "ids" : [],
             "state" : "unknown"
@@ -48289,9 +48289,9 @@
          },
          "cracknote" : "",
          "denotation" : "",
-         "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr" : "$c1.cut(sha1($p),8),c1=00000000",
+         "expr_note" : "transcribed from the hx specification's Appendix A entry for mdxfind type SHA1lsb32 (e398), which states \"00000000\" . cut(sha1(pass), 8). Transcription, not reproduction, so this is upstream and not vector; run derive-expressions.pl to try to promote it. Not checkable locally: the construction uses functions RosettaExpr cannot compile, so this rests on upstream's word alone.; TRIAGE 2026-09-02 [no-john-format]: no john format on this entry, so john ships no control vectors, and RosettaExpr cannot compile this expression either -- nothing here can check it",
+         "expr_tier" : "upstream",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -49397,9 +49397,9 @@
          },
          "cracknote" : "",
          "denotation" : "",
-         "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr" : "sha1(md5(md5($c1.upper(sha1(sha1_raw($p)))))),c1=*",
+         "expr_note" : "transcribed from the hx specification's Appendix A entry for mdxfind type SHA1MD5MD5SQL5 (e713), which states sha1(md5(md5(\"*\" . upper(sha1(sha1_bin(pass)))))) (see Notes [1], [24]). Transcription, not reproduction, so this is upstream and not vector; run derive-expressions.pl to try to promote it. Not checkable locally: the construction uses functions RosettaExpr cannot compile, so this rests on upstream's word alone.; TRIAGE 2026-09-02 [no-john-format]: no john format on this entry, so john ships no control vectors, and RosettaExpr cannot compile this expression either -- nothing here can check it",
+         "expr_tier" : "upstream",
          "hashcat" : {
             "ids" : [],
             "state" : "unknown"
@@ -50156,9 +50156,9 @@
          },
          "cracknote" : "",
          "denotation" : "",
-         "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr" : "sha1(md5($c1.upper(sha1(sha1_raw($p))))),c1=*",
+         "expr_note" : "transcribed from the hx specification's Appendix A entry for mdxfind type SHA1MD5SQL5 (e712), which states sha1(md5(\"*\" . upper(sha1(sha1_bin(pass))))) (see Notes [1], [24]). Transcription, not reproduction, so this is upstream and not vector; run derive-expressions.pl to try to promote it. Not checkable locally: the construction uses functions RosettaExpr cannot compile, so this rests on upstream's word alone.; TRIAGE 2026-09-02 [no-john-format]: no john format on this entry, so john ships no control vectors, and RosettaExpr cannot compile this expression either -- nothing here can check it",
+         "expr_tier" : "upstream",
          "hashcat" : {
             "ids" : [],
             "state" : "unknown"
@@ -51377,9 +51377,9 @@
          },
          "cracknote" : "",
          "denotation" : "",
-         "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr" : "sha1(sha1_raw($p))",
+         "expr_note" : "round-tripped as --format=dynamic=<expr> against every vector this entry carries",
+         "expr_tier" : "vector",
          "hashcat" : {
             "ids" : [
                300
@@ -55229,9 +55229,9 @@
          },
          "cracknote" : "",
          "denotation" : "",
-         "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr" : "sha1(utf16be($p).$c1),c1=\\x00",
+         "expr_note" : "round-tripped as --format=dynamic=<expr> against every vector this entry carries",
+         "expr_tier" : "vector",
          "hashcat" : {
             "ids" : [],
             "state" : "unknown"
@@ -55533,9 +55533,9 @@
          },
          "cracknote" : "",
          "denotation" : "",
-         "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr" : "sha1($c1.utf16($p)),c1=\\x00",
+         "expr_note" : "round-tripped as --format=dynamic=<expr> against every vector this entry carries",
+         "expr_tier" : "vector",
          "hashcat" : {
             "ids" : [],
             "state" : "unknown"
@@ -58090,9 +58090,9 @@
          },
          "cracknote" : "",
          "denotation" : "",
-         "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr" : "sha512(md5(sha1(md5($c1.$p.$c2)))),c1=$3dfhgjhgG65-,c2=23ewdfwGh5RG65?",
+         "expr_note" : "transcribed from the hx specification's Appendix A entry for mdxfind type SHA512-CUSTOM1 (e448), which states sha512(md5(sha1(md5(\"$3dfhgjhgG65-\" . pass . \"23ewdfwGh5RG65?\")))). Transcription, not reproduction, so this is upstream and not vector; run derive-expressions.pl to try to promote it. Not checkable locally: the construction uses functions RosettaExpr cannot compile, so this rests on upstream's word alone.; TRIAGE 2026-09-02 [no-john-format]: no john format on this entry, so john ships no control vectors, and RosettaExpr cannot compile this expression either -- nothing here can check it",
+         "expr_tier" : "upstream",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -59887,9 +59887,9 @@
          },
          "cracknote" : "",
          "denotation" : "",
-         "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr" : "md5($s.$c1.$c2.$c1.$p),c1=\\x0a,c2=skyper",
+         "expr_note" : "round-tripped as --format=dynamic=<expr> against every vector this entry carries",
+         "expr_tier" : "vector",
          "hashcat" : {
             "ids" : [
                23
@@ -61008,9 +61008,9 @@
          },
          "cracknote" : "",
          "denotation" : "",
-         "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr" : "$c1.base64(sha1_raw($p.$s).$s),c1={SSHA}",
+         "expr_note" : "transcribed from the hx specification's Appendix A entry for mdxfind type SSHA1BASE64 (e833), which states \"{SSHA}\" . base64(sha1_bin(pass . salt) . salt). Transcription, not reproduction, so this is upstream and not vector; run derive-expressions.pl to try to promote it. Not checkable locally: the construction uses functions RosettaExpr cannot compile, so this rests on upstream's word alone.; TRIAGE 2026-09-02 [format-encoding]: Salted-SHA1 has its own ciphertext encoding rather than plain hex, so a generic expression cannot be checked against it however correctly it describes the computation",
+         "expr_tier" : "upstream",
          "hashcat" : {
             "ids" : [
                111
@@ -61057,9 +61057,9 @@
          },
          "cracknote" : "",
          "denotation" : "",
-         "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr" : "$c1.base64(sha256_raw($p.$s).$s),c1={SSHA256}",
+         "expr_note" : "transcribed from the hx specification's Appendix A entry for mdxfind type SSHA256BASE64 (e835), which states \"{SSHA256}\" . base64(sha256_bin(pass . salt) . salt). Transcription, not reproduction, so this is upstream and not vector; run derive-expressions.pl to try to promote it. Not checkable locally: the construction uses functions RosettaExpr cannot compile, so this rests on upstream's word alone.; TRIAGE 2026-09-02 [no-john-format]: no john format on this entry, so john ships no control vectors, and RosettaExpr cannot compile this expression either -- nothing here can check it",
+         "expr_tier" : "upstream",
          "hashcat" : {
             "ids" : [
                1411
@@ -61102,9 +61102,9 @@
          },
          "cracknote" : "",
          "denotation" : "",
-         "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr" : "$c1.base64(sha512_raw($p.$s).$s),c1={SSHA512}",
+         "expr_note" : "transcribed from the hx specification's Appendix A entry for mdxfind type SSHA512BASE64 (e836), which states \"{SSHA512}\" . base64(sha512_bin(pass . salt) . salt). Transcription, not reproduction, so this is upstream and not vector; run derive-expressions.pl to try to promote it. Not checkable locally: the construction uses functions RosettaExpr cannot compile, so this rests on upstream's word alone.; TRIAGE 2026-09-02 [format-encoding]: SSHA512 has its own ciphertext encoding rather than plain hex, so a generic expression cannot be checked against it however correctly it describes the computation",
+         "expr_tier" : "upstream",
          "hashcat" : {
             "ids" : [
                1711

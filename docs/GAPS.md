@@ -240,8 +240,8 @@ A few that carry a vector and a proven expression, so there is a definite constr
 
 * [`gost-md5-plain-plain`](index.html#gost-md5-plain-plain) - `gost(md5($p).$p)` (and 1 more starting `gost`)
 * [`haval128-3-md5-plain`](index.html#haval128-3-md5-plain) - `haval128_3(md5($p))` (and 29 more starting `haval`)
-* [`huawei-sha1-md5-pass-salt`](index.html#huawei-sha1-md5-pass-salt) - `sha1(md5($p).$s)` (and 96 more starting `sha`)
-* [`md2-md5-plain`](index.html#md2-md5-plain) - `md2(md5($p))` (and 93 more starting `md`)
+* [`huawei-sha1-md5-pass-salt`](index.html#huawei-sha1-md5-pass-salt) - `sha1(md5($p).$s)` (and 102 more starting `sha`)
+* [`md2-md5-plain`](index.html#md2-md5-plain) - `md2(md5($p))` (and 96 more starting `md`)
 * [`ripemd128-md5-plain`](index.html#ripemd128-md5-plain) - `ripemd128(md5($p))` (and 5 more starting `ripemd`)
 * [`tiger128-3-md5-plain`](index.html#tiger128-3-md5-plain) - `tiger(md5($p))` (and 1 more starting `tiger`)
 * [`whirlpool-md5-plain`](index.html#whirlpool-md5-plain) - `whirlpool(md5($p))` (and 3 more starting `whirlpool`)
@@ -270,7 +270,7 @@ A few that carry a vector and a proven expression, so there is a definite constr
 * [`md2-x2`](index.html#md2-x2) - `md2(md2($p))` (and 27 more starting `md`)
 * [`panama-x2`](index.html#panama-x2) - `panama(panama($p))`
 * [`rmd128-x2`](index.html#rmd128-x2) - `ripemd128(ripemd128($p))` (and 2 more starting `ripemd`)
-* [`sha1-md5-md5saltmd5pass`](index.html#sha1-md5-md5saltmd5pass) - `sha1(md5(md5($s).md5($p)))` (and 46 more starting `sha`)
+* [`sha1-md5-md5saltmd5pass`](index.html#sha1-md5-md5saltmd5pass) - `sha1(md5(md5($s).md5($p)))` (and 50 more starting `sha`)
 * [`skein224-x2`](index.html#skein224-x2) - `skein224(skein224($p))` (and 3 more starting `skein`)
 * [`sm3-x2`](index.html#sm3-x2) - `sm3(sm3($p))`
 * [`tiger`](index.html#tiger) - `tiger($p)` (and 1 more starting `tiger`)

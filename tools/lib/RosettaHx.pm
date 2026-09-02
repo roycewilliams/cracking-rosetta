@@ -281,6 +281,41 @@ sub translate_hx {
     }
     return (undef, 'multi-statement') if $e =~ /[;=]/;
 
+    # STRING LITERALS BECOME john's CONSTANTS.
+    #
+    # john's dynamic language has $c1..$c8, appended after the expression as
+    # ,c1=... -- doc/DYNAMIC_EXPRESSIONS lines 53-73, and confirmed on this
+    # host 2026-09-02: md5($c1.$p),c1=x compiles and cracks. Every literal used
+    # to fall out here as 'stray-literal', which stranded entries whose
+    # construction the appendix states plainly and john can PROVE. mediawiki
+    # is the worked example: md5(salt . "-" . md5(pass)) becomes
+    # md5($s.$c1.md5($p)),c1=- and john recovers the entry's own plaintext.
+    #
+    # fromhex("0d") is a literal too, and turning it into a constant REMOVES a
+    # token john's language does not have, rather than adding one. fromhex on
+    # a VARIABLE is untouched and still refused later.
+    my (@const, %seen_const);
+    my $litfail;
+    my $take = sub {
+        my ($raw) = @_;                     # the constant's actual bytes
+        # A comma would be read as the start of the next ,cN= assignment and
+        # there is no documented escape for it, so refuse rather than emit
+        # something john would silently misparse.
+        if ($raw =~ /,/) { $litfail = 'constant-comma'; return '' }
+        unless (defined $seen_const{$raw}) {
+            if (@const >= 8) { $litfail = 'too-many-constants'; return '' }
+            push @const, $raw;
+            $seen_const{$raw} = scalar @const;    # $c1 is the first
+        }
+        return '$c' . $seen_const{$raw};
+    };
+
+    # fromhex("hh..") first, so its bytes are decoded rather than quoted.
+    $e =~ s{\bfromhex\s*\(\s*"([0-9A-Fa-f]+)"\s*\)}
+           { $take->(pack 'H*', $1) }ge;
+    $e =~ s{"([^"]*)"}{ $take->($1) }ge;
+    return (undef, $litfail) if $litfail;
+
     $e =~ s/\s+//g;
     # Operands. hx's `user` is this repository's $s wherever an entry stores
     # the userid in the salt field, which is every such entry here today --
@@ -318,7 +353,24 @@ sub translate_hx {
     # must actually mention the password: a candidate that never uses $p is
     # the tokeniser having lost an operand, not an algorithm.
     return (undef, 'no-password') unless $e =~ /\$p/;
+
+    # The stray-literal guard runs on the BODY, before the constant data is
+    # appended: that data is arbitrary bytes by definition -- "{SSHA}", a
+    # space, a NUL -- and testing it here would reject every constant this
+    # function just built.
     return (undef, 'stray-literal') if $e =~ /[^A-Za-z0-9_\$\(\)\.,]/;
+
+    # ':' terminates a field in john's input, so a constant containing one has
+    # to be escaped. The doc gives the form: md5($c1.$p),c1=test_\x3a_test
+    if (@const) {
+        my $i = 0;
+        for my $c (@const) {
+            my $v = $c;
+            $v =~ s/([:\\])/sprintf '\\x%02x', ord $1/ge;
+            $v =~ s/([^\x20-\x7e])/sprintf '\\x%02x', ord $1/ge;
+            $e .= ',c' . (++$i) . '=' . $v;
+        }
+    }
     return ($e, undef);
 }
 

@@ -1,5 +1,11 @@
 id: "mediawiki"
 name: "MEDIAWIKI"
+expression: "md5($s.$c1.md5($p)),c1=-"
+expression_proof:
+  verified: "upstream"
+  verified_at: "2026-09-02"
+  verified_with: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A"
+  note: "transcribed from the hx specification's Appendix A entry for mdxfind type MEDIAWIKI (e863), which states md5(salt . \"-\" . md5(pass)) (MediaWiki B-type). Transcription, not reproduction, so this is upstream and not vector; run derive-expressions.pl to try to promote it. Not checkable locally: the construction uses functions RosettaExpr cannot compile, so this rests on upstream's word alone.; TRIAGE 2026-09-02 [format-encoding]: MediaWiki has its own ciphertext encoding rather than plain hex, so a generic expression cannot be checked against it however correctly it describes the computation"
 status: "ok"
 tools:
   hashcat:

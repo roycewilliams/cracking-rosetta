@@ -1,5 +1,12 @@
 id: "skype"
 name: "SKYPE"
+expression: "md5($s.$c1.$c2.$c1.$p),c1=\\x0a,c2=skyper"
+john_dynamic_expr: "dynamic=md5($s.$c1.$c2.$c1.$p),c1=\\x0a,c2=skyper"
+expression_proof:
+  verified: "vector"
+  verified_at: "2026-09-02"
+  verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
+  note: "round-tripped as --format=dynamic=<expr> against every vector this entry carries"
 category: "application"
 status: "ok"
 tools:

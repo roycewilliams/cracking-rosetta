@@ -202,10 +202,16 @@ for my $f (@files) {
                  (defined $d->{text} ? "\"$d->{text}\"" : '(none)'), ($d->{source} // 'unknown');
     }
 
+    # verified_at records WHEN the check ran, so it cannot be a literal. This
+    # was hardcoded to 2026-08-31 and duly stamped that on 34 entries written
+    # on 2026-09-02.
+    my $today = do { my @t = localtime; sprintf '%04d-%02d-%02d',
+                     $t[5] + 1900, $t[4] + 1, $t[3] };
+
     $e->{expression} = $expr;
     $e->{expression_proof} = {
         verified      => 'upstream',
-        verified_at   => '2026-08-31',
+        verified_at   => $today,
         verified_with => 'hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A',
         note          => "transcribed from the hx specification's Appendix A entry for mdxfind type "
                        . "$type ($hx->{$type}{index}), which states $hx->{$type}{raw}. Transcription, "
@@ -213,7 +219,7 @@ for my $f (@files) {
                        . "derive-expressions.pl to try to promote it. "
                        . ($confirmed
                           ? "An independent Digest:: computation of this string DOES reproduce this "
-                          . "entry's own vector, checked 2026-08-31."
+                          . "entry's own vector, checked $today."
                           : "Not checkable locally: the construction uses functions RosettaExpr "
                           . "cannot compile, so this rests on upstream's word alone.") . $retired,
     };
