@@ -283,6 +283,44 @@ an entry that has no named john format at all. It belongs in
 not a john format identifier and putting it in the identifier column would
 inflate john's coverage with something no `--list=formats` will ever show.
 
+### `expression:` and `john_dynamic_expr:` are not always the same string
+
+`expression:` is hx-style. hx spells a change of REPRESENTATION as a wrapper;
+john spells it as a FLAVOUR of the hash function, and rejects the wrapper form
+outright:
+
+    md5(upper(md5($p)))   hx        -- john: "Dyna expression syntax error"
+    md5(MD5($p))          john      -- compiles, and cracks the same vector
+
+    upper(F(x))       -> F_UPPERCASED(x)      lower(F(x))     -> F(x)
+    hex(F_bin(x))     -> F(x)                 base64(F_bin(x))-> F_64(x)
+    upper($p|$u)      -> uc($p|$u)            pad($p,100)     -> pad100($p)
+
+`RosettaJohn::hx_to_john` does exactly those rewrites and REFUSES anything
+else whole, on the same rule as `RosettaHx`: dropping a modifier is how a
+wrong expression proves itself, since `cap()` on a lowercase digest and
+`lower()` on a hex string are both no-ops on some inputs.
+`derive-expressions.pl` hands john the rewritten string and records the hx
+one, so an entry keeps hx notation in `expression:` and a runnable command in
+`john_dynamic_expr:`. Where the two differ the proof note says so: they are
+ONE claim written twice, not two agreeing pieces of evidence. `render.pl`
+publishes `john_dynamic_expr` as its own CSV column for the same reason --
+pasting the `expression` column after `--format=` is a syntax error on those
+rows.
+
+**Read john's LEXER, not its documentation, for what the language contains.**
+`doc/DYNAMIC_EXPRESSIONS` names only `lc()` and `uc()`.
+`src/dynamic_compiler.c` -- `comp_get_symbol`, the block after
+`LARGE_HASH_EDIT_POINT` -- also has `pad16($p)`, `pad20($p)`, `pad100($p)`,
+`utf16()` and `utf16be()`, and every hash has upper-case, `_raw`, `_64` and
+`_64c` flavours. Measured 2026-09-02: believing the doc refused 19 radmin2
+entries and 13 utf16 ones, on a day when 46 entries in this corpus already
+carried a PROVEN `john_dynamic_expr:` containing `utf16()`. Not every token
+the lexer accepts works: `pad16($p)` compiles and then dies with `unknown
+flag: Flag=MGF_KEYS_INPUT_pad16` in this build, which is a defect in the
+build rather than a fact about the notation, so it is still emitted and john
+still gets to be the oracle.
+
 ### The expression carries its own tier
 
 `expression:` is a gate -- `validate.pl` fails a build where two entries claim

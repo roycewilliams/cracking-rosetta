@@ -100,6 +100,14 @@ jobs:
       - name: Check formatting
         run: perl -Itools/lib tools/fmt.pl --all --check
 
+      # RosettaJohn rewrites an hx expression into john's notation, and that
+      # rewritten string is what john is asked to PROVE. A rewrite that drops
+      # a token does not fail loudly, it manufactures a proof -- cap() on a
+      # lowercase digest is a no-op on the inputs a test vector carries. The
+      # refusals are the assertions that matter; this runs without john.
+      - name: Exercise the expression translator
+        run: perl -Itools/lib tools/test-rosetta-john.pl
+
       # docs/index.html is the front door, and its behaviour is a string that
       # render.pl builds -- so a wrong array index or selector passes perl -c,
       # passes validate.pl, and silently breaks the page's search. node is

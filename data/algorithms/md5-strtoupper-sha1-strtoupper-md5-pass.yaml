@@ -1,11 +1,12 @@
 id: "md5-strtoupper-sha1-strtoupper-md5-pass"
 name: "md5(strtoupper(sha1(strtoupper(md5('$pass')))));"
 expression: "md5(upper(sha1(upper(md5($p)))))"
+john_dynamic_expr: "dynamic=md5(SHA1(MD5($p)))"
 expression_proof:
-  verified: "upstream"
-  verified_at: "2026-08-31"
-  verified_with: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A"
-  note: "transcribed from the hx specification's Appendix A entry for mdxfind type MD5SHA1UCMD5UC (e248), which states md5(upper(sha1(upper(md5(pass))))). Transcription, not reproduction, so this is upstream and not vector; run derive-expressions.pl to try to promote it. Not checkable locally: the construction uses functions RosettaExpr cannot compile, so this rests on upstream's word alone.; TRIAGE 2026-09-02 [no-john-format]: no john format on this entry, so john ships no control vectors, and RosettaExpr cannot compile this expression either -- nothing here can check it"
+  verified: "vector"
+  verified_at: "2026-09-02"
+  verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
+  note: "round-tripped against every vector this entry carries as --format=dynamic='md5(SHA1(MD5($p)))', which is this expression written in john's own notation: john spells a representation change as a flavour of the hash function, not as a wrapper. The two strings are ONE claim, not two pieces of evidence"
 category: "composite"
 status: "needs-review"
 tools:

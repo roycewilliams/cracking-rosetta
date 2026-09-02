@@ -97,6 +97,19 @@
 # in the identifier column would inflate john's coverage number with something
 # nobody can look up. The john gap must not move because of this tool.
 #
+# THE TWO FIELDS ARE NOT ALWAYS THE SAME STRING
+#
+# expression: is hx-style; john's dynamic compiler is not. hx writes a change
+# of representation as a wrapper -- upper(md5($p)) -- and john writes it as a
+# FLAVOUR of the hash function -- MD5($p). So md5(upper(md5($p))) is a syntax
+# error to john while md5(MD5($p)) compiles and cracks the same vector, which
+# is why 228 already-recorded expressions were failing to reproduce their own
+# vectors on 2026-09-02. RosettaJohn does that rewrite (or refuses the
+# candidate whole, never dropping a token), john is handed the rewritten
+# string, and the entry keeps the hx spelling in expression: with the john
+# spelling in john_dynamic_expr:. The proof note says so on any entry where
+# the two differ, because they are ONE piece of evidence written twice.
+#
 # EXPECT validate.pl TO FAIL AFTER THE FIRST --apply
 #
 # That is the collision gate doing its job: two entries claiming the same
@@ -125,6 +138,7 @@ use YAML::XS ();
 use lib "$RealBin/lib";
 use RosettaEmit qw(emit_entry);
 use RosettaTools qw(tool_path tool_env_help);
+use RosettaJohn qw(hx_to_john);
 
 my $PROG = basename($0);
 my $ROOT = "$RealBin/..";
@@ -804,15 +818,29 @@ ENTRY: for my $f (@files) {
         next;
     }
 
+    # expression: is hx-style and john's dynamic compiler is not: it spells a
+    # representation change as a FLAVOUR of the hash function rather than as a
+    # wrapper, so md5(upper(md5($p))) is a syntax error and md5(MD5($p)) is the
+    # same claim john will compile. RosettaJohn does that rewrite, or refuses
+    # the candidate whole. What is handed to john may therefore differ from
+    # what gets recorded, and the two are ONE claim written twice -- so the
+    # john spelling is kept per candidate and lands in john_dynamic_expr:.
+    # A candidate RosettaJohn cannot rewrite is still offered to john as it
+    # stands: john is the oracle either way, and refusing to ask costs the
+    # entries whose expression needed no rewrite in the first place.
+    my %john_of = map { $_ => (hx_to_john($_) // $_) } @cands;
+
     my @won;
     for my $c (@cands) {
         $tag_n++;
-        push @won, $c if prove($c, \@vecs, sprintf('c%05d', $tag_n));
+        push @won, $c if prove($john_of{$c}, \@vecs, sprintf('c%05d', $tag_n));
     }
 
     if (!@won) {
         push @{ $promote ? \@unproven : \@failed },
-            sprintf('%-34s %s', $e->{id}, join(' | ', @cands));
+            sprintf('%-34s %s', $e->{id},
+                    join(' | ', map { $john_of{$_} eq $_ ? $_
+                                    : "$_ [as $john_of{$_}]" } @cands));
         printf STDERR "-   %-34s no candidate proved (%d tried)\n",
             $e->{id}, scalar @cands if $verbose > 1;
         next;
@@ -834,8 +862,9 @@ ENTRY: for my $f (@files) {
         if $verbose || !$apply;
 
     next unless $apply;
+    my $jexpr = $john_of{$expr};
     $e->{expression}        = $expr;
-    $e->{john_dynamic_expr} = "dynamic=$expr";
+    $e->{john_dynamic_expr} = "dynamic=$jexpr";
 
     # Tier 'vector', and it means what it means everywhere else in this repo:
     # this exact string was compiled by john and recovered this entry's own
@@ -845,8 +874,14 @@ ENTRY: for my $f (@files) {
         verified      => 'vector',
         verified_at   => $TODAY,
         verified_with => john_version(),
-        note          => 'round-tripped as --format=dynamic=<expr> against '
-                       . 'every vector this entry carries',
+        note          => $jexpr eq $expr
+            ? 'round-tripped as --format=dynamic=<expr> against every vector '
+            . 'this entry carries'
+            : 'round-tripped against every vector this entry carries as '
+            . "--format=dynamic='$jexpr', which is this expression written in "
+            . "john's own notation: john spells a representation change as a "
+            . 'flavour of the hash function, not as a wrapper. The two strings '
+            . 'are ONE claim, not two pieces of evidence',
     };
     delete $e->{denotation};   # an expression supersedes the fallback wording
     emit_entry($path, $e);

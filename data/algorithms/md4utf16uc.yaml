@@ -1,11 +1,12 @@
 id: "md4utf16uc"
 name: "MD4UTF16UC"
 expression: "upper(md4(utf16($p)))"
+john_dynamic_expr: "dynamic=MD4(utf16($p))"
 expression_proof:
-  verified: "upstream"
+  verified: "vector"
   verified_at: "2026-09-02"
-  verified_with: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A"
-  note: "transcribed from the hx specification's Appendix A entry for mdxfind type MD4UTF16UC (e570), which states upper(md4(utf16le(pass))) (Note [28]). Transcription, not reproduction, so this is upstream and not vector; run derive-expressions.pl to try to promote it. Not checkable locally: the construction uses functions RosettaExpr cannot compile, so this rests on upstream's word alone.; TRIAGE 2026-09-02 [compiler-disagrees]: compiled with --format=dynamic this expression recovers none of john's own test vectors for NT either, so john's dynamic compiler and its named format disagree about what the string means; this is an upstream question, not a data error here"
+  verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
+  note: "round-tripped against every vector this entry carries as --format=dynamic='MD4(utf16($p))', which is this expression written in john's own notation: john spells a representation change as a flavour of the hash function, not as a wrapper. The two strings are ONE claim, not two pieces of evidence"
 category: "application"
 status: "ok"
 tools:

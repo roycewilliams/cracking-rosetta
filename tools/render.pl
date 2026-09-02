@@ -206,6 +206,14 @@ for my $e (@rows) {
         # machine-consumption views and nowhere else.
         expr_tier  => (ref $e->{expression_proof} eq 'HASH'
                        ? ($e->{expression_proof}{verified} // '') : ''),
+        # The same claim in john's own notation, which is NOT always the same
+        # string: expression: is hx-style and writes a change of
+        # representation as a wrapper -- upper(md5($p)) -- where john writes
+        # it as a flavour of the hash function -- MD5($p). Copying the
+        # expression column into a --format=dynamic= would hand a reader a
+        # syntax error on 48 rows, so the runnable form is published
+        # separately rather than left to be reconstructed.
+        john_expr  => $e->{john_dynamic_expr} // '',
         denotation => (ref $e->{denotation} eq 'HASH'
                        ? ($e->{denotation}{text} // '') : ''),
         status => $e->{status} // 'ok',
@@ -316,8 +324,8 @@ sub csv_field {
 # live row. It is a column rather than something to be dug out of the
 # relations prose: the whole reason a merged id keeps a row is that a machine
 # joining on it should be told where the row went.
-my @CSV = qw(id name aliases expression expression_tier denotation
-             category application status merged_into
+my @CSV = qw(id name aliases expression expression_tier john_dynamic_expr
+             denotation category application status merged_into
              hashcat hashcat_state john john_state mdxfind mdxfind_state
              crack_state vectors serialization relations legacy notes);
 
@@ -326,7 +334,7 @@ print {$csv} join(',', @CSV), "\n";
 for my $r (@out) {
     print {$csv} join(',', map { csv_field($_) } (
         $r->{id}, $r->{name}, $r->{alias}, $r->{expr},
-        $r->{expr_tier}, $r->{denotation},
+        $r->{expr_tier}, $r->{john_expr}, $r->{denotation},
         $r->{category}, $r->{application}, $r->{status}, '',
         join(' ', @{ $r->{hashcat}{ids} }), $r->{hashcat}{state},
         join(' ', @{ $r->{john}{ids} }),    $r->{john}{state},
@@ -339,7 +347,7 @@ for my $r (@out) {
 # reading the file by eye rather than by key.
 for my $t (@tomb_out) {
     print {$csv} join(',', map { csv_field($_) } (
-        $t->{id}, $t->{name}, '', '', '', '', '', '', 'merged', $t->{into},
+        $t->{id}, $t->{name}, '', '', '', '', '', '', '', 'merged', $t->{into},
         '', '', '', '', '', '', '', '', '', $t->{sameas}, '', $t->{notes},
     )), "\n";
 }
@@ -636,10 +644,13 @@ a named format:
 john --format=dynamic='haval128_3(md5($p))' hashes
 ```
 
-That string is in the entry's `john_dynamic_expr:` field and in the
-`expression` column of the CSV. It is deliberately **not** in john's column,
-which lists formats `--list=formats` will show; the gap worth filling is
-whether a named one exists.
+That string is in the entry's `john_dynamic_expr:` field and in the CSV column
+of the same name. Take it from there rather than from the `expression` column:
+the expression is written in hx notation, which spells a change of
+representation as a wrapper - `md5(upper(md5($p)))` - where john spells it as a
+flavour of the hash function - `md5(MD5($p))` - and john rejects the first
+outright. It is deliberately **not** in john's column, which lists formats
+`--list=formats` will show; the gap worth filling is whether a named one exists.
 
 GAPS_JOHN
 }
@@ -708,13 +719,21 @@ OQ_HEAD
 printf {$oq} "## Expressions that do not reproduce their own vectors (%d)\n\n",
     scalar @expr_unproven;
 print  {$oq} <<'OQ_EXPR';
-Each of these carries an expression that john's own `--list=subformats`
-states for a format the entry has already proven - and yet compiling that
+Each of these carries an expression transcribed from somewhere that states it
+- john's own `--list=subformats` for a format the entry has already proven, or
+the hx specification's Appendix A for an mdxfind type - and yet compiling that
 string with `--format=dynamic='...'` does not recover the entry's plaintext
-from the entry's hash. One of three things is true and we cannot tell which
-from here: the string is a wrong transcription, the vector belongs to a
-different algorithm, or john's dynamic compiler and its named format disagree
-about what the string means.
+from the entry's hash. Four things could be true and we cannot tell which from
+here: the string is a wrong transcription, the vector belongs to a different
+algorithm, john's dynamic compiler and its named format disagree about what
+the string means, or john's expression language simply has no way to write
+this construction - it has no `cut()`, `rev()` or `cap()`, and its base64
+flavour encodes the raw digest rather than the hex string.
+
+The last of those is the common case rather than a corner: the expression is
+rewritten into john's own notation before it is tried - `upper(md5($p))`
+becomes `MD5($p)`, `pad($p,100)` becomes `pad100($p)` - so a row that is still
+here after that is one john was asked correctly and could not confirm.
 
 The tier stays `upstream` rather than being promoted or deleted, which is the
 honest state: john says it, we could not reproduce it.
