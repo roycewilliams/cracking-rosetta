@@ -114,6 +114,47 @@ for my $k (keys %FUNC) {
 $FUNC{utf16le} = 'utf16';
 
 #-----------------------------------------------------------------------
+# MEASURED MULTI-EMIT, WHICH NEITHER UPSTREAM LIST CARRIES
+#
+# The two document-derived tests below miss a whole family, and the way to
+# find that out is not to read harder. "mdxfind -z" dumps every candidate
+# digest the tool computes for a password, so an emit count is MEASURABLE:
+# MD5 prints one line, MD51SALTMD5 prints 480. Measured 2026-09-02 against
+# RCS 1.545, and corroborated by reading the implementation in mdxfind.c --
+# the 1SALT family sweeps a single salt byte over 9 and 32..126, 96 values,
+# and emits five placements at each:
+#
+#     s.d    d.s    s.d.s    s.s.d    d.s.s        (d = hex32 inner digest)
+#
+# 5 x 96 = 480, and the corpus entries for these types already carried exactly
+# those five forms as their name plus four aliases -- nobody had confirmed why.
+# Appendix A's row for them is the prose "(complex: iterates over single-char
+# salts)", so translate_hx refuses it and Note [24] does not name them: the
+# family was invisible to both tests.
+#
+# WHY THIS IS A LIST AND NOT A SWEEP
+#
+# A full measured sweep of all 1002 types is the right end state and is now
+# clearly possible, but it is not a drop-in replacement for the documents and
+# must not be treated as one. Measured 2026-09-02: NTLM prints ONE candidate
+# under this invocation while hx Note [29] states it emits three, so an emit
+# count is authoritative for what the binary computes UNDER THE OPTIONS GIVEN
+# and not for the type in general -- several families take extra inputs (-u
+# user lists, -j peppers) that change what they emit. Until that is understood
+# a measured zero or one cannot be allowed to overrule a document that says
+# otherwise, so what goes in here is the set where measurement and the SOURCE
+# agree and the documents are simply silent.
+#
+# Each entry cites where it was established. Re-measure with:
+#   mdxfind -z -h '^TYPE$' -f <hashes> -i 1 <one-word-wordlist> | grep -c ^TYPE
+
+my %MULTI_SOURCE = map { $_ => 1 } qw(
+    MD51SALTMD5 MD51SALTMD5UC MD51SALTMD5MD5 MD51SALTMD5MD5MD5
+    MD51SALTMD5MD5MD5MD5 MD51SALTMD5MD5MD5MD5MD5
+    SHA11SALTMD5 SHA11SALTMD5UC SHA11SALTMD5SHA256 SHA1MD51SALTMD5
+);
+
+#-----------------------------------------------------------------------
 # Note [24]'s 34 named types.
 
 my %MULTI_NOTE = map { $_ => 1 } qw(
@@ -170,6 +211,7 @@ my $N_RANGE = qr/\bN \s* = \s* \d+ \s* [-\x{2013}] \s* \d+/x;
 sub is_multi_emit {
     my ($type, $hx) = @_;
     return 1 if defined $type && $MULTI_NOTE{$type};
+    return 1 if defined $type && $MULTI_SOURCE{$type};
     return 0 unless $hx;
     return 1 if defined $hx->{expr} && $hx->{expr} =~ /\bemit\b/;
 

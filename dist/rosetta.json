@@ -25770,10 +25770,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "md5($salt.$salt.strtoupper(md5($plain)))",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "Established from mdxfind's own source and a measurement, not from a document: Appendix A writes only the prose \"(complex: iterates over single-char salts)\" for this family and Note [24] does not name it. mdxfind.c sweeps a single salt byte over 9 and 32..126 -- 96 values -- and emits five placements at each (s.d, d.s, s.d.s, s.s.d and d.s.s, where d is the hex inner digest); \"mdxfind -z\" prints 480 candidates per password, which is 5 x 96. Measured 2026-09-02 against RCS 1.545. The name and aliases on this entry are those five placements. mdxfind type MD51SALTMD5UC (e284) is MULTI-EMIT: it computes several candidate digests per input and matches if any one reproduces the stored hash. There is therefore no single expression to record, and writing one of the emitted forms into expression: would be a false claim even though the string itself is correct. This is also why two vectors of such a type can disagree with each other, and why a tool matching one of them is not evidence about the other.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -27134,10 +27134,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "h=\"\"; for i=0 to length(pass)-1 { h=h.md5(cut(pass,i,1)) }; md5(h)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type MD5HESK (e437) is a multi-statement hx PROGRAM -- it assigns to a variable and loops over the characters of the password. john's dynamic expression language has no statements, no assignment and no iteration: doc/DYNAMIC_EXPRESSIONS requires a SINGLE outer crypt-hash expression, so this is not a gap a wider function vocabulary could ever close. Verified against mdxfind's own source on 2026-09-02 (RCS 1.545), which implements exactly the loop upstream describes and emits one candidate. It says nothing about whether john can CRACK this.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -27757,10 +27757,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "md5(md5($plain).$salt)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "Established from mdxfind's own source and a measurement, not from a document: Appendix A writes only the prose \"(complex: iterates over single-char salts)\" for this family and Note [24] does not name it. mdxfind.c sweeps a single salt byte over 9 and 32..126 -- 96 values -- and emits five placements at each (s.d, d.s, s.d.s, s.s.d and d.s.s, where d is the hex inner digest); \"mdxfind -z\" prints 480 candidates per password, which is 5 x 96. Measured 2026-09-02 against RCS 1.545. The name and aliases on this entry are those five placements. mdxfind type MD51SALTMD5 (e278) is MULTI-EMIT: it computes several candidate digests per input and matches if any one reproduces the stored hash. There is therefore no single expression to record, and writing one of the emitted forms into expression: would be a false claim even though the string itself is correct. This is also why two vectors of such a type can disagree with each other, and why a tool matching one of them is not evidence about the other.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -28277,10 +28277,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "md5(md5(md5($plain)).$salt)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "Established from mdxfind's own source and a measurement, not from a document: Appendix A writes only the prose \"(complex: iterates over single-char salts)\" for this family and Note [24] does not name it. mdxfind.c sweeps a single salt byte over 9 and 32..126 -- 96 values -- and emits five placements at each (s.d, d.s, s.d.s, s.s.d and d.s.s, where d is the hex inner digest); \"mdxfind -z\" prints 480 candidates per password, which is 5 x 96. Measured 2026-09-02 against RCS 1.545. The name and aliases on this entry are those five placements. mdxfind type MD51SALTMD5MD5 (e285) is MULTI-EMIT: it computes several candidate digests per input and matches if any one reproduces the stored hash. There is therefore no single expression to record, and writing one of the emitted forms into expression: would be a false claim even though the string itself is correct. This is also why two vectors of such a type can disagree with each other, and why a tool matching one of them is not evidence about the other.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                3610
@@ -28598,10 +28598,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "md5(md5(md5(md5($plain))).$salt)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "Established from mdxfind's own source and a measurement, not from a document: Appendix A writes only the prose \"(complex: iterates over single-char salts)\" for this family and Note [24] does not name it. mdxfind.c sweeps a single salt byte over 9 and 32..126 -- 96 values -- and emits five placements at each (s.d, d.s, s.d.s, s.s.d and d.s.s, where d is the hex inner digest); \"mdxfind -z\" prints 480 candidates per password, which is 5 x 96. Measured 2026-09-02 against RCS 1.545. The name and aliases on this entry are those five placements. mdxfind type MD51SALTMD5MD5MD5 (e343) is MULTI-EMIT: it computes several candidate digests per input and matches if any one reproduces the stored hash. There is therefore no single expression to record, and writing one of the emitted forms into expression: would be a false claim even though the string itself is correct. This is also why two vectors of such a type can disagree with each other, and why a tool matching one of them is not evidence about the other.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -28826,10 +28826,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "md5(md5(md5(md5(md5($plain)))).$salt)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "Established from mdxfind's own source and a measurement, not from a document: Appendix A writes only the prose \"(complex: iterates over single-char salts)\" for this family and Note [24] does not name it. mdxfind.c sweeps a single salt byte over 9 and 32..126 -- 96 values -- and emits five placements at each (s.d, d.s, s.d.s, s.s.d and d.s.s, where d is the hex inner digest); \"mdxfind -z\" prints 480 candidates per password, which is 5 x 96. Measured 2026-09-02 against RCS 1.545. The name and aliases on this entry are those five placements. mdxfind type MD51SALTMD5MD5MD5MD5 (e344) is MULTI-EMIT: it computes several candidate digests per input and matches if any one reproduces the stored hash. There is therefore no single expression to record, and writing one of the emitted forms into expression: would be a false claim even though the string itself is correct. This is also why two vectors of such a type can disagree with each other, and why a tool matching one of them is not evidence about the other.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -28961,10 +28961,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "md5(md5(md5(md5(md5(md5($plain))))).$salt)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "Established from mdxfind's own source and a measurement, not from a document: Appendix A writes only the prose \"(complex: iterates over single-char salts)\" for this family and Note [24] does not name it. mdxfind.c sweeps a single salt byte over 9 and 32..126 -- 96 values -- and emits five placements at each (s.d, d.s, s.d.s, s.s.d and d.s.s, where d is the hex inner digest); \"mdxfind -z\" prints 480 candidates per password, which is 5 x 96. Measured 2026-09-02 against RCS 1.545. The name and aliases on this entry are those five placements. mdxfind type MD51SALTMD5MD5MD5MD5MD5 (e345) is MULTI-EMIT: it computes several candidate digests per input and matches if any one reproduces the stored hash. There is therefore no single expression to record, and writing one of the emitted forms into expression: would be a false claim even though the string itself is correct. This is also why two vectors of such a type can disagree with each other, and why a tool matching one of them is not evidence about the other.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -32171,9 +32171,9 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "md5(md5(md5(pass) . salt) . pepper)",
          "expr" : "",
-         "expr_note" : "Withdrawn 2026-08-31. This entry carried the expression \"md5(md5(md5($p).$s).pepper)\", transcribed from the hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A entry for mdxfind type MD5-MD5MD5PASSSALT-PEP (e819) by a parser that has since been corrected: it carries the bare operand pepper, which john's dynamic language cannot bind. Nothing can compile that string, so it was a claim rather than a fact, and it is withdrawn rather than adjusted -- guessing what upstream meant is exactly what the expression field exists to stop. Re-run seed-hx.pl and denote-hx.pl to settle this entry from the corrected parse.",
+         "expr_note" : "Withdrawn 2026-08-31. This entry carried the expression \"md5(md5(md5($p).$s).pepper)\", transcribed from the hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A entry for mdxfind type MD5-MD5MD5PASSSALT-PEP (e819) by a parser that has since been corrected: it carries the bare operand pepper, which john's dynamic language cannot bind. Nothing can compile that string, so it was a claim rather than a fact, and it is withdrawn rather than adjusted -- guessing what upstream meant is exactly what the expression field exists to stop. Re-run seed-hx.pl and denote-hx.pl to settle this entry from the corrected parse. Settled here: the construction upstream states for mdxfind type MD5-MD5MD5PASSSALT-PEP (e819) uses a PEPPER: a site-wide secret that appears in no hash and cannot be derived from one. hx makes it a built-in variable beside pass, salt and salt2, with its own slot in the VM, and mdxfind reads it from a file (-j global array, -P per-type). john's dynamic expression language has no equivalent: $s2 is a second PER-HASH salt, not a site secret, and a $c1 constant would have to carry the value, which is exactly what a pepper does not publish. The absence therefore holds for every possible pepper rather than for this vector, which is what makes it a lookup. It says nothing about whether john can CRACK this. Established from mdxfind's source (hx.y line 19, hx_vm.c HX_SLOT_PEPPER) on 2026-09-02.",
          "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
@@ -32219,9 +32219,9 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "md5(md5(md5(pass . salt)) . pepper)",
          "expr" : "",
-         "expr_note" : "Withdrawn 2026-08-31. This entry carried the expression \"md5(md5(md5($p.$s)).pepper)\", transcribed from the hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A entry for mdxfind type MD5-MD5MD5PASSSALT-PEP2 (e821) by a parser that has since been corrected: it carries the bare operand pepper, which john's dynamic language cannot bind. Nothing can compile that string, so it was a claim rather than a fact, and it is withdrawn rather than adjusted -- guessing what upstream meant is exactly what the expression field exists to stop. Re-run seed-hx.pl and denote-hx.pl to settle this entry from the corrected parse.",
+         "expr_note" : "Withdrawn 2026-08-31. This entry carried the expression \"md5(md5(md5($p.$s)).pepper)\", transcribed from the hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A entry for mdxfind type MD5-MD5MD5PASSSALT-PEP2 (e821) by a parser that has since been corrected: it carries the bare operand pepper, which john's dynamic language cannot bind. Nothing can compile that string, so it was a claim rather than a fact, and it is withdrawn rather than adjusted -- guessing what upstream meant is exactly what the expression field exists to stop. Re-run seed-hx.pl and denote-hx.pl to settle this entry from the corrected parse. Settled here: the construction upstream states for mdxfind type MD5-MD5MD5PASSSALT-PEP2 (e821) uses a PEPPER: a site-wide secret that appears in no hash and cannot be derived from one. hx makes it a built-in variable beside pass, salt and salt2, with its own slot in the VM, and mdxfind reads it from a file (-j global array, -P per-type). john's dynamic expression language has no equivalent: $s2 is a second PER-HASH salt, not a site secret, and a $c1 constant would have to carry the value, which is exactly what a pepper does not publish. The absence therefore holds for every possible pepper rather than for this vector, which is what makes it a lookup. It says nothing about whether john can CRACK this. Established from mdxfind's source (hx.y line 19, hx_vm.c HX_SLOT_PEPPER) on 2026-09-02.",
          "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
@@ -32540,9 +32540,9 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "md5(salt . sha1(pepper . pass))",
          "expr" : "",
-         "expr_note" : "Withdrawn 2026-08-31. This entry carried the expression \"md5($s.sha1(pepper.$p))\", transcribed from the hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A entry for mdxfind type MD5-SALT-SHA1PEPPASS (e822) by a parser that has since been corrected: it carries the bare operand pepper, which john's dynamic language cannot bind. Nothing can compile that string, so it was a claim rather than a fact, and it is withdrawn rather than adjusted -- guessing what upstream meant is exactly what the expression field exists to stop. Re-run seed-hx.pl and denote-hx.pl to settle this entry from the corrected parse.",
+         "expr_note" : "Withdrawn 2026-08-31. This entry carried the expression \"md5($s.sha1(pepper.$p))\", transcribed from the hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A entry for mdxfind type MD5-SALT-SHA1PEPPASS (e822) by a parser that has since been corrected: it carries the bare operand pepper, which john's dynamic language cannot bind. Nothing can compile that string, so it was a claim rather than a fact, and it is withdrawn rather than adjusted -- guessing what upstream meant is exactly what the expression field exists to stop. Re-run seed-hx.pl and denote-hx.pl to settle this entry from the corrected parse. Settled here: the construction upstream states for mdxfind type MD5-SALT-SHA1PEPPASS (e822) uses a PEPPER: a site-wide secret that appears in no hash and cannot be derived from one. hx makes it a built-in variable beside pass, salt and salt2, with its own slot in the VM, and mdxfind reads it from a file (-j global array, -P per-type). john's dynamic expression language has no equivalent: $s2 is a second PER-HASH salt, not a site secret, and a $c1 constant would have to carry the value, which is exactly what a pepper does not publish. The absence therefore holds for every possible pepper rather than for this vector, which is what makes it a lookup. It says nothing about whether john can CRACK this. Established from mdxfind's source (hx.y line 19, hx_vm.c HX_SLOT_PEPPER) on 2026-09-02.",
          "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
@@ -47204,10 +47204,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "h=\"\"; for i=0 to length(pass)-1 { h=h.sha1(cut(pass,i,1)) }; sha1(h)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type SHA1HESK (e436) is a multi-statement hx PROGRAM -- it assigns to a variable and loops over the characters of the password. john's dynamic expression language has no statements, no assignment and no iteration: doc/DYNAMIC_EXPRESSIONS requires a SINGLE outer crypt-hash expression, so this is not a gap a wider function vocabulary could ever close. Verified against mdxfind's own source on 2026-09-02 (RCS 1.545), which implements exactly the loop upstream describes and emits one candidate. It says nothing about whether john can CRACK this.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -47409,10 +47409,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "sha1(md5($plain).$salt)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "Established from mdxfind's own source and a measurement, not from a document: Appendix A writes only the prose \"(complex: iterates over single-char salts)\" for this family and Note [24] does not name it. mdxfind.c sweeps a single salt byte over 9 and 32..126 -- 96 values -- and emits five placements at each (s.d, d.s, s.d.s, s.s.d and d.s.s, where d is the hex inner digest); \"mdxfind -z\" prints 480 candidates per password, which is 5 x 96. Measured 2026-09-02 against RCS 1.545. The name and aliases on this entry are those five placements. mdxfind type SHA11SALTMD5 (e311) is MULTI-EMIT: it computes several candidate digests per input and matches if any one reproduces the stored hash. There is therefore no single expression to record, and writing one of the emitted forms into expression: would be a false claim even though the string itself is correct. This is also why two vectors of such a type can disagree with each other, and why a tool matching one of them is not evidence about the other.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [
                4710
@@ -47691,10 +47691,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "sha1(md5(md5($plain).$salt))",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "Established from mdxfind's own source and a measurement, not from a document: Appendix A writes only the prose \"(complex: iterates over single-char salts)\" for this family and Note [24] does not name it. mdxfind.c sweeps a single salt byte over 9 and 32..126 -- 96 values -- and emits five placements at each (s.d, d.s, s.d.s, s.s.d and d.s.s, where d is the hex inner digest); \"mdxfind -z\" prints 480 candidates per password, which is 5 x 96. Measured 2026-09-02 against RCS 1.545. The name and aliases on this entry are those five placements. mdxfind type SHA1MD51SALTMD5 (e297) is MULTI-EMIT: it computes several candidate digests per input and matches if any one reproduces the stored hash. There is therefore no single expression to record, and writing one of the emitted forms into expression: would be a false claim even though the string itself is correct. This is also why two vectors of such a type can disagree with each other, and why a tool matching one of them is not evidence about the other.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -49896,10 +49896,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "sha1(cap(md5(md5(pass) . salt)) . pepper)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type SHA1-MD5CAPPEPPER-MD5SALT (e654) uses a PEPPER: a site-wide secret that appears in no hash and cannot be derived from one. hx makes it a built-in variable beside pass, salt and salt2, with its own slot in the VM, and mdxfind reads it from a file (-j global array, -P per-type). john's dynamic expression language has no equivalent: $s2 is a second PER-HASH salt, not a site secret, and a $c1 constant would have to carry the value, which is exactly what a pepper does not publish. The absence therefore holds for every possible pepper rather than for this vector, which is what makes it a lookup. It says nothing about whether john can CRACK this. Established from mdxfind's source (hx.y line 19, hx_vm.c HX_SLOT_PEPPER) on 2026-09-02.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "unknown"
@@ -50121,10 +50121,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "sha1(md5(md5(md5(pass)) . salt) . pepper)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type SHA1-MD5PEPPER-MD5MD5SALT (e611) uses a PEPPER: a site-wide secret that appears in no hash and cannot be derived from one. hx makes it a built-in variable beside pass, salt and salt2, with its own slot in the VM, and mdxfind reads it from a file (-j global array, -P per-type). john's dynamic expression language has no equivalent: $s2 is a second PER-HASH salt, not a site secret, and a $c1 constant would have to carry the value, which is exactly what a pepper does not publish. The absence therefore holds for every possible pepper rather than for this vector, which is what makes it a lookup. It says nothing about whether john can CRACK this. Established from mdxfind's source (hx.y line 19, hx_vm.c HX_SLOT_PEPPER) on 2026-09-02.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "unknown"
@@ -50166,10 +50166,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "sha1(md5(md5(pass) . salt) . pepper)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type SHA1-MD5PEPPER-MD5SALT (e597) uses a PEPPER: a site-wide secret that appears in no hash and cannot be derived from one. hx makes it a built-in variable beside pass, salt and salt2, with its own slot in the VM, and mdxfind reads it from a file (-j global array, -P per-type). john's dynamic expression language has no equivalent: $s2 is a second PER-HASH salt, not a site secret, and a $c1 constant would have to carry the value, which is exactly what a pepper does not publish. The absence therefore holds for every possible pepper rather than for this vector, which is what makes it a lookup. It says nothing about whether john can CRACK this. Established from mdxfind's source (hx.y line 19, hx_vm.c HX_SLOT_PEPPER) on 2026-09-02.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "unknown"
@@ -50211,10 +50211,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "sha1(md5(md5(salt) . md5(pass)) . pepper)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type SHA1-MD5PEPPER-MD5SALTMD5PASS (e596) uses a PEPPER: a site-wide secret that appears in no hash and cannot be derived from one. hx makes it a built-in variable beside pass, salt and salt2, with its own slot in the VM, and mdxfind reads it from a file (-j global array, -P per-type). john's dynamic expression language has no equivalent: $s2 is a second PER-HASH salt, not a site secret, and a $c1 constant would have to carry the value, which is exactly what a pepper does not publish. The absence therefore holds for every possible pepper rather than for this vector, which is what makes it a lookup. It says nothing about whether john can CRACK this. Established from mdxfind's source (hx.y line 19, hx_vm.c HX_SLOT_PEPPER) on 2026-09-02.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "unknown"
@@ -50571,10 +50571,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "sha1(pepper . md5(md5(pass) . salt))",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type SHA1-PEPPER-MD5SALT (e677) uses a PEPPER: a site-wide secret that appears in no hash and cannot be derived from one. hx makes it a built-in variable beside pass, salt and salt2, with its own slot in the VM, and mdxfind reads it from a file (-j global array, -P per-type). john's dynamic expression language has no equivalent: $s2 is a second PER-HASH salt, not a site secret, and a $c1 constant would have to carry the value, which is exactly what a pepper does not publish. The absence therefore holds for every possible pepper rather than for this vector, which is what makes it a lookup. It says nothing about whether john can CRACK this. Established from mdxfind's source (hx.y line 19, hx_vm.c HX_SLOT_PEPPER) on 2026-09-02.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "unknown"
@@ -50757,9 +50757,9 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "sha1(utf16le(salt . rev(lower(pass)) . pepper))",
          "expr" : "",
-         "expr_note" : "Withdrawn 2026-08-31. This entry carried the expression \"sha1(utf16($s.rev(lower($p)).pepper))\", transcribed from the hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A entry for mdxfind type SHA1-SALT-UTF16-PEPPER (e446) by a parser that has since been corrected: it carries the bare operand pepper, which john's dynamic language cannot bind. Nothing can compile that string, so it was a claim rather than a fact, and it is withdrawn rather than adjusted -- guessing what upstream meant is exactly what the expression field exists to stop. Re-run seed-hx.pl and denote-hx.pl to settle this entry from the corrected parse.",
+         "expr_note" : "Withdrawn 2026-08-31. This entry carried the expression \"sha1(utf16($s.rev(lower($p)).pepper))\", transcribed from the hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A entry for mdxfind type SHA1-SALT-UTF16-PEPPER (e446) by a parser that has since been corrected: it carries the bare operand pepper, which john's dynamic language cannot bind. Nothing can compile that string, so it was a claim rather than a fact, and it is withdrawn rather than adjusted -- guessing what upstream meant is exactly what the expression field exists to stop. Re-run seed-hx.pl and denote-hx.pl to settle this entry from the corrected parse. Settled here: the construction upstream states for mdxfind type SHA1-SALT-UTF16-PEPPER (e446) uses a PEPPER: a site-wide secret that appears in no hash and cannot be derived from one. hx makes it a built-in variable beside pass, salt and salt2, with its own slot in the VM, and mdxfind reads it from a file (-j global array, -P per-type). john's dynamic expression language has no equivalent: $s2 is a second PER-HASH salt, not a site secret, and a $c1 constant would have to carry the value, which is exactly what a pepper does not publish. The absence therefore holds for every possible pepper rather than for this vector, which is what makes it a lookup. It says nothing about whether john can CRACK this. Established from mdxfind's source (hx.y line 19, hx_vm.c HX_SLOT_PEPPER) on 2026-09-02.",
          "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
@@ -51041,10 +51041,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "SHA11SALTMD5SHA256",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "Established from mdxfind's own source and a measurement, not from a document: Appendix A writes only the prose \"(complex: iterates over single-char salts)\" for this family and Note [24] does not name it. mdxfind.c sweeps a single salt byte over 9 and 32..126 -- 96 values -- and emits five placements at each (s.d, d.s, s.d.s, s.s.d and d.s.s, where d is the hex inner digest); \"mdxfind -z\" prints 480 candidates per password, which is 5 x 96. Measured 2026-09-02 against RCS 1.545. The name and aliases on this entry are those five placements. mdxfind type SHA11SALTMD5SHA256 (e763) is MULTI-EMIT: it computes several candidate digests per input and matches if any one reproduces the stored hash. There is therefore no single expression to record, and writing one of the emitted forms into expression: would be a false claim even though the string itself is correct. This is also why two vectors of such a type can disagree with each other, and why a tool matching one of them is not evidence about the other.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "unknown"
@@ -51086,10 +51086,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "SHA11SALTMD5UC",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "Established from mdxfind's own source and a measurement, not from a document: Appendix A writes only the prose \"(complex: iterates over single-char salts)\" for this family and Note [24] does not name it. mdxfind.c sweeps a single salt byte over 9 and 32..126 -- 96 values -- and emits five placements at each (s.d, d.s, s.d.s, s.s.d and d.s.s, where d is the hex inner digest); \"mdxfind -z\" prints 480 candidates per password, which is 5 x 96. Measured 2026-09-02 against RCS 1.545. The name and aliases on this entry are those five placements. mdxfind type SHA11SALTMD5UC (e718) is MULTI-EMIT: it computes several candidate digests per input and matches if any one reproduces the stored hash. There is therefore no single expression to record, and writing one of the emitted forms into expression: would be a false claim even though the string itself is correct. This is also why two vectors of such a type can disagree with each other, and why a tool matching one of them is not evidence about the other.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "unknown"
@@ -51453,10 +51453,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "h=sha1_bin(pass); for i=1 to 1000000 { h=sha1_bin(sha1(h).pass) }; sha1(h)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type SHA1DRU (e404) is a multi-statement hx PROGRAM -- it assigns to a variable and loops over the characters of the password. john's dynamic expression language has no statements, no assignment and no iteration: doc/DYNAMIC_EXPRESSIONS requires a SINGLE outer crypt-hash expression, so this is not a gap a wider function vocabulary could ever close. Verified against mdxfind's own source on 2026-09-02 (RCS 1.545), which implements exactly the loop upstream describes and emits one candidate. It says nothing about whether john can CRACK this.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -53272,10 +53272,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "sha1(md5(salt . pass) . pepper)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type SHA1MD5SALTPASSPEPPER (e607) uses a PEPPER: a site-wide secret that appears in no hash and cannot be derived from one. hx makes it a built-in variable beside pass, salt and salt2, with its own slot in the VM, and mdxfind reads it from a file (-j global array, -P per-type). john's dynamic expression language has no equivalent: $s2 is a second PER-HASH salt, not a site secret, and a $c1 constant would have to carry the value, which is exactly what a pepper does not publish. The absence therefore holds for every possible pepper rather than for this vector, which is what makes it a lookup. It says nothing about whether john can CRACK this. Established from mdxfind's source (hx.y line 19, hx_vm.c HX_SLOT_PEPPER) on 2026-09-02.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "unknown"
@@ -55303,10 +55303,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "sha1(salt . md5(md5(pass)) . pepper)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type SHA1SALTMD5MD5PASSPEPPER (e719) uses a PEPPER: a site-wide secret that appears in no hash and cannot be derived from one. hx makes it a built-in variable beside pass, salt and salt2, with its own slot in the VM, and mdxfind reads it from a file (-j global array, -P per-type). john's dynamic expression language has no equivalent: $s2 is a second PER-HASH salt, not a site secret, and a $c1 constant would have to carry the value, which is exactly what a pepper does not publish. The absence therefore holds for every possible pepper rather than for this vector, which is what makes it a lookup. It says nothing about whether john can CRACK this. Established from mdxfind's source (hx.y line 19, hx_vm.c HX_SLOT_PEPPER) on 2026-09-02.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "unknown"
@@ -55438,10 +55438,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "sha1(salt . md5(pass) . pepper)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type SHA1SALTMD5PASSPEPPER (e602) uses a PEPPER: a site-wide secret that appears in no hash and cannot be derived from one. hx makes it a built-in variable beside pass, salt and salt2, with its own slot in the VM, and mdxfind reads it from a file (-j global array, -P per-type). john's dynamic expression language has no equivalent: $s2 is a second PER-HASH salt, not a site secret, and a $c1 constant would have to carry the value, which is exactly what a pepper does not publish. The absence therefore holds for every possible pepper rather than for this vector, which is what makes it a lookup. It says nothing about whether john can CRACK this. Established from mdxfind's source (hx.y line 19, hx_vm.c HX_SLOT_PEPPER) on 2026-09-02.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "unknown"
@@ -55528,10 +55528,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "sha1(salt . md5(sha1(pass)) . pepper)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type SHA1SALTMD5SHA1PASSPEPPER (e742) uses a PEPPER: a site-wide secret that appears in no hash and cannot be derived from one. hx makes it a built-in variable beside pass, salt and salt2, with its own slot in the VM, and mdxfind reads it from a file (-j global array, -P per-type). john's dynamic expression language has no equivalent: $s2 is a second PER-HASH salt, not a site secret, and a $c1 constant would have to carry the value, which is exactly what a pepper does not publish. The absence therefore holds for every possible pepper rather than for this vector, which is what makes it a lookup. It says nothing about whether john can CRACK this. Established from mdxfind's source (hx.y line 19, hx_vm.c HX_SLOT_PEPPER) on 2026-09-02.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "unknown"
@@ -55663,10 +55663,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "sha1(salt . upper(md5(pass)) . pepper)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type SHA1SALTMD5UCPASSPEPPER (e651) uses a PEPPER: a site-wide secret that appears in no hash and cannot be derived from one. hx makes it a built-in variable beside pass, salt and salt2, with its own slot in the VM, and mdxfind reads it from a file (-j global array, -P per-type). john's dynamic expression language has no equivalent: $s2 is a second PER-HASH salt, not a site secret, and a $c1 constant would have to carry the value, which is exactly what a pepper does not publish. The absence therefore holds for every possible pepper rather than for this vector, which is what makes it a lookup. It says nothing about whether john can CRACK this. Established from mdxfind's source (hx.y line 19, hx_vm.c HX_SLOT_PEPPER) on 2026-09-02.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "unknown"
@@ -55843,10 +55843,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "sha1(salt . sha1(pass) . pepper)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "the construction upstream states for mdxfind type SHA1SALTSHA1PASSPEPPER (e681) uses a PEPPER: a site-wide secret that appears in no hash and cannot be derived from one. hx makes it a built-in variable beside pass, salt and salt2, with its own slot in the VM, and mdxfind reads it from a file (-j global array, -P per-type). john's dynamic expression language has no equivalent: $s2 is a second PER-HASH salt, not a site secret, and a $c1 constant would have to carry the value, which is exactly what a pepper does not publish. The absence therefore holds for every possible pepper rather than for this vector, which is what makes it a lookup. It says nothing about whether john can CRACK this. Established from mdxfind's source (hx.y line 19, hx_vm.c HX_SLOT_PEPPER) on 2026-09-02.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "unknown"

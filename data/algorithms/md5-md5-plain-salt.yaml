@@ -1,6 +1,15 @@
 id: "md5-md5-plain-salt"
 name: "md5(md5($plain).$salt)"
 aliases: ["md5(md5($plain).$salt.$salt)", "md5($salt.md5($plain))", "md5($salt.md5($plain).$salt)", "md5($salt.$salt.md5($plain))"]
+expression_proof:
+  verified: "absent"
+  verified_at: "2026-09-02"
+  verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
+  note: "Established from mdxfind's own source and a measurement, not from a document: Appendix A writes only the prose \"(complex: iterates over single-char salts)\" for this family and Note [24] does not name it. mdxfind.c sweeps a single salt byte over 9 and 32..126 -- 96 values -- and emits five placements at each (s.d, d.s, s.d.s, s.s.d and d.s.s, where d is the hex inner digest); \"mdxfind -z\" prints 480 candidates per password, which is 5 x 96. Measured 2026-09-02 against RCS 1.545. The name and aliases on this entry are those five placements. mdxfind type MD51SALTMD5 (e278) is MULTI-EMIT: it computes several candidate digests per input and matches if any one reproduces the stored hash. There is therefore no single expression to record, and writing one of the emitted forms into expression: would be a false claim even though the string itself is correct. This is also why two vectors of such a type can disagree with each other, and why a tool matching one of them is not evidence about the other."
+denotation:
+  text: "md5(md5($plain).$salt)"
+  source: "mdxfind"
+  note: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A, entry for mdxfind type MD51SALTMD5 (e278), which states (complex: iterates over single-char salts). This is what the type emits, not a single construction -- see expression_proof."
 status: "ok"
 tools:
   hashcat:

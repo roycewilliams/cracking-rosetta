@@ -107,6 +107,24 @@ my $TODAY = do { my @t = localtime; sprintf '%04d-%02d-%02d',
 use RosettaTools qw(tool_path tool_env_help);
 
 my $PROG = basename($0);
+
+# Types whose multi-emit status comes from mdxfind's SOURCE and a measurement
+# rather than from a document, with the sentence that says so. RosettaHx's
+# %MULTI_SOURCE decides membership; this only supplies the citation, so the
+# two cannot drift about WHICH types -- only about the wording.
+my $ONESALT_CITE =
+    'Established from mdxfind\'s own source and a measurement, not from a '
+  . 'document: Appendix A writes only the prose "(complex: iterates over '
+  . 'single-char salts)" for this family and Note [24] does not name it. '
+  . 'mdxfind.c sweeps a single salt byte over 9 and 32..126 -- 96 values -- '
+  . 'and emits five placements at each (s.d, d.s, s.d.s, s.s.d and d.s.s, '
+  . 'where d is the hex inner digest); "mdxfind -z" prints 480 candidates per '
+  . 'password, which is 5 x 96. Measured 2026-09-02 against RCS 1.545. The '
+  . 'name and aliases on this entry are those five placements.';
+my %MULTI_SOURCE_TEXT = map { $_ => $ONESALT_CITE }
+  qw(MD51SALTMD5 MD51SALTMD5UC MD51SALTMD5MD5 MD51SALTMD5MD5MD5
+     MD51SALTMD5MD5MD5MD5 MD51SALTMD5MD5MD5MD5MD5
+     SHA11SALTMD5 SHA11SALTMD5UC SHA11SALTMD5SHA256 SHA1MD51SALTMD5);
 my $ROOT = "$RealBin/..";
 
 my $appendix = "$ROOT/tmp/hx/appA.txt";
@@ -319,7 +337,18 @@ for my $f (@files) {
     # a row that never mentions the password would publish upstream's slip as
     # this repository's answer to "what is this algorithm", so those go to a
     # person instead. Same rule seed-hx.pl applies to expression:.
-    unless ($hx->{$type}{expr} =~ /\bpass\b/) {
+    # The password guard is a check on APPENDIX A's text, so it applies only
+    # where the text being transcribed is Appendix A's. For a type RosettaHx
+    # knows is multi-emit from mdxfind's own source and a measurement,
+    # Appendix A is not the source being used -- the 1SALT family's row is the
+    # prose "(complex: iterates over single-char salts)", which names no
+    # password because upstream declined to state the construction at all. The
+    # entry's own name does state it, and for these types it states it
+    # correctly: MD51SALTMD5 carries md5(md5($plain).$salt) plus four aliases,
+    # which are exactly the five placements the source emits.
+    my $from_source = $MULTI_SOURCE_TEXT{$type} ? 1 : 0;
+
+    unless ($from_source || $hx->{$type}{expr} =~ /\bpass\b/) {
         $skip{'appendix row never mentions the password'}++;
         printf STDERR "  NO-PASS %-30s %-22s %s\n", $e->{id}, $type,
             $hx->{$type}{raw};
@@ -329,8 +358,10 @@ for my $f (@files) {
     my ($text, $note, $proofnote);
 
     if ($multi) {
-        $text = $hx->{$type}{expr};
-        $proofnote =
+        # Appendix A's expression where it states one; the entry's own name
+        # where upstream wrote prose instead and the source settled it.
+        $text = $from_source ? ($e->{name} // $type) : $hx->{$type}{expr};
+        $proofnote = ($from_source ? "$MULTI_SOURCE_TEXT{$type} " : '') .
             "mdxfind type $type ($hx->{$type}{index}) is MULTI-EMIT: it computes "
           . "several candidate digests per input and matches if any one reproduces "
           . "the stored hash. There is therefore no single expression to record, and "
@@ -362,6 +393,71 @@ for my $f (@files) {
           . "It says nothing about whether john can CRACK this: john has formats for "
           . "plenty of these constructions, and where it does they are in "
           . "tools.john.cpu. The wording upstream uses is kept in denotation:.";
+        $note =
+            "$HXCITE, entry for mdxfind type $type ($hx->{$type}{index}), which states "
+          . "$hx->{$type}{raw}.";
+    }
+    elsif (($why // '') eq 'multi-statement') {
+        # An hx PROGRAM, not an expression: MD5HESK is
+        # h=""; for i=0 to length(pass)-1 { h=h.md5(cut(pass,i,1)) }; md5(h)
+        # -- a loop over the password's characters. This IS a checkable
+        # absence, and a stronger one than a missing function: john's dynamic
+        # grammar admits a SINGLE outer hash expression and has no statements,
+        # no assignment and no iteration over a string at all
+        # (doc/DYNAMIC_EXPRESSIONS, "The expression MUST be a single crypt-hash
+        # expression"). No vocabulary could close that gap, so nothing is
+        # foreclosed by saying so. Confirmed against mdxfind's source
+        # 2026-09-02: mdxfind.c's JOB_MD5HESK loops md5 over each character,
+        # stages each as 32 hex, and hashes the concatenation, which is
+        # upstream's statement exactly; "mdxfind -z" prints one candidate, so
+        # it is single-emit and the construction is genuinely singular.
+        $text = $hx->{$type}{expr};
+        $proofnote =
+            "the construction upstream states for mdxfind type $type "
+          . "($hx->{$type}{index}) is a multi-statement hx PROGRAM -- it "
+          . "assigns to a variable and loops over the characters of the "
+          . "password. john's dynamic expression language has no statements, "
+          . "no assignment and no iteration: doc/DYNAMIC_EXPRESSIONS requires "
+          . "a SINGLE outer crypt-hash expression, so this is not a gap a "
+          . "wider function vocabulary could ever close. Verified against "
+          . "mdxfind's own source on 2026-09-02 (RCS 1.545), which implements "
+          . "exactly the loop upstream describes and emits one candidate. It "
+          . "says nothing about whether john can CRACK this.";
+        $note =
+            "$HXCITE, entry for mdxfind type $type ($hx->{$type}{index}), which states "
+          . "$hx->{$type}{raw}.";
+    }
+    elsif (($why // '') eq 'unknown-operand'
+           && ($tokens // '') =~ /(?:^|,)pepper(?:,|$)/) {
+        # 'pepper' is not a missing FUNCTION, it is a missing INPUT. hx makes
+        # it a built-in variable beside pass, salt and salt2 (hx.y line 19)
+        # with its own VM slot, and mdxfind reads it from a file: -j for the
+        # global array, -P for the per-type set. john's dynamic language has
+        # no site-wide-secret variable. $s2 is not one -- it is a second
+        # PER-HASH salt -- and a $c1 constant is not one either, because a
+        # constant has to be written into the expression and the whole point
+        # of a pepper is that its value is not in any hash. So this absence is
+        # checkable in the strong sense: it holds for every possible value.
+        #
+        # This is the one case where denoting an unknown-operand type is
+        # right. The general rule stands and the residue is still left alone,
+        # because john HAS constants and a second salt, so most of what
+        # translate_hx calls an unknown operand might yet be provable.
+        $text = $hx->{$type}{expr};
+        $proofnote =
+            "the construction upstream states for mdxfind type $type "
+          . "($hx->{$type}{index}) uses a PEPPER: a site-wide secret that "
+          . "appears in no hash and cannot be derived from one. hx makes it a "
+          . "built-in variable beside pass, salt and salt2, with its own slot "
+          . "in the VM, and mdxfind reads it from a file (-j global array, -P "
+          . "per-type). john's dynamic expression language has no equivalent: "
+          . "\$s2 is a second PER-HASH salt, not a site secret, and a \$c1 "
+          . "constant would have to carry the value, which is exactly what a "
+          . "pepper does not publish. The absence therefore holds for every "
+          . "possible pepper rather than for this vector, which is what makes "
+          . "it a lookup. It says nothing about whether john can CRACK this. "
+          . "Established from mdxfind's source (hx.y line 19, hx_vm.c "
+          . "HX_SLOT_PEPPER) on 2026-09-02.";
         $note =
             "$HXCITE, entry for mdxfind type $type ($hx->{$type}{index}), which states "
           . "$hx->{$type}{raw}.";

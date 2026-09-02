@@ -1,5 +1,14 @@
 id: "sha1saltsha1passpepper"
 name: "SHA1SALTSHA1PASSPEPPER"
+expression_proof:
+  verified: "absent"
+  verified_at: "2026-09-02"
+  verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
+  note: "the construction upstream states for mdxfind type SHA1SALTSHA1PASSPEPPER (e681) uses a PEPPER: a site-wide secret that appears in no hash and cannot be derived from one. hx makes it a built-in variable beside pass, salt and salt2, with its own slot in the VM, and mdxfind reads it from a file (-j global array, -P per-type). john's dynamic expression language has no equivalent: $s2 is a second PER-HASH salt, not a site secret, and a $c1 constant would have to carry the value, which is exactly what a pepper does not publish. The absence therefore holds for every possible pepper rather than for this vector, which is what makes it a lookup. It says nothing about whether john can CRACK this. Established from mdxfind's source (hx.y line 19, hx_vm.c HX_SLOT_PEPPER) on 2026-09-02."
+denotation:
+  text: "sha1(salt . sha1(pass) . pepper)"
+  source: "mdxfind"
+  note: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A, entry for mdxfind type SHA1SALTSHA1PASSPEPPER (e681), which states sha1(salt . sha1(pass) . pepper)."
 status: "needs-review"
 tools:
   mdxfind:

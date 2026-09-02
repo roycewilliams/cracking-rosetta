@@ -1,5 +1,14 @@
 id: "sha1-hesk-plain"
 name: "sha1(hesk($plain)) ?"
+expression_proof:
+  verified: "absent"
+  verified_at: "2026-09-02"
+  verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
+  note: "the construction upstream states for mdxfind type SHA1HESK (e436) is a multi-statement hx PROGRAM -- it assigns to a variable and loops over the characters of the password. john's dynamic expression language has no statements, no assignment and no iteration: doc/DYNAMIC_EXPRESSIONS requires a SINGLE outer crypt-hash expression, so this is not a gap a wider function vocabulary could ever close. Verified against mdxfind's own source on 2026-09-02 (RCS 1.545), which implements exactly the loop upstream describes and emits one candidate. It says nothing about whether john can CRACK this."
+denotation:
+  text: "h=\"\"; for i=0 to length(pass)-1 { h=h.sha1(cut(pass,i,1)) }; sha1(h)"
+  source: "mdxfind"
+  note: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A, entry for mdxfind type SHA1HESK (e436), which states h=\"\"; for i=0 to length(pass)-1 { h=h.sha1(cut(pass,i,1)) }; sha1(h)."
 status: "ok"
 tools:
   hashcat:
