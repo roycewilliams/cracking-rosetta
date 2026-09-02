@@ -100,7 +100,7 @@ One file per algorithm rather than one big table is deliberate: you touch one sm
 ## Notes
 
 * Crack does not get a table column. It attacks two of these algorithms, so a
-  column would spend 782 rows saying "no" to buy two rows of information -
+  column would say "no" on every row but two to buy two rows of information -
   those two are marked (c) and the detail lives in [docs/CRACK.md](docs/CRACK.md).
   The `tools.crack` field is still in the data and in both exports.
 

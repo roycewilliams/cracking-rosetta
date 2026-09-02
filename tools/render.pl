@@ -394,7 +394,8 @@ For sorting, filtering and search, open [index.html](index.html) - or
 
 LEGEND
 # Crack gets a dagger, not a column. It attacks 2 of these algorithms, so a
-# column spent 782 rows saying "no" to buy two rows of information. The data
+# column would say "no" on every row but two to buy two rows of information.
+# The data
 # itself is unchanged in data/algorithms, the CSV and the JSON; only the
 # presentation moves, to docs/CRACK.md and a marker on the rows it concerns.
 print  {$md} "| Algorithm | hashcat | John | mdxfind | Same as |\n|---|---|---|---|---|\n";

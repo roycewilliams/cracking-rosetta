@@ -230,9 +230,9 @@ fixed-length salts.
 What counts as good enough, best first:
 
 1. **`decoded`, spelled properly.** Only possible where the digest is base64
-   rather than hex -- `{SSHA}`, `$apr1$`, `$P$` and friends, 75 entries here
-   already. Seven characters of a 64-character alphabet is 42 bits, a few
-   minutes of GPU time. This is the real prize.
+   rather than hex -- `{SSHA}`, `$apr1$`, `$P$` and friends. Seven characters
+   of a 64-character alphabet is 42 bits, a few minutes of GPU time. This is
+   the real prize.
 2. **`dec0ded`** -- the hex form, and the normal target. Hex is `0-9a-f`, so
    `o`->`0` is forced and nothing else is.
 3. **Heavier leet or a shorter prefix** (`dec0d3d`, `dec0de`) -- accepted only
@@ -253,6 +253,25 @@ Housekeeping:
 - **Don't replace a good existing vector with a vanity one.** A vector from
   hashcat's example set is *evidence about hashcat*; one we generated is not.
   Vanity vectors fill gaps; they don't redecorate.
+
+## One rule about numbers in prose
+
+If you write a count into a document or into a tool's `--help` -- how many
+entries have no category, how many modes hashcat ships -- put the date you
+measured it in the same paragraph, or leave the number out and name the
+command that prints it.
+
+This is not pedantry, it is the failure this repository keeps having. On
+2026-09-02 `MAINTAINING.md` told readers "772 entries with no `category:`" and
+`curate.pl --help` said "(772 open)"; the real figure was 483. Both were true
+when they were typed. Counts here move every time an extractor runs or a
+derivation pass lands, so a dated number stays useful and an undated one
+quietly becomes a lie.
+
+`tools/check-numbers.pl --tracked` is the gate, and CI runs it. A document that
+is a record of one moment rather than living documentation can opt out with a
+`check-numbers: frozen YYYY-MM-DD` line near the top, which is what
+`ACTION-PLAN.md` does.
 
 ## What happens to your PR
 

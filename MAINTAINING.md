@@ -39,8 +39,9 @@ of its meaning.
 
 ## Why CI doesn't verify, and must not
 
-`.github/workflows/validate.yml` runs `validate.pl`, `fmt.pl --check` and a
-compile of every tool. It never runs a cracker.
+`.github/workflows/validate.yml` runs `validate.pl`, `fmt.pl --check`,
+`check-numbers.pl --tracked`, an ASCII check and a compile of every tool. It
+never runs a cracker.
 
 That's not a limitation of hosted runners, it's the design. Tier `vector` is
 the repository's only load-bearing claim. If a pull request could cause CI to
@@ -96,11 +97,14 @@ Every tool prints usage with no arguments and writes nothing without
 
 ## Curation: the decisions no tool can make
 
-The machine passes are done. What's left is a person knowing things -- 772
-entries with no `category:` (the sheet's own `class` column, defined in 2023
-and never filled), 402 with no expression and nothing said about why, a
-handful of merge proposals, and 14 expressions that don't reproduce their own
-vectors.
+The machine passes are done. What's left is a person knowing things: entries
+with no `category:` (the sheet's own `class` column, defined in 2023 and never
+filled), entries with no expression and nothing said about why, merge
+proposals, and expressions that don't reproduce their own vectors.
+
+`tools/curate.pl --list` prints how many of each are open today. This file
+deliberately does not: the answer moves every session, and a number here would
+be wrong before anyone read it.
 
 `tools/curate.pl` is a question queue for exactly that. One question at a
 time, every fact the repo already knows printed above it, usually one
@@ -190,9 +194,9 @@ order:
    ```
 
    Regenerate rather than filing a saved batch. The queue shrinks as the tools
-   resolve things -- it went from 22 questions to 10 in a single session -- and a
-   stale batch files questions that already have answers. The script creates
-   its own `curation` label and files nothing until you run it.
+   resolve things, sometimes by half in a single session, and a stale batch
+   files questions that already have answers. The script creates its own
+   `curation` label and files nothing until you run it.
 
 3. **Re-render**, so the counter, `GAPS.md` and `OPEN-QUESTIONS.md` match what
    is being published: `tools/render.pl`, then `tools/validate.pl`.

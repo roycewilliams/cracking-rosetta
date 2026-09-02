@@ -81,6 +81,18 @@ jobs:
             exit 1
           fi
 
+      # A count in prose is wrong the day after it is written. Measured
+      # 2026-09-02, MAINTAINING.md told a reader "772 entries with no
+      # category:" and curate.pl's --help said "(772 open)" while the live
+      # figure was 483 -- two surfaces describing one field, both confidently
+      # wrong, neither the result of carelessness. This requires a count in a
+      # document or in help text to carry an ISO date in its own paragraph, so
+      # a reader can tell a measurement from a number that has rotted.
+      # Design-rationale comments in tool source are a different genre and are
+      # exempt; --comments checks them for anyone who wants it.
+      - name: Counts are dated
+        run: perl tools/check-numbers.pl --tracked
+
       # Canonical form, so a reviewer never has to read a one-line change
       # buried in a whole-file reformat, and so a misspelled key is caught
       # here rather than vanishing the next time a tool rewrites the entry.

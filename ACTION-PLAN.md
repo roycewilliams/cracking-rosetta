@@ -1,7 +1,19 @@
-# cracking-rosetta -- action plan (for review)
+# cracking-rosetta -- action plan (historical)
 
-Status: **proposal**. Nothing below is built yet except the survey evidence,
-which was measured in this environment on 2026-08-29.
+<!-- check-numbers: frozen 2026-08-29 -->
+
+Status: **historical record**, frozen as written on 2026-08-29. It was a
+proposal then. Most of it has since been built and a few parts were decided
+differently, and none of it is maintained: read it for the reasoning that
+produced this repository, not for what the repository does today.
+
+`README.md` and `CLAUDE.md` are the current documents. Section 11's design is
+restated, with what changed on contact with the code, in `CLAUDE.md` under
+"Collisions: when two entries mean the same thing".
+
+Every number below is the survey as measured on 2026-08-29 and is deliberately
+not updated. That is what the frozen marker above records, and why
+`tools/check-numbers.pl` does not ask this file to date its counts one by one.
 
 ---
 

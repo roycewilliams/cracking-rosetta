@@ -58,10 +58,11 @@ Upstream, for drift detection and as seed data:
 - `github.com/Cynosureprime/hashpipe` -- `HASH_TYPES.md`, `john_map.h`
 
 **hashpipe is not a separate column.** Its type list was diffed against the
-local mdxfind binary: 1000 vs 1001 types, zero name mismatches, zero
-hashcat-mode mismatches (mdxfind has one extra index, e426). Record hashpipe
-as an alias of mdxfind until that stops being true; `tools/extract-hashpipe.pl`
-exists to detect divergence, not to populate a column.
+local mdxfind binary on 2026-08-29: 1000 vs 1001 types, zero name mismatches,
+zero hashcat-mode mismatches (mdxfind has one extra index, e426). Record
+hashpipe as an alias of mdxfind until that stops being true;
+`tools/extract-hashpipe.pl` exists to detect divergence, not to populate a
+column.
 
 ## Verification tiers
 
@@ -250,7 +251,7 @@ The expression is the semantic join key -- it is what lets a validator assert
 that two tools' identifiers really do denote the same thing.
 
 `tools/expressions.pl` populates both fields from `john --list=subformats`,
-which states what each of john's 474 dynamics computes in the syntax
+which states what each of john's dynamics computes in the syntax
 `--format=dynamic='...'` takes back. It writes only where the john block
 reached tier `vector` and every identifier that block names prints the same
 expression, so the field is transcription rather than interpretation.

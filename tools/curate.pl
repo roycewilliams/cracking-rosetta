@@ -13,15 +13,18 @@
 #
 # WHAT IS ACTUALLY LEFT
 #
-# The machine passes have gone as far as they go. 265 expressions were proven
-# by round-trip; the remainder is a long tail of 289 distinct unguessable
-# mdxfind type names across 306 entries -- roughly one construction per entry,
-# with no lever left to pull. Meanwhile 772 entries have no category:, which
-# is the sheet's own 'class' column that was defined in 2023 and never filled.
+# The machine passes have gone as far as they go. Measured 2026-08-30, the day
+# this tool was written: 265 expressions were proven by round-trip; the
+# remainder was a long tail of 289 distinct unguessable mdxfind type names
+# across 306 entries -- roughly one construction per entry, with no lever left
+# to pull. Meanwhile 772 entries had no category:, the sheet's own 'class'
+# column that was defined in 2023 and never filled. Run `--list` for what is
+# open now; those figures are the reason this tool exists, not a current
+# report, and the category one in particular has since moved a long way.
 #
 # None of that is a tooling problem any more. It is a person knowing things,
-# and the bottleneck is how expensive it is to ASK them. Opening 772 files to
-# type one word in each is the expensive way.
+# and the bottleneck is how expensive it is to ASK them. Opening hundreds of
+# files to type one word in each is the expensive way.
 #
 # SO THIS IS A QUESTION QUEUE, NOT AN EDITOR
 #
@@ -105,7 +108,7 @@ sub usage {
 Usage: $PROG [options]
 
    --kind K          only questions of this kind (repeatable). One of:
-                       category    which axis does this entry sit on (772 open)
+                       category    which axis does this entry sit on
                        denotation  what do people call this, when there is no
                                    provable expression
                        duplicate   two entries propose a merge; which survives
