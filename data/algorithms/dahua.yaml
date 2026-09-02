@@ -5,6 +5,7 @@ expression_proof:
   verified_at: "2026-08-31"
   verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
   note: "Withdrawn 2026-08-31. This entry carried the expression \"md5($s.upper(md5(salt2.$p)))\", transcribed from the hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A entry for mdxfind type DAHUA (e864) by a parser that has since been corrected: it carries the bare operand salt2, which john's dynamic language cannot bind. Nothing can compile that string, so it was a claim rather than a fact, and it is withdrawn rather than adjusted -- guessing what upstream meant is exactly what the expression field exists to stop. Re-run seed-hx.pl and denote-hx.pl to settle this entry from the corrected parse."
+category: "composite"
 status: "needs-review"
 tools:
   hashcat:

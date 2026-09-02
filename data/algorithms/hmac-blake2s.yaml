@@ -9,6 +9,7 @@ denotation:
   text: "hmac_blake2s(pass, salt)"
   source: "mdxfind"
   note: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A, entry for mdxfind type HMAC-BLAKE2S (e828), which states hmac_blake2s(pass, salt)."
+category: "composite"
 status: "ok"
 tools:
   hashcat:

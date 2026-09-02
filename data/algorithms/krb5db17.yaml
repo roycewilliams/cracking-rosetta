@@ -9,6 +9,7 @@ denotation:
   text: "aes128_cts_hmac_sha1(pass, realm, user)"
   source: "mdxfind"
   note: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A, entry for mdxfind type KRB5DB17 (e970), which states aes128_cts_hmac_sha1(pass, realm, user) (Kerberos 5 KDB etype 17)."
+category: "protocol"
 status: "ok"
 tools:
   hashcat:

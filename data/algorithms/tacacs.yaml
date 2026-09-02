@@ -1,5 +1,6 @@
 id: "tacacs"
 name: "TACACS"
+category: "protocol"
 status: "ok"
 tools:
   hashcat:

@@ -1,5 +1,6 @@
 id: "iscsi-chap"
 name: "ISCSI-CHAP"
+category: "protocol"
 status: "ok"
 tools:
   hashcat:

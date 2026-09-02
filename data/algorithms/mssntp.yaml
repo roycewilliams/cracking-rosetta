@@ -1,5 +1,6 @@
 id: "mssntp"
 name: "MSSNTP"
+category: "protocol"
 status: "ok"
 tools:
   hashcat:

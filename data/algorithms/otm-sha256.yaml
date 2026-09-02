@@ -1,5 +1,6 @@
 id: "otm-sha256"
 name: "OTM-SHA256"
+category: "application"
 status: "ok"
 tools:
   hashcat:

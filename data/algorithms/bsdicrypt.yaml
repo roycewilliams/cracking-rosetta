@@ -9,6 +9,7 @@ denotation:
   text: "bsdicrypt(pass, salt)"
   source: "mdxfind"
   note: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A, entry for mdxfind type BSDICRYPT (e997), which states bsdicrypt(pass, salt)."
+category: "application"
 status: "ok"
 tools:
   hashcat:

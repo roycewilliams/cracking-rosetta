@@ -1,5 +1,6 @@
 id: "symfony256"
 name: "SYMFONY256"
+category: "application"
 status: "ok"
 tools:
   hashcat:

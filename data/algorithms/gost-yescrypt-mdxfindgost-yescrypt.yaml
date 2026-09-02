@@ -9,6 +9,7 @@ denotation:
   text: "gost_yescrypt(pass, salt)"
   source: "mdxfind"
   note: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A, entry for mdxfind type GOST-YESCRYPT (e998), which states gost_yescrypt(pass, salt)."
+category: "kdf"
 status: "needs-review"
 tools:
   hashcat:

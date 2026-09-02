@@ -1,5 +1,6 @@
 id: "netscaler"
 name: "NETSCALER"
+category: "application"
 status: "ok"
 tools:
   hashcat:

@@ -509,7 +509,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -688,7 +688,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "primitive",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -733,7 +733,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "primitive",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -778,7 +778,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "primitive",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -880,7 +880,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -930,7 +930,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -978,7 +978,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -1026,7 +1026,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -1203,7 +1203,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -1249,7 +1249,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -1336,7 +1336,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -1385,7 +1385,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -1435,7 +1435,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -1526,7 +1526,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -1618,7 +1618,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -1663,7 +1663,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -1712,7 +1712,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -1761,7 +1761,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "kdf",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -1898,7 +1898,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -1985,7 +1985,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -2072,7 +2072,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -2249,7 +2249,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -2294,7 +2294,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "protocol",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -2339,7 +2339,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -2563,7 +2563,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -2650,7 +2650,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -2741,7 +2741,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "kdf",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -2828,7 +2828,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "kdf",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -2873,7 +2873,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "kdf",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -2918,7 +2918,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "kdf",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -2963,7 +2963,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "kdf",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -3008,7 +3008,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -3859,7 +3859,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -4118,7 +4118,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -4163,7 +4163,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -4256,7 +4256,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -4301,7 +4301,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -4861,7 +4861,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -5077,7 +5077,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -5126,7 +5126,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -5175,7 +5175,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -5278,7 +5278,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -5327,7 +5327,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -5508,7 +5508,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "protocol",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -5556,7 +5556,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -6064,7 +6064,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -6109,7 +6109,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -6243,7 +6243,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -6292,7 +6292,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "primitive",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -6337,7 +6337,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "claimed"
@@ -6386,7 +6386,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "primitive",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -6936,7 +6936,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -6981,7 +6981,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -7029,7 +7029,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -9198,7 +9198,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -10438,7 +10438,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -10486,7 +10486,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -10744,7 +10744,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -11129,7 +11129,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "kdf",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -11216,7 +11216,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -15369,7 +15369,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -15456,7 +15456,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -15543,7 +15543,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -15588,7 +15588,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -15675,7 +15675,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -15720,7 +15720,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -16017,7 +16017,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -16104,7 +16104,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -16233,7 +16233,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -16278,7 +16278,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -16365,7 +16365,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -16536,7 +16536,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -16791,7 +16791,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -16836,7 +16836,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -16881,7 +16881,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -16926,7 +16926,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -16971,7 +16971,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -17016,7 +17016,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -17201,7 +17201,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "protocol",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -17246,7 +17246,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "protocol",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -17552,7 +17552,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "protocol",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -17597,7 +17597,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "protocol",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -17726,7 +17726,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "protocol",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -18255,7 +18255,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -18300,7 +18300,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -18345,7 +18345,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "protocol",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -19030,7 +19030,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "protocol",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -19723,7 +19723,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "protocol",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -19768,7 +19768,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "protocol",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -19813,7 +19813,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "protocol",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -19858,7 +19858,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "protocol",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -19903,7 +19903,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "protocol",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -19952,7 +19952,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "protocol",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -20043,7 +20043,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -20300,7 +20300,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -20391,7 +20391,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -21235,7 +21235,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -21371,7 +21371,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -23381,7 +23381,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -26420,7 +26420,7 @@
       {
          "alias" : "md5($salt.md5(md5($plain))); md5(substr($salt,0,1).md5(md5($plain)).substr($salt,1,1))",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -26465,7 +26465,7 @@
       {
          "alias" : "md5(md5(md5($plain)).$salt.$salt); md5($salt.md5(md5($plain))); md5($salt.md5(md5($plain)).$salt); md5($salt.$salt.md5(md5($plain)))",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -26636,7 +26636,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -29551,7 +29551,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "claimed"
@@ -30104,7 +30104,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -30149,7 +30149,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -30449,7 +30449,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -31418,7 +31418,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -31883,7 +31883,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -32645,7 +32645,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -33296,7 +33296,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -34827,7 +34827,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -34872,7 +34872,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "protocol",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -35200,7 +35200,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "primitive",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -35245,7 +35245,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "primitive",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -35290,7 +35290,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "primitive",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -35840,7 +35840,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "protocol",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -35927,7 +35927,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "protocol",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -36019,7 +36019,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -36067,7 +36067,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -36112,7 +36112,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -36157,7 +36157,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -36248,7 +36248,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -36336,7 +36336,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -37197,7 +37197,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -37635,7 +37635,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "kdf",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -37892,7 +37892,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "kdf",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -37937,7 +37937,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -37982,7 +37982,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -38027,7 +38027,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -38648,7 +38648,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "kdf",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -38739,7 +38739,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "kdf",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -38921,7 +38921,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -39279,7 +39279,7 @@
       {
          "alias" : "null($plain)",
          "application" : "",
-         "category" : "",
+         "category" : "encoding",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -39686,7 +39686,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -39902,7 +39902,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -39993,7 +39993,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -40041,7 +40041,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -40089,7 +40089,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -40137,7 +40137,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -40182,7 +40182,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -40272,7 +40272,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -40954,7 +40954,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -41597,7 +41597,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -42432,7 +42432,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -42834,7 +42834,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -42922,7 +42922,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -42970,7 +42970,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -43015,7 +43015,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -43063,7 +43063,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -43108,7 +43108,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -43156,7 +43156,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -43288,7 +43288,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "kdf",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -44376,7 +44376,7 @@
       {
          "alias" : "sha1(md5($plain).$salt.$salt); sha1($salt.md5($plain)); sha1($salt.md5($plain).$salt); sha2($salt.$salt.md5($plain))",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -44421,7 +44421,7 @@
       {
          "alias" : "sha1(md5($plain).\":\".$salt)",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -47415,7 +47415,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -47460,7 +47460,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -47592,7 +47592,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -48023,7 +48023,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -55264,7 +55264,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -56480,7 +56480,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -58125,7 +58125,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -58441,7 +58441,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -58962,7 +58962,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -59349,7 +59349,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "composite",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -59880,7 +59880,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -59970,7 +59970,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -60757,7 +60757,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -60869,7 +60869,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -60914,7 +60914,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -61001,7 +61001,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -61050,7 +61050,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -61095,7 +61095,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -61143,7 +61143,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -61192,7 +61192,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -61241,7 +61241,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -61290,7 +61290,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -61339,7 +61339,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -61756,7 +61756,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -61843,7 +61843,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "protocol",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -62066,7 +62066,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -63967,7 +63967,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -66197,7 +66197,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -66385,7 +66385,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -66430,7 +66430,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -66475,7 +66475,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -67041,7 +67041,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "protocol",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -67296,7 +67296,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -67785,7 +67785,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
+         "category" : "kdf",
          "crack" : {
             "ids" : [],
             "state" : "no"

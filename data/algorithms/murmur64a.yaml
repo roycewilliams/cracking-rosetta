@@ -9,6 +9,7 @@ denotation:
   text: "murmur64a(pass)"
   source: "mdxfind"
   note: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A, entry for mdxfind type MURMUR64A (e829), which states murmur64a(pass)."
+category: "primitive"
 status: "ok"
 tools:
   hashcat:

@@ -9,6 +9,7 @@ denotation:
   text: "sevenzip(pass, salt)"
   source: "mdxfind"
   note: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A, entry for mdxfind type 7ZIP (e1000), which states sevenzip(pass, salt)."
+category: "application"
 status: "ok"
 tools:
   hashcat:

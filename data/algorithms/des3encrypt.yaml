@@ -9,6 +9,7 @@ denotation:
   text: "des3(pass, fromhex(salt))"
   source: "mdxfind"
   note: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A, entry for mdxfind type DES3ENCRYPT (e849), which states des3(pass, fromhex(salt))."
+category: "primitive"
 status: "ok"
 tools:
   hashcat:

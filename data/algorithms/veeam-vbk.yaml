@@ -1,5 +1,6 @@
 id: "veeam-vbk"
 name: "VEEAM-VBK"
+category: "application"
 status: "ok"
 tools:
   hashcat:

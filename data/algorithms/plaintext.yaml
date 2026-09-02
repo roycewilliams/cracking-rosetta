@@ -1,6 +1,7 @@
 id: "plaintext"
 name: "plaintext"
 aliases: ["null($plain)"]
+category: "encoding"
 status: "needs-review"
 tools:
   hashcat:

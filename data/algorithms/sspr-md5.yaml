@@ -9,6 +9,7 @@ denotation:
   text: "md5^N(pass)"
   source: "mdxfind"
   note: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A, entry for mdxfind type SSPR-MD5 (e975), which states md5^N(pass) (SSPR; N from the $sspr$ format, binary chaining)."
+category: "application"
 status: "ok"
 tools:
   hashcat:

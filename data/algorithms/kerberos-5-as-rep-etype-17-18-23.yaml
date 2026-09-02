@@ -9,6 +9,7 @@ denotation:
   text: "Kerberos 5 AS-REP etype 17/18/23"
   source: "john"
   note: "john's own label for krb5asrep, in 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200."
+category: "protocol"
 status: "needs-review"
 tools:
   hashcat:

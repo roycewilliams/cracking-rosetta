@@ -9,6 +9,7 @@ denotation:
   text: "pbkdf2_sha1(md4(utf16le(pass)), utf16le(username), 10240, 16)"
   source: "mdxfind"
   note: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A, entry for mdxfind type DCC2 (e918), which states pbkdf2_sha1(md4(utf16le(pass)), utf16le(username), 10240, 16)."
+category: "application"
 status: "ok"
 tools:
   hashcat:

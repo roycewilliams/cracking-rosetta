@@ -9,6 +9,7 @@ denotation:
   text: "hmac_md5(pass, challenge)"
   source: "mdxfind"
   note: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A, entry for mdxfind type CRAMMD5-DOVECOT (e932), which states hmac_md5(pass, challenge) (Dovecot CRAM-MD5)."
+category: "application"
 status: "ok"
 tools:
   hashcat:

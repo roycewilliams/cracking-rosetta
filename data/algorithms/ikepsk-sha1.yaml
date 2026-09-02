@@ -1,5 +1,6 @@
 id: "ikepsk-sha1"
 name: "IKEPSK-SHA1"
+category: "protocol"
 status: "ok"
 tools:
   hashcat:

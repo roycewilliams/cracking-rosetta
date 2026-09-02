@@ -1,5 +1,6 @@
 id: "sspr-sha1s"
 name: "SSPR-SHA1S"
+category: "application"
 status: "ok"
 tools:
   hashcat:

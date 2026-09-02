@@ -1,5 +1,6 @@
 id: "md5sha1x"
 name: "MD5SHA1x"
+category: "composite"
 status: "needs-review"
 tools:
   hashcat:

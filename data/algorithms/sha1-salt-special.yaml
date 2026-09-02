@@ -1,5 +1,6 @@
 id: "sha1-salt-special"
 name: "SHA1-SALT-SPECIAL"
+category: "composite"
 status: "ok"
 tools:
   hashcat:

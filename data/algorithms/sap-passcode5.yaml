@@ -1,5 +1,6 @@
 id: "sap-passcode5"
 name: "SAP-PASSCODE5"
+category: "application"
 status: "ok"
 tools:
   hashcat:

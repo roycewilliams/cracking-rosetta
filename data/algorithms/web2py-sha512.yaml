@@ -9,6 +9,7 @@ denotation:
   text: "pbkdf2_sha512(pass, salt, 1000, 64)"
   source: "mdxfind"
   note: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A, entry for mdxfind type WEB2PY-SHA512 (e948), which states pbkdf2_sha512(pass, salt, 1000, 64) (web2py)."
+category: "application"
 status: "ok"
 tools:
   hashcat:

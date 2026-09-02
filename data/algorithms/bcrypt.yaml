@@ -9,6 +9,7 @@ denotation:
   text: "bcrypt(pass, salt, 12)"
   source: "mdxfind"
   note: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A, entry for mdxfind type BCRYPT (e450), which states bcrypt(pass, salt, 12)."
+category: "application"
 status: "ok"
 tools:
   hashcat:

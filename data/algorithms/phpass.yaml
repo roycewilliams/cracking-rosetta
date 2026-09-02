@@ -1,5 +1,6 @@
 id: "phpass"
 name: "phpass"
+category: "kdf"
 status: "ok"
 tools:
   hashcat:

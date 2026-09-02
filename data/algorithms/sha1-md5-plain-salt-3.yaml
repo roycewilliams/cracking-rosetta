@@ -1,6 +1,7 @@
 id: "sha1-md5-plain-salt-3"
 name: "sha1(md5($plain).$salt)"
 aliases: ["sha1(md5($plain).$salt.$salt)", "sha1($salt.md5($plain))", "sha1($salt.md5($plain).$salt)", "sha2($salt.$salt.md5($plain))"]
+category: "composite"
 status: "ok"
 tools:
   hashcat:

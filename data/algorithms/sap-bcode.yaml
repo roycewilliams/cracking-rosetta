@@ -9,6 +9,7 @@ denotation:
   text: "upper(sap_bcode(pass, salt))"
   source: "mdxfind"
   note: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A, entry for mdxfind type SAP-BCODE (e922), which states upper(sap_bcode(pass, salt))."
+category: "application"
 status: "ok"
 tools:
   hashcat:

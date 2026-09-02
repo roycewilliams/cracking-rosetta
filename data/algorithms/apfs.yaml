@@ -1,5 +1,6 @@
 id: "apfs"
 name: "APFS"
+category: "application"
 status: "ok"
 tools:
   hashcat:

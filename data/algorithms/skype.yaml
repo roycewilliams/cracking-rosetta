@@ -1,5 +1,6 @@
 id: "skype"
 name: "SKYPE"
+category: "application"
 status: "ok"
 tools:
   hashcat:

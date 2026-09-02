@@ -1,5 +1,6 @@
 id: "awssigv4"
 name: "AWSSIGV4"
+category: "protocol"
 status: "ok"
 tools:
   hashcat:

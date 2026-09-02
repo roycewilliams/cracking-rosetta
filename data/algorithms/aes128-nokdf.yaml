@@ -9,6 +9,7 @@ denotation:
   text: "aes_ecb_encrypt(pad(pass, 16), fromhex(salt))"
   source: "mdxfind"
   note: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A, entry for mdxfind type AES128-NOKDF (e963), which states aes_ecb_encrypt(pad(pass, 16), fromhex(salt))."
+category: "primitive"
 status: "ok"
 tools:
   hashcat:

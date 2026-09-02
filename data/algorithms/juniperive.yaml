@@ -1,5 +1,6 @@
 id: "juniperive"
 name: "JUNIPERIVE"
+category: "application"
 status: "ok"
 tools:
   hashcat:

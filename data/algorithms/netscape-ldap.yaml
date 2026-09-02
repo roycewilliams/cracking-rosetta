@@ -1,5 +1,6 @@
 id: "netscape-ldap"
 name: "netscape LDAP"
+category: "application"
 status: "ok"
 tools:
   hashcat:

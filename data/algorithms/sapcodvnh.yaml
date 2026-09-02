@@ -1,5 +1,6 @@
 id: "sapcodvnh"
 name: "SAPCODVNH"
+category: "application"
 status: "ok"
 tools:
   hashcat:

@@ -1,5 +1,6 @@
 id: "arubaos"
 name: "ARUBAOS"
+category: "application"
 status: "ok"
 tools:
   hashcat:

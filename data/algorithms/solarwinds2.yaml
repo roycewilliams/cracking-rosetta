@@ -1,5 +1,6 @@
 id: "solarwinds2"
 name: "SOLARWINDS2"
+category: "application"
 status: "ok"
 tools:
   hashcat:

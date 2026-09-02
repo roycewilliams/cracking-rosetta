@@ -1,5 +1,6 @@
 id: "ikepsk-md5"
 name: "IKEPSK-MD5"
+category: "protocol"
 status: "ok"
 tools:
   hashcat:

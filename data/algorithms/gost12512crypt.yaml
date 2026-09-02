@@ -9,6 +9,7 @@ denotation:
   text: "gost12_512crypt(pass, salt, rounds)"
   source: "mdxfind"
   note: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A, entry for mdxfind type GOST12512CRYPT (e994), which states gost12_512crypt(pass, salt, rounds)."
+category: "application"
 status: "ok"
 tools:
   hashcat:

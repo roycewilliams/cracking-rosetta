@@ -1,5 +1,6 @@
 id: "md4utf16uc"
 name: "MD4UTF16UC"
+category: "application"
 status: "needs-review"
 tools:
   hashcat:

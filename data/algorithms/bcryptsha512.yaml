@@ -9,6 +9,7 @@ denotation:
   text: "bcrypt(sha512(pass), salt, cost)"
   source: "mdxfind"
   note: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A, entry for mdxfind type BCRYPTSHA512 (e967), which states bcrypt(sha512(pass), salt, cost)."
+category: "kdf"
 status: "ok"
 tools:
   hashcat:

@@ -9,6 +9,7 @@ denotation:
   text: "hmac_streebog256(salt, pass)"
   source: "mdxfind"
   note: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A, entry for mdxfind type HMAC-STREEBOG256-KPASS (e837), which states hmac_streebog256(salt, pass)."
+category: "composite"
 status: "ok"
 tools:
   hashcat:

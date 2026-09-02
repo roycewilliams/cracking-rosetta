@@ -8,6 +8,7 @@ expression_proof:
 denotation:
   text: "bcrypt(md5($plain))"
   source: "sheet"
+category: "kdf"
 status: "ok"
 tools:
   hashcat:

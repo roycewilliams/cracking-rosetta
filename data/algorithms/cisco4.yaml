@@ -1,5 +1,6 @@
 id: "cisco4"
 name: "CISCO4"
+category: "application"
 status: "ok"
 tools:
   hashcat:

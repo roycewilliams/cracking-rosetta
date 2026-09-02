@@ -28,10 +28,28 @@
 # EVERY RULE WAS CHECKED AGAINST THE ANSWERS A HUMAN ALREADY GAVE
 #
 # 309 entries were categorised by hand before this existed, and that is a test
-# set nobody had to build. Run against them, this ruleset agrees on every entry
-# it fires on and contradicts none (measured 2026-09-01). A rule that
-# contradicted a curator would be wrong by definition: the curator is the
-# authority this tool is trying not to waste.
+# set nobody had to build. Rules 1-5 contradicted none of them when they were
+# written, and rule 6 contradicts none of them today. A rule that contradicted
+# a curator would be wrong by definition: the curator is the authority this
+# tool is trying not to waste.
+#
+# THE TEST SET IS NOT STATIC, AND RULE 5 HAS SINCE DRIFTED ONTO TWO OF IT
+#
+# Re-measured 2026-09-01, after rule 6 was added: rule 5 now contradicts the
+# curator on huawei-sha1-md5-pass-salt and solarwinds-serv-u, both of which a
+# human called 'application' and rule 5 calls 'composite'. Nothing was edited
+# and no rule changed. At the control-set commit both entries carried
+# expression_proof: absent, so rule 5 did not fire on them and the original
+# claim was true when it was made; a later session proved both expressions and
+# rule 5 started firing. The lesson is that this test set moves underneath the
+# ruleset, so --check is the thing to believe and this comment is not.
+#
+# It is also the only evidence anyone has about rule ordering, and it points at
+# rule 6: on both entries hashcat's category agrees with the curator and the
+# expression does not. Two samples is not enough to reorder on -- 17 entries
+# now reading 'composite' would become 'application' -- so rule 6 stays last
+# and --check reports the 19 entries where the two differ. Deciding that
+# boundary is curation and belongs to a person.
 #
 # THE RULES, IN ORDER, AND WHY EACH IS DEFENSIBLE
 #
@@ -68,6 +86,35 @@
 #      human's claim, and deriving a category from it would launder that claim
 #      into a second field at a strength it never had.
 #
+#   6. hashcat's own category for the mode  -> the human answer it maps to
+#      LAST, so it only ever reaches what rules 3-5 could not answer. hashcat
+#      publishes a category per mode -- 'Full-Disk Encryption (FDE)', 'Generic
+#      KDF', 'Network Protocol', 23 of them, already in data/tools/hashcat.yaml
+#      at tier upstream. Crosstabbed against the 309 human answers (recover the
+#      control set with `git archive 63801b5^ data/algorithms`), 21 of the 23
+#      map to exactly ONE human answer and contradict none. The table below
+#      carries each mapping's support count, because n=96 for FDE and n=1 for
+#      'Plaintext' are not the same quality of evidence and a reader should not
+#      have to re-measure to see which is which.
+#
+#      Two are held because the humans SPLIT on them, and two more because no
+#      human ever answered one: hashcat's 'Database Server' covers both
+#      mssql2000 (a construction) and oracle7 (a product), and 'Undefined' is
+#      hashcat declining to classify. Those are curator questions, which is
+#      exactly what the residue is for.
+#
+#      An entry naming several modes must have them AGREE on hashcat's
+#      category, or the entry says nothing usable -- the same shape as the
+#      encodes guard in rule 2.
+#
+#      Placed last on purpose. Measured 2026-09-01, the hashcat rule and rules
+#      1-5 disagree on 19 live entries -- macosx is composite by its proven
+#      expression and 'Operating System' by hashcat -- but on ZERO entries of
+#      the human control set, so the control set offers no evidence for
+#      preferring one over the other. Rules 1-5 are the established ones, so
+#      they keep precedence and the new rule only reaches the residue. --check
+#      reports those 19 rather than swallowing them.
+#
 # WHAT IS DELIBERATELY NOT DERIVED
 #
 # kdf and protocol. The tempting rule is to read denotation: and call anything
@@ -76,8 +123,9 @@
 # scryptcrypt-scrypt-unix and terra-station-wallet-...-pbkdf2-pass, all three
 # of which a curator called 'application' -- correctly, because they are
 # products that USE a KDF. Distinguishing "is a KDF" from "is a product built
-# on one" is judgement, not a lookup, so it stays a question. That leaves ~675
-# entries in the queue, and that number is the honest one.
+# on one" is judgement, not a lookup, so it stays a question. Rule 6 reaches
+# 188 of what is left; run the tool for the figure rather than trusting this
+# comment.
 #
 # NOTHING IS EVER OVERWRITTEN
 #
@@ -109,6 +157,8 @@ sub usage {
 Usage: $PROG [options]
 
    --algorithms DIR  curated entries (default: data/algorithms)
+   --hashcat FILE    hashcat inventory for rule 6
+                     (default: data/tools/hashcat.yaml)
    --only ID         consider just this entry (repeatable)
    --check           also report where a rule disagrees with a category a
                      human already wrote; never edits either way
@@ -123,13 +173,14 @@ END_USAGE
     return;
 }
 
-my ($algdir, $apply, $check, $help);
+my ($algdir, $hcfile, $apply, $check, $help);
 my @only;
 my $verbose  = 0;
 my $had_args = scalar @ARGV;      # house rule: no arguments means show usage
 
 GetOptions(
     'algorithms=s' => \$algdir,
+    'hashcat=s'    => \$hcfile,
     'only=s'       => \@only,
     'check'        => \$check,
     'apply'        => \$apply,
@@ -141,6 +192,87 @@ if ($help)     { usage(); exit 0 }
 if (!$had_args) { usage(); exit 2 }
 
 $algdir //= "$ROOT/data/algorithms";
+$hcfile //= "$ROOT/data/tools/hashcat.yaml";
+
+#-----------------------------------------------------------------------
+# Rule 6's table. hashcat category -> the one human answer it mapped to in the
+# control set, with that mapping's support count. See the methodology note;
+# regenerate with the crosstab described there rather than editing by hand.
+
+my %HASHCAT_CATEGORY = (
+    # hashcat category                       category        n
+    'Application Database'                => ['application',  1],
+    'Archive'                             => ['application', 22],
+    'Cryptocurrency Wallet'               => ['application', 34],
+    'Document'                            => ['application', 21],
+    'Enterprise Application Software (EAS)' => ['application', 9],
+    'FTP, HTTP, SMTP, LDAP Server'        => ['application',  6],
+    'File-Based Encryption (FBE)'         => ['application',  4],
+    'Framework'                           => ['application',  4],
+    'Full-Disk Encryption (FDE)'          => ['application', 96],
+    'Generic KDF'                         => ['kdf',         11],
+    'Instant Messaging Service'           => ['application',  5],
+    'Network Protocol'                    => ['protocol',    24],
+    'One-Time Password'                   => ['protocol',     1],
+    'Operating System'                    => ['application', 12],
+    'Password Manager'                    => ['application', 10],
+    'Plaintext'                           => ['encoding',     1],
+    'Private Key'                         => ['application', 13],
+    'Raw Checksum'                        => ['primitive',    6],
+    'Raw Cipher, Known-plaintext attack'  => ['primitive',    6],
+    'Raw Hash authenticated'              => ['composite',    4],
+    'Raw Hash salted and/or iterated'     => ['composite',    6],
+);
+
+# The two the humans SPLIT on, with the split, so the held reason can say so
+# rather than lumping them in with the ones nobody ever answered.
+my %HASHCAT_SPLIT = (
+    'Raw Hash'               => 'encoding 1, primitive 1',
+    'Forums, CMS, E-Commerce' => 'application 10, composite 1',
+);
+
+# mode -> hashcat's own category, from the generated inventory.
+my %MODE_CATEGORY;
+{
+    my $hc = eval { YAML::XS::LoadFile($hcfile) };
+    unless ($hc && $hc->{modes}) {
+        print STDERR "$PROG: cannot read hashcat inventory $hcfile\n";
+        exit 1;
+    }
+    $MODE_CATEGORY{ $_->{mode} } = $_->{category} for @{ $hc->{modes} };
+}
+
+# Rule 6 proper. Returns (category, why) or (undef, why), same contract as
+# derive(); split out so --check can ask it about an entry an earlier rule
+# already answered.
+sub hashcat_category {
+    my ($e) = @_;
+
+    my @modes = @{ $e->{tools}{hashcat}{modes} || [] };
+    return (undef, 'no rule: no application:, no iteration count, no proven '
+                 . 'expression and no hashcat mode')
+        unless @modes;
+
+    my %seen = map { ($MODE_CATEGORY{$_} // '(not in the inventory)') => 1 } @modes;
+    if (keys %seen > 1) {
+        return (undef, 'held: the modes this entry names sit in different '
+                     . 'hashcat categories (' . join('; ', sort keys %seen) . ')');
+    }
+    my ($hcat) = keys %seen;
+
+    if (my $split = $HASHCAT_SPLIT{$hcat}) {
+        return (undef, "held: hashcat category '$hcat' is one a curator has "
+                     . "already answered two ways ($split)");
+    }
+    my $m = $HASHCAT_CATEGORY{$hcat};
+    return (undef, "held: no curator has ever categorised an entry in hashcat "
+                 . "category '$hcat', so there is nothing to map it to")
+        unless $m;
+
+    return ($m->[0], "hashcat category '$hcat' (agreed by "
+                   . join(',', @modes) . "); $m->[1] human answer(s) in the "
+                   . 'control set, all of them ' . $m->[0]);
+}
 my %only = map { $_ => 1 } @only;
 
 #-----------------------------------------------------------------------
@@ -179,8 +311,9 @@ sub derive {
                            . "of \$p alone (tier $tier)");
     }
 
-    return (undef, 'no rule: no application:, no iteration count and no proven '
-                 . 'expression');
+    # 6. hashcat's own classification of the mode. Last, so it only ever
+    #    answers what nothing above could.
+    return hashcat_category($e);
 }
 
 #-----------------------------------------------------------------------
@@ -190,7 +323,7 @@ opendir(my $dh, $algdir) or do { print STDERR "$PROG: cannot read $algdir: $!\n"
 my @files = sort grep { /\.yaml$/ } readdir $dh;
 closedir $dh;
 
-my (%yield, %held_why, @disagree, @write);
+my (%yield, %held_why, %held_bucket, @disagree, @overruled, @write);
 my ($seen, $tombstone, $already, $held, $norule) = (0, 0, 0, 0, 0);
 
 for my $f (@files) {
@@ -204,6 +337,15 @@ for my $f (@files) {
 
     my ($cat, $why) = derive($e);
 
+    # Rule 6 is a fallback, so where an earlier rule answered we never see what
+    # hashcat would have said. Ask it anyway under --check: a disagreement is
+    # evidence about the ruleset and is lost otherwise.
+    if ($check && defined $cat && $why !~ /^hashcat category/) {
+        my ($hcat) = hashcat_category($e);
+        push @overruled, [$e->{id}, $cat, $hcat, $why]
+            if defined $hcat && $hcat ne $cat;
+    }
+
     if (defined $e->{category}) {
         $already++;
         push @disagree, [$e->{id}, $e->{category}, $cat, $why]
@@ -212,8 +354,20 @@ for my $f (@files) {
     }
 
     unless (defined $cat) {
-        $why =~ /^held/ ? $held++ : $norule++;
-        $held_why{ $e->{id} } = $why if $why =~ /^held/;
+        if ($why =~ /^held/) {
+            $held++;
+            $held_why{ $e->{id} } = $why;
+            # Bucket by reason. Rule 2 and rule 6 both hold, for unrelated
+            # reasons, and a single lumped count hid which was which.
+            my $bucket =
+                  $why =~ /encodes|input-encoding/       ? 'an encoding edge'
+                : $why =~ /answered two ways/            ? 'a hashcat category curators split on'
+                : $why =~ /nothing to map it to/         ? 'a hashcat category no curator has answered'
+                : $why =~ /different hashcat categories/ ? 'modes in disagreeing hashcat categories'
+                :                                          'another reason';
+            $held_bucket{$bucket}++;
+        }
+        else { $norule++ }
         printf STDERR "-   %-46s %s\n", $e->{id}, $why if $verbose > 1;
         next;
     }
@@ -228,6 +382,13 @@ for my $f (@files) {
 # convention.
 
 printf "%-46s %s\n", $_->[1]{id}, $_->[2] for @write;
+
+if ($check && @overruled) {
+    print "\n# rules 1-5 answered these and rule 6 would have said otherwise.\n"
+        . "# Rules 1-5 win by precedence, not by evidence: the human control\n"
+        . "# set contains no entry on which the two disagree.\n";
+    printf "# %-44s kept=%-11s hashcat=%-11s %s\n", @$_ for @overruled;
+}
 
 if ($check) {
     if (@disagree) {
@@ -245,9 +406,10 @@ printf STDERR "- %d entry/entries (%d tombstone(s) skipped); %d already had a "
             . "category\n", $seen, $tombstone, $already;
 printf STDERR "-   derived %d: %s\n", scalar @write,
     join('  ', map { "$_ $yield{$_}" } sort keys %yield) || '(none)';
-printf STDERR "-   left for a curator: %d with no rule, %d held by an "
-            . "encoding edge (%s)\n", $norule, $held,
-    join(' ', sort keys %held_why) || '-';
+printf STDERR "-   left for a curator: %d with no rule, %d held\n", $norule, $held;
+printf STDERR "-     held by %-46s %d\n", $_, $held_bucket{$_}
+    for sort { $held_bucket{$b} <=> $held_bucket{$a} || $a cmp $b } keys %held_bucket;
+printf STDERR "-     held: %s\n", join(' ', sort keys %held_why) if $verbose;
 
 #-----------------------------------------------------------------------
 # Apply.

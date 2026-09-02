@@ -1,5 +1,6 @@
 id: "ssha256base64"
 name: "SSHA256BASE64"
+category: "application"
 status: "ok"
 tools:
   hashcat:

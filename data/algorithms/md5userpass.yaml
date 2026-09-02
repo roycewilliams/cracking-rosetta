@@ -1,5 +1,6 @@
 id: "md5userpass"
 name: "MD5USERPASS"
+category: "composite"
 status: "ok"
 tools:
   hashcat:

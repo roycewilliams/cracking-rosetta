@@ -1,5 +1,6 @@
 id: "phpbb3md5"
 name: "PHPBB3MD5"
+category: "kdf"
 status: "needs-review"
 tools:
   hashcat:

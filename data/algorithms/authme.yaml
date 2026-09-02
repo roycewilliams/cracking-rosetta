@@ -1,5 +1,6 @@
 id: "authme"
 name: "AUTHME"
+category: "application"
 status: "ok"
 tools:
   hashcat:

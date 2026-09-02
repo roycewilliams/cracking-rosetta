@@ -9,6 +9,7 @@ denotation:
   text: "sha512crypt(pass, salt, rounds)"
   source: "mdxfind"
   note: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A, entry for mdxfind type QNX-SHA512 (e936), which states sha512crypt(pass, salt, rounds) (QNX)."
+category: "application"
 status: "ok"
 tools:
   hashcat:

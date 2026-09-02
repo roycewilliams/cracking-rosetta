@@ -9,6 +9,7 @@ denotation:
   text: "blake2b256(salt . pass)"
   source: "mdxfind"
   note: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A, entry for mdxfind type BLAKE2B256SALTPASS (e847), which states blake2b256(salt . pass)."
+category: "composite"
 status: "ok"
 tools:
   hashcat:

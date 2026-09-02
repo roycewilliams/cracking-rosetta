@@ -1,5 +1,6 @@
 id: "sha512utf16lepasssalt"
 name: "SHA512UTF16LEPASSSALT"
+category: "composite"
 status: "ok"
 tools:
   hashcat:

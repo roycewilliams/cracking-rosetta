@@ -1,5 +1,6 @@
 id: "wpa-pmk"
 name: "WPA-PMK"
+category: "protocol"
 status: "needs-review"
 tools:
   hashcat:

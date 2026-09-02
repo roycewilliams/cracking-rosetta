@@ -9,6 +9,7 @@ denotation:
   text: "sha512^N(salt . pass)"
   source: "mdxfind"
   note: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A, entry for mdxfind type SSPR-SHA512 (e979), which states sha512^N(salt . pass) (Note [37])."
+category: "application"
 status: "needs-review"
 tools:
   hashcat:

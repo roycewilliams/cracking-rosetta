@@ -9,6 +9,7 @@ denotation:
   text: "cisco_pix_encode(md5_bin(pad(pass, 16)))"
   source: "mdxfind"
   note: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A, entry for mdxfind type CISCOPIX (e861), which states cisco_pix_encode(md5_bin(pad(pass, 16))) (Cisco PIX)."
+category: "application"
 status: "needs-review"
 tools:
   hashcat:

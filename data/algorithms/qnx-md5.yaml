@@ -9,6 +9,7 @@ denotation:
   text: "md5crypt(pass, salt)"
   source: "mdxfind"
   note: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A, entry for mdxfind type QNX-MD5 (e934), which states md5crypt(pass, salt) (QNX)."
+category: "application"
 status: "ok"
 tools:
   hashcat:

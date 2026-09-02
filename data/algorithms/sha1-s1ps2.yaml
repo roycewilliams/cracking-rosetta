@@ -1,5 +1,6 @@
 id: "sha1-s1ps2"
 name: "SHA1-S1PS2"
+category: "composite"
 status: "ok"
 tools:
   hashcat:

@@ -1,5 +1,6 @@
 id: "fortigate256"
 name: "FORTIGATE256"
+category: "application"
 status: "ok"
 tools:
   hashcat:

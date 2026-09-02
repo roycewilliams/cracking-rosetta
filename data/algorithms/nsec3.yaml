@@ -9,6 +9,7 @@ denotation:
   text: "sha1^N(pass . salt)"
   source: "mdxfind"
   note: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A, entry for mdxfind type NSEC3 (e879), which states sha1^N(pass . salt) (DNSSEC NSEC3, N = iteration count)."
+category: "application"
 status: "ok"
 tools:
   hashcat:

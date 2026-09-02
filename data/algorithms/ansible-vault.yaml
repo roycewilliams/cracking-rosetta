@@ -1,5 +1,6 @@
 id: "ansible-vault"
 name: "ANSIBLE-VAULT"
+category: "application"
 status: "ok"
 tools:
   hashcat:

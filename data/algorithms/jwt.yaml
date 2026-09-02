@@ -9,6 +9,7 @@ denotation:
   text: "hmac_sha256(pass, header . \".\" . payload)"
   source: "mdxfind"
   note: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A, entry for mdxfind type JWT (e933), which states hmac_sha256(pass, header . \".\" . payload) (JWT HS256 signature)."
+category: "protocol"
 status: "ok"
 tools:
   hashcat:

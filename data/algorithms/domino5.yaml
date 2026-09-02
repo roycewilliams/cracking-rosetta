@@ -9,6 +9,7 @@ denotation:
   text: "domino5(pass)"
   source: "mdxfind"
   note: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A, entry for mdxfind type DOMINO5 (e882), which states domino5(pass)."
+category: "application"
 status: "ok"
 tools:
   hashcat:

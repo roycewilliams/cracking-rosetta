@@ -1,5 +1,6 @@
 id: "netscaler-sha512"
 name: "NETSCALER-SHA512"
+category: "application"
 status: "ok"
 tools:
   hashcat:

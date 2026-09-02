@@ -9,6 +9,7 @@ denotation:
   text: "des_block(md4(utf16le(pass)), challenge)"
   source: "mdxfind"
   note: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A, entry for mdxfind type NETNTLMV1 (e897), which states des_block(md4(utf16le(pass)), challenge) (NetNTLMv1)."
+category: "protocol"
 status: "ok"
 tools:
   hashcat:

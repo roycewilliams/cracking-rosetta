@@ -9,6 +9,7 @@ denotation:
   text: "juniper_encode(md5_bin(user . \":Administration Tools:\" . pass))"
   source: "mdxfind"
   note: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A, entry for mdxfind type JUNIPERSSG (e856), which states juniper_encode(md5_bin(user . \":Administration Tools:\" . pass))."
+category: "application"
 status: "ok"
 tools:
   hashcat:

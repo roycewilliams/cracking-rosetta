@@ -9,6 +9,7 @@ denotation:
   text: "pbkdf2_sha512(pass, salt, 100000, 56)"
   source: "mdxfind"
   note: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A, entry for mdxfind type TELEGRAM-SHA256 (e947), which states pbkdf2_sha512(pass, salt, 100000, 56) (Telegram local passcode)."
+category: "application"
 status: "ok"
 tools:
   hashcat:

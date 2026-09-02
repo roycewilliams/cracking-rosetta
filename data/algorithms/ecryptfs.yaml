@@ -1,5 +1,6 @@
 id: "ecryptfs"
 name: "ECRYPTFS"
+category: "application"
 status: "ok"
 tools:
   hashcat:

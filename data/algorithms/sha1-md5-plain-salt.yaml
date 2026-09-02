@@ -1,6 +1,7 @@
 id: "sha1-md5-plain-salt"
 name: "sha1(md5($plain).$salt)"
 aliases: ["sha1(md5($plain).\":\".$salt)"]
+category: "composite"
 status: "ok"
 tools:
   hashcat:

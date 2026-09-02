@@ -9,6 +9,7 @@ denotation:
   text: "scrypt(pass, salt, 16384, 1, 1)"
   source: "mdxfind"
   note: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A, entry for mdxfind type CISCO9 (e917), which states scrypt(pass, salt, 16384, 1, 1) (Cisco Type 9)."
+category: "application"
 status: "ok"
 tools:
   hashcat:

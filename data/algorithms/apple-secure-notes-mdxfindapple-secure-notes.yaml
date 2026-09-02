@@ -1,5 +1,6 @@
 id: "apple-secure-notes-mdxfindapple-secure-notes"
 name: "APPLE-SECURE-NOTES"
+category: "application"
 status: "needs-review"
 tools:
   hashcat:

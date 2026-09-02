@@ -9,6 +9,7 @@ denotation:
   text: "bcrypt(base64(hmac_sha384_bin(pass, \"wp-sha384\")), salt, N)"
   source: "mdxfind"
   note: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A, entry for mdxfind type WPBCRYPT (e993), which states bcrypt(base64(hmac_sha384_bin(pass, \"wp-sha384\")), salt, N) (WordPress)."
+category: "application"
 status: "ok"
 tools:
   hashcat:

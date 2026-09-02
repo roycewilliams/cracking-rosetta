@@ -1,5 +1,6 @@
 id: "md5-md5-md5-plain-salt1-salt2"
 name: "md5(md5(md5($plain).$salt1).$salt2)"
+category: "composite"
 status: "ok"
 tools:
   hashcat:

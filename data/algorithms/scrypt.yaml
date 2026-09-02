@@ -9,6 +9,7 @@ denotation:
   text: "scrypt(pass, salt, N, r, p)"
   source: "mdxfind"
   note: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A, entry for mdxfind type SCRYPT (e884), which states scrypt(pass, salt, N, r, p)."
+category: "kdf"
 status: "ok"
 tools:
   hashcat:

@@ -1,6 +1,7 @@
 id: "md5-md5-md5-plain-salt"
 name: "md5(md5(md5($plain)).$salt)"
 aliases: ["md5(md5(md5($plain)).$salt.$salt)", "md5($salt.md5(md5($plain)))", "md5($salt.md5(md5($plain)).$salt)", "md5($salt.$salt.md5(md5($plain)))"]
+category: "composite"
 status: "ok"
 tools:
   hashcat:

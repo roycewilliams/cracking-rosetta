@@ -9,6 +9,7 @@ denotation:
   text: "sm3crypt(pass, salt, rounds)"
   source: "mdxfind"
   note: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A, entry for mdxfind type SM3CRYPT (e985), which states sm3crypt(pass, salt, rounds)."
+category: "application"
 status: "ok"
 tools:
   hashcat:

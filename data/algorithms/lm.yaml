@@ -9,6 +9,7 @@ denotation:
   text: "lm(pass)"
   source: "mdxfind"
   note: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A, entry for mdxfind type LM (e379), which states lm(pass)."
+category: "application"
 status: "needs-review"
 tools:
   hashcat:

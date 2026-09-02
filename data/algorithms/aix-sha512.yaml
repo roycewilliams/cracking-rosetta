@@ -9,6 +9,7 @@ denotation:
   text: "pbkdf2_sha512(pass, salt, N, 64)"
   source: "mdxfind"
   note: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A, entry for mdxfind type AIX-SHA512 (e871), which states pbkdf2_sha512(pass, salt, N, 64) (AIX {ssha512})."
+category: "application"
 status: "ok"
 tools:
   hashcat:

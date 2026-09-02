@@ -9,6 +9,7 @@ denotation:
   text: "pbkdf2_sha256(pass, salt, N, 32)"
   source: "mdxfind"
   note: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A, entry for mdxfind type LASTPASS (e899), which states pbkdf2_sha256(pass, salt, N, 32) (LastPass)."
+category: "application"
 status: "ok"
 tools:
   hashcat:

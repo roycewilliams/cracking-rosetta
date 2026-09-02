@@ -1,5 +1,6 @@
 id: "rails-restful"
 name: "RAILS-RESTFUL"
+category: "application"
 status: "ok"
 tools:
   hashcat:

@@ -9,6 +9,7 @@ denotation:
   text: "hmac_md5(md4(utf16le(pass)), challenge)"
   source: "mdxfind"
   note: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A, entry for mdxfind type NETNTLMV2 (e898), which states hmac_md5(md4(utf16le(pass)), challenge) (NetNTLMv2)."
+category: "protocol"
 status: "needs-review"
 tools:
   hashcat:

@@ -9,6 +9,7 @@ denotation:
   text: "murmur3(pass, seed)"
   source: "mdxfind"
   note: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A, entry for mdxfind type MURMUR3 (e972), which states murmur3(pass, seed) (MurmurHash3_x86_32; seed stored beside the digest)."
+category: "primitive"
 status: "ok"
 tools:
   hashcat:

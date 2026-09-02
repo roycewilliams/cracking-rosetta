@@ -9,6 +9,7 @@ denotation:
   text: "murmur64a(pass)"
   source: "mdxfind"
   note: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A, entry for mdxfind type MURMUR64AZERO (e830), which states murmur64a(pass) (zero seed)."
+category: "primitive"
 status: "ok"
 tools:
   hashcat:

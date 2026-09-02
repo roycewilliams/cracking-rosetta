@@ -9,6 +9,7 @@ denotation:
   text: "upper(as400_des(pass, salt))"
   source: "mdxfind"
   note: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A, entry for mdxfind type AS400-DES (e926), which states upper(as400_des(pass, salt)) (salt = userid)."
+category: "application"
 status: "ok"
 tools:
   hashcat:

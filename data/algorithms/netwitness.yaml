@@ -1,5 +1,6 @@
 id: "netwitness"
 name: "NETWITNESS"
+category: "application"
 status: "ok"
 tools:
   hashcat:

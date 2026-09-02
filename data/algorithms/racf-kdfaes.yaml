@@ -1,5 +1,6 @@
 id: "racf-kdfaes"
 name: "RACF-KDFAES"
+category: "application"
 status: "ok"
 tools:
   hashcat:

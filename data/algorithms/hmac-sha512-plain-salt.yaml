@@ -8,6 +8,7 @@ expression_proof:
 denotation:
   text: "hmac(\"sha512\", $plain, $salt)"
   source: "sheet"
+category: "composite"
 status: "ok"
 tools:
   hashcat:

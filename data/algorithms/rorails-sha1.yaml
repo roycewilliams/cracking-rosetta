@@ -1,5 +1,6 @@
 id: "rorails-sha1"
 name: "RORAILS-SHA1"
+category: "application"
 status: "ok"
 tools:
   hashcat:

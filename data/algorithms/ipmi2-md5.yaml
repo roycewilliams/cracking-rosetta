@@ -9,6 +9,7 @@ denotation:
   text: "hmac_md5(pass, rakp_data)"
   source: "mdxfind"
   note: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A, entry for mdxfind type IPMI2-MD5 (e873), which states hmac_md5(pass, rakp_data) (IPMI 2.0 RAKP)."
+category: "protocol"
 status: "ok"
 tools:
   hashcat:
