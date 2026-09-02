@@ -270,9 +270,64 @@ for my $file (@files) {
 
     my ($verdict, $note);
     if (!$fmt) {
-        $verdict = 'no-john-format';
-        $note = 'no john format on this entry, so there is no control to test '
-              . 'the expression against';
+        # No john format means john ships no test vectors to use as a control.
+        # That is a statement about the CONTROL, not about the expression, and
+        # curate.pl stops asking a human on the strength of this verdict -- so
+        # do not stop at "cannot check" while our own compiler can still run
+        # the thing against the entry's own vectors. RosettaExpr is
+        # independent of all three crackers, which is what makes the answer
+        # worth having and also what caps it: per CLAUDE.md a recomputation
+        # here is corroboration, never tier 'vector', because that requires
+        # john's own compiler.
+        my ($ours_ok, $ours_no) = (0, 0);
+        if ($fn) {
+            for my $v (@{ $d->{vectors} || [] }) {
+                my ($h, $salt) = split /:/, $v->{hash} // '', 2;
+                $salt = $v->{salt} if defined $v->{salt} && length $v->{salt};
+                $salt = '' unless defined $salt;
+                my $mine = eval { $fn->($v->{pass} // '', $salt) };
+                unless (defined $mine) { $ours_no++; next }
+                lc($h // '') eq lc($mine) ? $ours_ok++ : $ours_no++;
+            }
+        }
+
+        if (!$fn) {
+            $verdict = 'no-john-format';
+            $note = 'no john format on this entry, so john ships no control '
+                  . 'vectors, and RosettaExpr cannot compile this expression '
+                  . 'either -- nothing here can check it';
+        }
+        elsif (!$ours_ok && !$ours_no) {
+            $verdict = 'no-john-format';
+            $note = 'no john format on this entry, so john ships no control '
+                  . 'vectors, and the entry carries no vector of its own to '
+                  . 'check the expression against';
+        }
+        elsif ($ours_ok && !$ours_no) {
+            $verdict = 'corroborated';
+            $note = "no john format, so john ships no control vectors; but "
+                  . "RosettaExpr -- an implementation independent of all three "
+                  . "crackers -- computes this expression over the entry's own "
+                  . "vector(s) and reproduces $ours_ok of $ours_ok. That is "
+                  . 'corroboration, not tier vector, which needs john\'s own '
+                  . 'compiler';
+        }
+        elsif ($ours_ok) {
+            $verdict = 'partial';
+            $note = "no john format; RosettaExpr reproduces $ours_ok of "
+                  . ($ours_ok + $ours_no) . " of the entry's own vectors, so "
+                  . 'the expression is right for some and not others -- which '
+                  . 'is what a multi-emit type looks like, and is a question '
+                  . 'for a person';
+        }
+        else {
+            $verdict = 'expression-wrong';
+            $note = 'no john format, but RosettaExpr -- an implementation '
+                  . 'independent of all three crackers -- computes this '
+                  . "expression over the entry's own vector(s) and reproduces "
+                  . 'none of them. Either the expression or the vector is '
+                  . 'wrong';
+        }
     }
     elsif (!@t) {
         $verdict = 'no-test-vectors';

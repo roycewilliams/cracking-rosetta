@@ -127,14 +127,59 @@ my %MULTI_NOTE = map { $_ => 1 } qw(
     SHA1SHA384TRUNC SHA1RMD160TRUNC SHA1SHA1SHA1TRUNC SHA1SHA1TRUNCMD5
 );
 
+# A SWEPT TRUNCATION LENGTH IS THE THIRD MULTI-EMIT SHAPE
+#
+# Note [24] names 34 types and Appendix A spells emit() for 14 more, and
+# CLAUDE.md says to ask this function rather than re-derive either list. Both
+# lists still miss a shape that the appendix states plainly in its own gloss:
+#
+#     SHA1SHA3-256TRUNC   sha1(cut(sha3_256(pass), 0, N))   (N = 21-64)
+#
+# N is not bound. The type computes a digest at every truncation length in the
+# stated range and matches if any reproduces the stored hash, which is exactly
+# what CLAUDE.md already describes the TRUNC family as doing. Note [24] names
+# most of that family -- SHA1SHA256TRUNC, SHA1SHA1TRUNC, SHA1MD6TRUNC and a
+# dozen more -- so the 16 it misses are an omission upstream, not a different
+# construction. Found 2026-09-02, when denote-hx.pl stalled on
+# SHA1SHA3-256TRUNC for an unrelated reason and the family turned out to be
+# split across the two lists.
+#
+# The test is a lookup, not a judgement: the gloss states a NUMERIC RANGE for
+# N. That is what distinguishes it from
+#
+#     SHA1MD5x            sha1(md5^N(pass))                 (N = iteration count)
+#
+# which must NOT match. An iteration count is identity in this repository --
+# MD5x01 is not MD5x02, it is john's dynamic_2 -- so those 16 types are a
+# family parameterised by N, not one type emitting several digests. Marking
+# them multi-emit would forbid an expression: that each of them can honestly
+# carry once N is fixed.
+#
+# Verified before widening: of the 16 types this newly catches, no entry
+# carries an expression:, so nothing already claimed is withdrawn. Fifteen
+# carried neither an expression nor a denotation and were sitting in the
+# curation queue with nothing able to answer them.
+
+my $N_RANGE = qr/\bN \s* = \s* \d+ \s* [-\x{2013}] \s* \d+/x;
+
 # is_multi_emit($type, $hx) - true when the type emits several candidates.
 # $hx is the hashref parse_appendix returned for that type, or undef; the
 # second test reads emit() straight out of the appendix, which is how the 14
-# types Note [24] omits are caught.
+# types Note [24] omits are caught, and the third reads a swept range out of
+# the gloss, which is how the 16 BOTH lists omit are caught.
 sub is_multi_emit {
     my ($type, $hx) = @_;
     return 1 if defined $type && $MULTI_NOTE{$type};
-    return 1 if $hx && defined $hx->{expr} && $hx->{expr} =~ /\bemit\b/;
+    return 0 unless $hx;
+    return 1 if defined $hx->{expr} && $hx->{expr} =~ /\bemit\b/;
+
+    # A swept range, and only where the expression actually uses N: a gloss
+    # mentioning a range for something else is not a statement about emission.
+    my $gloss = join ' ', @{ $hx->{gloss} || [] };
+    return 1 if $gloss =~ $N_RANGE
+             && defined $hx->{expr}
+             && $hx->{expr} =~ /\bN\b/;
+
     return 0;
 }
 

@@ -1,5 +1,14 @@
 id: "sha1saltsha256trunc"
 name: "SHA1SALTSHA256TRUNC"
+expression_proof:
+  verified: "absent"
+  verified_at: "2026-08-31"
+  verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
+  note: "mdxfind type SHA1SALTSHA256TRUNC (e725) is MULTI-EMIT: it computes several candidate digests per input and matches if any one reproduces the stored hash. There is therefore no single expression to record, and writing one of the emitted forms into expression: would be a false claim even though the string itself is correct. This is also why two vectors of such a type can disagree with each other, and why a tool matching one of them is not evidence about the other."
+denotation:
+  text: "sha1(salt . cut(sha256(pass), 0, N))"
+  source: "mdxfind"
+  note: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A, entry for mdxfind type SHA1SALTSHA256TRUNC (e725), which states sha1(salt . cut(sha256(pass), 0, N)) (N = 21-64). This is what the type emits, not a single construction -- see expression_proof."
 status: "needs-review"
 tools:
   mdxfind:

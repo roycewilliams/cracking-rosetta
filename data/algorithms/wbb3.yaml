@@ -6,7 +6,7 @@ expression_proof:
   verified: "upstream"
   verified_at: "2026-08-29"
   verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
-  note: "transcribed from john --list=subformats for an identifier this entry proved by round-trip; TRIAGE 2026-08-30 [salt-length]: the expression is correct -- computed here with Digest:: it reproduces all 6 of john's own test vectors for dynamic_1592 -- but john's ad-hoc compiler will not take it with this format's 40-character salt, while the same expression recovers a control vector with a 2-character salt. A limit in the compiled form, not a disagreement about the algorithm"
+  note: "transcribed from john --list=subformats for an identifier this entry proved by round-trip; TRIAGE 2026-09-02 [salt-length]: the expression is correct -- computed here with Digest:: it reproduces all 6 of john's own test vectors for dynamic_1592 -- but john's ad-hoc compiler will not take it with this format's 40-character salt, while the same expression recovers a control vector with a 2-character salt. A limit in the compiled form, not a disagreement about the algorithm"
 category: "application"
 application: "Woltlab Burning Board 3"
 status: "needs-review"

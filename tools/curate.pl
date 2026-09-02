@@ -442,17 +442,23 @@ unless (%want_kind && !$want_kind{unproven}) {
         # string it printed, the format encodes its ciphertext its own way, it
         # truncates, it will not take a long salt -- and no contributor can
         # answer those. Asking anyway is how a queue of real questions gets
-        # buried. Only a wrong expression or an anomalous vector needs a human.
+        # buried. Three verdicts do need a human: a wrong expression, an
+        # anomalous vector, and a PARTIAL reproduction -- an expression that
+        # reproduces some of an entry's vectors and not others is what a
+        # multi-emit mdxfind type looks like (CLAUDE.md, "Some mdxfind types
+        # are MULTI-EMIT"), and deciding that is curation.
         my $tnote = $e->{expression_proof}{note} // '';
         if ($tnote =~ /TRIAGE \d{4}-\d{2}-\d{2} \[([a-z-]+)\]:/) {
             my $verdict = $1;
             next unless $verdict eq 'vector-anomalous'
-                     || $verdict eq 'expression-wrong';
+                     || $verdict eq 'expression-wrong'
+                     || $verdict eq 'partial';
         }
         push @queue, {
             kind => 'unproven', target => $id, ids => [$id],
-            prompt  => 'This expression does not reproduce the entry\'s own '
-                     . 'vector. What is wrong?',
+            prompt  => 'This expression is recorded at tier upstream and has '
+                     . 'not been proven. Where triage could test it, it did '
+                     . 'not reproduce the entry\'s own vector. What is wrong?',
             context => [ describe($e) ],
             options => [ ['1', 'expression-wrong', 'the expression is wrong'],
                          ['2', 'vector-wrong', 'the vector is of a different '
