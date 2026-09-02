@@ -101,7 +101,7 @@ One file per algorithm rather than one big table is deliberate: you touch one sm
 
 * Crack does not get a table column. It attacks two of these algorithms, so a
   column would spend 782 rows saying "no" to buy two rows of information -
-  those two are marked † and the detail lives in [docs/CRACK.md](docs/CRACK.md).
+  those two are marked (c) and the detail lives in [docs/CRACK.md](docs/CRACK.md).
   The `tools.crack` field is still in the data and in both exports.
 
 * Coverage is partial and visibly so. Run `tools/validate.pl` for live numbers rather than trusting a README - as of 2026-08-29 the inventories held 593 hashcat modes, 552 John formats and 1001 mdxfind types.

@@ -60,7 +60,7 @@ vectors:
     source: "hashcat's example hashes"
 ```
 
-Salted hashes go in as `hash:salt`. Say where you got it in `source:` — a
+Salted hashes go in as `hash:salt`. Say where you got it in `source:` -- a
 tool's example hash, a public test corpus, "generated it myself" are all fine.
 Please don't contribute a hash from real data.
 
@@ -77,13 +77,13 @@ tools:
     note: "from the hashcat wiki; not reproduced"
 ```
 
-Use the exact identifier the tool prints — `Raw-MD5` on CPU but
+Use the exact identifier the tool prints -- `Raw-MD5` on CPU but
 `raw-MD5-opencl` on GPU, John is inconsistent about case. If you name an
 identifier no installed tool has, `validate.pl` will tell you.
 
 ### ...fix a mapping that's wrong
 
-Don't overwrite the old claim — add yours in `note:` and say so in the PR.
+Don't overwrite the old claim -- add yours in `note:` and say so in the PR.
 Disagreements here get settled by verification, not by whoever edited last.
 
 ### ...add an algorithm that isn't here
@@ -109,7 +109,7 @@ the house style. The full field list is in `schema/algorithm.schema.json`.
 
 ### ...say two entries are the same thing
 
-Don't merge them yourself — propose it in the data:
+Don't merge them yourself -- propose it in the data:
 
 ```sh
 tools/relate.pl --kind same-computation \
@@ -123,14 +123,14 @@ of `same-computation`, `encodes`, `input-encoding`, `iterates`, `truncates`,
 `collides-on-subset`, `duplicate-of`. `distinction` says why both rows still
 exist: `application`, `encoding`, `input-encoding`, `iteration`, `truncation`,
 `salt-convention`, `naming`, or `none`. (`naming` is a maintainer's answer to
-a proposed duplicate — the tools publish two names for one computation and
+a proposed duplicate -- the tools publish two names for one computation and
 both keep a row. Propose `none`; let them decide.)
 
 If you think there's genuinely no difference left, use
 `--kind duplicate-of --distinction none`. That's the proposal; a maintainer
 does the merge, because an `id` is a published key that other people's scripts
-point at. When they do, the retired `id` stays as a tombstone — a file with
-`status: merged`, `merged_into:` and nothing else — so your bookmark and their
+point at. When they do, the retired `id` stays as a tombstone -- a file with
+`status: merged`, `merged_into:` and nothing else -- so your bookmark and their
 CSV join keep working.
 
 ## Don't edit the generated files
@@ -152,11 +152,11 @@ claim came from. Someone will verify it later and promote it. An honest
 of this repository is that you can trust the `vector` rows without checking.
 
 The automated checks on your PR deliberately never run a cracker, so this one
-is on your honour — and it's the thing a maintainer will look at first.
+is on your honour -- and it's the thing a maintainer will look at first.
 
 ## Files you may and may not edit
 
-**Edit:** `data/algorithms/*.yaml` — one algorithm per file, filename stem
+**Edit:** `data/algorithms/*.yaml` -- one algorithm per file, filename stem
 equal to the `id`.
 
 **Don't edit:** `data/tools/*.yaml`, `docs/index.html`, `docs/ROSETTA.md`,
@@ -169,7 +169,7 @@ that as its own PR, so the diff shows what upstream actually changed.
 ## Mistakes that are easy to make
 
 - **One entry is one algorithm.** If your hash is computed differently from
-  the entry you were going to put it in, it needs its own entry — even if the
+  the entry you were going to put it in, it needs its own entry -- even if the
   two share a name or a mode. `aliases:` is for other *names* of the same
   computation, not for related algorithms.
 - **A tool cracking your vector doesn't mean it implements your algorithm.**
@@ -180,7 +180,7 @@ that as its own PR, so the diff shows what upstream actually changed.
   `md5(md5($pass))`, which is John's `dynamic_2`, not `dynamic_0`. Record it
   as `tools.mdxfind.iterations`.
 - **mdxfind's hashcat column lists *related* modes, not equivalents.** Type
-  `MD5` names modes 0, 2600, 3500 and 5100 — four different algorithms. Don't
+  `MD5` names modes 0, 2600, 3500 and 5100 -- four different algorithms. Don't
   copy such a list into one entry.
 - **`id` never changes once it's published.** It's the filename, a link
   fragment on the rendered page, and the key in `dist/rosetta.csv`. If a name
@@ -188,7 +188,7 @@ that as its own PR, so the diff shows what upstream actually changed.
 
 ## Bonus: vanity vectors (optional, and welcome)
 
-One target, not a collection — a marker is recognisable because it is always
+One target, not a collection -- a marker is recognisable because it is always
 the same string.
 
 **The salt is `rosetta`. The plaintext is `rosetta`. The digest starts
@@ -201,7 +201,7 @@ salt is a free variable nobody cares about, so search that and leave the
 plaintext alone.
 
 Searching means padding the salt. The only requirement is that **`rosetta` is
-still visible in it** — what surrounds it is yours: digits, letters,
+still visible in it** -- what surrounds it is yours: digits, letters,
 punctuation, before, after, or both. A wider alphabet buys you a shorter salt
 for the same search depth, which matters because plenty of formats cap salt
 length:
@@ -224,18 +224,18 @@ digest     dec0ded...
 Two characters to avoid in a salt, for mechanical reasons rather than taste:
 **`:`**, because vectors are stored as `hash:salt` and the tools split on it,
 and **tab**, because John is fed with `--field-separator-char=tab`. Beyond
-that, respect whatever the format itself allows — some want hex-only or
+that, respect whatever the format itself allows -- some want hex-only or
 fixed-length salts.
 
 What counts as good enough, best first:
 
 1. **`decoded`, spelled properly.** Only possible where the digest is base64
-   rather than hex — `{SSHA}`, `$apr1$`, `$P$` and friends, 75 entries here
+   rather than hex -- `{SSHA}`, `$apr1$`, `$P$` and friends, 75 entries here
    already. Seven characters of a 64-character alphabet is 42 bits, a few
    minutes of GPU time. This is the real prize.
-2. **`dec0ded`** — the hex form, and the normal target. Hex is `0-9a-f`, so
-   `o`→`0` is forced and nothing else is.
-3. **Heavier leet or a shorter prefix** (`dec0d3d`, `dec0de`) — accepted only
+2. **`dec0ded`** -- the hex form, and the normal target. Hex is `0-9a-f`, so
+   `o`->`0` is forced and nothing else is.
+3. **Heavier leet or a shorter prefix** (`dec0d3d`, `dec0de`) -- accepted only
    if nothing better has been found for that entry.
 
 **An entry is closed for vanity once it has a clean `dec0ded`.** Don't send a
@@ -243,13 +243,13 @@ second one, and don't send an improvement on a marker that already reads
 correctly. This is meant to be a pleasant side quest, not a leaderboard.
 
 If you don't want to search at all, just use `rosetta` as the salt and take
-whatever digest falls out — both ends are still on theme, and
+whatever digest falls out -- both ends are still on theme, and
 `mdxfind -z -s` will generate the vector for you.
 
 Housekeeping:
 
 - A vanity vector is still a vector. It must verify like any other.
-- Say how you made it in `source:` — `"vanity, salt search"` is perfect.
+- Say how you made it in `source:` -- `"vanity, salt search"` is perfect.
 - **Don't replace a good existing vector with a vanity one.** A vector from
   hashcat's example set is *evidence about hashcat*; one we generated is not.
   Vanity vectors fill gaps; they don't redecorate.
@@ -257,13 +257,13 @@ Housekeeping:
 ## What happens to your PR
 
 CI runs the same checks you ran, plus a compile of every tool. It never runs a
-cracker — verification has to happen on a machine with the tools and a GPU,
+cracker -- verification has to happen on a machine with the tools and a GPU,
 and a tier that a pull request could influence would be worthless.
 
 A maintainer then runs `tools/review-delta.pl`, which lists what your change
 claims and which claims need proving locally, and re-runs the ones that do. If
 a `vector` claim doesn't reproduce, expect a question rather than a rejection
-— a vector that won't crack can mean a wrong mapping, a wrong plaintext or a
+-- a vector that won't crack can mean a wrong mapping, a wrong plaintext or a
 missing salt, and those are worth telling apart.
 
 ## No GitHub account, or not comfortable with YAML?
@@ -290,5 +290,5 @@ not, however useful it would be.
 
 ## Be nice
 
-Keep PR descriptions lean. Using an LLM to help is fine — strip the padding
+Keep PR descriptions lean. Using an LLM to help is fine -- strip the padding
 before you send it. Say what changed and why, and stop.

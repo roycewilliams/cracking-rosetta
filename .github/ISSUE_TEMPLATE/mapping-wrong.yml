@@ -6,7 +6,7 @@ body:
     attributes:
       value: |
         A wrong row is worse than a missing one, so thank you. You do not need
-        to have run anything — say what you know and how you know it.
+        to have run anything -- say what you know and how you know it.
   - type: input
     id: entry
     attributes:
@@ -40,7 +40,7 @@ body:
     attributes:
       label: How you know
       description: >-
-        Best is a command and its output — the tool, pinned to the identifier,
+        Best is a command and its output -- the tool, pinned to the identifier,
         against a test vector. Second best is a link to upstream saying so.
         "I have hit this in practice" is also a real answer.
       render: shell

@@ -58,10 +58,10 @@ shipped for.
 
 | Algorithm | hashcat | mdxfind | How |
 |---|---|---|---|
-| descrypt($plain) | `1500` ✓ | `DESCRYPT` ✓ | core algorithm; Eric Young's libdes ships with Crack and is its default |
-| md5(unix) | `500` ✓ | `MD5CRYPT` ✓ | via src/util/elcid.c,bsd - the FreeBSD/NetBSD MD5 crypt() |
+| descrypt($plain) | `1500` (v) | `DESCRYPT` (v) | core algorithm; Eric Young's libdes ships with Crack and is its default |
+| md5(unix) | `500` (v) | `MD5CRYPT` (v) | via src/util/elcid.c,bsd - the FreeBSD/NetBSD MD5 crypt() |
 
-Marked with † in [ROSETTA.md](ROSETTA.md). The underlying field is
+Marked with (c) in [ROSETTA.md](ROSETTA.md). The underlying field is
 `tools.crack.supported` in `data/algorithms/`, and it is carried in
 `dist/rosetta.csv` and `dist/rosetta.json` for anyone consuming those.
 

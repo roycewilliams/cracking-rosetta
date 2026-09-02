@@ -1,8 +1,8 @@
-# CLAUDE.md — cracking-rosetta
+# CLAUDE.md -- cracking-rosetta
 
 Cross-reference ("rosetta stone") of password-cracking algorithm support and
-identifiers across hashcat, John the Ripper, mdxfind/hashpipe, and — for
-historical reference only — Alec Muffett's Crack.
+identifiers across hashcat, John the Ripper, mdxfind/hashpipe, and -- for
+historical reference only -- Alec Muffett's Crack.
 
 Migrated from a Google Sheet:
 `https://docs.google.com/spreadsheets/d/1SBv-oRbXb8OapSD1BSPClPXIfiWOL2oH_zTls4sz1rk`
@@ -13,7 +13,7 @@ Migrated from a Google Sheet:
 "hashcat 2811 == dynamic_12 == MD5-MD5SALTMD5PASS" is only trustworthy if a
 test vector was actually cracked by each named tool under that exact
 identifier. Unverified mappings are allowed, but must be labelled as such
-(see Verification tiers). This mirrors upstream Cynosureprime practice — see
+(see Verification tiers). This mirrors upstream Cynosureprime practice -- see
 the header of `hashpipe/john_map.h`: *"Formats whose vectors did not verify
 are absent rather than guessed."*
 
@@ -29,7 +29,7 @@ are absent rather than guessed."*
     dist/rosetta.{csv,json}  GENERATED. Machine consumption.
     tmp/                     Scratch. Not committed.
 
-### Two-layer split — why
+### Two-layer split -- why
 
 `data/tools/` is a mechanical dump of what each tool *actually supports*,
 regenerated from the canonical binary. `data/algorithms/` is human judgement:
@@ -54,8 +54,8 @@ people expect are regenerated into `docs/` and `dist/`.
 
 Upstream, for drift detection and as seed data:
 
-- `github.com/Cynosureprime/mdxfind` — `HASH_TYPES.md`
-- `github.com/Cynosureprime/hashpipe` — `HASH_TYPES.md`, `john_map.h`
+- `github.com/Cynosureprime/mdxfind` -- `HASH_TYPES.md`
+- `github.com/Cynosureprime/hashpipe` -- `HASH_TYPES.md`, `john_map.h`
 
 **hashpipe is not a separate column.** Its type list was diffed against the
 local mdxfind binary: 1000 vs 1001 types, zero name mismatches, zero
@@ -67,17 +67,17 @@ exists to detect divergence, not to populate a column.
 
 Every per-tool mapping carries `verified:`:
 
-- `vector`   — a test vector was round-tripped locally by that tool under that
+- `vector`   -- a test vector was round-tripped locally by that tool under that
                exact identifier. The only tier that means "proven".
-- `upstream` — asserted by an upstream project that verifies by recomputation
+- `upstream` -- asserted by an upstream project that verifies by recomputation
                (mdxfind's `Hashcat mode` column, hashpipe's `john_map.h`).
-- `asserted` — a human said so; no reproduction on record.
-- `absent`   — that tool does not support this algorithm.
+- `asserted` -- a human said so; no reproduction on record.
+- `absent`   -- that tool does not support this algorithm.
 
 Also record `verified_at` (ISO date) and `verified_with` (tool version string).
 Never promote a tier without re-running the check.
 
-The same four tiers apply to `expression:` via `expression_proof:` — see
+The same four tiers apply to `expression:` via `expression_proof:` -- see
 **Expression language** below. It is the same kind of claim and deserves the
 same audit trail.
 
@@ -89,7 +89,7 @@ These are proven working in this environment.
     hashcat -m <mode> -a 0 --quiet --potfile-disable --self-test-disable \
         <hashfile> <wordlist>
 
-    # mdxfind  — pin the type; -i 1 unless the type is iterated
+    # mdxfind  -- pin the type; -i 1 unless the type is iterated
     mdxfind -h '^<TYPE>$' -f <hashfile> -i 1 <wordlist>
     # prints e.g.:  MD5x01 482c811da5d5b4bc6d497ffa98491e38:password123
 
@@ -122,7 +122,7 @@ mdxfind also accepts hashcat modes directly (`mdxfind -m 0`, `-m e1`,
 - **Scraped tool output can be elided.** `hashcat --hash-info` truncates a
   long example hash to `48435058...00000 [Truncated, use --mach for full
   length]`, and 181 of 593 modes were recorded that way before anyone tried
-  to use one — hashcat refuses its own truncated example, so those modes
+  to use one -- hashcat refuses its own truncated example, so those modes
   could not be round-tripped and nothing in the data said why.
   `extract-hashcat.pl` reads `--hash-info --machine-readable` for that
   reason. Check for an elision marker before trusting a scraped field.
@@ -194,7 +194,7 @@ mdxfind also accepts hashcat modes directly (`mdxfind -m 0`, `-m e1`,
   uppercase hex**, and mdxfind will not read them back that way. Only
   `MD5UCBASE64SHA1RAW` turned out to be purely a case problem; `MD5UC`,
   `SHA256UC` and `RACF` reproduce in neither case. Re-casing on failure is a
-  search for something that passes, not a fix — confirm with `mdxfind -z`
+  search for something that passes, not a fix -- confirm with `mdxfind -z`
   first, and say so in the entry.
 - **Sheet-era junk.** `NOTSUPPORTED`, `MD5AUTOMATICPARTIALMATCH` and
   `MD5UCWITHI2MD5UCX2` appear in the mdxfind column but are not types.
@@ -246,7 +246,7 @@ Record both, canonical field is the hx-style expression:
     expression: md5(md5($p).$s)
     john_dynamic_expr: dynamic=md5(md5($p).$s)
 
-The expression is the semantic join key — it is what lets a validator assert
+The expression is the semantic join key -- it is what lets a validator assert
 that two tools' identifiers really do denote the same thing.
 
 `tools/expressions.pl` populates both fields from `john --list=subformats`,
@@ -260,8 +260,8 @@ expression can be *proven* rather than proposed. **John's dynamic compiler
 takes an expression on the command line**, so a candidate never has to be
 believed: hand it to john against the entry's own vector and either it
 recovers the entry's own plaintext or it does not. Candidates come from three
-redundant generators — the `name:` field, the entry `id` slug, and the mdxfind
-type name — and every one of them **bails on the first token it does not
+redundant generators -- the `name:` field, the entry `id` slug, and the mdxfind
+type name -- and every one of them **bails on the first token it does not
 know**. That rule is what keeps the tool honest: `MD5CAP`'s `CAP` is not in
 the vocabulary, so no candidate is emitted, whereas silently dropping the
 token would emit `md5($p)`, which john would happily "prove" because `cap()`
@@ -269,13 +269,13 @@ is a no-op on a lowercase digest. The function vocabulary is harvested from
 john's own subformat listing, never hand-written.
 
 Two guards, both non-negotiable. **Every vector the entry carries must fall,
-not the first** — an entry with three vectors and a candidate that cracks two
+not the first** -- an entry with three vectors and a candidate that cracks two
 has found a coincidence, which is exactly how `dynamic_1011` looked like
 `MD5PASSMD5`. And **if two different expressions each reproduce every vector,
 nothing is written**: they agree on this entry's inputs, they need not agree
 in general, and choosing between them is curation.
 
-A proven expression is also an operational answer — `john
+A proven expression is also an operational answer -- `john
 --format=dynamic='haval128_3(md5($p))'` is a command someone can run today on
 an entry that has no named john format at all. It belongs in
 `john_dynamic_expr:`, **never in `tools.john.cpu`**: an ad-hoc expression is
@@ -284,8 +284,8 @@ inflate john's coverage with something no `--list=formats` will ever show.
 
 ### The expression carries its own tier
 
-`expression:` is a gate — `validate.pl` fails a build where two entries claim
-the same one — so it says how it was established, in the same vocabulary the
+`expression:` is a gate -- `validate.pl` fails a build where two entries claim
+the same one -- so it says how it was established, in the same vocabulary the
 per-tool blocks use:
 
     expression: "haval128_3(md5($p))"
@@ -300,20 +300,20 @@ Without it a transcription and a round-trip are indistinguishable, and the
 first awkward collision becomes an argument for weakening the rule. The tiers
 mean here what they mean everywhere:
 
-- `vector`   — this exact string was compiled by john and recovered the
+- `vector`   -- this exact string was compiled by john and recovered the
                entry's own plaintext from its own hash. Only
                `derive-expressions.pl` may write it.
-- `upstream` — john's `--list=subformats` states it for an identifier the
+- `upstream` -- john's `--list=subformats` states it for an identifier the
                entry already proved. `expressions.pl` writes this and nothing
                stronger: what was round-tripped is the *identifier*.
-- `asserted` — a human said so.
-- `absent`   — this algorithm has no expression in the dynamic language.
+- `asserted` -- a human said so.
+- `absent`   -- this algorithm has no expression in the dynamic language.
 
 `validate.pl` enforces the pairing: an `expression:` with no
 `expression_proof:` fails, `vector` with no vectors fails, and `absent`
 alongside an expression fails.
 
-### `denotation:` — no expression, but still a way to refer to it
+### `denotation:` -- no expression, but still a way to refer to it
 
 `absent` on its own leaves a row's expression column empty and says nothing
 useful to a reader. So the entry records how people actually refer to the
@@ -330,8 +330,8 @@ algorithm:
 
 `text` is a pseudo-expression in a language richer than john's dynamic
 (`md5(base64_encode($plain))`), or simply the label a suite or standard uses
-(`PBKDF2-HMAC-SHA256`, `7-Zip`). It is deliberately **not tiered** — nothing
-can round-trip it — so it carries a `source:` instead and is never an
+(`PBKDF2-HMAC-SHA256`, `7-Zip`). It is deliberately **not tiered** -- nothing
+can round-trip it -- so it carries a `source:` instead and is never an
 unattributed human claim. It is illegal alongside `expression:`: an entry with
 both says the same thing twice at two strengths and a reader cannot tell which
 to believe.
@@ -339,7 +339,7 @@ to believe.
 `--denote` writes this pair, and only where `absent` is a **checkable fact**
 rather than a shrug: the name is already expression-shaped and at least one
 function in it is not in the vocabulary harvested from john. That is a lookup,
-not an opinion. Note what it does *not* say — john has formats for HMAC-SHA1
+not an opinion. Note what it does *not* say -- john has formats for HMAC-SHA1
 and for bcrypt; it has no `hmac()` or `bcrypt()` token in the dynamic
 *expression* language, and those are different sentences.
 
@@ -351,12 +351,12 @@ generated" is a fact about our generators, not about john.
 specification's own statement of what an mdxfind type computes. `--denote`
 reads the entry's `name:`, which for most of these is just the mdxfind type
 name and denotes nothing; Appendix A states the construction. So the
-denotation is `source: "mdxfind"` in the schema's literal sense — the tool's
+denotation is `source: "mdxfind"` in the schema's literal sense -- the tool's
 own label for its own type, which is already in `tools.mdxfind.types`.
 
 It qualifies an entry on two facts and nothing else: a function outside
-**both** boundaries — `RosettaHx`'s `%FUNC` and the vocabulary harvested from
-john — or a multi-emit type. Both boundaries are checked because `%FUNC`
+**both** boundaries -- `RosettaHx`'s `%FUNC` and the vocabulary harvested from
+john -- or a multi-emit type. Both boundaries are checked because `%FUNC`
 admits `cut()` and `pad()` deliberately, so `%FUNC` alone would call them
 grounds for `absent` and contradict `seed-hx.pl` on the same type. It refuses
 a row that is prose rather than an expression (`Note [20]`, `(complex: ...)`),
@@ -364,7 +364,7 @@ because there upstream declined to state the construction and that is a shrug.
 
 **`denotation:` forecloses an `expression:`,** because `validate.pl` forbids
 both, so never denote something that might yet be provable. Concretely:
-**john's dynamic language has constants and a second salt** —
+**john's dynamic language has constants and a second salt** --
 `md5($c1.$p),c1=x` compiles and cracks, and `$s2` is real (`doc/DYNAMIC_EXPRESSIONS`
 lines 53-73). None of the generators here know that yet, which is why
 `denote-hx.pl` leaves the `stray-literal` and `unknown-operand` residue alone.
@@ -378,15 +378,15 @@ denotation settles it.
 ## Collisions: when two entries mean the same thing
 
 The moment expressions existed, nine of them turned out to be claimed by more
-than one entry. That is not noise — it is the `id` being asked to carry four
+than one entry. That is not noise -- it is the `id` being asked to carry four
 independent facts at once: the **computation**, the **representation** (hex
 case, base64, a `$1$` wrapper), the **deployment** (Joomla, vBulletin 3.8.5,
-osCommerce — which hashcat gives separate modes), and the **tool identifier**.
+osCommerce -- which hashcat gives separate modes), and the **tool identifier**.
 Only the last was ever modelled.
 
 So an entry carries three fields for it. `category:` names the axis it sits on
-— `primitive`, `composite`, `iterated`, `encoding`, `application`, `protocol`,
-`kdf` — with `application:` and `application_version:` for a product row.
+-- `primitive`, `composite`, `iterated`, `encoding`, `application`, `protocol`,
+`kdf` -- with `application:` and `application_version:` for a product row.
 `relations:` is a typed, symmetric edge list:
 
     relations:
@@ -396,9 +396,9 @@ So an entry carries three fields for it. `category:` names the axis it sits on
         note: "hashcat separates these: mode 11 assumes Joomla's fixed-length
                salt, mode 10 is the generic construction"
 
-`kind` says what the relationship is — `same-computation`, `encodes`,
+`kind` says what the relationship is -- `same-computation`, `encodes`,
 `input-encoding`, `iterates`, `truncates`, `collides-on-subset`,
-`duplicate-of`. `distinction` says why both rows nonetheless exist —
+`duplicate-of`. `distinction` says why both rows nonetheless exist --
 `application`, `encoding`, `input-encoding`, `iteration`, `truncation`,
 `salt-convention`, `naming`, `none`. `none` is legal only with
 `duplicate-of`, which is how a merge gets proposed in data rather than in a
@@ -487,7 +487,7 @@ Decided 2026-08-30, and it is what unblocks acting on a `duplicate-of` /
     notes: "Tombstone. ..."
 
 `aliases:`, `legacy:`, `vectors:` and every tool identifier move to the
-survivor — that is the merge — and the tombstone keeps nothing but the
+survivor -- that is the merge -- and the tombstone keeps nothing but the
 redirect. `validate.pl` enforces that: `merged_into` and a mirrored
 `duplicate-of` edge are both required, the destination must exist and must not
 itself be a tombstone (repoint the first one instead of building a chain), and
@@ -495,8 +495,8 @@ any of `expression`, `tools`, `vectors`, `aliases`, `legacy`, `category` on a
 tombstone is an error. A tombstone is excluded from every count and coverage
 denominator: it is not an algorithm.
 
-`render.pl` gives it a row in `dist/rosetta.csv` and `rosetta.json` — the old
-`id` still joins — with every claim column empty, `status` `merged` and a
+`render.pl` gives it a row in `dist/rosetta.csv` and `rosetta.json` -- the old
+`id` still joins -- with every claim column empty, `status` `merged` and a
 `merged_into` column naming the survivor, so a consumer is told where the row
 went instead of having to parse the relations prose. The two human views list
 it under the table rather than in it, because a row of dashes reads as a gap
@@ -516,7 +516,7 @@ given edge only once, so a merge that leaves the stale pre-merge `duplicate-of`
 beside the new one passes.
 
 The full design, the options weighed against it and what changed on contact
-with the code are in `ACTION-PLAN.md` §11.
+with the code are in `ACTION-PLAN.md` section 11.
 
 ## The published contract
 
@@ -544,9 +544,9 @@ un-break, so they are restated here where a tool gets written:
   importer is Python only because `openpyxl` is the practical xlsx reader;
   flag any further Python additions.
 - Data files are YAML, UTF-8, LF, 2-space indent, keys in schema order.
-- Generated files carry a `# GENERATED by tools/<x> — do not edit` header and
+- Generated files carry a `# GENERATED by tools/<x> -- do not edit` header and
   the source tool version.
 - Scripts: no args => usage + exit 2. `--verbose` to stderr, data to stdout.
   Counts and elapsed time to stderr on bulk runs.
-- Scale is small — ~1000 mdxfind types, ~600 hashcat modes, ~400 john formats.
+- Scale is small -- ~1000 mdxfind types, ~600 hashcat modes, ~400 john formats.
   Plain hashes are fine; no need for anything cleverer.

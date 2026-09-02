@@ -1,4 +1,4 @@
-# cracking-rosetta — action plan (for review)
+# cracking-rosetta -- action plan (for review)
 
 Status: **proposal**. Nothing below is built yet except the survey evidence,
 which was measured in this environment on 2026-08-29.
@@ -30,8 +30,8 @@ Exported all three tabs and diffed them against the canonical tools.
 
 Five of thirteen columns are effectively dead: `class` (0 filled), `Notes`
 (0), `Hashcat-legacy mode` (5), `hashes.org comment` (3), `MDXfind
-extra_params` (7). Two more columns — `Hashkiller-accepted format` and
-`hashes.org algo` — point at services that no longer exist. They still have
+extra_params` (7). Two more columns -- `Hashkiller-accepted format` and
+`hashes.org algo` -- point at services that no longer exist. They still have
 archival value for reading old cracking write-ups, so demote them into a
 `legacy:` block rather than deleting them.
 
@@ -52,12 +52,12 @@ archival value for reading old cracking write-ups, so demote them into a
 The single biggest finding of the survey: **Cynosureprime has already done a
 large, verified chunk of this work, and publishes it in machine-readable form.**
 
-- `mdxfind/HASH_TYPES.md` and `hashpipe/HASH_TYPES.md` — a Markdown table of
+- `mdxfind/HASH_TYPES.md` and `hashpipe/HASH_TYPES.md` -- a Markdown table of
   every type: index, name, hashcat mode(s), and a complete self-test vector
   as `hash[:salt]:password`. That is 1000 algorithms *with test vectors*,
   which is exactly the corpus needed to verify anything.
 - mdxfind ships hashcat mappings for **296 types covering 325 distinct modes**.
-- `hashpipe/john_map.h` — **125 John dynamic formats** mapped to mdxfind
+- `hashpipe/john_map.h` -- **125 John dynamic formats** mapped to mdxfind
   types, each confirmed by recomputation against John's own test vectors
   (9672 vectors harvested across 403 formats).
 
@@ -74,8 +74,8 @@ Revisit when you get it compiling.
 
 ## 3. Proposed structure
 
-    data/tools/*.yaml        GENERATED per-tool inventories — never hand-edited
-    data/algorithms/*.yaml   CURATED, one file per algorithm — the PR surface
+    data/tools/*.yaml        GENERATED per-tool inventories -- never hand-edited
+    data/algorithms/*.yaml   CURATED, one file per algorithm -- the PR surface
     schema/*.schema.json     validation contract
     tools/*.pl               extractors, validator, renderer
     docs/ROSETTA.md          generated flat table (human)
@@ -114,7 +114,7 @@ legacy:
   hashkiller: "IPB2+, MyBB1.2+"
 ```
 
-Every mapping is tiered — `vector` (round-tripped locally), `upstream`
+Every mapping is tiered -- `vector` (round-tripped locally), `upstream`
 (asserted by a project that verifies by recomputation), `asserted` (a human
 said so), `absent`. This is the feature that makes the reference trustworthy
 rather than merely large, and it lets consumers filter to proven rows only.
@@ -147,9 +147,9 @@ Planned scripts:
 
 CI splits into two lanes because they have very different requirements:
 
-- **`validate.pl` + `render.pl`** — pure text, runs on any GitHub runner, gates
+- **`validate.pl` + `render.pl`** -- pure text, runs on any GitHub runner, gates
   every PR. Fast, no secrets, no hardware.
-- **`verify-vectors.pl`** — needs hashcat, John, mdxfind and a GPU. Runs on a
+- **`verify-vectors.pl`** -- needs hashcat, John, mdxfind and a GPU. Runs on a
   self-hosted runner on your crack host, on a schedule, not per-PR. It writes
   tier changes back as a PR.
 
@@ -178,7 +178,7 @@ between a reference that stays current and one that reads "Last updated
 
 ---
 
-## 6. The `Primitives` tab — restart, don't rebuild
+## 6. The `Primitives` tab -- restart, don't rebuild
 
 The tab's stated goal was "a clear, near-universal meta-language for
 expressing algorithms... Suggest starting with JtR's as a base." That goal is
@@ -186,7 +186,7 @@ sound and is now *more* achievable than in 2023, because two implementations
 exist:
 
 - John: `--format=dynamic='md5(md5($p).$s)'`
-- mdxfind: a complete expression compiler — lexer, parser, AST, VM and
+- mdxfind: a complete expression compiler -- lexer, parser, AST, VM and
   primitive emitters (`hx.lex.c`, `hx.tab.c`, `hx_ast.c`, `hx_compile.c`,
   `hx_vm.c`, `codegen/hx_emit_primitives.c`).
 
@@ -203,7 +203,7 @@ trusting that someone lined the columns up correctly.
 
 The `refs` tab becomes `docs/REFERENCES.md`. Its "other suites for potential
 inclusion someday" note (Passware, Elcomsoft) should become an explicit
-scope decision — see below.
+scope decision -- see below.
 
 ---
 
@@ -213,7 +213,7 @@ Add as requested, historical reference only, as `tools.crack` in the schema
 and a final column in the rendered table.
 
 Crack 5.0a is unmaintained (last release ~2000) and does not implement hashes
-itself — it delegates to the host's `crypt(3)`. So its honest support set is
+itself -- it delegates to the host's `crypt(3)`. So its honest support set is
 "whatever libcrypt on the host does", historically `descrypt`, plus
 `bigcrypt`/`bsdicrypt` and, on later glibc, `md5crypt` and the SHA-crypts.
 
@@ -222,7 +222,7 @@ render it as a narrow trailing column, populate only the `true` rows, and
 document the crypt(3)-delegation caveat once in `docs/REFERENCES.md` rather
 than repeating it per row. **Open question for you:** pin it to a specific
 Crack release's documented capability, or to "what glibc crypt(3) offers"?
-I lean to the former — a frozen historical claim is more useful than one that
+I lean to the former -- a frozen historical claim is more useful than one that
 drifts with libc.
 
 ---
@@ -238,7 +238,7 @@ drifts with libc.
 | 4 | John extractor **(blocked, see below)**; close the ~348-format John gap | John inventory lands |
 | 5 | `verify-vectors.pl`; promote what round-trips to tier `vector` | Baseline verified % published |
 | 6 | Drift automation + self-hosted runner; publish repo | First automated PR opens |
-| 7 | Revisit hashpipe once it compiles; revisit Passware/Elcomsoft scope | — |
+| 7 | Revisit hashpipe once it compiles; revisit Passware/Elcomsoft scope | -- |
 
 ---
 
@@ -248,7 +248,7 @@ drifts with libc.
 `/usr/local/src/sec/crack/john-latest/run/john` and `run/*.conf` are
 `0750 royce:royce`, so `--list=format-details` and `dynamic.conf` are both
 out of reach; `johnl` reports the binary as "missing or not executable".
-Only `src/*.c` is world-readable, and it yields ~114 of ~403 format labels —
+Only `src/*.c` is world-readable, and it yields ~114 of ~403 format labels --
 not a usable substitute.
 
 Either widen the mode / add a shared group, or run `extract-john.pl` as
@@ -263,15 +263,15 @@ Either widen the mode / add a shared group, or run `extract-john.pl` as
    and 35 cryptocurrency wallet modes get first-class rows, or a thinner
    treatment than raw/salted hashes? This drives whether the repo is ~450
    files or ~1200.
-2. **Crack column basis** — frozen release capability vs. host crypt(3).
-   (I lean frozen; §7.)
+2. **Crack column basis** -- frozen release capability vs. host crypt(3).
+   (I lean frozen; section 7.)
 3. **Other suites.** The `refs` tab flagged Passware and Elcomsoft. Both are
    closed-source and unverifiable by round-trip. Include as `asserted`-only
    columns, or declare out of scope?
 4. **Hash identification.** The 1000-vector corpus would make this repo a
    good backing dataset for hash-ID tooling (`hashID`, Name-That-Hash). In
    scope as an export, or explicitly not our problem?
-5. **Repo home** — personal namespace, or offer it to Cynosureprime given how
+5. **Repo home** -- personal namespace, or offer it to Cynosureprime given how
    much of the verified seed data is theirs? Worth asking them before
    publishing; it also gets the SME review you want built in.
 
@@ -303,9 +303,9 @@ facts at once.**
 `md5-md5-plain-salt` is the extreme case: one file, an `aliases:` list naming
 four *different* algorithms, and five vectors that fall to three different
 dynamics. Nothing in the schema stopped that, because `aliases:` was never
-defined as "names for the same computation" — it was just a search aid.
+defined as "names for the same computation" -- it was just a search aid.
 
-### Option A — normalise into two tables
+### Option A -- normalise into two tables
 
 Split `data/algorithms/` into computations (keyed by expression) and
 `data/profiles/` for the product-facing rows, each profile pointing at one
@@ -316,7 +316,7 @@ it is the largest migration, it changes what a pull request touches, and most
 entries have no product at all, so several hundred profiles would be 1:1
 shells around their computation. Rejected on cost, not on correctness.
 
-### Option B — one file per entry, explicit typed relations *(chosen)*
+### Option B -- one file per entry, explicit typed relations *(chosen)*
 
 Keep the file layout exactly as it is, and make the relationship a first-class
 field rather than a hint buried in `aliases:` or prose.
@@ -331,7 +331,7 @@ field rather than a hint buried in `aliases:` or prose.
 
        primitive | composite | iterated | encoding | application | protocol | kdf
 
-3. **`relations:` — a typed, many-to-many edge list.**
+3. **`relations:` -- a typed, many-to-many edge list.**
 
    ```yaml
    relations:
@@ -365,13 +365,13 @@ field rather than a hint buried in `aliases:` or prose.
    computation, for search. Naming a different algorithm there becomes an
    error, which is exactly the mistake `md5-md5-plain-salt` encodes today.
 
-5. **Optional `application:` / `application_version:`** so "vBulletin ≥ 3.8.5"
+5. **Optional `application:` / `application_version:`** so "vBulletin >= 3.8.5"
    is data rather than punctuation inside `name:`.
 
-### Option C — a separate relations file
+### Option C -- a separate relations file
 
 `data/relations.yaml` holding the whole graph. One place to review, entry
-files untouched — but it moves the fact away from the file that states it, a
+files untouched -- but it moves the fact away from the file that states it, a
 contributor editing one algorithm no longer sees it, and every change
 collides in a single file. That is the exact failure one-file-per-algorithm
 was chosen to avoid. Rejected.
@@ -379,10 +379,10 @@ was chosen to avoid. Rejected.
 ### Why B satisfies both audiences
 
 **Human intelligibility.** Nobody reads a join table. The rendered view stays
-one row per entry, with the relation surfaced as a short "same as" column —
+one row per entry, with the relation surfaced as a short "same as" column --
 `joomla` reads "same computation as md5-pass-salt, differs by application".
-`render.pl` can additionally emit Option C's *view* — a grouped listing keyed
-by expression — without paying Option C's cost, because the edges are data.
+`render.pl` can additionally emit Option C's *view* -- a grouped listing keyed
+by expression -- without paying Option C's cost, because the edges are data.
 
 **Machine precision.** `dist/rosetta.json` gains a `relations` array. A
 consumer building hash-ID tooling can collapse the graph to computations; a
@@ -413,7 +413,7 @@ something enforced:
    lives in the tool.
 3. `distinction: none` outside `duplicate-of` is an error, and so is a
    `duplicate-of` that claims a distinction.
-4. `collides-on-subset` requires a `note` naming the degenerate class — this
+4. `collides-on-subset` requires a `note` naming the degenerate class -- this
    is where `md5cap`/`md5`, `md5capsha1`/`md5-sha1-pass` and
    `md5-plain-md5-plain`/`md5-pass-md5-salt` are recorded, so the trap is
    documented instead of rediscovered.
@@ -427,7 +427,7 @@ something enforced:
 ### What the rule cannot see
 
 The collision check fires only where an `expression` exists, and only 144
-entries have one — they are the entries whose John block reached tier
+entries have one -- they are the entries whose John block reached tier
 `vector` with identifiers that agree. `oscommerce-xt-commerce` and
 `vbulletin-v3-8-5-2` are the same computation as their siblings and have no
 expression yet, so nothing forced their edges; they were added by hand. The
@@ -437,7 +437,7 @@ knowing that its silence is not proof.
 ### Identifier discipline
 
 `id` remains the stable key and the filename stem, and still never changes
-once published — it is a URL fragment in `docs/index.html` and the key in
+once published -- it is a URL fragment in `docs/index.html` and the key in
 `dist/rosetta.csv`. A rename is expressed as a new entry plus a
 `duplicate-of` edge and an `aliases:` entry on the survivor, never as an
 `mv`.
@@ -456,13 +456,13 @@ once published — it is a URL fragment in `docs/index.html` and the key in
 | `sha1-sha1-plain-salt`, `sha1-sha1-plain-substr-plain-0-1` | `same-computation` | `application` |
 | `sha256-salt-pass`, `sha256rawsaltpass` | `same-computation` | `encoding` |
 
-Plus, not a collision but the same machinery: `md5cap` →
-`collides-on-subset` → `md5`, and `md5-plain-md5-plain` →
-`collides-on-subset` → `md5-pass-md5-salt`.
+Plus, not a collision but the same machinery: `md5cap` ->
+`collides-on-subset` -> `md5`, and `md5-plain-md5-plain` ->
+`collides-on-subset` -> `md5-pass-md5-salt`.
 
 `md5-md5-plain-salt` and `md5-md5-plain-salt-2` are the one case that needs
 splitting rather than linking: their `aliases:` name genuinely different
 computations, so each alias becomes its own entry taking the vector that
 falls to it, and the originals keep the vector matching their own expression.
-**Not done** — creating entries is a bigger curation act than linking
+**Not done** -- creating entries is a bigger curation act than linking
 existing ones, and `discover-john.pl` holds both back and says why.

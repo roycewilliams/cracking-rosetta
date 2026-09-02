@@ -65,6 +65,22 @@ jobs:
       - name: Validate
         run: perl -Itools/lib tools/validate.pl
 
+      # House style is pure ASCII. An em-dash or a typographic quote is a
+      # visible tell that prose was pasted from somewhere that reflows it, and
+      # the generated CSV is consumed by tools that have no reason to expect
+      # anything but ASCII. vendor/ is excluded: those files are upstream's,
+      # copied verbatim, and rewriting one would create drift that
+      # tools/fetch-upstream.sh is meant to detect.
+      - name: ASCII only
+        run: |
+          bad=$(git ls-files -z ":!vendor/**" | xargs -0 grep -lP "[^\x00-\x7F]" || true)
+          if [ -n "$bad" ]; then
+            echo "non-ASCII bytes in:"; echo "$bad"
+            echo "House style is ASCII. Use -- for an em-dash, -> for an arrow."
+            git ls-files -z ":!vendor/**" | xargs -0 grep -nP "[^\x00-\x7F]" | head -40
+            exit 1
+          fi
+
       # Canonical form, so a reviewer never has to read a one-line change
       # buried in a whole-file reformat, and so a misspelled key is caught
       # here rather than vanishing the next time a tool rewrites the entry.

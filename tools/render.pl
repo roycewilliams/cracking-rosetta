@@ -368,13 +368,13 @@ sub wrap_name {
 # identifier. Nothing is lost and the column gets roughly three times narrower.
 sub md_cell {
     my ($c) = @_;
-    return '**—**' if $c->{state} eq 'unknown';
-    return '·'     if $c->{state} eq 'no';
+    return '**--**'    if $c->{state} eq 'unknown';
+    return 'no'       if $c->{state} eq 'no';
     # Crack carries a state but never identifiers; saying "yes" for anything
     # that merely is not 'no' would have claimed Crack supports every entry.
     return 'yes'   unless @{ $c->{ids} };
     my $t = join('<br>', map { "`$_`" } @{ $c->{ids} });
-    return $c->{state} eq 'proven' ? "$t ✓" : $t;
+    return $c->{state} eq 'proven' ? "$t (v)" : $t;
 }
 
 open my $md, '>', "$docsdir/ROSETTA.md" or die "cannot write md: $!\n";
@@ -384,10 +384,10 @@ printf {$md} "%d algorithms. hashcat %s, john %s, mdxfind %s.\n\n",
     scalar @out, $inv{hashcat}{version} // '?', $inv{john}{version} // '?',
     $inv{mdxfind}{version} // '?';
 print  {$md} <<'LEGEND';
-`x` ✓ verified here by round-trip · `x` claimed, not verified · `·` tool does
-not support it · **—** nobody has said yet (a gap worth filling)
+`x` (v) verified here by round-trip; `x` claimed, not verified; `no` tool
+does not support it; **--** nobody has said yet (a gap worth filling)
 
-† also attackable by Alec Muffett's Crack - see [CRACK.md](CRACK.md).
+(c) also attackable by Alec Muffett's Crack - see [CRACK.md](CRACK.md).
 
 For sorting, filtering and search, open [index.html](index.html) - or
 [dist/rosetta.csv](../dist/rosetta.csv) in a spreadsheet.
@@ -400,7 +400,7 @@ LEGEND
 print  {$md} "| Algorithm | hashcat | John | mdxfind | Same as |\n|---|---|---|---|---|\n";
 for my $r (@out) {
     my $n = wrap_name($r->{name}); $n =~ s/\|/\\|/g;
-    $n .= ' †' if $r->{crack}{state} ne 'no' && $r->{crack}{state} ne 'unknown';
+    $n .= ' (c)' if $r->{crack}{state} ne 'no' && $r->{crack}{state} ne 'unknown';
     my $rel = $r->{sameas}; $rel =~ s/\|/\\|/g;
     printf {$md} "| %s | %s | %s | %s | %s |\n", $n,
         md_cell($r->{hashcat}), md_cell($r->{john}), md_cell($r->{mdxfind}),
@@ -850,7 +850,7 @@ else {
 
 print {$cm} <<'CRACK_TAIL';
 
-Marked with † in [ROSETTA.md](ROSETTA.md). The underlying field is
+Marked with (c) in [ROSETTA.md](ROSETTA.md). The underlying field is
 `tools.crack.supported` in `data/algorithms/`, and it is carried in
 `dist/rosetta.csv` and `dist/rosetta.json` for anyone consuming those.
 

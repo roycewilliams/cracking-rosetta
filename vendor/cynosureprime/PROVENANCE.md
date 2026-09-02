@@ -19,7 +19,7 @@ Both repositories ship a `HASH_TYPES.md`. They are not equally current:
 measured 2026-08-29, mdxfind's copy is v1.76 / 988 types while hashpipe's is
 v1.102 / 1000, and the local mdxfind binary is newer still at 1001 types
 (RCS 1.540). On the 1000 shared indices hashpipe's copy agrees with the binary
-on every name and every hashcat mapping; mdxfind's does not — `e1` alone gives
+on every name and every hashcat mapping; mdxfind's does not -- `e1` alone gives
 `0,2600,5100` against the binary's `0,2600,3500,5100`.
 
 mdxfind's copy is therefore deliberately **not** vendored. See

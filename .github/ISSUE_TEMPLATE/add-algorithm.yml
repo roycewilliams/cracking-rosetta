@@ -5,7 +5,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        Gaps are expected — the browsable table marks them loudly on purpose.
+        Gaps are expected -- the browsable table marks them loudly on purpose.
         A missing *row* is different from a gap in an existing row; if the
         algorithm is already listed and one tool's cell is empty, use
         "a mapping is wrong" or just say so below.

@@ -20,17 +20,17 @@ tools/review-delta.pl --base main --verify   # ...and settle what it can
 ```
 
 `review-delta.pl` is the one that matters. A unified diff buries the single
-most consequential line a contributor can write — `verified: "vector"` — as
+most consequential line a contributor can write -- `verified: "vector"` -- as
 one green line among forty. `review-delta.pl` compares the two sides as
 *structures* and prints only what changed as a claim, graded:
 
-- **PROVE** — a tier now says `vector`, or identifiers were added under a
+- **PROVE** -- a tier now says `vector`, or identifiers were added under a
   block that already does, or there are new vectors. Nothing here is
   trustworthy until this machine reproduces it. The tool prints the exact
   `verify-vectors.pl` line, and `--verify` runs it.
-- **READ** — a claim no local run can settle: tier `upstream` or `asserted`,
+- **READ** -- a claim no local run can settle: tier `upstream` or `asserted`,
   a relation's rationale, a note. Your judgement.
-- **FYI** — covered by `validate.pl`, or inherently safe. A reformat reviews
+- **FYI** -- covered by `validate.pl`, or inherently safe. A reformat reviews
   as "no claim changed", which is why contributors can run `fmt.pl` freely.
 
 Because it compares structures, prose and formatting changes don't generate
@@ -65,7 +65,7 @@ reported, not written.
 
 A failure is not automatically a rejection. A vector that won't crack can mean
 a wrong mapping, a wrong plaintext, a missing salt, or an encoding the tool
-wants differently — and the exit status can't tell those apart. Ask.
+wants differently -- and the exit status can't tell those apart. Ask.
 
 Two rules that have each cost real time here:
 
@@ -80,23 +80,23 @@ Two rules that have each cost real time here:
 
 | When | Run |
 |---|---|
-| Upstream released | the relevant `tools/extract-*.pl`, then `validate.pl` — an entry naming a retired identifier now fails |
-| Data changed | `tools/render.pl` — but CI does this on push; you rarely need to |
+| Upstream released | the relevant `tools/extract-*.pl`, then `validate.pl` -- an entry naming a retired identifier now fails |
+| Data changed | `tools/render.pl` -- but CI does this on push; you rarely need to |
 | Vectors added anywhere | `tools/verify-vectors.pl --tool all` (`--only` is repeatable, so verify just the delta) |
-| An entry has no vector, or a tool block is stuck below tier `vector` | `tools/seed-vectors.pl --report`, then `--apply` (add `--fill` for the second case) — it seeds the publishing tool's own published example and verifies before writing |
-| A row names one tool and should name three | `tools/discover-hashcat.pl`, `tools/discover-mdxfind.pl`, `tools/discover-john.pl` — one per column, same proof standard: the identifier goes on the row because that tool cracked THAT ROW'S vector under it |
+| An entry has no vector, or a tool block is stuck below tier `vector` | `tools/seed-vectors.pl --report`, then `--apply` (add `--fill` for the second case) -- it seeds the publishing tool's own published example and verifies before writing |
+| A row names one tool and should name three | `tools/discover-hashcat.pl`, `tools/discover-mdxfind.pl`, `tools/discover-john.pl` -- one per column, same proof standard: the identifier goes on the row because that tool cracked THAT ROW'S vector under it |
 | Looking for missing John mappings | `tools/discover-john.pl`, then `tools/identify-john.pl` (the two search directions) |
 | Expressions | `tools/expressions.pl` (transcribe, tier `upstream`), then `tools/derive-expressions.pl` (prove, tier `vector`) |
-| Two entries share an expression | `tools/relate.pl` — writes both sides; never hand-write one |
+| Two entries share an expression | `tools/relate.pl` -- writes both sides; never hand-write one |
 | Refreshing upstream copies | `tools/fetch-upstream.sh`, committed on its own |
-| Giving an entry a recognisable vector | `tools/vanity.pl --entry ID` (`--apply` to write) — a second vector whose digest starts `dec0ded`, alongside the plain one, never over it |
+| Giving an entry a recognisable vector | `tools/vanity.pl --entry ID` (`--apply` to write) -- a second vector whose digest starts `dec0ded`, alongside the plain one, never over it |
 
 Every tool prints usage with no arguments and writes nothing without
 `--apply`. Data goes to stdout, progress to stderr.
 
 ## Curation: the decisions no tool can make
 
-The machine passes are done. What's left is a person knowing things — 772
+The machine passes are done. What's left is a person knowing things -- 772
 entries with no `category:` (the sheet's own `class` column, defined in 2023
 and never filled), 402 with no expression and nothing said about why, a
 handful of merge proposals, and 14 expressions that don't reproduce their own
@@ -118,14 +118,14 @@ nothing and re-running skips what's answered. **Nothing touches
 `data/algorithms` until `--apply`**, and `--apply` deliberately writes only
 two kinds:
 
-- `category` — a closed vocabulary; the answer *is* the value.
-- `denotation` — free text with `source: human`, which is what that field is
+- `category` -- a closed vocabulary; the answer *is* the value.
+- `denotation` -- free text with `source: human`, which is what that field is
   for: untiered, because nothing can round-trip it.
 
 Everything else is recorded and reported, never applied. A merge is a
-maintainer's edit — see the next section — and an expression must be proven by
+maintainer's edit -- see the next section -- and an expression must be proven by
 john, not accepted because someone typed it. `--report` prints the held
-answers as Markdown, which is the format to hand to whoever — or whatever —
+answers as Markdown, which is the format to hand to whoever -- or whatever --
 acts on them next.
 
 Run `validate.pl` and `fmt.pl --all --check` after `--apply`; it tells you to.
@@ -171,7 +171,7 @@ this decision and does not yet write the tombstone, so check its output.
 refused: mdxfind publishes three type indices for `md4(utf16($p))` and the
 `NTLMH` row is where a reader arrives with that name. That answer is
 `same-computation` with `distinction: naming`, which records that the merge
-was considered and declined — as opposed to `none`, which records that one is
+was considered and declined -- as opposed to `none`, which records that one is
 still owed.
 
 ## At publication
@@ -190,7 +190,7 @@ order:
    ```
 
    Regenerate rather than filing a saved batch. The queue shrinks as the tools
-   resolve things — it went from 22 questions to 10 in a single session — and a
+   resolve things -- it went from 22 questions to 10 in a single session -- and a
    stale batch files questions that already have answers. The script creates
    its own `curation` label and files nothing until you run it.
 
@@ -202,12 +202,12 @@ order:
 ## Things that will bite you
 
 - **`RosettaEmit`'s key order is an allowlist.** A key it doesn't know isn't
-  an error — it just isn't emitted. Schema, `@ENTRY_ORDER` in
+  an error -- it just isn't emitted. Schema, `@ENTRY_ORDER` in
   `tools/lib/RosettaEmit.pm` and `validate.pl` must always change in the same
   commit. `fmt.pl` catches the resulting loss, so run it after any schema
   work.
 - **John's pot echoes John's encoding, not your input.** A bare digest comes
-  back `$dynamic_213$…`; `$2y$` comes back `$2a$`. Attribute a crack by the
+  back `$dynamic_213$...`; `$2y$` comes back `$2a$`. Attribute a crack by the
   synthetic login and `--show`, never by searching the pot for the hash you
   submitted.
 - **mdxfind reports the first internal type that reproduces a digest.** Pin
@@ -221,7 +221,7 @@ order:
 `render.yml` regenerates `docs/` and `dist/` on any change to `data/**`,
 `tools/render.pl` or `tools/lib/**`, and commits only if the output actually
 differs. It can't loop: it commits paths that aren't triggers. It needs
-**Settings → Actions → General → Read and write permissions**.
+**Settings -> Actions -> General -> Read and write permissions**.
 
 The rendered table is meant to be served by GitHub Pages from **main /
 `/docs`**.
