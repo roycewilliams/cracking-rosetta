@@ -1,0 +1,104 @@
+# Project: cracking-rosetta | Phase: upstream drift
+#
+# Known disagreements with a vendored upstream document. CURATED -- never
+# generated, never bulk-populated. tools/check-upstream.pl executes it.
+#
+# WHY THIS FILE EXISTS
+#
+# vendor/ holds upstream's files byte for byte and is never edited, because
+# the re-fetch diff is the whole drift signal and one local "fix" inverts it:
+# a re-fetch would then report a false alarm every time upstream had NOT
+# changed, and go silent on the day it finally did. So where this repository
+# has established a value upstream publishes wrongly, the correction lives in
+# data/algorithms/ with its evidence and the two layers carry different
+# values on purpose.
+#
+# Nothing connected those two layers. This file is the connection, and
+# tools/check-upstream.pl fails three ways:
+#
+#   1. upstream no longer matches what is recorded here -- upstream moved,
+#      go look.
+#   2. our side no longer matches -- somebody re-seeded upstream's value over
+#      a proven one, which is exactly how the bad e607 vector arrived here.
+#   3. the two have CONVERGED -- upstream fixed it, delete the record. This
+#      is the state change nothing could detect at all: today it looks
+#      exactly like "nothing happened".
+#
+# (3) is the point. It makes a re-fetch that changes nothing a PASSING TEST
+# rather than an absence of evidence.
+#
+# KEEP IT SHORT. Two records that are checked beat twenty that are asserted.
+# A record is added when a disagreement has been established by measurement,
+# not when one is suspected.
+#
+# SHAPE
+#
+# Every record: id, kind, upstream, inventory, because, recorded. The rest is
+# whatever its kind needs, and the kinds are hard-coded in check-upstream.pl
+# rather than described by a mini-language. There are two, and adding a third
+# should feel expensive.
+#
+#   catalog-row-value   one row of a vendored catalog publishes a value we
+#                       have disproved. Adds: key, publishes, entry,
+#                       we_assert.
+#   catalog-index-set   the vendored catalog does not cover every type the
+#                       local binary has. Adds: absent_upstream. Also asserts
+#                       the agreement that makes hashpipe an ALIAS of mdxfind
+#                       rather than a fourth column: on every shared index the
+#                       two agree on name and on hashcat mapping.
+#
+# The shape did not fully generalise, and that is recorded rather than
+# papered over: a value disagreement is one string against one string, an
+# index-set disagreement is a set difference, and forcing the second into
+# publishes:/we_assert: would have meant writing a thousand indices into a
+# field. What DID generalise is the core and the three failure modes.
+
+version: 1
+
+disagreements:
+  - id: "e607-example-vector"
+    kind: "catalog-row-value"
+    upstream: "vendor/cynosureprime/hashpipe-HASH_TYPES.md"
+    inventory: "data/tools/mdxfind.yaml"
+    key: "SHA1MD5SALTPASSPEPPER"
+    entry: "sha1md5saltpasspepper"
+    publishes: "786aab530907a783e9c25a2c7326ab7907ebf798:1122334455667788 1122334455667788:password123"
+    we_assert: "0992047fa349ac4e5abb3fef6c0f3f8f8bc6d679:1122334455667788 1122334455667788:password123"
+    recorded: "2026-09-02"
+    because: >-
+      mdxfind 1.543 (2026-08-29) repaired a buffer-layout bug in e607. The old
+      code staged the inner digest at linebuf+saltlen while writing the pepper
+      at a fixed offset 32, so for any non-empty salt the hash covered the
+      salt, then a TRUNCATED digest, then the pepper, and the output depended
+      on the salt length. Upstream's own revision note says any hash cracked
+      as e607 before that revision will not verify against it. The catalog
+      still publishes the PRE-FIX digest. The repaired construction
+      sha1(md5(salt . pass) . pepper) was established three independent ways:
+      the source at RCS 1.545, a Digest:: recomputation in perl that
+      reproduces 786aab... under the old layout and 0992047f... under the new,
+      and the rebuilt binary cracking 0992047f... data/tools/mdxfind.yaml
+      carries upstream's value too, CORRECTLY -- it is generated from this
+      catalog -- which is checked here so the generated layer cannot quietly
+      stop matching the file it is generated from.
+
+  - id: "mdxfind-catalog-lags-binary"
+    kind: "catalog-index-set"
+    upstream: "vendor/cynosureprime/hashpipe-HASH_TYPES.md"
+    inventory: "data/tools/mdxfind.yaml"
+    absent_upstream: ["e426", "e1002"]
+    recorded: "2026-09-02"
+    because: >-
+      The catalog is published from a release; the local binary is ahead of
+      it. Measured 2026-09-02: 1000 catalog rows at v1.102 against 1002 types
+      in mdxfind RCS 1.545. e1002 RMD256 is a hash type with no catalog row
+      and therefore no example vector, which is why the extractor reports
+      fewer vectors than types; e426 PARALLEL is a control type the catalog
+      has never listed. The catalog SKIPS e426 rather than renumbering around
+      it, so the two index spaces line up and can be compared directly -- that
+      is what makes the agreement check below meaningful. CLAUDE.md records
+      hashpipe as an alias of mdxfind rather than a fourth column "until that
+      stops being true", and names a tools/extract-hashpipe.pl to detect the
+      divergence. That tool does not exist. This record is that detector: on
+      every shared index the catalog and the binary must agree on the name and
+      on the hashcat mapping, and a mismatch means the alias rule needs
+      revisiting.

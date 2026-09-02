@@ -82,9 +82,17 @@ rewrite entries from source while the binary is older than it.
 **hashpipe is not a separate column.** Its type list was diffed against the
 local mdxfind binary on 2026-08-29: 1000 vs 1001 types, zero name mismatches,
 zero hashcat-mode mismatches (mdxfind has one extra index, e426). Record
-hashpipe as an alias of mdxfind until that stops being true;
-`tools/extract-hashpipe.pl` exists to detect divergence, not to populate a
-column.
+hashpipe as an alias of mdxfind until that stops being true.
+
+**What detects that it has stopped being true is
+`data/upstream-disagreements.yaml`, executed by `tools/check-upstream.pl`.**
+Until 2026-09-02 this paragraph named a `tools/extract-hashpipe.pl` that had
+never been written, so the documented drift detector was a human remembering
+to read a `fetch-upstream.sh` diff. The `mdxfind-catalog-lags-binary` record
+now asserts the agreement itself: on every index the vendored catalog and the
+local inventory share, the name and the hashcat mapping must be identical,
+and the only indices the binary has beyond the catalog are the ones the
+record lists. A mismatch is the alias rule expiring.
 
 ## Verification tiers
 
@@ -250,6 +258,18 @@ mdxfind also accepts hashcat modes directly (`mdxfind -m 0`, `-m e1`,
   from source, recompute independently, and check the recomputation against the
   binary. All three agreed here, which is what made replacing upstream's own
   example defensible.
+  **The disagreement that leaves behind is now a RECORD, not a note.**
+  `data/upstream-disagreements.yaml` holds each place this repository
+  knowingly disagrees with a vendored document, and `tools/check-upstream.pl`
+  fails three ways: upstream moved, our side was re-seeded back to upstream's
+  value, or the two CONVERGED and the record is spent and should be deleted.
+  The third is the one nothing could previously detect -- it looked exactly
+  like nothing having happened -- and it is what makes a re-fetch that changes
+  nothing a passing test rather than an absence of evidence. So: **never
+  re-seed `data/algorithms/` from a catalog without reading the register
+  first**, and when a disagreement is established, add a record rather than
+  only a sentence in the entry's `notes:`. Keep it short -- two records that
+  are checked beat twenty that are asserted.
 - **Sheet-era junk.** `NOTSUPPORTED`, `MD5AUTOMATICPARTIALMATCH` and
   `MD5UCWITHI2MD5UCX2` appear in the mdxfind column but are not types.
   `WLR1` was on that list and should not have been: it is `WRL1`

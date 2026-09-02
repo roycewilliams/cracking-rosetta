@@ -38,12 +38,21 @@ exactly the drift `tools/fetch-upstream.sh` exists to detect. Where this
 repository has established the correct value, it lives in `data/algorithms/`
 with its working shown, and the entry says the catalog disagrees.
 
+**Each item below is also a record in `data/upstream-disagreements.yaml`,
+which `tools/check-upstream.pl` executes and CI runs.** Until 2026-09-02 this
+section was the only statement of the relationship and nothing read it, so
+none of the three ways it can change state -- upstream moving, our side being
+re-seeded back to upstream's value, or the two converging -- was detectable.
+The prose here is the human account; the register is the part that fails.
+**Delete an item from both when its record converges.**
+
 Re-fetched 2026-09-02 at commit `6ebf0069`: **both files came back
 byte-identical to the 2026-08-29 copy** even though upstream HEAD had moved, so
 what follows is upstream's current published state rather than a stale local
 copy.
 
-* **`e607 SHA1MD5SALTPASSPEPPER` publishes a pre-fix digest.** mdxfind 1.543
+* **`e607 SHA1MD5SALTPASSPEPPER` publishes a pre-fix digest.**
+  Register record: `e607-example-vector`. mdxfind 1.543
   (2026-08-29) repaired a buffer-layout bug in that type; its own revision log
   says "any hash cracked as e607 before this revision will not verify against
   it". The catalog still carries `786aab530907a783e9c25a2c7326ab7907ebf798`,
@@ -53,7 +62,11 @@ copy.
   plaintext, established three independent ways and recorded on the
   `sha1md5saltpasspepper` entry.
 
-* **The catalog lags the binary by design.** Measured 2026-09-02: 1000 types at
+* **The catalog lags the binary by design.**
+  Register record: `mdxfind-catalog-lags-binary`, which also carries the
+  assertion that makes hashpipe an alias of mdxfind rather than a fourth
+  column: on every shared index the catalog and the local inventory agree on
+  the name and on the hashcat mapping. Measured 2026-09-02: 1000 types at
   v1.102 here against 1002 in the local mdxfind (RCS 1.545). `e1002 RMD256` has no catalog row and
   therefore no example vector, which is why the extractor reports fewer example
   vectors than types.

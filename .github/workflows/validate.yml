@@ -19,6 +19,7 @@ on:
       - 'data/**'
       - 'schema/**'
       - 'tools/**'
+      - 'vendor/**'
       - 'docs/index.html'
       - '.github/workflows/validate.yml'
   push:
@@ -27,6 +28,7 @@ on:
       - 'data/**'
       - 'schema/**'
       - 'tools/**'
+      - 'vendor/**'
       - 'docs/index.html'
       - '.github/workflows/validate.yml'
   workflow_dispatch:
@@ -107,6 +109,23 @@ jobs:
       # refusals are the assertions that matter; this runs without john.
       - name: Exercise the expression translator
         run: perl -Itools/lib tools/test-rosetta-john.pl
+
+      # A disagreement with a vendored upstream that nobody executes is a
+      # prose note, which is what this was until the register existed. Each
+      # record fails three ways: upstream moved, our side moved, or the two
+      # converged and the record is spent. The third is why this runs in CI --
+      # it is the state change that otherwise looks exactly like nothing
+      # having happened, and 'vendor/**' is a trigger path above so a re-fetch
+      # is checked on arrival.
+      - name: Execute the upstream-disagreement register
+        run: perl -Itools/lib tools/check-upstream.pl --check -v
+
+      # And prove the gate above can still fail. It passes every day until an
+      # upstream catalog changes, which may be never, so a gate that had
+      # quietly stopped working would be indistinguishable from a clean run.
+      # Synthetic fixtures under tmp/; touches nothing real.
+      - name: Exercise the register's failure modes
+        run: perl -Itools/lib tools/test-check-upstream.pl
 
       # docs/index.html is the front door, and its behaviour is a string that
       # render.pl builds -- so a wrong array index or selector passes perl -c,

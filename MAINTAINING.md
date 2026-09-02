@@ -40,8 +40,8 @@ of its meaning.
 ## Why CI doesn't verify, and must not
 
 `.github/workflows/validate.yml` runs `validate.pl`, `fmt.pl --check`,
-`check-numbers.pl --tracked`, an ASCII check and a compile of every tool. It
-never runs a cracker.
+`check-numbers.pl --tracked`, `check-upstream.pl --check`, an ASCII check and a
+compile of every tool. It never runs a cracker.
 
 That's not a limitation of hosted runners, it's the design. Tier `vector` is
 the repository's only load-bearing claim. If a pull request could cause CI to
@@ -89,7 +89,8 @@ Two rules that have each cost real time here:
 | Looking for missing John mappings | `tools/discover-john.pl`, then `tools/identify-john.pl` (the two search directions) |
 | Expressions | `tools/expressions.pl` (transcribe, tier `upstream`), then `tools/derive-expressions.pl` (prove, tier `vector`) |
 | Two entries share an expression | `tools/relate.pl` -- writes both sides; never hand-write one |
-| Refreshing upstream copies | `tools/fetch-upstream.sh`, committed on its own |
+| Refreshing upstream copies | `tools/fetch-upstream.sh`, committed on its own -- it writes the commit and date into `vendor/*/PROVENANCE.md` itself; then `tools/check-upstream.pl --check -v` |
+| A known disagreement with an upstream document | `data/upstream-disagreements.yaml`, executed by `tools/check-upstream.pl`. Add a record only when the disagreement has been MEASURED; delete it the day the record reports `converged`, which means upstream fixed it |
 | Giving an entry a recognisable vector | `tools/vanity.pl --entry ID` (`--apply` to write) -- a second vector whose digest starts `dec0ded`, alongside the plain one, never over it |
 
 Every tool prints usage with no arguments and writes nothing without
