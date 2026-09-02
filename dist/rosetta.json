@@ -2476,7 +2476,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "composite",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -5460,7 +5460,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "composite",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -9952,7 +9952,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "composite",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -21326,7 +21326,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "composite",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -21939,7 +21939,7 @@
       {
          "alias" : "NTLM; ntlm($plain) / md4(utf16-le($plain))",
          "application" : "",
-         "category" : "composite",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -22053,7 +22053,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "composite",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -34740,7 +34740,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "composite",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -36381,7 +36381,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "composite",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -38432,7 +38432,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "composite",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -39731,7 +39731,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "composite",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -40443,7 +40443,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "composite",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"
@@ -66695,7 +66695,7 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "composite",
+         "category" : "application",
          "crack" : {
             "ids" : [],
             "state" : "no"

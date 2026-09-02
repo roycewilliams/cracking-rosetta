@@ -107,13 +107,23 @@
 #      category, or the entry says nothing usable -- the same shape as the
 #      encodes guard in rule 2.
 #
-#      Placed last on purpose. Measured 2026-09-01, the hashcat rule and rules
-#      1-5 disagree on 19 live entries -- macosx is composite by its proven
-#      expression and 'Operating System' by hashcat -- but on ZERO entries of
-#      the human control set, so the control set offers no evidence for
-#      preferring one over the other. Rules 1-5 are the established ones, so
-#      they keep precedence and the new rule only reaches the residue. --check
-#      reports those 19 rather than swallowing them.
+#      Placed ABOVE rules 4 and 5, below rule 3. Royce, 2026-09-01: of the
+#      three tools only hashcat publishes human judgement about what KIND of
+#      thing a mode is, which is the question this field asks -- mdxfind and
+#      john publish no classification at all, so there is nothing to weigh it
+#      against. It stays below rule 3 because an iteration count is a statement
+#      about identity, not about kind, and hashcat merges the two axes under
+#      'Raw Hash salted and/or iterated'.
+#
+#      The evidence agreed. Rules 4/5 and rule 6 differed on 19 live entries,
+#      and on none of the control set -- but two control-set entries had drifted
+#      since: huawei-sha1-md5-pass-salt and solarwinds-serv-u, where a curator
+#      said 'application', rule 5 says 'composite' and rule 6 says
+#      'application'. The reorder resolves both without editing either file.
+#
+#      A HOLD in rule 6 is not a stop. It means hashcat cannot classify the
+#      mode, so the expression rules still get their turn; only rule 2's
+#      encoding guard halts derivation outright.
 #
 # WHAT IS DELIBERATELY NOT DERIVED
 #
@@ -141,6 +151,7 @@ use strict;
 use warnings;
 
 use File::Basename qw(basename);
+use File::Temp ();
 use FindBin qw($RealBin);
 use Getopt::Long qw(GetOptions);
 use YAML::XS ();
@@ -160,8 +171,14 @@ Usage: $PROG [options]
    --hashcat FILE    hashcat inventory for rule 6
                      (default: data/tools/hashcat.yaml)
    --only ID         consider just this entry (repeatable)
-   --check           also report where a rule disagrees with a category a
-                     human already wrote; never edits either way
+   --check           also report where a rule disagrees with a category the
+                     entry already carries; never edits either way
+   --baseline REF    git ref whose data/algorithms holds the curator-written
+                     categories. Any category present there is PROTECTED and
+                     is never rewritten. Required by --rederive.
+   --rederive        rewrite categories THIS TOOL wrote that the current
+                     ruleset no longer agrees with -- for a rule change, not
+                     for routine use. Needs --baseline and, to write, --apply.
    --apply           write the derived categories into data/algorithms
    -v, --verbose     one line per derivation (repeatable: also the held ones)
    -h, --help        this help
@@ -173,7 +190,8 @@ END_USAGE
     return;
 }
 
-my ($algdir, $hcfile, $apply, $check, $help);
+my ($algdir, $hcfile, $baseline, $rederive, $apply, $check, $help);
+my (%protected, @rewrite);
 my @only;
 my $verbose  = 0;
 my $had_args = scalar @ARGV;      # house rule: no arguments means show usage
@@ -181,6 +199,8 @@ my $had_args = scalar @ARGV;      # house rule: no arguments means show usage
 GetOptions(
     'algorithms=s' => \$algdir,
     'hashcat=s'    => \$hcfile,
+    'baseline=s'   => \$baseline,
+    'rederive'     => \$rederive,
     'only=s'       => \@only,
     'check'        => \$check,
     'apply'        => \$apply,
@@ -193,6 +213,63 @@ if (!$had_args) { usage(); exit 2 }
 
 $algdir //= "$ROOT/data/algorithms";
 $hcfile //= "$ROOT/data/tools/hashcat.yaml";
+
+# --rederive overwrites, which is the one thing this tool otherwise never does.
+# It is only defensible because a baseline says which values are a curator's,
+# so refuse without one rather than guessing.
+if ($rederive && !defined $baseline) {
+    print STDERR "$PROG: --rederive needs --baseline REF: without it the tool\n"
+               . "$PROG: cannot tell its own earlier output from a curator's\n"
+               . "$PROG: answer, and it must never overwrite the latter.\n";
+    usage();
+    exit 2;
+}
+
+#-----------------------------------------------------------------------
+# The baseline. category: carries no provenance of its own -- no tier, no
+# source -- so the only record of who wrote a given value is git history. A ref
+# from before this tool first ran is therefore the curator set: every category
+# in it is a human's, and every category that appeared afterwards is this
+# tool's. Externalising it as a --baseline ref keeps that judgement auditable
+# instead of hidden in the code.
+
+sub baseline_categories {
+    my ($ref) = @_;
+
+    # Project tmp/, per the house rule, and cleaned up on exit.
+    my $tmp = File::Temp->newdir(
+        TEMPLATE => 'derive-categories-baseline-XXXXXX',
+        DIR      => "$ROOT/tmp",
+        CLEANUP  => 1,
+    );
+    my $dir = "$tmp";
+
+    # List form, so no shell parses the ref. Two steps rather than a pipe for
+    # the same reason.
+    my $tar = "$dir/baseline.tar";
+    system('git', '-C', $ROOT, 'archive', '-o', $tar, $ref, 'data/algorithms') == 0
+        or do { print STDERR "$PROG: git archive $ref failed\n"; exit 1 };
+    system('tar', '-x', '-f', $tar, '-C', $dir) == 0
+        or do { print STDERR "$PROG: cannot unpack the baseline archive\n"; exit 1 };
+
+    my $bdir = "$dir/data/algorithms";
+    opendir(my $bh, $bdir)
+        or do { print STDERR "$PROG: $ref has no data/algorithms\n"; exit 1 };
+    my @bf = grep { /\.yaml$/ } readdir $bh;
+    closedir $bh;
+
+    my %cat;
+    for my $f (@bf) {
+        my $e = eval { YAML::XS::LoadFile("$bdir/$f") } or next;
+        next unless $e->{id} && defined $e->{category};
+        $cat{ $e->{id} } = $e->{category};
+    }
+    printf STDERR "- baseline %s: %d file(s), %d curator-written category/"
+                . "categories protected\n", $ref, scalar @bf, scalar keys %cat;
+    return %cat;
+}
+
+%protected = baseline_categories($baseline) if defined $baseline;
 
 #-----------------------------------------------------------------------
 # Rule 6's table. hashcat category -> the one human answer it mapped to in the
@@ -300,7 +377,19 @@ sub derive {
     return ('iterated', "tools.mdxfind.iterations = $it")
         if $it > 1;
 
-    # 4/5. Only a proven expression counts; see the methodology note.
+    # 6. hashcat's own classification of the mode, ABOVE the expression rules.
+    #    Royce, 2026-09-01: of the three tools only hashcat publishes human
+    #    judgement about what KIND of thing a mode is, and that is the question
+    #    this field asks. mdxfind and john publish no classification at all.
+    #    It stays below rule 3, because an iteration count is a statement about
+    #    identity rather than about kind.
+    my ($hcat, $hwhy) = hashcat_category($e);
+    return ($hcat, $hwhy) if defined $hcat;
+
+    # 4/5. Only a proven expression counts; see the methodology note. Reached
+    #      when hashcat named no usable category -- a HOLD there means hashcat
+    #      cannot tell us, not that nobody can, so the expression still gets
+    #      its turn.
     my $tier = $e->{expression_proof}{verified} // '';
     my $x    = $e->{expression};
     if (defined $x && length $x && ($tier eq 'vector' || $tier eq 'upstream')) {
@@ -311,9 +400,8 @@ sub derive {
                            . "of \$p alone (tier $tier)");
     }
 
-    # 6. hashcat's own classification of the mode. Last, so it only ever
-    #    answers what nothing above could.
-    return hashcat_category($e);
+    # Nothing answered. hashcat's reason is the more specific one.
+    return (undef, $hwhy);
 }
 
 #-----------------------------------------------------------------------
@@ -337,9 +425,9 @@ for my $f (@files) {
 
     my ($cat, $why) = derive($e);
 
-    # Rule 6 is a fallback, so where an earlier rule answered we never see what
-    # hashcat would have said. Ask it anyway under --check: a disagreement is
-    # evidence about the ruleset and is lost otherwise.
+    # Where an earlier rule answered, we never see what hashcat would have
+    # said. Ask it anyway under --check: a disagreement is evidence about the
+    # ruleset and is lost otherwise.
     if ($check && defined $cat && $why !~ /^hashcat category/) {
         my ($hcat) = hashcat_category($e);
         push @overruled, [$e->{id}, $cat, $hcat, $why]
@@ -348,8 +436,18 @@ for my $f (@files) {
 
     if (defined $e->{category}) {
         $already++;
-        push @disagree, [$e->{id}, $e->{category}, $cat, $why]
-            if $check && defined $cat && $cat ne $e->{category};
+        if (defined $cat && $cat ne $e->{category}) {
+            # --rederive corrects values this tool wrote under a ruleset that
+            # has since changed. A curator's answer is never a candidate.
+            if ($rederive && !$protected{ $e->{id} }) {
+                push @rewrite, [$p, $e, $cat, $e->{category}, $why];
+            }
+            elsif ($check) {
+                push @disagree, [$e->{id}, $e->{category}, $cat,
+                                 ($baseline ? ($protected{$e->{id}} ? 'curator' : 'this tool')
+                                            : 'unknown'), $why];
+            }
+        }
         next;
     }
 
@@ -384,17 +482,21 @@ for my $f (@files) {
 printf "%-46s %s\n", $_->[1]{id}, $_->[2] for @write;
 
 if ($check && @overruled) {
-    print "\n# rules 1-5 answered these and rule 6 would have said otherwise.\n"
-        . "# Rules 1-5 win by precedence, not by evidence: the human control\n"
-        . "# set contains no entry on which the two disagree.\n";
+    print "\n# an earlier rule answered these and rule 6 would have said\n"
+        . "# otherwise. Since 2026-09-01 rule 6 outranks the expression rules,\n"
+        . "# so what remains here is rule 3: mdxfind declares an iteration\n"
+        . "# count, which is a statement about identity, while hashcat files\n"
+        . "# the same mode under 'Raw Hash salted and/or iterated' and merges\n"
+        . "# the two axes this repository keeps apart. Rule 3 wins on purpose.\n";
     printf "# %-44s kept=%-11s hashcat=%-11s %s\n", @$_ for @overruled;
 }
 
 if ($check) {
     if (@disagree) {
-        print "\n# a rule disagrees with a category a human wrote -- one of the\n"
-            . "# two is wrong, and neither is edited here\n";
-        printf "# %-44s have=%-11s rule=%-11s %s\n", @$_ for @disagree;
+        print "\n# a rule disagrees with a category already on the entry -- one\n"
+            . "# of the two is wrong, and neither is edited here. 'by' says who\n"
+            . "# wrote the existing value, which needs --baseline to know.\n";
+        printf "# %-44s have=%-11s rule=%-11s by=%-8s %s\n", @$_ for @disagree;
     }
     else {
         print STDERR "- --check: no rule contradicts any of the $already "
@@ -402,8 +504,23 @@ if ($check) {
     }
 }
 
+if ($rederive) {
+    if (@rewrite) {
+        print "\n# --rederive: categories this tool wrote that the current\n"
+            . "# ruleset no longer agrees with. None of these is a curator's:\n"
+            . "# every value present in the baseline is protected.\n";
+        printf "# %-44s %-11s -> %-11s %s\n", $_->[1]{id}, $_->[3], $_->[2], $_->[4]
+            for @rewrite;
+    }
+    else {
+        print STDERR "- --rederive: nothing to correct; the ruleset agrees "
+                   . "with every category this tool wrote\n";
+    }
+}
+
 printf STDERR "- %d entry/entries (%d tombstone(s) skipped); %d already had a "
             . "category\n", $seen, $tombstone, $already;
+printf STDERR "-   to rewrite: %d\n", scalar @rewrite if $rederive;
 printf STDERR "-   derived %d: %s\n", scalar @write,
     join('  ', map { "$_ $yield{$_}" } sort keys %yield) || '(none)';
 printf STDERR "-   left for a curator: %d with no rule, %d held\n", $norule, $held;
@@ -415,15 +532,21 @@ printf STDERR "-     held: %s\n", join(' ', sort keys %held_why) if $verbose;
 # Apply.
 
 if ($apply) {
-    my $changed = 0;
+    my ($added, $corrected) = (0, 0);
     for my $w (@write) {
         my ($p, $e, $cat) = @$w;
         $e->{category} = $cat;
-        $changed += emit_entry($p, $e);
+        $added += emit_entry($p, $e);
     }
-    printf STDERR "-   files rewritten: %d\n", $changed;
+    for my $w (@rewrite) {
+        my ($p, $e, $cat) = @$w;
+        $e->{category} = $cat;
+        $corrected += emit_entry($p, $e);
+    }
+    printf STDERR "-   files written: %d new category/categories, %d corrected\n",
+        $added, $corrected;
 }
-elsif (@write) {
+elsif (@write || @rewrite) {
     print STDERR "-   nothing written; re-run with --apply to record these\n";
 }
 
