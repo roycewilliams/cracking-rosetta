@@ -27,3 +27,4 @@ vectors:
   - hash: "$mongodb-scram$*0*dXNlcg==*10000*4p+f1tKpK18hQqrVr0UGOw==*+TqMh0BgBUxzv36wfXoRiKwfw34="
     pass: "password123"
     source: "mdxfind"
+    reads_in: ["hashcat", "mdxfind"]

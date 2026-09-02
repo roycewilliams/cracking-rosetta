@@ -37,3 +37,4 @@ vectors:
   - hash: "$racf$*8481*6095E8FCA59F8E3E"
     pass: "hashcat"
     source: "hashcat"
+    reads_in: ["hashcat", "john"]

@@ -32,9 +32,11 @@ vectors:
   - hash: "d21af7ece046af0e12d3c38472792cd5"
     pass: "rosetta"
     source: "sheet"
+    reads_in: ["john", "mdxfind"]
   - hash: "d21af7ece046af0e12d3c38472792cd5f081c39f"
     pass: "rosetta"
     source: "sheet"
+    reads_in: ["hashcat", "john"]
 legacy:
   hashes_org: "CUT0-32SHA1"
   hashkiller: "SHA1.Substr(0, 32)"

@@ -24,5 +24,6 @@ vectors:
   - hash: "15c779264953088b5c06db162fb9ee510aed6a1a205c6cb020eccef6"
     pass: "rosetta"
     source: "sheet"
+    reads_in: ["mdxfind"]
 legacy:
   hashes_org: "SIMD224"

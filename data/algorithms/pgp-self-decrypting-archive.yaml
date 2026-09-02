@@ -24,3 +24,4 @@ vectors:
   - hash: "$pgpsda$0*16000*12ad24b8dd12b751*19504b5f4e85c760"
     pass: "openwall"
     source: "john"
+    reads_in: ["john"]

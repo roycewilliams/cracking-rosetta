@@ -28,3 +28,4 @@ vectors:
   - hash: "$vmx$0$10000$264bbab02fdf7c1a793651120bec3723$cbb368564d8dfb99f509d4922f469341a6e18a778759e00378c50087feaf1552"
     pass: "password123"
     source: "mdxfind"
+    reads_in: ["hashcat", "mdxfind"]

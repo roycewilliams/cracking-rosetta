@@ -31,3 +31,4 @@ vectors:
   - hash: "$fvde$1$16$84286044060108438487434858307513$20000$f1620ab93192112f0a23eea89b5d4df065661f974b704191"
     pass: "hashcat"
     source: "hashcat"
+    reads_in: ["hashcat", "john"]

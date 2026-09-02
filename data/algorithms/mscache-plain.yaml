@@ -25,6 +25,8 @@ vectors:
   - hash: "f43fd64d8e4a84cd72ea440264ebdf60:Administrator"
     pass: "rosetta"
     source: "sheet"
+    reads_in: ["mdxfind"]
   - hash: "c896b3c6963e03c86ade3a38370bbb09:54161084332"
     pass: "hashcat"
     source: "hashcat"
+    reads_in: ["hashcat", "mdxfind"]

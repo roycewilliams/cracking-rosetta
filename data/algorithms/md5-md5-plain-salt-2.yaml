@@ -16,11 +16,14 @@ vectors:
   - hash: "b2c1d7975b2f58d1bf3d769134469a11:yy"
     pass: "rosetta"
     source: "sheet"
+    reads_in: ["mdxfind"]
   - hash: "fa5a20ee6b1ce38383fe7ec168c53145:yy"
     pass: "rosetta"
     source: "sheet"
+    reads_in: ["mdxfind"]
   - hash: "419c45212b0c26be32d581c0ed9e6ba0:yy"
     pass: "rosetta"
     source: "sheet"
+    reads_in: ["mdxfind"]
 legacy:
   hashes_org: "MD5(MD5(PLAIN)SALT)"

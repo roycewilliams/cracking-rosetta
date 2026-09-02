@@ -22,26 +22,34 @@ vectors:
   - hash: "0043b42cca3fb55158310e4ecf633663"
     pass: "rosetta"
     source: "sheet"
+    reads_in: ["mdxfind"]
   - hash: "bfdab96a8999bc38c845dcd348f26ad6"
     pass: "rosetta"
     source: "sheet"
+    reads_in: ["mdxfind"]
   - hash: "d5dfeff011cb674cb24bad9b1692d1e9"
     pass: "rosetta"
     source: "sheet"
+    reads_in: ["mdxfind"]
   - hash: "bb8b4ef7643442c3fbebe8bf7be4be75"
     pass: "rosetta"
     source: "sheet"
+    reads_in: ["mdxfind"]
   - hash: "04e9c7e2c18ad3652a5cf99f08212a4d"
     pass: "rosetta"
     source: "sheet"
+    reads_in: ["mdxfind"]
   - hash: "07cdc6f01ab4d274383cd5e7aed55c66"
     pass: "rosetta"
     source: "sheet"
+    reads_in: ["mdxfind"]
   - hash: "60483c03be94a2a21f1621d4d82bf695"
     pass: "rosetta"
     source: "sheet"
+    reads_in: ["mdxfind"]
   - hash: "b3fe926c32fda29d2c63641da5c8d877"
     pass: "rosetta"
     source: "sheet"
+    reads_in: ["mdxfind"]
 legacy:
   hashes_org: "MD5INS1CUT0-31MYSQL5TOT"

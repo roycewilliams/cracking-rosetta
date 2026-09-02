@@ -19,6 +19,7 @@ vectors:
   - hash: "975790dfb2854c88"
     pass: "rosetta"
     source: "sheet"
+    reads_in: ["hashcat", "mdxfind"]
 legacy:
   hashes_org: "CUTn-16MD5"
   hashkiller: "n/a"

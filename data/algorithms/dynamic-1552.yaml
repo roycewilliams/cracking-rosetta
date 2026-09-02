@@ -23,3 +23,4 @@ vectors:
   - hash: "$dynamic_1552$10290925d16d81e50db242c9f3572d91$0000000000000000$$Ulongusername"
     pass: "longpassword@12345678"
     source: "john"
+    reads_in: ["john"]

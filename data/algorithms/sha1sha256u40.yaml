@@ -21,3 +21,4 @@ vectors:
   - hash: "6a9f6d34ca77a5e09c8072150b331aca501f704d"
     pass: "password123"
     source: "mdxfind"
+    reads_in: ["mdxfind"]

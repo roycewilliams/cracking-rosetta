@@ -23,3 +23,4 @@ vectors:
   - hash: "550c41c11bab48f9dbd8203ed313eef0aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
     pass: "abc123"
     source: "john"
+    reads_in: ["john"]

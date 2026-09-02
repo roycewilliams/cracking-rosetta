@@ -23,5 +23,6 @@ vectors:
   - hash: "dec021292cf48fd37b3cac0d2a54096d"
     pass: "password123"
     source: "mdxfind"
+    reads_in: ["mdxfind"]
 legacy:
   hashes_org: "MD5(MD5(PLAIN)PLAINSHA1(PLAIN))"

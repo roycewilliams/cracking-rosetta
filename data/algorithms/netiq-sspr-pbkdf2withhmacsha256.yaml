@@ -31,3 +31,4 @@ vectors:
   - hash: "$pbkdf2-sha256$100000$MDUzMTE4NjQyNDc5NTQxMjAwMjg1OTYxNjAxNDgzNzc$bwYpAyQ2g5PqdnMj8mJ46mkwQbyztw8gEQqnhDHj48c"
     pass: "hashcat"
     source: "hashcat"
+    reads_in: ["hashcat", "john"]

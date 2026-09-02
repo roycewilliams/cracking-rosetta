@@ -31,9 +31,12 @@ vectors:
   - hash: "453f2e21fa6c150670d3ecf0e4a0ff3bab8b1903c2e96ad655d960b95f104248:697de9eda4a02563a7ec66d42d4a96995cb2948e29ab76fbcc89e8db71dd10f1"
     pass: "password"
     source: "john"
+    reads_in: ["hashcat", "john", "mdxfind"]
   - hash: "c13ec3c0bee06d3315f743a0df31b3f23069eed4bdcf6dde4d37f894c0c9d1b6:testsalt"
     pass: "password123"
     source: "mdxfind"
+    reads_in: ["hashcat", "john", "mdxfind"]
   - hash: "bfede293ecf6539211a7305ea218b9f3f608953130405cda9eaba6fb6250f824:7218532375810603"
     pass: "hashcat"
     source: "hashcat"
+    reads_in: ["hashcat", "john", "mdxfind"]

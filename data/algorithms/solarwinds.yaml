@@ -25,3 +25,4 @@ vectors:
   - hash: "$solarwinds$0$admin$M+blDF6m56Y24YMVrjDDGUEbGVsviTpp5JYS+pHfym1Z9+UDDw6iHfZRUknm89UUa/EnuH5t7x8MREolxvf7jA=="
     pass: "password123"
     source: "mdxfind"
+    reads_in: ["hashcat", "john", "mdxfind"]

@@ -23,3 +23,4 @@ vectors:
   - hash: "$4$7E48ul$K4u43llx1P184KZBoILl2hnFLBHj6.486TtxWA.EA1pLZuQS7P5k0LQqyEULux47.5vttDbSo/Cbpsez.AUI"
     pass: "magnum"
     source: "john"
+    reads_in: ["john"]

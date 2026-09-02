@@ -31,3 +31,4 @@ vectors:
   - hash: "$RAR3$*0*45109af8ab5f297a*adbf6c5385d7a40373e8f77d7b89d317"
     pass: "hashcat"
     source: "hashcat"
+    reads_in: ["hashcat", "john"]

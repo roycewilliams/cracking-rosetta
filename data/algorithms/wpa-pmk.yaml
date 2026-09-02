@@ -20,3 +20,4 @@ vectors:
   - hash: "WPA*01*5ce7ebe97a1bbfeb2822ae627b726d5b*27462da350ac*accd10fb464e*686173686361742d6573736964***"
     pass: "88f43854ae7b1624fc2ab7724859e795130f4843c7535729e819cf92f39535dc"
     source: "mdxfind"
+    reads_in: ["mdxfind"]

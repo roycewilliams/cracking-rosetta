@@ -19,3 +19,4 @@ vectors:
   - hash: "otm_sha256:1000:1234567890:VXxvkQcU+34QHlMrdScpmdbKTHi8oA41M4VBfy1z3zc="
     pass: "password123"
     source: "mdxfind"
+    reads_in: ["hashcat", "mdxfind"]

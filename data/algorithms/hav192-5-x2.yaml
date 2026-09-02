@@ -27,3 +27,4 @@ vectors:
   - hash: "4755def808c81f3e8d2d1cb855929bbd578e0e0eb045a5d4"
     pass: "abc"
     source: "john"
+    reads_in: ["john", "mdxfind"]

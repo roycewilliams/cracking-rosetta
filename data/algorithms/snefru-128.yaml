@@ -29,3 +29,4 @@ vectors:
   - hash: "53b8a9b1c9ed00174d88d705fb7bae30"
     pass: "mystrongpassword"
     source: "john"
+    reads_in: ["john", "mdxfind"]

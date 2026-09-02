@@ -32,8 +32,10 @@ vectors:
   - hash: "{SHA}0hr37OBGrw4S08OEcnks1fCBw58="
     pass: "rosetta"
     source: "sheet"
+    reads_in: ["hashcat", "john", "mdxfind"]
   - hash: "{SHA}0ijZPTcJXMa+t2XnEbEwSOkvQu0="
     pass: "ccccccccc"
     source: "john"
+    reads_in: ["hashcat", "john", "mdxfind"]
 legacy:
   hashes_org: "NSLDAP"

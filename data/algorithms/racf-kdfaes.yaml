@@ -19,3 +19,4 @@ vectors:
   - hash: "$racf-kdfaes$*USER*E7D7E66D000180000008003200100010*00112233445566778899AABBCCDDEEFF*57558AFDA9513B926E3E2BE86DFAF72D"
     pass: "pass1234"
     source: "mdxfind"
+    reads_in: ["hashcat", "mdxfind"]

@@ -24,3 +24,4 @@ vectors:
   - hash: "$metamaskMobile$JV4j2dUDl7n+sujyqW3Wvg==$398f9b04c822d36bfcbdd1e68c82d1e8$auj3J2TwOZ4ev3UIGmNa7VXLh0Nmzr3rDbpXRRrONr4="
     pass: "hashcat1"
     source: "hashcat"
+    reads_in: ["hashcat"]

@@ -24,3 +24,4 @@ vectors:
   - hash: "$pbkdf2-hmac-md4$1000$6d61676e756d$32ebfcea201e61cc498948916a213459c259c7b0a8ce9473368665f0808dcde1"
     pass: "magnum"
     source: "john"
+    reads_in: ["john"]

@@ -24,3 +24,4 @@ vectors:
   - hash: "f1eff5c0368d10311dcfc419"
     pass: "hashcat"
     source: "hashcat"
+    reads_in: ["hashcat"]

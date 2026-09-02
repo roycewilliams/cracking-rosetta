@@ -28,3 +28,4 @@ vectors:
   - hash: "$krb5db$17$test$TEST.LOCAL$ea35f3bdc1c4fdb75c708405d8273e51"
     pass: "password123"
     source: "mdxfind"
+    reads_in: ["hashcat", "mdxfind"]

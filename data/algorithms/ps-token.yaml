@@ -25,6 +25,8 @@ vectors:
   - hash: "d7ace0616a3ae62d2c271e3bb3fa4204099cfea0:deadbeef01020304"
     pass: "password123"
     source: "mdxfind"
+    reads_in: ["mdxfind"]
   - hash: "24eea51b53d02b4c5ff99bcb05a6847fdb2d9308:4f10a0de76e242040c28e9d3dd15c903343489c79765f9118c098c266b9ff505c95bd75bbe406ff3404849eea73930ad17937c0ba6fc3e7bb6d37362941318938b8af96d1292a310b3fd29a67e411ecb10d30247c99183a16951b3859054d4eba9dcd50709c7b21dee836d7ed195cc6b33317aeb557cc56392dc551faa8d5a0fb42212"
     pass: "hashcat"
     source: "hashcat"
+    reads_in: ["hashcat", "mdxfind"]

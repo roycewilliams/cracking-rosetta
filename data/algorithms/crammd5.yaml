@@ -34,3 +34,4 @@ vectors:
   - hash: "$cram_md5$MTI=$dXNlciBhZTBjM2VmMGE2NTM0NWY4MzFhMDEyYjlhMTg2ZDVjNQ=="
     pass: "password123"
     source: "mdxfind"
+    reads_in: ["hashcat", "john", "mdxfind"]

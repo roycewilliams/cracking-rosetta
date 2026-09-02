@@ -28,6 +28,7 @@ vectors:
   - hash: "42c824c35d2544e0bc95f70e678d0577"
     pass: "rosetta"
     source: "sheet"
+    reads_in: ["hashcat", "john", "mdxfind"]
 legacy:
   hashes_org: "RADMIN2"
   hashkiller: "Radmin"

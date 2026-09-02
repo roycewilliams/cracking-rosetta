@@ -28,5 +28,6 @@ vectors:
   - hash: "e4de02dc709f447ce71559198797071a22c039360641943afc4ece717deb00232ef924a4cc3b7978f32b446350b4623f"
     pass: "rosetta"
     source: "sheet"
+    reads_in: ["john", "mdxfind"]
 legacy:
   hashes_org: "SKEIN384"

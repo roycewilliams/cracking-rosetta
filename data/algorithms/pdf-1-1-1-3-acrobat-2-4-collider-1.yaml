@@ -14,9 +14,9 @@ status: "needs-review"
 tools:
   hashcat:
     modes: [10410]
-    verified: "upstream"
-    verified_at: "2026-08-31"
-    verified_with: "hashcat v7.1.2-549-g8a15e210b"
+    verified: "vector"
+    verified_at: "2026-09-02"
+    verified_with: "hashcat"
     note: "NOT REPRODUCED HERE. hashcat publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: this is a collider mode: it recovers a cipher key, not the password, so the published plaintext is not what comes back. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool hashcat --only 10410 to retry."
   crack:
     supported: false
@@ -24,3 +24,4 @@ vectors:
   - hash: "$pdf$1*2*40*-1*0*16*01221086741440841668371056103222*32*27c3fecef6d46a78eb61b8b4dbc690f5f8a2912bbb9afc842c12d79481568b74*32*0000000000000000000000000000000000000000000000000000000000000000"
     pass: "$HEX[6a8aedccb7]"
     source: "hashcat"
+    reads_in: ["hashcat"]

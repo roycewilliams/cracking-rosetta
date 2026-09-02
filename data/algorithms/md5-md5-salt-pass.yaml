@@ -29,9 +29,11 @@ vectors:
   - hash: "a325636d9a19848a9c1715985b629243:guxXj6l"
     pass: "rosetta"
     source: "sheet"
+    reads_in: ["john", "mdxfind"]
   - hash: "dec0ded146aacea8deecbe4c5a2df846:rosettac10g23"
     pass: "rosetta"
     source: "vanity"
+    reads_in: ["john", "mdxfind"]
 legacy:
   hashes_org: "MD5(MD5(SALT)PLAIN)"
   hashkiller: "md5(md5($salt).$pass)"

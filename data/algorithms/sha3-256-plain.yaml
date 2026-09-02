@@ -31,5 +31,6 @@ vectors:
   - hash: "4f96e26701ef260e552c00f3d3cf06ffcff3f2616792ad01c06b7f6cba92585b"
     pass: "rosetta"
     source: "sheet"
+    reads_in: ["hashcat", "john", "mdxfind"]
 legacy:
   hashes_org: "SHA3-256"

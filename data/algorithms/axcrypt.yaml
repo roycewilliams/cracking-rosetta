@@ -35,3 +35,4 @@ vectors:
   - hash: "$axcrypt$*1*10467*deadbeef01020304deadbeef01020304*a85333a6027147fd1db9a67f5ec969c6cdc19f018043fe68"
     pass: "password123"
     source: "mdxfind"
+    reads_in: ["hashcat", "john", "mdxfind"]

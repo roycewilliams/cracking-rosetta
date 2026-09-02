@@ -24,3 +24,4 @@ vectors:
   - hash: "$krb5pa$17$user1$EXAMPLE.COM$$c5461873dc13665771b98ba80be53939e906d90ae1ba79cf2e21f0395e50ee56379fbef4d0298cfccfd6cf8f907329120048fd05e8ae5df4"
     pass: "openwall"
     source: "john"
+    reads_in: ["john"]

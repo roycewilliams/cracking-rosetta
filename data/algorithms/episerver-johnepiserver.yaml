@@ -23,3 +23,4 @@ vectors:
   - hash: "$episerver$*0*fGJ2wn/5WlzqQoDeCA2kXA==*UQgnz/vPWap9UeD8Dhaw3h/fgFA="
     pass: "testPassword"
     source: "john"
+    reads_in: ["john"]

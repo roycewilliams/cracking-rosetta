@@ -35,11 +35,14 @@ vectors:
   - hash: "$ml$23923$c3fa2e153466f7619286024fe7d812d0a8ae836295f84b9133ccc65456519fc3$ccb903ee691ade6d5dee9b3c6931ebed6ddbb1348f1b26c21add8ba0d45f27e61e97c0b80d9a18020944bb78f1ebda6fdd79c5cf08a12c80522caf987c287b6d"
     pass: "openwall"
     source: "john"
+    reads_in: ["john", "mdxfind"]
   - hash: "sha512:100:dGVzdA:fUaRYJbFLqw4Gz7AEjFLetYNcozT25qdphhFs+kY5REqO9NCFlt2Y256Lyx78m4jcLd7RB96inePiMCpYgxjNw=="
     pass: "password123"
     source: "mdxfind"
+    reads_in: ["mdxfind"]
   - hash: "$pbkdf2-sha512$25000$LyWE0HrP2RsjZCxlDGFMKQ$1vC5Ohk2mCS9b6akqsEfgeb4l74SF8XjH.SljXf3dMLHdlY1GK9ojcCKts6/asR4aPqBmk74nCDddU3tvSCJvw"
     pass: "hashcat"
     source: "hashcat"
+    reads_in: ["hashcat"]
 legacy:
   hashes_org: "PBKDF2"

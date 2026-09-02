@@ -22,5 +22,6 @@ vectors:
   - hash: "6e443efc8f2d2e77e332408965408481"
     pass: "password123"
     source: "mdxfind"
+    reads_in: ["mdxfind"]
 legacy:
   hashes_org: "MD5BASE64RAWSHA256"

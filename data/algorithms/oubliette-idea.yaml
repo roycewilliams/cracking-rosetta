@@ -23,3 +23,4 @@ vectors:
   - hash: "$oubliette-idea$e82bb8b871ed9a2b7d77afce662325a2c522844e0e91bde104b8e4f68044e991"
     pass: 12345678
     source: "john"
+    reads_in: ["john"]

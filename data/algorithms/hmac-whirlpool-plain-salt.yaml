@@ -23,5 +23,6 @@ vectors:
   - hash: "7cae693e6919f283227fbfc5dcd24e1094a807f309b9cdca08fe3097b7eb3e97:abc123"
     pass: "rosetta"
     source: "sheet"
+    reads_in: ["mdxfind"]
 legacy:
   hashes_org: "not supported"

@@ -28,6 +28,8 @@ vectors:
   - hash: "$7z$2$19$0$$16$cbe826c3ca7eacb29c3be1fe55a1dc7c$2342977848$48$37$984c3361994832363504cead5cc83953f40044b0441a4ef07c32ac14f6372241$33$00"
     pass: "password123"
     source: "mdxfind"
+    reads_in: ["mdxfind"]
   - hash: "$7z$0$14$0$$11$33363437353138333138300000000000$2365089182$16$12$d00321533b483f54a523f624a5f63269"
     pass: "hashcat"
     source: "hashcat"
+    reads_in: ["hashcat"]

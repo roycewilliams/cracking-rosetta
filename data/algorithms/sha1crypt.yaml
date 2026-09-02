@@ -35,6 +35,8 @@ vectors:
   - hash: "$sha1$5000$rndSa1t$ALxwxoUXoLh.IqKoUKiiKctunvFY"
     pass: "password123"
     source: "mdxfind"
+    reads_in: ["john", "mdxfind"]
   - hash: "$sha1$20000$75552156$HhYMDdaEHiK3eMIzTldOFPnw.s2Q"
     pass: "hashcat"
     source: "hashcat"
+    reads_in: ["hashcat", "john"]

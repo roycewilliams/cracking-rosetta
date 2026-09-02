@@ -24,5 +24,6 @@ vectors:
   - hash: "1ece79f847b8498bd0ec7bbb40318f5f87ee2836d210e6d892c01baa60c339fd"
     pass: "rosetta"
     source: "sheet"
+    reads_in: ["mdxfind"]
 legacy:
   hashes_org: "JH256"

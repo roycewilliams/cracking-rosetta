@@ -32,11 +32,14 @@ vectors:
   - hash: "6e28eba8059a9e06aa3aa0679e721d4fb29bd825:6602905396"
     pass: "rosetta"
     source: "sheet"
+    reads_in: ["hashcat", "mdxfind"]
   - hash: "713769f2b8824e8f5abc2d3e4f9326f32ff1d46b:5bfe6f1c0f7a8d802032d1bf85225400"
     pass: "redminefff"
     source: "john"
+    reads_in: ["hashcat", "john", "mdxfind"]
   - hash: "dec0dedaf2a8fd58b35ff3cdcbc64da85aed6487:rosettaw6xzt1"
     pass: "rosetta"
     source: "vanity"
+    reads_in: ["hashcat", "mdxfind"]
 legacy:
   hashes_org: "?"

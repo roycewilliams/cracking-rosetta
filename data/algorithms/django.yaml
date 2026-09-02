@@ -23,3 +23,4 @@ vectors:
   - hash: "$django$*1*pbkdf2_sha256$10000$qPmFbibfAY06$x/geVEkdZSlJMqvIYJ7G6i5l/6KJ0UpvLUU6cfj83VM="
     pass: "openwall"
     source: "john"
+    reads_in: ["john"]

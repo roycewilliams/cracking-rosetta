@@ -23,3 +23,4 @@ vectors:
   - hash: "$scram-pbkdf2-sha256$15000$OxAPvANwV/ZQXqgiW6s6o2+wPM+gfZNthjpUjw==$MenSdE9VmSij4sIKMKfRs+bHy9vkareAopWM8MB+364="
     pass: "openwall"
     source: "john"
+    reads_in: ["john"]

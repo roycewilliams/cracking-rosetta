@@ -23,3 +23,4 @@ vectors:
   - hash: "what do ya want for nothing?#a30e01098bc6dbbf45690f3a7e9e6d0f8bbea2a39e6148008fd05e44"
     pass: "Jefe"
     source: "john"
+    reads_in: ["john"]

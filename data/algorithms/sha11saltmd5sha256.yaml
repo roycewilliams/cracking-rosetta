@@ -14,3 +14,4 @@ vectors:
   - hash: "1fbe24e8ee1bfb36376dc8715af1c2eb15764c05:$HEX[09]"
     pass: "password123"
     source: "mdxfind"
+    reads_in: ["mdxfind"]

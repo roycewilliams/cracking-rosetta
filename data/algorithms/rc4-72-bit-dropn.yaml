@@ -24,3 +24,4 @@ vectors:
   - hash: "$rc4$72$0$90eaa8d71c$0$48656c6c6f"
     pass: "hashcat12"
     source: "hashcat"
+    reads_in: ["hashcat"]

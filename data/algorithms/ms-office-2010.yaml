@@ -31,3 +31,4 @@ vectors:
   - hash: "$office$*2010*100000*128*16*34170046140146368675746031258762*de5bc114991bb3a5679a6e24320bdb09*1b72a4ddffba3dcd5395f6a5ff75b126cb832b733c298e86162028ca47a235a9"
     pass: "hashcat"
     source: "hashcat"
+    reads_in: ["hashcat", "john"]

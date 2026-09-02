@@ -23,3 +23,4 @@ vectors:
   - hash: "$oubliette-blowfish$16c863009dbc7a89fa26520aeeae5543beda0bbf41622be472d7c7320c8ea66f"
     pass: 12345678
     source: "john"
+    reads_in: ["john"]

@@ -31,3 +31,4 @@ vectors:
   - hash: "$ethereum$p*1024*38353131353831333338313138363430*a8b4dfe92687dbc0afeb5dae7863f18964241e96b264f09959903c8c924583fc*0a9252861d1e235994ce33dbca91c98231764d8ecb4950015a8ae20d6415b986"
     pass: "hashcat"
     source: "hashcat"
+    reads_in: ["hashcat", "john"]

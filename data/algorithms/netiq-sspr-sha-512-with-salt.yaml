@@ -31,3 +31,4 @@ vectors:
   - hash: "$sspr$4$100000$NzYwNjMyNDc2MTQ2OTE4NTUzODAyODE3$0ce2e8b8efa4280e6e003d77cb45d45300dff3960c5c073f68303565fe62fe4ff3ada8cee7d3b87d0457335ab0df73c5c64ee1f71ccf6b8bd43a316ecb42ecd4"
     pass: "hashcat"
     source: "hashcat"
+    reads_in: ["hashcat", "john"]

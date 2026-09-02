@@ -23,3 +23,4 @@ vectors:
   - hash: "$o3logon$PASSWORD9$8CF28B36E4F3D2095729CF59510003BF$3078D7DE44385654CC952A9C56E2659B"
     pass: "password9"
     source: "john"
+    reads_in: ["john"]

@@ -30,3 +30,4 @@ vectors:
   - hash: "$multibit$1*e5912fe5c84af3d5*5f0391c219e8ef62c06505b1f6232858f5bcaa739c2b471d45dd0bd8345334de"
     pass: "hashcat"
     source: "hashcat"
+    reads_in: ["hashcat", "john"]

@@ -23,3 +23,4 @@ vectors:
   - hash: "$snefru$4170e04e900e6221562ceb5ff6ea27fa9b9b0d9587add44a4379a02619c5a106"
     pass: "mystrongpassword"
     source: "john"
+    reads_in: ["john"]

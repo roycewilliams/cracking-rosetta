@@ -23,3 +23,4 @@ vectors:
   - hash: "$oracle12c$e3243b98974159cc24fd2c9a8b30ba62e0e83b6ca2fc7c55177c3a7f82602e3bdd17ceb9b9091cf9dad672b8be961a9eac4d344bdba878edc5dcb5899f689ebd8dd1be3f67bff9813a464382381ab36b"
     pass: "epsilon"
     source: "john"
+    reads_in: ["john"]

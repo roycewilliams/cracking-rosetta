@@ -24,3 +24,4 @@ vectors:
   - hash: "$metamask-short$jfGI3TXguhb8GPnKSXFrMzRk2NCEc131Gt5G3kZr5+s=$h+BoIf2CQ5BEjaIOShFE7g==$R95fzGt4UQ0uwrcrVYnIi4UcSlWn9wlmer+//526ZDwYAp50K82F1u1oacYcdjjhuEvbZnWk/uBG00UkgLLlOw=="
     pass: "hashcat1"
     source: "hashcat"
+    reads_in: ["hashcat"]

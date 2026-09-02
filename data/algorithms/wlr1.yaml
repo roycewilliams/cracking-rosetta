@@ -30,6 +30,7 @@ vectors:
   - hash: "cc23fd53f2506161e7342fc10d7eb7d57fff074e1811f5f2f70d96d71fd93fce34b42ee88707a88b95391a1f6f9b8c071694d46c7eb270814dd9fca9c1d82623"
     pass: "rosetta"
     source: "sheet"
+    reads_in: ["john", "mdxfind"]
 legacy:
   hashes_org: "WLR1"
 notes: "the sheet spelled this WLR1 and CLAUDE.md listed it as a non-type; it is mdxfind WRL1 (Whirlpool-1) with the letters transposed. mdxfind pinned to WRL1 and john whirlpool1 both reproduce the vector."

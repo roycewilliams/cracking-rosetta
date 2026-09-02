@@ -32,9 +32,11 @@ vectors:
   - hash: "ce37bde60c47d84cbdaf69bcd3d024be3b8918fa:2VrVff"
     pass: "rosetta"
     source: "sheet"
+    reads_in: ["hashcat", "john", "mdxfind"]
   - hash: "dec0ded917834269a639fa6f9d879b67a8d27acc:rosetta55icv2"
     pass: "rosetta"
     source: "vanity"
+    reads_in: ["hashcat", "john", "mdxfind"]
 legacy:
   hashes_org: "SHA1(SALTPLAIN)"
   hashkiller: "sha1($salt.$pass)"

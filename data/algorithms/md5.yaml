@@ -45,6 +45,7 @@ vectors:
   - hash: "975790dfb2854c88094fe62477a7d5f3"
     pass: "rosetta"
     source: "sheet"
+    reads_in: ["hashcat", "john"]
 legacy:
   hashes_org: "MD5"
   hashkiller: "MD5"

@@ -24,3 +24,4 @@ vectors:
   - hash: "$pse$1$2048$8$0000000000000000$0$$8$826a5c4189e18b67"
     pass: 1234
     source: "john"
+    reads_in: ["john"]

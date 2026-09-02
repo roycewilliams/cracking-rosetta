@@ -37,6 +37,8 @@ vectors:
   - hash: "d72fcd56bc1db14b6f6148cb82b292da:administrator"
     pass: "password123"
     source: "mdxfind"
+    reads_in: ["hashcat", "john", "mdxfind"]
   - hash: "dec0dedf9046019f420d6147bdf7105b:rosetta5dc4r1"
     pass: "rosetta"
     source: "vanity"
+    reads_in: ["hashcat", "john", "mdxfind"]

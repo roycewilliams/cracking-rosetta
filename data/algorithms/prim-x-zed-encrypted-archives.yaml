@@ -24,3 +24,4 @@ vectors:
   - hash: "$zed$2$22$200000$4d05362c7ac3f518$a649427303fae36e"
     pass: "Azertyui"
     source: "john"
+    reads_in: ["john"]

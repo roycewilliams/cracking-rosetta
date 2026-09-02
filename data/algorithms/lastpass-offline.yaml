@@ -24,3 +24,4 @@ vectors:
   - hash: "$lp$hackme@mailinator.com$6f5d8cec3615fc9ac7ba2e0569bce4f5"
     pass: "strongpassword"
     source: "john"
+    reads_in: ["john"]

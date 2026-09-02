@@ -34,6 +34,8 @@ vectors:
   - hash: "SCRYPT:1024:1:1:AA==:m3hB8eGi24+6bsMZkTf+If0G0liOTm26E7zsUzY/SRg="
     pass: "password123"
     source: "mdxfind"
+    reads_in: ["hashcat", "mdxfind"]
   - hash: "$7$86....E....NaCl$xffjQo7Bm/.SKRS4B2EuynbOLjAmXU5AbDbRXhoBl64"
     pass: "password"
     source: "john"
+    reads_in: ["john", "mdxfind"]

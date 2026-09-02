@@ -23,3 +23,4 @@ vectors:
   - hash: "$IPB2$2e75504633$d891f03a7327639bc632d62a7f302604"
     pass: "welcome"
     source: "john"
+    reads_in: ["john"]

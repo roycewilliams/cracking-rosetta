@@ -30,11 +30,14 @@ vectors:
   - hash: "e97fcdf8ebe91bdeffee47b2db2aa6d8:ff"
     pass: "rosetta"
     source: "sheet"
+    reads_in: ["john", "mdxfind"]
   - hash: "fa711dcbeaa6279ce5c8c974bd0b0822:ff"
     pass: "rosetta"
     source: "sheet"
+    reads_in: ["mdxfind"]
   - hash: "865ca7c85295be0fc1c987d552e4329f:ff"
     pass: "rosetta"
     source: "sheet"
+    reads_in: ["mdxfind"]
 legacy:
   hashes_org: "MD5(MD5(SALTPLAIN)INSDPSALT)"

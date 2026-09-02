@@ -28,6 +28,8 @@ vectors:
   - hash: "44jvntvfj82gq27k8ps7pqrjlo5h9c58:.x.net:1:00"
     pass: "password123"
     source: "mdxfind"
+    reads_in: ["mdxfind"]
   - hash: "pi6a89u8tca930h8mvolklmesefc5gmn:.fnmlbsik.net:35537886:1"
     pass: "hashcat"
     source: "hashcat"
+    reads_in: ["hashcat", "mdxfind"]

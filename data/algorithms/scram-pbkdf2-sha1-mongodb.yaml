@@ -23,3 +23,4 @@ vectors:
   - hash: "$scram$someadmin$10000$wf42AF7JaU1NSeBaSmkKzw==$H6A5RF0qz6DrcWNNX4xe+wIeVEw="
     pass: "secret"
     source: "john"
+    reads_in: ["john"]

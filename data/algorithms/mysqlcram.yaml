@@ -31,3 +31,4 @@ vectors:
   - hash: "$mysqlna$4141414141414141414141414141414141414141*024763fc7fa983ef4c424bb91c4c9ca58a4c6a20"
     pass: "password123"
     source: "mdxfind"
+    reads_in: ["hashcat", "john", "mdxfind"]

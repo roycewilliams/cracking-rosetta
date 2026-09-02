@@ -48,6 +48,7 @@ vectors:
   - hash: "a2dde7c8056b54f9f419fc9b62cb6611"
     pass: "rosetta"
     source: "sheet"
+    reads_in: ["hashcat", "john", "mdxfind"]
 legacy:
   hashes_org: "NTLM"
   hashkiller: "NTLM"

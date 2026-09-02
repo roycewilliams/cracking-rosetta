@@ -35,8 +35,10 @@ vectors:
   - hash: "$8$TnGX/fE4KGHOVU$/y6TkzwXzKg3tzpEs4yHca5PgftnlQ38aSvj9g98zO."
     pass: "rosetta"
     source: "sheet"
+    reads_in: ["hashcat", "john", "mdxfind"]
   - hash: "$8$6NHinlEjiwvb5J$RjC.H.ydVb34wDLqJvfjyG1ubxYKpfXqv.Ry9mtrNBY"
     pass: "password"
     source: "john"
+    reads_in: ["hashcat", "john", "mdxfind"]
 legacy:
   hashes_org: "not supported"

@@ -25,3 +25,4 @@ vectors:
   - hash: "$ecryptfs$0$1$4141414141414141$a07ae5f28a1db69d"
     pass: "password123"
     source: "mdxfind"
+    reads_in: ["hashcat", "john", "mdxfind"]

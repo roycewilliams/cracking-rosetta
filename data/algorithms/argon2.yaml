@@ -38,6 +38,8 @@ vectors:
   - hash: "$argon2d$v=19$m=16384,t=3,p=1$c2hvcnRfc2FsdA$TLSTPihIo+5F67Y1vJdfWdB9"
     pass: "blessed_dead"
     source: "john"
+    reads_in: ["hashcat", "john", "mdxfind"]
   - hash: "$argon2id$v=19$m=65536,t=3,p=1$FBMjI4RJBhIykCgol1KEJA$2ky5GAdhT1kH4kIgPN/oERE3Taiy43vNN70a3HpiKQU"
     pass: "hashcat"
     source: "hashcat"
+    reads_in: ["hashcat", "john", "mdxfind"]

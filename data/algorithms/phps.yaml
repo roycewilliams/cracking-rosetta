@@ -24,6 +24,8 @@ vectors:
   - hash: "$PHPS$3031$216cb30ddee43eced3bb76fd38e0b7df"
     pass: "password123"
     source: "mdxfind"
+    reads_in: ["hashcat", "mdxfind"]
   - hash: "$PHPS$247824$ad14afbbf0e16d4ad8c8985263a3d051"
     pass: "test"
     source: "john"
+    reads_in: ["hashcat", "john", "mdxfind"]

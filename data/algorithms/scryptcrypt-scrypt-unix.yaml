@@ -30,3 +30,4 @@ vectors:
   - hash: "$7$C6..../....nRiFmykMMn62$SxIhqyA0SkQFM1dimuhCTqWH4zlIFIvfF.1IzSL.Rb/"
     pass: "hashcat"
     source: "hashcat"
+    reads_in: ["hashcat", "john"]

@@ -23,3 +23,4 @@ vectors:
   - hash: "YXI6DKXVcrlt7I85ct/qzlUSXX1MCs+wbXVpJdtrw9RuXZpMowuOXmfqMiuFKj0/g/G2sQScLr6+dsiNrh/OOlsDzP4T60QAAIAAAgAAAIZidMeJWIXezaAL+WpoA5nbs9eGf5syXhOnHYF65Ftmo4p+jw=="
     pass: "jtr-test-password1"
     source: "john"
+    reads_in: ["john"]

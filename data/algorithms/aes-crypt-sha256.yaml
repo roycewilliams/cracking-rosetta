@@ -24,3 +24,4 @@ vectors:
   - hash: "$aescrypt$1*efc648908ca7ec727f37f3316dfd885c*eff5c87a35545406a57b56de57bd0554*3a66401271aec08cbd10cf2070332214093a33f36bd0dced4a4bb09fab817184*6a3c49fea0cafb19190dc4bdadb787e73b1df244c51780beef912598bd3bdf7e"
     pass: "hashcat"
     source: "hashcat"
+    reads_in: ["hashcat"]

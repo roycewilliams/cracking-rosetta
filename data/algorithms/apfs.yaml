@@ -26,3 +26,4 @@ vectors:
   - hash: "$fvde$2$16$58778104701476542047675521040224$20000$c75ba59230e2d14c19eb26a75176d853c88dce8ec8996f745fff5050073987391ac0092d7009b131"
     pass: "password123"
     source: "mdxfind"
+    reads_in: ["hashcat", "john", "mdxfind"]

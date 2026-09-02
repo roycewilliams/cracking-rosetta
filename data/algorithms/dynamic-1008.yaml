@@ -23,3 +23,4 @@ vectors:
   - hash: "$dynamic_1008$b962b0d40fc9111ce5f8efab424bad73$NormalSaltNormal"
     pass: "secret"
     source: "john"
+    reads_in: ["john"]

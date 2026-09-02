@@ -23,3 +23,4 @@ vectors:
   - hash: "salt$f86036a85e3ff84e73bf10769011ecdbccbf5aaed9df0240310776b42f5bb8776e612ab15a78bbfc39e867448a08337d97427e182e72922bbaa903ee75b2bfd4"
     pass: "password"
     source: "john"
+    reads_in: ["john"]

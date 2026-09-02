@@ -31,3 +31,4 @@ vectors:
   - hash: "$pdf$1*3*40*-4*1*16*5e1f73575e1f73575e1f73575e1f7357*32*c0be424bef466277092f2a1ba0fbe506ebabe5c01db100dedc0ffeebabe5c01d*32*0ff1cedeadce110ff1cedeadce110ff1cedeadce110ff1cedeadce11babebabe"
     pass: "hashcat"
     source: "hashcat"
+    reads_in: ["hashcat", "john"]

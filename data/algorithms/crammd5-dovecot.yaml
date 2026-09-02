@@ -28,3 +28,4 @@ vectors:
   - hash: "{CRAM-MD5}947d35b03647a7dbeb55e59aa5bee3a100000000000000000000000000000000"
     pass: "password123"
     source: "mdxfind"
+    reads_in: ["hashcat", "mdxfind"]

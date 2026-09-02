@@ -28,6 +28,8 @@ vectors:
   - hash: "$krb5pa$18$hashpipe$HASHPIPEDOMAIN.FAKE$ce165afbd18b9b6f50ed9cb9954cd77c0c7a6054a26dbe5607206ed459156b27df4a6db33cc1e39aa1263ddfd6c45540af2b316e109da4ca"
     pass: "password123"
     source: "mdxfind"
+    reads_in: ["mdxfind"]
   - hash: "$krb5pa$18$hashcat$HASHCATDOMAIN.COM$96c289009b05181bfd32062962740b1b1ce5f74eb12e0266cde74e81094661addab08c0c1a178882c91a0ed89ae4e0e68d2820b9cce69770"
     pass: "hashcat"
     source: "hashcat"
+    reads_in: ["hashcat", "mdxfind"]

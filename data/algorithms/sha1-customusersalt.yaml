@@ -15,3 +15,4 @@ vectors:
   - hash: "Y0VT90x+SlnTt4Q/edsR5Ez4dbM=:rndSa1t"
     pass: "password123"
     source: "mdxfind"
+    reads_in: ["mdxfind"]

@@ -26,6 +26,8 @@ vectors:
   - hash: "b1b4706604213021f6ec950e6b2fedc9c10ca569094e4a1f686cf396ae48c67993fee570d6c4044aad2aca76514e3768647f90835e351066524bb60753af098e:testsalt"
     pass: "password123"
     source: "mdxfind"
+    reads_in: ["john", "mdxfind"]
   - hash: "dec0dedf268a997f78eb71a65eb7185ba94ea56a28d01fc5df4e52227587617cb4723a681b2292498740b38bdc0f811e31f94db9dea9f5b7dc4aa7fcf91cfdf6:rosetta884q21"
     pass: "rosetta"
     source: "vanity"
+    reads_in: ["john", "mdxfind"]

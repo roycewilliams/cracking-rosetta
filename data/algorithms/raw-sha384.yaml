@@ -40,8 +40,10 @@ vectors:
   - hash: "a8b64babd0aca91a59bdbb7761b421d4f2bb38280d3a75ba0f21f2bebc45583d446c598660c94ce680c47d19c30783a7"
     pass: "password"
     source: "john"
+    reads_in: ["hashcat", "john", "mdxfind"]
   - hash: "c91ac188daac08cf79159835683e3f907c97b25652e01c9c779874589da77e0719bfc0216bba661205d1384536288343"
     pass: "rosetta"
     source: "sheet"
+    reads_in: ["hashcat", "john", "mdxfind"]
 legacy:
   hashes_org: "SHA384"

@@ -31,6 +31,7 @@ vectors:
   - hash: "b6b0e6ed07a82829cf9d9e93568e5224debefa714c9531a86b9365f8ec38d7eac7106778be2c1570367511ed635e45f3dd77893918bbdcb2e7c9b67dff9ffd97"
     pass: "rosetta"
     source: "sheet"
+    reads_in: ["hashcat", "john", "mdxfind"]
 legacy:
   hashes_org: "WRL"
   hashkiller: "n/a"

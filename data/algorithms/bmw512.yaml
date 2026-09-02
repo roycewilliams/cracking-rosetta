@@ -24,5 +24,6 @@ vectors:
   - hash: "59a86083bfa32bb189e30060a7f76e56398ba329b42b757465230c3f0cdc82c8d5c1c6408079d367f72604439d92f881a45194b003a1f058bbfafe340b1d003f"
     pass: "rosetta"
     source: "sheet"
+    reads_in: ["mdxfind"]
 legacy:
   hashes_org: "BMW512"

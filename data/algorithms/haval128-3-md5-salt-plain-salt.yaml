@@ -16,9 +16,11 @@ vectors:
   - hash: "081d80d288b6d5f6f8a2eb796f3504f1:ff"
     pass: "rosetta"
     source: "sheet"
+    reads_in: ["mdxfind"]
   - hash: "287d170e2e4ffb70dd547427f3e6bdfb:ff"
     pass: "rosetta"
     source: "sheet"
+    reads_in: ["mdxfind"]
   - hash: "c17bf487649611cf1f4deb05e807c7d7:ff"
     pass: "rosetta"
     source: "sheet"

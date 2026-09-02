@@ -19,5 +19,6 @@ vectors:
   - hash: "$S$5PpDG6SBfYKrvTHtiMzdZBWjwqOTTiW1Qntn1Sf4jO2PFhkrchMP"
     pass: "rosetta"
     source: "sheet"
+    reads_in: ["hashcat", "john"]
 legacy:
   hashes_org: "DRUPAL7"

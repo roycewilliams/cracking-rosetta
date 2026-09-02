@@ -23,3 +23,4 @@ vectors:
   - hash: "$MSCHAPv2$4c092fd3fd98236502e8591100046326$b912ce522524d33123a982cf330a57f8e953fa7974042b5d$6a4915d0ce61d42be533640a75391925$1111"
     pass: 2222
     source: "john"
+    reads_in: ["john"]

@@ -27,3 +27,4 @@ vectors:
   - hash: "$episerver$*0*RGVm*qNFZycuVKKgy9gzqwETNNLxZ+vg"
     pass: "password123"
     source: "mdxfind"
+    reads_in: ["hashcat", "mdxfind"]

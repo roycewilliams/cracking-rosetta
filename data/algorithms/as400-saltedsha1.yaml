@@ -23,3 +23,4 @@ vectors:
   - hash: "$as400ssha1$4C106E52CA196986E1C52C7FCD02AF046B76C73C$ROB"
     pass: "banaan"
     source: "john"
+    reads_in: ["john"]

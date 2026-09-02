@@ -24,3 +24,4 @@ vectors:
   - hash: "S:\"Config Passphrase\"=02:ded7137400e0a1004a12f1708453968ccc270908ba02ab0345c83690d1de3d9937587be66ad2a7fe8cc6cb16ecff02e61ac05e09d4f49f284efd24f6b16d6ae3"
     pass: "hashcat"
     source: "hashcat"
+    reads_in: ["hashcat"]

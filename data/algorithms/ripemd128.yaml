@@ -28,5 +28,6 @@ vectors:
   - hash: "128ff0f4059533e0e23652cbdb97d23c"
     pass: "rosetta"
     source: "sheet"
+    reads_in: ["john", "mdxfind"]
 legacy:
   hashes_org: "RIPEMD128"

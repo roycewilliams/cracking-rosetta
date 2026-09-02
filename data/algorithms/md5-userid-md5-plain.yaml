@@ -38,8 +38,10 @@ vectors:
   - hash: "80f27f91fbec4c2fd50aed9f4f9d8a92:abc123"
     pass: "rosetta"
     source: "sheet"
+    reads_in: ["hashcat", "john", "mdxfind"]
   - hash: "dec0ded5840c9dfcf8a6a78a0d01978f:rosetta4z8fq6"
     pass: "rosetta"
     source: "vanity"
+    reads_in: ["hashcat", "john", "mdxfind"]
 legacy:
   hashes_org: "MD5(SALTMD5(PLAIN))"

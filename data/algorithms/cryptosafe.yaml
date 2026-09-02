@@ -24,3 +24,4 @@ vectors:
   - hash: "$cryptosafe$1$RJ+YWtuyOoLnnOpOdmj43+hwO5cquMsSO3f/OiQfINofM+c0JVbIyUTQg3St+1Ue09QiZKlNnCAmlPHq2wuI31QoZQ/KNKZT/VMLd3qYbkOv873HT4wsYeavSwOqrdVdxpEimkqgdDkGP7XHfeFUCv6+jXFZioiR8jYrgxA8fDQQ5C+YReuvfiqLGaVrC9ih58X8Q7NLxAlQTGSQvHgsZI6DNfAsXw3Zt++fIJh9bdLzHDEBF/pLp47zj132UOYr6TuufnnA+HeUISdk+xH6/w=="
     pass: "foobar"
     source: "john"
+    reads_in: ["john"]

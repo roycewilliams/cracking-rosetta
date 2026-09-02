@@ -24,4 +24,5 @@ vectors:
   - hash: "c20983cb4198e300ba28a9423660a9c9"
     pass: "password123"
     source: "mdxfind"
+    reads_in: ["mdxfind"]
 notes: "The vendored catalog renders this type's example digest in uppercase hex, and mdxfind will not read it back in that case, so the seeding pass could not verify it. mdxfind -z computes the same digest in lowercase for the same plaintext, and pinned to ^MD5UCBASE64SHA1RAW$ it reproduces that form; the stored vector is the catalog's own digest re-cased, not one we invented. Fourteen other types carry an uppercase example (MD5UC, SHA1UC, SHA256UC, RACF, ORACLE7 among them) and are NOT all the same story -- MD5UC and SHA256UC do not reproduce in either case."

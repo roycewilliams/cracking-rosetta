@@ -23,3 +23,4 @@ vectors:
   - hash: "$dummy$64756d6d79"
     pass: "dummy"
     source: "john"
+    reads_in: ["john"]

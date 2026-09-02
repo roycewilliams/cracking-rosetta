@@ -23,3 +23,4 @@ vectors:
   - hash: "$af$UMICH.EDU$bb46613c503ad92e649d99d038efddb2"
     pass: "w00w00"
     source: "john"
+    reads_in: ["john"]

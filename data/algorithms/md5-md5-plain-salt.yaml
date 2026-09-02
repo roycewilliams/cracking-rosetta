@@ -16,17 +16,22 @@ vectors:
   - hash: "c90ea42a1cb92a2f6f1c90c95ca27f3c:z"
     pass: "rosetta"
     source: "sheet"
+    reads_in: ["mdxfind"]
   - hash: "c25d767eb942f86f52541fe50b480994:z"
     pass: "rosetta"
     source: "sheet"
+    reads_in: ["mdxfind"]
   - hash: "1b60e99da6d88e99fc7b1f0456b692e6:z"
     pass: "rosetta"
     source: "sheet"
+    reads_in: ["mdxfind"]
   - hash: "b847aff2eb508dd334328079011f6eb0:z"
     pass: "rosetta"
     source: "sheet"
+    reads_in: ["mdxfind"]
   - hash: "d36d11ee427b93bec89d10139e220a7d:z"
     pass: "rosetta"
     source: "sheet"
+    reads_in: ["mdxfind"]
 legacy:
   hashes_org: "MD5(MD5(PLAIN)SALT)"

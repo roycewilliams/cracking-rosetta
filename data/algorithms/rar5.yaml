@@ -31,3 +31,4 @@ vectors:
   - hash: "$rar5$16$38466361001011015181344360681307$15$00000000000000000000000000000000$8$cc7a30583e62676a"
     pass: "hashcat"
     source: "hashcat"
+    reads_in: ["hashcat", "john"]

@@ -40,6 +40,8 @@ vectors:
   - hash: "0000012f25e64931f3833b26e999e26e81f9ad24"
     pass: "azertyuiop3"
     source: "john"
+    reads_in: ["john", "mdxfind"]
   - hash: "00000c6008f9cab4083784cbd1874f76618d2a97"
     pass: "password123"
     source: "mdxfind"
+    reads_in: ["john", "mdxfind"]

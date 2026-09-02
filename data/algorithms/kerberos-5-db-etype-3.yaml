@@ -23,3 +23,4 @@ vectors:
   - hash: "$krb3$INTERNAL.CORP1user3$eafdc79b7620584a"
     pass: "password"
     source: "john"
+    reads_in: ["john"]

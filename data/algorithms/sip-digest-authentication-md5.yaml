@@ -30,3 +30,4 @@ vectors:
   - hash: "$sip$*72087*1215344588738747***342210558720*737232616*1215344588738747*8867133055*65600****MD5*e9980869221f9d1182c83b0d5e56a7db"
     pass: "hashcat"
     source: "hashcat"
+    reads_in: ["hashcat", "john"]

@@ -14,5 +14,6 @@ vectors:
   - hash: "c7a971e405313d0ecc22e37e8b2424a1:2316355934:478467"
     pass: "hashcat"
     source: "hashcat"
+    reads_in: ["hashcat"]
 legacy:
   hashes_org: "not supported"

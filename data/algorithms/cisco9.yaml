@@ -34,6 +34,8 @@ vectors:
   - hash: "$9$rndSa1tRndSa1t$vNe65wzVje3iwyqNXv34z3vaHXV9qbyYgYB37IWc5uA"
     pass: "password123"
     source: "mdxfind"
+    reads_in: ["hashcat", "john", "mdxfind"]
   - hash: "$9$X9fA8mypebLFVj$Klp6X9hxNhkns0kwUIinvLRSIgWOvCwDhVTZqjsycyU"
     pass: "JtR"
     source: "john"
+    reads_in: ["hashcat", "john", "mdxfind"]

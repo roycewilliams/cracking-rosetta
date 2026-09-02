@@ -25,5 +25,6 @@ vectors:
   - hash: "LjnhkUkzakkqZzlG"
     pass: "rosetta"
     source: "sheet"
+    reads_in: ["hashcat"]
 legacy:
   hashes_org: "not supported"

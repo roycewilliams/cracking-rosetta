@@ -24,5 +24,6 @@ vectors:
   - hash: "5493df4d9169725724290d00fd5bbfaed054ec9985cb02479d62bcddedbaecae34038e616d141328b4f320a784ecc36a8f9833e886d19fe594e6cd56889ea920"
     pass: "rosetta"
     source: "sheet"
+    reads_in: ["mdxfind"]
 legacy:
   hashes_org: "EDON512"

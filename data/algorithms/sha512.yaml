@@ -33,6 +33,7 @@ vectors:
   - hash: "a914375619cd494d3079f93dd4a7ed8848fbe4da9929700cdc4c31819a3f0685ec3f7e100762826f16c9a9a1f5983e1a25af01058ab0a178190322f8661f8137"
     pass: "rosetta"
     source: "sheet"
+    reads_in: ["hashcat", "john", "mdxfind"]
 legacy:
   hashes_org: "SHA512"
   hashkiller: "SHA512"

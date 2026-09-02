@@ -24,3 +24,4 @@ vectors:
   - hash: "$gost94hash$salt$sG.6rfU0vKHX4eL00bUDqjXxaAcQHqpJQlM3ctfj013"
     pass: "magnum"
     source: "john"
+    reads_in: ["john"]

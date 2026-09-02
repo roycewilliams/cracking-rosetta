@@ -24,3 +24,4 @@ vectors:
   - hash: "$cryptoapi$9$2$03000000000000000000000000000000$00000000000000000000000000000000$d1d20e91a8f2e18881dc79369d8af761"
     pass: "hashcat"
     source: "hashcat"
+    reads_in: ["hashcat"]

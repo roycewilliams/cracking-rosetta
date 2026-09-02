@@ -24,3 +24,4 @@ vectors:
   - hash: "$mozilla$*3DES*b735d19e6cadb5136376a98c2369f22819d08c79*2b36961682200a877f7d5550975b614acc9fefe3*f03f3575fd5bdbc9e32232316eab7623"
     pass: "hashcat"
     source: "hashcat"
+    reads_in: ["hashcat"]

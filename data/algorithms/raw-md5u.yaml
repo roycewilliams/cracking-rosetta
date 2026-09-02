@@ -35,3 +35,4 @@ vectors:
   - hash: "16c47151c18ac087cd12b3a70746c790"
     pass: "test1"
     source: "john"
+    reads_in: ["hashcat", "john", "mdxfind"]

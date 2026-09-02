@@ -23,3 +23,4 @@ vectors:
   - hash: "02020000ffff0003002c01145267d48d000000000000000000020000ac100100ffffff000000000000000001ffff0001$1e372a8a233c6556253a0909bc3dcce6"
     pass: "quagga"
     source: "john"
+    reads_in: ["john"]

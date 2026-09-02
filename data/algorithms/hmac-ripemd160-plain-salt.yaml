@@ -28,5 +28,6 @@ vectors:
   - hash: "ed4cb7ad83efb24dab418984d2000afb9aedf48a:abc123"
     pass: "rosetta"
     source: "sheet"
+    reads_in: ["hashcat", "mdxfind"]
 legacy:
   hashes_org: "not supported"

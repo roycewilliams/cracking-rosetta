@@ -24,3 +24,4 @@ vectors:
   - hash: "$episerver$*1*NDg1NTIz*8BFCg/YJBAuZs/wjbH3OWKe69BLr5Lao26ybpnD48Zk"
     pass: "hashcat"
     source: "hashcat"
+    reads_in: ["hashcat"]

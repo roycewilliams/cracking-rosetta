@@ -24,3 +24,4 @@ vectors:
   - hash: "$gost12256hash$password$awrQfwgXMa0BFMCtZu97GJKqeVszI/B2usmTf9cpOa/"
     pass: "magnum"
     source: "john"
+    reads_in: ["john"]

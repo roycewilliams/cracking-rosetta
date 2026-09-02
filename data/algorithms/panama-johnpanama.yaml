@@ -35,8 +35,10 @@ vectors:
   - hash: "049d698307d8541f22870dfa0a551099d3d02bc6d57c610a06a4585ed8d35ff8"
     pass: "T"
     source: "john"
+    reads_in: ["john", "mdxfind"]
   - hash: "8f8d192270e3e7f8fbbeb35b544dd0c893771628cb4163ea68bc9d815736b896"
     pass: "rosetta"
     source: "sheet"
+    reads_in: ["john", "mdxfind"]
 legacy:
   hashes_org: "PANAMA"

@@ -24,3 +24,4 @@ vectors:
   - hash: "$chacha20$*0400000000000003*16*0200000000000001*5152535455565758*6b05fe554b0bc3b3"
     pass: "hashcat_hashcat_hashcat_hashcat_"
     source: "hashcat"
+    reads_in: ["hashcat"]

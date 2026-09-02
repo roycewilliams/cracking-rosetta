@@ -31,3 +31,4 @@ vectors:
   - hash: "$argon2id$v=19$m=65536,t=3,p=1$FBMjI4RJBhIykCgol1KEJA$2ky5GAdhT1kH4kIgPN/oERE3Taiy43vNN70a3HpiKQU"
     pass: "hashcat"
     source: "hashcat"
+    reads_in: ["hashcat", "john"]

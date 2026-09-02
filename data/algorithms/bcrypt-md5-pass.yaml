@@ -15,3 +15,4 @@ vectors:
   - hash: "$2a$05$/VT2Xs2dMd8GJKfrXhjYP.DkTjOVrY12yDN7/6I8ZV0q/1lEohLru"
     pass: "hashcat"
     source: "hashcat"
+    reads_in: ["hashcat"]

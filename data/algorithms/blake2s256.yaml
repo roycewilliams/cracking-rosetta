@@ -27,3 +27,4 @@ vectors:
   - hash: "$BLAKE2$02027c0e103001c546eaf0688c8270aa97dcdf867964d0049cdd021936768667"
     pass: "password123"
     source: "mdxfind"
+    reads_in: ["hashcat"]

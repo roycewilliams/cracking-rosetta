@@ -33,9 +33,11 @@ vectors:
   - hash: "05b56c69b512a1c641fc59d1070df60b:abc123"
     pass: "rosetta"
     source: "sheet"
+    reads_in: ["mdxfind"]
   - hash: "d4f7dec5b98ac42336b1c9e56f2e5ca8:abc123"
     pass: "rosetta"
     source: "sheet"
+    reads_in: ["mdxfind"]
 legacy:
   hashes_org: "MD5(CAPMD5(PLAIN)SALT)"
 notes: "This row is mdxfind type MD5CAPMD5USER. CORRECTED TWICE on 2026-08-31, and the second correction matters more than the first. Waffle named the unknown vector d4f7dec5...:abc123 as the colon form, confirmed here by independent Digest::MD5 and by local mdxfind pinned to ^MD5CAPMD5USER$ with -F. But the hx specification (rev 1.15) Appendix A Note [24] then showed the stronger fact: MD5CAPMD5USER is a MULTI-EMIT type. It emits BOTH md5(cap(md5($p)).$u) and md5(cap(md5($p)).\":\".$u) and matches if either reproduces the stored digest. So this row is not one computation, and neither of its two vectors is anomalous -- 05b56c69... is the colonless emit and d4f7dec5... is the colon emit. The first correction here wrongly called the colonless vector foreign and removed it; it is restored. A copy also sits on md5-md5-pass-salt, which is the row for the colonless construction in its own right. john has no format for either emit: discover-john.pl ran all 957 formats against the colon vector with zero matches, and the dynamic language has no literal-string token. The 198,534-construction sweep that failed to identify this missed it because it enumerated terms and never a literal separator."

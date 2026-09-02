@@ -24,5 +24,6 @@ vectors:
   - hash: "9ee7fdfb57e2132c6614dcfcf4084bc7"
     pass: "rosetta"
     source: "sheet"
+    reads_in: ["mdxfind"]
 legacy:
   hashes_org: "RADIOGATUN32"

@@ -488,7 +488,7 @@ For sorting, filtering and search, open [index.html](index.html) - or
 | LUKS | **--** | `LUKS` | **--** |  |
 | LUKS v1 RIPEMD-160 + AES | `29541` (v) | **--** | **--** |  |
 | LUKS v1 RIPEMD-160 + Serpent | `29542` (v) | **--** | **--** |  |
-| LUKS v1 RIPEMD-160 + Twofish | `29543` | **--** | **--** |  |
+| LUKS v1 RIPEMD-160 + Twofish | `29543` (v) | **--** | **--** |  |
 | LUKS v1 SHA-1 + AES | `29511` (v) | **--** | **--** |  |
 | LUKS v1 SHA-1 + Serpent | `29512` (v) | **--** | **--** |  |
 | LUKS v1 SHA-1 + Twofish | `29513` (v) | **--** | **--** |  |
@@ -497,7 +497,7 @@ For sorting, filtering and search, open [index.html](index.html) - or
 | LUKS v1 SHA-256 + Twofish | `29523` (v) | **--** | **--** |  |
 | LUKS v1 SHA-512 + AES | `29531` (v) | **--** | **--** |  |
 | LUKS v1 SHA-512 + Serpent | `29532` (v) | **--** | **--** |  |
-| LUKS v1 SHA-512 + Twofish | `29533` | **--** | **--** |  |
+| LUKS v1 SHA-512 + Twofish | `29533` (v) | **--** | **--** |  |
 | LUKS v2 argon2 + SHA-256 + AES | `34100` (v) | **--** | **--** |  |
 | Mac OS X 10.4 - 10.6 | `122` (v) | `xsha` (v) | **--** |  |
 | macOS v10.8+ (PBKDF2-SHA512) | `7100` (v) | `PBKDF2-HMAC-SHA512`<br>`PBKDF2-HMAC-SHA512-opencl` (v) | **--** |  |
@@ -803,9 +803,9 @@ For sorting, filtering and search, open [index.html](index.html) - or
 | MS Office 2013 | `9600` (v) | `Office`<br>`office-opencl` (v) | **--** |  |
 | MS Office 2016 - SheetProtection | `25300` (v) | **--** | **--** |  |
 | MS Office <= 2003 $0/$1, MD5 + RC4 | `9700` (v) | `oldoffice`<br>`oldoffice-opencl` (v) | **--** |  |
-| MS Office <= 2003 $0/$1, MD5 + RC4, collider #1 | `9710` | **--** | **--** |  |
+| MS Office <= 2003 $0/$1, MD5 + RC4, collider #1 | `9710` (v) | **--** | **--** |  |
 | MS Office <= 2003 $0/$1, MD5 + RC4, collider #2 | `9720` (v) | **--** | **--** |  |
-| MS Office <= 2003 $3, SHA1 + RC4, collider #1 | `9810` | **--** | **--** |  |
+| MS Office <= 2003 $3, SHA1 + RC4, collider #1 | `9810` (v) | **--** | **--** |  |
 | MS Office <= 2003 $3, SHA1 + RC4, collider #2 | `9820` (v) | **--** | **--** |  |
 | MS Office <= 2003 $3/$4, SHA1 + RC4 | `9800` (v) | `oldoffice`<br>`oldoffice-opencl` (v) | **--** |  |
 | mscache($plain) | `1100` (v) | **--** | `MSCACHE` (v) |  |
@@ -883,11 +883,11 @@ For sorting, filtering and search, open [index.html](index.html) - or
 | pbkdf2-sha256($plain) | `10000` (v) | **--** | `PBKDF2-SHA256` (v) |  |
 | pbkdf2-sha512($plain) | `20200` (v) | `PBKDF2-HMAC-SHA512`<br>`PBKDF2-HMAC-SHA512-opencl` (v) | `PBKDF2-SHA512` (v) |  |
 | PDF 1.1 - 1.3 (Acrobat 2 - 4) | `10400` (v) | `PDF`<br>`pdf-opencl` (v) | **--** |  |
-| PDF 1.1 - 1.3 (Acrobat 2 - 4), collider #1 | `10410` | **--** | **--** |  |
+| PDF 1.1 - 1.3 (Acrobat 2 - 4), collider #1 | `10410` (v) | **--** | **--** |  |
 | PDF 1.1 - 1.3 (Acrobat 2 - 4), collider #2 | `10420` (v) | **--** | **--** |  |
 | PDF 1.3 - 1.6 (Acrobat 4 - 8) w/ RC4-40 | `10510` (v) | `PDF`<br>`pdf-opencl` (v) | **--** |  |
 | PDF 1.4 - 1.6 (Acrobat 5 - 8) | `10500` (v) | `PDF`<br>`pdf-opencl` (v) | **--** |  |
-| PDF 1.4 - 1.6 (Acrobat 5 - 8) - user and owner pass | `25400` | **--** | **--** |  |
+| PDF 1.4 - 1.6 (Acrobat 5 - 8) - user and owner pass | `25400` (v) | **--** | **--** |  |
 | PDF 1.7 Level 3 (Acrobat 9) | `10600` (v) | `PDF`<br>`pdf-opencl` (v) | **--** |  |
 | PDF 1.7 Level 8 (Acrobat 10 - 11) | `10700` (v) | `PDF`<br>`pdf-opencl` (v) | **--** |  |
 | PEOPLESOFT | `133` (v) | **--** | `PEOPLESOFT` (v) |  |
@@ -908,7 +908,7 @@ For sorting, filtering and search, open [index.html](index.html) - or
 | PKZIP (Mixed Multi-File) | `17225` (v) | `PKZIP` (v) | **--** |  |
 | PKZIP (Uncompressed) | `17210` (v) | `PKZIP` (v) | **--** |  |
 | PKZIP Master Key | `20500` (v) | **--** | **--** |  |
-| PKZIP Master Key (6 byte optimization) | `20510` | **--** | **--** |  |
+| PKZIP Master Key (6 byte optimization) | `20510` (v) | **--** | **--** |  |
 | plaintext | `99999` (v) | `plaintext` | `NULL` (v) |  |
 | pomelo($plain) | no | **--** | `POMELO` (v) |  |
 | Post.Office | **--** | `po` (v) | **--** |  |
@@ -1440,7 +1440,7 @@ For sorting, filtering and search, open [index.html](index.html) - or
 | tiger128_3(md5($plain)) | no | **--** | `TIGERMD5` (v) |  |
 | tiger128_3(md5($plain).$plain) | no | **--** | `TIGERMD5PASS` (v) |  |
 | TIGER2 | no | **--** | `TIGER2` (v) |  |
-| TOTP (HMAC-SHA1) | `18100` | **--** | **--** |  |
+| TOTP (HMAC-SHA1) | `18100` (v) | **--** | **--** |  |
 | Tripcode | `16000` (v) | `tripcode` (v) | **--** |  |
 | TrueCrypt AES/Twofish/Serpent | **--** | `tc_ripemd160boot` | **--** |  |
 | TrueCrypt AES256_XTS | **--** | `tc_ripemd160`<br>`TrueCrypt-opencl` (v) | **--** |  |
@@ -1505,11 +1505,11 @@ For sorting, filtering and search, open [index.html](index.html) - or
 | VeraCrypt SHA512 + XTS 1536 bit (legacy) | `13723` | **--** | **--** |  |
 | VeraCrypt SHA512 + XTS 512 bit | `29421` (v) | **--** | **--** |  |
 | VeraCrypt SHA512 + XTS 512 bit (legacy) | `13721` | **--** | **--** |  |
-| VeraCrypt Streebog-512 + XTS 1024 bit | `29472` | **--** | **--** |  |
+| VeraCrypt Streebog-512 + XTS 1024 bit | `29472` (v) | **--** | **--** |  |
 | VeraCrypt Streebog-512 + XTS 1024 bit (legacy) | `13772` | **--** | **--** |  |
 | VeraCrypt Streebog-512 + XTS 1024 bit + boot-mode | `29482` (v) | **--** | **--** |  |
 | VeraCrypt Streebog-512 + XTS 1024 bit + boot-mode (legacy) | `13782` | **--** | **--** |  |
-| VeraCrypt Streebog-512 + XTS 1536 bit | `29473` | **--** | **--** |  |
+| VeraCrypt Streebog-512 + XTS 1536 bit | `29473` (v) | **--** | **--** |  |
 | VeraCrypt Streebog-512 + XTS 1536 bit (legacy) | `13773` | **--** | **--** |  |
 | VeraCrypt Streebog-512 + XTS 1536 bit + boot-mode | `29483` (v) | **--** | **--** |  |
 | VeraCrypt Streebog-512 + XTS 1536 bit + boot-mode (legacy) | `13783` | **--** | **--** |  |
@@ -1519,7 +1519,7 @@ For sorting, filtering and search, open [index.html](index.html) - or
 | VeraCrypt Streebog-512 + XTS 512 bit + boot-mode (legacy) | `13781` | **--** | **--** |  |
 | VeraCrypt Whirlpool + XTS 1024 bit | `29432` (v) | **--** | **--** |  |
 | VeraCrypt Whirlpool + XTS 1024 bit (legacy) | `13732` | **--** | **--** |  |
-| VeraCrypt Whirlpool + XTS 1536 bit | `29433` | **--** | **--** |  |
+| VeraCrypt Whirlpool + XTS 1536 bit | `29433` (v) | **--** | **--** |  |
 | VeraCrypt Whirlpool + XTS 1536 bit (legacy) | `13733` | **--** | **--** |  |
 | VeraCrypt Whirlpool + XTS 512 bit | `29431` (v) | **--** | **--** |  |
 | VeraCrypt Whirlpool + XTS 512 bit (legacy) | `13731` | **--** | **--** |  |

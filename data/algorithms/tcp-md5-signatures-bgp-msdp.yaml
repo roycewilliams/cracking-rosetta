@@ -23,3 +23,4 @@ vectors:
   - hash: "$tcpmd5$c0a83814c0a838280006002800b3d10515f72762291b6878a010007300000000$eaf8d1f1da3f03c90b42709e9508fc73"
     pass: "lolcats"
     source: "john"
+    reads_in: ["john"]

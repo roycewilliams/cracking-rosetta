@@ -23,3 +23,4 @@ vectors:
   - hash: "$vnc$*2F7532B3EFD17EEA5DD3A0949FFDF1D8*0EB42D4D9AC1EF1B6EF6647B9594A621"
     pass: 12345678
     source: "john"
+    reads_in: ["john"]

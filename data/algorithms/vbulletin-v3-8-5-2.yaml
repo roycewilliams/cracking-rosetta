@@ -29,6 +29,7 @@ vectors:
   - hash: "bc926ffde1bab8659f4a3ab0f30f418e:9eOlrQF9WEXZ8I6mKpb26lg3p16mft"
     pass: "rosetta"
     source: "sheet"
+    reads_in: ["hashcat", "john", "mdxfind"]
 legacy:
   hashes_org: "VBULLETIN"
   hashkiller: "vBulletin > v3.8.5"

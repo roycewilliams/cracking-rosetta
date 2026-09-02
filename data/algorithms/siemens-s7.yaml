@@ -23,3 +23,4 @@ vectors:
   - hash: "$siemens-s7$1$599fe00cdb61f76cc6e949162f22c95943468acb$002e45951f62602b2f5d15df217f49da2f5379cb"
     pass: 123
     source: "john"
+    reads_in: ["john"]

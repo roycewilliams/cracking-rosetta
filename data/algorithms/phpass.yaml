@@ -26,6 +26,7 @@ vectors:
   - hash: "$P$68EpAeraqYY3OYBMWpG6I//eL2e5IZ0"
     pass: "rosetta"
     source: "sheet"
+    reads_in: ["hashcat", "john", "mdxfind"]
 legacy:
   hashes_org: "WORDPRESS / PHPBB3"
   hashkiller: "n/a"

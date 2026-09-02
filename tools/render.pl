@@ -225,17 +225,38 @@ for my $e (@rows) {
         # string satisfies both hashcat and john and said so nowhere, and a
         # reader holding one could not tell that from "nobody checked".
         serialization => do {
-            my %cred;
-            my $shared = 0;
+            my ($shared, %tools) = (0);
             for my $v (@{ $e->{vectors} || [] }) {
-                $cred{ $v->{credential} }++
-                    if defined $v->{credential} && !ref $v->{credential};
-                $shared = 1 if ref $v->{reads_in} eq 'ARRAY'
-                            && @{ $v->{reads_in} } > 1;
+                next unless ref $v->{reads_in} eq 'ARRAY';
+                my @r = @{ $v->{reads_in} };
+                $shared = 1 if @r > 1;      # one string, more than one tool
+                $tools{$_} = 1 for @r;
             }
-            (grep { $cred{$_} > 1 } keys %cred) ? 'divergent'
-                                    : $shared   ? 'shared'
-                                    :             'unknown';
+            # divergent needs no credential group: reads_in already proves it.
+            # verify-vectors runs every tool against every vector of an entry
+            # with every plaintext in the wordlist, so a tool that read none of
+            # another tool's strings was given the chance and declined. Two
+            # tools that each read something, and never the same something, do
+            # not take each other's format.
+            #
+            # credential: adds the stronger claim -- that the two strings are
+            # ONE credential rather than each tool's own example -- which
+            # nothing in the strings can establish and only a curator sets.
+            # Pairwise agreement is not the question a reader has. They hold
+            # one string and want to know whether the other tools take it, so
+            # the test is whether SOME vector is read by every tool that reads
+            # anything here. scrypt is why: its hashcat vector is read by
+            # mdxfind too, which looked like agreement, while john refuses
+            # both strings and wants $7$86....NaCl$... of its own.
+            my $all = join ',', sort keys %tools;
+            $shared = 0;
+            for my $v (@{ $e->{vectors} || [] }) {
+                next unless ref $v->{reads_in} eq 'ARRAY';
+                $shared = 1 if join(',', sort @{ $v->{reads_in} }) eq $all;
+            }
+              keys(%tools) < 2 ? 'unknown'
+            : $shared          ? 'shared'
+            :                    'divergent';
         },
         notes  => $e->{notes} // '',
         legacy => join('; ', grep { defined && length }

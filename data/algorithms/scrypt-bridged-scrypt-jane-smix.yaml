@@ -24,3 +24,4 @@ vectors:
   - hash: "SCRYPT:16384:8:1:OTEyNzU0ODg=:Cc8SPjRH1hFQhuIPCdF51uNGtJ2aOY/isuoMlMUsJ8c="
     pass: "hashcat"
     source: "hashcat"
+    reads_in: ["hashcat"]

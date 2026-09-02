@@ -23,3 +23,4 @@ vectors:
   - hash: "$ospf$1$02010030ac10001400000000000000020000011454ee4518ffffff00000a120100000028c0a86f14c0a86f0aac10000a$e59ba2c56a2c0429ebe72a194e4b54c250cac1a3"
     pass: 1234
     source: "john"
+    reads_in: ["john"]

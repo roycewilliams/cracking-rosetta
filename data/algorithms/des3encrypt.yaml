@@ -28,6 +28,8 @@ vectors:
   - hash: "c74ec0f283bb3efb:8152001061460743"
     pass: "password123"
     source: "mdxfind"
+    reads_in: ["mdxfind"]
   - hash: "4c29eea59d8db1e7:7428288455525516"
     pass: "hashcat1hashcat1hashcat1"
     source: "hashcat"
+    reads_in: ["hashcat", "mdxfind"]

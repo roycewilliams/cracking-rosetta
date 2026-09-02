@@ -28,8 +28,10 @@ vectors:
   - hash: "sha256:100:dGVzdA:EzztVA6V4NTgoFma1UJYNBCjBI3mqya9"
     pass: "password123"
     source: "mdxfind"
+    reads_in: ["mdxfind"]
   - hash: "pbkdf2_sha256$10000$1135411628$bFYX62rfJobJ07VwrUMXfuffLfj2RDM2G6/BrTrUWkE="
     pass: "hashcat"
     source: "hashcat"
+    reads_in: ["hashcat", "mdxfind"]
 legacy:
   hashes_org: "PBKDF2"

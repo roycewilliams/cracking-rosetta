@@ -26,5 +26,6 @@ vectors:
   - hash: "e3ae045f333f084a0ee4acdb1f5c20c560410c7e28005a3a"
     pass: "rosetta"
     source: "sheet"
+    reads_in: ["john", "mdxfind"]
 legacy:
   hashes_org: "TIGER192-3"

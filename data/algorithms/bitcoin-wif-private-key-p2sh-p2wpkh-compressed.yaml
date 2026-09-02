@@ -24,3 +24,4 @@ vectors:
   - hash: "3H1YvmSdrjEfj9LvtiKJ8XiYq5htJRuejA"
     pass: "L4hashcat7q6HMnMFcukyvxxVJvpabXYjxXLey8846NtWUyX4YLi"
     source: "hashcat"
+    reads_in: ["hashcat"]

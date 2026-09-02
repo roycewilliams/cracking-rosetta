@@ -38,8 +38,10 @@ vectors:
   - hash: "3bd23f4d8de0744d2c294c5a9e90ea661356ff97:472433673"
     pass: "rosetta"
     source: "sheet"
+    reads_in: ["hashcat", "john", "mdxfind"]
   - hash: "dec0dede17cf208fb2d8c82dec013a312db1e5b3:rosettajclwb6"
     pass: "rosetta"
     source: "vanity"
+    reads_in: ["john", "mdxfind"]
 legacy:
   hashes_org: "SHA1(SALTSHA1(SALTSHA1(PLAIN)))"

@@ -31,3 +31,4 @@ vectors:
   - hash: "$zip2$*0*1*0*0675369741458183*5dc5*0**36b85538918416712640*$/zip2$"
     pass: "hashcat"
     source: "hashcat"
+    reads_in: ["hashcat", "john"]

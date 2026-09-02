@@ -31,3 +31,4 @@ vectors:
   - hash: "$pbkdf2-hmac-sha1$100000$7134180503252384106490944216249411431665011151428170747164626720$990e0c5f62b1384d48cbe3660329b9741c4a8473"
     pass: "hashcat"
     source: "hashcat"
+    reads_in: ["hashcat", "john"]

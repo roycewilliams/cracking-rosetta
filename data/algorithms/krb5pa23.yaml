@@ -35,6 +35,8 @@ vectors:
   - hash: "$krb5pa$23$user$realm$salt$6925dc172806e0ce5681bbaefb6781bf058c03f1a21e383fd55a7b79fa98a8078d7ebdcc6c208758de6e78fd9c8ea704f894c15d"
     pass: "password123"
     source: "mdxfind"
+    reads_in: ["hashcat", "mdxfind"]
   - hash: "$krb5pa$23$$$$3d973b3833953655d019abff1a98ea124d98d94170fb77574f3cf6d0e6a7eded9f3e4bb37ec9fb64b55df7d9aceb6e19c1711983"
     pass: "TheEmperor99!"
     source: "john"
+    reads_in: ["hashcat", "john", "mdxfind"]

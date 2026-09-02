@@ -17,7 +17,7 @@ Each row below links to its entry in the [browsable table](index.html).
 Gaps are absences; for the rows where something is known to be *odd*, see
 [OPEN-QUESTIONS.md](OPEN-QUESTIONS.md).
 
-## 1. Believed but never reproduced (129)
+## 1. Believed but never reproduced (118)
 
 The cheapest contribution in the repository, if you own the tool. Each of
 these already names an identifier and already carries a test vector; nobody
@@ -39,8 +39,6 @@ tools/verify-vectors.pl --tool <tool> --only <id> -v
 | [`generic-hash-bridged-python-interpreter-with-gil`](index.html#generic-hash-bridged-python-interpreter-with-gil) | hashcat | `73000` | upstream |
 | [`generic-hash-bridged-rust`](index.html#generic-hash-bridged-rust) | hashcat | `74000` | upstream |
 | [`lm`](index.html#lm) | john | `LM`, `LM-opencl` | asserted |
-| [`luks-v1-ripemd-160-twofish`](index.html#luks-v1-ripemd-160-twofish) | hashcat | `29543` | upstream |
-| [`luks-v1-sha-512-twofish`](index.html#luks-v1-sha-512-twofish) | hashcat | `29533` | upstream |
 | [`md4utf16md5x`](index.html#md4utf16md5x) | mdxfind | `MD4UTF16MD5x` | upstream |
 | [`md4utf16sha1x`](index.html#md4utf16sha1x) | mdxfind | `MD4UTF16SHA1x` | upstream |
 | [`md4utf16sha256x`](index.html#md4utf16sha256x) | mdxfind | `MD4UTF16SHA256x` | upstream |
@@ -49,15 +47,10 @@ tools/verify-vectors.pl --tool <tool> --only <id> -v
 | [`md5sha1x`](index.html#md5sha1x) | mdxfind | `MD5SHA1x` | upstream |
 | [`md5uc`](index.html#md5uc) | mdxfind | `MD5UC` | upstream |
 | [`md5ucmd5`](index.html#md5ucmd5) | mdxfind | `MD5UCMD5` | upstream |
-| [`ms-office-le-2003-0-1-md5-rc4-collider-1`](index.html#ms-office-le-2003-0-1-md5-rc4-collider-1) | hashcat | `9710` | upstream |
-| [`ms-office-le-2003-3-sha1-rc4-collider-1`](index.html#ms-office-le-2003-3-sha1-rc4-collider-1) | hashcat | `9810` | upstream |
 | [`mysql4-1-mysql5`](index.html#mysql4-1-mysql5) | john | `dynamic_1028`, `mysql-sha1`, `mysql-sha1-opencl` | asserted |
 | [`netntlmv2`](index.html#netntlmv2) | john | `netlmv2`, `netntlmv2`, `ntlmv2-opencl` | asserted |
 | [`oscommerce-xt-commerce`](index.html#oscommerce-xt-commerce) | john | `dynamic_1009`, `dynamic_1017`, `dynamic_2004`, `dynamic_4`, `osc` | asserted |
 | [`password-safe-v2`](index.html#password-safe-v2) | hashcat | `9000` | upstream |
-| [`pdf-1-1-1-3-acrobat-2-4-collider-1`](index.html#pdf-1-1-1-3-acrobat-2-4-collider-1) | hashcat | `10410` | upstream |
-| [`pdf-1-4-1-6-acrobat-5-8-user-and-owner-pass`](index.html#pdf-1-4-1-6-acrobat-5-8-user-and-owner-pass) | hashcat | `25400` | upstream |
-| [`pkzip-master-key-6-byte-optimization`](index.html#pkzip-master-key-6-byte-optimization) | hashcat | `20510` | upstream |
 | [`plaintext`](index.html#plaintext) | john | `plaintext` | asserted |
 | [`progressencode-plain`](index.html#progressencode-plain) | mdxfind | `PROGRESSENCODE` | asserted |
 | [`pwsafe3`](index.html#pwsafe3) | hashcat | `5200` | upstream |
@@ -113,7 +106,6 @@ tools/verify-vectors.pl --tool <tool> --only <id> -v
 | [`smf-v1-1`](index.html#smf-v1-1) | john | `dynamic_25`, `dynamic_37` | asserted |
 | [`snmpv3-hmac-sha384-256`](index.html#snmpv3-hmac-sha384-256) | hashcat | `26900` | upstream |
 | [`stdout`](index.html#stdout) | hashcat | `2000` | upstream |
-| [`totp-hmac-sha1`](index.html#totp-hmac-sha1) | hashcat | `18100` | upstream |
 | [`truecrypt-ripemd160-xts-1024-bit-boot-mode-legacy`](index.html#truecrypt-ripemd160-xts-1024-bit-boot-mode-legacy) | hashcat | `6242` | upstream |
 | [`truecrypt-ripemd160-xts-1024-bit-legacy`](index.html#truecrypt-ripemd160-xts-1024-bit-legacy) | hashcat | `6212` | upstream |
 | [`truecrypt-ripemd160-xts-1536-bit-boot-mode-legacy`](index.html#truecrypt-ripemd160-xts-1536-bit-boot-mode-legacy) | hashcat | `6243` | upstream |
@@ -142,16 +134,13 @@ tools/verify-vectors.pl --tool <tool> --only <id> -v
 | [`veracrypt-sha512-xts-1024-bit-legacy`](index.html#veracrypt-sha512-xts-1024-bit-legacy) | hashcat | `13722` | upstream |
 | [`veracrypt-sha512-xts-1536-bit-legacy`](index.html#veracrypt-sha512-xts-1536-bit-legacy) | hashcat | `13723` | upstream |
 | [`veracrypt-sha512-xts-512-bit-legacy`](index.html#veracrypt-sha512-xts-512-bit-legacy) | hashcat | `13721` | upstream |
-| [`veracrypt-streebog-512-xts-1024-bit`](index.html#veracrypt-streebog-512-xts-1024-bit) | hashcat | `29472` | upstream |
 | [`veracrypt-streebog-512-xts-1024-bit-boot-mode-legacy`](index.html#veracrypt-streebog-512-xts-1024-bit-boot-mode-legacy) | hashcat | `13782` | upstream |
 | [`veracrypt-streebog-512-xts-1024-bit-legacy`](index.html#veracrypt-streebog-512-xts-1024-bit-legacy) | hashcat | `13772` | upstream |
-| [`veracrypt-streebog-512-xts-1536-bit`](index.html#veracrypt-streebog-512-xts-1536-bit) | hashcat | `29473` | upstream |
 | [`veracrypt-streebog-512-xts-1536-bit-boot-mode-legacy`](index.html#veracrypt-streebog-512-xts-1536-bit-boot-mode-legacy) | hashcat | `13783` | upstream |
 | [`veracrypt-streebog-512-xts-1536-bit-legacy`](index.html#veracrypt-streebog-512-xts-1536-bit-legacy) | hashcat | `13773` | upstream |
 | [`veracrypt-streebog-512-xts-512-bit-boot-mode-legacy`](index.html#veracrypt-streebog-512-xts-512-bit-boot-mode-legacy) | hashcat | `13781` | upstream |
 | [`veracrypt-streebog-512-xts-512-bit-legacy`](index.html#veracrypt-streebog-512-xts-512-bit-legacy) | hashcat | `13771` | upstream |
 | [`veracrypt-whirlpool-xts-1024-bit-legacy`](index.html#veracrypt-whirlpool-xts-1024-bit-legacy) | hashcat | `13732` | upstream |
-| [`veracrypt-whirlpool-xts-1536-bit`](index.html#veracrypt-whirlpool-xts-1536-bit) | hashcat | `29433` | upstream |
 | [`veracrypt-whirlpool-xts-1536-bit-legacy`](index.html#veracrypt-whirlpool-xts-1536-bit-legacy) | hashcat | `13733` | upstream |
 | [`veracrypt-whirlpool-xts-512-bit-legacy`](index.html#veracrypt-whirlpool-xts-512-bit-legacy) | hashcat | `13731` | upstream |
 | [`wpa-eapol-pbkdf2`](index.html#wpa-eapol-pbkdf2) | hashcat | `2500` | upstream |

@@ -23,3 +23,4 @@ vectors:
   - hash: "$openssl$1$0$8$a1a5e529c8d92da5$8de763bf61377d365243993137ad9729$1$0"
     pass: "\\xc0\\xc1\\xc2\\xc3"
     source: "john"
+    reads_in: ["john"]

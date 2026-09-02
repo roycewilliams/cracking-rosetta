@@ -23,3 +23,4 @@ vectors:
   - hash: "$BitShares$0*ec415018f26e7182a273655aef7cec47966306c48956604462f5b9e1613b3b70ebaaed4d7600b24a424ddb7d4cd56e55"
     pass: "openwall"
     source: "john"
+    reads_in: ["john"]

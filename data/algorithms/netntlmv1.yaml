@@ -28,3 +28,4 @@ vectors:
   - hash: "::WG:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa:3a29fd33694feaa7c51547f0055054b373b5c1813551756a:1122334455667788"
     pass: "password123"
     source: "mdxfind"
+    reads_in: ["hashcat", "mdxfind"]

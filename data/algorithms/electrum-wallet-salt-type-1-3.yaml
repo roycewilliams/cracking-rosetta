@@ -30,3 +30,4 @@ vectors:
   - hash: "$electrum$1*44358283104603165383613672586868*c43a6632d9f59364f74c395a03d8c2ea"
     pass: "hashcat"
     source: "hashcat"
+    reads_in: ["hashcat", "john"]

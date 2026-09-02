@@ -30,6 +30,7 @@ vectors:
   - hash: "e74b7ca3b557563710b439f7f666deee6aab007b"
     pass: "rosetta"
     source: "sheet"
+    reads_in: ["hashcat", "mdxfind"]
 legacy:
   hashes_org: "SHA1X2"
   hashkiller: "sha1(sha1($pass))"

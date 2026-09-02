@@ -28,6 +28,7 @@ vectors:
   - hash: "c127b5d28f587364a7c034865384c53040226025:testuser"
     pass: "rosetta"
     source: "sheet"
+    reads_in: ["hashcat", "john", "mdxfind"]
 legacy:
   hashes_org: "SHA1(SALTPLAIN)"
   hashkiller: "SMF < v1.1"

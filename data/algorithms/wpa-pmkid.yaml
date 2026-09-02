@@ -14,3 +14,4 @@ vectors:
   - hash: "WPA*01*73e1a080000ac80417aa784bec8627fa*fc690c158264*f4747f87f9f4*686173686361742d6573736964***"
     pass: "password123"
     source: "mdxfind"
+    reads_in: ["mdxfind"]

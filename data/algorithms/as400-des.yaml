@@ -28,6 +28,8 @@ vectors:
   - hash: "$as400$des$*OPEN3*B6079DA0E2EF813D"
     pass: "pass1234"
     source: "mdxfind"
+    reads_in: ["mdxfind"]
   - hash: "$as400$des$*OPEN3*EC76FC0DEF5B0A83"
     pass: "SYS1"
     source: "hashcat"
+    reads_in: ["hashcat", "mdxfind"]

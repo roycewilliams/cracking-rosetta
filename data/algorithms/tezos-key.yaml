@@ -24,3 +24,4 @@ vectors:
   - hash: "$tezos$1*2048*put guide flat machine express cave hello connect stay local spike ski romance express brass*jbzbdybr.vpbdbxnn@tezos.example.org*tz1eTjPtwYjdcBMStwVdEcwY2YE3th1bXyMR*a19fce77caa0729c68072dc3eb274c7626a71880d926"
     pass: "4FGU8MpuCo"
     source: "john"
+    reads_in: ["john"]

@@ -25,3 +25,4 @@ vectors:
   - hash: "$tacacs-plus$0$5fde8e68$2c388f382ca4$c006"
     pass: "password123"
     source: "mdxfind"
+    reads_in: ["hashcat", "john", "mdxfind"]

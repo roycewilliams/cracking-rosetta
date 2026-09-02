@@ -24,3 +24,4 @@ vectors:
   - hash: "$kgb$0ab30cf7a52dad93$82a7c454246fc7570224e9f24279791aa2a63bf4"
     pass: "hashcat"
     source: "hashcat"
+    reads_in: ["hashcat"]

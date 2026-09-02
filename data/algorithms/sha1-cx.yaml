@@ -15,3 +15,4 @@ vectors:
   - hash: "fcdc7ec700b887e8eaebf94c2ec52aebb5521223:63038426024388230227"
     pass: "hashcat"
     source: "hashcat"
+    reads_in: ["hashcat"]

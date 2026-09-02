@@ -22,5 +22,6 @@ vectors:
   - hash: "b6c2d5d96031dea226e18338310f1c84"
     pass: "rosetta"
     source: "sheet"
+    reads_in: ["mdxfind"]
 legacy:
   hashes_org: "not supported (just reverse first)"

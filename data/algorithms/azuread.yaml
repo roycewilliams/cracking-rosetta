@@ -23,3 +23,4 @@ vectors:
   - hash: "v1;PPH1_MD4,724b754c4b6d30526f36,100,367ff0ac2a1cb334bb26609c8bfc8ae5f619d1eaf07568df040f407504a20241;"
     pass: "openwall"
     source: "john"
+    reads_in: ["john"]

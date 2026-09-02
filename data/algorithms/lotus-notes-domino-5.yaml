@@ -31,3 +31,4 @@ vectors:
   - hash: "06E0A50B579AD2CD5FFDC48564627EE7"
     pass: "secret"
     source: "john"
+    reads_in: ["john"]

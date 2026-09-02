@@ -32,5 +32,6 @@ vectors:
   - hash: "9400ae28448e1364174dde269b2cce1bca9d7ee8"
     pass: "password123"
     source: "mdxfind"
+    reads_in: ["hashcat", "john", "mdxfind"]
 legacy:
   hashes_org: "n/a"

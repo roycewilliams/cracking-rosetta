@@ -32,9 +32,11 @@ vectors:
   - hash: "94b9a9d316bf89ef7e0ef48c36fac57c"
     pass: "rosetta"
     source: "sheet"
+    reads_in: ["hashcat", "mdxfind"]
   - hash: "cb8bca2e221b4ae44c95ca2f70f8f407"
     pass: "password123"
     source: "mdxfind"
+    reads_in: ["hashcat", "mdxfind"]
 legacy:
   hashes_org: "MD5UCMD5"
   hashkiller: "md5(strtoupper(md5($pass)))"

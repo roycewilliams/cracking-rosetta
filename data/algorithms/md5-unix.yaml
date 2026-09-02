@@ -35,5 +35,6 @@ vectors:
   - hash: "$1$AQQ4Z4bg$RIsaaAerjDK0FYJ0qx4Uj1"
     pass: "rosetta"
     source: "sheet"
+    reads_in: ["hashcat", "john", "mdxfind"]
 legacy:
   hashes_org: "MD5CRYPT"

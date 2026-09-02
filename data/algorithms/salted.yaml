@@ -24,3 +24,4 @@ vectors:
   - hash: "$sisha1$1024$6f77746f6f77746f5fa823ad3c2dc9b58893df73d52b2108b2efce45"
     pass: "magnum"
     source: "john"
+    reads_in: ["john"]

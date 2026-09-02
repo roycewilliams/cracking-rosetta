@@ -31,9 +31,11 @@ vectors:
   - hash: "8236c4133430071e41c5103876d103299d348814"
     pass: "rosetta"
     source: "sheet"
+    reads_in: ["hashcat", "mdxfind"]
   - hash: "06c0bf5b64ece2f648b5f048a7190390"
     pass: "test1"
     source: "john"
+    reads_in: ["john", "mdxfind"]
 legacy:
   hashes_org: "MYSQL5"
   hashkiller: "MySQL4.1/MySQL5"

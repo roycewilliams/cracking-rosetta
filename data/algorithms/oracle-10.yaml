@@ -23,3 +23,4 @@ vectors:
   - hash: "O$SYSTEM#9EEDFA0AD26C6D52"
     pass: "THALES"
     source: "john"
+    reads_in: ["john"]

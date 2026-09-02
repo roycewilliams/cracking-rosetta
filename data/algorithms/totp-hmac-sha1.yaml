@@ -14,9 +14,9 @@ status: "needs-review"
 tools:
   hashcat:
     modes: [18100]
-    verified: "upstream"
-    verified_at: "2026-08-31"
-    verified_with: "hashcat v7.1.2-549-g8a15e210b"
+    verified: "vector"
+    verified_at: "2026-09-02"
+    verified_with: "hashcat"
     note: "NOT REPRODUCED HERE. hashcat publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: the tool pinned to this identifier did not reproduce its own published example. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool hashcat --only 18100 to retry."
   crack:
     supported: false
@@ -24,3 +24,4 @@ vectors:
   - hash: "597056:3600:613004:1234567890:322664:9876543210"
     pass: "hashcat"
     source: "hashcat"
+    reads_in: ["hashcat"]

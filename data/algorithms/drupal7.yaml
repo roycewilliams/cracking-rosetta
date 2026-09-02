@@ -33,3 +33,4 @@ vectors:
   - hash: "$S$C00000000uP3JXd.0IL30e76wJH2NZ/Ovd0AALo.mjXytygeAP9u"
     pass: "password123"
     source: "mdxfind"
+    reads_in: ["hashcat", "john", "mdxfind"]

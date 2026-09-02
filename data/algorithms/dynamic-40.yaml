@@ -23,3 +23,4 @@ vectors:
   - hash: "$dynamic_40$94bce4d9084199508669b39f044064082a093de3$HEX$20440a340000000100000000000f4240000f424000000000051c010000000002"
     pass: "password12345"
     source: "john"
+    reads_in: ["john"]

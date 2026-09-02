@@ -24,3 +24,4 @@ vectors:
   - hash: "$keyring$db1b562e453a0764*3221*16*0*02b5c084e4802369c42507300f2e5e56"
     pass: "openwall"
     source: "john"
+    reads_in: ["john"]

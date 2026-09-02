@@ -43,3 +43,4 @@ vectors:
   - hash: "e983672a03adcc9767b24584338eb378:00"
     pass: "hashcat"
     source: "hashcat"
+    reads_in: ["hashcat", "john", "mdxfind"]

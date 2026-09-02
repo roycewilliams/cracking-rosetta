@@ -23,3 +23,4 @@ vectors:
   - hash: "$K4$e35e9294ecef926d,0123"
     pass: "U*U*U*U*"
     source: "john"
+    reads_in: ["john"]

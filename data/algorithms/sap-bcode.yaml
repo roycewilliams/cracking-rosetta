@@ -34,9 +34,12 @@ vectors:
   - hash: "ABCDEFGH$246EFDAD288F373D"
     pass: "pass1234"
     source: "mdxfind"
+    reads_in: ["mdxfind"]
   - hash: "------------$058DE95926E00F32"
     pass: "--+----"
     source: "john"
+    reads_in: ["hashcat", "john", "mdxfind"]
   - hash: "027642760180$77EC38630C08DF8D"
     pass: "HASHCAT"
     source: "hashcat"
+    reads_in: ["hashcat", "john", "mdxfind"]

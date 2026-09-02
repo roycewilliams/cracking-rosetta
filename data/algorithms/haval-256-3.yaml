@@ -36,8 +36,10 @@ vectors:
   - hash: "91850C6487C9829E791FC5B58E98E372F3063256BB7D313A93F1F83B426AEDCC"
     pass: "HAVAL"
     source: "john"
+    reads_in: ["john", "mdxfind"]
   - hash: "f7d3b3936e52b5c7e36d76ed06d31c1fd92761b002ddc6426dccbac1a598bee9"
     pass: "rosetta"
     source: "sheet"
+    reads_in: ["john", "mdxfind"]
 legacy:
   hashes_org: "HAVAL256-3"

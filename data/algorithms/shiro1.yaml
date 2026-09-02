@@ -28,3 +28,4 @@ vectors:
   - hash: "$shiro1$SHA-512$1024$QUFBQUFBQUFBQUFBQUFBQQ==$PGoJ83m0phYuc1i1rh7Vqv2+kkuSqxgEX+Ah0luTEOXRcKChRdW2wI38pCMRLTWzeEhMNricVDAqJ3cwO95ItA=="
     pass: "password123"
     source: "mdxfind"
+    reads_in: ["hashcat", "mdxfind"]

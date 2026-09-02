@@ -43,5 +43,6 @@ vectors:
   - hash: "b4b9b02e6f09a9bd760f388b67351e2b"
     pass: "hashcat"
     source: "hashcat"
+    reads_in: ["hashcat", "john", "mdxfind"]
 legacy:
   hashes_org: "TROLLHUNTNTLM"

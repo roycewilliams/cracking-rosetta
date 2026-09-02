@@ -24,3 +24,4 @@ vectors:
   - hash: "$pgpdisk$0*5*16000*3a1bfe10b9d17cf7b446cd94564fc594*1a1ce4453d81117830934495a2516ebc"
     pass: "openwall"
     source: "john"
+    reads_in: ["john"]

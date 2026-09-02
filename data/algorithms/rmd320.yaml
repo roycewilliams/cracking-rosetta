@@ -37,8 +37,10 @@ vectors:
   - hash: "e3a8ce82f0e176fd498227b3994bf3b238197c98a9576c7e5741b5a7f22cfab7ef9c2bbf462d2a32"
     pass: "password123"
     source: "mdxfind"
+    reads_in: ["hashcat", "john", "mdxfind"]
   - hash: "b05513f048c2096c2472980dc4893a65e4a2b552a6fa652983d92627ebc120cf58d01c56eb9d6960"
     pass: "rosetta"
     source: "sheet"
+    reads_in: ["hashcat", "john", "mdxfind"]
 legacy:
   hashes_org: "RIPEMD320"

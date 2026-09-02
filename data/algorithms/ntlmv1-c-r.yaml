@@ -23,3 +23,4 @@ vectors:
   - hash: "$NETNTLM$1122334455667788$BFCCAF26128EC95F9999C9792F49434267A1D9B0EF89BFFB"
     pass: "g3rg3g3rg3g3rg3"
     source: "john"
+    reads_in: ["john"]

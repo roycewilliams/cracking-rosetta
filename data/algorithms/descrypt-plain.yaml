@@ -34,5 +34,6 @@ vectors:
   - hash: "mIRigMYTnft4M"
     pass: "rosetta"
     source: "sheet"
+    reads_in: ["hashcat", "john", "mdxfind"]
 legacy:
   hashes_org: "DESCRYPT"

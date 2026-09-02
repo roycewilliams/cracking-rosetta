@@ -23,3 +23,4 @@ vectors:
   - hash: "$response$679066476e67b5c7c4e88f04be567f8b$user$myrealm$GET$/$8c12bd8f728afe56d45a0ce846b70e5a$00000001$4b61913cec32e2c9$auth"
     pass: "nocode"
     source: "john"
+    reads_in: ["john"]

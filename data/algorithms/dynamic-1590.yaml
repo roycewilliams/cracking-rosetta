@@ -23,3 +23,4 @@ vectors:
   - hash: "$dynamic_1590$4C106E52CA196986E1C52C7FCD02AF046B76C73C$HEX$0052004F00420020002000200020002000200020"
     pass: "banaan"
     source: "john"
+    reads_in: ["john"]

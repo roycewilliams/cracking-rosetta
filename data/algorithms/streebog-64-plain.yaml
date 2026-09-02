@@ -39,3 +39,4 @@ vectors:
   - hash: "ef6239cb4ceb087bc3cb8b0f8fe5f7f7c9ca73ec885ec721d641ae1d427092c2c1c3cce546c0edf5041e8a5a3e79dfa0d0345de02dcb62ae999c6a3c7ef73953"
     pass: "rosetta"
     source: "sheet"
+    reads_in: ["hashcat", "john", "mdxfind"]

@@ -35,6 +35,7 @@ vectors:
   - hash: "299bd128c1101fd6"
     pass: "HASHCAT"
     source: "hashcat"
+    reads_in: ["hashcat", "mdxfind"]
 legacy:
   hashes_org: "LM"
   hashkiller: "n/a"

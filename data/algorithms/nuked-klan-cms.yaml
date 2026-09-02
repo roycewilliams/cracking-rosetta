@@ -23,3 +23,4 @@ vectors:
   - hash: "$nk$*379637b4fcde21b2c5fbc9a00af505e997443267*#17737d3661312121d5ae7d5c6156c0298"
     pass: "openwall"
     source: "john"
+    reads_in: ["john"]

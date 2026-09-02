@@ -24,3 +24,4 @@ vectors:
   - hash: "$lpcli$0$lulu@mailinator.com$1234$3fec6cd2d8c049cbafe9fa6a9343f42f$f21d8e60ad22db53033e431700fb5e0c"
     pass: "Badpassword098765"
     source: "john"
+    reads_in: ["john"]

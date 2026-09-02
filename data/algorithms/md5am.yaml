@@ -21,3 +21,4 @@ vectors:
   - hash: "95e20a37247b576b68f9f4e1d389c3ad:admin"
     pass: "rosetta"
     source: "sheet"
+    reads_in: ["mdxfind"]

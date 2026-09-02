@@ -25,3 +25,4 @@ vectors:
   - hash: "{x-issha, 1024}J/gd5d88iJICTDsKpDiuiED4gDw2NzU4MzE2MTA="
     pass: "password123"
     source: "mdxfind"
+    reads_in: ["hashcat", "john", "mdxfind"]

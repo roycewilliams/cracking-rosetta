@@ -28,6 +28,7 @@ vectors:
   - hash: "c3b51271a851284dbf87bbb806c6ad42d537c6e20720a966"
     pass: "rosetta"
     source: "sheet"
+    reads_in: ["john", "mdxfind"]
 legacy:
   hashes_org: "HAVAL192-4"
 notes: "sheet vector corrected 2026-08-29: the HAVAL-192 4-pass and 5-pass example hashes were swapped in the source sheet. mdxfind pinned to each type and john dynamic_230/dynamic_240 independently agree on the pairing now recorded."

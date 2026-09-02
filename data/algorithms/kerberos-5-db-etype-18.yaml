@@ -23,3 +23,4 @@ vectors:
   - hash: "OLYMPE.OLtest$214bb89cf5b8330112d52189ab05d9d05b03b5a961fe6d06203335ad5f339b26"
     pass: "password"
     source: "john"
+    reads_in: ["john"]

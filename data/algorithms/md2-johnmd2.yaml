@@ -23,3 +23,4 @@ vectors:
   - hash: "$md2$ab4f496bfb2a530b219ff33031fe06b0"
     pass: "message digest"
     source: "john"
+    reads_in: ["john"]

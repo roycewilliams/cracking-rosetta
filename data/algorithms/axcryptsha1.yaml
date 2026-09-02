@@ -25,3 +25,4 @@ vectors:
   - hash: "$axcrypt_sha1$cbfdac6008f9cab4083784cbd1874f76"
     pass: "password123"
     source: "mdxfind"
+    reads_in: ["hashcat", "mdxfind"]

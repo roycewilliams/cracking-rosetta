@@ -24,3 +24,4 @@ vectors:
   - hash: "$bitlocker$0$16$134bd2634ba580adc3758ca5a84d8666$1048576$12$9080903a0d9dd20103000000$60$0c52fdd87f17ac55d4f4b82a00b264070f36a84ead6d4cd330368f7dddfde1bdc9f5d08fa526dae361b3d64875f76a077fe9c67f44e08d56f0131bb2"
     pass: "openwall@123"
     source: "john"
+    reads_in: ["john"]

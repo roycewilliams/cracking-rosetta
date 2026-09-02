@@ -37,3 +37,4 @@ vectors:
   - hash: "$sspr$4$100000$NzYwNjMyNDc2MTQ2OTE4NTUzODAyODE3$f1a614b4400702da2d49c8ee3f3b5f835dabc92ba1fd192471cbab80e9f3acb24edcfb0fa0b7acf74233a1f87c880f76a3052d5bd68e5f1fdcfbaafd7f98c08e"
     pass: "password123"
     source: "mdxfind"
+    reads_in: ["hashcat", "john", "mdxfind"]

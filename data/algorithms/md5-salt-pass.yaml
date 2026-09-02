@@ -41,9 +41,11 @@ vectors:
   - hash: "6812da91ee7426c161a69aa4d5d373c5:6lg3p16"
     pass: "rosetta"
     source: "sheet"
+    reads_in: ["hashcat", "john", "mdxfind"]
   - hash: "dec0dedb8b2d4ff878ae6add4128b8ac:rosettagz5gk"
     pass: "rosetta"
     source: "vanity"
+    reads_in: ["hashcat", "john", "mdxfind"]
 legacy:
   hashes_org: "MD5(SALTPLAIN)"
   hashkiller: "md5($salt.$pass)"

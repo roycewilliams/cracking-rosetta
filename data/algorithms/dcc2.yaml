@@ -35,3 +35,4 @@ vectors:
   - hash: "$DCC2$10240#6848#4f9d6397a4756474a8ee1bdf701f4db5"
     pass: "password123"
     source: "mdxfind"
+    reads_in: ["hashcat", "john", "mdxfind"]

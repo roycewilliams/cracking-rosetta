@@ -23,3 +23,4 @@ vectors:
   - hash: "$as400des$AAAAAAA*CA2E330B2FD1820E"
     pass: "AAAAAAAA"
     source: "john"
+    reads_in: ["john"]

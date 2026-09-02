@@ -40,9 +40,11 @@ vectors:
   - hash: "d63dc919e201d7bc4c825630d2cf25fdc93d4b2f0d46706d29038d01"
     pass: "password"
     source: "john"
+    reads_in: ["hashcat", "john", "mdxfind"]
   - hash: "223b5c5625a10b045533f2f731dc47f572b3070feaf0838dffba0dbb"
     pass: "rosetta"
     source: "sheet"
+    reads_in: ["hashcat", "john", "mdxfind"]
 legacy:
   hashes_org: "SHA224"
   hashkiller: "n/a"

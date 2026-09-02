@@ -23,3 +23,4 @@ vectors:
   - hash: "$chap$0*cc7e5247514551acdcbf782c4027bfb1*fdfdad5277812ae40956a66f3db23308"
     pass: "password"
     source: "john"
+    reads_in: ["john"]

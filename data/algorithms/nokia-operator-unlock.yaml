@@ -24,3 +24,4 @@ vectors:
   - hash: "$sl3$35831503698405$d8f6b336a4df3336bf7de58a38b1189f6c5ce1e8"
     pass: 621888462499899
     source: "john"
+    reads_in: ["john"]

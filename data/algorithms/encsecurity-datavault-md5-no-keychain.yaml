@@ -30,3 +30,4 @@ vectors:
   - hash: "$encdv$1$1$3a427b9ee5851118$4f52176bb9a1b3b6"
     pass: "hashcat"
     source: "hashcat"
+    reads_in: ["hashcat", "john"]

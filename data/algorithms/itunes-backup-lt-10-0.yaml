@@ -30,3 +30,4 @@ vectors:
   - hash: "$itunes_backup$*9*ebd7f9b33293b2511f0a4139d5b213feff51476968863cef60ec38d720497b6ff39a0bb63fa9f84e*10000*2202015774208421818002001652122401871832**"
     pass: "hashcat"
     source: "hashcat"
+    reads_in: ["hashcat", "john"]

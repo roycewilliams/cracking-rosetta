@@ -23,5 +23,6 @@ vectors:
   - hash: "d5a61a408f8bfd58bfd8ab00c1494f2a159550e6"
     pass: "rosetta"
     source: "sheet"
+    reads_in: ["mdxfind"]
 legacy:
   hashes_org: "SHA1MYSQL5TOT"

@@ -26,6 +26,8 @@ vectors:
   - hash: "2cd237c6a88649f18a4cd4a3bc22f966:testsalt"
     pass: "password123"
     source: "mdxfind"
+    reads_in: ["hashcat", "mdxfind"]
   - hash: "dec0ded4aeae37ce7889ec1fbf057697:rosetta5g7lk"
     pass: "rosetta"
     source: "vanity"
+    reads_in: ["hashcat", "mdxfind"]

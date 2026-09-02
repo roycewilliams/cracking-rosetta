@@ -28,6 +28,8 @@ vectors:
   - hash: "ABCDEFGH$246EFDAD00000000"
     pass: "pass1234"
     source: "mdxfind"
+    reads_in: ["mdxfind"]
   - hash: "027642760180$77EC386300000000"
     pass: "HASHCAT"
     source: "hashcat"
+    reads_in: ["hashcat", "mdxfind"]

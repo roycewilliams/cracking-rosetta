@@ -37,3 +37,4 @@ vectors:
   - hash: "$fvde$1$16$80771171105233481004850004085037$20000$ead1884ed4297f1087be86ae90ab696018ef07cc96fefe57"
     pass: "password123"
     source: "mdxfind"
+    reads_in: ["hashcat", "john"]
