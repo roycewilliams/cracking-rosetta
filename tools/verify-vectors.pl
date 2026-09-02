@@ -714,13 +714,25 @@ if (!$dry) {
             my @bad = grep { !$cracked{$tool}{$id}{$_} } @idents;
 
             if (!@bad) {
+                # A clean run always withdraws a machine-written note that
+                # says the opposite of the tier, INCLUDING on a block that
+                # was already at 'vector'. The early return used to skip
+                # this, so a block promoted in one run kept seed-orphans'
+                # marker from the run before it: measured 2026-09-02, 24
+                # blocks stood at tier 'vector' while their own note read
+                # "NOT REPRODUCED HERE ... the claim is upstream's, not this
+                # repository's". A reader of that row cannot tell which half
+                # to believe, and the tier is the load-bearing one.
+                if (($blk->{note} // '') =~ /^(hashcat mapping shipped|from hashpipe|vector replaced|NOT REPRODUCED HERE)/) {
+                    delete $blk->{note};
+                    $touched = 1;
+                }
                 next if ($blk->{verified} // '') eq 'vector';
                 $blk->{verified}      = 'vector';
                 $blk->{verified_at}   = $today;
                 $blk->{verified_with} = $tool eq 'hashcat' ? 'hashcat'
                                       : $tool eq 'mdxfind' ? 'mdxfind'
                                       :                      'john';
-                delete $blk->{note} if ($blk->{note} // '') =~ /^(hashcat mapping shipped|from hashpipe|vector replaced)/;
                 $promoted{$tool}++;
                 $touched = 1;
             }

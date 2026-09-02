@@ -17,7 +17,6 @@ tools:
     verified: "vector"
     verified_at: "2026-09-02"
     verified_with: "hashcat"
-    note: "NOT REPRODUCED HERE. hashcat publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: the run exceeded the 30s timeout; it may simply need longer. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool hashcat --only 29472 to retry."
   crack:
     supported: false
 vectors:

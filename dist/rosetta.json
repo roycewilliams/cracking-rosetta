@@ -22231,7 +22231,7 @@
          "serialization" : "unknown",
          "status" : "needs-review",
          "tool_note" : {
-            "hashcat" : "NOT REPRODUCED HERE. hashcat publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: the run exceeded the 30s timeout; it may simply need longer. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool hashcat --only 29543 to retry.",
+            "hashcat" : "",
             "john" : "",
             "mdxfind" : ""
          },
@@ -22636,7 +22636,7 @@
          "serialization" : "unknown",
          "status" : "needs-review",
          "tool_note" : {
-            "hashcat" : "NOT REPRODUCED HERE. hashcat publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: the run exceeded the 30s timeout; it may simply need longer. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool hashcat --only 29533 to retry.",
+            "hashcat" : "",
             "john" : "",
             "mdxfind" : ""
          },
@@ -25031,7 +25031,7 @@
          "tool_note" : {
             "hashcat" : "mode discovered by round-trip search, not by name",
             "john" : "format discovered by round-trip search, not by name",
-            "mdxfind" : "NOT REPRODUCED HERE. mdxfind publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: the tool pinned to this identifier did not reproduce its own published example. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool mdxfind --only MD4UTF16UC to retry."
+            "mdxfind" : ""
          },
          "vecs" : 1
       },
@@ -36929,7 +36929,7 @@
          "serialization" : "unknown",
          "status" : "needs-review",
          "tool_note" : {
-            "hashcat" : "NOT REPRODUCED HERE. hashcat publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: this is a collider mode: it recovers a cipher key, not the password, so the published plaintext is not what comes back. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool hashcat --only 9710 to retry.",
+            "hashcat" : "",
             "john" : "",
             "mdxfind" : ""
          },
@@ -37019,7 +37019,7 @@
          "serialization" : "unknown",
          "status" : "needs-review",
          "tool_note" : {
-            "hashcat" : "NOT REPRODUCED HERE. hashcat publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: this is a collider mode: it recovers a cipher key, not the password, so the published plaintext is not what comes back. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool hashcat --only 9810 to retry.",
+            "hashcat" : "",
             "john" : "",
             "mdxfind" : ""
          },
@@ -40765,7 +40765,7 @@
          "serialization" : "unknown",
          "status" : "needs-review",
          "tool_note" : {
-            "hashcat" : "NOT REPRODUCED HERE. hashcat publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: this is a collider mode: it recovers a cipher key, not the password, so the published plaintext is not what comes back. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool hashcat --only 10410 to retry.",
+            "hashcat" : "",
             "john" : "",
             "mdxfind" : ""
          },
@@ -40953,7 +40953,7 @@
          "serialization" : "unknown",
          "status" : "needs-review",
          "tool_note" : {
-            "hashcat" : "NOT REPRODUCED HERE. hashcat publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: the tool pinned to this identifier did not reproduce its own published example. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool hashcat --only 25400 to retry.",
+            "hashcat" : "",
             "john" : "",
             "mdxfind" : ""
          },
@@ -41955,7 +41955,7 @@
          "serialization" : "unknown",
          "status" : "needs-review",
          "tool_note" : {
-            "hashcat" : "NOT REPRODUCED HERE. hashcat publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: the tool pinned to this identifier did not reproduce its own published example. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool hashcat --only 20510 to retry.",
+            "hashcat" : "",
             "john" : "",
             "mdxfind" : ""
          },
@@ -49928,7 +49928,7 @@
          "tool_note" : {
             "hashcat" : "",
             "john" : "",
-            "mdxfind" : "NOT REPRODUCED HERE. mdxfind publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: the tool pinned to this identifier did not reproduce its own published example. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool mdxfind --only SHA1-MD5CAPPEPPER-MD5SALT to retry."
+            "mdxfind" : ""
          },
          "vecs" : 1
       },
@@ -50153,7 +50153,7 @@
          "tool_note" : {
             "hashcat" : "",
             "john" : "",
-            "mdxfind" : "NOT REPRODUCED HERE. mdxfind publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: the tool pinned to this identifier did not reproduce its own published example. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool mdxfind --only SHA1-MD5PEPPER-MD5MD5SALT to retry."
+            "mdxfind" : ""
          },
          "vecs" : 1
       },
@@ -50198,7 +50198,7 @@
          "tool_note" : {
             "hashcat" : "",
             "john" : "",
-            "mdxfind" : "NOT REPRODUCED HERE. mdxfind publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: the tool pinned to this identifier did not reproduce its own published example. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool mdxfind --only SHA1-MD5PEPPER-MD5SALT to retry."
+            "mdxfind" : ""
          },
          "vecs" : 1
       },
@@ -50243,7 +50243,7 @@
          "tool_note" : {
             "hashcat" : "",
             "john" : "",
-            "mdxfind" : "NOT REPRODUCED HERE. mdxfind publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: the tool pinned to this identifier did not reproduce its own published example. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool mdxfind --only SHA1-MD5PEPPER-MD5SALTMD5PASS to retry."
+            "mdxfind" : ""
          },
          "vecs" : 1
       },
@@ -50603,7 +50603,7 @@
          "tool_note" : {
             "hashcat" : "",
             "john" : "",
-            "mdxfind" : "NOT REPRODUCED HERE. mdxfind publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: the tool pinned to this identifier did not reproduce its own published example. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool mdxfind --only SHA1-PEPPER-MD5SALT to retry."
+            "mdxfind" : ""
          },
          "vecs" : 1
       },
@@ -53304,7 +53304,7 @@
          "tool_note" : {
             "hashcat" : "",
             "john" : "",
-            "mdxfind" : "NOT REPRODUCED HERE. mdxfind publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: the tool pinned to this identifier did not reproduce its own published example. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool mdxfind --only SHA1MD5SALTPASSPEPPER to retry."
+            "mdxfind" : ""
          },
          "vecs" : 1
       },
@@ -55335,7 +55335,7 @@
          "tool_note" : {
             "hashcat" : "",
             "john" : "",
-            "mdxfind" : "NOT REPRODUCED HERE. mdxfind publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: the tool pinned to this identifier did not reproduce its own published example. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool mdxfind --only SHA1SALTMD5MD5PASSPEPPER to retry."
+            "mdxfind" : ""
          },
          "vecs" : 1
       },
@@ -55470,7 +55470,7 @@
          "tool_note" : {
             "hashcat" : "",
             "john" : "",
-            "mdxfind" : "NOT REPRODUCED HERE. mdxfind publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: the tool pinned to this identifier did not reproduce its own published example. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool mdxfind --only SHA1SALTMD5PASSPEPPER to retry."
+            "mdxfind" : ""
          },
          "vecs" : 1
       },
@@ -55560,7 +55560,7 @@
          "tool_note" : {
             "hashcat" : "",
             "john" : "",
-            "mdxfind" : "NOT REPRODUCED HERE. mdxfind publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: the tool pinned to this identifier did not reproduce its own published example. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool mdxfind --only SHA1SALTMD5SHA1PASSPEPPER to retry."
+            "mdxfind" : ""
          },
          "vecs" : 1
       },
@@ -55695,7 +55695,7 @@
          "tool_note" : {
             "hashcat" : "",
             "john" : "",
-            "mdxfind" : "NOT REPRODUCED HERE. mdxfind publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: the tool pinned to this identifier did not reproduce its own published example. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool mdxfind --only SHA1SALTMD5UCPASSPEPPER to retry."
+            "mdxfind" : ""
          },
          "vecs" : 1
       },
@@ -55875,7 +55875,7 @@
          "tool_note" : {
             "hashcat" : "",
             "john" : "",
-            "mdxfind" : "NOT REPRODUCED HERE. mdxfind publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: the tool pinned to this identifier did not reproduce its own published example. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool mdxfind --only SHA1SALTSHA1PASSPEPPER to retry."
+            "mdxfind" : ""
          },
          "vecs" : 1
       },
@@ -58917,7 +58917,7 @@
          "tool_note" : {
             "hashcat" : "mode discovered by round-trip search, not by name",
             "john" : "format discovered by round-trip search, not by name",
-            "mdxfind" : "NOT REPRODUCED HERE. mdxfind publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: the tool pinned to this identifier did not reproduce its own published example. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool mdxfind --only SHA1UCUTF16LE to retry."
+            "mdxfind" : ""
          },
          "vecs" : 1
       },
@@ -66810,7 +66810,7 @@
          "serialization" : "unknown",
          "status" : "needs-review",
          "tool_note" : {
-            "hashcat" : "NOT REPRODUCED HERE. hashcat publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: the tool pinned to this identifier did not reproduce its own published example. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool hashcat --only 18100 to retry.",
+            "hashcat" : "",
             "john" : "",
             "mdxfind" : ""
          },
@@ -69781,7 +69781,7 @@
          "serialization" : "unknown",
          "status" : "needs-review",
          "tool_note" : {
-            "hashcat" : "NOT REPRODUCED HERE. hashcat publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: the run exceeded the 30s timeout; it may simply need longer. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool hashcat --only 29472 to retry.",
+            "hashcat" : "",
             "john" : "",
             "mdxfind" : ""
          },
@@ -69961,7 +69961,7 @@
          "serialization" : "unknown",
          "status" : "needs-review",
          "tool_note" : {
-            "hashcat" : "NOT REPRODUCED HERE. hashcat publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: the run exceeded the 30s timeout; it may simply need longer. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool hashcat --only 29473 to retry.",
+            "hashcat" : "",
             "john" : "",
             "mdxfind" : ""
          },
@@ -70411,7 +70411,7 @@
          "serialization" : "unknown",
          "status" : "needs-review",
          "tool_note" : {
-            "hashcat" : "NOT REPRODUCED HERE. hashcat publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: the run exceeded the 30s timeout; it may simply need longer. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool hashcat --only 29433 to retry.",
+            "hashcat" : "",
             "john" : "",
             "mdxfind" : ""
          },

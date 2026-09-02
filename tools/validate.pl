@@ -579,6 +579,25 @@ for my $file (@files) {
                         $file, $tool);
                 }
 
+                # And a block must not say the opposite of its own tier.
+                # seed-orphans.pl writes 'NOT REPRODUCED HERE ... the claim
+                # is upstream's, not this repository's' on a row it created
+                # but could not round-trip. That sentence is true at tier
+                # 'upstream' and false at tier 'vector', and a later
+                # verification used to promote the tier without withdrawing
+                # it: measured 2026-09-02, 24 blocks carried both, and a
+                # reader of one of those rows had no way to tell which half
+                # to believe. It is a machine-written marker, so testing for
+                # it is a lookup rather than a judgement about prose.
+                if (defined $tier && $tier eq 'vector'
+                    && ($blk->{note} // '') =~ /^NOT REPRODUCED HERE/) {
+                    err("%s: tools.%s is tier 'vector' but its note still says "
+                      . "NOT REPRODUCED HERE. Re-run verify-vectors.pl --tool %s "
+                      . "--only %s, which withdraws the marker on a clean run; "
+                      . "if it does not verify, the TIER is the wrong half",
+                        $file, $tool, $tool, $d->{id} // '?');
+                }
+
                 # Identifier cross-reference, the point of this script.
                 my $named = 0;
                 for my $key (@{ $IDENT_KEYS{$tool} || [] }) {
