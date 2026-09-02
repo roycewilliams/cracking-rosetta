@@ -95,6 +95,15 @@ use File::Basename qw(basename);
 use YAML::XS qw(LoadFile);
 use RosettaEmit qw(emit_entry);
 use RosettaHx qw(parse_appendix translate_hx is_multi_emit %FUNC);
+
+# verified_at is an AUDIT field: it says when the check ran, so it has to be
+# today's date and never a literal. seed-hx.pl carried '2026-08-31' hardcoded
+# and stamped it on work done two days later until 989e06f; this tool had the
+# identical bug in three places and stamped 2026-08-31 on ten entries denoted
+# on 2026-09-02 before it was found. Same class as the prose staleness gate,
+# one layer down in the data.
+my $TODAY = do { my @t = localtime; sprintf '%04d-%02d-%02d',
+                 $t[5] + 1900, $t[4] + 1, $t[3] };
 use RosettaTools qw(tool_path tool_env_help);
 
 my $PROG = basename($0);
@@ -255,9 +264,9 @@ for my $f (@files) {
                 delete $e->{john_dynamic_expr};
                 $e->{expression_proof} = {
                     verified   => 'absent',
-                    verified_at=> '2026-08-31',
+                    verified_at=> $TODAY,
                     verified_with => $JVER,
-                    note => "Withdrawn 2026-08-31. This entry carried the expression "
+                    note => "Withdrawn $TODAY. This entry carried the expression "
                           . "\"$was\", transcribed from the $HXCITE entry for mdxfind "
                           . "type $type ($hx->{$type}{index}) by a parser that has since "
                           . "been corrected: it " . join('; and it ', @why) . ". Nothing "
@@ -283,7 +292,23 @@ for my $f (@files) {
 
     #-- the two qualifying facts ------------------------------------------
     my ($expr, $why, $tokens) = translate_hx($hx->{$type}{expr});
-    if (defined $expr) { $skip{'expressible: seed-hx.pl writes this one'}++; next }
+    my $multi = is_multi_emit($type, $hx->{$type});
+
+    # The deferral to seed-hx.pl must come AFTER the multi-emit test, not
+    # before it. A multi-emit type's appendix row is often perfectly
+    # expressible -- GOSTHEXSALT reads gost(pass . salt), SHA1RMD160TRUNC
+    # reads sha1(cut(rmd160(pass),0,32)) -- so testing expressibility first
+    # sent it to seed-hx.pl, which then refused it BECAUSE it is multi-emit,
+    # and nothing wrote anything. Measured 2026-09-02: seed-hx.pl was skipping
+    # 61 types as multi-emit while this tool was deferring to it, and the
+    # HEXSALT and TRUNC families sat with no expression and no denotation
+    # because each tool believed the other had them. CLAUDE.md is explicit
+    # that such a type gets a denotation and never an expression, so this is
+    # where they belong.
+    if (defined $expr && !$multi) {
+        $skip{'expressible: seed-hx.pl writes this one'}++;
+        next;
+    }
 
     # THE PASSWORD GUARD, and it is not paranoia. Appendix A's rows for e308
     # SHA1MD5USER, e354 MD5CAPMD5USER and e355 MD5CAPMD5MD5USER read
@@ -302,7 +327,6 @@ for my $f (@files) {
     }
 
     my ($text, $note, $proofnote);
-    my $multi = is_multi_emit($type, $hx->{$type});
 
     if ($multi) {
         $text = $hx->{$type}{expr};
@@ -363,7 +387,7 @@ for my $f (@files) {
 
     $e->{expression_proof} = {
         verified      => 'absent',
-        verified_at   => '2026-08-31',
+        verified_at   => $TODAY,
         verified_with => $JVER,
         note          => $proofnote,
     };

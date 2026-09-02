@@ -1,6 +1,15 @@
 id: "haval128-3-md5-salt-plain-salt"
 name: "haval128_3(md5($salt.$plain).\":\".$salt)"
 aliases: ["haval128_3(md5($salt.$plain).\":\".$salt.\":\")", "haval128_3(md5($salt.$plain).$salt)"]
+expression_proof:
+  verified: "absent"
+  verified_at: "2026-09-02"
+  verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
+  note: "mdxfind type HAV128HEXSALT (e187) is MULTI-EMIT: it computes several candidate digests per input and matches if any one reproduces the stored hash. There is therefore no single expression to record, and writing one of the emitted forms into expression: would be a false claim even though the string itself is correct. This is also why two vectors of such a type can disagree with each other, and why a tool matching one of them is not evidence about the other."
+denotation:
+  text: "hav128(pass . salt)"
+  source: "mdxfind"
+  note: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A, entry for mdxfind type HAV128HEXSALT (e187), which states hav128(pass . salt) (Note [24]). This is what the type emits, not a single construction -- see expression_proof."
 status: "ok"
 tools:
   hashcat:

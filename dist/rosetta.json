@@ -11852,10 +11852,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "gost(pass . salt)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "mdxfind type GOSTHEXSALT (e186) is MULTI-EMIT: it computes several candidate digests per input and matches if any one reproduces the stored hash. There is therefore no single expression to record, and writing one of the emitted forms into expression: would be a false claim even though the string itself is correct. This is also why two vectors of such a type can disagree with each other, and why a tool matching one of them is not evidence about the other.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -14763,10 +14763,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "hav128(pass . salt)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "mdxfind type HAV128HEXSALT (e187) is MULTI-EMIT: it computes several candidate digests per input and matches if any one reproduces the stored hash. There is therefore no single expression to record, and writing one of the emitted forms into expression: would be a false claim even though the string itself is correct. This is also why two vectors of such a type can disagree with each other, and why a tool matching one of them is not evidence about the other.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -25509,10 +25509,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "md5(pass . md5(pass))",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "mdxfind type MD5PASSMD5 (e201) is MULTI-EMIT: it computes several candidate digests per input and matches if any one reproduces the stored hash. There is therefore no single expression to record, and writing one of the emitted forms into expression: would be a false claim even though the string itself is correct. This is also why two vectors of such a type can disagree with each other, and why a tool matching one of them is not evidence about the other.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -27622,10 +27622,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "md5(md5(pass).pass)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "mdxfind type MD5MD5PASS (e123) is MULTI-EMIT: it computes several candidate digests per input and matches if any one reproduces the stored hash. There is therefore no single expression to record, and writing one of the emitted forms into expression: would be a false claim even though the string itself is correct. This is also why two vectors of such a type can disagree with each other, and why a tool matching one of them is not evidence about the other.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -27712,10 +27712,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "md5(salt . salt . md5(pass))",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "mdxfind type MD52SALTMD5 (e283) is MULTI-EMIT: it computes several candidate digests per input and matches if any one reproduces the stored hash. There is therefore no single expression to record, and writing one of the emitted forms into expression: would be a false claim even though the string itself is correct. This is also why two vectors of such a type can disagree with each other, and why a tool matching one of them is not evidence about the other.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -47550,10 +47550,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "sha1(pass . salt)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "mdxfind type SHA1HEXSALT (e184) is MULTI-EMIT: it computes several candidate digests per input and matches if any one reproduces the stored hash. There is therefore no single expression to record, and writing one of the emitted forms into expression: would be a false claim even though the string itself is correct. This is also why two vectors of such a type can disagree with each other, and why a tool matching one of them is not evidence about the other.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -55168,10 +55168,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "sha1(cut(rmd160(pass),0,32))",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "mdxfind type SHA1RMD160TRUNC (e746) is MULTI-EMIT: it computes several candidate digests per input and matches if any one reproduces the stored hash. There is therefore no single expression to record, and writing one of the emitted forms into expression: would be a false claim even though the string itself is correct. This is also why two vectors of such a type can disagree with each other, and why a tool matching one of them is not evidence about the other.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "unknown"
@@ -56383,10 +56383,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "sha1(sha1(md5(md5(pass))) . salt)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "mdxfind type SHA1SHA1MD5MD5PASS1SALT (e687) is MULTI-EMIT: it computes several candidate digests per input and matches if any one reproduces the stored hash. There is therefore no single expression to record, and writing one of the emitted forms into expression: would be a false claim even though the string itself is correct. This is also why two vectors of such a type can disagree with each other, and why a tool matching one of them is not evidence about the other.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "unknown"
@@ -58504,10 +58504,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "sha1(cut(sha384(pass),0,32))",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "mdxfind type SHA1SHA384TRUNC (e745) is MULTI-EMIT: it computes several candidate digests per input and matches if any one reproduces the stored hash. There is therefore no single expression to record, and writing one of the emitted forms into expression: would be a false claim even though the string itself is correct. This is also why two vectors of such a type can disagree with each other, and why a tool matching one of them is not evidence about the other.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "unknown"
@@ -60083,10 +60083,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
+         "denotation" : "sha256(pass . salt)",
          "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr_note" : "mdxfind type SHA256HEXSALT (e185) is MULTI-EMIT: it computes several candidate digests per input and matches if any one reproduces the stored hash. There is therefore no single expression to record, and writing one of the emitted forms into expression: would be a false claim even though the string itself is correct. This is also why two vectors of such a type can disagree with each other, and why a tool matching one of them is not evidence about the other.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
