@@ -242,7 +242,7 @@ make_path($workdir) unless -d $workdir;
 my $today = strftime('%Y-%m-%d', localtime);
 
 # Which mdxfind types carry a salt, so -f or -F is chosen from the inventory.
-my %MX_SALTED;
+my (%MX_SALTED, %MX_PEPPER);
 if ($want{mdxfind}) {
     my $mx = eval { YAML::XS::LoadFile("$ROOT/data/tools/mdxfind.yaml") };
     if ($mx) {
@@ -252,6 +252,12 @@ if ($want{mdxfind}) {
             # way, and 47 types are flagged 'u'. Both need -F rather than -f.
             $MX_SALTED{ $t->{name} } = 1
                 if grep { $_ eq 's' || $_ eq 'u' } @{ $t->{flags} || [] };
+            # 'j' is a PEPPER type: it takes a site-wide secret that is not in
+            # the hash line and cannot be derived from it, so mdxfind reads it
+            # from a file (-j, the global pepper array). 13 types carry the
+            # flag.
+            $MX_PEPPER{ $t->{name} } = 1
+                if grep { $_ eq 'j' } @{ $t->{flags} || [] };
         }
     }
     else {
@@ -455,6 +461,53 @@ if ($want{mdxfind} && $job{mdxfind}) {
 
         my ($code, $out) = run_capture($timeout, $mdxfind,
             '-h', "^\Q$type\E\$", $readflag, $hf, '-i', $it, $wf);
+
+        # PEPPER TYPES TAKE THEIR SECRET TWO DIFFERENT WAYS, AND THE FLAGS DO
+        # NOT SAY WHICH
+        #
+        # A pepper is a site-wide secret that appears in no hash and cannot be
+        # derived from one, so mdxfind reads it from a file: -j, the global
+        # pepper array. The catalog writes it as the SECOND space-separated
+        # field of the salt, "<hash>:<salt> <pepper>", which the run above
+        # hands to -F as one long salt -- so the pepper never reaches the array
+        # and the type computes nothing it can match. That is why ten of these
+        # entries sat at tier upstream: not a wrong vector, an unaskable
+        # question.
+        #
+        # But it is not universal, and the inventory cannot tell them apart:
+        # SHA1-SALT-UTF16-PEPPER and SHA1SALTMD5PASSPEPPER both carry flags
+        # f,s,j and need OPPOSITE handling. The reason is in mdxfind's source,
+        # in the default_salts[] table -- SHA1_SALT_UTF16_PEPPER has a built-in
+        # salt of "f5g= of8=", one string the type splits itself, so it wants
+        # the field whole and splitting it breaks a vector that was verifying.
+        # Measured 2026-09-02 against RCS 1.545.
+        #
+        # So the whole-field run above stays PRIMARY and this is a fallback,
+        # which makes a regression structurally impossible: anything that
+        # verified before still verifies on the first run. Note what this is
+        # NOT -- it is not the re-casing pitfall of "try variants until one
+        # passes". The hash and the plaintext are fixed; only the plumbing by
+        # which the tool is handed its own published fields varies, and both
+        # forms ask the identical question of the identical type.
+        if ($MX_PEPPER{$type} && ($out // '') !~ /^\Q$type\E/m) {
+            my (@hashes, @peppers);
+            for my $vec (@v) {
+                my ($h, $rest) = split /:/, $vec->{hash}, 2;
+                if (defined $rest && $rest =~ /^(.*?) (.+)$/) {
+                    push @hashes,  "$h:$1";
+                    push @peppers, $2;
+                }
+                else { push @hashes, $vec->{hash} }
+            }
+            if (@peppers) {
+                my %u; my @uniq = grep { !$u{$_}++ } @peppers;
+                my $hf2 = write_file("$workdir/mx.$safe.$it.hash2", @hashes);
+                my $jf  = write_file("$workdir/mx.$safe.$it.pep",   @uniq);
+                ($code, $out) = run_capture($timeout, $mdxfind,
+                    '-h', "^\Q$type\E\$", $readflag, $hf2, '-i', $it,
+                    '-j', $jf, $wf);
+            }
+        }
 
         # Output lines look like "MD5x01 <hash>:<plain>". The suffix is the
         # iteration that actually matched and is part of the identity, so a

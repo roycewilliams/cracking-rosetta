@@ -49915,8 +49915,8 @@
             "ids" : [
                "SHA1-MD5CAPPEPPER-MD5SALT"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "SHA1-MD5CAPPEPPER-MD5SALT",
          "notes" : "",
@@ -50140,8 +50140,8 @@
             "ids" : [
                "SHA1-MD5PEPPER-MD5MD5SALT"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "SHA1-MD5PEPPER-MD5MD5SALT",
          "notes" : "",
@@ -50185,8 +50185,8 @@
             "ids" : [
                "SHA1-MD5PEPPER-MD5SALT"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "SHA1-MD5PEPPER-MD5SALT",
          "notes" : "",
@@ -50230,8 +50230,8 @@
             "ids" : [
                "SHA1-MD5PEPPER-MD5SALTMD5PASS"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "SHA1-MD5PEPPER-MD5SALTMD5PASS",
          "notes" : "",
@@ -50590,8 +50590,8 @@
             "ids" : [
                "SHA1-PEPPER-MD5SALT"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "SHA1-PEPPER-MD5SALT",
          "notes" : "",
@@ -53291,11 +53291,11 @@
             "ids" : [
                "SHA1MD5SALTPASSPEPPER"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "SHA1MD5SALTPASSPEPPER",
-         "notes" : "",
+         "notes" : "The vector here is NOT the one mdxfind's published catalog carries. mdxfind 1.543 (2026-08-29) changed what e607 computes: the old code staged the inner digest at linebuf+saltlen while writing the pepper at a fixed offset 32, so for any non-empty salt the hash covered the salt, then a TRUNCATED digest, then the pepper, and the output depended on the salt length. dlr's own note says any hash cracked as e607 before that revision will not verify against it. The catalog example 786aab530907a783e9c25a2c7326ab7907ebf798 is the PRE-FIX digest and was still being published on 2026-09-02, so it is upstream's stale artefact rather than a vector this row should carry. Replaced 2026-09-02 with the repaired construction sha1(md5(salt . pass) . pepper), established three independent ways: the source at RCS 1.545, a Digest:: recomputation in perl that reproduces 786aab... under the old layout and 0992047f... under the new, and the rebuilt binary cracking 0992047f... The salt field holds SALT then PEPPER, space separated, both 1122334455667788 here; a pepper is a site-wide secret that appears in no hash, so mdxfind reads it from a file (-j).",
          "primary_form" : "",
          "relations" : [],
          "sameas" : "",
@@ -55322,8 +55322,8 @@
             "ids" : [
                "SHA1SALTMD5MD5PASSPEPPER"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "SHA1SALTMD5MD5PASSPEPPER",
          "notes" : "",
@@ -55457,8 +55457,8 @@
             "ids" : [
                "SHA1SALTMD5PASSPEPPER"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "SHA1SALTMD5PASSPEPPER",
          "notes" : "",
@@ -55547,8 +55547,8 @@
             "ids" : [
                "SHA1SALTMD5SHA1PASSPEPPER"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "SHA1SALTMD5SHA1PASSPEPPER",
          "notes" : "",
@@ -55682,8 +55682,8 @@
             "ids" : [
                "SHA1SALTMD5UCPASSPEPPER"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "SHA1SALTMD5UCPASSPEPPER",
          "notes" : "",
@@ -55862,8 +55862,8 @@
             "ids" : [
                "SHA1SALTSHA1PASSPEPPER"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "name" : "SHA1SALTSHA1PASSPEPPER",
          "notes" : "",
@@ -72593,6 +72593,6 @@
    "tools" : {
       "hashcat" : "v7.1.2-549-g8a15e210b",
       "john" : "1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200",
-      "mdxfind" : "RCS 1.540 (2026/08/22)"
+      "mdxfind" : "RCS 1.545 (2026/08/29)"
    }
 }

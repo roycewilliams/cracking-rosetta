@@ -17,7 +17,7 @@ Each row below links to its entry in the [browsable table](index.html).
 Gaps are absences; for the rows where something is known to be *odd*, see
 [OPEN-QUESTIONS.md](OPEN-QUESTIONS.md).
 
-## 1. Believed but never reproduced (118)
+## 1. Believed but never reproduced (107)
 
 The cheapest contribution in the repository, if you own the tool. Each of
 these already names an identifier and already carries a test vector; nobody
@@ -59,15 +59,9 @@ tools/verify-vectors.pl --tool <tool> --only <id> -v
 | [`radmin`](index.html#radmin) | john | `RAdmin`, `dynamic_1010` | asserted |
 | [`sha1-md5-md5-plain`](index.html#sha1-md5-md5-plain) | john | `dynamic_1025` | asserted |
 | [`sha1-md5-pass`](index.html#sha1-md5-pass) | john | `dynamic_1024`, `dynamic_23` | asserted |
-| [`sha1-md5cappepper-md5salt`](index.html#sha1-md5cappepper-md5salt) | mdxfind | `SHA1-MD5CAPPEPPER-MD5SALT` | upstream |
-| [`sha1-md5pepper-md5md5salt`](index.html#sha1-md5pepper-md5md5salt) | mdxfind | `SHA1-MD5PEPPER-MD5MD5SALT` | upstream |
-| [`sha1-md5pepper-md5salt`](index.html#sha1-md5pepper-md5salt) | mdxfind | `SHA1-MD5PEPPER-MD5SALT` | upstream |
-| [`sha1-md5pepper-md5saltmd5pass`](index.html#sha1-md5pepper-md5saltmd5pass) | mdxfind | `SHA1-MD5PEPPER-MD5SALTMD5PASS` | upstream |
-| [`sha1-pepper-md5salt`](index.html#sha1-pepper-md5salt) | mdxfind | `SHA1-PEPPER-MD5SALT` | upstream |
 | [`sha1-sha1-pass`](index.html#sha1-sha1-pass) | john | `dynamic_1026`, `dynamic_26` | asserted |
 | [`sha1-sha1-sha1-pass`](index.html#sha1-sha1-sha1-pass) | john | `dynamic_1027`, `dynamic_26` | asserted |
 | [`sha1md5md5ucx`](index.html#sha1md5md5ucx) | mdxfind | `SHA1MD5MD5UCx` | upstream |
-| [`sha1md5saltpasspepper`](index.html#sha1md5saltpasspepper) | mdxfind | `SHA1MD5SALTPASSPEPPER` | upstream |
 | [`sha1md5truncsalt`](index.html#sha1md5truncsalt) | mdxfind | `SHA1MD5TRUNCSALT` | upstream |
 | [`sha1md5uc1lc`](index.html#sha1md5uc1lc) | mdxfind | `SHA1MD5UC1LC` | upstream |
 | [`sha1md5ucx`](index.html#sha1md5ucx) | mdxfind | `SHA1MD5UCx` | upstream |
@@ -75,11 +69,6 @@ tools/verify-vectors.pl --tool <tool> --only <id> -v
 | [`sha1md6trunc`](index.html#sha1md6trunc) | mdxfind | `SHA1MD6TRUNC` | upstream |
 | [`sha1raw`](index.html#sha1raw) | mdxfind | `SHA1RAW` | upstream |
 | [`sha1rmd160trunc`](index.html#sha1rmd160trunc) | mdxfind | `SHA1RMD160TRUNC` | upstream |
-| [`sha1saltmd5md5passpepper`](index.html#sha1saltmd5md5passpepper) | mdxfind | `SHA1SALTMD5MD5PASSPEPPER` | upstream |
-| [`sha1saltmd5passpepper`](index.html#sha1saltmd5passpepper) | mdxfind | `SHA1SALTMD5PASSPEPPER` | upstream |
-| [`sha1saltmd5sha1passpepper`](index.html#sha1saltmd5sha1passpepper) | mdxfind | `SHA1SALTMD5SHA1PASSPEPPER` | upstream |
-| [`sha1saltmd5ucpasspepper`](index.html#sha1saltmd5ucpasspepper) | mdxfind | `SHA1SALTMD5UCPASSPEPPER` | upstream |
-| [`sha1saltsha1passpepper`](index.html#sha1saltsha1passpepper) | mdxfind | `SHA1SALTSHA1PASSPEPPER` | upstream |
 | [`sha1saltsha256trunc`](index.html#sha1saltsha256trunc) | mdxfind | `SHA1SALTSHA256TRUNC` | upstream |
 | [`sha1saltsha256truncmd5`](index.html#sha1saltsha256truncmd5) | mdxfind | `SHA1SALTSHA256TRUNCMD5` | upstream |
 | [`sha1saltsha256uctrunc`](index.html#sha1saltsha256uctrunc) | mdxfind | `SHA1SALTSHA256UCTRUNC` | upstream |

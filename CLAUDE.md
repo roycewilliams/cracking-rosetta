@@ -48,7 +48,7 @@ people expect are regenerated into `docs/` and `dist/`.
 |---|---|---|
 | hashcat | `/usr/local/bin/hashcat` (v7.1.2-549-g8a15e210b) | `hashcat --hash-info` |
 | john | `/usr/local/scripts/johnl` -> `/usr/local/src/sec/crack/john-latest/run/john` | `john --list=format-details` |
-| mdxfind | `/usr/local/bin/mdxfind` (RCS 1.540, 2026-08-22) | `mdxfind -h` |
+| mdxfind | `/usr/local/bin/mdxfind` (RCS 1.545, 2026-08-29) | `mdxfind -h` |
 | hashpipe | not built locally | upstream `HASH_TYPES.md` |
 | Crack | not present | hand-maintained, frozen |
 
@@ -56,6 +56,28 @@ Upstream, for drift detection and as seed data:
 
 - `github.com/Cynosureprime/mdxfind` -- `HASH_TYPES.md`
 - `github.com/Cynosureprime/hashpipe` -- `HASH_TYPES.md`, `john_map.h`
+
+**mdxfind's SOURCE is on this host and outranks every document.**
+`/usr/local/src/sec/crack/mdxfind/github/mdxfind`, MIT licensed, kept current
+by Royce. `mdxfind.c` carries the per-type implementations and a full RCS
+revision log; `hx.l` and `hx.y` are the expression grammar; `hx_func.c` the
+primitives. Use it, in this order of authority: **the source, then the binary's
+own output, then the hx specification, then `HASH_TYPES.md`.** Appendix A has
+been measured wrong about its own types (e308 omits the password operand) and
+the published catalogs lag the binary, so a document is the weakest of the
+four. Two things the source settles that nothing else does: what a type
+actually emits, and WHEN it changed.
+
+**Check the revision log before trusting a vector.** The source can be ahead of
+the binary, and a revision can change what a type COMPUTES rather than only how
+it is described. Measured 2026-09-02: source 1.545 against binary 1.540, and
+revision 1.543 repaired a buffer-layout bug in e607 `SHA1MD5SALTPASSPEPPER` --
+the old code hashed the salt followed by a TRUNCATED digest, with output
+depending on salt length. Upstream's own note: "any hash cracked as e607 before
+this revision will not verify against it." Every `verified: vector` here is a
+measurement against the binary of the day, so after an upstream pull, diff the
+revision log for behaviour changes and re-verify what they touch -- do not
+rewrite entries from source while the binary is older than it.
 
 **hashpipe is not a separate column.** Its type list was diffed against the
 local mdxfind binary on 2026-08-29: 1000 vs 1001 types, zero name mismatches,
@@ -197,6 +219,37 @@ mdxfind also accepts hashcat modes directly (`mdxfind -m 0`, `-m e1`,
   `SHA256UC` and `RACF` reproduce in neither case. Re-casing on failure is a
   search for something that passes, not a fix -- confirm with `mdxfind -z`
   first, and say so in the entry.
+- **A PEPPER type cannot be verified from its vector alone, and the catalog
+  hides the pepper in the salt field.** A pepper is a site-wide secret that
+  appears in no hash and cannot be derived from one; hx makes it a BUILT-IN
+  VARIABLE alongside `pass`, `salt`, `salt2` (`hx.y` line 19), fed to the VM in
+  its own slot. mdxfind reads it from a file: `-j` is the global pepper array,
+  `-P` the per-type set named by a preceding `-M`. `HASH_TYPES.md` writes it as
+  the SECOND space-separated field of the salt --
+  `<hash>:<salt> <pepper>:<plaintext>` -- which `-F` alone parses as one long
+  salt, so the pepper never reaches the array and the type computes nothing it
+  can match. Twelve entries sat at tier `upstream` for that reason on
+  2026-09-02: not a wrong vector, an unaskable question. All twelve reach
+  `vector` once the field is split and the pepper passed through `-j`.
+  **But the split is not universal and the flags do not say which.**
+  `SHA1-SALT-UTF16-PEPPER` and `SHA1SALTMD5PASSPEPPER` both carry flags
+  `f,s,j` and need OPPOSITE handling: the first has a built-in salt of
+  `"f5g= of8="` in mdxfind's `default_salts[]` table, one string the type
+  splits itself, so splitting the field BREAKS a vector that was verifying.
+  `verify-vectors.pl` therefore keeps the whole-field run primary and tries the
+  split only after it finds nothing, which makes a regression structurally
+  impossible. That is not the re-casing pitfall below: the hash and the
+  plaintext are fixed and only the plumbing varies, where re-casing searches
+  for a variant STRING that passes.
+- **An upstream catalog can be stale in a way that looks like our error.**
+  mdxfind 1.543 changed what e607 computes; the vendored hashpipe
+  `HASH_TYPES.md` (commit `81c3b8f`, fetched 2026-08-29) still published the
+  PRE-FIX digest `786aab53...` on 2026-09-02, and this repository had seeded it
+  and correctly recorded that the local round-trip failed. Do not "fix" our
+  side when a published example will not verify: establish the construction
+  from source, recompute independently, and check the recomputation against the
+  binary. All three agreed here, which is what made replacing upstream's own
+  example defensible.
 - **Sheet-era junk.** `NOTSUPPORTED`, `MD5AUTOMATICPARTIALMATCH` and
   `MD5UCWITHI2MD5UCX2` appear in the mdxfind column but are not types.
   `WLR1` was on that list and should not have been: it is `WRL1`
