@@ -23,10 +23,12 @@ vectors:
   - hash: "rosetta"
     pass: "rosetta"
     source: "sheet"
+    form: "hashcat"
     reads_in: ["hashcat"]
   - hash: "726f7365747461000000000000000000"
     pass: "rosetta"
     source: "sheet"
+    form: "mdxfind"
     reads_in: ["mdxfind"]
 legacy:
   hashes_org: "PLAIN"

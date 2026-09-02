@@ -25,6 +25,7 @@ vectors:
   - hash: "USER$ebfec7528f4d6617b1c232ea25558c1502f6ef99"
     pass: "password123"
     source: "mdxfind"
+    form: "mdxfind"
     reads_in: ["mdxfind"]
   - hash: "604020408266$32837BA7B97672BA4E5AC74767A4E6E1AE802651"
     pass: "hashcat"

@@ -39,10 +39,12 @@ vectors:
   - hash: "sha512:100:dGVzdA:fUaRYJbFLqw4Gz7AEjFLetYNcozT25qdphhFs+kY5REqO9NCFlt2Y256Lyx78m4jcLd7RB96inePiMCpYgxjNw=="
     pass: "password123"
     source: "mdxfind"
+    form: "mdxfind"
     reads_in: ["mdxfind"]
   - hash: "$pbkdf2-sha512$25000$LyWE0HrP2RsjZCxlDGFMKQ$1vC5Ohk2mCS9b6akqsEfgeb4l74SF8XjH.SljXf3dMLHdlY1GK9ojcCKts6/asR4aPqBmk74nCDddU3tvSCJvw"
     pass: "hashcat"
     source: "hashcat"
+    form: "hashcat"
     reads_in: ["hashcat"]
 legacy:
   hashes_org: "PBKDF2"

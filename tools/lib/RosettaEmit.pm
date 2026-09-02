@@ -159,10 +159,14 @@ my %TOOL_KEYS = (
 # So these keys are rendered as booleans, and only an absent value is skipped.
 my %BOOL_KEYS = ('crack.supported' => 1);
 
-# reads_in and credential come after the vector itself: reads_in is a
-# MEASUREMENT of which tools loaded this exact string, credential groups
-# two spellings of one credential so they are not counted twice.
-my @VECTOR_KEYS   = qw(hash pass salt source reads_in credential);
+# form, reads_in and credential come after the vector itself. form says which
+# serialization the string is written in and sits beside source: because the
+# two are routinely confused -- source is WHERE THE STRING CAME FROM, form is
+# WHOSE FORMAT IT IS IN, and reading the first as the second is what once made
+# seven entries look like divergent serializations. reads_in is a MEASUREMENT
+# of which tools loaded this exact string, credential groups two spellings of
+# one credential so they are not counted twice.
+my @VECTOR_KEYS   = qw(hash pass salt source form reads_in credential);
 
 # relations: is a list of maps like vectors:, and emitted the same way -- the
 # first key of each edge carries the "- " so one edge is one readable stanza.

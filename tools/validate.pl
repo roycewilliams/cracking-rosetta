@@ -161,6 +161,12 @@ my @TIERS      = qw(vector upstream asserted absent);
 my %IS_TIER    = map { $_ => 1 } @TIERS;
 my %IS_STATUS  = map { $_ => 1 } qw(ok needs-review merged);
 
+# The serializations a test vector can be written in. 'native' is the form the
+# producing system itself stores; the three tool names are each tool's own
+# spelling of the same credential. Fixed vocabulary, like the tiers: a fifth
+# value changes what every row means to a consumer.
+my %FORM = map { $_ => 1 } qw(native hashcat john mdxfind);
+
 # A tombstone (status: merged) is a redirect, not an entry: its content moved
 # to the survivor and the file survives only so the published id keeps
 # resolving. So it may carry nothing that asserts anything -- these keys are
@@ -721,6 +727,8 @@ for my $file (@files) {
         else {
             my $i = 0;
             my %cred;      # credential label -> how many vectors carry it
+            my %form_n;    # form value      -> how many vectors carry it
+            my %cred_form; # credential+form -> seen, to catch two of a kind
             for my $v (@{ $d->{vectors} }) {
                 $i++;
                 if (ref $v ne 'HASH') {
@@ -752,8 +760,75 @@ for my $file (@files) {
                 err("%s: vectors[%d].credential must be a scalar", $file, $i)
                     if defined $v->{credential} && ref $v->{credential};
 
+                # form: which serialization this string is written in.
+                #
+                # 'native' is the form the producing system stores or emits,
+                # and it is PRIMARY over any tool's rewriting of it -- a tool
+                # that reshapes a credential to suit its parser has not
+                # changed what the credential is. Primacy is derived from
+                # that, never asserted, so there is no 'primary' flag to get
+                # out of step with this one: within a credential group the
+                # native vector IS the primary one, which is why at most one
+                # may be native.
+                if (defined $v->{form}) {
+                    if (ref $v->{form}) {
+                        err("%s: vectors[%d].form must be a scalar", $file, $i);
+                    }
+                    elsif (!$FORM{ $v->{form} }) {
+                        err("%s: vectors[%d].form is '%s'; it must be one of "
+                          . "%s", $file, $i, $v->{form},
+                            join(', ', sort keys %FORM));
+                    }
+                    else {
+                        $form_n{ $v->{form} }++;
+                        # A string cannot be in a tool's format and have been
+                        # measured NOT to load in that tool. reads_in is only
+                        # ever written by verify-vectors.pl and a non-empty
+                        # list means that run read SOMETHING here, so the
+                        # omission is a measurement rather than a gap.
+                        if ($v->{form} ne 'native'
+                            && ref $v->{reads_in} eq 'ARRAY'
+                            && @{ $v->{reads_in} }
+                            && !grep { $_ eq $v->{form} } @{ $v->{reads_in} }) {
+                            err("%s: vectors[%d].form says '%s' but reads_in "
+                              . "was measured as (%s), which does not include "
+                              . "it -- a string in a tool's own format that "
+                              . "the tool declined is a contradiction",
+                                $file, $i, $v->{form},
+                                join(' ', @{ $v->{reads_in} }));
+                        }
+                        # Two vectors both claiming to be john's spelling are
+                        # two different strings said to be one format.
+                        if ($v->{form} ne 'native' && defined $v->{credential}
+                            && !ref $v->{credential}) {
+                            my $k = "$v->{credential}\0$v->{form}";
+                            err("%s: credential '%s' has two vectors in '%s' "
+                              . "form; one credential has one spelling per "
+                              . "tool", $file, $v->{credential}, $v->{form})
+                                if $cred_form{$k}++;
+                        }
+                    }
+                }
+
                 $cred{ $v->{credential} }++ if defined $v->{credential}
                                             && !ref $v->{credential};
+            }
+
+            # At most one native form. Two would be two different claims about
+            # what the producing system stores, and the derivation of primacy
+            # would have no answer.
+            err("%s: %d vectors carry form: native; the native form is the "
+              . "primary one and an entry has at most one",
+                $file, $form_n{native})
+                if ($form_n{native} // 0) > 1;
+
+            # A native form is only useful if the reader can tell what shape it
+            # is. Same discipline as the credential group: the claim lives in
+            # the data, the explanation has to be in the entry.
+            if (($form_n{native} // 0) && ($d->{notes} // '') !~ /\S/) {
+                err("%s: a vector is form: native, so notes: must say what "
+                  . "that form is shaped like -- otherwise the reader is told "
+                  . "a string is primary and not what makes it so", $file);
             }
 
             # A credential group is the statement "these are ONE credential

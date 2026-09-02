@@ -100,7 +100,7 @@ my $ROOT = "$RealBin/..";
 my $TODAY = do { my @t = localtime; sprintf '%04d-%02d-%02d',
                  $t[5] + 1900, $t[4] + 1, $t[3] };
 
-my @KINDS = qw(category denotation duplicate unproven token);
+my @KINDS = qw(category denotation duplicate unproven token form);
 
 sub usage {
     print STDERR <<"END_USAGE";
@@ -396,6 +396,63 @@ unless (%want_kind && !$want_kind{denotation}) {
     }
 }
 
+# --- form -------------------------------------------------------------
+# Which of these strings is the form the producing system actually stores?
+#
+# Only asked where the tools SPLIT -- no single string is read by every tool
+# that reads anything on the entry -- because that is where a reader holding
+# one string genuinely cannot tell which of them is the real credential and
+# which is a cracker's re-encoding of it. derive-forms.pl has already set the
+# TOOL forms from reads_in, which is measurement; this is the half nothing in
+# a string can answer. Both answers are useful and the tool says so: "none of
+# them" is a real result for a credential that only ever existed as a wire
+# message, and it stops the question being re-asked.
+unless (%want_kind && !$want_kind{form}) {
+    for my $id (sort keys %entry) {
+        my $e = $entry{$id};
+        my @v = @{ $e->{vectors} || [] };
+        next unless @v;
+        next if grep { ($_->{form} // '') eq 'native' } @v;
+
+        my %tools;
+        for my $v (@v) {
+            next unless ref $v->{reads_in} eq 'ARRAY';
+            $tools{$_} = 1 for @{ $v->{reads_in} };
+        }
+        next unless keys %tools > 1;
+        my $all = join ',', sort keys %tools;
+        next if grep { ref $_->{reads_in} eq 'ARRAY'
+                    && join(',', sort @{ $_->{reads_in} }) eq $all } @v;
+
+        # The strings themselves are the options: a curator picks one, or says
+        # none of them is native. Truncated for the terminal; the entry file
+        # has them whole.
+        my ($n, @opt) = (0);
+        for my $v (@v) {
+            $n++;
+            my $h = $v->{hash};
+            $h = substr($h, 0, 72) . '...' if length $h > 75;
+            my $who = ref $v->{reads_in} eq 'ARRAY' && @{ $v->{reads_in} }
+                    ? join('+', sort @{ $v->{reads_in} }) : 'nothing';
+            push @opt, [ $n, "vector $n", "$h  (read by $who)" ];
+        }
+        push @opt, [ $n + 1, 'none',
+                     'no string here is native -- the credential exists only '
+                   . 'as a wire message or a binary field, and every form '
+                   . 'here is a cracker\'s invention' ];
+
+        push @queue, {
+            kind => 'form', target => $id, ids => [$id],
+            prompt  => 'The tools here disagree about the string. Which of '
+                     . 'these is the form the producing system itself stores '
+                     . 'or emits? That form is the primary one, even though '
+                     . 'the tools rewrite it.',
+            context => [ describe($e) ],
+            options => \@opt, free => 1,
+        };
+    }
+}
+
 # --- duplicate --------------------------------------------------------
 unless (%want_kind && !$want_kind{duplicate}) {
     my %pair;
@@ -612,12 +669,14 @@ if ($apply) {
 # The category and denotation kinds are deliberately excluded by default:
 # 1100 of them are open, they are derivable rather than knowledge, and filing
 # them as issues would bury the ~25 questions that genuinely need a person.
+# 'form' is included: which string a system actually stores is exactly the
+# knowledge someone who runs that system has and this repository does not.
 
 if ($issues) {
     # Shell-quote for single quotes: end the quote, escape one, reopen.
     my $q = sub { my $t = shift // ''; $t =~ s/'/'\\''/g; return "'$t'" };
 
-    my %ASK_KIND = map { $_ => 1 } qw(duplicate unproven token);
+    my %ASK_KIND = map { $_ => 1 } qw(duplicate unproven token form);
     my @ask = grep { $ASK_KIND{ $_->{kind} } }
               grep { !%want_kind || $want_kind{ $_->{kind} } } @queue;
 
@@ -710,6 +769,9 @@ if ($issues) {
             : $item->{kind} eq 'token'
             ? sprintf('What does the mdxfind name fragment %s mean?',
                       ($item->{target} =~ /^TOKEN:(.+)$/)[0] // $item->{target})
+            : $item->{kind} eq 'form'
+            ? sprintf('%s: which of these strings does the real system store?',
+                      $ids[0] // $item->{target})
             : sprintf('%s: what is this vector, if not %s?', $ids[0] // $item->{target},
                       ($entry{ $ids[0] // '' } || {})->{expression} // 'the recorded expression');
 

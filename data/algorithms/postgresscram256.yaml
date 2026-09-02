@@ -27,8 +27,10 @@ vectors:
   - hash: "SCRAM-SHA-256$4096:IKfxyYOHyqPkoSUM8TgKkA==$v6UrTg19oAlY0aDMyijgZwTq9fEGNIRE650DWrsqIXQ=:*"
     pass: "password123"
     source: "mdxfind"
+    form: "mdxfind"
     reads_in: ["mdxfind"]
   - hash: "SCRAM-SHA-256$4096:IKfxzJ8Nq4PkLJCfgKcPmA==$iRw3qwTp18uaBnsTOEExbtgWdKeBMbSSnZvqD4sdqLQ=:hPciC1CcnBna3szR8Mf3MVc8t0W7QPbIHoMMrh4zRV0="
     pass: "hashcat"
     source: "hashcat"
+    form: "hashcat"
     reads_in: ["hashcat"]

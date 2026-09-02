@@ -266,6 +266,19 @@ for my $e (@rows) {
             : $shared          ? 'shared'
             :                    'divergent';
         },
+        # Which form is PRIMARY. The native form -- what the producing system
+        # itself stores -- outranks every tool's rewriting of it, so this is
+        # simply which vector is native, if the entry knows. Empty means
+        # nobody has said, and on a row whose serialization is 'divergent'
+        # that is a live question rather than a shrug: a reader holding one of
+        # several strings cannot tell the real credential from a cracker's
+        # re-encoding of it. Derived, never asserted -- there is no 'primary'
+        # flag in the data to drift out of step with this.
+        primary_form => do {
+            my ($p) = grep { ($_->{form} // '') eq 'native' }
+                      @{ $e->{vectors} || [] };
+            $p ? 'native' : '';
+        },
         notes  => $e->{notes} // '',
         legacy => join('; ', grep { defined && length }
                         ($e->{legacy}{hashes_org}, $e->{legacy}{hashkiller})),
@@ -327,7 +340,8 @@ sub csv_field {
 my @CSV = qw(id name aliases expression expression_tier john_dynamic_expr
              denotation category application status merged_into
              hashcat hashcat_state john john_state mdxfind mdxfind_state
-             crack_state vectors serialization relations legacy notes);
+             crack_state vectors serialization primary_form relations legacy
+             notes);
 
 open my $csv, '>', "$distdir/rosetta.csv" or die "cannot write csv: $!\n";
 print {$csv} join(',', @CSV), "\n";
@@ -340,7 +354,7 @@ for my $r (@out) {
         join(' ', @{ $r->{john}{ids} }),    $r->{john}{state},
         join(' ', @{ $r->{mdxfind}{ids} }), $r->{mdxfind}{state},
         $r->{crack}{state}, $r->{vecs}, $r->{serialization},
-        $r->{sameas}, $r->{legacy}, $r->{notes},
+        $r->{primary_form}, $r->{sameas}, $r->{legacy}, $r->{notes},
     )), "\n";
 }
 # Tombstones last, so the live table stays one contiguous block for anyone
@@ -348,7 +362,7 @@ for my $r (@out) {
 for my $t (@tomb_out) {
     print {$csv} join(',', map { csv_field($_) } (
         $t->{id}, $t->{name}, '', '', '', '', '', '', '', 'merged', $t->{into},
-        '', '', '', '', '', '', '', '', '', $t->{sameas}, '', $t->{notes},
+        '', '', '', '', '', '', '', '', '', '', $t->{sameas}, '', $t->{notes},
     )), "\n";
 }
 close $csv;

@@ -31,6 +31,7 @@ vectors:
   - hash: "0x010012345678f9cf12a8bbcee0131a6068815203371250b5cb1198069a7aec5df5cb05ef43f73acbe8572cf9d744"
     pass: "password123"
     source: "mdxfind"
+    form: "mdxfind"
     reads_in: ["mdxfind"]
   - hash: "0x0100778883860000000000000000000000000000000000000000eda3604e067a06f2732b05b9cb90b8a710996939"
     pass: "HASHCAT"

@@ -285,7 +285,7 @@
     },
     "vectors": {
       "type": "array",
-      "description": "Test vectors. A vector is what promotes a mapping to tier 'vector'. Where two tools expect different serializations of one credential, both strings live here, grouped by credential: and distinguished by which tools reads_in says actually read each.",
+      "description": "Test vectors. A vector is what promotes a mapping to tier 'vector'. Where two tools expect different serializations of one credential, both strings live here, grouped by credential: and distinguished by which tools reads_in says actually read each. form: says which serialization each string is, and the native form is primary over any tool's rewriting of it.",
       "items": {
         "type": "object",
         "additionalProperties": false,
@@ -307,6 +307,16 @@
           "source": {
             "type": "string",
             "description": "Where this vector came from: hashcat, mdxfind, john, sheet, or a person."
+          },
+          "form": {
+            "type": "string",
+            "enum": [
+              "native",
+              "hashcat",
+              "john",
+              "mdxfind"
+            ],
+            "description": "Which serialization this string is written in. 'native' is the form the producing system itself stores or emits; a tool name is that tool's own spelling of the same credential. The native form is PRIMARY even where no cracking tool reads it - a tool that rewrites a credential to suit its parser has not changed what the credential is. Primacy is therefore derived and never asserted: within a credential: group the native vector is the primary one, and an entry may hold at most one. An entry carrying a native vector must say in notes: what that form is shaped like."
           },
           "reads_in": {
             "type": "array",
