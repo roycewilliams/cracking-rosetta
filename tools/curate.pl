@@ -761,7 +761,24 @@ if ($issues) {
         return ("**Already ruled out**: $n", '');
     };
 
+    # A separator before each command. The bodies are multi-line single-quoted
+    # strings tens of lines long, so without one it is genuinely hard to see
+    # where a command ends -- and the file exists to be READ and cut down
+    # before it is run, which is the whole reason it is a script rather than
+    # an API call. The line carries the position, the kind and the target so a
+    # reader scanning for the ones they can answer can find them without
+    # parsing the gh invocation.
+    my $bar = sub {
+        my ($i, $item) = @_;
+        my $head = sprintf('--- %d/%d  %s  %s ', $i, scalar @ask,
+                           $item->{kind}, $item->{target});
+        $head .= '-' x (78 - length($head) - 2) if length($head) < 76;
+        return "# $head\n";
+    };
+
+    my $i = 0;
     for my $item (@ask) {
+        $i++;
         my @ids = @{ $item->{ids} || [] };
         my $title = $item->{kind} eq 'duplicate'
             ? sprintf('Are %s one algorithm or two?',
@@ -800,12 +817,13 @@ if ($issues) {
                             $REPO, $_, $REPO) for @ids;
         push @body, '', 'Generated from the curation queue (`tools/curate.pl --issues`).';
 
+        print  $bar->($i, $item);
         printf "gh issue create --label %s --title %s --body %s\n\n",
             $q->('curation'), $q->($title), $q->(join "\n", @body);
     }
 
-    printf STDERR "- %d question(s) of kind duplicate/unproven/token; "
-                . "%d in the queue overall\n", scalar @ask, scalar @queue;
+    printf STDERR "- %d question(s) of kind %s; %d in the queue overall\n",
+        scalar @ask, join('/', sort keys %ASK_KIND), scalar @queue;
     print  STDERR "- nothing was filed; pipe this to a file, read it, then run it\n";
     exit 0;
 }
