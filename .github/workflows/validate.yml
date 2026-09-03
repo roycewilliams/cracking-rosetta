@@ -110,6 +110,17 @@ jobs:
       - name: Exercise the expression translator
         run: perl -Itools/lib tools/test-rosetta-john.pl
 
+      # RosettaExpr is the INDEPENDENT implementation triage uses as its
+      # control, and on its answer curate.pl either files a human question or
+      # suppresses one. An off-by-one in cut(), or a cap() that moved the
+      # first character rather than the first lower-case letter, would report
+      # correct expressions as wrong at scale rather than failing loudly. The
+      # expected values are mdxfind's own hx engine's, measured; this step
+      # checks the module against them and needs no hx binary. Re-measure the
+      # fixture itself after an upstream pull with --oracle.
+      - name: Exercise the independent expression evaluator
+        run: perl -Itools/lib tools/test-rosetta-expr.pl
+
       # A disagreement with a vendored upstream that nobody executes is a
       # prose note, which is what this was until the register existed. Each
       # record fails three ways: upstream moved, our side moved, or the two

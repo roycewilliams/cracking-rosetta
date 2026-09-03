@@ -185,6 +185,62 @@ sub try_expression {
 }
 
 #-----------------------------------------------------------------------
+# recompute_vectors($fn, $expr, $entry)
+#
+# Compute the expression over each of the entry's own vectors and report how
+# many it reproduces. Returns (reproduced, contradicted, unusable).
+#
+# The third number is the point of this sub. The comparison used to be
+# `lc($h) eq lc($mine)` against the first colon-field of the hash, which is
+# right only when that field IS a bare digest. It is not, for any vector held
+# in the producing tool's own serialization -- $episerver$*0*RGVm*qNFZ...,
+# {SHA}base64, $B$salt$hash -- and it is not for a base64 output either, where
+# lower-casing destroys the very distinction being tested. Counting those as
+# CONTRADICTED would report a correct expression as wrong, which is precisely
+# the failure this whole tool exists to avoid, and it would do it on the
+# entries most likely to be right. So they are counted apart and no verdict
+# claims anything about them.
+#
+# A vector is also unusable when the expression needs a salt the vector does
+# not carry: computing with the empty string produces a confidently wrong
+# digest rather than an error.
+sub recompute_vectors {
+    my ($fn, $expr, $d) = @_;
+    my ($ok, $no, $skip) = (0, 0, 0);
+    return ($ok, $no, $skip) unless $fn;
+    my $needs_salt = $expr =~ /\$s/;
+
+    for my $v (@{ $d->{vectors} || [] }) {
+        my $raw = $v->{hash} // '';
+        # The recorded shape is <digest>:<salt> for a salted vector, and the
+        # salt: field overrides when the entry states one.
+        my ($h, $salt) = split /:/, $raw, 2;
+        $salt = $v->{salt} if defined $v->{salt} && length $v->{salt};
+        $h = '' unless defined $h;
+
+        # Not a bare digest: hex, or base64 with optional padding. Anything
+        # framed by the producing tool ($..$, {SHA}, *) lands here.
+        unless ($h =~ /^[0-9a-fA-F]+$/ || $h =~ m{^[A-Za-z0-9+/]+={0,2}$}) {
+            $skip++;
+            next;
+        }
+        if ($needs_salt && !(defined $salt && length $salt)) { $skip++; next }
+
+        my $mine = eval { $fn->($v->{pass} // '', defined $salt ? $salt : '') };
+        unless (defined $mine) { $skip++; next }
+
+        # Hex is compared without regard to case, because both spellings are
+        # the same digest and the catalogs disagree about which to print.
+        # Anything else is compared exactly: in base64 the case IS the value.
+        my $same = ($h =~ /^[0-9a-fA-F]+$/ && $mine =~ /^[0-9a-fA-F]+$/)
+                 ? lc($h) eq lc($mine)
+                 : $h eq $mine;
+        $same ? $ok++ : $no++;
+    }
+    return ($ok, $no, $skip);
+}
+
+#-----------------------------------------------------------------------
 # Walk.
 
 opendir(my $dh, $algdir) or do {
@@ -279,23 +335,30 @@ for my $file (@files) {
         # worth having and also what caps it: per CLAUDE.md a recomputation
         # here is corroboration, never tier 'vector', because that requires
         # john's own compiler.
-        my ($ours_ok, $ours_no) = (0, 0);
-        if ($fn) {
-            for my $v (@{ $d->{vectors} || [] }) {
-                my ($h, $salt) = split /:/, $v->{hash} // '', 2;
-                $salt = $v->{salt} if defined $v->{salt} && length $v->{salt};
-                $salt = '' unless defined $salt;
-                my $mine = eval { $fn->($v->{pass} // '', $salt) };
-                unless (defined $mine) { $ours_no++; next }
-                lc($h // '') eq lc($mine) ? $ours_ok++ : $ours_no++;
-            }
-        }
+        my ($ours_ok, $ours_no, $ours_skip)
+            = recompute_vectors($fn, $expr, $d);
 
         if (!$fn) {
             $verdict = 'no-john-format';
             $note = 'no john format on this entry, so john ships no control '
                   . 'vectors, and RosettaExpr cannot compile this expression '
                   . 'either -- nothing here can check it';
+        }
+        elsif (!$ours_ok && !$ours_no && $ours_skip) {
+            # The expression compiles and the entry has vectors, but not one
+            # of them is a bare digest this can line up against -- they are
+            # in the producing tool's own serialization, or the construction
+            # needs a salt the vector does not carry. Reserialising them is
+            # real work with real coverage behind it (STATE.md, "a vector in
+            # a tool's native serialization"), and it is NOT evidence that
+            # anything here is wrong.
+            $verdict = 'native-serialization';
+            $note = sprintf('no john format, and RosettaExpr can compute this '
+                  . 'expression but none of the entry\'s %d vector(s) is a '
+                  . 'bare digest to compare it against -- each is in a tool\'s '
+                  . 'own serialization, or lacks a salt the expression needs. '
+                  . 'The expression is unchecked, not contradicted',
+                    $ours_skip);
         }
         elsif (!$ours_ok && !$ours_no) {
             $verdict = 'no-john-format';
@@ -315,7 +378,7 @@ for my $file (@files) {
         elsif ($ours_ok) {
             $verdict = 'partial';
             $note = "no john format; RosettaExpr reproduces $ours_ok of "
-                  . ($ours_ok + $ours_no) . " of the entry's own vectors, so "
+                  . ($ours_ok + $ours_no) . " comparable vector(s), so "
                   . 'the expression is right for some and not others -- which '
                   . 'is what a multi-emit type looks like, and is a question '
                   . 'for a person';
@@ -340,17 +403,8 @@ for my $file (@files) {
         # answers are completely different questions for a contributor -- one
         # is "find out what this vector really is", the other is "john will
         # not eat a vector that is provably correct".
-        my ($ours_ok, $ours_no) = (0, 0);
-        if ($fn) {
-            for my $v (@{ $d->{vectors} || [] }) {
-                my ($h, $salt) = split /:/, $v->{hash} // '', 2;
-                $salt = $v->{salt} if defined $v->{salt} && length $v->{salt};
-                $salt = '' unless defined $salt;
-                my $mine = eval { $fn->($v->{pass} // '', $salt) };
-                next unless defined $mine;
-                lc($h // '') eq lc($mine) ? $ours_ok++ : $ours_no++;
-            }
-        }
+        my ($ours_ok, $ours_no, $ours_skip)
+            = recompute_vectors($fn, $expr, $d);
 
         if ($fn && $ours_ok && !$ours_no) {
             $verdict = 'john-refuses-our-vector';
