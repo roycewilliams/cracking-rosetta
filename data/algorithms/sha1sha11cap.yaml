@@ -1,11 +1,14 @@
 id: "sha1sha11cap"
 name: "SHA1SHA11CAP"
-expression: "sha1(cap(sha1($p)))"
 expression_proof:
-  verified: "upstream"
-  verified_at: "2026-08-31"
-  verified_with: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A"
-  note: "transcribed from the hx specification's Appendix A entry for mdxfind type SHA1SHA11CAP (e737), which states sha1(cap(sha1(pass))). Transcription, not reproduction, so this is upstream and not vector; run derive-expressions.pl to try to promote it.; TRIAGE 2026-09-02 [corroborated]: no john format, so john ships no control vectors; but RosettaExpr -- an implementation independent of all three crackers -- computes this expression over the entry's own vector(s) and reproduces 1 of 1. That is corroboration, not tier vector, which needs john's own compiler"
+  verified: "absent"
+  verified_at: "2026-09-02"
+  verified_with: "mdxfind RCS 1.545 (2026/08/29), source and -z emission count"
+  note: "WITHDRAWN 2026-09-02. This row carried sha1(cap(sha1($p))) at tier upstream, transcribed from hx Appendix A for e737. That is ONE of 22 forms and so a false claim on its own: mdxfind type SHA1SHA11CAP is MULTI-EMIT. mdxfind.c JOB_SHA1SHA11CAP upper-cases each lower-case hex character of the inner sha1 digest IN TURN, emitting sha1 of each result, then upper-cases ALL occurrences of each letter a-f and emits six more. For the plaintext \"rosetta\" that is 16 + 6, and a full sweep of all 1002 types with mdxfind -z measured exactly 22 on 2026-09-02 against RCS 1.545. The count is INPUT-DEPENDENT -- it follows how many lower-case hex letters the inner digest happens to have -- which settles it on its own: no single expression can describe a type whose number of candidates varies with the candidate. hx cap() means the FIRST lower-case letter only, which is just the first of the 22."
+denotation:
+  text: "SHA1SHA11CAP is MULTI-EMIT: it emits sha1() of the inner sha1 hex digest with each lower-case hex character upper-cased in turn, plus one form per letter a-f with every occurrence of that letter upper-cased. The number of emissions varies with the digest; it was 22 for \"rosetta\"."
+  source: "mdxfind"
+  note: "Emission count measured by sweeping all 1002 mdxfind types with mdxfind -z on 2026-09-02 (RCS 1.545) and corroborated by reading JOB_SHA1SHA11CAP in mdxfind.c. Raw output kept under tmp/multiemit/raw/ at the time of measurement."
 category: "composite"
 status: "needs-review"
 tools:

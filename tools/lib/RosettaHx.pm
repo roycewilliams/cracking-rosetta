@@ -252,6 +252,75 @@ $MULTI_SOURCE{$_} = 1 for qw(
 );
 
 #-----------------------------------------------------------------------
+# THE THIRD GROUP: FOUND BY SWEEPING ALL 1002 TYPES, CONFIRMED IN THE SOURCE
+#
+# tmp/sweep-multiemit.pl measured every type the binary publishes rather than
+# reading a document: 1002 types in 1022 seconds on 2026-09-02, against RCS
+# 1.545. Results are in tmp/multiemit/sweep2.tsv, and the raw -z output for
+# every type with more than one emission is under tmp/multiemit/raw/.
+#
+# READING "mdxfind -z" IS NOT COUNTING ITS LINES, AND THREE THINGS BITE.
+# The first sweep proposed 55 names; 39 of them were artefacts of the method
+# and would have gone straight into this hash. In order of how convincing the
+# wrong answer looked:
+#
+#   - EVERY DIGEST IS PRINTED WITH ITS TRAILING-128-BIT WINDOWS. MD5 prints
+#     1 line, SHA-1 2, SHA-512 and Whirlpool 4, all for ONE emission. This is
+#     the masked/truncated-leak family, not a second candidate.
+#   - THE WINDOW IS NOT ALWAYS ZERO-PADDED. SHA1SHA256 prints
+#     ...7cbd4366 and then 54faf880...7cbd4366eec897b6, where the tail is
+#     residue of the INNER sha256 left in the buffer. A rule that required
+#     zeros missed it and called ~30 ordinary types multi-emit.
+#   - ONE EMISSION IS OFTEN PRINTED IN TWO SPELLINGS. BLAKE2 prints each
+#     digest bare and behind "$BLAKE2$"; MSSQL2000/2005/2012 print theirs
+#     with and without a leading "0x"; APPLE-SECURE-NOTES prints one digest
+#     in both "$ASN$" and "$fvde$" container syntax. None is multi-emit.
+#
+# So the sweep collapses windows structurally (a digest that BEGINS with a
+# 32-hex-or-longer suffix of another is a window of it), strips serialization
+# tags, and refuses to count non-hex serializations at all. DESCRYPT and
+# BSDICRYPT print 4096 crypt(3) strings -- the 12-bit DES salt sweep, with
+# the salt inside the ciphertext -- and are reported as their own class
+# rather than claimed here.
+#
+# WHAT WENT IN, AND WHY EACH ONE
+#
+# The CAP family, which is the substantial find. JOB_SHA1SHA11CAP upper-cases
+# each lower-case hex character of the inner digest IN TURN and emits sha1 of
+# each result, then upper-cases ALL occurrences of each letter a-f and emits
+# six more. For "rosetta" that is 16 + 6 = 22, and the sweep measured exactly
+# 22. The count is INPUT-DEPENDENT -- it follows how many lower-case hex
+# letters the digest happens to have -- which is on its own conclusive: no
+# single expression can describe a type whose number of candidates varies
+# with the candidate. Every entry naming one of these carried an expression
+# spelling exactly one of the forms, usually with cap().
+#
+#     SHA1SHA11CAP  22    SHA1SHA256CAP  27    SHA1SHA1CAPSALT  16
+#     SHA1MD51CAPMD5  13  SHA1MD51CAPMD5MD5  13   SHA1MD5UC1LC  9
+#
+# MD52SALTMD5MD5 and MD52SALTMD5MD5MD5 fall through into MD52SALTMD5, which
+# Note [24] names; the same fallthrough blindness as the group above, found
+# again from the other direction. 3 emissions each, measured.
+#
+# SHA1BASE64CUSTBASE64MD5 emits 4 unrelated digests, measured and read.
+#
+# WHAT WAS DELIBERATELY LEFT OUT, all measured >1 and none of it multi-emit:
+# MSSQL2000/2005/2012 and APPLE-SECURE-NOTES (serialization duplicates, see
+# above); DESCRYPT and BSDICRYPT (non-hex salt sweep); and EPISERVER, which
+# dispatches on a VERSION carried in its salt -- mdxfind.c's own comment says
+# the salt key is "V*SALT_B64" where V=0 selects SHA-1 and V=1 SHA-256 -- so
+# for any one stored hash the version is fixed and one computation applies.
+# That entry's expression covers only the v0 form, which is a completeness
+# question about the row and not a multi-emit one.
+
+$MULTI_SOURCE{$_} = 1 for qw(
+    SHA1SHA11CAP SHA1SHA256CAP SHA1SHA1CAPSALT
+    SHA1MD51CAPMD5 SHA1MD51CAPMD5MD5 SHA1MD5UC1LC
+    MD52SALTMD5MD5 MD52SALTMD5MD5MD5
+    SHA1BASE64CUSTBASE64MD5
+);
+
+#-----------------------------------------------------------------------
 # Note [24]'s 34 named types.
 
 my %MULTI_NOTE = map { $_ => 1 } qw(
