@@ -323,8 +323,52 @@ if (-r $johnmap) {
     my $src = do { local $/; <$fh> };
     close $fh;
 
+    # ONLY the first table, JohnMap[]. hashpipe v1.189 added a second,
+    # JohnMapLocal[], holding config-defined dynamics read from the
+    # dynamic.conf of the machine that ran upstream's generator. Upstream's
+    # own comment says the numbering is local and the table is consulted on
+    # INPUT ONLY, and that is demonstrable here: upstream's dynamic_1013 is
+    # MD5PASSSALT and its dynamic_1014 is POSTGRESQL, while this host's john
+    # has the two the other way round (measured 2026-09-02). Seeding from it
+    # would write another machine's numbering into the john column, where
+    # every other row means an identifier this host's john answers to.
+    # data/upstream-disagreements.yaml carries the record; check_john_map in
+    # check-upstream.pl makes the same cut for the same reason.
+    if ($src =~ /\bJohnMap\s*\[\s*\]\s*=\s*\{(.*?)^\s*\}\s*;/ms) {
+        $src = $1;
+    }
+    else {
+        print STDERR "$PROG: $johnmap has no JohnMap[] table -- has its "
+                   . "shape changed? Refusing to seed from it.\n";
+        exit 1;
+    }
+
+    # Rows this repository has MEASURED upstream to be wrong about. The
+    # register is the single place that records them, so read it rather than
+    # keeping a second list here that can drift from it. A row named in a
+    # john-map-agreement record's differs: is reported unresolved, never
+    # seeded: see data/upstream-disagreements.yaml for what each one is.
+    my %disputed;
+    my $regpath = "$ROOT/data/upstream-disagreements.yaml";
+    if (-r $regpath) {
+        my $reg = eval { YAML::XS::LoadFile($regpath) };
+        for my $rec (@{ ($reg || {})->{disagreements} || [] }) {
+            next unless ($rec->{kind} // '') eq 'john-map-agreement';
+            for my $d (@{ $rec->{differs} || [] }) {
+                $disputed{ $d->{john} } = $d->{why} // 'recorded disagreement'
+                    if defined $d->{john};
+            }
+        }
+    }
+
     while ($src =~ /\{\s*"([^"]+)"\s*,\s*"([^"]+)"\s*\}/g) {
         my ($label, $hptype) = ($1, $2);
+
+        if (my $why = $disputed{$label}) {
+            push @unresolved, "john_map $label -> '$hptype' is a recorded "
+                            . "disagreement ($why); not seeded";
+            next;
+        }
 
         # Strip the iteration suffix ONLY if the whole name is not itself a
         # type; see methodology.
