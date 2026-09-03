@@ -1,12 +1,15 @@
 id: "md5-1-substr-mysql5-plain-0-30"
 name: "md5(\"1*\".substr(mysql5($plain),0,30))"
 aliases: ["md5(\"1*\".substr(strtolower(mysql5($plain)),0,30))", "md5(\"*\".substr(mysql5($plain), 0, 31))", "md5(substr(mysql5($plain), 0, 31))", "md5(\"*\".substr(mysql5($plain), 0, 32))", "md5(\"*\".substr(strtolower(mysql5($plain)), 0, 31))", "md5(substr(strtolower(mysql5($plain)), 0, 31))", "md5(\"*\".substr(strtolower(mysql5($plain)), 0, 32))"]
-expression: "md5(cut($c1.upper(sha1(sha1_raw($p))),0,32)),c1=*"
 expression_proof:
-  verified: "upstream"
+  verified: "absent"
   verified_at: "2026-09-02"
-  verified_with: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A"
-  note: "transcribed from the hx specification's Appendix A entry for mdxfind type MD5SQL5-32 (e342), which states md5(cut(\"*\" . upper(sha1(sha1_bin(pass))), 0, 32)). Transcription, not reproduction, so this is upstream and not vector; run derive-expressions.pl to try to promote it. Not checkable locally: the construction uses functions RosettaExpr cannot compile, so this rests on upstream's word alone. Superseded the denotation \"md5(\"1*\".substr(mysql5($plain),0,30))\" (source: sheet), which validate.pl forbids alongside an expression.; TRIAGE 2026-09-02 [no-john-format]: no john format on this entry, so john ships no control vectors, and RosettaExpr cannot compile this expression either -- nothing here can check it"
+  verified_with: "mdxfind RCS 1.545 (2026/08/29), source and -z emission count"
+  note: "WITHDRAWN 2026-09-02. This row carried md5(cut($c1.upper(sha1(sha1_raw($p))),0,32)),c1=* at tier upstream, transcribed from hx Appendix A for e342. It is one of EIGHT forms and so a false claim on its own: mdxfind type MD5SQL5-32 is MULTI-EMIT. mdxfind.c JOB_MD5SQL5_32 writes the MySQL5 digest of the candidate as upper-case hex into mdbuf and as lower-case hex into linebuf, each behind the two bytes \"1*\", then fills mdcur[0..7] with md5 of four placements in each case: \"1*\" plus 30 characters, \"*\" plus 31, \"*\" plus 32, and the bare 32; it checkhash()es all eight every iteration. mdxfind -z counts exactly 8 emissions, RCS 1.545, measured 2026-09-02. This row already carried all eight as its name plus seven aliases, which is what nobody had connected."
+denotation:
+  text: "MD5SQL5-32 is MULTI-EMIT: it emits EIGHT digests per candidate and matches any of them. They are md5() of the MySQL5 digest written as upper-case hex and as lower-case hex, each taken four ways -- \"1*\" plus its first 30 characters, \"*\" plus 31, \"*\" plus 32, and the bare 32. This row name and its seven aliases are exactly those eight forms."
+  source: "mdxfind"
+  note: "Emission count measured with mdxfind -z against RCS 1.545 on 2026-09-02 and corroborated by reading JOB_MD5SQL5_32 in mdxfind.c, which fills eight mdcur slots. Note the spelling: the C identifier is JOB_MD5SQL5_32 and the published type name is MD5SQL5-32; measuring the C spelling reports zero and looks like a single-emit type."
 status: "ok"
 tools:
   hashcat:

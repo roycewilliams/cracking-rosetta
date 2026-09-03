@@ -1,12 +1,15 @@
 id: "md5-base64-encode-md5-sha1-plain-true"
 name: "md5(base64_encode(md5(sha1($plain), true)))"
 aliases: ["md5(substr(base64_encode(md5(sha1($plain), true)), 0, -2))"]
-expression: "md5(base64(md5_raw(sha1($p))))"
 expression_proof:
-  verified: "upstream"
-  verified_at: "2026-08-31"
-  verified_with: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A"
-  note: "transcribed from the hx specification's Appendix A entry for mdxfind type MD5BASE64MD5RAWSHA1 (e242), which states md5(base64(md5_bin(sha1(pass)))). Transcription, not reproduction, so this is upstream and not vector; run derive-expressions.pl to try to promote it. Superseded the denotation \"md5(base64_encode(md5(sha1($plain), true)))\" (source: sheet), which validate.pl forbids alongside an expression.; TRIAGE 2026-09-02 [partial]: no john format; RosettaExpr reproduces 1 of 2 comparable vector(s), so the expression is right for some and not others -- which is what a multi-emit type looks like, and is a question for a person"
+  verified: "absent"
+  verified_at: "2026-09-02"
+  verified_with: "mdxfind RCS 1.545 (2026/08/29), source and -z emission count"
+  note: "WITHDRAWN 2026-09-02. This row carried md5(base64(md5_raw(sha1($p)))) at tier upstream, transcribed from hx Appendix A for e242, and triage recorded it as reproducing 1 of 2 vectors. Both vectors are correct and the expression was the false claim: mdxfind type MD5BASE64MD5RAWSHA1 gotos mdxfind.c b64md5raw, which is MULTI-EMIT -- md5 of the whole 24-character base64 into mdcur[0] and, under if (len > 18), md5 of that base64 minus its last two characters into mdcur[1], both checkhash()ed. mdxfind -z counts 2 emissions, RCS 1.545, measured 2026-09-02. The hx VM reproduces this row first vector from the padded form and its second from the 22-character form."
+denotation:
+  text: "MD5BASE64MD5RAWSHA1 is MULTI-EMIT: it matches either md5(base64(md5_raw(sha1($p)))) or md5(cut(base64(md5_raw(sha1($p))),0,22)), which is the same base64 with its \"==\" padding removed"
+  source: "mdxfind"
+  note: "Both forms verified against this row own vectors with mdxfind hx VM, built -DHX_STANDALONE from RCS 1.545, on 2026-09-02. The alias this row already carried is the second emission written in the sheet notation."
 category: "composite"
 status: "needs-review"
 tools:

@@ -155,6 +155,72 @@ my %MULTI_SOURCE = map { $_ => 1 } qw(
 );
 
 #-----------------------------------------------------------------------
+# THE SECOND MEASURED GROUP: TYPES THAT REACH A MULTI-EMIT BLOCK BY
+# FALLTHROUGH OR goto, WHICH IS WHY NOTE [24] DOES NOT NAME THEM
+#
+# Note [24] names types that sit AT a C case label whose body emits several
+# digests. It does not name the types that reach that same body by falling
+# through from an earlier label or by jumping to it, and those compute
+# exactly the same thing because they run exactly the same code. Found
+# 2026-09-02 by reading mdxfind.c rather than the appendix, after three
+# corpus entries carried the TRIAGE verdict `partial` -- each reproducing
+# one of its two vectors and not the other -- and is_multi_emit() said no to
+# all three.
+#
+# mdxfind.c's b64md5raw block is the clearest case. It computes
+#
+#     len = b64_encode(digest, buf, 16);      24 chars, trailing "=="
+#     mymd5(buf, len,     &mdcur[0]);         md5 of the whole base64
+#     if (len > 18)
+#       mymd5(buf, len - 2, &mdcur[1]);       md5 of it MINUS the padding
+#
+# and checkhash()es both on every iteration. MD5BASE64MD5RAW and
+# MD5UCBASE64MD5RAW sit at that label and Note [24] names them;
+# MD5BASE64MD5RAWSHA1 gotos it and MD5BASE64MD5RAWMD5 and
+# MD5BASE64MD5RAWMD5MD5 fall into it, and the note names none of the three.
+# The corpus settles it independently: each of those three entries carries
+# two vectors for one plaintext, and the hx VM reproduces one of them from
+# the padded form and the other from the 22-character form.
+#
+# Every name below was confirmed BOTH ways, which is what this list's rule
+# requires: the source says the body emits more than one, and "mdxfind -z"
+# counts more than one. Measured against RCS 1.545 on 2026-09-02 --
+#
+#     MD5BASE64MD5RAWSHA1     2     MD5-DBL-PASS     2
+#     MD5BASE64MD5RAWMD5MD5   2     SHA1MD5MD5PASS   4
+#     MD5BASE64MD5RAWMD5      2     MD5SQL5-32       8
+#     SHA1SQL5  6    SHA1SQL5MD5  6    SHA1SQL5MD5MD5  6
+#
+# NOTE THE SPELLING. These are the names the BINARY publishes, which is what
+# is_multi_emit() is asked about and what data/tools/mdxfind.yaml carries.
+# The C identifiers differ: JOB_MD5DBLPASS is the type MD5-DBL-PASS and
+# JOB_MD5SQL5_32 is MD5SQL5-32. Measuring the C spelling reports ZERO
+# emissions, which looks exactly like a single-emit type rather than like a
+# name that was never found. That is the separator-drift pitfall in
+# CLAUDE.md, reached from a new direction.
+#
+# TWO THINGS DELIBERATELY LEFT OUT, both open questions:
+#
+#   - MD5BASE64SHA1RAWMD5 and MD5BASE64SHA1RAWBASE64SHA1RAW reach the
+#     b64sha1raw block, which carries the same "if (len > 18)" second
+#     emission, but "mdxfind -z" counts ONE for them -- and one for
+#     MD5BASE64SHA1RAW too, which Note [24] DOES name. Source and
+#     measurement disagree, so by this list's own rule neither may be
+#     asserted here. The note keeps MD5BASE64SHA1RAW; its two siblings stay
+#     unclaimed rather than being guessed either way.
+#   - SHA1BASE64, SHA1SQL5-32, SHA1SQL5-40 and SHA1MD5PASSMD5 each measure 2
+#     although each ends in "goto SHA1_start", which reads as a single
+#     emission. The shared SHA1_start and MDstart tails have not been read.
+#     Whatever they do they do for a large number of types, so establishing
+#     that is the next piece of work and not something to guess at here.
+
+$MULTI_SOURCE{$_} = 1 for qw(
+    MD5BASE64MD5RAWSHA1 MD5BASE64MD5RAWMD5MD5 MD5BASE64MD5RAWMD5
+    MD5-DBL-PASS SHA1MD5MD5PASS MD5SQL5-32
+    SHA1SQL5 SHA1SQL5MD5 SHA1SQL5MD5MD5
+);
+
+#-----------------------------------------------------------------------
 # Note [24]'s 34 named types.
 
 my %MULTI_NOTE = map { $_ => 1 } qw(
