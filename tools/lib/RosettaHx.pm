@@ -184,12 +184,42 @@ my %MULTI_SOURCE = map { $_ => 1 } qw(
 #
 # Every name below was confirmed BOTH ways, which is what this list's rule
 # requires: the source says the body emits more than one, and "mdxfind -z"
-# counts more than one. Measured against RCS 1.545 on 2026-09-02 --
+# agrees. Measured against RCS 1.545 on 2026-09-02 --
 #
-#     MD5BASE64MD5RAWSHA1     2     MD5-DBL-PASS     2
-#     MD5BASE64MD5RAWMD5MD5   2     SHA1MD5MD5PASS   4
-#     MD5BASE64MD5RAWMD5      2     MD5SQL5-32       8
-#     SHA1SQL5  6    SHA1SQL5MD5  6    SHA1SQL5MD5MD5  6
+#     type                     -z lines   emissions   source
+#     MD5BASE64MD5RAWSHA1          2          2          2
+#     MD5BASE64MD5RAWMD5MD5        2          2          2
+#     MD5BASE64MD5RAWMD5           2          2          2
+#     MD5-DBL-PASS                 2          2          2
+#     MD5SQL5-32                   8          8          8
+#     SHA1MD5MD5PASS               4          2          2
+#     SHA1SQL5                     6          3          3
+#     SHA1SQL5MD5                  6          3          3
+#     SHA1SQL5MD5MD5               6          3          3
+#
+# -z LINES ARE NOT EMISSIONS, AND THE DIFFERENCE IS PER OUTPUT WIDTH
+#
+# For a type whose output is a 40-hex SHA-1 digest, "mdxfind -z" prints every
+# emission TWICE: the true digest, and a twin equal to the true digest with
+# its first 8 hex characters dropped and eight "0"s appended --
+#
+#     SHA1BASE64x01 a07445b1a23792a88c177ae6e315dfadac81bdde:rosetta
+#     SHA1BASE64x01 a23792a88c177ae6e315dfadac81bdde00000000:rosetta
+#
+# so the line count is DOUBLE the emission count there, while for a 32-hex
+# md5-output type it is equal to it. Counting lines and calling the result an
+# emission count therefore reports every ordinary SHA-1 type as multi-emit.
+# Divide by two whenever the digests differ only by that shift; two lines that
+# are unrelated digests are two real emissions --
+#
+#     MD5BASE64MD5RAWMD5x01 bf69328d466cdfc0da6b852d643937ad:rosetta
+#     MD5BASE64MD5RAWMD5x01 dcf5f5226be78c2a212535a0f2a26e8e:rosetta
+#
+# Measured 2026-09-02. This is why the list's rule is a CONJUNCTION and not
+# either test alone: the raw counts above were first read as emissions, and
+# requiring the source to agree independently is what kept a wrong number from
+# becoming a wrong claim. Nothing in this list changed when the counts were
+# corrected.
 #
 # NOTE THE SPELLING. These are the names the BINARY publishes, which is what
 # is_multi_emit() is asked about and what data/tools/mdxfind.yaml carries.
@@ -208,11 +238,12 @@ my %MULTI_SOURCE = map { $_ => 1 } qw(
 #     measurement disagree, so by this list's own rule neither may be
 #     asserted here. The note keeps MD5BASE64SHA1RAW; its two siblings stay
 #     unclaimed rather than being guessed either way.
-#   - SHA1BASE64, SHA1SQL5-32, SHA1SQL5-40 and SHA1MD5PASSMD5 each measure 2
-#     although each ends in "goto SHA1_start", which reads as a single
-#     emission. The shared SHA1_start and MDstart tails have not been read.
-#     Whatever they do they do for a large number of types, so establishing
-#     that is the next piece of work and not something to guess at here.
+#   - SHA1BASE64, SHA1SQL5-32, SHA1SQL5-40 and SHA1MD5PASSMD5 are NOT in this
+#     list and must not be added: each prints 2 -z lines, but the two are the
+#     shift-twins described above, so each is a SINGLE emission. SHA1_start
+#     has been read since -- it is one checkhash() per iteration, and 71 types
+#     goto it -- so the tail is single-emit and agrees. Resolved 2026-09-02;
+#     it is recorded here because the raw count invites the mistake again.
 
 $MULTI_SOURCE{$_} = 1 for qw(
     MD5BASE64MD5RAWSHA1 MD5BASE64MD5RAWMD5MD5 MD5BASE64MD5RAWMD5
