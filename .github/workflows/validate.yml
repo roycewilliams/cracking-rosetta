@@ -144,3 +144,12 @@ jobs:
       # preinstalled on the runner; this needs nothing else.
       - name: Exercise the browsable page
         run: node tools/test-index-page.js docs/index.html
+
+      # Every finding published to upstream has to still hold. --check writes
+      # nothing; it re-verifies that each record's entry still makes the claim,
+      # that each type is still spelled the way the binary spells it, and that
+      # each quoted note still says what it is quoted for. A record that has
+      # gone stale fails the build rather than staying on a page addressed to
+      # somebody else's maintainers.
+      - name: Upstream findings still hold
+        run: perl -Itools/lib tools/upstream-findings.pl --check -v

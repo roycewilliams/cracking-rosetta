@@ -27,3 +27,4 @@ vectors:
     reads_in: ["mdxfind"]
 legacy:
   hashes_org: "MD5UCMD5RAWMD5"
+notes: "The hx specification Appendix A row for mdxfind type MD5RAWUC (e383) states hex(upper(md5_bin(pass))), which applies upper() to RAW BYTES and hexes the result afterwards. That is a different operation from upper-casing the hex text, and it is not what the type computes: this entry reaches tier vector with the upper() outside the hex-emitting call, proven 2026-09-02 by john's own dynamic compiler against this entry's own vector. Note that this entry is at -i 2, so its expression carries one more round than the appendix row describes; the defect is the placement of upper(), which is independent of the iteration count. Recorded here because docs/UPSTREAM-FINDINGS.md renders this note rather than restating it."

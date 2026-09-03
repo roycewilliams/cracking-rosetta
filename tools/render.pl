@@ -674,6 +674,9 @@ does not support it; **--** nobody has said yet (a gap worth filling)
 
 (c) also attackable by Alec Muffett's Crack - see [CRACK.md](CRACK.md).
 
+Where checking these mappings turned up something an upstream document gets
+wrong, that is in [UPSTREAM-FINDINGS.md](UPSTREAM-FINDINGS.md).
+
 For sorting, filtering and search, open [index.html](index.html) - or
 [dist/rosetta.csv](../dist/rosetta.csv) in a spreadsheet.
 
@@ -1359,7 +1362,9 @@ a{color:inherit}
   Every row has a permalink &mdash; the <code>#</code> that appears when you
   hover it. What is missing, and what fixing it costs, is in
   <a href="GAPS.md">GAPS.md</a>; what is known to be doubtful is in
-  <a href="OPEN-QUESTIONS.md">OPEN-QUESTIONS.md</a>.
+  <a href="OPEN-QUESTIONS.md">OPEN-QUESTIONS.md</a>; what checking all this
+  turned up about the upstream documents is in
+  <a href="UPSTREAM-FINDINGS.md">UPSTREAM-FINDINGS.md</a>.
   A gap is not a claim that the tool cannot do it &mdash; it means nobody has said.
   &quot;Cost&quot; is hashcat's own fast/slow split with John's tunable cost
   under it; &quot;Shape&quot; is how long the hash string is, then which tools

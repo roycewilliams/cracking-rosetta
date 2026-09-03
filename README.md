@@ -83,6 +83,8 @@ Full instructions: [CONTRIBUTING.md](CONTRIBUTING.md) if you want to add or corr
 
 **Know one of these formats well?** [`docs/OPEN-QUESTIONS.md`](docs/OPEN-QUESTIONS.md) is the other list: rows where something is known to be odd and the answer needs a person rather than a command - an expression john states but cannot reproduce, a tool that cracks a vector without implementing the algorithm, an entry that may be two algorithms collated into one row. An issue saying what you know is a complete contribution.
 
+**Maintain one of the tools this cross-references?** [`docs/UPSTREAM-FINDINGS.md`](docs/UPSTREAM-FINDINGS.md) is generated from the places where verifying a mapping here turned up something a published document gets wrong - a construction that is not what the type computes, a note that is silent about types running the same code, examples the tool will not read back - plus one measurement that disagrees with a document and is deliberately *not* strong enough to overrule it. Every finding names the version it was measured against, and every one is re-checked on each build against the entry or the type list it came from, so a finding upstream has already fixed fails the build rather than sitting on the page.
+
 ## Layout
 
 ```

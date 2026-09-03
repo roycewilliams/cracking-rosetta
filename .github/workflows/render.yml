@@ -47,6 +47,11 @@ jobs:
       - name: Render
         run: perl -Itools/lib tools/render.pl -v
 
+      # Rendered here rather than in the validate workflow because it writes a
+      # file, and this is the workflow that is allowed to commit one.
+      - name: Render the upstream findings
+        run: perl -Itools/lib tools/upstream-findings.pl -v
+
       - name: Commit only if something actually changed
         run: |
           if git diff --quiet -- docs dist README.md; then
