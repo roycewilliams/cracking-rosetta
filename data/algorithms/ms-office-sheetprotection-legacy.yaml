@@ -1,0 +1,86 @@
+id: "ms-office-sheetprotection-legacy"
+name: "MS Office SheetProtection - legacy 16-bit verifier"
+aliases:
+  - "Excel sheet protection password"
+  - "Excel workbook protection password"
+  - "sheetProtection password attribute"
+  - "BIFF Password/Protect record"
+  - "Binary Document Password Verifier Derivation Method 1"
+expression_proof:
+  verified: "absent"
+  verified_at: "2026-09-03"
+  verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a"
+  note: "the construction is a 15-bit rotate-and-xor over the password read BACKWARDS, then an xor of the length and of the constant 0xCE4B. john's dynamic expression vocabulary has no rotate, no xor and no reversal, so this cannot be written as an expression at all -- that is a lookup against the function names in john's own --list=subformats, not an opinion. It is also separate from whether john can CRACK it, and john cannot: see tools.john."
+denotation:
+  text: "Binary Document Password Verifier Derivation Method 1"
+  source: "human"
+  note: "Microsoft's own name for it, MS-OFFCRYPTO section 2.3.7.1; ECMA-376 1st edition specifies the same value as the sheetProtection/@password attribute. No cracking tool publishes a label for this algorithm, so there is no tool-sourced denotation to quote."
+category: "application"
+application: "Microsoft Excel"
+application_version: "<=2010 file format; still written by openpyxl and by LibreOffice"
+status: "ok"
+tools:
+  hashcat:
+    verified: "absent"
+    verified_at: "2026-09-03"
+    verified_with: "hashcat v7.1.2-549-g8a15e210b"
+    note: "no mode. 25300 is the SHA-512 successor scheme and is a different algorithm -- see ms-office-2016-sheetprotection. Searched the full mode inventory for a protection or verifier mode; the only two hits are 25300 and mega.nz."
+  john:
+    verified: "absent"
+    verified_at: "2026-09-03"
+    verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a"
+    note: "no format. --list=formats offers only Office and oldoffice, which are MS-OFFCRYPTO document ENCRYPTION; office2john extracts that verifier from the OLE/agile container and has nothing to find here, because a protected sheet is not encrypted and its digest sits in cleartext XML."
+  mdxfind:
+    verified: "absent"
+    verified_at: "2026-09-03"
+    verified_with: "mdxfind RCS 1.545"
+    note: "no type."
+  crack:
+    supported: false
+vectors:
+  - hash: "94AB"
+    pass: "P@ssw0rd"
+    source: "measured"
+    form: "native"
+notes: |
+  A 16-bit password verifier, not a hash in any useful sense. In an OOXML part
+  it appears under a DIFFERENT ATTRIBUTE NAME on each element: `password` on
+  `<sheetProtection>` and `<chartsheetProtection>`, `workbookPassword` and
+  `revisionsPassword` on `<workbookProtection>` (two independent passwords on
+  one element), and `reservationPassword` on `<fileSharing>`. Spellings taken
+  from openpyxl's schema classes and exercised 2026-09-03. It is also the data
+  of the BIFF PASSWORD and PROTECT records in a pre-2007 .xls. The native form
+  -- the one the vector
+  above is written in -- is FOUR HEXADECIMAL DIGITS exactly as the attribute
+  spells them, with no wrapper, no salt and no iteration count, because there
+  is nowhere for any of those to go.
+
+  The algorithm, from MS-OFFCRYPTO 2.3.7.1: start at 0; for each character of
+  the password taken from LAST to FIRST, rotate the running value left within
+  15 bits and xor the character code; then rotate once more, xor the password
+  length, and xor the constant 0xCE4B. Reimplemented and measured 2026-09-03
+  against the value openpyxl 3.0.9 writes for "P@ssw0rd", which is the vector
+  above.
+
+  BYTE ORDER IS A TRAP. The XML attribute and the BIFF record render the same
+  word in opposite orders, so published write-ups give "AB94" for the value
+  this repository records as "94AB". They are the same verifier. Check which
+  container a quoted value came out of before comparing it to anything.
+
+  THE ORIGINAL PASSWORD IS NOT RECOVERABLE and no tool will ever make it so:
+  16 bits cannot carry it. What is recoverable is a COLLIDING password, which
+  unlocks the sheet just as well. Measured 2026-09-03: 'DbOUJLIb' verifies to
+  94AB, found in 24065 random 8-character tries in under a second. Do not
+  report such a string as the password.
+
+  Collisions are dense but NOT uniformly reachable, which is the practical
+  gotcha. Exhausting printable ASCII at lengths 1 to 4 -- 82,317,120 strings
+  -- reaches only 1536 distinct verifier values out of 65536, and 94AB is not
+  among them, because a short password is rotated too few times for the high
+  bits ever to be set. Search at the same length as the original or longer; a
+  short-candidate sweep can return nothing and prove nothing.
+
+  Operationally, cracking is usually the wrong move for either form of sheet
+  protection. The file is not encrypted: deleting the protection element and
+  rezipping opens the sheet, and only a genuine interest in the password
+  itself (credential reuse, an investigation) justifies the rest.
