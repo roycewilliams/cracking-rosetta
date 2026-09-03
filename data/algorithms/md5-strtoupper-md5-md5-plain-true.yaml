@@ -1,11 +1,12 @@
 id: "md5-strtoupper-md5-md5-plain-true"
 name: "md5(strtoupper(md5(md5($plain, true))))"
-expression: "hex(upper(md5_raw($p)))"
+expression: "md5(upper(md5(md5_raw($p))))"
+john_dynamic_expr: "dynamic=md5(MD5(md5_raw($p)))"
 expression_proof:
-  verified: "upstream"
-  verified_at: "2026-08-31"
-  verified_with: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A"
-  note: "transcribed from the hx specification's Appendix A entry for mdxfind type MD5RAWUC (e383), which states hex(upper(md5_bin(pass))). Transcription, not reproduction, so this is upstream and not vector; run derive-expressions.pl to try to promote it.; TRIAGE 2026-09-02 [expression-wrong]: no john format, but RosettaExpr -- an implementation independent of all three crackers -- computes this expression over the entry's own vector(s) and reproduces none of them. Either the expression or the vector is wrong"
+  verified: "vector"
+  verified_at: "2026-09-02"
+  verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
+  note: "round-tripped against every vector this entry carries as --format=dynamic='md5(MD5(md5_raw($p)))', which is this expression written in john's own notation: john spells a representation change as a flavour of the hash function, not as a wrapper. The two strings are ONE claim, not two pieces of evidence"
 category: "iterated"
 status: "needs-review"
 tools:
