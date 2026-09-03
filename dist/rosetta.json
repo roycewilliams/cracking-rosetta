@@ -56217,10 +56217,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
-         "expr" : "sha1(cap(sha1($p)))",
-         "expr_note" : "transcribed from the hx specification's Appendix A entry for mdxfind type SHA1SHA11CAP (e737), which states sha1(cap(sha1(pass))). Transcription, not reproduction, so this is upstream and not vector; run derive-expressions.pl to try to promote it.; TRIAGE 2026-09-02 [corroborated]: no john format, so john ships no control vectors; but RosettaExpr -- an implementation independent of all three crackers -- computes this expression over the entry's own vector(s) and reproduces 1 of 1. That is corroboration, not tier vector, which needs john's own compiler",
-         "expr_tier" : "upstream",
+         "denotation" : "SHA1SHA11CAP is MULTI-EMIT: it emits sha1() of the inner sha1 hex digest with each lower-case hex character upper-cased in turn, plus one form per letter a-f with every occurrence of that letter upper-cased. The number of emissions varies with the digest; it was 22 for \"rosetta\".",
+         "expr" : "",
+         "expr_note" : "WITHDRAWN 2026-09-02. This row carried sha1(cap(sha1($p))) at tier upstream, transcribed from hx Appendix A for e737. That is ONE of 22 forms and so a false claim on its own: mdxfind type SHA1SHA11CAP is MULTI-EMIT. mdxfind.c JOB_SHA1SHA11CAP upper-cases each lower-case hex character of the inner sha1 digest IN TURN, emitting sha1 of each result, then upper-cases ALL occurrences of each letter a-f and emits six more. For the plaintext \"rosetta\" that is 16 + 6, and a full sweep of all 1002 types with mdxfind -z measured exactly 22 on 2026-09-02 against RCS 1.545. The count is INPUT-DEPENDENT -- it follows how many lower-case hex letters the inner digest happens to have -- which settles it on its own: no single expression can describe a type whose number of candidates varies with the candidate. hx cap() means the FIRST lower-case letter only, which is just the first of the 22.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "unknown"
@@ -56262,10 +56262,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
-         "expr" : "sha1(cap(sha1($p)).$s)",
-         "expr_note" : "transcribed from the hx specification's Appendix A entry for mdxfind type SHA1SHA1CAPSALT (e666), which states sha1(cap(sha1(pass)) . salt). Transcription, not reproduction, so this is upstream and not vector; run derive-expressions.pl to try to promote it.; TRIAGE 2026-09-02 [corroborated]: no john format, so john ships no control vectors; but RosettaExpr -- an implementation independent of all three crackers -- computes this expression over the entry's own vector(s) and reproduces 1 of 1. That is corroboration, not tier vector, which needs john's own compiler",
-         "expr_tier" : "upstream",
+         "denotation" : "SHA1SHA1CAPSALT is MULTI-EMIT: it emits sha1() of the inner sha1 hex digest concatenated with the salt, sweeping which lower-case hex characters of that digest are upper-cased. The number of emissions varies with the digest; it was 16 for \"rosetta\".",
+         "expr" : "",
+         "expr_note" : "WITHDRAWN 2026-09-02. This row carried sha1(cap(sha1($p)).$s) at tier upstream, transcribed from hx Appendix A for e666. It is ONE of 16 forms and so a false claim on its own: mdxfind type SHA1SHA1CAPSALT is MULTI-EMIT, sweeping which characters of the inner digest are upper-cased in the same way JOB_SHA1SHA11CAP does. A full sweep of all 1002 types with mdxfind -z measured 16 on 2026-09-02 against RCS 1.545, and the count is INPUT-DEPENDENT, which no single expression can describe. hx cap() means the FIRST lower-case letter only, which is one of the 16.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "unknown"
@@ -57258,10 +57258,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
-         "expr" : "sha1(cap(sha256($p)))",
-         "expr_note" : "transcribed from the hx specification's Appendix A entry for mdxfind type SHA1SHA256CAP (e632), which states sha1(cap(sha256(pass))). Transcription, not reproduction, so this is upstream and not vector; run derive-expressions.pl to try to promote it.; TRIAGE 2026-09-02 [corroborated]: no john format, so john ships no control vectors; but RosettaExpr -- an implementation independent of all three crackers -- computes this expression over the entry's own vector(s) and reproduces 1 of 1. That is corroboration, not tier vector, which needs john's own compiler",
-         "expr_tier" : "upstream",
+         "denotation" : "SHA1SHA256CAP is MULTI-EMIT: it emits sha1() of the inner sha256 hex digest, sweeping which lower-case hex characters of that digest are upper-cased. The number of emissions varies with the digest; it was 27 for \"rosetta\".",
+         "expr" : "",
+         "expr_note" : "WITHDRAWN 2026-09-02. This row carried sha1(cap(sha256($p))) at tier upstream, transcribed from hx Appendix A for e632. It is ONE of 27 forms and so a false claim on its own: mdxfind type SHA1SHA256CAP is MULTI-EMIT, sweeping which characters of the inner sha256 digest are upper-cased in the same way JOB_SHA1SHA11CAP does. A full sweep of all 1002 types with mdxfind -z measured 27 on 2026-09-02 against RCS 1.545 -- more than SHA1SHA11CAP because a sha256 digest is 64 hex characters and so carries more lower-case letters, which is the input-dependence itself. No single expression can describe that.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "unknown"

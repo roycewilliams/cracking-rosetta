@@ -11,7 +11,7 @@ If you can settle one, an issue saying so is a complete contribution. You do
 not need to open a pull request, and you do not need to be certain: "I have
 seen this format do X" is information this cannot derive.
 
-## Expressions that do not reproduce their own vectors (176)
+## Expressions that do not reproduce their own vectors (173)
 
 Each of these carries an expression transcribed from somewhere that states it
 - john's own `--list=subformats` for a format the entry has already proven, or
@@ -183,8 +183,6 @@ what those vectors really are.
 | [`sha1saltsha1ucpass`](index.html#sha1saltsha1ucpass) | `sha1($s.upper(sha1($p)))` | `-` | no john format, so john ships no control vectors; but RosettaExpr -- an implementation independent of all three crackers -- computes this expression over the entry's own vector(s) and reproduces 1 of ... |
 | [`sha1saltsha256`](index.html#sha1saltsha256) | `sha1($s.sha256($p))` | `-` | no john format, so john ships no control vectors; but RosettaExpr -- an implementation independent of all three crackers -- computes this expression over the entry's own vector(s) and reproduces 1 of ... |
 | [`sha1sha0`](index.html#sha1sha0) | `sha1(sha0($p))` | `-` | no john format on this entry, so john ships no control vectors, and RosettaExpr cannot compile this expression either -- nothing here can check it |
-| [`sha1sha11cap`](index.html#sha1sha11cap) | `sha1(cap(sha1($p)))` | `-` | no john format, so john ships no control vectors; but RosettaExpr -- an implementation independent of all three crackers -- computes this expression over the entry's own vector(s) and reproduces 1 of ... |
-| [`sha1sha1capsalt`](index.html#sha1sha1capsalt) | `sha1(cap(sha1($p)).$s)` | `-` | no john format, so john ships no control vectors; but RosettaExpr -- an implementation independent of all three crackers -- computes this expression over the entry's own vector(s) and reproduces 1 of ... |
 | [`sha1sha1sub1-16`](index.html#sha1sha1sub1-16) | `sha1(cut(sha1($p),0,16))` | `-` | no john format, so john ships no control vectors; but RosettaExpr -- an implementation independent of all three crackers -- computes this expression over the entry's own vector(s) and reproduces 1 of ... |
 | [`sha1sha1u34`](index.html#sha1sha1u34) | `sha1(cut(sha1($p),0,34))` | `-` | no john format, so john ships no control vectors; but RosettaExpr -- an implementation independent of all three crackers -- computes this expression over the entry's own vector(s) and reproduces 1 of ... |
 | [`sha1sha1u35`](index.html#sha1sha1u35) | `sha1(cut(sha1($p),0,35))` | `-` | no john format, so john ships no control vectors; but RosettaExpr -- an implementation independent of all three crackers -- computes this expression over the entry's own vector(s) and reproduces 1 of ... |
@@ -193,7 +191,6 @@ what those vectors really are.
 | [`sha1sha1u38`](index.html#sha1sha1u38) | `sha1(cut(sha1($p),0,38))` | `-` | no john format, so john ships no control vectors; but RosettaExpr -- an implementation independent of all three crackers -- computes this expression over the entry's own vector(s) and reproduces 1 of ... |
 | [`sha1sha1u39`](index.html#sha1sha1u39) | `sha1(cut(sha1($p),0,39))` | `-` | no john format, so john ships no control vectors; but RosettaExpr -- an implementation independent of all three crackers -- computes this expression over the entry's own vector(s) and reproduces 1 of ... |
 | [`sha1sha1ucpasssalt`](index.html#sha1sha1ucpasssalt) | `sha1(upper(sha1($p)).$s)` | `-` | no john format, so john ships no control vectors; but RosettaExpr -- an implementation independent of all three crackers -- computes this expression over the entry's own vector(s) and reproduces 1 of ... |
-| [`sha1sha256cap`](index.html#sha1sha256cap) | `sha1(cap(sha256($p)))` | `-` | no john format, so john ships no control vectors; but RosettaExpr -- an implementation independent of all three crackers -- computes this expression over the entry's own vector(s) and reproduces 1 of ... |
 | [`sha1sha256u32`](index.html#sha1sha256u32) | `sha1(cut(sha256($p),0,32))` | `-` | no john format, so john ships no control vectors; but RosettaExpr -- an implementation independent of all three crackers -- computes this expression over the entry's own vector(s) and reproduces 1 of ... |
 | [`sha1sha256u34`](index.html#sha1sha256u34) | `sha1(cut(sha256($p),0,34))` | `-` | no john format, so john ships no control vectors; but RosettaExpr -- an implementation independent of all three crackers -- computes this expression over the entry's own vector(s) and reproduces 1 of ... |
 | [`sha1sha256u36`](index.html#sha1sha256u36) | `sha1(cut(sha256($p),0,36))` | `-` | no john format, so john ships no control vectors; but RosettaExpr -- an implementation independent of all three crackers -- computes this expression over the entry's own vector(s) and reproduces 1 of ... |
