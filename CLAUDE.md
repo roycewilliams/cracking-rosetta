@@ -49,7 +49,7 @@ people expect are regenerated into `docs/` and `dist/`.
 | hashcat | `/usr/local/bin/hashcat` (v7.1.2-549-g8a15e210b) | `hashcat --hash-info` |
 | john | `/usr/local/scripts/johnl` -> `/usr/local/src/sec/crack/john-latest/run/john` | `john --list=format-details` |
 | mdxfind | `/usr/local/bin/mdxfind` (RCS 1.545, 2026-08-29) | `mdxfind -h` |
-| hashpipe | not built locally | upstream `HASH_TYPES.md` |
+| hashpipe | `/usr/local/src/sec/crack/hashpipe/hashpipe` (v1.189, 2026-09-02) | `hashpipe -h`; feed it `hash:plaintext` on stdin |
 | Crack | not present | hand-maintained, frozen |
 
 Upstream, for drift detection and as seed data:
@@ -79,10 +79,27 @@ measurement against the binary of the day, so after an upstream pull, diff the
 revision log for behaviour changes and re-verify what they touch -- do not
 rewrite entries from source while the binary is older than it.
 
-**hashpipe is not a separate column.** Its type list was diffed against the
-local mdxfind binary on 2026-08-29: 1000 vs 1001 types, zero name mismatches,
-zero hashcat-mode mismatches (mdxfind has one extra index, e426). Record
-hashpipe as an alias of mdxfind until that stops being true.
+**hashpipe's SOURCE AND BINARY are now on this host too.**
+`/usr/local/src/sec/crack/hashpipe`, MIT, built and working as of 2026-09-02
+(v1.189, commit `ab66e0f`). It takes `hash:plaintext` on stdin and names the
+type that reproduces it, which makes it a THIRD independent oracle beside
+mdxfind and john rather than a document to be read. The same authority order
+applies as for mdxfind: source, then binary, then specification, then
+`HASH_TYPES.md`.
+
+**hashpipe is still not a separate column, but the alias rule now has a
+measured exception.** Its type list was diffed against the local mdxfind
+binary on 2026-08-29: 1000 vs 1001 types, zero name mismatches, zero
+hashcat-mode mismatches (mdxfind has one extra index, e426). Names and
+hashcat modes still agree. **Iteration suffixes do not.** Measured 2026-09-02,
+same hash and same plaintext, each tool pinned to the named type: mdxfind
+reports `MD5RAWx02`, `SHA1RAWx02`, `SHA256RAWx02`, `SHA512RAWx02` and
+`MD5CAPx02` where hashpipe reports all five at `x01`. The cause is in
+mdxfind's source -- `JOB_MD5CAP`'s loop is `for (x = 2; x <= Maxiter; x++)`
+with `checkhash` INSIDE it, so mdxfind labels its first emitted value `x02`
+and hashpipe labels the same value `x01`. Since the suffix is part of the
+identity (see the pitfall below), **this repository follows mdxfind for
+`iterations:` and never seeds that field from a hashpipe source.**
 
 **What detects that it has stopped being true is
 `data/upstream-disagreements.yaml`, executed by `tools/check-upstream.pl`.**
@@ -93,6 +110,20 @@ now asserts the agreement itself: on every index the vendored catalog and the
 local inventory share, the name and the hashcat mapping must be identical,
 and the only indices the binary has beyond the catalog are the ones the
 record lists. A mismatch is the alias rule expiring.
+
+That record checks names and hashcat modes, and it CANNOT see the suffix --
+`HASH_TYPES.md` does not carry one. The `hashpipe-john-map-agreement` record
+is what sees it: on every john dynamic that hashpipe's `john_map.h` and this
+repository both name, the hashpipe type AND the iteration count must agree,
+except for a listed set. It found the numbering split above, and it is the
+reason a third record kind exists at all.
+
+**Do not seed from `john_map.h`'s second table.** v1.189 added
+`JohnMapLocal[]`, 51 config-defined dynamics; upstream's own comment says the
+NUMBERING IS LOCAL to the machine that generated it and the table is for input
+only. That is demonstrable here: upstream's `dynamic_1013` is `MD5PASSSALT`
+and its `dynamic_1014` is `POSTGRESQL`, while this host's john has the two the
+other way round. `check_john_map` reads the first table only, on purpose.
 
 ## Verification tiers
 
