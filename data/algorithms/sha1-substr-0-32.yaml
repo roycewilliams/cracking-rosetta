@@ -1,12 +1,11 @@
 id: "sha1-substr-0-32"
 name: "SHA1.Substr(0, 32)"
-expression: "sha1($p)"
-john_dynamic_expr: "dynamic=sha1($p)"
+expression: "cut(sha1($p),0,32)"
 expression_proof:
   verified: "upstream"
-  verified_at: "2026-08-29"
+  verified_at: "2026-09-02"
   verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
-  note: "transcribed from john --list=subformats for an identifier this entry proved by round-trip; TRIAGE 2026-09-02 [truncation]: dynamic_1023 truncates: computed here, the expression produces a digest of which the stored 32-character ciphertext is exactly the leading part, on all 6 of john's own test vectors. The expression describes the computation, not the cut"
+  note: "CORRECTED 2026-09-02. This row previously carried sha1($p), on the reading that dynamic_1023 truncates the STORAGE and the expression describes the computation. Withdrawn for one reason: the expression is this repository join key, and axcryptsha1 (mdxfind e916) already spells the identical construction as cut(sha1($p),0,32). Two rows for one computation that spell it differently do not join, which is the entire point of the field. The cut is also what this row own name, its legacy hashes_org name CUT0-32SHA1, and john own --list=subformats all say: john states dynamic_1023 as \"sha1($p) (hash truncated to length 32)\", for an identifier this row proved by round-trip. mdxfind hx VM, built -DHX_STANDALONE 2026-09-02, evaluates cut(sha1(pass),0,32) to d21af7ece046af0e12d3c38472792cd5, this row first vector, exactly. Tier stays upstream and cannot become vector: cut() has no john dynamic spelling at all (RosettaJohn %NO_JOHN), so john compiler can never be handed this string, and john_dynamic_expr has been WITHDRAWN for the same reason -- the dynamic=sha1($p) it used to carry runs happily and produces the 40-hex digest, not the 32-hex ciphertext stored here. CAVEAT, unresolved and left for a curator: this row second vector is the FULL 40-hex sha1(\"rosetta\") and does not satisfy this expression, and hashcat -m 100, mdxfind SHA1, john dynamic_26 and raw-SHA1-opencl are all plain-SHA1 identifiers that compute no cut. See the curation note in notes:."
 category: "primitive"
 status: "needs-review"
 tools:
@@ -28,6 +27,11 @@ tools:
     verified_with: "john"
   crack:
     supported: false
+relations:
+  - kind: "same-computation"
+    entry: "axcryptsha1"
+    distinction: "encoding"
+    note: "Both compute cut(sha1(pass),0,32); mdxfind hx VM reproduces each row own vector from that one string, 2026-09-02. They stay separate rows because the ciphertext SERIALIZATION differs: AxCrypt stores it behind a $axcrypt_sha1$ prefix and hashcat gives that its own mode 13300, where this row stores the bare 32 hex characters. Same computation, two encodings, two identifiers a reader can arrive by."
 vectors:
   - hash: "d21af7ece046af0e12d3c38472792cd5"
     pass: "rosetta"
@@ -40,3 +44,4 @@ vectors:
 legacy:
   hashes_org: "CUT0-32SHA1"
   hashkiller: "SHA1.Substr(0, 32)"
+notes: "OPEN CURATION QUESTION, raised 2026-09-02. This row is being asked to be two computations at once, and correcting the expression to cut(sha1($p),0,32) made that visible rather than causing it. Its FIRST vector is the 32-hex truncation and satisfies the expression; its SECOND is the full 40-hex sha1(\"rosetta\") and does not. Of its tool identifiers only john dynamic_1023 truncates -- john states it as \"sha1($p) (hash truncated to length 32)\" -- while hashcat -m 100, mdxfind SHA1, john dynamic_26 and raw-SHA1-opencl are all plain SHA-1 and compute no cut. Those were round-tripped against the 40-hex vector, so nothing recorded here is false; they simply belong to a different computation. Two things block resolving it by deletion. First, this corpus has NO row for plain SHA-1 as such: john Raw-SHA1 sits on aich, sha1uc and netscape-ldap, and this row holds mdxfind SHA1, so removing the plain-SHA1 claims here would strand them rather than rehome them. Second, splitting is an id decision and ids are forever (CLAUDE.md, The published contract). Left for Royce: either a new row for plain SHA-1 that takes the 40-hex vector and the four plain identifiers, or a documented decision that this row keeps both. Do NOT resolve it by weakening the expression back to sha1($p) -- see expression_proof.note for why the cut has to stay."

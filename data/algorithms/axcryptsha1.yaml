@@ -21,6 +21,11 @@ tools:
     verified_with: "mdxfind"
   crack:
     supported: false
+relations:
+  - kind: "same-computation"
+    entry: "sha1-substr-0-32"
+    distinction: "encoding"
+    note: "Both compute cut(sha1(pass),0,32); mdxfind hx VM reproduces each row own vector from that one string, 2026-09-02. They stay separate rows because the ciphertext SERIALIZATION differs: AxCrypt stores it behind a $axcrypt_sha1$ prefix and hashcat gives that its own mode 13300, where this row stores the bare 32 hex characters. Same computation, two encodings, two identifiers a reader can arrive by."
 vectors:
   - hash: "$axcrypt_sha1$cbfdac6008f9cab4083784cbd1874f76"
     pass: "password123"
