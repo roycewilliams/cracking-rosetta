@@ -35,8 +35,8 @@
 #
 # Every record: id, kind, upstream, inventory, because, recorded. The rest is
 # whatever its kind needs, and the kinds are hard-coded in check-upstream.pl
-# rather than described by a mini-language. There are two, and adding a third
-# should feel expensive.
+# rather than described by a mini-language. There are three, and adding a
+# fourth should feel expensive.
 #
 #   catalog-row-value   one row of a vendored catalog publishes a value we
 #                       have disproved. Adds: key, publishes, entry,
@@ -46,6 +46,12 @@
 #                       the agreement that makes hashpipe an ALIAS of mdxfind
 #                       rather than a fourth column: on every shared index the
 #                       two agree on name and on hashcat mapping.
+#   john-map-agreement  hashpipe's john_map.h and this repository both say,
+#                       for a john dynamic, which hashpipe type reproduces it.
+#                       Adds: differs, a list of {john, publishes, we_assert,
+#                       why}. This is the kind that sees the ITERATION SUFFIX,
+#                       which catalog-index-set structurally cannot: the
+#                       suffix is not in HASH_TYPES.md at all.
 #
 # The shape did not fully generalise, and that is recorded rather than
 # papered over: a value disagreement is one string against one string, an
@@ -102,3 +108,65 @@ disagreements:
       every shared index the catalog and the binary must agree on the name and
       on the hashcat mapping, and a mismatch means the alias rule needs
       revisiting.
+
+  - id: "hashpipe-john-map-agreement"
+    kind: "john-map-agreement"
+    upstream: "vendor/cynosureprime/john_map.h"
+    inventory: "data/algorithms"
+    differs:
+      - john: "dynamic_37"
+        publishes: "SHA1SALTPASS"
+        we_assert: "SMF x01"
+        why: "masking"
+      - john: "dynamic_54"
+        publishes: "SHA224RAWx01"
+        we_assert: "SHA224RAW x02"
+        why: "iteration-numbering"
+      - john: "dynamic_64"
+        publishes: "SHA256RAWx01"
+        we_assert: "SHA256RAW x02"
+        why: "iteration-numbering"
+      - john: "dynamic_74"
+        publishes: "SHA384RAWx01"
+        we_assert: "SHA384RAW x02"
+        why: "iteration-numbering"
+      - john: "dynamic_84"
+        publishes: "SHA512RAWx01"
+        we_assert: "SHA512RAW x02"
+        why: "iteration-numbering"
+    recorded: "2026-09-02"
+    because: >-
+      hashpipe v1.189 (commit ab66e0f) publishes 132 verified john-to-hashpipe
+      rows. On the 126 this repository also names, the two agree; these five do
+      not, and they are two different disagreements.
+
+      FOUR ARE ITERATION NUMBERING, and they are the reason this kind exists.
+      mdxfind and hashpipe report DIFFERENT SUFFIXES for the same computation.
+      Measured 2026-09-02 on this host, same hash and same plaintext, each tool
+      pinned to the named type: mdxfind says MD5RAWx02 / SHA1RAWx02 /
+      SHA256RAWx02 / SHA512RAWx02 / MD5CAPx02 where hashpipe says the same five
+      at x01. The cause is visible in mdxfind's source: JOB_MD5CAP's loop is
+      `for (x = 2; x <= Maxiter; x++)` with checkhash INSIDE it, so mdxfind
+      labels its first emitted value x02 and hashpipe labels the same value
+      x01. CLAUDE.md is explicit that the suffix is part of the identity, so
+      this is the alias rule breaking. This repository follows mdxfind, which
+      is its canonical source for that column and the tool its verification
+      recipes and audit-iterations.pl both use; nothing here is wrong, and the
+      risk this record guards is a future seed importing hashpipe's numbering
+      into a field that means mdxfind's.
+
+      ONE IS MASKING, which is upstream's own documented hazard rather than a
+      numbering difference. hashpipe reports the FIRST type that reproduces a
+      digest, and john's dynamic_37 is `sha1(lc($u).$p)`, which its own
+      subformat listing labels SMF. Whenever the userid is already lower case
+      that is byte-identical to `sha1($s.$p)`, so SHA1SALTPASS reproduces the
+      vector without denoting the algorithm. john names this one for us
+      directly, so the entry keeps SMF; per CLAUDE.md that coincidence is a
+      collides-on-subset relation, not a mapping.
+
+      NOTE WHAT IS DELIBERATELY NOT CHECKED. v1.189 also added JohnMapLocal[],
+      51 rows of config-defined dynamics. Upstream says their numbering is
+      local to the generating machine and the table is for input only, and that
+      is demonstrable here: upstream's dynamic_1013 is MD5PASSSALT and its
+      dynamic_1014 is POSTGRESQL, while this host's john has them the other way
+      round. check_john_map reads the first table only.

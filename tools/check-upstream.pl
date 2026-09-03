@@ -54,9 +54,16 @@
 # WHY THE KINDS ARE HARD-CODED
 #
 # A register that needs a plugin architecture has stopped being a list of
-# specific evidenced disagreements. There are two kinds, each with a fixed
-# pair of accessors written out below, and adding a third should feel
+# specific evidenced disagreements. There are three kinds, each with a fixed
+# pair of accessors written out below, and adding a fourth should feel
 # expensive enough that somebody asks whether the disagreement is real first.
+#
+# The third was added 2026-09-02 and paid that price: the alias assertion in
+# catalog-index-set checks the NAME and the HASHCAT MAPPING of every shared
+# index, and it passed while hashpipe and mdxfind were reporting different
+# ITERATION SUFFIXES for the same computation. The suffix is not in
+# HASH_TYPES.md at all, so no amount of checking that file could have found
+# it. See check_john_map.
 #
 # WHAT DID NOT GENERALISE, RECORDED RATHER THAN PAPERED OVER
 #
@@ -422,9 +429,178 @@ sub check_index_set {
     return;
 }
 
+#-----------------------------------------------------------------------
+# john-map-agreement: hashpipe's john_map.h states, for a john dynamic, the
+# hashpipe type that reproduces john's own test vector. This repository states
+# the same thing independently, from the LOCAL john and the LOCAL mdxfind. On
+# every dynamic both name, the two must agree -- except for a recorded set,
+# which must be exactly as recorded.
+#
+# WHY THIS KIND EXISTS, when adding one is supposed to feel expensive
+#
+# catalog-index-set already carries the alias assertion, and it checks the
+# NAME and the HASHCAT MAPPING of every shared index. It passed on 2026-09-02
+# while hashpipe and mdxfind were reporting DIFFERENT ITERATION SUFFIXES for
+# the same computation -- mdxfind says SHA256RAWx02 where hashpipe says
+# SHA256RAWx01, reproduced on five types with the same hash and the same
+# plaintext. CLAUDE.md is explicit that the suffix is part of the identity, so
+# that is the alias rule breaking, and nothing could have seen it: the suffix
+# is not in HASH_TYPES.md at all. It is in john_map.h, which nothing read.
+#
+# ONLY THE FIRST TABLE IS READ, AND THAT IS NOT AN OVERSIGHT
+#
+# v1.189 added a second table, JohnMapLocal[]. Upstream's own comment says its
+# NUMBERING IS LOCAL to the machine that generated it and that it is consulted
+# on input only. Measured here 2026-09-02, that warning is correct and
+# demonstrable: upstream's dynamic_1013 is MD5PASSSALT and its dynamic_1014 is
+# POSTGRESQL, while this host's john has them the other way round. Reading
+# that table would import another machine's dynamic.conf numbering as though
+# it were a fact about an algorithm.
+sub parse_john_map {
+    my ($path) = @_;
+    open my $fh, '<:raw', $path or fatal("cannot read %s: %s", $path, $!);
+    my (%row, $in, $done);
+    while (my $line = <$fh>) {
+        next if $done;
+        # Enter on the first table only, and stop at its closing brace, so
+        # JohnMapLocal[] below it is never read.
+        $in = 1 if !$in && $line =~ /\bJohnMap\s*\[\s*\]\s*=/;
+        next unless $in;
+        if ($line =~ /^\s*\}\s*;/) { $done = 1; next }
+        $row{$1} = $2 if $line =~ /\{\s*"(dynamic_\d+)"\s*,\s*"([^"]+)"\s*\}/;
+    }
+    close $fh;
+    fatal("%s yielded no JohnMap[] rows -- has its shape changed?", $path)
+        unless %row;
+    return \%row;
+}
+
+# Upstream writes MD5x02. This repository writes type "MD5" with
+# `iterations: 2` beside it (CLAUDE.md, "Iteration suffix is identity"), so
+# the two halves are compared separately. An absent iterations: means 1,
+# which is what an unsuffixed upstream name means too.
+sub split_iter {
+    my ($t) = @_;
+    return ($1, $2 + 0) if $t =~ /^(.*?)x(\d+)$/;
+    return ($t, 1);
+}
+# CLAUDE.md, "Name separator drift": HAV128_4 and HAV128-4 are one name.
+sub norm_type { my $s = uc($_[0] // ''); $s =~ s/[^A-Z0-9]//g; return $s }
+
+sub check_john_map {
+    my ($r) = @_;
+    my $id = $r->{id};
+
+    finding($id, 'malformed', "record has no differs: list"), return
+        unless ref $r->{differs} eq 'ARRAY';
+
+    my $up = parse_john_map("$ROOT/$r->{upstream}");
+
+    # This repository's side: every entry naming a john dynamic, with the
+    # mdxfind type and iteration count it also names. The directory comes from
+    # $algdir, not from inventory:, so --algorithms overrides it the way it
+    # does for catalog-row-value -- which is what lets the gate be tested
+    # against a fixture tree instead of the real corpus.
+    my $dir = $algdir;
+    opendir(my $dh, $dir) or fatal("cannot read %s: %s", $dir, $!);
+    my @files = sort grep { /\.yaml$/ } readdir $dh;
+    closedir $dh;
+    my %ours;
+    for my $file (@files) {
+        my $d = eval { YAML::XS::LoadFile("$dir/$file") } or next;
+        next unless ref $d eq 'HASH';
+        next if ($d->{status} // '') eq 'merged';
+        my $j = $d->{tools}{john} or next;
+        my @dyn = grep { /^dynamic_\d+$/ } @{ $j->{cpu} || [] };
+        next unless @dyn;
+        my $mx = $d->{tools}{mdxfind} || {};
+        next unless @{ $mx->{types} || [] };
+        push @{ $ours{$_} }, { id   => $d->{id},
+                               types => $mx->{types},
+                               iter  => $mx->{iterations} // 1 } for @dyn;
+    }
+
+    # The live disagreement set, keyed by john dynamic. A dynamic several
+    # entries name agrees if ANY of them matches: the tools publish more than
+    # one identifier for one computation and each entry is a different name
+    # for it.
+    my (%live, $shared);
+    for my $dy (sort keys %$up) {
+        my $rows = $ours{$dy} or next;
+        $shared++;
+        my ($ubase, $uiter) = split_iter($up->{$dy});
+        my $ok = 0;
+        for my $row (@$rows) {
+            for my $ty (@{ $row->{types} }) {
+                $ok = 1 if norm_type($ty) eq norm_type($ubase)
+                        && $row->{iter} == $uiter;
+            }
+        }
+        next if $ok;
+        my $row = $rows->[0];
+        $live{$dy} = sprintf('%s x%02d', join(',', @{ $row->{types} }),
+                             $row->{iter});
+    }
+
+    my %rec = map { ($_->{john} // '') => $_ } @{ $r->{differs} };
+
+    # 3 first: an empty difference is the record being spent.
+    unless (%live) {
+        finding($id, 'converged',
+            "every one of the %d john dynamic(s) that %s and %s both name now "
+          . "agrees on the hashpipe type AND the iteration count. Upstream and "
+          . "this repository have converged -- delete this record and the "
+          . "matching paragraph in vendor/cynosureprime/PROVENANCE.md.",
+            $shared, $r->{upstream}, $r->{inventory});
+        return;
+    }
+
+    # 1: upstream moved, or a disagreement appeared that is not recorded.
+    for my $dy (sort keys %live) {
+        unless ($rec{$dy}) {
+            finding($id, 'set-moved',
+                "%s and %s disagree about %s, which this record does not "
+              . "list: upstream publishes '%s', we assert '%s'. Either "
+              . "upstream changed a row or this repository did. Measure it, "
+              . "then add it to differs: or fix the entry.",
+                $r->{upstream}, $r->{inventory}, $dy, $up->{$dy}, $live{$dy});
+            next;
+        }
+        my $e = $rec{$dy};
+        finding($id, 'upstream-moved',
+            "%s: this record says upstream publishes '%s', but it now "
+          . "publishes '%s'.", $dy, $e->{publishes} // '(unset)', $up->{$dy})
+            if ($e->{publishes} // '') ne $up->{$dy};
+        # 2: our side moved -- a re-seed to upstream's value, or the entry
+        # changed under us.
+        finding($id, 'ours-moved',
+            "%s: this record says we assert '%s', but the entries now say "
+          . "'%s'. If that was a re-seed from upstream, it undid a measured "
+          . "correction.", $dy, $e->{we_assert} // '(unset)', $live{$dy})
+            if ($e->{we_assert} // '') ne $live{$dy};
+    }
+
+    # A recorded disagreement that is no longer live: partly spent.
+    for my $dy (sort keys %rec) {
+        next if $live{$dy};
+        finding($id, 'row-converged',
+            "%s: this record lists a disagreement here, but the two now "
+          . "agree. Drop that row from differs:.", $dy);
+    }
+
+    if ($verbose) {
+        printf STDERR "-   %s: %d JohnMap[] row(s), %d shared with the "
+                    . "entries, %d disagree, %d recorded\n",
+            $id, scalar(keys %$up), $shared, scalar(keys %live),
+            scalar(keys %rec);
+    }
+    return;
+}
+
 my %KIND = (
-    'catalog-row-value' => \&check_row_value,
-    'catalog-index-set' => \&check_index_set,
+    'catalog-row-value'  => \&check_row_value,
+    'catalog-index-set'  => \&check_index_set,
+    'john-map-agreement' => \&check_john_map,
 );
 
 #-----------------------------------------------------------------------

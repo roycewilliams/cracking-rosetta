@@ -161,11 +161,85 @@ YAML
     return;
 }
 
+#-----------------------------------------------------------------------
+# john-map-agreement fixtures.
+#
+# The gate this proves is the one the other two could not: hashpipe and
+# mdxfind number ITERATIONS differently on chained types, and the suffix is
+# part of the identity. It is also the gate most at risk of reading the wrong
+# table -- v1.189 shipped a JohnMapLocal[] whose numbering is local to the
+# machine that generated it -- so one case asserts that reading it would have
+# fired, and that it does not.
+
+# A fixture john_map.h. %over patches a JohnMap[] row: pass a type string, or
+# drop => 1. JohnMapLocal[] always carries a row that CONTRADICTS the entries,
+# so a gate that read it would fail the baseline.
+sub write_john_map {
+    my (%over) = @_;
+    my %row = (dynamic_900 => 'FIXTYPEx01', dynamic_901 => 'OTHERTYPEx02');
+    for my $k (keys %over) {
+        if (ref $over{$k} eq 'HASH' && $over{$k}{drop}) { delete $row{$k} }
+        else { $row{$k} = $over{$k} }
+    }
+    my $body = join('', map { qq{    { "$_", "$row{$_}" },\n} } sort keys %row);
+    spit("$DIR/john_map.h", <<"C");
+/* fixture, not upstream's file */
+struct john_map_ent { const char *john; const char *hptype; };
+
+static const struct john_map_ent JohnMap[] = {
+$body};
+
+/* Numbering is LOCAL to the generating machine; input only. */
+static const struct john_map_ent JohnMapLocal[] = {
+    { "dynamic_900", "WRONGIFREAD" },
+};
+C
+    return;
+}
+
+# An entry naming a john dynamic plus the mdxfind type and iteration count
+# this repository asserts for it.
+sub write_john_entry {
+    my ($stem, $dyn, $type, $iter) = @_;
+    my $it = defined $iter ? "    iterations: $iter\n" : '';
+    spit("$DIR/algorithms/$stem.yaml", <<"YAML");
+id: "$stem"
+name: "$stem"
+status: "ok"
+tools:
+  john:
+    cpu: ["$dyn"]
+    verified: "vector"
+  mdxfind:
+    types: ["$type"]
+$it    verified: "vector"
+YAML
+    return;
+}
+
+# The baseline pair: dynamic_900 agrees (FIXTYPE at 1 iteration, which is what
+# an unsuffixed x01 means), dynamic_901 is the recorded disagreement.
+sub write_john_entries {
+    my (%over) = @_;
+    write_john_entry('jm-agree', 'dynamic_900',
+                     $over{agree_type} // 'FIXTYPE', $over{agree_iter});
+    write_john_entry('jm-differ', 'dynamic_901',
+                     $over{differ_type} // 'OTHERTYPE',
+                     exists $over{differ_iter} ? $over{differ_iter} : 3);
+    return;
+}
+
 # The register. %over patches the row-value record; anything in %set_index
 # patches the index-set record.
 sub write_register {
     my (%over) = @_;
     my $absent = $over{absent_upstream} // '["e426", "e1002"]';
+    # The recorded john-map disagreement: dynamic_901, where upstream says
+    # two iterations and the entry says three.
+    my $differs = $over{differs} // qq{      - john: "dynamic_901"\n}
+                . qq{        publishes: "OTHERTYPEx02"\n}
+                . qq{        we_assert: "OTHERTYPE x03"\n}
+                . qq{        why: "iteration-numbering"\n};
     my $kind   = $over{kind}            // 'catalog-row-value';
     my $core   = $over{no_because} ? '' : "    because: \"a fixture\"\n";
     spit("$DIR/register.yaml", <<"YAML");
@@ -186,6 +260,13 @@ $core  - id: "index-set"
     inventory: "$REL/inventory.yaml"
     absent_upstream: $absent
     recorded: "2026-09-02"
+    because: "a fixture"
+  - id: "johnmap"
+    kind: "john-map-agreement"
+    upstream: "$REL/john_map.h"
+    inventory: "$REL/algorithms"
+    differs:
+$differs    recorded: "2026-09-02"
     because: "a fixture"
 YAML
     return;
@@ -214,8 +295,9 @@ sub run_gate {
 
 my @CASES = (
     {
-        why   => 'baseline: both disagreements exactly as recorded',
-        setup => sub { write_catalog(); write_inventory(); write_entry($OUR_HASH, $OUR_PASS); write_register() },
+        why   => 'baseline: all three disagreements exactly as recorded',
+        setup => sub { write_catalog(); write_inventory(); write_entry($OUR_HASH, $OUR_PASS);
+                       write_john_map(); write_john_entries(); write_register() },
         want  => [],
     },
     {
@@ -306,9 +388,54 @@ my @CASES = (
         setup => sub { write_register(kind => 'catalog-vibes') },
         want  => ['row-value malformed'],
     },
+    # --- the third kind ------------------------------------------------
+    {
+        why   => 'john-map: the local table is NOT read',
+        # JohnMapLocal[] maps dynamic_900 to WRONGIFREAD, which contradicts
+        # the entry. A gate that read the second table fails here, and that
+        # is the entire point of the case: upstream says the numbering in it
+        # belongs to another machine.
+        setup => sub { write_john_map(); write_john_entries(); write_register() },
+        want  => [],
+    },
+    {
+        why   => 'john-map: upstream changed a recorded row',
+        setup => sub { write_john_map(dynamic_901 => 'OTHERTYPEx05') },
+        want  => ['johnmap upstream-moved'],
+    },
+    {
+        why   => 'john-map: our side moved off the recorded value',
+        setup => sub { write_john_map(); write_john_entries(differ_iter => 4) },
+        want  => ['johnmap ours-moved'],
+    },
+    {
+        why   => 'john-map: a disagreement appeared that is not recorded',
+        setup => sub { write_john_entries(agree_type => 'SOMETHINGELSE') },
+        want  => ['johnmap set-moved'],
+    },
+    {
+        why   => 'john-map: the ITERATION SUFFIX alone is a disagreement',
+        # The type name matches and only the suffix differs. This is the
+        # case catalog-index-set structurally cannot see, and the reason
+        # this kind was added.
+        setup => sub { write_john_entries(agree_iter => 7) },
+        want  => ['johnmap set-moved'],
+    },
+    {
+        why   => 'john-map: one recorded row converged, another still differs',
+        setup => sub { write_john_entries(agree_type => 'SOMETHINGELSE',
+                                          differ_iter => 2) },
+        want  => ['johnmap set-moved', 'johnmap row-converged'],
+    },
+    {
+        why   => 'john-map: everything converged, so the record is spent',
+        setup => sub { write_john_entries(differ_iter => 2) },
+        want  => ['johnmap converged'],
+    },
     {
         why   => 'back to baseline: the fixtures were not left broken',
-        setup => sub { write_catalog(); write_inventory(); write_entry($OUR_HASH, $OUR_PASS); write_register() },
+        setup => sub { write_catalog(); write_inventory(); write_entry($OUR_HASH, $OUR_PASS);
+                       write_john_map(); write_john_entries(); write_register() },
         want  => [],
     },
 );

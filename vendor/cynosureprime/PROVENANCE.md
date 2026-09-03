@@ -10,8 +10,8 @@ change, so the diff shows exactly what upstream altered.
 
 | File | Source | Commit | Fetched |
 |---|---|---|---|
-| `hashpipe-HASH_TYPES.md` | [Cynosureprime/hashpipe](https://github.com/Cynosureprime/hashpipe) `HASH_TYPES.md` | `6ebf0069dac07b81a34177d160f88f51e6b809f6` (2026-09-02) | 2026-09-02 |
-| `john_map.h` | [Cynosureprime/hashpipe](https://github.com/Cynosureprime/hashpipe) `john_map.h` | `6ebf0069dac07b81a34177d160f88f51e6b809f6` (2026-09-02) | 2026-09-02 |
+| `hashpipe-HASH_TYPES.md` | [Cynosureprime/hashpipe](https://github.com/Cynosureprime/hashpipe) `HASH_TYPES.md` | `ab66e0faf993952a1d058ae820273bbf6217eb4a` (2026-09-03) | 2026-09-03 |
+| `john_map.h` | [Cynosureprime/hashpipe](https://github.com/Cynosureprime/hashpipe) `john_map.h` | `ab66e0faf993952a1d058ae820273bbf6217eb4a` (2026-09-03) | 2026-09-03 |
 
 ## Why hashpipe's catalog and not mdxfind's
 
@@ -70,3 +70,27 @@ copy.
   v1.102 here against 1002 in the local mdxfind (RCS 1.545). `e1002 RMD256` has no catalog row and
   therefore no example vector, which is why the extractor reports fewer example
   vectors than types.
+
+* **`john_map.h` numbers ITERATIONS in hashpipe's scheme, not mdxfind's.**
+  Register record: `hashpipe-john-map-agreement`. Measured 2026-09-02 with
+  both binaries on this host, same hash and same plaintext, each pinned to the
+  named type: mdxfind reports `SHA224RAWx01` for plain `sha224($p)` and
+  `SHA224RAWx02` for `sha224(sha224_raw($p))`, while hashpipe calls the plain
+  one `SHA224x01` and the raw-fed one `SHA224RAWx01`. The same offset holds for
+  `SHA256RAW`, `SHA384RAW`, `SHA512RAW`, `MD5RAW` and `MD5CAP`. Four rows of
+  `JohnMap[]` are affected (`dynamic_54`, `_64`, `_74`, `_84`), and a fifth,
+  `dynamic_37`, publishes `SHA1SALTPASS` where john's own subformat listing
+  says `sha1(lc($u).$p) (SMF)` -- hashpipe reports the first type that
+  reproduces a digest, and those two coincide whenever the userid is already
+  lower case. `tools/seed-upstream.pl` reads this register and refuses all
+  five rather than seeding them.
+
+* **`JohnMapLocal[]` must never be seeded from.** Not a disagreement and so
+  not a register record, but the same class of hazard. hashpipe v1.189 added a
+  second table of 51 config-defined dynamics; upstream's own comment says the
+  NUMBERING IS LOCAL to the machine that ran the generator and the table is
+  consulted on input only. Confirmed here 2026-09-02: upstream's
+  `dynamic_1013` is `MD5PASSSALT` and its `dynamic_1014` is `POSTGRESQL`,
+  while this host's john has the two the other way round. Both
+  `tools/seed-upstream.pl` and `check_john_map` in `tools/check-upstream.pl`
+  read the first table only, on purpose.
