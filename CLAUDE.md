@@ -118,11 +118,18 @@ john-supported, which is exactly the overlap he describes.
 **So the argument for a fourth column is weaker than it looked, on its own
 headline example.** The case put to Royce on 2026-09-02 was that "someone
 arriving by MONGODB lands nowhere". They do not: `MONGODB` normalises onto a
-john format the `system-network` entry already carries. Only three of the 25
-are unreachable here by any identifier -- `MD4PASSSALT`, `MD4SALTPASS` and
-`QAS-VASAUTH` -- and three ordinary gaps are a seeding backlog, not a
-structural case for a new column and a new key in every entry. Nine more
-match only as substrings (`SAPCODVNH256` against `SAPCODVNH`,
+john format the `system-network` entry already carries. Only ONE of the 25 is
+unreachable here by any identifier: `QAS-VASAUTH`. Corrected 2026-09-03 --
+the first measurement said three, having matched on NAMES alone, but
+hashpipe's own `JohnMap[]` states `MD4PASSSALT` = `dynamic_32` and
+`MD4SALTPASS` = `dynamic_31`, so both are reachable by a john identifier this
+repository already carries. **Ask `john_map.h` before calling a hashpipe type
+unreachable**; it is 132 rows of DYNAMICS ONLY -- zero named formats, so it
+says nothing about `sunmd5` or `mongodb` -- but on a dynamic it outranks any
+name matching. (`MD5PASSSALTMD5PASSSALT` = `dynamic_1505` is in
+`JohnMapLocal[]` and stays unusable under the rule above.) One ordinary gap is a
+seeding backlog, not a structural case for a new column and a new key in every
+entry. Nine more match only as substrings (`SAPCODVNH256` against `SAPCODVNH`,
 `SHA512RAWPASSSALT` against `SHA512`) and are NOT established: a substring is
 a hint for a curator, never a mapping.
 
