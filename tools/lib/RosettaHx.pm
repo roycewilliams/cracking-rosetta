@@ -76,7 +76,37 @@ use warnings;
 use Exporter qw(import);
 
 our @EXPORT_OK = qw(parse_appendix translate_hx strip_gloss ascii_fold
-                    is_multi_emit %FUNC);
+                    is_multi_emit %FUNC %MODIFIER);
+
+#-----------------------------------------------------------------------
+# %MODIFIER -- the tokens that change REPRESENTATION or STRUCTURE rather than
+# computing a digest, in THIS repository's spelling (the one an expression:
+# field is written in, not hx's).
+#
+# It is declared before %FUNC and the modifier half of %FUNC is built from it,
+# so the two cannot drift. That matters because a consumer counting hash
+# applications -- render.pl's nesting depth -- has to tell md5(upper(md5($p)))
+# (two hashes) from md5(md5(md5($p))) (three), and the only thing separating
+# them is which tokens are in here. A new modifier added to %FUNC and not to
+# this list would silently inflate every depth that used it.
+#
+# The two lists are in DIFFERENT namespaces, which is why one is built from
+# the other rather than repeated: %FUNC is keyed by hx's spelling, %MODIFIER
+# holds this repository's. They differ on exactly one token -- hx writes the
+# little-endian widening utf16le where an expression: here normally writes
+# utf16 -- so %MOD_HX carries the mapping and both lists come out of it.
+#
+# utf16le is then ALSO admitted as a repository spelling, because one entry
+# (PEOPLESOFT, e858) carries the hx form in its own expression:. That is a
+# token a reader will meet, so a consumer must classify it; it is not licence
+# to write new expressions that way.
+my %MOD_HX = (
+    upper => 'upper', lower => 'lower', cap => 'cap', rev => 'rev',
+    base64 => 'base64', hex => 'hex',
+    cut => 'cut', pad => 'pad', fromhex => 'fromhex',
+    frombase64 => 'frombase64', utf16be => 'utf16be', utf16le => 'utf16',
+);
+our %MODIFIER = map { $_ => 1 } (values %MOD_HX), 'utf16le';
 
 #-----------------------------------------------------------------------
 # hx spelling -> this repository's spelling. A token absent from here is a
@@ -92,17 +122,17 @@ our %FUNC = (
     sne128 => 'snefru128', sne256 => 'snefru256',
     hav128 => 'haval128_3', hav160 => 'haval160_3',
     hav192 => 'haval192_3', hav224 => 'haval224_3', hav256 => 'haval256_3',
-    # representation modifiers that carry over unchanged in meaning
-    upper => 'upper', lower => 'lower', cap => 'cap', rev => 'rev',
-    base64 => 'base64', hex => 'hex',
-    # structural, and descriptive rather than cryptographic. These cannot be
-    # compiled by john, so an expression using one stays at tier upstream --
-    # but the field is documented as hx-style, and ciscoasa already carries a
-    # pad(). Refusing them would lose real information for no gain, and
-    # denote-hx.pl must therefore NOT count them as grounds for `absent`.
-    cut => 'cut', pad => 'pad', fromhex => 'fromhex',
-    frombase64 => 'frombase64', utf16be => 'utf16be',
+    # The representation and structural modifiers are NOT listed again here.
+    # They come from %MODIFIER above, spliced in below, because a token in one
+    # list and not the other is exactly the drift that makes a nesting depth
+    # or a denotation wrong. They are descriptive rather than cryptographic:
+    # john cannot compile cut() or pad(), so an expression using one stays at
+    # tier upstream -- but the field is documented as hx-style, ciscoasa
+    # already carries a pad(), and refusing them would lose real information
+    # for no gain. denote-hx.pl must therefore NOT count them as grounds for
+    # `absent`.
 );
+$FUNC{$_} = $MOD_HX{$_} for keys %MOD_HX;
 # hav128_4 / hav160_5 / ... expand mechanically
 for my $w (qw(128 160 192 224 256)) {
     for my $r (3, 4, 5) { $FUNC{"hav${w}_$r"} = "haval${w}_$r" }
@@ -111,7 +141,6 @@ for my $w (qw(128 160 192 224 256)) {
 for my $k (keys %FUNC) {
     $FUNC{"${k}_bin"} = "$FUNC{$k}_raw" if $k =~ /^(md|sha|wrl|gost|rmd|sne|hav)/;
 }
-$FUNC{utf16le} = 'utf16';
 
 #-----------------------------------------------------------------------
 # MEASURED MULTI-EMIT, WHICH NEITHER UPSTREAM LIST CARRIES

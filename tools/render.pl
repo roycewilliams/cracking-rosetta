@@ -54,9 +54,11 @@ use warnings;
 use File::Basename qw(basename);
 use File::Path qw(make_path);
 use FindBin qw($RealBin);
+use lib "$RealBin/lib";
 use Getopt::Long qw(GetOptions);
 use JSON::PP ();
 use POSIX qw(strftime);
+use RosettaHx qw(%MODIFIER);
 use YAML::XS ();
 
 my $PROG = basename($0);
@@ -115,6 +117,139 @@ my %inv;
 for my $t (qw(hashcat john mdxfind)) {
     my $f = "$tooldir/$t.yaml";
     $inv{$t} = -r $f ? YAML::XS::LoadFile($f) : {};
+}
+
+#-----------------------------------------------------------------------
+# The inventories, indexed by the identifier an ENTRY names, so a practitioner
+# column can be looked up rather than searched for. An entry names hashcat
+# modes as integers, john formats by label and mdxfind types by name, which is
+# exactly what these three keys are.
+#
+# Not every identifier resolves. 57 of the john labels entries name are real
+# dynamics that this build has switched off in dynamic_disabled.conf, so they
+# are absent from the inventory and no fact about them can be looked up. That
+# is left EMPTY rather than guessed, and counted on stderr under --verbose.
+my %by_mode  = map { $_->{mode}  => $_ } @{ $inv{hashcat}{modes}   || [] };
+my %by_label = map { $_->{label} => $_ } @{ $inv{john}{formats}    || [] };
+my %by_type  = map { $_->{name}  => $_ } @{ $inv{mdxfind}{types}   || [] };
+my %unresolved;   # tool => count of identifiers with no inventory record
+
+#-----------------------------------------------------------------------
+# The practitioner columns.
+#
+# THESE ARE FACTS ABOUT A TOOL'S MODE, NOT ABOUT THE ALGORITHM, and that is
+# the whole design risk. An entry can name a hashcat mode that takes no salt
+# and an mdxfind type that does, because the two tools cut the problem
+# differently; a single merged `salted` column would flatten that into a claim
+# neither tool makes, which is precisely the conflation the two-layer split
+# exists to prevent. So every column below is per-tool and says so in its
+# name. There is deliberately no algorithm-level `salted`.
+#
+# Nothing here is curated and nothing here needs a tier. Each value is read
+# straight out of data/tools/*.yaml, which is regenerated from the binary, so
+# these columns cannot go stale relative to the tool the way a hand-written
+# field would.
+
+# tool_fact(\@ids, \%index, \&test) - fold a per-identifier yes/no over every
+# identifier an entry names for one tool.
+#
+#   yes / no  every identifier that resolves agrees
+#   mixed     they do not, and that is a real finding rather than an error --
+#             the entry names two modes of one tool that differ on this
+#   ''        the entry names none, or none of them resolve
+#
+# 'mixed' is never collapsed to a majority. A reader who has to know which of
+# two modes they are holding is better served by being told the row is not
+# uniform than by being handed the more common answer.
+sub tool_fact {
+    my ($ids, $index, $test) = @_;
+    my @known = grep { $index->{$_} } @$ids;
+    return '' unless @known;
+    my %seen = map { ($test->($index->{$_}) ? 'yes' : 'no') => 1 } @known;
+    return keys(%seen) > 1 ? 'mixed' : (keys %seen)[0];
+}
+
+# nesting_depth($expression) - how many hash applications deep the deepest
+# operand sits. md5($p.$s) is 1, md5(md5($p)) is 2, and md5(upper(md5($p)))
+# is 2 as well, because upper() changes the REPRESENTATION of a digest
+# without computing another one.
+#
+# That last case is why this cannot be a paren counter: it would say 3, and
+# the number a practitioner wants is how many times the input is hashed.
+# Telling the two apart needs the modifier set, which is why %MODIFIER is
+# declared in RosettaHx beside %FUNC rather than copied here -- a modifier
+# added there and not here would silently inflate every depth that used it.
+#
+# Everything that is not a modifier is counted as a hash. The one structural
+# guard is that the parentheses must balance; if they do not, the depth comes
+# back undef and the column is left empty rather than reporting the count of
+# something it failed to parse.
+#
+# There is deliberately no whitelist of legal characters. 20 expressions carry
+# john's constant syntax -- md5($s.$c1.$p),c1=\x00, and {SSHA} and * as
+# constant VALUES -- which a whitelist would have refused although the
+# construction parses perfectly well: the constants sit after the expression
+# and outside every bracket, so they contribute no token and no depth.
+sub nesting_depth {
+    my ($expr) = @_;
+    return undef unless defined $expr && length $expr;
+    my ($depth, $max) = (0, 0);
+    my @stack;
+    my @tok = ($expr =~ /([A-Za-z_][A-Za-z0-9_]*\(|\(|\))/g);
+    for my $t (@tok) {
+        if ($t eq ')') { $depth -= pop(@stack) // 0 }
+        elsif ($t eq '(') { push @stack, 0 }              # a bare group
+        else {
+            my $fn = substr($t, 0, -1);
+            my $is_hash = !$MODIFIER{$fn};
+            push @stack, $is_hash ? 1 : 0;
+            $depth += $is_hash ? 1 : 0;
+            $max = $depth if $depth > $max;
+        }
+    }
+    return undef if @stack;          # unbalanced: say nothing
+    return $max;
+}
+
+# hash_length($entry) - how long the hash string on this row actually is, and
+# how well that is evidenced.
+#
+# It measures the leading colon-delimited field when that field is entirely
+# hex, which for a salted vector is the digest and for a bare one is the whole
+# string. A container format ($2a$05$..., a volume header) has no such field
+# and honestly yields nothing rather than a number that means something else.
+#
+# It is the length of the STRING a reader is holding, not the width of the
+# underlying digest, and the two part company on blob formats -- pwsafe3's
+# vector here is 144 hex characters and hashcat's example of the same mode is
+# 720. That is why hashcat's example_hash is NOT folded in: on the 263 rows
+# where both exist they agree 262 times, so the second source buys one
+# disagreement and no information.
+#
+# The basis is the honest part. Only 137 entries carry two or more vectors, so
+# on most rows a single length is one sample and not evidence that the length
+# is fixed:
+#
+#   fixed     two or more vectors, all the same length
+#   observed  exactly one vector -- true of what was seen, and no more
+#   varies    the vectors disagree, and on six rows they do so for a reason
+#             (lm is 16 or 32; mysql4-1-mysql5 is 32 or 40). Both lengths are
+#             reported, because which one a reader is holding is the question.
+#   ''        no vector has a leading hex field
+sub hash_length {
+    my ($e) = @_;
+    my @len;
+    for my $v (@{ $e->{vectors} || [] }) {
+        my $h = $v->{hash};
+        next unless defined $h;
+        my ($first) = split /:/, $h, 2;
+        push @len, length($first) if defined $first && $first =~ /^[0-9a-fA-F]+$/;
+    }
+    return ('', '') unless @len;
+    my %u = map { $_ => 1 } @len;
+    my @s = sort { $a <=> $b } keys %u;
+    return (join('; ', @s), 'varies') if @s > 1;
+    return ($s[0], @len > 1 ? 'fixed' : 'observed');
 }
 
 opendir(my $dh, $algdir) or do { print STDERR "$PROG: cannot read $algdir: $!\n"; exit 1 };
@@ -282,6 +417,38 @@ for my $e (@rows) {
         notes  => $e->{notes} // '',
         legacy => join('; ', grep { defined && length }
                         ($e->{legacy}{hashes_org}, $e->{legacy}{hashkiller})),
+        # The practitioner columns. Per-tool by design -- see tool_fact above
+        # for why there is no merged `salted`.
+        hashcat_salted => tool_fact($e->{tools}{hashcat}{modes} || [],
+                              \%by_mode, sub { exists $_[0]{salt_type} }),
+        # hashcat publishes the fast/slow split itself, which is the
+        # distinction a practitioner actually plans around, and it cannot go
+        # stale relative to hashcat the way a benchmarked H/s figure on this
+        # host's one GPU would.
+        hashcat_speed  => (tool_fact($e->{tools}{hashcat}{modes} || [],
+                              \%by_mode, sub { $_[0]{slow} })
+                           =~ s/^yes$/slow/r =~ s/^no$/fast/r),
+        john_salted    => tool_fact([ @{ $e->{tools}{john}{cpu} || [] },
+                                      @{ $e->{tools}{john}{gpu} || [] } ],
+                              \%by_label, sub { ($_[0]{salt_size} // 0) > 0 }),
+        # john's own words for what it can tune, verbatim: "iteration count",
+        # "N,r,p", argon2's "t,m,p,type". Several formats on one row can name
+        # different costs, so they are joined rather than reduced -- an entry
+        # spanning bcrypt and scrypt has two answers and should say so.
+        john_work_factor => do {
+            my %c;
+            for my $l (@{ $e->{tools}{john}{cpu} || [] },
+                       @{ $e->{tools}{john}{gpu} || [] }) {
+                next unless $by_label{$l};
+                my $t = $by_label{$l}{tunable_cost};
+                $c{$t} = 1 if defined $t && length $t;
+            }
+            join('; ', sort keys %c);
+        },
+        mdxfind_salted => tool_fact($e->{tools}{mdxfind}{types} || [],
+                              \%by_type,
+                              sub { grep { $_ eq 's' } @{ $_[0]{flags} || [] } }),
+        nesting_depth  => (nesting_depth($e->{expression}) // ''),
         category    => $e->{category} // '',
         application => join(' ', grep { defined && length }
                              ($e->{application}, $e->{application_version})),
@@ -300,6 +467,19 @@ for my $e (@rows) {
         tool_note   => { map { $_ => ($e->{tools}{$_}{note} // '') }
                          qw(hashcat john mdxfind) },
     );
+    ($r{hash_length}, $r{hash_length_basis}) = hash_length($e);
+
+    # Identifiers an entry names that the inventory does not have. Counted
+    # rather than silently skipped, because the practitioner columns above go
+    # empty on exactly these and a reader is owed the reason.
+    $unresolved{hashcat} += grep { !$by_mode{$_} }
+                            @{ $e->{tools}{hashcat}{modes} || [] };
+    $unresolved{john}    += grep { !$by_label{$_} }
+                            (@{ $e->{tools}{john}{cpu} || [] },
+                             @{ $e->{tools}{john}{gpu} || [] });
+    $unresolved{mdxfind} += grep { !$by_type{$_} }
+                            @{ $e->{tools}{mdxfind}{types} || [] };
+
     for my $t (qw(hashcat john mdxfind crack)) {
         my $c = cell($e, $t);
         $r{$t} = $c;
@@ -337,16 +517,40 @@ sub csv_field {
 # live row. It is a column rather than something to be dug out of the
 # relations prose: the whole reason a merged id keeps a row is that a machine
 # joining on it should be told where the row went.
+# The practitioner columns sit between primary_form and the prose, because
+# they are the same kind of thing as the columns before them -- derived,
+# single-valued, machine-read -- and relations/legacy/notes are the long
+# free text a spreadsheet reader wants at the far right.
+#
+# Every one of them names its tool. They are facts about a MODE, not about an
+# algorithm, and a bare `salted` column would invite a reader to take one
+# tool's convention for the algorithm's own.
 my @CSV = qw(id name aliases expression expression_tier john_dynamic_expr
              denotation category application status merged_into
              hashcat hashcat_state john john_state mdxfind mdxfind_state
-             crack_state vectors serialization primary_form relations legacy
-             notes);
+             crack_state vectors serialization primary_form
+             hashcat_salted hashcat_speed john_salted john_work_factor
+             mdxfind_salted nesting_depth hash_length hash_length_basis
+             relations legacy notes);
+
+# csv_row(@fields) - one row, with the field count checked against the header.
+#
+# A row that is one field short is not a parse error for most consumers: it
+# shifts every column after the gap by one and each cell still looks
+# plausible. Adding a column means touching the header, the live row and the
+# tombstone row, and the tombstone row is the one that gets forgotten, so the
+# count is asserted rather than trusted.
+sub csv_row {
+    my @f = @_;
+    die sprintf("csv_row: %d field(s), header has %d\n", scalar @f, scalar @CSV)
+        unless @f == @CSV;
+    return join(',', map { csv_field($_) } @f) . "\n";
+}
 
 open my $csv, '>', "$distdir/rosetta.csv" or die "cannot write csv: $!\n";
 print {$csv} join(',', @CSV), "\n";
 for my $r (@out) {
-    print {$csv} join(',', map { csv_field($_) } (
+    print {$csv} csv_row(
         $r->{id}, $r->{name}, $r->{alias}, $r->{expr},
         $r->{expr_tier}, $r->{john_expr}, $r->{denotation},
         $r->{category}, $r->{application}, $r->{status}, '',
@@ -354,16 +558,26 @@ for my $r (@out) {
         join(' ', @{ $r->{john}{ids} }),    $r->{john}{state},
         join(' ', @{ $r->{mdxfind}{ids} }), $r->{mdxfind}{state},
         $r->{crack}{state}, $r->{vecs}, $r->{serialization},
-        $r->{primary_form}, $r->{sameas}, $r->{legacy}, $r->{notes},
-    )), "\n";
+        $r->{primary_form},
+        $r->{hashcat_salted}, $r->{hashcat_speed}, $r->{john_salted},
+        $r->{john_work_factor}, $r->{mdxfind_salted}, $r->{nesting_depth},
+        $r->{hash_length}, $r->{hash_length_basis},
+        $r->{sameas}, $r->{legacy}, $r->{notes},
+    );
 }
 # Tombstones last, so the live table stays one contiguous block for anyone
 # reading the file by eye rather than by key.
 for my $t (@tomb_out) {
-    print {$csv} join(',', map { csv_field($_) } (
+    # Every claim column empty on purpose: an empty cell says "this row
+    # asserts nothing", where a value would say something about an algorithm
+    # this row no longer is. The practitioner columns are claims like any
+    # other, so they are empty here too.
+    print {$csv} csv_row(
         $t->{id}, $t->{name}, '', '', '', '', '', '', '', 'merged', $t->{into},
-        '', '', '', '', '', '', '', '', '', '', $t->{sameas}, '', $t->{notes},
-    )), "\n";
+        ('') x 10,                         # the tool and vector columns
+        ('') x 8,                          # the practitioner columns
+        $t->{sameas}, '', $t->{notes},
+    );
 }
 close $csv;
 
@@ -462,6 +676,13 @@ does not support it; **--** nobody has said yet (a gap worth filling)
 
 For sorting, filtering and search, open [index.html](index.html) - or
 [dist/rosetta.csv](../dist/rosetta.csv) in a spreadsheet.
+
+This table stays narrow enough to read on GitHub, so the practitioner columns
+- whether a tool salts it, hashcat's fast/slow split, John's tunable cost, how
+long the hash string is and how many hashes deep the construction goes - are
+in those two views rather than here. They are read straight out of the tool
+inventories, and each one names the tool it came from: an entry can name a
+hashcat mode that takes no salt and an mdxfind type that does.
 
 LEGEND
 # Crack gets a dagger, not a column. It attacks 2 of these algorithms, so a
@@ -959,7 +1180,18 @@ my $compact = JSON::PP->new->canonical->encode([
             # 2026-08-30, which meant the page could not find a row from the
             # one thing a person holding a hash actually has -- a guess at the
             # construction. Searching "md5($p.$s)" returned nothing.
-            $_->{expr}, $_->{denotation} ] } @out
+            $_->{expr}, $_->{denotation},
+            # 15-22: the practitioner columns, in the same order as the CSV.
+            # They are here rather than only in the CSV because the question
+            # they answer -- is this worth attacking, and is this the shape of
+            # hash I am holding -- is asked while browsing, not afterwards in
+            # a spreadsheet. Each one names its tool: they are facts about a
+            # MODE, and a merged `salted` would read as a claim about the
+            # algorithm that no tool has made.
+            $_->{hashcat_salted}, $_->{hashcat_speed}, $_->{john_salted},
+            $_->{john_work_factor}, $_->{mdxfind_salted},
+            $_->{nesting_depth}, $_->{hash_length}, $_->{hash_length_basis},
+          ] } @out
 ]);
 
 # The footer sentence about merged ids, built here so the heredoc below stays
@@ -1036,6 +1268,16 @@ td.alg .ex{display:block;color:var(--ink2);font-size:.76rem;
  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;word-break:break-all}
 td.rel{color:var(--ink3);font-size:.74rem;max-width:30ch;word-break:break-word;
  font-family:ui-sans-serif,system-ui,sans-serif}
+/* The practitioner cells. Two columns carrying eight facts, so the secondary
+   line is deliberately quiet: the scan is for "slow" and for a length, and
+   the work factor, the per-tool salt and the nesting depth are there for the
+   row you have already stopped on. Every one of them also has a title, since
+   "hc+ jo+ mx-" is only readable once somebody has told you what it means. */
+td.cost,td.shape{font-size:.78rem;white-space:nowrap}
+td.cost .sub,td.shape .sub{display:block;color:var(--ink3);font-size:.72rem;
+ font-family:ui-monospace,SFMono-Regular,Menlo,monospace;white-space:normal}
+.slow{color:var(--no);font-weight:600}
+.fast{color:var(--ink2)}
 .ids{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.8rem}
 .pill{display:inline-block;padding:1px 6px;border-radius:3px;font-size:.66rem;
  font-weight:700;letter-spacing:.04em;text-transform:uppercase;margin-left:6px;
@@ -1102,7 +1344,10 @@ a{color:inherit}
 <table>
 <thead><tr>
   <th data-c="0">Algorithm</th><th data-c="3">hashcat</th>
-  <th data-c="5">John</th><th data-c="7">mdxfind</th><th data-c="11">Vectors</th>
+  <th data-c="5">John</th><th data-c="7">mdxfind</th>
+  <th data-c="16" title="hashcat's own slow/fast split, and what John says is tunable">Cost</th>
+  <th data-c="21" title="length of the hash string, how well evidenced, which tools salt it, and how many hashes deep">Shape</th>
+  <th data-c="11">Vectors</th>
   <th data-c="12">Same as</th>
 </tr></thead>
 <tbody id="tb"></tbody>
@@ -1116,6 +1361,14 @@ a{color:inherit}
   <a href="GAPS.md">GAPS.md</a>; what is known to be doubtful is in
   <a href="OPEN-QUESTIONS.md">OPEN-QUESTIONS.md</a>.
   A gap is not a claim that the tool cannot do it &mdash; it means nobody has said.
+  &quot;Cost&quot; is hashcat's own fast/slow split with John's tunable cost
+  under it; &quot;Shape&quot; is how long the hash string is, then which tools
+  salt it (<code>hc</code> hashcat, <code>jo</code> John, <code>mx</code>
+  mdxfind) and how many hashes deep the construction goes. A length followed
+  by <code>?</code> rests on a single vector and <code>!</code> means the
+  vectors on that row disagree. The salt marks are per tool and never merged,
+  because an entry can name a hashcat mode that takes no salt and an mdxfind
+  type that does.
   &quot;Same as&quot; names another row that is the same computation, and why both
   rows exist; the full typed edges are in <code>rosetta.json</code>.
   Alec Muffett's Crack is covered separately in <a href="CRACK.md">CRACK.md</a>.
@@ -1142,14 +1395,65 @@ function cellHtml(st,ids){
 }
 function esc(s){return String(s).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));}
 
+// costHtml: is this worth attacking? hashcat publishes the fast/slow split
+// itself, which is the distinction a practitioner plans around, and John's
+// tunable_cost names what can be turned up -- "iteration count", "N,r,p",
+// argon2's "t,m,p,type". Both are read out of the tool inventories, so
+// neither can drift from the tool.
+function costHtml(r){
+  const speed=r[16]||'', wf=r[18]||'';
+  if(!speed && !wf) return '<td class="cost">&mdash;</td>';
+  return '<td class="cost">'
+    +(speed?'<span class="'+esc(speed)+'" title="hashcat '
+      +(speed==='slow'?'marks this mode slow':'marks this mode fast')+'">'
+      +esc(speed)+'</span>':'&mdash;')
+    +(wf?'<span class="sub" title="John tunable cost">'+esc(wf)+'</span>':'')
+    +'</td>';
+}
+
+// shapeHtml: what am I holding? The length of the hash string, then -- quietly
+// -- how well that length is evidenced, which tools salt it, and how many
+// hashes deep the construction goes.
+//
+// The salt markers are per tool and never merged. An entry can name a hashcat
+// mode that takes no salt and an mdxfind type that does, because the two tools
+// cut the problem differently, and a single "salted" here would read as a
+// claim about the algorithm that neither tool has made. bcrypt is the standing
+// example: hashcat salts it, mdxfind's BCRYPT carries no salt flag because the
+// salt travels inside the string.
+const SALTMARK={yes:'+',no:'-',mixed:'~'};
+function shapeHtml(r){
+  const len=r[21]||'', basis=r[22]||'', depth=r[20]||'';
+  const salt=[['hc',r[15]],['jo',r[17]],['mx',r[19]]]
+             .filter(p=>p[1]).map(p=>p[0]+(SALTMARK[p[1]]||'?'));
+  const sub=[];
+  if(salt.length) sub.push(salt.join(' '));
+  if(depth!=='') sub.push('depth '+depth);
+  if(!len && !sub.length) return '<td class="shape">&mdash;</td>';
+  return '<td class="shape">'
+    +(len?'<span title="'+(basis==='fixed'?'every vector on this row is this long'
+       :basis==='observed'?'one vector, so this is what was seen and no more'
+       :basis==='varies'?'the vectors on this row disagree, and both lengths are real'
+       :'')+'">'+esc(len)+(basis==='observed'?'?':basis==='varies'?'!':'')
+      +'</span>':'&mdash;')
+    +(sub.length?'<span class="sub" title="salt per tool (hc hashcat, jo John, '
+      +'mx mdxfind); + salted, - not, ~ the identifiers on the row disagree">'
+      +esc(sub.join('  '))+'</span>':'')
+    +'</td>';
+}
+
 function render(){
   const term=q.value.trim().toLowerCase(), tool=toolSel.value, st=stSel.value;
   let rows=D.filter(r=>{
     if(term){
       // name, id, tool identifiers, aliases, legacy names, relations, and
       // the expression or denotation -- everything a person might arrive with.
+      // r[16], r[18] and r[21] are in here so a search for "slow", for
+      // "iteration count", or for the length of the string in hand lands on
+      // the rows that have it -- "32" is how a lot of people would start.
       const hay=(r[0]+' '+r[1]+' '+r[3]+' '+r[5]+' '+r[7]+' '+r[9]+' '+r[10]
-                +' '+r[12]+' '+(r[13]||'')+' '+(r[14]||'')).toLowerCase();
+                +' '+r[12]+' '+(r[13]||'')+' '+(r[14]||'')
+                +' '+(r[16]||'')+' '+(r[18]||'')+' '+(r[21]||'')).toLowerCase();
       if(hay.indexOf(term)<0) return false;
     }
     const idx = tool===''? null : COLS[+tool][0];
@@ -1162,6 +1466,18 @@ function render(){
   });
   rows.sort((a,b)=>{
     const x=String(a[sortCol]).toLowerCase(), y=String(b[sortCol]).toLowerCase();
+    // Sort numerically when both cells are plain numbers, so the length
+    // column does not put 128 before 32. Everything else still sorts as text.
+    // Two heredoc hazards in one line, both silent. This script is emitted
+    // from an INTERPOLATING Perl heredoc, so a lone backslash is eaten --
+    // hence [0-9] rather than \\d -- and a bare \$ is a Perl variable, so the
+    // regex anchor has to be escaped or \$/ interpolates as the input record
+    // separator and closes the regex with a newline. test-index-page.js
+    // catches both by eval'ing what was actually written.
+    if(/^[0-9]+\$/.test(x) && /^[0-9]+\$/.test(y)) return (+x - +y)*sortDir;
+    // An empty cell sorts last in either direction: a row that says nothing is
+    // not the smallest answer, it is the absence of one.
+    if(!x !== !y) return x?-1:1;
     return x<y?-sortDir:x>y?sortDir:0;
   });
   tb.innerHTML=rows.map(r=>
@@ -1175,6 +1491,7 @@ function render(){
       (r[14]&&r[14]!==r[0])?'<span class="ex">'+esc(r[14])+'</span>':'')
     +(r[9]?'<span class="al">'+esc(r[9])+'</span>':'')+'</td>'
     +cellHtml(r[2],r[3])+cellHtml(r[4],r[5])+cellHtml(r[6],r[7])
+    +costHtml(r)+shapeHtml(r)
     +'<td>'+(r[11]||0)+'</td>'
     +'<td class="rel">'+esc(r[12]||'')+'</td>'
     +'</tr>'
@@ -1261,5 +1578,33 @@ printf STDERR "-   %s, %s\n", "$distdir/rosetta.csv", "$distdir/rosetta.json";
 for my $t (qw(hashcat john mdxfind)) {
     printf STDERR "-   %-8s proven %3d, claimed %3d, not-supported %3d, GAP %3d\n",
         $t, map { $state_count{$t}{$_} // 0 } qw(proven claimed no unknown);
+}
+
+# The practitioner columns, counted. These are cheap to add and easy to stop
+# noticing, so the render says how much of each one is actually populated --
+# a column that has quietly gone empty looks exactly like a column nobody
+# needed, and the difference matters.
+{
+    my %c;
+    for my $r (@out) {
+        $c{$_}{ length($r->{$_}) ? $r->{$_} : '(empty)' }++
+            for qw(hashcat_salted hashcat_speed john_salted mdxfind_salted
+                   hash_length_basis);
+        $c{john_work_factor}{ length($r->{john_work_factor}) ? 'named' : '(empty)' }++;
+        $c{nesting_depth}{ length($r->{nesting_depth}) ? $r->{nesting_depth} : '(empty)' }++;
+    }
+    for my $col (qw(hashcat_salted hashcat_speed john_salted john_work_factor
+                    mdxfind_salted nesting_depth hash_length_basis)) {
+        printf STDERR "-   %-18s %s\n", $col,
+            join('  ', map { "$_ $c{$col}{$_}" }
+                       sort { ($a eq '(empty)') <=> ($b eq '(empty)') || $a cmp $b }
+                       keys %{ $c{$col} });
+    }
+    # An identifier with no inventory record is why a practitioner cell is
+    # empty on a row that plainly names the tool. It is not an error -- 57 of
+    # john's are dynamics this build has switched off in
+    # dynamic_disabled.conf -- but it is the reason, and it should be visible.
+    printf STDERR "-   %-18s hashcat %d, john %d, mdxfind %d\n",
+        'unresolved ids', map { $unresolved{$_} // 0 } qw(hashcat john mdxfind);
 }
 exit 0;

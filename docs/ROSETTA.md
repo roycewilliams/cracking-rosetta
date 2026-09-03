@@ -12,6 +12,13 @@ does not support it; **--** nobody has said yet (a gap worth filling)
 For sorting, filtering and search, open [index.html](index.html) - or
 [dist/rosetta.csv](../dist/rosetta.csv) in a spreadsheet.
 
+This table stays narrow enough to read on GitHub, so the practitioner columns
+- whether a tool salts it, hashcat's fast/slow split, John's tunable cost, how
+long the hash string is and how many hashes deep the construction goes - are
+in those two views rather than here. They are read straight out of the tool
+inventories, and each one names the tool it came from: an entry can name a
+hashcat mode that takes no salt and an mdxfind type that does.
+
 | Algorithm | hashcat | John | mdxfind | Same as |
 |---|---|---|---|---|
 | "Keyed MD5" RIPv2, OSPF, BGP, SNMPv2 | **--** | `net-md5` (v) | **--** |  |
