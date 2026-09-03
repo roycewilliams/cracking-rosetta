@@ -1,11 +1,12 @@
 id: "peoplesoft"
 name: "PEOPLESOFT"
-expression: "sha1(utf16be(upper($p)))"
+expression: "base64(sha1_raw(utf16le($p)))"
+john_dynamic_expr: "dynamic=sha1_64(utf16($p))"
 expression_proof:
   verified: "upstream"
-  verified_at: "2026-08-31"
-  verified_with: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A"
-  note: "transcribed from the hx specification's Appendix A entry for mdxfind type PEOPLESOFT (e858), which states sha1(utf16be(upper(pass))). Transcription, not reproduction, so this is upstream and not vector; run derive-expressions.pl to try to promote it. Not checkable locally: the construction uses functions RosettaExpr cannot compile, so this rests on upstream's word alone.; TRIAGE 2026-09-02 [no-john-format]: no john format on this entry, so john ships no control vectors, and RosettaExpr cannot compile this expression either -- nothing here can check it"
+  verified_at: "2026-09-02"
+  verified_with: "mdxfind source RCS 1.545 (2026/08/29); hx VM built -DHX_STANDALONE from the same tree"
+  note: "CORRECTED 2026-09-02. This row previously carried sha1(utf16be(upper($p))), transcribed from the hx specification Appendix A entry for mdxfind type PEOPLESOFT (e858). Appendix A is wrong TWICE there: the encoding is UTF-16LE, not BE, and there is no upper() at all. mdxfind SOURCE settles it and outranks the document -- mdxfind.c JOB_PEOPLESOFT (line 20644) converts the candidate through iconv descriptor cd, opened UTF-8 to UTF-16LE//IGNORE at line 11690, then mysha1() then b64_encode() of 20 bytes, with no case folding anywhere. Corroborated four further ways, all 2026-09-02: mdxfind own hx VM, built -DHX_STANDALONE from the same tree, evaluates base64(sha1_bin(utf16le(pass))) to this row own vector byte for byte INCLUDING the = padding; an independent Perl recomputation (Digest::SHA + MIME::Base64) reproduces it and reproduces NEITHER of Appendix A two errors; hashcat -m 133 already round-trips this vector; and john dynamic compiler cracks the same digest under dynamic=sha1_64(utf16($p)). The tier stays upstream and not vector because john _64 flavour emits UNPADDED base64, so john was handed lACuKESOE2QXTd4mmyzOG8qdfug with the trailing = stripped -- a transcode of the stored ciphertext, not this row own hash, and mdxfind loader requires that padding (len == 28 and line[27] == = at mdxfind.c line 43971). Anyone running the john_dynamic_expr on the stored vector must strip the = first or john will not load it."
 category: "application"
 status: "needs-review"
 tools:
