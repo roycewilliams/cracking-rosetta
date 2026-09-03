@@ -786,13 +786,122 @@ ms-cache-hash-dcc,MS Cache Hash (DCC),,,absent,,MS Cache Hash (DCC),,,needs-revi
 ms-office-2007,MS Office 2007,,,absent,,MS Office 2007,application,,ok,,9400,proven,Office office-opencl,proven,,unknown,no,1,shared,,yes,slow,yes,"MS Office version,iteration count",,,,,,,
 ms-office-2010,MS Office 2010,,,absent,,MS Office 2010,application,,ok,,9500,proven,Office office-opencl,proven,,unknown,no,1,shared,,yes,slow,yes,"MS Office version,iteration count",,,,,,,
 ms-office-2013,MS Office 2013,,,absent,,MS Office 2013,application,,ok,,9600,proven,Office office-opencl,proven,,unknown,no,1,shared,,yes,slow,yes,"MS Office version,iteration count",,,,,,,
-ms-office-2016-sheetprotection,MS Office 2016 - SheetProtection,,,absent,,MS Office 2016 - SheetProtection,application,,ok,,25300,proven,,unknown,,unknown,no,1,unknown,,yes,slow,,,,,,,,,
+ms-office-2016-sheetprotection,MS Office 2016 - SheetProtection,OOXML sheetProtection hashValue; Excel sheet protection password (SHA-512); Office 2013+ protection verifier,,absent,,MS Office 2016 - SheetProtection,application,,ok,,25300,proven,,no,,unknown,no,1,unknown,,yes,slow,,,,,,,,,"WHERE THE HASH LIVES. This is not document encryption and office2john does
+not extract it. An .xlsx is a zip; the digest is a cleartext attribute run
+on the protection element of the relevant part:
+
+    <sheetProtection algorithmName=""SHA-512"" hashValue=""...""
+                     saltValue=""..."" spinCount=""100000"" sheet=""1""/>
+
+THE ATTRIBUTE NAMES ARE NOT UNIFORM, which is where a naive extractor goes
+wrong. `<sheetProtection>`, `<chartsheetProtection>` and `<fileSharing>` use
+the bare names above. `<workbookProtection>` carries TWO INDEPENDENT digests
+under PREFIXED names: workbookAlgorithmName / workbookHashValue /
+workbookSaltValue / workbookSpinCount for the structure password, and
+revisionsAlgorithmName / revisionsHashValue / revisionsSaltValue /
+revisionsSpinCount for the revisions password. Word's
+`<w:documentProtection>`, `<w:writeProtection>` and `<w:modifyVerifier>` use
+the bare names again, namespace-prefixed.
+
+Measured 2026-09-03: sheetProtection, fileSharing and BOTH prefixed
+workbookProtection slots round-trip at mode 25300, against fixtures whose
+attribute spellings come from openpyxl's own schema classes rather than from
+recollection. The Word elements were exercised only against a hand-written
+.docx, so those spellings remain spec reading and not measurement.
+
+THE HASHCAT LINE is built from three of those attributes and two literals:
+
+    $office$2016$0$<spinCount>$<saltValue>$<hashValue>
+
+`2016` and `0` never vary; salt precedes hash; both go in base64 exactly as
+the XML spells them. Getting the order wrong or using ':' as the separator
+produces hashcat's ""separator unmatched"", which reads like a corrupt hash
+rather than a malformed line.
+
+HASHCAT'S PARSER IS STRICTER THAN THE FILE FORMAT, and its error names the
+wrong field. src/modules/module_25300.c in v7.1.2-549 requires the spinCount
+token to be six digits AND to equal 100000 (line 165), the salt to be
+exactly 24 base64 characters decoding to 16 bytes, and the digest exactly 88
+decoding to 64. Probed against the binary across ten spin values on
+2026-09-03: only 100000 loads, and every other value is rejected as
+""Salt-value exception"", which sends the reader off to inspect the salt.
+Excel's own default is 100000 so most real files pass, but a document
+written with any other spin count has a real, well-formed SHA-512 digest and
+NO hashcat mode at all.
+
+THE CONSTRUCTION, measured 2026-09-03 by reproducing hashcat's own example
+vector above with all four plausible orderings and finding exactly one
+match:
+
+    H_0 = SHA512(saltValue . utf16le(password))
+    H_i = SHA512(H_{i-1} . uint32le(i-1))   for i = 1 .. spinCount
+    hashValue = base64(H_spinCount)
+
+The counter is APPENDED and 0-BASED. Agile ENCRYPTION prepends it, and that
+difference is the whole trap: the prepending order computes a perfectly
+well-formed digest that simply is not this one, with nothing to indicate the
+error. It is SHA-512 throughout, not SHA-256; secondary write-ups say SHA-256
+and are wrong. hashcat's 25300 kernel is SHA-512 only, so a file whose
+algorithmName is anything else has no mode.
+
+Proven end to end on 2026-09-03 against a synthesised .xlsx carrying a
+SHA-512 sheetProtection element for a known password, extracted from the
+XML and cracked by hashcat at this mode.
+
+The pre-2013 form of the same feature is a 16-bit verifier in a `password`
+attribute, which is a different algorithm and has its own entry:
+ms-office-sheetprotection-legacy. And for either form, note that the file is
+not encrypted -- deleting the protection element and rezipping opens the
+sheet, so cracking is only warranted when the password itself is the object.
+"
 ms-office-le-2003-0-1-md5-rc4,"MS Office <= 2003 $0/$1, MD5 + RC4",,,absent,,"MS Office <= 2003 $0/$1, MD5 + RC4",application,,ok,,9700,proven,oldoffice oldoffice-opencl,proven,,unknown,no,1,shared,,yes,fast,yes,hash type [0-1:MD5+RC4-40 3:SHA1+RC4-40 4:SHA1+RC4-128 5:SHA1+RC4-56],,,,,,,
 ms-office-le-2003-0-1-md5-rc4-collider-1,"MS Office <= 2003 $0/$1, MD5 + RC4, collider #1",,,absent,,"MS Office <= 2003 $0/$1, MD5 + RC4, collider #1",application,,needs-review,,9710,proven,,unknown,,unknown,no,1,unknown,,yes,fast,,,,,,,,,
 ms-office-le-2003-0-1-md5-rc4-collider-2,"MS Office <= 2003 $0/$1, MD5 + RC4, collider #2",,,absent,,"MS Office <= 2003 $0/$1, MD5 + RC4, collider #2",application,,ok,,9720,proven,,unknown,,unknown,no,1,unknown,,yes,fast,,,,,,,,,
 ms-office-le-2003-3-sha1-rc4-collider-1,"MS Office <= 2003 $3, SHA1 + RC4, collider #1",,,absent,,"MS Office <= 2003 $3, SHA1 + RC4, collider #1",application,,needs-review,,9810,proven,,unknown,,unknown,no,1,unknown,,yes,fast,,,,,,,,,
 ms-office-le-2003-3-sha1-rc4-collider-2,"MS Office <= 2003 $3, SHA1 + RC4, collider #2",,,absent,,"MS Office <= 2003 $3, SHA1 + RC4, collider #2",application,,ok,,9820,proven,,unknown,,unknown,no,1,unknown,,yes,fast,,,,,,,,,
 ms-office-le-2003-3-4-sha1-rc4,"MS Office <= 2003 $3/$4, SHA1 + RC4",,,absent,,"MS Office <= 2003 $3/$4, SHA1 + RC4",application,,ok,,9800,proven,oldoffice oldoffice-opencl,proven,,unknown,no,1,shared,,yes,fast,yes,hash type [0-1:MD5+RC4-40 3:SHA1+RC4-40 4:SHA1+RC4-128 5:SHA1+RC4-56],,,,,,,
+ms-office-sheetprotection-legacy,MS Office SheetProtection - legacy 16-bit verifier,Excel sheet protection password; Excel workbook protection password; sheetProtection password attribute; BIFF Password/Protect record; Binary Document Password Verifier Derivation Method 1,,absent,,Binary Document Password Verifier Derivation Method 1,application,Microsoft Excel <=2010 file format; still written by openpyxl and by LibreOffice,ok,,,no,,no,,no,no,1,unknown,native,,,,,,,4,observed,,,"A 16-bit password verifier, not a hash in any useful sense. In an OOXML part
+it appears under a DIFFERENT ATTRIBUTE NAME on each element: `password` on
+`<sheetProtection>` and `<chartsheetProtection>`, `workbookPassword` and
+`revisionsPassword` on `<workbookProtection>` (two independent passwords on
+one element), and `reservationPassword` on `<fileSharing>`. Spellings taken
+from openpyxl's schema classes and exercised 2026-09-03. It is also the data
+of the BIFF PASSWORD and PROTECT records in a pre-2007 .xls. The native form
+-- the one the vector
+above is written in -- is FOUR HEXADECIMAL DIGITS exactly as the attribute
+spells them, with no wrapper, no salt and no iteration count, because there
+is nowhere for any of those to go.
+
+The algorithm, from MS-OFFCRYPTO 2.3.7.1: start at 0; for each character of
+the password taken from LAST to FIRST, rotate the running value left within
+15 bits and xor the character code; then rotate once more, xor the password
+length, and xor the constant 0xCE4B. Reimplemented and measured 2026-09-03
+against the value openpyxl 3.0.9 writes for ""P@ssw0rd"", which is the vector
+above.
+
+BYTE ORDER IS A TRAP. The XML attribute and the BIFF record render the same
+word in opposite orders, so published write-ups give ""AB94"" for the value
+this repository records as ""94AB"". They are the same verifier. Check which
+container a quoted value came out of before comparing it to anything.
+
+THE ORIGINAL PASSWORD IS NOT RECOVERABLE and no tool will ever make it so:
+16 bits cannot carry it. What is recoverable is a COLLIDING password, which
+unlocks the sheet just as well. Measured 2026-09-03: 'DbOUJLIb' verifies to
+94AB, found in 24065 random 8-character tries in under a second. Do not
+report such a string as the password.
+
+Collisions are dense but NOT uniformly reachable, which is the practical
+gotcha. Exhausting printable ASCII at lengths 1 to 4 -- 82,317,120 strings
+-- reaches only 1536 distinct verifier values out of 65536, and 94AB is not
+among them, because a short password is rotated too few times for the high
+bits ever to be set. Search at the same length as the original or longer; a
+short-candidate sweep can return nothing and prove nothing.
+
+Operationally, cracking is usually the wrong move for either form of sheet
+protection. The file is not encrypted: deleting the protection element and
+rezipping opens the sheet, and only a genuine interest in the password
+itself (credential reuse, an investigation) justifies the rest.
+"
 mscache-plain,mscache($plain),,md4(md4_raw(utf16($p)).utf16(lower($s))),upstream,,,application,,needs-review,,1100,proven,,unknown,MSCACHE,proven,no,2,shared,,yes,fast,,,no,2,32,fixed,,,
 mschapv2-c-r,MSCHAPv2 C/R,,,absent,,MSCHAPv2 C/R,,,needs-review,,,unknown,mschapv2-naive,claimed,,unknown,no,0,unknown,,,,yes,,,,,,,,
 msonline,MSONLINE,,,absent,,"pbkdf2_sha256(pass, salt, N, 32)",application,,ok,,33700,proven,,unknown,MSONLINE,proven,no,1,shared,,yes,slow,,,yes,,,,,,

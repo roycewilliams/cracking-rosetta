@@ -1,5 +1,5 @@
 {
-   "count" : 1551,
+   "count" : 1552,
    "entries" : [
       {
          "alias" : "",
@@ -43100,7 +43100,7 @@
          "vecs" : 1
       },
       {
-         "alias" : "",
+         "alias" : "OOXML sheetProtection hashValue; Excel sheet protection password (SHA-512); Office 2013+ protection verifier",
          "application" : "",
          "category" : "application",
          "crack" : {
@@ -43126,7 +43126,7 @@
          "id" : "ms-office-2016-sheetprotection",
          "john" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "john_expr" : "",
          "john_salted" : "",
@@ -43139,7 +43139,7 @@
          "mdxfind_salted" : "",
          "name" : "MS Office 2016 - SheetProtection",
          "nesting_depth" : "",
-         "notes" : "",
+         "notes" : "WHERE THE HASH LIVES. This is not document encryption and office2john does\nnot extract it. An .xlsx is a zip; the digest is a cleartext attribute run\non the protection element of the relevant part:\n\n    <sheetProtection algorithmName=\"SHA-512\" hashValue=\"...\"\n                     saltValue=\"...\" spinCount=\"100000\" sheet=\"1\"/>\n\nTHE ATTRIBUTE NAMES ARE NOT UNIFORM, which is where a naive extractor goes\nwrong. `<sheetProtection>`, `<chartsheetProtection>` and `<fileSharing>` use\nthe bare names above. `<workbookProtection>` carries TWO INDEPENDENT digests\nunder PREFIXED names: workbookAlgorithmName / workbookHashValue /\nworkbookSaltValue / workbookSpinCount for the structure password, and\nrevisionsAlgorithmName / revisionsHashValue / revisionsSaltValue /\nrevisionsSpinCount for the revisions password. Word's\n`<w:documentProtection>`, `<w:writeProtection>` and `<w:modifyVerifier>` use\nthe bare names again, namespace-prefixed.\n\nMeasured 2026-09-03: sheetProtection, fileSharing and BOTH prefixed\nworkbookProtection slots round-trip at mode 25300, against fixtures whose\nattribute spellings come from openpyxl's own schema classes rather than from\nrecollection. The Word elements were exercised only against a hand-written\n.docx, so those spellings remain spec reading and not measurement.\n\nTHE HASHCAT LINE is built from three of those attributes and two literals:\n\n    $office$2016$0$<spinCount>$<saltValue>$<hashValue>\n\n`2016` and `0` never vary; salt precedes hash; both go in base64 exactly as\nthe XML spells them. Getting the order wrong or using ':' as the separator\nproduces hashcat's \"separator unmatched\", which reads like a corrupt hash\nrather than a malformed line.\n\nHASHCAT'S PARSER IS STRICTER THAN THE FILE FORMAT, and its error names the\nwrong field. src/modules/module_25300.c in v7.1.2-549 requires the spinCount\ntoken to be six digits AND to equal 100000 (line 165), the salt to be\nexactly 24 base64 characters decoding to 16 bytes, and the digest exactly 88\ndecoding to 64. Probed against the binary across ten spin values on\n2026-09-03: only 100000 loads, and every other value is rejected as\n\"Salt-value exception\", which sends the reader off to inspect the salt.\nExcel's own default is 100000 so most real files pass, but a document\nwritten with any other spin count has a real, well-formed SHA-512 digest and\nNO hashcat mode at all.\n\nTHE CONSTRUCTION, measured 2026-09-03 by reproducing hashcat's own example\nvector above with all four plausible orderings and finding exactly one\nmatch:\n\n    H_0 = SHA512(saltValue . utf16le(password))\n    H_i = SHA512(H_{i-1} . uint32le(i-1))   for i = 1 .. spinCount\n    hashValue = base64(H_spinCount)\n\nThe counter is APPENDED and 0-BASED. Agile ENCRYPTION prepends it, and that\ndifference is the whole trap: the prepending order computes a perfectly\nwell-formed digest that simply is not this one, with nothing to indicate the\nerror. It is SHA-512 throughout, not SHA-256; secondary write-ups say SHA-256\nand are wrong. hashcat's 25300 kernel is SHA-512 only, so a file whose\nalgorithmName is anything else has no mode.\n\nProven end to end on 2026-09-03 against a synthesised .xlsx carrying a\nSHA-512 sheetProtection element for a known password, extracted from the\nXML and cracked by hashcat at this mode.\n\nThe pre-2013 form of the same feature is a 16-bit verifier in a `password`\nattribute, which is a different algorithm and has its own entry:\nms-office-sheetprotection-legacy. And for either form, note that the file is\nnot encrypted -- deleting the protection element and rezipping opens the\nsheet, so cracking is only warranted when the password itself is the object.\n",
          "primary_form" : "",
          "relations" : [],
          "sameas" : "",
@@ -43147,7 +43147,7 @@
          "status" : "ok",
          "tool_note" : {
             "hashcat" : "hashcat's own published example hash for this mode, recovered by hashcat at this mode with hashcat's own published plaintext.",
-            "john" : "",
+            "john" : "no format. --list=formats offers only Office and oldoffice, which are MS-OFFCRYPTO document ENCRYPTION and a different mechanism entirely. office2john reads that encryption verifier out of the OLE/agile container and finds nothing here, because a protected sheet is not encrypted at all -- the digest sits in cleartext in the part XML.",
             "mdxfind" : ""
          },
          "vecs" : 1
@@ -43475,6 +43475,56 @@
             "hashcat" : "hashcat's own published example hash for this mode, recovered by hashcat at this mode with hashcat's own published plaintext.",
             "john" : "format discovered by round-trip search, not by name",
             "mdxfind" : ""
+         },
+         "vecs" : 1
+      },
+      {
+         "alias" : "Excel sheet protection password; Excel workbook protection password; sheetProtection password attribute; BIFF Password/Protect record; Binary Document Password Verifier Derivation Method 1",
+         "application" : "Microsoft Excel <=2010 file format; still written by openpyxl and by LibreOffice",
+         "category" : "application",
+         "crack" : {
+            "ids" : [],
+            "state" : "no"
+         },
+         "cracknote" : "",
+         "denotation" : "Binary Document Password Verifier Derivation Method 1",
+         "expr" : "",
+         "expr_note" : "the construction is a 15-bit rotate-and-xor over the password read BACKWARDS, then an xor of the length and of the constant 0xCE4B. john's dynamic expression vocabulary has no rotate, no xor and no reversal, so this cannot be written as an expression at all -- that is a lookup against the function names in john's own --list=subformats, not an opinion. It is also separate from whether john can CRACK it, and john cannot: see tools.john.",
+         "expr_tier" : "absent",
+         "hash_length" : 4,
+         "hash_length_basis" : "observed",
+         "hashcat" : {
+            "ids" : [],
+            "state" : "no"
+         },
+         "hashcat_salted" : "",
+         "hashcat_speed" : "",
+         "id" : "ms-office-sheetprotection-legacy",
+         "john" : {
+            "ids" : [],
+            "state" : "no"
+         },
+         "john_expr" : "",
+         "john_salted" : "",
+         "john_work_factor" : "",
+         "legacy" : "",
+         "mdxfind" : {
+            "ids" : [],
+            "state" : "no"
+         },
+         "mdxfind_salted" : "",
+         "name" : "MS Office SheetProtection - legacy 16-bit verifier",
+         "nesting_depth" : "",
+         "notes" : "A 16-bit password verifier, not a hash in any useful sense. In an OOXML part\nit appears under a DIFFERENT ATTRIBUTE NAME on each element: `password` on\n`<sheetProtection>` and `<chartsheetProtection>`, `workbookPassword` and\n`revisionsPassword` on `<workbookProtection>` (two independent passwords on\none element), and `reservationPassword` on `<fileSharing>`. Spellings taken\nfrom openpyxl's schema classes and exercised 2026-09-03. It is also the data\nof the BIFF PASSWORD and PROTECT records in a pre-2007 .xls. The native form\n-- the one the vector\nabove is written in -- is FOUR HEXADECIMAL DIGITS exactly as the attribute\nspells them, with no wrapper, no salt and no iteration count, because there\nis nowhere for any of those to go.\n\nThe algorithm, from MS-OFFCRYPTO 2.3.7.1: start at 0; for each character of\nthe password taken from LAST to FIRST, rotate the running value left within\n15 bits and xor the character code; then rotate once more, xor the password\nlength, and xor the constant 0xCE4B. Reimplemented and measured 2026-09-03\nagainst the value openpyxl 3.0.9 writes for \"P@ssw0rd\", which is the vector\nabove.\n\nBYTE ORDER IS A TRAP. The XML attribute and the BIFF record render the same\nword in opposite orders, so published write-ups give \"AB94\" for the value\nthis repository records as \"94AB\". They are the same verifier. Check which\ncontainer a quoted value came out of before comparing it to anything.\n\nTHE ORIGINAL PASSWORD IS NOT RECOVERABLE and no tool will ever make it so:\n16 bits cannot carry it. What is recoverable is a COLLIDING password, which\nunlocks the sheet just as well. Measured 2026-09-03: 'DbOUJLIb' verifies to\n94AB, found in 24065 random 8-character tries in under a second. Do not\nreport such a string as the password.\n\nCollisions are dense but NOT uniformly reachable, which is the practical\ngotcha. Exhausting printable ASCII at lengths 1 to 4 -- 82,317,120 strings\n-- reaches only 1536 distinct verifier values out of 65536, and 94AB is not\namong them, because a short password is rotated too few times for the high\nbits ever to be set. Search at the same length as the original or longer; a\nshort-candidate sweep can return nothing and prove nothing.\n\nOperationally, cracking is usually the wrong move for either form of sheet\nprotection. The file is not encrypted: deleting the protection element and\nrezipping opens the sheet, and only a genuine interest in the password\nitself (credential reuse, an investigation) justifies the rest.\n",
+         "primary_form" : "native",
+         "relations" : [],
+         "sameas" : "",
+         "serialization" : "unknown",
+         "status" : "ok",
+         "tool_note" : {
+            "hashcat" : "no mode. 25300 is the SHA-512 successor scheme and is a different algorithm -- see ms-office-2016-sheetprotection. Searched the full mode inventory for a protection or verifier mode; the only two hits are 25300 and mega.nz.",
+            "john" : "no format. --list=formats offers only Office and oldoffice, which are MS-OFFCRYPTO document ENCRYPTION; office2john extracts that verifier from the OLE/agile container and has nothing to find here, because a protected sheet is not encrypted and its digest sits in cleartext XML.",
+            "mdxfind" : "no type."
          },
          "vecs" : 1
       },
