@@ -101,6 +101,39 @@ and hashpipe labels the same value `x01`. Since the suffix is part of the
 identity (see the pitfall below), **this repository follows mdxfind for
 `iterations:` and never seeds that field from a hashpipe source.**
 
+**The 25 names hashpipe has and mdxfind does not are TRANSIENT, and that is
+upstream's own account.** Waffle told Royce (relayed 2026-09-03) that they
+exist because he is improving hashpipe's overlapping support with algorithms
+JOHN supports. That is the author's statement of intent, not a measurement,
+so it is recorded as such -- but it predicts something checkable, and the
+check passes. Measured 2026-09-03 by normalising each of the 25 names (upper-
+case, strip non-alphanumerics -- the separator-drift rule) and looking for it
+in `data/tools/john.yaml` and in every identifier `data/algorithms/` publishes
+(id, name, aliases, legacy, mdxfind types, john cpu/gpu labels): of the 25,
+**15 have a john format, and 13 already reach a row in this repository by an
+exact identifier** -- DRAGONFLY3/4-32/64, EPISERVER-SID, GOST94CRYPT, H3C,
+IPB2, MONGODB, ORACLE11, POSTOFFICE, RVARY, SUNMD5. Every one of those is
+john-supported, which is exactly the overlap he describes.
+
+**So the argument for a fourth column is weaker than it looked, on its own
+headline example.** The case put to Royce on 2026-09-02 was that "someone
+arriving by MONGODB lands nowhere". They do not: `MONGODB` normalises onto a
+john format the `system-network` entry already carries. Only three of the 25
+are unreachable here by any identifier -- `MD4PASSSALT`, `MD4SALTPASS` and
+`QAS-VASAUTH` -- and three ordinary gaps are a seeding backlog, not a
+structural case for a new column and a new key in every entry. Nine more
+match only as substrings (`SAPCODVNH256` against `SAPCODVNH`,
+`SHA512RAWPASSSALT` against `SHA512`) and are NOT established: a substring is
+a hint for a curator, never a mapping.
+
+Note what this does and does not settle. It addresses the 25 NAMES only. The
+iteration-suffix divergence above is a separate, measured disagreement with
+its own record in `data/upstream-disagreements.yaml`, and nothing here
+touches it. And because the divergence is transient by upstream's account,
+the thing to watch after the next `fetch-upstream.sh` is the list SHRINKING:
+if these types arrive in mdxfind, they stop being hashpipe-only and the
+question closes itself.
+
 **What detects that it has stopped being true is
 `data/upstream-disagreements.yaml`, executed by `tools/check-upstream.pl`.**
 Until 2026-09-02 this paragraph named a `tools/extract-hashpipe.pl` that had
