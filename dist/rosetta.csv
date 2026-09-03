@@ -705,7 +705,7 @@ md5base64base64,MD5BASE64BASE64,,md5(base64(base64($p))),upstream,,,composite,,n
 md5base64base64base64,MD5BASE64BASE64BASE64,,md5(base64(base64(base64($p)))),upstream,,,composite,,needs-review,,,no,,unknown,MD5BASE64BASE64BASE64,proven,no,1,unknown,,,,
 md5base64sha1md5,MD5BASE64SHA1MD5,,md5(base64(sha1(md5($p)))),upstream,,,composite,,needs-review,,,unknown,,unknown,MD5BASE64SHA1MD5,proven,no,1,unknown,,,,
 md5bcad-order-of-32bit-values,md5bcad (order of 32bit values),,,absent,,md5bcad (order of 32bit values),,,ok,,,no,,unknown,MD5bcad,proven,no,1,unknown,,,BCAD-MD5,
-md5cap,MD5CAP,,cap(md5($p)),upstream,,,iterated,,needs-review,,,no,,unknown,MD5CAP -i2,proven,no,1,unknown,,collides with md5 (encoding),MD5CAPMD5,
+md5cap,MD5CAP,,"md5(cap(md5($p),0))",upstream,,,iterated,,needs-review,,,no,,unknown,MD5CAP -i2,proven,no,1,unknown,,collides with md5 (encoding),MD5CAPMD5,
 md5capmd5md5user,MD5CAPMD5MD5USER,,,,,,,,ok,,,no,,unknown,MD5CAPMD5MD5USER,proven,no,2,unknown,,,MD5(CAPMD5(CAPMD5(PLAIN))SALT),
 md5capsha1,MD5CAPSHA1,,md5(cap(sha1($p))),upstream,,,composite,,needs-review,,,no,,unknown,MD5CAPSHA1,proven,no,1,unknown,,collides with md5-sha1-pass (encoding),MD5CAPSHA1,
 md5cdab-order-of-32bit-values,md5cdab (order of 32bit values),,,absent,,md5cdab (order of 32bit values),,,ok,,,no,,unknown,,unknown,no,1,unknown,,encoding of md5 (encoding),CDAB-MD5,
