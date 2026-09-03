@@ -2675,8 +2675,15 @@
          "name" : "AXCRYPTSHA1",
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "encoding",
+               "entry" : "sha1-substr-0-32",
+               "kind" : "same-computation",
+               "note" : "Both compute cut(sha1(pass),0,32); mdxfind hx VM reproduces each row own vector from that one string, 2026-09-02. They stay separate rows because the ciphertext SERIALIZATION differs: AxCrypt stores it behind a $axcrypt_sha1$ prefix and hashcat gives that its own mode 13300, where this row stores the bare 32 hex characters. Same computation, two encodings, two identifiers a reader can arrive by."
+            }
+         ],
+         "sameas" : "same as sha1-substr-0-32 (encoding)",
          "serialization" : "shared",
          "status" : "needs-review",
          "tool_note" : {
@@ -25296,10 +25303,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
-         "expr" : "md5(cut($c1.upper(sha1(sha1_raw($p))),0,32)),c1=*",
-         "expr_note" : "transcribed from the hx specification's Appendix A entry for mdxfind type MD5SQL5-32 (e342), which states md5(cut(\"*\" . upper(sha1(sha1_bin(pass))), 0, 32)). Transcription, not reproduction, so this is upstream and not vector; run derive-expressions.pl to try to promote it. Not checkable locally: the construction uses functions RosettaExpr cannot compile, so this rests on upstream's word alone. Superseded the denotation \"md5(\"1*\".substr(mysql5($plain),0,30))\" (source: sheet), which validate.pl forbids alongside an expression.; TRIAGE 2026-09-02 [no-john-format]: no john format on this entry, so john ships no control vectors, and RosettaExpr cannot compile this expression either -- nothing here can check it",
-         "expr_tier" : "upstream",
+         "denotation" : "MD5SQL5-32 is MULTI-EMIT: it emits EIGHT digests per candidate and matches any of them. They are md5() of the MySQL5 digest written as upper-case hex and as lower-case hex, each taken four ways -- \"1*\" plus its first 30 characters, \"*\" plus 31, \"*\" plus 32, and the bare 32. This row name and its seven aliases are exactly those eight forms.",
+         "expr" : "",
+         "expr_note" : "WITHDRAWN 2026-09-02. This row carried md5(cut($c1.upper(sha1(sha1_raw($p))),0,32)),c1=* at tier upstream, transcribed from hx Appendix A for e342. It is one of EIGHT forms and so a false claim on its own: mdxfind type MD5SQL5-32 is MULTI-EMIT. mdxfind.c JOB_MD5SQL5_32 writes the MySQL5 digest of the candidate as upper-case hex into mdbuf and as lower-case hex into linebuf, each behind the two bytes \"1*\", then fills mdcur[0..7] with md5 of four placements in each case: \"1*\" plus 30 characters, \"*\" plus 31, \"*\" plus 32, and the bare 32; it checkhash()es all eight every iteration. mdxfind -z counts exactly 8 emissions, RCS 1.545, measured 2026-09-02. This row already carried all eight as its name plus seven aliases, which is what nobody had connected.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -26497,10 +26504,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
-         "expr" : "md5(base64(md5_raw(md5($p))))",
-         "expr_note" : "transcribed from the hx specification's Appendix A entry for mdxfind type MD5BASE64MD5RAWMD5 (e243), which states md5(base64(md5_bin(md5(pass)))). Transcription, not reproduction, so this is upstream and not vector; run derive-expressions.pl to try to promote it. Superseded the denotation \"md5(base64_encode(md5(md5($plain), true)))\" (source: sheet), which validate.pl forbids alongside an expression.; TRIAGE 2026-09-02 [partial]: no john format; RosettaExpr reproduces 1 of 2 comparable vector(s), so the expression is right for some and not others -- which is what a multi-emit type looks like, and is a question for a person",
-         "expr_tier" : "upstream",
+         "denotation" : "MD5BASE64MD5RAWMD5 is MULTI-EMIT: it matches either md5(base64(md5_raw(md5($p)))) or md5(cut(base64(md5_raw(md5($p))),0,22)), which is the same base64 with its \"==\" padding removed",
+         "expr" : "",
+         "expr_note" : "WITHDRAWN 2026-09-02. This row carried md5(base64(md5_raw(md5($p)))) at tier upstream, transcribed from hx Appendix A for e243, and triage recorded it as reproducing 1 of 2 vectors. Both vectors are correct and the expression was the false claim: mdxfind type MD5BASE64MD5RAWMD5 is MULTI-EMIT, so no single expression describes it. mdxfind.c b64md5raw computes md5 of the whole 24-character base64 into mdcur[0] and, under if (len > 18), md5 of the same base64 minus its last two characters into mdcur[1], then checkhash()es both. mdxfind -z counts 2 emissions for this type, RCS 1.545, measured 2026-09-02. mdxfind own hx VM reproduces this row first vector from the padded form and its second from the 22-character form, so the two vectors corroborate the type rather than contradicting each other.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -26542,10 +26549,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
-         "expr" : "md5(base64(md5_raw(md5(md5($p)))))",
-         "expr_note" : "transcribed from the hx specification's Appendix A entry for mdxfind type MD5BASE64MD5RAWMD5MD5 (e244), which states md5(base64(md5_bin(md5(md5(pass))))). Transcription, not reproduction, so this is upstream and not vector; run derive-expressions.pl to try to promote it. Superseded the denotation \"md5(base64_encode(md5(md5(md5($plain), true))))\" (source: sheet), which validate.pl forbids alongside an expression.; TRIAGE 2026-09-02 [partial]: no john format; RosettaExpr reproduces 1 of 2 comparable vector(s), so the expression is right for some and not others -- which is what a multi-emit type looks like, and is a question for a person",
-         "expr_tier" : "upstream",
+         "denotation" : "MD5BASE64MD5RAWMD5MD5 is MULTI-EMIT: it matches either md5(base64(md5_raw(md5(md5($p))))) or md5(cut(base64(md5_raw(md5(md5($p)))),0,22)), which is the same base64 with its \"==\" padding removed",
+         "expr" : "",
+         "expr_note" : "WITHDRAWN 2026-09-02. This row carried md5(base64(md5_raw(md5(md5($p))))) at tier upstream, transcribed from hx Appendix A for e244, and triage recorded it as reproducing 1 of 2 vectors. Both vectors are correct and the expression was the false claim: mdxfind type MD5BASE64MD5RAWMD5MD5 falls through into mdxfind.c b64md5raw, which is MULTI-EMIT -- md5 of the whole 24-character base64 into mdcur[0] and, under if (len > 18), md5 of that base64 minus its last two characters into mdcur[1], both checkhash()ed. mdxfind -z counts 2 emissions, RCS 1.545, measured 2026-09-02. The hx VM reproduces this row first vector from the padded form and its second from the 22-character form.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -26587,10 +26594,10 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "",
-         "expr" : "md5(base64(md5_raw(sha1($p))))",
-         "expr_note" : "transcribed from the hx specification's Appendix A entry for mdxfind type MD5BASE64MD5RAWSHA1 (e242), which states md5(base64(md5_bin(sha1(pass)))). Transcription, not reproduction, so this is upstream and not vector; run derive-expressions.pl to try to promote it. Superseded the denotation \"md5(base64_encode(md5(sha1($plain), true)))\" (source: sheet), which validate.pl forbids alongside an expression.; TRIAGE 2026-09-02 [partial]: no john format; RosettaExpr reproduces 1 of 2 comparable vector(s), so the expression is right for some and not others -- which is what a multi-emit type looks like, and is a question for a person",
-         "expr_tier" : "upstream",
+         "denotation" : "MD5BASE64MD5RAWSHA1 is MULTI-EMIT: it matches either md5(base64(md5_raw(sha1($p)))) or md5(cut(base64(md5_raw(sha1($p))),0,22)), which is the same base64 with its \"==\" padding removed",
+         "expr" : "",
+         "expr_note" : "WITHDRAWN 2026-09-02. This row carried md5(base64(md5_raw(sha1($p)))) at tier upstream, transcribed from hx Appendix A for e242, and triage recorded it as reproducing 1 of 2 vectors. Both vectors are correct and the expression was the false claim: mdxfind type MD5BASE64MD5RAWSHA1 gotos mdxfind.c b64md5raw, which is MULTI-EMIT -- md5 of the whole 24-character base64 into mdcur[0] and, under if (len > 18), md5 of that base64 minus its last two characters into mdcur[1], both checkhash()ed. mdxfind -z counts 2 emissions, RCS 1.545, measured 2026-09-02. The hx VM reproduces this row first vector from the padded form and its second from the 22-character form.",
+         "expr_tier" : "absent",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -31265,9 +31272,9 @@
          },
          "cracknote" : "",
          "denotation" : "",
-         "expr" : "hex(upper(md5_raw($p)))",
-         "expr_note" : "transcribed from the hx specification's Appendix A entry for mdxfind type MD5RAWUC (e383), which states hex(upper(md5_bin(pass))). Transcription, not reproduction, so this is upstream and not vector; run derive-expressions.pl to try to promote it.; TRIAGE 2026-09-02 [expression-wrong]: no john format, but RosettaExpr -- an implementation independent of all three crackers -- computes this expression over the entry's own vector(s) and reproduces none of them. Either the expression or the vector is wrong",
-         "expr_tier" : "upstream",
+         "expr" : "md5(upper(md5(md5_raw($p))))",
+         "expr_note" : "round-tripped against every vector this entry carries as --format=dynamic='md5(MD5(md5_raw($p)))', which is this expression written in john's own notation: john spells a representation change as a flavour of the hash function, not as a wrapper. The two strings are ONE claim, not two pieces of evidence",
+         "expr_tier" : "vector",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -31277,7 +31284,7 @@
             "ids" : [],
             "state" : "unknown"
          },
-         "john_expr" : "",
+         "john_expr" : "dynamic=md5(MD5(md5_raw($p)))",
          "legacy" : "MD5UCMD5RAWMD5",
          "mdxfind" : {
             "ids" : [
@@ -41067,8 +41074,8 @@
          },
          "cracknote" : "",
          "denotation" : "",
-         "expr" : "sha1(utf16be(upper($p)))",
-         "expr_note" : "transcribed from the hx specification's Appendix A entry for mdxfind type PEOPLESOFT (e858), which states sha1(utf16be(upper(pass))). Transcription, not reproduction, so this is upstream and not vector; run derive-expressions.pl to try to promote it. Not checkable locally: the construction uses functions RosettaExpr cannot compile, so this rests on upstream's word alone.; TRIAGE 2026-09-02 [no-john-format]: no john format on this entry, so john ships no control vectors, and RosettaExpr cannot compile this expression either -- nothing here can check it",
+         "expr" : "base64(sha1_raw(utf16le($p)))",
+         "expr_note" : "CORRECTED 2026-09-02. This row previously carried sha1(utf16be(upper($p))), transcribed from the hx specification Appendix A entry for mdxfind type PEOPLESOFT (e858). Appendix A is wrong TWICE there: the encoding is UTF-16LE, not BE, and there is no upper() at all. mdxfind SOURCE settles it and outranks the document -- mdxfind.c JOB_PEOPLESOFT (line 20644) converts the candidate through iconv descriptor cd, opened UTF-8 to UTF-16LE//IGNORE at line 11690, then mysha1() then b64_encode() of 20 bytes, with no case folding anywhere. Corroborated four further ways, all 2026-09-02: mdxfind own hx VM, built -DHX_STANDALONE from the same tree, evaluates base64(sha1_bin(utf16le(pass))) to this row own vector byte for byte INCLUDING the = padding; an independent Perl recomputation (Digest::SHA + MIME::Base64) reproduces it and reproduces NEITHER of Appendix A two errors; hashcat -m 133 already round-trips this vector; and john dynamic compiler cracks the same digest under dynamic=sha1_64(utf16($p)). The tier stays upstream and not vector because john _64 flavour emits UNPADDED base64, so john was handed lACuKESOE2QXTd4mmyzOG8qdfug with the trailing = stripped -- a transcode of the stored ciphertext, not this row own hash, and mdxfind loader requires that padding (len == 28 and line[27] == = at mdxfind.c line 43971). Anyone running the john_dynamic_expr on the stored vector must strip the = first or john will not load it.",
          "expr_tier" : "upstream",
          "hashcat" : {
             "ids" : [
@@ -41082,7 +41089,7 @@
             "ids" : [],
             "state" : "unknown"
          },
-         "john_expr" : "",
+         "john_expr" : "dynamic=sha1_64(utf16($p))",
          "legacy" : "",
          "mdxfind" : {
             "ids" : [
@@ -50989,8 +50996,8 @@
          },
          "cracknote" : "",
          "denotation" : "",
-         "expr" : "sha1($p)",
-         "expr_note" : "transcribed from john --list=subformats for an identifier this entry proved by round-trip; TRIAGE 2026-09-02 [truncation]: dynamic_1023 truncates: computed here, the expression produces a digest of which the stored 32-character ciphertext is exactly the leading part, on all 6 of john's own test vectors. The expression describes the computation, not the cut",
+         "expr" : "cut(sha1($p),0,32)",
+         "expr_note" : "CORRECTED 2026-09-02. This row previously carried sha1($p), on the reading that dynamic_1023 truncates the STORAGE and the expression describes the computation. Withdrawn for one reason: the expression is this repository join key, and axcryptsha1 (mdxfind e916) already spells the identical construction as cut(sha1($p),0,32). Two rows for one computation that spell it differently do not join, which is the entire point of the field. The cut is also what this row own name, its legacy hashes_org name CUT0-32SHA1, and john own --list=subformats all say: john states dynamic_1023 as \"sha1($p) (hash truncated to length 32)\", for an identifier this row proved by round-trip. mdxfind hx VM, built -DHX_STANDALONE 2026-09-02, evaluates cut(sha1(pass),0,32) to d21af7ece046af0e12d3c38472792cd5, this row first vector, exactly. Tier stays upstream and cannot become vector: cut() has no john dynamic spelling at all (RosettaJohn %NO_JOHN), so john compiler can never be handed this string, and john_dynamic_expr has been WITHDRAWN for the same reason -- the dynamic=sha1($p) it used to carry runs happily and produces the 40-hex digest, not the 32-hex ciphertext stored here. CAVEAT, unresolved and left for a curator: this row second vector is the FULL 40-hex sha1(\"rosetta\") and does not satisfy this expression, and hashcat -m 100, mdxfind SHA1, john dynamic_26 and raw-SHA1-opencl are all plain-SHA1 identifiers that compute no cut. See the curation note in notes:.",
          "expr_tier" : "upstream",
          "hashcat" : {
             "ids" : [
@@ -51009,7 +51016,7 @@
             "state" : "proven",
             "tier" : "vector"
          },
-         "john_expr" : "dynamic=sha1($p)",
+         "john_expr" : "",
          "legacy" : "CUT0-32SHA1; SHA1.Substr(0, 32)",
          "mdxfind" : {
             "ids" : [
@@ -51019,10 +51026,17 @@
             "tier" : "vector"
          },
          "name" : "SHA1.Substr(0, 32)",
-         "notes" : "",
+         "notes" : "OPEN CURATION QUESTION, raised 2026-09-02. This row is being asked to be two computations at once, and correcting the expression to cut(sha1($p),0,32) made that visible rather than causing it. Its FIRST vector is the 32-hex truncation and satisfies the expression; its SECOND is the full 40-hex sha1(\"rosetta\") and does not. Of its tool identifiers only john dynamic_1023 truncates -- john states it as \"sha1($p) (hash truncated to length 32)\" -- while hashcat -m 100, mdxfind SHA1, john dynamic_26 and raw-SHA1-opencl are all plain SHA-1 and compute no cut. Those were round-tripped against the 40-hex vector, so nothing recorded here is false; they simply belong to a different computation. Two things block resolving it by deletion. First, this corpus has NO row for plain SHA-1 as such: john Raw-SHA1 sits on aich, sha1uc and netscape-ldap, and this row holds mdxfind SHA1, so removing the plain-SHA1 claims here would strand them rather than rehome them. Second, splitting is an id decision and ids are forever (CLAUDE.md, The published contract). Left for Royce: either a new row for plain SHA-1 that takes the 40-hex vector and the four plain identifiers, or a documented decision that this row keeps both. Do NOT resolve it by weakening the expression back to sha1($p) -- see expression_proof.note for why the cut has to stay.",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "encoding",
+               "entry" : "axcryptsha1",
+               "kind" : "same-computation",
+               "note" : "Both compute cut(sha1(pass),0,32); mdxfind hx VM reproduces each row own vector from that one string, 2026-09-02. They stay separate rows because the ciphertext SERIALIZATION differs: AxCrypt stores it behind a $axcrypt_sha1$ prefix and hashcat gives that its own mode 13300, where this row stores the bare 32 hex characters. Same computation, two encodings, two identifiers a reader can arrive by."
+            }
+         ],
+         "sameas" : "same as axcryptsha1 (encoding)",
          "serialization" : "divergent",
          "status" : "needs-review",
          "tool_note" : {

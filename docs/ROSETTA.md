@@ -69,7 +69,7 @@ For sorting, filtering and search, open [index.html](index.html) - or
 | AXCRYPT | `13200` (v) | `AxCrypt`<br>`axcrypt-opencl` (v) | `AXCRYPT` (v) |  |
 | AxCrypt 2 AES-128 | `23500` (v) | **--** | **--** |  |
 | AxCrypt 2 AES-256 | `23600` (v) | `AxCrypt`<br>`axcrypt2-opencl` (v) | **--** |  |
-| AXCRYPTSHA1 | `13300` (v) | **--** | `AXCRYPTSHA1` (v) |  |
+| AXCRYPTSHA1 | `13300` (v) | **--** | `AXCRYPTSHA1` (v) | same as sha1-substr-0-32 (encoding) |
 | AzureAD | **--** | `AzureAD` (v) | **--** |  |
 | AZURESYNC | `12800` (v) | **--** | `AZURESYNC` (v) |  |
 | Battlenet | **--** | `WoWSRP` | **--** |  |
@@ -1101,7 +1101,7 @@ For sorting, filtering and search, open [index.html](index.html) - or
 | SHA1-SALTSHA1U16 | `29000` (v) | **--** | `SHA1-SALTSHA1U16` (v) |  |
 | SHA1-SHA1SALTSHA1PASS | **--** | **--** | `SHA1-SHA1SALTSHA1PASS` (v) |  |
 | SHA1-SHA512PASSSHA512SALT | **--** | **--** | `SHA1-SHA512PASSSHA512SALT` (v) |  |
-| SHA1.Substr(0, 32) | `100` (v) | `dynamic_1023`<br>`dynamic_26`<br>`raw-SHA1-opencl` (v) | `SHA1` (v) |  |
+| SHA1.Substr(0, 32) | `100` (v) | `dynamic_1023`<br>`dynamic_26`<br>`raw-SHA1-opencl` (v) | `SHA1` (v) | same as axcryptsha1 (encoding) |
 | SHA11SALTMD5SHA256 | **--** | **--** | `SHA11SALTMD5SHA256` (v) |  |
 | SHA11SALTMD5UC | **--** | **--** | `SHA11SALTMD5UC` (v) |  |
 | SHA1BASE64CUSTBASE64MD5 | **--** | **--** | `SHA1BASE64CUSTBASE64MD5` (v) |  |
