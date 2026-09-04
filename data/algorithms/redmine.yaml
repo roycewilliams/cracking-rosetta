@@ -18,6 +18,12 @@ tools:
     verified_at: "2026-08-31"
     verified_with: "hashcat v7.1.2-549-g8a15e210b"
     note: "hashcat's own published example hash for this mode, recovered by hashcat at this mode with hashcat's own published plaintext."
+  mdxfind:
+    types: ["SHA1SALTSHA1PASS"]
+    verified: "vector"
+    verified_at: "2026-09-04"
+    verified_with: "mdxfind RCS 1.545 (2026/08/29)"
+    note: "type discovered by round-trip search, not by name"
   john:
     cpu: ["dynamic_1501"]
     verified: "vector"
@@ -30,4 +36,4 @@ vectors:
   - hash: "c18e826af2a78c7b9b7261452613233417e65817:28246535720688452723483475753333"
     pass: "hashcat"
     source: "hashcat"
-    reads_in: ["hashcat", "john"]
+    reads_in: ["hashcat", "john", "mdxfind"]

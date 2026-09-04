@@ -18,6 +18,12 @@ tools:
     verified_at: "2026-08-31"
     verified_with: "hashcat v7.1.2-549-g8a15e210b"
     note: "hashcat's own published example hash for this mode, recovered by hashcat at this mode with hashcat's own published plaintext."
+  mdxfind:
+    types: ["PBKDF2-SHA512"]
+    verified: "vector"
+    verified_at: "2026-09-04"
+    verified_with: "mdxfind RCS 1.545 (2026/08/29)"
+    note: "type discovered by round-trip search, not by name"
   john:
     cpu: ["PBKDF2-HMAC-SHA512"]
     gpu: ["PBKDF2-HMAC-SHA512-opencl"]
@@ -31,4 +37,4 @@ vectors:
   - hash: "$ml$1024$2484380731132131624506271467162123576077004878124365203837706482$89a3a979ee186c0c837ca4551f32e951e6564c7ac6798aa35baf4427fbf6bd1d630642c12cfd5c236c7b0104782237db95e895f7c0e372cd81d58f0448daf958"
     pass: "hashcat"
     source: "hashcat"
-    reads_in: ["hashcat", "john"]
+    reads_in: ["hashcat", "john", "mdxfind"]

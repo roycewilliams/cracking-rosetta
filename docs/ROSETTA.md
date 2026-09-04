@@ -73,7 +73,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | AS400SSHA1 | `35200` (v) | **--** | `AS400SSHA1` (v) |  |
 | Astra Linux $gost12256hash$ | **--** | `streebog256crypt`<br>`streebog256crypt-opencl` (v) | **--** |  |
 | Astra Linux $gost94hash$ | **--** | `gost94crypt`<br>`gost94crypt-opencl` (v) | **--** |  |
-| Atlassian (PBKDF2-HMAC-SHA1) | `12001` (v) | `PBKDF2-HMAC-SHA1`<br>`PBKDF2-HMAC-SHA1-opencl` (v) | **--** |  |
+| Atlassian (PBKDF2-HMAC-SHA1) | `12001` (v) | `PBKDF2-HMAC-SHA1`<br>`PBKDF2-HMAC-SHA1-opencl` (v) | `PKCS5S2` (v) |  |
 | AUTHME | `20711` (v) | **--** | `AUTHME` (v) |  |
 | AWSSIGV4 | `28700` (v) | **--** | `AWSSIGV4` (v) |  |
 | AXCRYPT | `13200` (v) | `AxCrypt`<br>`axcrypt-opencl` (v) | `AXCRYPT` (v) |  |
@@ -84,9 +84,9 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | AZURESYNC | `12800` (v) | **--** | `AZURESYNC` (v) |  |
 | Battlenet | **--** | `WoWSRP` | **--** |  |
 | Bcrypt | `3200` (v) | `bcrypt`<br>`bcrypt-opencl` (v) | `BCRYPT` (v) |  |
-| bcrypt(md5($pass)) | `25600` (v) | **--** | **--** |  |
+| bcrypt(md5($pass)) | `25600` (v) | **--** | `BCRYPTMD5` (v) |  |
 | bcrypt(md5($plain)) | `25600` (v) | **--** | `BCRYPTMD5` (v) |  |
-| bcrypt(sha1($pass)) | `25800` (v) | **--** | **--** |  |
+| bcrypt(sha1($pass)) | `25800` (v) | **--** | `BCRYPTSHA1` (v) |  |
 | bcrypt(sha1($plain)) | `25800` (v) | **--** | `BCRYPTSHA1` (v) |  |
 | BCRYPT256 | `30600` (v) | **--** | `BCRYPT256` (v) |  |
 | BCRYPTHMACSHA256 | `30601` (v) | **--** | `BCRYPTHMACSHA256` (v) |  |
@@ -269,7 +269,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | FUGUE256 | no | **--** | `FUGUE256` (v) |  |
 | FUGUE384 | no | **--** | `FUGUE384` (v) |  |
 | FUGUE512 | no | **--** | `FUGUE512` (v) |  |
-| generic crypt(3) | `1500` (v) | `crypt` (v) | **--** |  |
+| generic crypt(3) | `1500` (v) | `crypt` (v) | `DESCRYPT` (v) |  |
 | Generic Hash [Bridged: Python Interpreter free-threading] | `72000` | **--** | no |  |
 | Generic Hash [Bridged: Python Interpreter with GIL] | `73000` | **--** | no |  |
 | Generic Hash [Bridged: Rust] | `74000` | **--** | no |  |
@@ -510,7 +510,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | LUKS v1 SHA-512 + Twofish | `29533` (v) | **--** | no |  |
 | LUKS v2 argon2 + SHA-256 + AES | `34100` (v) | **--** | no |  |
 | Mac OS X 10.4 - 10.6 | `122` (v) | `xsha` (v) | `MACOSX` (v) |  |
-| macOS v10.8+ (PBKDF2-SHA512) | `7100` (v) | `PBKDF2-HMAC-SHA512`<br>`PBKDF2-HMAC-SHA512-opencl` (v) | **--** |  |
+| macOS v10.8+ (PBKDF2-SHA512) | `7100` (v) | `PBKDF2-HMAC-SHA512`<br>`PBKDF2-HMAC-SHA512-opencl` (v) | `PBKDF2-SHA512` (v) |  |
 | MACOSX | `122` (v) | **--** | `MACOSX` (v) |  |
 | MACOSX7 | `1722` (v) | `xsha512`<br>`XSHA512-opencl`<br>`XSHA512-free-opencl` (v) | `MACOSX7` (v) |  |
 | MANGOS | no | **--** | `MANGOS` (v) |  |
@@ -630,7 +630,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | md5(md5(md5($plain)).md5(md5($plain))) | no | **--** | `MD5-2xMD5-MD5` (v) |  |
 | md5(md5(md5($plain)).<br>md5(md5($plain)).<br>md5(md5($plain))) | no | **--** | `MD5-3xMD5-MD5` (v) |  |
 | md5(md5(md5($plain)).sha1(md5($plain))) | no | **--** | `MD5-1xMD5SHA1-MD5` (v) |  |
-| md5(md5(md5($plain).$salt1).$salt2) | `31700` (v) | **--** | **--** |  |
+| md5(md5(md5($plain).$salt1).$salt2) | `31700` (v) | **--** | `MD5-MD5MD5PASSSALT-PEP` (v) |  |
 | md5(md5(md5(md5($pass)))) | no | `dynamic_1001` (v) | `MD5 -i4` (v) |  |
 | md5(md5(md5(md5($plain))).$salt) | no | **--** | `MD52SALTMD5MD5MD5` (v) |  |
 | md5(md5(md5(md5($plain))).$salt) | no | **--** | `MD51SALTMD5MD5MD5` (v) |  |
@@ -886,9 +886,9 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | PBKDF1-SHA1 | `32900` (v) | **--** | `PBKDF1-SHA1` (v) |  |
 | PBKDF2-HMAC-MD4 | **--** | `PBKDF2-HMAC-MD4`<br>`PBKDF2-HMAC-MD4-opencl` (v) | no |  |
 | PBKDF2-HMAC-MD5 | **--** | `PBKDF2-HMAC-MD5`<br>`PBKDF2-HMAC-MD5-opencl` (v) | no |  |
-| PBKDF2-HMAC-SHA1 | `12000` (v) | **--** | **--** |  |
-| PBKDF2-HMAC-SHA256 | `10900` (v) | **--** | **--** |  |
-| PBKDF2-HMAC-SHA512 | `12100` (v) | **--** | **--** |  |
+| PBKDF2-HMAC-SHA1 | `12000` (v) | **--** | `PBKDF2-SHA1` (v) |  |
+| PBKDF2-HMAC-SHA256 | `10900` (v) | **--** | `PBKDF2-SHA256` (v) |  |
+| PBKDF2-HMAC-SHA512 | `12100` (v) | **--** | `PBKDF2-SHA512` (v) |  |
 | pbkdf2-md5($plain) | `11900` (v) | **--** | `PBKDF2-MD5` (v) |  |
 | pbkdf2-sha1($plain) | `20400` (v) | **--** | `PBKDF2-SHA1` (v) |  |
 | pbkdf2-sha256($plain) | `10000` (v) | **--** | `PBKDF2-SHA256` (v) |  |
@@ -907,7 +907,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | PGP Self Decrypting Archive | **--** | `pgpsda`<br>`pgpsda-opencl` (v) | no |  |
 | PGP Whole Disk Encryption | **--** | `pgpwde`<br>`pgpwde-opencl` (v) | no |  |
 | phpass | `400` (v) | `phpass`<br>`phpass-opencl` (v) | `PHPBB3` (v) |  |
-| phpass(md5($pass)) | `35700` (v) | **--** | **--** |  |
+| phpass(md5($pass)) | `35700` (v) | **--** | `PHPBB3MD5` (v) |  |
 | PHPBB3MD5 | `35700` (v) | **--** | `PHPBB3MD5` (v) |  |
 | PHPS | `2612` (v) | `PHPS`<br>`PHPS2` (v) | `PHPS` (v) |  |
 | PKCS#8 Private Keys (PBKDF2-HMAC-SHA1 + 3DES/AES) | `24410` (v) | `PEM`<br>`pem-opencl` (v) | no |  |
@@ -932,7 +932,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | progressencode($plain) | `26200` (v) | **--** | `PROGRESSENCODE` |  |
 | PS-TOKEN | `13500` (v) | **--** | `PS-TOKEN` (v) |  |
 | PSK | **--** | `IKE` (v) | no |  |
-| PunBB | `4522` (v) | **--** | **--** |  |
+| PunBB | `4522` (v) | **--** | `SHA1SALTSHA1PASS` (v) |  |
 | Purdy | **--** | `OpenVMS` (v) | no |  |
 | PWSAFE3 | `5200` | **--** | `PWSAFE3` (v) |  |
 | Python passlib pbkdf2-sha256 | `20300` (v) | `PBKDF2-HMAC-SHA256`<br>`PBKDF2-HMAC-SHA256-opencl` (v) | **--** |  |
@@ -973,7 +973,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | RC4 40-bit DropN | `33500` (v) | **--** | no |  |
 | RC4 72-bit DropN | `33501` (v) | **--** | no |  |
 | REDHAT389DS | `10901` (v) | **--** | `REDHAT389DS` (v) |  |
-| Redmine | `4521` (v) | `dynamic_1501` (v) | **--** |  |
+| Redmine | `4521` (v) | `dynamic_1501` (v) | `SHA1SALTSHA1PASS` (v) |  |
 | Restic Repository | **--** | `restic` | **--** |  |
 | RIPEMD 128 | **--** | `ripemd-128` | **--** |  |
 | RIPEMD 160 | **--** | `ripemd-160` | **--** |  |
@@ -1351,7 +1351,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | sha512(md5($plain)) | no | **--** | `SHA512MD5` (v) |  |
 | sha512(md5($plain),$plain) | no | **--** | `SHA512MD5PASS` (v) |  |
 | sha512(sha512($plain, true)) | `21000` (v) | `dynamic_84` (v) | `SHA512RAW -i2` (v) |  |
-| sha512(sha512_bin($pass).$salt) | `32420` (v) | **--** | **--** |  |
+| sha512(sha512_bin($pass).$salt) | `32420` (v) | **--** | `SHA512SHA512RAWUSER` (v) |  |
 | SHA512-CUSTOM1 | no | **--** | `SHA512-CUSTOM1` (v) |  |
 | sha512crypt | `1800` (v) | `sha512crypt`<br>`sha512crypt-opencl` (v) | `SHA512CRYPT` (v) |  |
 | SHA512CRYPTMD5 | no | **--** | `SHA512CRYPTMD5` (v) |  |

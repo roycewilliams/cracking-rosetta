@@ -8,12 +8,18 @@ tools:
     verified: "vector"
     verified_at: "2026-08-30"
     verified_with: "hashcat"
+  mdxfind:
+    types: ["MD5-MD5MD5PASSSALT-PEP"]
+    verified: "vector"
+    verified_at: "2026-09-04"
+    verified_with: "mdxfind RCS 1.545 (2026/08/29)"
+    note: "type discovered by round-trip search, not by name"
   crack:
     supported: false
 vectors:
   - hash: "c7a971e405313d0ecc22e37e8b2424a1:2316355934:478467"
     pass: "hashcat"
     source: "hashcat"
-    reads_in: ["hashcat"]
+    reads_in: ["hashcat", "mdxfind"]
 legacy:
   hashes_org: "not supported"

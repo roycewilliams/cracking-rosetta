@@ -3113,10 +3113,13 @@
          "john_work_factor" : "iteration count; iterations",
          "legacy" : "",
          "mdxfind" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "PKCS5S2"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
-         "mdxfind_salted" : "",
+         "mdxfind_salted" : "no",
          "name" : "Atlassian (PBKDF2-HMAC-SHA1)",
          "nesting_depth" : "",
          "notes" : "",
@@ -3129,7 +3132,7 @@
             "hashcat" : "hashcat's own published example hash for this mode, recovered by hashcat at this mode with hashcat's own published plaintext.",
             "hashpipe" : "",
             "john" : "format discovered by round-trip search, not by name",
-            "mdxfind" : ""
+            "mdxfind" : "type discovered by round-trip search, not by name"
          },
          "vecs" : 1
       },
@@ -3806,23 +3809,26 @@
          "john_work_factor" : "",
          "legacy" : "",
          "mdxfind" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "BCRYPTMD5"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
-         "mdxfind_salted" : "",
+         "mdxfind_salted" : "no",
          "name" : "bcrypt(md5($pass))",
          "nesting_depth" : "",
          "notes" : "",
          "primary_form" : "",
          "relations" : [],
          "sameas" : "",
-         "serialization" : "unknown",
+         "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
             "hashcat" : "hashcat's own published example hash for this mode, recovered by hashcat at this mode with hashcat's own published plaintext.",
             "hashpipe" : "",
             "john" : "",
-            "mdxfind" : ""
+            "mdxfind" : "type discovered by round-trip search, not by name"
          },
          "vecs" : 1
       },
@@ -3928,23 +3934,26 @@
          "john_work_factor" : "",
          "legacy" : "",
          "mdxfind" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "BCRYPTSHA1"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
-         "mdxfind_salted" : "",
+         "mdxfind_salted" : "no",
          "name" : "bcrypt(sha1($pass))",
          "nesting_depth" : "",
          "notes" : "",
          "primary_form" : "",
          "relations" : [],
          "sameas" : "",
-         "serialization" : "unknown",
+         "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
             "hashcat" : "hashcat's own published example hash for this mode, recovered by hashcat at this mode with hashcat's own published plaintext.",
             "hashpipe" : "",
             "john" : "",
-            "mdxfind" : ""
+            "mdxfind" : "type discovered by round-trip search, not by name"
          },
          "vecs" : 1
       },
@@ -15036,10 +15045,13 @@
          "john_work_factor" : "algorithm [0:unknown 1:descrypt 2:md5crypt 3:sunmd5 4:bcrypt 5:sha256crypt 6:sha512crypt 7:scrypt 10:yescrypt 11:gost-yescrypt],algorithm specific iterations",
          "legacy" : "",
          "mdxfind" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "DESCRYPT"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
-         "mdxfind_salted" : "",
+         "mdxfind_salted" : "yes",
          "name" : "generic crypt(3)",
          "nesting_depth" : "",
          "notes" : "",
@@ -15052,7 +15064,7 @@
             "hashcat" : "mode discovered by round-trip search, not by name",
             "hashpipe" : "",
             "john" : "john's own published example ciphertext for this format, recovered by john under this format. john publishes no plaintext, so the plaintext was found by handing john its own example and a candidate list -- what john recovered IS the plaintext, by construction.",
-            "mdxfind" : ""
+            "mdxfind" : "type discovered by round-trip search, not by name"
          },
          "vecs" : 1
       },
@@ -29975,10 +29987,13 @@
          "john_work_factor" : "iteration count",
          "legacy" : "",
          "mdxfind" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "PBKDF2-SHA512"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
-         "mdxfind_salted" : "",
+         "mdxfind_salted" : "no",
          "name" : "macOS v10.8+ (PBKDF2-SHA512)",
          "nesting_depth" : "",
          "notes" : "",
@@ -29991,7 +30006,7 @@
             "hashcat" : "hashcat's own published example hash for this mode, recovered by hashcat at this mode with hashcat's own published plaintext.",
             "hashpipe" : "",
             "john" : "format discovered by round-trip search, not by name",
-            "mdxfind" : ""
+            "mdxfind" : "type discovered by round-trip search, not by name"
          },
          "vecs" : 1
       },
@@ -37602,23 +37617,26 @@
          "john_work_factor" : "",
          "legacy" : "not supported",
          "mdxfind" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "MD5-MD5MD5PASSSALT-PEP"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
-         "mdxfind_salted" : "",
+         "mdxfind_salted" : "yes",
          "name" : "md5(md5(md5($plain).$salt1).$salt2)",
          "nesting_depth" : "",
          "notes" : "",
          "primary_form" : "",
          "relations" : [],
          "sameas" : "",
-         "serialization" : "unknown",
+         "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
             "hashcat" : "",
             "hashpipe" : "",
             "john" : "",
-            "mdxfind" : ""
+            "mdxfind" : "type discovered by round-trip search, not by name"
          },
          "vecs" : 1
       },
@@ -53434,23 +53452,26 @@
          "john_work_factor" : "",
          "legacy" : "",
          "mdxfind" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "PBKDF2-SHA1"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
-         "mdxfind_salted" : "",
+         "mdxfind_salted" : "no",
          "name" : "PBKDF2-HMAC-SHA1",
          "nesting_depth" : "",
          "notes" : "",
          "primary_form" : "",
          "relations" : [],
          "sameas" : "",
-         "serialization" : "unknown",
+         "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
             "hashcat" : "hashcat's own published example hash for this mode, recovered by hashcat at this mode with hashcat's own published plaintext.",
             "hashpipe" : "",
             "john" : "",
-            "mdxfind" : ""
+            "mdxfind" : "type discovered by round-trip search, not by name"
          },
          "vecs" : 1
       },
@@ -53492,23 +53513,26 @@
          "john_work_factor" : "",
          "legacy" : "",
          "mdxfind" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "PBKDF2-SHA256"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
-         "mdxfind_salted" : "",
+         "mdxfind_salted" : "no",
          "name" : "PBKDF2-HMAC-SHA256",
          "nesting_depth" : "",
          "notes" : "",
          "primary_form" : "",
          "relations" : [],
          "sameas" : "",
-         "serialization" : "unknown",
+         "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
             "hashcat" : "hashcat's own published example hash for this mode, recovered by hashcat at this mode with hashcat's own published plaintext.",
             "hashpipe" : "",
             "john" : "",
-            "mdxfind" : ""
+            "mdxfind" : "type discovered by round-trip search, not by name"
          },
          "vecs" : 1
       },
@@ -53550,23 +53574,26 @@
          "john_work_factor" : "",
          "legacy" : "",
          "mdxfind" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "PBKDF2-SHA512"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
-         "mdxfind_salted" : "",
+         "mdxfind_salted" : "no",
          "name" : "PBKDF2-HMAC-SHA512",
          "nesting_depth" : "",
          "notes" : "",
          "primary_form" : "",
          "relations" : [],
          "sameas" : "",
-         "serialization" : "unknown",
+         "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
             "hashcat" : "hashcat's own published example hash for this mode, recovered by hashcat at this mode with hashcat's own published plaintext.",
             "hashpipe" : "",
             "john" : "",
-            "mdxfind" : ""
+            "mdxfind" : "type discovered by round-trip search, not by name"
          },
          "vecs" : 1
       },
@@ -54719,23 +54746,26 @@
          "john_work_factor" : "",
          "legacy" : "",
          "mdxfind" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "PHPBB3MD5"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
-         "mdxfind_salted" : "",
+         "mdxfind_salted" : "yes",
          "name" : "phpass(md5($pass))",
          "nesting_depth" : "",
          "notes" : "",
          "primary_form" : "",
          "relations" : [],
          "sameas" : "",
-         "serialization" : "unknown",
+         "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
             "hashcat" : "hashcat's own published example hash for this mode, recovered by hashcat at this mode with hashcat's own published plaintext.",
             "hashpipe" : "",
             "john" : "",
-            "mdxfind" : ""
+            "mdxfind" : "type discovered by round-trip search, not by name"
          },
          "vecs" : 1
       },
@@ -56273,23 +56303,26 @@
          "john_work_factor" : "",
          "legacy" : "",
          "mdxfind" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "SHA1SALTSHA1PASS"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
-         "mdxfind_salted" : "",
+         "mdxfind_salted" : "yes",
          "name" : "PunBB",
          "nesting_depth" : "",
          "notes" : "",
          "primary_form" : "",
          "relations" : [],
          "sameas" : "",
-         "serialization" : "unknown",
+         "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
             "hashcat" : "hashcat's own published example hash for this mode, recovered by hashcat at this mode with hashcat's own published plaintext.",
             "hashpipe" : "",
             "john" : "",
-            "mdxfind" : ""
+            "mdxfind" : "type discovered by round-trip search, not by name"
          },
          "vecs" : 1
       },
@@ -58828,10 +58861,13 @@
          "john_work_factor" : "",
          "legacy" : "",
          "mdxfind" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "SHA1SALTSHA1PASS"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
-         "mdxfind_salted" : "",
+         "mdxfind_salted" : "yes",
          "name" : "Redmine",
          "nesting_depth" : "",
          "notes" : "",
@@ -58844,7 +58880,7 @@
             "hashcat" : "hashcat's own published example hash for this mode, recovered by hashcat at this mode with hashcat's own published plaintext.",
             "hashpipe" : "",
             "john" : "format discovered by round-trip search, not by name",
-            "mdxfind" : ""
+            "mdxfind" : "type discovered by round-trip search, not by name"
          },
          "vecs" : 1
       },
@@ -82300,23 +82336,26 @@
          "john_work_factor" : "",
          "legacy" : "",
          "mdxfind" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "SHA512SHA512RAWUSER"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
-         "mdxfind_salted" : "",
+         "mdxfind_salted" : "no",
          "name" : "sha512(sha512_bin($pass).$salt)",
          "nesting_depth" : "",
          "notes" : "",
          "primary_form" : "",
          "relations" : [],
          "sameas" : "",
-         "serialization" : "unknown",
+         "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
             "hashcat" : "hashcat's own published example hash for this mode, recovered by hashcat at this mode with hashcat's own published plaintext.",
             "hashpipe" : "",
             "john" : "",
-            "mdxfind" : ""
+            "mdxfind" : "type discovered by round-trip search, not by name"
          },
          "vecs" : 1
       },

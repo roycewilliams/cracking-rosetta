@@ -9,10 +9,16 @@ tools:
     verified_at: "2026-08-31"
     verified_with: "hashcat v7.1.2-549-g8a15e210b"
     note: "hashcat's own published example hash for this mode, recovered by hashcat at this mode with hashcat's own published plaintext."
+  mdxfind:
+    types: ["PHPBB3MD5"]
+    verified: "vector"
+    verified_at: "2026-09-04"
+    verified_with: "mdxfind RCS 1.545 (2026/08/29)"
+    note: "type discovered by round-trip search, not by name"
   crack:
     supported: false
 vectors:
   - hash: "$H$9ZtU3uM7Twc8X53ImNRhaec4b3QHJ91"
     pass: "hashcat"
     source: "hashcat"
-    reads_in: ["hashcat"]
+    reads_in: ["hashcat", "mdxfind"]
