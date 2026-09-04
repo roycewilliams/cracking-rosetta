@@ -49,7 +49,7 @@ people expect are regenerated into `docs/` and `dist/`.
 | hashcat | `/usr/local/bin/hashcat` (v7.1.2-549-g8a15e210b) | `hashcat --hash-info` |
 | john | `/usr/local/scripts/johnl` -> `/usr/local/src/sec/crack/john-latest/run/john` | `john --list=format-details` |
 | mdxfind | `/usr/local/bin/mdxfind` (RCS 1.545, 2026-08-29) | `mdxfind -h` |
-| hashpipe | `/usr/local/bin/hashpipe` (v1.191, 2026-09-04) | `hashpipe -T` (see `tools/extract-hashpipe.pl`); feed it `hash:plaintext` on stdin, or `TYPE[xNN] hash[:salt]:pass` under `-c` |
+| hashpipe | `/usr/local/bin/hashpipe` (v1.192, 2026-09-04) | `hashpipe -T` (see `tools/extract-hashpipe.pl`); feed it `hash:plaintext` on stdin, or `TYPE[xNN] hash[:salt]:pass` under `-c` |
 | Crack | not present | hand-maintained, frozen |
 
 Upstream, for drift detection and as seed data:
@@ -244,61 +244,58 @@ mdxfind also accepts hashcat modes directly (`mdxfind -m 0`, `-m e1`,
   `mdxfind-corpus.pl` and `verify-vectors.pl` already read `(?:x(\d+))?`.
   No type in the inventory ends in `x<digits>`, so stripping a trailing
   suffix cannot eat a name.
-  **`hashpipe -c` re-admitted this exact error, and v1.191 fixed it PER
-  LINE and left it standing in a BATCH.** v1.190 added `-c`, which verifies
-  each line against its own leading `TYPE[xNN]` label and runs no detection
-  -- a per-line TYPE PIN, the equivalent of `mdxfind -h '^TYPE$'`. The type
-  half was strict from the start, measured against negative controls
-  2026-09-04: a wrong type, a wrong plaintext and an unknown label are all
-  refused, the last fatally. The SUFFIX half was not: in v1.190 a depth-1
-  match verified under any labelled depth, so `MD5x05` accepted `md5($p)`.
-  Upstream CONFIRMED that as a bug and v1.191 closed it -- measured the
-  same day, every off-diagonal cell of md5^1..md5^5 is now refused.
-  **The hole moved up a level rather than closing.** Measured on v1.191, one
-  invocation per row:
+  **`hashpipe -c` re-admitted this exact error twice, and is now clean.**
+  v1.190 added `-c`, which verifies each line against its own leading
+  `TYPE[xNN]` label and runs no detection -- a per-line TYPE PIN, the
+  equivalent of `mdxfind -h '^TYPE$'`. The type half was strict from the
+  start, measured against negative controls 2026-09-04: a wrong type, a
+  wrong plaintext and an unknown label are all refused, the last fatally.
+  The SUFFIX half took two fixes. In v1.190 a depth-1 match verified under
+  any labelled depth, so `MD5x05` accepted `md5($p)`; v1.191 closed that per
+  line and left it standing in a BATCH, where a line's plaintext could still
+  claim ANOTHER line's digest -- `MD5x02 <md5^2>` beside `MD5x03 <md5^1>`
+  verified both, the second emitted as `MD5x01`. v1.192 closed that too.
+  Measured 2026-09-04 on v1.192: every off-diagonal cell of md5^1..md5^5 is
+  refused, and that batch verifies the `x02` line and refuses the `x03` one.
+  **The reading traps are NOT version history and still apply in full.**
+  `-c` writes a VERIFIED line to stdout, relabelled with the depth that
+  actually matched, and echoes a REFUSED line to stderr VERBATIM. So:
 
-      MD5x03 <md5^1>                    alone   -> refused
-      MD5x03 <md5^1> + MD5x05 <md5^1>           -> both refused
-      MD5x03 <md5^1> + SHA1x01 <sha1>           -> MD5x03 refused
-      MD5x02 <md5^2> + MD5x03 <md5^1>           -> BOTH VERIFIED, and the
-                                                   md5^1 line comes back
-                                                   labelled MD5x01
+  - **Compare the emitted suffix with the one you asked for.** Never treat a
+    line on stdout as agreement. This is what caught both leaks.
+  - **Never read `-c` with the streams merged.** `echo 'MD5x03
+    <md5^1>:password' | hashpipe -c` prints the line straight back and looks
+    like a pass; on v1.190 it was one and on v1.191 it was the refusal echo,
+    and the command cannot tell you which. Use `2>/dev/null`, then a
+    positive control that must still print.
+  - **In a batch, output lines do not correspond one-to-one with input
+    lines**, since refusals go to the other stream. Match on the emitted
+    HASH, never on position.
+  - The emitted label is BARE where the input was bare or `x01`, the same
+    convention as mdxfind's bare lines.
 
-  So a line's plaintext can still claim ANOTHER line's digest at a depth no
-  line asked for, when the two are the same hash family and the other line's
-  own check succeeds. The controls are what make that a measurement rather
-  than "-c is lax": alone it refuses, and a verifying SHA1 line does not
-  unlock an MD5 one.
-  **Two rules follow, and the first is unchanged.** The output is the guard
-  -- `-c` emits the depth it actually matched at, so **compare the emitted
-  suffix with the one you asked for** and never treat a line on stdout as
-  agreement. And **feed `-c` ONE LINE PER INVOCATION**: in a batch the
-  output lines do not correspond one-to-one with the input lines, so a
-  leaked line reads as the verification of whichever input sits at the same
-  position. Match on the emitted HASH as well. Note too that the emitted
-  label is BARE where the input was bare or `x01`, the same convention as
-  mdxfind's bare lines.
-  **`tools/test-hashpipe-c.pl` is what measured all of this, and it is the
-  reason we learned of the fix on the day it landed** rather than by
-  remembering to re-check. It asserts the CURRENT behaviour on purpose, hole
-  included: v1.191 broke its four assertions of the per-line hole and the
-  failure text said what to do. The batch case is now asserted the same way.
-  It needs a hashpipe binary, so it is not in CI -- `validate.yml`
-  deliberately runs no cracker -- and it skips loudly rather than silently
-  when one is absent.
+  **`tools/test-hashpipe-c.pl` measured all of it, and is why both fixes
+  were confirmed on the day they landed** rather than by someone remembering
+  to re-check. It asserts the CURRENT behaviour on purpose, holes included,
+  so a fix FAILS it and the failure text says what to do -- which is what
+  happened at 1.191 and again at 1.192. It now also carries the opposite
+  control, correctly-labelled multi-line batches at mixed depths: a `-c`
+  that refused too much would satisfy the leak assertions exactly as a
+  correct fix does, and without those "the leak is gone" and "the batch path
+  is broken" are the same reading. It needs a hashpipe binary, so it is not
+  in CI -- `validate.yml` deliberately runs no cracker -- and it skips
+  loudly rather than silently when one is absent.
   Worth knowing how the original report landed, because it nearly did not:
   "by design" came back first, on a demonstration that `MD5x03` rejects an
   md5^4 digest -- which is true, and is a cell the hole does not touch. It
   took the same file plus ONE line, `MD5x03` against md5^1, to separate the
   two claims. **A refutation aimed at a different cell of the matrix is not
-  a refutation**; show the cell. The same trap runs the other way, and it
-  cost time on 2026-09-04: `echo 'MD5x03 <md5^1>:password' | hashpipe -c`
-  prints the line back and looks like a pass. It is the REFUSAL echo on
-  stderr, byte-identical to the input; a verified line goes to stdout
-  relabelled. **Never read `-c` with the streams merged** -- `2>/dev/null`,
-  and then a positive control that must still print.
+  a refutation**; show the cell. Both later readings of this flag went wrong
+  the same way, in the other direction -- a merged-stream one-liner, which
+  is consistent with a pass AND with a refusal -- which is why that is now
+  the second bullet above rather than a footnote here.
   **And `-c` numbers iterations mdxfind's way while the detect path does
-  not**: same binary, same hash, re-measured on v1.191, `-c` says
+  not**: same binary, same hash, re-measured on v1.192, `-c` says
   `MD5CAPx02` where plain stdin detection says `MD5CAPx01`. So hashpipe
   carries two numberings, and `data/upstream-disagreements.yaml` still
   records the detect path's -- which is the one this repository uses as its
