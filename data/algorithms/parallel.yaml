@@ -1,11 +1,14 @@
 id: "parallel"
 name: "PARALLEL"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     verified: "absent"
   mdxfind:
     types: ["PARALLEL"]
     verified: "asserted"
+    verified_at: "2026-09-04"
+    verified_with: "mdxfind RCS 1.576 (2026/09/02)"
+    note: "PARALLEL is not a hash. mdxfind's maintainer describes it as a measurement tool rather than an algorithm, and it emits nothing: measured 2026-09-04, run pinned with -M under -z alone, with -s and with -u, stdout empty in every case. So this entry can never reach tier vector and the absence of a vector is a property of the type, not a gap in this repository. The identifier itself is real -- it is in mdxfind's own type table -- and that is all the mapping claims."
   crack:
     supported: false
