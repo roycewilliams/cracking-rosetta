@@ -429,10 +429,26 @@ if ($want{hashcat} && $job{hashcat}) {
             $cracked{hashcat}{ $vec->{id} }{$mode} = 1;
             $read{hashcat}{ $vec->{id} }{ $vec->{vi} } = 1;
         }
-        $failed_job{hashcat}{$mode} = $code if $code == -2;
+        # A run that did not COMPLETE is not evidence of anything, and the
+        # reads_in rule below turns "did not run" into "does not read" unless
+        # it is told. hashcat's own include/types.h: RC_FINAL_OK is 0 and
+        # RC_FINAL_EXHAUSTED is 1; RC_FINAL_ERROR and the aborts are not runs
+        # that finished. Measured 2026-09-04, after two concurrent jobs
+        # contended for the GPU and the loser stripped "hashcat" from three
+        # vectors that hashcat demonstrably reads.
+        unless ($code == 0 || $code == 1) {
+            $failed_job{hashcat}{$mode} = $code;
+            delete $ran_ident{hashcat}{$mode};
+        }
+        # The count is VECTORS THIS IDENTIFIER READ, not vectors belonging to
+        # an entry that cracked. An entry can carry one vector per tool -- a
+        # sheet-era mdxfind serialization beside hashcat's own example -- and
+        # counting per entry printed "2 hash(es) -> 2 cracked" where hashcat
+        # read one of them. Promotion is unaffected: it is per identifier, and
+        # the per-vector fact is what reads_in already records.
         printf STDERR "-   hashcat -m %-6s %d hash(es) -> %d cracked%s\n",
             $mode, scalar @v,
-            scalar(grep { $cracked{hashcat}{ $_->{id} }{$mode} } @v),
+            scalar(grep { $read{hashcat}{ $_->{id} }{ $_->{vi} } } @v),
             ($code == -2 ? ' [TIMEOUT]' : '') if $verbose;
     }
 }
@@ -530,10 +546,13 @@ if ($want{mdxfind} && $job{mdxfind}) {
         # count, and assigning here would leave discovery seeing only the
         # entries of whichever iteration ran last.
         push @{ $mx_job_ids{$type} }, @ids;
-        $failed_job{mdxfind}{$type} = $code if $code == -2;
+        if ($code == -2) {
+            $failed_job{mdxfind}{$type} = $code;
+            delete $ran_ident{mdxfind}{$type};   # see the hashcat note above
+        }
         printf STDERR "-   mdxfind %-24s i=%s %d hash(es) -> %d cracked%s\n",
             $type, $it, scalar @v,
-            scalar(grep { $cracked{mdxfind}{ $_->{id} }{$type} } @v),
+            scalar(grep { $read{mdxfind}{ $_->{id} }{ $_->{vi} } } @v),
             ($code == -2 ? ' [TIMEOUT]' : '') if $verbose;
     }
 }
@@ -613,10 +632,13 @@ if ($want{john} && $job{john}) {
             $cracked{john}{ $vec->{id} }{$label} = 1;
             $read{john}{ $vec->{id} }{ $vec->{vi} } = 1;
         }
-        $failed_job{john}{$label} = $code if $code == -2;
+        if ($code == -2) {
+            $failed_job{john}{$label} = $code;
+            delete $ran_ident{john}{$label};     # see the hashcat note above
+        }
         printf STDERR "-   john --format=%-22s %d hash(es) -> %d cracked%s\n",
             $label, scalar @v,
-            scalar(grep { $cracked{john}{ $_->{id} }{$label} } @v),
+            scalar(grep { $read{john}{ $_->{id} }{ $_->{vi} } } @v),
             ($code == -2 ? ' [TIMEOUT]' : '') if $verbose;
     }
 }
@@ -777,9 +799,17 @@ if (@failed) {
     my $n = 0;
     for (@failed) { print STDERR "-   $_\n"; last if ++$n >= ($verbose ? @failed : 8) }
 }
+# A job here did not complete -- the ${timeout}s cap, or for hashcat an exit
+# outside {0,1}. Its identifier is withheld from $all_ran, so nothing it
+# touched was promoted and no reads_in was cleared on its account.
 for my $tool (sort keys %failed_job) {
-    printf STDERR "- %s: %d job(s) hit the %ds timeout\n",
-        $tool, scalar(keys %{ $failed_job{$tool} }), $timeout;
+    my @j = sort keys %{ $failed_job{$tool} };
+    my @to = grep { $failed_job{$tool}{$_} == -2 } @j;
+    printf STDERR "- %s: %d job(s) did not complete (%d at the %ds timeout);"
+                . " their identifiers are treated as unrun\n",
+        $tool, scalar @j, scalar @to, $timeout;
+    printf STDERR "-   %s exited %d\n", $_, $failed_job{$tool}{$_}
+        for grep { $failed_job{$tool}{$_} != -2 } @j;
 }
 
 exit 0;
