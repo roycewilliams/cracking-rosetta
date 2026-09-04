@@ -259,6 +259,18 @@ mdxfind also accepts hashcat modes directly (`mdxfind -m 0`, `-m e1`,
   with the one you asked for** and never treat a line on stdout as
   agreement. Note too that the emitted label is BARE where the input was
   bare or `x01`, the same convention as mdxfind's bare lines.
+  **Upstream CONFIRMED this as a bug on 2026-09-04, so the guard above has a
+  shelf life and `tools/test-hashpipe-c.pl` is what measures when it
+  expires.** That test asserts the CURRENT behaviour on purpose, hole
+  included: when a fix lands it fails and says to drop the guard. It needs a
+  hashpipe binary, so it is not in CI -- `validate.yml` deliberately runs no
+  cracker -- and it skips loudly rather than silently when one is absent.
+  Worth knowing how the report landed, because it nearly did not: "by
+  design" came back first, on a demonstration that `MD5x03` rejects an
+  md5^4 digest -- which is true, and is a cell this hole does not touch. It
+  took the same file plus ONE line, `MD5x03` against md5^1, to separate the
+  two claims. **A refutation aimed at a different cell of the matrix is not
+  a refutation**; show the cell.
   **And `-c` numbers iterations mdxfind's way while the detect path does
   not**: same binary, same hash, 2026-09-04, `-c` says `MD5CAPx02` where
   plain stdin detection says `MD5CAPx01`. So v1.190 carries two numberings,
