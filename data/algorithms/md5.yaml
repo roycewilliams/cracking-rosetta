@@ -38,7 +38,7 @@ relations:
   - kind: "collides-on-subset"
     entry: "md5cap"
     distinction: "encoding"
-    note: "MD5CAP is cap(md5($p)), a no-op whenever the digest contains no letters to capitalise, so john's dynamic_2 and plain MD5 crack its vector without denoting it"
+    note: "MD5CAP is cap(md5($p)), a no-op whenever the digest contains no letters to capitalize, so john's dynamic_2 and plain MD5 crack its vector without denoting it"
   - kind: "encodes"
     entry: "md5cdab-order-of-32bit-values"
     distinction: "encoding"

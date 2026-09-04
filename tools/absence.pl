@@ -34,7 +34,7 @@
 # publishes it as "no".
 #
 # --reearn is for exactly those. A BARE verdict is a checkable condition, not
-# a judgement: tier 'absent' with no verified_at, no verified_with and no
+# a judgment: tier 'absent' with no verified_at, no verified_with and no
 # note. Nothing else is touched, and the replacement can only ever be the
 # same verdict with evidence attached -- absent for absent. Where the sweep
 # DISAGREES with a bare claim, by cracking the vector or by matching a name,
@@ -84,7 +84,7 @@
 #
 # mdxfind cracks TRUNCATED hashes by design -- a capability hashcat does not
 # have -- so it compares at the length of the shortest hash it LOADED and
-# honours that for every hash in the file. Two numbers matter and both are
+# honors that for every hash in the file. Two numbers matter and both are
 # measured, 2026-09-03:
 #
 #   * It DROPS anything shorter than 16 hex characters. Stubs of 4, 8 and 12
@@ -231,7 +231,7 @@
 # A NAME MATCH VETOES
 #
 # Before any verdict, the entry's own tool-neutral identifiers -- id, name,
-# aliases, legacy spellings -- are normalised by the separator-drift rule
+# aliases, legacy spellings -- are normalized by the separator-drift rule
 # (upper-case, strip non-alphanumerics) and looked for among the tool's
 # identifier names. An exact match is a CANDIDATE MAPPING, not an absence.
 #
@@ -240,7 +240,7 @@
 # side produced 8 matches, and they are collisions between two naming
 # conventions rather than mappings: mdxfind's MD5MD5PASS is md5(md5(pass).pass)
 # and hashcat mode 2600 is named md5(md5($pass)), and stripping "$ . ( )"
-# makes both MD5MD5PASS. Same for SHA1MD5PASS against mode 4700. Normalisation
+# makes both MD5MD5PASS. Same for SHA1MD5PASS against mode 4700. Normalization
 # is safe within one tool's convention and unsafe across two that both write
 # expressions with different implicit operands.
 #
@@ -498,7 +498,7 @@ sub attribute {
     my ($printed, $w) = split_report($rest);
     return () unless defined $printed;
     # The index is keyed on lc(hash), so this lookup already folds the case
-    # mdxfind and hashcat both normalise on read and echo back.
+    # mdxfind and hashcat both normalize on read and echo back.
     return @{ $by_fold{ lc($printed) . "\0" . $w } || [] };
 }
 
@@ -603,7 +603,7 @@ if ($tool eq 'mdxfind') {
         close $fh;
 
         # A type mdxfind counted but whose report lines this parser never
-        # recognised means the output format moved. Every entry that type
+        # recognized means the output format moved. Every entry that type
         # cracked would look unswept, which is exactly a false absence, so it
         # is recorded and the run refuses to write.
         $parser_blind{$_} = $c for grep { !$saw{$_} } sort keys %claimed;
@@ -1171,7 +1171,7 @@ if (%parser_blind) {
     print STDERR <<"END_WARN";
 
 - mdxfind's own summary names @{[ scalar keys %parser_blind ]} type(s) it found hashes for whose report
-  lines this parser did not recognise. Every entry such a type cracked reads
+  lines this parser did not recognize. Every entry such a type cracked reads
   as unswept, and an unswept entry is one step from a false 'absent'. Nothing
   is written until the parser is fixed.
 END_WARN
@@ -1238,7 +1238,7 @@ sub note_for {
          . "Every applicable $what ran to completion; a "
          . "$what killed at the timeout is counted as untested and withholds "
          . "this verdict. No $tool $what name matches any identifier this entry "
-         . "publishes either, normalised by the separator-drift rule. "
+         . "publishes either, normalized by the separator-drift rule. "
          . ($tool eq 'mdxfind' && !$no_hashpipe
             ? ($hp_type{$id}
                ? "hashpipe DOES cover this algorithm, as type $hp_type{$id}, "

@@ -10,7 +10,7 @@ package RosettaJohn;
 #
 # expression: is documented as hx-style, and hx spells a representation
 # change as a wrapper: upper(md5($p)), base64(md5_bin($p)). John spells the
-# same three things as FLAVOURS OF THE HASH FUNCTION ITSELF -- doc/DYNAMIC_
+# same three things as FLAVORS OF THE HASH FUNCTION ITSELF -- doc/DYNAMIC_
 # EXPRESSIONS, "The hashing functions come in multiple 'flavors'":
 #
 #     md5(...)      lower-case base16      hx  lower(md5(...))  / md5(...)
@@ -41,10 +41,10 @@ package RosettaJohn;
 #
 # Three rewrites are exact and are the whole of what this does:
 #
-#   upper(F(x))   -> F_UPPERCASED(x)   john's upper-case flavour
-#   lower(F(x))   -> F(x)              john's default flavour IS lower-case
+#   upper(F(x))   -> F_UPPERCASED(x)   john's upper-case flavor
+#   lower(F(x))   -> F(x)              john's default flavor IS lower-case
 #   hex(F_raw(x)) -> F(x)              base16 of the raw digest IS the default
-#   base64(F_raw(x)) -> F_64(x)        john's mime-base64 flavour
+#   base64(F_raw(x)) -> F_64(x)        john's mime-base64 flavor
 #   upper($p|$u)  -> uc($p|$u)         and lower(...) -> lc(...)
 #
 # One more is exact but is spelled as a fixed-length token:
@@ -214,14 +214,14 @@ sub _wrap {
     my $raw = $inner_fn =~ /_raw$/ ? 1 : 0;
     (my $base = $inner_fn) =~ s/_raw$//;
 
-    # Which flavour of the inner function this modifier asks for -- and which
+    # Which flavor of the inner function this modifier asks for -- and which
     # combinations mean nothing. base64() of a hex STRING is not john's _64
-    # flavour (that is base64 of the raw digest), so it is refused.
-    my $flavour;
-    if    ($fn eq 'upper'  && !$raw) { $flavour = uc $base }
-    elsif ($fn eq 'lower'  && !$raw) { $flavour = $base }
-    elsif ($fn eq 'hex'    &&  $raw) { $flavour = $base }
-    elsif ($fn eq 'base64' &&  $raw) { $flavour = "${base}_64" }
+    # flavor (that is base64 of the raw digest), so it is refused.
+    my $flavor;
+    if    ($fn eq 'upper'  && !$raw) { $flavor = uc $base }
+    elsif ($fn eq 'lower'  && !$raw) { $flavor = $base }
+    elsif ($fn eq 'hex'    &&  $raw) { $flavor = $base }
+    elsif ($fn eq 'base64' &&  $raw) { $flavor = "${base}_64" }
     else                             { return }
 
     $pos->[0] += 2;                              # consume the inner NAME, '('
@@ -230,7 +230,7 @@ sub _wrap {
     return unless $pos->[0] < @$t
                && $t->[ $pos->[0] ][0] eq 'punc' && $t->[ $pos->[0] ][1] eq ')';
     $pos->[0]++;                                 # the inner call's ')'
-    return "$flavour($inner)";
+    return "$flavor($inner)";
 }
 
 #-----------------------------------------------------------------------

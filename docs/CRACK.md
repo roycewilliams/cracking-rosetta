@@ -67,6 +67,6 @@ Marked with (c) in [ROSETTA.md](ROSETTA.md). The underlying field is
 
 ## References
 
-* Manual, source and licence as distributed with Crack v5.0a
+* Manual, source and license as distributed with Crack v5.0a
 * [Elias Levy's crack-nt fork](https://github.com/eliaslevy/crack-nt) - the NT
   and LAN-Manager additions described above

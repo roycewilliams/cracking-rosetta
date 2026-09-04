@@ -57,7 +57,7 @@
 # used to prove anything, so validate.pl and any seeding pass need to see it.
 #
 # Those two are a LOCAL BUILD defect and the header below says so. The first
-# reading here was that they showed uninitialised state worth reporting
+# reading here was that they showed uninitialized state worth reporting
 # upstream; Waffle's answer, relayed 2026-09-04, is that sphlib's bmw.c
 # violates strict aliasing and GCC 12+ miscompiles it, which is why the
 # 32-bit BMW core fails and the 64-bit one does not. Worth keeping as a
@@ -278,7 +278,7 @@ emit_header($out, [
          'sphlib bmw.c violates strict aliasing and GCC 12+ miscompiles its',
          '32-bit core (upstream sphlib issue 3). Rebuilding from a fresh',
          "clone with hashpipe's own `make deps` fixed it, and this file is",
-         'the measurement that says so. The lesson generalises: a self-test',
+         'the measurement that says so. The lesson generalizes: a self-test',
          'failure is evidence about the BUILD, and only sometimes about the',
          'tool.')),
 ]);

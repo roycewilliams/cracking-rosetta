@@ -17,7 +17,7 @@ package RosettaHx;
 # twice at two strengths. So the boundary lives here, once.
 #
 # The specification is NOT vendored: this repository is MIT throughout and the
-# PDF carries no licence grant. Re-fetch it to tmp/hx/ to re-run either tool.
+# PDF carries no license grant. Re-fetch it to tmp/hx/ to re-run either tool.
 #
 # WHAT THE BOUNDARY IS
 #
@@ -43,7 +43,7 @@ package RosettaHx;
 #      and '=' then made the whole type look like a multi-statement hx program.
 #      Five types were lost that way, three of them (MACOSX, POSTGRESCRAM,
 #      WINPHONE) perfectly translatable. strip_gloss() instead finds the
-#      trailing parenthesised group and takes it only when what precedes it is
+#      trailing parenthesized group and takes it only when what precedes it is
 #      itself a complete balanced expression -- so md5(pass) is never mistaken
 #      for a gloss, and the gloss is kept rather than discarded.
 #
@@ -98,7 +98,7 @@ our @EXPORT_OK = qw(parse_appendix translate_hx strip_gloss ascii_fold
 #
 # utf16le is then ALSO admitted as a repository spelling, because one entry
 # (PEOPLESOFT, e858) carries the hx form in its own expression:. That is a
-# token a reader will meet, so a consumer must classify it; it is not licence
+# token a reader will meet, so a consumer must classify it; it is not license
 # to write new expressions that way.
 my %MOD_HX = (
     upper => 'upper', lower => 'lower', cap => 'cap', rev => 'rev',
@@ -380,14 +380,14 @@ my %MULTI_NOTE = map { $_ => 1 } qw(
 # SHA1SHA3-256TRUNC for an unrelated reason and the family turned out to be
 # split across the two lists.
 #
-# The test is a lookup, not a judgement: the gloss states a NUMERIC RANGE for
+# The test is a lookup, not a judgment: the gloss states a NUMERIC RANGE for
 # N. That is what distinguishes it from
 #
 #     SHA1MD5x            sha1(md5^N(pass))                 (N = iteration count)
 #
 # which must NOT match. An iteration count is identity in this repository --
 # MD5x01 is not MD5x02, it is john's dynamic_2 -- so those 16 types are a
-# family parameterised by N, not one type emitting several digests. Marking
+# family parameterized by N, not one type emitting several digests. Marking
 # them multi-emit would forbid an expression: that each of them can honestly
 # carry once N is fixed.
 #
@@ -423,7 +423,7 @@ sub is_multi_emit {
 #-----------------------------------------------------------------------
 # strip_gloss($text) -> ($expression, @glosses)
 #
-# Appendix A appends prose in parentheses. Take a trailing parenthesised group
+# Appendix A appends prose in parentheses. Take a trailing parenthesized group
 # ONLY when the text before it is a complete balanced expression -- otherwise
 # md5(pass) would lose its own argument list. Repeats, because a type can
 # carry both a note citation and a gloss.
@@ -473,7 +473,7 @@ sub ascii_fold {
 # parse_appendix($path) -> { TYPENAME => { index, expr, raw, gloss } }
 #
 # 'raw' is the line as extracted, 'expr' is it with the glosses removed and
-# U+02C6 normalised, 'gloss' is the arrayref of what was removed.
+# U+02C6 normalized, 'gloss' is the arrayref of what was removed.
 
 sub parse_appendix {
     my ($path) = @_;

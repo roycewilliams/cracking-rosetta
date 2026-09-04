@@ -94,7 +94,7 @@ sub spit {
     return;
 }
 
-# The two inventories. Each carries one identifier that shares a normalised
+# The two inventories. Each carries one identifier that shares a normalized
 # name with an entry below, so the name veto has something to fire on.
 sub write_inventories {
     spit("$DIR/tools/mdxfind.yaml", <<"END_INV");
@@ -683,7 +683,7 @@ for my $tool (qw(mdxfind hashcat john)) {
     ($rc, $out) = run_tool('mdxfind', '--apply');
     check($rc == 1, 'parser blindness: the run refuses',
           "exit was $rc");
-    check(!!($out =~ /report\s+lines this parser did not recognise/s),
+    check(!!($out =~ /report\s+lines this parser did not recognize/s),
           'parser blindness: it says which type and where');
     check(verdict('mdxfind', 'decidable') eq '',
           'parser blindness: nothing is written',

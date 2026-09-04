@@ -47,4 +47,4 @@ vectors:
     pass: "rosetta"
     source: "vanity"
     reads_in: ["hashcat", "john", "mdxfind"]
-notes: "Split out on 2026-08-30. mdxfind type e818 and hashcat mode 33100 had no entry of their own, and e818's example vector had been seeded onto md5-salt-md5-pass-salt, whose name, id and other vector are the neighbouring construction md5($s.md5($p.$s)) (e515, hashcat 4110). Digest::MD5 - independent of all three crackers - identifies this vector as md5($s.md5($p).$s); hashcat -m 33100, mdxfind pinned to the type, and john dynamic_14 and dynamic_2014 all reproduce it."
+notes: "Split out on 2026-08-30. mdxfind type e818 and hashcat mode 33100 had no entry of their own, and e818's example vector had been seeded onto md5-salt-md5-pass-salt, whose name, id and other vector are the neighboring construction md5($s.md5($p.$s)) (e515, hashcat 4110). Digest::MD5 - independent of all three crackers - identifies this vector as md5($s.md5($p).$s); hashcat -m 33100, mdxfind pinned to the type, and john dynamic_14 and dynamic_2014 all reproduce it."

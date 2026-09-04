@@ -27,7 +27,7 @@
 #
 # EVERY RULE WAS CHECKED AGAINST THE ANSWERS A HUMAN ALREADY GAVE
 #
-# 309 entries were categorised by hand before this existed, and that is a test
+# 309 entries were categorized by hand before this existed, and that is a test
 # set nobody had to build. Rules 1-5 contradicted none of them when they were
 # written, and rule 6 contradicts none of them today. A rule that contradicted
 # a curator would be wrong by definition: the curator is the authority this
@@ -78,7 +78,7 @@
 #      'primitive: one hash function over the plaintext' is literally the shape
 #      F($p). Everything else with an expression is a construction. Where the
 #      line falls between them was NOT decided here: md5-pass-salt (md5($p.$s))
-#      and md5-salt-pass (md5($s.$p)) were already categorised 'composite' by a
+#      and md5-salt-pass (md5($s.$p)) were already categorized 'composite' by a
 #      curator, so a single hash over a salted concatenation is composite in
 #      this repository, and rule 5 follows that rather than inventing a rule.
 #
@@ -108,7 +108,7 @@
 #      encodes guard in rule 2.
 #
 #      Placed ABOVE rules 4 and 5, below rule 3. Royce, 2026-09-01: of the
-#      three tools only hashcat publishes human judgement about what KIND of
+#      three tools only hashcat publishes human judgment about what KIND of
 #      thing a mode is, which is the question this field asks -- mdxfind and
 #      john publish no classification at all, so there is nothing to weigh it
 #      against. It stays below rule 3 because an iteration count is a statement
@@ -133,7 +133,7 @@
 # scryptcrypt-scrypt-unix and terra-station-wallet-...-pbkdf2-pass, all three
 # of which a curator called 'application' -- correctly, because they are
 # products that USE a KDF. Distinguishing "is a KDF" from "is a product built
-# on one" is judgement, not a lookup, so it stays a question. Rule 6 reaches
+# on one" is judgment, not a lookup, so it stays a question. Rule 6 reaches
 # 188 of what is left; run the tool for the figure rather than trusting this
 # comment.
 #
@@ -230,7 +230,7 @@ if ($rederive && !defined $baseline) {
 # source -- so the only record of who wrote a given value is git history. A ref
 # from before this tool first ran is therefore the curator set: every category
 # in it is a human's, and every category that appeared afterwards is this
-# tool's. Externalising it as a --baseline ref keeps that judgement auditable
+# tool's. Externalizing it as a --baseline ref keeps that judgment auditable
 # instead of hidden in the code.
 
 sub baseline_categories {
@@ -342,7 +342,7 @@ sub hashcat_category {
                      . "already answered two ways ($split)");
     }
     my $m = $HASHCAT_CATEGORY{$hcat};
-    return (undef, "held: no curator has ever categorised an entry in hashcat "
+    return (undef, "held: no curator has ever categorized an entry in hashcat "
                  . "category '$hcat', so there is nothing to map it to")
         unless $m;
 
@@ -379,7 +379,7 @@ sub derive {
 
     # 6. hashcat's own classification of the mode, ABOVE the expression rules.
     #    Royce, 2026-09-01: of the three tools only hashcat publishes human
-    #    judgement about what KIND of thing a mode is, and that is the question
+    #    judgment about what KIND of thing a mode is, and that is the question
     #    this field asks. mdxfind and john publish no classification at all.
     #    It stays below rule 3, because an iteration count is a statement about
     #    identity rather than about kind.

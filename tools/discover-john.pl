@@ -90,7 +90,7 @@
 #
 # So each line carries a synthetic login and the run is followed by "--show",
 # which prints that login beside the plaintext. The login is ours; it survives
-# every canonicalisation, and the special cases go away.
+# every canonicalization, and the special cases go away.
 #
 # TAB IS THE FIELD SEPARATOR, WHICH BUYS TWO THINGS
 #
@@ -205,7 +205,7 @@
 # when the corpus holds a hash DELIBERATELY related to a true digest, which is
 # exactly what mdxfind's masked and truncated families are.
 #
-# So a claim is withheld only where the corpus itself realises the ambiguity:
+# So a claim is withheld only where the corpus itself realizes the ambiguity:
 # two DIFFERENT hashes in it that the format cannot tell apart. Excluding every
 # format that skips a word would throw away correct mappings in order to refuse
 # one that is not. This is the same rule discover-hashcat.pl arrived at, and it
@@ -945,7 +945,7 @@ sub range_summary {
     return join ',', @runs;
 }
 
-# Where the corpus itself realises the ambiguity: two DIFFERENT hashes this
+# Where the corpus itself realizes the ambiguity: two DIFFERENT hashes this
 # format cannot tell apart. Only there is a claim withheld.
 my %ambiguous;    # "label\0id" -> the other ids the format cannot distinguish
 for my $label (keys %ignored_pos) {

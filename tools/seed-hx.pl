@@ -50,7 +50,7 @@
 # the results; see RosettaHx's header.
 #
 # The specification is NOT vendored: this repository is MIT throughout and the
-# PDF carries no licence grant. Re-fetch it to re-run this.
+# PDF carries no license grant. Re-fetch it to re-run this.
 #
 # Usage: seed-hx.pl [--appendix FILE] [--apply] [-v]
 #

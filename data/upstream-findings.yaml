@@ -177,7 +177,7 @@ findings:
     summary: >-
       As printed, all three rows compute a digest of the userid alone and never
       touch the candidate password, which would make them unusable as password
-      hashes. Appendix A's own neighbouring row gets it right -- e286
+      hashes. Appendix A's own neighboring row gets it right -- e286
       MD5MD5USER reads md5(md5(pass).user) -- and Note [24] gives the real
       forms for all of them, so this is a transcription fault in the appendix
       rather than a disagreement about the algorithm. It is worth reporting

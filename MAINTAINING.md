@@ -29,7 +29,7 @@ one green line among forty. `review-delta.pl` compares the two sides as
   trustworthy until this machine reproduces it. The tool prints the exact
   `verify-vectors.pl` line, and `--verify` runs it.
 - **READ** -- a claim no local run can settle: tier `upstream` or `asserted`,
-  a relation's rationale, a note. Your judgement.
+  a relation's rationale, a note. Your judgment.
 - **FYI** -- covered by `validate.pl`, or inherently safe. A reformat reviews
   as "no claim changed", which is why contributors can run `fmt.pl` freely.
 

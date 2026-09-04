@@ -165,8 +165,8 @@ my %IGNORED = map { $_ => 1 } (
     'Advice.Notice',      # multi-line prose about optimized-kernel caveats
     'Benchmark.Mask',     # benchmarking concern, not an identity
     'Custom.Plugin',      # build detail
-    'Keep.Guessing',      # runtime behaviour
-    'Potfile.Enabled',    # runtime behaviour
+    'Keep.Guessing',      # runtime behavior
+    'Potfile.Enabled',    # runtime behavior
 );
 
 # Fields whose Yes/No hashcat prints should become a real YAML boolean.

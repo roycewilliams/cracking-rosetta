@@ -94,7 +94,7 @@ Revisit when you get it compiling.
     dist/rosetta.{csv,json}  generated exports (machine)
 
 Splitting *inventory* (mechanical, regenerated) from *mapping* (human
-judgement) is what makes upstream releases cheap: a new hashcat version
+judgment) is what makes upstream releases cheap: a new hashcat version
 regenerates one layer and never touches curation.
 
 One file per algorithm rather than one big table is the core
@@ -179,9 +179,9 @@ Weekly job on the self-hosted runner:
    - the regenerated inventory,
    - stub `data/algorithms/*.yaml` for genuinely new algorithms, pre-filled
      only with what the machine can prove (mode, example vector, and any
-     mdxfind/john_map mapping), everything else blank and labelled
+     mdxfind/john_map mapping), everything else blank and labeled
      `needs-review`,
-   - a checklist of the human judgement calls required.
+   - a checklist of the human judgment calls required.
 
 The point is that the maintainer's job degrades from "notice hashcat shipped
 and go re-research 14 algorithms" to "review a PR". That is the difference
@@ -317,7 +317,7 @@ four *different* algorithms, and five vectors that fall to three different
 dynamics. Nothing in the schema stopped that, because `aliases:` was never
 defined as "names for the same computation" -- it was just a search aid.
 
-### Option A -- normalise into two tables
+### Option A -- normalize into two tables
 
 Split `data/algorithms/` into computations (keyed by expression) and
 `data/profiles/` for the product-facing rows, each profile pointing at one

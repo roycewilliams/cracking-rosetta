@@ -695,7 +695,7 @@ md5-md5sha1md5sha1md5sha1p,MD5-MD5SHA1MD5SHA1MD5SHA1p,,"md5(md5(sha1(md5(sha1(md
 md5-md5sha1passsha1md5salt,MD5-MD5SHA1PASSSHA1MD5SALT,,md5(md5(sha1($p)).sha1(md5($s))),upstream,,,composite,,needs-review,,,no,,unknown,MD5-MD5SHA1PASSSHA1MD5SALT,proven,MD5-MD5SHA1PASSSHA1MD5SALT,proven,no,1,unknown,,,,,,yes,3,32,observed,,,
 md5-md5usersha1md5pass,MD5-MD5USERSHA1MD5PASS,,md5(md5($s).sha1(md5($p))),vector,dynamic=md5(md5($s).sha1(md5($p))),,composite,,ok,,,no,,unknown,MD5-MD5USERSHA1MD5PASS,proven,MD5-MD5USERSHA1MD5PASS,proven,no,1,unknown,,,,,,no,3,32,observed,,,
 md5-salt-sha1peppass,MD5-SALT-SHA1PEPPASS,,,absent,,md5(salt . sha1(pepper . pass)),composite,,ok,,21310,proven,,unknown,MD5-SALT-SHA1PEPPASS,proven,MD5-SALT-SHA1PEPPASS,proven,no,1,shared,,yes,fast,,,yes,,32,observed,,,
-md5-saltmd5pass-salt,MD5-SALTMD5PASS-SALT,md5($salt.md5($pass).$salt),md5($s.md5($p).$s),upstream,dynamic=md5($s.md5($p).$s),,composite,,needs-review,,33100,proven,dynamic_14 dynamic_2014,proven,MD5-SALTMD5PASS-SALT,proven,MD5-SALTMD5PASS-SALT,proven,no,3,shared,,yes,fast,yes,,yes,2,32,fixed,,,"Split out on 2026-08-30. mdxfind type e818 and hashcat mode 33100 had no entry of their own, and e818's example vector had been seeded onto md5-salt-md5-pass-salt, whose name, id and other vector are the neighbouring construction md5($s.md5($p.$s)) (e515, hashcat 4110). Digest::MD5 - independent of all three crackers - identifies this vector as md5($s.md5($p).$s); hashcat -m 33100, mdxfind pinned to the type, and john dynamic_14 and dynamic_2014 all reproduce it."
+md5-saltmd5pass-salt,MD5-SALTMD5PASS-SALT,md5($salt.md5($pass).$salt),md5($s.md5($p).$s),upstream,dynamic=md5($s.md5($p).$s),,composite,,needs-review,,33100,proven,dynamic_14 dynamic_2014,proven,MD5-SALTMD5PASS-SALT,proven,MD5-SALTMD5PASS-SALT,proven,no,3,shared,,yes,fast,yes,,yes,2,32,fixed,,,"Split out on 2026-08-30. mdxfind type e818 and hashcat mode 33100 had no entry of their own, and e818's example vector had been seeded onto md5-salt-md5-pass-salt, whose name, id and other vector are the neighboring construction md5($s.md5($p.$s)) (e515, hashcat 4110). Digest::MD5 - independent of all three crackers - identifies this vector as md5($s.md5($p).$s); hashcat -m 33100, mdxfind pinned to the type, and john dynamic_14 and dynamic_2014 all reproduce it."
 md5-saltmd5passsalt,MD5-SALTMD5PASSSALT,,md5($s.md5($p.$s)),vector,dynamic=md5($s.md5($p.$s)),,composite,,ok,,4110,proven,dynamic_11 dynamic_2011,proven,MD5-SALTMD5PASSSALT,proven,MD5-SALTMD5PASSSALT,proven,no,2,shared,,yes,fast,yes,,yes,2,32,fixed,same as md5-salt-md5-pass-salt (naming),,
 md5-sha1numsha1,MD5-SHA1numSHA1,,,,,,,,ok,,,no,,unknown,MD5-SHA1numSHA1,proven,MD5-SHA1numSHA1,proven,no,1,unknown,,,,,,no,,32,observed,,,
 md5-sha1saltpass,MD5-SHA1SALTPASS,,md5(sha1($s.$p)),upstream,,,composite,,needs-review,,4430,proven,,unknown,MD5-SHA1SALTPASS,proven,MD5-SHA1SALTPASS,proven,no,1,shared,,yes,fast,,,yes,2,32,observed,,,
@@ -844,7 +844,7 @@ error. It is SHA-512 throughout, not SHA-256; secondary write-ups say SHA-256
 and are wrong. hashcat's 25300 kernel is SHA-512 only, so a file whose
 algorithmName is anything else has no mode.
 
-Proven end to end on 2026-09-03 against a synthesised .xlsx carrying a
+Proven end to end on 2026-09-03 against a synthesized .xlsx carrying a
 SHA-512 sheetProtection element for a known password, extracted from the
 XML and cracked by hashcat at this mode.
 

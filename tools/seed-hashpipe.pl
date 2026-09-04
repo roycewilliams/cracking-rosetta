@@ -16,7 +16,7 @@
 # hashpipe reports the FIRST type that reproduces a digest, exactly as mdxfind
 # does, so an unpinned answer names A type that works and not necessarily THE
 # type an entry is about. MD5CAP is cap(md5(pass)), a no-op whenever the digest
-# has no letters to capitalise, and is then byte-identical to plain MD5. Taking
+# has no letters to capitalize, and is then byte-identical to plain MD5. Taking
 # an unpinned report as a mapping is how that trap is walked into.
 #
 # So an unpinned run only ever PROPOSES here. Every candidate is re-run with
@@ -203,7 +203,7 @@ sub norm {
 # that merely reproduces the same digest.
 #
 # The john formats count, and that is a deliberate exception to the rule that
-# normalising across two tools' vocabularies produces collisions rather than
+# normalizing across two tools' vocabularies produces collisions rather than
 # mappings. It does when both write EXPRESSIONS: mdxfind's MD5MD5PASS is
 # md5(md5(pass).pass) and hashcat's mode 2600 is named md5(md5($pass)), and
 # both reduce to MD5MD5PASS. hashpipe's names are not expressions. The types

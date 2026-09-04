@@ -28,7 +28,7 @@
 # and the other line's own check succeeded:
 #
 #     MD5x02 <md5^2> + MD5x03 <md5^1>   ->  BOTH VERIFIED, and the md5^1
-#                                           line came back labelled MD5x01
+#                                           line came back labeled MD5x01
 #
 # That assertion was written as it stood, so 1.192 broke it and said so.
 # Measured on 1.192, the same batch verifies the x02 line and REFUSES the
@@ -37,7 +37,7 @@
 # THE RISK IS NOW THE OPPOSITE ONE, and it is what the controls below are
 # for. A -c that refused more than it should would make the old leak case
 # pass just as well as a correct fix does, and nothing here would notice.
-# So there are positive controls at BATCH scope: correctly-labelled
+# So there are positive controls at BATCH scope: correctly-labeled
 # multi-line batches at MIXED depths, which must still verify every line.
 # Without them "the leak is gone" and "the batch path is broken" are the
 # same measurement.
@@ -91,10 +91,10 @@ Usage: $PROG [--verbose]
    -h, --help        this help
 
    Asserts what `hashpipe -c` does with an iteration label. Since v1.192 it
-   is strict both per line and per batch: it verifies at the labelled depth
+   is strict both per line and per batch: it verifies at the labeled depth
    and refuses every other, and one line's plaintext can no longer claim
    another line's digest. Both halves are asserted, and so is the opposite
-   failure -- a correctly-labelled multi-line batch must still verify every
+   failure -- a correctly-labeled multi-line batch must still verify every
    line, or "the leak is gone" and "the batch path is broken" would be the
    same reading.
 
@@ -239,14 +239,14 @@ for my $label (1 .. $MAX) {
                   join('|', @{ $r->{out} }), join('|', @{ $r->{err} })));
 
     # THE CASE THAT LEAKED ON 1.190 AND 1.191. A verifying MD5 line in the
-    # same batch, on a DIFFERENT digest, used to let the wrongly-labelled
+    # same batch, on a DIFFERENT digest, used to let the wrongly-labeled
     # line through as well, emitted at a depth no line asked for. Closed in
     # 1.192: the x02 line verifies and the x03 line is refused.
     $r = run_lines("MD5x02 $digest[2]:$PASS", "MD5x03 $digest[1]:$PASS");
     my $leaked = (grep { /^MD5x01 / } @{ $r->{out} }) ? 1 : 0;
     check(!$leaked && @{ $r->{out} } == 1
               && $r->{labels}[0] eq 'MD5x02' && @{ $r->{err} } == 1,
-          'BATCH: a wrongly labelled line is refused beside a verifying one '
+          'BATCH: a wrongly labeled line is refused beside a verifying one '
         . 'of the same family',
           "     The 1.190/1.191 leak is BACK. Re-measure, restore the batch\n"
         . "     clause in CLAUDE.md's iteration-suffix pitfall, and feed -c\n"
@@ -256,7 +256,7 @@ for my $label (1 .. $MAX) {
 
     # AND THE OPPOSITE FAILURE, which the case above cannot see. A -c that
     # refused too much would satisfy it exactly as a correct fix does, so a
-    # correctly-labelled batch must still verify EVERY line -- including at
+    # correctly-labeled batch must still verify EVERY line -- including at
     # mixed depths, which is where a naive per-batch depth check would break.
     for my $pair ([2, 1], [5, 3], [1, 4]) {
         my ($a, $b) = @$pair;
@@ -267,7 +267,7 @@ for my $label (1 .. $MAX) {
                   && $got{ sprintf('MD5x%02d', $a) }
                   && $got{ sprintf('MD5x%02d', $b) },
               sprintf('BATCH control: x%02d and x%02d together, each correctly '
-                    . 'labelled, both verify', $a, $b),
+                    . 'labeled, both verify', $a, $b),
               sprintf("     out=[%s] err=[%s]\n",
                       join('|', @{ $r->{out} }), join('|', @{ $r->{err} })));
     }

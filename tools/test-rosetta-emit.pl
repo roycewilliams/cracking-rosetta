@@ -18,7 +18,7 @@
 # touches. fmt.pl compares its own before and after and so protects ITSELF,
 # but emit_entry has no such check: seed-vectors.pl writes what it is given.
 #
-# The behaviour under test is the block scalar. Two entries now carry a note
+# The behavior under test is the block scalar. Two entries now carry a note
 # that is a multi-paragraph document rather than a sentence, and the old
 # emitter folded those into one 4000-character line -- valid YAML, unreadable
 # in review, and the exact "one-line change buried in a reformat" that fmt.pl

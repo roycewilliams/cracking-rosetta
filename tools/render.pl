@@ -345,7 +345,7 @@ for my $e (@rows) {
         # The same claim in john's own notation, which is NOT always the same
         # string: expression: is hx-style and writes a change of
         # representation as a wrapper -- upper(md5($p)) -- where john writes
-        # it as a flavour of the hash function -- MD5($p). Copying the
+        # it as a flavor of the hash function -- MD5($p). Copying the
         # expression column into a --format=dynamic= would hand a reader a
         # syntax error on 48 rows, so the runnable form is published
         # separately rather than left to be reconstructed.
@@ -889,7 +889,7 @@ That string is in the entry's `john_dynamic_expr:` field and in the CSV column
 of the same name. Take it from there rather than from the `expression` column:
 the expression is written in hx notation, which spells a change of
 representation as a wrapper - `md5(upper(md5($p)))` - where john spells it as a
-flavour of the hash function - `md5(MD5($p))` - and john rejects the first
+flavor of the hash function - `md5(MD5($p))` - and john rejects the first
 outright. It is deliberately **not** in john's column, which lists formats
 `--list=formats` will show; the gap worth filling is whether a named one exists.
 
@@ -969,7 +969,7 @@ here: the string is a wrong transcription, the vector belongs to a different
 algorithm, john's dynamic compiler and its named format disagree about what
 the string means, or john's expression language simply has no way to write
 this construction - it has no `cut()`, `rev()` or `cap()`, and its base64
-flavour encodes the raw digest rather than the hex string.
+flavor encodes the raw digest rather than the hex string.
 
 The last of those is the common case rather than a corner: the expression is
 rewritten into john's own notation before it is tried - `upper(md5($p))`
@@ -1054,14 +1054,14 @@ fall to different constructions: `md5-md5-plain-salt` has five vectors
 answering to three different john dynamics, `md5-md5-plain-salt-2` has two,
 and `md5userpass` has two. Both `md5-md5-plain-salt*` entries also carry an
 `aliases:` list naming several algorithms, so the spreadsheet collated them
-deliberately and splitting them is a judgement about what the row is *for* -
+deliberately and splitting them is a judgment about what the row is *for* -
 one construction, or one thing people search for. Whoever put them together
 knew something; if that was you, say so.
 
 ## Mappings believed but never reproduced ($believed)
 
 Counted here, listed in [GAPS.md](GAPS.md#1-believed-but-never-reproduced),
-because filling one is mechanical rather than a judgement call: the identifier
+because filling one is mechanical rather than a judgment call: the identifier
 and the vector are both already recorded, and one command decides it.
 
 ## What is deliberately not a question
@@ -1166,7 +1166,7 @@ Marked with (c) in [ROSETTA.md](ROSETTA.md). The underlying field is
 
 ## References
 
-* Manual, source and licence as distributed with Crack v5.0a
+* Manual, source and license as distributed with Crack v5.0a
 * [Elias Levy's crack-nt fork](https://github.com/eliaslevy/crack-nt) - the NT
   and LAN-Manager additions described above
 CRACK_TAIL

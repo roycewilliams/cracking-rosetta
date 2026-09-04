@@ -109,7 +109,7 @@ package RosettaExpr;
 # carries the fixture and re-measures it with --oracle. Two that a careful
 # reading would still have got wrong, and which the oracle settled:
 #
-#   cap()  capitalises the first lower-case LETTER, not the first character.
+#   cap()  capitalizes the first lower-case LETTER, not the first character.
 #          cap('975790dfb...') moves the 'd' at index 6.
 #   pad()  TRUNCATES when the input is already longer than the width; it is
 #          "make it exactly this many bytes", not "at least".

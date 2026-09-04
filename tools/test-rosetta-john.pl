@@ -70,7 +70,7 @@ my @CASES = (
     [ 'sha1(utf16be($p))',  'sha1(utf16be($p))',  'so is utf16be'            ],
 
     # The six rewrites.
-    [ 'md5(upper(md5($p)))',      'md5(MD5($p))',     'upper -> UC flavour'  ],
+    [ 'md5(upper(md5($p)))',      'md5(MD5($p))',     'upper -> UC flavor'  ],
     [ 'md5(lower(md5($p)))',      'md5(md5($p))',     'lower is the default' ],
     [ 'md5(hex(md5_raw($p)))',    'md5(md5($p))',     'hex of raw is base16' ],
     [ 'md5(base64(md5_raw($p)))', 'md5(md5_64($p))',  'base64 of raw -> _64' ],
@@ -91,13 +91,13 @@ my @CASES = (
     [ 'md5(cap(md5($p)))',        undef, 'no cap() -- the md5cap trap'       ],
     [ 'md5(frombase64($p))',      undef, 'no frombase64()'                   ],
     [ 'md5(utf16le($p))',         undef, 'john spells this utf16(), not le'  ],
-    [ 'md5(base64(md5($p)))',     undef, 'base64 of HEX is not the _64 flavour'],
+    [ 'md5(base64(md5($p)))',     undef, 'base64 of HEX is not the _64 flavor'],
     [ 'md5(base64($p))',          undef, 'base64 of the password either'     ],
     [ 'md5(pad(md5($p),100))',    undef, 'john pads only $p'                 ],
     [ 'md5(pad($p,7))',           undef, 'and only at 16, 20 or 100'         ],
     [ 'sha1(upper(md5($p).$s))',  undef, 'no casing a concatenation'         ],
     [ 'md5(lower($s))',           undef, 'no casing the salt'                ],
-    [ 'md5(upper(md5_raw($p)))',  undef, 'no upper-case flavour of a raw'    ],
+    [ 'md5(upper(md5_raw($p)))',  undef, 'no upper-case flavor of a raw'    ],
     [ 'md5(md5($s.$p):$s)',       undef, 'a colon is not in the grammar'     ],
 );
 

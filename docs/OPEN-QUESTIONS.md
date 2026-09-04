@@ -22,7 +22,7 @@ here: the string is a wrong transcription, the vector belongs to a different
 algorithm, john's dynamic compiler and its named format disagree about what
 the string means, or john's expression language simply has no way to write
 this construction - it has no `cut()`, `rev()` or `cap()`, and its base64
-flavour encodes the raw digest rather than the hex string.
+flavor encodes the raw digest rather than the hex string.
 
 The last of those is the common case rather than a corner: the expression is
 rewritten into john's own notation before it is tried - `upper(md5($p))`
@@ -233,7 +233,7 @@ promote it.
 | Entry | Collides with | Why |
 |---|---|---|
 | [`aich`](index.html#aich) | `sha1lsb35` | AICH of a single block is SHA-1, and SHA1lsb35 is SHA-1 with the leading nibbles masked to zero, so any tool that ignores that field -- hashcat -m 100... |
-| [`md5`](index.html#md5) | `md5cap` | MD5CAP is cap(md5($p)), a no-op whenever the digest contains no letters to capitalise, so john's dynamic_2 and plain MD5 crack its vector without deno... |
+| [`md5`](index.html#md5) | `md5cap` | MD5CAP is cap(md5($p)), a no-op whenever the digest contains no letters to capitalize, so john's dynamic_2 and plain MD5 crack its vector without deno... |
 | [`md5-capitalise-md5-plain-username`](index.html#md5-capitalise-md5-plain-username) | `md5-md5-plain-salt-3` | MD5MD5USER and MD5CAPMD5USER differ only by cap() on the inner hex digest, which is a no-op whenever that digest starts with a digit. md5('rosetta') i... |
 | [`md5-md5-plain-salt-3`](index.html#md5-md5-plain-salt-3) | `md5-capitalise-md5-plain-username` | MD5MD5USER and MD5CAPMD5USER differ only by cap() on the inner hex digest, which is a no-op whenever that digest starts with a digit. md5('rosetta') i... |
 | [`md5-pass-md5-salt`](index.html#md5-pass-md5-salt) | `md5-plain-md5-plain` | md5($p.md5($p)) and md5($p.md5($s)) agree exactly when the salt is the password, which two of john's four dynamic_1011 test vectors happen to do |
@@ -314,14 +314,14 @@ fall to different constructions: `md5-md5-plain-salt` has five vectors
 answering to three different john dynamics, `md5-md5-plain-salt-2` has two,
 and `md5userpass` has two. Both `md5-md5-plain-salt*` entries also carry an
 `aliases:` list naming several algorithms, so the spreadsheet collated them
-deliberately and splitting them is a judgement about what the row is *for* -
+deliberately and splitting them is a judgment about what the row is *for* -
 one construction, or one thing people search for. Whoever put them together
 knew something; if that was you, say so.
 
 ## Mappings believed but never reproduced (137)
 
 Counted here, listed in [GAPS.md](GAPS.md#1-believed-but-never-reproduced),
-because filling one is mechanical rather than a judgement call: the identifier
+because filling one is mechanical rather than a judgment call: the identifier
 and the vector are both already recorded, and one command decides it.
 
 ## What is deliberately not a question

@@ -210,7 +210,7 @@ That string is in the entry's `john_dynamic_expr:` field and in the CSV column
 of the same name. Take it from there rather than from the `expression` column:
 the expression is written in hx notation, which spells a change of
 representation as a wrapper - `md5(upper(md5($p)))` - where john spells it as a
-flavour of the hash function - `md5(MD5($p))` - and john rejects the first
+flavor of the hash function - `md5(MD5($p))` - and john rejects the first
 outright. It is deliberately **not** in john's column, which lists formats
 `--list=formats` will show; the gap worth filling is whether a named one exists.
 

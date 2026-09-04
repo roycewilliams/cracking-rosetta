@@ -392,7 +392,7 @@ going quietly out of date.
 **Two kinds of disagreement, and they live in different files.** A
 disagreement that can be tested against a file vendored into this repository
 is a record in `data/upstream-disagreements.yaml`, executed by
-`tools/check-upstream.pl` on every build; those are summarised at the end. The
+`tools/check-upstream.pl` on every build; those are summarized at the end. The
 findings here cannot be tested that way - the hx specification is a PDF that
 is not vendored, an omission has nothing to diff against, and an emission
 count needs the binary - so they are recorded, checked as far as they can be,

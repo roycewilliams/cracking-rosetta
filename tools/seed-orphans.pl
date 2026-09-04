@@ -82,7 +82,7 @@
 # TWO ACTIONS, AND ATTACHING BEATS CREATING
 #
 # A tool can name an identifier for a computation this repository already
-# describes. --attach finds those by normalising the identifier to repo
+# describes. --attach finds those by normalizing the identifier to repo
 # expression notation and matching expression:, then requires the tool at
 # that identifier to crack THE EXISTING ENTRY'S OWN VECTOR before adding it.
 # That vector test is what stops an expression collision from putting an

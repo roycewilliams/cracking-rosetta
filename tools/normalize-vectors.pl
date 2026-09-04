@@ -39,7 +39,7 @@
 # identifier, and is written only if that tool recovers the entry's own
 # plaintext from it. If nothing verifies, the entry is reported and left
 # exactly as it was: a failure here is a finding about the entry, not a
-# licence to guess.
+# license to guess.
 #
 # Tiers are never touched. Making a vector readable does not prove anything
 # new -- it lets the tools that do the proving see it. Run

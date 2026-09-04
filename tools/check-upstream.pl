@@ -65,13 +65,13 @@
 # HASH_TYPES.md at all, so no amount of checking that file could have found
 # it. See check_john_map.
 #
-# WHAT DID NOT GENERALISE, RECORDED RATHER THAN PAPERED OVER
+# WHAT DID NOT GENERALIZE, RECORDED RATHER THAN PAPERED OVER
 #
 # The register was sketched as (upstream publishes X, we assert Y) and the
 # second seed record does not fit that shape: a catalog that lags a binary is
 # a SET DIFFERENCE, not one string against another, and forcing it into
 # publishes:/we_assert: would have meant writing a thousand indices into a
-# field. What did generalise is the core -- id, kind, upstream, inventory,
+# field. What did generalize is the core -- id, kind, upstream, inventory,
 # because, recorded -- and the three failure modes, which both kinds have.
 #
 # THE SECOND RECORD ALSO ABSORBS A FICTIONAL TOOL

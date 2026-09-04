@@ -16,7 +16,7 @@
 # will not reproduce this" from "nobody can", and on the strength of a
 # `corroborated` or `expression-wrong` verdict curate.pl either files a human
 # question or suppresses one. So an off-by-one in cut(), or a cap() that
-# capitalises the first CHARACTER rather than the first lower-case LETTER,
+# capitalizes the first CHARACTER rather than the first lower-case LETTER,
 # does not fail loudly: it reports a correct expression as wrong, and buries
 # or invents a curation question. That is the same trap that kept the module
 # deliberately tiny in the first place.
@@ -175,7 +175,7 @@ my @CASES = (
     [ 'base64(sha1_bin(salt . pass))', 'base64(sha1_raw($s.$p))',
       'C09EeCrDYHtj4VjvztegmjIbxd0=', 'the EPiServer/SSHA shape' ],
     # The distinction STATE.md records as costing 20 entries: john's _64
-    # flavour is base64 of the RAW digest, and this is base64 of the HEX.
+    # flavor is base64 of the RAW digest, and this is base64 of the HEX.
     [ 'base64(md5(pass))', 'base64(md5($p))',
       'OTc1NzkwZGZiMjg1NGM4ODA5NGZlNjI0NzdhN2Q1ZjM=',
       'base64 of the 32-character HEX string is a different thing entirely' ],
@@ -184,14 +184,14 @@ my @CASES = (
     [ 'sha1(base64(md5_bin(pass)))', 'sha1(base64(md5_raw($p)))',
       '61491661bb74130c3c0c070e28b28deb1ad15deb', 'and with a different outer' ],
 
-    # --- case, reversal, capitalisation ----------------------------
+    # --- case, reversal, capitalization ----------------------------
     [ 'upper(md5(pass))', 'upper(md5($p))',
       '975790DFB2854C88094FE62477A7D5F3', 'upper' ],
     [ 'lower(upper(md5(pass)))', 'lower(upper(md5($p)))',
       '975790dfb2854c88094fe62477a7d5f3', 'lower undoes upper' ],
     # The md5cap trap, measured rather than assumed: cap() moves the first
     # LOWER-CASE LETTER, which in this digest is the 'd' at index 6 -- not
-    # the leading '9'. A cap() that capitalised index 0 would agree with hx
+    # the leading '9'. A cap() that capitalized index 0 would agree with hx
     # on every digest starting with a letter and silently differ on the rest.
     [ 'cap(md5(pass))', 'cap(md5($p))', '975790Dfb2854c88094fe62477a7d5f3',
       'cap moves the first lower-case LETTER, not the first character' ],
@@ -283,7 +283,7 @@ my @CASES = (
     [ undef, 'hex(sha384_raw($p))',
       'c91ac188daac08cf79159835683e3f907c97b25652e01c9c779874589da77e071'
     . '9bfc0216bba661205d1384536288343',
-      'the _raw flavour of a hash hx does not have' ],
+      'the _raw flavor of a hash hx does not have' ],
     [ undef, 'sha224(sha224_raw($p))',
       '1886a854d9f3088e6f947e7aa512d3d02e4048b7998b2c89f0f9b4c8',
       'sha224 nested over its own raw output' ],
@@ -357,7 +357,7 @@ my @CASES = (
       'commas in the BODY do not start the constant list' ],
 
     [ undef, 'md5(cap($p,1,2))',  undef, 'cap takes at most two arguments' ],
-    [ undef, 'md5($u)',           undef, 'the userid variable is not modelled' ],
+    [ undef, 'md5($u)',           undef, 'the userid variable is not modeled' ],
     [ undef, 'md5(pass)',         undef,
       "hx's bare 'pass' is not this repository's notation" ],
     [ undef, 'md5($p) . junk',    undef, 'an unknown trailing token' ],
@@ -372,9 +372,9 @@ my @CASES = (
     [ undef, 'md5($c1.$p),c1=',   undef,
       'an EMPTY value is a missing constant to john, not the empty string' ],
     [ undef, 'md5($c1.$p),saltlen=32', undef,
-      'a parameter that is not cN=, so its meaning is not modelled here' ],
+      'a parameter that is not cN=, so its meaning is not modeled here' ],
     [ undef, 'md5($c9.$p),c9=x',  undef, 'there is no $c9; john stops at c8' ],
-    [ undef, 'md5($p.":".$s)',    undef, 'string literals are not modelled' ],
+    [ undef, 'md5($p.":".$s)',    undef, 'string literals are not modeled' ],
     [ undef, '',                  undef, 'the empty expression' ],
 );
 

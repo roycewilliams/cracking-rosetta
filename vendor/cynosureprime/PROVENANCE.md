@@ -25,7 +25,7 @@ on every name and every hashcat mapping; mdxfind's does not -- `e1` alone gives
 mdxfind's copy is therefore deliberately **not** vendored. See
 `tools/extract-mdxfind.pl`.
 
-## Licence
+## License
 
 Both projects are MIT licensed. See the LICENSE file in each upstream
 repository; these copies are included under those terms.

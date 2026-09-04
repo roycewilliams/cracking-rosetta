@@ -372,7 +372,7 @@ sub vectors_for {
 
 # mx_echo_is($rest, $vec) - does mdxfind's "<hash>:<plain>" tail name THIS
 # vector? The plaintext must match exactly. The digest must too, except for
-# hex case: mdxfind normalises hex on read and echoes its OWN lowercase form,
+# hex case: mdxfind normalizes hex on read and echoes its OWN lowercase form,
 # so an entry whose vector is recorded in uppercase -- which is how the
 # vendored catalog renders 15 types, and how the *UC types are published --
 # had its own successful round-trip rejected by a string compare and was left
@@ -406,7 +406,7 @@ my $ran = 0;
 # password as $HEX[<hex>], and a vector may store either spelling: mode 9710's
 # vector here is "$HEX[91b2e062b9]" and hashcat's crack line ends
 # ":91b2e062b9". Both are the same five bytes. So one $HEX wrapper on either
-# side is unwrapped and nothing else is: a comparison that normalised harder
+# side is unwrapped and nothing else is: a comparison that normalized harder
 # than that would start accepting different plaintexts.
 sub hc_plain_is {
     my ($said, $want) = @_;
