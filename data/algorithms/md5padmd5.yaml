@@ -1,11 +1,12 @@
 id: "md5padmd5"
 name: "MD5padMD5"
-expression: "md5($c1.md5($p).$c1),c1= "
+expression: "md5($c1.md5($p).$c1.$c1),c1=\\x20"
+john_dynamic_expr: "dynamic=md5($c1.md5($p).$c1.$c1),c1=\\x20"
 expression_proof:
-  verified: "upstream"
-  verified_at: "2026-09-02"
-  verified_with: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A"
-  note: "transcribed from the hx specification's Appendix A entry for mdxfind type MD5padMD5 (e407), which states md5(\" \" . md5(pass) . \" \"). Transcription, not reproduction, so this is upstream and not vector; run derive-expressions.pl to try to promote it. Not checkable locally: the construction uses functions RosettaExpr cannot compile, so this rests on upstream's word alone.; TRIAGE 2026-09-04 [no-john-format]: no john format on this entry, so john ships no control vectors, and RosettaExpr cannot compile this expression either -- nothing here can check it"
+  verified: "vector"
+  verified_at: "2026-09-04"
+  verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
+  note: "round-tripped as --format=dynamic=<expr> against every vector this entry carries; CORRECTED 2026-09-04: this entry read md5($c1.md5($p).$c1),c1= -- one leading space and one trailing -- transcribed from the hx specification's Appendix A entry for mdxfind type MD5padMD5 (e407), which states md5(' ' . md5(pass) . ' '). Appendix A is wrong about this type in the same way CLAUDE.md already records for e308. mdxfind.c JOB_MD5padMD5 writes linebuf[0] = space, the 32-character digest at offset 1, then linebuf[33] AND linebuf[34] = space, and hashes 32 + 3 = 35 bytes: ONE leading space and TWO trailing. Established three independent ways, all agreeing on this entry's own vector -- the source above; RosettaExpr computing the corrected string as 71d6fdd5c671f06239103fa32e0e1d0f; and john's own dynamic compiler recovering password123 from that hash under it, which is the round-trip recorded above. The old string does not merely disagree, it SEGFAULTS john, a constant whose value is a trailing space, which is a second reason the correction spells the space \\x20. This became visible only when RosettaExpr learned $c1 on 2026-09-04: until then the note here said \"not checkable locally\", which was true, and is what a boundary of our own tooling looks like when it is mistaken for a fact about the data."
 status: "ok"
 tools:
   hashcat:
