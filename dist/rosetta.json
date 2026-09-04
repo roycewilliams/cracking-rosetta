@@ -23004,8 +23004,15 @@
          "nesting_depth" : "",
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "naming",
+               "entry" : "hmac-sha1-kpass",
+               "kind" : "same-computation",
+               "note" : "Measured 2026-09-04: this row and hmac-sha1-kpass are one computation under three names. john publishes the format HMAC-SHA1, hashcat publishes mode 150 \"HMAC-SHA1 (key = $pass)\" and mdxfind publishes the type HMAC-SHA1-KPASS, and mdxfind pinned to HMAC-SHA1-KPASS reproduces BOTH rows vectors -- this rows RFC 2202 vector once it is written in mdxfinds serialization (<digest>:<message>, plaintext = the key), and the other rows own vector, which already stands at tier vector. Note what the plain name does NOT mean: mdxfinds HMAC-SHA1 without the -KPASS suffix keys on the SALT and is already mapped to hmac-sha1-plain-salt (hashcat 160). The name match absence.pl reported for this row pointed at that type and was wrong."
+            }
+         ],
+         "sameas" : "same as hmac-sha1-kpass (naming)",
          "serialization" : "unknown",
          "status" : "ok",
          "tool_note" : {
@@ -23068,8 +23075,15 @@
          "nesting_depth" : "",
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "naming",
+               "entry" : "hmac-sha1",
+               "kind" : "same-computation",
+               "note" : "Measured 2026-09-04: this row and hmac-sha1-kpass are one computation under three names. john publishes the format HMAC-SHA1, hashcat publishes mode 150 \"HMAC-SHA1 (key = $pass)\" and mdxfind publishes the type HMAC-SHA1-KPASS, and mdxfind pinned to HMAC-SHA1-KPASS reproduces BOTH rows vectors -- this rows RFC 2202 vector once it is written in mdxfinds serialization (<digest>:<message>, plaintext = the key), and the other rows own vector, which already stands at tier vector. Note what the plain name does NOT mean: mdxfinds HMAC-SHA1 without the -KPASS suffix keys on the SALT and is already mapped to hmac-sha1-plain-salt (hashcat 160). The name match absence.pl reported for this row pointed at that type and was wrong."
+            }
+         ],
+         "sameas" : "same as hmac-sha1 (naming)",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -23126,8 +23140,15 @@
          "nesting_depth" : "",
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "naming",
+               "entry" : "hmac-sha224-kpass",
+               "kind" : "same-computation",
+               "note" : "Measured 2026-09-04, same as the hmac-sha1 pair: mdxfind pinned to HMAC-SHA224-KPASS reproduces this rows RFC 4231 vector in mdxfinds serialization, and hmac-sha224-kpass already stands at tier vector for the same type. mdxfinds unsuffixed HMAC-SHA224 keys on the salt instead and belongs to a different row."
+            }
+         ],
+         "sameas" : "same as hmac-sha224-kpass (naming)",
          "serialization" : "unknown",
          "status" : "ok",
          "tool_note" : {
@@ -23187,8 +23208,15 @@
          "nesting_depth" : "",
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "naming",
+               "entry" : "hmac-sha224",
+               "kind" : "same-computation",
+               "note" : "Measured 2026-09-04, same as the hmac-sha1 pair: mdxfind pinned to HMAC-SHA224-KPASS reproduces this rows RFC 4231 vector in mdxfinds serialization, and hmac-sha224-kpass already stands at tier vector for the same type. mdxfinds unsuffixed HMAC-SHA224 keys on the salt instead and belongs to a different row."
+            }
+         ],
+         "sameas" : "same as hmac-sha224 (naming)",
          "serialization" : "unknown",
          "status" : "ok",
          "tool_note" : {
@@ -23370,8 +23398,15 @@
          "nesting_depth" : "",
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "naming",
+               "entry" : "hmac-sha384-kpass",
+               "kind" : "same-computation",
+               "note" : "Measured 2026-09-04, same as the hmac-sha1 pair: mdxfind pinned to HMAC-SHA384-KPASS reproduces this rows RFC 4231 vector in mdxfinds serialization, and hmac-sha384-kpass already stands at tier vector for the same type."
+            }
+         ],
+         "sameas" : "same as hmac-sha384-kpass (naming)",
          "serialization" : "unknown",
          "status" : "ok",
          "tool_note" : {
@@ -23492,8 +23527,15 @@
          "nesting_depth" : "",
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "naming",
+               "entry" : "hmac-sha384-johnhmac-sha384",
+               "kind" : "same-computation",
+               "note" : "Measured 2026-09-04, same as the hmac-sha1 pair: mdxfind pinned to HMAC-SHA384-KPASS reproduces this rows RFC 4231 vector in mdxfinds serialization, and hmac-sha384-kpass already stands at tier vector for the same type."
+            }
+         ],
+         "sameas" : "same as hmac-sha384-johnhmac-sha384 (naming)",
          "serialization" : "unknown",
          "status" : "ok",
          "tool_note" : {
@@ -23550,8 +23592,15 @@
          "nesting_depth" : "",
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "naming",
+               "entry" : "hmac-sha512-kpass",
+               "kind" : "same-computation",
+               "note" : "Measured 2026-09-04, same as the hmac-sha1 pair: mdxfind pinned to HMAC-SHA512-KPASS reproduces this rows RFC 4231 vector in mdxfinds serialization, and hmac-sha512-kpass already stands at tier vector for the same type."
+            }
+         ],
+         "sameas" : "same as hmac-sha512-kpass (naming)",
          "serialization" : "unknown",
          "status" : "ok",
          "tool_note" : {
@@ -23675,8 +23724,15 @@
          "nesting_depth" : "",
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "naming",
+               "entry" : "hmac-sha512",
+               "kind" : "same-computation",
+               "note" : "Measured 2026-09-04, same as the hmac-sha1 pair: mdxfind pinned to HMAC-SHA512-KPASS reproduces this rows RFC 4231 vector in mdxfinds serialization, and hmac-sha512-kpass already stands at tier vector for the same type."
+            }
+         ],
+         "sameas" : "same as hmac-sha512 (naming)",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {

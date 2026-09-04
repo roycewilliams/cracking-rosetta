@@ -397,18 +397,18 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | HMAC-RIPEMD320 (key = $salt) | `33660` (v) | **--** | `HMAC-RMD320` (v) |  |
 | HMAC-RMD160-KPASS | `6050` (v) | **--** | `HMAC-RMD160-KPASS` (v) |  |
 | HMAC-RMD320-KPASS | `33650` (v) | **--** | `HMAC-RMD320-KPASS` (v) |  |
-| HMAC-SHA1 | **--** | `HMAC-SHA1` (v) | **--** |  |
-| HMAC-SHA1-KPASS | `150` (v) | **--** | `HMAC-SHA1-KPASS` (v) |  |
-| HMAC-SHA224 | **--** | `HMAC-SHA224` (v) | **--** |  |
-| HMAC-SHA224-KPASS | no | **--** | `HMAC-SHA224-KPASS` (v) |  |
+| HMAC-SHA1 | **--** | `HMAC-SHA1` (v) | **--** | same as hmac-sha1-kpass (naming) |
+| HMAC-SHA1-KPASS | `150` (v) | **--** | `HMAC-SHA1-KPASS` (v) | same as hmac-sha1 (naming) |
+| HMAC-SHA224 | **--** | `HMAC-SHA224` (v) | **--** | same as hmac-sha224-kpass (naming) |
+| HMAC-SHA224-KPASS | no | **--** | `HMAC-SHA224-KPASS` (v) | same as hmac-sha224 (naming) |
 | HMAC-SHA256 (key = $salt) | `1460` (v) | **--** | `HMAC-SHA256` (v) |  |
 | HMAC-SHA256-KPASS | `1450` (v) | **--** | `HMAC-SHA256-KPASS` (v) |  |
-| HMAC-SHA384 | **--** | `HMAC-SHA384` (v) | **--** |  |
+| HMAC-SHA384 | **--** | `HMAC-SHA384` (v) | **--** | same as hmac-sha384-kpass (naming) |
 | HMAC-SHA384 | no | **--** | `HMAC-SHA384` (v) |  |
-| HMAC-SHA384-KPASS | no | **--** | `HMAC-SHA384-KPASS` (v) |  |
-| HMAC-SHA512 | **--** | `HMAC-SHA512` (v) | **--** |  |
+| HMAC-SHA384-KPASS | no | **--** | `HMAC-SHA384-KPASS` (v) | same as hmac-sha384-johnhmac-sha384 (naming) |
+| HMAC-SHA512 | **--** | `HMAC-SHA512` (v) | **--** | same as hmac-sha512-kpass (naming) |
 | HMAC-SHA512 (key = $salt) | `1760` (v) | **--** | `HMAC-SHA512` (v) |  |
-| HMAC-SHA512-KPASS | `1750` (v) | **--** | `HMAC-SHA512-KPASS` (v) |  |
+| HMAC-SHA512-KPASS | `1750` (v) | **--** | `HMAC-SHA512-KPASS` (v) | same as hmac-sha512 (naming) |
 | HMAC-STREEBOG256 | `11760` (v) | **--** | `HMAC-STREEBOG256` (v) |  |
 | HMAC-STREEBOG256-KPASS | `11750` (v) | **--** | `HMAC-STREEBOG256-KPASS` (v) |  |
 | HMAC-STREEBOG512 | `11860` (v) | **--** | `HMAC-STREEBOG512` (v) |  |

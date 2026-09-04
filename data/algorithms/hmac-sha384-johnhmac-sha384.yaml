@@ -19,6 +19,11 @@ tools:
     note: "john's own published example ciphertext for this format, recovered by john under this format. john publishes no plaintext, so the plaintext was found by handing john its own example and a candidate list -- what john recovered IS the plaintext, by construction."
   crack:
     supported: false
+relations:
+  - kind: "same-computation"
+    entry: "hmac-sha384-kpass"
+    distinction: "naming"
+    note: "Measured 2026-09-04, same as the hmac-sha1 pair: mdxfind pinned to HMAC-SHA384-KPASS reproduces this rows RFC 4231 vector in mdxfinds serialization, and hmac-sha384-kpass already stands at tier vector for the same type."
 vectors:
   - hash: "what do ya want for nothing?#af45d2e376484031617f78d2b58a6b1b9c7ef464f5a01b47e42ec3736322445e8e2240ca5e69e2c78b3239ecfab21649"
     pass: "Jefe"

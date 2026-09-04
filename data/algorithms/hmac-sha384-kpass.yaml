@@ -30,6 +30,11 @@ tools:
     note: "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one."
   crack:
     supported: false
+relations:
+  - kind: "same-computation"
+    entry: "hmac-sha384-johnhmac-sha384"
+    distinction: "naming"
+    note: "Measured 2026-09-04, same as the hmac-sha1 pair: mdxfind pinned to HMAC-SHA384-KPASS reproduces this rows RFC 4231 vector in mdxfinds serialization, and hmac-sha384-kpass already stands at tier vector for the same type."
 vectors:
   - hash: "3aad96017b6d4a8329131f3ae3e5166d7eeef0f455cb297523b8dc086963acab748ca424212516b6fc1d90b24c64317e:testsalt"
     pass: "password123"

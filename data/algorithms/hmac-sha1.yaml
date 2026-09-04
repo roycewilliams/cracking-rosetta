@@ -19,6 +19,11 @@ tools:
     note: "john's own published example ciphertext for this format, recovered by john under this format. john publishes no plaintext, so the plaintext was found by handing john its own example and a candidate list -- what john recovered IS the plaintext, by construction."
   crack:
     supported: false
+relations:
+  - kind: "same-computation"
+    entry: "hmac-sha1-kpass"
+    distinction: "naming"
+    note: "Measured 2026-09-04: this row and hmac-sha1-kpass are one computation under three names. john publishes the format HMAC-SHA1, hashcat publishes mode 150 \"HMAC-SHA1 (key = $pass)\" and mdxfind publishes the type HMAC-SHA1-KPASS, and mdxfind pinned to HMAC-SHA1-KPASS reproduces BOTH rows vectors -- this rows RFC 2202 vector once it is written in mdxfinds serialization (<digest>:<message>, plaintext = the key), and the other rows own vector, which already stands at tier vector. Note what the plain name does NOT mean: mdxfinds HMAC-SHA1 without the -KPASS suffix keys on the SALT and is already mapped to hmac-sha1-plain-salt (hashcat 160). The name match absence.pl reported for this row pointed at that type and was wrong."
 vectors:
   - hash: "The quick brown fox jumps over the lazy dog#de7c9b85b8b78aa6bc8a7a36f70a90701c9db4d9"
     pass: "key"
