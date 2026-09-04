@@ -72,17 +72,44 @@ example and verifies it before storing it. That is how `skein-256`,
 generator would reach is the rest -- the rows no tool here publishes an
 example for.
 
-Two things stand in the way, and both are the repository owner's call rather
-than a contributor's:
+**Decided 2026-09-04: bring it in.** It is GPL-2.0 and this repository is MIT
+throughout, but nothing of hashgen's is vendored -- a generated hash is a
+fact, not a copied table -- so the published contract is untouched. It is a Go
+program with no OS package, which the house rule asks be flagged rather than
+quietly installed; it is flagged here.
 
-* hashgen is **GPL-2.0** and this repository is MIT throughout, including the
-  data. Nothing of hashgen's would need to be vendored to *use* it -- a
-  generated hash is a fact, not a copied table -- but the published contract
-  says vendored material must be licence-compatible and recorded in
-  `vendor/*/PROVENANCE.md`, and that line is worth not blurring.
-* It is a Go program with no OS package. The house rule prefers
-  OS-packaged software and asks that an external source be flagged with its
-  trade-off rather than quietly installed.
+Built from source rather than downloaded, so the provenance is checkable:
+
+    git clone --depth 1 https://github.com/cyclone-github/hashgen.git
+    cd hashgen && go build -o hashgen ./hashgen.go
+
+v1.3.2, commit `0fd04afd2c3d92f216a80a5a60f3b886e3f1ae32`, built 2026-09-04
+against the local Go 1.23.2. It pulls eight modules of its own; that is the
+cost of the decision and it is what "no OS package" means in practice.
+
+### What hashgen turned out to be good for, and what it is not
+
+**It cannot check a salted vector this repository already holds.** Measured
+2026-09-04: for every salted mode hashgen INVENTS a fresh random salt, so two
+runs of `-m md5passsalt` on the same word give two different salts. It
+generates; it does not verify.
+
+**What it can do is state what a MODE computes**, which is more useful. Give
+it a plaintext and it returns `<digest>:<salt>:<plain>`, and that triple is
+checkable against this repository's `expression:` field using `RosettaExpr`,
+our own evaluator, which shares no code with hashcat, john or mdxfind. Two
+independent implementations of the same construction, neither of them a
+cracker.
+
+Run on 2026-09-04 over every (entry, hashcat mode) pair where hashgen
+publishes the same mode number: **48 pairs, 16 agree, 0 differ, 32 skipped.**
+Every skip is `RosettaExpr` declining to compile the expression, not hashgen
+failing -- it has no `sha384`, no `sha3_*`, no `utf16()` and no `$c1`
+constants. Widening the evaluator is what would raise that 16, and it is a
+job on our side, not hashgen's.
+
+So: a fourth implementation, agreeing everywhere it can be asked, and a
+measurement of exactly how far our own evaluator reaches.
 
 ## Identifiers: haiti, hashID, Name-That-Hash
 
@@ -170,8 +197,13 @@ Not tracked because there is nothing to join on, not because they are bad.
   puts its prototype file under mixed licensing including "GPL3 for untouched
   hashID nodes". Nothing there can be vendored or diffed against here. The
   only thing that would reopen it is haiti relicensing that file outright.
-* Somebody wanting a generator badly enough to accept a GPL-2.0 Go dependency
-  for the vectorless rows that no tool here publishes an example for.
+* ~~Somebody wanting a generator badly enough to accept a GPL-2.0 Go
+  dependency~~ **Decided 2026-09-04: yes**, and it earns its keep on the
+  expression cross-check rather than on the vectorless rows, which turned out
+  to be 45 containers and protocols a wordlist-to-digest generator cannot
+  produce either. What would change things again is widening `RosettaExpr` --
+  `sha384`, `sha3_*`, `utf16()`, constants -- since every skip in that
+  cross-check is our evaluator declining, not hashgen.
 
 Each of those is a decision with a cost, which is why none of them was taken
 quietly.
