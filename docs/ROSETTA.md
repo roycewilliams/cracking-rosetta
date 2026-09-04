@@ -250,7 +250,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | ENCsecurity Datavault (PBKDF2/keychain) | `29920` (v) | `ENCDataVault-PBKDF2` (v) | no |  |
 | ENCsecurity Datavault (PBKDF2/no keychain) | `29910` (v) | `ENCDataVault-PBKDF2` (v) | no |  |
 | Enpass Password Manager | **--** | `enpass` | **--** |  |
-| EPiServer | **--** | `EPiServer` (v) | **--** |  |
+| EPiServer | **--** | `EPiServer` (v) | `EPISERVER` (v) |  |
 | EPISERVER | `141` (v) | **--** | `EPISERVER` (v) |  |
 | Episerver 6.x < .NET 4 | `141` (v) | **--** | `EPISERVER` (v) |  |
 | Episerver 6.x >= .NET 4 | `1441` (v) | **--** | `EPISERVER` (v) |  |

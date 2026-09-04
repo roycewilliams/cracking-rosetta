@@ -11,6 +11,12 @@ denotation:
   note: "john's own label for EPiServer, in 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200."
 status: "ok"
 tools:
+  mdxfind:
+    types: ["EPISERVER"]
+    verified: "vector"
+    verified_at: "2026-09-04"
+    verified_with: "mdxfind"
+    note: "name match accepted by a curator on 2026-09-04 and not yet reproduced by this repository's own tooling; seed-vectors.pl and verify-vectors.pl decide it. See notes."
   hashpipe:
     types: ["EPISERVER"]
     verified: "vector"
@@ -30,3 +36,8 @@ vectors:
     pass: "testPassword"
     source: "john"
     reads_in: ["john"]
+  - hash: "$episerver$*0*RGVm*qNFZycuVKKgy9gzqwETNNLxZ+vg"
+    pass: "password123"
+    source: "mdxfind"
+    reads_in: ["mdxfind"]
+notes: "Accepted 2026-09-04 from a name match that was then measured. TRANSCODE, proven: mdxfind's EPISERVER reader REFUSES base64 padding on the DIGEST field and accepts it on the salt. This entry's own vector reproduces under EPISERVER pinned with the single trailing '=' removed from the digest, handed to mdxfind with only the plaintext the john vector already states. That is why the 2026-09-03 sweep found this row's two siblings and not this row: their digests happen to be unpadded. The vector stored for mdxfind is mdxfind's own example rather than the transcode, because an independent credential is better evidence than the same one written twice."

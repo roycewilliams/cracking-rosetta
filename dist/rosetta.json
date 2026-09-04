@@ -13862,25 +13862,28 @@
          "john_work_factor" : "hash type [1:SHA1 2:SHA256]",
          "legacy" : "",
          "mdxfind" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "EPISERVER"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
-         "mdxfind_salted" : "",
+         "mdxfind_salted" : "no",
          "name" : "EPiServer",
          "nesting_depth" : "",
-         "notes" : "",
+         "notes" : "Accepted 2026-09-04 from a name match that was then measured. TRANSCODE, proven: mdxfind's EPISERVER reader REFUSES base64 padding on the DIGEST field and accepts it on the salt. This entry's own vector reproduces under EPISERVER pinned with the single trailing '=' removed from the digest, handed to mdxfind with only the plaintext the john vector already states. That is why the 2026-09-03 sweep found this row's two siblings and not this row: their digests happen to be unpadded. The vector stored for mdxfind is mdxfind's own example rather than the transcode, because an independent credential is better evidence than the same one written twice.",
          "primary_form" : "",
          "relations" : [],
          "sameas" : "",
-         "serialization" : "unknown",
+         "serialization" : "divergent",
          "status" : "ok",
          "tool_note" : {
             "hashcat" : "",
             "hashpipe" : "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one.",
             "john" : "john's own published example ciphertext for this format, recovered by john under this format. john publishes no plaintext, so the plaintext was found by handing john its own example and a candidate list -- what john recovered IS the plaintext, by construction.",
-            "mdxfind" : ""
+            "mdxfind" : "name match accepted by a curator on 2026-09-04 and not yet reproduced by this repository's own tooling; seed-vectors.pl and verify-vectors.pl decide it. See notes."
          },
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
