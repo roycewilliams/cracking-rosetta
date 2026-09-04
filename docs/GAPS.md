@@ -139,7 +139,7 @@ tools/verify-vectors.pl --tool <tool> --only <id> -v
 | [`wpa-pmkid-pbkdf2`](index.html#wpa-pmkid-pbkdf2) | hashcat | `16800` | upstream |
 | [`wpa-pmkid-pmk`](index.html#wpa-pmkid-pmk) | hashcat | `16801` | upstream |
 
-## 2. No test vector at all (57)
+## 2. No test vector at all (54)
 
 Blocked on one piece of data, and it is the piece that does not require any
 tool: a hash and the plaintext that produces it. Nothing here can reach tier
@@ -195,9 +195,6 @@ that is the whole contribution.
 * [`sha1saltcx`](index.html#sha1saltcx) - SHA1SALTCX
 * [`sha1sha1hum`](index.html#sha1sha1hum) - SHA1SHA1HUM
 * [`sha256uc`](index.html#sha256uc) - SHA256UC
-* [`skein-256`](index.html#skein-256) - Skein 256
-* [`skein-512`](index.html#skein-512) - Skein 512
-* [`tiger-johntiger`](index.html#tiger-johntiger) - Tiger
 * [`truecrypt-aes-twofish-serpent`](index.html#truecrypt-aes-twofish-serpent) - TrueCrypt AES/Twofish/Serpent
 * [`truecrypt-aes256-xts-johntc-sha512`](index.html#truecrypt-aes256-xts-johntc-sha512) - TrueCrypt AES256_XTS
 * [`truecrypt-aes256-xts-johntc-whirlpool`](index.html#truecrypt-aes256-xts-johntc-whirlpool) - TrueCrypt AES256_XTS
@@ -263,14 +260,14 @@ A few that carry a vector, so a candidate identifier can be tested at once, one 
 
 All 194: filter `hashcat_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
 
-### mdxfind: 147 entries say nothing
+### mdxfind: 128 entries say nothing
 
 A few that carry a vector and a proven expression, so there is a definite construction to look for, one per family:
 
 * [`md5-md5-pass-salt-hc2630`](index.html#md5-md5-pass-salt-hc2630) - `md5(md5($p.$s))`
 * [`sha256-sha256-pass-salt`](index.html#sha256-sha256-pass-salt) - `sha256(sha256($p.$s))`
 
-All 147: filter `mdxfind_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
+All 128: filter `mdxfind_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
 
 ## 4. hashcat modes with no row here (1)
 

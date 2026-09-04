@@ -35,10 +35,10 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | 1Password, agilekeychain | `6600` (v) | **--** | **--** |  |
 | 1Password, cloudkeychain | `8200` (v) | **--** | no |  |
 | 1Password, mobilekeychain (1Password 8) | `31800` (v) | **--** | no |  |
-| 7-Zip archive encryption | **--** | `7z`<br>`7z-opencl` (v) | **--** |  |
+| 7-Zip archive encryption | **--** | `7z`<br>`7z-opencl` (v) | `7ZIP` (v) |  |
 | 7ZIP | `11600` (v) | **--** | `7ZIP` (v) |  |
-| Adobe AEM (SSPR, SHA-256 with Salt) | `32031` (v) | `sspr`<br>`sspr-opencl` (v) | **--** |  |
-| Adobe AEM (SSPR, SHA-512 with Salt) | `32041` (v) | `sspr`<br>`sspr-opencl` (v) | **--** |  |
+| Adobe AEM (SSPR, SHA-256 with Salt) | `32031` (v) | `sspr`<br>`sspr-opencl` (v) | `SSPR-SHA256` (v) |  |
+| Adobe AEM (SSPR, SHA-512 with Salt) | `32041` (v) | `sspr`<br>`sspr-opencl` (v) | `SSPR-SHA512` (v) |  |
 | AES Crypt (SHA256) | `22400` (v) | **--** | no |  |
 | AES128-NOKDF | `26401` (v) | **--** | `AES128-NOKDF` (v) |  |
 | AES192-NOKDF | `26402` (v) | **--** | `AES192-NOKDF` (v) |  |
@@ -64,10 +64,10 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | APPLE-KEYCHAIN | `23100` (v) | `keychain`<br>`keychain-opencl` (v) | `APPLE-KEYCHAIN` (v) |  |
 | APPLE-SECURE-NOTES | `16700` (v) | `FVDE`<br>`FVDE-opencl` (v) | `APPLE-SECURE-NOTES` |  |
 | ARGON2 | `34000` (v) | `Argon2`<br>`argon2-opencl` (v) | `ARGON2` (v) |  |
-| Argon2id [Bridged: reference implementation + tunings] | `70000` (v) | `Argon2`<br>`argon2-opencl` (v) | **--** |  |
+| Argon2id [Bridged: reference implementation + tunings] | `70000` (v) | `Argon2`<br>`argon2-opencl` (v) | `ARGON2` (v) |  |
 | Armory wallet | **--** | `armory` (v) | no |  |
 | ARUBAOS | `125` (v) | **--** | `ARUBAOS` (v) |  |
-| AS/400 DES | **--** | `as400-des` (v) | **--** |  |
+| AS/400 DES | **--** | `as400-des` (v) | `AS400-DES` (v) |  |
 | AS400-DES | `8501` (v) | **--** | `AS400-DES` (v) |  |
 | AS400-SaltedSHA1 | **--** | `as400-ssha1` (v) | no |  |
 | AS400SSHA1 | `35200` (v) | **--** | `AS400SSHA1` (v) |  |
@@ -138,7 +138,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | C/R | **--** | `MSCHAPv2` (v) | no |  |
 | Cardano Encrypted 128-byte Secret Key (a.k.a XPrv) | **--** | `cardano` | **--** |  |
 | ChaCha20 | `15400` (v) | **--** | no |  |
-| Cisco ASA | **--** | `asa-md5` (v) | **--** |  |
+| Cisco ASA | **--** | `asa-md5` (v) | `CISCOASA` (v) |  |
 | CISCO4 | `5700` (v) | `Raw-SHA256`<br>`raw-SHA256-opencl` (v) | `CISCO4` (v) |  |
 | CISCO8 | `9200` (v) | `PBKDF2-HMAC-SHA256`<br>`PBKDF2-HMAC-SHA256-opencl` (v) | `CISCO8` (v) |  |
 | CISCO9 | `9300` (v) | `scrypt` (v) | `CISCO9` (v) |  |
@@ -151,8 +151,8 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | CRAMMD5 | `10200` (v) | `HMAC-MD5` (v) | `CRAMMD5` (v) |  |
 | CRAMMD5-DOVECOT | `16400` (v) | **--** | `CRAMMD5-DOVECOT` (v) |  |
 | CRC32 | **--** | `CRC32` (v) | no |  |
-| CRC32 | `11500` (v) | **--** | **--** |  |
-| CRC32C | `27900` (v) | **--** | **--** |  |
+| CRC32 | `11500` (v) | **--** | no |  |
+| CRC32C | `27900` (v) | **--** | no |  |
 | CRC64Jones | `28000` (v) | **--** | no |  |
 | CRYPTEXT | no | **--** | `CRYPTEXT` (v) |  |
 | cryptoSafe | **--** | `cryptoSafe`<br>`cryptosafe-opencl` (v) | no |  |
@@ -279,7 +279,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | gost(md5($plain).$plain) | no | **--** | `GOSTMD5PASS` (v) |  |
 | gost(md5($salt.$plain).":".$salt) | no | **--** | `GOSTHEXSALT` (v) |  |
 | GOST-YESCRYPT | `36200` (v) | **--** | `GOST-YESCRYPT` (v) |  |
-| gost-yescrypt | `36200` (v) | **--** | **--** |  |
+| gost-yescrypt | `36200` (v) | **--** | `GOST-YESCRYPT` (v) |  |
 | GOST12512CRYPT | `35600` (v) | `streebog512crypt`<br>`streebog512crypt-opencl` (v) | `GOST12512CRYPT` (v) |  |
 | GOST2012-32 | `11700` (v) | `Stribog-256` (v) | `GOST2012-32` (v) | same as streebog-32-plain (naming) |
 | GOST2012-64 | `11800` (v) | `Stribog-512` (v) | `GOST2012-64` (v) | same as streebog-64-plain (naming) |
@@ -433,7 +433,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | iTunes backup < 10.0 | `14700` (v) | `itunes-backup` (v) | no |  |
 | iTunes backup >= 10.0 | `14800` (v) | `itunes-backup` (v) | no |  |
 | Java KeyStore | **--** | `keystore` | **--** |  |
-| Java Object hashCode() | `18700` (v) | **--** | **--** |  |
+| Java Object hashCode() | `18700` (v) | **--** | no |  |
 | Jetico BestCrypt (.jbc) | **--** | `BestCrypt` (v) | no |  |
 | JH224 | no | **--** | `JH224` (v) |  |
 | JH256 | no | **--** | `JH256` (v) |  |
@@ -514,7 +514,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | MACOSX | `122` (v) | **--** | `MACOSX` (v) |  |
 | MACOSX7 | `1722` (v) | `xsha512`<br>`XSHA512-opencl`<br>`XSHA512-free-opencl` (v) | `MACOSX7` (v) |  |
 | MANGOS | no | **--** | `MANGOS` (v) |  |
-| MD2 | **--** | `MD2` (v) | **--** |  |
+| MD2 | **--** | `MD2` (v) | `MD2` (v) |  |
 | MD2 | no | `dynamic_310` (v) | `MD2` (v) |  |
 | MD2 (2 iterations) | no | `dynamic_313` (v) | `MD2 -i2` (v) |  |
 | md2(md5($plain)) | no | **--** | `MD2MD5` (v) |  |
@@ -832,7 +832,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | MURMUR3 | `27800` (v) | **--** | `MURMUR3` (v) |  |
 | MURMUR64A | `34200` (v) | **--** | `MURMUR64A` (v) |  |
 | MURMUR64AZERO | `34201` (v) | **--** | `MURMUR64AZERO` (v) |  |
-| MurmurHash | `25700` (v) | **--** | **--** |  |
+| MurmurHash | `25700` (v) | **--** | no |  |
 | MurmurHash64A truncated (zero seed) | `34211` (v) | **--** | **--** |  |
 | MySQL 3 | `200` (v) | `mysql` (v) | `MYSQL3` (v) |  |
 | MYSQL-SHA256CRYPT | `7401` (v) | **--** | `MYSQL-SHA256CRYPT` (v) |  |
@@ -841,8 +841,8 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | NetIQ SSPR (PBKDF2WithHmacSHA1) | `32050` (v) | `PBKDF2-HMAC-SHA1`<br>`PBKDF2-HMAC-SHA1-opencl` (v) | **--** |  |
 | NetIQ SSPR (PBKDF2WithHmacSHA256) | `32060` (v) | `PBKDF2-HMAC-SHA256`<br>`PBKDF2-HMAC-SHA256-opencl` (v) | **--** |  |
 | NetIQ SSPR (PBKDF2WithHmacSHA512) | `32070` (v) | `PBKDF2-HMAC-SHA512`<br>`PBKDF2-HMAC-SHA512-opencl` (v) | no |  |
-| NetIQ SSPR (SHA-256 with Salt) | `32030` (v) | `sspr`<br>`sspr-opencl` (v) | **--** |  |
-| NetIQ SSPR (SHA-512 with Salt) | `32040` (v) | `sspr`<br>`sspr-opencl` (v) | **--** |  |
+| NetIQ SSPR (SHA-256 with Salt) | `32030` (v) | `sspr`<br>`sspr-opencl` (v) | `SSPR-SHA256` (v) |  |
+| NetIQ SSPR (SHA-512 with Salt) | `32040` (v) | `sspr`<br>`sspr-opencl` (v) | `SSPR-SHA512` (v) |  |
 | NETNTLMV1 | `5500` (v) | **--** | `NETNTLMV1` (v) |  |
 | NetNTLMv1 / NetNTLMv1+ESS (NT) | `27000` (v) | **--** | **--** |  |
 | NETNTLMV2 | `5600` (v) | `netlmv2`<br>`netntlmv2`<br>`ntlmv2-opencl` | `NETNTLMV2` (v) |  |
@@ -1382,8 +1382,8 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | SIMPLACMS | `22800` (v) | **--** | `SIMPLACMS` (v) |  |
 | SIP digest authentication (MD5) | `11400` (v) | `SIP` (v) | no |  |
 | SIPHASH | `10100` (v) | **--** | `SIPHASH` (v) |  |
-| Skein 256 | **--** | `skein-256` | **--** |  |
-| Skein 512 | **--** | `skein-512` | **--** |  |
+| Skein 256 | **--** | `skein-256` (v) | `SKEIN256` (v) |  |
+| Skein 512 | **--** | `skein-512` (v) | `SKEIN512` (v) |  |
 | SKEIN224 | no | `dynamic_330` (v) | `SKEIN224` (v) |  |
 | SKEIN224 (2 iterations) | no | `dynamic_333` (v) | `SKEIN224 -i2` (v) |  |
 | SKEIN256 | no | `dynamic_340` (v) | `SKEIN256` (v) |  |
@@ -1392,7 +1392,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | SKEIN384 (2 iterations) | no | `dynamic_353` (v) | `SKEIN384 -i2` (v) |  |
 | SKEIN512 | no | `dynamic_360` (v) | `SKEIN512` (v) |  |
 | SKEIN512 (2 iterations) | no | `dynamic_363` (v) | `SKEIN512 -i2` (v) |  |
-| Skip32 (PT = $salt, key = $pass) | `14900` (v) | **--** | **--** |  |
+| Skip32 (PT = $salt, key = $pass) | `14900` (v) | **--** | no |  |
 | SKYPE | `23` (v) | **--** | `SKYPE` (v) |  |
 | SM3 (2 iterations) | no | `dynamic_453` (v) | `SM3 -i2` (v) |  |
 | SM3CRYPT | `35100` (v) | `sm3crypt` (v) | `SM3CRYPT` (v) |  |
@@ -1444,7 +1444,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | TELEGRAM-SHA256 | `22301` (v) | **--** | `TELEGRAM-SHA256` (v) |  |
 | Terra Station Wallet (AES256-CBC(PBKDF2($pass))) | `29600` (v) | **--** | no |  |
 | Tezos Key | **--** | `tezos`<br>`tezos-opencl` (v) | no |  |
-| Tiger | **--** | `Tiger` | **--** |  |
+| Tiger | **--** | `Tiger` (v) | `TIGER` (v) |  |
 | TIGER | no | `dynamic_110` (v) | `TIGER` (v) |  |
 | TIGER (2 iterations) | no | `dynamic_113` (v) | `TIGER -i2` (v) |  |
 | Tiger Tree Hash | no | **--** | `TTH` (v) |  |
@@ -1575,7 +1575,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | XMPP SCRAM PBKDF2-SHA1 | `23200` (v) | `SCRAM-PBKDF2-SHA1` (v) | no |  |
 | YAF-SHA1 | no | **--** | `YAF-SHA1` |  |
 | YESCRYPT | `36100` (v) | **--** | `YESCRYPT` (v) |  |
-| yescrypt | `36100` (v) | **--** | **--** |  |
+| yescrypt | `36100` (v) | **--** | `YESCRYPT` (v) |  |
 
 ## Merged ids
 

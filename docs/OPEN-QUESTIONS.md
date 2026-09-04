@@ -245,7 +245,7 @@ promote it.
 | [`sha1lsb35`](index.html#sha1lsb35) | `sha1uc` | SHA1UC is SHA-1 written in uppercase hex and SHA1lsb35 is SHA-1 with the leading nibbles masked to zero, so a tool that skips that field cannot tell t... |
 | [`sha1uc`](index.html#sha1uc) | `sha1lsb35` | SHA1UC is SHA-1 written in uppercase hex and SHA1lsb35 is SHA-1 with the leading nibbles masked to zero, so a tool that skips that field cannot tell t... |
 
-## Entries nothing can prove yet (57)
+## Entries nothing can prove yet (54)
 
 No test vector, so no tier above `asserted` is reachable for any tool, however
 well equipped. Several are types whose publisher's own example does not
@@ -299,9 +299,6 @@ hash-and-plaintext pair settles one.
 * [`sha1saltcx`](index.html#sha1saltcx) - SHA1SALTCX
 * [`sha1sha1hum`](index.html#sha1sha1hum) - SHA1SHA1HUM
 * [`sha256uc`](index.html#sha256uc) - SHA256UC
-* [`skein-256`](index.html#skein-256) - Skein 256
-* [`skein-512`](index.html#skein-512) - Skein 512
-* [`tiger-johntiger`](index.html#tiger-johntiger) - Tiger
 * [`truecrypt-aes-twofish-serpent`](index.html#truecrypt-aes-twofish-serpent) - TrueCrypt AES/Twofish/Serpent
 * [`truecrypt-aes256-xts`](index.html#truecrypt-aes256-xts) - TrueCrypt AES256_XTS
 * [`truecrypt-aes256-xts-johntc-sha512`](index.html#truecrypt-aes256-xts-johntc-sha512) - TrueCrypt AES256_XTS
@@ -321,7 +318,7 @@ deliberately and splitting them is a judgement about what the row is *for* -
 one construction, or one thing people search for. Whoever put them together
 knew something; if that was you, say so.
 
-## Mappings believed but never reproduced (164)
+## Mappings believed but never reproduced (161)
 
 Counted here, listed in [GAPS.md](GAPS.md#1-believed-but-never-reproduced),
 because filling one is mechanical rather than a judgement call: the identifier
