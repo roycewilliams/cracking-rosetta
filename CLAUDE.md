@@ -326,6 +326,46 @@ mdxfind also accepts hashcat modes directly (`mdxfind -m 0`, `-m e1`,
   against 896 before concluding anything about the plaintext.** The full hash
   is in john's own `src/*_fmt_plug.c` test array; the rule that the source
   PROPOSES and john's crack PROVES still applies to the plaintext.
+  **`tools/seed-john-vectors.pl` is the answer to this, and it reads the
+  STRUCT rather than the file.** A first pass that scanned for
+  `#define FORMAT_LABEL` missed every format in `haval_fmt_plug.c`,
+  `ripemd_fmt_plug.c` and `truecrypt_fmt_plug.c`, because a file defining
+  several formats writes each label as a STRING LITERAL in its own `fmt_main`.
+  And the array is often not in that file at all: john keeps a container
+  format's tests in `<name>_common_plug.c`, and `wpapsk_fmt_plug.c` takes its
+  `tests` from the `wpapsk.h` it includes. So the label and the array
+  identifier are both read off the `fmt_main` params block, and the identifier
+  is resolved through the file's own `#include`s. `#if` is NOT evaluated, so a
+  conditionally compiled array yields the UNION of its branches -- `wpapsk.h`
+  has one `tests` whose `#ifdef WPAPMK` half carries PMK plaintexts -- which is
+  safe ONLY because john is the oracle and a pair from the wrong branch simply
+  fails to crack.
+- **Two john behaviours are indistinguishable from "did not crack" once the
+  output is discarded, and both were.** Measured 2026-09-04.
+  **The encoding refusal.** `john.c` line 930 refuses a format flagged
+  `FMT_UNICODE` but not `FMT_ENC` unless the encoding is raw or ISO-8859-1,
+  and this host's `john.conf` sets `DefaultEncoding = UTF-8` (line 274). It
+  prints one line on STDERR and exits; nothing is cracked. `dynamic_1507`
+  passes its own `--test=0` and cracks its own published vector the moment
+  `--input-encoding=iso-8859-1` is named. So a john job's stderr must be KEPT.
+  The retry is legitimate only where the plaintext is pure ASCII, since there
+  the two encodings feed the format identical bytes; on anything else the flag
+  would make the crack a claim about a different string. A refusal that
+  survives the flag is a FAILED job, not a zero: treating it as "ran and found
+  nothing" strikes john from `reads_in` on evidence never gathered.
+  **The case-insensitive plaintext.** john returns the plaintext it actually
+  found, and for a format without `FMT_CASE` that is not the string the
+  wordlist held: `netlm`'s own test array says `hiyagerge` and `john --show`
+  says `HIYAGERGE`. A byte-equal comparison reads that as a failure, which is
+  why `LM`, `netlm` and their neighbours sat unverified while every one of
+  them cracks its own vector on the first try. `FMT_CASE` is bit 0 of
+  `formats.h`, SET when the format IS case-sensitive, and it is carried in
+  `data/tools/john.yaml` as `flags`. Relax on case ONLY where john says the
+  bit is clear, and never on anything else.
+  **What is NOT one of these is a TRUNCATING format.** `nethalflm` takes seven
+  characters and returns `G3RG3P0` for john's own `G3RG3P00!`. The vector is
+  upstream's and correct; the strict comparison is also correct; they answer
+  different questions and the strict one is the one that gates a tier.
 - **Many hashcat modes do not compare the whole digest, so a crack is not
   automatically proof.** Measured on v7.1.2-549-g8a15e210b, 2026-08-31: `-m
   100` accepts any 40-hex string whose LAST 128 bits match `sha1($p)` --
