@@ -394,22 +394,44 @@ for my $id (sort keys %entry) {
 # win over "pass:word" where the corpus holds both.
 my @words_by_len = sort { length($b) <=> length($a) || $a cmp $b } keys %words;
 
-# attribute($rest) - "<hash>:<plain>", or a longer line ending that way, to
-# the entries whose vector it is. The hex fold is narrow on purpose: it
-# applies only where the recorded digest is pure hex, so a salted line whose
-# salt case is part of the input is still compared exactly.
-sub attribute {
+# split_report($rest) - "<hash>:<plain>", or a longer line ending that way,
+# split into its two halves. The plaintext is matched against the corpus's own
+# set longest-first because a plaintext may itself contain a colon, so there is
+# no fixed occurrence to split on.
+sub split_report {
     my ($rest) = @_;
     for my $w (@words_by_len) {
         my $tail = ":$w";
         next unless length($rest) > length($tail);
         next unless substr($rest, -length($tail)) eq $tail;
-        my $printed = substr($rest, 0, length($rest) - length($tail));
-        # The index is keyed on lc(hash), so this lookup already folds the
-        # case mdxfind and hashcat both normalise on read and echo back.
-        return @{ $by_fold{ lc($printed) . "\0" . $w } || [] };
+        return (substr($rest, 0, length($rest) - length($tail)), $w);
     }
     return ();
+}
+
+# attribute($rest) - the entries whose vector this report line is. The hex fold
+# is narrow on purpose: it applies only where the recorded digest is pure hex,
+# so a salted line whose salt case is part of the input is still compared
+# exactly.
+sub attribute {
+    my ($rest) = @_;
+    my ($printed, $w) = split_report($rest);
+    return () unless defined $printed;
+    # The index is keyed on lc(hash), so this lookup already folds the case
+    # mdxfind and hashcat both normalise on read and echo back.
+    return @{ $by_fold{ lc($printed) . "\0" . $w } || [] };
+}
+
+# Every HASH the sweep reproduced, without regard to which plaintext followed
+# it. See the "SAME HASH, ANOTHER PLAINTEXT" note at the classifier.
+my %cracked_hash;   # lc(hash portion) -> identifier -> 1
+
+# record_hash($ident, $rest) - the bookkeeping both evidence readers do.
+sub record_hash {
+    my ($ident, $rest) = @_;
+    my ($printed) = split_report($rest);
+    $cracked_hash{ lc $printed }{$ident} = 1 if defined $printed;
+    return;
 }
 
 #-----------------------------------------------------------------------
@@ -484,6 +506,7 @@ if ($tool eq 'mdxfind') {
             my ($tok, $rest) = ($1, $2);
             my $type = $report_type->($tok) // next;
             $saw{$type} = 1;
+            record_hash($type, $rest);
             $hits{$_}{$type} = 1 for attribute($rest);
         }
         close $fh;
@@ -513,6 +536,7 @@ else {
         while (my $line = <$fh>) {
             chomp $line;
             next unless length $line;
+            record_hash($mode, $line);
             $hits{$_}{$mode} = 1 for attribute($line);
         }
         close $fh;
@@ -809,7 +833,7 @@ my $today   = strftime('%Y-%m-%d', localtime);
 my $version = $inv->{version} // 'unknown';
 
 my (@absent, @candidate, @unsearched, @novector, @swept_hit, @partial,
-    @maskrisk, @hp_hit, %napplicable);
+    @maskrisk, @hp_hit, @othertext, %napplicable);
 
 for my $id (sort keys %target) {
     my $e = $entry{$id};
@@ -827,6 +851,33 @@ for my $id (sort keys %target) {
 
     unless (@v)        { push @novector,  [ $id, '' ]; next }
     if ($hits{$id})    { push @swept_hit, [ $id, join(', ', sort keys %{ $hits{$id} }) ]; next }
+
+    # SAME HASH, ANOTHER PLAINTEXT.
+    #
+    # Two entries can record the same hash and disagree about what the tool is
+    # fed as the password. hashcat mode 2100 takes the password and mode 31600
+    # takes the NT hash of it, and both describe DCC2; the same split gives
+    # this repository a "-nt" row beside the ordinary one for MSCACHE,
+    # NETNTLMv1, NETNTLMv2 and Kerberos TGS-REP etype 23. The sweep then cracks
+    # the hash under the OTHER row's plaintext, this row draws no hit of its
+    # own, and the literal reading -- no identifier of this tool reproduced
+    # this (hash, plaintext) pair -- is true and publishes as "mdxfind does not
+    # support NetNTLMv2", which it does.
+    #
+    # Measured 2026-09-03 on the mdxfind sweep: five entries in exactly this
+    # position, all of them the NT-hash-input variant of an algorithm the tool
+    # names. It is an input-encoding relation waiting to be curated, so it is
+    # reported and never written.
+    my %othertype;
+    for my $v (@v) {
+        next unless defined $v->{hash};
+        my $t = $cracked_hash{ lc $v->{hash} } or next;
+        $othertype{$_} = 1 for keys %$t;
+    }
+    if (%othertype) {
+        push @othertext, [ $id, join(', ', sort keys %othertype) ];
+        next;
+    }
 
     # hashpipe names a type the sweep did not find. If mdxfind has that type
     # too, the sweep merely failed to arrange the question and this
@@ -897,6 +948,7 @@ printf STDERR "-   %-28s %d\n", $_->[0], scalar @{ $_->[1] } for
     [ 'masked (width collision)'  => \@maskrisk   ],
     [ 'no vector at all'          => \@novector   ],
     [ 'sweep found an identifier' => \@swept_hit  ],
+    [ 'same hash, other plaintext'=> \@othertext  ],
     [ 'hashpipe names a type'     => \@hp_hit     ];
 
 # A bare claim the evidence CONTRADICTS is the outcome worth a reader's time,
@@ -913,6 +965,7 @@ if ($verbose) {
                [ 'UNSEARCHED' => \@unsearched ], [ 'PARTIAL'   => \@partial    ],
                [ 'MASKED'     => \@maskrisk   ],
                [ 'NO VECTOR'  => \@novector   ], [ 'SWEEP HIT' => \@swept_hit  ],
+               [ 'SAME HASH, ANOTHER PLAINTEXT' => \@othertext ],
                [ 'HASHPIPE NAMES A TYPE' => \@hp_hit ]) {
         next unless @{ $g->[1] };
         print STDERR "\n- $g->[0]\n";
@@ -951,7 +1004,7 @@ sub note_for {
         . "vector, as hashcat --identify lists them,"
         : "all " . scalar(@ident) . " $tool ${what}s";
     return "no $what. Swept $scope on $today "
-         . "(tools/discover-$tool.pl --all, evidence read by tools/absence.pl): "
+         . "(a tools/discover-$tool.pl sweep, evidence read by tools/absence.pl): "
          . "not one reproduced this entry's own vector. That the vector was IN "
          . "the search is not assumed -- the same sweep reported a hit on "
          . "another vector of the same shape, a positive control measured in "

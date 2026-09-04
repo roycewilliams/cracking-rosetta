@@ -181,6 +181,20 @@ vectors:
     pass: "$PASS"
 END_E
 
+    # The same hash as the control, under a DIFFERENT plaintext: the "-nt"
+    # shape, where one row feeds the tool the password and the other feeds it
+    # a hash of the password. The sweep cracks the hash under the control's
+    # plaintext and this row draws no hit of its own, so a literal reading
+    # would publish "this tool does not support the algorithm" about an
+    # algorithm it demonstrably does.
+    spit("$DIR/algorithms/ntvariant.yaml", <<"END_E");
+id: "ntvariant"
+name: "the NT-hash-input variant"
+vectors:
+  - hash: "$CTRL"
+    pass: "0123456789abcdef0123456789abcdef"
+END_E
+
     spit("$DIR/algorithms/novec.yaml", <<'END_E');
 id: "novec"
 name: "no vector here"
@@ -533,6 +547,28 @@ for my $tool (qw(mdxfind hashcat)) {
                     ->{tools}{$tool}{verified_at} eq '2026-01-01'),
               "$tool reearn: an absence somebody checked is not revisited");
     }
+}
+
+# 4a. The same hash under another plaintext, for BOTH tools.
+for my $tool (qw(mdxfind hashcat)) {
+    print "\n# $tool same-hash veto\n";
+    write_entries($tool);
+    write_evidence($tool);
+
+    my ($rc, $out) = run_tool($tool, '--apply');
+    check($rc == 0, "$tool same hash: the run completes");
+    check(verdict($tool, 'ntvariant') eq '',
+          "$tool same hash: an entry whose hash fell under another plaintext "
+        . 'is never written',
+          'verdict is ' . verdict($tool, 'ntvariant'));
+    check(!!($out =~ /same hash, other plaintext\s+1\b/),
+          "$tool same hash: it is counted in its own class");
+
+    # The guard must not swallow the ordinary case: decidable shares no hash
+    # with anything and is still decided.
+    check(verdict($tool, 'decidable') eq 'absent',
+          "$tool same hash: an unrelated entry is still decided",
+          'verdict is ' . verdict($tool, 'decidable'));
 }
 
 # 4b. mdxfind's two report-line shapes, and the guard on them.
