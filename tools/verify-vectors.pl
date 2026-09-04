@@ -399,6 +399,28 @@ sub mx_echo_is {
 my (%cracked, %attempted, %failed_job, %mx_job_ids, %ran_ident);
 my $ran = 0;
 
+# hc_plain_is($said, $want) - is the plaintext hashcat printed the plaintext
+# the vector records?
+#
+# The two do not always spell it the same way. hashcat writes a non-printable
+# password as $HEX[<hex>], and a vector may store either spelling: mode 9710's
+# vector here is "$HEX[91b2e062b9]" and hashcat's crack line ends
+# ":91b2e062b9". Both are the same five bytes. So one $HEX wrapper on either
+# side is unwrapped and nothing else is: a comparison that normalised harder
+# than that would start accepting different plaintexts.
+sub hc_plain_is {
+    my ($said, $want) = @_;
+    return 0 unless defined $said && defined $want;
+    return 1 if $said eq $want;
+    for my $p ([$said, $want], [$want, $said]) {
+        my ($a, $b) = @$p;
+        next unless $a =~ /^\$HEX\[([0-9a-fA-F]*)\]$/;
+        return 1 if lc($1) eq lc($b);              # the inner hex, as text
+        return 1 if pack('H*', $1) eq $b;          # the inner hex, as bytes
+    }
+    return 0;
+}
+
 #-----------------------------------------------------------------------
 # hashcat.
 
@@ -420,14 +442,29 @@ if ($want{hashcat} && $job{hashcat}) {
             '-m', $mode, '-a', '0', '--quiet', '--potfile-disable',
             '--self-test-disable', '--backend-ignore-opencl', $hf, $wf);
 
-        # hashcat prints "<hash>:<plain>" for each crack. Match back by hash.
-        my %got;
-        $got{$1} = 1 while $out =~ /^(.+?):[^:]*$/mg;
+        # hashcat prints "<hash>:<plain>" for each crack, and the two facts
+        # that line carries are NOT the same claim.
+        #
+        # READ is about the string: hashcat loaded this exact serialization,
+        # whatever plaintext came back. That is what reads_in records, so the
+        # hash appearing is the whole test.
+        #
+        # CRACKED is about the tier, which promises that the tool "recovers
+        # the entry's plaintext from the entry's hash", so it checks the
+        # plaintext -- as the john and mdxfind branches already do. The
+        # wordlist for a mode holds every plaintext of every entry mapped to
+        # it, and CLAUDE.md records modes that compare only part of a digest,
+        # so hashcat reporting hash A cracked by entry B's plaintext is a
+        # shape this branch could not see. Tightening here can only ever
+        # WITHHOLD a promotion, never invent one, because verify-vectors does
+        # not demote.
         for my $vec (@v) {
-            next unless index($out, $vec->{hash}) >= 0
-                     && $out =~ /\Q$vec->{hash}\E:/;
-            $cracked{hashcat}{ $vec->{id} }{$mode} = 1;
+            next unless index($out, $vec->{hash}) >= 0;
+            next unless $out =~ /^\Q$vec->{hash}\E:(.*)$/m;
+            my $said = $1;
             $read{hashcat}{ $vec->{id} }{ $vec->{vi} } = 1;
+            $cracked{hashcat}{ $vec->{id} }{$mode} = 1
+                if hc_plain_is($said, $vec->{pass});
         }
         # A run that did not COMPLETE is not evidence of anything, and the
         # reads_in rule below turns "did not run" into "does not read" unless
