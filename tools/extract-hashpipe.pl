@@ -37,6 +37,17 @@
 #
 #     e1    MD5                            Pass
 #     e56   BMW224                         FAIL (got d0ec78...)
+#     e0    none                           SKIP (no test vector)
+#
+# v1.190 CHANGED THIS OUTPUT, and the guard below is what caught it. The
+# failures are recapped in a "Failed:" block, which used to sit after the
+# summary line and now sits before it, so stopping the scan at the summary
+# no longer excludes the recap and the two failing types were inventoried
+# twice. v1.190 also states a skip count -- "1024 passed, 2 failed, 2
+# skipped" -- for the two registered types with no built-in vector, which
+# earlier builds printed as SKIP lines that this parser silently dropped.
+# Measured 2026-09-04: the TYPE SET itself did not move at all, 1026 types
+# with no index added, removed or renamed.
 #
 # so the inventory is index, name, and whether the type reproduces its OWN
 # built-in vector. That last field is something neither of the other two
@@ -148,14 +159,32 @@ my $out_text = '';
     close $fh;
 }
 
-my (@types, $passed, $failed, $summary);
+my (@types, @skipped, $passed, $failed, $summary, $in_recap);
 for my $line (split /\n/, $out_text) {
-    # The failures are printed twice: once in sequence, and again in a block
-    # after the summary. Reading past the summary inventories them twice and
-    # disagrees with hashpipe's own count.
-    if ($line =~ /^\s*(\d+) passed, (\d+) failed/) { $summary = [$1, $2]; last }
+    # The failures are printed TWICE: once in sequence, and again in a recap
+    # block headed "Failed:". Inventorying both disagrees with hashpipe's own
+    # count. Where that recap sits relative to the summary CHANGED in v1.190
+    # -- it used to follow the summary, so stopping at the summary was
+    # enough; it now precedes it. So the recap is skipped explicitly and the
+    # scan continues, because the summary is what the guard below needs.
+    $in_recap = 1 if $line =~ /^Failed:/;
+    if ($line =~ /^\s*(\d+) passed, (\d+) failed(?:, (\d+) skipped)?/) {
+        $summary = [ $1, $2, $3 ];      # skipped is undef before v1.190
+        next;
+    }
+    # "e0    none                           SKIP (no test vector)"
+    # A registered type with no built-in vector. v1.190 states these; before
+    # it, they were silently dropped by the Pass|FAIL match below. They are
+    # NOT inventoried as types -- e0 is 'none' and neither is a construction
+    # anything here maps -- but the count is checked and recorded, so a
+    # future type arriving with no vector cannot pass unnoticed.
+    if (!$in_recap && $line =~ /^e(\d+)\s+(\S+)\s+SKIP\s*(.*)$/) {
+        push @skipped, "e$1 $2";
+        next;
+    }
     # "e1    MD5                            Pass"
     # "e56   BMW224                         FAIL (got d0ec78...)"
+    next if $in_recap;
     next unless $line =~ /^e(\d+)\s+(\S+)\s+(Pass|FAIL)\s*(.*)$/;
     my ($num, $name, $result, $detail) = ($1, $2, $3, $4);
     $detail =~ s/^\s+|\s+$//g;
@@ -180,11 +209,18 @@ unless (@types) {
 
 # Make a near miss fatal. hashpipe states its own totals, and a parse that
 # disagrees with them has misread the output -- which is exactly what reading
-# past the summary did.
+# past the summary did, and what caught v1.190's reordered recap.
 if ($summary && ($summary->[0] != ($passed // 0) || $summary->[1] != ($failed // 0))) {
     printf STDERR "%s: parsed %d pass / %d fail, but hashpipe says %d / %d. "
                 . "Refusing to write an inventory that disagrees with the binary.\n",
-        $PROG, $passed // 0, $failed // 0, @$summary;
+        $PROG, $passed // 0, $failed // 0, @$summary[0, 1];
+    exit 1;
+}
+# The same rule for the skip count, where the binary states one.
+if ($summary && defined $summary->[2] && $summary->[2] != scalar @skipped) {
+    printf STDERR "%s: parsed %d skipped, but hashpipe says %d. Refusing to "
+                . "write an inventory that disagrees with the binary.\n",
+        $PROG, scalar @skipped, $summary->[2];
     exit 1;
 }
 
@@ -206,6 +242,11 @@ emit_header($out, [
     "Extracted:  $today",
     sprintf('Types:      %d (%d self-test pass, %d fail)',
             scalar @types, $passed // 0, $failed // 0),
+    (@skipped
+        ? sprintf('Skipped:    %d registered type(s) with no built-in test '
+                . 'vector, not inventoried: %s', scalar @skipped,
+                  join(', ', @skipped))
+        : ()),
     '',
     'This is an inventory of what hashpipe supports, not a mapping. Mappings',
     'between tools live in data/algorithms/ and are curated by hand.',
