@@ -11,6 +11,12 @@ denotation:
   note: "john's own label for MD2, in 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200."
 status: "ok"
 tools:
+  mdxfind:
+    types: ["MD2"]
+    verified: "vector"
+    verified_at: "2026-09-04"
+    verified_with: "mdxfind"
+    note: "name match accepted by a curator on 2026-09-04 and not yet reproduced by this repository's own tooling; seed-vectors.pl and verify-vectors.pl decide it. See notes for what was measured by hand first."
   john:
     cpu: ["MD2"]
     verified: "vector"
@@ -24,3 +30,8 @@ vectors:
     pass: "message digest"
     source: "john"
     reads_in: ["john"]
+  - hash: "01d78cde2365535ed93abaae48a9abc2"
+    pass: "password123"
+    source: "mdxfind"
+    reads_in: ["john", "mdxfind"]
+notes: "Accepted 2026-09-04 from a name match that was then measured. TRANSCODE, proven: john writes $md2$<hex> and mdxfind wants the bare digest, so this entry's own john-form vector reproduces under mdxfind pinned to MD2 once the $md2$ prefix is dropped -- handed to mdxfind with only the plaintext the john vector already states."

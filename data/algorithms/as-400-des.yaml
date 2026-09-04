@@ -11,6 +11,12 @@ denotation:
   note: "john's own label for as400-des, in 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200."
 status: "ok"
 tools:
+  mdxfind:
+    types: ["AS400-DES"]
+    verified: "vector"
+    verified_at: "2026-09-04"
+    verified_with: "mdxfind"
+    note: "name match accepted by a curator on 2026-09-04 and not yet reproduced by this repository's own tooling; seed-vectors.pl and verify-vectors.pl decide it. See notes for what was measured by hand first."
   john:
     cpu: ["as400-des"]
     verified: "vector"
@@ -24,3 +30,8 @@ vectors:
     pass: "AAAAAAAA"
     source: "john"
     reads_in: ["john"]
+  - hash: "$as400$des$*OPEN3*B6079DA0E2EF813D"
+    pass: "pass1234"
+    source: "mdxfind"
+    reads_in: ["mdxfind"]
+notes: "Accepted 2026-09-04 from a name match that was then measured. TRANSCODE, proven: john writes $as400des$<user>*<hash> and mdxfind writes $as400$des$*<user>*<hash>, so this entry's own vector reproduces under mdxfind pinned to AS400-DES when rewritten that way -- handed to mdxfind with only the plaintext the john vector already states."

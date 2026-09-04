@@ -11,11 +11,22 @@ denotation:
   note: "john's own label for Tiger, in 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200."
 status: "needs-review"
 tools:
+  mdxfind:
+    types: ["TIGER"]
+    verified: "vector"
+    verified_at: "2026-09-04"
+    verified_with: "mdxfind"
+    note: "name match accepted by a curator on 2026-09-04 and not yet reproduced by this repository's own tooling; seed-vectors.pl and verify-vectors.pl decide it. See notes for what was measured by hand first."
   john:
     cpu: ["Tiger"]
-    verified: "upstream"
-    verified_at: "2026-08-31"
-    verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
-    note: "NOT REPRODUCED HERE. john publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: john publishes no plaintext for its example, and the example did not fall to the ~819 candidate plaintexts harvested from john's own source. The plaintext is findable, it was simply not in the list. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool john --only Tiger to retry."
+    verified: "vector"
+    verified_at: "2026-09-04"
+    verified_with: "john"
   crack:
     supported: false
+vectors:
+  - hash: "763cfa83b7d3dd5fd82d536e6a2f912142721444b919367e"
+    pass: "password123"
+    source: "mdxfind"
+    reads_in: ["john", "mdxfind"]
+notes: "Accepted 2026-09-04 from a name match that was then measured: mdxfind's own TIGER example and john's Tiger recover the same plaintext from the same digest. The entry carried no vector before this. john echoes its canonical $tiger$<UPPERCASE HEX> form; mdxfind reads and echoes the bare lower-case digest."

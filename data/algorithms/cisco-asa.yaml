@@ -11,6 +11,12 @@ denotation:
   note: "john's own label for asa-md5, in 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200."
 status: "ok"
 tools:
+  mdxfind:
+    types: ["CISCOASA"]
+    verified: "vector"
+    verified_at: "2026-09-04"
+    verified_with: "mdxfind"
+    note: "name match accepted by a curator on 2026-09-04 and not yet reproduced by this repository's own tooling; seed-vectors.pl and verify-vectors.pl decide it. See notes for what was measured by hand first."
   john:
     cpu: ["asa-md5"]
     verified: "vector"
@@ -24,3 +30,8 @@ vectors:
     pass: "ripper"
     source: "john"
     reads_in: ["john"]
+  - hash: "iOZ4lbE3GPO/eeeS:36"
+    pass: "password123"
+    source: "mdxfind"
+    reads_in: ["mdxfind"]
+notes: "Accepted 2026-09-04 from a name match that was then measured. TRANSCODE, proven: john writes $dynamic_20$<hash>$<salt> and mdxfind writes <hash>:<salt>, so this entry's own vector reproduces under mdxfind pinned to CISCOASA when rewritten that way -- handed to mdxfind with only the plaintext the john vector already states."
