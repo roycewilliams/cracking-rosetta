@@ -16,3 +16,8 @@ tools:
     verified: "asserted"
   crack:
     supported: false
+vectors:
+  - hash: "EF92B778BAFE771E89245B89ECBC08A44A4E166C06659911881F383D4473E94F"
+    pass: "password123"
+    source: "hashpipe"
+notes: "The vector is hashpipe's published example and mdxfind will not read it back in EITHER case, so the mdxfind mapping stays at tier `asserted`. Measured 2026-09-04, and the measurement narrows the fault rather than widening it: the digest IS sha256 of the plaintext. Lower-cased and offered to mdxfind's own SHA256 type it reproduces immediately as SHA256x01, which is the positive control that makes the silence above evidence. So the catalog's digest is correct and it is mdxfind's SHA256UC type that cannot read its own example. See docs/UPSTREAM-FINDINGS.md, which lists this type among those whose example digest is rendered in upper-case hex."

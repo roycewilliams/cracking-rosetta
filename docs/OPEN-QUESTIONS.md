@@ -244,24 +244,15 @@ promote it.
 | [`sha1lsb35`](index.html#sha1lsb35) | `sha1uc` | SHA1UC is SHA-1 written in uppercase hex and SHA1lsb35 is SHA-1 with the leading nibbles masked to zero, so a tool that skips that field cannot tell t... |
 | [`sha1uc`](index.html#sha1uc) | `sha1lsb35` | SHA1UC is SHA-1 written in uppercase hex and SHA1lsb35 is SHA-1 with the leading nibbles masked to zero, so a tool that skips that field cannot tell t... |
 
-## Entries nothing can prove yet (11)
+## Entries nothing can prove yet (2)
 
 No test vector, so no tier above `asserted` is reachable for any tool, however
 well equipped. Several are types whose publisher's own example does not
 reproduce under that type, which is itself a question worth an answer. Any
 hash-and-plaintext pair settles one.
 
-* [`md5dsalt`](index.html#md5dsalt) - MD5DSALT
-* [`md5sha1hum`](index.html#md5sha1hum) - MD5SHA1HUM
-* [`md5sha1md5hum`](index.html#md5sha1md5hum) - MD5SHA1MD5HUM
-* [`md5specam`](index.html#md5specam) - MD5SPECAM
-* [`md5ucbase64md5raw`](index.html#md5ucbase64md5raw) - MD5UCBASE64MD5RAW
-* [`parallel`](index.html#parallel) - PARALLEL
-* [`sha1md5hum`](index.html#sha1md5hum) - SHA1MD5HUM
-* [`sha1saltcx`](index.html#sha1saltcx) - SHA1SALTCX
-* [`sha1sha1hum`](index.html#sha1sha1hum) - SHA1SHA1HUM
-* [`sha256uc`](index.html#sha256uc) - SHA256UC
-* [`yaf-sha1`](index.html#yaf-sha1) - YAF-SHA1
+* [`parallel`](index.html#parallel) - PARALLEL - No vector exists to seed, measured 2026-09-04, and this is the one type in the inventory for which that is a fact about the tools rather than a gap in...
+* [`sha1saltcx`](index.html#sha1saltcx) - SHA1SALTCX - This row has NO vector and that is a deliberate withholding, measured 2026-09-04. The only example anyone publishes for this type -- mdxfind's own inv...
 
 ## Rows that may be more than one algorithm
 
@@ -274,7 +265,7 @@ deliberately and splitting them is a judgment about what the row is *for* -
 one construction, or one thing people search for. Whoever put them together
 knew something; if that was you, say so.
 
-## Mappings believed but never reproduced (94)
+## Mappings believed but never reproduced (88)
 
 Counted here, listed in [GAPS.md](GAPS.md#1-believed-but-never-reproduced),
 because filling one is mechanical rather than a judgment call: the identifier

@@ -17,7 +17,7 @@ Each row below links to its entry in the [browsable table](index.html).
 Gaps are absences; for the rows where something is known to be *odd*, see
 [OPEN-QUESTIONS.md](OPEN-QUESTIONS.md).
 
-## 1. Believed but never reproduced (83)
+## 1. Believed but never reproduced (86)
 
 The cheapest contribution in the repository, if you own the tool. Each of
 these already names an identifier and already carries a test vector; nobody
@@ -39,7 +39,9 @@ tools/verify-vectors.pl --tool <tool> --only <id> -v
 | [`generic-hash-bridged-rust`](index.html#generic-hash-bridged-rust) | hashcat | `74000` | upstream |
 | [`halflm-c-r`](index.html#halflm-c-r) | john | `nethalflm` | upstream |
 | [`md5-md5-pass-salt`](index.html#md5-md5-pass-salt) | hashcat | `2611`, `2711` | asserted |
+| [`md5dsalt`](index.html#md5dsalt) | mdxfind | `MD5DSALT` | asserted |
 | [`md5md5hum`](index.html#md5md5hum) | mdxfind | `MD5MD5HUM` | asserted |
+| [`md5specam`](index.html#md5specam) | mdxfind | `MD5SPECAM` | asserted |
 | [`md5uc`](index.html#md5uc) | mdxfind | `MD5UC` | upstream |
 | [`md5ucmd5`](index.html#md5ucmd5) | mdxfind | `MD5UCMD5` | upstream |
 | [`mysql4-1-mysql5`](index.html#mysql4-1-mysql5) | john | `dynamic_1028`, `mysql-sha1`, `mysql-sha1-opencl` | asserted |
@@ -68,6 +70,7 @@ tools/verify-vectors.pl --tool <tool> --only <id> -v
 | [`sha1sha256truncsalt`](index.html#sha1sha256truncsalt) | mdxfind | `SHA1SHA256TRUNCSALT` | upstream |
 | [`sha1uc`](index.html#sha1uc) | mdxfind | `SHA1UC` | upstream |
 | [`sha1wrluctruncsalt`](index.html#sha1wrluctruncsalt) | mdxfind | `SHA1WRLUCTRUNCSALT` | upstream |
+| [`sha256uc`](index.html#sha256uc) | mdxfind | `SHA256UC` | asserted |
 | [`smf-v1-1`](index.html#smf-v1-1) | john | `dynamic_25`, `dynamic_37` | asserted |
 | [`snmpv3-hmac-sha384-256`](index.html#snmpv3-hmac-sha384-256) | hashcat | `26900` | upstream |
 | [`stdout`](index.html#stdout) | hashcat | `2000` | upstream |
@@ -115,7 +118,7 @@ tools/verify-vectors.pl --tool <tool> --only <id> -v
 | [`wpa-pmkid-pbkdf2`](index.html#wpa-pmkid-pbkdf2) | hashcat | `16800` | upstream |
 | [`wpa-pmkid-pmk`](index.html#wpa-pmkid-pmk) | hashcat | `16801` | upstream |
 
-## 2. No test vector at all (11)
+## 2. No test vector at all (2)
 
 Blocked on one piece of data, and it is the piece that does not require any
 tool: a hash and the plaintext that produces it. Nothing here can reach tier
@@ -124,17 +127,8 @@ equipped. If you have a vector for one of these - from a tool's own test
 suite, from your own scratch implementation, from a wordlist you cracked -
 that is the whole contribution.
 
-* [`md5dsalt`](index.html#md5dsalt) - MD5DSALT
-* [`md5sha1hum`](index.html#md5sha1hum) - MD5SHA1HUM
-* [`md5sha1md5hum`](index.html#md5sha1md5hum) - MD5SHA1MD5HUM
-* [`md5specam`](index.html#md5specam) - MD5SPECAM
-* [`md5ucbase64md5raw`](index.html#md5ucbase64md5raw) - MD5UCBASE64MD5RAW
 * [`parallel`](index.html#parallel) - PARALLEL
-* [`sha1md5hum`](index.html#sha1md5hum) - SHA1MD5HUM
 * [`sha1saltcx`](index.html#sha1saltcx) - SHA1SALTCX
-* [`sha1sha1hum`](index.html#sha1sha1hum) - SHA1SHA1HUM
-* [`sha256uc`](index.html#sha256uc) - SHA256UC
-* [`yaf-sha1`](index.html#yaf-sha1) - YAF-SHA1
 
 ## 3. A tool column nobody has filled
 

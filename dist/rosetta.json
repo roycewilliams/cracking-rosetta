@@ -44249,8 +44249,8 @@
          "expr" : "",
          "expr_note" : "Withdrawn 2026-08-31. This entry carried the expression \"md5(md5(md5($p).$s).salt2)\", transcribed from the hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A entry for mdxfind type MD5DSALT (e408) by a parser that has since been corrected: it carries the bare operand salt2, which john's dynamic language cannot bind. Nothing can compile that string, so it was a claim rather than a fact, and it is withdrawn rather than adjusted -- guessing what upstream meant is exactly what the expression field exists to stop. Re-run seed-hx.pl and denote-hx.pl to settle this entry from the corrected parse.",
          "expr_tier" : "absent",
-         "hash_length" : "",
-         "hash_length_basis" : "",
+         "hash_length" : 32,
+         "hash_length_basis" : "observed",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -44280,7 +44280,7 @@
          "mdxfind_salted" : "yes",
          "name" : "MD5DSALT",
          "nesting_depth" : "",
-         "notes" : "",
+         "notes" : "The vector is hashpipe's published example, verified under hashpipe -c pinned to MD5DSALT, and mdxfind will not read it back, so the mdxfind mapping stays at tier `asserted`. Measured 2026-09-04: pinned with -h '^MD5DSALT$', mdxfind performs ZERO hash calculations on the line under -f and zero under -F, at every iteration count tried, so it is declining the input shape rather than computing and missing. hashpipe's verify_md5dsalt parses the line as a 32-hex digest, a colon, and a salt of 2 to 6 characters, then sweeps the ways that salt can be split -- this is one of the multi-emit DSALT types CLAUDE.md records, which is why no single expression belongs on this row either.",
          "primary_form" : "",
          "relations" : [],
          "sameas" : "",
@@ -44292,7 +44292,7 @@
             "john" : "",
             "mdxfind" : ""
          },
-         "vecs" : 0
+         "vecs" : 1
       },
       {
          "alias" : "",
@@ -45347,8 +45347,8 @@
          "expr" : "",
          "expr_note" : "mdxfind type MD5SHA1HUM (e366) is MULTI-EMIT: it computes several candidate digests per input and matches if any one reproduces the stored hash. There is therefore no single expression to record, and writing one of the emitted forms into expression: would be a false claim even though the string itself is correct. This is also why two vectors of such a type can disagree with each other, and why a tool matching one of them is not evidence about the other.",
          "expr_tier" : "absent",
-         "hash_length" : "",
-         "hash_length_basis" : "",
+         "hash_length" : 32,
+         "hash_length_basis" : "observed",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -45372,8 +45372,8 @@
             "ids" : [
                "MD5SHA1HUM"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "mdxfind_salted" : "no",
          "name" : "MD5SHA1HUM",
@@ -45390,7 +45390,7 @@
             "john" : "",
             "mdxfind" : ""
          },
-         "vecs" : 0
+         "vecs" : 1
       },
       {
          "alias" : "",
@@ -45466,8 +45466,8 @@
          "expr" : "",
          "expr_note" : "mdxfind type MD5SHA1MD5HUM (e378) is MULTI-EMIT: it computes several candidate digests per input and matches if any one reproduces the stored hash. There is therefore no single expression to record, and writing one of the emitted forms into expression: would be a false claim even though the string itself is correct. This is also why two vectors of such a type can disagree with each other, and why a tool matching one of them is not evidence about the other.",
          "expr_tier" : "absent",
-         "hash_length" : "",
-         "hash_length_basis" : "",
+         "hash_length" : 32,
+         "hash_length_basis" : "observed",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -45491,8 +45491,8 @@
             "ids" : [
                "MD5SHA1MD5HUM"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "mdxfind_salted" : "no",
          "name" : "MD5SHA1MD5HUM",
@@ -45509,7 +45509,7 @@
             "john" : "",
             "mdxfind" : ""
          },
-         "vecs" : 0
+         "vecs" : 1
       },
       {
          "alias" : "",
@@ -46506,8 +46506,8 @@
          "expr" : "",
          "expr_note" : "",
          "expr_tier" : "",
-         "hash_length" : "",
-         "hash_length_basis" : "",
+         "hash_length" : 32,
+         "hash_length_basis" : "observed",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -46537,7 +46537,7 @@
          "mdxfind_salted" : "no",
          "name" : "MD5SPECAM",
          "nesting_depth" : "",
-         "notes" : "",
+         "notes" : "mdxfind and hashpipe do NOT compute the same thing under this name, measured 2026-09-04, and the vector on this row is hashpipe's. hashpipe's compute_md5specam is md5($p . md5_raw($p)) -- it takes neither salt nor user (it is registered with flags 0 and casts both away) -- and its published example 9018942a51656d6055f0c20024dd4f48:password123 was confirmed three independent ways: hashpipe -c pinned to MD5SPECAM, the source itself, and a recomputation in Perl. mdxfind's JOB_MD5SPECAM (mdxfind.c, the case at ~27795) reads a USERID off the line, lower-casing it up to the first colon, and breaks out when that field is empty -- it is a member of the AM family, whose sibling MD5AM hashpipe's own source records as md5(user . \"::\" . lower($p)). Pinned with -h '^MD5SPECAM$', mdxfind performs ZERO hash calculations on this line under -f and zero again under -F with a userid field appended, so it is declining the input shape rather than computing and missing. The mdxfind mapping therefore stays at tier `asserted`: what is on this row is proven for hashpipe's MD5SPECAM and says nothing yet about mdxfind's.",
          "primary_form" : "",
          "relations" : [],
          "sameas" : "",
@@ -46549,7 +46549,7 @@
             "john" : "",
             "mdxfind" : ""
          },
-         "vecs" : 0
+         "vecs" : 1
       },
       {
          "alias" : "",
@@ -47006,8 +47006,8 @@
          "expr" : "",
          "expr_note" : "mdxfind type MD5UCBASE64MD5RAW (e375) is MULTI-EMIT: it computes several candidate digests per input and matches if any one reproduces the stored hash. There is therefore no single expression to record, and writing one of the emitted forms into expression: would be a false claim even though the string itself is correct. This is also why two vectors of such a type can disagree with each other, and why a tool matching one of them is not evidence about the other.",
          "expr_tier" : "absent",
-         "hash_length" : "",
-         "hash_length_basis" : "",
+         "hash_length" : 32,
+         "hash_length_basis" : "observed",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -47031,8 +47031,8 @@
             "ids" : [
                "MD5UCBASE64MD5RAW"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "mdxfind_salted" : "no",
          "name" : "MD5UCBASE64MD5RAW",
@@ -47049,7 +47049,7 @@
             "john" : "",
             "mdxfind" : ""
          },
-         "vecs" : 0
+         "vecs" : 1
       },
       {
          "alias" : "",
@@ -53068,7 +53068,7 @@
          "mdxfind_salted" : "no",
          "name" : "PARALLEL",
          "nesting_depth" : "",
-         "notes" : "",
+         "notes" : "No vector exists to seed, measured 2026-09-04, and this is the one type in the inventory for which that is a fact about the tools rather than a gap in this repository. hashpipe registers PARALLEL with no ht->example at all, so `hashpipe -T` skips it -- it is one of the two skipped types the generated data/tools/hashpipe.yaml header names -- and `hashpipe -G`, which generates a vector for a type that has none, emits nothing for it either because it has no compute function and no chain to drive. mdxfind's own inventory row (e426) carries no example_vector, and e426 is the single index mdxfind has that hashpipe does not. Nothing here can move until one of the two tools publishes a vector.",
          "primary_form" : "",
          "relations" : [],
          "sameas" : "",
@@ -69723,8 +69723,8 @@
          "expr" : "",
          "expr_note" : "mdxfind type SHA1MD5HUM (e364) is MULTI-EMIT: it computes several candidate digests per input and matches if any one reproduces the stored hash. There is therefore no single expression to record, and writing one of the emitted forms into expression: would be a false claim even though the string itself is correct. This is also why two vectors of such a type can disagree with each other, and why a tool matching one of them is not evidence about the other.",
          "expr_tier" : "absent",
-         "hash_length" : "",
-         "hash_length_basis" : "",
+         "hash_length" : 40,
+         "hash_length_basis" : "observed",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -69748,8 +69748,8 @@
             "ids" : [
                "SHA1MD5HUM"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "mdxfind_salted" : "no",
          "name" : "SHA1MD5HUM",
@@ -69766,7 +69766,7 @@
             "john" : "",
             "mdxfind" : ""
          },
-         "vecs" : 0
+         "vecs" : 1
       },
       {
          "alias" : "",
@@ -73350,7 +73350,7 @@
          "mdxfind_salted" : "yes",
          "name" : "SHA1SALTCX",
          "nesting_depth" : "",
-         "notes" : "",
+         "notes" : "This row has NO vector and that is a deliberate withholding, measured 2026-09-04. The only example anyone publishes for this type -- mdxfind's own inventory row and the vendored hashpipe catalog carry the same string -- b59b77c52921e5df0d007fec2518e0f726ce3aaf:administrator:password123, is a TEN-ITERATION hash, and this row declares no iteration count, which the schema reads as one. Both oracles agree and each refuses the wrong depth: hashpipe -c asked for SHA1SALTCXx01 refuses and emits SHA1SALTCXx10 when asked bare, and mdxfind -h '^SHA1SALTCX$' -i 1 finds nothing while -i 10 reproduces the line exactly, as SHA1SALTCXx10. Storing it here would put an x10 digest under an x01 row, which is the defect audit-iterations.pl exists to catch -- the iteration suffix is identity, not a tuning knob. The type does support depth 1 (hashpipe's source notes it verifies at every depth, x01 included); nobody has published a depth-1 example, and one generated locally could not promote mdxfind anyway. So this needs a curator: either a depth-1 vector from upstream, or a decision that this row is about SHA1SALTCXx10 and should say so. Worth reporting upstream: the catalog publishes a depth-10 example with nothing in the row to say the depth is not 1.",
          "primary_form" : "",
          "relations" : [],
          "sameas" : "",
@@ -74841,8 +74841,8 @@
          "expr" : "",
          "expr_note" : "mdxfind type SHA1SHA1HUM (e365) is MULTI-EMIT: it computes several candidate digests per input and matches if any one reproduces the stored hash. There is therefore no single expression to record, and writing one of the emitted forms into expression: would be a false claim even though the string itself is correct. This is also why two vectors of such a type can disagree with each other, and why a tool matching one of them is not evidence about the other.",
          "expr_tier" : "absent",
-         "hash_length" : "",
-         "hash_length_basis" : "",
+         "hash_length" : 40,
+         "hash_length_basis" : "observed",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -74866,8 +74866,8 @@
             "ids" : [
                "SHA1SHA1HUM"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "mdxfind_salted" : "no",
          "name" : "SHA1SHA1HUM",
@@ -74884,7 +74884,7 @@
             "john" : "",
             "mdxfind" : ""
          },
-         "vecs" : 0
+         "vecs" : 1
       },
       {
          "alias" : "",
@@ -80612,8 +80612,8 @@
          "expr" : "",
          "expr_note" : "the construction upstream states for mdxfind type SHA256UC (e488) names sha256_uc(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
          "expr_tier" : "absent",
-         "hash_length" : "",
-         "hash_length_basis" : "",
+         "hash_length" : 64,
+         "hash_length_basis" : "observed",
          "hashcat" : {
             "ids" : [],
             "state" : "unknown"
@@ -80643,7 +80643,7 @@
          "mdxfind_salted" : "no",
          "name" : "SHA256UC",
          "nesting_depth" : "",
-         "notes" : "",
+         "notes" : "The vector is hashpipe's published example and mdxfind will not read it back in EITHER case, so the mdxfind mapping stays at tier `asserted`. Measured 2026-09-04, and the measurement narrows the fault rather than widening it: the digest IS sha256 of the plaintext. Lower-cased and offered to mdxfind's own SHA256 type it reproduces immediately as SHA256x01, which is the positive control that makes the silence above evidence. So the catalog's digest is correct and it is mdxfind's SHA256UC type that cannot read its own example. See docs/UPSTREAM-FINDINGS.md, which lists this type among those whose example digest is rendered in upper-case hex.",
          "primary_form" : "",
          "relations" : [],
          "sameas" : "",
@@ -80655,7 +80655,7 @@
             "john" : "",
             "mdxfind" : ""
          },
-         "vecs" : 0
+         "vecs" : 1
       },
       {
          "alias" : "",
@@ -96007,8 +96007,8 @@
             "ids" : [
                "YAF-SHA1"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "mdxfind_salted" : "no",
          "name" : "YAF-SHA1",
@@ -96025,7 +96025,7 @@
             "john" : "",
             "mdxfind" : ""
          },
-         "vecs" : 0
+         "vecs" : 1
       },
       {
          "alias" : "",

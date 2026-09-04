@@ -755,9 +755,9 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | MD5SALT1SALT2 | `33000` (v) | **--** | `MD5SALT1SALT2` (v) |  |
 | MD5SHA0 | no | no | `MD5SHA0` (v) |  |
 | MD5SHA1BASE64MD5RAW | no | no | `MD5SHA1BASE64MD5RAW` (v) |  |
-| MD5SHA1HUM | no | **--** | `MD5SHA1HUM` |  |
+| MD5SHA1HUM | no | **--** | `MD5SHA1HUM` (v) |  |
 | MD5SHA1lsb35 | no | no | `MD5SHA1lsb35` (v) |  |
-| MD5SHA1MD5HUM | no | **--** | `MD5SHA1MD5HUM` |  |
+| MD5SHA1MD5HUM | no | **--** | `MD5SHA1MD5HUM` (v) |  |
 | MD5SHA1MD5MD5SHA1 | no | no | `MD5SHA1MD5MD5SHA1` (v) |  |
 | MD5SHA1MD5MD5SHA1MD5 | no | no | `MD5SHA1MD5MD5SHA1MD5` (v) |  |
 | MD5SHA1MD5MD5UC | no | no | `MD5SHA1MD5MD5UC` (v) |  |
@@ -782,7 +782,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | MD5sub8-24SALT | no | no | `MD5sub8-24SALT` (v) |  |
 | MD5SWAP | no | no | `MD5SWAP` (v) |  |
 | MD5UC | `0` (v) | `Raw-MD5`<br>`dynamic_0`<br>`dynamic_2000` (v) | `MD5UC` | encoding of md5 (encoding) |
-| MD5UCBASE64MD5RAW | no | **--** | `MD5UCBASE64MD5RAW` |  |
+| MD5UCBASE64MD5RAW | no | **--** | `MD5UCBASE64MD5RAW` (v) |  |
 | MD5UCBASE64SHA1RAW | no | no | `MD5UCBASE64SHA1RAW` (v) |  |
 | MD5UCMD5 | no | no | `MD5UCMD5` |  |
 | MD5USERPASS | `20` (v) | `dynamic_1009`<br>`dynamic_2004`<br>`dynamic_4` (v) | `MD5USERPASS` (v) |  |
@@ -1147,7 +1147,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | SHA1MD5CAPSALT | no | no | `SHA1MD5CAPSALT` (v) |  |
 | SHA1MD5CAPSHA1SALT | no | no | `SHA1MD5CAPSHA1SALT` (v) |  |
 | SHA1MD5DSALT | no | no | `SHA1MD5DSALT` (v) |  |
-| SHA1MD5HUM | no | **--** | `SHA1MD5HUM` |  |
+| SHA1MD5HUM | no | **--** | `SHA1MD5HUM` (v) |  |
 | SHA1MD5MD5DSALT | no | no | `SHA1MD5MD5DSALT` (v) |  |
 | SHA1MD5MD5SALT | no | no | `SHA1MD5MD5SALT` (v) |  |
 | SHA1MD5MD5SHA1MD5SHA1SHA1MD5 | no | no | `SHA1MD5MD5SHA1MD5SHA1SHA1MD5` (v) |  |
@@ -1231,7 +1231,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | SHA1SHA11CAP | no | no | `SHA1SHA11CAP` (v) |  |
 | SHA1SHA1CAPSALT | no | no | `SHA1SHA1CAPSALT` (v) |  |
 | SHA1SHA1CAPTRUNC | no | no | `SHA1SHA1CAPTRUNC` (v) |  |
-| SHA1SHA1HUM | no | **--** | `SHA1SHA1HUM` |  |
+| SHA1SHA1HUM | no | **--** | `SHA1SHA1HUM` (v) |  |
 | SHA1SHA1MD5MD5PASS1SALT | no | no | `SHA1SHA1MD5MD5PASS1SALT` (v) |  |
 | SHA1SHA1MD5PASSSALT | no | no | `SHA1SHA1MD5PASSSALT` (v) |  |
 | SHA1SHA1PASS-TRUNC1SALT | no | no | `SHA1SHA1PASS-TRUNC1SALT` (v) |  |
@@ -1574,7 +1574,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | WRLSALTWRL | no | `dynamic_106` (v) | `WRLSALTWRL` (v) |  |
 | WRLWRLSALT | no | `dynamic_105` (v) | `WRLWRLSALT` (v) |  |
 | XMPP SCRAM PBKDF2-SHA1 | `23200` (v) | `SCRAM-PBKDF2-SHA1` (v) | no |  |
-| YAF-SHA1 | no | **--** | `YAF-SHA1` |  |
+| YAF-SHA1 | no | **--** | `YAF-SHA1` (v) |  |
 | YESCRYPT | `36100` (v) | **--** | `YESCRYPT` (v) |  |
 | yescrypt | `36100` (v) | **--** | `YESCRYPT` (v) |  |
 
