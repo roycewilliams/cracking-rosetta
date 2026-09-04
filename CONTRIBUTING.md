@@ -45,6 +45,16 @@ your change. It also catches the mistake nothing else will: if you misspell a
 key, `fmt.pl` tells you, where otherwise the line would be silently dropped
 the next time a tool touches the file.
 
+A `notes:` field that runs to several paragraphs is written as a YAML literal
+block -- `notes: |` with the text indented beneath it -- so a later one-word
+edit shows up as a one-line diff. `fmt.pl` produces that form for you; write
+the note however you like and let the tool settle it. It falls back to a
+quoted one-liner where the block form would give a different string back:
+trailing whitespace on a line, an indented first line, a stray carriage
+return, or a second blank line at the end. If your long note comes out as one
+enormous quoted line, that is why, and the fix is in the whitespace rather
+than in the tool.
+
 ## I want to...
 
 ### ...add a test vector

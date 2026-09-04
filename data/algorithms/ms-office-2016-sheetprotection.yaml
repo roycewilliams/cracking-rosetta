@@ -1,9 +1,6 @@
 id: "ms-office-2016-sheetprotection"
 name: "MS Office 2016 - SheetProtection"
-aliases:
-  - "OOXML sheetProtection hashValue"
-  - "Excel sheet protection password (SHA-512)"
-  - "Office 2013+ protection verifier"
+aliases: ["OOXML sheetProtection hashValue", "Excel sheet protection password (SHA-512)", "Office 2013+ protection verifier"]
 expression_proof:
   verified: "absent"
   verified_at: "2026-08-31"

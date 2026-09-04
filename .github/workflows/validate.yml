@@ -102,6 +102,17 @@ jobs:
       - name: Check formatting
         run: perl -Itools/lib tools/fmt.pl --all --check
 
+      # The other half of the gate above. fmt.pl asserts that the files ARE
+      # canonical; this asserts that the canonical form gives the data back.
+      # RosettaEmit is the single writer for data/algorithms and emit_entry
+      # has no round-trip check of its own, so a seeding pass writes whatever
+      # the emitter produces. The block scalar is the risk: it is the one form
+      # here that can hand back a different string -- trailing whitespace, an
+      # indented first line, a second trailing newline -- with nothing in the
+      # file looking wrong. Every case that must stay quoted is asserted.
+      - name: Exercise the entry emitter
+        run: perl -Itools/lib tools/test-rosetta-emit.pl
+
       # RosettaJohn rewrites an hx expression into john's notation, and that
       # rewritten string is what john is asked to PROVE. A rewrite that drops
       # a token does not fail loudly, it manufactures a proof -- cap() on a

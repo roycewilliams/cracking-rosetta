@@ -43,6 +43,7 @@ use strict;
 use warnings;
 
 use Exporter 'import';
+use YAML::XS ();
 our @EXPORT_OK = qw(yaml_scalar emit_header emit_records emit_entry entry_text);
 
 # yaml_scalar($value) - render one value as a YAML scalar.
@@ -202,8 +203,71 @@ sub _empty {
     return 0;
 }
 
+# _block_kv($pad, $key, $value) - render "key: |" plus indented content, or
+# undef when this value must not be written that way.
+#
+# WHY A BLOCK AT ALL
+#
+# yaml_scalar folds a newline to the two characters \n inside a double-quoted
+# string, which is correct and unreadable. An entry whose notes: field is a
+# multi-paragraph document then arrives in review as one 4000-character line,
+# and a one-word edit to it is a whole-file diff -- the exact failure fmt.pl
+# was written to prevent, reappearing inside a single field.
+#
+# WHY IT REFUSES SO MUCH
+#
+# A block scalar can hand back a DIFFERENT string, and nothing in the file
+# looks wrong when it does. Leading indentation on the first line needs an
+# explicit indentation indicator; trailing whitespace on any line is preserved
+# and invisible; a bare CR is ambiguous with the line break the form
+# introduces; more than one trailing newline needs an explicit chomping
+# indicator. Each is cheap to test for and expensive to discover later, so the
+# rule is to fall back to the quoted form rather than to handle the case.
+#
+# And then, having tested for all of them, it PARSES WHAT IT IS ABOUT TO
+# WRITE and requires the value back byte for byte. That check is what makes
+# the refusal list a belt rather than the only guard: a shape nobody thought
+# of cannot get through it, it merely stays quoted.
+sub _block_kv {
+    my ($pad, $key, $v) = @_;
+
+    return undef if ref $v || !defined $v;
+    return undef unless $v =~ /\n/;              # single line: nothing to gain
+    return undef if $v =~ /\r/;                  # ambiguous with the line break
+    return undef if $v =~ /[^\t\n\x20-\x7e]/;    # control or non-ASCII: quote it
+    return undef if $v =~ /\A[ \t]/;             # indented first line needs an indicator
+    return undef if $v =~ /[ \t]\n/;             # trailing whitespace, including
+    return undef if $v =~ /[ \t]\z/;             # a whitespace-only line
+    return undef if $v =~ /\n\n\z/;              # two trailing newlines: not worth a case
+
+    # "|" keeps exactly one trailing newline; "|-" keeps none.
+    my $chomp = $v =~ /\n\z/ ? '' : '-';
+
+    # text($pad) - the same rendering at any indent, so the probe below can be
+    # built at column zero and still be the thing being tested.
+    my $text = sub {
+        my ($p) = @_;
+        my $ind  = ' ' x (length($p) + 2);
+        my $body = $v;
+        $body .= "\n" unless $body =~ /\n\z/;
+        # (?=.) matches only where a character follows, so an empty line stays
+        # empty rather than becoming a line of spaces.
+        $body =~ s/^(?=.)/$ind/mg;
+        return "$p$key: |$chomp\n$body";
+    };
+
+    my $probe = eval { YAML::XS::Load($text->('')) };
+    return undef unless ref $probe eq 'HASH'
+                     && defined $probe->{$key}
+                     && $probe->{$key} eq $v;
+
+    return $text->($pad);
+}
+
 sub _kv {
     my ($pad, $k, $v) = @_;
+    my $block = _block_kv($pad, $k, $v);
+    return $block if defined $block;
     return sprintf("%s%s: %s\n", $pad, $k, yaml_scalar($v));
 }
 
