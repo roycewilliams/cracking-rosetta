@@ -59,7 +59,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | APFS | `18300` (v) | `FVDE`<br>`FVDE-opencl` (v) | `APFS` (v) |  |
 | Apple DMG | **--** | `dmg` | **--** |  |
 | Apple iWork '09 or newer | `23300` (v) | `iwork`<br>`iwork-opencl` (v) | **--** |  |
-| Apple Secure Notes | `16200` (v) | `notes`<br>`notes-opencl` (v) | **--** |  |
+| Apple Secure Notes | `16200` (v) | `notes`<br>`notes-opencl` (v) | `APPLE-SECURE-NOTES` (v) |  |
 | APPLE-IWORK | `23300` (v) | **--** | `APPLE-IWORK` (v) |  |
 | APPLE-KEYCHAIN | `23100` (v) | `keychain`<br>`keychain-opencl` (v) | `APPLE-KEYCHAIN` (v) |  |
 | APPLE-SECURE-NOTES | `16700` (v) | `FVDE`<br>`FVDE-opencl` (v) | `APPLE-SECURE-NOTES` |  |
@@ -192,7 +192,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | DragonFly BSD $3$ w/ bug, 64-bit | **--** | `dragonfly3-64` (v) | no |  |
 | DragonFly BSD $4$ w/ bugs, 32-bit | **--** | `dragonfly4-32` (v) | no |  |
 | DragonFly BSD $4$ w/ bugs, 64-bit | **--** | `dragonfly4-64` (v) | no |  |
-| Drupal 7 | `7900` (v) | `Drupal7` (v) | **--** |  |
+| Drupal 7 | `7900` (v) | `Drupal7` (v) | `DRUPAL7` (v) |  |
 | DRUPAL7 | `7900` (v) | `Drupal7` (v) | `DRUPAL7` (v) |  |
 | dummy | **--** | `dummy` (v) | no |  |
 | dynamic=md5($p) | **--** | `dynamic=md5($p)` (v) | no |  |
@@ -252,8 +252,8 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | Enpass Password Manager | **--** | `enpass` | **--** |  |
 | EPiServer | **--** | `EPiServer` (v) | **--** |  |
 | EPISERVER | `141` (v) | **--** | `EPISERVER` (v) |  |
-| Episerver 6.x < .NET 4 | `141` (v) | **--** | **--** |  |
-| Episerver 6.x >= .NET 4 | `1441` (v) | **--** | **--** |  |
+| Episerver 6.x < .NET 4 | `141` (v) | **--** | `EPISERVER` (v) |  |
+| Episerver 6.x >= .NET 4 | `1441` (v) | **--** | `EPISERVER` (v) |  |
 | EPiServer SID | **--** | `EPI` (v) | no |  |
 | Ethereum Pre-Sale Wallet, PBKDF2-HMAC-SHA256 | `16300` (v) | `ethereum`<br>`ethereum-presale-opencl` (v) | no |  |
 | Ethereum Wallet, PBKDF2-HMAC-SHA256 | `15600` (v) | `ethereum`<br>`ethereum-opencl` (v) | no |  |
@@ -393,21 +393,21 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | HMAC-BLAKE2S | `33300` (v) | **--** | `HMAC-BLAKE2S` (v) |  |
 | HMAC-MD5 / HMAC-SHA1, RSVP, IS-IS, OMAPI, RNDC, TSIG | **--** | `rsvp` (v) | no |  |
 | HMAC-MD5-KPASS | `50` (v) | **--** | `HMAC-MD5-KPASS` (v) |  |
-| HMAC-RIPEMD160 (key = $salt) | `6060` (v) | **--** | **--** |  |
-| HMAC-RIPEMD320 (key = $salt) | `33660` (v) | **--** | **--** |  |
+| HMAC-RIPEMD160 (key = $salt) | `6060` (v) | **--** | `HMAC-RMD160` (v) |  |
+| HMAC-RIPEMD320 (key = $salt) | `33660` (v) | **--** | `HMAC-RMD320` (v) |  |
 | HMAC-RMD160-KPASS | `6050` (v) | **--** | `HMAC-RMD160-KPASS` (v) |  |
 | HMAC-RMD320-KPASS | `33650` (v) | **--** | `HMAC-RMD320-KPASS` (v) |  |
 | HMAC-SHA1 | **--** | `HMAC-SHA1` (v) | **--** |  |
 | HMAC-SHA1-KPASS | `150` (v) | **--** | `HMAC-SHA1-KPASS` (v) |  |
 | HMAC-SHA224 | **--** | `HMAC-SHA224` (v) | **--** |  |
 | HMAC-SHA224-KPASS | no | **--** | `HMAC-SHA224-KPASS` (v) |  |
-| HMAC-SHA256 (key = $salt) | `1460` (v) | **--** | **--** |  |
+| HMAC-SHA256 (key = $salt) | `1460` (v) | **--** | `HMAC-SHA256` (v) |  |
 | HMAC-SHA256-KPASS | `1450` (v) | **--** | `HMAC-SHA256-KPASS` (v) |  |
 | HMAC-SHA384 | **--** | `HMAC-SHA384` (v) | **--** |  |
 | HMAC-SHA384 | no | **--** | `HMAC-SHA384` (v) |  |
 | HMAC-SHA384-KPASS | no | **--** | `HMAC-SHA384-KPASS` (v) |  |
 | HMAC-SHA512 | **--** | `HMAC-SHA512` (v) | **--** |  |
-| HMAC-SHA512 (key = $salt) | `1760` (v) | **--** | **--** |  |
+| HMAC-SHA512 (key = $salt) | `1760` (v) | **--** | `HMAC-SHA512` (v) |  |
 | HMAC-SHA512-KPASS | `1750` (v) | **--** | `HMAC-SHA512-KPASS` (v) |  |
 | HMAC-STREEBOG256 | `11760` (v) | **--** | `HMAC-STREEBOG256` (v) |  |
 | HMAC-STREEBOG256-KPASS | `11750` (v) | **--** | `HMAC-STREEBOG256-KPASS` (v) |  |
@@ -489,7 +489,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | Linux Kernel Crypto API (2.4) | `14500` (v) | **--** | no |  |
 | LM | `3000` (v) | `LM`<br>`LM-opencl` | `LM` (v) |  |
 | LM C/R | **--** | `netlm` | **--** |  |
-| Lotus Notes/Domino 5 | `8600` (v) | `lotus5`<br>`lotus5-opencl` (v) | **--** |  |
+| Lotus Notes/Domino 5 | `8600` (v) | `lotus5`<br>`lotus5-opencl` (v) | `DOMINO5` (v) |  |
 | Lotus Notes/Domino 8.5 | **--** | `lotus85` (v) | **--** |  |
 | LUFFA224 | no | **--** | `LUFFA224` (v) |  |
 | LUFFA256 | no | **--** | `LUFFA256` (v) |  |
@@ -509,7 +509,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | LUKS v1 SHA-512 + Serpent | `29532` (v) | **--** | no |  |
 | LUKS v1 SHA-512 + Twofish | `29533` (v) | **--** | no |  |
 | LUKS v2 argon2 + SHA-256 + AES | `34100` (v) | **--** | no |  |
-| Mac OS X 10.4 - 10.6 | `122` (v) | `xsha` (v) | **--** |  |
+| Mac OS X 10.4 - 10.6 | `122` (v) | `xsha` (v) | `MACOSX` (v) |  |
 | macOS v10.8+ (PBKDF2-SHA512) | `7100` (v) | `PBKDF2-HMAC-SHA512`<br>`PBKDF2-HMAC-SHA512-opencl` (v) | **--** |  |
 | MACOSX | `122` (v) | **--** | `MACOSX` (v) |  |
 | MACOSX7 | `1722` (v) | `xsha512`<br>`XSHA512-opencl`<br>`XSHA512-free-opencl` (v) | `MACOSX7` (v) |  |
@@ -985,7 +985,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | ripemd160 | `6000` (v) | `dynamic_130` (v) | `RMD160` (v) |  |
 | ripemd160(md5($plain)) | no | **--** | `RMD160MD5` (v) |  |
 | ripemd160(md5($plain).$plain) | no | **--** | `RMD160MD5PASS` (v) |  |
-| ripemd256 | no | `dynamic_140` (v) | **--** |  |
+| ripemd256 | no | `dynamic_140` (v) | `RMD256` (v) |  |
 | ripemd320 | `33600` (v) | `dynamic_150` (v) | `RMD320` (v) | duplicate of ripemd320 |
 | RMD128 (2 iterations) | no | `dynamic_123` (v) | `RMD128 -i2` (v) |  |
 | RMD128MD4 | no | **--** | `RMD128MD4` (v) |  |
@@ -1011,9 +1011,9 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | SCRAM-PBKDF2-SHA1-MongoDB | **--** | `SCRAM-PBKDF2-SHA1-MongoDB` (v) | no |  |
 | SCRAM-PBKDF2-SHA256 | **--** | `SCRAM-PBKDF2-SHA256` (v) | no |  |
 | SCRYPT | `8900` (v) | `scrypt` (v) | `SCRYPT` (v) |  |
-| scrypt [Bridged: Scrypt-Jane SMix] | `70100` (v) | **--** | **--** |  |
-| scrypt [Bridged: Scrypt-Yescrypt] | `70200` (v) | **--** | **--** |  |
-| scryptcrypt, scrypt (Unix) | `36300` (v) | `scrypt` (v) | **--** |  |
+| scrypt [Bridged: Scrypt-Jane SMix] | `70100` (v) | **--** | `SCRYPT` (v) |  |
+| scrypt [Bridged: Scrypt-Yescrypt] | `70200` (v) | **--** | `SCRYPT` (v) |  |
+| scryptcrypt, scrypt (Unix) | `36300` (v) | `scrypt` (v) | `SCRYPT` (v) |  |
 | SecureCRT MasterPassphrase v2 | `31400` (v) | **--** | no |  |
 | SecureZIP AES-128 | `23001` (v) | `securezip` (v) | no |  |
 | SecureZIP AES-192 | `23002` (v) | `securezip` (v) | no |  |
@@ -1029,7 +1029,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | sha1(base64_encode($plain)) | no | **--** | `SHA1BASE64` (v) |  |
 | sha1(base64_encode(md5($plain, true))) | no | **--** | `SHA1BASE64MD5RAW` (v) |  |
 | sha1(base64_encode(sha1($plain, true))) | no | **--** | `SHA1BASE64SHA1RAW` (v) |  |
-| sha1(CX) | `14400` (v) | **--** | **--** |  |
+| sha1(CX) | `14400` (v) | **--** | `SHA1-SALT-SPECIAL` (v) |  |
 | sha1(hesk($plain)) ? | no | **--** | `SHA1HESK` (v) |  |
 | sha1(md5($pass)) | `4700` (v) | `dynamic_1024`<br>`dynamic_23` | `SHA1MD5` (v) |  |
 | sha1(md5($pass).$salt) | `4710` (v) | **--** | `SHA1MD5PASS-SALT`<br>`SHA1-MD5PASSSALT`<br>`SHA1MD5SALT` (v) | duplicate of sha1-md5-md5-pass-salt; same as huawei-sha1-md5-pass-salt (application) |
@@ -1556,7 +1556,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | WPA-EAPOL | no | **--** | `WPA-EAPOL` (v) |  |
 | WPA-EAPOL-PBKDF2 | `2500` | **--** | **--** |  |
 | WPA-EAPOL-PMK | `2501` | **--** | **--** |  |
-| WPA-PBKDF2-PMKID+EAPOL | `22000` | **--** | **--** |  |
+| WPA-PBKDF2-PMKID+EAPOL | `22000` | **--** | `WPA-PMKID` (v) |  |
 | WPA-PMK | `22001` | **--** | `WPA-PMK` (v) |  |
 | WPA-PMKID | no | **--** | `WPA-PMKID` (v) |  |
 | WPA-PMKID-PBKDF2 | `16800` | **--** | no |  |

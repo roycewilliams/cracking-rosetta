@@ -18,6 +18,12 @@ tools:
     verified_at: "2026-08-31"
     verified_with: "v7.1.2-549-g8a15e210b"
     note: "mode discovered by round-trip search, not by name"
+  mdxfind:
+    types: ["MACOSX"]
+    verified: "vector"
+    verified_at: "2026-09-04"
+    verified_with: "mdxfind RCS 1.545 (2026/08/29)"
+    note: "type discovered by round-trip search, not by name"
   john:
     cpu: ["xsha"]
     verified: "vector"
@@ -30,4 +36,4 @@ vectors:
   - hash: "12345678F9083C7F66F46A0A102E4CC17EC08C8AF120571B"
     pass: "abc"
     source: "john"
-    reads_in: ["john"]
+    reads_in: ["john", "mdxfind"]

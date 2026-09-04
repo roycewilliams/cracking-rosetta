@@ -7,6 +7,12 @@ tools:
     verified: "vector"
     verified_at: "2026-08-29"
     verified_with: "hashcat"
+  mdxfind:
+    types: ["DRUPAL7"]
+    verified: "vector"
+    verified_at: "2026-09-04"
+    verified_with: "mdxfind RCS 1.545 (2026/08/29)"
+    note: "type discovered by round-trip search, not by name"
   hashpipe:
     types: ["DRUPAL7"]
     verified: "vector"
@@ -25,6 +31,6 @@ vectors:
   - hash: "$S$5PpDG6SBfYKrvTHtiMzdZBWjwqOTTiW1Qntn1Sf4jO2PFhkrchMP"
     pass: "rosetta"
     source: "sheet"
-    reads_in: ["hashcat", "john"]
+    reads_in: ["hashcat", "john", "mdxfind"]
 legacy:
   hashes_org: "DRUPAL7"

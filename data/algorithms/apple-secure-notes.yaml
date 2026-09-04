@@ -18,6 +18,12 @@ tools:
     verified_at: "2026-08-31"
     verified_with: "hashcat v7.1.2-549-g8a15e210b"
     note: "hashcat's own published example hash for this mode, recovered by hashcat at this mode with hashcat's own published plaintext."
+  mdxfind:
+    types: ["APPLE-SECURE-NOTES"]
+    verified: "vector"
+    verified_at: "2026-09-04"
+    verified_with: "mdxfind RCS 1.545 (2026/08/29)"
+    note: "type discovered by round-trip search, not by name"
   hashpipe:
     types: ["APPLE-SECURE-NOTES"]
     verified: "vector"
@@ -37,4 +43,4 @@ vectors:
   - hash: "$ASN$*1*20000*80771171105233481004850004085037*d04b17af7f6b184346aad3efefe8bec0987ee73418291a41"
     pass: "hashcat"
     source: "hashcat"
-    reads_in: ["hashcat", "john"]
+    reads_in: ["hashcat", "john", "mdxfind"]
