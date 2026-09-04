@@ -43,9 +43,17 @@
 #
 # A construction RosettaExpr cannot compute must return undef, never a value
 # computed from a silently dropped token. Every refusal below is a function
-# this host genuinely cannot evaluate (md4 -- no Digest::MD4 here), a token hx
-# itself does not have (sha224), or a shape outside the grammar. If one of
-# them starts returning a value, triage gains a verdict it has not earned.
+# this host genuinely cannot evaluate (md4 -- no Digest::MD4 here; whirlpool,
+# gost, ripemd, haval, sha3 likewise) or a shape outside the grammar. If one
+# of them starts returning a value, triage gains a verdict it has not earned.
+#
+# NOT being in hx is NOT a reason to refuse, and saying so cost this fixture
+# two wrong assertions until 2026-09-04. `sha224` and `sha384` are absent
+# from hx's function table but present in this corpus's expression: fields,
+# which take them from john's dynamics; they are computed exactly by core
+# Perl, and the entries carrying them hold john-proven vectors that pin what
+# the token means. The right question for a refusal is whether this host can
+# compute the construction, not which upstream happens to spell it.
 #
 # USAGE
 #   perl tools/test-rosetta-expr.pl            fixture only, no hx needed
@@ -96,8 +104,16 @@ USAGE
 }
 
 # [ hx spelling (what the oracle was asked), repository spelling (what
-#   RosettaExpr is asked), expected output, what it is testing ]
+#   RosettaExpr is asked), expected output, what it is testing,
+#   OPTIONALLY a password to use instead of $PASS ]
 # An expected value of undef means RosettaExpr MUST refuse to compile it.
+#
+# The fifth element exists for the utf16 family and is used by the direct
+# loop and by --oracle alike, so the two never diverge. Everything about
+# utf16 that can be got wrong is on input 'rosetta' cannot express: it is a
+# UTF-8 conversion rather than a byte widening, and the two agree on every
+# ASCII string in this corpus. Those passwords are written as \x escapes so
+# this file stays ASCII on disk.
 my @CASES = (
     # --- the four hashes, plain -------------------------------------
     [ 'md5(pass)',    'md5($p)',    '975790dfb2854c88094fe62477a7d5f3',
@@ -224,9 +240,70 @@ my @CASES = (
     # dropped or guessed, and triage would spend it on a verdict.
     [ undef, 'md4($p)',           undef,
       'md4 is real hx, but there is no Digest::MD4 on this host' ],
-    [ undef, 'sha224($p)',        undef, 'hx itself has no sha224' ],
     [ undef, 'whirlpool($p)',     undef, 'no whirlpool here' ],
-    [ undef, 'utf16($p)',         undef, 'utf16 is john notation, not hx' ],
+    # sha224($p) and utf16($p) were refusals here until 2026-09-04, and both
+    # reasons are recorded above where they are now computed. The utf16 one
+    # was wrong when it was written -- hx HAS utf16le, and RosettaHx's
+    # %MOD_HX already mapped it onto this repository's utf16 -- so the
+    # fixture and RosettaHx were asserting opposite things about the same
+    # token. Neither was ever a dropped token; both are computed exactly.
+    # --- sha224 and sha384, added 2026-09-04 ------------------------
+    # hx has NO sha224 and NO sha384: its function table is md5, md4, sha1,
+    # sha256, sha512 and nothing else (hx_func.c, measured 2026-09-04). So
+    # the hx column is undef here and --oracle skips these, which is why
+    # the expected values are the corpus's OWN vectors -- raw-sha224 and
+    # raw-sha384 both carry the 'rosetta' digest, each already proven by
+    # john's dynamic compiler. Digest::SHA reproducing them is a second,
+    # independent implementation agreeing, not a transcription.
+    [ undef, 'sha224($p)',
+      '223b5c5625a10b045533f2f731dc47f572b3070feaf0838dffba0dbb',
+      "sha224 (raw-sha224's own vector; hx cannot be asked)" ],
+    [ undef, 'sha384($p)',
+      'c91ac188daac08cf79159835683e3f907c97b25652e01c9c779874589da77e071'
+    . '9bfc0216bba661205d1384536288343',
+      "sha384 (raw-sha384's own vector; hx cannot be asked)" ],
+    [ undef, 'hex(sha384_raw($p))',
+      'c91ac188daac08cf79159835683e3f907c97b25652e01c9c779874589da77e071'
+    . '9bfc0216bba661205d1384536288343',
+      'the _raw flavour of a hash hx does not have' ],
+    [ undef, 'sha224(sha224_raw($p))',
+      '1886a854d9f3088e6f947e7aa512d3d02e4048b7998b2c89f0f9b4c8',
+      'sha224 nested over its own raw output' ],
+
+    # --- the utf16 family -------------------------------------------
+    # These DO have an hx form, so --oracle re-measures every one of them
+    # against the binary. utf16 is this repository's spelling of hx's
+    # utf16le; both are accepted, exactly as _raw is for hx's _bin.
+    [ 'hex(utf16le(pass))', 'hex(utf16($p))',
+      '72006f0073006500740074006100',
+      "utf16 is this repository's spelling of hx's utf16le" ],
+    [ 'hex(utf16le(pass))', 'hex(utf16le($p))',
+      '72006f0073006500740074006100',
+      'the hx spelling is accepted too (PEOPLESOFT carries it)' ],
+    [ 'hex(utf16be(pass))', 'hex(utf16be($p))',
+      '0072006f00730065007400740061', 'utf16be' ],
+    [ 'sha1(utf16le(pass))', 'sha1(utf16($p))',
+      '9e6b5d761d32257a81c62b309f159d0c808f6296',
+      'the composite the MSSQL and NTLM rows are built on' ],
+    # The four that separate a UTF-8 conversion from a byte widening. A
+    # blind zero-extension would answer 7200c300a900 to the first and would
+    # never drop anything at all in the last three.
+    [ 'hex(utf16le(pass))', 'hex(utf16($p))', '7200e900',
+      'U+00E9 is ONE unit: utf16 converts UTF-8, it does not widen bytes',
+      "r\xc3\xa9" ],
+    [ 'hex(utf16le(pass))', 'hex(utf16($p))', '3dd800de',
+      'above the BMP, one code point becomes a surrogate PAIR',
+      "\xf0\x9f\x98\x80" ],
+    [ 'hex(utf16le(pass))', 'hex(utf16($p))', '41004200',
+      'an invalid byte is DROPPED (iconv //IGNORE), not replaced',
+      "A\xffB" ],
+    [ 'hex(utf16le(pass))', 'hex(utf16($p))', '41004200',
+      'the drop is the maximal subpart: f0 9f both go, the 41 survives',
+      "\xf0\x9fAB" ],
+    [ 'hex(utf16le(pass))', 'hex(utf16($p))', '',
+      'a UTF-8-encoded surrogate is not valid UTF-8 and vanishes whole',
+      "\xed\xa0\x80" ],
+
     [ undef, 'md5(cap($p,1,2))',  undef, 'cap takes at most two arguments' ],
     [ undef, 'md5($u)',           undef, 'the userid variable is not modelled' ],
     [ undef, 'md5(pass)',         undef,
@@ -249,13 +326,14 @@ sub check {
 }
 
 for my $c (@CASES) {
-    my (undef, $expr, $want, $why) = @$c;
+    my (undef, $expr, $want, $why, $pw) = @$c;
+    $pw = $PASS unless defined $pw;
     my $fn = compile_expression($expr);
     if (!defined $want) {
         check(!defined $fn, $why,
               defined $fn
                 ? sprintf("     %s\n     want (refused)\n     got  %s\n",
-                          $expr, eval { $fn->($PASS, $SALT) } // '(died)')
+                          $expr, eval { $fn->($pw, $SALT) } // '(died)')
                 : '');
         next;
     }
@@ -263,7 +341,7 @@ for my $c (@CASES) {
         check(0, $why, "     $expr\n     want $want\n     got  (refused)\n");
         next;
     }
-    my $got = eval { $fn->($PASS, $SALT) };
+    my $got = eval { $fn->($pw, $SALT) };
     $got = '(died: ' . ($@ =~ s/\n.*//sr) . ')' unless defined $got;
     check($got eq $want, $why,
           "     $expr\n     want $want\n     got  $got\n");
@@ -283,7 +361,8 @@ if ($oracle) {
     else {
         my $checked = 0;
         for my $c (@CASES) {
-            my ($hxe, undef, $want, $why) = @$c;
+            my ($hxe, undef, $want, $why, $pw) = @$c;
+            $pw = $PASS unless defined $pw;
             next unless defined $hxe && defined $want;
             # -p/-s are passed as separate argv entries, so nothing is
             # interpolated by a shell.
@@ -291,7 +370,7 @@ if ($oracle) {
             defined $pid or die "fork: $!";
             unless ($pid) {
                 open(STDERR, '>', '/dev/null');
-                exec($hx, '-p', $PASS, '-s', $SALT, $hxe) or exit 127;
+                exec($hx, '-p', $pw, '-s', $SALT, $hxe) or exit 127;
             }
             my $got = do { local $/; <$fh> };
             close $fh;

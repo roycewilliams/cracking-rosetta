@@ -35,6 +35,21 @@ package RosettaExpr;
 # (binary) digest output, and the representation and slicing operators --
 # cut, pad, trunc, upper, lower, cap, rev, hex, base64, fromhex, frombase64.
 #
+# It widened again on 2026-09-04, by sha224, sha384 and the utf16 family,
+# on the same kind of measurement and with the same restraint: those are
+# the tokens this host can compute from CORE PERL alone. Digest::SHA
+# already supplied sha224 and sha384, and the utf16 conversion is written
+# out below rather than imported. Projected before the code was written
+# (tmp/expr-gain.pl): 39 entries whose expression this module refuses
+# today and would then compile.
+#
+# WHAT IS DELIBERATELY STILL OUTSIDE, and why it is not an oversight:
+# md4 (42 more entries), whirlpool (18), gost, ripemd, haval, tiger,
+# snefru, sha3/keccak, panama, skein, sm3, sha0. Every one needs a module
+# this host does not have -- measured 2026-09-04, only Digest::MD5,
+# Digest::SHA and Encode are installed -- so adding them is a packaging
+# decision, not a code change. md4 is the single biggest lever left.
+#
 # The bail rule is UNCHANGED and is what keeps the widening safe: an unknown
 # function, a wrong arity, a token outside the grammar, all return undef
 # rather than being skipped. Skipping a token silently changes the meaning of
@@ -80,7 +95,8 @@ use strict;
 use warnings;
 
 use Digest::MD5 qw(md5 md5_hex);
-use Digest::SHA qw(sha1 sha1_hex sha256 sha256_hex sha512 sha512_hex);
+use Digest::SHA qw(sha1 sha1_hex sha224 sha224_hex sha256 sha256_hex
+                   sha384 sha384_hex sha512 sha512_hex);
 use MIME::Base64 qw(encode_base64);
 
 use Exporter 'import';
@@ -90,7 +106,9 @@ our @EXPORT_OK = qw(compile_expression expr_functions);
 our %HASH = (
     md5    => \&md5_hex,
     sha1   => \&sha1_hex,
+    sha224 => \&sha224_hex,
     sha256 => \&sha256_hex,
+    sha384 => \&sha384_hex,
     sha512 => \&sha512_hex,
 );
 
@@ -98,7 +116,9 @@ our %HASH = (
 our %RAW = (
     md5    => \&md5,
     sha1   => \&sha1,
+    sha224 => \&sha224,
     sha256 => \&sha256,
+    sha384 => \&sha384,
     sha512 => \&sha512,
 );
 
@@ -167,6 +187,86 @@ sub _pad {
 # fn_base64: standard alphabet, padded, no line breaks.
 sub _base64 { return encode_base64($_[0], '') }
 
+#-----------------------------------------------------------------------
+# fn_utf16le / fn_utf16be. hx does NOT zero-extend each byte; it converts
+# UTF-8 to UTF-16 through iconv with //IGNORE (hx_func.c, fn_utf16le and
+# hx_iconv_convert). Three consequences, none of them guessable from the
+# name, all three MEASURED against the hx binary on 2026-09-04:
+#
+#   'e' U+00E9 as UTF-8 c3 a9  ->  one unit e900, not two units c300 a900
+#   an invalid sequence        ->  DROPPED, not replaced by U+FFFD
+#   U+1F600                    ->  the surrogate pair 3dd8 00de
+#
+# So a blind widening -- the obvious reading, and what mdxfind's own -b flag
+# does internally for NTLM (hx_func.c line 1429 calls that one "blind zero
+# extension") -- is a DIFFERENT function, agreeing only on ASCII. Every
+# vector in this corpus is ASCII today, which is exactly why this had to be
+# measured rather than assumed: the two cannot be told apart by the data.
+#
+# The drop granularity was measured too, since //IGNORE's resync is not
+# specified anywhere a reader would find it. It is the maximal subpart:
+# c3 41 drops one byte and decodes the 41, f0 9f 41 drops TWO and decodes
+# the 41. _utf8_next reproduces every case in the fixture.
+#-----------------------------------------------------------------------
+
+# _utf8_next($bytes, $i, $len) -> (code point, bytes consumed), or
+# (undef, bytes to drop) for a sequence iconv would ignore. Overlongs
+# (c0/c1, e0 80, f0 80), UTF-8-encoded surrogates (ed a0) and anything
+# above U+10FFFF (f4 90, f5-ff) are all invalid and so all dropped.
+sub _utf8_next {
+    my ($x, $i, $n) = @_;
+    my $c = ord substr($x, $i, 1);
+    return ($c, 1) if $c < 0x80;
+
+    # $need continuation bytes, and the range the FIRST of them may take --
+    # which is narrower than 80-bf exactly where a wider range would admit
+    # an overlong, a surrogate or an out-of-range code point.
+    my ($need, $lo, $hi);
+    if    ($c >= 0xc2 && $c <= 0xdf) { $need = 1; ($lo, $hi) = (0x80, 0xbf) }
+    elsif ($c == 0xe0)               { $need = 2; ($lo, $hi) = (0xa0, 0xbf) }
+    elsif ($c == 0xed)               { $need = 2; ($lo, $hi) = (0x80, 0x9f) }
+    elsif ($c >= 0xe1 && $c <= 0xef) { $need = 2; ($lo, $hi) = (0x80, 0xbf) }
+    elsif ($c == 0xf0)               { $need = 3; ($lo, $hi) = (0x90, 0xbf) }
+    elsif ($c == 0xf4)               { $need = 3; ($lo, $hi) = (0x80, 0x8f) }
+    elsif ($c >= 0xf1 && $c <= 0xf3) { $need = 3; ($lo, $hi) = (0x80, 0xbf) }
+    else                             { return (undef, 1) }   # never a lead
+
+    my $cp  = $c & ($need == 1 ? 0x1f : $need == 2 ? 0x0f : 0x07);
+    my $got = 0;
+    for my $k (1 .. $need) {
+        # Out of input, or a byte outside the range: drop the lead plus the
+        # continuation bytes already accepted, and resync on the next byte.
+        return (undef, 1 + $got) if $i + $k >= $n;
+        my $b = ord substr($x, $i + $k, 1);
+        my ($l, $h) = $k == 1 ? ($lo, $hi) : (0x80, 0xbf);
+        return (undef, 1 + $got) if $b < $l || $b > $h;
+        $cp = ($cp << 6) | ($b & 0x3f);
+        $got++;
+    }
+    return ($cp, 1 + $need);
+}
+
+sub _utf16 {
+    my ($x, $be) = @_;
+    my $out = '';
+    my $n   = length $x;
+    my $i   = 0;
+    while ($i < $n) {
+        my ($cp, $used) = _utf8_next($x, $i, $n);
+        $i += $used;
+        next unless defined $cp;                       # //IGNORE
+        # Above the BMP UTF-16 needs a surrogate pair; _utf8_next has
+        # already refused every code point that cannot be encoded.
+        my @u = $cp <= 0xffff ? ($cp)
+              : ( 0xd800 + (($cp - 0x10000) >> 10),
+                  0xdc00 + (($cp - 0x10000) & 0x3ff) );
+        $out .= pack($be ? 'n*' : 'v*', @u);
+    }
+    return $out;
+}
+sub _utf16le { return _utf16($_[0], 0) }
+sub _utf16be { return _utf16($_[0], 1) }
+
 # fn_frombase64: transcribed rather than handed to MIME::Base64, which
 # discards characters outside the alphabet where hx STOPS at the first one.
 # They agree on well-formed input and the corpus is well-formed, but the
@@ -219,6 +319,9 @@ our %OP = (
     base64     => [ \&_base64,     1, 1, {} ],
     frombase64 => [ \&_frombase64, 1, 1, {} ],
     fromhex    => [ \&_fromhex,    1, 1, {} ],
+    utf16      => [ \&_utf16le,    1, 1, {} ],
+    utf16le    => [ \&_utf16le,    1, 1, {} ],
+    utf16be    => [ \&_utf16be,    1, 1, {} ],
     cap        => [ \&_cap,        1, 2, { 1 => 1 } ],
     cut        => [ \&_cut,        2, 3, { 1 => 1, 2 => 1 } ],
     trunc      => [ \&_trunc,      2, 2, { 1 => 1 } ],
