@@ -50,10 +50,12 @@ my %DEFAULT = (
     hashcat  => '/usr/local/bin/hashcat',
     mdxfind  => '/usr/local/bin/mdxfind',
     john     => '/usr/local/src/sec/crack/john-latest/run/john',
-    # hashpipe is built from source here and deliberately not installed to
-    # /usr/local/bin: it is upstream's working tree, kept current, and the
-    # binary moves with it.
-    hashpipe => '/usr/local/src/sec/crack/hashpipe/hashpipe',
+    # hashpipe was built from source and run out of its working tree until
+    # 2026-09-04, when it was installed alongside the others. The old default
+    # was one `mv` from breaking and that is not hypothetical: rebuilding
+    # from a fresh clone moved the tree to hashpipe.old the same day. An
+    # installed path does not move when the tree does.
+    hashpipe => '/usr/local/bin/hashpipe',
 );
 my %ENV_VAR = (hashcat => 'HASHCAT', mdxfind => 'MDXFIND', john => 'JOHN',
                hashpipe => 'HASHPIPE');

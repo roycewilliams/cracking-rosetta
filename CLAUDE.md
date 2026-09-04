@@ -49,7 +49,7 @@ people expect are regenerated into `docs/` and `dist/`.
 | hashcat | `/usr/local/bin/hashcat` (v7.1.2-549-g8a15e210b) | `hashcat --hash-info` |
 | john | `/usr/local/scripts/johnl` -> `/usr/local/src/sec/crack/john-latest/run/john` | `john --list=format-details` |
 | mdxfind | `/usr/local/bin/mdxfind` (RCS 1.545, 2026-08-29) | `mdxfind -h` |
-| hashpipe | `/usr/local/src/sec/crack/hashpipe/hashpipe` (v1.190, 2026-09-04) | `hashpipe -T` (see `tools/extract-hashpipe.pl`); feed it `hash:plaintext` on stdin, or `TYPE[xNN] hash[:salt]:pass` under `-c` |
+| hashpipe | `/usr/local/bin/hashpipe` (v1.190, 2026-09-04) | `hashpipe -T` (see `tools/extract-hashpipe.pl`); feed it `hash:plaintext` on stdin, or `TYPE[xNN] hash[:salt]:pass` under `-c` |
 | Crack | not present | hand-maintained, frozen |
 
 Upstream, for drift detection and as seed data:
@@ -79,13 +79,28 @@ measurement against the binary of the day, so after an upstream pull, diff the
 revision log for behaviour changes and re-verify what they touch -- do not
 rewrite entries from source while the binary is older than it.
 
-**hashpipe's SOURCE AND BINARY are now on this host too.**
-`/usr/local/src/sec/crack/hashpipe`, MIT, built and working since 2026-09-02
-and at v1.190 (commit `e528d88`) since 2026-09-04. It takes `hash:plaintext`
-on stdin and names the type that reproduces it, which makes it a THIRD
-independent oracle beside mdxfind and john rather than a document to be
-read. The same authority order applies as for mdxfind: source, then binary,
-then specification, then `HASH_TYPES.md`.
+**hashpipe's SOURCE AND BINARY are now on this host too.** The source is
+`/usr/local/src/sec/crack/hashpipe`, MIT; the binary is INSTALLED at
+`/usr/local/bin/hashpipe` beside hashcat and mdxfind, since 2026-09-04. It
+was run out of its working tree before that, and the move is not
+housekeeping: rebuilding from a fresh clone that day moved the tree to
+`hashpipe.old`, which would have taken the old path with it. Working since
+2026-09-02 and at v1.190 (commit `e528d88`) since 2026-09-04. It takes
+`hash:plaintext` on stdin and names the type that reproduces it, which makes
+it a THIRD independent oracle beside mdxfind and john rather than a document
+to be read. The same authority order applies as for mdxfind: source, then
+binary, then specification, then `HASH_TYPES.md`.
+
+**All 1026 types now reproduce their own vectors** (`hashpipe -T`, 1026
+passed, 0 failed, 2 skipped for the two registered types that ship no
+vector). BMW224 and BMW256 failed from 2026-09-03 to 2026-09-04 and that was
+never hashpipe: sphlib's `bmw.c` violates strict aliasing and GCC 12+
+miscompiles its 32-bit core, so a `libsph.a` built without
+`-fno-strict-aliasing` gets BMW224/BMW256 wrong and BMW384/BMW512 right
+(upstream `pornin/sphlib` issue 3). A fresh clone built with hashpipe's own
+`make deps` -- which passes the flag, `Makefile` line 268 -- fixed it.
+**The lesson is the durable part: a self-test failure is evidence about the
+BUILD, and only sometimes about the tool.**
 
 **hashpipe is still not a separate column, but the alias rule now has a
 measured exception.** Its type list was diffed against the local mdxfind
