@@ -149,6 +149,19 @@ jobs:
       - name: Exercise the register's failure modes
         run: perl -Itools/lib tools/test-check-upstream.pl
 
+      # absence.pl writes tier 'absent' in bulk, and a false one is invisible:
+      # an empty column and a wrong "does not support this" read the same to a
+      # human, and the second stops anyone looking again -- which is what the
+      # 415 undated hashcat absences look like after a few years. Two rules for
+      # deciding which vectors a sweep actually searched were tried during
+      # development and both were measurably wrong, so the refusals are
+      # asserted rather than trusted. The table runs against BOTH tools,
+      # because only the evidence reader differs and a refactor that broke one
+      # while leaving the other working is what a single-tool test would miss.
+      # Synthetic fixtures under tmp/; needs no cracker.
+      - name: Exercise the absence pass
+        run: perl -Itools/lib tools/test-absence.pl
+
       # docs/index.html is the front door, and its behaviour is a string that
       # render.pl builds -- so a wrong array index or selector passes perl -c,
       # passes validate.pl, and silently breaks the page's search. node is

@@ -97,6 +97,12 @@ vendor/cynosureprime/    vendored upstream catalogs, with provenance
 
 Inventory (what each tool supports) is kept apart from mapping (human judgement about which identifiers mean the same thing), so a new hashcat release regenerates one layer and never touches the other.
 
+### For mdxfind's maintainers, and anyone running an mdxfind release
+
+[`dist/mdxfind-corpus.tsv`](dist/mdxfind-corpus.tsv) is this repository's proven vectors written as a regression corpus in mdxfind's own serialization: one row per (type, vector), carrying the type name, the `eN` index, the iteration count, the reader flag, the pepper where there is one, the hash line in the shape the binary reads, and the plaintext that must come back. Every row was reproduced rather than transcribed - `tools/mdxfind-corpus.pl --export` drives the binary for every job and writes only what came back - and `--check` re-runs the file and names anything that stopped reproducing.
+
+The vectors are the cheap part. What the file carries that a catalog does not: which reader flag each type needs, which of the twelve pepper types want the salt field split and which want it whole, and one hash length per run, because mdxfind compares at the length of the shortest hash it loaded and will happily match a truncation.
+
 One file per algorithm rather than one big table is deliberate: you touch one small file, merge conflicts effectively vanish, `git blame` is meaningful per algorithm, and CODEOWNERS can route review by path.
 
 ## Notes
