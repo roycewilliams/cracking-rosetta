@@ -280,6 +280,7 @@ END_E
 #   control => report the control vector (default), else report nothing
 #   bare    => write mdxfind's UNSUFFIXED report line instead of "MD5x01 ..."
 #   blind   => add a summary tally for a type that reports no line at all
+#   runs    => how many mdxfind invocations the chunk file records (default 1)
 sub write_evidence {
     my ($tool, %opt) = @_;
     my $full    = exists $opt{full}    ? $opt{full}    : 1;
@@ -296,8 +297,12 @@ sub write_evidence {
         my $line = $control ? "$tag $CTRL:$PASS\n" : '';
         my $tally = $control ? "1 MD5x01 hashes found\n" : '';
         $tally .= "1 WIDGETHASHx01 hashes found\n" if $opt{blind};
+        # mdxfind prints this once per invocation, so the count of them is its
+        # own record of how many runs the file holds.
+        my $hdr = "[T+ 0.01s] Minimum hash length is 16 characters\n"
+                x ($opt{runs} // 1);
         spit("$DIR/evidence/out/" . ($full ? 'e1-e2.txt' : 'e1-e1.txt'),
-             "SSSE3 hex conversion enabled\n$line$tally");
+             "SSSE3 hex conversion enabled\n$hdr$line$tally");
 
         # What hashpipe would answer, supplied in full so the binary is never
         # invoked. An empty second field is "asked, found nothing", which is
@@ -611,6 +616,39 @@ for my $tool (qw(mdxfind hashcat)) {
     check(verdict('mdxfind', 'decidable') eq '',
           'parser blindness: nothing is written',
           'verdict is ' . verdict('mdxfind', 'decidable'));
+}
+
+# 4c. How many runs the evidence holds, and saying so.
+#
+# Measured 2026-09-04: mdxfind can miss under -m over a range what it finds
+# pinned, because the salt pool is the union over every type selected. A sweep
+# of one corpus is therefore weaker evidence than a sweep of two, and the
+# claim absence.pl writes should say which it had.
+{
+    print "\n# mdxfind run count\n";
+    write_entries('mdxfind');
+    write_evidence('mdxfind');
+    my ($rc, $out) = run_tool('mdxfind', '--apply');
+    check(!!($out =~ /evidence holds 1 mdxfind run\(s\)/),
+          'run count: one run is counted and reported');
+    check(!!($out =~ /ONE run only/),
+          'run count: one run says what to do about it');
+    my $y = eval { YAML::XS::LoadFile("$DIR/algorithms/decidable.yaml") } || {};
+    check(!!(($y->{tools}{mdxfind}{note} // '') =~ /in a single run,/),
+          'run count: the claim written says it rested on one run',
+          'note is ' . substr($y->{tools}{mdxfind}{note} // '(none)', 0, 90));
+
+    write_entries('mdxfind');
+    write_evidence('mdxfind', runs => 2);
+    ($rc, $out) = run_tool('mdxfind', '--apply');
+    check(!!($out =~ /evidence holds 2 mdxfind run\(s\)/),
+          'run count: two runs are counted');
+    check(!($out =~ /ONE run only/),
+          'run count: two runs do not trigger the warning');
+    $y = eval { YAML::XS::LoadFile("$DIR/algorithms/decidable.yaml") } || {};
+    check(!!(($y->{tools}{mdxfind}{note} // '') =~ /in 2 separate runs over different corpora,/),
+          'run count: the claim written names the number of runs',
+          'note is ' . substr($y->{tools}{mdxfind}{note} // '(none)', 0, 90));
 }
 
 # 5. Usage. No --tool is not a run with a default; it is a usage error.

@@ -443,6 +443,12 @@ my (%hits, %covered);
 # the only acceptable value: see the report_type note below.
 my %parser_blind;
 
+# How many mdxfind invocations the evidence for a range holds. mdxfind prints
+# "Minimum hash length is N characters" once per run, so this is its own
+# record rather than an inference. It matters because a sweep's silence is
+# weaker the bigger its corpus was -- see the salt-pool note at the report.
+my $runs_per_chunk;
+
 if ($tool eq 'mdxfind') {
     # Raw output per chunk, named eLOW-eHIGH.txt. A report line is
     # "TYPExNN <hash>[:<salt>]:<plain>".
@@ -489,8 +495,13 @@ if ($tool eq 'mdxfind') {
         $covered{$_} = 1 for ($c =~ /^e(\d+)-e(\d+)\.txt$/ ? ($1 .. $2) : ());
         open my $fh, '<', "$from/out/$c" or next;
         my (%saw, %claimed);
+        my $runs = 0;
         while (my $line = <$fh>) {
             chomp $line;
+
+            # mdxfind prints this once per invocation, so counting them is its
+            # own record of how many runs this range's evidence holds.
+            $runs++ if $line =~ /Minimum hash length is \d+ characters/;
 
             # mdxfind's own tally, one line per (type, iteration) it found
             # something for: "4 MD5MD5SALTx01 hashes found", commified. It is
@@ -516,6 +527,11 @@ if ($tool eq 'mdxfind') {
         # cracked would look unswept, which is exactly a false absence, so it
         # is recorded and the run refuses to write.
         $parser_blind{$_} = $c for grep { !$saw{$_} } sort keys %claimed;
+
+        # The weakest range decides: an absence is only as good as the
+        # least-swept identifier it rests on.
+        $runs_per_chunk = $runs
+            if $runs && (!defined $runs_per_chunk || $runs < $runs_per_chunk);
     }
 }
 else {
@@ -626,7 +642,6 @@ if ($tool eq 'mdxfind' && -r "$from/corpus.hash") {
             while (<$fh2>) {
                 next unless /Minimum hash length is (\d+) characters/;
                 $min = $1 if !defined $min || $1 < $min;
-                last;
             }
             close $fh2;
         }
@@ -823,6 +838,19 @@ sub uncovered_for {
 }
 
 my @globally_uncovered = grep { !$covered{$_} } @ident;
+if ($tool eq 'mdxfind' && defined $runs_per_chunk) {
+    printf STDERR "- evidence holds %d mdxfind run(s) of every range\n",
+        $runs_per_chunk;
+    print STDERR <<'END_ONE' if $runs_per_chunk < 2;
+-   ONE run only. Measured 2026-09-04: mdxfind can miss under -m over a range
+-   what it finds in a second under -h pinned, because the salt pool is the
+-   union over every type selected and a large one suppresses the match. A
+-   lean-corpus sweep of all 1002 types took 21.5s and found eight mappings a
+-   full-corpus sweep had missed. Run the other one and union the chunk files:
+-     tools/discover-mdxfind.pl --lean --untyped -v --work <dir2>
+END_ONE
+}
+
 printf STDERR "- sweep ran %d of this tool's %d identifier(s)\n",
     scalar(grep { $covered{$_} } @ident), scalar @ident;
 
@@ -1003,7 +1031,12 @@ sub note_for {
         ? "the $napplicable{$id} mode(s) whose parser accepts this entry's own "
         . "vector, as hashcat --identify lists them,"
         : "all " . scalar(@ident) . " $tool ${what}s";
-    return "no $what. Swept $scope on $today "
+    my $howmany = ($tool eq 'mdxfind' && defined $runs_per_chunk)
+                ? ($runs_per_chunk > 1
+                   ? ", in $runs_per_chunk separate runs over different corpora,"
+                   : ", in a single run,")
+                : '';
+    return "no $what. Swept $scope on $today$howmany "
          . "(a tools/discover-$tool.pl sweep, evidence read by tools/absence.pl): "
          . "not one reproduced this entry's own vector. That the vector was IN "
          . "the search is not assumed -- the same sweep reported a hit on "
