@@ -175,7 +175,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | DiskCryptor SHA512 + XTS 1536 bit | `20013` (v) | **--** | no |  |
 | DiskCryptor SHA512 + XTS 512 bit | `20011` (v) | **--** | no |  |
 | Django | **--** | `Django` (v) | no |  |
-| Django (SHA-1) | `124` (v) | **--** | **--** |  |
+| Django (SHA-1) | `124` (v) | **--** | **--** | same as sha1-salt-pass (encoding) |
 | django-scrypt | **--** | `django-scrypt` (v) | no |  |
 | DNSSEC NSEC3 | **--** | `nsec3` | **--** |  |
 | Dogechain.info Wallet | `32500` (v) | **--** | no |  |
@@ -1022,7 +1022,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | sha1("*".mysql5($plain)) | no | **--** | `SHA1SQL5` (v) |  |
 | sha1($pass.$salt) | `110` (v) | `dynamic_24` (v) | `SHA1PASSSALT` (v) |  |
 | sha1($plain.sha1($plain)) | no | **--** | `SHA1PASSSHA1` (v) |  |
-| sha1($salt.$pass) | `120` (v) | `dynamic_25` (v) | `SHA1SALTPASS` (v) |  |
+| sha1($salt.$pass) | `120` (v) | `dynamic_25` (v) | `SHA1SALTPASS` (v) | same as django-sha-1 (encoding) |
 | sha1($salt.$pass.$salt) | `4900` (v) | `dynamic_1504` (v) | `SHA1SALTPASSSALT` (v) |  |
 | sha1($salt.sha1($plain)) | `4520` (v) | `dynamic_1501` (v) | `SHA1SALTSHA1PASS` (v) |  |
 | sha1($salt.sha1($salt.sha1($plain))) (AKA Opencart) | `13900` (v) | `dynamic_38` (v) | `SHA1SALTSHA1SALTSHA1PASS` (v) | same as wbb3 (application) |

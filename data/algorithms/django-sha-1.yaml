@@ -20,6 +20,11 @@ tools:
     note: "hashcat's own published example hash for this mode, recovered by hashcat at this mode with hashcat's own published plaintext."
   crack:
     supported: false
+relations:
+  - kind: "same-computation"
+    entry: "sha1-salt-pass"
+    distinction: "encoding"
+    note: "Measured 2026-09-04: the same computation, sha1($salt.$pass), stored two ways. Django writes sha1$<salt>$<digest> and mdxfind reads <digest>:<salt>, and this rows own vector reproduces under mdxfind pinned to SHA1SALTPASS once it is rewritten that way, handed to mdxfind with only the plaintext this row already states. No mdxfind type is named on this row because mdxfind cannot READ Djangos serialization; the type belongs to sha1-salt-pass, which is where a reader holding a bare <digest>:<salt> should land. hashcat tracks the two separately as modes 124 and 120."
 vectors:
   - hash: "sha1$fe76b$02d5916550edf7fc8c886f044887f4b1abf9b013"
     pass: "hashcat"
