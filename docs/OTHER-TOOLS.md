@@ -94,14 +94,35 @@ each, both a hashcat mode and a john format -- a hashcat-to-john rosetta stone
 by any other name, and it is packaged (FreeBSD `security/rubygem-haiti-hash`).
 Its repository is badged MIT.
 
-**Do not treat that badge as settled provenance.** haiti's type database is
-`data/prototypes.json`, which is the same filename and the same role as
-hashID's `prototypes.json`, and **hashID is GPL-3.0** -- the licence is in its
-`doc/LICENSE`, which is why GitHub reports none. Whether haiti's data is an
-independent creation or a descendant of hashID's is a question about the file's
-history, not about a badge, and it has to be answered before a line of it is
-read, copied or compared against. That is the same care the repository already
-took when it deleted its fetched copy of hashID's file in 2026-08.
+**The repository badge is MIT and the database is not.** Asked and answered on
+2026-09-04 by reading haiti's own `docs/legal.md`, without reading
+`data/prototypes.json` itself. haiti states that its prototype file is under
+**mixed licensing**, and names the mix: permissive for the sample hashes taken
+from hashcat and John the Ripper modules, MIT for the nodes its author wrote,
+and **"GPL3 for untouched hashID nodes"**. It argues Fair Use for reusing parts
+of hashID's file without relicensing haiti as a whole, and that argument is
+about haiti, not about anyone copying from haiti.
+
+So the question this repository had is closed: `data/prototypes.json` cannot
+be vendored here and cannot be diffed against, because a published contract
+that says "both the code and the data are MIT" cannot absorb a file whose own
+author says parts of it are GPL-3. The 2026-08-30 clean-room decision about
+hashID covers haiti too.
+
+**One thing haiti says is worth keeping**, because it is an argument this
+repository can make from a stronger position: "the mapping between Hashcat or
+John the Ripper references and the hash type name comes from Hashcat and John
+the Ripper modules anyway". Quite so. That mapping is not anyone's original
+work -- it is a fact about the tools, and this repository gets it by running
+them rather than by transcribing a third party. It is also why haiti being off
+limits costs nothing but a cross-check.
+
+And a caution for the queued regex work: haiti's author claims that
+re-implementing a regexp without knowledge of hashID's would produce the same
+one more than 90% of the time, since there is often a minimal form. That is
+probably true and it is exactly why the clean-room record matters -- similarity
+is expected and proves nothing either way, so what has to be defensible is the
+DERIVATION, from this repository's own vectors, and not the resemblance.
 
 **`Name-That-Hash`** (Python) appeared in 2021, after haiti, and covers fewer
 types. Same class, smaller; nothing here has been measured against it.
@@ -144,10 +165,11 @@ Not tracked because there is nothing to join on, not because they are bad.
 * hashgen gaining a stable per-mode identifier that people cite in the way they
   cite `-m 2811` -- at which point its 130 names become a namespace and the
   measurement above should be re-run.
-* haiti's data provenance being established as independent of hashID, which
-  would make it an MIT third opinion on every hashcat-to-john pair published
-  here, and disagreements would belong in
-  `data/upstream-disagreements.yaml` like any other.
+* ~~haiti's data provenance being established as independent of hashID~~
+  **Answered 2026-09-04, and the answer is no**: haiti's own `docs/legal.md`
+  puts its prototype file under mixed licensing including "GPL3 for untouched
+  hashID nodes". Nothing there can be vendored or diffed against here. The
+  only thing that would reopen it is haiti relicensing that file outright.
 * Somebody wanting a generator badly enough to accept a GPL-2.0 Go dependency
   for the vectorless rows that no tool here publishes an example for.
 
