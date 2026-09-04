@@ -58,12 +58,19 @@ hashpipe types, john cpu and gpu labels, hashcat modes:
 So hashgen is a **naming convention**, not a namespace with its own algorithms,
 and the convention already lands on rows this repository publishes.
 
-**Its real interest is the other direction.** 57 live entries carry no usable
-vector at all, which means no tool mapping on them can ever reach tier
-`vector`. A generator is exactly the instrument for that: give it a plaintext
-and it produces the hash, where a cracker has to be handed both. Nothing else
-in this repository's toolbox does that -- hashpipe recomputes, but only to name
-a type for a pair it is already given.
+**Its real interest is the other direction.** 54 live entries carried no
+usable vector at all on 2026-09-04, which means no tool mapping on them can
+ever reach tier `vector`. A generator is exactly the instrument for that: give
+it a plaintext and it produces the hash, where a cracker has to be handed
+both. Nothing else in this repository's toolbox does that -- hashpipe
+recomputes, but only to name a type for a pair it is already given.
+
+Where a tool already publishes a worked example the gap closes without a
+generator, and `tools/seed-vectors.pl` does exactly that: it adopts the
+example and verifies it before storing it. That is how `skein-256`,
+`skein-512` and `tiger` stopped being vectorless the same day. What a
+generator would reach is the rest -- the rows no tool here publishes an
+example for.
 
 Two things stand in the way, and both are the repository owner's call rather
 than a contributor's:
@@ -142,7 +149,7 @@ Not tracked because there is nothing to join on, not because they are bad.
   here, and disagreements would belong in
   `data/upstream-disagreements.yaml` like any other.
 * Somebody wanting a generator badly enough to accept a GPL-2.0 Go dependency
-  for the 57 vectorless rows.
+  for the vectorless rows that no tool here publishes an example for.
 
 Each of those is a decision with a cost, which is why none of them was taken
 quietly.
