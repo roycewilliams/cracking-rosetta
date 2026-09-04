@@ -44,7 +44,15 @@ jobs:
   validate:
     runs-on: ubuntu-latest
     steps:
+      # fetch-depth 0, not the default 1, because tools/render.pl and
+      # tools/upstream-findings.pl date their output from the last commit
+      # touching their inputs rather than from the clock. In a shallow clone
+      # the tip commit has no parent, so git reports it as touching every
+      # path, and both stamps collapse to "the date of this push" -- which is
+      # the date-only rewrite that dating from git was meant to prevent.
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       # YAML::XS is the only non-core dependency, and Debian packages it, which
       # keeps CI consistent with how the tools are installed on the fleet
