@@ -49,7 +49,7 @@ people expect are regenerated into `docs/` and `dist/`.
 | hashcat | `/usr/local/bin/hashcat` (v7.1.2-549-g8a15e210b) | `hashcat --hash-info` |
 | john | `/usr/local/scripts/johnl` -> `/usr/local/src/sec/crack/john-latest/run/john` | `john --list=format-details` |
 | mdxfind | `/usr/local/bin/mdxfind` (RCS 1.545, 2026-08-29) | `mdxfind -h` |
-| hashpipe | `/usr/local/src/sec/crack/hashpipe/hashpipe` (v1.189, 2026-09-02) | `hashpipe -h`; feed it `hash:plaintext` on stdin |
+| hashpipe | `/usr/local/src/sec/crack/hashpipe/hashpipe` (v1.190, 2026-09-04) | `hashpipe -T` (see `tools/extract-hashpipe.pl`); feed it `hash:plaintext` on stdin, or `TYPE[xNN] hash[:salt]:pass` under `-c` |
 | Crack | not present | hand-maintained, frozen |
 
 Upstream, for drift detection and as seed data:
@@ -80,12 +80,12 @@ revision log for behaviour changes and re-verify what they touch -- do not
 rewrite entries from source while the binary is older than it.
 
 **hashpipe's SOURCE AND BINARY are now on this host too.**
-`/usr/local/src/sec/crack/hashpipe`, MIT, built and working as of 2026-09-02
-(v1.189, commit `ab66e0f`). It takes `hash:plaintext` on stdin and names the
-type that reproduces it, which makes it a THIRD independent oracle beside
-mdxfind and john rather than a document to be read. The same authority order
-applies as for mdxfind: source, then binary, then specification, then
-`HASH_TYPES.md`.
+`/usr/local/src/sec/crack/hashpipe`, MIT, built and working since 2026-09-02
+and at v1.190 (commit `e528d88`) since 2026-09-04. It takes `hash:plaintext`
+on stdin and names the type that reproduces it, which makes it a THIRD
+independent oracle beside mdxfind and john rather than a document to be
+read. The same authority order applies as for mdxfind: source, then binary,
+then specification, then `HASH_TYPES.md`.
 
 **hashpipe is still not a separate column, but the alias rule now has a
 measured exception.** Its type list was diffed against the local mdxfind
@@ -229,6 +229,26 @@ mdxfind also accepts hashcat modes directly (`mdxfind -m 0`, `-m e1`,
   `mdxfind-corpus.pl` and `verify-vectors.pl` already read `(?:x(\d+))?`.
   No type in the inventory ends in `x<digits>`, so stripping a trailing
   suffix cannot eat a name.
+  **`hashpipe -c` re-admits this exact error, so never read it as a
+  boolean.** v1.190 added `-c`, which verifies each line against its own
+  leading `TYPE[xNN]` label and runs no detection -- a per-line TYPE PIN,
+  which is genuinely new and is the equivalent of `mdxfind -h '^TYPE$'`. The
+  type half is strict, measured against negative controls 2026-09-04: a
+  wrong type, a wrong plaintext and an unknown label are all refused, the
+  last fatally. The SUFFIX half is not. Measured over md5^1..md5^5,
+  sha1^1..sha1^3 and upstream's own salted `SHA1SALTPASS` vector, every
+  off-diagonal pair is refused EXCEPT a depth-1 match, which verifies under
+  any labelled depth: `MD5x05` accepts `md5($p)`. That is the 42-entry
+  defect above, waiting to happen again. The output is the guard -- `-c`
+  emits the depth it actually matched at, so **compare the emitted suffix
+  with the one you asked for** and never treat a line on stdout as
+  agreement. Note too that the emitted label is BARE where the input was
+  bare or `x01`, the same convention as mdxfind's bare lines.
+  **And `-c` numbers iterations mdxfind's way while the detect path does
+  not**: same binary, same hash, 2026-09-04, `-c` says `MD5CAPx02` where
+  plain stdin detection says `MD5CAPx01`. So v1.190 carries two numberings,
+  and `data/upstream-disagreements.yaml` still records the detect path's --
+  which is the one this repository uses as its hashpipe oracle.
 - **Name separator drift.** The source sheet wrote `HAV128_4` where mdxfind
   writes `HAV128-4`. Normalize by stripping non-alphanumerics before matching;
   store the tool's exact spelling.
