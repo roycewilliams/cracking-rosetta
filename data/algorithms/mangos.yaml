@@ -8,6 +8,11 @@ expression_proof:
   note: "transcribed from the hx specification's Appendix A entry for mdxfind type MANGOS (e540), which states sha1(upper(user) . \":\" . upper(pass)) (Note [31]). Transcription, not reproduction, so this is upstream and not vector; run derive-expressions.pl to try to promote it. Not checkable locally: the construction uses functions RosettaExpr cannot compile, so this rests on upstream's word alone.; TRIAGE 2026-09-02 [no-john-format]: no john format on this entry, so john ships no control vectors, and RosettaExpr cannot compile this expression either -- nothing here can check it"
 status: "ok"
 tools:
+  hashcat:
+    verified: "absent"
+    verified_at: "2026-09-03"
+    verified_with: "hashcat v7.1.2-549-g8a15e210b"
+    note: "no mode. Swept the 17 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-03 (tools/discover-hashcat.pl --all, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalised by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping."
   mdxfind:
     types: ["MANGOS"]
     verified: "vector"

@@ -241,23 +241,27 @@ flavour of the hash function - `md5(MD5($p))` - and john rejects the first
 outright. It is deliberately **not** in john's column, which lists formats
 `--list=formats` will show; the gap worth filling is whether a named one exists.
 
-### hashcat: 495 entries say nothing
+### hashcat: 194 entries say nothing
 
-A few that carry a vector and a proven expression, so there is a definite construction to look for, one per family:
+A few that carry a vector, so a candidate identifier can be tested at once, one per family:
 
-* [`gost-x2`](index.html#gost-x2) - `gost(gost($p))`
-* [`hav128-x2`](index.html#hav128-x2) - `haval128_3(haval128_3($p))` (and 14 more starting `haval`)
-* [`keccak256-x2`](index.html#keccak256-x2) - `keccak_256(keccak_256($p))` (and 1 more starting `keccak`)
-* [`md2-x2`](index.html#md2-x2) - `md2(md2($p))` (and 31 more starting `md`)
-* [`panama-x2`](index.html#panama-x2) - `panama(panama($p))`
-* [`rmd128-x2`](index.html#rmd128-x2) - `ripemd128(ripemd128($p))` (and 2 more starting `ripemd`)
-* [`sha1-md5-md5saltmd5pass`](index.html#sha1-md5-md5saltmd5pass) - `sha1(md5(md5($s).md5($p)))` (and 71 more starting `sha`)
-* [`skein224-x2`](index.html#skein224-x2) - `skein224(skein224($p))` (and 3 more starting `skein`)
-* [`sm3-x2`](index.html#sm3-x2) - `sm3(sm3($p))`
-* [`tiger`](index.html#tiger) - `tiger($p)` (and 1 more starting `tiger`)
-* [`wrl-x2`](index.html#wrl-x2) - `whirlpool(whirlpool($p))`
+* [`keyed-md5-ripv2-ospf-bgp-snmpv2`](index.html#keyed-md5-ripv2-ospf-bgp-snmpv2) - `"Keyed MD5" RIPv2, OSPF, BGP, SNMPv2`
+* [`keyed-sha1-bfd`](index.html#keyed-sha1-bfd) - `"Keyed SHA1" BFD`
+* [`md5-authentication-hsrp-hsrpv2-vrrp-glbp`](index.html#md5-authentication-hsrp-hsrpv2-vrrp-glbp) - `"MD5 authentication" HSRP, HSRPv2, VRRP, GLBP`
+* [`md5-based-authentication-dahua`](index.html#md5-based-authentication-dahua) - `"MD5 based authentication" Dahua`
+* [`md5-based-authentication-vtp`](index.html#md5-based-authentication-vtp) - `"MD5 based authentication" VTP`
+* [`7-zip-archive-encryption`](index.html#7-zip-archive-encryption) - `7-Zip archive encryption`
+* [`andotp`](index.html#andotp) - `andOTP`
+* [`armory-wallet`](index.html#armory-wallet) - `Armory wallet`
+* [`as-400-des`](index.html#as-400-des) - `AS/400 DES` (and 1 more starting `AS`)
+* [`astra-linux-gost12256hash`](index.html#astra-linux-gost12256hash) - `Astra Linux $gost12256hash$` (and 1 more starting `Astra`)
+* [`azuread`](index.html#azuread) - `AzureAD`
+* [`bitlocker-johnbitlocker`](index.html#bitlocker-johnbitlocker) - `BitLocker`
+* [`bitshares-wallet`](index.html#bitshares-wallet) - `BitShares Wallet`
+* [`bitwarden-password-manager`](index.html#bitwarden-password-manager) - `Bitwarden Password Manager`
+* [`blackberry-es10`](index.html#blackberry-es10) - `Blackberry-ES10`
 
-All 495: filter `hashcat_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
+All 194: filter `hashcat_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
 
 ### mdxfind: 500 entries say nothing
 

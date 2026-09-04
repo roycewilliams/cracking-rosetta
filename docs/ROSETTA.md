@@ -154,7 +154,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | CRC32 | `11500` (v) | **--** | **--** |  |
 | CRC32C | `27900` (v) | **--** | **--** |  |
 | CRC64Jones | `28000` (v) | **--** | **--** |  |
-| CRYPTEXT | **--** | **--** | `CRYPTEXT` (v) |  |
+| CRYPTEXT | no | **--** | `CRYPTEXT` (v) |  |
 | cryptoSafe | **--** | `cryptoSafe`<br>`cryptosafe-opencl` (v) | **--** |  |
 | CUBE224 | no | **--** | `CUBE224` (v) |  |
 | CUBE256 | no | **--** | `CUBE256` (v) |  |
@@ -274,7 +274,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | Generic Hash [Bridged: Python Interpreter with GIL] | `73000` | **--** | **--** |  |
 | Generic Hash [Bridged: Rust] | `74000` | **--** | **--** |  |
 | GNOME Keyring | **--** | `keyring`<br>`keyring-opencl` (v) | **--** |  |
-| GOST (2 iterations) | **--** | `dynamic_93` (v) | `GOST -i2` (v) |  |
+| GOST (2 iterations) | no | `dynamic_93` (v) | `GOST -i2` (v) |  |
 | GOST R 34.11-94 | **--** | `gost` | **--** |  |
 | gost(md5($plain).$plain) | no | **--** | `GOSTMD5PASS` (v) |  |
 | gost(md5($salt.$plain).":".$salt) | no | **--** | `GOSTHEXSALT` (v) |  |
@@ -306,34 +306,34 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | hash('gost-crypto', $plain) | no | **--** | `GOST-CRYPTO` (v) |  |
 | HashKnownHosts HMAC-SHA1 | **--** | `known_hosts` (v) | **--** |  |
 | HAV128 | no | `dynamic_160` (v) | `HAV128` (v) |  |
-| HAV128 (2 iterations) | **--** | `dynamic_163` (v) | `HAV128 -i2` (v) |  |
+| HAV128 (2 iterations) | no | `dynamic_163` (v) | `HAV128 -i2` (v) |  |
 | HAV128-4 | no | `dynamic_170` (v) | `HAV128-4` (v) |  |
-| HAV128-4 (2 iterations) | **--** | `dynamic_173` (v) | `HAV128-4 -i2` (v) |  |
+| HAV128-4 (2 iterations) | no | `dynamic_173` (v) | `HAV128-4 -i2` (v) |  |
 | HAV128-5 | no | `dynamic_180` (v) | `HAV128-5` (v) |  |
-| HAV128-5 (2 iterations) | **--** | `dynamic_183` (v) | `HAV128-5 -i2` (v) |  |
+| HAV128-5 (2 iterations) | no | `dynamic_183` (v) | `HAV128-5 -i2` (v) |  |
 | HAV160-3 | no | `dynamic_190` (v) | `HAV160-3` (v) |  |
-| HAV160-3 (2 iterations) | **--** | `dynamic_193` (v) | `HAV160-3 -i2` (v) |  |
+| HAV160-3 (2 iterations) | no | `dynamic_193` (v) | `HAV160-3 -i2` (v) |  |
 | HAV160-4 | no | `dynamic_200` (v) | `HAV160-4` (v) |  |
-| HAV160-4 (2 iterations) | **--** | `dynamic_203` (v) | `HAV160-4 -i2` (v) |  |
+| HAV160-4 (2 iterations) | no | `dynamic_203` (v) | `HAV160-4 -i2` (v) |  |
 | HAV160-5 | no | `dynamic_210` (v) | `HAV160-5` (v) |  |
-| HAV160-5 (2 iterations) | **--** | `dynamic_213` (v) | `HAV160-5 -i2` (v) |  |
+| HAV160-5 (2 iterations) | no | `dynamic_213` (v) | `HAV160-5 -i2` (v) |  |
 | HAV192-3 | no | `dynamic_220` (v) | `HAV192-3` (v) |  |
-| HAV192-3 (2 iterations) | **--** | `dynamic_223` (v) | `HAV192-3 -i2` (v) |  |
+| HAV192-3 (2 iterations) | no | `dynamic_223` (v) | `HAV192-3 -i2` (v) |  |
 | HAV192-4 | no | `dynamic_230` (v) | `HAV192-4` (v) |  |
-| HAV192-4 (2 iterations) | **--** | `dynamic_233` (v) | `HAV192-4 -i2` (v) |  |
+| HAV192-4 (2 iterations) | no | `dynamic_233` (v) | `HAV192-4 -i2` (v) |  |
 | HAV192-5 | no | `dynamic_240` (v) | `HAV192-5` (v) |  |
-| HAV192-5 (2 iterations) | **--** | `dynamic_243` (v) | `HAV192-5 -i2` (v) |  |
+| HAV192-5 (2 iterations) | no | `dynamic_243` (v) | `HAV192-5 -i2` (v) |  |
 | HAV224-3 | no | `dynamic_250` (v) | `HAV224-3` (v) |  |
-| HAV224-3 (2 iterations) | **--** | `dynamic_253` (v) | `HAV224-3 -i2` (v) |  |
+| HAV224-3 (2 iterations) | no | `dynamic_253` (v) | `HAV224-3 -i2` (v) |  |
 | HAV224-4 | no | `dynamic_260` (v) | `HAV224-4` (v) |  |
-| HAV224-4 (2 iterations) | **--** | `dynamic_263` (v) | `HAV224-4 -i2` (v) |  |
+| HAV224-4 (2 iterations) | no | `dynamic_263` (v) | `HAV224-4 -i2` (v) |  |
 | HAV224-5 | no | `dynamic_270` (v) | `HAV224-5` (v) |  |
-| HAV224-5 (2 iterations) | **--** | `dynamic_273` (v) | `HAV224-5 -i2` (v) |  |
-| HAV256 (2 iterations) | **--** | `dynamic_283` (v) | `HAV256 -i2` (v) |  |
+| HAV224-5 (2 iterations) | no | `dynamic_273` (v) | `HAV224-5 -i2` (v) |  |
+| HAV256 (2 iterations) | no | `dynamic_283` (v) | `HAV256 -i2` (v) |  |
 | HAV256-4 | no | `dynamic_290` (v) | `HAV256-4` (v) |  |
-| HAV256-4 (2 iterations) | **--** | `dynamic_293` (v) | `HAV256-4 -i2` (v) |  |
+| HAV256-4 (2 iterations) | no | `dynamic_293` (v) | `HAV256-4 -i2` (v) |  |
 | HAV256-5 | no | `dynamic_300` (v) | `HAV256-5` (v) |  |
-| HAV256-5 (2 iterations) | **--** | `dynamic_303` (v) | `HAV256-5 -i2` (v) |  |
+| HAV256-5 (2 iterations) | no | `dynamic_303` (v) | `HAV256-5 -i2` (v) |  |
 | HAVAL-128-4 | **--** | `HAVAL-128-4` | **--** |  |
 | HAVAL-256-3 | no | `HAVAL-256-3`<br>`dynamic_280` (v) | `HAV256` (v) | duplicate of hav256 |
 | haval128_3(md5($plain)) | no | **--** | `HAV128MD5` (v) |  |
@@ -400,12 +400,12 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | HMAC-SHA1 | **--** | `HMAC-SHA1` (v) | **--** |  |
 | HMAC-SHA1-KPASS | `150` (v) | **--** | `HMAC-SHA1-KPASS` (v) |  |
 | HMAC-SHA224 | **--** | `HMAC-SHA224` (v) | **--** |  |
-| HMAC-SHA224-KPASS | **--** | **--** | `HMAC-SHA224-KPASS` (v) |  |
+| HMAC-SHA224-KPASS | no | **--** | `HMAC-SHA224-KPASS` (v) |  |
 | HMAC-SHA256 (key = $salt) | `1460` (v) | **--** | **--** |  |
 | HMAC-SHA256-KPASS | `1450` (v) | **--** | `HMAC-SHA256-KPASS` (v) |  |
 | HMAC-SHA384 | **--** | `HMAC-SHA384` (v) | **--** |  |
-| HMAC-SHA384 | **--** | **--** | `HMAC-SHA384` (v) |  |
-| HMAC-SHA384-KPASS | **--** | **--** | `HMAC-SHA384-KPASS` (v) |  |
+| HMAC-SHA384 | no | **--** | `HMAC-SHA384` (v) |  |
+| HMAC-SHA384-KPASS | no | **--** | `HMAC-SHA384-KPASS` (v) |  |
 | HMAC-SHA512 | **--** | `HMAC-SHA512` (v) | **--** |  |
 | HMAC-SHA512 (key = $salt) | `1760` (v) | **--** | **--** |  |
 | HMAC-SHA512-KPASS | `1750` (v) | **--** | `HMAC-SHA512-KPASS` (v) |  |
@@ -446,13 +446,13 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | JWT | `16500` (v) | `HMAC-SHA256` (v) | `JWT` (v) |  |
 | KDE KWallet | **--** | `kwallet` (v) | **--** |  |
 | KECCAK224 | `17700` (v) | `dynamic_430` (v) | `KECCAK224` (v) |  |
-| KECCAK224 (2 iterations) | **--** | `dynamic_433` (v) | `KECCAK224 -i2` (v) |  |
+| KECCAK224 (2 iterations) | no | `dynamic_433` (v) | `KECCAK224 -i2` (v) |  |
 | KECCAK256 | `17800` (v) | `Raw-Keccak-256`<br>`dynamic_410` (v) | `KECCAK256` (v) |  |
-| KECCAK256 (2 iterations) | **--** | `dynamic_413` (v) | `KECCAK256 -i2` (v) |  |
+| KECCAK256 (2 iterations) | no | `dynamic_413` (v) | `KECCAK256 -i2` (v) |  |
 | KECCAK384 | `17900` (v) | `dynamic_440` (v) | `KECCAK384` (v) |  |
-| KECCAK384 (2 iterations) | **--** | `dynamic_443` (v) | `KECCAK384 -i2` (v) |  |
+| KECCAK384 (2 iterations) | no | `dynamic_443` (v) | `KECCAK384 -i2` (v) |  |
 | KECCAK512 | `18000` (v) | `dynamic_420` (v) | `KECCAK512` (v) |  |
-| KECCAK512 (2 iterations) | **--** | `dynamic_423` (v) | `KECCAK512 -i2` (v) |  |
+| KECCAK512 (2 iterations) | no | `dynamic_423` (v) | `KECCAK512 -i2` (v) |  |
 | KeePass (KDBX v2/v3) | `13400` (v) | `KeePass`<br>`KeePass-opencl` (v) | **--** |  |
 | KeePass (KDBX v2/v3) - keyfile only | `29700` (v) | **--** | **--** |  |
 | KeePass AESKDF (KDBX v4) | `34301` (v) | `KeePass`<br>`KeePass-opencl` (v) | **--** |  |
@@ -513,10 +513,10 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | macOS v10.8+ (PBKDF2-SHA512) | `7100` (v) | `PBKDF2-HMAC-SHA512`<br>`PBKDF2-HMAC-SHA512-opencl` (v) | **--** |  |
 | MACOSX | `122` (v) | **--** | `MACOSX` (v) |  |
 | MACOSX7 | `1722` (v) | `xsha512`<br>`XSHA512-opencl`<br>`XSHA512-free-opencl` (v) | `MACOSX7` (v) |  |
-| MANGOS | **--** | **--** | `MANGOS` (v) |  |
+| MANGOS | no | **--** | `MANGOS` (v) |  |
 | MD2 | **--** | `MD2` (v) | **--** |  |
 | MD2 | no | `dynamic_310` (v) | `MD2` (v) |  |
-| MD2 (2 iterations) | **--** | `dynamic_313` (v) | `MD2 -i2` (v) |  |
+| MD2 (2 iterations) | no | `dynamic_313` (v) | `MD2 -i2` (v) |  |
 | md2(md5($plain)) | no | **--** | `MD2MD5` (v) |  |
 | md2(md5($plain).$plain) | no | **--** | `MD2MD5PASS` (v) |  |
 | MD4 | `900` (v) | `Raw-MD4`<br>`dynamic_30`<br>`raw-MD4-opencl` (v) | `MD4` (v) |  |
@@ -526,38 +526,38 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | md4(mysql3($plain)) | no | **--** | `MD4SQL3` (v) |  |
 | md4(sha1(md5($plain))) | no | **--** | `MD4SHA1MD5` (v) |  |
 | md4(utf16($plain)) | `1000` (v) | `NT`<br>`NT-long`<br>`dynamic_33`<br>`NT-long-opencl`<br>`NT-opencl` (v) | `MD4UTF16`<br>`NTLM` (v) | duplicate of ntlm-plain-md4-utf16-le-plain; same as md4-utf16-le-utf-8-plain (naming); same as ntlmh (naming) |
-| md4(utf16(md5($plain))) | **--** | **--** | `MD4UTF16MD5` (v) |  |
+| md4(utf16(md5($plain))) | no | **--** | `MD4UTF16MD5` (v) |  |
 | md4(utf16-le(utf-8($plain))) | `1000` (v) | `NT`<br>`NT-long`<br>`dynamic_33`<br>`NT-long-opencl`<br>`NT-opencl` (v) | `MD4UTF16`<br>`MD4UTF16UC`<br>`NTLM`<br>`NTLMH` (v) | same as md4-utf16-plain (naming); same as ntlmh (naming) |
-| MD4UTF16-2xMD5 | **--** | **--** | `MD4UTF16-2xMD5` (v) |  |
-| MD4UTF16BASE64 | **--** | **--** | `MD4UTF16BASE64` (v) |  |
-| MD4UTF16BASE64SHA256 | **--** | **--** | `MD4UTF16BASE64SHA256` (v) |  |
-| MD4UTF16DESCRYPT | **--** | **--** | `MD4UTF16DESCRYPT` (v) |  |
-| MD4UTF16MD5MD5 | **--** | **--** | `MD4UTF16MD5MD5` (v) |  |
-| MD4UTF16MD5MD5MD5 | **--** | **--** | `MD4UTF16MD5MD5MD5` (v) |  |
-| MD4UTF16MD5MD5MD5MD5 | **--** | **--** | `MD4UTF16MD5MD5MD5MD5` (v) |  |
-| MD4UTF16MD5MD5PASSMD5SALT | **--** | **--** | `MD4UTF16MD5MD5PASSMD5SALT` (v) |  |
-| MD4UTF16MD5PASSMD5SALT | **--** | **--** | `MD4UTF16MD5PASSMD5SALT` (v) |  |
-| MD4UTF16MD5PASSMD5SHA1PASS | **--** | **--** | `MD4UTF16MD5PASSMD5SHA1PASS` (v) |  |
-| MD4UTF16MD5PASSMD5SHA1SALT | **--** | **--** | `MD4UTF16MD5PASSMD5SHA1SALT` (v) |  |
-| MD4UTF16MD5SHA1 | **--** | **--** | `MD4UTF16MD5SHA1` (v) |  |
-| MD4UTF16MD5UC | **--** | **--** | `MD4UTF16MD5UC` (v) |  |
-| MD4UTF16MD5x | **--** | **--** | `MD4UTF16MD5x` |  |
-| MD4UTF16revBASE64x | **--** | **--** | `MD4UTF16revBASE64x` (v) |  |
-| MD4UTF16SHA1 | **--** | **--** | `MD4UTF16SHA1` (v) |  |
-| MD4UTF16SHA1MD5 | **--** | **--** | `MD4UTF16SHA1MD5` (v) |  |
-| MD4UTF16SHA1SHA1 | **--** | **--** | `MD4UTF16SHA1SHA1` (v) |  |
-| MD4UTF16SHA1UC | **--** | **--** | `MD4UTF16SHA1UC` (v) |  |
-| MD4UTF16SHA1x | **--** | **--** | `MD4UTF16SHA1x` |  |
-| MD4UTF16SHA256 | **--** | **--** | `MD4UTF16SHA256` (v) |  |
-| MD4UTF16SHA256MD5 | **--** | **--** | `MD4UTF16SHA256MD5` (v) |  |
-| MD4UTF16SHA256SHA1 | **--** | **--** | `MD4UTF16SHA256SHA1` (v) |  |
-| MD4UTF16SHA256SHA256 | **--** | **--** | `MD4UTF16SHA256SHA256` (v) |  |
-| MD4UTF16SHA256SHA256SHA256 | **--** | **--** | `MD4UTF16SHA256SHA256SHA256` (v) |  |
-| MD4UTF16SHA256SHA256SHA256SHA256 | **--** | **--** | `MD4UTF16SHA256SHA256SHA256SHA256` (v) |  |
-| MD4UTF16SHA256SHA256SHA256SHA256SHA256 | **--** | **--** | `MD4UTF16SHA256SHA256SHA256SHA256SHA256` (v) |  |
-| MD4UTF16SHA256UC | **--** | **--** | `MD4UTF16SHA256UC` (v) |  |
-| MD4UTF16SHA256x | **--** | **--** | `MD4UTF16SHA256x` |  |
-| MD4UTF16SQL3 | **--** | **--** | `MD4UTF16SQL3` (v) |  |
+| MD4UTF16-2xMD5 | no | **--** | `MD4UTF16-2xMD5` (v) |  |
+| MD4UTF16BASE64 | no | **--** | `MD4UTF16BASE64` (v) |  |
+| MD4UTF16BASE64SHA256 | no | **--** | `MD4UTF16BASE64SHA256` (v) |  |
+| MD4UTF16DESCRYPT | no | **--** | `MD4UTF16DESCRYPT` (v) |  |
+| MD4UTF16MD5MD5 | no | **--** | `MD4UTF16MD5MD5` (v) |  |
+| MD4UTF16MD5MD5MD5 | no | **--** | `MD4UTF16MD5MD5MD5` (v) |  |
+| MD4UTF16MD5MD5MD5MD5 | no | **--** | `MD4UTF16MD5MD5MD5MD5` (v) |  |
+| MD4UTF16MD5MD5PASSMD5SALT | no | **--** | `MD4UTF16MD5MD5PASSMD5SALT` (v) |  |
+| MD4UTF16MD5PASSMD5SALT | no | **--** | `MD4UTF16MD5PASSMD5SALT` (v) |  |
+| MD4UTF16MD5PASSMD5SHA1PASS | no | **--** | `MD4UTF16MD5PASSMD5SHA1PASS` (v) |  |
+| MD4UTF16MD5PASSMD5SHA1SALT | no | **--** | `MD4UTF16MD5PASSMD5SHA1SALT` (v) |  |
+| MD4UTF16MD5SHA1 | no | **--** | `MD4UTF16MD5SHA1` (v) |  |
+| MD4UTF16MD5UC | no | **--** | `MD4UTF16MD5UC` (v) |  |
+| MD4UTF16MD5x | no | **--** | `MD4UTF16MD5x` |  |
+| MD4UTF16revBASE64x | no | **--** | `MD4UTF16revBASE64x` (v) |  |
+| MD4UTF16SHA1 | no | **--** | `MD4UTF16SHA1` (v) |  |
+| MD4UTF16SHA1MD5 | no | **--** | `MD4UTF16SHA1MD5` (v) |  |
+| MD4UTF16SHA1SHA1 | no | **--** | `MD4UTF16SHA1SHA1` (v) |  |
+| MD4UTF16SHA1UC | no | **--** | `MD4UTF16SHA1UC` (v) |  |
+| MD4UTF16SHA1x | no | **--** | `MD4UTF16SHA1x` |  |
+| MD4UTF16SHA256 | no | **--** | `MD4UTF16SHA256` (v) |  |
+| MD4UTF16SHA256MD5 | no | **--** | `MD4UTF16SHA256MD5` (v) |  |
+| MD4UTF16SHA256SHA1 | no | **--** | `MD4UTF16SHA256SHA1` (v) |  |
+| MD4UTF16SHA256SHA256 | no | **--** | `MD4UTF16SHA256SHA256` (v) |  |
+| MD4UTF16SHA256SHA256SHA256 | no | **--** | `MD4UTF16SHA256SHA256SHA256` (v) |  |
+| MD4UTF16SHA256SHA256SHA256SHA256 | no | **--** | `MD4UTF16SHA256SHA256SHA256SHA256` (v) |  |
+| MD4UTF16SHA256SHA256SHA256SHA256SHA256 | no | **--** | `MD4UTF16SHA256SHA256SHA256SHA256SHA256` (v) |  |
+| MD4UTF16SHA256UC | no | **--** | `MD4UTF16SHA256UC` (v) |  |
+| MD4UTF16SHA256x | no | **--** | `MD4UTF16SHA256x` |  |
+| MD4UTF16SQL3 | no | **--** | `MD4UTF16SQL3` (v) |  |
 | MD4UTF16UC | `1000` (v) | `NT`<br>`NT-long`<br>`dynamic_33`<br>`NT-long-opencl`<br>`NT-opencl` (v) | `MD4UTF16UC` (v) |  |
 | MD5 | `0` (v) | `Raw-MD5`<br>`dynamic_0`<br>`raw-MD5-opencl` (v) | `MD5` (v) | collides with md5cap (encoding); encoding of md5cdab-order-of-32bit-values (encoding); encoding of md5uc (encoding) |
 | md5( md5($pass) . $pass . sha1($pass) ) | no | **--** | `MD5MD5PASSSHA1` (v) |  |
@@ -583,7 +583,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | md5($userid.md5($plain)) | `3710` (v) | `dynamic_2009`<br>`dynamic_9` (v) | `MD5USERIDMD5` (v) | same as md5-salt-md5-pass (salt-convention) |
 | md5($userid.md5(md5($plain))) | no | **--** | `MD5USERIDMD5MD5` (v) |  |
 | md5(base64(raw_sha256)) ? | no | **--** | `MD5BASE64SHA256RAW` (v) |  |
-| md5(base64_decode($plain)) | **--** | **--** | `MD5DECBASE64` (v) |  |
+| md5(base64_decode($plain)) | no | **--** | `MD5DECBASE64` (v) |  |
 | md5(base64_encode($plain)) | no | **--** | `MD5BASE64` (v) |  |
 | md5(base64_encode(md5($plain))) | no | **--** | `MD5BASE64MD5` (v) |  |
 | md5(base64_encode(md5($plain, true))) | no | **--** | `MD5BASE64MD5RAW` (v) |  |
@@ -706,18 +706,18 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | MD5(ZipMonster) | **--** | `ZipMonster` (v) | **--** |  |
 | MD5-2xMD5UC | no | **--** | `MD5-2xMD5UC` (v) |  |
 | MD5-2xSHA1 | no | **--** | `MD5-2xSHA1` (v) |  |
-| MD5-2xSHA1MD5 | **--** | **--** | `MD5-2xSHA1MD5` (v) |  |
+| MD5-2xSHA1MD5 | no | **--** | `MD5-2xSHA1MD5` (v) |  |
 | MD5-4xMD5 | no | **--** | `MD5-4xMD5` (v) |  |
 | MD5-4xMD5-SALT | no | **--** | `MD5-4xMD5-SALT` (v) |  |
-| MD5-5xMD5 | **--** | **--** | `MD5-5xMD5` (v) |  |
-| MD5-6xMD5 | **--** | **--** | `MD5-6xMD5` (v) |  |
+| MD5-5xMD5 | no | **--** | `MD5-5xMD5` (v) |  |
+| MD5-6xMD5 | no | **--** | `MD5-6xMD5` (v) |  |
 | MD5-MD5MD5PASSSALT-PEP | `31700` (v) | **--** | `MD5-MD5MD5PASSSALT-PEP` (v) |  |
 | MD5-MD5MD5PASSSALT-PEP2 | `21900` (v) | **--** | `MD5-MD5MD5PASSSALT-PEP2` (v) |  |
 | MD5-MD5psSHA1MD5psp | no | **--** | `MD5-MD5psSHA1MD5psp` (v) |  |
 | MD5-MD5puSHA1MD5pup | no | **--** | `MD5-MD5puSHA1MD5pup` (v) |  |
 | MD5-MD5SALT-MD5MD5PASS | `30500` (v) | **--** | `MD5-MD5SALT-MD5MD5PASS` (v) |  |
 | MD5-MD5SHA1MD5SHA1MD5SHA1p | no | **--** | `MD5-MD5SHA1MD5SHA1MD5SHA1p` (v) |  |
-| MD5-MD5SHA1PASSSHA1MD5SALT | **--** | **--** | `MD5-MD5SHA1PASSSHA1MD5SALT` (v) |  |
+| MD5-MD5SHA1PASSSHA1MD5SALT | no | **--** | `MD5-MD5SHA1PASSSHA1MD5SALT` (v) |  |
 | MD5-MD5USERSHA1MD5PASS | no | **--** | `MD5-MD5USERSHA1MD5PASS` (v) |  |
 | MD5-SALT-SHA1PEPPASS | `21310` (v) | **--** | `MD5-SALT-SHA1PEPPASS` (v) |  |
 | MD5-SALTMD5PASS-SALT | `33100` (v) | `dynamic_14`<br>`dynamic_2014` (v) | `MD5-SALTMD5PASS-SALT` (v) |  |
@@ -728,38 +728,38 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | MD5AM2 | no | **--** | `MD5AM2` (v) |  |
 | MD5BASE64BASE64 | no | **--** | `MD5BASE64BASE64` (v) |  |
 | MD5BASE64BASE64BASE64 | no | **--** | `MD5BASE64BASE64BASE64` (v) |  |
-| MD5BASE64SHA1MD5 | **--** | **--** | `MD5BASE64SHA1MD5` (v) |  |
+| MD5BASE64SHA1MD5 | no | **--** | `MD5BASE64SHA1MD5` (v) |  |
 | md5bcad (order of 32bit values) | no | **--** | `MD5bcad` (v) |  |
 | MD5CAP | no | **--** | `MD5CAP -i2` (v) | collides with md5 (encoding) |
 | MD5CAPMD5MD5USER | no | **--** | `MD5CAPMD5MD5USER` (v) |  |
 | MD5CAPSHA1 | no | **--** | `MD5CAPSHA1` (v) | collides with md5-sha1-pass (encoding) |
 | md5cdab (order of 32bit values) | no | **--** | **--** | encoding of md5 (encoding) |
 | md5dcab (order of 32bit values) | no | **--** | `MD5dcab` (v) |  |
-| MD5DECBASE64MD5 | **--** | **--** | `MD5DECBASE64MD5` (v) |  |
-| MD5DECBASE64MD5BASE64MD5 | **--** | **--** | `MD5DECBASE64MD5BASE64MD5` (v) |  |
+| MD5DECBASE64MD5 | no | **--** | `MD5DECBASE64MD5` (v) |  |
+| MD5DECBASE64MD5BASE64MD5 | no | **--** | `MD5DECBASE64MD5BASE64MD5` (v) |  |
 | MD5DSALT | no | **--** | `MD5DSALT` |  |
 | MD5GOSTMD5UC | no | **--** | `MD5GOSTMD5UC` (v) |  |
-| MD5LMUC | **--** | **--** | `MD5LMUC` (v) |  |
+| MD5LMUC | no | **--** | `MD5LMUC` (v) |  |
 | MD5MD5HUM | no | **--** | `MD5MD5HUM` |  |
 | MD5MD5MD5USER | `3610` (v) | **--** | `MD5MD5MD5USER` (v) |  |
 | MD5MD5SALT-SALT | no | **--** | `MD5MD5SALT-SALT` (v) |  |
-| MD5MD5SHA1SALT | **--** | **--** | `MD5MD5SHA1SALT` (v) |  |
-| MD5MD5SHA256SALT | **--** | **--** | `MD5MD5SHA256SALT` (v) |  |
+| MD5MD5SHA1SALT | no | **--** | `MD5MD5SHA1SALT` (v) |  |
+| MD5MD5SHA256SALT | no | **--** | `MD5MD5SHA256SALT` (v) |  |
 | MD5MD5UCp | no | **--** | `MD5MD5UCp` (v) |  |
 | MD5MD5UCSHA1MD5MD5 | no | **--** | `MD5MD5UCSHA1MD5MD5` (v) |  |
 | MD5MD5UCSQL3p | no | **--** | `MD5MD5UCSQL3p` (v) |  |
 | MD5NTLMp | no | **--** | `MD5NTLMp` (v) |  |
 | MD5padMD5 | no | **--** | `MD5padMD5` (v) |  |
 | MD5PASSSHA1 | no | **--** | `MD5PASSSHA1` (v) |  |
-| MD5revMD5SALT | **--** | **--** | `MD5revMD5SALT` (v) |  |
+| MD5revMD5SALT | no | **--** | `MD5revMD5SALT` (v) |  |
 | MD5SALT1SALT2 | `33000` (v) | **--** | `MD5SALT1SALT2` (v) |  |
 | MD5SHA0 | no | **--** | `MD5SHA0` (v) |  |
 | MD5SHA1BASE64MD5RAW | no | **--** | `MD5SHA1BASE64MD5RAW` (v) |  |
 | MD5SHA1HUM | no | **--** | `MD5SHA1HUM` |  |
-| MD5SHA1lsb35 | **--** | **--** | `MD5SHA1lsb35` (v) |  |
+| MD5SHA1lsb35 | no | **--** | `MD5SHA1lsb35` (v) |  |
 | MD5SHA1MD5HUM | no | **--** | `MD5SHA1MD5HUM` |  |
 | MD5SHA1MD5MD5SHA1 | no | **--** | `MD5SHA1MD5MD5SHA1` (v) |  |
-| MD5SHA1MD5MD5SHA1MD5 | **--** | **--** | `MD5SHA1MD5MD5SHA1MD5` (v) |  |
+| MD5SHA1MD5MD5SHA1MD5 | no | **--** | `MD5SHA1MD5MD5SHA1MD5` (v) |  |
 | MD5SHA1MD5MD5UC | no | **--** | `MD5SHA1MD5MD5UC` (v) |  |
 | MD5SHA1MD5SHA1MD5SHA1MD5SHA1MD5SHA1MD5SHA1 | no | **--** | `MD5SHA1MD5SHA1MD5SHA1MD5SHA1MD5SHA1MD5SHA1` (v) |  |
 | MD5SHA1MD5UC | no | **--** | `MD5SHA1MD5UC` (v) |  |
@@ -767,34 +767,34 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | MD5SHA1RADMIN2MD5 | no | **--** | `MD5SHA1RADMIN2MD5` (v) |  |
 | MD5SHA1SALT | `4410` (v) | **--** | `MD5SHA1SALT` (v) |  |
 | MD5SHA1u32SALT | no | **--** | `MD5SHA1u32SALT` (v) |  |
-| MD5SHA1u39 | **--** | **--** | `MD5SHA1u39` (v) |  |
-| MD5SHA1UC | **--** | **--** | `MD5SHA1UC` (v) |  |
+| MD5SHA1u39 | no | **--** | `MD5SHA1u39` (v) |  |
+| MD5SHA1UC | no | **--** | `MD5SHA1UC` (v) |  |
 | MD5SHA1UCu32 | no | **--** | `MD5SHA1UCu32` (v) |  |
 | MD5SHA1x | `4400` (v) | `dynamic_22` (v) | `MD5SHA1x` |  |
 | MD5SHA256MD5 | no | **--** | `MD5SHA256MD5` (v) |  |
-| MD5SHA256SHA256 | **--** | **--** | `MD5SHA256SHA256` (v) |  |
-| MD5SHA512 | **--** | **--** | `MD5SHA512` (v) |  |
+| MD5SHA256SHA256 | no | **--** | `MD5SHA256SHA256` (v) |  |
+| MD5SHA512 | no | **--** | `MD5SHA512` (v) |  |
 | MD5SPECAM | no | **--** | `MD5SPECAM` |  |
-| MD5SQL3SQL5MD5MD5 | **--** | **--** | `MD5SQL3SQL5MD5MD5` (v) |  |
-| MD5sub1-20MD5 | **--** | **--** | `MD5sub1-20MD5` (v) |  |
-| MD5sub1-20MD5MD5 | **--** | **--** | `MD5sub1-20MD5MD5` (v) |  |
+| MD5SQL3SQL5MD5MD5 | no | **--** | `MD5SQL3SQL5MD5MD5` (v) |  |
+| MD5sub1-20MD5 | no | **--** | `MD5sub1-20MD5` (v) |  |
+| MD5sub1-20MD5MD5 | no | **--** | `MD5sub1-20MD5MD5` (v) |  |
 | MD5sub8-24MD5sub8-24MD5 | no | **--** | `MD5sub8-24MD5sub8-24MD5` (v) |  |
-| MD5sub8-24SALT | **--** | **--** | `MD5sub8-24SALT` (v) |  |
+| MD5sub8-24SALT | no | **--** | `MD5sub8-24SALT` (v) |  |
 | MD5SWAP | no | **--** | `MD5SWAP` (v) |  |
 | MD5UC | `0` (v) | `Raw-MD5`<br>`dynamic_0`<br>`dynamic_2000` (v) | `MD5UC` | encoding of md5 (encoding) |
 | MD5UCBASE64MD5RAW | no | **--** | `MD5UCBASE64MD5RAW` |  |
 | MD5UCBASE64SHA1RAW | no | **--** | `MD5UCBASE64SHA1RAW` (v) |  |
-| MD5UCMD5 | **--** | **--** | `MD5UCMD5` |  |
+| MD5UCMD5 | no | **--** | `MD5UCMD5` |  |
 | MD5USERPASS | `20` (v) | `dynamic_1009`<br>`dynamic_2004`<br>`dynamic_4` (v) | `MD5USERPASS` (v) |  |
 | MD5UTF16LE | `70` (v) | `dynamic_29` (v) | `MD5UTF16LE` (v) |  |
 | MD5UTF16LEPASSSALT | `30` (v) | **--** | `MD5UTF16LEPASSSALT` (v) |  |
 | MD5UTF16LESALTPASS | `40` (v) | **--** | `MD5UTF16LESALTPASS` (v) |  |
-| MD5WRLSHA1 | **--** | **--** | `MD5WRLSHA1` (v) |  |
+| MD5WRLSHA1 | no | **--** | `MD5WRLSHA1` (v) |  |
 | md6 (128bit) | no | **--** | `MD6` (v) |  |
-| MD6128 | **--** | **--** | `MD6128` (v) |  |
+| MD6128 | no | **--** | `MD6128` (v) |  |
 | MD6256 | `34600` (v) | **--** | `MD6256` (v) |  |
-| MD6512 | **--** | **--** | `MD6512` (v) |  |
-| MDC2 | **--** | `mdc2` (v) | `MDC2` (v) |  |
+| MD6512 | no | **--** | `MD6512` (v) |  |
+| MDC2 | no | `mdc2` (v) | `MDC2` (v) |  |
 | MEDIAWIKI | `3711` (v) | `MediaWiki` (v) | `MEDIAWIKI` (v) |  |
 | mega.nz password-protected link (PBKDF2-HMAC-SHA512) | `33400` (v) | **--** | **--** |  |
 | MetaMask Mobile Wallet | `31900` (v) | **--** | **--** |  |
@@ -878,7 +878,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | Oubliette IDEA | **--** | `Oubliette-IDEA` (v) | **--** |  |
 | Padlock | **--** | `Padlock` (v) | **--** |  |
 | Panama | no | `Panama`<br>`dynamic_320` (v) | `PANAMA` (v) | duplicate of panama |
-| PANAMA (2 iterations) | **--** | `dynamic_323` (v) | `PANAMA -i2` (v) |  |
+| PANAMA (2 iterations) | no | `dynamic_323` (v) | `PANAMA -i2` (v) |  |
 | PARALLEL | no | **--** | `PARALLEL` |  |
 | Password Manager | **--** | `STRIP` | **--** |  |
 | Password Safe | **--** | `pwsafe`<br>`pwsafe-opencl` (v) | **--** |  |
@@ -922,7 +922,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | PKZIP Master Key (6 byte optimization) | `20510` (v) | **--** | **--** |  |
 | plaintext | `99999` (v) | `plaintext` | `NULL` (v) |  |
 | pomelo($plain) | no | **--** | `POMELO` (v) |  |
-| Post.Office | **--** | `po` (v) | **--** |  |
+| Post.Office | no | `po` (v) | **--** |  |
 | POSTGRESCRAM | `11100` (v) | `postgres` (v) | `POSTGRESCRAM` (v) |  |
 | POSTGRESQL | `12` (v) | `dynamic_1013` (v) | `POSTGRESQL` (v) |  |
 | POSTGRESSCRAM256 | `28600` (v) | **--** | `POSTGRESSCRAM256` (v) |  |
@@ -965,7 +965,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | RAR5 | `13000` (v) | `RAR5`<br>`RAR5-opencl` (v) | **--** |  |
 | Raw-Keccak | **--** | `Raw-Keccak` | **--** |  |
 | Raw-MD5u | `70` (v) | `Raw-MD5u` (v) | `MD5UTF16LE` (v) |  |
-| Raw-SHA1-AxCrypt | **--** | `Raw-SHA1-AxCrypt` (v) | **--** |  |
+| Raw-SHA1-AxCrypt | no | `Raw-SHA1-AxCrypt` (v) | **--** |  |
 | Raw-SHA224 | `1300` (v) | `Raw-SHA224`<br>`dynamic_50` (v) | `SHA224`<br>`SHA224RAW` (v) | duplicate of sha224 |
 | Raw-SHA3 | **--** | `Raw-SHA3` | **--** |  |
 | Raw-SHA384 | `10800` (v) | `Raw-SHA384`<br>`dynamic_70` (v) | `SHA384`<br>`SHA384RAW` (v) | duplicate of sha384 |
@@ -987,10 +987,10 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | ripemd160(md5($plain).$plain) | no | **--** | `RMD160MD5PASS` (v) |  |
 | ripemd256 | no | `dynamic_140` (v) | **--** |  |
 | ripemd320 | `33600` (v) | `dynamic_150` (v) | `RMD320` (v) | duplicate of ripemd320 |
-| RMD128 (2 iterations) | **--** | `dynamic_123` (v) | `RMD128 -i2` (v) |  |
+| RMD128 (2 iterations) | no | `dynamic_123` (v) | `RMD128 -i2` (v) |  |
 | RMD128MD4 | no | **--** | `RMD128MD4` (v) |  |
-| RMD160 (2 iterations) | **--** | `dynamic_133` (v) | `RMD160 -i2` (v) |  |
-| RMD320 (2 iterations) | **--** | `dynamic_153` (v) | `RMD320 -i2` (v) |  |
+| RMD160 (2 iterations) | no | `dynamic_133` (v) | `RMD160 -i2` (v) |  |
+| RMD320 (2 iterations) | no | `dynamic_153` (v) | `RMD320 -i2` (v) |  |
 | RORAILS-SHA1 | `27200` (v) | **--** | `RORAILS-SHA1` (v) |  |
 | RSA/DSA/EC/OpenSSH Private Keys ($0$) | `22911` (v) | `SSH`<br>`ssh-opencl` (v) | **--** |  |
 | RSA/DSA/EC/OpenSSH Private Keys ($1, $3$) | `22931` (v) | `SSH`<br>`ssh-opencl` (v) | **--** |  |
@@ -1018,7 +1018,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | SecureZIP AES-128 | `23001` (v) | `securezip` (v) | **--** |  |
 | SecureZIP AES-192 | `23002` (v) | `securezip` (v) | **--** |  |
 | SecureZIP AES-256 | `23003` (v) | `securezip` (v) | **--** |  |
-| SHA0 | **--** | **--** | `SHA0` (v) |  |
+| SHA0 | no | **--** | `SHA0` (v) |  |
 | sha1("*".mysql5($plain)) | no | **--** | `SHA1SQL5` (v) |  |
 | sha1($pass.$salt) | `110` (v) | `dynamic_24` (v) | `SHA1PASSSALT` (v) |  |
 | sha1($plain.sha1($plain)) | no | **--** | `SHA1PASSSHA1` (v) |  |
@@ -1084,228 +1084,228 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | SHA1-2xMD5 | no | **--** | `SHA1-2xMD5` (v) |  |
 | SHA1-8TRACK | no | **--** | `SHA1-8TRACK` (v) |  |
 | SHA1-CUSTOMUSERSALT | no | **--** | `SHA1-CUSTOMUSERSALT` (v) |  |
-| SHA1-HMAC-MD5 | **--** | **--** | `SHA1-HMAC-MD5` (v) |  |
-| SHA1-MD5-MD5SALTMD5PASS | **--** | **--** | `SHA1-MD5-MD5SALTMD5PASS` (v) |  |
-| SHA1-MD5-MD5SALTMD5PASS-SALT | **--** | **--** | `SHA1-MD5-MD5SALTMD5PASS-SALT` (v) |  |
-| SHA1-MD5CAPMD5SALT | **--** | **--** | `SHA1-MD5CAPMD5SALT` (v) |  |
-| SHA1-MD5CAPPEPPER-MD5SALT | **--** | **--** | `SHA1-MD5CAPPEPPER-MD5SALT` (v) |  |
-| SHA1-MD5CAPSALT | **--** | **--** | `SHA1-MD5CAPSALT` (v) |  |
-| SHA1-MD5MD5SALT | **--** | **--** | `SHA1-MD5MD5SALT` (v) |  |
-| SHA1-MD5MD5SALT-CR | **--** | **--** | `SHA1-MD5MD5SALT-CR` (v) |  |
-| SHA1-MD5PASSMD5MD5SALT | **--** | **--** | `SHA1-MD5PASSMD5MD5SALT` (v) |  |
-| SHA1-MD5PEPPER-MD5MD5SALT | **--** | **--** | `SHA1-MD5PEPPER-MD5MD5SALT` (v) |  |
-| SHA1-MD5PEPPER-MD5SALT | **--** | **--** | `SHA1-MD5PEPPER-MD5SALT` (v) |  |
-| SHA1-MD5PEPPER-MD5SALTMD5PASS | **--** | **--** | `SHA1-MD5PEPPER-MD5SALTMD5PASS` (v) |  |
-| SHA1-MD5SALT | **--** | **--** | `SHA1-MD5SALT` (v) |  |
-| SHA1-MD5SALT-CR | **--** | **--** | `SHA1-MD5SALT-CR` (v) |  |
-| SHA1-MD5SHA1PASSSHA1MD5SALT | **--** | **--** | `SHA1-MD5SHA1PASSSHA1MD5SALT` (v) |  |
-| SHA1-MD5SHA256SALT | **--** | **--** | `SHA1-MD5SHA256SALT` (v) |  |
-| SHA1-MD5sub8-24SALT | **--** | **--** | `SHA1-MD5sub8-24SALT` (v) |  |
-| SHA1-MD5UC-MD5SALT | **--** | **--** | `SHA1-MD5UC-MD5SALT` (v) |  |
-| SHA1-MD5UCMD5UCPASSMD5UCSALT | **--** | **--** | `SHA1-MD5UCMD5UCPASSMD5UCSALT` (v) |  |
-| SHA1-PEPPER-MD5SALT | **--** | **--** | `SHA1-PEPPER-MD5SALT` (v) |  |
+| SHA1-HMAC-MD5 | no | **--** | `SHA1-HMAC-MD5` (v) |  |
+| SHA1-MD5-MD5SALTMD5PASS | no | **--** | `SHA1-MD5-MD5SALTMD5PASS` (v) |  |
+| SHA1-MD5-MD5SALTMD5PASS-SALT | no | **--** | `SHA1-MD5-MD5SALTMD5PASS-SALT` (v) |  |
+| SHA1-MD5CAPMD5SALT | no | **--** | `SHA1-MD5CAPMD5SALT` (v) |  |
+| SHA1-MD5CAPPEPPER-MD5SALT | no | **--** | `SHA1-MD5CAPPEPPER-MD5SALT` (v) |  |
+| SHA1-MD5CAPSALT | no | **--** | `SHA1-MD5CAPSALT` (v) |  |
+| SHA1-MD5MD5SALT | no | **--** | `SHA1-MD5MD5SALT` (v) |  |
+| SHA1-MD5MD5SALT-CR | no | **--** | `SHA1-MD5MD5SALT-CR` (v) |  |
+| SHA1-MD5PASSMD5MD5SALT | no | **--** | `SHA1-MD5PASSMD5MD5SALT` (v) |  |
+| SHA1-MD5PEPPER-MD5MD5SALT | no | **--** | `SHA1-MD5PEPPER-MD5MD5SALT` (v) |  |
+| SHA1-MD5PEPPER-MD5SALT | no | **--** | `SHA1-MD5PEPPER-MD5SALT` (v) |  |
+| SHA1-MD5PEPPER-MD5SALTMD5PASS | no | **--** | `SHA1-MD5PEPPER-MD5SALTMD5PASS` (v) |  |
+| SHA1-MD5SALT | no | **--** | `SHA1-MD5SALT` (v) |  |
+| SHA1-MD5SALT-CR | no | **--** | `SHA1-MD5SALT-CR` (v) |  |
+| SHA1-MD5SHA1PASSSHA1MD5SALT | no | **--** | `SHA1-MD5SHA1PASSSHA1MD5SALT` (v) |  |
+| SHA1-MD5SHA256SALT | no | **--** | `SHA1-MD5SHA256SALT` (v) |  |
+| SHA1-MD5sub8-24SALT | no | **--** | `SHA1-MD5sub8-24SALT` (v) |  |
+| SHA1-MD5UC-MD5SALT | no | **--** | `SHA1-MD5UC-MD5SALT` (v) |  |
+| SHA1-MD5UCMD5UCPASSMD5UCSALT | no | **--** | `SHA1-MD5UCMD5UCPASSMD5UCSALT` (v) |  |
+| SHA1-PEPPER-MD5SALT | no | **--** | `SHA1-PEPPER-MD5SALT` (v) |  |
 | SHA1-revMD5SALT | no | **--** | `SHA1-revMD5SALT` (v) |  |
 | SHA1-S1PS2 | `19300` (v) | **--** | `SHA1-S1PS2` (v) |  |
 | SHA1-SALT-SPECIAL | `14400` (v) | **--** | `SHA1-SALT-SPECIAL` (v) |  |
 | SHA1-SALT-UTF16-PEPPER | no | **--** | `SHA1-SALT-UTF16-PEPPER` (v) |  |
 | SHA1-SALTSHA1PASSSALT | `24300` (v) | **--** | `SHA1-SALTSHA1PASSSALT` (v) |  |
 | SHA1-SALTSHA1U16 | `29000` (v) | **--** | `SHA1-SALTSHA1U16` (v) |  |
-| SHA1-SHA1SALTSHA1PASS | **--** | **--** | `SHA1-SHA1SALTSHA1PASS` (v) |  |
-| SHA1-SHA512PASSSHA512SALT | **--** | **--** | `SHA1-SHA512PASSSHA512SALT` (v) |  |
+| SHA1-SHA1SALTSHA1PASS | no | **--** | `SHA1-SHA1SALTSHA1PASS` (v) |  |
+| SHA1-SHA512PASSSHA512SALT | no | **--** | `SHA1-SHA512PASSSHA512SALT` (v) |  |
 | SHA1.Substr(0, 32) | `100` (v) | `dynamic_1023`<br>`dynamic_26`<br>`raw-SHA1-opencl` (v) | `SHA1` (v) | same as axcryptsha1 (encoding) |
-| SHA11SALTMD5SHA256 | **--** | **--** | `SHA11SALTMD5SHA256` (v) |  |
-| SHA11SALTMD5UC | **--** | **--** | `SHA11SALTMD5UC` (v) |  |
-| SHA1BASE64CUSTBASE64MD5 | **--** | **--** | `SHA1BASE64CUSTBASE64MD5` (v) |  |
-| SHA1BASE64MD5 | **--** | **--** | `SHA1BASE64MD5` (v) |  |
-| SHA1BASE64MD5UC | **--** | **--** | `SHA1BASE64MD5UC` (v) |  |
-| SHA1BASE64SHA256 | **--** | **--** | `SHA1BASE64SHA256` (v) |  |
+| SHA11SALTMD5SHA256 | no | **--** | `SHA11SALTMD5SHA256` (v) |  |
+| SHA11SALTMD5UC | no | **--** | `SHA11SALTMD5UC` (v) |  |
+| SHA1BASE64CUSTBASE64MD5 | no | **--** | `SHA1BASE64CUSTBASE64MD5` (v) |  |
+| SHA1BASE64MD5 | no | **--** | `SHA1BASE64MD5` (v) |  |
+| SHA1BASE64MD5UC | no | **--** | `SHA1BASE64MD5UC` (v) |  |
+| SHA1BASE64SHA256 | no | **--** | `SHA1BASE64SHA256` (v) |  |
 | SHA1CRYPT | `15100` (v) | `sha1crypt`<br>`sha1crypt-opencl` (v) | `SHA1CRYPT` (v) |  |
-| SHA1DECBASE64 | **--** | **--** | `SHA1DECBASE64` (v) |  |
-| SHA1DESCRYPT | **--** | **--** | `SHA1DESCRYPT` (v) |  |
+| SHA1DECBASE64 | no | **--** | `SHA1DECBASE64` (v) |  |
+| SHA1DESCRYPT | no | **--** | `SHA1DESCRYPT` (v) |  |
 | SHA1DRU | no | **--** | `SHA1DRU` (v) |  |
-| SHA1GOST | **--** | **--** | `SHA1GOST` (v) |  |
-| SHA1HAV128 | **--** | **--** | `SHA1HAV128` (v) |  |
+| SHA1GOST | no | **--** | `SHA1GOST` (v) |  |
+| SHA1HAV128 | no | **--** | `SHA1HAV128` (v) |  |
 | SHA1lsb32 | no | **--** | `SHA1lsb32` (v) |  |
 | SHA1lsb35 | no | `Raw-SHA1-Linkedin` (v) | `SHA1lsb35` (v) | collides with aich (truncation); collides with sha1uc (truncation) |
-| SHA1MD2 | **--** | **--** | `SHA1MD2` (v) |  |
-| SHA1MD4 | **--** | **--** | `SHA1MD4` (v) |  |
-| SHA1MD4UTF16UCMD4UTF16UC | **--** | **--** | `SHA1MD4UTF16UCMD4UTF16UC` (v) |  |
-| SHA1MD5-2xMD5-MD5 | **--** | **--** | `SHA1MD5-2xMD5-MD5` (v) |  |
-| SHA1MD5-PASSMD5SALT | **--** | **--** | `SHA1MD5-PASSMD5SALT` (v) |  |
-| SHA1MD5-SALTMD5PASS | **--** | **--** | `SHA1MD5-SALTMD5PASS` (v) |  |
-| SHA1MD5-SHA1PASSPASS | **--** | **--** | `SHA1MD5-SHA1PASSPASS` (v) |  |
-| SHA1MD51CAP | **--** | **--** | `SHA1MD51CAP` (v) |  |
-| SHA1MD51CAPMD5 | **--** | **--** | `SHA1MD51CAPMD5` (v) |  |
-| SHA1MD51CAPMD5MD5 | **--** | **--** | `SHA1MD51CAPMD5MD5` (v) |  |
-| SHA1MD51CAPSALT | **--** | **--** | `SHA1MD51CAPSALT` (v) |  |
-| SHA1MD5BASE64 | **--** | **--** | `SHA1MD5BASE64` (v) |  |
-| SHA1MD5BASE641SALT | **--** | **--** | `SHA1MD5BASE641SALT` (v) |  |
-| SHA1MD5CAP | **--** | **--** | `SHA1MD5CAP` (v) |  |
-| SHA1MD5CAPMD5 | **--** | **--** | `SHA1MD5CAPMD5` (v) |  |
-| SHA1MD5CAPMD5SALT | **--** | **--** | `SHA1MD5CAPMD5SALT` (v) |  |
-| SHA1MD5CAPSALT | **--** | **--** | `SHA1MD5CAPSALT` (v) |  |
-| SHA1MD5CAPSHA1SALT | **--** | **--** | `SHA1MD5CAPSHA1SALT` (v) |  |
-| SHA1MD5DSALT | **--** | **--** | `SHA1MD5DSALT` (v) |  |
+| SHA1MD2 | no | **--** | `SHA1MD2` (v) |  |
+| SHA1MD4 | no | **--** | `SHA1MD4` (v) |  |
+| SHA1MD4UTF16UCMD4UTF16UC | no | **--** | `SHA1MD4UTF16UCMD4UTF16UC` (v) |  |
+| SHA1MD5-2xMD5-MD5 | no | **--** | `SHA1MD5-2xMD5-MD5` (v) |  |
+| SHA1MD5-PASSMD5SALT | no | **--** | `SHA1MD5-PASSMD5SALT` (v) |  |
+| SHA1MD5-SALTMD5PASS | no | **--** | `SHA1MD5-SALTMD5PASS` (v) |  |
+| SHA1MD5-SHA1PASSPASS | no | **--** | `SHA1MD5-SHA1PASSPASS` (v) |  |
+| SHA1MD51CAP | no | **--** | `SHA1MD51CAP` (v) |  |
+| SHA1MD51CAPMD5 | no | **--** | `SHA1MD51CAPMD5` (v) |  |
+| SHA1MD51CAPMD5MD5 | no | **--** | `SHA1MD51CAPMD5MD5` (v) |  |
+| SHA1MD51CAPSALT | no | **--** | `SHA1MD51CAPSALT` (v) |  |
+| SHA1MD5BASE64 | no | **--** | `SHA1MD5BASE64` (v) |  |
+| SHA1MD5BASE641SALT | no | **--** | `SHA1MD5BASE641SALT` (v) |  |
+| SHA1MD5CAP | no | **--** | `SHA1MD5CAP` (v) |  |
+| SHA1MD5CAPMD5 | no | **--** | `SHA1MD5CAPMD5` (v) |  |
+| SHA1MD5CAPMD5SALT | no | **--** | `SHA1MD5CAPMD5SALT` (v) |  |
+| SHA1MD5CAPSALT | no | **--** | `SHA1MD5CAPSALT` (v) |  |
+| SHA1MD5CAPSHA1SALT | no | **--** | `SHA1MD5CAPSHA1SALT` (v) |  |
+| SHA1MD5DSALT | no | **--** | `SHA1MD5DSALT` (v) |  |
 | SHA1MD5HUM | no | **--** | `SHA1MD5HUM` |  |
-| SHA1MD5MD5DSALT | **--** | **--** | `SHA1MD5MD5DSALT` (v) |  |
+| SHA1MD5MD5DSALT | no | **--** | `SHA1MD5MD5DSALT` (v) |  |
 | SHA1MD5MD5SALT | no | **--** | `SHA1MD5MD5SALT` (v) |  |
 | SHA1MD5MD5SHA1MD5SHA1SHA1MD5 | no | **--** | `SHA1MD5MD5SHA1MD5SHA1SHA1MD5` (v) |  |
-| SHA1MD5MD5SHA1SHA1MD5 | **--** | **--** | `SHA1MD5MD5SHA1SHA1MD5` (v) |  |
-| SHA1MD5MD5SQL5 | **--** | **--** | `SHA1MD5MD5SQL5` (v) |  |
-| SHA1MD5MD5UC | **--** | **--** | `SHA1MD5MD5UC` (v) |  |
-| SHA1MD5MD5UCMD5MD5UC | **--** | **--** | `SHA1MD5MD5UCMD5MD5UC` (v) |  |
-| SHA1MD5MD5UCMD5UC | **--** | **--** | `SHA1MD5MD5UCMD5UC` (v) |  |
-| SHA1MD5MD5UCx | **--** | **--** | `SHA1MD5MD5UCx` |  |
-| SHA1MD5PASSMD5 | **--** | **--** | `SHA1MD5PASSMD5` (v) |  |
+| SHA1MD5MD5SHA1SHA1MD5 | no | **--** | `SHA1MD5MD5SHA1SHA1MD5` (v) |  |
+| SHA1MD5MD5SQL5 | no | **--** | `SHA1MD5MD5SQL5` (v) |  |
+| SHA1MD5MD5UC | no | **--** | `SHA1MD5MD5UC` (v) |  |
+| SHA1MD5MD5UCMD5MD5UC | no | **--** | `SHA1MD5MD5UCMD5MD5UC` (v) |  |
+| SHA1MD5MD5UCMD5UC | no | **--** | `SHA1MD5MD5UCMD5UC` (v) |  |
+| SHA1MD5MD5UCx | no | **--** | `SHA1MD5MD5UCx` |  |
+| SHA1MD5PASSMD5 | no | **--** | `SHA1MD5PASSMD5` (v) |  |
 | SHA1MD5PASSSALT | `21100` (v) | **--** | `SHA1MD5PASSSALT` (v) |  |
-| SHA1MD5RAW | **--** | **--** | `SHA1MD5RAW` (v) |  |
-| SHA1MD5RAWUCMD5RAW | **--** | **--** | `SHA1MD5RAWUCMD5RAW` (v) |  |
-| SHA1MD5SALTMD5PASS | **--** | **--** | `SHA1MD5SALTMD5PASS` (v) |  |
-| SHA1MD5SALTPASS | **--** | **--** | `SHA1MD5SALTPASS` (v) |  |
-| SHA1MD5SALTPASSPEPPER | **--** | **--** | `SHA1MD5SALTPASSPEPPER` (v) |  |
-| SHA1MD5SHA1-SALT | **--** | **--** | `SHA1MD5SHA1-SALT` (v) |  |
-| SHA1MD5SHA1MD5MD5SHA1MD5 | **--** | **--** | `SHA1MD5SHA1MD5MD5SHA1MD5` (v) |  |
-| SHA1MD5SHA1MD5SHA1 | **--** | **--** | `SHA1MD5SHA1MD5SHA1` (v) |  |
-| SHA1MD5SHA1PASSSALT | **--** | **--** | `SHA1MD5SHA1PASSSALT` (v) |  |
-| SHA1MD5SHA256 | **--** | **--** | `SHA1MD5SHA256` (v) |  |
-| SHA1MD5SHA512 | **--** | **--** | `SHA1MD5SHA512` (v) |  |
-| SHA1MD5SQL5 | **--** | **--** | `SHA1MD5SQL5` (v) |  |
-| SHA1MD5sub1-16 | **--** | **--** | `SHA1MD5sub1-16` (v) |  |
-| SHA1MD5sub1-16MD5 | **--** | **--** | `SHA1MD5sub1-16MD5` (v) |  |
-| SHA1MD5sub1-16MD5MD5 | **--** | **--** | `SHA1MD5sub1-16MD5MD5` (v) |  |
-| SHA1MD5sub1-20MD5 | **--** | **--** | `SHA1MD5sub1-20MD5` (v) |  |
-| SHA1MD5sub1-20MD5MD5 | **--** | **--** | `SHA1MD5sub1-20MD5MD5` (v) |  |
-| SHA1MD5sub8-24MD5 | **--** | **--** | `SHA1MD5sub8-24MD5` (v) |  |
-| SHA1MD5TRUNCSALT | **--** | **--** | `SHA1MD5TRUNCSALT` |  |
-| SHA1MD5UC | **--** | **--** | `SHA1MD5UC` (v) |  |
-| SHA1MD5UC-MD5UCSALT | **--** | **--** | `SHA1MD5UC-MD5UCSALT` (v) |  |
-| SHA1MD5UC1LC | **--** | **--** | `SHA1MD5UC1LC` |  |
-| SHA1MD5UCMD5 | **--** | **--** | `SHA1MD5UCMD5` (v) |  |
-| SHA1MD5UCMD5UC | **--** | **--** | `SHA1MD5UCMD5UC` (v) |  |
-| SHA1MD5UCMD5UCMD5UC | **--** | **--** | `SHA1MD5UCMD5UCMD5UC` (v) |  |
-| SHA1MD5UCMD5UCMD5UCMD5UC | **--** | **--** | `SHA1MD5UCMD5UCMD5UCMD5UC` (v) |  |
-| SHA1MD5UCSALT | **--** | **--** | `SHA1MD5UCSALT` (v) |  |
-| SHA1MD5UCSHA1BASE64 | **--** | **--** | `SHA1MD5UCSHA1BASE64` (v) |  |
-| SHA1MD5UCSHA1UCMD5UC | **--** | **--** | `SHA1MD5UCSHA1UCMD5UC` (v) |  |
-| SHA1MD5UCx | **--** | **--** | `SHA1MD5UCx` |  |
-| SHA1MD5WRLSHA1 | **--** | **--** | `SHA1MD5WRLSHA1` (v) |  |
-| SHA1MD5x | **--** | **--** | `SHA1MD5x` (v) |  |
-| SHA1MD5x1CAP | **--** | **--** | `SHA1MD5x1CAP` (v) |  |
-| SHA1MD5xSALT | **--** | **--** | `SHA1MD5xSALT` |  |
-| SHA1MD6CAPTRUNC | **--** | **--** | `SHA1MD6CAPTRUNC` (v) |  |
-| SHA1MD6TRUNC | **--** | **--** | `SHA1MD6TRUNC` |  |
-| SHA1NTLM | **--** | **--** | `SHA1NTLM` (v) |  |
-| SHA1NTLMUC | **--** | **--** | `SHA1NTLMUC` (v) |  |
-| SHA1PASS-TRUNC | **--** | **--** | `SHA1PASS-TRUNC` (v) |  |
+| SHA1MD5RAW | no | **--** | `SHA1MD5RAW` (v) |  |
+| SHA1MD5RAWUCMD5RAW | no | **--** | `SHA1MD5RAWUCMD5RAW` (v) |  |
+| SHA1MD5SALTMD5PASS | no | **--** | `SHA1MD5SALTMD5PASS` (v) |  |
+| SHA1MD5SALTPASS | no | **--** | `SHA1MD5SALTPASS` (v) |  |
+| SHA1MD5SALTPASSPEPPER | no | **--** | `SHA1MD5SALTPASSPEPPER` (v) |  |
+| SHA1MD5SHA1-SALT | no | **--** | `SHA1MD5SHA1-SALT` (v) |  |
+| SHA1MD5SHA1MD5MD5SHA1MD5 | no | **--** | `SHA1MD5SHA1MD5MD5SHA1MD5` (v) |  |
+| SHA1MD5SHA1MD5SHA1 | no | **--** | `SHA1MD5SHA1MD5SHA1` (v) |  |
+| SHA1MD5SHA1PASSSALT | no | **--** | `SHA1MD5SHA1PASSSALT` (v) |  |
+| SHA1MD5SHA256 | no | **--** | `SHA1MD5SHA256` (v) |  |
+| SHA1MD5SHA512 | no | **--** | `SHA1MD5SHA512` (v) |  |
+| SHA1MD5SQL5 | no | **--** | `SHA1MD5SQL5` (v) |  |
+| SHA1MD5sub1-16 | no | **--** | `SHA1MD5sub1-16` (v) |  |
+| SHA1MD5sub1-16MD5 | no | **--** | `SHA1MD5sub1-16MD5` (v) |  |
+| SHA1MD5sub1-16MD5MD5 | no | **--** | `SHA1MD5sub1-16MD5MD5` (v) |  |
+| SHA1MD5sub1-20MD5 | no | **--** | `SHA1MD5sub1-20MD5` (v) |  |
+| SHA1MD5sub1-20MD5MD5 | no | **--** | `SHA1MD5sub1-20MD5MD5` (v) |  |
+| SHA1MD5sub8-24MD5 | no | **--** | `SHA1MD5sub8-24MD5` (v) |  |
+| SHA1MD5TRUNCSALT | no | **--** | `SHA1MD5TRUNCSALT` |  |
+| SHA1MD5UC | no | **--** | `SHA1MD5UC` (v) |  |
+| SHA1MD5UC-MD5UCSALT | no | **--** | `SHA1MD5UC-MD5UCSALT` (v) |  |
+| SHA1MD5UC1LC | no | **--** | `SHA1MD5UC1LC` |  |
+| SHA1MD5UCMD5 | no | **--** | `SHA1MD5UCMD5` (v) |  |
+| SHA1MD5UCMD5UC | no | **--** | `SHA1MD5UCMD5UC` (v) |  |
+| SHA1MD5UCMD5UCMD5UC | no | **--** | `SHA1MD5UCMD5UCMD5UC` (v) |  |
+| SHA1MD5UCMD5UCMD5UCMD5UC | no | **--** | `SHA1MD5UCMD5UCMD5UCMD5UC` (v) |  |
+| SHA1MD5UCSALT | no | **--** | `SHA1MD5UCSALT` (v) |  |
+| SHA1MD5UCSHA1BASE64 | no | **--** | `SHA1MD5UCSHA1BASE64` (v) |  |
+| SHA1MD5UCSHA1UCMD5UC | no | **--** | `SHA1MD5UCSHA1UCMD5UC` (v) |  |
+| SHA1MD5UCx | no | **--** | `SHA1MD5UCx` |  |
+| SHA1MD5WRLSHA1 | no | **--** | `SHA1MD5WRLSHA1` (v) |  |
+| SHA1MD5x | no | **--** | `SHA1MD5x` (v) |  |
+| SHA1MD5x1CAP | no | **--** | `SHA1MD5x1CAP` (v) |  |
+| SHA1MD5xSALT | no | **--** | `SHA1MD5xSALT` |  |
+| SHA1MD6CAPTRUNC | no | **--** | `SHA1MD6CAPTRUNC` (v) |  |
+| SHA1MD6TRUNC | no | **--** | `SHA1MD6TRUNC` |  |
+| SHA1NTLM | no | **--** | `SHA1NTLM` (v) |  |
+| SHA1NTLMUC | no | **--** | `SHA1NTLMUC` (v) |  |
+| SHA1PASS-TRUNC | no | **--** | `SHA1PASS-TRUNC` (v) |  |
 | SHA1PASSHEXSALT | `112` (v) | **--** | `SHA1PASSHEXSALT` (v) |  |
 | SHA1RAW | `300` (v) | **--** | `SHA1RAW` |  |
-| SHA1revBASE64 | **--** | **--** | `SHA1revBASE64` (v) |  |
-| SHA1revBASE64x | **--** | **--** | `SHA1revBASE64x` (v) |  |
+| SHA1revBASE64 | no | **--** | `SHA1revBASE64` (v) |  |
+| SHA1revBASE64x | no | **--** | `SHA1revBASE64x` (v) |  |
 | SHA1revMD5PASSSALT | no | **--** | `SHA1revMD5PASSSALT` (v) |  |
-| SHA1revSHA1 | **--** | **--** | `SHA1revSHA1` (v) |  |
-| SHA1RMD128 | **--** | **--** | `SHA1RMD128` (v) |  |
-| SHA1RMD160TRUNC | **--** | **--** | `SHA1RMD160TRUNC` |  |
+| SHA1revSHA1 | no | **--** | `SHA1revSHA1` (v) |  |
+| SHA1RMD128 | no | **--** | `SHA1RMD128` (v) |  |
+| SHA1RMD160TRUNC | no | **--** | `SHA1RMD160TRUNC` |  |
 | SHA1SALTCX | no | **--** | `SHA1SALTCX` |  |
-| SHA1SALTMD5MD5PASS | **--** | **--** | `SHA1SALTMD5MD5PASS` (v) |  |
-| SHA1SALTMD5MD5PASSPEPPER | **--** | **--** | `SHA1SALTMD5MD5PASSPEPPER` (v) |  |
+| SHA1SALTMD5MD5PASS | no | **--** | `SHA1SALTMD5MD5PASS` (v) |  |
+| SHA1SALTMD5MD5PASSPEPPER | no | **--** | `SHA1SALTMD5MD5PASSPEPPER` (v) |  |
 | SHA1SALTMD5PASS | no | **--** | `SHA1SALTMD5PASS` (v) |  |
-| SHA1SALTMD5PASSMD5 | **--** | **--** | `SHA1SALTMD5PASSMD5` (v) |  |
-| SHA1SALTMD5PASSPEPPER | **--** | **--** | `SHA1SALTMD5PASSPEPPER` (v) |  |
-| SHA1SALTMD5SHA1PASS | **--** | **--** | `SHA1SALTMD5SHA1PASS` (v) |  |
-| SHA1SALTMD5SHA1PASSPEPPER | **--** | **--** | `SHA1SALTMD5SHA1PASSPEPPER` (v) |  |
-| SHA1SALTMD5UC | **--** | **--** | `SHA1SALTMD5UC` (v) |  |
-| SHA1SALTMD5UCMD5UC | **--** | **--** | `SHA1SALTMD5UCMD5UC` (v) |  |
-| SHA1SALTMD5UCPASSPEPPER | **--** | **--** | `SHA1SALTMD5UCPASSPEPPER` (v) |  |
+| SHA1SALTMD5PASSMD5 | no | **--** | `SHA1SALTMD5PASSMD5` (v) |  |
+| SHA1SALTMD5PASSPEPPER | no | **--** | `SHA1SALTMD5PASSPEPPER` (v) |  |
+| SHA1SALTMD5SHA1PASS | no | **--** | `SHA1SALTMD5SHA1PASS` (v) |  |
+| SHA1SALTMD5SHA1PASSPEPPER | no | **--** | `SHA1SALTMD5SHA1PASSPEPPER` (v) |  |
+| SHA1SALTMD5UC | no | **--** | `SHA1SALTMD5UC` (v) |  |
+| SHA1SALTMD5UCMD5UC | no | **--** | `SHA1SALTMD5UCMD5UC` (v) |  |
+| SHA1SALTMD5UCPASSPEPPER | no | **--** | `SHA1SALTMD5UCPASSPEPPER` (v) |  |
 | SHA1SALTrevMD5PASS | no | **--** | `SHA1SALTrevMD5PASS` (v) |  |
-| SHA1SALTSHA1CAP | **--** | **--** | `SHA1SALTSHA1CAP` (v) |  |
-| SHA1SALTSHA1MD5 | **--** | **--** | `SHA1SALTSHA1MD5` (v) |  |
-| SHA1SALTSHA1PASSPEPPER | **--** | **--** | `SHA1SALTSHA1PASSPEPPER` (v) |  |
-| SHA1SALTSHA1UCPASS | **--** | **--** | `SHA1SALTSHA1UCPASS` (v) |  |
-| SHA1SALTSHA256 | **--** | **--** | `SHA1SALTSHA256` (v) |  |
-| SHA1SALTSHA256TRUNC | **--** | **--** | `SHA1SALTSHA256TRUNC` |  |
-| SHA1SALTSHA256TRUNCMD5 | **--** | **--** | `SHA1SALTSHA256TRUNCMD5` |  |
-| SHA1SALTSHA256UCTRUNC | **--** | **--** | `SHA1SALTSHA256UCTRUNC` |  |
-| SHA1SALTSHA512UCTRUNC | **--** | **--** | `SHA1SALTSHA512UCTRUNC` |  |
-| SHA1SHA0 | **--** | **--** | `SHA1SHA0` (v) |  |
-| SHA1SHA11CAP | **--** | **--** | `SHA1SHA11CAP` (v) |  |
-| SHA1SHA1CAPSALT | **--** | **--** | `SHA1SHA1CAPSALT` (v) |  |
-| SHA1SHA1CAPTRUNC | **--** | **--** | `SHA1SHA1CAPTRUNC` (v) |  |
+| SHA1SALTSHA1CAP | no | **--** | `SHA1SALTSHA1CAP` (v) |  |
+| SHA1SALTSHA1MD5 | no | **--** | `SHA1SALTSHA1MD5` (v) |  |
+| SHA1SALTSHA1PASSPEPPER | no | **--** | `SHA1SALTSHA1PASSPEPPER` (v) |  |
+| SHA1SALTSHA1UCPASS | no | **--** | `SHA1SALTSHA1UCPASS` (v) |  |
+| SHA1SALTSHA256 | no | **--** | `SHA1SALTSHA256` (v) |  |
+| SHA1SALTSHA256TRUNC | no | **--** | `SHA1SALTSHA256TRUNC` |  |
+| SHA1SALTSHA256TRUNCMD5 | no | **--** | `SHA1SALTSHA256TRUNCMD5` |  |
+| SHA1SALTSHA256UCTRUNC | no | **--** | `SHA1SALTSHA256UCTRUNC` |  |
+| SHA1SALTSHA512UCTRUNC | no | **--** | `SHA1SALTSHA512UCTRUNC` |  |
+| SHA1SHA0 | no | **--** | `SHA1SHA0` (v) |  |
+| SHA1SHA11CAP | no | **--** | `SHA1SHA11CAP` (v) |  |
+| SHA1SHA1CAPSALT | no | **--** | `SHA1SHA1CAPSALT` (v) |  |
+| SHA1SHA1CAPTRUNC | no | **--** | `SHA1SHA1CAPTRUNC` (v) |  |
 | SHA1SHA1HUM | no | **--** | `SHA1SHA1HUM` |  |
-| SHA1SHA1MD5MD5PASS1SALT | **--** | **--** | `SHA1SHA1MD5MD5PASS1SALT` (v) |  |
-| SHA1SHA1MD5PASSSALT | **--** | **--** | `SHA1SHA1MD5PASSSALT` (v) |  |
-| SHA1SHA1PASS-TRUNC1SALT | **--** | **--** | `SHA1SHA1PASS-TRUNC1SALT` (v) |  |
+| SHA1SHA1MD5MD5PASS1SALT | no | **--** | `SHA1SHA1MD5MD5PASS1SALT` (v) |  |
+| SHA1SHA1MD5PASSSALT | no | **--** | `SHA1SHA1MD5PASSSALT` (v) |  |
+| SHA1SHA1PASS-TRUNC1SALT | no | **--** | `SHA1SHA1PASS-TRUNC1SALT` (v) |  |
 | SHA1SHA1SALTPASSSALT | `5000` (v) | **--** | `SHA1SHA1SALTPASSSALT` (v) |  |
-| SHA1SHA1SHA1TRUNC | **--** | **--** | `SHA1SHA1SHA1TRUNC` (v) |  |
-| SHA1SHA1sub1-16 | **--** | **--** | `SHA1SHA1sub1-16` (v) |  |
-| SHA1SHA1TRUNC | **--** | `dynamic_1026` (v) | `SHA1SHA1TRUNC` |  |
-| SHA1SHA1TRUNC-SHA1PASS-3 | **--** | **--** | `SHA1SHA1TRUNC-SHA1PASS-3` (v) |  |
-| SHA1SHA1TRUNCMD5 | **--** | **--** | `SHA1SHA1TRUNCMD5` (v) |  |
-| SHA1SHA1TRUNCSALT | **--** | **--** | `SHA1SHA1TRUNCSALT` |  |
-| SHA1SHA1u34 | **--** | **--** | `SHA1SHA1u34` (v) |  |
-| SHA1SHA1u35 | **--** | **--** | `SHA1SHA1u35` (v) |  |
-| SHA1SHA1u36 | **--** | **--** | `SHA1SHA1u36` (v) |  |
-| SHA1SHA1u37 | **--** | **--** | `SHA1SHA1u37` (v) |  |
-| SHA1SHA1u38 | **--** | **--** | `SHA1SHA1u38` (v) |  |
-| SHA1SHA1u39 | **--** | **--** | `SHA1SHA1u39` (v) |  |
-| SHA1SHA1UCPASSSALT | **--** | **--** | `SHA1SHA1UCPASSSALT` (v) |  |
-| SHA1SHA1UCTRUNC | **--** | **--** | `SHA1SHA1UCTRUNC` |  |
-| SHA1SHA224 | **--** | **--** | `SHA1SHA224` (v) |  |
-| SHA1SHA256CAP | **--** | **--** | `SHA1SHA256CAP` (v) |  |
-| SHA1SHA256MD5 | **--** | **--** | `SHA1SHA256MD5` (v) |  |
-| SHA1SHA256MD5MD5 | **--** | **--** | `SHA1SHA256MD5MD5` (v) |  |
-| SHA1SHA256MD5SHA256MD5 | **--** | **--** | `SHA1SHA256MD5SHA256MD5` (v) |  |
-| SHA1SHA256SHA1 | **--** | **--** | `SHA1SHA256SHA1` (v) |  |
-| SHA1SHA256SHA256 | **--** | **--** | `SHA1SHA256SHA256` (v) |  |
-| SHA1SHA256SHA256SHA256 | **--** | **--** | `SHA1SHA256SHA256SHA256` (v) |  |
-| SHA1SHA256SHA512 | **--** | **--** | `SHA1SHA256SHA512` (v) |  |
-| SHA1SHA256TRUNC | **--** | **--** | `SHA1SHA256TRUNC` |  |
-| SHA1SHA256TRUNCMD5 | **--** | **--** | `SHA1SHA256TRUNCMD5` |  |
-| SHA1SHA256TRUNCMD5SALT | **--** | **--** | `SHA1SHA256TRUNCMD5SALT` |  |
-| SHA1SHA256TRUNCSALT | **--** | **--** | `SHA1SHA256TRUNCSALT` |  |
-| SHA1SHA256u32 | **--** | **--** | `SHA1SHA256u32` (v) |  |
-| SHA1SHA256u34 | **--** | **--** | `SHA1SHA256u34` (v) |  |
-| SHA1SHA256u36 | **--** | **--** | `SHA1SHA256u36` (v) |  |
-| SHA1SHA256u37 | **--** | **--** | `SHA1SHA256u37` (v) |  |
-| SHA1SHA256u38 | **--** | **--** | `SHA1SHA256u38` (v) |  |
-| SHA1SHA256u40 | **--** | **--** | `SHA1SHA256u40` (v) |  |
-| SHA1SHA256u42 | **--** | **--** | `SHA1SHA256u42` (v) |  |
-| SHA1SHA256UC | **--** | **--** | `SHA1SHA256UC` (v) |  |
-| SHA1SHA256UCSHA256 | **--** | **--** | `SHA1SHA256UCSHA256` (v) |  |
-| SHA1SHA256UCSHA256SHA256 | **--** | **--** | `SHA1SHA256UCSHA256SHA256` (v) |  |
-| SHA1SHA256UCTRUNC | **--** | **--** | `SHA1SHA256UCTRUNC` |  |
-| SHA1SHA256UCx | **--** | **--** | `SHA1SHA256UCx` |  |
-| SHA1SHA256UCxSHA256 | **--** | **--** | `SHA1SHA256UCxSHA256` |  |
-| SHA1SHA256x | **--** | **--** | `SHA1SHA256x` |  |
-| SHA1SHA3-256 | **--** | **--** | `SHA1SHA3-256` (v) |  |
-| SHA1SHA3-256TRUNC | **--** | **--** | `SHA1SHA3-256TRUNC` |  |
-| SHA1SHA384TRUNC | **--** | **--** | `SHA1SHA384TRUNC` |  |
-| SHA1SHA512TRUNC | **--** | **--** | `SHA1SHA512TRUNC` |  |
-| SHA1SHA512TRUNC1SALT | **--** | **--** | `SHA1SHA512TRUNC1SALT` (v) |  |
-| SHA1SHA512TRUNCMD5 | **--** | **--** | `SHA1SHA512TRUNCMD5` (v) |  |
-| SHA1SHA512UC | **--** | **--** | `SHA1SHA512UC` (v) |  |
-| SHA1SHA512UCTRUNC | **--** | **--** | `SHA1SHA512UCTRUNC` |  |
-| SHA1SQL5-32 | **--** | **--** | `SHA1SQL5-32` (v) |  |
+| SHA1SHA1SHA1TRUNC | no | **--** | `SHA1SHA1SHA1TRUNC` (v) |  |
+| SHA1SHA1sub1-16 | no | **--** | `SHA1SHA1sub1-16` (v) |  |
+| SHA1SHA1TRUNC | no | `dynamic_1026` (v) | `SHA1SHA1TRUNC` |  |
+| SHA1SHA1TRUNC-SHA1PASS-3 | no | **--** | `SHA1SHA1TRUNC-SHA1PASS-3` (v) |  |
+| SHA1SHA1TRUNCMD5 | no | **--** | `SHA1SHA1TRUNCMD5` (v) |  |
+| SHA1SHA1TRUNCSALT | no | **--** | `SHA1SHA1TRUNCSALT` |  |
+| SHA1SHA1u34 | no | **--** | `SHA1SHA1u34` (v) |  |
+| SHA1SHA1u35 | no | **--** | `SHA1SHA1u35` (v) |  |
+| SHA1SHA1u36 | no | **--** | `SHA1SHA1u36` (v) |  |
+| SHA1SHA1u37 | no | **--** | `SHA1SHA1u37` (v) |  |
+| SHA1SHA1u38 | no | **--** | `SHA1SHA1u38` (v) |  |
+| SHA1SHA1u39 | no | **--** | `SHA1SHA1u39` (v) |  |
+| SHA1SHA1UCPASSSALT | no | **--** | `SHA1SHA1UCPASSSALT` (v) |  |
+| SHA1SHA1UCTRUNC | no | **--** | `SHA1SHA1UCTRUNC` |  |
+| SHA1SHA224 | no | **--** | `SHA1SHA224` (v) |  |
+| SHA1SHA256CAP | no | **--** | `SHA1SHA256CAP` (v) |  |
+| SHA1SHA256MD5 | no | **--** | `SHA1SHA256MD5` (v) |  |
+| SHA1SHA256MD5MD5 | no | **--** | `SHA1SHA256MD5MD5` (v) |  |
+| SHA1SHA256MD5SHA256MD5 | no | **--** | `SHA1SHA256MD5SHA256MD5` (v) |  |
+| SHA1SHA256SHA1 | no | **--** | `SHA1SHA256SHA1` (v) |  |
+| SHA1SHA256SHA256 | no | **--** | `SHA1SHA256SHA256` (v) |  |
+| SHA1SHA256SHA256SHA256 | no | **--** | `SHA1SHA256SHA256SHA256` (v) |  |
+| SHA1SHA256SHA512 | no | **--** | `SHA1SHA256SHA512` (v) |  |
+| SHA1SHA256TRUNC | no | **--** | `SHA1SHA256TRUNC` |  |
+| SHA1SHA256TRUNCMD5 | no | **--** | `SHA1SHA256TRUNCMD5` |  |
+| SHA1SHA256TRUNCMD5SALT | no | **--** | `SHA1SHA256TRUNCMD5SALT` |  |
+| SHA1SHA256TRUNCSALT | no | **--** | `SHA1SHA256TRUNCSALT` |  |
+| SHA1SHA256u32 | no | **--** | `SHA1SHA256u32` (v) |  |
+| SHA1SHA256u34 | no | **--** | `SHA1SHA256u34` (v) |  |
+| SHA1SHA256u36 | no | **--** | `SHA1SHA256u36` (v) |  |
+| SHA1SHA256u37 | no | **--** | `SHA1SHA256u37` (v) |  |
+| SHA1SHA256u38 | no | **--** | `SHA1SHA256u38` (v) |  |
+| SHA1SHA256u40 | no | **--** | `SHA1SHA256u40` (v) |  |
+| SHA1SHA256u42 | no | **--** | `SHA1SHA256u42` (v) |  |
+| SHA1SHA256UC | no | **--** | `SHA1SHA256UC` (v) |  |
+| SHA1SHA256UCSHA256 | no | **--** | `SHA1SHA256UCSHA256` (v) |  |
+| SHA1SHA256UCSHA256SHA256 | no | **--** | `SHA1SHA256UCSHA256SHA256` (v) |  |
+| SHA1SHA256UCTRUNC | no | **--** | `SHA1SHA256UCTRUNC` |  |
+| SHA1SHA256UCx | no | **--** | `SHA1SHA256UCx` |  |
+| SHA1SHA256UCxSHA256 | no | **--** | `SHA1SHA256UCxSHA256` |  |
+| SHA1SHA256x | no | **--** | `SHA1SHA256x` |  |
+| SHA1SHA3-256 | no | **--** | `SHA1SHA3-256` (v) |  |
+| SHA1SHA3-256TRUNC | no | **--** | `SHA1SHA3-256TRUNC` |  |
+| SHA1SHA384TRUNC | no | **--** | `SHA1SHA384TRUNC` |  |
+| SHA1SHA512TRUNC | no | **--** | `SHA1SHA512TRUNC` |  |
+| SHA1SHA512TRUNC1SALT | no | **--** | `SHA1SHA512TRUNC1SALT` (v) |  |
+| SHA1SHA512TRUNCMD5 | no | **--** | `SHA1SHA512TRUNCMD5` (v) |  |
+| SHA1SHA512UC | no | **--** | `SHA1SHA512UC` (v) |  |
+| SHA1SHA512UCTRUNC | no | **--** | `SHA1SHA512UCTRUNC` |  |
+| SHA1SQL5-32 | no | **--** | `SHA1SQL5-32` (v) |  |
 | SHA1UC | `100` (v) | `Raw-SHA1`<br>`dynamic_26`<br>`raw-SHA1-opencl` (v) | `SHA1UC` | collides with sha1lsb35 (truncation) |
 | SHA1UCUTF16LE | `170` (v) | `dynamic_1400` (v) | `SHA1UCUTF16LE` (v) |  |
 | SHA1USERSQL3 | no | **--** | `SHA1USERSQL3` (v) |  |
-| SHA1UTF16BE | **--** | **--** | `SHA1UTF16BE` (v) |  |
-| SHA1UTF16BEZ | **--** | **--** | `SHA1UTF16BEZ` (v) |  |
+| SHA1UTF16BE | no | **--** | `SHA1UTF16BE` (v) |  |
+| SHA1UTF16BEZ | no | **--** | `SHA1UTF16BEZ` (v) |  |
 | SHA1UTF16LEPASSSALT | `130` (v) | **--** | `SHA1UTF16LEPASSSALT` (v) |  |
 | SHA1UTF16LESALTPASS | `140` (v) | `dynamic_1600`<br>`dynamic_41` (v) | `SHA1UTF16LESALTPASS` (v) |  |
-| SHA1UTF7 | **--** | **--** | `SHA1UTF7` (v) |  |
-| SHA1WRLTRUNC | **--** | **--** | `SHA1WRLTRUNC` |  |
-| SHA1WRLUCTRUNC | **--** | **--** | `SHA1WRLUCTRUNC` |  |
-| SHA1WRLUCTRUNCSALT | **--** | **--** | `SHA1WRLUCTRUNCSALT` |  |
-| SHA1ZUTF16LE | **--** | **--** | `SHA1ZUTF16LE` (v) |  |
+| SHA1UTF7 | no | **--** | `SHA1UTF7` (v) |  |
+| SHA1WRLTRUNC | no | **--** | `SHA1WRLTRUNC` |  |
+| SHA1WRLUCTRUNC | no | **--** | `SHA1WRLUCTRUNC` |  |
+| SHA1WRLUCTRUNCSALT | no | **--** | `SHA1WRLUCTRUNCSALT` |  |
+| SHA1ZUTF16LE | no | **--** | `SHA1ZUTF16LE` (v) |  |
 | SHA224 (2 iterations) | `34400` (v) | `dynamic_53` (v) | `SHA224 -i2` (v) |  |
 | sha224(md5($plain)) | no | **--** | `SHA224MD5` (v) |  |
 | sha224(md5($plain),$plain) | no | **--** | `SHA224MD5PASS` (v) |  |
-| sha224(sha224($plain, true)) | **--** | `dynamic_54` (v) | `SHA224RAW -i2` (v) |  |
+| sha224(sha224($plain, true)) | no | `dynamic_54` (v) | `SHA224RAW -i2` (v) |  |
 | SHA224PASSSALT | `1310` (v) | `dynamic_52` (v) | `SHA224PASSSALT` (v) |  |
 | SHA224SALTPASS | `1320` (v) | `dynamic_51` (v) | `SHA224SALTPASS` (v) |  |
 | SHA224SHA1 | `34500` (v) | **--** | `SHA224SHA1` (v) |  |
 | SHA256 | `1400` (v) | `Raw-SHA256`<br>`dynamic_60`<br>`raw-SHA256-opencl` (v) | `SHA256` (v) |  |
-| SHA256 (2 iterations) | **--** | `dynamic_63` (v) | `SHA256 -i2` (v) |  |
+| SHA256 (2 iterations) | no | `dynamic_63` (v) | `SHA256 -i2` (v) |  |
 | sha256($pass.$salt) | `1410` (v) | `dynamic_62` (v) | `SHA256PASSSALT` (v) |  |
 | sha256($salt.$pass) | `1420` (v) | `dynamic_61` (v) | `SHA256SALTPASS` (v) | encoding of sha256rawsaltpass (encoding) |
 | sha256($salt.sha256($pass)) | `20720` (v) | `dynamic_66` (v) | `SHA256SALTSHA256PASS` (v) |  |
@@ -1319,7 +1319,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | SHA256-SALTSHA256RAW | `21420` (v) | **--** | `SHA256-SALTSHA256RAW` (v) |  |
 | sha256crypt | `7400` (v) | `sha256crypt`<br>`sha256crypt-opencl` (v) | `SHA256CRYPT` (v) |  |
 | SHA256MD5SALTPASS | no | **--** | `SHA256MD5SALTPASS` (v) |  |
-| SHA256MD5SHA256MD5 | **--** | **--** | `SHA256MD5SHA256MD5` (v) |  |
+| SHA256MD5SHA256MD5 | no | **--** | `SHA256MD5SHA256MD5` (v) |  |
 | SHA256RAWSALTPASS | `1420` (v) | `FormSpring`<br>`dynamic_61` (v) | `SHA256RAWSALTPASS` (v) | encoding of sha256-salt-pass (encoding) |
 | SHA256SALTPASSSALT | `22300` (v) | **--** | `SHA256SALTPASSSALT` (v) |  |
 | SHA256SHA256SALT | `20710` (v) | `dynamic_1503`<br>`dynamic_65` (v) | `SHA256SHA256SALT` (v) |  |
@@ -1327,25 +1327,25 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | SHA256UTF16LE | `1470` (v) | **--** | `SHA256UTF16LE` (v) |  |
 | SHA256UTF16LEPASSSALT | `1430` (v) | **--** | `SHA256UTF16LEPASSSALT` (v) |  |
 | SHA256UTF16LESALTPASS | `1440` (v) | **--** | `SHA256UTF16LESALTPASS` (v) |  |
-| SHA3-224 (2 iterations) | **--** | `dynamic_373` (v) | `SHA3-224 -i2` (v) |  |
+| SHA3-224 (2 iterations) | no | `dynamic_373` (v) | `SHA3-224 -i2` (v) |  |
 | sha3-224($plain) | `17300` (v) | `dynamic_370` (v) | `SHA3-224` (v) |  |
-| SHA3-256 (2 iterations) | **--** | `dynamic_383` (v) | `SHA3-256 -i2` (v) |  |
+| SHA3-256 (2 iterations) | no | `dynamic_383` (v) | `SHA3-256 -i2` (v) |  |
 | sha3-256($plain) | `17400` (v) | `dynamic_380` (v) | `SHA3-256` (v) |  |
-| SHA3-384 (2 iterations) | **--** | `dynamic_393` (v) | `SHA3-384 -i2` (v) |  |
+| SHA3-384 (2 iterations) | no | `dynamic_393` (v) | `SHA3-384 -i2` (v) |  |
 | sha3-384($plain) | `17500` (v) | `dynamic_390` (v) | `SHA3-384` (v) |  |
-| SHA3-512 (2 iterations) | **--** | `dynamic_403` (v) | `SHA3-512 -i2` (v) |  |
+| SHA3-512 (2 iterations) | no | `dynamic_403` (v) | `SHA3-512 -i2` (v) |  |
 | sha3-512($plain) | `17600` (v) | `dynamic_400` (v) | `SHA3-512` (v) |  |
-| SHA384 (2 iterations) | **--** | `dynamic_73` (v) | `SHA384 -i2` (v) |  |
+| SHA384 (2 iterations) | no | `dynamic_73` (v) | `SHA384 -i2` (v) |  |
 | sha384(md5($plain)) | no | **--** | `SHA384MD5` (v) |  |
 | sha384(md5($plain),$plain) | no | **--** | `SHA384MD5PASS` (v) |  |
-| sha384(sha384($plain, true)) | **--** | `dynamic_74` (v) | `SHA384RAW -i2` (v) |  |
+| sha384(sha384($plain, true)) | no | `dynamic_74` (v) | `SHA384RAW -i2` (v) |  |
 | SHA384PASSSALT | `10810` (v) | `dynamic_72` (v) | `SHA384PASSSALT` (v) |  |
 | SHA384SALTPASS | `10820` (v) | `dynamic_71` (v) | `SHA384SALTPASS` (v) |  |
 | SHA384UTF16LE | `10870` (v) | **--** | `SHA384UTF16LE` (v) |  |
 | SHA384UTF16LEPASSSALT | `10830` (v) | **--** | `SHA384UTF16LEPASSSALT` (v) |  |
 | SHA384UTF16LESALTPASS | `10840` (v) | **--** | `SHA384UTF16LESALTPASS` (v) |  |
 | SHA512 | `1700` (v) | `Raw-SHA512`<br>`dynamic_80`<br>`raw-SHA512-opencl`<br>`raw-SHA512-free-opencl` (v) | `SHA512` (v) |  |
-| SHA512 (2 iterations) | **--** | `dynamic_83` (v) | `SHA512 -i2` (v) |  |
+| SHA512 (2 iterations) | no | `dynamic_83` (v) | `SHA512 -i2` (v) |  |
 | sha512($pass.$salt) | `1710` (v) | `dynamic_82` (v) | `SHA512PASSSALT` (v) |  |
 | sha512($salt.$pass) | `1720` (v) | `dynamic_81` (v) | `SHA512SALTPASS` (v) |  |
 | sha512(md5($plain)) | no | **--** | `SHA512MD5` (v) |  |
@@ -1354,9 +1354,9 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | sha512(sha512_bin($pass).$salt) | `32420` (v) | **--** | **--** |  |
 | SHA512-CUSTOM1 | no | **--** | `SHA512-CUSTOM1` (v) |  |
 | sha512crypt | `1800` (v) | `sha512crypt`<br>`sha512crypt-opencl` (v) | `SHA512CRYPT` (v) |  |
-| SHA512CRYPTMD5 | **--** | **--** | `SHA512CRYPTMD5` (v) |  |
+| SHA512CRYPTMD5 | no | **--** | `SHA512CRYPTMD5` (v) |  |
 | SHA512SALTMD5 | no | **--** | `SHA512SALTMD5` (v) |  |
-| SHA512SALTSHA512 | **--** | `dynamic_86` (v) | `SHA512SALTSHA512` (v) |  |
+| SHA512SALTSHA512 | no | `dynamic_86` (v) | `SHA512SALTSHA512` (v) |  |
 | SHA512SHA512RAWUSER | `32420` (v) | **--** | `SHA512SHA512RAWUSER` (v) |  |
 | SHA512SHA512SALT | `32410` (v) | `dynamic_85` (v) | `SHA512SHA512SALT` (v) |  |
 | SHA512UTF16LE | `1770` (v) | **--** | `SHA512UTF16LE` (v) |  |
@@ -1385,21 +1385,21 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | Skein 256 | **--** | `skein-256` | **--** |  |
 | Skein 512 | **--** | `skein-512` | **--** |  |
 | SKEIN224 | no | `dynamic_330` (v) | `SKEIN224` (v) |  |
-| SKEIN224 (2 iterations) | **--** | `dynamic_333` (v) | `SKEIN224 -i2` (v) |  |
+| SKEIN224 (2 iterations) | no | `dynamic_333` (v) | `SKEIN224 -i2` (v) |  |
 | SKEIN256 | no | `dynamic_340` (v) | `SKEIN256` (v) |  |
-| SKEIN256 (2 iterations) | **--** | `dynamic_343` (v) | `SKEIN256 -i2` (v) |  |
+| SKEIN256 (2 iterations) | no | `dynamic_343` (v) | `SKEIN256 -i2` (v) |  |
 | SKEIN384 | no | `dynamic_350` (v) | `SKEIN384` (v) |  |
-| SKEIN384 (2 iterations) | **--** | `dynamic_353` (v) | `SKEIN384 -i2` (v) |  |
+| SKEIN384 (2 iterations) | no | `dynamic_353` (v) | `SKEIN384 -i2` (v) |  |
 | SKEIN512 | no | `dynamic_360` (v) | `SKEIN512` (v) |  |
-| SKEIN512 (2 iterations) | **--** | `dynamic_363` (v) | `SKEIN512 -i2` (v) |  |
+| SKEIN512 (2 iterations) | no | `dynamic_363` (v) | `SKEIN512 -i2` (v) |  |
 | Skip32 (PT = $salt, key = $pass) | `14900` (v) | **--** | **--** |  |
 | SKYPE | `23` (v) | **--** | `SKYPE` (v) |  |
-| SM3 (2 iterations) | **--** | `dynamic_453` (v) | `SM3 -i2` (v) |  |
+| SM3 (2 iterations) | no | `dynamic_453` (v) | `SM3 -i2` (v) |  |
 | SM3CRYPT | `35100` (v) | `sm3crypt` (v) | `SM3CRYPT` (v) |  |
 | SMF < v1.1 | `121` (v) | `dynamic_25`<br>`dynamic_37` | `SMF` (v) |  |
-| SNE128 | **--** | `Snefru-128` (v) | `SNE128` (v) |  |
-| SNE256 | **--** | `Snefru-256` (v) | `SNE256` (v) |  |
-| Snefru-128 | **--** | `Snefru-128` (v) | `SNE128` (v) |  |
+| SNE128 | no | `Snefru-128` (v) | `SNE128` (v) |  |
+| SNE256 | no | `Snefru-256` (v) | `SNE256` (v) |  |
+| Snefru-128 | no | `Snefru-128` (v) | `SNE128` (v) |  |
 | Snefru-256 | **--** | `Snefru-256` (v) | **--** |  |
 | snefru128(md5($plain)) | no | **--** | `SNE128MD5` (v) |  |
 | snefru128(md5($plain).$plain) | no | **--** | `SNE128MD5PASS` (v) |  |
@@ -1445,8 +1445,8 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | Terra Station Wallet (AES256-CBC(PBKDF2($pass))) | `29600` (v) | **--** | **--** |  |
 | Tezos Key | **--** | `tezos`<br>`tezos-opencl` (v) | **--** |  |
 | Tiger | **--** | `Tiger` | **--** |  |
-| TIGER | **--** | `dynamic_110` (v) | `TIGER` (v) |  |
-| TIGER (2 iterations) | **--** | `dynamic_113` (v) | `TIGER -i2` (v) |  |
+| TIGER | no | `dynamic_110` (v) | `TIGER` (v) |  |
+| TIGER (2 iterations) | no | `dynamic_113` (v) | `TIGER -i2` (v) |  |
 | Tiger Tree Hash | no | **--** | `TTH` (v) |  |
 | tiger128_3(md5($plain)) | no | **--** | `TIGERMD5` (v) |  |
 | tiger128_3(md5($plain).$plain) | no | **--** | `TIGERMD5PASS` (v) |  |
@@ -1553,18 +1553,18 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | WinZip | `13600` (v) | `ZIP`<br>`ZIP-opencl` (v) | **--** |  |
 | WLR1 | no | `whirlpool1` (v) | `WRL1` (v) |  |
 | WoltLab BB3 | **--** | `wbb3` (v) | **--** |  |
-| WPA-EAPOL | **--** | **--** | `WPA-EAPOL` (v) |  |
+| WPA-EAPOL | no | **--** | `WPA-EAPOL` (v) |  |
 | WPA-EAPOL-PBKDF2 | `2500` | **--** | **--** |  |
 | WPA-EAPOL-PMK | `2501` | **--** | **--** |  |
 | WPA-PBKDF2-PMKID+EAPOL | `22000` | **--** | **--** |  |
 | WPA-PMK | `22001` | **--** | `WPA-PMK` (v) |  |
-| WPA-PMKID | **--** | **--** | `WPA-PMKID` (v) |  |
+| WPA-PMKID | no | **--** | `WPA-PMKID` (v) |  |
 | WPA-PMKID-PBKDF2 | `16800` | **--** | **--** |  |
 | WPA-PMKID-PMK | `16801` | **--** | **--** |  |
 | WPA/WPA2/PMF/PMKID master key | **--** | `wpapsk-pmk` | **--** |  |
 | WPA/WPA2/PMF/PMKID PSK | **--** | `wpapsk` | **--** |  |
 | WPBCRYPT | `35500` (v) | **--** | `WPBCRYPT` (v) |  |
-| WRL (2 iterations) | **--** | `dynamic_103` (v) | `WRL -i2` (v) |  |
+| WRL (2 iterations) | no | `dynamic_103` (v) | `WRL -i2` (v) |  |
 | wrl(sha512($plain)) | no | **--** | `WRLSHA512` (v) |  |
 | WRL0 | no | `whirlpool0` (v) | `WRL0` (v) |  |
 | WRLPASSSALT | no | `dynamic_102` (v) | `WRLPASSSALT` (v) |  |

@@ -258,6 +258,18 @@ sub write_evidence {
         # nothing; that distinction is the whole coverage check.
         spit("$DIR/evidence/pot/1.pot", $control ? "$CTRL:$PASS\n" : '');
         spit("$DIR/evidence/pot/2.pot", '') if $full;
+
+        # What hashcat --identify would answer, supplied rather than run: the
+        # test must not need a GPU, and it is this tool being measured, not
+        # hashcat's parsers. The 32-hex hashes are accepted by both fixture
+        # modes, so with only mode 1 swept, mode 2 is applicable and unrun.
+        # The blob is accepted by neither, which is a different verdict.
+        spit("$DIR/evidence/identify.tsv", join("\n",
+            "$CTRL\t1,2",
+            "$TGT\t1,2",
+            "$LONG\t1",
+            "$BLOB\t",
+        ) . "\n");
     }
     return;
 }
@@ -265,8 +277,10 @@ sub write_evidence {
 sub run_tool {
     my ($tool, @args) = @_;
     my $out = "$DIR/run.out";
+    # --no-identify: never shell out. Every answer comes from the cache the
+    # fixture wrote, so CI needs no hashcat and no GPU.
     my $rc = system("perl -I$ROOT/tools/lib $ROOT/tools/absence.pl "
-                  . "--tool $tool --from '$DIR/evidence' "
+                  . "--tool $tool --from '$DIR/evidence' --no-identify "
                   . "--algorithms '$DIR/algorithms' "
                   . "--inventory '$DIR/tools/$tool.yaml' "
                   . join(' ', @args) . " >'$out' 2>&1");
@@ -367,6 +381,11 @@ for my $tool (qw(mdxfind hashcat)) {
         check(verdict($tool, 'blob') eq '',
               "$tool apply: writes NOTHING for a shape the loader never takes",
               "verdict is '" . verdict($tool, 'blob') . "'");
+        # The per-entry reason is only printed under -v, so ask for it.
+        my (undef, $vout) = run_tool($tool, '-v');
+        check($tool eq 'mdxfind'
+              || !!($vout =~ /cannot ask the question/),
+              "$tool apply: a vector no mode can parse is named as such");
         check(verdict($tool, 'named') eq '',
               "$tool apply: a name match is a candidate mapping, never an absence",
               "verdict is '" . verdict($tool, 'named') . "'");

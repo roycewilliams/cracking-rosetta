@@ -113,6 +113,31 @@
 # absence -- unless no control parses either, which is exactly what the
 # control test detects.
 #
+# WHICH IDENTIFIERS EVEN APPLY
+#
+# An identifier that could never have loaded the vector is not one whose
+# silence means anything, and counting it as untested holds back every entry
+# for no reason: nine VeraCrypt modes timed out in the 2026-09-03 sweep, and
+# a length-based applicability test made them relevant to a 56-hex BLAKE224
+# digest, which they cannot parse.
+#
+# For hashcat there is no need to reason about it. --identify lists every mode
+# whose parser accepts an input, which is hashcat answering the question about
+# itself. Measured 2026-09-03: 12 modes for a 32-hex digest, and 19 for a file
+# holding a 32-hex and a 40-hex one, so it reports the UNION over the file and
+# each hash is asked separately. A run is under a second and the answers are
+# cached in <from>/identify.tsv, which also makes this testable without a GPU.
+#
+# So a hashcat absence reads "of the modes whose parser accepts this hash,
+# every one was swept and none reproduced it" rather than "none of 592", most
+# of which were never candidates. An EMPTY list is not an absence: it means no
+# mode can read this serialization, so this vector cannot ask the question at
+# all, and the entry is reported as unsearched.
+#
+# mdxfind has no equivalent -- it selects types by its own rules and reports
+# what it loaded, not what it could have -- so there the identifier set stays
+# the whole inventory.
+#
 # A NAME MATCH VETOES
 #
 # Before any verdict, the entry's own tool-neutral identifiers -- id, name,
@@ -169,6 +194,9 @@ Usage: $PROG --tool mdxfind|hashcat --from DIR [options]
                      (default: tmp/discover-<tool>)
    --algorithms DIR  curated entries (default: data/algorithms)
    --inventory PATH  that tool's inventory (default: data/tools/<tool>.yaml)
+   --hashcat PATH    hashcat binary, for --identify (default: hashcat on PATH)
+   --no-identify     do not run hashcat; use only the cached identify answers
+                     already in <from>/identify.tsv
    --timeouts PATH   identifiers the sweep could not finish, one per line;
                      they are treated as never run (default: <from>/timeouts
                      when it exists). A run killed at the timeout looks
@@ -187,11 +215,14 @@ END_USAGE
     return;
 }
 
-my ($tool, $from, $algdir, $invpath, $apply, $reearn, $timeouts, $verbose, $help);
+my ($tool, $from, $algdir, $invpath, $apply, $reearn, $timeouts, $hashcat,
+    $no_identify, $verbose, $help);
 GetOptions(
-    'tool=s'       => \$tool,
-    'from=s'       => \$from,
-    'timeouts=s'   => \$timeouts,
+    'tool=s'        => \$tool,
+    'from=s'        => \$from,
+    'hashcat=s'     => \$hashcat,
+    'no-identify'   => \$no_identify,
+    'timeouts=s'    => \$timeouts,
     'algorithms=s' => \$algdir,
     'inventory=s'  => \$invpath,
     'apply'        => \$apply,
@@ -486,17 +517,82 @@ if ($tool eq 'mdxfind' && -r "$from/corpus.hash") {
     }
 }
 
+#-----------------------------------------------------------------------
+# Which modes can even parse a given hash, from hashcat itself.
+
+my %identify;            # hash -> [ modes ], '' meaning "no mode accepts it"
+my $identify_path = "$from/identify.tsv";
+if ($tool eq 'hashcat' && -r $identify_path) {
+    open my $if, '<', $identify_path or die "$PROG: $!\n";
+    while (<$if>) {
+        chomp;
+        next unless length && !/^#/;
+        my ($h, $m) = split /\t/, $_, 2;
+        next unless defined $h;
+        $identify{$h} = [ grep { length } split /,/, ($m // '') ];
+    }
+    close $if;
+    printf STDERR "- %d cached --identify answer(s)\n", scalar keys %identify
+        if $verbose;
+}
+
+# identify_modes($hash) - hashcat's own list, cached. Returns an arrayref, or
+# undef when it is not known and cannot be found out.
+sub identify_modes {
+    my ($h) = @_;
+    return $identify{$h} if exists $identify{$h};
+    return undef if $no_identify;
+
+    $hashcat //= 'hashcat';
+    my $tmpf = "$from/.identify.$$";
+    open my $th, '>', $tmpf or return undef;
+    print {$th} "$h\n";
+    close $th;
+    my $out = `$hashcat --identify '$tmpf' 2>&1`;
+    unlink $tmpf;
+
+    my @m;
+    push @m, $1 while $out =~ /^\s*(\d+)\s*\|/mg;
+    $identify{$h} = \@m;
+
+    # Append rather than rewrite: the cache is evidence accumulated across
+    # runs, and a partial run must not discard what an earlier one measured.
+    if (open my $af, '>>', $identify_path) {
+        print {$af} join("\t", $h, join(',', @m)), "\n";
+        close $af;
+    }
+    return \@m;
+}
+
+# applicable_for($e) - the identifiers whose silence about this entry means
+# anything. For hashcat that is hashcat's own answer; for mdxfind it is the
+# whole inventory, because mdxfind has no equivalent question to ask.
+sub applicable_for {
+    my ($e) = @_;
+    return @ident unless $tool eq 'hashcat';
+    my (%m, $asked);
+    for my $v (ref $e->{vectors} eq 'ARRAY' ? @{ $e->{vectors} } : ()) {
+        my $list = identify_modes($v->{hash} // '') or next;
+        $asked = 1;
+        $m{$_} = 1 for @$list;
+    }
+    return $asked ? (sort { $a <=> $b } keys %m) : @ident;
+}
+
 # uncovered_for($e) - the tool's identifiers that this entry needed tested and
 # the sweep did not run. For hashcat a mode whose plaintext-length range
 # excludes every plaintext the entry carries could never have applied, and
 # discover-hashcat skips it for that reason; that is not missing coverage.
 sub uncovered_for {
-    my ($e) = @_;
+    my ($e, @applicable) = @_;
     my @plen = map { length($_->{pass} // '') }
                (ref $e->{vectors} eq 'ARRAY' ? @{ $e->{vectors} } : ());
     my @out;
-    for my $i (@ident) {
+    for my $i (@applicable) {
         next if $covered{$i};
+        # hashcat also refuses a plaintext outside a mode's stated range, and
+        # discover-hashcat skips such a mode rather than running it. That is a
+        # legitimate non-test, not missing coverage.
         if ($tool eq 'hashcat') {
             next unless grep { $_ >= $len_min{$i} && $_ <= $len_max{$i} } @plen;
         }
@@ -516,7 +612,7 @@ my $today   = strftime('%Y-%m-%d', localtime);
 my $version = $inv->{version} // 'unknown';
 
 my (@absent, @candidate, @unsearched, @novector, @swept_hit, @partial,
-    @maskrisk);
+    @maskrisk, %napplicable);
 
 for my $id (sort keys %target) {
     my $e = $entry{$id};
@@ -535,7 +631,14 @@ for my $id (sort keys %target) {
     unless (@v)        { push @novector,  [ $id, '' ]; next }
     if ($hits{$id})    { push @swept_hit, [ $id, join(', ', sort keys %{ $hits{$id} }) ]; next }
 
-    my @miss = uncovered_for($e);
+    my @applicable = applicable_for($e);
+    unless (@applicable) {
+        push @unsearched, [ $id, sprintf('no %s identifier can parse this '
+            . 'vector, so it cannot ask the question', $tool) ];
+        next;
+    }
+
+    my @miss = uncovered_for($e, @applicable);
     if (@miss) {
         push @partial, [ $id, sprintf('%d identifier(s) never run, first %s',
             scalar @miss, $miss[0]) ];
@@ -560,8 +663,10 @@ for my $id (sort keys %target) {
             scalar @v, join('/', map { shape($_->{hash}) } @v)) ];
         next;
     }
-    push @absent, [ $id, sprintf('%d of %d vector(s) in a searched shape (%s)',
-        scalar @s, scalar @v, shape($s[0]{hash})) ];
+    push @absent, [ $id, sprintf('%d of %d vector(s) in a searched shape (%s); '
+        . '%d applicable %s', scalar @s, scalar @v, shape($s[0]{hash}),
+        scalar @applicable, $tool eq 'hashcat' ? 'mode(s)' : 'type(s)') ];
+    $napplicable{$id} = scalar @applicable;
 }
 
 #-----------------------------------------------------------------------
@@ -607,22 +712,36 @@ unless ($apply) {
 }
 
 my $what = $tool eq 'mdxfind' ? 'type' : 'mode';
-my $note = "no $what. Full-inventory sweep of all " . scalar(@ident) . " $tool "
-         . "${what}s against this entry's own vector on $today "
+
+# note_for($id) - the evidence, in the entry's own terms. The denominator is
+# per entry for hashcat: "none of 592 modes" is true and misleading, since
+# most could never have parsed the hash, and hashcat's own --identify says
+# which could.
+sub note_for {
+    my ($id) = @_;
+    my $scope = $tool eq 'hashcat' && $napplicable{$id}
+        ? "the $napplicable{$id} mode(s) whose parser accepts this entry's own "
+        . "vector, as hashcat --identify lists them,"
+        : "all " . scalar(@ident) . " $tool ${what}s";
+    return "no $what. Swept $scope on $today "
          . "(tools/discover-$tool.pl --all, evidence read by tools/absence.pl): "
-         . "no $what reproduced it. That the vector was IN the search is not "
-         . "assumed -- the same sweep reported a hit on another vector of the "
-         . "same shape, a positive control measured in the same run by the same "
-         . "binary. Four fifths of a sweep corpus can go unloaded, so without "
-         . "that control finding nothing would not be evidence. No $tool $what "
-         . "name matches any identifier this entry publishes either, normalised "
-         . "by the separator-drift rule. This is the absence of an IDENTIFIER, "
-         . "not of the algorithm: if $tool gains one, this becomes a mapping.";
+         . "not one reproduced this entry's own vector. That the vector was IN "
+         . "the search is not assumed -- the same sweep reported a hit on "
+         . "another vector of the same shape, a positive control measured in "
+         . "the same run by the same binary, and without it finding nothing "
+         . "would not be evidence. Every applicable $what ran to completion; a "
+         . "$what killed at the timeout is counted as untested and withholds "
+         . "this verdict. No $tool $what name matches any identifier this entry "
+         . "publishes either, normalised by the separator-drift rule. This is "
+         . "the absence of an IDENTIFIER, not of the algorithm: if $tool gains "
+         . "one, this becomes a mapping.";
+}
 
 my $written = 0;
 for my $row (@absent) {
     my ($id) = @$row;
     my $e = $entry{$id};
+    my $note = note_for($id);
     $e->{tools}{$tool} = {
         verified      => 'absent',
         verified_at   => $today,
