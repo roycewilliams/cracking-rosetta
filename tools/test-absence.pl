@@ -80,6 +80,7 @@ my $CTRL = 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa';
 my $TGT  = 'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb';
 my $LONG = 'cccccccccccccccccccccccccccccccccccccccc';
 my $BLOB = '$container$1$deadbeef$cafebabe';
+my $HPHASH = 'dddddddddddddddddddddddddddddddd';
 my $PASS = 'password123';
 
 sub spit {
@@ -184,6 +185,17 @@ id: "novec"
 name: "no vector here"
 END_E
 
+    # hashpipe names a type for this one. The mdxfind sweep found nothing, so
+    # without the second oracle it would be called absent -- which is exactly
+    # what happened to fifteen real entries before hashpipe was consulted.
+    spit("$DIR/algorithms/hpnamed.yaml", <<"END_E");
+id: "hpnamed"
+name: "a type only hashpipe finds"
+vectors:
+  - hash: "$HPHASH"
+    pass: "$PASS"
+END_E
+
     # A bare verdict: 'absent' with no date, version or note. The sweep agrees
     # with it, so --reearn must replace it with the same verdict plus the
     # evidence.
@@ -251,6 +263,17 @@ sub write_evidence {
         my $line = $control ? "MD5x01 $CTRL:$PASS\n" : '';
         spit("$DIR/evidence/out/" . ($full ? 'e1-e2.txt' : 'e1-e1.txt'),
              "SSSE3 hex conversion enabled\n$line");
+
+        # What hashpipe would answer, supplied in full so the binary is never
+        # invoked. An empty second field is "asked, found nothing", which is
+        # the corroboration; a type name is a veto.
+        spit("$DIR/evidence/hashpipe.tsv", join("\n",
+            "$CTRL:$PASS\t",
+            "$TGT:$PASS\t",
+            "$LONG:$PASS\t",
+            "$BLOB:$PASS\t",
+            "$HPHASH:$PASS\tWIDGETHASH",
+        ) . "\n");
     }
     else {
         make_path("$DIR/evidence/pot");
@@ -269,6 +292,7 @@ sub write_evidence {
             "$TGT\t1,2",
             "$LONG\t1",
             "$BLOB\t",
+            "$HPHASH\t1,2",
         ) . "\n");
     }
     return;
@@ -279,8 +303,12 @@ sub run_tool {
     my $out = "$DIR/run.out";
     # --no-identify: never shell out. Every answer comes from the cache the
     # fixture wrote, so CI needs no hashcat and no GPU.
+    # --hashpipe /bin/false: the cache is complete, so it must never be run.
+    # If the tool reaches for it anyway the results come back empty and the
+    # assertions fail, rather than the test depending on this host's binary.
     my $rc = system("perl -I$ROOT/tools/lib $ROOT/tools/absence.pl "
                   . "--tool $tool --from '$DIR/evidence' --no-identify "
+                  . "--hashpipe /bin/false "
                   . "--algorithms '$DIR/algorithms' "
                   . "--inventory '$DIR/tools/$tool.yaml' "
                   . join(' ', @args) . " >'$out' 2>&1");
@@ -391,6 +419,16 @@ for my $tool (qw(mdxfind hashcat)) {
               "verdict is '" . verdict($tool, 'named') . "'");
         check(verdict($tool, 'novec') eq '',
               "$tool apply: writes NOTHING for an entry with no vector");
+        # hashpipe answers the mdxfind question. For hashcat this entry is an
+        # ordinary absence and must be written like any other.
+        check($tool eq 'hashcat'
+              ? verdict($tool, 'hpnamed') eq 'absent'
+              : verdict($tool, 'hpnamed') eq '',
+              "$tool apply: hashpipe vetoes for mdxfind and not for hashcat",
+              "verdict is '" . verdict($tool, 'hpnamed') . "'");
+        check($tool eq 'hashcat'
+              || !!($out =~ /^-\s+hashpipe names a type\s+1$/m),
+              "$tool apply: the hashpipe hit is reported in its own class");
         check(!!($out =~ /^-\s+candidate \(name match\)\s+1$/m),
               "$tool apply: the name match is reported as a candidate");
         check(verdict($tool, 'ctrl') eq 'vector',

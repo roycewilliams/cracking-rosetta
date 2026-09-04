@@ -47,11 +47,16 @@ our @EXPORT_OK = qw(tool_path tool_env_help);
 # on. Do not change these to make a different machine work -- set the
 # environment variable there instead.
 my %DEFAULT = (
-    hashcat => '/usr/local/bin/hashcat',
-    mdxfind => '/usr/local/bin/mdxfind',
-    john    => '/usr/local/src/sec/crack/john-latest/run/john',
+    hashcat  => '/usr/local/bin/hashcat',
+    mdxfind  => '/usr/local/bin/mdxfind',
+    john     => '/usr/local/src/sec/crack/john-latest/run/john',
+    # hashpipe is built from source here and deliberately not installed to
+    # /usr/local/bin: it is upstream's working tree, kept current, and the
+    # binary moves with it.
+    hashpipe => '/usr/local/src/sec/crack/hashpipe/hashpipe',
 );
-my %ENV_VAR = (hashcat => 'HASHCAT', mdxfind => 'MDXFIND', john => 'JOHN');
+my %ENV_VAR = (hashcat => 'HASHCAT', mdxfind => 'MDXFIND', john => 'JOHN',
+               hashpipe => 'HASHPIPE');
 
 # tool_path($name, $explicit) - where to find one of the three tools.
 #

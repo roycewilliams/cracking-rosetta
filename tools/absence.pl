@@ -138,6 +138,35 @@
 # what it loaded, not what it could have -- so there the identifier set stays
 # the whole inventory.
 #
+# hashpipe IS THE INSTRUMENT FOR THE mdxfind QUESTION
+#
+# mdxfind has no --identify, but it has something better: hashpipe, built from
+# the same catalog, is handed <hash>:<plaintext> and names the type that
+# reproduces it. That is the absence question asked directly, where a sweep
+# asks it sideways -- the sweep must CRACK, so it needs the -F/-S/-U/-j
+# plumbing to be right and its loader drops anything that is not a hex digest,
+# while hashpipe is given the plaintext and simply recomputes.
+#
+# The difference is not marginal. Measured 2026-09-03 over the 454
+# mdxfind-silent entries carrying a vector: hashpipe resolved 84 vectors
+# across 58 entries in 7.5 seconds; the chunked sweep found one in twenty
+# minutes. FIFTEEN of those 58 are hex-shaped, so the shape-control test would
+# not have withheld them and they would have been written as false absences --
+# hmac-sha256-key-salt is HMAC-SHA256, oracle-11g is ORACLE11, ripemd256 is
+# RMD256, punbb and redmine are SHA1SALTSHA1PASS. Fifteen published claims
+# that mdxfind does not support something it does.
+#
+# So an mdxfind absence requires hashpipe to have found nothing either, and
+# --no-hashpipe is the only way to skip that, loudly.
+#
+# WHAT A hashpipe HIT IS NOT
+#
+# It is not an mdxfind mapping. hashpipe carries 25 names mdxfind does not, so
+# a type it names may not exist in mdxfind at all -- DRAGONFLY3-32, EPISERVER
+# and H3C are all in that set and all appear in this run's results. A hit is
+# therefore reported in its own class as a CANDIDATE, to be proven by mdxfind
+# pinned to the type. hashpipe proposes; mdxfind proves.
+#
 # A NAME MATCH VETOES
 #
 # Before any verdict, the entry's own tool-neutral identifiers -- id, name,
@@ -181,6 +210,7 @@ use YAML::XS ();
 
 use lib "$RealBin/lib";
 use RosettaEmit qw(emit_entry);
+use RosettaTools qw(tool_path tool_env_help);
 
 my $PROG = basename($0);
 my $ROOT = "$RealBin/..";
@@ -195,6 +225,10 @@ Usage: $PROG --tool mdxfind|hashcat --from DIR [options]
    --algorithms DIR  curated entries (default: data/algorithms)
    --inventory PATH  that tool's inventory (default: data/tools/<tool>.yaml)
    --hashcat PATH    hashcat binary, for --identify (default: hashcat on PATH)
+   --hashpipe PATH   hashpipe binary (default: @{[tool_env_help('hashpipe')]})
+   --no-hashpipe     do not corroborate an mdxfind absence with hashpipe.
+                     Measured 2026-09-03, that corroboration is what stops 15
+                     entries being called absent for a type hashpipe names.
    --no-identify     do not run hashcat; use only the cached identify answers
                      already in <from>/identify.tsv
    --timeouts PATH   identifiers the sweep could not finish, one per line;
@@ -216,11 +250,13 @@ END_USAGE
 }
 
 my ($tool, $from, $algdir, $invpath, $apply, $reearn, $timeouts, $hashcat,
-    $no_identify, $verbose, $help);
+    $no_identify, $hashpipe, $no_hashpipe, $verbose, $help);
 GetOptions(
     'tool=s'        => \$tool,
     'from=s'        => \$from,
     'hashcat=s'     => \$hashcat,
+    'hashpipe=s'    => \$hashpipe,
+    'no-hashpipe'   => \$no_hashpipe,
     'no-identify'   => \$no_identify,
     'timeouts=s'    => \$timeouts,
     'algorithms=s' => \$algdir,
@@ -518,6 +554,83 @@ if ($tool eq 'mdxfind' && -r "$from/corpus.hash") {
 }
 
 #-----------------------------------------------------------------------
+# hashpipe: the second oracle on the mdxfind question.
+
+my %hp_type;    # entry id -> type hashpipe named
+my %hp_asked;   # entry id -> 1 when hashpipe was actually given its vectors
+if ($tool eq 'mdxfind' && !$no_hashpipe) {
+    my $cache = "$from/hashpipe.tsv";
+    my %known;  # "<hash>:<plain>" -> type, '' meaning asked and unresolved
+    if (-r $cache) {
+        open my $cf, '<', $cache or die "$PROG: $!\n";
+        while (<$cf>) {
+            chomp;
+            next unless length && !/^#/;
+            my ($line, $t) = split /\t/, $_, 2;
+            $known{$line} = $t // '';
+        }
+        close $cf;
+    }
+
+    # Everything a target carries, asked in ONE pass: hashpipe reads a file
+    # and takes 7.5 seconds over the whole set, so there is no reason to
+    # batch it any more cleverly than this.
+    my (%line_of, @ask);
+    for my $id (sort keys %target) {
+        for my $v (ref $entry{$id}{vectors} eq 'ARRAY'
+                   ? @{ $entry{$id}{vectors} } : ()) {
+            next unless defined $v->{hash} && defined $v->{pass};
+            my $line = "$v->{hash}:$v->{pass}";
+            push @{ $line_of{$line} }, $id;
+            push @ask, $line unless exists $known{$line};
+        }
+    }
+
+    if (@ask) {
+        my $bin = tool_path('hashpipe', $hashpipe);
+        my $in  = "$from/.hp.in.$$";
+        my $out = "$from/.hp.out.$$";
+        open my $ih, '>', $in or die "$PROG: cannot write $in: $!\n";
+        print {$ih} "$_\n" for @ask;
+        close $ih;
+        # -L is hashpipe's own guard: above that estimate an expensive verify
+        # is DECLINED and the line is reported unresolved, which its help says
+        # "looks exactly like a genuine miss". Raised well past the default so
+        # a slow KDF is measured rather than silently declined.
+        system("$bin -L 5000 -O '$out' -E /dev/null '$in' >/dev/null 2>&1");
+        my %got;
+        if (open my $oh, '<', $out) {
+            while (<$oh>) {
+                chomp;
+                next unless /^(\S+)\s+(.+)$/;
+                $got{$2} = $1;
+            }
+            close $oh;
+        }
+        unlink $in, $out;
+        # Record the misses too: "asked and found nothing" is the evidence,
+        # and without it a re-run cannot tell it from "never asked".
+        open my $af, '>>', $cache or die "$PROG: cannot append $cache: $!\n";
+        for my $line (@ask) {
+            $known{$line} = $got{$line} // '';
+            print {$af} join("\t", $line, $known{$line}), "\n";
+        }
+        close $af;
+        printf STDERR "- hashpipe asked about %d line(s)\n", scalar @ask;
+    }
+
+    for my $line (sort keys %line_of) {
+        next unless exists $known{$line};
+        for my $id (@{ $line_of{$line} }) {
+            $hp_asked{$id} = 1;
+            $hp_type{$id} = $known{$line} if length $known{$line};
+        }
+    }
+    printf STDERR "- hashpipe: %d entry/entries asked, %d named a type\n",
+        scalar keys %hp_asked, scalar keys %hp_type;
+}
+
+#-----------------------------------------------------------------------
 # Which modes can even parse a given hash, from hashcat itself.
 
 my %identify;            # hash -> [ modes ], '' meaning "no mode accepts it"
@@ -612,7 +725,7 @@ my $today   = strftime('%Y-%m-%d', localtime);
 my $version = $inv->{version} // 'unknown';
 
 my (@absent, @candidate, @unsearched, @novector, @swept_hit, @partial,
-    @maskrisk, %napplicable);
+    @maskrisk, @hp_hit, %napplicable);
 
 for my $id (sort keys %target) {
     my $e = $entry{$id};
@@ -630,6 +743,14 @@ for my $id (sort keys %target) {
 
     unless (@v)        { push @novector,  [ $id, '' ]; next }
     if ($hits{$id})    { push @swept_hit, [ $id, join(', ', sort keys %{ $hits{$id} }) ]; next }
+
+    # hashpipe names a type the sweep did not find. Not an mdxfind mapping --
+    # hashpipe has 25 names mdxfind lacks -- so it is a candidate to prove,
+    # and certainly not an absence.
+    if ($hp_type{$id}) {
+        push @hp_hit, [ $id, $hp_type{$id} ];
+        next;
+    }
 
     my @applicable = applicable_for($e);
     unless (@applicable) {
@@ -663,6 +784,13 @@ for my $id (sort keys %target) {
             scalar @v, join('/', map { shape($_->{hash}) } @v)) ];
         next;
     }
+    # No absence without the second oracle having been asked.
+    if ($tool eq 'mdxfind' && !$no_hashpipe && !$hp_asked{$id}) {
+        push @unsearched, [ $id, 'hashpipe was not asked about this entry, '
+            . 'and an mdxfind absence is not written without it' ];
+        next;
+    }
+
     push @absent, [ $id, sprintf('%d of %d vector(s) in a searched shape (%s); '
         . '%d applicable %s', scalar @s, scalar @v, shape($s[0]{hash}),
         scalar @applicable, $tool eq 'hashcat' ? 'mode(s)' : 'type(s)') ];
@@ -683,7 +811,8 @@ printf STDERR "-   %-28s %d\n", $_->[0], scalar @{ $_->[1] } for
     [ 'partial (identifier unrun)'=> \@partial    ],
     [ 'masked (width collision)'  => \@maskrisk   ],
     [ 'no vector at all'          => \@novector   ],
-    [ 'sweep found an identifier' => \@swept_hit  ];
+    [ 'sweep found an identifier' => \@swept_hit  ],
+    [ 'hashpipe names a type'     => \@hp_hit     ];
 
 # A bare claim the evidence CONTRADICTS is the outcome worth a reader's time,
 # and it is never written: see the methodology note.
@@ -698,7 +827,8 @@ if ($verbose) {
     for my $g ([ 'ABSENT'     => \@absent     ], [ 'CANDIDATE' => \@candidate  ],
                [ 'UNSEARCHED' => \@unsearched ], [ 'PARTIAL'   => \@partial    ],
                [ 'MASKED'     => \@maskrisk   ],
-               [ 'NO VECTOR'  => \@novector   ], [ 'SWEEP HIT' => \@swept_hit  ]) {
+               [ 'NO VECTOR'  => \@novector   ], [ 'SWEEP HIT' => \@swept_hit  ],
+               [ 'HASHPIPE NAMES A TYPE' => \@hp_hit ]) {
         next unless @{ $g->[1] };
         print STDERR "\n- $g->[0]\n";
         printf STDERR "    %-52s %s\n", @$_ for @{ $g->[1] };
@@ -732,7 +862,15 @@ sub note_for {
          . "would not be evidence. Every applicable $what ran to completion; a "
          . "$what killed at the timeout is counted as untested and withholds "
          . "this verdict. No $tool $what name matches any identifier this entry "
-         . "publishes either, normalised by the separator-drift rule. This is "
+         . "publishes either, normalised by the separator-drift rule. "
+         . ($tool eq 'mdxfind' && !$no_hashpipe
+            ? "Corroborated by hashpipe, a second binary built from the same "
+            . "catalog: handed this entry's own hash and plaintext it names no "
+            . "type at all. It is the more direct instrument -- it recomputes "
+            . "rather than cracking -- and on this corpus it named a type for "
+            . "58 entries the sweep alone called silent. "
+            : "")
+         . "This is "
          . "the absence of an IDENTIFIER, not of the algorithm: if $tool gains "
          . "one, this becomes a mapping.";
 }
