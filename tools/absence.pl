@@ -245,6 +245,10 @@ Usage: $PROG --tool mdxfind|hashcat --from DIR [options]
                      entries being called absent for a type hashpipe names.
    --no-identify     do not run hashcat; use only the cached identify answers
                      already in <from>/identify.tsv
+   --single-run      write even though the evidence holds only ONE mdxfind run
+                     of some range. Refused by default: a second sweep over a
+                     different corpus costs 21 seconds and has found mappings
+                     the first missed every time it has been run.
    --timeouts PATH   identifiers the sweep could not finish, one per line;
                      they are treated as never run (default: <from>/timeouts
                      when it exists). A run killed at the timeout looks
@@ -263,6 +267,7 @@ END_USAGE
     return;
 }
 
+my $single_run;
 my ($tool, $from, $algdir, $invpath, $apply, $reearn, $timeouts, $hashcat,
     $no_identify, $hashpipe, $no_hashpipe, $verbose, $help);
 GetOptions(
@@ -273,6 +278,7 @@ GetOptions(
     'no-hashpipe'   => \$no_hashpipe,
     'no-identify'   => \$no_identify,
     'timeouts=s'    => \$timeouts,
+    'single-run'    => \$single_run,
     'algorithms=s' => \$algdir,
     'inventory=s'  => \$invpath,
     'apply'        => \$apply,
@@ -841,14 +847,25 @@ my @globally_uncovered = grep { !$covered{$_} } @ident;
 if ($tool eq 'mdxfind' && defined $runs_per_chunk) {
     printf STDERR "- evidence holds %d mdxfind run(s) of every range\n",
         $runs_per_chunk;
-    print STDERR <<'END_ONE' if $runs_per_chunk < 2;
+    if ($runs_per_chunk < 2) {
+        print STDERR <<'END_ONE';
 -   ONE run only. Measured 2026-09-04: mdxfind can miss under -m over a range
 -   what it finds in a second under -h pinned, because the salt pool is the
 -   union over every type selected and a large one suppresses the match. A
 -   lean-corpus sweep of all 1002 types took 21.5s and found eight mappings a
--   full-corpus sweep had missed. Run the other one and union the chunk files:
+-   full-corpus sweep had missed, and at --chunk 1 it found thirteen more:
 -     tools/discover-mdxfind.pl --lean --untyped -v --work <dir2>
+-   then append each range's chunk file to the first sweep's.
 END_ONE
+        # A refusal rather than a warning, by Royce's decision 2026-09-04. The
+        # second sweep costs 21 seconds, so --single-run exists to be visible
+        # in the command rather than to be convenient.
+        if ($apply && !$single_run) {
+            print STDERR
+                "- REFUSING to write on one run. Pass --single-run to override.\n";
+            exit 1;
+        }
+    }
 }
 
 printf STDERR "- sweep ran %d of this tool's %d identifier(s)\n",

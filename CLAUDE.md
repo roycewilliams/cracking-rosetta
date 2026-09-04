@@ -330,12 +330,20 @@ mdxfind also accepts hashcat modes directly (`mdxfind -m 0`, `-m e1`,
   clean. The error is one-directional: a bogus ignored position can only ever
   WITHHOLD a claim, never invent one, so a stale cached verdict costs coverage
   and not correctness.
-- **The vendored mdxfind catalog renders 15 types' example digests in
+- **The vendored mdxfind catalog renders SOME types' example digests in
   uppercase hex**, and mdxfind will not read them back that way. Only
   `MD5UCBASE64SHA1RAW` turned out to be purely a case problem; `MD5UC`,
   `SHA256UC` and `RACF` reproduce in neither case. Re-casing on failure is a
   search for something that passes, not a fix -- confirm with `mdxfind -z`
   first, and say so in the entry.
+  **Do not type the count here.** This line used to say 15 and that figure is
+  not reproducible: measured 2026-09-03, the leading-digest rule -- first
+  colon-delimited field, entirely hex, has an upper-case letter and no
+  lower-case one -- gives 12 on the vendored hashpipe catalog and 10 on
+  mdxfind's own `HASH_TYPES.md`, and widening it to the whole hash portion
+  gives 16 and 12. `docs/UPSTREAM-FINDINGS.md` DERIVES the list from the
+  vendored catalog on every build and states the rule beside it, so the number
+  cannot go stale again. Read it there.
 - **A PEPPER type cannot be verified from its vector alone, and the catalog
   hides the pepper in the salt field.** A pepper is a site-wide secret that
   appears in no hash and cannot be derived from one; hx makes it a BUILT-IN
