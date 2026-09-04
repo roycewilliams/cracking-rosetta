@@ -181,6 +181,53 @@
 # hashpipe column. That note is the placeholder for a decision, not a
 # substitute for one.
 #
+# john HAS AN --identify, IT IS JUST NOT CALLED THAT
+#
+# This tool had no --tool john for one reason: the applicability question.
+# hashcat answers it with --identify and mdxfind cannot be asked at all, so
+# there was nothing to build a john verdict on, and the cost of that is
+# measured -- 2026-09-04, 802 of the 991 single-column entries carry a john
+# block at tier `none`, no evidence in either direction, against 623 entries
+# where hashcat's silence has been measured into an absence.
+#
+# john answers it with its own LOADER. `--show=left` prints the hashes that
+# loaded and were not cracked, so one invocation per format names exactly the
+# corpus lines that format's valid() accepted. That is not a heuristic about
+# lengths, it is the real parser answering about itself, and it is per
+# (format, vector) rather than per shape -- so a john absence can say "of the
+# formats that can PARSE this hash, every one ran and none reproduced it",
+# which is a stronger sentence than either of the other two tools can make.
+#
+# discover-john.pl --loadable writes that matrix to <from>/loadable.tsv. The
+# whole inventory takes about 50 seconds.
+#
+# WHAT john's EVIDENCE FILES ARE, AND WHY THEY EXIST
+#
+# A john pot cannot be attributed after the fact: john echoes its CANONICAL
+# encoding, so the pot never holds the hash that was submitted, and the crack
+# is tied to its entry only through the synthetic login that `--show`
+# resolves. Re-deriving that here would be a second implementation of
+# discover-john's attribution, which is the drift this repository keeps
+# refusing to introduce. So the sweep writes down what it attributed:
+#
+#   <from>/hits.tsv     format, entry id, hash -- an attributed crack
+#   <from>/loadable.tsv format, entry id, hash -- valid() accepted this line
+#   <from>/ran          every format the sweep asked
+#   <from>/timeouts     the formats killed at --timeout
+#
+# `ran` is what separates "tried and found nothing" from "never tried", which
+# for hashcat is carried by the potfile existing. There is no equivalent for
+# john: a format that cracks nothing leaves no pot at all, measured
+# 2026-09-04, so the file is the only record.
+#
+# THE DISABLED DYNAMICS ARE FORMATS
+#
+# dynamic_disabled.conf switches 518 dynamics out of john's default list, and
+# they are still real formats that run when named. Measured 2026-09-04, 324
+# of them accept at least one line of this corpus. They are therefore part of
+# john's identifier universe here, exactly as discover-john.pl already treats
+# them, and an entry one of them cracks is not an entry john lacks.
+#
 # A NAME MATCH VETOES
 #
 # Before any verdict, the entry's own tool-neutral identifiers -- id, name,
@@ -205,7 +252,7 @@
 # one is verify-vectors.pl's.
 #
 # USAGE
-#   tools/absence.pl --tool mdxfind|hashcat --from DIR [--apply] [-v]
+#   tools/absence.pl --tool mdxfind|hashcat|john --from DIR [--apply] [-v]
 #
 # DEPENDENCIES
 #   perl, YAML::XS, tools/lib/RosettaEmit.pm
@@ -231,7 +278,7 @@ my $ROOT = "$RealBin/..";
 
 sub usage {
     print STDERR <<"END_USAGE";
-Usage: $PROG --tool mdxfind|hashcat --from DIR [options]
+Usage: $PROG --tool mdxfind|hashcat|john --from DIR [options]
 
    --tool NAME       which tool's column to decide
    --from DIR        a completed discover-<tool>.pl work directory
@@ -290,8 +337,9 @@ GetOptions(
 if ($help) { usage(); exit 0 }
 # House rule: no arguments prints usage and exits rather than blocking.
 unless (defined $tool) { usage(); exit 2 }
-unless ($tool =~ /^(mdxfind|hashcat)$/) {
-    print STDERR "$PROG: --tool must be mdxfind or hashcat, not '$tool'.\n";
+unless ($tool =~ /^(mdxfind|hashcat|john)$/) {
+    print STDERR "$PROG: --tool must be mdxfind, hashcat or john, "
+               . "not '$tool'.\n";
     exit 2;
 }
 
@@ -334,6 +382,27 @@ if ($tool eq 'mdxfind') {
         push @{ $ident_by_norm{ norm($t->{name}) } }, $t->{name};
     }
 }
+elsif ($tool eq 'john') {
+    for my $f (@{ $inv->{formats} }) {
+        # GPU formats mirror a CPU one and add no algorithmic claim, which is
+        # why discover-john.pl --mirror-gpu is a separate pass; including them
+        # here would make an entry look untested because an opencl twin of a
+        # format that did run was not in the sweep.
+        next unless ($f->{device} // 'cpu') eq 'cpu';
+        push @ident, $f->{label};
+        $ident_name{ $f->{label} } = $f->{label};
+        push @{ $ident_by_norm{ norm($f->{label}) } }, $f->{label};
+        # A format_name is john's prose title ("7-Zip archive encryption"),
+        # and it is a second identifier a reader could arrive by.
+        push @{ $ident_by_norm{ norm($f->{format_name}) } }, $f->{label}
+            if defined $f->{format_name} && length $f->{format_name};
+    }
+    for my $d (@{ $inv->{disabled_dynamic} || [] }) {
+        push @ident, $d;
+        $ident_name{$d} = $d;
+        push @{ $ident_by_norm{ norm($d) } }, $d;
+    }
+}
 else {
     for my $m (@{ $inv->{modes} }) {
         push @ident, $m->{mode};
@@ -352,7 +421,12 @@ else {
 sub entry_ids {
     my ($e) = @_;
     my $b = $e->{tools}{$tool} || {};
-    return $tool eq 'mdxfind' ? @{ $b->{types} || [] } : @{ $b->{modes} || [] };
+    return @{ $b->{types} || [] }              if $tool eq 'mdxfind';
+    # cpu and gpu together: an entry that names only the opencl twin still
+    # names john, and calling that an absence would be plainly false.
+    return (@{ $b->{cpu} || [] }, @{ $b->{gpu} || [] })
+                                            if $tool eq 'john';
+    return @{ $b->{modes} || [] };
 }
 
 #-----------------------------------------------------------------------
@@ -539,6 +613,42 @@ if ($tool eq 'mdxfind') {
         $runs_per_chunk = $runs
             if $runs && (!defined $runs_per_chunk || $runs < $runs_per_chunk);
     }
+}
+elsif ($tool eq 'john') {
+    # Three files, all written by the sweep that produced the evidence. See
+    # the methodology note for why the pot cannot be read directly.
+    my $hits_path = "$from/hits.tsv";
+    my $ran_path  = "$from/ran";
+    for my $p ($hits_path, $ran_path) {
+        next if -r $p;
+        die "$PROG: cannot read $p\n"
+          . "  Run tools/discover-john.pl --all --work $from first; it writes\n"
+          . "  hits.tsv, ran, timeouts and (with --loadable) loadable.tsv.\n";
+    }
+
+    open my $rf, '<', $ran_path or die "$PROG: $ran_path: $!\n";
+    while (my $line = <$rf>) {
+        chomp $line;
+        next if !length $line || $line =~ /^#/;
+        $covered{$line} = 1;
+    }
+    close $rf;
+    die "$PROG: $ran_path lists no format\n" unless %covered;
+
+    open my $hf, '<', $hits_path or die "$PROG: $hits_path: $!\n";
+    while (my $line = <$hf>) {
+        chomp $line;
+        next if !length $line || $line =~ /^#/;
+        my ($label, $id, $hash) = split /\t/, $line, 3;
+        next unless defined $label && defined $id;
+        $hits{$id}{$label} = 1;
+        # The hash goes in whether or not this entry is a target: the "same
+        # hash, another plaintext" check reads it to notice that a SIBLING
+        # row's crack is what really happened.
+        $cracked_hash{ lc $hash }{$label} = 1
+            if defined $hash && length $hash;
+    }
+    close $hf;
 }
 else {
     # One potfile per mode. The file EXISTING is the record that the mode ran;
@@ -809,8 +919,46 @@ sub identify_modes {
 # applicable_for($e) - the identifiers whose silence about this entry means
 # anything. For hashcat that is hashcat's own answer; for mdxfind it is the
 # whole inventory, because mdxfind has no equivalent question to ask.
+# For john it is loadable.tsv: the formats whose valid() accepted one of this
+# entry's own vectors. Read once, on first use, so a run that never needs it
+# does not require the file.
+my %loadable_for;      # entry id -> { format => 1 }
+my $loadable_read;
+sub read_loadable {
+    return if $loadable_read++;
+    my $p = "$from/loadable.tsv";
+    die "$PROG: cannot read $p\n"
+      . "  Run tools/discover-john.pl --loadable --all --work $from first.\n"
+      . "  Without it there is no way to say which formats could even have\n"
+      . "  answered, and an absence would rest on nothing.\n" unless -r $p;
+    open my $lf, '<', $p or die "$PROG: $p: $!\n";
+    my $rows = 0;
+    while (my $line = <$lf>) {
+        chomp $line;
+        next if !length $line || $line =~ /^#/;
+        my ($label, $id) = split /\t/, $line, 3;
+        next unless defined $label && defined $id;
+        $loadable_for{$id}{$label} = 1;
+        $rows++;
+    }
+    close $lf;
+    die "$PROG: $p holds no (format, entry) pair\n" unless $rows;
+    printf STDERR "- loadable: %d entry/entries have at least one format that "
+                . "can parse a vector\n", scalar keys %loadable_for;
+    return;
+}
+
 sub applicable_for {
     my ($e) = @_;
+    if ($tool eq 'john') {
+        read_loadable();
+        my $l = $loadable_for{ $e->{id} } or return ();
+        # Only identifiers this run knows about: a format in the matrix but
+        # not in the inventory would otherwise be counted as never run for
+        # ever, holding the entry back with no way to clear it.
+        my %known = map { $_ => 1 } @ident;
+        return sort grep { $known{$_} } keys %$l;
+    }
     return @ident unless $tool eq 'hashcat';
     my (%m, $asked);
     for my $v (ref $e->{vectors} eq 'ARRAY' ? @{ $e->{vectors} } : ()) {
@@ -974,7 +1122,8 @@ for my $id (sort keys %target) {
 
     push @absent, [ $id, sprintf('%d of %d vector(s) in a searched shape (%s); '
         . '%d applicable %s', scalar @s, scalar @v, shape($s[0]{hash}),
-        scalar @applicable, $tool eq 'hashcat' ? 'mode(s)' : 'type(s)') ];
+        scalar @applicable, $tool eq 'hashcat' ? 'mode(s)'
+                          : $tool eq 'john'    ? 'format(s)' : 'type(s)') ];
     $napplicable{$id} = scalar @applicable;
 }
 
@@ -1036,7 +1185,22 @@ unless ($apply) {
     exit 0;
 }
 
-my $what = $tool eq 'mdxfind' ? 'type' : 'mode';
+my $what = $tool eq 'mdxfind' ? 'type' : $tool eq 'john' ? 'format' : 'mode';
+
+# Entries whose expression john's dynamic compiler PROVED. Built once, and
+# only for john: for the other two it would say nothing about their column.
+my %dyn_expr;
+if ($tool eq 'john') {
+    for my $id (keys %entry) {
+        my $e = $entry{$id};
+        next unless $e->{john_dynamic_expr};
+        next unless ($e->{expression_proof}{verified} // '') eq 'vector';
+        $dyn_expr{$id} = $e->{john_dynamic_expr};
+    }
+    printf STDERR "- %d entry/entries carry a PROVEN john_dynamic_expr; where "
+                . "one is written absent,\n-   the note says john computes it "
+                . "anyway\n", scalar keys %dyn_expr;
+}
 
 # note_for($id) - the evidence, in the entry's own terms. The denominator is
 # per entry for hashcat: "none of 592 modes" is true and misleading, since
@@ -1047,6 +1211,9 @@ sub note_for {
     my $scope = $tool eq 'hashcat' && $napplicable{$id}
         ? "the $napplicable{$id} mode(s) whose parser accepts this entry's own "
         . "vector, as hashcat --identify lists them,"
+        : $tool eq 'john' && $napplicable{$id}
+        ? "the $napplicable{$id} format(s) whose own valid() accepts this "
+        . "entry's own vector, as john --show=left reports them,"
         : "all " . scalar(@ident) . " $tool ${what}s";
     my $howmany = ($tool eq 'mdxfind' && defined $runs_per_chunk)
                 ? ($runs_per_chunk > 1
@@ -1059,7 +1226,16 @@ sub note_for {
          . "the search is not assumed -- the same sweep reported a hit on "
          . "another vector of the same shape, a positive control measured in "
          . "the same run by the same binary, and without it finding nothing "
-         . "would not be evidence. Every applicable $what ran to completion; a "
+         . "would not be evidence. "
+         . ($tool eq 'john'
+            ? "For john the control is also per ENTRY and not only per "
+            . "shape: every format counted above is one whose own loader "
+            . "ACCEPTED this hash, so each was asked this exact question "
+            . "and answered no. A format that cannot parse the hash is not "
+            . "counted at all, and an entry no format can parse is "
+            . "reported as unsearched rather than decided. "
+            : "")
+         . "Every applicable $what ran to completion; a "
          . "$what killed at the timeout is counted as untested and withholds "
          . "this verdict. No $tool $what name matches any identifier this entry "
          . "publishes either, normalised by the separator-drift rule. "
@@ -1074,6 +1250,16 @@ sub note_for {
                . "no type at all. It is the more direct instrument -- it "
                . "recomputes rather than cracking -- and on this corpus it named "
                . "a type for 58 entries the sweep alone called silent. ")
+            : "")
+         . (($tool eq 'john' && $dyn_expr{$id})
+            ? "john nonetheless COMPUTES this: the entry carries a proven "
+            . "john_dynamic_expr, $dyn_expr{$id}, which john's own dynamic "
+            . "compiler recovered this entry's plaintext from this entry's "
+            . "hash under. That is a runnable command and not a format "
+            . "identifier, which is why it stays out of this column -- "
+            . "putting it here would inflate john's coverage with something "
+            . "no --list=formats will ever show. Read this verdict as 'no "
+            . "named format', not as 'john cannot do it'. "
             : "")
          . "This is "
          . "the absence of an IDENTIFIER, not of the algorithm: if $tool gains "

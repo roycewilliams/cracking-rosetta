@@ -113,6 +113,24 @@ types:
     flags: ["f"]
     example_vector: "$LONG:$PASS"
 END_INV
+    spit("$DIR/tools/john.yaml", <<'END_JOHN');
+tool: "john"
+version: "1.9.0-jumbo-test"
+count: 3
+disabled_dynamic_count: 1
+disabled_dynamic:
+  - "dynamic_9999"
+formats:
+  - label: "MD5"
+    format_name: "Raw MD5 fixture"
+    device: "cpu"
+  - label: "WIDGETHASH"
+    format_name: "Widget Hash fixture"
+    device: "cpu"
+  - label: "MD5-opencl"
+    format_name: "Raw MD5 fixture"
+    device: "gpu"
+END_JOHN
     spit("$DIR/tools/hashcat.yaml", <<'END_HC');
 tool: "hashcat"
 version: "v9.9.9-test"
@@ -137,7 +155,9 @@ sub write_entries {
     remove_tree("$DIR/algorithms") if -d "$DIR/algorithms";
     make_path("$DIR/algorithms");
 
-    my $ids = $tool eq 'mdxfind' ? qq(    types: ["MD5"]\n) : qq(    modes: [1]\n);
+    my $ids = $tool eq 'mdxfind' ? qq(    types: ["MD5"]\n)
+            : $tool eq 'john'    ? qq(    cpu: ["MD5"]\n)
+            :                      qq(    modes: [1]\n);
     spit("$DIR/algorithms/ctrl.yaml", <<"END_E");
 id: "ctrl"
 name: "control entry"
@@ -322,6 +342,52 @@ sub write_evidence {
         # hit is read as a contradiction, which is the conservative default.
         spit("$DIR/evidence/hashpipe-only.txt", "ONLYINHASHPIPE\n");
     }
+    elsif ($tool eq 'john') {
+        make_path("$DIR/evidence");
+
+        # `ran` is the record that a format was asked. There is no potfile
+        # to carry it: a john format that cracks nothing leaves no pot at
+        # all, so this file is the only thing separating "tried and found
+        # nothing" from "never tried".
+        spit("$DIR/evidence/ran",
+             "# fixture\nMD5\n" . ($full ? "WIDGETHASH\n" : ''));
+        spit("$DIR/evidence/timeouts", "# fixture\n");
+
+        # The attributed cracks. One hash falls, under the format that also
+        # names it -- and the credit goes to EVERY entry carrying that hash
+        # under that plaintext, which is what discover-john.pl does because
+        # john deduplicates identical hashes on load and --show prints such a
+        # hash once. So `barewrong` is credited beside `ctrl`, and
+        # `ntvariant`, which is the same hash under a DIFFERENT plaintext, is
+        # not.
+        spit("$DIR/evidence/hits.tsv", "# fixture\n"
+             . ($control ? "MD5\tbarewrong\t$CTRL\nMD5\tctrl\t$CTRL\n" : ''));
+
+        # What `john --show=left` reported, supplied rather than run so the
+        # test needs no john. The mapping mirrors identify.tsv: both fixture
+        # formats accept a 32-hex hash, only MD5 accepts the 40-hex one, and
+        # neither accepts the container blob -- which is a different verdict
+        # from "accepted and not cracked".
+        my @rows;
+        my %accepts = ($CTRL       => [qw(MD5 WIDGETHASH)],
+                       $TGT        => [qw(MD5 WIDGETHASH)],
+                       $LONG       => ['MD5'],
+                       $BLOB       => [],
+                       $HPHASH     => [qw(MD5 WIDGETHASH)],
+                       $HPONLYHASH => [qw(MD5 WIDGETHASH)]);
+        my %entry_hash = (ctrl        => $CTRL,      decidable => $TGT,
+                          uncontrolled=> $LONG,      blob      => $BLOB,
+                          'widget-hash' => $TGT,     ntvariant => $CTRL,
+                          hpnamed     => $HPHASH,    hponly    => $HPONLYHASH,
+                          bare        => $TGT,       barewrong => $CTRL,
+                          evidenced   => $TGT);
+        for my $id (sort keys %entry_hash) {
+            my $h = $entry_hash{$id};
+            push @rows, "$_\t$id\t$h" for @{ $accepts{$h} || [] };
+        }
+        spit("$DIR/evidence/loadable.tsv",
+             "# fixture\n" . join("\n", @rows) . "\n");
+    }
     else {
         make_path("$DIR/evidence/pot");
         # An EMPTY potfile is the record that the mode ran and cracked
@@ -405,7 +471,7 @@ remove_tree($DIR) if -d $DIR;
 make_path("$DIR/tools");
 write_inventories();
 
-for my $tool (qw(mdxfind hashcat)) {
+for my $tool (qw(mdxfind hashcat john)) {
     print "\n# $tool\n";
 
     # 1. A partial sweep must refuse, whatever else is true.
@@ -461,20 +527,23 @@ for my $tool (qw(mdxfind hashcat)) {
         my (undef, $vout) = run_tool($tool, '-v');
         check($tool eq 'mdxfind'
               || !!($vout =~ /cannot ask the question/),
-              "$tool apply: a vector no mode can parse is named as such");
+              "$tool apply: a vector no " . ($tool eq 'john' ? 'format' : 'mode')
+            . " can parse is named as such");
         check(verdict($tool, 'named') eq '',
               "$tool apply: a name match is a candidate mapping, never an absence",
               "verdict is '" . verdict($tool, 'named') . "'");
         check(verdict($tool, 'novec') eq '',
               "$tool apply: writes NOTHING for an entry with no vector");
-        # hashpipe answers the mdxfind question. For hashcat this entry is an
-        # ordinary absence and must be written like any other.
-        check($tool eq 'hashcat'
-              ? verdict($tool, 'hpnamed') eq 'absent'
-              : verdict($tool, 'hpnamed') eq '',
-              "$tool apply: hashpipe vetoes for mdxfind and not for hashcat",
+        # hashpipe answers the mdxfind question and NOBODY else's: it is a
+        # second binary built from mdxfind's catalog. For hashcat and for
+        # john this entry is an ordinary absence and must be written like
+        # any other.
+        check($tool eq 'mdxfind'
+              ? verdict($tool, 'hpnamed') eq ''
+              : verdict($tool, 'hpnamed') eq 'absent',
+              "$tool apply: hashpipe vetoes for mdxfind alone",
               "verdict is '" . verdict($tool, 'hpnamed') . "'");
-        check($tool eq 'hashcat'
+        check($tool ne 'mdxfind'
               || !!($out =~ /^-\s+hashpipe names a type\s+1$/m),
               "$tool apply: the hashpipe hit is reported in its own class");
 
@@ -514,7 +583,8 @@ for my $tool (qw(mdxfind hashcat)) {
     write_entries($tool);
     write_evidence($tool);
     {
-        my $first = $tool eq 'mdxfind' ? 1 : 1;
+        # The list holds an IDENTIFIER, and john's are labels, not numbers.
+        my $first = $tool eq 'john' ? 'MD5' : 1;
         spit("$DIR/evidence/timeouts", "$first\n");
         my ($rc, $out) = run_tool($tool, '--apply');
         check(verdict($tool, 'decidable') eq '',
@@ -556,8 +626,8 @@ for my $tool (qw(mdxfind hashcat)) {
     }
 }
 
-# 4a. The same hash under another plaintext, for BOTH tools.
-for my $tool (qw(mdxfind hashcat)) {
+# 4a. The same hash under another plaintext, for ALL THREE tools.
+for my $tool (qw(mdxfind hashcat john)) {
     print "\n# $tool same-hash veto\n";
     write_entries($tool);
     write_evidence($tool);
