@@ -7,7 +7,7 @@ expression_proof:
   verified: "upstream"
   verified_at: "2026-08-30"
   verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a"
-  note: "john's --list=subformats states this string for dynamic_14, which this entry proved by round-trip; the string itself has not been compiled as --format=dynamic=<expr> here; TRIAGE 2026-09-02 [john-refuses-our-vector]: both the expression and this entry's vector are correct and independently checked: compiled with --format=dynamic the expression recovers all 6 of john's own test vectors for dynamic_14, and computed here with Digest:: it reproduces all 3 of this entry's. john's ad-hoc compiler simply will not crack this particular vector -- a salt string it mishandles is the known cause"
+  note: "john's --list=subformats states this string for dynamic_14, which this entry proved by round-trip; the string itself has not been compiled as --format=dynamic=<expr> here; TRIAGE 2026-09-04 [john-refuses-our-vector]: both the expression and this entry's vector are correct and independently checked: compiled with --format=dynamic the expression recovers all 6 of john's own test vectors for dynamic_14, and computed here with Digest:: it reproduces all 3 of this entry's. john's ad-hoc compiler simply will not crack this particular vector -- a salt string it mishandles is the known cause"
 category: "composite"
 status: "needs-review"
 tools:

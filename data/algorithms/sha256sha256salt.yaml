@@ -5,7 +5,7 @@ expression_proof:
   verified: "upstream"
   verified_at: "2026-08-31"
   verified_with: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A"
-  note: "transcribed from the hx specification's Appendix A entry for mdxfind type SHA256SHA256SALT (e382), which states sha256(sha256(pass) . salt). Transcription, not reproduction, so this is upstream and not vector; run derive-expressions.pl to try to promote it. An independent Digest:: computation of this string DOES reproduce this entry's own vector, checked 2026-08-31.; TRIAGE 2026-09-02 [salt-length]: the expression is correct -- computed here with Digest:: it reproduces all 6 of john's own test vectors for dynamic_1503 -- but john's ad-hoc compiler will not take it with this format's 64-character salt, while the same expression recovers a control vector with a 2-character salt. A limit in the compiled form, not a disagreement about the algorithm"
+  note: "transcribed from the hx specification's Appendix A entry for mdxfind type SHA256SHA256SALT (e382), which states sha256(sha256(pass) . salt). Transcription, not reproduction, so this is upstream and not vector; run derive-expressions.pl to try to promote it. An independent Digest:: computation of this string DOES reproduce this entry's own vector, checked 2026-08-31.; TRIAGE 2026-09-04 [salt-length]: the expression is correct -- computed here with Digest:: it reproduces all 6 of john's own test vectors for dynamic_1503 -- but john's ad-hoc compiler will not take it with this format's 64-character salt, while the same expression recovers a control vector with a 2-character salt. A limit in the compiled form, not a disagreement about the algorithm"
 category: "composite"
 status: "needs-review"
 tools:
