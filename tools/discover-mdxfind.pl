@@ -160,10 +160,15 @@ Usage: $PROG [options]
                      printed suffix is exactly this counts
    --limit N         stop after N chunks; for smoke tests
    --type REGEX      only types whose name matches (repeatable)
+   --index LO-HI     only types whose internal index is in this range
+   --lean            trim the corpus to the target vectors plus ONE
+                     already-proven vector per hash shape (not with --all)
    --only ID         only consider this entry
    --exclude ID      never write a mapping for this entry (repeatable); it is
                      still measured and reported, so the reason stays visible
    --all             target every entry with a vector, not just the unmapped
+   --untyped         target ONLY entries naming no mdxfind type at all; this
+                     is the set absence.pl publishes about (not with --all)
    --extend          also write onto entries that already name a type
                      (off by default; see the methodology note)
    --multi-emit      also write types that emit several digests per candidate
@@ -186,7 +191,7 @@ END_USAGE
 }
 
 my ($mdxfind, $algdir, $inventory, $workdir, $only, $help, $dry, $apply);
-my ($all, $resume, $extend, $want_multi);
+my ($all, $resume, $extend, $want_multi, $lean, $index_range, $untyped);
 my (@type_re, @exclude);
 my $chunk         = 50;
 my $timeout       = 300;
@@ -207,9 +212,12 @@ GetOptions(
     'iterations=i'    => \$iterations,
     'limit=i'         => \$limit,
     'type=s'          => \@type_re,
+    'index=s'         => \$index_range,
+    'lean'            => \$lean,
     'only=s'          => \$only,
     'exclude=s'       => \@exclude,
     'all'             => \$all,
+    'untyped'         => \$untyped,
     'extend'          => \$extend,
     'multi-emit'      => \$want_multi,
     'max-per-entry=i' => \$max_per_entry,
@@ -254,6 +262,22 @@ if (@type_re) {
     @types = grep { my $t = $_->{name}; grep { $t =~ $_ } @re } @types;
 }
 
+# --index selects the same way -m eLO-eHI does, which is what makes a chunk
+# re-runnable on its own: the work dir's file is named for the range, so
+# "--index 901-950" rewrites exactly out/e901-e950.txt and nothing else.
+if (defined $index_range) {
+    my ($lo, $hi) = $index_range =~ /^(\d+)-(\d+)$/;
+    unless (defined $lo && $lo <= $hi) {
+        print STDERR "$PROG: --index wants LO-HI with LO <= HI, not '$index_range'\n";
+        exit 2;
+    }
+    @types = grep { $_->{index_num} >= $lo && $_->{index_num} <= $hi } @types;
+    unless (@types) {
+        print STDERR "$PROG: --index $index_range selects no type\n";
+        exit 1;
+    }
+}
+
 my %is_type = map { $_->{name} => 1 } @types;
 
 # Chunks are contiguous runs of internal index, so each is one -m eA-eB.
@@ -282,23 +306,99 @@ for my $f (@files) {
     $path{  $e->{id} } = $p;
 }
 
+# WHY --lean EXISTS, AND WHAT IT COSTS
+#
+# mdxfind pools the salt field of every line it reads, so a salted type costs
+# words x salts and the corpus's own size is the multiplier. Measured
+# 2026-09-03 on the --all corpus -- 1668 lines, 485 of them salted, 126 unique
+# plaintexts -- the e901-e950 chunk of slow KDF and container types (DCC2,
+# ECRYPTFS, ANDROIDFDE, PWSAFE3, APFS, the SAP family) did not finish at 300
+# seconds, did not finish at 3600, and had still not finished at 900 with the
+# thirteen longest salts removed. mdxfind reported "found 189 unique salts"
+# for a typical salted type.
+#
+# The salt pool is almost entirely NOT the targets: of 444 unique target
+# hashes only 39 carry a salt. Dropping the already-proven vectors that are
+# not needed as shape controls therefore takes the pool from 189 to 10 and
+# leaves the question intact -- the same chunk then runs in ONE second.
+#
+# What survives is what the question needs. Every target vector is present
+# with its own hash, its own salt and its own plaintext, so any type that can
+# reproduce a target has everything required to do so; and one already-proven
+# vector per hash shape is kept so a sweep still reports a hit at each shape,
+# which is what absence.pl requires before it will call a shape searched.
+#
+# What is lost, and it is real: with the full corpus a bare digest whose entry
+# records no salt could still fall to some OTHER entry's salt. Under --lean
+# there are fewer foreign salts to fall to. That trades discovery sensitivity
+# for a chunk that terminates, so --lean is a deliberate flag and not the
+# default.
+#
+# --all makes every entry a target, so there is nothing left to trim; the two
+# together are a contradiction rather than a no-op, and are refused.
+if ($untyped && $all) {
+    print STDERR "$PROG: --untyped and --all contradict: one narrows the target\n"
+               . "  set to the entries with no mapping, the other widens it to all.\n";
+    exit 2;
+}
+
+if ($lean && $all) {
+    print STDERR "$PROG: --lean and --all contradict: --all makes every entry\n"
+               . "  a target, so there are no already-proven vectors to trim.\n";
+    exit 2;
+}
+
+# shape($hash) - absence.pl's definition, deliberately identical: a control
+# only speaks for a shape if the two tools agree on what a shape is.
+sub shape {
+    my ($h) = @_;
+    my ($head) = split /:/, $h, 2;
+    return 'nonhex' unless $head =~ /^[0-9A-Fa-f]+$/;
+    return 'hex:' . length($head);
+}
+
 my @vectors;   # { id, hash, pass, vid }
 my %targets;
 my %already_typed;
+my %ctl_by_shape;   # shape -> [ vectors of entries this run is NOT targeting ]
 for my $id (sort keys %entry) {
     my $e = $entry{$id};
     my $m = $e->{tools}{mdxfind};
     $already_typed{$id} = 1 if $m && @{ $m->{types} || [] };
-    unless ($all) {
-        next if $m && ($m->{verified} // '') eq 'vector';
-    }
+    # Three points on one axis: --all targets everything, --untyped targets
+    # only what has no mapping at all, and the default sits between them at
+    # "not yet proven". Only --untyped matches the question absence.pl asks,
+    # which is why an absence sweep uses it -- see the --lean note.
+    my $skip = $all     ? 0
+             : $untyped ? (($m && @{ $m->{types} || [] }) ? 1 : 0)
+             :            (($m && ($m->{verified} // '') eq 'vector') ? 1 : 0);
     for my $v (@{ $e->{vectors} || [] }) {
         next unless defined $v->{hash} && defined $v->{pass};
         next if $v->{hash} =~ /\n/ || $v->{pass} =~ /\n/;   # one hash per line
+        if ($skip) {
+            push @{ $ctl_by_shape{ shape($v->{hash}) } },
+                 { id => $id, hash => $v->{hash}, pass => $v->{pass} };
+            next;
+        }
         push @vectors, { id => $id, hash => $v->{hash}, pass => $v->{pass},
                          vid => "$id\0" . scalar(@vectors) };
         $targets{$id} = 1;
     }
+}
+
+# One control per shape, unsalted for preference: a control costs a corpus
+# line either way, and only a salted one costs a salt.
+my @control;
+if ($lean) {
+    for my $s (sort keys %ctl_by_shape) {
+        my ($pick) = grep { $_->{hash} !~ /:/ } @{ $ctl_by_shape{$s} };
+        $pick //= $ctl_by_shape{$s}[0];
+        push @control, $pick;
+    }
+    my $pool = 0;
+    $pool += scalar @{ $ctl_by_shape{$_} } for keys %ctl_by_shape;
+    printf STDERR "- lean corpus: %d shape control(s) kept, %d proven vector(s) dropped\n",
+        scalar @control, $pool - scalar @control;
 }
 
 if (!@vectors) {
@@ -381,11 +481,17 @@ my $hashfile = "$workdir/corpus.hash";
 my $wordfile = "$workdir/corpus.word";
 
 my %uniq_hash;
-write_file($hashfile, grep { !$uniq_hash{$_}++ } map { $_->{hash} } @vectors);
+write_file($hashfile, grep { !$uniq_hash{$_}++ }
+                      map { $_->{hash} } (@vectors, @control));
 
+# A control's plaintext has to be in the wordlist or the control cannot fall,
+# but it is deliberately NOT in @words_by_len: that list is how a report line
+# is split back into hash and plaintext, and only a TARGET's plaintext may win
+# that split.
 my %uniq_word;
-my @words = grep { !$uniq_word{$_}++ } map { $_->{pass} } @vectors;
-write_file($wordfile, @words);
+my @words     = grep { !$uniq_word{$_}++ } map { $_->{pass} } @vectors;
+my @ctl_words = grep { !$uniq_word{$_}++ } map { $_->{pass} } @control;
+write_file($wordfile, @words, @ctl_words);
 
 # Longest first: a report line is split from the right against this set, and
 # "pass" must not win over "pass:word" where the corpus holds both.
