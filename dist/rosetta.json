@@ -56936,7 +56936,7 @@
          "tool_note" : {
             "hashcat" : "mode 4510 added 2026-08-31 by seed-hashcat-orphans.pl: hashcat names it \"sha1(sha1($pass).$salt)\", which is this entry's own expression, and hashcat at that mode recovers this entry's own vector. It had no entry at all before.",
             "john" : "format discovered by round-trip search, not by name",
-            "mdxfind" : "SHA1SHA1PASSSALT added 2026-08-31 by seed-orphans.pl: mdxfind names it \"SHA1SHA1PASSSALT\", which is this entry's own expression, and mdxfind at that identifier recovers this entry's own vector. It had no entry at all before."
+            "mdxfind" : "SHA1SHA1PASSSALT added 2026-08-31 by seed-orphans.pl: mdxfind names it \"SHA1SHA1PASSSALT\", which is this entry's own expression, and mdxfind at that identifier recovers this entry's own vector. It had no entry at all before. The two types named here are ONE computation under two identifiers, established 2026-09-03 from mdxfind's source and then measured: mdxfind.c computes sha1(hex(sha1(pass)).X) for both, with no separator byte, e310 SHA1SHA1USER taking X from the userid Judy and e579 SHA1SHA1PASSSALT taking it from the salt pool (label sha1passsalt), and both publish the same example vector 3b8240b10f2caefcc6cd7c970b332b4109d7e63c:testsalt:password123. Each identifier pinned on its own recovers both vectors this entry carries. So the derived mdxfind_salted column reads 'mixed' -- flags s and u on one row -- and that is a salt-convention difference, not the MD5MD5USER defect where one row carried two computations."
          },
          "vecs" : 2
       },
