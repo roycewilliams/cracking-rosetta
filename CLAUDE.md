@@ -215,6 +215,20 @@ mdxfind also accepts hashcat modes directly (`mdxfind -m 0`, `-m e1`,
   their type's single-iteration self-test vector and reached tier `vector`
   because the verifier accepted any suffix. `tools/audit-iterations.pl`
   measures the count a vector actually matches at.
+  **But HALF of mdxfind's report lines carry no suffix at all, and they are
+  not junk.** The print is guarded by `if (x > 0)` in every emitter
+  (`mdxfind.c` around lines 10264-10703): a type whose internal iteration
+  counter never leaves zero prints its bare name. The value is not lost --
+  the same block tallies at `TOTALFOUND(op)[x > 0 ? x - 1 : 0]` and the
+  end-of-run summary prints slot 0 as `x01` -- so **a bare line IS the first
+  iteration, stated by the binary in its own totals.** Measured 2026-09-03:
+  235 of 1152 report lines in a full sweep are bare, covering 163 entries,
+  141 of which appear NO other way. `absence.pl` and `discover-mdxfind.pl`
+  both required the suffix and were one `--apply` from publishing 13 entries
+  as "mdxfind has no type for this" when a type had just cracked them.
+  `mdxfind-corpus.pl` and `verify-vectors.pl` already read `(?:x(\d+))?`.
+  No type in the inventory ends in `x<digits>`, so stripping a trailing
+  suffix cannot eat a name.
 - **Name separator drift.** The source sheet wrote `HAV128_4` where mdxfind
   writes `HAV128-4`. Normalize by stripping non-alphanumerics before matching;
   store the tool's exact spelling.
@@ -281,6 +295,30 @@ mdxfind also accepts hashcat modes directly (`mdxfind -m 0`, `-m e1`,
   CPU format adds no algorithmic claim. `discover-mdxfind.pl` has no canary;
   mdxfind matches on a full raw digest, so it is lower risk, but nobody has
   measured it.
+- **A SWEEP'S SILENCE IS WEAKER EVIDENCE THE BIGGER ITS CORPUS AND ITS TYPE
+  SELECTION ARE.** mdxfind can fail to reproduce a vector under `-m` over a
+  RANGE that it reproduces in one second under `-h` pinned to the same type,
+  against the same corpus and the same wordlist. Measured 2026-09-04 on
+  YESCRYPT: pinned, mdxfind reports "found 1 unique salts" and cracks both of
+  the entry's vectors; selected as part of `e951-e1000` it reports "found 96
+  unique salts" and finds nothing. The salt pool is the union over every type
+  in the selection, and a large one suppresses the match.
+  The effect is ordered and it is large. Three sweeps of the same 1002 types
+  on the same day: the full corpus (1668 lines, 485 salted) found a set; a
+  LEAN corpus (`--lean --untyped`: the target vectors plus one already-proven
+  vector per hash shape, 466 lines, 43 salted) found EIGHT more in 21.5
+  seconds; the same lean corpus at `--chunk 1`, one invocation per type, found
+  THIRTEEN more again in 917 seconds. Twenty-one mappings the coarsest sweep
+  missed.
+  **Not one of the twenty-one was ever published as `absent`** -- every one
+  was held back by `absence.pl`'s hashpipe corroboration or its name-match
+  veto. That is what those two rules are FOR, and it is now a measurement
+  rather than an argument.
+  So: run more than one sweep, union the chunk files per range, and point
+  `absence.pl` at the union. It counts the runs itself -- mdxfind prints
+  "Minimum hash length is N characters" once per invocation -- reports the
+  number, says what to do when it is one, and writes the count into the claim
+  it publishes.
 - **A canary must never mutate a base64 digest.** The mutation is defined on
   TEXT and the claim is about a DIGEST, and those coincide only where the text
   IS the digest. Measured 2026-09-01: challenging john's `Raw-SHA1` reported
