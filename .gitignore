@@ -17,3 +17,4 @@ fleet-staging/
 # separate repository with its own history and remotes; it must never be
 # committed into this one.
 hashcat-pattern/
+STATE-HISTORY.md
