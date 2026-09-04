@@ -55,6 +55,24 @@
 # the token means. The right question for a refusal is whether this host can
 # compute the construction, not which upstream happens to spell it.
 #
+# THE CONSTANT CASES ARE MEASURED AGAINST hx TOO, BY A DETOUR
+#
+# john's $c1..$c8 arrived in this module on 2026-09-04, and hx has no such
+# notation -- its own answer is a STRING LITERAL. That would make hx useless
+# as an oracle here, except that a constant IS a literal once demangled, so
+# the hx column simply spells the same construction with the literal in it:
+#
+#   md5($s.$c1.md5($p)),c1=-   <->   md5(salt . "-" . md5(pass))
+#
+# ONE TRAP, and it decides how every escape case below is written: hx string
+# literals are RAW. Measured 2026-09-04 against the binary, hex("\x0a") is
+# the four characters backslash,x,0,a -- not a newline. So an hx column may
+# never carry a \x escape and expect it to mean a byte; where the constant
+# demangles to something unprintable the hx spelling reaches it another way.
+# `md5($s.$p.$c1),c1=\x00` is written as `md5(pad(salt . pass, 12))`, since
+# pad() NUL-fills and "NaClrosetta" is 11 bytes. That is the same value by a
+# route that shares no code with the one being tested.
+#
 # USAGE
 #   perl tools/test-rosetta-expr.pl            fixture only, no hx needed
 #   perl tools/test-rosetta-expr.pl --oracle   also re-measure against hx
@@ -304,6 +322,40 @@ my @CASES = (
       'a UTF-8-encoded surrogate is not valid UTF-8 and vanishes whole',
       "\xed\xa0\x80" ],
 
+    # --- john's constants, added 2026-09-04 -------------------------
+    # Every expected value came from the hx binary, spelling the constant
+    # as the literal it demangles to. See the header for why an hx column
+    # can never carry a \x escape.
+    [ 'md5(salt . "-" . md5(pass))', 'md5($s.$c1.md5($p)),c1=-',
+      '479c7a8ce3cd57eca20b379a5b61507b',
+      'a constant between two operands (the mediawiki shape)' ],
+    [ 'md5(" " . md5(pass) . " ")', 'md5($c1.md5($p).$c1),c1= ',
+      'fde30ae84f67df7c2f74315f52cfd20a',
+      'one constant used twice, and its value is a space' ],
+    [ 'md5(pad(salt . pass, 12))', 'md5($s.$p.$c1),c1=\x00',
+      '9375e87f7a1ac58b6fce035cc279214e',
+      'a \x00 constant IS a NUL byte: pad() reaches the same value in hx' ],
+    [ 'md5("a" . "b" . pass)', 'md5($c1.$c2.$p),c1=a,c2=b',
+      '3c415b5a7f60c974c4de8c631e5c05f0', 'two constants, packed from c1' ],
+    [ 'md5("abc" . pass)', 'md5($c1.$p),c1=a\x62c',
+      '08f7ce62a44f0f077d03766fdb2de1bf', 'an escape in the MIDDLE of a value' ],
+    # The three that pin john's demangler, which is not the obvious one: a
+    # doubled backslash is one, and a backslash before anything else is
+    # KEPT, escape and all -- so \z is two characters and not a 'z'.
+    [ 'md5("a\b" . pass)', 'md5($c1.$p),c1=a\\\\b',
+      '6c1fb0fb84fabf6cf1b9150f2f47ad52', '\\\\ demangles to one backslash' ],
+    [ 'md5("a\zb" . pass)', 'md5($c1.$p),c1=a\zb',
+      '255d24c3f57aac1a8cdb72425578ac65',
+      'a backslash before a non-x is kept, both characters' ],
+    [ 'md5("a\,b" . pass)', 'md5($c1.$p),c1=a\,b',
+      '28a1d9cefc2b3deda5d8e90295aecedf',
+      'an escaped comma does not end the value, and leaves its backslash' ],
+    # The reason the suffix is split at the first DEPTH-ZERO comma rather
+    # than the first comma: john can use the first, this grammar cannot.
+    [ 'md5(cut("xy" . pass, 0, 4))', 'md5(cut($c1.$p,0,4)),c1=xy',
+      'f2e754cccd85453beb559ee4545d69cd',
+      'commas in the BODY do not start the constant list' ],
+
     [ undef, 'md5(cap($p,1,2))',  undef, 'cap takes at most two arguments' ],
     [ undef, 'md5($u)',           undef, 'the userid variable is not modelled' ],
     [ undef, 'md5(pass)',         undef,
@@ -313,7 +365,15 @@ my @CASES = (
     [ undef, 'md5($p,$s)',        undef, 'md5 does not take two arguments' ],
     [ undef, 'cut(md5($p))',      undef, 'cut needs at least a start' ],
     [ undef, 'pad($p)',           undef, 'pad needs a width' ],
-    [ undef, 'md5($c1.$p)',       undef, 'constants are not modelled here' ],
+    [ undef, 'md5($c1.$p)',       undef,
+      'a $c1 with no definition, which john refuses too' ],
+    [ undef, 'md5($c2.$p),c2=x',  undef,
+      'c2 with no c1: john breaks its scan at the gap, so c2 is unset' ],
+    [ undef, 'md5($c1.$p),c1=',   undef,
+      'an EMPTY value is a missing constant to john, not the empty string' ],
+    [ undef, 'md5($c1.$p),saltlen=32', undef,
+      'a parameter that is not cN=, so its meaning is not modelled here' ],
+    [ undef, 'md5($c9.$p),c9=x',  undef, 'there is no $c9; john stops at c8' ],
     [ undef, 'md5($p.":".$s)',    undef, 'string literals are not modelled' ],
     [ undef, '',                  undef, 'the empty expression' ],
 );
