@@ -263,7 +263,7 @@ A few that carry a vector, so a candidate identifier can be tested at once, one 
 
 All 194: filter `hashcat_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
 
-### mdxfind: 500 entries say nothing
+### mdxfind: 163 entries say nothing
 
 A few that carry a vector and a proven expression, so there is a definite construction to look for, one per family:
 
@@ -271,7 +271,7 @@ A few that carry a vector and a proven expression, so there is a definite constr
 * [`ripemd256`](index.html#ripemd256) - `ripemd256($p)`
 * [`sha256-sha256-pass-salt`](index.html#sha256-sha256-pass-salt) - `sha256(sha256($p.$s))`
 
-All 500: filter `mdxfind_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
+All 163: filter `mdxfind_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
 
 ## 4. hashcat modes with no row here (1)
 

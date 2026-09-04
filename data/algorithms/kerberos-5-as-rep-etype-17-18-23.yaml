@@ -18,6 +18,11 @@ tools:
     verified_at: "2026-08-31"
     verified_with: "v7.1.2-549-g8a15e210b"
     note: "mode discovered by round-trip search, not by name"
+  mdxfind:
+    verified: "absent"
+    verified_at: "2026-09-03"
+    verified_with: "mdxfind RCS 1.545 (2026/08/29)"
+    note: "no type. Swept all 1002 mdxfind types on 2026-09-03 (a tools/discover-mdxfind.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable type ran to completion; a type killed at the timeout is counted as untested and withholds this verdict. No mdxfind type name matches any identifier this entry publishes either, normalised by the separator-drift rule. Corroborated by hashpipe, a second binary built from the same catalog: handed this entry's own hash and plaintext it names no type at all. It is the more direct instrument -- it recomputes rather than cracking -- and on this corpus it named a type for 58 entries the sweep alone called silent. This is the absence of an IDENTIFIER, not of the algorithm: if mdxfind gains one, this becomes a mapping."
   john:
     cpu: ["krb5asrep"]
     gpu: ["krb5asrep-aes-opencl"]
