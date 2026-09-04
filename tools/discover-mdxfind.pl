@@ -438,13 +438,28 @@ CHUNK: for my $c (@chunks) {
     }
     $ran_chunk{$spec} = 1;
 
-    # A report is "TYPExNN <hash>[:<salt>]:<plain>". The plaintext may itself
-    # contain a colon, so the tail is matched against the known set rather
-    # than split on a fixed occurrence.
+    # A report is "TYPExNN <hash>[:<salt>]:<plain>", or "TYPE <hash>...:<plain>"
+    # where the type does not iterate. The suffix is printed under "if (x > 0)"
+    # (mdxfind.c, every emitter around lines 10264-10703) and the same block
+    # tallies the find at TOTALFOUND(op)[x > 0 ? x - 1 : 0], whose slot 0 the
+    # end-of-run summary prints as "x01" -- so a BARE line is iteration 1,
+    # stated by the binary in its own totals rather than assumed here.
+    # Requiring the suffix hid 235 of the 1152 report lines of the 2026-09-03
+    # sweep, among them every HMAC, SCRYPT, MSSQL and NETNTLM hit.
+    #
+    # No type in the inventory ends in x<digits>, so stripping a trailing
+    # suffix cannot eat a name.
+    #
+    # The plaintext may itself contain a colon, so the tail is matched against
+    # the known set rather than split on a fixed occurrence.
     my $found = 0;
     LINE: for my $line (split /\n/, $out // '') {
-        next unless $line =~ /^(\S+?)x(\d+)\s+(.+)$/;
-        my ($type, $it, $rest) = ($1, $2 + 0, $3);
+        next unless $line =~ /^(\S+)\s+(.+)$/;
+        my ($tok, $rest) = ($1, $2);
+        my ($type, $it) = ($tok, 1);
+        unless ($is_type{$type}) {
+            ($type, $it) = ($1, $2 + 0) if $tok =~ /^(\S+)x(\d+)$/;
+        }
         next unless $is_type{$type};        # not a type name: a progress line
         next unless $it == $iterations;     # the suffix is part of the identity
         for my $w (@words_by_len) {

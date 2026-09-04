@@ -264,6 +264,8 @@ END_E
 # A synthetic work directory in whichever layout the tool under test reads.
 #   full    => cover both identifiers (default), else only the first
 #   control => report the control vector (default), else report nothing
+#   bare    => write mdxfind's UNSUFFIXED report line instead of "MD5x01 ..."
+#   blind   => add a summary tally for a type that reports no line at all
 sub write_evidence {
     my ($tool, %opt) = @_;
     my $full    = exists $opt{full}    ? $opt{full}    : 1;
@@ -272,9 +274,16 @@ sub write_evidence {
     remove_tree("$DIR/evidence") if -d "$DIR/evidence";
     if ($tool eq 'mdxfind') {
         make_path("$DIR/evidence/out");
-        my $line = $control ? "MD5x01 $CTRL:$PASS\n" : '';
+        # mdxfind prints the xNN suffix only where its iteration counter is
+        # above zero and the bare name otherwise, and its end-of-run tally
+        # calls both of them x01. Both shapes are real output; see the
+        # report_type note in absence.pl.
+        my $tag  = $opt{bare} ? 'MD5' : 'MD5x01';
+        my $line = $control ? "$tag $CTRL:$PASS\n" : '';
+        my $tally = $control ? "1 MD5x01 hashes found\n" : '';
+        $tally .= "1 WIDGETHASHx01 hashes found\n" if $opt{blind};
         spit("$DIR/evidence/out/" . ($full ? 'e1-e2.txt' : 'e1-e1.txt'),
-             "SSSE3 hex conversion enabled\n$line");
+             "SSSE3 hex conversion enabled\n$line$tally");
 
         # What hashpipe would answer, supplied in full so the binary is never
         # invoked. An empty second field is "asked, found nothing", which is
@@ -524,6 +533,48 @@ for my $tool (qw(mdxfind hashcat)) {
                     ->{tools}{$tool}{verified_at} eq '2026-01-01'),
               "$tool reearn: an absence somebody checked is not revisited");
     }
+}
+
+# 4b. mdxfind's two report-line shapes, and the guard on them.
+#
+# The suffix is printed under "if (x > 0)" in every mdxfind emitter, so a type
+# whose iteration counter stays at zero reports its bare name. Measured
+# 2026-09-03 on the real sweep: 235 of 1152 report lines, covering 163
+# entries, 141 of them reachable NO other way and 13 of those entries ones
+# absence.pl targets. A parser that reads only the suffixed form calls every
+# one of them unswept, which is a false absence waiting for --apply.
+{
+    print "\n# mdxfind report-line shapes\n";
+    write_entries('mdxfind');
+    write_evidence('mdxfind', bare => 1);
+
+    my ($rc, $out) = run_tool('mdxfind', '--apply');
+    check($rc == 0, 'bare report line: the run completes');
+    check(verdict('mdxfind', 'decidable') eq 'absent',
+          'bare report line: it still establishes the shape control',
+          'verdict is ' . verdict('mdxfind', 'decidable'));
+
+    # barewrong carries the control's own vector, so seeing the bare line at
+    # all is what makes this entry a contradiction rather than an absence.
+    write_entries('mdxfind');
+    write_evidence('mdxfind', bare => 1);
+    ($rc, $out) = run_tool('mdxfind', '--reearn', '--apply');
+    check(!!($out =~ /bare 'absent' claim\(s\) the evidence CONTRADICTS/),
+          'bare report line: a hit reported without a suffix still contradicts');
+
+    # A type mdxfind tallied but never reported in a shape the parser knows.
+    # That is the parser having gone stale, and it must stop the run rather
+    # than quietly turn one type's hits into absences.
+    write_entries('mdxfind');
+    write_evidence('mdxfind', blind => 1);
+    ($rc, $out) = run_tool('mdxfind', '--apply');
+    check($rc == 1, 'parser blindness: the run refuses',
+          "exit was $rc");
+    check(!!($out =~ /report\s+lines this parser did not recognise/s),
+          'parser blindness: it says which type and where');
+    check(verdict('mdxfind', 'decidable') eq '',
+          'parser blindness: nothing is written',
+          'verdict is ' . verdict('mdxfind', 'decidable'));
 }
 
 # 5. Usage. No --tool is not a run with a default; it is a usage error.

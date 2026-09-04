@@ -417,6 +417,10 @@ sub attribute {
 
 my (%hits, %covered);
 
+# Types whose hits mdxfind reported and this parser could not read. Empty is
+# the only acceptable value: see the report_type note below.
+my %parser_blind;
+
 if ($tool eq 'mdxfind') {
     # Raw output per chunk, named eLOW-eHIGH.txt. A report line is
     # "TYPExNN <hash>[:<salt>]:<plain>".
@@ -428,16 +432,67 @@ if ($tool eq 'mdxfind') {
     die "$PROG: no chunk output under $from/out\n" unless @chunks;
 
     my %is_type = map { $_ => 1 } values %ident_name;
+
+    # report_type($token) - the type a report line's first field names, or
+    # undef.
+    #
+    # HALF OF mdxfind's REPORT LINES CARRY NO ITERATION SUFFIX. The print is
+    # guarded by "if (x > 0)" (mdxfind.c, every emitter around lines
+    # 10264-10703): a type whose internal iteration counter never leaves zero
+    # prints its bare name, and only a type that counts prints "NAMExNN". The
+    # value is not lost -- the same block does
+    # TOTALFOUND(op)[x > 0 ? x - 1 : 0]++ and the end-of-run summary prints
+    # slot 0 as "x01" -- so a bare line IS the first iteration, stated by the
+    # binary in its own totals.
+    #
+    # Measured 2026-09-03 on tmp/mx-sweep-fresh: 917 suffixed report lines and
+    # 235 bare ones, the bare ones covering 163 entries. 141 of those entries
+    # appear ONLY in a bare line, and 13 of the 141 are entries this tool
+    # targets -- drupal-7, both episerver rows, four hmac-*-key-salt rows,
+    # lotus-notes-domino-5, mac-os-x-10-4-10-6, three scrypt rows and sha1-cx.
+    # Every one of them was cracked by an mdxfind type in the sweep, and every
+    # one would have been published as 'absent' by a parser that reads only
+    # the suffixed form.
+    #
+    # No type in the inventory ends in x<digits> (measured 2026-09-03), so
+    # stripping a trailing suffix cannot eat a name.
+    my $report_type = sub {
+        my ($tok) = @_;
+        return $tok if $is_type{$tok};
+        (my $bare = $tok) =~ s/x\d+$//;
+        return $is_type{$bare} ? $bare : undef;
+    };
+
     for my $c (@chunks) {
         $covered{$_} = 1 for ($c =~ /^e(\d+)-e(\d+)\.txt$/ ? ($1 .. $2) : ());
         open my $fh, '<', "$from/out/$c" or next;
+        my (%saw, %claimed);
         while (my $line = <$fh>) {
             chomp $line;
-            next unless $line =~ /^(\S+?)x(\d+)\s+(.+)$/;
-            next unless $is_type{$1};
-            $hits{$_}{$1} = 1 for attribute($3);
+
+            # mdxfind's own tally, one line per (type, iteration) it found
+            # something for: "4 MD5MD5SALTx01 hashes found", commified. It is
+            # the binary's account of its own run and it is what this parser
+            # is reconciled against.
+            if ($line =~ /^\s*[\d,]+\s+(\S+)x\d+\s+hashes found$/) {
+                my $t = $report_type->($1);
+                $claimed{$t} = 1 if defined $t;
+                next;
+            }
+
+            next unless $line =~ /^(\S+)\s+(.+)$/;
+            my ($tok, $rest) = ($1, $2);
+            my $type = $report_type->($tok) // next;
+            $saw{$type} = 1;
+            $hits{$_}{$type} = 1 for attribute($rest);
         }
         close $fh;
+
+        # A type mdxfind counted but whose report lines this parser never
+        # recognised means the output format moved. Every entry that type
+        # cracked would look unswept, which is exactly a false absence, so it
+        # is recorded and the run refuses to write.
+        $parser_blind{$_} = $c for grep { !$saw{$_} } sort keys %claimed;
     }
 }
 else {
@@ -865,7 +920,19 @@ if ($verbose) {
     }
 }
 
-unless ($controls_ok) { exit 1 }
+if (%parser_blind) {
+    print STDERR <<"END_WARN";
+
+- mdxfind's own summary names @{[ scalar keys %parser_blind ]} type(s) it found hashes for whose report
+  lines this parser did not recognise. Every entry such a type cracked reads
+  as unswept, and an unswept entry is one step from a false 'absent'. Nothing
+  is written until the parser is fixed.
+END_WARN
+    printf STDERR "    %-28s first seen in %s\n", $_, $parser_blind{$_}
+        for sort keys %parser_blind;
+}
+
+unless ($controls_ok && !%parser_blind) { exit 1 }
 unless ($apply) {
     print STDERR "\n- dry run; nothing written. Add --apply to write the 'absent' class.\n";
     exit 0;
