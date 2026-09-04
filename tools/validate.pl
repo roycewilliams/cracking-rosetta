@@ -227,17 +227,22 @@ my %REL_MIRROR = (
 );
 
 my %TOOL_KEY = (
-    hashcat => { map { $_ => 1 } qw(modes verified verified_at verified_with note) },
-    john    => { map { $_ => 1 } qw(cpu gpu verified verified_at verified_with note) },
-    mdxfind => { map { $_ => 1 } qw(types iterations verified verified_at verified_with note) },
-    crack   => { map { $_ => 1 } qw(supported note) },
+    hashcat  => { map { $_ => 1 } qw(modes verified verified_at verified_with note) },
+    john     => { map { $_ => 1 } qw(cpu gpu verified verified_at verified_with note) },
+    mdxfind  => { map { $_ => 1 } qw(types iterations verified verified_at verified_with note) },
+    # No iterations: hashpipe's suffix reports the algorithm's own round count
+    # read out of the hash where mdxfind's counts outer re-hashing driven by
+    # -i, so the two are different quantities. See the schema.
+    hashpipe => { map { $_ => 1 } qw(types verified verified_at verified_with note) },
+    crack    => { map { $_ => 1 } qw(supported note) },
 );
 
 # Which key in each tool block holds the identifiers to cross-reference.
 my %IDENT_KEYS = (
-    hashcat => ['modes'],
-    john    => ['cpu', 'gpu'],
-    mdxfind => ['types'],
+    hashcat  => ['modes'],
+    john     => ['cpu', 'gpu'],
+    mdxfind  => ['types'],
+    hashpipe => ['types'],
 );
 
 my (@errors, @warnings);
@@ -282,6 +287,7 @@ sub load_inventory {
 my ($hc_doc, $hc_list) = load_inventory("$tooldir/hashcat.yaml", 'modes');
 my ($jn_doc, $jn_list) = load_inventory("$tooldir/john.yaml",    'formats');
 my ($mx_doc, $mx_list) = load_inventory("$tooldir/mdxfind.yaml", 'types');
+my ($hp_doc, $hp_list) = load_inventory("$tooldir/hashpipe.yaml", 'types');
 
 my %HC_MODE = map { $_->{mode} => $_ } @$hc_list;
 my %JN_FMT  = map { $_->{label} => $_ } @$jn_list;
@@ -293,13 +299,23 @@ my %JN_FMT  = map { $_->{label} => $_ } @$jn_list;
 my %JN_DISABLED = map { $_ => 1 } @{ $jn_doc->{disabled_dynamic} || [] };
 my %used_disabled;
 my %MX_TYPE = map { $_->{name} => $_ } @$mx_list;
+my %HP_TYPE = map { $_->{name} => $_ } @$hp_list;
+
+# Types whose own self-test hashpipe fails. Naming one is not an error -- the
+# type exists and a reader arriving by that name must land somewhere -- but it
+# cannot be at tier 'vector', because the tool cannot reproduce its own vector
+# for it, let alone ours. Measured 2026-09-03: BMW224 and BMW256, and they
+# return a DIFFERENT digest on every invocation, which is uninitialised state
+# rather than a wrong constant.
+my %HP_SELFTEST_FAIL =
+    map { $_->{name} => 1 } grep { ($_->{selftest} // '') eq 'fail' } @$hp_list;
 
 # mdxfind is also addressable by index (e1), which the old sheet sometimes used.
 my %MX_INDEX = map { $_->{index} => $_ } @$mx_list;
 
 # Which inventory entries any algorithm file actually references. Drives the
 # coverage report, which is the number this project exists to move.
-my (%hit_hc, %hit_jn, %hit_mx);
+my (%hit_hc, %hit_jn, %hit_mx, %hit_hp);
 
 #-----------------------------------------------------------------------
 # Walk the curated entries.
@@ -365,7 +381,7 @@ for my $file (@files) {
         $n_novec++ unless ref $d->{vectors} eq 'ARRAY' && @{ $d->{vectors} };
         $expr_tier{ $d->{expression_proof}{verified} // '?' }++
             if ref $d->{expression_proof} eq 'HASH';
-        for my $t (qw(hashcat john mdxfind crack)) {
+        for my $t (qw(hashcat john mdxfind hashpipe crack)) {
             my $b = $d->{tools}{$t};
             next unless ref $b eq 'HASH' && defined $b->{verified};
             $tier_count{ $b->{verified} }++;
@@ -655,6 +671,26 @@ for my $file (@files) {
                             else {
                                 err("%s: mdxfind type '%s' does not exist in %s",
                                     $file, $v, $mx_doc->{version});
+                            }
+                        }
+                        elsif ($tool eq 'hashpipe') {
+                            if (!exists $HP_TYPE{$v}) {
+                                err("%s: hashpipe type '%s' does not exist in %s",
+                                    $file, $v, $hp_doc->{version});
+                            }
+                            else {
+                                $hit_hp{$v} = 1;
+                                # A type whose own self-test fails cannot
+                                # prove anything about an entry. Naming it is
+                                # fine -- the type exists and a reader may
+                                # arrive by it -- but not at tier vector.
+                                if ($HP_SELFTEST_FAIL{$v}
+                                 && ($blk->{verified} // '') eq 'vector') {
+                                    err("%s: hashpipe type '%s' FAILS its own "
+                                      . "self-test in %s, so this block cannot "
+                                      . "be at tier 'vector'",
+                                        $file, $v, $hp_doc->{version});
+                                }
                             }
                         }
                     }
@@ -1021,6 +1057,13 @@ unless ($quiet) {
         scalar(@$hc_list), $hc_doc->{version},
         scalar(@$jn_list), $jn_doc->{version},
         scalar(@$mx_list), $mx_doc->{version};
+    printf STDERR "-              hashpipe %d types (%s)%s\n",
+        scalar(@$hp_list), $hp_doc->{version},
+        (keys %HP_SELFTEST_FAIL)
+            ? sprintf(', of which %d FAIL their own self-test: %s',
+                      scalar(keys %HP_SELFTEST_FAIL),
+                      join(', ', sort keys %HP_SELFTEST_FAIL))
+            : '';
 
     printf STDERR "- Entries:     %d file(s) in %s%s\n", $entries, $algdir,
         $tombstones ? sprintf(", of which %d tombstone(s) redirecting a "
@@ -1047,6 +1090,8 @@ unless ($quiet) {
         scalar(keys %hit_hc), scalar(@$hc_list), $pc->(scalar(keys %hit_hc), scalar(@$hc_list)),
         scalar(keys %hit_jn), scalar(@$jn_list), $pc->(scalar(keys %hit_jn), scalar(@$jn_list)),
         scalar(keys %hit_mx), scalar(@$mx_list), $pc->(scalar(keys %hit_mx), scalar(@$mx_list));
+    printf STDERR "-              hashpipe %d/%d (%s)\n",
+        scalar(keys %hit_hp), scalar(@$hp_list), $pc->(scalar(keys %hit_hp), scalar(@$hp_list));
 
     if ($verbose) {
         printf STDERR "- Tool tiers:  %s\n",

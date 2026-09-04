@@ -268,6 +268,31 @@
             }
           }
         },
+        "hashpipe": {
+          "type": "object",
+          "additionalProperties": false,
+          "description": "hashpipe, Cynosureprime's identification tool. It was treated as an alias of mdxfind until 2026-09-03, when ten entries turned out to have an algorithm hashpipe supports under a type mdxfind has no equivalent of. It carries NO iterations field on purpose: hashpipe's suffix reports the algorithm's own round count read out of the hash (APFSx20000) where mdxfind's counts outer re-hashing driven by -i (APFSx01), so the two are different quantities and must not share a field.",
+          "properties": {
+            "types": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "verified": {
+              "$ref": "#/$defs/tier"
+            },
+            "verified_at": {
+              "$ref": "#/$defs/date"
+            },
+            "verified_with": {
+              "type": "string"
+            },
+            "note": {
+              "type": "string"
+            }
+          }
+        },
         "crack": {
           "type": "object",
           "additionalProperties": false,

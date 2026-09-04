@@ -114,7 +114,7 @@ $today = strftime('%Y-%m-%d', localtime) unless $today =~ /^\d{4}-\d{2}-\d{2}$/;
 # Load.
 
 my %inv;
-for my $t (qw(hashcat john mdxfind)) {
+for my $t (qw(hashcat john mdxfind hashpipe)) {
     my $f = "$tooldir/$t.yaml";
     $inv{$t} = -r $f ? YAML::XS::LoadFile($f) : {};
 }
@@ -280,10 +280,11 @@ sub cell {
     my $b = $e->{tools}{$tool};
     return { state => 'unknown', ids => [] } unless $b;
 
-    my @ids = $tool eq 'hashcat' ? @{ $b->{modes} || [] }
-            : $tool eq 'mdxfind' ? @{ $b->{types} || [] }
-            : $tool eq 'john'    ? (@{ $b->{cpu} || [] }, @{ $b->{gpu} || [] })
-            :                      ();
+    my @ids = $tool eq 'hashcat'  ? @{ $b->{modes} || [] }
+            : $tool eq 'mdxfind'  ? @{ $b->{types} || [] }
+            : $tool eq 'hashpipe' ? @{ $b->{types} || [] }
+            : $tool eq 'john'     ? (@{ $b->{cpu} || [] }, @{ $b->{gpu} || [] })
+            :                       ();
 
     my $tier = $b->{verified} // 'asserted';
 
@@ -465,7 +466,7 @@ for my $e (@rows) {
         expr_note   => (ref $e->{expression_proof} eq 'HASH'
                         ? ($e->{expression_proof}{note} // '') : ''),
         tool_note   => { map { $_ => ($e->{tools}{$_}{note} // '') }
-                         qw(hashcat john mdxfind) },
+                         qw(hashcat john mdxfind hashpipe) },
     );
     ($r{hash_length}, $r{hash_length_basis}) = hash_length($e);
 
@@ -480,7 +481,7 @@ for my $e (@rows) {
     $unresolved{mdxfind} += grep { !$by_type{$_} }
                             @{ $e->{tools}{mdxfind}{types} || [] };
 
-    for my $t (qw(hashcat john mdxfind crack)) {
+    for my $t (qw(hashcat john mdxfind hashpipe crack)) {
         my $c = cell($e, $t);
         $r{$t} = $c;
         $r{cracknote} = $e->{tools}{crack}{note} // '' if $t eq 'crack';
@@ -528,6 +529,7 @@ sub csv_field {
 my @CSV = qw(id name aliases expression expression_tier john_dynamic_expr
              denotation category application status merged_into
              hashcat hashcat_state john john_state mdxfind mdxfind_state
+             hashpipe hashpipe_state
              crack_state vectors serialization primary_form
              hashcat_salted hashcat_speed john_salted john_work_factor
              mdxfind_salted nesting_depth hash_length hash_length_basis
@@ -557,6 +559,7 @@ for my $r (@out) {
         join(' ', @{ $r->{hashcat}{ids} }), $r->{hashcat}{state},
         join(' ', @{ $r->{john}{ids} }),    $r->{john}{state},
         join(' ', @{ $r->{mdxfind}{ids} }), $r->{mdxfind}{state},
+        join(' ', @{ $r->{hashpipe}{ids} }), $r->{hashpipe}{state},
         $r->{crack}{state}, $r->{vecs}, $r->{serialization},
         $r->{primary_form},
         $r->{hashcat_salted}, $r->{hashcat_speed}, $r->{john_salted},
@@ -574,7 +577,7 @@ for my $t (@tomb_out) {
     # other, so they are empty here too.
     print {$csv} csv_row(
         $t->{id}, $t->{name}, '', '', '', '', '', '', '', 'merged', $t->{into},
-        ('') x 10,                         # the tool and vector columns
+        ('') x 12,                         # the tool and vector columns
         ('') x 8,                          # the practitioner columns
         $t->{sameas}, '', $t->{notes},
     );
@@ -588,7 +591,7 @@ my $json = JSON::PP->new->canonical->pretty;
 open my $jf, '>', "$distdir/rosetta.json" or die "cannot write json: $!\n";
 print {$jf} $json->encode({
     generated => $today,
-    tools     => { map { $_ => ($inv{$_}{version} // 'unknown') } qw(hashcat john mdxfind) },
+    tools     => { map { $_ => ($inv{$_}{version} // 'unknown') } qw(hashcat john mdxfind hashpipe) },
     # count is the number of algorithms, which is what it has always meant.
     # Tombstones are counted separately rather than folded in, so a merge
     # cannot look like the corpus growing.

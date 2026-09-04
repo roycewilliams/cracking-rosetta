@@ -143,12 +143,16 @@ my @ENTRY_ORDER = qw(
     category application application_version status merged_into
     tools relations vectors legacy notes
 );
-my @TOOL_ORDER   = qw(hashcat mdxfind john crack);
+# hashpipe sits next to mdxfind because that is where a reader looks for it:
+# one catalog, two binaries. It carries no iterations field -- see the schema
+# for why the two tools' suffixes must not share one.
+my @TOOL_ORDER   = qw(hashcat mdxfind hashpipe john crack);
 my %TOOL_KEYS = (
-    hashcat => [qw(modes verified verified_at verified_with note)],
-    mdxfind => [qw(types iterations verified verified_at verified_with note)],
-    john    => [qw(cpu gpu verified verified_at verified_with note)],
-    crack   => [qw(supported note)],
+    hashcat  => [qw(modes verified verified_at verified_with note)],
+    mdxfind  => [qw(types iterations verified verified_at verified_with note)],
+    hashpipe => [qw(types verified verified_at verified_with note)],
+    john     => [qw(cpu gpu verified verified_at verified_with note)],
+    crack    => [qw(supported note)],
 );
 # Keys whose value is a YAML boolean, addressed as "<tool>.<key>".
 #
