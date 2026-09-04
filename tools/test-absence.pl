@@ -81,6 +81,7 @@ my $TGT  = 'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb';
 my $LONG = 'cccccccccccccccccccccccccccccccccccccccc';
 my $BLOB = '$container$1$deadbeef$cafebabe';
 my $HPHASH = 'dddddddddddddddddddddddddddddddd';
+my $HPONLYHASH = 'eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee';
 my $PASS = 'password123';
 
 sub spit {
@@ -196,6 +197,17 @@ vectors:
     pass: "$PASS"
 END_E
 
+    # hashpipe names a type mdxfind does NOT have. That corroborates the
+    # absence instead of contradicting it, so this one IS written -- and the
+    # note has to say which hashpipe type covers it, because no column does.
+    spit("$DIR/algorithms/hponly.yaml", <<"END_E");
+id: "hponly"
+name: "an algorithm only hashpipe has"
+vectors:
+  - hash: "$HPONLYHASH"
+    pass: "$PASS"
+END_E
+
     # A bare verdict: 'absent' with no date, version or note. The sweep agrees
     # with it, so --reearn must replace it with the same verdict plus the
     # evidence.
@@ -273,7 +285,12 @@ sub write_evidence {
             "$LONG:$PASS\t",
             "$BLOB:$PASS\t",
             "$HPHASH:$PASS\tWIDGETHASH",
+            "$HPONLYHASH:$PASS\tONLYINHASHPIPE",
         ) . "\n");
+
+        # The types hashpipe has and mdxfind does not. Absent this file every
+        # hit is read as a contradiction, which is the conservative default.
+        spit("$DIR/evidence/hashpipe-only.txt", "ONLYINHASHPIPE\n");
     }
     else {
         make_path("$DIR/evidence/pot");
@@ -293,6 +310,7 @@ sub write_evidence {
             "$LONG\t1",
             "$BLOB\t",
             "$HPHASH\t1,2",
+            "$HPONLYHASH\t1,2",
         ) . "\n");
     }
     return;
@@ -429,6 +447,19 @@ for my $tool (qw(mdxfind hashcat)) {
         check($tool eq 'hashcat'
               || !!($out =~ /^-\s+hashpipe names a type\s+1$/m),
               "$tool apply: the hashpipe hit is reported in its own class");
+
+        # The other reading: mdxfind has no such type, so hashpipe naming one
+        # supports the absence rather than blocking it.
+        check($tool eq 'hashcat'
+              ? verdict($tool, 'hponly') eq 'absent'
+              : verdict($tool, 'hponly') eq 'absent',
+              "$tool apply: a hashpipe-only type corroborates the absence",
+              "verdict is '" . verdict($tool, 'hponly') . "'");
+        if ($tool eq 'mdxfind') {
+            my $y = eval { YAML::XS::LoadFile("$DIR/algorithms/hponly.yaml") };
+            check(!!(($y->{tools}{mdxfind}{note} // '') =~ /ONLYINHASHPIPE/),
+                  "$tool apply: the note names the hashpipe type, since no column does");
+        }
         check(!!($out =~ /^-\s+candidate \(name match\)\s+1$/m),
               "$tool apply: the name match is reported as a candidate");
         check(verdict($tool, 'ctrl') eq 'vector',

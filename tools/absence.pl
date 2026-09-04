@@ -159,13 +159,27 @@
 # So an mdxfind absence requires hashpipe to have found nothing either, and
 # --no-hashpipe is the only way to skip that, loudly.
 #
-# WHAT A hashpipe HIT IS NOT
+# A hashpipe HIT MEANS TWO OPPOSITE THINGS
 #
-# It is not an mdxfind mapping. hashpipe carries 25 names mdxfind does not, so
-# a type it names may not exist in mdxfind at all -- DRAGONFLY3-32, EPISERVER
-# and H3C are all in that set and all appear in this run's results. A hit is
-# therefore reported in its own class as a CANDIDATE, to be proven by mdxfind
-# pinned to the type. hashpipe proposes; mdxfind proves.
+# It is never an mdxfind mapping -- hashpipe proposes, mdxfind proves -- but
+# which way it cuts depends on whether mdxfind has the type at all. Measured
+# 2026-09-03: 25 names hashpipe has and mdxfind does not, against 1 the other
+# way (PARALLEL).
+#
+#   * A type BOTH have. hashpipe reproduced the vector, so mdxfind plausibly
+#     can too and the sweep merely failed to arrange it -- wrong plumbing, or
+#     a line its loader dropped. That CONTRADICTS an absence: the entry is
+#     reported as a candidate mapping and nothing is written.
+#   * A type only hashpipe has. mdxfind genuinely does not have it, so the
+#     hit CORROBORATES the absence rather than contradicting it. Ten entries
+#     here are in this position -- ORACLE11, SUNMD5, H3C, MONGODB,
+#     GOST94CRYPT, GOST12256CRYPT and the four DRAGONFLY variants.
+#
+# The second case is also where this repository stops being a superset. The
+# absence is true and gets written, and the note says which hashpipe type
+# covers the algorithm, because there is nowhere else to put it: there is no
+# hashpipe column. That note is the placeholder for a decision, not a
+# substitute for one.
 #
 # A NAME MATCH VETOES
 #
@@ -558,6 +572,7 @@ if ($tool eq 'mdxfind' && -r "$from/corpus.hash") {
 
 my %hp_type;    # entry id -> type hashpipe named
 my %hp_asked;   # entry id -> 1 when hashpipe was actually given its vectors
+my %hp_only;    # type name -> 1 when hashpipe has it and mdxfind does not
 if ($tool eq 'mdxfind' && !$no_hashpipe) {
     my $cache = "$from/hashpipe.tsv";
     my %known;  # "<hash>:<plain>" -> type, '' meaning asked and unresolved
@@ -625,6 +640,20 @@ if ($tool eq 'mdxfind' && !$no_hashpipe) {
             $hp_asked{$id} = 1;
             $hp_type{$id} = $known{$line} if length $known{$line};
         }
+    }
+
+    # Which of hashpipe's types mdxfind does not have. Read from a list
+    # alongside the cache rather than derived: producing it needs the hashpipe
+    # binary (-T lists its registered types) and this tool must run without
+    # one. Absent, every hit is treated as a contradiction, which is the
+    # conservative reading.
+    my $only = "$from/hashpipe-only.txt";
+    if (-r $only) {
+        open my $of, '<', $only or die "$PROG: $!\n";
+        while (<$of>) { chomp; s/^\s+|\s+$//g; $hp_only{$_} = 1 if length && !/^#/ }
+        close $of;
+        printf STDERR "- %d type(s) hashpipe has and mdxfind does not\n",
+            scalar keys %hp_only;
     }
     printf STDERR "- hashpipe: %d entry/entries asked, %d named a type\n",
         scalar keys %hp_asked, scalar keys %hp_type;
@@ -744,10 +773,11 @@ for my $id (sort keys %target) {
     unless (@v)        { push @novector,  [ $id, '' ]; next }
     if ($hits{$id})    { push @swept_hit, [ $id, join(', ', sort keys %{ $hits{$id} }) ]; next }
 
-    # hashpipe names a type the sweep did not find. Not an mdxfind mapping --
-    # hashpipe has 25 names mdxfind lacks -- so it is a candidate to prove,
-    # and certainly not an absence.
-    if ($hp_type{$id}) {
+    # hashpipe names a type the sweep did not find. If mdxfind has that type
+    # too, the sweep merely failed to arrange the question and this
+    # contradicts an absence. If it does not, mdxfind really has no such type
+    # and the hit corroborates -- see the methodology note.
+    if ($hp_type{$id} && !$hp_only{ $hp_type{$id} }) {
         push @hp_hit, [ $id, $hp_type{$id} ];
         next;
     }
@@ -864,11 +894,16 @@ sub note_for {
          . "this verdict. No $tool $what name matches any identifier this entry "
          . "publishes either, normalised by the separator-drift rule. "
          . ($tool eq 'mdxfind' && !$no_hashpipe
-            ? "Corroborated by hashpipe, a second binary built from the same "
-            . "catalog: handed this entry's own hash and plaintext it names no "
-            . "type at all. It is the more direct instrument -- it recomputes "
-            . "rather than cracking -- and on this corpus it named a type for "
-            . "58 entries the sweep alone called silent. "
+            ? ($hp_type{$id}
+               ? "hashpipe DOES cover this algorithm, as type $hp_type{$id}, "
+               . "which mdxfind has no equivalent of -- so that is corroboration "
+               . "rather than contradiction, and it is recorded here because "
+               . "there is no hashpipe column to record it in. "
+               : "Corroborated by hashpipe, a second binary built from the same "
+               . "catalog: handed this entry's own hash and plaintext it names "
+               . "no type at all. It is the more direct instrument -- it "
+               . "recomputes rather than cracking -- and on this corpus it named "
+               . "a type for 58 entries the sweep alone called silent. ")
             : "")
          . "This is "
          . "the absence of an IDENTIFIER, not of the algorithm: if $tool gains "
