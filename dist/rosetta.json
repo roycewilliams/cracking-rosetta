@@ -24161,7 +24161,7 @@
          "mdxfind_salted" : "",
          "name" : "IBM/Toshiba 4690",
          "nesting_depth" : "",
-         "notes" : "",
+         "notes" : "The plaintext here was DERIVED by search on 2026-08-31 -- john publishes an example ciphertext and no plaintext, so seed-orphans.pl hands john the example and candidates harvested from john's own source and takes back whatever falls. That is sound only where john's comparison is exact, and this format is one john flags FMT_NOT_EXACT: --list=format-all-details prints \"Collisions possible (as in likely) yes\" and a run prints \"Note: This format may emit false positives\". The candidate list is harvested from the same test arrays that carry the collisions, so the search returned one. john's own test array states BOTH strings for this ciphertext and labels them: {\"$adxcrypt$54886955\", \"99999999\"} // default credentials, and {\"$adxcrypt$54886955\", \"786r\"} // collided password, works fine on a real system. This entry carried the collision. Corrected 2026-09-04 to the default credential, re-run under john and recovered. The mdxfind absence on this row was measured on 2026-09-03 against the previous plaintext. hashpipe was re-asked with the corrected pair on 2026-09-04 and still names no type, which is the half of that verdict a plaintext can change. A full-inventory mdxfind re-run against the corrected pairs found nothing in 900 seconds but was cut off at that cap, so it is consistent with the verdict rather than a fresh proof of it.",
          "primary_form" : "",
          "relations" : [],
          "sameas" : "",
@@ -24170,7 +24170,7 @@
          "tool_note" : {
             "hashcat" : "",
             "hashpipe" : "",
-            "john" : "john's own published example ciphertext for this format, recovered by john under this format. john publishes no plaintext, so the plaintext was found by handing john its own example and a candidate list -- what john recovered IS the plaintext, by construction.",
+            "john" : "john's own published example ciphertext for this format, recovered by john under this format. The plaintext is the one john's own source states for this ciphertext, not one found by search: this format is FMT_NOT_EXACT, so what john recovers is not necessarily what was hashed. See notes.",
             "mdxfind" : "no type. Swept all 1002 mdxfind types on 2026-09-03 (a tools/discover-mdxfind.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable type ran to completion; a type killed at the timeout is counted as untested and withholds this verdict. No mdxfind type name matches any identifier this entry publishes either, normalised by the separator-drift rule. Corroborated by hashpipe, a second binary built from the same catalog: handed this entry's own hash and plaintext it names no type at all. It is the more direct instrument -- it recomputes rather than cracking -- and on this corpus it named a type for 58 entries the sweep alone called silent. This is the absence of an IDENTIFIER, not of the algorithm: if mdxfind gains one, this becomes a mapping."
          },
          "vecs" : 1
@@ -48032,7 +48032,7 @@
          "mdxfind_salted" : "",
          "name" : "Microsoft Money (2002 to Money Plus)",
          "nesting_depth" : "",
-         "notes" : "",
+         "notes" : "The plaintext here was DERIVED by search on 2026-08-31 -- john publishes an example ciphertext and no plaintext, so seed-orphans.pl hands john the example and candidates harvested from john's own source and takes back whatever falls. That is sound only where john's comparison is exact, and this format is one john flags FMT_NOT_EXACT: --list=format-all-details prints \"Collisions possible (as in likely) yes\" and a run prints \"Note: This format may emit false positives\". The candidate list is harvested from the same test arrays that carry the collisions, so the search returned one. john's source states \"openwall\" for this ciphertext; the search returned \"OpenWall\", which sorts first in the candidate list and collides. Corrected 2026-09-04, re-run under john and recovered. The mdxfind absence on this row was measured on 2026-09-03 against the previous plaintext. hashpipe was re-asked with the corrected pair on 2026-09-04 and still names no type, which is the half of that verdict a plaintext can change. A full-inventory mdxfind re-run against the corrected pairs found nothing in 900 seconds but was cut off at that cap, so it is consistent with the verdict rather than a fresh proof of it.",
          "primary_form" : "",
          "relations" : [],
          "sameas" : "",
@@ -48041,7 +48041,7 @@
          "tool_note" : {
             "hashcat" : "",
             "hashpipe" : "",
-            "john" : "john's own published example ciphertext for this format, recovered by john under this format. john publishes no plaintext, so the plaintext was found by handing john its own example and a candidate list -- what john recovered IS the plaintext, by construction.",
+            "john" : "john's own published example ciphertext for this format, recovered by john under this format. The plaintext is the one john's own source states for this ciphertext, not one found by search: this format is FMT_NOT_EXACT, so what john recovers is not necessarily what was hashed. See notes.",
             "mdxfind" : "no type. Swept all 1002 mdxfind types on 2026-09-03 (a tools/discover-mdxfind.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable type ran to completion; a type killed at the timeout is counted as untested and withholds this verdict. No mdxfind type name matches any identifier this entry publishes either, normalised by the separator-drift rule. Corroborated by hashpipe, a second binary built from the same catalog: handed this entry's own hash and plaintext it names no type at all. It is the more direct instrument -- it recomputes rather than cracking -- and on this corpus it named a type for 58 entries the sweep alone called silent. This is the absence of an IDENTIFIER, not of the algorithm: if mdxfind gains one, this becomes a mapping."
          },
          "vecs" : 1
@@ -51883,7 +51883,7 @@
          "mdxfind_salted" : "",
          "name" : "OpenSSL \"enc\" encryption",
          "nesting_depth" : "",
-         "notes" : "",
+         "notes" : "The plaintext here was DERIVED by search on 2026-08-31 -- john publishes an example ciphertext and no plaintext, so seed-orphans.pl hands john the example and candidates harvested from john's own source and takes back whatever falls. That is sound only where john's comparison is exact, and this format is one john flags FMT_NOT_EXACT: --list=format-all-details prints \"Collisions possible (as in likely) yes\" and a run prints \"Note: This format may emit false positives\". The candidate list is harvested from the same test arrays that carry the collisions, so the search returned one. john's source states \"password\" for this ciphertext. The search returned the 16-character literal string \\xc0\\xc1\\xc2\\xc3, which is a second defect in the same harvest: it reads a C string literal without unescaping it, so the backslashes become part of the candidate. Corrected 2026-09-04, re-run under john and recovered. The mdxfind absence on this row was measured on 2026-09-03 against the previous plaintext. hashpipe was re-asked with the corrected pair on 2026-09-04 and still names no type, which is the half of that verdict a plaintext can change. A full-inventory mdxfind re-run against the corrected pairs found nothing in 900 seconds but was cut off at that cap, so it is consistent with the verdict rather than a fresh proof of it.",
          "primary_form" : "",
          "relations" : [],
          "sameas" : "",
@@ -51892,7 +51892,7 @@
          "tool_note" : {
             "hashcat" : "",
             "hashpipe" : "",
-            "john" : "john's own published example ciphertext for this format, recovered by john under this format. john publishes no plaintext, so the plaintext was found by handing john its own example and a candidate list -- what john recovered IS the plaintext, by construction.",
+            "john" : "john's own published example ciphertext for this format, recovered by john under this format. The plaintext is the one john's own source states for this ciphertext, not one found by search: this format is FMT_NOT_EXACT, so what john recovers is not necessarily what was hashed. See notes.",
             "mdxfind" : "no type. Swept all 1002 mdxfind types on 2026-09-03 (a tools/discover-mdxfind.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable type ran to completion; a type killed at the timeout is counted as untested and withholds this verdict. No mdxfind type name matches any identifier this entry publishes either, normalised by the separator-drift rule. Corroborated by hashpipe, a second binary built from the same catalog: handed this entry's own hash and plaintext it names no type at all. It is the more direct instrument -- it recomputes rather than cracking -- and on this corpus it named a type for 58 entries the sweep alone called silent. This is the absence of an IDENTIFIER, not of the algorithm: if mdxfind gains one, this becomes a mapping."
          },
          "vecs" : 1
@@ -95905,7 +95905,7 @@
          "vecs" : 1
       }
    ],
-   "generated" : "2026-09-03",
+   "generated" : "2026-09-04",
    "merged" : 9,
    "tombstones" : [
       {

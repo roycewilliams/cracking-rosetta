@@ -19,13 +19,14 @@ tools:
   john:
     cpu: ["adxcrypt"]
     verified: "vector"
-    verified_at: "2026-08-31"
+    verified_at: "2026-09-04"
     verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
-    note: "john's own published example ciphertext for this format, recovered by john under this format. john publishes no plaintext, so the plaintext was found by handing john its own example and a candidate list -- what john recovered IS the plaintext, by construction."
+    note: "john's own published example ciphertext for this format, recovered by john under this format. The plaintext is the one john's own source states for this ciphertext, not one found by search: this format is FMT_NOT_EXACT, so what john recovers is not necessarily what was hashed. See notes."
   crack:
     supported: false
 vectors:
   - hash: "$adxcrypt$54886955"
-    pass: "786r"
+    pass: 99999999
     source: "john"
     reads_in: ["john"]
+notes: "The plaintext here was DERIVED by search on 2026-08-31 -- john publishes an example ciphertext and no plaintext, so seed-orphans.pl hands john the example and candidates harvested from john's own source and takes back whatever falls. That is sound only where john's comparison is exact, and this format is one john flags FMT_NOT_EXACT: --list=format-all-details prints \"Collisions possible (as in likely) yes\" and a run prints \"Note: This format may emit false positives\". The candidate list is harvested from the same test arrays that carry the collisions, so the search returned one. john's own test array states BOTH strings for this ciphertext and labels them: {\"$adxcrypt$54886955\", \"99999999\"} // default credentials, and {\"$adxcrypt$54886955\", \"786r\"} // collided password, works fine on a real system. This entry carried the collision. Corrected 2026-09-04 to the default credential, re-run under john and recovered. The mdxfind absence on this row was measured on 2026-09-03 against the previous plaintext. hashpipe was re-asked with the corrected pair on 2026-09-04 and still names no type, which is the half of that verdict a plaintext can change. A full-inventory mdxfind re-run against the corrected pairs found nothing in 900 seconds but was cut off at that cap, so it is consistent with the verdict rather than a fresh proof of it."

@@ -297,6 +297,46 @@ my %HC_CATEGORY = (
 # john candidate plaintexts. Harvested, then PROVEN by john -- see header.
 
 my @CANDIDATES;
+
+# STATED: john's own (ciphertext, plaintext) pairing, in source order.
+#
+# WHY THE PAIRING MATTERS AND THE HARVEST ALONE DOES NOT
+#
+# john publishes an example ciphertext per format and no plaintext, so the
+# plaintext is recovered by handing john the example and every candidate the
+# harvest below found. That is sound only where john's cmp_exact() is exact.
+# For a format john flags FMT_NOT_EXACT -- "Collisions possible (as in
+# likely)" in --list=format-all-details, and at runtime "Note: This format may
+# emit false positives, so it will keep trying" -- a COLLIDING candidate is
+# reported instead, and the candidate list is harvested from the very test
+# arrays that hold the collisions.
+#
+# Measured 2026-09-04 across the 139 entries whose plaintext was derived this
+# way: 136 agree with john's stated pairing and 3 do not, all 3 on
+# FMT_NOT_EXACT formats. adxcrypt says it in its own comments:
+#
+#     {"$adxcrypt$54886955", "99999999"},  // default credentials
+#     {"$adxcrypt$54886955", "786r"},      // collided password
+#
+# So the answer is not a better search. john STATES the plaintext beside the
+# ciphertext, and reading the pair turns a derivation into a lookup that john
+# is then asked to confirm.
+my %STATED;
+
+# unescape($lit) - the bytes a C string literal denotes. The harvest used to
+# take the literal verbatim, which is how the SIXTEEN-character string
+# \xc0\xc1\xc2\xc3 became a candidate and then a published plaintext.
+sub unescape {
+    my ($s) = @_;
+    $s =~ s{\\x([0-9a-fA-F]{2})}{chr hex $1}ge;
+    $s =~ s{\\([0-7]{1,3})}{chr oct $1}ge;
+    $s =~ s{\\n}{\n}g;
+    $s =~ s{\\t}{\t}g;
+    $s =~ s{\\r}{\r}g;
+    $s =~ s{\\(["\\])}{$1}g;
+    return $s;
+}
+
 sub load_candidates {
     if ($candfile) {
         open my $fh, '<', $candfile or do {
@@ -311,11 +351,16 @@ sub load_candidates {
         exit 1;
     }
     my %seen;
-    for my $f (glob "$src/*.c") {
+    for my $f (glob "$src/*.[ch]") {
         open my $fh, '<', $f or next;
         while (my $l = <$fh>) {
-            while ($l =~ /\{"[^"]*",\s*"([^"]*)"/g) {
-                my $p = $1;
+            next if $l =~ m{^\s*//};        # a commented-out test is not a test
+            # Both halves are kept: the plaintext as a candidate, and the pair
+            # so that this format's own answer can be tried first.
+            while ($l =~ /\{\s*"((?:[^"\\]|\\.)*)"\s*,\s*"((?:[^"\\]|\\.)*)"\s*\}/g) {
+                my ($ct, $p) = (unescape($1), unescape($2));
+                push @{ $STATED{$ct} }, $p
+                    if length $ct && !grep { $_ eq $p } @{ $STATED{$ct} || [] };
                 next unless length $p && length($p) <= 40;
                 next if $p =~ /[^\x20-\x7e]/;
                 $seen{$p} = 1;
@@ -477,8 +522,22 @@ my %TOOL = (
             unlink $pot;
             my @common = ("./$jbin", "--format=$ident",
                           '--field-separator-char=:', "--pot=$pot");
+
+            # john's own stated plaintexts for THIS ciphertext go first, so a
+            # format whose comparison is not exact reports the documented
+            # password rather than the first colliding candidate. Order within
+            # the stated list is john's: adxcrypt states the real credential
+            # before the collision it labels as one.
+            my $wl = "$workdir/jn.words";
+            my @stated = @{ $STATED{$hash} || [] };
+            if (@stated) {
+                my %first = map { $_ => 1 } @stated;
+                $wl = "$workdir/jn.$s.words";
+                write_file($wl, @stated, grep { !$first{$_} } @CANDIDATES);
+            }
+
             my ($code) = run_capture($timeout, $jdir, @common,
-                "--wordlist=$workdir/jn.words", "--session=$workdir/jn.$s", $hf);
+                "--wordlist=$wl", "--session=$workdir/jn.$s", $hf);
             return (0, 'timeout') if $code == -2;
             return (0, 'no crack') unless -s $pot;
             # The pot line is "<john's canonical hash>:<plain>". Take the
@@ -490,7 +549,10 @@ my %TOOL = (
             my $plain = $line;
             $plain =~ s/^.*://;
             return (0, 'no crack') unless defined $plain && length $plain;
-            return (1, '', $plain);
+            # The fourth value says the plaintext is john's own answer for
+            # this ciphertext rather than whatever the search turned up, which
+            # is the difference the note has to report.
+            return (1, '', $plain, (grep { $_ eq $plain } @stated) ? 1 : 0);
         },
     },
 );
@@ -626,8 +688,8 @@ for my $r (@orphans) {
     $tried++;
     # In --dry-run john has no plaintext yet: it is discovered by the real
     # run, so stand one in rather than reporting every format as a failure.
-    my ($cracked, $err, $found) = $dry
-        ? (1, '', (defined $pass ? $pass : '(discovered at run time)'))
+    my ($cracked, $err, $found, $stated) = $dry
+        ? (1, '', (defined $pass ? $pass : '(discovered at run time)'), 0)
         : $T->{verify}->($ident, $hash, $pass, $r);
     $pass = $found if defined $found;
     my $proven = ($cracked && defined $pass) ? 1 : 0;
@@ -668,11 +730,22 @@ for my $r (@orphans) {
                     . "repository's, until a vector is round-tripped here. Re-run "
                     . "seed-orphans.pl --tool $tool --only $ident to retry."
                     : $tool eq 'john'
-                    ? "john's own published example ciphertext for this format, "
-                    . "recovered by john under this format. john publishes no "
-                    . "plaintext, so the plaintext was found by handing john its "
-                    . "own example and a candidate list -- what john recovered IS "
-                    . "the plaintext, by construction."
+                    ? ($stated
+                       ? "john's own published example ciphertext for this "
+                       . "format, recovered by john under this format. "
+                       . "--list=format-details publishes no plaintext, but "
+                       . "john's SOURCE states one beside this ciphertext and "
+                       . "that is the one here: it was offered to john ahead of "
+                       . "every other candidate and john recovered it."
+                       : "john's own published example ciphertext for this "
+                       . "format, recovered by john under this format. john "
+                       . "publishes no plaintext and its source states none for "
+                       . "this ciphertext, so the plaintext was found by handing "
+                       . "john its own example and a candidate list. Where "
+                       . "john's comparison is not exact -- it says so per "
+                       . "format, and again at run time -- a search can return a "
+                       . "colliding string rather than what was hashed, so this "
+                       . "plaintext is the weaker half of the vector.")
                     : "${tool}'s own published example for this identifier, "
                     . "recovered by $tool at this identifier with ${tool}'s own "
                     . "published plaintext.",
