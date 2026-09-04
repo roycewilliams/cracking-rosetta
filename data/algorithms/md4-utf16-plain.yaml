@@ -22,6 +22,12 @@ tools:
     verified_at: "2026-08-30"
     verified_with: "mdxfind"
     note: "NTLM (e369) came in with the merge of ntlm-plain-md4-utf16-le-plain; both types were re-run pinned against this entry's vector on 2026-08-30. mdxfind's third spelling, NTLMH (e786), keeps its own entry - see the relation."
+  hashpipe:
+    types: ["MD4UTF16", "NTLM"]
+    verified: "vector"
+    verified_at: "2026-09-03"
+    verified_with: "hashpipe RCS 1.189 (2026/09/02)"
+    note: "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one."
   john:
     cpu: ["NT", "NT-long", "dynamic_33"]
     gpu: ["NT-long-opencl", "NT-opencl"]

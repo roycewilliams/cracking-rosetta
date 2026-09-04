@@ -21,6 +21,12 @@ tools:
     verified_at: "2026-08-30"
     verified_with: "mdxfind RCS 1.540"
     note: "Three type indices for one computation, listed in index order: e471, e578, e587. mdxfind's maintainer states e578 and e587 are literal duplicates he added while working through the SHA-1 HIBP hashes; e471 publishes the same example vector and had no entry here at all. All three were run pinned against this vector on 2026-08-30."
+  hashpipe:
+    types: ["SHA1-MD5PASSSALT", "SHA1MD5PASS-SALT", "SHA1MD5SALT"]
+    verified: "vector"
+    verified_at: "2026-09-03"
+    verified_with: "hashpipe RCS 1.189 (2026/09/02)"
+    note: "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one."
   crack:
     supported: false
 relations:

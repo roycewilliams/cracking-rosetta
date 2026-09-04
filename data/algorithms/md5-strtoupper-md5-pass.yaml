@@ -22,6 +22,12 @@ tools:
     verified_at: "2026-08-31"
     verified_with: "mdxfind RCS 1.540 (2026/08/22)"
     note: "type discovered by round-trip search, not by name"
+  hashpipe:
+    types: ["MD5MD5UC"]
+    verified: "vector"
+    verified_at: "2026-09-03"
+    verified_with: "hashpipe RCS 1.189 (2026/09/02)"
+    note: "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one."
   crack:
     supported: false
 relations:

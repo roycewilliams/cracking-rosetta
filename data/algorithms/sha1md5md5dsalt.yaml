@@ -22,6 +22,12 @@ tools:
     verified_at: "2026-08-31"
     verified_with: "mdxfind RCS 1.540 (2026/08/22)"
     note: "mdxfind's own published example for this identifier, recovered by mdxfind at this identifier with mdxfind's own published plaintext."
+  hashpipe:
+    types: ["SHA1MD5MD5DSALT"]
+    verified: "vector"
+    verified_at: "2026-09-03"
+    verified_with: "hashpipe RCS 1.189 (2026/09/02)"
+    note: "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one."
   crack:
     supported: false
 vectors:

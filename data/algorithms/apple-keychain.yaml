@@ -22,6 +22,12 @@ tools:
     verified: "vector"
     verified_at: "2026-08-29"
     verified_with: "mdxfind"
+  hashpipe:
+    types: ["APPLE-KEYCHAIN"]
+    verified: "vector"
+    verified_at: "2026-09-03"
+    verified_with: "hashpipe RCS 1.189 (2026/09/02)"
+    note: "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one."
   john:
     cpu: ["keychain"]
     gpu: ["keychain-opencl"]
