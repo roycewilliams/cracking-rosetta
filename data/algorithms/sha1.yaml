@@ -1,0 +1,48 @@
+id: "sha1"
+name: "SHA-1"
+aliases: ["SHA1"]
+expression: "sha1($p)"
+john_dynamic_expr: "dynamic=sha1($p)"
+expression_proof:
+  verified: "vector"
+  verified_at: "2026-09-04"
+  verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
+  note: "round-tripped as --format=dynamic=<expr> against every vector this entry carries"
+category: "primitive"
+status: "ok"
+tools:
+  hashcat:
+    modes: [100]
+    verified: "vector"
+    verified_at: "2026-08-29"
+    verified_with: "hashcat"
+  mdxfind:
+    types: ["SHA1"]
+    verified: "vector"
+    verified_at: "2026-08-29"
+    verified_with: "mdxfind"
+  hashpipe:
+    types: ["SHA1"]
+    verified: "vector"
+    verified_at: "2026-09-03"
+    verified_with: "hashpipe RCS 1.189 (2026/09/02)"
+    note: "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one."
+  john:
+    cpu: ["dynamic_26"]
+    gpu: ["raw-SHA1-opencl"]
+    verified: "vector"
+    verified_at: "2026-08-29"
+    verified_with: "john"
+  crack:
+    supported: false
+relations:
+  - kind: "truncates"
+    entry: "sha1-substr-0-32"
+    distinction: "truncation"
+    note: "sha1-substr-0-32 is this computation cut to its first 32 hex characters. Split out of that row on 2026-09-04 by Royce's decision: it was carrying both, and only john's dynamic_1023 truncates. Every identifier here computes plain SHA-1 and no cut, and every one of them was round-tripped against this vector before the split -- nothing was re-tiered by moving it."
+vectors:
+  - hash: "d21af7ece046af0e12d3c38472792cd5f081c39f"
+    pass: "rosetta"
+    source: "sheet"
+    reads_in: ["hashcat", "john", "mdxfind"]
+notes: "Created 2026-09-04. This corpus had no row for plain SHA-1 as such, which is what blocked resolving the two-computations problem on sha1-substr-0-32: john's Raw-SHA1 sits on aich, sha1uc and netscape-ldap, and the truncation row held mdxfind's SHA1, so deleting the plain-SHA-1 claims there would have stranded them rather than rehomed them. They are rehomed here."

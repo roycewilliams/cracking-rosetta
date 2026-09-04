@@ -214,7 +214,7 @@ flavour of the hash function - `md5(MD5($p))` - and john rejects the first
 outright. It is deliberately **not** in john's column, which lists formats
 `--list=formats` will show; the gap worth filling is whether a named one exists.
 
-### hashcat: 194 entries say nothing
+### hashcat: 195 entries say nothing
 
 A few that carry a vector, so a candidate identifier can be tested at once, one per family:
 
@@ -234,9 +234,9 @@ A few that carry a vector, so a candidate identifier can be tested at once, one 
 * [`bitwarden-password-manager`](index.html#bitwarden-password-manager) - `Bitwarden Password Manager`
 * [`blackberry-es10`](index.html#blackberry-es10) - `Blackberry-ES10`
 
-All 194: filter `hashcat_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
+All 195: filter `hashcat_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
 
-### mdxfind: 105 entries say nothing
+### mdxfind: 106 entries say nothing
 
 A few that carry a vector, so a candidate identifier can be tested at once, one per family:
 
@@ -253,10 +253,10 @@ A few that carry a vector, so a candidate identifier can be tested at once, one 
 * [`oracle-11g`](index.html#oracle-11g) - `Oracle 11g`
 * [`password-safe-v2`](index.html#password-safe-v2) - `Password Safe v2`
 * [`pkzip-master-key`](index.html#pkzip-master-key) - `PKZIP Master Key` (and 1 more starting `PKZIP`)
+* [`sha1-substr-0-32`](index.html#sha1-substr-0-32) - `cut(sha1($p),0,32)`
 * [`stuffit5`](index.html#stuffit5) - `Stuffit5`
-* [`sunmd5`](index.html#sunmd5) - `SunMD5`
 
-All 105: filter `mdxfind_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
+All 106: filter `mdxfind_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
 
 ## 4. hashcat modes with no row here (1)
 

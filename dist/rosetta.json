@@ -1,5 +1,5 @@
 {
-   "count" : 1552,
+   "count" : 1553,
    "entries" : [
       {
          "alias" : "",
@@ -61653,6 +61653,81 @@
          "vecs" : 1
       },
       {
+         "alias" : "SHA1",
+         "application" : "",
+         "category" : "primitive",
+         "crack" : {
+            "ids" : [],
+            "state" : "no"
+         },
+         "cracknote" : "",
+         "denotation" : "",
+         "expr" : "sha1($p)",
+         "expr_note" : "round-tripped as --format=dynamic=<expr> against every vector this entry carries",
+         "expr_tier" : "vector",
+         "hash_length" : 40,
+         "hash_length_basis" : "observed",
+         "hashcat" : {
+            "ids" : [
+               100
+            ],
+            "state" : "proven",
+            "tier" : "vector"
+         },
+         "hashcat_salted" : "no",
+         "hashcat_speed" : "fast",
+         "hashpipe" : {
+            "ids" : [
+               "SHA1"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
+         },
+         "id" : "sha1",
+         "john" : {
+            "ids" : [
+               "dynamic_26",
+               "raw-SHA1-opencl"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
+         },
+         "john_expr" : "dynamic=sha1($p)",
+         "john_salted" : "no",
+         "john_work_factor" : "",
+         "legacy" : "",
+         "mdxfind" : {
+            "ids" : [
+               "SHA1"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
+         },
+         "mdxfind_salted" : "no",
+         "name" : "SHA-1",
+         "nesting_depth" : 1,
+         "notes" : "Created 2026-09-04. This corpus had no row for plain SHA-1 as such, which is what blocked resolving the two-computations problem on sha1-substr-0-32: john's Raw-SHA1 sits on aich, sha1uc and netscape-ldap, and the truncation row held mdxfind's SHA1, so deleting the plain-SHA-1 claims there would have stranded them rather than rehomed them. They are rehomed here.",
+         "primary_form" : "",
+         "relations" : [
+            {
+               "distinction" : "truncation",
+               "entry" : "sha1-substr-0-32",
+               "kind" : "truncates",
+               "note" : "sha1-substr-0-32 is this computation cut to its first 32 hex characters. Split out of that row on 2026-09-04 by Royce's decision: it was carrying both, and only john's dynamic_1023 truncates. Every identifier here computes plain SHA-1 and no cut, and every one of them was round-tripped against this vector before the split -- nothing was re-tiered by moving it."
+            }
+         ],
+         "sameas" : "truncates sha1-substr-0-32 (truncation)",
+         "serialization" : "shared",
+         "status" : "ok",
+         "tool_note" : {
+            "hashcat" : "",
+            "hashpipe" : "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one.",
+            "john" : "",
+            "mdxfind" : ""
+         },
+         "vecs" : 1
+      },
+      {
          "alias" : "",
          "application" : "",
          "category" : "primitive",
@@ -67541,30 +67616,22 @@
          "expr" : "cut(sha1($p),0,32)",
          "expr_note" : "CORRECTED 2026-09-02. This row previously carried sha1($p), on the reading that dynamic_1023 truncates the STORAGE and the expression describes the computation. Withdrawn for one reason: the expression is this repository join key, and axcryptsha1 (mdxfind e916) already spells the identical construction as cut(sha1($p),0,32). Two rows for one computation that spell it differently do not join, which is the entire point of the field. The cut is also what this row own name, its legacy hashes_org name CUT0-32SHA1, and john own --list=subformats all say: john states dynamic_1023 as \"sha1($p) (hash truncated to length 32)\", for an identifier this row proved by round-trip. mdxfind hx VM, built -DHX_STANDALONE 2026-09-02, evaluates cut(sha1(pass),0,32) to d21af7ece046af0e12d3c38472792cd5, this row first vector, exactly. Tier stays upstream and cannot become vector: cut() has no john dynamic spelling at all (RosettaJohn %NO_JOHN), so john compiler can never be handed this string, and john_dynamic_expr has been WITHDRAWN for the same reason -- the dynamic=sha1($p) it used to carry runs happily and produces the 40-hex digest, not the 32-hex ciphertext stored here. CAVEAT, unresolved and left for a curator: this row second vector is the FULL 40-hex sha1(\"rosetta\") and does not satisfy this expression, and hashcat -m 100, mdxfind SHA1, john dynamic_26 and raw-SHA1-opencl are all plain-SHA1 identifiers that compute no cut. See the curation note in notes:.",
          "expr_tier" : "upstream",
-         "hash_length" : "32; 40",
-         "hash_length_basis" : "varies",
+         "hash_length" : 32,
+         "hash_length_basis" : "observed",
          "hashcat" : {
-            "ids" : [
-               100
-            ],
-            "state" : "proven",
-            "tier" : "vector"
+            "ids" : [],
+            "state" : "unknown"
          },
-         "hashcat_salted" : "no",
-         "hashcat_speed" : "fast",
+         "hashcat_salted" : "",
+         "hashcat_speed" : "",
          "hashpipe" : {
-            "ids" : [
-               "SHA1"
-            ],
-            "state" : "proven",
-            "tier" : "vector"
+            "ids" : [],
+            "state" : "unknown"
          },
          "id" : "sha1-substr-0-32",
          "john" : {
             "ids" : [
-               "dynamic_1023",
-               "dynamic_26",
-               "raw-SHA1-opencl"
+               "dynamic_1023"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -67574,16 +67641,13 @@
          "john_work_factor" : "",
          "legacy" : "CUT0-32SHA1; SHA1.Substr(0, 32)",
          "mdxfind" : {
-            "ids" : [
-               "SHA1"
-            ],
-            "state" : "proven",
-            "tier" : "vector"
+            "ids" : [],
+            "state" : "unknown"
          },
-         "mdxfind_salted" : "no",
+         "mdxfind_salted" : "",
          "name" : "SHA1.Substr(0, 32)",
          "nesting_depth" : 1,
-         "notes" : "OPEN CURATION QUESTION, raised 2026-09-02. This row is being asked to be two computations at once, and correcting the expression to cut(sha1($p),0,32) made that visible rather than causing it. Its FIRST vector is the 32-hex truncation and satisfies the expression; its SECOND is the full 40-hex sha1(\"rosetta\") and does not. Of its tool identifiers only john dynamic_1023 truncates -- john states it as \"sha1($p) (hash truncated to length 32)\" -- while hashcat -m 100, mdxfind SHA1, john dynamic_26 and raw-SHA1-opencl are all plain SHA-1 and compute no cut. Those were round-tripped against the 40-hex vector, so nothing recorded here is false; they simply belong to a different computation. Two things block resolving it by deletion. First, this corpus has NO row for plain SHA-1 as such: john Raw-SHA1 sits on aich, sha1uc and netscape-ldap, and this row holds mdxfind SHA1, so removing the plain-SHA1 claims here would strand them rather than rehome them. Second, splitting is an id decision and ids are forever (CLAUDE.md, The published contract). Left for Royce: either a new row for plain SHA-1 that takes the 40-hex vector and the four plain identifiers, or a documented decision that this row keeps both. Do NOT resolve it by weakening the expression back to sha1($p) -- see expression_proof.note for why the cut has to stay.",
+         "notes" : "RESOLVED 2026-09-04 by Royce, and the reasoning is kept because the shape recurs. This row was being asked to be two computations: its expression is cut(sha1($p),0,32), its 32-hex vector satisfies it, and the 40-hex sha1(\"rosetta\") it also carried did not. Only john's dynamic_1023 truncates; the other five identifiers computed plain SHA-1. Nothing recorded here was ever false -- they had all been round-tripped -- they simply belonged to a different computation, and there was no row for it. There is now: see the sha1 entry, which took them and the 40-hex vector. No id changed and no claim was dropped.",
          "primary_form" : "",
          "relations" : [
             {
@@ -67591,18 +67655,24 @@
                "entry" : "axcryptsha1",
                "kind" : "same-computation",
                "note" : "Both compute cut(sha1(pass),0,32); mdxfind hx VM reproduces each row own vector from that one string, 2026-09-02. They stay separate rows because the ciphertext SERIALIZATION differs: AxCrypt stores it behind a $axcrypt_sha1$ prefix and hashcat gives that its own mode 13300, where this row stores the bare 32 hex characters. Same computation, two encodings, two identifiers a reader can arrive by."
+            },
+            {
+               "distinction" : "truncation",
+               "entry" : "sha1",
+               "kind" : "truncates",
+               "note" : "This row is sha1 cut to its first 32 hex characters. RESOLVED 2026-09-04 by Royce: the plain-SHA-1 identifiers this row carried -- hashcat 100, mdxfind SHA1, hashpipe SHA1, john dynamic_26 and raw-SHA1-opencl -- compute no cut and moved to the new sha1 row with the 40-hex vector they were proven against. Note what is NOT a mapping: mdxfind's SHA1 and hashpipe's SHA1 do recover the 32-hex vector, because mdxfind compares at the length of the shortest hash it loaded and cracking a truncated digest is a capability it has by design. That is the tool being able to crack this, not the tool having an identifier for the truncation, and \"mdxfind -h '^SHA1$'\" is still the command for it."
             }
          ],
-         "sameas" : "same as axcryptsha1 (encoding)",
-         "serialization" : "divergent",
-         "status" : "needs-review",
+         "sameas" : "same as axcryptsha1 (encoding); truncates sha1 (truncation)",
+         "serialization" : "shared",
+         "status" : "ok",
          "tool_note" : {
             "hashcat" : "",
-            "hashpipe" : "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one.",
-            "john" : "",
+            "hashpipe" : "",
+            "john" : "dynamic_1023 is the only identifier on this row that truncates; john states it as \"sha1($p) (hash truncated to length 32)\". The plain-SHA-1 identifiers this row used to carry moved to the sha1 entry on 2026-09-04.",
             "mdxfind" : ""
          },
-         "vecs" : 2
+         "vecs" : 1
       },
       {
          "alias" : "",
