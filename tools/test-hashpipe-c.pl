@@ -13,22 +13,41 @@
 # and it is the equivalent of `mdxfind -h '^TYPE$'`, which makes hashpipe a
 # pinnable third oracle instead of a suggester.
 #
-# It has one hole. A pair that matches at ONE iteration is accepted whatever
-# depth the label asks for, and re-emitted as x01. Everything else
-# off-diagonal is correctly refused. Reported 2026-09-04 and CONFIRMED BY
-# UPSTREAM as a bug, so it is expected to be fixed -- which is exactly why
-# this file exists rather than a sentence somewhere.
+# v1.190 had a hole in it. A pair that matched at ONE iteration was accepted
+# whatever depth the label asked for, and re-emitted as x01. Reported and
+# CONFIRMED by upstream on 2026-09-04. This file asserted that hole as it
+# stood, on the rule that a test which passes either way is decoration.
 #
-# CLAUDE.md tells every future reader to code around the hole: read the
-# EMITTED suffix, never the exit status. That instruction has a shelf life.
-# Without a check, the way anyone would learn the hole had closed is by
-# remembering to re-test it, and this repository has already been bitten by
-# a "documented drift detector" that was a human remembering to read a diff
-# (see the extract-hashpipe.pl history in CLAUDE.md).
+# v1.191 FIXED IT PER LINE, and this file is why we found out on the day
+# rather than by remembering to re-check: the four assertions of the hole
+# failed, and their failure text said what to do. That is the whole design.
 #
-# SO THE ASSERTION IS DELIBERATELY OF THE CURRENT, BUGGY BEHAVIOUR. When
-# upstream fixes it this test FAILS, and the failure text says what to do:
-# drop the guard. A test that passed either way would be decoration.
+# THE HOLE IS NOT GONE, IT MOVED INTO THE BATCH. Measured on 1.191:
+#
+#     MD5x03 <md5^1>                       alone      -> refused          (fixed)
+#     MD5x03 <md5^1> + MD5x05 <md5^1>                 -> both refused     (fixed)
+#     MD5x03 <md5^1> + SHA1x01 <sha1>                 -> x03 refused      (fixed)
+#     MD5x02 <md5^2> + MD5x03 <md5^1>                 -> BOTH VERIFIED
+#                                          and the md5^1 line comes back
+#                                          labelled MD5x01, a depth no line
+#                                          asked for
+#
+# So a line's plaintext can still claim ANOTHER line's digest at a depth
+# that line did not ask for, when the two are the same hash family and the
+# other line's own check succeeds. Same class of defect, one level up.
+#
+# TWO CONSEQUENCES FOR ANY CALLER, and both are already CLAUDE.md's rule
+# widened by exactly one clause:
+#
+#   - read the EMITTED suffix, never the exit status. Still the guard, and
+#     it still works: the emitted label is the depth that actually matched.
+#   - in a BATCH, output lines do not correspond one-to-one with input
+#     lines. Match on the emitted HASH as well, or a leaked line reads as
+#     the verification of whichever input sits at the same position.
+#
+# The safe use is therefore ONE LINE PER INVOCATION, which is what run_c
+# does and what every assertion here is built on. The batch behaviour is
+# asserted separately, as it stands, so a fix to it fails loudly too.
 #
 # WHY IT IS NOT IN CI
 #
@@ -55,6 +74,7 @@ use FindBin qw($RealBin);
 use lib "$RealBin/lib";
 use RosettaTools qw(tool_path);
 use Digest::MD5 qw(md5_hex);
+use Digest::SHA qw(sha1_hex);
 use File::Temp qw(tempdir);
 
 my $PROG = 'test-hashpipe-c.pl';
@@ -66,11 +86,11 @@ Usage: $PROG [--verbose]
    -v, --verbose     print the whole label-against-truth matrix
    -h, --help        this help
 
-   Asserts what `hashpipe -c` does with an iteration label: it verifies at
-   the labelled depth, EXCEPT that a depth-1 match is accepted under any
-   depth and re-emitted as x01. Upstream confirmed that hole as a bug on
-   2026-09-04, so the current behaviour is asserted as it stands and this
-   test FAILS when a fix lands, saying to drop the guard CLAUDE.md carries.
+   Asserts what `hashpipe -c` does with an iteration label. Per line it is
+   now strict: it verifies at the labelled depth and refuses every other.
+   In a BATCH it is not -- one line's plaintext can claim another line's
+   digest at a depth nobody asked for -- and that is asserted as it stands,
+   so a fix to it fails here and says to drop the guard CLAUDE.md carries.
 
    Needs a hashpipe binary (\$HASHPIPE, else the resolver default). Skips
    loudly when there is none, because a skip must not read as a pass. Not
@@ -100,27 +120,42 @@ my @digest;
     my $h = $PASS;
     for my $n (1 .. $MAX) { $h = md5_hex($h); $digest[$n] = $h }
 }
+my $SHA1 = sha1_hex($PASS);
 
-# run_c($line) - feed one line to `hashpipe -c` and say what happened.
-# Streams are read SEPARATELY and that is not fastidiousness: a rejected line
-# is echoed to stderr VERBATIM, and where the label already matches what the
-# tool would emit, the accepted and rejected forms are byte-identical. Merge
-# the streams and the two become indistinguishable.
-sub run_c {
-    my ($line) = @_;
+# run_lines(@lines) - feed a whole batch to one `hashpipe -c` and say what
+# came back. Streams are read SEPARATELY and that is not fastidiousness: a
+# rejected line is echoed to stderr VERBATIM, and where the label already
+# matches what the tool would emit, the accepted and rejected forms are
+# byte-identical. Merge the streams and the two become indistinguishable --
+# which is exactly how a one-liner in a terminal reads a refusal as a pass.
+sub run_lines {
+    my (@lines) = @_;
     my ($o, $e) = ("$TMP/o", "$TMP/e");
     open my $in, '|-', "'$HP' -c > '$o' 2> '$e'" or die "cannot run $HP: $!\n";
-    print {$in} "$line\n";
-    my $ok = close $in;
+    print {$in} "$_\n" for @lines;
+    close $in;
     my $status = $?;
     my $out = do { local (@ARGV, $/) = ($o); <> } // '';
     my $err = do { local (@ARGV, $/) = ($e); <> } // '';
-    chomp for ($out, $err);
+    my @out = grep { length } split /\n/, $out;
+    my @err = grep { length } split /\n/, $err;
     return {
-        verified => (length $out ? 1 : 0),
-        label    => (split / /, $out)[0] // '',
-        stderr   => $err,
-        exit     => ($status >> 8),
+        out    => \@out,                          # verified, as emitted
+        err    => \@err,                          # refused, echoed verbatim
+        labels => [ map { (split / /, $_)[0] } @out ],
+        exit   => ($status >> 8),
+    };
+}
+
+# run_c($line) - ONE line, one process. The only shape a caller should use.
+sub run_c {
+    my ($line) = @_;
+    my $r = run_lines($line);
+    return {
+        verified => (scalar @{ $r->{out} } ? 1 : 0),
+        label    => $r->{labels}[0] // '',
+        stderr   => join("\n", @{ $r->{err} }),
+        exit     => $r->{exit},
     };
 }
 
@@ -132,9 +167,9 @@ sub check {
 }
 
 #-----------------------------------------------------------------------
-# The matrix: label depth against true depth. Measured 2026-09-04 on
-# v1.190. Accepted exactly when the label matches the truth, OR when the
-# truth is 1 -- that second clause is the bug.
+# The per-line matrix: label depth against true depth. STRICT since v1.191
+# -- the diagonal verifies and re-emits its own label, everything else is
+# refused. $leak_seen counts the v1.190 hole, and is asserted to be zero.
 #-----------------------------------------------------------------------
 my $leak_seen = 0;
 printf "%-8s%s\n", 'label', join '', map { sprintf '%-11s', "md5^$_" } 1 .. $MAX
@@ -145,33 +180,73 @@ for my $label (1 .. $MAX) {
         my $r = run_c(sprintf 'MD5x%02d %s:%s', $label, $digest[$true], $PASS);
         push @row, $r->{verified} ? $r->{label} : '.';
 
-        my $want_verified = ($label == $true || $true == 1) ? 1 : 0;
         my $why = sprintf 'MD5x%02d against md5^%d: %s', $label, $true,
-            $want_verified ? 'verifies' : 'refused';
-        # The diagonal and the true off-diagonal refusals are the contract.
+            $label == $true ? 'verifies' : 'refused';
         if ($label == $true) {
             check($r->{verified} && $r->{label} eq sprintf('MD5x%02d', $label),
                   "$why as MD5x" . sprintf('%02d', $label),
-                  sprintf("     got verified=%d label=%s\n", $r->{verified}, $r->{label}));
-        }
-        elsif ($true == 1) {
-            # THE BUG. Asserted as-is so a fix breaks this loudly.
-            $leak_seen++ if $r->{verified};
-            check($r->{verified} && $r->{label} eq 'MD5x01',
-                  "$why as MD5x01 -- the CONFIRMED UPSTREAM BUG, still present",
-                  "     A depth-1 match is no longer accepted under a deeper\n"
-                . "     label. That means upstream FIXED it. Re-measure, then\n"
-                . "     drop the guard in CLAUDE.md's iteration-suffix pitfall\n"
-                . "     and delete this branch.\n");
+                  sprintf("     got verified=%d label=%s\n",
+                          $r->{verified}, $r->{label}));
         }
         else {
-            check(!$r->{verified},
-                  $why,
+            # $true == 1 under a deeper label is the v1.190 hole. It is now
+            # one off-diagonal cell like any other, but still counted, so
+            # the summary line says in one number whether it came back.
+            $leak_seen++ if $true == 1 && $r->{verified};
+            check(!$r->{verified}, $why,
                   sprintf("     wrongly verified as %s\n", $r->{label}));
         }
     }
     printf "MD5x%02d  %s\n", $label, join '', map { sprintf '%-11s', $_ } @row
         if $verbose;
+}
+
+#-----------------------------------------------------------------------
+# The BATCH, where the hole moved. Asserted as it stands on 1.191, with the
+# three controls that say what it is NOT -- because without them "two lines
+# verified" is equally consistent with -c simply being lax, and a claim that
+# fits both cases has not measured anything.
+#-----------------------------------------------------------------------
+{
+    # Control 1: the same wrong label, alone. This is the v1.190 hole, and
+    # it is what 1.191 fixed.
+    my $r = run_c("MD5x03 $digest[1]:$PASS");
+    check(!$r->{verified},
+          'batch control: MD5x03 on md5^1 ALONE is refused (the v1.190 fix)',
+          sprintf("     verified as %s -- the v1.190 hole is BACK\n", $r->{label}));
+
+    # Control 2: two lines, neither of which can verify. Refusal is not
+    # about being alone.
+    $r = run_lines("MD5x03 $digest[1]:$PASS", "MD5x05 $digest[1]:$PASS");
+    check(@{ $r->{out} } == 0 && @{ $r->{err} } == 2,
+          'batch control: two lines that cannot verify are both refused',
+          sprintf("     out=%d err=%d\n", scalar @{ $r->{out} }, scalar @{ $r->{err} }));
+
+    # Control 3: a line that DOES verify, but in another hash family. The
+    # leak does not cross families, so this is not "any success unlocks
+    # everything".
+    $r = run_lines("SHA1x01 $SHA1:$PASS", "MD5x03 $digest[1]:$PASS");
+    check(@{ $r->{out} } == 1 && $r->{labels}[0] eq 'SHA1x01'
+              && @{ $r->{err} } == 1 && $r->{err}[0] =~ /^MD5x03 /,
+          'batch control: a verifying SHA1 line does not unlock an MD5 line',
+          sprintf("     out=[%s] err=[%s]\n",
+                  join('|', @{ $r->{out} }), join('|', @{ $r->{err} })));
+
+    # THE LEAK. A verifying MD5 line in the same batch, on a DIFFERENT
+    # digest, and the wrongly-labelled line comes back verified -- emitted
+    # at the depth that actually matched, which is a depth no line asked
+    # for. Asserted as-is so a fix breaks this loudly.
+    $r = run_lines("MD5x02 $digest[2]:$PASS", "MD5x03 $digest[1]:$PASS");
+    my $leaked = (grep { /^MD5x01 $digest[1]:/ } @{ $r->{out} }) ? 1 : 0;
+    check($leaked && @{ $r->{err} } == 0,
+          'BATCH LEAK still present: a verifying MD5 line lets a wrongly '
+        . 'labelled one through, emitted as MD5x01',
+          "     A wrong label is no longer accepted beside a verifying line\n"
+        . "     of the same family. That means upstream fixed the batch case\n"
+        . "     too. Re-measure, then drop the batch clause from CLAUDE.md's\n"
+        . "     iteration-suffix pitfall and delete this branch.\n"
+        . sprintf("     out=[%s] err=[%s]\n",
+                  join('|', @{ $r->{out} }), join('|', @{ $r->{err} })));
 }
 
 #-----------------------------------------------------------------------
@@ -195,7 +270,16 @@ check(!$r->{verified} && $r->{exit} == 2,
       'a line with no label at all is fatal too',
       sprintf("     exit=%d stderr=%s\n", $r->{exit}, $r->{stderr}));
 
+# MD5CAP is the type whose two numberings disagree: -c calls this vector
+# MD5CAPx02, mdxfind's way, where the DETECT path calls it MD5CAPx01. That
+# split is what data/upstream-disagreements.yaml records, and it survived
+# 1.191, so it is asserted here rather than only written down.
+$r = run_c('MD5CAP bd62daf88a5f6d734e91228e7f2e540a:rosetta');
+check($r->{verified} && $r->{label} eq 'MD5CAPx02',
+      'a bare label is emitted at the depth that matched: MD5CAP -> MD5CAPx02',
+      sprintf("     verified=%d label=%s\n", $r->{verified}, $r->{label}));
+
 printf STDERR "- %d passed, %d failed (hashpipe %s)\n", $pass_n, $fail_n, $HP;
-printf STDERR "- the depth-1 leak is still present in %d of %d deeper labels\n",
-    $leak_seen, $MAX - 1;
+printf STDERR "- the v1.190 per-line depth-1 leak is present in %d of %d "
+            . "deeper labels\n", $leak_seen, $MAX - 1;
 exit($fail_n ? 1 : 0);
