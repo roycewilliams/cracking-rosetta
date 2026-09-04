@@ -18,6 +18,12 @@ tools:
     verified_at: "2026-08-31"
     verified_with: "hashcat v7.1.2-549-g8a15e210b"
     note: "hashcat's own published example hash for this mode, recovered by hashcat at this mode with hashcat's own published plaintext."
+  mdxfind:
+    types: ["GOST-YESCRYPT"]
+    verified: "vector"
+    verified_at: "2026-09-04"
+    verified_with: "mdxfind RCS 1.545 (2026/08/29)"
+    note: "type discovered by round-trip search, not by name"
   hashpipe:
     types: ["GOST-YESCRYPT"]
     verified: "vector"
@@ -30,4 +36,4 @@ vectors:
   - hash: "$gy$j9T$HtyOX9cwJ2Dh8LlJV8IJ30$ZCSJt69pE/HLXFfIuxukRc2PlNla.tbqJxUHCp/WHVD"
     pass: "hashcat"
     source: "hashcat"
-    reads_in: ["hashcat"]
+    reads_in: ["hashcat", "mdxfind"]
