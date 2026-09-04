@@ -18,6 +18,12 @@ tools:
     verified_at: "2026-08-31"
     verified_with: "hashcat v7.1.2-549-g8a15e210b"
     note: "hashcat's own published example hash for this mode, recovered by hashcat at this mode with hashcat's own published plaintext."
+  mdxfind:
+    types: ["APPLE-SECURE-NOTES"]
+    verified: "vector"
+    verified_at: "2026-09-04"
+    verified_with: "mdxfind"
+    note: "proposed by hashpipe, reproduced by mdxfind pinned, and not yet re-run by this repository's own verifier; verify-vectors.pl decides it. See notes."
   john:
     cpu: ["FVDE"]
     gpu: ["FVDE-opencl"]
@@ -31,4 +37,5 @@ vectors:
   - hash: "$fvde$1$16$84286044060108438487434858307513$20000$f1620ab93192112f0a23eea89b5d4df065661f974b704191"
     pass: "hashcat"
     source: "hashcat"
-    reads_in: ["hashcat", "john"]
+    reads_in: ["hashcat", "john", "mdxfind"]
+notes: "Accepted 2026-09-04. hashpipe named this mdxfind type for this entry and the sweep could not confirm it; handed to mdxfind PINNED with -h, one hash and one plaintext, it reproduces at the first iteration. The sweep's corpus shares a salt pool across every line in it, and this type needs its own line's salt. The type name is misleading and the format is not: mdxfind's own example for APPLE-SECURE-NOTES is a $fvde$ string, and its Hashcat mode column gives 16200,16700 -- both this row's 16700 and apple-secure-notes' 16200. One mdxfind type covers both rows."

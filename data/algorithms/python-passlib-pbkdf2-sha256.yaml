@@ -18,6 +18,12 @@ tools:
     verified_at: "2026-08-31"
     verified_with: "hashcat v7.1.2-549-g8a15e210b"
     note: "hashcat's own published example hash for this mode, recovered by hashcat at this mode with hashcat's own published plaintext."
+  mdxfind:
+    types: ["PBKDF2-SHA256"]
+    verified: "vector"
+    verified_at: "2026-09-04"
+    verified_with: "mdxfind"
+    note: "proposed by hashpipe, reproduced by mdxfind pinned, and not yet re-run by this repository's own verifier; verify-vectors.pl decides it. See notes."
   john:
     cpu: ["PBKDF2-HMAC-SHA256"]
     gpu: ["PBKDF2-HMAC-SHA256-opencl"]
@@ -31,4 +37,5 @@ vectors:
   - hash: "$pbkdf2-sha256$29000$x9h7j/Ge8x6DMEao1VqrdQ$kra3R1wEnY8mPdDWOpTqOTINaAmZvRMcYd8u5OBQP9A"
     pass: "hashcat"
     source: "hashcat"
-    reads_in: ["hashcat", "john"]
+    reads_in: ["hashcat", "john", "mdxfind"]
+notes: "Accepted 2026-09-04. hashpipe named this mdxfind type for this entry and the sweep could not confirm it; handed to mdxfind PINNED with -h, one hash and one plaintext, it reproduces at the first iteration. The sweep's corpus shares a salt pool across every line in it, and this type needs its own line's salt. Corroborated independently: mdxfind gives PBKDF2-SHA256 as 10000,10900,20300 and this entry carries 20300."

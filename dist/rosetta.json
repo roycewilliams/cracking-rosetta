@@ -2157,13 +2157,16 @@
          "john_work_factor" : "iteration count",
          "legacy" : "",
          "mdxfind" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "APPLE-IWORK"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
-         "mdxfind_salted" : "",
+         "mdxfind_salted" : "yes",
          "name" : "Apple iWork '09 or newer",
          "nesting_depth" : "",
-         "notes" : "",
+         "notes" : "Accepted 2026-09-04. hashpipe named this mdxfind type for this entry and the sweep could not confirm it; handed to mdxfind PINNED with -h, one hash and one plaintext, it reproduces at the first iteration. The sweep's corpus shares a salt pool across every line in it, and this type needs its own line's salt. Corroborated independently: mdxfind's own Hashcat mode column gives APPLE-IWORK as 23300, which is the mode this entry already carries.",
          "primary_form" : "",
          "relations" : [],
          "sameas" : "",
@@ -2173,7 +2176,7 @@
             "hashcat" : "mode discovered by round-trip search, not by name",
             "hashpipe" : "",
             "john" : "john's own published example ciphertext for this format, recovered by john under this format. john publishes no plaintext, so the plaintext was found by handing john its own example and a candidate list -- what john recovered IS the plaintext, by construction.",
-            "mdxfind" : ""
+            "mdxfind" : "proposed by hashpipe, reproduced by mdxfind pinned, and not yet re-run by this repository's own verifier; verify-vectors.pl decides it. See notes."
          },
          "vecs" : 1
       },
@@ -2425,8 +2428,8 @@
             "ids" : [
                "APPLE-SECURE-NOTES"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "mdxfind_salted" : "yes",
          "name" : "APPLE-SECURE-NOTES",
@@ -2441,7 +2444,7 @@
             "hashcat" : "mode discovered by round-trip search, not by name",
             "hashpipe" : "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one.",
             "john" : "format discovered by round-trip search, not by name",
-            "mdxfind" : "NOT REPRODUCED HERE. mdxfind publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: the tool pinned to this identifier did not reproduce its own published example. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool mdxfind --only APPLE-SECURE-NOTES to retry."
+            "mdxfind" : ""
          },
          "vecs" : 1
       },
@@ -14430,13 +14433,16 @@
          "john_work_factor" : "iteration count",
          "legacy" : "",
          "mdxfind" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "APPLE-SECURE-NOTES"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
-         "mdxfind_salted" : "",
+         "mdxfind_salted" : "yes",
          "name" : "FileVault 2",
          "nesting_depth" : "",
-         "notes" : "",
+         "notes" : "Accepted 2026-09-04. hashpipe named this mdxfind type for this entry and the sweep could not confirm it; handed to mdxfind PINNED with -h, one hash and one plaintext, it reproduces at the first iteration. The sweep's corpus shares a salt pool across every line in it, and this type needs its own line's salt. The type name is misleading and the format is not: mdxfind's own example for APPLE-SECURE-NOTES is a $fvde$ string, and its Hashcat mode column gives 16200,16700 -- both this row's 16700 and apple-secure-notes' 16200. One mdxfind type covers both rows.",
          "primary_form" : "",
          "relations" : [],
          "sameas" : "",
@@ -14446,7 +14452,7 @@
             "hashcat" : "hashcat's own published example hash for this mode, recovered by hashcat at this mode with hashcat's own published plaintext.",
             "hashpipe" : "",
             "john" : "format discovered by round-trip search, not by name",
-            "mdxfind" : ""
+            "mdxfind" : "proposed by hashpipe, reproduced by mdxfind pinned, and not yet re-run by this repository's own verifier; verify-vectors.pl decides it. See notes."
          },
          "vecs" : 1
       },
@@ -16548,13 +16554,16 @@
          "john_work_factor" : "iteration count",
          "legacy" : "",
          "mdxfind" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "PBKDF2-SHA512"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
-         "mdxfind_salted" : "",
+         "mdxfind_salted" : "no",
          "name" : "GRUB 2",
          "nesting_depth" : "",
-         "notes" : "",
+         "notes" : "Accepted 2026-09-04. hashpipe named this mdxfind type for this entry and the sweep could not confirm it; handed to mdxfind PINNED with -h, one hash and one plaintext, it reproduces at the first iteration. The sweep's corpus shares a salt pool across every line in it, and this type needs its own line's salt. Corroborated independently: mdxfind gives PBKDF2-SHA512 as 7100,7200,12100,20200 and this entry carries 7200.",
          "primary_form" : "",
          "relations" : [],
          "sameas" : "",
@@ -16564,7 +16573,7 @@
             "hashcat" : "hashcat's own published example hash for this mode, recovered by hashcat at this mode with hashcat's own published plaintext.",
             "hashpipe" : "",
             "john" : "format discovered by round-trip search, not by name",
-            "mdxfind" : ""
+            "mdxfind" : "proposed by hashpipe, reproduced by mdxfind pinned, and not yet re-run by this repository's own verifier; verify-vectors.pl decides it. See notes."
          },
          "vecs" : 1
       },
@@ -31973,8 +31982,8 @@
             "ids" : [
                "MD4UTF16MD5x"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "mdxfind_salted" : "no",
          "name" : "MD4UTF16MD5x",
@@ -31989,7 +31998,7 @@
             "hashcat" : "no mode. Swept the 27 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-03 (tools/discover-hashcat.pl --all, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalised by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
             "hashpipe" : "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one.",
             "john" : "",
-            "mdxfind" : "NOT REPRODUCED HERE. mdxfind publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: the tool pinned to this identifier did not reproduce its own published example. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool mdxfind --only MD4UTF16MD5x to retry."
+            "mdxfind" : ""
          },
          "vecs" : 1
       },
@@ -32339,8 +32348,8 @@
             "ids" : [
                "MD4UTF16SHA1x"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "mdxfind_salted" : "no",
          "name" : "MD4UTF16SHA1x",
@@ -32355,7 +32364,7 @@
             "hashcat" : "no mode. Swept the 27 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-03 (tools/discover-hashcat.pl --all, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalised by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
             "hashpipe" : "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one.",
             "john" : "",
-            "mdxfind" : "NOT REPRODUCED HERE. mdxfind publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: the tool pinned to this identifier did not reproduce its own published example. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool mdxfind --only MD4UTF16SHA1x to retry."
+            "mdxfind" : ""
          },
          "vecs" : 1
       },
@@ -32885,8 +32894,8 @@
             "ids" : [
                "MD4UTF16SHA256x"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "mdxfind_salted" : "no",
          "name" : "MD4UTF16SHA256x",
@@ -32901,7 +32910,7 @@
             "hashcat" : "no mode. Swept the 12 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-03 (tools/discover-hashcat.pl --all, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalised by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
             "hashpipe" : "",
             "john" : "",
-            "mdxfind" : "NOT REPRODUCED HERE. mdxfind publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: the tool pinned to this identifier did not reproduce its own published example. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool mdxfind --only MD4UTF16SHA256x to retry."
+            "mdxfind" : ""
          },
          "vecs" : 1
       },
@@ -46281,8 +46290,8 @@
             "ids" : [
                "MD5SHA1x"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "mdxfind_salted" : "no",
          "name" : "MD5SHA1x",
@@ -46297,7 +46306,7 @@
             "hashcat" : "mode discovered by round-trip search, not by name",
             "hashpipe" : "",
             "john" : "format discovered by round-trip search, not by name",
-            "mdxfind" : "NOT REPRODUCED HERE. mdxfind publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: the tool pinned to this identifier did not reproduce its own published example. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool mdxfind --only MD5SHA1x to retry."
+            "mdxfind" : ""
          },
          "vecs" : 1
       },
@@ -50485,13 +50494,16 @@
          "john_work_factor" : "iteration count; iterations",
          "legacy" : "",
          "mdxfind" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "PBKDF2-SHA1"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
-         "mdxfind_salted" : "",
+         "mdxfind_salted" : "no",
          "name" : "NetIQ SSPR (PBKDF2WithHmacSHA1)",
          "nesting_depth" : "",
-         "notes" : "",
+         "notes" : "Accepted 2026-09-04. hashpipe named this mdxfind type for this entry and the sweep could not confirm it; handed to mdxfind PINNED with -h, one hash and one plaintext, it reproduces at the first iteration. The sweep's corpus shares a salt pool across every line in it, and this type needs its own line's salt. Corroborated independently: mdxfind gives PBKDF2-SHA1 as 12000,20400,32050 and this entry carries 32050.",
          "primary_form" : "",
          "relations" : [],
          "sameas" : "",
@@ -50501,7 +50513,7 @@
             "hashcat" : "hashcat's own published example hash for this mode, recovered by hashcat at this mode with hashcat's own published plaintext.",
             "hashpipe" : "",
             "john" : "format discovered by round-trip search, not by name",
-            "mdxfind" : ""
+            "mdxfind" : "proposed by hashpipe, reproduced by mdxfind pinned, and not yet re-run by this repository's own verifier; verify-vectors.pl decides it. See notes."
          },
          "vecs" : 1
       },
@@ -50547,13 +50559,16 @@
          "john_work_factor" : "iteration count",
          "legacy" : "",
          "mdxfind" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "PBKDF2-SHA256"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
-         "mdxfind_salted" : "",
+         "mdxfind_salted" : "no",
          "name" : "NetIQ SSPR (PBKDF2WithHmacSHA256)",
          "nesting_depth" : "",
-         "notes" : "",
+         "notes" : "Accepted 2026-09-04. hashpipe named this mdxfind type for this entry and the sweep could not confirm it; handed to mdxfind PINNED with -h, one hash and one plaintext, it reproduces at the first iteration. The sweep's corpus shares a salt pool across every line in it, and this type needs its own line's salt. NOT corroborated by the mode column: mdxfind gives PBKDF2-SHA256 as 10000,10900,20300 and this entry carries 32060, which is not among them. This one rests on hashpipe naming the type and mdxfind reproducing the vector under it, and on nothing else.",
          "primary_form" : "",
          "relations" : [],
          "sameas" : "",
@@ -50563,7 +50578,7 @@
             "hashcat" : "hashcat's own published example hash for this mode, recovered by hashcat at this mode with hashcat's own published plaintext.",
             "hashpipe" : "",
             "john" : "format discovered by round-trip search, not by name",
-            "mdxfind" : ""
+            "mdxfind" : "proposed by hashpipe, reproduced by mdxfind pinned, and not yet re-run by this repository's own verifier; verify-vectors.pl decides it. See notes."
          },
          "vecs" : 1
       },
@@ -56500,13 +56515,16 @@
          "john_work_factor" : "iteration count",
          "legacy" : "",
          "mdxfind" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "PBKDF2-SHA256"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
-         "mdxfind_salted" : "",
+         "mdxfind_salted" : "no",
          "name" : "Python passlib pbkdf2-sha256",
          "nesting_depth" : "",
-         "notes" : "",
+         "notes" : "Accepted 2026-09-04. hashpipe named this mdxfind type for this entry and the sweep could not confirm it; handed to mdxfind PINNED with -h, one hash and one plaintext, it reproduces at the first iteration. The sweep's corpus shares a salt pool across every line in it, and this type needs its own line's salt. Corroborated independently: mdxfind gives PBKDF2-SHA256 as 10000,10900,20300 and this entry carries 20300.",
          "primary_form" : "",
          "relations" : [],
          "sameas" : "",
@@ -56516,7 +56534,7 @@
             "hashcat" : "hashcat's own published example hash for this mode, recovered by hashcat at this mode with hashcat's own published plaintext.",
             "hashpipe" : "",
             "john" : "format discovered by round-trip search, not by name",
-            "mdxfind" : ""
+            "mdxfind" : "proposed by hashpipe, reproduced by mdxfind pinned, and not yet re-run by this repository's own verifier; verify-vectors.pl decides it. See notes."
          },
          "vecs" : 1
       },
@@ -56832,8 +56850,8 @@
             "ids" : [
                "RACF"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "mdxfind_salted" : "no",
          "name" : "RACF",
@@ -70209,8 +70227,8 @@
             "ids" : [
                "SHA1MD5MD5UCx"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "mdxfind_salted" : "no",
          "name" : "SHA1MD5MD5UCx",
@@ -70225,7 +70243,7 @@
             "hashcat" : "no mode. Swept the 17 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-03 (tools/discover-hashcat.pl --all, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalised by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
             "hashpipe" : "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one.",
             "john" : "",
-            "mdxfind" : "NOT REPRODUCED HERE. mdxfind publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: the tool pinned to this identifier did not reproduce its own published example. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool mdxfind --only SHA1MD5MD5UCx to retry."
+            "mdxfind" : ""
          },
          "vecs" : 1
       },
@@ -72161,8 +72179,8 @@
             "ids" : [
                "SHA1MD5UCx"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "mdxfind_salted" : "no",
          "name" : "SHA1MD5UCx",
@@ -72177,7 +72195,7 @@
             "hashcat" : "no mode. Swept the 17 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-03 (tools/discover-hashcat.pl --all, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalised by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
             "hashpipe" : "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one.",
             "john" : "",
-            "mdxfind" : "NOT REPRODUCED HERE. mdxfind publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: the tool pinned to this identifier did not reproduce its own published example. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool mdxfind --only SHA1MD5UCx to retry."
+            "mdxfind" : ""
          },
          "vecs" : 1
       },
@@ -72524,8 +72542,8 @@
             "ids" : [
                "SHA1MD6TRUNC"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "mdxfind_salted" : "no",
          "name" : "SHA1MD6TRUNC",
@@ -72540,7 +72558,7 @@
             "hashcat" : "no mode. Swept the 12 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-03 (tools/discover-hashcat.pl --all, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalised by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
             "hashpipe" : "",
             "john" : "",
-            "mdxfind" : "NOT REPRODUCED HERE. mdxfind publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: the tool pinned to this identifier did not reproduce its own published example. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool mdxfind --only SHA1MD6TRUNC to retry."
+            "mdxfind" : ""
          },
          "vecs" : 1
       },
@@ -73198,8 +73216,8 @@
             "ids" : [
                "SHA1RMD160TRUNC"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "mdxfind_salted" : "no",
          "name" : "SHA1RMD160TRUNC",
@@ -73214,7 +73232,7 @@
             "hashcat" : "no mode. Swept the 12 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-03 (tools/discover-hashcat.pl --all, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalised by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
             "hashpipe" : "",
             "john" : "",
-            "mdxfind" : "NOT REPRODUCED HERE. mdxfind publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: the tool pinned to this identifier did not reproduce its own published example. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool mdxfind --only SHA1RMD160TRUNC to retry."
+            "mdxfind" : ""
          },
          "vecs" : 1
       },
@@ -75208,8 +75226,8 @@
             "ids" : [
                "SHA1SHA1TRUNC"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "mdxfind_salted" : "no",
          "name" : "SHA1SHA1TRUNC",
@@ -75218,13 +75236,13 @@
          "primary_form" : "",
          "relations" : [],
          "sameas" : "",
-         "serialization" : "unknown",
+         "serialization" : "shared",
          "status" : "needs-review",
          "tool_note" : {
             "hashcat" : "no mode. Swept the 12 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-03 (tools/discover-hashcat.pl --all, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalised by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
             "hashpipe" : "",
             "john" : "format discovered by round-trip search, not by name",
-            "mdxfind" : "NOT REPRODUCED HERE. mdxfind publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: the tool pinned to this identifier did not reproduce its own published example. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool mdxfind --only SHA1SHA1TRUNC to retry."
+            "mdxfind" : ""
          },
          "vecs" : 1
       },
@@ -75876,8 +75894,8 @@
             "ids" : [
                "SHA1SHA1UCTRUNC"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "mdxfind_salted" : "no",
          "name" : "SHA1SHA1UCTRUNC",
@@ -75892,7 +75910,7 @@
             "hashcat" : "no mode. Swept the 12 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-03 (tools/discover-hashcat.pl --all, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalised by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
             "hashpipe" : "",
             "john" : "",
-            "mdxfind" : "NOT REPRODUCED HERE. mdxfind publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: the tool pinned to this identifier did not reproduce its own published example. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool mdxfind --only SHA1SHA1UCTRUNC to retry."
+            "mdxfind" : ""
          },
          "vecs" : 1
       },
@@ -76483,8 +76501,8 @@
             "ids" : [
                "SHA1SHA256TRUNC"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "mdxfind_salted" : "no",
          "name" : "SHA1SHA256TRUNC",
@@ -76499,7 +76517,7 @@
             "hashcat" : "no mode. Swept the 12 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-03 (tools/discover-hashcat.pl --all, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalised by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
             "hashpipe" : "",
             "john" : "",
-            "mdxfind" : "NOT REPRODUCED HERE. mdxfind publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: the tool pinned to this identifier did not reproduce its own published example. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool mdxfind --only SHA1SHA256TRUNC to retry."
+            "mdxfind" : ""
          },
          "vecs" : 1
       },
@@ -76541,8 +76559,8 @@
             "ids" : [
                "SHA1SHA256TRUNCMD5"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "mdxfind_salted" : "no",
          "name" : "SHA1SHA256TRUNCMD5",
@@ -76557,7 +76575,7 @@
             "hashcat" : "no mode. Swept the 12 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-03 (tools/discover-hashcat.pl --all, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalised by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
             "hashpipe" : "",
             "john" : "",
-            "mdxfind" : "NOT REPRODUCED HERE. mdxfind publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: the tool pinned to this identifier did not reproduce its own published example. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool mdxfind --only SHA1SHA256TRUNCMD5 to retry."
+            "mdxfind" : ""
          },
          "vecs" : 1
       },
@@ -77331,8 +77349,8 @@
             "ids" : [
                "SHA1SHA256UCTRUNC"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "mdxfind_salted" : "no",
          "name" : "SHA1SHA256UCTRUNC",
@@ -77347,7 +77365,7 @@
             "hashcat" : "no mode. Swept the 12 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-03 (tools/discover-hashcat.pl --all, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalised by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
             "hashpipe" : "",
             "john" : "",
-            "mdxfind" : "NOT REPRODUCED HERE. mdxfind publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: the tool pinned to this identifier did not reproduce its own published example. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool mdxfind --only SHA1SHA256UCTRUNC to retry."
+            "mdxfind" : ""
          },
          "vecs" : 1
       },
@@ -77392,8 +77410,8 @@
             "ids" : [
                "SHA1SHA256UCx"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "mdxfind_salted" : "no",
          "name" : "SHA1SHA256UCx",
@@ -77408,7 +77426,7 @@
             "hashcat" : "no mode. Swept the 17 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-03 (tools/discover-hashcat.pl --all, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalised by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
             "hashpipe" : "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one.",
             "john" : "",
-            "mdxfind" : "NOT REPRODUCED HERE. mdxfind publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: the tool pinned to this identifier did not reproduce its own published example. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool mdxfind --only SHA1SHA256UCx to retry."
+            "mdxfind" : ""
          },
          "vecs" : 1
       },
@@ -77450,8 +77468,8 @@
             "ids" : [
                "SHA1SHA256UCxSHA256"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "mdxfind_salted" : "no",
          "name" : "SHA1SHA256UCxSHA256",
@@ -77466,7 +77484,7 @@
             "hashcat" : "no mode. Swept the 7 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-03 (tools/discover-hashcat.pl --all, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalised by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
             "hashpipe" : "",
             "john" : "",
-            "mdxfind" : "NOT REPRODUCED HERE. mdxfind publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: the tool pinned to this identifier did not reproduce its own published example. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool mdxfind --only SHA1SHA256UCxSHA256 to retry."
+            "mdxfind" : ""
          },
          "vecs" : 1
       },
@@ -77511,8 +77529,8 @@
             "ids" : [
                "SHA1SHA256x"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "mdxfind_salted" : "no",
          "name" : "SHA1SHA256x",
@@ -77527,7 +77545,7 @@
             "hashcat" : "no mode. Swept the 17 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-03 (tools/discover-hashcat.pl --all, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalised by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
             "hashpipe" : "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one.",
             "john" : "",
-            "mdxfind" : "NOT REPRODUCED HERE. mdxfind publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: the tool pinned to this identifier did not reproduce its own published example. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool mdxfind --only SHA1SHA256x to retry."
+            "mdxfind" : ""
          },
          "vecs" : 1
       },
@@ -77630,8 +77648,8 @@
             "ids" : [
                "SHA1SHA3-256TRUNC"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "mdxfind_salted" : "no",
          "name" : "SHA1SHA3-256TRUNC",
@@ -77646,7 +77664,7 @@
             "hashcat" : "no mode. Swept the 12 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-03 (tools/discover-hashcat.pl --all, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalised by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
             "hashpipe" : "",
             "john" : "",
-            "mdxfind" : "NOT REPRODUCED HERE. mdxfind publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: the tool pinned to this identifier did not reproduce its own published example. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool mdxfind --only SHA1SHA3-256TRUNC to retry."
+            "mdxfind" : ""
          },
          "vecs" : 1
       },
@@ -77688,8 +77706,8 @@
             "ids" : [
                "SHA1SHA384TRUNC"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "mdxfind_salted" : "no",
          "name" : "SHA1SHA384TRUNC",
@@ -77704,7 +77722,7 @@
             "hashcat" : "no mode. Swept the 12 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-03 (tools/discover-hashcat.pl --all, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalised by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
             "hashpipe" : "",
             "john" : "",
-            "mdxfind" : "NOT REPRODUCED HERE. mdxfind publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: the tool pinned to this identifier did not reproduce its own published example. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool mdxfind --only SHA1SHA384TRUNC to retry."
+            "mdxfind" : ""
          },
          "vecs" : 1
       },
@@ -77746,8 +77764,8 @@
             "ids" : [
                "SHA1SHA512TRUNC"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "mdxfind_salted" : "no",
          "name" : "SHA1SHA512TRUNC",
@@ -77762,7 +77780,7 @@
             "hashcat" : "no mode. Swept the 12 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-03 (tools/discover-hashcat.pl --all, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalised by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
             "hashpipe" : "",
             "john" : "",
-            "mdxfind" : "NOT REPRODUCED HERE. mdxfind publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: the tool pinned to this identifier did not reproduce its own published example. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool mdxfind --only SHA1SHA512TRUNC to retry."
+            "mdxfind" : ""
          },
          "vecs" : 1
       },
@@ -77987,8 +78005,8 @@
             "ids" : [
                "SHA1SHA512UCTRUNC"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "mdxfind_salted" : "no",
          "name" : "SHA1SHA512UCTRUNC",
@@ -78003,7 +78021,7 @@
             "hashcat" : "no mode. Swept the 12 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-03 (tools/discover-hashcat.pl --all, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalised by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
             "hashpipe" : "",
             "john" : "",
-            "mdxfind" : "NOT REPRODUCED HERE. mdxfind publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: the tool pinned to this identifier did not reproduce its own published example. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool mdxfind --only SHA1SHA512UCTRUNC to retry."
+            "mdxfind" : ""
          },
          "vecs" : 1
       },
@@ -78625,8 +78643,8 @@
             "ids" : [
                "SHA1WRLTRUNC"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "mdxfind_salted" : "no",
          "name" : "SHA1WRLTRUNC",
@@ -78641,7 +78659,7 @@
             "hashcat" : "no mode. Swept the 12 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-03 (tools/discover-hashcat.pl --all, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalised by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
             "hashpipe" : "",
             "john" : "",
-            "mdxfind" : "NOT REPRODUCED HERE. mdxfind publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: the tool pinned to this identifier did not reproduce its own published example. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool mdxfind --only SHA1WRLTRUNC to retry."
+            "mdxfind" : ""
          },
          "vecs" : 1
       },
@@ -78683,8 +78701,8 @@
             "ids" : [
                "SHA1WRLUCTRUNC"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "mdxfind_salted" : "no",
          "name" : "SHA1WRLUCTRUNC",
@@ -78699,7 +78717,7 @@
             "hashcat" : "no mode. Swept the 12 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-03 (tools/discover-hashcat.pl --all, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalised by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
             "hashpipe" : "",
             "john" : "",
-            "mdxfind" : "NOT REPRODUCED HERE. mdxfind publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: the tool pinned to this identifier did not reproduce its own published example. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool mdxfind --only SHA1WRLUCTRUNC to retry."
+            "mdxfind" : ""
          },
          "vecs" : 1
       },

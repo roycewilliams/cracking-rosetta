@@ -17,7 +17,7 @@ Each row below links to its entry in the [browsable table](index.html).
 Gaps are absences; for the rows where something is known to be *odd*, see
 [OPEN-QUESTIONS.md](OPEN-QUESTIONS.md).
 
-## 1. Believed but never reproduced (107)
+## 1. Believed but never reproduced (83)
 
 The cheapest contribution in the repository, if you own the tool. Each of
 these already names an identifier and already carries a test vector; nobody
@@ -31,7 +31,6 @@ tools/verify-vectors.pl --tool <tool> --only <id> -v
 
 | Entry | Tool | Says | Tier |
 |---|---|---|---|
-| [`apple-secure-notes-mdxfindapple-secure-notes`](index.html#apple-secure-notes-mdxfindapple-secure-notes) | mdxfind | `APPLE-SECURE-NOTES` | upstream |
 | [`blake2s256`](index.html#blake2s256) | mdxfind | `BLAKE2S256` | upstream |
 | [`ciscopix`](index.html#ciscopix) | john | `dynamic_19`, `pix-md5` | upstream |
 | [`dahua`](index.html#dahua) | mdxfind | `DAHUA` | upstream |
@@ -39,12 +38,8 @@ tools/verify-vectors.pl --tool <tool> --only <id> -v
 | [`generic-hash-bridged-python-interpreter-with-gil`](index.html#generic-hash-bridged-python-interpreter-with-gil) | hashcat | `73000` | upstream |
 | [`generic-hash-bridged-rust`](index.html#generic-hash-bridged-rust) | hashcat | `74000` | upstream |
 | [`lm`](index.html#lm) | john | `LM`, `LM-opencl` | asserted |
-| [`md4utf16md5x`](index.html#md4utf16md5x) | mdxfind | `MD4UTF16MD5x` | upstream |
-| [`md4utf16sha1x`](index.html#md4utf16sha1x) | mdxfind | `MD4UTF16SHA1x` | upstream |
-| [`md4utf16sha256x`](index.html#md4utf16sha256x) | mdxfind | `MD4UTF16SHA256x` | upstream |
 | [`md5-md5-pass-salt`](index.html#md5-md5-pass-salt) | hashcat | `2611`, `2711` | asserted |
 | [`md5md5hum`](index.html#md5md5hum) | mdxfind | `MD5MD5HUM` | asserted |
-| [`md5sha1x`](index.html#md5sha1x) | mdxfind | `MD5SHA1x` | upstream |
 | [`md5uc`](index.html#md5uc) | mdxfind | `MD5UC` | upstream |
 | [`md5ucmd5`](index.html#md5ucmd5) | mdxfind | `MD5UCMD5` | upstream |
 | [`mysql4-1-mysql5`](index.html#mysql4-1-mysql5) | john | `dynamic_1028`, `mysql-sha1`, `mysql-sha1-opencl` | asserted |
@@ -55,42 +50,23 @@ tools/verify-vectors.pl --tool <tool> --only <id> -v
 | [`progressencode-plain`](index.html#progressencode-plain) | mdxfind | `PROGRESSENCODE` | asserted |
 | [`pwsafe3`](index.html#pwsafe3) | hashcat | `5200` | upstream |
 | [`qnx7-sha512`](index.html#qnx7-sha512) | hashcat | `19210` | upstream |
-| [`racf`](index.html#racf) | mdxfind | `RACF` | upstream |
 | [`radmin`](index.html#radmin) | john | `RAdmin`, `dynamic_1010` | asserted |
 | [`sha1-md5-md5-plain`](index.html#sha1-md5-md5-plain) | john | `dynamic_1025` | asserted |
 | [`sha1-md5-pass`](index.html#sha1-md5-pass) | john | `dynamic_1024`, `dynamic_23` | asserted |
 | [`sha1-sha1-pass`](index.html#sha1-sha1-pass) | john | `dynamic_1026`, `dynamic_26` | asserted |
 | [`sha1-sha1-sha1-pass`](index.html#sha1-sha1-sha1-pass) | john | `dynamic_1027`, `dynamic_26` | asserted |
-| [`sha1md5md5ucx`](index.html#sha1md5md5ucx) | mdxfind | `SHA1MD5MD5UCx` | upstream |
 | [`sha1md5truncsalt`](index.html#sha1md5truncsalt) | mdxfind | `SHA1MD5TRUNCSALT` | upstream |
 | [`sha1md5uc1lc`](index.html#sha1md5uc1lc) | mdxfind | `SHA1MD5UC1LC` | upstream |
-| [`sha1md5ucx`](index.html#sha1md5ucx) | mdxfind | `SHA1MD5UCx` | upstream |
 | [`sha1md5xsalt`](index.html#sha1md5xsalt) | mdxfind | `SHA1MD5xSALT` | upstream |
-| [`sha1md6trunc`](index.html#sha1md6trunc) | mdxfind | `SHA1MD6TRUNC` | upstream |
 | [`sha1raw`](index.html#sha1raw) | mdxfind | `SHA1RAW` | upstream |
-| [`sha1rmd160trunc`](index.html#sha1rmd160trunc) | mdxfind | `SHA1RMD160TRUNC` | upstream |
 | [`sha1saltsha256trunc`](index.html#sha1saltsha256trunc) | mdxfind | `SHA1SALTSHA256TRUNC` | upstream |
 | [`sha1saltsha256truncmd5`](index.html#sha1saltsha256truncmd5) | mdxfind | `SHA1SALTSHA256TRUNCMD5` | upstream |
 | [`sha1saltsha256uctrunc`](index.html#sha1saltsha256uctrunc) | mdxfind | `SHA1SALTSHA256UCTRUNC` | upstream |
 | [`sha1saltsha512uctrunc`](index.html#sha1saltsha512uctrunc) | mdxfind | `SHA1SALTSHA512UCTRUNC` | upstream |
-| [`sha1sha1trunc`](index.html#sha1sha1trunc) | mdxfind | `SHA1SHA1TRUNC` | upstream |
 | [`sha1sha1truncsalt`](index.html#sha1sha1truncsalt) | mdxfind | `SHA1SHA1TRUNCSALT` | upstream |
-| [`sha1sha1uctrunc`](index.html#sha1sha1uctrunc) | mdxfind | `SHA1SHA1UCTRUNC` | upstream |
-| [`sha1sha256trunc`](index.html#sha1sha256trunc) | mdxfind | `SHA1SHA256TRUNC` | upstream |
-| [`sha1sha256truncmd5`](index.html#sha1sha256truncmd5) | mdxfind | `SHA1SHA256TRUNCMD5` | upstream |
 | [`sha1sha256truncmd5salt`](index.html#sha1sha256truncmd5salt) | mdxfind | `SHA1SHA256TRUNCMD5SALT` | upstream |
 | [`sha1sha256truncsalt`](index.html#sha1sha256truncsalt) | mdxfind | `SHA1SHA256TRUNCSALT` | upstream |
-| [`sha1sha256uctrunc`](index.html#sha1sha256uctrunc) | mdxfind | `SHA1SHA256UCTRUNC` | upstream |
-| [`sha1sha256ucx`](index.html#sha1sha256ucx) | mdxfind | `SHA1SHA256UCx` | upstream |
-| [`sha1sha256ucxsha256`](index.html#sha1sha256ucxsha256) | mdxfind | `SHA1SHA256UCxSHA256` | upstream |
-| [`sha1sha256x`](index.html#sha1sha256x) | mdxfind | `SHA1SHA256x` | upstream |
-| [`sha1sha3-256trunc`](index.html#sha1sha3-256trunc) | mdxfind | `SHA1SHA3-256TRUNC` | upstream |
-| [`sha1sha384trunc`](index.html#sha1sha384trunc) | mdxfind | `SHA1SHA384TRUNC` | upstream |
-| [`sha1sha512trunc`](index.html#sha1sha512trunc) | mdxfind | `SHA1SHA512TRUNC` | upstream |
-| [`sha1sha512uctrunc`](index.html#sha1sha512uctrunc) | mdxfind | `SHA1SHA512UCTRUNC` | upstream |
 | [`sha1uc`](index.html#sha1uc) | mdxfind | `SHA1UC` | upstream |
-| [`sha1wrltrunc`](index.html#sha1wrltrunc) | mdxfind | `SHA1WRLTRUNC` | upstream |
-| [`sha1wrluctrunc`](index.html#sha1wrluctrunc) | mdxfind | `SHA1WRLUCTRUNC` | upstream |
 | [`sha1wrluctruncsalt`](index.html#sha1wrluctruncsalt) | mdxfind | `SHA1WRLUCTRUNCSALT` | upstream |
 | [`smf-v1-1`](index.html#smf-v1-1) | john | `dynamic_25`, `dynamic_37` | asserted |
 | [`snmpv3-hmac-sha384-256`](index.html#snmpv3-hmac-sha384-256) | hashcat | `26900` | upstream |
@@ -260,27 +236,27 @@ A few that carry a vector, so a candidate identifier can be tested at once, one 
 
 All 194: filter `hashcat_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
 
-### mdxfind: 111 entries say nothing
+### mdxfind: 105 entries say nothing
 
 A few that carry a vector, so a candidate identifier can be tested at once, one per family:
 
 * [`1password-agilekeychain`](index.html#1password-agilekeychain) - `1Password, agilekeychain`
-* [`apple-iwork-09-or-newer`](index.html#apple-iwork-09-or-newer) - `Apple iWork '09 or newer`
 * [`astra-linux-gost12256hash`](index.html#astra-linux-gost12256hash) - `Astra Linux $gost12256hash$` (and 1 more starting `Astra`)
 * [`django-sha-1`](index.html#django-sha-1) - `Django (SHA-1)`
 * [`domain-cached-credentials-dcc-ms-cache-nt`](index.html#domain-cached-credentials-dcc-ms-cache-nt) - `Domain Cached Credentials (DCC), MS Cache (NT)` (and 1 more starting `Domain`)
-* [`filevault-2`](index.html#filevault-2) - `FileVault 2`
-* [`grub-2`](index.html#grub-2) - `GRUB 2`
 * [`hmac-sha1`](index.html#hmac-sha1) - `HMAC-SHA1` (and 3 more starting `HMAC`)
 * [`kerberos-5-etype-23-tgs-rep-nt`](index.html#kerberos-5-etype-23-tgs-rep-nt) - `Kerberos 5, etype 23, TGS-REP (NT)`
 * [`lotus-notes-domino-8-5`](index.html#lotus-notes-domino-8-5) - `Lotus Notes/Domino 8.5`
 * [`murmurhash64a-truncated-zero-seed`](index.html#murmurhash64a-truncated-zero-seed) - `MurmurHash64A truncated (zero seed)`
-* [`netiq-sspr-pbkdf2withhmacsha1`](index.html#netiq-sspr-pbkdf2withhmacsha1) - `NetIQ SSPR (PBKDF2WithHmacSHA1)` (and 1 more starting `NetIQ`)
 * [`netntlmv1-netntlmv1-ess-nt`](index.html#netntlmv1-netntlmv1-ess-nt) - `NetNTLMv1 / NetNTLMv1+ESS (NT)` (and 1 more starting `NetNTLMv`)
 * [`netscreen`](index.html#netscreen) - `Netscreen`
 * [`oracle-11g`](index.html#oracle-11g) - `Oracle 11g`
+* [`password-safe-v2`](index.html#password-safe-v2) - `Password Safe v2`
+* [`pkzip-master-key`](index.html#pkzip-master-key) - `PKZIP Master Key` (and 1 more starting `PKZIP`)
+* [`stuffit5`](index.html#stuffit5) - `Stuffit5`
+* [`sunmd5`](index.html#sunmd5) - `SunMD5`
 
-All 111: filter `mdxfind_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
+All 105: filter `mdxfind_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
 
 ## 4. hashcat modes with no row here (1)
 

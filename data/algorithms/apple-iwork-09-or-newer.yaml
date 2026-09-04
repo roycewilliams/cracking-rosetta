@@ -18,6 +18,12 @@ tools:
     verified_at: "2026-08-31"
     verified_with: "v7.1.2-549-g8a15e210b"
     note: "mode discovered by round-trip search, not by name"
+  mdxfind:
+    types: ["APPLE-IWORK"]
+    verified: "vector"
+    verified_at: "2026-09-04"
+    verified_with: "mdxfind"
+    note: "proposed by hashpipe, reproduced by mdxfind pinned, and not yet re-run by this repository's own verifier; verify-vectors.pl decides it. See notes."
   john:
     cpu: ["iwork"]
     gpu: ["iwork-opencl"]
@@ -31,4 +37,5 @@ vectors:
   - hash: "$iwork$1$2$1$100000$d77ce46a68697e08b76ac91de9117541$e7b72b2848dc27efed883963b00b1ac7$e794144cd2f04bd50e23957b30affb2898554a99a3accb7506c17132654e09c04bbeff45dc4f8a8a1db5fd1592f699eeff2f9a8c31b503e9631a25a344b517f7"
     pass: 12345678
     source: "john"
-    reads_in: ["hashcat", "john"]
+    reads_in: ["hashcat", "john", "mdxfind"]
+notes: "Accepted 2026-09-04. hashpipe named this mdxfind type for this entry and the sweep could not confirm it; handed to mdxfind PINNED with -h, one hash and one plaintext, it reproduces at the first iteration. The sweep's corpus shares a salt pool across every line in it, and this type needs its own line's salt. Corroborated independently: mdxfind's own Hashcat mode column gives APPLE-IWORK as 23300, which is the mode this entry already carries."

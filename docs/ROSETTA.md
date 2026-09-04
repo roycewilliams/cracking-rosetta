@@ -58,11 +58,11 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | Apache $apr1$ | `1600` (v) | `md5crypt`<br>`md5crypt-long`<br>`md5crypt-opencl` (v) | `APR1` (v) |  |
 | APFS | `18300` (v) | `FVDE`<br>`FVDE-opencl` (v) | `APFS` (v) |  |
 | Apple DMG | **--** | `dmg` | **--** |  |
-| Apple iWork '09 or newer | `23300` (v) | `iwork`<br>`iwork-opencl` (v) | **--** |  |
+| Apple iWork '09 or newer | `23300` (v) | `iwork`<br>`iwork-opencl` (v) | `APPLE-IWORK` (v) |  |
 | Apple Secure Notes | `16200` (v) | `notes`<br>`notes-opencl` (v) | `APPLE-SECURE-NOTES` (v) |  |
 | APPLE-IWORK | `23300` (v) | **--** | `APPLE-IWORK` (v) |  |
 | APPLE-KEYCHAIN | `23100` (v) | `keychain`<br>`keychain-opencl` (v) | `APPLE-KEYCHAIN` (v) |  |
-| APPLE-SECURE-NOTES | `16700` (v) | `FVDE`<br>`FVDE-opencl` (v) | `APPLE-SECURE-NOTES` |  |
+| APPLE-SECURE-NOTES | `16700` (v) | `FVDE`<br>`FVDE-opencl` (v) | `APPLE-SECURE-NOTES` (v) |  |
 | ARGON2 | `34000` (v) | `Argon2`<br>`argon2-opencl` (v) | `ARGON2` (v) |  |
 | Argon2id [Bridged: reference implementation + tunings] | `70000` (v) | `Argon2`<br>`argon2-opencl` (v) | `ARGON2` (v) |  |
 | Armory wallet | **--** | `armory` (v) | no |  |
@@ -259,7 +259,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | Ethereum Wallet, PBKDF2-HMAC-SHA256 | `15600` (v) | `ethereum`<br>`ethereum-opencl` (v) | no |  |
 | Ethereum Wallet, SCRYPT | `15700` (v) | `ethereum` (v) | no |  |
 | Exodus Desktop Wallet (scrypt) | `28200` (v) | **--** | no |  |
-| FileVault 2 | `16700` (v) | `FVDE`<br>`FVDE-opencl` (v) | **--** |  |
+| FileVault 2 | `16700` (v) | `FVDE`<br>`FVDE-opencl` (v) | `APPLE-SECURE-NOTES` (v) |  |
 | FileZilla Server >= 0.9.55 | `15000` (v) | `dynamic_82` (v) | `SHA512PASSSALT` (v) |  |
 | Flask Session Cookie ($salt.$salt.$pass) | `29100` (v) | **--** | no |  |
 | FORTIGATE | `7000` (v) | `Fortigate` (v) | `FORTIGATE` (v) |  |
@@ -293,7 +293,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | GROESTL256 | no | **--** | `GROESTL256` (v) |  |
 | GROESTL384 | no | **--** | `GROESTL384` (v) |  |
 | GROESTL512 | no | **--** | `GROESTL512` (v) |  |
-| GRUB 2 | `7200` (v) | `PBKDF2-HMAC-SHA512`<br>`PBKDF2-HMAC-SHA512-opencl` (v) | **--** |  |
+| GRUB 2 | `7200` (v) | `PBKDF2-HMAC-SHA512`<br>`PBKDF2-HMAC-SHA512-opencl` (v) | `PBKDF2-SHA512` (v) |  |
 | H3C/Huawei/HPE | **--** | `h3c` (v) | no |  |
 | Half MD5 | `5100` (v) | **--** | `MD5`<br>`MD5RAW` (v) |  |
 | HalfLM C/R | **--** | `nethalflm` | **--** |  |
@@ -541,13 +541,13 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | MD4UTF16MD5PASSMD5SHA1SALT | no | **--** | `MD4UTF16MD5PASSMD5SHA1SALT` (v) |  |
 | MD4UTF16MD5SHA1 | no | **--** | `MD4UTF16MD5SHA1` (v) |  |
 | MD4UTF16MD5UC | no | **--** | `MD4UTF16MD5UC` (v) |  |
-| MD4UTF16MD5x | no | **--** | `MD4UTF16MD5x` |  |
+| MD4UTF16MD5x | no | **--** | `MD4UTF16MD5x` (v) |  |
 | MD4UTF16revBASE64x | no | **--** | `MD4UTF16revBASE64x` (v) |  |
 | MD4UTF16SHA1 | no | **--** | `MD4UTF16SHA1` (v) |  |
 | MD4UTF16SHA1MD5 | no | **--** | `MD4UTF16SHA1MD5` (v) |  |
 | MD4UTF16SHA1SHA1 | no | **--** | `MD4UTF16SHA1SHA1` (v) |  |
 | MD4UTF16SHA1UC | no | **--** | `MD4UTF16SHA1UC` (v) |  |
-| MD4UTF16SHA1x | no | **--** | `MD4UTF16SHA1x` |  |
+| MD4UTF16SHA1x | no | **--** | `MD4UTF16SHA1x` (v) |  |
 | MD4UTF16SHA256 | no | **--** | `MD4UTF16SHA256` (v) |  |
 | MD4UTF16SHA256MD5 | no | **--** | `MD4UTF16SHA256MD5` (v) |  |
 | MD4UTF16SHA256SHA1 | no | **--** | `MD4UTF16SHA256SHA1` (v) |  |
@@ -556,7 +556,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | MD4UTF16SHA256SHA256SHA256SHA256 | no | **--** | `MD4UTF16SHA256SHA256SHA256SHA256` (v) |  |
 | MD4UTF16SHA256SHA256SHA256SHA256SHA256 | no | **--** | `MD4UTF16SHA256SHA256SHA256SHA256SHA256` (v) |  |
 | MD4UTF16SHA256UC | no | **--** | `MD4UTF16SHA256UC` (v) |  |
-| MD4UTF16SHA256x | no | **--** | `MD4UTF16SHA256x` |  |
+| MD4UTF16SHA256x | no | **--** | `MD4UTF16SHA256x` (v) |  |
 | MD4UTF16SQL3 | no | **--** | `MD4UTF16SQL3` (v) |  |
 | MD4UTF16UC | `1000` (v) | `NT`<br>`NT-long`<br>`dynamic_33`<br>`NT-long-opencl`<br>`NT-opencl` (v) | `MD4UTF16UC` (v) |  |
 | MD5 | `0` (v) | `Raw-MD5`<br>`dynamic_0`<br>`raw-MD5-opencl` (v) | `MD5` (v) | collides with md5cap (encoding); encoding of md5cdab-order-of-32bit-values (encoding); encoding of md5uc (encoding) |
@@ -770,7 +770,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | MD5SHA1u39 | no | **--** | `MD5SHA1u39` (v) |  |
 | MD5SHA1UC | no | **--** | `MD5SHA1UC` (v) |  |
 | MD5SHA1UCu32 | no | **--** | `MD5SHA1UCu32` (v) |  |
-| MD5SHA1x | `4400` (v) | `dynamic_22` (v) | `MD5SHA1x` |  |
+| MD5SHA1x | `4400` (v) | `dynamic_22` (v) | `MD5SHA1x` (v) |  |
 | MD5SHA256MD5 | no | **--** | `MD5SHA256MD5` (v) |  |
 | MD5SHA256SHA256 | no | **--** | `MD5SHA256SHA256` (v) |  |
 | MD5SHA512 | no | **--** | `MD5SHA512` (v) |  |
@@ -838,8 +838,8 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | MYSQL-SHA256CRYPT | `7401` (v) | **--** | `MYSQL-SHA256CRYPT` (v) |  |
 | MySQL4.1/MySQL5 | `300` (v) | `dynamic_1028`<br>`mysql-sha1`<br>`mysql-sha1-opencl` | `SQL5` (v) |  |
 | MYSQLCRAM | `11200` (v) | `mysqlna` (v) | `MYSQLCRAM` (v) |  |
-| NetIQ SSPR (PBKDF2WithHmacSHA1) | `32050` (v) | `PBKDF2-HMAC-SHA1`<br>`PBKDF2-HMAC-SHA1-opencl` (v) | **--** |  |
-| NetIQ SSPR (PBKDF2WithHmacSHA256) | `32060` (v) | `PBKDF2-HMAC-SHA256`<br>`PBKDF2-HMAC-SHA256-opencl` (v) | **--** |  |
+| NetIQ SSPR (PBKDF2WithHmacSHA1) | `32050` (v) | `PBKDF2-HMAC-SHA1`<br>`PBKDF2-HMAC-SHA1-opencl` (v) | `PBKDF2-SHA1` (v) |  |
+| NetIQ SSPR (PBKDF2WithHmacSHA256) | `32060` (v) | `PBKDF2-HMAC-SHA256`<br>`PBKDF2-HMAC-SHA256-opencl` (v) | `PBKDF2-SHA256` (v) |  |
 | NetIQ SSPR (PBKDF2WithHmacSHA512) | `32070` (v) | `PBKDF2-HMAC-SHA512`<br>`PBKDF2-HMAC-SHA512-opencl` (v) | no |  |
 | NetIQ SSPR (SHA-256 with Salt) | `32030` (v) | `sspr`<br>`sspr-opencl` (v) | `SSPR-SHA256` (v) |  |
 | NetIQ SSPR (SHA-512 with Salt) | `32040` (v) | `sspr`<br>`sspr-opencl` (v) | `SSPR-SHA512` (v) |  |
@@ -935,12 +935,12 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | PunBB | `4522` (v) | **--** | `SHA1SALTSHA1PASS` (v) |  |
 | Purdy | **--** | `OpenVMS` (v) | no |  |
 | PWSAFE3 | `5200` | **--** | `PWSAFE3` (v) |  |
-| Python passlib pbkdf2-sha256 | `20300` (v) | `PBKDF2-HMAC-SHA256`<br>`PBKDF2-HMAC-SHA256-opencl` (v) | **--** |  |
+| Python passlib pbkdf2-sha256 | `20300` (v) | `PBKDF2-HMAC-SHA256`<br>`PBKDF2-HMAC-SHA256-opencl` (v) | `PBKDF2-SHA256` (v) |  |
 | QNX-MD5 | `19000` (v) | `qnx` (v) | `QNX-MD5` (v) |  |
 | QNX-SHA256 | `19100` (v) | `qnx` (v) | `QNX-SHA256` (v) |  |
 | QNX-SHA512 | `19200` (v) | `qnx` (v) | `QNX-SHA512` (v) |  |
 | QNX7-SHA512 | `19210` | **--** | `QNX7-SHA512` (v) |  |
-| RACF | `8500` (v) | `RACF` (v) | `RACF` |  |
+| RACF | `8500` (v) | `RACF` (v) | `RACF` (v) |  |
 | RACF-KDFAES | **--** | `RACF-KDFAES` (v) | `RACF-KDFAES` (v) |  |
 | RACF-KDFAES | `14200` (v) | **--** | `RACF-KDFAES` (v) |  |
 | RADIOGATUN32 | no | **--** | `RADIOGATUN32` (v) |  |
@@ -1155,7 +1155,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | SHA1MD5MD5UC | no | **--** | `SHA1MD5MD5UC` (v) |  |
 | SHA1MD5MD5UCMD5MD5UC | no | **--** | `SHA1MD5MD5UCMD5MD5UC` (v) |  |
 | SHA1MD5MD5UCMD5UC | no | **--** | `SHA1MD5MD5UCMD5UC` (v) |  |
-| SHA1MD5MD5UCx | no | **--** | `SHA1MD5MD5UCx` |  |
+| SHA1MD5MD5UCx | no | **--** | `SHA1MD5MD5UCx` (v) |  |
 | SHA1MD5PASSMD5 | no | **--** | `SHA1MD5PASSMD5` (v) |  |
 | SHA1MD5PASSSALT | `21100` (v) | **--** | `SHA1MD5PASSSALT` (v) |  |
 | SHA1MD5RAW | no | **--** | `SHA1MD5RAW` (v) |  |
@@ -1187,13 +1187,13 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | SHA1MD5UCSALT | no | **--** | `SHA1MD5UCSALT` (v) |  |
 | SHA1MD5UCSHA1BASE64 | no | **--** | `SHA1MD5UCSHA1BASE64` (v) |  |
 | SHA1MD5UCSHA1UCMD5UC | no | **--** | `SHA1MD5UCSHA1UCMD5UC` (v) |  |
-| SHA1MD5UCx | no | **--** | `SHA1MD5UCx` |  |
+| SHA1MD5UCx | no | **--** | `SHA1MD5UCx` (v) |  |
 | SHA1MD5WRLSHA1 | no | **--** | `SHA1MD5WRLSHA1` (v) |  |
 | SHA1MD5x | no | **--** | `SHA1MD5x` (v) |  |
 | SHA1MD5x1CAP | no | **--** | `SHA1MD5x1CAP` (v) |  |
 | SHA1MD5xSALT | no | **--** | `SHA1MD5xSALT` |  |
 | SHA1MD6CAPTRUNC | no | **--** | `SHA1MD6CAPTRUNC` (v) |  |
-| SHA1MD6TRUNC | no | **--** | `SHA1MD6TRUNC` |  |
+| SHA1MD6TRUNC | no | **--** | `SHA1MD6TRUNC` (v) |  |
 | SHA1NTLM | no | **--** | `SHA1NTLM` (v) |  |
 | SHA1NTLMUC | no | **--** | `SHA1NTLMUC` (v) |  |
 | SHA1PASS-TRUNC | no | **--** | `SHA1PASS-TRUNC` (v) |  |
@@ -1204,7 +1204,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | SHA1revMD5PASSSALT | no | **--** | `SHA1revMD5PASSSALT` (v) |  |
 | SHA1revSHA1 | no | **--** | `SHA1revSHA1` (v) |  |
 | SHA1RMD128 | no | **--** | `SHA1RMD128` (v) |  |
-| SHA1RMD160TRUNC | no | **--** | `SHA1RMD160TRUNC` |  |
+| SHA1RMD160TRUNC | no | **--** | `SHA1RMD160TRUNC` (v) |  |
 | SHA1SALTCX | no | **--** | `SHA1SALTCX` |  |
 | SHA1SALTMD5MD5PASS | no | **--** | `SHA1SALTMD5MD5PASS` (v) |  |
 | SHA1SALTMD5MD5PASSPEPPER | no | **--** | `SHA1SALTMD5MD5PASSPEPPER` (v) |  |
@@ -1237,7 +1237,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | SHA1SHA1SALTPASSSALT | `5000` (v) | **--** | `SHA1SHA1SALTPASSSALT` (v) |  |
 | SHA1SHA1SHA1TRUNC | no | **--** | `SHA1SHA1SHA1TRUNC` (v) |  |
 | SHA1SHA1sub1-16 | no | **--** | `SHA1SHA1sub1-16` (v) |  |
-| SHA1SHA1TRUNC | no | `dynamic_1026` (v) | `SHA1SHA1TRUNC` |  |
+| SHA1SHA1TRUNC | no | `dynamic_1026` (v) | `SHA1SHA1TRUNC` (v) |  |
 | SHA1SHA1TRUNC-SHA1PASS-3 | no | **--** | `SHA1SHA1TRUNC-SHA1PASS-3` (v) |  |
 | SHA1SHA1TRUNCMD5 | no | **--** | `SHA1SHA1TRUNCMD5` (v) |  |
 | SHA1SHA1TRUNCSALT | no | **--** | `SHA1SHA1TRUNCSALT` |  |
@@ -1248,7 +1248,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | SHA1SHA1u38 | no | **--** | `SHA1SHA1u38` (v) |  |
 | SHA1SHA1u39 | no | **--** | `SHA1SHA1u39` (v) |  |
 | SHA1SHA1UCPASSSALT | no | **--** | `SHA1SHA1UCPASSSALT` (v) |  |
-| SHA1SHA1UCTRUNC | no | **--** | `SHA1SHA1UCTRUNC` |  |
+| SHA1SHA1UCTRUNC | no | **--** | `SHA1SHA1UCTRUNC` (v) |  |
 | SHA1SHA224 | no | **--** | `SHA1SHA224` (v) |  |
 | SHA1SHA256CAP | no | **--** | `SHA1SHA256CAP` (v) |  |
 | SHA1SHA256MD5 | no | **--** | `SHA1SHA256MD5` (v) |  |
@@ -1258,8 +1258,8 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | SHA1SHA256SHA256 | no | **--** | `SHA1SHA256SHA256` (v) |  |
 | SHA1SHA256SHA256SHA256 | no | **--** | `SHA1SHA256SHA256SHA256` (v) |  |
 | SHA1SHA256SHA512 | no | **--** | `SHA1SHA256SHA512` (v) |  |
-| SHA1SHA256TRUNC | no | **--** | `SHA1SHA256TRUNC` |  |
-| SHA1SHA256TRUNCMD5 | no | **--** | `SHA1SHA256TRUNCMD5` |  |
+| SHA1SHA256TRUNC | no | **--** | `SHA1SHA256TRUNC` (v) |  |
+| SHA1SHA256TRUNCMD5 | no | **--** | `SHA1SHA256TRUNCMD5` (v) |  |
 | SHA1SHA256TRUNCMD5SALT | no | **--** | `SHA1SHA256TRUNCMD5SALT` |  |
 | SHA1SHA256TRUNCSALT | no | **--** | `SHA1SHA256TRUNCSALT` |  |
 | SHA1SHA256u32 | no | **--** | `SHA1SHA256u32` (v) |  |
@@ -1272,18 +1272,18 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | SHA1SHA256UC | no | **--** | `SHA1SHA256UC` (v) |  |
 | SHA1SHA256UCSHA256 | no | **--** | `SHA1SHA256UCSHA256` (v) |  |
 | SHA1SHA256UCSHA256SHA256 | no | **--** | `SHA1SHA256UCSHA256SHA256` (v) |  |
-| SHA1SHA256UCTRUNC | no | **--** | `SHA1SHA256UCTRUNC` |  |
-| SHA1SHA256UCx | no | **--** | `SHA1SHA256UCx` |  |
-| SHA1SHA256UCxSHA256 | no | **--** | `SHA1SHA256UCxSHA256` |  |
-| SHA1SHA256x | no | **--** | `SHA1SHA256x` |  |
+| SHA1SHA256UCTRUNC | no | **--** | `SHA1SHA256UCTRUNC` (v) |  |
+| SHA1SHA256UCx | no | **--** | `SHA1SHA256UCx` (v) |  |
+| SHA1SHA256UCxSHA256 | no | **--** | `SHA1SHA256UCxSHA256` (v) |  |
+| SHA1SHA256x | no | **--** | `SHA1SHA256x` (v) |  |
 | SHA1SHA3-256 | no | **--** | `SHA1SHA3-256` (v) |  |
-| SHA1SHA3-256TRUNC | no | **--** | `SHA1SHA3-256TRUNC` |  |
-| SHA1SHA384TRUNC | no | **--** | `SHA1SHA384TRUNC` |  |
-| SHA1SHA512TRUNC | no | **--** | `SHA1SHA512TRUNC` |  |
+| SHA1SHA3-256TRUNC | no | **--** | `SHA1SHA3-256TRUNC` (v) |  |
+| SHA1SHA384TRUNC | no | **--** | `SHA1SHA384TRUNC` (v) |  |
+| SHA1SHA512TRUNC | no | **--** | `SHA1SHA512TRUNC` (v) |  |
 | SHA1SHA512TRUNC1SALT | no | **--** | `SHA1SHA512TRUNC1SALT` (v) |  |
 | SHA1SHA512TRUNCMD5 | no | **--** | `SHA1SHA512TRUNCMD5` (v) |  |
 | SHA1SHA512UC | no | **--** | `SHA1SHA512UC` (v) |  |
-| SHA1SHA512UCTRUNC | no | **--** | `SHA1SHA512UCTRUNC` |  |
+| SHA1SHA512UCTRUNC | no | **--** | `SHA1SHA512UCTRUNC` (v) |  |
 | SHA1SQL5-32 | no | **--** | `SHA1SQL5-32` (v) |  |
 | SHA1UC | `100` (v) | `Raw-SHA1`<br>`dynamic_26`<br>`raw-SHA1-opencl` (v) | `SHA1UC` | collides with sha1lsb35 (truncation) |
 | SHA1UCUTF16LE | `170` (v) | `dynamic_1400` (v) | `SHA1UCUTF16LE` (v) |  |
@@ -1293,8 +1293,8 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | SHA1UTF16LEPASSSALT | `130` (v) | **--** | `SHA1UTF16LEPASSSALT` (v) |  |
 | SHA1UTF16LESALTPASS | `140` (v) | `dynamic_1600`<br>`dynamic_41` (v) | `SHA1UTF16LESALTPASS` (v) |  |
 | SHA1UTF7 | no | **--** | `SHA1UTF7` (v) |  |
-| SHA1WRLTRUNC | no | **--** | `SHA1WRLTRUNC` |  |
-| SHA1WRLUCTRUNC | no | **--** | `SHA1WRLUCTRUNC` |  |
+| SHA1WRLTRUNC | no | **--** | `SHA1WRLTRUNC` (v) |  |
+| SHA1WRLUCTRUNC | no | **--** | `SHA1WRLUCTRUNC` (v) |  |
 | SHA1WRLUCTRUNCSALT | no | **--** | `SHA1WRLUCTRUNCSALT` |  |
 | SHA1ZUTF16LE | no | **--** | `SHA1ZUTF16LE` (v) |  |
 | SHA224 (2 iterations) | `34400` (v) | `dynamic_53` (v) | `SHA224 -i2` (v) |  |
