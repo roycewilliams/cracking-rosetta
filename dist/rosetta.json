@@ -36372,23 +36372,26 @@
          "john_work_factor" : "",
          "legacy" : "",
          "mdxfind" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "MD5PASSSALT -i2"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
-         "mdxfind_salted" : "",
+         "mdxfind_salted" : "yes",
          "name" : "md5(md5($pass.$salt))",
          "nesting_depth" : 2,
-         "notes" : "FALSE FRIEND, measured 2026-09-04. absence.pl reports mdxfind's MD5-MD5PASS-SALT as a name match for this row and it is NOT this computation. hashcat calls mode 2630 md5(md5($pass.$salt)) and this row's own vector confirms it: md5(md5(\"hashcat\".\"0\")) is 0127eecea3120e34c8934ba3b72a390a. mdxfind's MD5-MD5PASS-SALT (e517) is md5(md5($pass).$salt), confirmed the same way against its own published example. The two differ in where the salt goes, and this row's id reads like the OTHER one. No mdxfind type publishes an example matching md5(md5($pass.$salt)) with a single salt field, which is consistent with mdxfind having no type for it.",
+         "notes" : "FALSE FRIEND, measured 2026-09-04. absence.pl reports mdxfind's MD5-MD5PASS-SALT as a name match for this row and it is NOT this computation. hashcat calls mode 2630 md5(md5($pass.$salt)) and this row's own vector confirms it: md5(md5(\"hashcat\".\"0\")) is 0127eecea3120e34c8934ba3b72a390a. mdxfind's MD5-MD5PASS-SALT (e517) is md5(md5($pass).$salt), confirmed the same way against its own published example. The two differ in where the salt goes, and this row's id reads like the OTHER one. That was written before the answer turned up, and the answer is the ITERATION COUNT: mdxfind's MD5PASSSALT is md5($pass.$salt) at one iteration and md5(md5($pass.$salt)) at two, so this row is MD5PASSSALT x02. A --iterations 2 sweep found it on 2026-09-04 and it verifies pinned at that count. No type's published EXAMPLE matches the construction because every example is printed at one iteration, which is why looking for one found nothing.",
          "primary_form" : "",
          "relations" : [],
          "sameas" : "",
-         "serialization" : "unknown",
+         "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
             "hashcat" : "hashcat's own published example hash for this mode, recovered by hashcat at this mode with hashcat's own published plaintext.",
             "hashpipe" : "",
             "john" : "",
-            "mdxfind" : ""
+            "mdxfind" : "type discovered by round-trip search, not by name"
          },
          "vecs" : 1
       },
@@ -79896,23 +79899,26 @@
          "john_work_factor" : "",
          "legacy" : "",
          "mdxfind" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "SHA256PASSSALT -i2"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
-         "mdxfind_salted" : "",
+         "mdxfind_salted" : "yes",
          "name" : "sha256(sha256($pass.$salt))",
          "nesting_depth" : 2,
          "notes" : "",
          "primary_form" : "",
          "relations" : [],
          "sameas" : "",
-         "serialization" : "unknown",
+         "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
             "hashcat" : "hashcat's own published example hash for this mode, recovered by hashcat at this mode with hashcat's own published plaintext.",
             "hashpipe" : "",
             "john" : "",
-            "mdxfind" : ""
+            "mdxfind" : "type discovered by round-trip search, not by name"
          },
          "vecs" : 1
       },

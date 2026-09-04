@@ -610,7 +610,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | md5(md5($pass)) | `2600` (v) | `dynamic_2` (v) | `MD5 -i2` (v) |  |
 | md5(md5($pass).$salt) | `2611`<br>`2711` | `dynamic_1007`<br>`dynamic_2006`<br>`dynamic_6` (v) | `MD5-MD5PASS-SALT` (v) | same as vbulletin-v3-8-5 (application) |
 | md5(md5($pass).md5($salt)) | `3910` (v) | `dynamic_13` (v) | `MD5-MD5PASSMD5SALT` (v) |  |
-| md5(md5($pass.$salt)) | `2630` (v) | **--** | **--** |  |
+| md5(md5($pass.$salt)) | `2630` (v) | **--** | `MD5PASSSALT -i2` (v) |  |
 | md5(md5($plain).":".$username) | no | no | `MD5MD5USER` (v) | collides with md5-capitalise-md5-plain-username (encoding) |
 | md5(md5($plain).$plain) | no | **--** | `MD5MD5PASS` (v) |  |
 | md5(md5($plain).$plain.md5($plain)) | no | **--** | `MD5-MD5PASSMD5` (v) |  |
@@ -1313,7 +1313,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | sha256(md5($plain),$plain) | no | **--** | `SHA256MD5PASS` (v) |  |
 | sha256(md5($salt.$plain).":".$salt) | no | **--** | `SHA256HEXSALT` (v) |  |
 | sha256(sha1($plain)) | no | **--** | `SHA256SHA1` (v) |  |
-| sha256(sha256($pass.$salt)) | `20730` (v) | **--** | **--** |  |
+| sha256(sha256($pass.$salt)) | `20730` (v) | **--** | `SHA256PASSSALT -i2` (v) |  |
 | sha256(sha256($plain, true)) | `21400` (v) | `dynamic_64` (v) | `SHA256RAW -i2` (v) |  |
 | sha256(sha512($plain)) | no | **--** | `SHA256SHA512` (v) |  |
 | SHA256-SALTSHA256RAW | `21420` (v) | **--** | `SHA256-SALTSHA256RAW` (v) |  |

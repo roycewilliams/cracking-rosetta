@@ -260,14 +260,27 @@ A few that carry a vector, so a candidate identifier can be tested at once, one 
 
 All 194: filter `hashcat_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
 
-### mdxfind: 113 entries say nothing
+### mdxfind: 111 entries say nothing
 
-A few that carry a vector and a proven expression, so there is a definite construction to look for, one per family:
+A few that carry a vector, so a candidate identifier can be tested at once, one per family:
 
-* [`md5-md5-pass-salt-hc2630`](index.html#md5-md5-pass-salt-hc2630) - `md5(md5($p.$s))`
-* [`sha256-sha256-pass-salt`](index.html#sha256-sha256-pass-salt) - `sha256(sha256($p.$s))`
+* [`1password-agilekeychain`](index.html#1password-agilekeychain) - `1Password, agilekeychain`
+* [`apple-iwork-09-or-newer`](index.html#apple-iwork-09-or-newer) - `Apple iWork '09 or newer`
+* [`astra-linux-gost12256hash`](index.html#astra-linux-gost12256hash) - `Astra Linux $gost12256hash$` (and 1 more starting `Astra`)
+* [`django-sha-1`](index.html#django-sha-1) - `Django (SHA-1)`
+* [`domain-cached-credentials-dcc-ms-cache-nt`](index.html#domain-cached-credentials-dcc-ms-cache-nt) - `Domain Cached Credentials (DCC), MS Cache (NT)` (and 1 more starting `Domain`)
+* [`filevault-2`](index.html#filevault-2) - `FileVault 2`
+* [`grub-2`](index.html#grub-2) - `GRUB 2`
+* [`hmac-sha1`](index.html#hmac-sha1) - `HMAC-SHA1` (and 3 more starting `HMAC`)
+* [`kerberos-5-etype-23-tgs-rep-nt`](index.html#kerberos-5-etype-23-tgs-rep-nt) - `Kerberos 5, etype 23, TGS-REP (NT)`
+* [`lotus-notes-domino-8-5`](index.html#lotus-notes-domino-8-5) - `Lotus Notes/Domino 8.5`
+* [`murmurhash64a-truncated-zero-seed`](index.html#murmurhash64a-truncated-zero-seed) - `MurmurHash64A truncated (zero seed)`
+* [`netiq-sspr-pbkdf2withhmacsha1`](index.html#netiq-sspr-pbkdf2withhmacsha1) - `NetIQ SSPR (PBKDF2WithHmacSHA1)` (and 1 more starting `NetIQ`)
+* [`netntlmv1-netntlmv1-ess-nt`](index.html#netntlmv1-netntlmv1-ess-nt) - `NetNTLMv1 / NetNTLMv1+ESS (NT)` (and 1 more starting `NetNTLMv`)
+* [`netscreen`](index.html#netscreen) - `Netscreen`
+* [`oracle-11g`](index.html#oracle-11g) - `Oracle 11g`
 
-All 113: filter `mdxfind_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
+All 111: filter `mdxfind_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
 
 ## 4. hashcat modes with no row here (1)
 
