@@ -579,6 +579,65 @@ if ($want{mdxfind} && $job{mdxfind}) {
                 $read{mdxfind}{ $vec->{id} }{ $vec->{vi} } = 1;
             }
         }
+        # SOLO FALLBACK: mdxfind does not always echo the string it was GIVEN,
+        # and mx_echo_is attributes a crack by comparing the echo.
+        #
+        # Two ways it differs, both measured 2026-09-04:
+        #
+        #   * IT RE-SERIALIZES. Handed grub-2's
+        #     "grub.pbkdf2.sha512.1024.<salt>.<digest>" mdxfind recovers the
+        #     plaintext and prints "$ml$1024$<salt>$<digest>" -- macOS's
+        #     spelling of the same PBKDF2-SHA512 material.
+        #   * IT ADDS A FIELD. The TRUNC family sweeps a truncation length and
+        #     reports the one that matched, so SHA1SHA1TRUNC handed
+        #     "360621c68ac8101809a7a66d5a2c2469" prints
+        #     "360621c68ac8101809a7a66d5a2c2469:40:password123". That is 20 of
+        #     the 24 blocks this fallback promotes, and every one of them had
+        #     been sitting at tier 'upstream' saying "the tool pinned to this
+        #     identifier did not reproduce its own published example".
+        #
+        # In both cases the round trip succeeded and the attribution failed, so
+        # the row said NOT REPRODUCED about a row that reproduces.
+        #
+        # The echo is only load-bearing because several hashes share a run. So
+        # each still-unverified vector is re-run ALONE, pinned, at the same
+        # iteration count: with ONE hash in the file, a report line naming the
+        # pinned type and ending in that vector's plaintext cannot be anything
+        # else, and the echoed spelling stops mattering.
+        #
+        # Same shape and same guarantee as the PEPPER fallback above: the
+        # grouped run stays primary and this only ever ADDS a verification, so
+        # nothing that verified before can stop verifying.
+        # Only where the (entry, type) pair has NOTHING yet, which is the pair
+        # that would otherwise be reported as failing. A vector that is another
+        # tool's serialization is not expected to verify under mdxfind and does
+        # not need a run of its own to say so; reads_in already carries the
+        # per-vector fact. Measured 2026-09-04: without this guard the fallback
+        # fires for every unverified vector and the pass takes hours.
+        for my $vec (@v) {
+            next if $cracked{mdxfind}{ $vec->{id} }{$type};
+            next if $read{mdxfind}{ $vec->{id} }{ $vec->{vi} };
+            my $sf = write_file("$workdir/mx.$safe.$it.solo.hash", $vec->{hash});
+            my $sw = write_file("$workdir/mx.$safe.$it.solo.word", $vec->{pass});
+            my ($c2, $o2) = run_capture($timeout, $mdxfind,
+                '-h', "^\Q$type\E\$", $readflag, $sf, '-i', $it, $sw);
+            next unless defined $o2;
+            my $found = 0;
+            for my $line (split /\n/, $o2) {
+                next unless $line =~ /^\Q$type\E(?:x(\d+))?\s+(.+)$/;
+                my $g = defined $1 ? $1 + 0 : $it;
+                next unless $g == $it;
+                my $tail = ":$vec->{pass}";
+                next unless length($2) > length($tail)
+                         && substr($2, -length($tail)) eq $tail;
+                $found = 1;
+                last;
+            }
+            next unless $found;
+            $cracked{mdxfind}{ $vec->{id} }{$type} = 1;
+            $read{mdxfind}{ $vec->{id} }{ $vec->{vi} } = 1;
+        }
+
         # Accumulate: one type has a separate job per declared iteration
         # count, and assigning here would leave discovery seeing only the
         # entries of whichever iteration ran last.
