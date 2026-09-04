@@ -13,9 +13,13 @@ status: "needs-review"
 tools:
   john:
     cpu: ["tc_whirlpool"]
-    verified: "upstream"
-    verified_at: "2026-08-31"
-    verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
-    note: "NOT REPRODUCED HERE. john publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: hashcat's example for this mode is a volume header rather than a digest, so a plain -a 0 wordlist attack cannot consume it. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool john --only tc_whirlpool to retry."
+    verified: "vector"
+    verified_at: "2026-09-04"
+    verified_with: "john"
   crack:
     supported: false
+vectors:
+  - hash: "truecrypt_WHIRLPOOL$5724ba89229d705010ec56af416b16155682a0cab9cf48ac5a5fdd2086c9a251ae4bbea6cfb8464321a789852f7812095b0e0c4c4f9c6d14ba7beedaf3484b375ac7bc97b43c3e74bf1a0c259b7ac8725d990d2ff31935ca3443f2ce8df59de86515da3e0f53f728882b71c5cc704df0c87c282a7413db446e9a2e516a144311dd25092eb0a2c5df0240d899708289fc7141abd8538fa5791d9f96c39129cce9fe8a6e58e84364e2f4acc32274147431cb2d2480b1b54bffee485acee0925852b8a6ee71d275f028b92e540be595448e5f1d78560a3b8ad209962dd5981d7ca98db9a678a588a9296157d44502cd78f9e32f022dddc9bc8111b5704ee39a9b56d30b89898ae340e90f2e6c73be6ac64de97e32fc2eed0b66dcd5c1553eeab3950cf851624a5a4439435a6fd5717fda6d5f939f4a902321341964c16bda8975752ba150fb9d858d8eaff2a2086cb50d30abff741ee20223b4223b1783f0ed537a609a081afed952395ef0b5de6883db66cbb5a8bac70f2f757c7b6e6bb5d863672820f0d3d61b262b2b6c2ca0dc8e7137851aa450da1c1d915e005bff0e849a89bf67693ef97f5c17bf8d07a18c562dc783274f9ec580f9519a6dd1429b66160ddb04549506ad616dd0695da144fa2ad270eac7163983e9036f1bde3c7634b8a246b8dcd518ce3e12b881c838fbce59a0cfdffa3b21447e3f28124f63549c3962"
+    pass: "password"
+    source: "john"
+    reads_in: ["john"]

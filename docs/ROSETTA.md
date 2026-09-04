@@ -29,9 +29,9 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | "MD5 authentication" HSRP, HSRPv2, VRRP, GLBP | **--** | `hsrp` (v) | no |  |
 | "MD5 based authentication" Dahua | **--** | `dahua` (v) | no |  |
 | "MD5 based authentication" VTP | **--** | `vtp` (v) | no |  |
-| (.pfx, .p12) | **--** | `pfx` | **--** |  |
-| 1Password Agile Keychain | **--** | `agilekeychain` | **--** |  |
-| 1Password Cloud Keychain | **--** | `cloudkeychain` | **--** |  |
+| (.pfx, .p12) | **--** | `pfx` (v) | **--** |  |
+| 1Password Agile Keychain | **--** | `agilekeychain` (v) | **--** |  |
+| 1Password Cloud Keychain | **--** | `cloudkeychain` (v) | **--** |  |
 | 1Password, agilekeychain | `6600` (v) | **--** | **--** |  |
 | 1Password, cloudkeychain | `8200` (v) | **--** | no |  |
 | 1Password, mobilekeychain (1Password 8) | `31800` (v) | **--** | no |  |
@@ -40,9 +40,9 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | Adobe AEM (SSPR, SHA-256 with Salt) | `32031` (v) | `sspr`<br>`sspr-opencl` (v) | `SSPR-SHA256` (v) |  |
 | Adobe AEM (SSPR, SHA-512 with Salt) | `32041` (v) | `sspr`<br>`sspr-opencl` (v) | `SSPR-SHA512` (v) |  |
 | AES Crypt (SHA256) | `22400` (v) | **--** | no |  |
-| AES128-NOKDF | `26401` (v) | **--** | `AES128-NOKDF` (v) |  |
-| AES192-NOKDF | `26402` (v) | **--** | `AES192-NOKDF` (v) |  |
-| AES256-NOKDF | `26403` (v) | **--** | `AES256-NOKDF` (v) |  |
+| AES128-NOKDF | `26401` (v) | no | `AES128-NOKDF` (v) |  |
+| AES192-NOKDF | `26402` (v) | no | `AES192-NOKDF` (v) |  |
+| AES256-NOKDF | `26403` (v) | no | `AES256-NOKDF` (v) |  |
 | AICH | `100` (v) | `Raw-SHA1`<br>`dynamic_26`<br>`raw-SHA1-opencl` (v) | `AICH` (v) | collides with sha1lsb35 (truncation) |
 | AIX-MD5 | `6300` (v) | `md5crypt`<br>`md5crypt-long`<br>`md5crypt-opencl` (v) | `AIX-MD5` (v) |  |
 | AIX-SHA1 | `6700` (v) | `aix-ssha1` (v) | `AIX-SHA1` (v) |  |
@@ -57,10 +57,10 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | ANSIBLE-VAULT | `16900` (v) | `ansible`<br>`ansible-opencl` (v) | `ANSIBLE-VAULT` (v) |  |
 | Apache $apr1$ | `1600` (v) | `md5crypt`<br>`md5crypt-long`<br>`md5crypt-opencl` (v) | `APR1` (v) |  |
 | APFS | `18300` (v) | `FVDE`<br>`FVDE-opencl` (v) | `APFS` (v) |  |
-| Apple DMG | **--** | `dmg` | **--** |  |
+| Apple DMG | **--** | `dmg` (v) | **--** |  |
 | Apple iWork '09 or newer | `23300` (v) | `iwork`<br>`iwork-opencl` (v) | `APPLE-IWORK` (v) |  |
 | Apple Secure Notes | `16200` (v) | `notes`<br>`notes-opencl` (v) | `APPLE-SECURE-NOTES` (v) |  |
-| APPLE-IWORK | `23300` (v) | **--** | `APPLE-IWORK` (v) |  |
+| APPLE-IWORK | `23300` (v) | no | `APPLE-IWORK` (v) |  |
 | APPLE-KEYCHAIN | `23100` (v) | `keychain`<br>`keychain-opencl` (v) | `APPLE-KEYCHAIN` (v) |  |
 | APPLE-SECURE-NOTES | `16700` (v) | `FVDE`<br>`FVDE-opencl` (v) | `APPLE-SECURE-NOTES` (v) |  |
 | ARGON2 | `34000` (v) | `Argon2`<br>`argon2-opencl` (v) | `ARGON2` (v) |  |
@@ -77,20 +77,20 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | AUTHME | `20711` (v) | **--** | `AUTHME` (v) |  |
 | AWSSIGV4 | `28700` (v) | **--** | `AWSSIGV4` (v) |  |
 | AXCRYPT | `13200` (v) | `AxCrypt`<br>`axcrypt-opencl` (v) | `AXCRYPT` (v) |  |
-| AxCrypt 2 AES-128 | `23500` (v) | **--** | no |  |
+| AxCrypt 2 AES-128 | `23500` (v) | no | no |  |
 | AxCrypt 2 AES-256 | `23600` (v) | `AxCrypt`<br>`axcrypt2-opencl` (v) | no |  |
 | AXCRYPTSHA1 | `13300` (v) | **--** | `AXCRYPTSHA1` (v) | same as sha1-substr-0-32 (encoding) |
 | AzureAD | **--** | `AzureAD` (v) | no |  |
 | AZURESYNC | `12800` (v) | **--** | `AZURESYNC` (v) |  |
-| Battlenet | **--** | `WoWSRP` | **--** |  |
+| Battlenet | **--** | `WoWSRP` (v) | **--** |  |
 | Bcrypt | `3200` (v) | `bcrypt`<br>`bcrypt-opencl` (v) | `BCRYPT` (v) |  |
-| bcrypt(md5($pass)) | `25600` (v) | **--** | `BCRYPTMD5` (v) |  |
-| bcrypt(md5($plain)) | `25600` (v) | **--** | `BCRYPTMD5` (v) |  |
-| bcrypt(sha1($pass)) | `25800` (v) | **--** | `BCRYPTSHA1` (v) |  |
-| bcrypt(sha1($plain)) | `25800` (v) | **--** | `BCRYPTSHA1` (v) |  |
-| BCRYPT256 | `30600` (v) | **--** | `BCRYPT256` (v) |  |
+| bcrypt(md5($pass)) | `25600` (v) | no | `BCRYPTMD5` (v) |  |
+| bcrypt(md5($plain)) | `25600` (v) | no | `BCRYPTMD5` (v) |  |
+| bcrypt(sha1($pass)) | `25800` (v) | no | `BCRYPTSHA1` (v) |  |
+| bcrypt(sha1($plain)) | `25800` (v) | no | `BCRYPTSHA1` (v) |  |
+| BCRYPT256 | `30600` (v) | no | `BCRYPT256` (v) |  |
 | BCRYPTHMACSHA256 | `30601` (v) | **--** | `BCRYPTHMACSHA256` (v) |  |
-| BCRYPTSHA512 | `28400` (v) | **--** | `BCRYPTSHA512` (v) |  |
+| BCRYPTSHA512 | `28400` (v) | no | `BCRYPTSHA512` (v) |  |
 | BESDER-AUTH | `24901` (v) | **--** | `BESDER-AUTH` (v) |  |
 | BestCrypt v3 Volume Encryption | `23900` (v) | **--** | no |  |
 | BestCrypt v4 Volume Encryption | `24000` (v) | `BestCryptVE4` (v) | no |  |
@@ -114,8 +114,8 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | BITWARDEN | `23400` (v) | **--** | `BITWARDEN` (v) |  |
 | Bitwarden Password Manager | **--** | `Bitwarden`<br>`bitwarden-opencl` (v) | no |  |
 | Blackberry-ES10 | **--** | `Blackberry-ES10` (v) | no |  |
-| BLAKE224 | no | **--** | `BLAKE224` (v) |  |
-| BLAKE256 | no | **--** | `BLAKE256` (v) |  |
+| BLAKE224 | no | no | `BLAKE224` (v) |  |
+| BLAKE256 | no | no | `BLAKE256` (v) |  |
 | BLAKE2B256 | `34800` (v) | **--** | `BLAKE2B256` (v) |  |
 | BLAKE2B256PASSSALT | `34810` (v) | **--** | `BLAKE2B256PASSSALT` (v) |  |
 | BLAKE2B256SALTPASS | `34820` (v) | **--** | `BLAKE2B256SALTPASS` (v) |  |
@@ -123,20 +123,20 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | BLAKE2B512PASSSALT | `610` (v) | **--** | `BLAKE2B512PASSSALT` (v) |  |
 | BLAKE2B512SALTPASS | `620` (v) | **--** | `BLAKE2B512SALTPASS` (v) |  |
 | BLAKE2S256 | `31000` (v) | **--** | `BLAKE2S256` |  |
-| BLAKE384 | no | **--** | `BLAKE384` (v) |  |
-| BLAKE512 | no | **--** | `BLAKE512` (v) |  |
+| BLAKE384 | no | no | `BLAKE384` (v) |  |
+| BLAKE512 | no | no | `BLAKE512` (v) |  |
 | Blockchain, My Wallet | `12700` (v) | `Blockchain`<br>`blockchain-opencl` (v) | no |  |
-| Blockchain, My Wallet, Legacy Wallets | `34700` (v) | **--** | no |  |
+| Blockchain, My Wallet, Legacy Wallets | `34700` (v) | no | no |  |
 | Blockchain, My Wallet, Second Password (SHA256) | `18800` (v) | **--** | no |  |
 | Blockchain, My Wallet, V2 | `15200` (v) | `Blockchain`<br>`blockchain-opencl` (v) | no |  |
-| BMW224 | no | **--** | `BMW224` (v) |  |
-| BMW256 | no | **--** | `BMW256` (v) |  |
-| BMW384 | no | **--** | `BMW384` (v) |  |
-| BMW512 | no | **--** | `BMW512` (v) |  |
-| BouncyCastle | **--** | `BKS` | **--** |  |
+| BMW224 | no | no | `BMW224` (v) |  |
+| BMW256 | no | no | `BMW256` (v) |  |
+| BMW384 | no | no | `BMW384` (v) |  |
+| BMW512 | no | no | `BMW512` (v) |  |
+| BouncyCastle | **--** | `BKS` (v) | **--** |  |
 | BSDICRYPT | `12400` (v) | `bsdicrypt` (v) | `BSDICRYPT` (v) |  |
 | C/R | **--** | `MSCHAPv2` (v) | no |  |
-| Cardano Encrypted 128-byte Secret Key (a.k.a XPrv) | **--** | `cardano` | **--** |  |
+| Cardano Encrypted 128-byte Secret Key (a.k.a XPrv) | **--** | `cardano` (v) | **--** |  |
 | ChaCha20 | `15400` (v) | **--** | no |  |
 | Cisco ASA | **--** | `asa-md5` (v) | `CISCOASA` (v) |  |
 | CISCO4 | `5700` (v) | `Raw-SHA256`<br>`raw-SHA256-opencl` (v) | `CISCO4` (v) |  |
@@ -145,7 +145,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | CISCOASA | `2410` (v) | `dynamic_20` (v) | `CISCOASA` (v) | same as md5-pass-salt (application) |
 | CISCOISE | `5720` (v) | `Iterated-SHA256`<br>`Iterated-SHA256-opencl` (v) | `CISCOISE` (v) |  |
 | CISCOPIX | `2400` (v) | `dynamic_19`<br>`pix-md5` | `CISCOPIX` (v) |  |
-| ClearQuest | **--** | `cq` | **--** |  |
+| ClearQuest | **--** | `cq` (v) | **--** |  |
 | CMIYC | **--** | **--** | `CMIYC` (v) |  |
 | COLDFUSION10 | `12600` (v) | `dynamic_1588` (v) | `COLDFUSION10` (v) |  |
 | CRAMMD5 | `10200` (v) | `HMAC-MD5` (v) | `CRAMMD5` (v) |  |
@@ -154,16 +154,16 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | CRC32 | `11500` (v) | **--** | no |  |
 | CRC32C | `27900` (v) | **--** | no |  |
 | CRC64Jones | `28000` (v) | **--** | no |  |
-| CRYPTEXT | no | **--** | `CRYPTEXT` (v) |  |
+| CRYPTEXT | no | no | `CRYPTEXT` (v) |  |
 | cryptoSafe | **--** | `cryptoSafe`<br>`cryptosafe-opencl` (v) | no |  |
-| CUBE224 | no | **--** | `CUBE224` (v) |  |
-| CUBE256 | no | **--** | `CUBE256` (v) |  |
-| CUBE384 | no | **--** | `CUBE384` (v) |  |
-| CUBE512 | no | **--** | `CUBE512` (v) |  |
+| CUBE224 | no | no | `CUBE224` (v) |  |
+| CUBE256 | no | no | `CUBE256` (v) |  |
+| CUBE384 | no | no | `CUBE384` (v) |  |
+| CUBE512 | no | no | `CUBE512` (v) |  |
 | custom CRC-32 | **--** | `PST` (v) | no |  |
 | DAHUA | `3730` (v) | **--** | `DAHUA` |  |
 | DAHUA-AUTH | `24900` (v) | **--** | `DAHUA-AUTH` (v) |  |
-| DANE RFC7929/RFC8162 SHA2-256 | `30420` (v) | **--** | `SHA256`<br>`SHA256RAW` (v) |  |
+| DANE RFC7929/RFC8162 SHA2-256 | `30420` (v) | no | `SHA256`<br>`SHA256RAW` (v) |  |
 | Dashlane Password Manager | **--** | `dashlane`<br>`dashlane-opencl` (v) | no |  |
 | DCC2 | `2100` (v) | `mscash2`<br>`mscash2-opencl` (v) | `DCC2` (v) |  |
 | DES3ENCRYPT | `14100` (v) | **--** | `DES3ENCRYPT` (v) |  |
@@ -171,17 +171,17 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | DESENCRYPT | `14000` (v) | **--** | `DESENCRYPT` (v) |  |
 | DIGEST-MD5 C/R | **--** | `dmd5` (v) | no |  |
 | DiskCryptor | **--** | `diskcryptor`<br>`diskcryptor-aes-opencl` (v) | no |  |
-| DiskCryptor SHA512 + XTS 1024 bit | `20012` (v) | **--** | no |  |
+| DiskCryptor SHA512 + XTS 1024 bit | `20012` (v) | no | no |  |
 | DiskCryptor SHA512 + XTS 1536 bit | `20013` (v) | **--** | no |  |
 | DiskCryptor SHA512 + XTS 512 bit | `20011` (v) | **--** | no |  |
 | Django | **--** | `Django` (v) | no |  |
 | Django (SHA-1) | `124` (v) | **--** | **--** | same as sha1-salt-pass (encoding) |
 | django-scrypt | **--** | `django-scrypt` (v) | no |  |
-| DNSSEC NSEC3 | **--** | `nsec3` | **--** |  |
+| DNSSEC NSEC3 | **--** | `nsec3` (v) | **--** |  |
 | Dogechain.info Wallet | `32500` (v) | **--** | no |  |
-| Domain Cached Credentials (DCC), MS Cache (NT) | `31500` (v) | **--** | **--** |  |
-| Domain Cached Credentials 2 (DCC2), MS Cache 2, (NT) | `31600` (v) | **--** | **--** |  |
-| DOMINO5 | `8600` (v) | **--** | `DOMINO5` (v) |  |
+| Domain Cached Credentials (DCC), MS Cache (NT) | `31500` (v) | no | **--** |  |
+| Domain Cached Credentials 2 (DCC2), MS Cache 2, (NT) | `31600` (v) | no | **--** |  |
+| DOMINO5 | `8600` (v) | no | `DOMINO5` (v) |  |
 | DOMINO6 | `8700` (v) | `dominosec` (v) | `DOMINO6` (v) |  |
 | DOMINO8 | `9100` (v) | `dominosec8` (v) | `DOMINO8` (v) |  |
 | DPAPI masterkey file v1 (context 1 and 2) | `15300` (v) | `DPAPImk` (v) | no |  |
@@ -200,26 +200,26 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | dynamic_1005 | **--** | `dynamic_1005` (v) | no |  |
 | dynamic_1006 | **--** | `dynamic_1006` (v) | no |  |
 | dynamic_1008 | **--** | `dynamic_1008` (v) | no |  |
-| dynamic_1015 | **--** | `dynamic_1015` | **--** |  |
+| dynamic_1015 | **--** | `dynamic_1015` (v) | **--** |  |
 | dynamic_1029 | **--** | `dynamic_1029` (v) | no |  |
-| dynamic_1030 | **--** | `dynamic_1030` | **--** |  |
+| dynamic_1030 | **--** | `dynamic_1030` (v) | **--** |  |
 | dynamic_1031 | **--** | `dynamic_1031` (v) | no |  |
 | dynamic_1032 | **--** | `dynamic_1032` (v) | no |  |
-| dynamic_1034 | **--** | `dynamic_1034` | **--** |  |
-| dynamic_1401 | **--** | `dynamic_1401` | **--** |  |
+| dynamic_1034 | **--** | `dynamic_1034` (v) | **--** |  |
+| dynamic_1401 | **--** | `dynamic_1401` (v) | **--** |  |
 | dynamic_15 | **--** | `dynamic_15` (v) | no |  |
 | dynamic_1505 | **--** | `dynamic_1505` (v) | no |  |
-| dynamic_1506 | **--** | `dynamic_1506` | **--** |  |
-| dynamic_1507 | **--** | `dynamic_1507` | **--** |  |
+| dynamic_1506 | **--** | `dynamic_1506` (v) | **--** |  |
+| dynamic_1507 | **--** | `dynamic_1507` (v) | **--** |  |
 | dynamic_1528 | **--** | `dynamic_1528` (v) | no |  |
-| dynamic_1529 | **--** | `dynamic_1529` | **--** |  |
+| dynamic_1529 | **--** | `dynamic_1529` (v) | **--** |  |
 | dynamic_1550 | **--** | `dynamic_1550` (v) | no |  |
 | dynamic_1551 | **--** | `dynamic_1551` (v) | no |  |
 | dynamic_1552 | **--** | `dynamic_1552` (v) | no |  |
 | dynamic_1560 | **--** | `dynamic_1560` (v) | no |  |
 | dynamic_1590 | **--** | `dynamic_1590` (v) | no |  |
 | dynamic_16 | **--** | `dynamic_16` (v) | no |  |
-| dynamic_1602 | **--** | `dynamic_1602` | **--** |  |
+| dynamic_1602 | **--** | `dynamic_1602` (v) | **--** |  |
 | dynamic_1608 | **--** | `dynamic_1608` (v) | no |  |
 | dynamic_18 | **--** | `dynamic_18` (v) | no |  |
 | dynamic_2002 | **--** | `dynamic_2002` (v) | no |  |
@@ -230,14 +230,14 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | dynamic_36 | **--** | `dynamic_36` (v) | no |  |
 | dynamic_39 | **--** | `dynamic_39` (v) | no |  |
 | dynamic_40 | **--** | `dynamic_40` (v) | no |  |
-| ECHO224 | no | **--** | `ECHO224` (v) |  |
-| ECHO256 | no | **--** | `ECHO256` (v) |  |
-| ECHO384 | no | **--** | `ECHO384` (v) |  |
-| ECHO512 | no | **--** | `ECHO512` (v) |  |
+| ECHO224 | no | no | `ECHO224` (v) |  |
+| ECHO256 | no | no | `ECHO256` (v) |  |
+| ECHO384 | no | no | `ECHO384` (v) |  |
+| ECHO512 | no | no | `ECHO512` (v) |  |
 | ECRYPTFS | `12200` (v) | `eCryptfs` (v) | `ECRYPTFS` (v) |  |
 | ED2K | `900` (v) | `Raw-MD4`<br>`dynamic_30`<br>`raw-MD4-opencl` (v) | `ED2K` (v) |  |
-| EDON256 | no | **--** | `EDON256` (v) |  |
-| EDON512 | no | **--** | `EDON512` (v) |  |
+| EDON256 | no | no | `EDON256` (v) |  |
+| EDON512 | no | no | `EDON512` (v) |  |
 | Eggdrop | **--** | `bfegg` (v) | no |  |
 | EIGRP MD5 / HMAC-SHA-256 authentication | **--** | `eigrp` (v) | no |  |
 | Electrum Wallet (Salt-Type 1-3) | `16600` (v) | `electrum` (v) | no |  |
@@ -249,7 +249,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | ENCsecurity Datavault (MD5/no keychain) | `29930` (v) | `ENCDataVault-MD5` (v) | no |  |
 | ENCsecurity Datavault (PBKDF2/keychain) | `29920` (v) | `ENCDataVault-PBKDF2` (v) | no |  |
 | ENCsecurity Datavault (PBKDF2/no keychain) | `29910` (v) | `ENCDataVault-PBKDF2` (v) | no |  |
-| Enpass Password Manager | **--** | `enpass` | **--** |  |
+| Enpass Password Manager | **--** | `enpass` (v) | **--** |  |
 | EPiServer | **--** | `EPiServer` (v) | `EPISERVER` (v) |  |
 | EPISERVER | `141` (v) | **--** | `EPISERVER` (v) |  |
 | Episerver 6.x < .NET 4 | `141` (v) | **--** | `EPISERVER` (v) |  |
@@ -264,46 +264,46 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | Flask Session Cookie ($salt.$salt.$pass) | `29100` (v) | **--** | no |  |
 | FORTIGATE | `7000` (v) | `Fortigate` (v) | `FORTIGATE` (v) |  |
 | FORTIGATE256 | `26300` (v) | `Fortigate256` (v) | `FORTIGATE256` (v) |  |
-| FreeBSD GELI | **--** | `geli` | **--** |  |
-| FUGUE224 | no | **--** | `FUGUE224` (v) |  |
-| FUGUE256 | no | **--** | `FUGUE256` (v) |  |
-| FUGUE384 | no | **--** | `FUGUE384` (v) |  |
-| FUGUE512 | no | **--** | `FUGUE512` (v) |  |
+| FreeBSD GELI | **--** | `geli` (v) | **--** |  |
+| FUGUE224 | no | no | `FUGUE224` (v) |  |
+| FUGUE256 | no | no | `FUGUE256` (v) |  |
+| FUGUE384 | no | no | `FUGUE384` (v) |  |
+| FUGUE512 | no | no | `FUGUE512` (v) |  |
 | generic crypt(3) | `1500` (v) | `crypt` (v) | `DESCRYPT` (v) |  |
 | Generic Hash [Bridged: Python Interpreter free-threading] | `72000` | **--** | no |  |
 | Generic Hash [Bridged: Python Interpreter with GIL] | `73000` | **--** | no |  |
 | Generic Hash [Bridged: Rust] | `74000` | **--** | no |  |
 | GNOME Keyring | **--** | `keyring`<br>`keyring-opencl` (v) | no |  |
 | GOST (2 iterations) | no | `dynamic_93` (v) | `GOST -i2` (v) |  |
-| GOST R 34.11-94 | **--** | `gost` | **--** |  |
-| gost(md5($plain).$plain) | no | **--** | `GOSTMD5PASS` (v) |  |
-| gost(md5($salt.$plain).":".$salt) | no | **--** | `GOSTHEXSALT` (v) |  |
+| GOST R 34.11-94 | **--** | `gost` (v) | **--** |  |
+| gost(md5($plain).$plain) | no | no | `GOSTMD5PASS` (v) |  |
+| gost(md5($salt.$plain).":".$salt) | no | no | `GOSTHEXSALT` (v) |  |
 | GOST-YESCRYPT | `36200` (v) | **--** | `GOST-YESCRYPT` (v) |  |
 | gost-yescrypt | `36200` (v) | **--** | `GOST-YESCRYPT` (v) |  |
 | GOST12512CRYPT | `35600` (v) | `streebog512crypt`<br>`streebog512crypt-opencl` (v) | `GOST12512CRYPT` (v) |  |
 | GOST2012-32 | `11700` (v) | `Stribog-256` (v) | `GOST2012-32` (v) | same as streebog-32-plain (naming) |
 | GOST2012-64 | `11800` (v) | `Stribog-512` (v) | `GOST2012-64` (v) | same as streebog-64-plain (naming) |
-| GOSTMD5 | no | **--** | `GOSTMD5` (v) |  |
+| GOSTMD5 | no | no | `GOSTMD5` (v) |  |
 | GPG (AES-128/AES-256 (SHA-1($pass))) | `17010` (v) | `gpg`<br>`gpg-opencl` (v) | no |  |
 | GPG (AES-128/AES-256 (SHA-256($pass))) | `17030` (v) | `gpg`<br>`gpg-opencl` (v) | no |  |
 | GPG (AES-128/AES-256 (SHA-512($pass))) | `17020` (v) | `gpg`<br>`gpg-opencl` (v) | no |  |
 | GPG (AES-OCB-128 (SHA-1($pass))) | `17050` (v) | **--** | no |  |
 | GPG (CAST5 (SHA-1($pass))) | `17040` (v) | `gpg` (v) | no |  |
-| GROESTL224 | no | **--** | `GROESTL224` (v) |  |
-| GROESTL256 | no | **--** | `GROESTL256` (v) |  |
-| GROESTL384 | no | **--** | `GROESTL384` (v) |  |
-| GROESTL512 | no | **--** | `GROESTL512` (v) |  |
+| GROESTL224 | no | no | `GROESTL224` (v) |  |
+| GROESTL256 | no | no | `GROESTL256` (v) |  |
+| GROESTL384 | no | no | `GROESTL384` (v) |  |
+| GROESTL512 | no | no | `GROESTL512` (v) |  |
 | GRUB 2 | `7200` (v) | `PBKDF2-HMAC-SHA512`<br>`PBKDF2-HMAC-SHA512-opencl` (v) | `PBKDF2-SHA512` (v) |  |
 | H3C/Huawei/HPE | **--** | `h3c` (v) | no |  |
-| Half MD5 | `5100` (v) | **--** | `MD5`<br>`MD5RAW` (v) |  |
+| Half MD5 | `5100` (v) | no | `MD5`<br>`MD5RAW` (v) |  |
 | HalfLM C/R | **--** | `nethalflm` | **--** |  |
-| HAMSI224 | no | **--** | `HAMSI224` (v) |  |
-| HAMSI256 | no | **--** | `HAMSI256` (v) |  |
-| HAMSI384 | no | **--** | `HAMSI384` (v) |  |
-| HAMSI512 | no | **--** | `HAMSI512` (v) |  |
+| HAMSI224 | no | no | `HAMSI224` (v) |  |
+| HAMSI256 | no | no | `HAMSI256` (v) |  |
+| HAMSI384 | no | no | `HAMSI384` (v) |  |
+| HAMSI512 | no | no | `HAMSI512` (v) |  |
 | has-160 (librhash) | no | `has-160` (v) | `HAS160` (v) |  |
 | hash('gost', $plain) | `6900` (v) | `dynamic_90` (v) | `GOST` (v) |  |
-| hash('gost-crypto', $plain) | no | **--** | `GOST-CRYPTO` (v) |  |
+| hash('gost-crypto', $plain) | no | no | `GOST-CRYPTO` (v) |  |
 | HashKnownHosts HMAC-SHA1 | **--** | `known_hosts` (v) | no |  |
 | HAV128 | no | `dynamic_160` (v) | `HAV128` (v) |  |
 | HAV128 (2 iterations) | no | `dynamic_163` (v) | `HAV128 -i2` (v) |  |
@@ -334,88 +334,88 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | HAV256-4 (2 iterations) | no | `dynamic_293` (v) | `HAV256-4 -i2` (v) |  |
 | HAV256-5 | no | `dynamic_300` (v) | `HAV256-5` (v) |  |
 | HAV256-5 (2 iterations) | no | `dynamic_303` (v) | `HAV256-5 -i2` (v) |  |
-| HAVAL-128-4 | **--** | `HAVAL-128-4` | **--** |  |
+| HAVAL-128-4 | **--** | `HAVAL-128-4` (v) | **--** |  |
 | HAVAL-256-3 | no | `HAVAL-256-3`<br>`dynamic_280` (v) | `HAV256` (v) | duplicate of hav256 |
-| haval128_3(md5($plain)) | no | **--** | `HAV128MD5` (v) |  |
-| haval128_3(md5($plain).$plain) | no | **--** | `HAV128MD5PASS` (v) |  |
-| haval128_3(md5($salt.$plain).":".$salt) | no | **--** | `HAV128HEXSALT` (v) |  |
-| haval128_4(md5($plain)) | no | **--** | `HAV128-4MD5` (v) |  |
-| haval128_4(md5($plain).$plain) | no | **--** | `HAV128-4MD5PASS` (v) |  |
-| haval128_5(md5($plain)) | no | **--** | `HAV128-5MD5` (v) |  |
-| haval128_5(md5($plain).$plain) | no | **--** | `HAV128-5MD5PASS` (v) |  |
-| haval160_3(md5($plain)) | no | **--** | `HAV160-3MD5` (v) |  |
-| haval160_3(md5($plain).$plain) | no | **--** | `HAV160-3MD5PASS` (v) |  |
-| haval160_4(md5($plain)) | no | **--** | `HAV160-4MD5` (v) |  |
-| haval160_4(md5($plain).$plain) | no | **--** | `HAV160-4MD5PASS` (v) |  |
-| haval160_5(md5($plain)) | no | **--** | `HAV160-5MD5` (v) |  |
-| haval160_5(md5($plain).$plain) | no | **--** | `HAV160-5MD5PASS` (v) |  |
-| haval192_3(md5($plain)) | no | **--** | `HAV192-3MD5` (v) |  |
-| haval192_3(md5($plain).$plain) | no | **--** | `HAV192-3MD5PASS` (v) |  |
-| haval192_4(md5($plain)) | no | **--** | `HAV192-4MD5` (v) |  |
-| haval192_4(md5($plain).$plain) | no | **--** | `HAV192-4MD5PASS` (v) |  |
-| haval192_5(md5($plain)) | no | **--** | `HAV192-5MD5` (v) |  |
-| haval192_5(md5($plain).$plain) | no | **--** | `HAV192-5MD5PASS` (v) |  |
-| haval224_3(md5($plain)) | no | **--** | `HAV224-3MD5` (v) |  |
-| haval224_3(md5($plain).$plain) | no | **--** | `HAV224-3MD5PASS` (v) |  |
-| haval224_4(md5($plain)) | no | **--** | `HAV224-4MD5` (v) |  |
-| haval224_4(md5($plain).$plain) | no | **--** | `HAV224-4MD5PASS` (v) |  |
-| haval224_5(md5($plain)) | no | **--** | `HAV224-5MD5` (v) |  |
-| haval224_5(md5($plain).$plain) | no | **--** | `HAV224-5MD5PASS` (v) |  |
-| haval256_3(md5($plain)) | no | **--** | `HAV256MD5` (v) |  |
-| haval256_3(md5($plain).$plain) | no | **--** | `HAV256MD5PASS` (v) |  |
-| haval256_4(md5($plain)) | no | **--** | `HAV256-4MD5` (v) |  |
-| haval256_4(md5($plain).$plain) | no | **--** | `HAV256-4MD5PASS` (v) |  |
-| haval256_5(md5($plain)) | no | **--** | `HAV256-5MD5` (v) |  |
-| haval256_5(md5($plain).$plain) | no | **--** | `HAV256-5MD5PASS` (v) |  |
-| hmac("gost", $plain, $salt) | no | **--** | `HMAC-GOST` (v) |  |
-| hmac("haval128,3", $plain, $salt) | no | **--** | `HMAC-HAV128` (v) |  |
-| hmac("haval160,3", $plain, $salt) | no | **--** | `HMAC-HAV160` (v) |  |
-| hmac("haval192,3", $plain, $salt) | no | **--** | `HMAC-HAV192` (v) |  |
-| hmac("haval224,3", $plain, $salt) | no | **--** | `HMAC-HAV224` (v) |  |
-| hmac("haval256,3", $plain, $salt) | no | **--** | `HMAC-HAV256` (v) |  |
-| hmac("md2", $plain, $salt) | no | **--** | `HMAC-MD2` (v) |  |
-| hmac("md4", $plain, $salt) | no | **--** | `HMAC-MD4` (v) |  |
-| hmac("md5", $plain, $salt) | `60` (v) | **--** | `HMAC-MD5` (v) |  |
-| hmac("ripemd128", $plain, $salt) | no | **--** | `HMAC-RMD128` (v) |  |
-| hmac("ripemd160", $plain, $salt) | `6060` (v) | **--** | `HMAC-RMD160` (v) |  |
-| hmac("ripemd256", $plain, $salt) | no | **--** | `HMAC-RMD256` (v) |  |
-| hmac("ripemd320", $plain, $salt) | `33660` (v) | **--** | `HMAC-RMD320` (v) |  |
-| hmac("sha1", $plain, $salt) | `160` (v) | **--** | `HMAC-SHA1` (v) |  |
-| hmac("sha224", $plain, $salt) | no | **--** | `HMAC-SHA224` (v) |  |
-| hmac("sha256", $plain, $salt) | `1460` (v) | **--** | `HMAC-SHA256` (v) |  |
-| hmac("sha512", $plain, $salt) | `1760` (v) | **--** | `HMAC-SHA512` (v) |  |
-| hmac("snefru128", $plain, $salt) | no | **--** | `HMAC-SNE128` (v) |  |
-| hmac("snefru256", $plain, $salt) | no | **--** | `HMAC-SNE256` (v) |  |
-| hmac("tiger128,3", $plain, $salt) | no | **--** | `HMAC-TIGER128` (v) |  |
-| hmac("tiger160,3", $plain, $salt) | no | **--** | `HMAC-TIGER160` (v) |  |
-| hmac("tiger192,3", $plain, $salt) | no | **--** | `HMAC-TIGER192` (v) |  |
-| hmac("whirlpool", $plain, $salt) | no | **--** | `HMAC-WRL` (v) |  |
-| HMAC-BLAKE2S | `33300` (v) | **--** | `HMAC-BLAKE2S` (v) |  |
+| haval128_3(md5($plain)) | no | no | `HAV128MD5` (v) |  |
+| haval128_3(md5($plain).$plain) | no | no | `HAV128MD5PASS` (v) |  |
+| haval128_3(md5($salt.$plain).":".$salt) | no | no | `HAV128HEXSALT` (v) |  |
+| haval128_4(md5($plain)) | no | no | `HAV128-4MD5` (v) |  |
+| haval128_4(md5($plain).$plain) | no | no | `HAV128-4MD5PASS` (v) |  |
+| haval128_5(md5($plain)) | no | no | `HAV128-5MD5` (v) |  |
+| haval128_5(md5($plain).$plain) | no | no | `HAV128-5MD5PASS` (v) |  |
+| haval160_3(md5($plain)) | no | no | `HAV160-3MD5` (v) |  |
+| haval160_3(md5($plain).$plain) | no | no | `HAV160-3MD5PASS` (v) |  |
+| haval160_4(md5($plain)) | no | no | `HAV160-4MD5` (v) |  |
+| haval160_4(md5($plain).$plain) | no | no | `HAV160-4MD5PASS` (v) |  |
+| haval160_5(md5($plain)) | no | no | `HAV160-5MD5` (v) |  |
+| haval160_5(md5($plain).$plain) | no | no | `HAV160-5MD5PASS` (v) |  |
+| haval192_3(md5($plain)) | no | no | `HAV192-3MD5` (v) |  |
+| haval192_3(md5($plain).$plain) | no | no | `HAV192-3MD5PASS` (v) |  |
+| haval192_4(md5($plain)) | no | no | `HAV192-4MD5` (v) |  |
+| haval192_4(md5($plain).$plain) | no | no | `HAV192-4MD5PASS` (v) |  |
+| haval192_5(md5($plain)) | no | no | `HAV192-5MD5` (v) |  |
+| haval192_5(md5($plain).$plain) | no | no | `HAV192-5MD5PASS` (v) |  |
+| haval224_3(md5($plain)) | no | no | `HAV224-3MD5` (v) |  |
+| haval224_3(md5($plain).$plain) | no | no | `HAV224-3MD5PASS` (v) |  |
+| haval224_4(md5($plain)) | no | no | `HAV224-4MD5` (v) |  |
+| haval224_4(md5($plain).$plain) | no | no | `HAV224-4MD5PASS` (v) |  |
+| haval224_5(md5($plain)) | no | no | `HAV224-5MD5` (v) |  |
+| haval224_5(md5($plain).$plain) | no | no | `HAV224-5MD5PASS` (v) |  |
+| haval256_3(md5($plain)) | no | no | `HAV256MD5` (v) |  |
+| haval256_3(md5($plain).$plain) | no | no | `HAV256MD5PASS` (v) |  |
+| haval256_4(md5($plain)) | no | no | `HAV256-4MD5` (v) |  |
+| haval256_4(md5($plain).$plain) | no | no | `HAV256-4MD5PASS` (v) |  |
+| haval256_5(md5($plain)) | no | no | `HAV256-5MD5` (v) |  |
+| haval256_5(md5($plain).$plain) | no | no | `HAV256-5MD5PASS` (v) |  |
+| hmac("gost", $plain, $salt) | no | no | `HMAC-GOST` (v) |  |
+| hmac("haval128,3", $plain, $salt) | no | no | `HMAC-HAV128` (v) |  |
+| hmac("haval160,3", $plain, $salt) | no | no | `HMAC-HAV160` (v) |  |
+| hmac("haval192,3", $plain, $salt) | no | no | `HMAC-HAV192` (v) |  |
+| hmac("haval224,3", $plain, $salt) | no | no | `HMAC-HAV224` (v) |  |
+| hmac("haval256,3", $plain, $salt) | no | no | `HMAC-HAV256` (v) |  |
+| hmac("md2", $plain, $salt) | no | no | `HMAC-MD2` (v) |  |
+| hmac("md4", $plain, $salt) | no | no | `HMAC-MD4` (v) |  |
+| hmac("md5", $plain, $salt) | `60` (v) | no | `HMAC-MD5` (v) |  |
+| hmac("ripemd128", $plain, $salt) | no | no | `HMAC-RMD128` (v) |  |
+| hmac("ripemd160", $plain, $salt) | `6060` (v) | no | `HMAC-RMD160` (v) |  |
+| hmac("ripemd256", $plain, $salt) | no | no | `HMAC-RMD256` (v) |  |
+| hmac("ripemd320", $plain, $salt) | `33660` (v) | no | `HMAC-RMD320` (v) |  |
+| hmac("sha1", $plain, $salt) | `160` (v) | no | `HMAC-SHA1` (v) |  |
+| hmac("sha224", $plain, $salt) | no | no | `HMAC-SHA224` (v) |  |
+| hmac("sha256", $plain, $salt) | `1460` (v) | no | `HMAC-SHA256` (v) |  |
+| hmac("sha512", $plain, $salt) | `1760` (v) | no | `HMAC-SHA512` (v) |  |
+| hmac("snefru128", $plain, $salt) | no | no | `HMAC-SNE128` (v) |  |
+| hmac("snefru256", $plain, $salt) | no | no | `HMAC-SNE256` (v) |  |
+| hmac("tiger128,3", $plain, $salt) | no | no | `HMAC-TIGER128` (v) |  |
+| hmac("tiger160,3", $plain, $salt) | no | no | `HMAC-TIGER160` (v) |  |
+| hmac("tiger192,3", $plain, $salt) | no | no | `HMAC-TIGER192` (v) |  |
+| hmac("whirlpool", $plain, $salt) | no | no | `HMAC-WRL` (v) |  |
+| HMAC-BLAKE2S | `33300` (v) | no | `HMAC-BLAKE2S` (v) |  |
 | HMAC-MD5 / HMAC-SHA1, RSVP, IS-IS, OMAPI, RNDC, TSIG | **--** | `rsvp` (v) | no |  |
-| HMAC-MD5-KPASS | `50` (v) | **--** | `HMAC-MD5-KPASS` (v) |  |
-| HMAC-RIPEMD160 (key = $salt) | `6060` (v) | **--** | `HMAC-RMD160` (v) |  |
-| HMAC-RIPEMD320 (key = $salt) | `33660` (v) | **--** | `HMAC-RMD320` (v) |  |
-| HMAC-RMD160-KPASS | `6050` (v) | **--** | `HMAC-RMD160-KPASS` (v) |  |
-| HMAC-RMD320-KPASS | `33650` (v) | **--** | `HMAC-RMD320-KPASS` (v) |  |
+| HMAC-MD5-KPASS | `50` (v) | no | `HMAC-MD5-KPASS` (v) |  |
+| HMAC-RIPEMD160 (key = $salt) | `6060` (v) | no | `HMAC-RMD160` (v) |  |
+| HMAC-RIPEMD320 (key = $salt) | `33660` (v) | no | `HMAC-RMD320` (v) |  |
+| HMAC-RMD160-KPASS | `6050` (v) | no | `HMAC-RMD160-KPASS` (v) |  |
+| HMAC-RMD320-KPASS | `33650` (v) | no | `HMAC-RMD320-KPASS` (v) |  |
 | HMAC-SHA1 | **--** | `HMAC-SHA1` (v) | **--** | same as hmac-sha1-kpass (naming) |
-| HMAC-SHA1-KPASS | `150` (v) | **--** | `HMAC-SHA1-KPASS` (v) | same as hmac-sha1 (naming) |
+| HMAC-SHA1-KPASS | `150` (v) | no | `HMAC-SHA1-KPASS` (v) | same as hmac-sha1 (naming) |
 | HMAC-SHA224 | **--** | `HMAC-SHA224` (v) | **--** | same as hmac-sha224-kpass (naming) |
-| HMAC-SHA224-KPASS | no | **--** | `HMAC-SHA224-KPASS` (v) | same as hmac-sha224 (naming) |
-| HMAC-SHA256 (key = $salt) | `1460` (v) | **--** | `HMAC-SHA256` (v) |  |
-| HMAC-SHA256-KPASS | `1450` (v) | **--** | `HMAC-SHA256-KPASS` (v) |  |
+| HMAC-SHA224-KPASS | no | no | `HMAC-SHA224-KPASS` (v) | same as hmac-sha224 (naming) |
+| HMAC-SHA256 (key = $salt) | `1460` (v) | no | `HMAC-SHA256` (v) |  |
+| HMAC-SHA256-KPASS | `1450` (v) | no | `HMAC-SHA256-KPASS` (v) |  |
 | HMAC-SHA384 | **--** | `HMAC-SHA384` (v) | **--** | same as hmac-sha384-kpass (naming) |
 | HMAC-SHA384 | no | **--** | `HMAC-SHA384` (v) |  |
-| HMAC-SHA384-KPASS | no | **--** | `HMAC-SHA384-KPASS` (v) | same as hmac-sha384-johnhmac-sha384 (naming) |
+| HMAC-SHA384-KPASS | no | no | `HMAC-SHA384-KPASS` (v) | same as hmac-sha384-johnhmac-sha384 (naming) |
 | HMAC-SHA512 | **--** | `HMAC-SHA512` (v) | **--** | same as hmac-sha512-kpass (naming) |
-| HMAC-SHA512 (key = $salt) | `1760` (v) | **--** | `HMAC-SHA512` (v) |  |
-| HMAC-SHA512-KPASS | `1750` (v) | **--** | `HMAC-SHA512-KPASS` (v) | same as hmac-sha512 (naming) |
-| HMAC-STREEBOG256 | `11760` (v) | **--** | `HMAC-STREEBOG256` (v) |  |
-| HMAC-STREEBOG256-KPASS | `11750` (v) | **--** | `HMAC-STREEBOG256-KPASS` (v) |  |
-| HMAC-STREEBOG512 | `11860` (v) | **--** | `HMAC-STREEBOG512` (v) |  |
-| HMAC-STREEBOG512-KPASS | `11850` (v) | **--** | `HMAC-STREEBOG512-KPASS` (v) |  |
+| HMAC-SHA512 (key = $salt) | `1760` (v) | no | `HMAC-SHA512` (v) |  |
+| HMAC-SHA512-KPASS | `1750` (v) | no | `HMAC-SHA512-KPASS` (v) | same as hmac-sha512 (naming) |
+| HMAC-STREEBOG256 | `11760` (v) | no | `HMAC-STREEBOG256` (v) |  |
+| HMAC-STREEBOG256-KPASS | `11750` (v) | no | `HMAC-STREEBOG256-KPASS` (v) |  |
+| HMAC-STREEBOG512 | `11860` (v) | no | `HMAC-STREEBOG512` (v) |  |
+| HMAC-STREEBOG512-KPASS | `11850` (v) | no | `HMAC-STREEBOG512-KPASS` (v) |  |
 | HMAILSERVER | `1421` (v) | `hMailServer` (v) | `HMAILSERVER` (v) |  |
 | HTTP Digest access authentication | **--** | `hdaa` (v) | no |  |
-| Huawei sha1(md5($pass).$salt) | `4711` (v) | **--** | `SHA1MD5PASS-SALT`<br>`SHA1MD5SALT` (v) | same as sha1-md5-pass-salt (application) |
+| Huawei sha1(md5($pass).$salt) | `4711` (v) | no | `SHA1MD5PASS-SALT`<br>`SHA1MD5SALT` (v) | same as sha1-md5-pass-salt (application) |
 | IBM/Toshiba 4690 | **--** | `adxcrypt` (v) | no |  |
 | IKEPSK-MD5 | `5300` (v) | **--** | `IKEPSK-MD5` (v) |  |
 | IKEPSK-SHA1 | `5400` (v) | **--** | `IKEPSK-SHA1` (v) |  |
@@ -425,24 +425,24 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | IPMI 2.0 RAKP (RMCP+) | **--** | `RAKP-SHA1`<br>`RAKP-SHA1-opencl` (v) | no |  |
 | IPMI 2.0 RAKP (RMCP+) | **--** | `RAKP-SHA256`<br>`RAKP-SHA256-opencl` (v) | no |  |
 | IPMI 2.0 RAKP (RMCP+) | **--** | `RAKP-MD5`<br>`RAKP-MD5-opencl` (v) | no |  |
-| IPMI2-MD5 | `7350` (v) | **--** | `IPMI2-MD5` (v) |  |
+| IPMI2-MD5 | `7350` (v) | no | `IPMI2-MD5` (v) |  |
 | IPMI2-SHA1 | `7300` (v) | **--** | `IPMI2-SHA1` (v) |  |
 | IPsec AH HMAC-MD5-96 | **--** | `net-ah` (v) | no |  |
 | iSCSI CHAP authentication / EAP-MD5 | **--** | `chap` (v) | no |  |
 | ISCSI-CHAP | `4800` (v) | **--** | `ISCSI-CHAP` (v) |  |
 | iTunes backup < 10.0 | `14700` (v) | `itunes-backup` (v) | no |  |
 | iTunes backup >= 10.0 | `14800` (v) | `itunes-backup` (v) | no |  |
-| Java KeyStore | **--** | `keystore` | **--** |  |
+| Java KeyStore | **--** | `keystore` (v) | **--** |  |
 | Java Object hashCode() | `18700` (v) | **--** | no |  |
 | Jetico BestCrypt (.jbc) | **--** | `BestCrypt` (v) | no |  |
-| JH224 | no | **--** | `JH224` (v) |  |
-| JH256 | no | **--** | `JH256` (v) |  |
-| JH384 | no | **--** | `JH384` (v) |  |
-| JH512 | no | **--** | `JH512` (v) |  |
+| JH224 | no | no | `JH224` (v) |  |
+| JH256 | no | no | `JH256` (v) |  |
+| JH384 | no | no | `JH384` (v) |  |
+| JH512 | no | no | `JH512` (v) |  |
 | JKS Java Key Store Private Keys (SHA1) | `15500` (v) | **--** | no |  |
 | Joomla | `11` (v) | `dynamic_1`<br>`dynamic_1014`<br>`dynamic_1016`<br>`dynamic_2001` (v) | `MD5PASSSALT` (v) | same as md5-pass-salt (application) |
 | JUNIPERIVE | `501` (v) | **--** | `JUNIPERIVE` (v) |  |
-| JUNIPERSSG | `22` (v) | **--** | `JUNIPERSSG` (v) |  |
+| JUNIPERSSG | `22` (v) | no | `JUNIPERSSG` (v) |  |
 | JWT | `16500` (v) | `HMAC-SHA256` (v) | `JWT` (v) |  |
 | KDE KWallet | **--** | `kwallet` (v) | no |  |
 | KECCAK224 | `17700` (v) | `dynamic_430` (v) | `KECCAK224` (v) |  |
@@ -454,7 +454,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | KECCAK512 | `18000` (v) | `dynamic_420` (v) | `KECCAK512` (v) |  |
 | KECCAK512 (2 iterations) | no | `dynamic_423` (v) | `KECCAK512 -i2` (v) |  |
 | KeePass (KDBX v2/v3) | `13400` (v) | `KeePass`<br>`KeePass-opencl` (v) | no |  |
-| KeePass (KDBX v2/v3) - keyfile only | `29700` (v) | **--** | no |  |
+| KeePass (KDBX v2/v3) - keyfile only | `29700` (v) | no | no |  |
 | KeePass AESKDF (KDBX v4) | `34301` (v) | `KeePass`<br>`KeePass-opencl` (v) | no |  |
 | KeePass Argon2 (KDBX v4) | `34300` (v) | `KeePass`<br>`KeePass-Argon2-opencl` (v) | no |  |
 | Keplr Wallet | **--** | `keplr` (v) | no |  |
@@ -485,17 +485,17 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | LastPass CLI | **--** | `lpcli`<br>`lpcli-opencl` (v) | no |  |
 | LastPass offline | **--** | `lp`<br>`lp-opencl` (v) | no |  |
 | leet | **--** | `leet` (v) | no |  |
-| LEET-SHA512-WRL-USER | no | **--** | `LEET-SHA512-WRL-USER` (v) |  |
+| LEET-SHA512-WRL-USER | no | no | `LEET-SHA512-WRL-USER` (v) |  |
 | Linux Kernel Crypto API (2.4) | `14500` (v) | **--** | no |  |
-| LM | `3000` (v) | `LM`<br>`LM-opencl` | `LM` (v) |  |
-| LM C/R | **--** | `netlm` | **--** |  |
+| LM | `3000` (v) | `LM`<br>`LM-opencl` (v) | `LM` (v) |  |
+| LM C/R | **--** | `netlm` (v) | **--** |  |
 | Lotus Notes/Domino 5 | `8600` (v) | `lotus5`<br>`lotus5-opencl` (v) | `DOMINO5` (v) |  |
 | Lotus Notes/Domino 8.5 | **--** | `lotus85` (v) | **--** |  |
-| LUFFA224 | no | **--** | `LUFFA224` (v) |  |
-| LUFFA256 | no | **--** | `LUFFA256` (v) |  |
-| LUFFA384 | no | **--** | `LUFFA384` (v) |  |
-| LUFFA512 | no | **--** | `LUFFA512` (v) |  |
-| LUKS | **--** | `LUKS` | **--** |  |
+| LUFFA224 | no | no | `LUFFA224` (v) |  |
+| LUFFA256 | no | no | `LUFFA256` (v) |  |
+| LUFFA384 | no | no | `LUFFA384` (v) |  |
+| LUFFA512 | no | no | `LUFFA512` (v) |  |
+| LUKS | **--** | `LUKS` (v) | **--** |  |
 | LUKS v1 RIPEMD-160 + AES | `29541` (v) | **--** | no |  |
 | LUKS v1 RIPEMD-160 + Serpent | `29542` (v) | **--** | no |  |
 | LUKS v1 RIPEMD-160 + Twofish | `29543` (v) | **--** | no |  |
@@ -511,289 +511,289 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | LUKS v2 argon2 + SHA-256 + AES | `34100` (v) | **--** | no |  |
 | Mac OS X 10.4 - 10.6 | `122` (v) | `xsha` (v) | `MACOSX` (v) |  |
 | macOS v10.8+ (PBKDF2-SHA512) | `7100` (v) | `PBKDF2-HMAC-SHA512`<br>`PBKDF2-HMAC-SHA512-opencl` (v) | `PBKDF2-SHA512` (v) |  |
-| MACOSX | `122` (v) | **--** | `MACOSX` (v) |  |
+| MACOSX | `122` (v) | no | `MACOSX` (v) |  |
 | MACOSX7 | `1722` (v) | `xsha512`<br>`XSHA512-opencl`<br>`XSHA512-free-opencl` (v) | `MACOSX7` (v) |  |
-| MANGOS | no | **--** | `MANGOS` (v) |  |
+| MANGOS | no | no | `MANGOS` (v) |  |
 | MD2 | **--** | `MD2` (v) | `MD2` (v) |  |
 | MD2 | no | `dynamic_310` (v) | `MD2` (v) |  |
 | MD2 (2 iterations) | no | `dynamic_313` (v) | `MD2 -i2` (v) |  |
-| md2(md5($plain)) | no | **--** | `MD2MD5` (v) |  |
-| md2(md5($plain).$plain) | no | **--** | `MD2MD5PASS` (v) |  |
+| md2(md5($plain)) | no | no | `MD2MD5` (v) |  |
+| md2(md5($plain).$plain) | no | no | `MD2MD5PASS` (v) |  |
 | MD4 | `900` (v) | `Raw-MD4`<br>`dynamic_30`<br>`raw-MD4-opencl` (v) | `MD4` (v) |  |
-| md4(descrypt($plain)) | no | **--** | `MD4DESCRYPT` (v) |  |
-| md4(md5($plain)) | no | **--** | `MD4MD5` (v) |  |
-| md4(md5($plain).$plain) | no | **--** | `MD4MD5PASS` (v) |  |
-| md4(mysql3($plain)) | no | **--** | `MD4SQL3` (v) |  |
-| md4(sha1(md5($plain))) | no | **--** | `MD4SHA1MD5` (v) |  |
+| md4(descrypt($plain)) | no | no | `MD4DESCRYPT` (v) |  |
+| md4(md5($plain)) | no | no | `MD4MD5` (v) |  |
+| md4(md5($plain).$plain) | no | no | `MD4MD5PASS` (v) |  |
+| md4(mysql3($plain)) | no | no | `MD4SQL3` (v) |  |
+| md4(sha1(md5($plain))) | no | no | `MD4SHA1MD5` (v) |  |
 | md4(utf16($plain)) | `1000` (v) | `NT`<br>`NT-long`<br>`dynamic_33`<br>`NT-long-opencl`<br>`NT-opencl` (v) | `MD4UTF16`<br>`NTLM` (v) | duplicate of ntlm-plain-md4-utf16-le-plain; same as md4-utf16-le-utf-8-plain (naming); same as ntlmh (naming) |
-| md4(utf16(md5($plain))) | no | **--** | `MD4UTF16MD5` (v) |  |
+| md4(utf16(md5($plain))) | no | no | `MD4UTF16MD5` (v) |  |
 | md4(utf16-le(utf-8($plain))) | `1000` (v) | `NT`<br>`NT-long`<br>`dynamic_33`<br>`NT-long-opencl`<br>`NT-opencl` (v) | `MD4UTF16`<br>`MD4UTF16UC`<br>`NTLM`<br>`NTLMH` (v) | same as md4-utf16-plain (naming); same as ntlmh (naming) |
-| MD4UTF16-2xMD5 | no | **--** | `MD4UTF16-2xMD5` (v) |  |
-| MD4UTF16BASE64 | no | **--** | `MD4UTF16BASE64` (v) |  |
-| MD4UTF16BASE64SHA256 | no | **--** | `MD4UTF16BASE64SHA256` (v) |  |
-| MD4UTF16DESCRYPT | no | **--** | `MD4UTF16DESCRYPT` (v) |  |
-| MD4UTF16MD5MD5 | no | **--** | `MD4UTF16MD5MD5` (v) |  |
-| MD4UTF16MD5MD5MD5 | no | **--** | `MD4UTF16MD5MD5MD5` (v) |  |
-| MD4UTF16MD5MD5MD5MD5 | no | **--** | `MD4UTF16MD5MD5MD5MD5` (v) |  |
-| MD4UTF16MD5MD5PASSMD5SALT | no | **--** | `MD4UTF16MD5MD5PASSMD5SALT` (v) |  |
-| MD4UTF16MD5PASSMD5SALT | no | **--** | `MD4UTF16MD5PASSMD5SALT` (v) |  |
-| MD4UTF16MD5PASSMD5SHA1PASS | no | **--** | `MD4UTF16MD5PASSMD5SHA1PASS` (v) |  |
-| MD4UTF16MD5PASSMD5SHA1SALT | no | **--** | `MD4UTF16MD5PASSMD5SHA1SALT` (v) |  |
-| MD4UTF16MD5SHA1 | no | **--** | `MD4UTF16MD5SHA1` (v) |  |
-| MD4UTF16MD5UC | no | **--** | `MD4UTF16MD5UC` (v) |  |
-| MD4UTF16MD5x | no | **--** | `MD4UTF16MD5x` (v) |  |
-| MD4UTF16revBASE64x | no | **--** | `MD4UTF16revBASE64x` (v) |  |
-| MD4UTF16SHA1 | no | **--** | `MD4UTF16SHA1` (v) |  |
-| MD4UTF16SHA1MD5 | no | **--** | `MD4UTF16SHA1MD5` (v) |  |
-| MD4UTF16SHA1SHA1 | no | **--** | `MD4UTF16SHA1SHA1` (v) |  |
-| MD4UTF16SHA1UC | no | **--** | `MD4UTF16SHA1UC` (v) |  |
-| MD4UTF16SHA1x | no | **--** | `MD4UTF16SHA1x` (v) |  |
-| MD4UTF16SHA256 | no | **--** | `MD4UTF16SHA256` (v) |  |
-| MD4UTF16SHA256MD5 | no | **--** | `MD4UTF16SHA256MD5` (v) |  |
-| MD4UTF16SHA256SHA1 | no | **--** | `MD4UTF16SHA256SHA1` (v) |  |
-| MD4UTF16SHA256SHA256 | no | **--** | `MD4UTF16SHA256SHA256` (v) |  |
-| MD4UTF16SHA256SHA256SHA256 | no | **--** | `MD4UTF16SHA256SHA256SHA256` (v) |  |
-| MD4UTF16SHA256SHA256SHA256SHA256 | no | **--** | `MD4UTF16SHA256SHA256SHA256SHA256` (v) |  |
-| MD4UTF16SHA256SHA256SHA256SHA256SHA256 | no | **--** | `MD4UTF16SHA256SHA256SHA256SHA256SHA256` (v) |  |
-| MD4UTF16SHA256UC | no | **--** | `MD4UTF16SHA256UC` (v) |  |
-| MD4UTF16SHA256x | no | **--** | `MD4UTF16SHA256x` (v) |  |
-| MD4UTF16SQL3 | no | **--** | `MD4UTF16SQL3` (v) |  |
+| MD4UTF16-2xMD5 | no | no | `MD4UTF16-2xMD5` (v) |  |
+| MD4UTF16BASE64 | no | no | `MD4UTF16BASE64` (v) |  |
+| MD4UTF16BASE64SHA256 | no | no | `MD4UTF16BASE64SHA256` (v) |  |
+| MD4UTF16DESCRYPT | no | no | `MD4UTF16DESCRYPT` (v) |  |
+| MD4UTF16MD5MD5 | no | no | `MD4UTF16MD5MD5` (v) |  |
+| MD4UTF16MD5MD5MD5 | no | no | `MD4UTF16MD5MD5MD5` (v) |  |
+| MD4UTF16MD5MD5MD5MD5 | no | no | `MD4UTF16MD5MD5MD5MD5` (v) |  |
+| MD4UTF16MD5MD5PASSMD5SALT | no | no | `MD4UTF16MD5MD5PASSMD5SALT` (v) |  |
+| MD4UTF16MD5PASSMD5SALT | no | no | `MD4UTF16MD5PASSMD5SALT` (v) |  |
+| MD4UTF16MD5PASSMD5SHA1PASS | no | no | `MD4UTF16MD5PASSMD5SHA1PASS` (v) |  |
+| MD4UTF16MD5PASSMD5SHA1SALT | no | no | `MD4UTF16MD5PASSMD5SHA1SALT` (v) |  |
+| MD4UTF16MD5SHA1 | no | no | `MD4UTF16MD5SHA1` (v) |  |
+| MD4UTF16MD5UC | no | no | `MD4UTF16MD5UC` (v) |  |
+| MD4UTF16MD5x | no | no | `MD4UTF16MD5x` (v) |  |
+| MD4UTF16revBASE64x | no | no | `MD4UTF16revBASE64x` (v) |  |
+| MD4UTF16SHA1 | no | no | `MD4UTF16SHA1` (v) |  |
+| MD4UTF16SHA1MD5 | no | no | `MD4UTF16SHA1MD5` (v) |  |
+| MD4UTF16SHA1SHA1 | no | no | `MD4UTF16SHA1SHA1` (v) |  |
+| MD4UTF16SHA1UC | no | no | `MD4UTF16SHA1UC` (v) |  |
+| MD4UTF16SHA1x | no | no | `MD4UTF16SHA1x` (v) |  |
+| MD4UTF16SHA256 | no | no | `MD4UTF16SHA256` (v) |  |
+| MD4UTF16SHA256MD5 | no | no | `MD4UTF16SHA256MD5` (v) |  |
+| MD4UTF16SHA256SHA1 | no | no | `MD4UTF16SHA256SHA1` (v) |  |
+| MD4UTF16SHA256SHA256 | no | no | `MD4UTF16SHA256SHA256` (v) |  |
+| MD4UTF16SHA256SHA256SHA256 | no | no | `MD4UTF16SHA256SHA256SHA256` (v) |  |
+| MD4UTF16SHA256SHA256SHA256SHA256 | no | no | `MD4UTF16SHA256SHA256SHA256SHA256` (v) |  |
+| MD4UTF16SHA256SHA256SHA256SHA256SHA256 | no | no | `MD4UTF16SHA256SHA256SHA256SHA256SHA256` (v) |  |
+| MD4UTF16SHA256UC | no | no | `MD4UTF16SHA256UC` (v) |  |
+| MD4UTF16SHA256x | no | no | `MD4UTF16SHA256x` (v) |  |
+| MD4UTF16SQL3 | no | no | `MD4UTF16SQL3` (v) |  |
 | MD4UTF16UC | `1000` (v) | `NT`<br>`NT-long`<br>`dynamic_33`<br>`NT-long-opencl`<br>`NT-opencl` (v) | `MD4UTF16UC` (v) |  |
 | MD5 | `0` (v) | `Raw-MD5`<br>`dynamic_0`<br>`raw-MD5-opencl` (v) | `MD5` (v) | collides with md5cap (encoding); encoding of md5cdab-order-of-32bit-values (encoding); encoding of md5uc (encoding) |
-| md5( md5($pass) . $pass . sha1($pass) ) | no | **--** | `MD5MD5PASSSHA1` (v) |  |
-| md5("*".mysql5($plain)) | no | **--** | `MD5SQL5` (v) |  |
-| md5("*".mysql5(md5($plain))) | no | **--** | `MD5SQL5MD5` (v) |  |
-| md5("*".substr(mysql5($plain), 0, 39)) | no | **--** | `MD5SQL5-chop40` (v) |  |
-| md5("1*".substr(mysql5($plain),0,30)) | no | **--** | `MD5SQL5-32` (v) |  |
+| md5( md5($pass) . $pass . sha1($pass) ) | no | no | `MD5MD5PASSSHA1` (v) |  |
+| md5("*".mysql5($plain)) | no | no | `MD5SQL5` (v) |  |
+| md5("*".mysql5(md5($plain))) | no | no | `MD5SQL5MD5` (v) |  |
+| md5("*".substr(mysql5($plain), 0, 39)) | no | no | `MD5SQL5-chop40` (v) |  |
+| md5("1*".substr(mysql5($plain),0,30)) | no | no | `MD5SQL5-32` (v) |  |
 | md5($pass.$salt) | `10` (v) | `dynamic_1`<br>`dynamic_1014`<br>`dynamic_1016`<br>`dynamic_2001` (v) | `MD5PASSSALT` (v) | same as ciscoasa (application); same as joomla (application) |
 | md5($pass.md5($salt)) | no | `dynamic_1011`<br>`dynamic_1012` (v) | `MD5-PASS-MD5SALT` (v) | collides with md5-plain-md5-plain (salt-convention) |
-| md5($plain.$md5(md5(md5($plain)))) | no | **--** | `MD5PASSMD5MD5MD5` (v) |  |
-| md5($plain.md5($plain)) | no | **--** | `MD5PASSMD5` (v) | collides with md5-pass-md5-salt (salt-convention) |
-| md5($plain.md5(md5($plain))) | no | **--** | `MD5PASSMD5MD5PASS` (v) |  |
-| md5($plain.sha1(md5($plain)))) | no | **--** | `MD5PASSSHA1MD5` (v) |  |
+| md5($plain.$md5(md5(md5($plain)))) | no | no | `MD5PASSMD5MD5MD5` (v) |  |
+| md5($plain.md5($plain)) | no | no | `MD5PASSMD5` (v) | collides with md5-pass-md5-salt (salt-convention) |
+| md5($plain.md5(md5($plain))) | no | no | `MD5PASSMD5MD5PASS` (v) |  |
+| md5($plain.sha1(md5($plain)))) | no | no | `MD5PASSSHA1MD5` (v) |  |
 | md5($salt.$pass) | `20` (v) | `dynamic_1009`<br>`dynamic_1017`<br>`dynamic_2004`<br>`dynamic_4` (v) | `MD5SALTPASS` (v) | same as oscommerce-xt-commerce (application); same as solarwinds-serv-u (application) |
 | md5($salt.$pass.$salt) | `3800` (v) | `dynamic_2005`<br>`dynamic_5` (v) | `MD5SALTPASSSALT` (v) |  |
-| md5($salt.$salt.strtoupper(md5($plain))) | no | **--** | `MD51SALTMD5UC` (v) |  |
+| md5($salt.$salt.strtoupper(md5($plain))) | no | no | `MD51SALTMD5UC` (v) |  |
 | md5($salt.md5($pass)) | `3710` (v) | `dynamic_2009`<br>`dynamic_9` (v) | `MD5SALTMD5PASS` (v) | same as md5-userid-md5-plain (salt-convention) |
 | md5($salt.md5($pass.$salt)) | `4110` (v) | `dynamic_11`<br>`dynamic_2011` (v) | `MD5-SALTMD5PASSSALT` (v) | same as md5-saltmd5passsalt (naming) |
 | md5($salt.md5($salt.$pass)) | `4010` (v) | `dynamic_10`<br>`dynamic_2010` (v) | `MD5-SALTMD5SALTPASS` (v) |  |
-| md5($salt.<br>md5(md5($salt.$plain).$salt).<br>$salt) | no | **--** | `MD5-MULTISALT` (v) |  |
-| md5($salt.sha1($salt.$plain)) | `21300` (v) | **--** | `MD5-SALTSHA1SALTPASS` (v) |  |
-| md5($user."\0".$plain) | no | **--** | `MD5USERnulPASS` (v) |  |
+| md5($salt.<br>md5(md5($salt.$plain).$salt).<br>$salt) | no | no | `MD5-MULTISALT` (v) |  |
+| md5($salt.sha1($salt.$plain)) | `21300` (v) | no | `MD5-SALTSHA1SALTPASS` (v) |  |
+| md5($user."\0".$plain) | no | no | `MD5USERnulPASS` (v) |  |
 | md5($userid.md5($plain)) | `3710` (v) | `dynamic_2009`<br>`dynamic_9` (v) | `MD5USERIDMD5` (v) | same as md5-salt-md5-pass (salt-convention) |
-| md5($userid.md5(md5($plain))) | no | **--** | `MD5USERIDMD5MD5` (v) |  |
-| md5(base64(raw_sha256)) ? | no | **--** | `MD5BASE64SHA256RAW` (v) |  |
-| md5(base64_decode($plain)) | no | **--** | `MD5DECBASE64` (v) |  |
-| md5(base64_encode($plain)) | no | **--** | `MD5BASE64` (v) |  |
-| md5(base64_encode(md5($plain))) | no | **--** | `MD5BASE64MD5` (v) |  |
-| md5(base64_encode(md5($plain, true))) | no | **--** | `MD5BASE64MD5RAW` (v) |  |
-| md5(base64_encode(md5(md5($plain)))) | no | **--** | `MD5BASE64MD5MD5` (v) |  |
-| md5(base64_encode(md5(md5($plain), true))) | no | **--** | `MD5BASE64MD5RAWMD5` (v) |  |
-| md5(base64_encode(md5(md5(md5($plain), true)))) | no | **--** | `MD5BASE64MD5RAWMD5MD5` (v) |  |
-| md5(base64_encode(md5(sha1($plain), true))) | no | **--** | `MD5BASE64MD5RAWSHA1` (v) |  |
-| md5(base64_encode(sha1($plain, true))) | no | **--** | `MD5BASE64SHA1RAW` (v) |  |
-| md5(base64_encode(sha1(base64_encode(sha1($plain, true)), true))) | no | **--** | `MD5BASE64SHA1RAWBASE64SHA1RAW` (v) |  |
-| md5(base64_encode(sha1(md5($plain), true))) | no | **--** | `MD5BASE64SHA1RAWMD5` (v) |  |
-| md5(base64_encode(str_rot13($plain))) | no | **--** | `MD5BASE64ROT13` (v) |  |
-| md5(base64_encode(strrev(md5($plain)))) | no | **--** | `MD5BASE64revMD5` (v) |  |
+| md5($userid.md5(md5($plain))) | no | no | `MD5USERIDMD5MD5` (v) |  |
+| md5(base64(raw_sha256)) ? | no | no | `MD5BASE64SHA256RAW` (v) |  |
+| md5(base64_decode($plain)) | no | no | `MD5DECBASE64` (v) |  |
+| md5(base64_encode($plain)) | no | no | `MD5BASE64` (v) |  |
+| md5(base64_encode(md5($plain))) | no | no | `MD5BASE64MD5` (v) |  |
+| md5(base64_encode(md5($plain, true))) | no | no | `MD5BASE64MD5RAW` (v) |  |
+| md5(base64_encode(md5(md5($plain)))) | no | no | `MD5BASE64MD5MD5` (v) |  |
+| md5(base64_encode(md5(md5($plain), true))) | no | no | `MD5BASE64MD5RAWMD5` (v) |  |
+| md5(base64_encode(md5(md5(md5($plain), true)))) | no | no | `MD5BASE64MD5RAWMD5MD5` (v) |  |
+| md5(base64_encode(md5(sha1($plain), true))) | no | no | `MD5BASE64MD5RAWSHA1` (v) |  |
+| md5(base64_encode(sha1($plain, true))) | no | no | `MD5BASE64SHA1RAW` (v) |  |
+| md5(base64_encode(sha1(base64_encode(sha1($plain, true)), true))) | no | no | `MD5BASE64SHA1RAWBASE64SHA1RAW` (v) |  |
+| md5(base64_encode(sha1(md5($plain), true))) | no | no | `MD5BASE64SHA1RAWMD5` (v) |  |
+| md5(base64_encode(str_rot13($plain))) | no | no | `MD5BASE64ROT13` (v) |  |
+| md5(base64_encode(strrev(md5($plain)))) | no | no | `MD5BASE64revMD5` (v) |  |
 | md5(cap(md5($plain)).":".$username) | no | no | `MD5CAPMD5USER` (v) | collides with md5-md5-plain-salt-3 (encoding) |
-| md5(cut8-16(md5($plain))) | no | **--** | `MD5sub8-24MD5` (v) |  |
-| md5(descrypt($plain)) | no | **--** | `MD5DESCRYPT` (v) |  |
-| md5(gost($plain)) | no | **--** | `MD5GOST` (v) |  |
-| md5(gost(md5($plain))) | no | **--** | `MD5GOSTMD5` (v) |  |
-| md5(haval160_3($plain)) | no | **--** | `MD5HAV160-3` (v) |  |
-| md5(hesk($plain)) ? | no | **--** | `MD5HESK` (v) |  |
-| md5(lm($plain)) | no | **--** | `MD5LM` (v) |  |
-| md5(lm($plain).ntlm($plain)) | no | **--** | `MD5-LMNTLM` (v) |  |
-| md5(md2($plain)) | no | **--** | `MD5MD2` (v) |  |
+| md5(cut8-16(md5($plain))) | no | no | `MD5sub8-24MD5` (v) |  |
+| md5(descrypt($plain)) | no | no | `MD5DESCRYPT` (v) |  |
+| md5(gost($plain)) | no | no | `MD5GOST` (v) |  |
+| md5(gost(md5($plain))) | no | no | `MD5GOSTMD5` (v) |  |
+| md5(haval160_3($plain)) | no | no | `MD5HAV160-3` (v) |  |
+| md5(hesk($plain)) ? | no | no | `MD5HESK` (v) |  |
+| md5(lm($plain)) | no | no | `MD5LM` (v) |  |
+| md5(lm($plain).ntlm($plain)) | no | no | `MD5-LMNTLM` (v) |  |
+| md5(md2($plain)) | no | no | `MD5MD2` (v) |  |
 | md5(md4($plain)) | no | `dynamic_34` (v) | `MD5MD4` (v) |  |
 | md5(md5($pass)) | `2600` (v) | `dynamic_2` (v) | `MD5 -i2` (v) |  |
 | md5(md5($pass).$salt) | `2611`<br>`2711` | `dynamic_1007`<br>`dynamic_2006`<br>`dynamic_6` (v) | `MD5-MD5PASS-SALT` (v) | same as vbulletin-v3-8-5 (application) |
 | md5(md5($pass).md5($salt)) | `3910` (v) | `dynamic_13` (v) | `MD5-MD5PASSMD5SALT` (v) |  |
-| md5(md5($pass.$salt)) | `2630` (v) | **--** | `MD5PASSSALT -i2` (v) |  |
+| md5(md5($pass.$salt)) | `2630` (v) | no | `MD5PASSSALT -i2` (v) |  |
 | md5(md5($plain).":".$username) | no | no | `MD5MD5USER` (v) | collides with md5-capitalise-md5-plain-username (encoding) |
-| md5(md5($plain).$plain) | no | **--** | `MD5MD5PASS` (v) |  |
-| md5(md5($plain).$plain.md5($plain)) | no | **--** | `MD5-MD5PASSMD5` (v) |  |
+| md5(md5($plain).$plain) | no | no | `MD5MD5PASS` (v) |  |
+| md5(md5($plain).$plain.md5($plain)) | no | no | `MD5-MD5PASSMD5` (v) |  |
 | md5(md5($plain).$salt) | no | **--** | `MD52SALTMD5` (v) |  |
 | md5(md5($plain).$salt) | no | **--** | `MD51SALTMD5` (v) |  |
 | md5(md5($plain).md5($plain)) | no | `dynamic_1003` (v) | `MD5-2xMD5` (v) |  |
-| md5(md5($plain).md5($plain).md5($plain)) | no | **--** | `MD5-3xMD5` (v) |  |
-| md5(md5($plain).md5(md5($plain))) | no | **--** | `MD5-DBL-PASS` (v) |  |
-| md5(md5($plain).sha1($plain)) | no | **--** | `MD5-1xMD5SHA1` (v) |  |
+| md5(md5($plain).md5($plain).md5($plain)) | no | no | `MD5-3xMD5` (v) |  |
+| md5(md5($plain).md5(md5($plain))) | no | no | `MD5-DBL-PASS` (v) |  |
+| md5(md5($plain).sha1($plain)) | no | no | `MD5-1xMD5SHA1` (v) |  |
 | md5(md5($plain, true)) | no | `dynamic_1300` (v) | `MD5RAW -i2` (v) |  |
 | md5(md5($salt).$pass) | no | `dynamic_2008`<br>`dynamic_8` (v) | `MD5-MD5SALT-PASS` (v) |  |
 | md5(md5($salt.$plain).":".$salt) | no | `dynamic_1350` (v) | `MD5HEXSALT` (v) |  |
 | md5(md5(md5($pass))) | `3500` (v) | `dynamic_3` (v) | `MD5 -i3` (v) |  |
-| md5(md5(md5($plain)).$salt) | `3610` (v) | **--** | `MD5MD5SALT` (v) |  |
-| md5(md5(md5($plain)).$salt) | `3610` (v) | **--** | `MD52SALTMD5MD5` (v) |  |
-| md5(md5(md5($plain)).$salt) | `3610` (v) | **--** | `MD51SALTMD5MD5` (v) |  |
-| md5(md5(md5($plain)).md5(md5($plain))) | no | **--** | `MD5-2xMD5-MD5` (v) |  |
-| md5(md5(md5($plain)).<br>md5(md5($plain)).<br>md5(md5($plain))) | no | **--** | `MD5-3xMD5-MD5` (v) |  |
-| md5(md5(md5($plain)).sha1(md5($plain))) | no | **--** | `MD5-1xMD5SHA1-MD5` (v) |  |
+| md5(md5(md5($plain)).$salt) | `3610` (v) | no | `MD5MD5SALT` (v) |  |
+| md5(md5(md5($plain)).$salt) | `3610` (v) | no | `MD52SALTMD5MD5` (v) |  |
+| md5(md5(md5($plain)).$salt) | `3610` (v) | no | `MD51SALTMD5MD5` (v) |  |
+| md5(md5(md5($plain)).md5(md5($plain))) | no | no | `MD5-2xMD5-MD5` (v) |  |
+| md5(md5(md5($plain)).<br>md5(md5($plain)).<br>md5(md5($plain))) | no | no | `MD5-3xMD5-MD5` (v) |  |
+| md5(md5(md5($plain)).sha1(md5($plain))) | no | no | `MD5-1xMD5SHA1-MD5` (v) |  |
 | md5(md5(md5($plain).$salt1).$salt2) | `31700` (v) | **--** | `MD5-MD5MD5PASSSALT-PEP` (v) |  |
 | md5(md5(md5(md5($pass)))) | no | `dynamic_1001` (v) | `MD5 -i4` (v) |  |
-| md5(md5(md5(md5($plain))).$salt) | no | **--** | `MD52SALTMD5MD5MD5` (v) |  |
-| md5(md5(md5(md5($plain))).$salt) | no | **--** | `MD51SALTMD5MD5MD5` (v) |  |
-| md5(md5(md5(md5($plain))).<br>md5(md5(md5($plain)))) | no | **--** | `MD5-2xMD5-MD5MD5` (v) |  |
-| md5(md5(md5(md5($plain))).<br>md5(md5(md5($plain))).<br>md5(md5(md5($plain)))) | no | **--** | `MD5-3xMD5-MD5MD5` (v) |  |
-| md5(md5(md5(md5($plain))).<br>sha1(md5(md5($plain)))) | no | **--** | `MD5-1xMD5SHA1-MD5MD5` (v) |  |
+| md5(md5(md5(md5($plain))).$salt) | no | no | `MD52SALTMD5MD5MD5` (v) |  |
+| md5(md5(md5(md5($plain))).$salt) | no | no | `MD51SALTMD5MD5MD5` (v) |  |
+| md5(md5(md5(md5($plain))).<br>md5(md5(md5($plain)))) | no | no | `MD5-2xMD5-MD5MD5` (v) |  |
+| md5(md5(md5(md5($plain))).<br>md5(md5(md5($plain))).<br>md5(md5(md5($plain)))) | no | no | `MD5-3xMD5-MD5MD5` (v) |  |
+| md5(md5(md5(md5($plain))).<br>sha1(md5(md5($plain)))) | no | no | `MD5-1xMD5SHA1-MD5MD5` (v) |  |
 | md5(md5(md5(md5(md5($pass))))) | no | `dynamic_1002` (v) | `MD5 -i5` (v) |  |
-| md5(md5(md5(md5(md5($plain)))).$salt) | no | **--** | `MD51SALTMD5MD5MD5MD5` (v) |  |
-| md5(md5(md5(md5(md5($plain)))).<br>md5(md5(md5(md5($plain))))) | no | **--** | `MD5-2xMD5-MD5MD5MD5` (v) |  |
-| md5(md5(md5(md5(md5($plain)))).<br>md5(md5(md5(md5($plain)))).<br>md5(md5(md5(md5($plain))))) | no | **--** | `MD5-3xMD5-MD5MD5MD5` (v) |  |
-| md5(md5(md5(md5(md5(md5($plain))))).$salt) | no | **--** | `MD51SALTMD5MD5MD5MD5MD5` (v) |  |
-| md5(md5(sha1($plain)).md5(sha1($plain))) | no | **--** | `MD5-2xMD5-SHA1` (v) |  |
-| md5(md5(sha1($plain)).<br>md5(sha1($plain)).<br>md5(sha1($plain))) | no | **--** | `MD5-3xMD5-SHA1` (v) |  |
-| md5(md5_raw(md5_raw($plain))) | no | **--** | `MD5RAWMD5RAW -i2` (v) |  |
-| md5(mysql3($plain)) | no | **--** | `MD5SQL3` (v) |  |
-| md5(ntlm($plain)) | no | **--** | `MD5NTLM` (v) |  |
+| md5(md5(md5(md5(md5($plain)))).$salt) | no | no | `MD51SALTMD5MD5MD5MD5` (v) |  |
+| md5(md5(md5(md5(md5($plain)))).<br>md5(md5(md5(md5($plain))))) | no | no | `MD5-2xMD5-MD5MD5MD5` (v) |  |
+| md5(md5(md5(md5(md5($plain)))).<br>md5(md5(md5(md5($plain)))).<br>md5(md5(md5(md5($plain))))) | no | no | `MD5-3xMD5-MD5MD5MD5` (v) |  |
+| md5(md5(md5(md5(md5(md5($plain))))).$salt) | no | no | `MD51SALTMD5MD5MD5MD5MD5` (v) |  |
+| md5(md5(sha1($plain)).md5(sha1($plain))) | no | no | `MD5-2xMD5-SHA1` (v) |  |
+| md5(md5(sha1($plain)).<br>md5(sha1($plain)).<br>md5(sha1($plain))) | no | no | `MD5-3xMD5-SHA1` (v) |  |
+| md5(md5_raw(md5_raw($plain))) | no | no | `MD5RAWMD5RAW -i2` (v) |  |
+| md5(mysql3($plain)) | no | no | `MD5SQL3` (v) |  |
+| md5(ntlm($plain)) | no | no | `MD5NTLM` (v) |  |
 | MD5(Palshop) | **--** | `Palshop` (v) | no |  |
-| md5(radmin2($plain)) | no | **--** | `MD5RADMIN2` (v) |  |
-| md5(radmin2(md5($plain))) | no | **--** | `MD5RADMIN2MD5` (v) |  |
-| md5(radmin2(sha1($plain))) | no | **--** | `MD5RADMIN2SHA1` (v) |  |
-| md5(raw_md2($plain)) | no | **--** | `MD5MD2RAW` (v) |  |
-| md5(reverse($plain)) | no | **--** | `MD5revp` (v) |  |
-| md5(reverse(md5(sha1($plain)))) | no | **--** | `MD5revMD5SHA1` (v) |  |
-| md5(reverse(md5(sha1(sha1($plain))))) | no | **--** | `MD5revMD5SHA1SHA1` (v) |  |
-| md5(ripemd160($plain)) | no | **--** | `MD5RMD160` (v) |  |
+| md5(radmin2($plain)) | no | no | `MD5RADMIN2` (v) |  |
+| md5(radmin2(md5($plain))) | no | no | `MD5RADMIN2MD5` (v) |  |
+| md5(radmin2(sha1($plain))) | no | no | `MD5RADMIN2SHA1` (v) |  |
+| md5(raw_md2($plain)) | no | no | `MD5MD2RAW` (v) |  |
+| md5(reverse($plain)) | no | no | `MD5revp` (v) |  |
+| md5(reverse(md5(sha1($plain)))) | no | no | `MD5revMD5SHA1` (v) |  |
+| md5(reverse(md5(sha1(sha1($plain))))) | no | no | `MD5revMD5SHA1SHA1` (v) |  |
+| md5(ripemd160($plain)) | no | no | `MD5RMD160` (v) |  |
 | md5(sha1($pass)) | `4400` (v) | `dynamic_22` (v) | `MD5SHA1` (v) | collides with md5capsha1 (encoding) |
 | md5(sha1($plain).md5($pass).sha1($plain)) | `20900` (v) | `dynamic_1518` (v) | `MD5SHA1PASSMD5PASSSHA1PASS` (v) |  |
-| md5(sha1($plain).md5($plain)) | no | **--** | `MD5-1xSHA1MD5` (v) |  |
-| md5(sha1($plain, true)) | no | **--** | `MD5SHA1RAW` (v) |  |
-| md5(sha1($plain.$salt)) | `4420` (v) | **--** | `MD5SHA1PASSSALT` (v) |  |
-| md5(sha1($salt).md5($plain)) | `21200` (v) | **--** | `MD5SHA1SALTMD5PASS` (v) |  |
-| md5(sha1(base64(sha1(md5($plain))))) | no | **--** | `MD5SHA1BASE64SHA1MD5` (v) |  |
-| md5(sha1(base64(sha1_raw($plain)))) | no | **--** | `MD5SHA1BASE64SHA1RAW` (v) |  |
-| md5(sha1(base64_encode($plain))) | no | **--** | `MD5SHA1BASE64` (v) |  |
-| md5(sha1(haval160_4($plain))) | no | **--** | `MD5SHA1HAV160-4` (v) |  |
+| md5(sha1($plain).md5($plain)) | no | no | `MD5-1xSHA1MD5` (v) |  |
+| md5(sha1($plain, true)) | no | no | `MD5SHA1RAW` (v) |  |
+| md5(sha1($plain.$salt)) | `4420` (v) | no | `MD5SHA1PASSSALT` (v) |  |
+| md5(sha1($salt).md5($plain)) | `21200` (v) | no | `MD5SHA1SALTMD5PASS` (v) |  |
+| md5(sha1(base64(sha1(md5($plain))))) | no | no | `MD5SHA1BASE64SHA1MD5` (v) |  |
+| md5(sha1(base64(sha1_raw($plain)))) | no | no | `MD5SHA1BASE64SHA1RAW` (v) |  |
+| md5(sha1(base64_encode($plain))) | no | no | `MD5SHA1BASE64` (v) |  |
+| md5(sha1(haval160_4($plain))) | no | no | `MD5SHA1HAV160-4` (v) |  |
 | md5(sha1(md5($plain))) | `32800` (v) | `dynamic_1020` (v) | `MD5SHA1MD5` (v) |  |
-| md5(sha1(md5($plain)).$plain) | no | **--** | `MD5SHA1MD5PASS` (v) |  |
-| md5(sha1(md5($plain)).md5(md5($plain))) | no | **--** | `MD5-1xSHA1MD5-MD5` (v) |  |
-| md5(sha1(md5($plain)).sha1($plain)) | no | **--** | `MD5-1xSHA1MD5pSHA1p` (v) |  |
-| md5(sha1(md5(base64_encode($plain)))) | no | **--** | `MD5SHA1MD5BASE64` (v) |  |
-| md5(sha1(md5(md5($plain)))) | no | **--** | `MD5SHA1MD5MD5` (v) |  |
-| md5(sha1(md5(md5($plain))).<br>md5(md5(md5($plain)))) | no | **--** | `MD5-1xSHA1MD5-MD5MD5` (v) |  |
-| md5(sha1(md5(md5(md5($plain))))) | no | **--** | `MD5SHA1MD5MD5MD5` (v) |  |
-| md5(sha1(md5(md5(md5(sha1($plain)))))) | no | **--** | `MD5SHA1MD5MD5MD5SHA1` (v) |  |
-| md5(sha1(md5(radmin2($plain)))) | no | **--** | `MD5SHA1MD5RADMIN2` (v) |  |
+| md5(sha1(md5($plain)).$plain) | no | no | `MD5SHA1MD5PASS` (v) |  |
+| md5(sha1(md5($plain)).md5(md5($plain))) | no | no | `MD5-1xSHA1MD5-MD5` (v) |  |
+| md5(sha1(md5($plain)).sha1($plain)) | no | no | `MD5-1xSHA1MD5pSHA1p` (v) |  |
+| md5(sha1(md5(base64_encode($plain)))) | no | no | `MD5SHA1MD5BASE64` (v) |  |
+| md5(sha1(md5(md5($plain)))) | no | no | `MD5SHA1MD5MD5` (v) |  |
+| md5(sha1(md5(md5($plain))).<br>md5(md5(md5($plain)))) | no | no | `MD5-1xSHA1MD5-MD5MD5` (v) |  |
+| md5(sha1(md5(md5(md5($plain))))) | no | no | `MD5SHA1MD5MD5MD5` (v) |  |
+| md5(sha1(md5(md5(md5(sha1($plain)))))) | no | no | `MD5SHA1MD5MD5MD5SHA1` (v) |  |
+| md5(sha1(md5(radmin2($plain)))) | no | no | `MD5SHA1MD5RADMIN2` (v) |  |
 | md5(sha1(md5(sha1($plain)))) | no | `dynamic_1021` (v) | `MD5SHA1MD5SHA1` (v) |  |
 | md5(sha1(md5(sha1(md5($plain))))) | no | `dynamic_1022` (v) | `MD5SHA1MD5SHA1MD5` (v) |  |
-| md5(sha1(md5(sha1(sha1($plain))))) | no | **--** | `MD5SHA1MD5SHA1SHA1` (v) |  |
+| md5(sha1(md5(sha1(sha1($plain))))) | no | no | `MD5SHA1MD5SHA1SHA1` (v) |  |
 | md5(sha1(sha1($pass))) | no | `dynamic_1018` (v) | `MD5SHA1SHA1` (v) |  |
-| md5(sha1(sha1($plain, true))) | no | **--** | `MD5SHA1SHA1RAW` (v) |  |
+| md5(sha1(sha1($plain, true))) | no | no | `MD5SHA1SHA1RAW` (v) |  |
 | md5(sha1(sha1(md5($plain)))) | no | `dynamic_1019` (v) | `MD5SHA1SHA1MD5` (v) |  |
-| md5(sha1(sha1(md5($plain)).sha1($plain))) | no | **--** | `MD5SHA1-1xSHA1MD5pSHA1p` (v) |  |
-| md5(sha1(sha256($plain))) | no | **--** | `MD5SHA1SHA256` (v) |  |
-| md5(sha256($pass)) | no | **--** | `MD5SHA256` (v) |  |
-| md5(str_reverse(md5($plain))) | no | **--** | `MD5revMD5` (v) |  |
-| md5(strrev(md5(md5($plain)))) | no | **--** | `MD5revMD5MD5` (v) |  |
-| md5(strrev(sha1($plain))) | no | **--** | `MD5revSHA1` (v) |  |
-| md5(strtoupper(md5($pass))) | `4300` (v) | **--** | `MD5MD5UC` (v) | duplicate of md5md5uc |
-| md5(strtoupper(md5($plain)).$salt) | no | **--** | `MD5UCSALT` (v) |  |
-| md5(strtoupper(md5(md5($plain)))) | no | **--** | `MD5MD5UCMD5` (v) |  |
-| md5(strtoupper(md5(md5($plain, true)))) | no | **--** | `MD5RAWUC -i2` (v) |  |
-| md5(strtoupper(sha1(md5($plain)))) | no | **--** | `MD5SHA1UCMD5` (v) |  |
-| md5(strtoupper(sha1(sha1($plain, true)))) | no | **--** | `MD5SQL5-40` (v) |  |
-| md5(strtoupper(sha1(strtoupper(md5('$pass'))))); | no | **--** | `MD5SHA1UCMD5UC` (v) |  |
-| md5(substr(sha1($plain), 0, 32)) | no | **--** | `MD5SHA1u32` (v) |  |
-| md5(tiger192_3($plain)) | no | **--** | `MD5TIGER` (v) |  |
-| md5(tiger2($plain)) | no | **--** | `MD5TIGER2` (v) |  |
+| md5(sha1(sha1(md5($plain)).sha1($plain))) | no | no | `MD5SHA1-1xSHA1MD5pSHA1p` (v) |  |
+| md5(sha1(sha256($plain))) | no | no | `MD5SHA1SHA256` (v) |  |
+| md5(sha256($pass)) | no | no | `MD5SHA256` (v) |  |
+| md5(str_reverse(md5($plain))) | no | no | `MD5revMD5` (v) |  |
+| md5(strrev(md5(md5($plain)))) | no | no | `MD5revMD5MD5` (v) |  |
+| md5(strrev(sha1($plain))) | no | no | `MD5revSHA1` (v) |  |
+| md5(strtoupper(md5($pass))) | `4300` (v) | no | `MD5MD5UC` (v) | duplicate of md5md5uc |
+| md5(strtoupper(md5($plain)).$salt) | no | no | `MD5UCSALT` (v) |  |
+| md5(strtoupper(md5(md5($plain)))) | no | no | `MD5MD5UCMD5` (v) |  |
+| md5(strtoupper(md5(md5($plain, true)))) | no | no | `MD5RAWUC -i2` (v) |  |
+| md5(strtoupper(sha1(md5($plain)))) | no | no | `MD5SHA1UCMD5` (v) |  |
+| md5(strtoupper(sha1(sha1($plain, true)))) | no | no | `MD5SQL5-40` (v) |  |
+| md5(strtoupper(sha1(strtoupper(md5('$pass'))))); | no | no | `MD5SHA1UCMD5UC` (v) |  |
+| md5(substr(sha1($plain), 0, 32)) | no | no | `MD5SHA1u32` (v) |  |
+| md5(tiger192_3($plain)) | no | no | `MD5TIGER` (v) |  |
+| md5(tiger2($plain)) | no | no | `MD5TIGER2` (v) |  |
 | md5(unix) (c) | `500` (v) | `md5crypt`<br>`md5crypt-opencl` (v) | `MD5CRYPT` (v) |  |
-| md5(upper(ntlm($plain))) | no | **--** | `MD5NTLMUC` (v) |  |
-| md5(whirlpool($plain)) | no | **--** | `MD5WRL` (v) |  |
-| md5(wrl(md5($plain))) | no | **--** | `MD5WRLMD5` (v) |  |
-| md5(wrl_raw($plain)) | no | **--** | `MD5WRLRAW` (v) |  |
+| md5(upper(ntlm($plain))) | no | no | `MD5NTLMUC` (v) |  |
+| md5(whirlpool($plain)) | no | no | `MD5WRL` (v) |  |
+| md5(wrl(md5($plain))) | no | no | `MD5WRLMD5` (v) |  |
+| md5(wrl_raw($plain)) | no | no | `MD5WRLRAW` (v) |  |
 | MD5(ZipMonster) | **--** | `ZipMonster` (v) | no |  |
-| MD5-2xMD5UC | no | **--** | `MD5-2xMD5UC` (v) |  |
-| MD5-2xSHA1 | no | **--** | `MD5-2xSHA1` (v) |  |
-| MD5-2xSHA1MD5 | no | **--** | `MD5-2xSHA1MD5` (v) |  |
-| MD5-4xMD5 | no | **--** | `MD5-4xMD5` (v) |  |
-| MD5-4xMD5-SALT | no | **--** | `MD5-4xMD5-SALT` (v) |  |
-| MD5-5xMD5 | no | **--** | `MD5-5xMD5` (v) |  |
-| MD5-6xMD5 | no | **--** | `MD5-6xMD5` (v) |  |
+| MD5-2xMD5UC | no | no | `MD5-2xMD5UC` (v) |  |
+| MD5-2xSHA1 | no | no | `MD5-2xSHA1` (v) |  |
+| MD5-2xSHA1MD5 | no | no | `MD5-2xSHA1MD5` (v) |  |
+| MD5-4xMD5 | no | no | `MD5-4xMD5` (v) |  |
+| MD5-4xMD5-SALT | no | no | `MD5-4xMD5-SALT` (v) |  |
+| MD5-5xMD5 | no | no | `MD5-5xMD5` (v) |  |
+| MD5-6xMD5 | no | no | `MD5-6xMD5` (v) |  |
 | MD5-MD5MD5PASSSALT-PEP | `31700` (v) | **--** | `MD5-MD5MD5PASSSALT-PEP` (v) |  |
 | MD5-MD5MD5PASSSALT-PEP2 | `21900` (v) | **--** | `MD5-MD5MD5PASSSALT-PEP2` (v) |  |
-| MD5-MD5psSHA1MD5psp | no | **--** | `MD5-MD5psSHA1MD5psp` (v) |  |
-| MD5-MD5puSHA1MD5pup | no | **--** | `MD5-MD5puSHA1MD5pup` (v) |  |
-| MD5-MD5SALT-MD5MD5PASS | `30500` (v) | **--** | `MD5-MD5SALT-MD5MD5PASS` (v) |  |
-| MD5-MD5SHA1MD5SHA1MD5SHA1p | no | **--** | `MD5-MD5SHA1MD5SHA1MD5SHA1p` (v) |  |
-| MD5-MD5SHA1PASSSHA1MD5SALT | no | **--** | `MD5-MD5SHA1PASSSHA1MD5SALT` (v) |  |
-| MD5-MD5USERSHA1MD5PASS | no | **--** | `MD5-MD5USERSHA1MD5PASS` (v) |  |
+| MD5-MD5psSHA1MD5psp | no | no | `MD5-MD5psSHA1MD5psp` (v) |  |
+| MD5-MD5puSHA1MD5pup | no | no | `MD5-MD5puSHA1MD5pup` (v) |  |
+| MD5-MD5SALT-MD5MD5PASS | `30500` (v) | no | `MD5-MD5SALT-MD5MD5PASS` (v) |  |
+| MD5-MD5SHA1MD5SHA1MD5SHA1p | no | no | `MD5-MD5SHA1MD5SHA1MD5SHA1p` (v) |  |
+| MD5-MD5SHA1PASSSHA1MD5SALT | no | no | `MD5-MD5SHA1PASSSHA1MD5SALT` (v) |  |
+| MD5-MD5USERSHA1MD5PASS | no | no | `MD5-MD5USERSHA1MD5PASS` (v) |  |
 | MD5-SALT-SHA1PEPPASS | `21310` (v) | **--** | `MD5-SALT-SHA1PEPPASS` (v) |  |
 | MD5-SALTMD5PASS-SALT | `33100` (v) | `dynamic_14`<br>`dynamic_2014` (v) | `MD5-SALTMD5PASS-SALT` (v) |  |
 | MD5-SALTMD5PASSSALT | `4110` (v) | `dynamic_11`<br>`dynamic_2011` (v) | `MD5-SALTMD5PASSSALT` (v) | same as md5-salt-md5-pass-salt (naming) |
-| MD5-SHA1numSHA1 | no | **--** | `MD5-SHA1numSHA1` (v) |  |
-| MD5-SHA1SALTPASS | `4430` (v) | **--** | `MD5-SHA1SALTPASS` (v) |  |
-| MD5AM | no | **--** | `MD5AM` (v) |  |
-| MD5AM2 | no | **--** | `MD5AM2` (v) |  |
-| MD5BASE64BASE64 | no | **--** | `MD5BASE64BASE64` (v) |  |
-| MD5BASE64BASE64BASE64 | no | **--** | `MD5BASE64BASE64BASE64` (v) |  |
-| MD5BASE64SHA1MD5 | no | **--** | `MD5BASE64SHA1MD5` (v) |  |
-| md5bcad (order of 32bit values) | no | **--** | `MD5bcad` (v) |  |
+| MD5-SHA1numSHA1 | no | no | `MD5-SHA1numSHA1` (v) |  |
+| MD5-SHA1SALTPASS | `4430` (v) | no | `MD5-SHA1SALTPASS` (v) |  |
+| MD5AM | no | no | `MD5AM` (v) |  |
+| MD5AM2 | no | no | `MD5AM2` (v) |  |
+| MD5BASE64BASE64 | no | no | `MD5BASE64BASE64` (v) |  |
+| MD5BASE64BASE64BASE64 | no | no | `MD5BASE64BASE64BASE64` (v) |  |
+| MD5BASE64SHA1MD5 | no | no | `MD5BASE64SHA1MD5` (v) |  |
+| md5bcad (order of 32bit values) | no | no | `MD5bcad` (v) |  |
 | MD5CAP | no | **--** | `MD5CAP -i2` (v) | collides with md5 (encoding) |
-| MD5CAPMD5MD5USER | no | **--** | `MD5CAPMD5MD5USER` (v) |  |
-| MD5CAPSHA1 | no | **--** | `MD5CAPSHA1` (v) | collides with md5-sha1-pass (encoding) |
-| md5cdab (order of 32bit values) | no | **--** | no | encoding of md5 (encoding) |
-| md5dcab (order of 32bit values) | no | **--** | `MD5dcab` (v) |  |
-| MD5DECBASE64MD5 | no | **--** | `MD5DECBASE64MD5` (v) |  |
-| MD5DECBASE64MD5BASE64MD5 | no | **--** | `MD5DECBASE64MD5BASE64MD5` (v) |  |
+| MD5CAPMD5MD5USER | no | no | `MD5CAPMD5MD5USER` (v) |  |
+| MD5CAPSHA1 | no | no | `MD5CAPSHA1` (v) | collides with md5-sha1-pass (encoding) |
+| md5cdab (order of 32bit values) | no | no | no | encoding of md5 (encoding) |
+| md5dcab (order of 32bit values) | no | no | `MD5dcab` (v) |  |
+| MD5DECBASE64MD5 | no | no | `MD5DECBASE64MD5` (v) |  |
+| MD5DECBASE64MD5BASE64MD5 | no | no | `MD5DECBASE64MD5BASE64MD5` (v) |  |
 | MD5DSALT | no | **--** | `MD5DSALT` |  |
-| MD5GOSTMD5UC | no | **--** | `MD5GOSTMD5UC` (v) |  |
-| MD5LMUC | no | **--** | `MD5LMUC` (v) |  |
-| MD5MD5HUM | no | **--** | `MD5MD5HUM` |  |
-| MD5MD5MD5USER | `3610` (v) | **--** | `MD5MD5MD5USER` (v) |  |
-| MD5MD5SALT-SALT | no | **--** | `MD5MD5SALT-SALT` (v) |  |
-| MD5MD5SHA1SALT | no | **--** | `MD5MD5SHA1SALT` (v) |  |
-| MD5MD5SHA256SALT | no | **--** | `MD5MD5SHA256SALT` (v) |  |
-| MD5MD5UCp | no | **--** | `MD5MD5UCp` (v) |  |
-| MD5MD5UCSHA1MD5MD5 | no | **--** | `MD5MD5UCSHA1MD5MD5` (v) |  |
-| MD5MD5UCSQL3p | no | **--** | `MD5MD5UCSQL3p` (v) |  |
-| MD5NTLMp | no | **--** | `MD5NTLMp` (v) |  |
-| MD5padMD5 | no | **--** | `MD5padMD5` (v) |  |
-| MD5PASSSHA1 | no | **--** | `MD5PASSSHA1` (v) |  |
-| MD5revMD5SALT | no | **--** | `MD5revMD5SALT` (v) |  |
+| MD5GOSTMD5UC | no | no | `MD5GOSTMD5UC` (v) |  |
+| MD5LMUC | no | no | `MD5LMUC` (v) |  |
+| MD5MD5HUM | no | no | `MD5MD5HUM` |  |
+| MD5MD5MD5USER | `3610` (v) | no | `MD5MD5MD5USER` (v) |  |
+| MD5MD5SALT-SALT | no | no | `MD5MD5SALT-SALT` (v) |  |
+| MD5MD5SHA1SALT | no | no | `MD5MD5SHA1SALT` (v) |  |
+| MD5MD5SHA256SALT | no | no | `MD5MD5SHA256SALT` (v) |  |
+| MD5MD5UCp | no | no | `MD5MD5UCp` (v) |  |
+| MD5MD5UCSHA1MD5MD5 | no | no | `MD5MD5UCSHA1MD5MD5` (v) |  |
+| MD5MD5UCSQL3p | no | no | `MD5MD5UCSQL3p` (v) |  |
+| MD5NTLMp | no | no | `MD5NTLMp` (v) |  |
+| MD5padMD5 | no | no | `MD5padMD5` (v) |  |
+| MD5PASSSHA1 | no | no | `MD5PASSSHA1` (v) |  |
+| MD5revMD5SALT | no | no | `MD5revMD5SALT` (v) |  |
 | MD5SALT1SALT2 | `33000` (v) | **--** | `MD5SALT1SALT2` (v) |  |
-| MD5SHA0 | no | **--** | `MD5SHA0` (v) |  |
-| MD5SHA1BASE64MD5RAW | no | **--** | `MD5SHA1BASE64MD5RAW` (v) |  |
+| MD5SHA0 | no | no | `MD5SHA0` (v) |  |
+| MD5SHA1BASE64MD5RAW | no | no | `MD5SHA1BASE64MD5RAW` (v) |  |
 | MD5SHA1HUM | no | **--** | `MD5SHA1HUM` |  |
-| MD5SHA1lsb35 | no | **--** | `MD5SHA1lsb35` (v) |  |
+| MD5SHA1lsb35 | no | no | `MD5SHA1lsb35` (v) |  |
 | MD5SHA1MD5HUM | no | **--** | `MD5SHA1MD5HUM` |  |
-| MD5SHA1MD5MD5SHA1 | no | **--** | `MD5SHA1MD5MD5SHA1` (v) |  |
-| MD5SHA1MD5MD5SHA1MD5 | no | **--** | `MD5SHA1MD5MD5SHA1MD5` (v) |  |
-| MD5SHA1MD5MD5UC | no | **--** | `MD5SHA1MD5MD5UC` (v) |  |
-| MD5SHA1MD5SHA1MD5SHA1MD5SHA1MD5SHA1MD5SHA1 | no | **--** | `MD5SHA1MD5SHA1MD5SHA1MD5SHA1MD5SHA1MD5SHA1` (v) |  |
-| MD5SHA1MD5UC | no | **--** | `MD5SHA1MD5UC` (v) |  |
-| MD5SHA1MD5x | no | **--** | `MD5SHA1MD5x` (v) |  |
-| MD5SHA1RADMIN2MD5 | no | **--** | `MD5SHA1RADMIN2MD5` (v) |  |
-| MD5SHA1SALT | `4410` (v) | **--** | `MD5SHA1SALT` (v) |  |
-| MD5SHA1u32SALT | no | **--** | `MD5SHA1u32SALT` (v) |  |
-| MD5SHA1u39 | no | **--** | `MD5SHA1u39` (v) |  |
-| MD5SHA1UC | no | **--** | `MD5SHA1UC` (v) |  |
-| MD5SHA1UCu32 | no | **--** | `MD5SHA1UCu32` (v) |  |
+| MD5SHA1MD5MD5SHA1 | no | no | `MD5SHA1MD5MD5SHA1` (v) |  |
+| MD5SHA1MD5MD5SHA1MD5 | no | no | `MD5SHA1MD5MD5SHA1MD5` (v) |  |
+| MD5SHA1MD5MD5UC | no | no | `MD5SHA1MD5MD5UC` (v) |  |
+| MD5SHA1MD5SHA1MD5SHA1MD5SHA1MD5SHA1MD5SHA1 | no | no | `MD5SHA1MD5SHA1MD5SHA1MD5SHA1MD5SHA1MD5SHA1` (v) |  |
+| MD5SHA1MD5UC | no | no | `MD5SHA1MD5UC` (v) |  |
+| MD5SHA1MD5x | no | no | `MD5SHA1MD5x` (v) |  |
+| MD5SHA1RADMIN2MD5 | no | no | `MD5SHA1RADMIN2MD5` (v) |  |
+| MD5SHA1SALT | `4410` (v) | no | `MD5SHA1SALT` (v) |  |
+| MD5SHA1u32SALT | no | no | `MD5SHA1u32SALT` (v) |  |
+| MD5SHA1u39 | no | no | `MD5SHA1u39` (v) |  |
+| MD5SHA1UC | no | no | `MD5SHA1UC` (v) |  |
+| MD5SHA1UCu32 | no | no | `MD5SHA1UCu32` (v) |  |
 | MD5SHA1x | `4400` (v) | `dynamic_22` (v) | `MD5SHA1x` (v) |  |
-| MD5SHA256MD5 | no | **--** | `MD5SHA256MD5` (v) |  |
-| MD5SHA256SHA256 | no | **--** | `MD5SHA256SHA256` (v) |  |
-| MD5SHA512 | no | **--** | `MD5SHA512` (v) |  |
+| MD5SHA256MD5 | no | no | `MD5SHA256MD5` (v) |  |
+| MD5SHA256SHA256 | no | no | `MD5SHA256SHA256` (v) |  |
+| MD5SHA512 | no | no | `MD5SHA512` (v) |  |
 | MD5SPECAM | no | **--** | `MD5SPECAM` |  |
-| MD5SQL3SQL5MD5MD5 | no | **--** | `MD5SQL3SQL5MD5MD5` (v) |  |
-| MD5sub1-20MD5 | no | **--** | `MD5sub1-20MD5` (v) |  |
-| MD5sub1-20MD5MD5 | no | **--** | `MD5sub1-20MD5MD5` (v) |  |
-| MD5sub8-24MD5sub8-24MD5 | no | **--** | `MD5sub8-24MD5sub8-24MD5` (v) |  |
-| MD5sub8-24SALT | no | **--** | `MD5sub8-24SALT` (v) |  |
-| MD5SWAP | no | **--** | `MD5SWAP` (v) |  |
+| MD5SQL3SQL5MD5MD5 | no | no | `MD5SQL3SQL5MD5MD5` (v) |  |
+| MD5sub1-20MD5 | no | no | `MD5sub1-20MD5` (v) |  |
+| MD5sub1-20MD5MD5 | no | no | `MD5sub1-20MD5MD5` (v) |  |
+| MD5sub8-24MD5sub8-24MD5 | no | no | `MD5sub8-24MD5sub8-24MD5` (v) |  |
+| MD5sub8-24SALT | no | no | `MD5sub8-24SALT` (v) |  |
+| MD5SWAP | no | no | `MD5SWAP` (v) |  |
 | MD5UC | `0` (v) | `Raw-MD5`<br>`dynamic_0`<br>`dynamic_2000` (v) | `MD5UC` | encoding of md5 (encoding) |
 | MD5UCBASE64MD5RAW | no | **--** | `MD5UCBASE64MD5RAW` |  |
-| MD5UCBASE64SHA1RAW | no | **--** | `MD5UCBASE64SHA1RAW` (v) |  |
-| MD5UCMD5 | no | **--** | `MD5UCMD5` |  |
+| MD5UCBASE64SHA1RAW | no | no | `MD5UCBASE64SHA1RAW` (v) |  |
+| MD5UCMD5 | no | no | `MD5UCMD5` |  |
 | MD5USERPASS | `20` (v) | `dynamic_1009`<br>`dynamic_2004`<br>`dynamic_4` (v) | `MD5USERPASS` (v) |  |
 | MD5UTF16LE | `70` (v) | `dynamic_29` (v) | `MD5UTF16LE` (v) |  |
-| MD5UTF16LEPASSSALT | `30` (v) | **--** | `MD5UTF16LEPASSSALT` (v) |  |
-| MD5UTF16LESALTPASS | `40` (v) | **--** | `MD5UTF16LESALTPASS` (v) |  |
-| MD5WRLSHA1 | no | **--** | `MD5WRLSHA1` (v) |  |
-| md6 (128bit) | no | **--** | `MD6` (v) |  |
-| MD6128 | no | **--** | `MD6128` (v) |  |
-| MD6256 | `34600` (v) | **--** | `MD6256` (v) |  |
-| MD6512 | no | **--** | `MD6512` (v) |  |
+| MD5UTF16LEPASSSALT | `30` (v) | no | `MD5UTF16LEPASSSALT` (v) |  |
+| MD5UTF16LESALTPASS | `40` (v) | no | `MD5UTF16LESALTPASS` (v) |  |
+| MD5WRLSHA1 | no | no | `MD5WRLSHA1` (v) |  |
+| md6 (128bit) | no | no | `MD6` (v) |  |
+| MD6128 | no | no | `MD6128` (v) |  |
+| MD6256 | `34600` (v) | no | `MD6256` (v) |  |
+| MD6512 | no | no | `MD6512` (v) |  |
 | MDC2 | no | `mdc2` (v) | `MDC2` (v) |  |
 | MEDIAWIKI | `3711` (v) | `MediaWiki` (v) | `MEDIAWIKI` (v) |  |
 | mega.nz password-protected link (PBKDF2-HMAC-SHA512) | `33400` (v) | **--** | no |  |
@@ -801,13 +801,13 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | MetaMask Wallet (needs all data, checks AES-GCM tag) | `26600` (v) | **--** | no |  |
 | MetaMask Wallet (short hash, plaintext check) | `26610` (v) | **--** | no |  |
 | Microsoft Money (2002 to Money Plus) | **--** | `money` (v) | no |  |
-| Monero Wallet | **--** | `Monero` | **--** |  |
+| Monero Wallet | **--** | `Monero` (v) | **--** |  |
 | MONGODB-SHA1 | `24100` (v) | **--** | `MONGODB-SHA1` (v) |  |
 | MONGODB-SHA256 | `24200` (v) | **--** | `MONGODB-SHA256` (v) |  |
 | Mozilla key3.db | **--** | `Mozilla` (v) | no |  |
 | Mozilla key3.db | `26000` (v) | **--** | no |  |
 | Mozilla key4.db | `26100` (v) | **--** | no |  |
-| MS Cache Hash (DCC) | **--** | `mscash` | **--** |  |
+| MS Cache Hash (DCC) | **--** | `mscash` (v) | **--** |  |
 | MS Office 2007 | `9400` (v) | `Office`<br>`office-opencl` (v) | no |  |
 | MS Office 2010 | `9500` (v) | `Office`<br>`office-opencl` (v) | no |  |
 | MS Office 2013 | `9600` (v) | `Office`<br>`office-opencl` (v) | no |  |
@@ -819,8 +819,8 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | MS Office <= 2003 $3, SHA1 + RC4, collider #2 | `9820` (v) | **--** | no |  |
 | MS Office <= 2003 $3/$4, SHA1 + RC4 | `9800` (v) | `oldoffice`<br>`oldoffice-opencl` (v) | no |  |
 | MS Office SheetProtection - legacy 16-bit verifier | no | no | no |  |
-| mscache($plain) | `1100` (v) | **--** | `MSCACHE` (v) |  |
-| MSCHAPv2 C/R | **--** | `mschapv2-naive` | **--** |  |
+| mscache($plain) | `1100` (v) | no | `MSCACHE` (v) |  |
+| MSCHAPv2 C/R | **--** | `mschapv2-naive` (v) | **--** |  |
 | MSONLINE | `33700` (v) | **--** | `MSONLINE` (v) |  |
 | MSSNTP | `31300` (v) | `timeroast`<br>`timeroast-opencl` (v) | `MSSNTP` (v) |  |
 | MSSQL2000 | `131` (v) | `mssql` (v) | `MSSQL2000` (v) |  |
@@ -830,8 +830,8 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | MultiBit Classic .wallet (scrypt) | `27700` (v) | `multibit` (v) | no |  |
 | MultiBit HD (scrypt) | `22700` (v) | `multibit` (v) | no |  |
 | MURMUR3 | `27800` (v) | **--** | `MURMUR3` (v) |  |
-| MURMUR64A | `34200` (v) | **--** | `MURMUR64A` (v) |  |
-| MURMUR64AZERO | `34201` (v) | **--** | `MURMUR64AZERO` (v) |  |
+| MURMUR64A | `34200` (v) | no | `MURMUR64A` (v) |  |
+| MURMUR64AZERO | `34201` (v) | no | `MURMUR64AZERO` (v) |  |
 | MurmurHash | `25700` (v) | **--** | no |  |
 | MurmurHash64A truncated (zero seed) | `34211` (v) | **--** | **--** |  |
 | MySQL 3 | `200` (v) | `mysql` (v) | `MYSQL3` (v) |  |
@@ -852,16 +852,16 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | NETSCALER-SHA512 | `22200` (v) | **--** | `NETSCALER-SHA512` (v) |  |
 | netscape LDAP | `101` (v) | `Raw-SHA1`<br>`raw-SHA1-opencl` (v) | `APACHE-SHA` (v) |  |
 | Netscreen | **--** | `md5ns` (v) | **--** |  |
-| NETWITNESS | `20712` (v) | **--** | `NETWITNESS` (v) |  |
+| NETWITNESS | `20712` (v) | no | `NETWITNESS` (v) |  |
 | Nokia operator unlock | **--** | `SL3`<br>`SL3-opencl` (v) | no |  |
 | NSEC3 | `8300` (v) | **--** | `NSEC3` (v) |  |
 | NTLMH | `1000` (v) | `NT`<br>`NT-long`<br>`dynamic_33`<br>`NT-long-opencl`<br>`NT-opencl` (v) | `NTLMH` (v) | same as md4-utf16-le-utf-8-plain (naming); same as md4-utf16-plain (naming) |
-| NTLMv1 C/R | **--** | `netntlm-naive` | **--** |  |
+| NTLMv1 C/R | **--** | `netntlm-naive` (v) | **--** |  |
 | NTLMv1 C/R | **--** | `netntlm` (v) | no |  |
 | Nuked-Klan CMS | **--** | `nk` (v) | no |  |
 | Open Document Format (ODF) 1.1 (SHA-1, Blowfish) | `18600` (v) | `ODF`<br>`ODF-opencl` (v) | no |  |
 | Open Document Format (ODF) 1.2 (SHA-256, AES) | `18400` (v) | `ODF`<br>`ODF-opencl` (v) | no |  |
-| OpenBSD-SoftRAID | **--** | `OpenBSD-SoftRAID` | **--** |  |
+| OpenBSD-SoftRAID | **--** | `OpenBSD-SoftRAID` (v) | **--** |  |
 | OpenSSL "enc" encryption | **--** | `openssl-enc` (v) | no |  |
 | Oracle 10 | **--** | `oracle` (v) | no |  |
 | Oracle 10g-logon protocol | **--** | `o10glogon` (v) | no |  |
@@ -880,7 +880,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | Panama | no | `Panama`<br>`dynamic_320` (v) | `PANAMA` (v) | duplicate of panama |
 | PANAMA (2 iterations) | no | `dynamic_323` (v) | `PANAMA -i2` (v) |  |
 | PARALLEL | no | **--** | `PARALLEL` |  |
-| Password Manager | **--** | `STRIP` | **--** |  |
+| Password Manager | **--** | `STRIP` (v) | **--** |  |
 | Password Safe | **--** | `pwsafe`<br>`pwsafe-opencl` (v) | no |  |
 | Password Safe v2 | `9000` | **--** | **--** |  |
 | PBKDF1-SHA1 | `32900` (v) | **--** | `PBKDF1-SHA1` (v) |  |
@@ -898,7 +898,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | PDF 1.1 - 1.3 (Acrobat 2 - 4), collider #2 | `10420` (v) | **--** | no |  |
 | PDF 1.3 - 1.6 (Acrobat 4 - 8) w/ RC4-40 | `10510` (v) | `PDF`<br>`pdf-opencl` (v) | no |  |
 | PDF 1.4 - 1.6 (Acrobat 5 - 8) | `10500` (v) | `PDF`<br>`pdf-opencl` (v) | no |  |
-| PDF 1.4 - 1.6 (Acrobat 5 - 8) - user and owner pass | `25400` (v) | **--** | no |  |
+| PDF 1.4 - 1.6 (Acrobat 5 - 8) - user and owner pass | `25400` (v) | no | no |  |
 | PDF 1.7 Level 3 (Acrobat 9) | `10600` (v) | `PDF`<br>`pdf-opencl` (v) | no |  |
 | PDF 1.7 Level 8 (Acrobat 10 - 11) | `10700` (v) | `PDF`<br>`pdf-opencl` (v) | no |  |
 | PEOPLESOFT | `133` (v) | **--** | `PEOPLESOFT` (v) |  |
@@ -907,8 +907,8 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | PGP Self Decrypting Archive | **--** | `pgpsda`<br>`pgpsda-opencl` (v) | no |  |
 | PGP Whole Disk Encryption | **--** | `pgpwde`<br>`pgpwde-opencl` (v) | no |  |
 | phpass | `400` (v) | `phpass`<br>`phpass-opencl` (v) | `PHPBB3` (v) |  |
-| phpass(md5($pass)) | `35700` (v) | **--** | `PHPBB3MD5` (v) |  |
-| PHPBB3MD5 | `35700` (v) | **--** | `PHPBB3MD5` (v) |  |
+| phpass(md5($pass)) | `35700` (v) | no | `PHPBB3MD5` (v) |  |
+| PHPBB3MD5 | `35700` (v) | no | `PHPBB3MD5` (v) |  |
 | PHPS | `2612` (v) | `PHPS`<br>`PHPS2` (v) | `PHPS` (v) |  |
 | PKCS#8 Private Keys (PBKDF2-HMAC-SHA1 + 3DES/AES) | `24410` (v) | `PEM`<br>`pem-opencl` (v) | no |  |
 | PKCS#8 Private Keys (PBKDF2-HMAC-SHA256 + 3DES/AES) | `24420` (v) | **--** | no |  |
@@ -921,18 +921,18 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | PKZIP Master Key | `20500` (v) | **--** | **--** |  |
 | PKZIP Master Key (6 byte optimization) | `20510` (v) | **--** | **--** |  |
 | plaintext | `99999` (v) | `plaintext` | `NULL` (v) |  |
-| pomelo($plain) | no | **--** | `POMELO` (v) |  |
+| pomelo($plain) | no | no | `POMELO` (v) |  |
 | Post.Office | no | `po` (v) | no |  |
 | POSTGRESCRAM | `11100` (v) | `postgres` (v) | `POSTGRESCRAM` (v) |  |
 | POSTGRESQL | `12` (v) | `dynamic_1013` (v) | `POSTGRESQL` (v) |  |
 | POSTGRESSCRAM256 | `28600` (v) | **--** | `POSTGRESSCRAM256` (v) |  |
 | PrestaShop | `11000` (v) | `dynamic_1017`<br>`dynamic_2004` (v) | `MD5SALTPASS` (v) |  |
 | Prim'X Zed! encrypted archives | **--** | `zed`<br>`zed-opencl` (v) | no |  |
-| Private Key (RSA/DSA/ECDSA/ED25519) | **--** | `PuTTY` | **--** |  |
-| progressencode($plain) | `26200` (v) | **--** | `PROGRESSENCODE` |  |
-| PS-TOKEN | `13500` (v) | **--** | `PS-TOKEN` (v) |  |
+| Private Key (RSA/DSA/ECDSA/ED25519) | **--** | `PuTTY` (v) | **--** |  |
+| progressencode($plain) | `26200` (v) | no | `PROGRESSENCODE` |  |
+| PS-TOKEN | `13500` (v) | no | `PS-TOKEN` (v) |  |
 | PSK | **--** | `IKE` (v) | no |  |
-| PunBB | `4522` (v) | **--** | `SHA1SALTSHA1PASS` (v) |  |
+| PunBB | `4522` (v) | no | `SHA1SALTSHA1PASS` (v) |  |
 | Purdy | **--** | `OpenVMS` (v) | no |  |
 | PWSAFE3 | `5200` | **--** | `PWSAFE3` (v) |  |
 | Python passlib pbkdf2-sha256 | `20300` (v) | `PBKDF2-HMAC-SHA256`<br>`PBKDF2-HMAC-SHA256-opencl` (v) | `PBKDF2-SHA256` (v) |  |
@@ -943,55 +943,55 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | RACF | `8500` (v) | `RACF` (v) | `RACF` (v) |  |
 | RACF-KDFAES | **--** | `RACF-KDFAES` (v) | `RACF-KDFAES` (v) |  |
 | RACF-KDFAES | `14200` (v) | **--** | `RACF-KDFAES` (v) |  |
-| RADIOGATUN32 | no | **--** | `RADIOGATUN32` (v) |  |
-| RADIOGATUN64 | no | **--** | `RADIOGATUN64` (v) |  |
+| RADIOGATUN32 | no | no | `RADIOGATUN32` (v) |  |
+| RADIOGATUN64 | no | no | `RADIOGATUN64` (v) |  |
 | RADIUS authentication | **--** | `radius` (v) | no |  |
 | Radmin | `9900` (v) | `RAdmin`<br>`dynamic_1010` | `RADMIN2` (v) |  |
-| radmin2(base64_encode($plain)) | no | **--** | `RADMIN2BASE64` (v) |  |
-| radmin2(md5($plain)) | no | **--** | `RADMIN2MD5` (v) |  |
-| radmin2(md5(md5($plain))) | no | **--** | `RADMIN2MD5MD5` (v) |  |
-| radmin2(md5(md5(md5($plain)))) | no | **--** | `RADMIN2MD5MD5MD5` (v) |  |
-| radmin2(md5(sha1($plain))) | no | **--** | `RADMIN2MD5SHA1` (v) |  |
-| radmin2(mysql3($plain)) | no | **--** | `RADMIN2SQL3` (v) |  |
-| radmin2(sha1($plain)) | no | **--** | `RADMIN2SHA1` (v) |  |
-| radmin2(sha1(md5($plain))) | no | **--** | `RADMIN2SHA1MD5` (v) |  |
-| radmin2(strtoupper(md5($plain))) | no | **--** | `RADMIN2MD5UC` (v) |  |
-| radmin2(strtoupper(sha1(sha1($plain, true)))) | no | **--** | `RADMIN2SQL5-40` (v) |  |
+| radmin2(base64_encode($plain)) | no | no | `RADMIN2BASE64` (v) |  |
+| radmin2(md5($plain)) | no | no | `RADMIN2MD5` (v) |  |
+| radmin2(md5(md5($plain))) | no | no | `RADMIN2MD5MD5` (v) |  |
+| radmin2(md5(md5(md5($plain)))) | no | no | `RADMIN2MD5MD5MD5` (v) |  |
+| radmin2(md5(sha1($plain))) | no | no | `RADMIN2MD5SHA1` (v) |  |
+| radmin2(mysql3($plain)) | no | no | `RADMIN2SQL3` (v) |  |
+| radmin2(sha1($plain)) | no | no | `RADMIN2SHA1` (v) |  |
+| radmin2(sha1(md5($plain))) | no | no | `RADMIN2SHA1MD5` (v) |  |
+| radmin2(strtoupper(md5($plain))) | no | no | `RADMIN2MD5UC` (v) |  |
+| radmin2(strtoupper(sha1(sha1($plain, true)))) | no | no | `RADMIN2SQL5-40` (v) |  |
 | Radmin3 | `29200` (v) | **--** | no |  |
 | RAILS-RESTFUL | `19500` (v) | **--** | `RAILS-RESTFUL` (v) |  |
 | RAR3-hp | `12500` (v) | `rar`<br>`rar-opencl` (v) | no |  |
 | RAR3-p (Compressed) | `23800` (v) | `rar`<br>`rar-opencl` (v) | no |  |
 | RAR3-p (Uncompressed) | `23700` (v) | `rar`<br>`rar-opencl` (v) | no |  |
 | RAR5 | `13000` (v) | `RAR5`<br>`RAR5-opencl` (v) | no |  |
-| Raw-Keccak | **--** | `Raw-Keccak` | **--** |  |
+| Raw-Keccak | **--** | `Raw-Keccak` (v) | **--** |  |
 | Raw-MD5u | `70` (v) | `Raw-MD5u` (v) | `MD5UTF16LE` (v) |  |
 | Raw-SHA1-AxCrypt | no | `Raw-SHA1-AxCrypt` (v) | no |  |
 | Raw-SHA224 | `1300` (v) | `Raw-SHA224`<br>`dynamic_50` (v) | `SHA224`<br>`SHA224RAW` (v) | duplicate of sha224 |
-| Raw-SHA3 | **--** | `Raw-SHA3` | **--** |  |
+| Raw-SHA3 | **--** | `Raw-SHA3` (v) | **--** |  |
 | Raw-SHA384 | `10800` (v) | `Raw-SHA384`<br>`dynamic_70` (v) | `SHA384`<br>`SHA384RAW` (v) | duplicate of sha384 |
 | RC4 104-bit DropN | `33502` (v) | **--** | no |  |
 | RC4 40-bit DropN | `33500` (v) | **--** | no |  |
 | RC4 72-bit DropN | `33501` (v) | **--** | no |  |
 | REDHAT389DS | `10901` (v) | **--** | `REDHAT389DS` (v) |  |
 | Redmine | `4521` (v) | `dynamic_1501` (v) | `SHA1SALTSHA1PASS` (v) |  |
-| Restic Repository | **--** | `restic` | **--** |  |
-| RIPEMD 128 | **--** | `ripemd-128` | **--** |  |
-| RIPEMD 160 | **--** | `ripemd-160` | **--** |  |
-| ripemd($plain) | no | **--** | `RIPEMD` (v) |  |
+| Restic Repository | **--** | `restic` (v) | **--** |  |
+| RIPEMD 128 | **--** | `ripemd-128` (v) | **--** |  |
+| RIPEMD 160 | **--** | `ripemd-160` (v) | **--** |  |
+| ripemd($plain) | no | no | `RIPEMD` (v) |  |
 | ripemd128 | no | `dynamic_120` (v) | `RMD128` (v) |  |
-| ripemd128(md5($plain)) | no | **--** | `RMD128MD5` (v) |  |
-| ripemd128(md5($plain).$plain) | no | **--** | `RMD128MD5PASS` (v) |  |
-| ripemd128(md5(md5($plain))) | no | **--** | `RMD128MD5MD5` (v) |  |
+| ripemd128(md5($plain)) | no | no | `RMD128MD5` (v) |  |
+| ripemd128(md5($plain).$plain) | no | no | `RMD128MD5PASS` (v) |  |
+| ripemd128(md5(md5($plain))) | no | no | `RMD128MD5MD5` (v) |  |
 | ripemd160 | `6000` (v) | `dynamic_130` (v) | `RMD160` (v) |  |
-| ripemd160(md5($plain)) | no | **--** | `RMD160MD5` (v) |  |
-| ripemd160(md5($plain).$plain) | no | **--** | `RMD160MD5PASS` (v) |  |
+| ripemd160(md5($plain)) | no | no | `RMD160MD5` (v) |  |
+| ripemd160(md5($plain).$plain) | no | no | `RMD160MD5PASS` (v) |  |
 | ripemd256 | no | `dynamic_140` (v) | `RMD256` (v) |  |
 | ripemd320 | `33600` (v) | `dynamic_150` (v) | `RMD320` (v) | duplicate of ripemd320 |
 | RMD128 (2 iterations) | no | `dynamic_123` (v) | `RMD128 -i2` (v) |  |
-| RMD128MD4 | no | **--** | `RMD128MD4` (v) |  |
+| RMD128MD4 | no | no | `RMD128MD4` (v) |  |
 | RMD160 (2 iterations) | no | `dynamic_133` (v) | `RMD160 -i2` (v) |  |
 | RMD320 (2 iterations) | no | `dynamic_153` (v) | `RMD320 -i2` (v) |  |
-| RORAILS-SHA1 | `27200` (v) | **--** | `RORAILS-SHA1` (v) |  |
+| RORAILS-SHA1 | `27200` (v) | no | `RORAILS-SHA1` (v) |  |
 | RSA/DSA/EC/OpenSSH Private Keys ($0$) | `22911` (v) | `SSH`<br>`ssh-opencl` (v) | no |  |
 | RSA/DSA/EC/OpenSSH Private Keys ($1, $3$) | `22931` (v) | `SSH`<br>`ssh-opencl` (v) | no |  |
 | RSA/DSA/EC/OpenSSH Private Keys ($4$) | `22941` (v) | `SSH`<br>`ssh-opencl` (v) | no |  |
@@ -1000,12 +1000,12 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | RVARY | **--** | `RVARY` (v) | no |  |
 | S/Key | **--** | `skey` (v) | no |  |
 | salted | **--** | `Iterated-SHA1`<br>`Iterated-SHA1-opencl` (v) | no |  |
-| SAMSUNGSHA1 | `5800` (v) | **--** | `SAMSUNGSHA1` (v) |  |
+| SAMSUNGSHA1 | `5800` (v) | no | `SAMSUNGSHA1` (v) |  |
 | SAP PSE | **--** | `sappse`<br>`sappse-opencl` (v) | no |  |
 | SAP-BCODE | `7700` (v) | `sapb` (v) | `SAP-BCODE` (v) |  |
-| SAP-BCODE4 | `7701` (v) | **--** | `SAP-BCODE4` (v) |  |
+| SAP-BCODE4 | `7701` (v) | no | `SAP-BCODE4` (v) |  |
 | SAP-PASSCODE | `7800` (v) | `sapg` (v) | `SAP-PASSCODE` (v) |  |
-| SAP-PASSCODE5 | `7801` (v) | **--** | `SAP-PASSCODE5` (v) |  |
+| SAP-PASSCODE5 | `7801` (v) | no | `SAP-PASSCODE5` (v) |  |
 | SAPCODVNH | `10300` (v) | `saph` (v) | `SAPCODVNH` (v) |  |
 | SAPCODVNH512 | `35000` (v) | `saph` (v) | `SAPCODVNH512` (v) |  |
 | SCRAM-PBKDF2-SHA1-MongoDB | **--** | `SCRAM-PBKDF2-SHA1-MongoDB` (v) | no |  |
@@ -1019,315 +1019,315 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | SecureZIP AES-192 | `23002` (v) | `securezip` (v) | no |  |
 | SecureZIP AES-256 | `23003` (v) | `securezip` (v) | no |  |
 | SHA-1 | `100` (v) | `dynamic_26`<br>`raw-SHA1-opencl` (v) | `SHA1` (v) | truncates sha1-substr-0-32 (truncation) |
-| SHA0 | no | **--** | `SHA0` (v) |  |
-| sha1("*".mysql5($plain)) | no | **--** | `SHA1SQL5` (v) |  |
+| SHA0 | no | no | `SHA0` (v) |  |
+| sha1("*".mysql5($plain)) | no | no | `SHA1SQL5` (v) |  |
 | sha1($pass.$salt) | `110` (v) | `dynamic_24` (v) | `SHA1PASSSALT` (v) |  |
-| sha1($plain.sha1($plain)) | no | **--** | `SHA1PASSSHA1` (v) |  |
+| sha1($plain.sha1($plain)) | no | no | `SHA1PASSSHA1` (v) |  |
 | sha1($salt.$pass) | `120` (v) | `dynamic_25` (v) | `SHA1SALTPASS` (v) | same as django-sha-1 (encoding) |
 | sha1($salt.$pass.$salt) | `4900` (v) | `dynamic_1504` (v) | `SHA1SALTPASSSALT` (v) |  |
 | sha1($salt.sha1($plain)) | `4520` (v) | `dynamic_1501` (v) | `SHA1SALTSHA1PASS` (v) |  |
 | sha1($salt.sha1($salt.sha1($plain))) (AKA Opencart) | `13900` (v) | `dynamic_38` (v) | `SHA1SALTSHA1SALTSHA1PASS` (v) | same as wbb3 (application) |
-| sha1(base64_encode($plain)) | no | **--** | `SHA1BASE64` (v) |  |
-| sha1(base64_encode(md5($plain, true))) | no | **--** | `SHA1BASE64MD5RAW` (v) |  |
-| sha1(base64_encode(sha1($plain, true))) | no | **--** | `SHA1BASE64SHA1RAW` (v) |  |
-| sha1(CX) | `14400` (v) | **--** | `SHA1-SALT-SPECIAL` (v) |  |
-| sha1(hesk($plain)) ? | no | **--** | `SHA1HESK` (v) |  |
+| sha1(base64_encode($plain)) | no | no | `SHA1BASE64` (v) |  |
+| sha1(base64_encode(md5($plain, true))) | no | no | `SHA1BASE64MD5RAW` (v) |  |
+| sha1(base64_encode(sha1($plain, true))) | no | no | `SHA1BASE64SHA1RAW` (v) |  |
+| sha1(CX) | `14400` (v) | no | `SHA1-SALT-SPECIAL` (v) |  |
+| sha1(hesk($plain)) ? | no | no | `SHA1HESK` (v) |  |
 | sha1(md5($pass)) | `4700` (v) | `dynamic_1024`<br>`dynamic_23` | `SHA1MD5` (v) |  |
-| sha1(md5($pass).$salt) | `4710` (v) | **--** | `SHA1MD5PASS-SALT`<br>`SHA1-MD5PASSSALT`<br>`SHA1MD5SALT` (v) | duplicate of sha1-md5-md5-pass-salt; same as huawei-sha1-md5-pass-salt (application) |
-| sha1(md5($plain),$plain) | no | **--** | `SHA1MD5PASS` (v) |  |
-| sha1(md5($plain).$salt) | `4710` (v) | **--** | `SHA11SALTMD5` (v) |  |
-| sha1(md5($plain).$salt) | `4710` (v) | **--** | `SHA1MD5USER` (v) |  |
-| sha1(md5($plain).sha1($plain)) | no | **--** | `SHA1-1xMD5SHA1` (v) |  |
-| sha1(md5($salt.$plain).":".$salt) | no | **--** | `SHA1HEXSALT` (v) |  |
+| sha1(md5($pass).$salt) | `4710` (v) | no | `SHA1MD5PASS-SALT`<br>`SHA1-MD5PASSSALT`<br>`SHA1MD5SALT` (v) | duplicate of sha1-md5-md5-pass-salt; same as huawei-sha1-md5-pass-salt (application) |
+| sha1(md5($plain),$plain) | no | no | `SHA1MD5PASS` (v) |  |
+| sha1(md5($plain).$salt) | `4710` (v) | no | `SHA11SALTMD5` (v) |  |
+| sha1(md5($plain).$salt) | `4710` (v) | no | `SHA1MD5USER` (v) |  |
+| sha1(md5($plain).sha1($plain)) | no | no | `SHA1-1xMD5SHA1` (v) |  |
+| sha1(md5($salt.$plain).":".$salt) | no | no | `SHA1HEXSALT` (v) |  |
 | sha1(md5(md5($plain))) | `18500` (v) | `dynamic_1025` | `SHA1MD5MD5` (v) |  |
-| sha1(md5(md5($plain).$plain) | no | **--** | `SHA1MD5MD5PASS` (v) |  |
-| sha1(md5(md5($plain).$salt)) | no | **--** | `SHA1MD51SALTMD5` (v) |  |
-| sha1(md5(md5(md5($plain)))) | no | **--** | `SHA1MD5MD5MD5` (v) |  |
-| sha1(md5(md5(md5(md5($plain))))) | no | **--** | `SHA1MD5MD5MD5MD5` (v) |  |
-| sha1(md5(md5(md5(md5(md5($plain)))))) | no | **--** | `SHA1MD5MD5MD5MD5MD5` (v) |  |
-| sha1(md5(md5(md5(sha1($plain))))) | no | **--** | `SHA1MD5MD5MD5SHA1` (v) |  |
-| sha1(md5(md5(sha1($plain)))) | no | **--** | `SHA1MD5MD5SHA1` (v) |  |
-| sha1(md5(md5(sha1(md5($plain))))) | no | **--** | `SHA1MD5MD5SHA1MD5` (v) |  |
-| sha1(md5(radmin2($plain))) | no | **--** | `SHA1MD5RADMIN2` (v) |  |
-| sha1(md5(sha1($plain))) | no | **--** | `SHA1MD5SHA1` (v) |  |
-| sha1(md5(sha1(md5($plain)))) | no | **--** | `SHA1MD5SHA1MD5` (v) |  |
-| sha1(md5(sha1(md5(sha1(md5($plain)))))) | no | **--** | `SHA1MD5SHA1MD5SHA1MD5` (v) |  |
-| sha1(md5(sha1(md5(sha1(md5(sha1($plain))))))) | no | **--** | `SHA1MD5SHA1MD5SHA1MD5SHA1` (v) |  |
-| sha1(mysql3($plain)) | no | **--** | `SHA1SQL3` (v) |  |
-| sha1(radmin2($plain)) | no | **--** | `SHA1RADMIN2` (v) |  |
-| sha1(radmin2(base64_encode($plain))) | no | **--** | `SHA1RADMIN2BASE64` (v) |  |
-| sha1(radmin2(md5($plain))) | no | **--** | `SHA1RADMIN2MD5` (v) |  |
-| sha1(reverse($plain)) | no | **--** | `SHA1revp` (v) |  |
-| sha1(reverse(md5($plain))) | no | **--** | `SHA1revMD5` (v) |  |
+| sha1(md5(md5($plain).$plain) | no | no | `SHA1MD5MD5PASS` (v) |  |
+| sha1(md5(md5($plain).$salt)) | no | no | `SHA1MD51SALTMD5` (v) |  |
+| sha1(md5(md5(md5($plain)))) | no | no | `SHA1MD5MD5MD5` (v) |  |
+| sha1(md5(md5(md5(md5($plain))))) | no | no | `SHA1MD5MD5MD5MD5` (v) |  |
+| sha1(md5(md5(md5(md5(md5($plain)))))) | no | no | `SHA1MD5MD5MD5MD5MD5` (v) |  |
+| sha1(md5(md5(md5(sha1($plain))))) | no | no | `SHA1MD5MD5MD5SHA1` (v) |  |
+| sha1(md5(md5(sha1($plain)))) | no | no | `SHA1MD5MD5SHA1` (v) |  |
+| sha1(md5(md5(sha1(md5($plain))))) | no | no | `SHA1MD5MD5SHA1MD5` (v) |  |
+| sha1(md5(radmin2($plain))) | no | no | `SHA1MD5RADMIN2` (v) |  |
+| sha1(md5(sha1($plain))) | no | no | `SHA1MD5SHA1` (v) |  |
+| sha1(md5(sha1(md5($plain)))) | no | no | `SHA1MD5SHA1MD5` (v) |  |
+| sha1(md5(sha1(md5(sha1(md5($plain)))))) | no | no | `SHA1MD5SHA1MD5SHA1MD5` (v) |  |
+| sha1(md5(sha1(md5(sha1(md5(sha1($plain))))))) | no | no | `SHA1MD5SHA1MD5SHA1MD5SHA1` (v) |  |
+| sha1(mysql3($plain)) | no | no | `SHA1SQL3` (v) |  |
+| sha1(radmin2($plain)) | no | no | `SHA1RADMIN2` (v) |  |
+| sha1(radmin2(base64_encode($plain))) | no | no | `SHA1RADMIN2BASE64` (v) |  |
+| sha1(radmin2(md5($plain))) | no | no | `SHA1RADMIN2MD5` (v) |  |
+| sha1(reverse($plain)) | no | no | `SHA1revp` (v) |  |
+| sha1(reverse(md5($plain))) | no | no | `SHA1revMD5` (v) |  |
 | sha1(sha1($pass)) | `4500` (v) | `dynamic_1026`<br>`dynamic_26` | `SHA1 -i2` (v) |  |
 | sha1(sha1($plain).$salt) | `4510` (v) | `dynamic_1502` (v) | `SHA1SHA1PASSSALT`<br>`SHA1SHA1USER` (v) | same as sha1-sha1-plain-substr-plain-0-1 (application) |
-| sha1(sha1($plain).md5($plain)) | no | **--** | `SHA1-1xSHA1MD5` (v) |  |
-| sha1(sha1($plain).sha1($plain)) | no | **--** | `SHA1-2xSHA1` (v) |  |
+| sha1(sha1($plain).md5($plain)) | no | no | `SHA1-1xSHA1MD5` (v) |  |
+| sha1(sha1($plain).sha1($plain)) | no | no | `SHA1-2xSHA1` (v) |  |
 | sha1(sha1($plain).substr($plain,0,1)) | `4510` (v) | `dynamic_1502` (v) | `SHA1-1xSHA1psubp` (v) | same as sha1-sha1-plain-salt (application) |
-| sha1(sha1(md5($plain)).sha1($plain)) | no | **--** | `SHA1-1xSHA1MD5pSHA1p` (v) |  |
-| sha1(sha1(md5($plain)).sha1(md5($plain))) | no | **--** | `SHA1-2xSHA1-MD5` (v) |  |
-| sha1(sha1(md5($plain),true)) | no | **--** | `MYSQL5MD5 -i2`<br>`SHA1SHA1RAWMD5 -i2` (v) |  |
-| sha1(sha1(md5(md5($plain))).<br>sha1(md5(md5($plain)))) | no | **--** | `SHA1-2xSHA1-MD5MD5` (v) |  |
-| sha1(sha1(md5(md5($plain)),true)) | no | **--** | `SHA1SHA1RAWMD5MD5 -i2` (v) |  |
-| sha1(sha1(md5(md5(md5($plain)))).<br>sha1(md5(md5(md5($plain))))) | no | **--** | `SHA1-2xSHA1-MD5MD5MD5` (v) |  |
-| sha1(sha1(md5(md5(md5($plain))),true)) | no | **--** | `SHA1SHA1RAWMD5MD5MD5 -i2` (v) |  |
+| sha1(sha1(md5($plain)).sha1($plain)) | no | no | `SHA1-1xSHA1MD5pSHA1p` (v) |  |
+| sha1(sha1(md5($plain)).sha1(md5($plain))) | no | no | `SHA1-2xSHA1-MD5` (v) |  |
+| sha1(sha1(md5($plain),true)) | no | no | `MYSQL5MD5 -i2`<br>`SHA1SHA1RAWMD5 -i2` (v) |  |
+| sha1(sha1(md5(md5($plain))).<br>sha1(md5(md5($plain)))) | no | no | `SHA1-2xSHA1-MD5MD5` (v) |  |
+| sha1(sha1(md5(md5($plain)),true)) | no | no | `SHA1SHA1RAWMD5MD5 -i2` (v) |  |
+| sha1(sha1(md5(md5(md5($plain)))).<br>sha1(md5(md5(md5($plain))))) | no | no | `SHA1-2xSHA1-MD5MD5MD5` (v) |  |
+| sha1(sha1(md5(md5(md5($plain))),true)) | no | no | `SHA1SHA1RAWMD5MD5MD5 -i2` (v) |  |
 | sha1(sha1(sha1($pass))) | no | `dynamic_1027`<br>`dynamic_26` | `SHA1 -i3` (v) |  |
-| sha1(sha1(sha1($plain)).sha1(sha1($plain))) | no | **--** | `SHA1-2xSHA1-SHA1` (v) |  |
-| sha1(sha256($plain)) | no | **--** | `SHA1SHA256` (v) |  |
-| sha1(sha384($plain)) | no | **--** | `SHA1SHA384` (v) |  |
-| sha1(sha512($plain)) | no | **--** | `SHA1SHA512` (v) |  |
-| sha1(strtoupper(sha1(sha1($plain, true)))) | no | **--** | `SHA1SQL5-40` (v) |  |
-| sha1(substr(sha1($plain), 0, 32)) | no | **--** | `SHA1SHA1u32` (v) |  |
-| sha1(upper(wrl($plain))) | no | **--** | `SHA1UCWRL` (v) |  |
+| sha1(sha1(sha1($plain)).sha1(sha1($plain))) | no | no | `SHA1-2xSHA1-SHA1` (v) |  |
+| sha1(sha256($plain)) | no | no | `SHA1SHA256` (v) |  |
+| sha1(sha384($plain)) | no | no | `SHA1SHA384` (v) |  |
+| sha1(sha512($plain)) | no | no | `SHA1SHA512` (v) |  |
+| sha1(strtoupper(sha1(sha1($plain, true)))) | no | no | `SHA1SQL5-40` (v) |  |
+| sha1(substr(sha1($plain), 0, 32)) | no | no | `SHA1SHA1u32` (v) |  |
+| sha1(upper(wrl($plain))) | no | no | `SHA1UCWRL` (v) |  |
 | sha1(utf16le($pass)) | `170` (v) | `dynamic_1400` (v) | `SHA1UTF16LE` (v) |  |
-| sha1(wrl($plain)) | no | **--** | `SHA1WRL` (v) |  |
-| sha1(wrl(md5($plain))) | no | **--** | `SHA1WRLMD5` (v) |  |
-| SHA1-2xMD5 | no | **--** | `SHA1-2xMD5` (v) |  |
-| SHA1-8TRACK | no | **--** | `SHA1-8TRACK` (v) |  |
-| SHA1-CUSTOMUSERSALT | no | **--** | `SHA1-CUSTOMUSERSALT` (v) |  |
-| SHA1-HMAC-MD5 | no | **--** | `SHA1-HMAC-MD5` (v) |  |
-| SHA1-MD5-MD5SALTMD5PASS | no | **--** | `SHA1-MD5-MD5SALTMD5PASS` (v) |  |
-| SHA1-MD5-MD5SALTMD5PASS-SALT | no | **--** | `SHA1-MD5-MD5SALTMD5PASS-SALT` (v) |  |
-| SHA1-MD5CAPMD5SALT | no | **--** | `SHA1-MD5CAPMD5SALT` (v) |  |
-| SHA1-MD5CAPPEPPER-MD5SALT | no | **--** | `SHA1-MD5CAPPEPPER-MD5SALT` (v) |  |
-| SHA1-MD5CAPSALT | no | **--** | `SHA1-MD5CAPSALT` (v) |  |
-| SHA1-MD5MD5SALT | no | **--** | `SHA1-MD5MD5SALT` (v) |  |
-| SHA1-MD5MD5SALT-CR | no | **--** | `SHA1-MD5MD5SALT-CR` (v) |  |
-| SHA1-MD5PASSMD5MD5SALT | no | **--** | `SHA1-MD5PASSMD5MD5SALT` (v) |  |
-| SHA1-MD5PEPPER-MD5MD5SALT | no | **--** | `SHA1-MD5PEPPER-MD5MD5SALT` (v) |  |
-| SHA1-MD5PEPPER-MD5SALT | no | **--** | `SHA1-MD5PEPPER-MD5SALT` (v) |  |
-| SHA1-MD5PEPPER-MD5SALTMD5PASS | no | **--** | `SHA1-MD5PEPPER-MD5SALTMD5PASS` (v) |  |
-| SHA1-MD5SALT | no | **--** | `SHA1-MD5SALT` (v) |  |
-| SHA1-MD5SALT-CR | no | **--** | `SHA1-MD5SALT-CR` (v) |  |
-| SHA1-MD5SHA1PASSSHA1MD5SALT | no | **--** | `SHA1-MD5SHA1PASSSHA1MD5SALT` (v) |  |
-| SHA1-MD5SHA256SALT | no | **--** | `SHA1-MD5SHA256SALT` (v) |  |
-| SHA1-MD5sub8-24SALT | no | **--** | `SHA1-MD5sub8-24SALT` (v) |  |
-| SHA1-MD5UC-MD5SALT | no | **--** | `SHA1-MD5UC-MD5SALT` (v) |  |
-| SHA1-MD5UCMD5UCPASSMD5UCSALT | no | **--** | `SHA1-MD5UCMD5UCPASSMD5UCSALT` (v) |  |
-| SHA1-PEPPER-MD5SALT | no | **--** | `SHA1-PEPPER-MD5SALT` (v) |  |
-| SHA1-revMD5SALT | no | **--** | `SHA1-revMD5SALT` (v) |  |
+| sha1(wrl($plain)) | no | no | `SHA1WRL` (v) |  |
+| sha1(wrl(md5($plain))) | no | no | `SHA1WRLMD5` (v) |  |
+| SHA1-2xMD5 | no | no | `SHA1-2xMD5` (v) |  |
+| SHA1-8TRACK | no | no | `SHA1-8TRACK` (v) |  |
+| SHA1-CUSTOMUSERSALT | no | no | `SHA1-CUSTOMUSERSALT` (v) |  |
+| SHA1-HMAC-MD5 | no | no | `SHA1-HMAC-MD5` (v) |  |
+| SHA1-MD5-MD5SALTMD5PASS | no | no | `SHA1-MD5-MD5SALTMD5PASS` (v) |  |
+| SHA1-MD5-MD5SALTMD5PASS-SALT | no | no | `SHA1-MD5-MD5SALTMD5PASS-SALT` (v) |  |
+| SHA1-MD5CAPMD5SALT | no | no | `SHA1-MD5CAPMD5SALT` (v) |  |
+| SHA1-MD5CAPPEPPER-MD5SALT | no | no | `SHA1-MD5CAPPEPPER-MD5SALT` (v) |  |
+| SHA1-MD5CAPSALT | no | no | `SHA1-MD5CAPSALT` (v) |  |
+| SHA1-MD5MD5SALT | no | no | `SHA1-MD5MD5SALT` (v) |  |
+| SHA1-MD5MD5SALT-CR | no | no | `SHA1-MD5MD5SALT-CR` (v) |  |
+| SHA1-MD5PASSMD5MD5SALT | no | no | `SHA1-MD5PASSMD5MD5SALT` (v) |  |
+| SHA1-MD5PEPPER-MD5MD5SALT | no | no | `SHA1-MD5PEPPER-MD5MD5SALT` (v) |  |
+| SHA1-MD5PEPPER-MD5SALT | no | no | `SHA1-MD5PEPPER-MD5SALT` (v) |  |
+| SHA1-MD5PEPPER-MD5SALTMD5PASS | no | no | `SHA1-MD5PEPPER-MD5SALTMD5PASS` (v) |  |
+| SHA1-MD5SALT | no | no | `SHA1-MD5SALT` (v) |  |
+| SHA1-MD5SALT-CR | no | no | `SHA1-MD5SALT-CR` (v) |  |
+| SHA1-MD5SHA1PASSSHA1MD5SALT | no | no | `SHA1-MD5SHA1PASSSHA1MD5SALT` (v) |  |
+| SHA1-MD5SHA256SALT | no | no | `SHA1-MD5SHA256SALT` (v) |  |
+| SHA1-MD5sub8-24SALT | no | no | `SHA1-MD5sub8-24SALT` (v) |  |
+| SHA1-MD5UC-MD5SALT | no | no | `SHA1-MD5UC-MD5SALT` (v) |  |
+| SHA1-MD5UCMD5UCPASSMD5UCSALT | no | no | `SHA1-MD5UCMD5UCPASSMD5UCSALT` (v) |  |
+| SHA1-PEPPER-MD5SALT | no | no | `SHA1-PEPPER-MD5SALT` (v) |  |
+| SHA1-revMD5SALT | no | no | `SHA1-revMD5SALT` (v) |  |
 | SHA1-S1PS2 | `19300` (v) | **--** | `SHA1-S1PS2` (v) |  |
-| SHA1-SALT-SPECIAL | `14400` (v) | **--** | `SHA1-SALT-SPECIAL` (v) |  |
-| SHA1-SALT-UTF16-PEPPER | no | **--** | `SHA1-SALT-UTF16-PEPPER` (v) |  |
-| SHA1-SALTSHA1PASSSALT | `24300` (v) | **--** | `SHA1-SALTSHA1PASSSALT` (v) |  |
+| SHA1-SALT-SPECIAL | `14400` (v) | no | `SHA1-SALT-SPECIAL` (v) |  |
+| SHA1-SALT-UTF16-PEPPER | no | no | `SHA1-SALT-UTF16-PEPPER` (v) |  |
+| SHA1-SALTSHA1PASSSALT | `24300` (v) | no | `SHA1-SALTSHA1PASSSALT` (v) |  |
 | SHA1-SALTSHA1U16 | `29000` (v) | **--** | `SHA1-SALTSHA1U16` (v) |  |
-| SHA1-SHA1SALTSHA1PASS | no | **--** | `SHA1-SHA1SALTSHA1PASS` (v) |  |
-| SHA1-SHA512PASSSHA512SALT | no | **--** | `SHA1-SHA512PASSSHA512SALT` (v) |  |
+| SHA1-SHA1SALTSHA1PASS | no | no | `SHA1-SHA1SALTSHA1PASS` (v) |  |
+| SHA1-SHA512PASSSHA512SALT | no | no | `SHA1-SHA512PASSSHA512SALT` (v) |  |
 | SHA1.Substr(0, 32) | **--** | `dynamic_1023` (v) | **--** | same as axcryptsha1 (encoding); truncates sha1 (truncation) |
-| SHA11SALTMD5SHA256 | no | **--** | `SHA11SALTMD5SHA256` (v) |  |
-| SHA11SALTMD5UC | no | **--** | `SHA11SALTMD5UC` (v) |  |
-| SHA1BASE64CUSTBASE64MD5 | no | **--** | `SHA1BASE64CUSTBASE64MD5` (v) |  |
-| SHA1BASE64MD5 | no | **--** | `SHA1BASE64MD5` (v) |  |
-| SHA1BASE64MD5UC | no | **--** | `SHA1BASE64MD5UC` (v) |  |
-| SHA1BASE64SHA256 | no | **--** | `SHA1BASE64SHA256` (v) |  |
+| SHA11SALTMD5SHA256 | no | no | `SHA11SALTMD5SHA256` (v) |  |
+| SHA11SALTMD5UC | no | no | `SHA11SALTMD5UC` (v) |  |
+| SHA1BASE64CUSTBASE64MD5 | no | no | `SHA1BASE64CUSTBASE64MD5` (v) |  |
+| SHA1BASE64MD5 | no | no | `SHA1BASE64MD5` (v) |  |
+| SHA1BASE64MD5UC | no | no | `SHA1BASE64MD5UC` (v) |  |
+| SHA1BASE64SHA256 | no | no | `SHA1BASE64SHA256` (v) |  |
 | SHA1CRYPT | `15100` (v) | `sha1crypt`<br>`sha1crypt-opencl` (v) | `SHA1CRYPT` (v) |  |
-| SHA1DECBASE64 | no | **--** | `SHA1DECBASE64` (v) |  |
-| SHA1DESCRYPT | no | **--** | `SHA1DESCRYPT` (v) |  |
-| SHA1DRU | no | **--** | `SHA1DRU` (v) |  |
-| SHA1GOST | no | **--** | `SHA1GOST` (v) |  |
-| SHA1HAV128 | no | **--** | `SHA1HAV128` (v) |  |
-| SHA1lsb32 | no | **--** | `SHA1lsb32` (v) |  |
+| SHA1DECBASE64 | no | no | `SHA1DECBASE64` (v) |  |
+| SHA1DESCRYPT | no | no | `SHA1DESCRYPT` (v) |  |
+| SHA1DRU | no | no | `SHA1DRU` (v) |  |
+| SHA1GOST | no | no | `SHA1GOST` (v) |  |
+| SHA1HAV128 | no | no | `SHA1HAV128` (v) |  |
+| SHA1lsb32 | no | no | `SHA1lsb32` (v) |  |
 | SHA1lsb35 | no | `Raw-SHA1-Linkedin` (v) | `SHA1lsb35` (v) | collides with aich (truncation); collides with sha1uc (truncation) |
-| SHA1MD2 | no | **--** | `SHA1MD2` (v) |  |
-| SHA1MD4 | no | **--** | `SHA1MD4` (v) |  |
-| SHA1MD4UTF16UCMD4UTF16UC | no | **--** | `SHA1MD4UTF16UCMD4UTF16UC` (v) |  |
-| SHA1MD5-2xMD5-MD5 | no | **--** | `SHA1MD5-2xMD5-MD5` (v) |  |
-| SHA1MD5-PASSMD5SALT | no | **--** | `SHA1MD5-PASSMD5SALT` (v) |  |
-| SHA1MD5-SALTMD5PASS | no | **--** | `SHA1MD5-SALTMD5PASS` (v) |  |
-| SHA1MD5-SHA1PASSPASS | no | **--** | `SHA1MD5-SHA1PASSPASS` (v) |  |
-| SHA1MD51CAP | no | **--** | `SHA1MD51CAP` (v) |  |
-| SHA1MD51CAPMD5 | no | **--** | `SHA1MD51CAPMD5` (v) |  |
-| SHA1MD51CAPMD5MD5 | no | **--** | `SHA1MD51CAPMD5MD5` (v) |  |
-| SHA1MD51CAPSALT | no | **--** | `SHA1MD51CAPSALT` (v) |  |
-| SHA1MD5BASE64 | no | **--** | `SHA1MD5BASE64` (v) |  |
-| SHA1MD5BASE641SALT | no | **--** | `SHA1MD5BASE641SALT` (v) |  |
-| SHA1MD5CAP | no | **--** | `SHA1MD5CAP` (v) |  |
-| SHA1MD5CAPMD5 | no | **--** | `SHA1MD5CAPMD5` (v) |  |
-| SHA1MD5CAPMD5SALT | no | **--** | `SHA1MD5CAPMD5SALT` (v) |  |
-| SHA1MD5CAPSALT | no | **--** | `SHA1MD5CAPSALT` (v) |  |
-| SHA1MD5CAPSHA1SALT | no | **--** | `SHA1MD5CAPSHA1SALT` (v) |  |
-| SHA1MD5DSALT | no | **--** | `SHA1MD5DSALT` (v) |  |
+| SHA1MD2 | no | no | `SHA1MD2` (v) |  |
+| SHA1MD4 | no | no | `SHA1MD4` (v) |  |
+| SHA1MD4UTF16UCMD4UTF16UC | no | no | `SHA1MD4UTF16UCMD4UTF16UC` (v) |  |
+| SHA1MD5-2xMD5-MD5 | no | no | `SHA1MD5-2xMD5-MD5` (v) |  |
+| SHA1MD5-PASSMD5SALT | no | no | `SHA1MD5-PASSMD5SALT` (v) |  |
+| SHA1MD5-SALTMD5PASS | no | no | `SHA1MD5-SALTMD5PASS` (v) |  |
+| SHA1MD5-SHA1PASSPASS | no | no | `SHA1MD5-SHA1PASSPASS` (v) |  |
+| SHA1MD51CAP | no | no | `SHA1MD51CAP` (v) |  |
+| SHA1MD51CAPMD5 | no | no | `SHA1MD51CAPMD5` (v) |  |
+| SHA1MD51CAPMD5MD5 | no | no | `SHA1MD51CAPMD5MD5` (v) |  |
+| SHA1MD51CAPSALT | no | no | `SHA1MD51CAPSALT` (v) |  |
+| SHA1MD5BASE64 | no | no | `SHA1MD5BASE64` (v) |  |
+| SHA1MD5BASE641SALT | no | no | `SHA1MD5BASE641SALT` (v) |  |
+| SHA1MD5CAP | no | no | `SHA1MD5CAP` (v) |  |
+| SHA1MD5CAPMD5 | no | no | `SHA1MD5CAPMD5` (v) |  |
+| SHA1MD5CAPMD5SALT | no | no | `SHA1MD5CAPMD5SALT` (v) |  |
+| SHA1MD5CAPSALT | no | no | `SHA1MD5CAPSALT` (v) |  |
+| SHA1MD5CAPSHA1SALT | no | no | `SHA1MD5CAPSHA1SALT` (v) |  |
+| SHA1MD5DSALT | no | no | `SHA1MD5DSALT` (v) |  |
 | SHA1MD5HUM | no | **--** | `SHA1MD5HUM` |  |
-| SHA1MD5MD5DSALT | no | **--** | `SHA1MD5MD5DSALT` (v) |  |
-| SHA1MD5MD5SALT | no | **--** | `SHA1MD5MD5SALT` (v) |  |
-| SHA1MD5MD5SHA1MD5SHA1SHA1MD5 | no | **--** | `SHA1MD5MD5SHA1MD5SHA1SHA1MD5` (v) |  |
-| SHA1MD5MD5SHA1SHA1MD5 | no | **--** | `SHA1MD5MD5SHA1SHA1MD5` (v) |  |
-| SHA1MD5MD5SQL5 | no | **--** | `SHA1MD5MD5SQL5` (v) |  |
-| SHA1MD5MD5UC | no | **--** | `SHA1MD5MD5UC` (v) |  |
-| SHA1MD5MD5UCMD5MD5UC | no | **--** | `SHA1MD5MD5UCMD5MD5UC` (v) |  |
-| SHA1MD5MD5UCMD5UC | no | **--** | `SHA1MD5MD5UCMD5UC` (v) |  |
-| SHA1MD5MD5UCx | no | **--** | `SHA1MD5MD5UCx` (v) |  |
-| SHA1MD5PASSMD5 | no | **--** | `SHA1MD5PASSMD5` (v) |  |
-| SHA1MD5PASSSALT | `21100` (v) | **--** | `SHA1MD5PASSSALT` (v) |  |
-| SHA1MD5RAW | no | **--** | `SHA1MD5RAW` (v) |  |
-| SHA1MD5RAWUCMD5RAW | no | **--** | `SHA1MD5RAWUCMD5RAW` (v) |  |
-| SHA1MD5SALTMD5PASS | no | **--** | `SHA1MD5SALTMD5PASS` (v) |  |
-| SHA1MD5SALTPASS | no | **--** | `SHA1MD5SALTPASS` (v) |  |
-| SHA1MD5SALTPASSPEPPER | no | **--** | `SHA1MD5SALTPASSPEPPER` (v) |  |
-| SHA1MD5SHA1-SALT | no | **--** | `SHA1MD5SHA1-SALT` (v) |  |
-| SHA1MD5SHA1MD5MD5SHA1MD5 | no | **--** | `SHA1MD5SHA1MD5MD5SHA1MD5` (v) |  |
-| SHA1MD5SHA1MD5SHA1 | no | **--** | `SHA1MD5SHA1MD5SHA1` (v) |  |
-| SHA1MD5SHA1PASSSALT | no | **--** | `SHA1MD5SHA1PASSSALT` (v) |  |
-| SHA1MD5SHA256 | no | **--** | `SHA1MD5SHA256` (v) |  |
-| SHA1MD5SHA512 | no | **--** | `SHA1MD5SHA512` (v) |  |
-| SHA1MD5SQL5 | no | **--** | `SHA1MD5SQL5` (v) |  |
-| SHA1MD5sub1-16 | no | **--** | `SHA1MD5sub1-16` (v) |  |
-| SHA1MD5sub1-16MD5 | no | **--** | `SHA1MD5sub1-16MD5` (v) |  |
-| SHA1MD5sub1-16MD5MD5 | no | **--** | `SHA1MD5sub1-16MD5MD5` (v) |  |
-| SHA1MD5sub1-20MD5 | no | **--** | `SHA1MD5sub1-20MD5` (v) |  |
-| SHA1MD5sub1-20MD5MD5 | no | **--** | `SHA1MD5sub1-20MD5MD5` (v) |  |
-| SHA1MD5sub8-24MD5 | no | **--** | `SHA1MD5sub8-24MD5` (v) |  |
-| SHA1MD5TRUNCSALT | no | **--** | `SHA1MD5TRUNCSALT` |  |
-| SHA1MD5UC | no | **--** | `SHA1MD5UC` (v) |  |
-| SHA1MD5UC-MD5UCSALT | no | **--** | `SHA1MD5UC-MD5UCSALT` (v) |  |
-| SHA1MD5UC1LC | no | **--** | `SHA1MD5UC1LC` |  |
-| SHA1MD5UCMD5 | no | **--** | `SHA1MD5UCMD5` (v) |  |
-| SHA1MD5UCMD5UC | no | **--** | `SHA1MD5UCMD5UC` (v) |  |
-| SHA1MD5UCMD5UCMD5UC | no | **--** | `SHA1MD5UCMD5UCMD5UC` (v) |  |
-| SHA1MD5UCMD5UCMD5UCMD5UC | no | **--** | `SHA1MD5UCMD5UCMD5UCMD5UC` (v) |  |
-| SHA1MD5UCSALT | no | **--** | `SHA1MD5UCSALT` (v) |  |
-| SHA1MD5UCSHA1BASE64 | no | **--** | `SHA1MD5UCSHA1BASE64` (v) |  |
-| SHA1MD5UCSHA1UCMD5UC | no | **--** | `SHA1MD5UCSHA1UCMD5UC` (v) |  |
-| SHA1MD5UCx | no | **--** | `SHA1MD5UCx` (v) |  |
-| SHA1MD5WRLSHA1 | no | **--** | `SHA1MD5WRLSHA1` (v) |  |
-| SHA1MD5x | no | **--** | `SHA1MD5x` (v) |  |
-| SHA1MD5x1CAP | no | **--** | `SHA1MD5x1CAP` (v) |  |
-| SHA1MD5xSALT | no | **--** | `SHA1MD5xSALT` |  |
-| SHA1MD6CAPTRUNC | no | **--** | `SHA1MD6CAPTRUNC` (v) |  |
-| SHA1MD6TRUNC | no | **--** | `SHA1MD6TRUNC` (v) |  |
-| SHA1NTLM | no | **--** | `SHA1NTLM` (v) |  |
-| SHA1NTLMUC | no | **--** | `SHA1NTLMUC` (v) |  |
-| SHA1PASS-TRUNC | no | **--** | `SHA1PASS-TRUNC` (v) |  |
-| SHA1PASSHEXSALT | `112` (v) | **--** | `SHA1PASSHEXSALT` (v) |  |
-| SHA1RAW | `300` (v) | **--** | `SHA1RAW` |  |
-| SHA1revBASE64 | no | **--** | `SHA1revBASE64` (v) |  |
-| SHA1revBASE64x | no | **--** | `SHA1revBASE64x` (v) |  |
-| SHA1revMD5PASSSALT | no | **--** | `SHA1revMD5PASSSALT` (v) |  |
-| SHA1revSHA1 | no | **--** | `SHA1revSHA1` (v) |  |
-| SHA1RMD128 | no | **--** | `SHA1RMD128` (v) |  |
-| SHA1RMD160TRUNC | no | **--** | `SHA1RMD160TRUNC` (v) |  |
+| SHA1MD5MD5DSALT | no | no | `SHA1MD5MD5DSALT` (v) |  |
+| SHA1MD5MD5SALT | no | no | `SHA1MD5MD5SALT` (v) |  |
+| SHA1MD5MD5SHA1MD5SHA1SHA1MD5 | no | no | `SHA1MD5MD5SHA1MD5SHA1SHA1MD5` (v) |  |
+| SHA1MD5MD5SHA1SHA1MD5 | no | no | `SHA1MD5MD5SHA1SHA1MD5` (v) |  |
+| SHA1MD5MD5SQL5 | no | no | `SHA1MD5MD5SQL5` (v) |  |
+| SHA1MD5MD5UC | no | no | `SHA1MD5MD5UC` (v) |  |
+| SHA1MD5MD5UCMD5MD5UC | no | no | `SHA1MD5MD5UCMD5MD5UC` (v) |  |
+| SHA1MD5MD5UCMD5UC | no | no | `SHA1MD5MD5UCMD5UC` (v) |  |
+| SHA1MD5MD5UCx | no | no | `SHA1MD5MD5UCx` (v) |  |
+| SHA1MD5PASSMD5 | no | no | `SHA1MD5PASSMD5` (v) |  |
+| SHA1MD5PASSSALT | `21100` (v) | no | `SHA1MD5PASSSALT` (v) |  |
+| SHA1MD5RAW | no | no | `SHA1MD5RAW` (v) |  |
+| SHA1MD5RAWUCMD5RAW | no | no | `SHA1MD5RAWUCMD5RAW` (v) |  |
+| SHA1MD5SALTMD5PASS | no | no | `SHA1MD5SALTMD5PASS` (v) |  |
+| SHA1MD5SALTPASS | no | no | `SHA1MD5SALTPASS` (v) |  |
+| SHA1MD5SALTPASSPEPPER | no | no | `SHA1MD5SALTPASSPEPPER` (v) |  |
+| SHA1MD5SHA1-SALT | no | no | `SHA1MD5SHA1-SALT` (v) |  |
+| SHA1MD5SHA1MD5MD5SHA1MD5 | no | no | `SHA1MD5SHA1MD5MD5SHA1MD5` (v) |  |
+| SHA1MD5SHA1MD5SHA1 | no | no | `SHA1MD5SHA1MD5SHA1` (v) |  |
+| SHA1MD5SHA1PASSSALT | no | no | `SHA1MD5SHA1PASSSALT` (v) |  |
+| SHA1MD5SHA256 | no | no | `SHA1MD5SHA256` (v) |  |
+| SHA1MD5SHA512 | no | no | `SHA1MD5SHA512` (v) |  |
+| SHA1MD5SQL5 | no | no | `SHA1MD5SQL5` (v) |  |
+| SHA1MD5sub1-16 | no | no | `SHA1MD5sub1-16` (v) |  |
+| SHA1MD5sub1-16MD5 | no | no | `SHA1MD5sub1-16MD5` (v) |  |
+| SHA1MD5sub1-16MD5MD5 | no | no | `SHA1MD5sub1-16MD5MD5` (v) |  |
+| SHA1MD5sub1-20MD5 | no | no | `SHA1MD5sub1-20MD5` (v) |  |
+| SHA1MD5sub1-20MD5MD5 | no | no | `SHA1MD5sub1-20MD5MD5` (v) |  |
+| SHA1MD5sub8-24MD5 | no | no | `SHA1MD5sub8-24MD5` (v) |  |
+| SHA1MD5TRUNCSALT | no | no | `SHA1MD5TRUNCSALT` |  |
+| SHA1MD5UC | no | no | `SHA1MD5UC` (v) |  |
+| SHA1MD5UC-MD5UCSALT | no | no | `SHA1MD5UC-MD5UCSALT` (v) |  |
+| SHA1MD5UC1LC | no | no | `SHA1MD5UC1LC` |  |
+| SHA1MD5UCMD5 | no | no | `SHA1MD5UCMD5` (v) |  |
+| SHA1MD5UCMD5UC | no | no | `SHA1MD5UCMD5UC` (v) |  |
+| SHA1MD5UCMD5UCMD5UC | no | no | `SHA1MD5UCMD5UCMD5UC` (v) |  |
+| SHA1MD5UCMD5UCMD5UCMD5UC | no | no | `SHA1MD5UCMD5UCMD5UCMD5UC` (v) |  |
+| SHA1MD5UCSALT | no | no | `SHA1MD5UCSALT` (v) |  |
+| SHA1MD5UCSHA1BASE64 | no | no | `SHA1MD5UCSHA1BASE64` (v) |  |
+| SHA1MD5UCSHA1UCMD5UC | no | no | `SHA1MD5UCSHA1UCMD5UC` (v) |  |
+| SHA1MD5UCx | no | no | `SHA1MD5UCx` (v) |  |
+| SHA1MD5WRLSHA1 | no | no | `SHA1MD5WRLSHA1` (v) |  |
+| SHA1MD5x | no | no | `SHA1MD5x` (v) |  |
+| SHA1MD5x1CAP | no | no | `SHA1MD5x1CAP` (v) |  |
+| SHA1MD5xSALT | no | no | `SHA1MD5xSALT` |  |
+| SHA1MD6CAPTRUNC | no | no | `SHA1MD6CAPTRUNC` (v) |  |
+| SHA1MD6TRUNC | no | no | `SHA1MD6TRUNC` (v) |  |
+| SHA1NTLM | no | no | `SHA1NTLM` (v) |  |
+| SHA1NTLMUC | no | no | `SHA1NTLMUC` (v) |  |
+| SHA1PASS-TRUNC | no | no | `SHA1PASS-TRUNC` (v) |  |
+| SHA1PASSHEXSALT | `112` (v) | no | `SHA1PASSHEXSALT` (v) |  |
+| SHA1RAW | `300` (v) | no | `SHA1RAW` |  |
+| SHA1revBASE64 | no | no | `SHA1revBASE64` (v) |  |
+| SHA1revBASE64x | no | no | `SHA1revBASE64x` (v) |  |
+| SHA1revMD5PASSSALT | no | no | `SHA1revMD5PASSSALT` (v) |  |
+| SHA1revSHA1 | no | no | `SHA1revSHA1` (v) |  |
+| SHA1RMD128 | no | no | `SHA1RMD128` (v) |  |
+| SHA1RMD160TRUNC | no | no | `SHA1RMD160TRUNC` (v) |  |
 | SHA1SALTCX | no | **--** | `SHA1SALTCX` |  |
-| SHA1SALTMD5MD5PASS | no | **--** | `SHA1SALTMD5MD5PASS` (v) |  |
-| SHA1SALTMD5MD5PASSPEPPER | no | **--** | `SHA1SALTMD5MD5PASSPEPPER` (v) |  |
-| SHA1SALTMD5PASS | no | **--** | `SHA1SALTMD5PASS` (v) |  |
-| SHA1SALTMD5PASSMD5 | no | **--** | `SHA1SALTMD5PASSMD5` (v) |  |
-| SHA1SALTMD5PASSPEPPER | no | **--** | `SHA1SALTMD5PASSPEPPER` (v) |  |
-| SHA1SALTMD5SHA1PASS | no | **--** | `SHA1SALTMD5SHA1PASS` (v) |  |
-| SHA1SALTMD5SHA1PASSPEPPER | no | **--** | `SHA1SALTMD5SHA1PASSPEPPER` (v) |  |
-| SHA1SALTMD5UC | no | **--** | `SHA1SALTMD5UC` (v) |  |
-| SHA1SALTMD5UCMD5UC | no | **--** | `SHA1SALTMD5UCMD5UC` (v) |  |
-| SHA1SALTMD5UCPASSPEPPER | no | **--** | `SHA1SALTMD5UCPASSPEPPER` (v) |  |
-| SHA1SALTrevMD5PASS | no | **--** | `SHA1SALTrevMD5PASS` (v) |  |
-| SHA1SALTSHA1CAP | no | **--** | `SHA1SALTSHA1CAP` (v) |  |
-| SHA1SALTSHA1MD5 | no | **--** | `SHA1SALTSHA1MD5` (v) |  |
-| SHA1SALTSHA1PASSPEPPER | no | **--** | `SHA1SALTSHA1PASSPEPPER` (v) |  |
-| SHA1SALTSHA1UCPASS | no | **--** | `SHA1SALTSHA1UCPASS` (v) |  |
-| SHA1SALTSHA256 | no | **--** | `SHA1SALTSHA256` (v) |  |
-| SHA1SALTSHA256TRUNC | no | **--** | `SHA1SALTSHA256TRUNC` |  |
-| SHA1SALTSHA256TRUNCMD5 | no | **--** | `SHA1SALTSHA256TRUNCMD5` |  |
-| SHA1SALTSHA256UCTRUNC | no | **--** | `SHA1SALTSHA256UCTRUNC` |  |
-| SHA1SALTSHA512UCTRUNC | no | **--** | `SHA1SALTSHA512UCTRUNC` |  |
-| SHA1SHA0 | no | **--** | `SHA1SHA0` (v) |  |
-| SHA1SHA11CAP | no | **--** | `SHA1SHA11CAP` (v) |  |
-| SHA1SHA1CAPSALT | no | **--** | `SHA1SHA1CAPSALT` (v) |  |
-| SHA1SHA1CAPTRUNC | no | **--** | `SHA1SHA1CAPTRUNC` (v) |  |
+| SHA1SALTMD5MD5PASS | no | no | `SHA1SALTMD5MD5PASS` (v) |  |
+| SHA1SALTMD5MD5PASSPEPPER | no | no | `SHA1SALTMD5MD5PASSPEPPER` (v) |  |
+| SHA1SALTMD5PASS | no | no | `SHA1SALTMD5PASS` (v) |  |
+| SHA1SALTMD5PASSMD5 | no | no | `SHA1SALTMD5PASSMD5` (v) |  |
+| SHA1SALTMD5PASSPEPPER | no | no | `SHA1SALTMD5PASSPEPPER` (v) |  |
+| SHA1SALTMD5SHA1PASS | no | no | `SHA1SALTMD5SHA1PASS` (v) |  |
+| SHA1SALTMD5SHA1PASSPEPPER | no | no | `SHA1SALTMD5SHA1PASSPEPPER` (v) |  |
+| SHA1SALTMD5UC | no | no | `SHA1SALTMD5UC` (v) |  |
+| SHA1SALTMD5UCMD5UC | no | no | `SHA1SALTMD5UCMD5UC` (v) |  |
+| SHA1SALTMD5UCPASSPEPPER | no | no | `SHA1SALTMD5UCPASSPEPPER` (v) |  |
+| SHA1SALTrevMD5PASS | no | no | `SHA1SALTrevMD5PASS` (v) |  |
+| SHA1SALTSHA1CAP | no | no | `SHA1SALTSHA1CAP` (v) |  |
+| SHA1SALTSHA1MD5 | no | no | `SHA1SALTSHA1MD5` (v) |  |
+| SHA1SALTSHA1PASSPEPPER | no | no | `SHA1SALTSHA1PASSPEPPER` (v) |  |
+| SHA1SALTSHA1UCPASS | no | no | `SHA1SALTSHA1UCPASS` (v) |  |
+| SHA1SALTSHA256 | no | no | `SHA1SALTSHA256` (v) |  |
+| SHA1SALTSHA256TRUNC | no | no | `SHA1SALTSHA256TRUNC` |  |
+| SHA1SALTSHA256TRUNCMD5 | no | no | `SHA1SALTSHA256TRUNCMD5` |  |
+| SHA1SALTSHA256UCTRUNC | no | no | `SHA1SALTSHA256UCTRUNC` |  |
+| SHA1SALTSHA512UCTRUNC | no | no | `SHA1SALTSHA512UCTRUNC` |  |
+| SHA1SHA0 | no | no | `SHA1SHA0` (v) |  |
+| SHA1SHA11CAP | no | no | `SHA1SHA11CAP` (v) |  |
+| SHA1SHA1CAPSALT | no | no | `SHA1SHA1CAPSALT` (v) |  |
+| SHA1SHA1CAPTRUNC | no | no | `SHA1SHA1CAPTRUNC` (v) |  |
 | SHA1SHA1HUM | no | **--** | `SHA1SHA1HUM` |  |
-| SHA1SHA1MD5MD5PASS1SALT | no | **--** | `SHA1SHA1MD5MD5PASS1SALT` (v) |  |
-| SHA1SHA1MD5PASSSALT | no | **--** | `SHA1SHA1MD5PASSSALT` (v) |  |
-| SHA1SHA1PASS-TRUNC1SALT | no | **--** | `SHA1SHA1PASS-TRUNC1SALT` (v) |  |
-| SHA1SHA1SALTPASSSALT | `5000` (v) | **--** | `SHA1SHA1SALTPASSSALT` (v) |  |
-| SHA1SHA1SHA1TRUNC | no | **--** | `SHA1SHA1SHA1TRUNC` (v) |  |
-| SHA1SHA1sub1-16 | no | **--** | `SHA1SHA1sub1-16` (v) |  |
+| SHA1SHA1MD5MD5PASS1SALT | no | no | `SHA1SHA1MD5MD5PASS1SALT` (v) |  |
+| SHA1SHA1MD5PASSSALT | no | no | `SHA1SHA1MD5PASSSALT` (v) |  |
+| SHA1SHA1PASS-TRUNC1SALT | no | no | `SHA1SHA1PASS-TRUNC1SALT` (v) |  |
+| SHA1SHA1SALTPASSSALT | `5000` (v) | no | `SHA1SHA1SALTPASSSALT` (v) |  |
+| SHA1SHA1SHA1TRUNC | no | no | `SHA1SHA1SHA1TRUNC` (v) |  |
+| SHA1SHA1sub1-16 | no | no | `SHA1SHA1sub1-16` (v) |  |
 | SHA1SHA1TRUNC | no | `dynamic_1026` (v) | `SHA1SHA1TRUNC` (v) |  |
-| SHA1SHA1TRUNC-SHA1PASS-3 | no | **--** | `SHA1SHA1TRUNC-SHA1PASS-3` (v) |  |
-| SHA1SHA1TRUNCMD5 | no | **--** | `SHA1SHA1TRUNCMD5` (v) |  |
-| SHA1SHA1TRUNCSALT | no | **--** | `SHA1SHA1TRUNCSALT` |  |
-| SHA1SHA1u34 | no | **--** | `SHA1SHA1u34` (v) |  |
-| SHA1SHA1u35 | no | **--** | `SHA1SHA1u35` (v) |  |
-| SHA1SHA1u36 | no | **--** | `SHA1SHA1u36` (v) |  |
-| SHA1SHA1u37 | no | **--** | `SHA1SHA1u37` (v) |  |
-| SHA1SHA1u38 | no | **--** | `SHA1SHA1u38` (v) |  |
-| SHA1SHA1u39 | no | **--** | `SHA1SHA1u39` (v) |  |
-| SHA1SHA1UCPASSSALT | no | **--** | `SHA1SHA1UCPASSSALT` (v) |  |
-| SHA1SHA1UCTRUNC | no | **--** | `SHA1SHA1UCTRUNC` (v) |  |
-| SHA1SHA224 | no | **--** | `SHA1SHA224` (v) |  |
-| SHA1SHA256CAP | no | **--** | `SHA1SHA256CAP` (v) |  |
-| SHA1SHA256MD5 | no | **--** | `SHA1SHA256MD5` (v) |  |
-| SHA1SHA256MD5MD5 | no | **--** | `SHA1SHA256MD5MD5` (v) |  |
-| SHA1SHA256MD5SHA256MD5 | no | **--** | `SHA1SHA256MD5SHA256MD5` (v) |  |
-| SHA1SHA256SHA1 | no | **--** | `SHA1SHA256SHA1` (v) |  |
-| SHA1SHA256SHA256 | no | **--** | `SHA1SHA256SHA256` (v) |  |
-| SHA1SHA256SHA256SHA256 | no | **--** | `SHA1SHA256SHA256SHA256` (v) |  |
-| SHA1SHA256SHA512 | no | **--** | `SHA1SHA256SHA512` (v) |  |
-| SHA1SHA256TRUNC | no | **--** | `SHA1SHA256TRUNC` (v) |  |
-| SHA1SHA256TRUNCMD5 | no | **--** | `SHA1SHA256TRUNCMD5` (v) |  |
-| SHA1SHA256TRUNCMD5SALT | no | **--** | `SHA1SHA256TRUNCMD5SALT` |  |
-| SHA1SHA256TRUNCSALT | no | **--** | `SHA1SHA256TRUNCSALT` |  |
-| SHA1SHA256u32 | no | **--** | `SHA1SHA256u32` (v) |  |
-| SHA1SHA256u34 | no | **--** | `SHA1SHA256u34` (v) |  |
-| SHA1SHA256u36 | no | **--** | `SHA1SHA256u36` (v) |  |
-| SHA1SHA256u37 | no | **--** | `SHA1SHA256u37` (v) |  |
-| SHA1SHA256u38 | no | **--** | `SHA1SHA256u38` (v) |  |
-| SHA1SHA256u40 | no | **--** | `SHA1SHA256u40` (v) |  |
-| SHA1SHA256u42 | no | **--** | `SHA1SHA256u42` (v) |  |
-| SHA1SHA256UC | no | **--** | `SHA1SHA256UC` (v) |  |
-| SHA1SHA256UCSHA256 | no | **--** | `SHA1SHA256UCSHA256` (v) |  |
-| SHA1SHA256UCSHA256SHA256 | no | **--** | `SHA1SHA256UCSHA256SHA256` (v) |  |
-| SHA1SHA256UCTRUNC | no | **--** | `SHA1SHA256UCTRUNC` (v) |  |
-| SHA1SHA256UCx | no | **--** | `SHA1SHA256UCx` (v) |  |
-| SHA1SHA256UCxSHA256 | no | **--** | `SHA1SHA256UCxSHA256` (v) |  |
-| SHA1SHA256x | no | **--** | `SHA1SHA256x` (v) |  |
-| SHA1SHA3-256 | no | **--** | `SHA1SHA3-256` (v) |  |
-| SHA1SHA3-256TRUNC | no | **--** | `SHA1SHA3-256TRUNC` (v) |  |
-| SHA1SHA384TRUNC | no | **--** | `SHA1SHA384TRUNC` (v) |  |
-| SHA1SHA512TRUNC | no | **--** | `SHA1SHA512TRUNC` (v) |  |
-| SHA1SHA512TRUNC1SALT | no | **--** | `SHA1SHA512TRUNC1SALT` (v) |  |
-| SHA1SHA512TRUNCMD5 | no | **--** | `SHA1SHA512TRUNCMD5` (v) |  |
-| SHA1SHA512UC | no | **--** | `SHA1SHA512UC` (v) |  |
-| SHA1SHA512UCTRUNC | no | **--** | `SHA1SHA512UCTRUNC` (v) |  |
-| SHA1SQL5-32 | no | **--** | `SHA1SQL5-32` (v) |  |
+| SHA1SHA1TRUNC-SHA1PASS-3 | no | no | `SHA1SHA1TRUNC-SHA1PASS-3` (v) |  |
+| SHA1SHA1TRUNCMD5 | no | no | `SHA1SHA1TRUNCMD5` (v) |  |
+| SHA1SHA1TRUNCSALT | no | no | `SHA1SHA1TRUNCSALT` |  |
+| SHA1SHA1u34 | no | no | `SHA1SHA1u34` (v) |  |
+| SHA1SHA1u35 | no | no | `SHA1SHA1u35` (v) |  |
+| SHA1SHA1u36 | no | no | `SHA1SHA1u36` (v) |  |
+| SHA1SHA1u37 | no | no | `SHA1SHA1u37` (v) |  |
+| SHA1SHA1u38 | no | no | `SHA1SHA1u38` (v) |  |
+| SHA1SHA1u39 | no | no | `SHA1SHA1u39` (v) |  |
+| SHA1SHA1UCPASSSALT | no | no | `SHA1SHA1UCPASSSALT` (v) |  |
+| SHA1SHA1UCTRUNC | no | no | `SHA1SHA1UCTRUNC` (v) |  |
+| SHA1SHA224 | no | no | `SHA1SHA224` (v) |  |
+| SHA1SHA256CAP | no | no | `SHA1SHA256CAP` (v) |  |
+| SHA1SHA256MD5 | no | no | `SHA1SHA256MD5` (v) |  |
+| SHA1SHA256MD5MD5 | no | no | `SHA1SHA256MD5MD5` (v) |  |
+| SHA1SHA256MD5SHA256MD5 | no | no | `SHA1SHA256MD5SHA256MD5` (v) |  |
+| SHA1SHA256SHA1 | no | no | `SHA1SHA256SHA1` (v) |  |
+| SHA1SHA256SHA256 | no | no | `SHA1SHA256SHA256` (v) |  |
+| SHA1SHA256SHA256SHA256 | no | no | `SHA1SHA256SHA256SHA256` (v) |  |
+| SHA1SHA256SHA512 | no | no | `SHA1SHA256SHA512` (v) |  |
+| SHA1SHA256TRUNC | no | no | `SHA1SHA256TRUNC` (v) |  |
+| SHA1SHA256TRUNCMD5 | no | no | `SHA1SHA256TRUNCMD5` (v) |  |
+| SHA1SHA256TRUNCMD5SALT | no | no | `SHA1SHA256TRUNCMD5SALT` |  |
+| SHA1SHA256TRUNCSALT | no | no | `SHA1SHA256TRUNCSALT` |  |
+| SHA1SHA256u32 | no | no | `SHA1SHA256u32` (v) |  |
+| SHA1SHA256u34 | no | no | `SHA1SHA256u34` (v) |  |
+| SHA1SHA256u36 | no | no | `SHA1SHA256u36` (v) |  |
+| SHA1SHA256u37 | no | no | `SHA1SHA256u37` (v) |  |
+| SHA1SHA256u38 | no | no | `SHA1SHA256u38` (v) |  |
+| SHA1SHA256u40 | no | no | `SHA1SHA256u40` (v) |  |
+| SHA1SHA256u42 | no | no | `SHA1SHA256u42` (v) |  |
+| SHA1SHA256UC | no | no | `SHA1SHA256UC` (v) |  |
+| SHA1SHA256UCSHA256 | no | no | `SHA1SHA256UCSHA256` (v) |  |
+| SHA1SHA256UCSHA256SHA256 | no | no | `SHA1SHA256UCSHA256SHA256` (v) |  |
+| SHA1SHA256UCTRUNC | no | no | `SHA1SHA256UCTRUNC` (v) |  |
+| SHA1SHA256UCx | no | no | `SHA1SHA256UCx` (v) |  |
+| SHA1SHA256UCxSHA256 | no | no | `SHA1SHA256UCxSHA256` (v) |  |
+| SHA1SHA256x | no | no | `SHA1SHA256x` (v) |  |
+| SHA1SHA3-256 | no | no | `SHA1SHA3-256` (v) |  |
+| SHA1SHA3-256TRUNC | no | no | `SHA1SHA3-256TRUNC` (v) |  |
+| SHA1SHA384TRUNC | no | no | `SHA1SHA384TRUNC` (v) |  |
+| SHA1SHA512TRUNC | no | no | `SHA1SHA512TRUNC` (v) |  |
+| SHA1SHA512TRUNC1SALT | no | no | `SHA1SHA512TRUNC1SALT` (v) |  |
+| SHA1SHA512TRUNCMD5 | no | no | `SHA1SHA512TRUNCMD5` (v) |  |
+| SHA1SHA512UC | no | no | `SHA1SHA512UC` (v) |  |
+| SHA1SHA512UCTRUNC | no | no | `SHA1SHA512UCTRUNC` (v) |  |
+| SHA1SQL5-32 | no | no | `SHA1SQL5-32` (v) |  |
 | SHA1UC | `100` (v) | `Raw-SHA1`<br>`dynamic_26`<br>`raw-SHA1-opencl` (v) | `SHA1UC` | collides with sha1lsb35 (truncation) |
 | SHA1UCUTF16LE | `170` (v) | `dynamic_1400` (v) | `SHA1UCUTF16LE` (v) |  |
-| SHA1USERSQL3 | no | **--** | `SHA1USERSQL3` (v) |  |
-| SHA1UTF16BE | no | **--** | `SHA1UTF16BE` (v) |  |
-| SHA1UTF16BEZ | no | **--** | `SHA1UTF16BEZ` (v) |  |
-| SHA1UTF16LEPASSSALT | `130` (v) | **--** | `SHA1UTF16LEPASSSALT` (v) |  |
+| SHA1USERSQL3 | no | no | `SHA1USERSQL3` (v) |  |
+| SHA1UTF16BE | no | no | `SHA1UTF16BE` (v) |  |
+| SHA1UTF16BEZ | no | no | `SHA1UTF16BEZ` (v) |  |
+| SHA1UTF16LEPASSSALT | `130` (v) | no | `SHA1UTF16LEPASSSALT` (v) |  |
 | SHA1UTF16LESALTPASS | `140` (v) | `dynamic_1600`<br>`dynamic_41` (v) | `SHA1UTF16LESALTPASS` (v) |  |
-| SHA1UTF7 | no | **--** | `SHA1UTF7` (v) |  |
-| SHA1WRLTRUNC | no | **--** | `SHA1WRLTRUNC` (v) |  |
-| SHA1WRLUCTRUNC | no | **--** | `SHA1WRLUCTRUNC` (v) |  |
-| SHA1WRLUCTRUNCSALT | no | **--** | `SHA1WRLUCTRUNCSALT` |  |
-| SHA1ZUTF16LE | no | **--** | `SHA1ZUTF16LE` (v) |  |
+| SHA1UTF7 | no | no | `SHA1UTF7` (v) |  |
+| SHA1WRLTRUNC | no | no | `SHA1WRLTRUNC` (v) |  |
+| SHA1WRLUCTRUNC | no | no | `SHA1WRLUCTRUNC` (v) |  |
+| SHA1WRLUCTRUNCSALT | no | no | `SHA1WRLUCTRUNCSALT` |  |
+| SHA1ZUTF16LE | no | no | `SHA1ZUTF16LE` (v) |  |
 | SHA224 (2 iterations) | `34400` (v) | `dynamic_53` (v) | `SHA224 -i2` (v) |  |
-| sha224(md5($plain)) | no | **--** | `SHA224MD5` (v) |  |
-| sha224(md5($plain),$plain) | no | **--** | `SHA224MD5PASS` (v) |  |
+| sha224(md5($plain)) | no | no | `SHA224MD5` (v) |  |
+| sha224(md5($plain),$plain) | no | no | `SHA224MD5PASS` (v) |  |
 | sha224(sha224($plain, true)) | no | `dynamic_54` (v) | `SHA224RAW -i2` (v) |  |
 | SHA224PASSSALT | `1310` (v) | `dynamic_52` (v) | `SHA224PASSSALT` (v) |  |
 | SHA224SALTPASS | `1320` (v) | `dynamic_51` (v) | `SHA224SALTPASS` (v) |  |
-| SHA224SHA1 | `34500` (v) | **--** | `SHA224SHA1` (v) |  |
+| SHA224SHA1 | `34500` (v) | no | `SHA224SHA1` (v) |  |
 | SHA256 | `1400` (v) | `Raw-SHA256`<br>`dynamic_60`<br>`raw-SHA256-opencl` (v) | `SHA256` (v) |  |
 | SHA256 (2 iterations) | no | `dynamic_63` (v) | `SHA256 -i2` (v) |  |
 | sha256($pass.$salt) | `1410` (v) | `dynamic_62` (v) | `SHA256PASSSALT` (v) |  |
 | sha256($salt.$pass) | `1420` (v) | `dynamic_61` (v) | `SHA256SALTPASS` (v) | encoding of sha256rawsaltpass (encoding) |
 | sha256($salt.sha256($pass)) | `20720` (v) | `dynamic_66` (v) | `SHA256SALTSHA256PASS` (v) |  |
-| sha256(md5($plain)) | `20800` (v) | **--** | `SHA256MD5` (v) |  |
-| sha256(md5($plain),$plain) | no | **--** | `SHA256MD5PASS` (v) |  |
-| sha256(md5($salt.$plain).":".$salt) | no | **--** | `SHA256HEXSALT` (v) |  |
-| sha256(sha1($plain)) | no | **--** | `SHA256SHA1` (v) |  |
-| sha256(sha256($pass.$salt)) | `20730` (v) | **--** | `SHA256PASSSALT -i2` (v) |  |
+| sha256(md5($plain)) | `20800` (v) | no | `SHA256MD5` (v) |  |
+| sha256(md5($plain),$plain) | no | no | `SHA256MD5PASS` (v) |  |
+| sha256(md5($salt.$plain).":".$salt) | no | no | `SHA256HEXSALT` (v) |  |
+| sha256(sha1($plain)) | no | no | `SHA256SHA1` (v) |  |
+| sha256(sha256($pass.$salt)) | `20730` (v) | no | `SHA256PASSSALT -i2` (v) |  |
 | sha256(sha256($plain, true)) | `21400` (v) | `dynamic_64` (v) | `SHA256RAW -i2` (v) |  |
-| sha256(sha512($plain)) | no | **--** | `SHA256SHA512` (v) |  |
-| SHA256-SALTSHA256RAW | `21420` (v) | **--** | `SHA256-SALTSHA256RAW` (v) |  |
+| sha256(sha512($plain)) | no | no | `SHA256SHA512` (v) |  |
+| SHA256-SALTSHA256RAW | `21420` (v) | no | `SHA256-SALTSHA256RAW` (v) |  |
 | sha256crypt | `7400` (v) | `sha256crypt`<br>`sha256crypt-opencl` (v) | `SHA256CRYPT` (v) |  |
-| SHA256MD5SALTPASS | no | **--** | `SHA256MD5SALTPASS` (v) |  |
-| SHA256MD5SHA256MD5 | no | **--** | `SHA256MD5SHA256MD5` (v) |  |
+| SHA256MD5SALTPASS | no | no | `SHA256MD5SALTPASS` (v) |  |
+| SHA256MD5SHA256MD5 | no | no | `SHA256MD5SHA256MD5` (v) |  |
 | SHA256RAWSALTPASS | `1420` (v) | `FormSpring`<br>`dynamic_61` (v) | `SHA256RAWSALTPASS` (v) | encoding of sha256-salt-pass (encoding) |
-| SHA256SALTPASSSALT | `22300` (v) | **--** | `SHA256SALTPASSSALT` (v) |  |
+| SHA256SALTPASSSALT | `22300` (v) | no | `SHA256SALTPASSSALT` (v) |  |
 | SHA256SHA256SALT | `20710` (v) | `dynamic_1503`<br>`dynamic_65` (v) | `SHA256SHA256SALT` (v) |  |
 | SHA256UC | **--** | **--** | `SHA256UC` |  |
-| SHA256UTF16LE | `1470` (v) | **--** | `SHA256UTF16LE` (v) |  |
-| SHA256UTF16LEPASSSALT | `1430` (v) | **--** | `SHA256UTF16LEPASSSALT` (v) |  |
-| SHA256UTF16LESALTPASS | `1440` (v) | **--** | `SHA256UTF16LESALTPASS` (v) |  |
+| SHA256UTF16LE | `1470` (v) | no | `SHA256UTF16LE` (v) |  |
+| SHA256UTF16LEPASSSALT | `1430` (v) | no | `SHA256UTF16LEPASSSALT` (v) |  |
+| SHA256UTF16LESALTPASS | `1440` (v) | no | `SHA256UTF16LESALTPASS` (v) |  |
 | SHA3-224 (2 iterations) | no | `dynamic_373` (v) | `SHA3-224 -i2` (v) |  |
 | sha3-224($plain) | `17300` (v) | `dynamic_370` (v) | `SHA3-224` (v) |  |
 | SHA3-256 (2 iterations) | no | `dynamic_383` (v) | `SHA3-256 -i2` (v) |  |
@@ -1337,50 +1337,50 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | SHA3-512 (2 iterations) | no | `dynamic_403` (v) | `SHA3-512 -i2` (v) |  |
 | sha3-512($plain) | `17600` (v) | `dynamic_400` (v) | `SHA3-512` (v) |  |
 | SHA384 (2 iterations) | no | `dynamic_73` (v) | `SHA384 -i2` (v) |  |
-| sha384(md5($plain)) | no | **--** | `SHA384MD5` (v) |  |
-| sha384(md5($plain),$plain) | no | **--** | `SHA384MD5PASS` (v) |  |
+| sha384(md5($plain)) | no | no | `SHA384MD5` (v) |  |
+| sha384(md5($plain),$plain) | no | no | `SHA384MD5PASS` (v) |  |
 | sha384(sha384($plain, true)) | no | `dynamic_74` (v) | `SHA384RAW -i2` (v) |  |
 | SHA384PASSSALT | `10810` (v) | `dynamic_72` (v) | `SHA384PASSSALT` (v) |  |
 | SHA384SALTPASS | `10820` (v) | `dynamic_71` (v) | `SHA384SALTPASS` (v) |  |
-| SHA384UTF16LE | `10870` (v) | **--** | `SHA384UTF16LE` (v) |  |
-| SHA384UTF16LEPASSSALT | `10830` (v) | **--** | `SHA384UTF16LEPASSSALT` (v) |  |
-| SHA384UTF16LESALTPASS | `10840` (v) | **--** | `SHA384UTF16LESALTPASS` (v) |  |
+| SHA384UTF16LE | `10870` (v) | no | `SHA384UTF16LE` (v) |  |
+| SHA384UTF16LEPASSSALT | `10830` (v) | no | `SHA384UTF16LEPASSSALT` (v) |  |
+| SHA384UTF16LESALTPASS | `10840` (v) | no | `SHA384UTF16LESALTPASS` (v) |  |
 | SHA512 | `1700` (v) | `Raw-SHA512`<br>`dynamic_80`<br>`raw-SHA512-opencl`<br>`raw-SHA512-free-opencl` (v) | `SHA512` (v) |  |
 | SHA512 (2 iterations) | no | `dynamic_83` (v) | `SHA512 -i2` (v) |  |
 | sha512($pass.$salt) | `1710` (v) | `dynamic_82` (v) | `SHA512PASSSALT` (v) |  |
 | sha512($salt.$pass) | `1720` (v) | `dynamic_81` (v) | `SHA512SALTPASS` (v) |  |
-| sha512(md5($plain)) | no | **--** | `SHA512MD5` (v) |  |
-| sha512(md5($plain),$plain) | no | **--** | `SHA512MD5PASS` (v) |  |
+| sha512(md5($plain)) | no | no | `SHA512MD5` (v) |  |
+| sha512(md5($plain),$plain) | no | no | `SHA512MD5PASS` (v) |  |
 | sha512(sha512($plain, true)) | `21000` (v) | `dynamic_84` (v) | `SHA512RAW -i2` (v) |  |
-| sha512(sha512_bin($pass).$salt) | `32420` (v) | **--** | `SHA512SHA512RAWUSER` (v) |  |
-| SHA512-CUSTOM1 | no | **--** | `SHA512-CUSTOM1` (v) |  |
+| sha512(sha512_bin($pass).$salt) | `32420` (v) | no | `SHA512SHA512RAWUSER` (v) |  |
+| SHA512-CUSTOM1 | no | no | `SHA512-CUSTOM1` (v) |  |
 | sha512crypt | `1800` (v) | `sha512crypt`<br>`sha512crypt-opencl` (v) | `SHA512CRYPT` (v) |  |
-| SHA512CRYPTMD5 | no | **--** | `SHA512CRYPTMD5` (v) |  |
-| SHA512SALTMD5 | no | **--** | `SHA512SALTMD5` (v) |  |
+| SHA512CRYPTMD5 | no | no | `SHA512CRYPTMD5` (v) |  |
+| SHA512SALTMD5 | no | no | `SHA512SALTMD5` (v) |  |
 | SHA512SALTSHA512 | no | `dynamic_86` (v) | `SHA512SALTSHA512` (v) |  |
-| SHA512SHA512RAWUSER | `32420` (v) | **--** | `SHA512SHA512RAWUSER` (v) |  |
+| SHA512SHA512RAWUSER | `32420` (v) | no | `SHA512SHA512RAWUSER` (v) |  |
 | SHA512SHA512SALT | `32410` (v) | `dynamic_85` (v) | `SHA512SHA512SALT` (v) |  |
-| SHA512UTF16LE | `1770` (v) | **--** | `SHA512UTF16LE` (v) |  |
-| SHA512UTF16LEPASSSALT | `1730` (v) | **--** | `SHA512UTF16LEPASSSALT` (v) |  |
-| SHA512UTF16LESALTPASS | `1740` (v) | **--** | `SHA512UTF16LESALTPASS` (v) |  |
-| SHABAL192 | no | **--** | no |  |
-| SHABAL224 | no | **--** | `SHABAL224` (v) |  |
-| SHABAL256 | no | **--** | `SHABAL256` (v) |  |
-| SHABAL384 | no | **--** | `SHABAL384` (v) |  |
-| SHABAL512 | no | **--** | `SHABAL512` (v) |  |
+| SHA512UTF16LE | `1770` (v) | no | `SHA512UTF16LE` (v) |  |
+| SHA512UTF16LEPASSSALT | `1730` (v) | no | `SHA512UTF16LEPASSSALT` (v) |  |
+| SHA512UTF16LESALTPASS | `1740` (v) | no | `SHA512UTF16LESALTPASS` (v) |  |
+| SHABAL192 | no | no | no |  |
+| SHABAL224 | no | no | `SHABAL224` (v) |  |
+| SHABAL256 | no | no | `SHABAL256` (v) |  |
+| SHABAL384 | no | no | `SHABAL384` (v) |  |
+| SHABAL512 | no | no | `SHABAL512` (v) |  |
 | ShangMi 3 | `31100` (v) | `Raw-SM3`<br>`dynamic_450` (v) | `SM3` (v) | duplicate of sm3 |
-| SHAVITE224 | no | **--** | `SHAVITE224` (v) |  |
-| SHAVITE256 | no | **--** | `SHAVITE256` (v) |  |
-| SHAVITE384 | no | **--** | `SHAVITE384` (v) |  |
-| SHAVITE512 | no | **--** | `SHAVITE512` (v) |  |
+| SHAVITE224 | no | no | `SHAVITE224` (v) |  |
+| SHAVITE256 | no | no | `SHAVITE256` (v) |  |
+| SHAVITE384 | no | no | `SHAVITE384` (v) |  |
+| SHAVITE512 | no | no | `SHAVITE512` (v) |  |
 | SHIRO1 | `12150` (v) | **--** | `SHIRO1` (v) |  |
 | Siemens-S7 | **--** | `Siemens-S7` (v) | no |  |
 | Signal Android | **--** | `Signal` (v) | no |  |
-| SIMD224 | no | **--** | `SIMD224` (v) |  |
-| SIMD256 | no | **--** | `SIMD256` (v) |  |
-| SIMD384 | no | **--** | `SIMD384` (v) |  |
-| SIMD512 | no | **--** | `SIMD512` (v) |  |
-| SIMPLACMS | `22800` (v) | **--** | `SIMPLACMS` (v) |  |
+| SIMD224 | no | no | `SIMD224` (v) |  |
+| SIMD256 | no | no | `SIMD256` (v) |  |
+| SIMD384 | no | no | `SIMD384` (v) |  |
+| SIMD512 | no | no | `SIMD512` (v) |  |
+| SIMPLACMS | `22800` (v) | no | `SIMPLACMS` (v) |  |
 | SIP digest authentication (MD5) | `11400` (v) | `SIP` (v) | no |  |
 | SIPHASH | `10100` (v) | **--** | `SIPHASH` (v) |  |
 | Skein 256 | **--** | `skein-256` (v) | `SKEIN256` (v) |  |
@@ -1394,7 +1394,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | SKEIN512 | no | `dynamic_360` (v) | `SKEIN512` (v) |  |
 | SKEIN512 (2 iterations) | no | `dynamic_363` (v) | `SKEIN512 -i2` (v) |  |
 | Skip32 (PT = $salt, key = $pass) | `14900` (v) | **--** | no |  |
-| SKYPE | `23` (v) | **--** | `SKYPE` (v) |  |
+| SKYPE | `23` (v) | no | `SKYPE` (v) |  |
 | SM3 (2 iterations) | no | `dynamic_453` (v) | `SM3 -i2` (v) |  |
 | SM3CRYPT | `35100` (v) | `sm3crypt` (v) | `SM3CRYPT` (v) |  |
 | SMF < v1.1 | `121` (v) | `dynamic_25`<br>`dynamic_37` | `SMF` (v) |  |
@@ -1402,10 +1402,10 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | SNE256 | no | `Snefru-256` (v) | `SNE256` (v) |  |
 | Snefru-128 | no | `Snefru-128` (v) | `SNE128` (v) |  |
 | Snefru-256 | **--** | `Snefru-256` (v) | no |  |
-| snefru128(md5($plain)) | no | **--** | `SNE128MD5` (v) |  |
-| snefru128(md5($plain).$plain) | no | **--** | `SNE128MD5PASS` (v) |  |
-| snefru256(md5($plain)) | no | **--** | `SNE256MD5` (v) |  |
-| snefru256(md5($plain).$plain) | no | **--** | `SNE256MD5PASS` (v) |  |
+| snefru128(md5($plain)) | no | no | `SNE128MD5` (v) |  |
+| snefru128(md5($plain).$plain) | no | no | `SNE128MD5PASS` (v) |  |
+| snefru256(md5($plain)) | no | no | `SNE256MD5` (v) |  |
+| snefru256(md5($plain).$plain) | no | no | `SNE256MD5PASS` (v) |  |
 | sniffed sessions | **--** | `LastPass` (v) | no |  |
 | SNMPv3 HMAC-MD5-96 | `25100` (v) | `SNMP` (v) | no |  |
 | SNMPv3 HMAC-MD5-96/HMAC-SHA1-96 | `25000` (v) | `SNMP` (v) | no |  |
@@ -1435,7 +1435,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | SunMD5 | **--** | `SunMD5` (v) | **--** |  |
 | SYBASE-ASE | `8000` (v) | `SybaseASE` (v) | `SYBASE-ASE` (v) |  |
 | Sybase-PROP | **--** | `Sybase-PROP` (v) | no |  |
-| SYMFONY256 | `35800` (v) | **--** | `SYMFONY256` (v) |  |
+| SYMFONY256 | `35800` (v) | no | `SYMFONY256` (v) |  |
 | system / network | **--** | `MongoDB` (v) | no |  |
 | TACACS | `16100` (v) | `tacacs-plus` (v) | `TACACS` (v) |  |
 | TCP MD5 Signatures, BGP, MSDP | **--** | `tcp-md5` (v) | no |  |
@@ -1443,22 +1443,22 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | Telegram Desktop < v2.1.14 (PBKDF2-HMAC-SHA1) | `22600` (v) | `telegram`<br>`telegram-opencl` (v) | no |  |
 | Telegram Desktop >= v2.1.14 (PBKDF2-HMAC-SHA512) | `24500` (v) | `telegram` (v) | no |  |
 | TELEGRAM-SHA256 | `22301` (v) | **--** | `TELEGRAM-SHA256` (v) |  |
-| Terra Station Wallet (AES256-CBC(PBKDF2($pass))) | `29600` (v) | **--** | no |  |
+| Terra Station Wallet (AES256-CBC(PBKDF2($pass))) | `29600` (v) | no | no |  |
 | Tezos Key | **--** | `tezos`<br>`tezos-opencl` (v) | no |  |
 | Tiger | **--** | `Tiger` (v) | `TIGER` (v) |  |
 | TIGER | no | `dynamic_110` (v) | `TIGER` (v) |  |
 | TIGER (2 iterations) | no | `dynamic_113` (v) | `TIGER -i2` (v) |  |
-| Tiger Tree Hash | no | **--** | `TTH` (v) |  |
-| tiger128_3(md5($plain)) | no | **--** | `TIGERMD5` (v) |  |
-| tiger128_3(md5($plain).$plain) | no | **--** | `TIGERMD5PASS` (v) |  |
-| TIGER2 | no | **--** | `TIGER2` (v) |  |
+| Tiger Tree Hash | no | no | `TTH` (v) |  |
+| tiger128_3(md5($plain)) | no | no | `TIGERMD5` (v) |  |
+| tiger128_3(md5($plain).$plain) | no | no | `TIGERMD5PASS` (v) |  |
+| TIGER2 | no | no | `TIGER2` (v) |  |
 | TOTP (HMAC-SHA1) | `18100` (v) | **--** | **--** |  |
 | Tripcode | `16000` (v) | `tripcode` (v) | no |  |
-| TrueCrypt AES/Twofish/Serpent | **--** | `tc_ripemd160boot` | **--** |  |
+| TrueCrypt AES/Twofish/Serpent | **--** | `tc_ripemd160boot` (v) | **--** |  |
 | TrueCrypt AES256_XTS | **--** | `tc_ripemd160`<br>`TrueCrypt-opencl` (v) | no |  |
-| TrueCrypt AES256_XTS | **--** | `tc_sha512` | **--** |  |
-| TrueCrypt AES256_XTS | **--** | `tc_whirlpool` | **--** |  |
-| TrueCrypt AES256_XTS | **--** | `tc_aes_xts` | **--** |  |
+| TrueCrypt AES256_XTS | **--** | `tc_sha512` (v) | **--** |  |
+| TrueCrypt AES256_XTS | **--** | `tc_whirlpool` (v) | **--** |  |
+| TrueCrypt AES256_XTS | **--** | `tc_aes_xts` (v) | **--** |  |
 | TrueCrypt RIPEMD160 + XTS 1024 bit | `29312` (v) | **--** | no |  |
 | TrueCrypt RIPEMD160 + XTS 1024 bit (legacy) | `6212` | **--** | **--** |  |
 | TrueCrypt RIPEMD160 + XTS 1024 bit + boot-mode | `29342` (v) | **--** | no |  |
@@ -1542,13 +1542,13 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | VMWARE-VMX | `27400` (v) | **--** | `VMWARE-VMX` (v) |  |
 | VNC | **--** | `VNC` (v) | no |  |
 | WBB3 | `8400` (v) | `dynamic_1592`<br>`dynamic_38` (v) | `WBB3` (v) | same as sha1-salt-sha1-salt-sha1-plain-aka-opencart (application) |
-| WBB4 | `33800` (v) | **--** | `WBB4` (v) |  |
+| WBB4 | `33800` (v) | no | `WBB4` (v) |  |
 | WEB2PY-SHA512 | `21600` (v) | **--** | `WEB2PY-SHA512` (v) |  |
 | WERKZEUG-MD5 | `30000` (v) | **--** | `WERKZEUG-MD5` (v) |  |
 | WERKZEUG-SHA256 | `30120` (v) | **--** | `WERKZEUG-SHA256` (v) |  |
 | Whirlpool | `6100` (v) | `dynamic_100`<br>`whirlpool` (v) | `WRL` (v) |  |
-| whirlpool(md5($plain)) | no | **--** | `WRLMD5` (v) |  |
-| whirlpool(md5($plain).$plain) | no | **--** | `WRLMD5PASS` (v) |  |
+| whirlpool(md5($plain)) | no | no | `WRLMD5` (v) |  |
+| whirlpool(md5($plain).$plain) | no | no | `WRLMD5PASS` (v) |  |
 | Windows Hello PIN/Password | `28100` (v) | **--** | no |  |
 | WINPHONE | `13800` (v) | **--** | `WINPHONE` (v) |  |
 | WinZip | `13600` (v) | `ZIP`<br>`ZIP-opencl` (v) | no |  |
@@ -1562,15 +1562,15 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | WPA-PMKID | no | **--** | `WPA-PMKID` (v) |  |
 | WPA-PMKID-PBKDF2 | `16800` | **--** | no |  |
 | WPA-PMKID-PMK | `16801` | **--** | no |  |
-| WPA/WPA2/PMF/PMKID master key | **--** | `wpapsk-pmk` | **--** |  |
-| WPA/WPA2/PMF/PMKID PSK | **--** | `wpapsk` | **--** |  |
+| WPA/WPA2/PMF/PMKID master key | **--** | `wpapsk-pmk` (v) | **--** |  |
+| WPA/WPA2/PMF/PMKID PSK | **--** | `wpapsk` (v) | **--** |  |
 | WPBCRYPT | `35500` (v) | **--** | `WPBCRYPT` (v) |  |
 | WRL (2 iterations) | no | `dynamic_103` (v) | `WRL -i2` (v) |  |
-| wrl(sha512($plain)) | no | **--** | `WRLSHA512` (v) |  |
+| wrl(sha512($plain)) | no | no | `WRLSHA512` (v) |  |
 | WRL0 | no | `whirlpool0` (v) | `WRL0` (v) |  |
 | WRLPASSSALT | no | `dynamic_102` (v) | `WRLPASSSALT` (v) |  |
 | WRLSALTPASS | no | `dynamic_101` (v) | `WRLSALTPASS` (v) |  |
-| WRLSALTPASSSALT | `32600` (v) | **--** | `WRLSALTPASSSALT` (v) |  |
+| WRLSALTPASSSALT | `32600` (v) | no | `WRLSALTPASSSALT` (v) |  |
 | WRLSALTWRL | no | `dynamic_106` (v) | `WRLSALTWRL` (v) |  |
 | WRLWRLSALT | no | `dynamic_105` (v) | `WRLWRLSALT` (v) |  |
 | XMPP SCRAM PBKDF2-SHA1 | `23200` (v) | `SCRAM-PBKDF2-SHA1` (v) | no |  |

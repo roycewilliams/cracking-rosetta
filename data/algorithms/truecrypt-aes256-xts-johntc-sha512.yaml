@@ -13,9 +13,13 @@ status: "needs-review"
 tools:
   john:
     cpu: ["tc_sha512"]
-    verified: "upstream"
-    verified_at: "2026-08-31"
-    verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
-    note: "NOT REPRODUCED HERE. john publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: hashcat's example for this mode is a volume header rather than a digest, so a plain -a 0 wordlist attack cannot consume it. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool john --only tc_sha512 to retry."
+    verified: "vector"
+    verified_at: "2026-09-04"
+    verified_with: "john"
   crack:
     supported: false
+vectors:
+  - hash: "truecrypt_SHA_512$aa582afe64197a3cfd4faf7697673e5e14414369da3f716400414f63f75447da7d3abdc65a25ea511b1772d67370d6c349d8000de66d65861403093fecfb85719e1d46158d24324e5a2c0ee598214b1b2e7eac761dbde8cb85bcb33f293df7f30c9e44a3fa97bf1c70e9986677855873fa2435d9154ccaed8f28d68f16b10adcce7032d7c1742d322739d02c05457859abdaa176faa95c674d2a1092c30832dd2afd9a319599b4d1db92ffe6e48b3b29e566d5c51af091839699f5ad1715730fef24e94e39a6f40770b8320e30bf972d810b588af88ce3450337adbec0a10255b20230bcfca93aa5a0a6592cd6038312181c0792c59ec9e5d95a6216497d39ae28131869b89368e82371718970bf9750a7114c83d87b1b0cd16b6e8d41c4925d15ec26107e92847ec1bb73363ca10f3ad62afa8b0f95ff13cdbe217a1e8a74508ef439ed2140b26d5538b8d011a0d1e469f2a6962e56964adc75b90d9c6a16e88ad0adb59a337f8abb3f9d76f7f9acad22853e9dbbce13a4f686c6a802243b0901972af3c6928511609ac7b957b352452c4347acd563a72faa86a46522942fdc57f32d48c5148a2bb0bc2c3dbc9851385f816f2ece958957082c0a8fe69f647be675d87fcb8244912abc277a3242ee17e1d522f85598417559cb3a9f60b755e5b613069cb54c05a4c5d2fbd3ca6ba793320aeb0e109f8b21852daf2d9ed74dd9"
+    pass: "password"
+    source: "john"
+    reads_in: ["john"]

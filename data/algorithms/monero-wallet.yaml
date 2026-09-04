@@ -13,9 +13,13 @@ status: "needs-review"
 tools:
   john:
     cpu: ["Monero"]
-    verified: "upstream"
-    verified_at: "2026-08-31"
-    verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
-    note: "NOT REPRODUCED HERE. john publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: john publishes no plaintext for its example, and the example did not fall to the ~819 candidate plaintexts harvested from john's own source. The plaintext is findable, it was simply not in the list. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool john --only Monero to retry."
+    verified: "vector"
+    verified_at: "2026-09-04"
+    verified_with: "john"
   crack:
     supported: false
+vectors:
+  - hash: "$monero$0*e0b3e6cadcb68205dd0608b79576034e7a29000806fffb766a655714a4a822bcd1d93c5524b6ef91fd8ae94f0d3ffe1e55a78305c39e52892a7e34d4dfe6983d8492967fe3cd4ea611829c37fc5f65107e8c54b72a96fe63c20b71dda388e08114b88b15055953f182186c19fe9c1816819dc89d162ffffab552634515a8a5aec13300541e6e83d0227af34557b3cc2f64951af8890674a632d48385fe8fc6aca8ec286729793ebd7a85248aaa6c00cb8b530094d6316f9c92a50bea7eb201fbda5a62bcba0413fc3cedf07cf74c3b49a27dd0ed555b7a79d18ab58c89bfaf5c53eb25f01fa950b8afe18c3d4098ce794c2920cc834c915204f3003c37f0aab9f98810b0e3ecd7202a375e0f7e5d845b68abaf45df587756e7c058f6bde6a4cee8a7544efe1d2d71d272b22817dcca7f0969668c5b5bb28d472fc0c429ed25d8987c9537bc1fe309ff39a1dd652c9d618dc433cc4de93906565c44d5eade81b2afbd6fb835f6bea472c1bf949cff305e33252e7921875df833bc6cac040399f0f4445716de0c0fb61518589c570ee76483537b091fad80cfb34b3014740f3456eb2ff9a429004d1ca156ea904290d6edf76e0953ea0bfa6075e88f8bdb63350f317909beccdf7e764b64201d6005b00f33b40e9c1acc2f3e7b7f986340ad7ede0b9a246d9fac416b58937c0e788fdb0f92cdd50cad0a8cb6e926cc0bcfc066d5c5acf70732d58825e1ff2f77eba4697aab68deeb00ffe7b5dffd65436ccf4d6d7148901067628733fc5997b368076bff26424d46d5ba0966d730c6dbdabb2bd9882aed8055e58980ce1000ae6853763187368741a2a3da21efc95583f5705859ffb3c45e8cbef59cafbb76cac69f86e8fb1eea7768ff51ddc66065bac297ea82afbdf8bcfdd03fa4a89dbfc7055e73ab384d6b9fae3d142e9a8768f0f94f26030559da03bcc5df8734c4e3202921faa39aa0bd78ce7d4302143fadf7ac5c97f41dc87d006e241dc10aa22eec9e075d8557a93a6bc7725de06a7c213c47e6b24142131b3d9cb45516b8ef5c8d77103502ac77e53b402ea0d92d01663c7148d99d889d35f76d2177a38bc4caee131fa941aa56a0fe1007e0470306cfe4f8a3e9fc0c63eb983cc625e5716aad730d07bd2bd148516bd4667b2f56b4b3dec528367968db74347be4052a9dd2045d5660bb835d38ca909665048f8a89573729339598c6221b1d12c2f2"
+    pass: "openwall"
+    source: "john"
+    reads_in: ["john"]
