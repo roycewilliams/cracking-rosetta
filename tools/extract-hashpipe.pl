@@ -56,6 +56,14 @@
 # 'vector' for mdxfind. A type that cannot reproduce its own vector cannot be
 # used to prove anything, so validate.pl and any seeding pass need to see it.
 #
+# Those two are a LOCAL BUILD defect and the header below says so. The first
+# reading here was that they showed uninitialised state worth reporting
+# upstream; Waffle's answer, relayed 2026-09-04, is that sphlib's bmw.c
+# violates strict aliasing and GCC 12+ miscompiles it, which is why the
+# 32-bit BMW core fails and the 64-bit one does not. Worth keeping as a
+# lesson about this field: a self-test failure is evidence about the BUILD,
+# and only sometimes about the tool.
+#
 # -G is documented as "-T, but also emit the generated example vectors" and
 # emits none on this build, to stdout or through -O. So there is no
 # example_vector column here, where mdxfind's inventory has one. Recorded
@@ -255,11 +263,21 @@ emit_header($out, [
     'A type that cannot do that cannot prove anything about an entry here, so',
     'the field is carried rather than assumed.',
     '',
-    'BMW224 and BMW256 fail, and selftest_detail records ONE run: measured',
-    '2026-09-03, they return a DIFFERENT digest on every invocation, which is',
-    'uninitialised state rather than a wrong constant. mdxfind computes both',
-    'deterministically and correctly. Do not treat the recorded digest as',
-    'stable.',
+    'BMW224 and BMW256 fail, and selftest_detail records ONE run: they return',
+    'a DIFFERENT digest on every invocation, so do not treat the recorded',
+    'digest as stable.',
+    '',
+    'THAT IS A FACT ABOUT THIS BUILD, NOT ABOUT HASHPIPE. sphlib bmw.c',
+    'violates strict aliasing and GCC 12+ miscompiles it at -O2 and above,',
+    'so the 32-bit core (BMW224/BMW256) comes out wrong while the 64-bit',
+    'core (BMW384/BMW512) is unaffected -- upstream sphlib issue 3.',
+    "hashpipe's own `make deps` passes -fno-strict-aliasing; a libsph.a",
+    'built separately without it does not. Stated by Waffle and confirmed',
+    'here 2026-09-04 on gcc 12.2.0: BMW384 verifies under hashpipe -c',
+    "against upstream's own vector while BMW224 and BMW256 are rejected,",
+    'and mdxfind on the same host -- linking its OWN libsph.a -- reproduces',
+    'both correctly. Fix the library, not the data: rebuild libsph.a with',
+    '-fno-strict-aliasing and re-run this extractor.',
 ]);
 
 printf {$out} "tool: %s\n",      yaml_scalar('hashpipe');
@@ -275,7 +293,11 @@ printf STDERR "- hashpipe %s: %d types in %ds\n",
 if ($failed) {
     printf STDERR "- %d type(s) FAIL their own self-test: %s\n", $failed,
         join(', ', map { $_->{name} } grep { $_->{selftest} eq 'fail' } @types);
-    print STDERR "-   Those cannot be used as evidence, and are worth reporting "
-               . "upstream.\n";
+    print STDERR "-   Those cannot be used as evidence. If they are BMW224 and "
+               . "BMW256, this is\n-   a MISCOMPILED libsph.a, not a hashpipe "
+               . "defect: sphlib's bmw.c violates\n-   strict aliasing and GCC "
+               . "12+ gets it wrong at -O2. Rebuild the library\n-   with "
+               . "-fno-strict-aliasing (hashpipe's own 'make deps' already "
+               . "does).\n";
 }
 exit 0;

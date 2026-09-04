@@ -13,11 +13,21 @@
 # A type that cannot do that cannot prove anything about an entry here, so
 # the field is carried rather than assumed.
 #
-# BMW224 and BMW256 fail, and selftest_detail records ONE run: measured
-# 2026-09-03, they return a DIFFERENT digest on every invocation, which is
-# uninitialised state rather than a wrong constant. mdxfind computes both
-# deterministically and correctly. Do not treat the recorded digest as
-# stable.
+# BMW224 and BMW256 fail, and selftest_detail records ONE run: they return
+# a DIFFERENT digest on every invocation, so do not treat the recorded
+# digest as stable.
+#
+# THAT IS A FACT ABOUT THIS BUILD, NOT ABOUT HASHPIPE. sphlib bmw.c
+# violates strict aliasing and GCC 12+ miscompiles it at -O2 and above,
+# so the 32-bit core (BMW224/BMW256) comes out wrong while the 64-bit
+# core (BMW384/BMW512) is unaffected -- upstream sphlib issue 3.
+# hashpipe's own `make deps` passes -fno-strict-aliasing; a libsph.a
+# built separately without it does not. Stated by Waffle and confirmed
+# here 2026-09-04 on gcc 12.2.0: BMW384 verifies under hashpipe -c
+# against upstream's own vector while BMW224 and BMW256 are rejected,
+# and mdxfind on the same host -- linking its OWN libsph.a -- reproduces
+# both correctly. Fix the library, not the data: rebuild libsph.a with
+# -fno-strict-aliasing and re-run this extractor.
 #
 tool: "hashpipe"
 version: "RCS 1.190 (2026/09/04)"
@@ -248,12 +258,12 @@ types:
     index_num: 56
     name: "BMW224"
     selftest: "fail"
-    selftest_detail: "(got 05cc2054e3b7e2cc0a0694bd73f8bb898921106d8b2888ebc2ca22a4)"
+    selftest_detail: "(got 9812a3761dbb4337c7ccb08f02f766c97701afa29699353b327afc3d)"
   - index: "e57"
     index_num: 57
     name: "BMW256"
     selftest: "fail"
-    selftest_detail: "(got 9b33048576b3d1eda37cd9d11280f4474a8d8faea724c19abaf34f4f310c3dee)"
+    selftest_detail: "(got 8ffe96215c099dcb5ea126d36505ac2274a9925617f36f4475a8e859a214babe)"
   - index: "e58"
     index_num: 58
     name: "BMW384"
