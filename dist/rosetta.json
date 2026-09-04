@@ -36356,7 +36356,7 @@
          "mdxfind_salted" : "",
          "name" : "md5(md5($pass.$salt))",
          "nesting_depth" : 2,
-         "notes" : "",
+         "notes" : "FALSE FRIEND, measured 2026-09-04. absence.pl reports mdxfind's MD5-MD5PASS-SALT as a name match for this row and it is NOT this computation. hashcat calls mode 2630 md5(md5($pass.$salt)) and this row's own vector confirms it: md5(md5(\"hashcat\".\"0\")) is 0127eecea3120e34c8934ba3b72a390a. mdxfind's MD5-MD5PASS-SALT (e517) is md5(md5($pass).$salt), confirmed the same way against its own published example. The two differ in where the salt goes, and this row's id reads like the OTHER one. No mdxfind type publishes an example matching md5(md5($pass.$salt)) with a single salt field, which is consistent with mdxfind having no type for it.",
          "primary_form" : "",
          "relations" : [],
          "sameas" : "",
@@ -56847,25 +56847,28 @@
          "john_work_factor" : "PMEM,PREP",
          "legacy" : "",
          "mdxfind" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "RACF-KDFAES"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
-         "mdxfind_salted" : "",
+         "mdxfind_salted" : "yes",
          "name" : "RACF-KDFAES",
          "nesting_depth" : "",
-         "notes" : "",
+         "notes" : "Accepted 2026-09-04 from a name match that was then measured. TRANSCODE, proven: john writes the KDFAES material as ONE 96-character hex field after the userid, and mdxfind splits it into three of 32 -- $racf$*USER1*<96 hex> becomes $racf-kdfaes$*USER1*<32>*<32>*<32> and reproduces under RACF-KDFAES pinned, handed to mdxfind with only the plaintext the john vector already states. Note that plain RACF does NOT crack it: the row is the KDFAES variant and the name match was pointing at the right type after all.",
          "primary_form" : "",
          "relations" : [],
          "sameas" : "",
-         "serialization" : "unknown",
+         "serialization" : "divergent",
          "status" : "ok",
          "tool_note" : {
             "hashcat" : "",
             "hashpipe" : "",
             "john" : "john's own published example ciphertext for this format, recovered by john under this format. john publishes no plaintext, so the plaintext was found by handing john its own example and a candidate list -- what john recovered IS the plaintext, by construction.",
-            "mdxfind" : ""
+            "mdxfind" : "name match accepted by a curator on 2026-09-04 and not yet reproduced by this repository's own tooling; seed-vectors.pl and verify-vectors.pl decide it. See notes."
          },
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -93627,7 +93630,7 @@
          "mdxfind_salted" : "",
          "name" : "VMware VMX",
          "nesting_depth" : "",
-         "notes" : "",
+         "notes" : "Name match NOT resolved, 2026-09-04. mdxfind's VMWARE-VMX takes $vmx$<n>$<iterations>$<32-hex salt>$<64-hex digest>; this row's john-form vector carries $vmx$1$0$0$10000$<32-hex salt>$<218-hex blob>, and the blob is an encrypted keysafe that john verifies by decrypting, not a digest. There is no field rearrangement that turns one into the other, so this is not a transcode question: it needs a vector in mdxfind's own form.",
          "primary_form" : "",
          "relations" : [],
          "sameas" : "",

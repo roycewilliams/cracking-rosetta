@@ -941,7 +941,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | QNX-SHA512 | `19200` (v) | `qnx` (v) | `QNX-SHA512` (v) |  |
 | QNX7-SHA512 | `19210` | **--** | `QNX7-SHA512` (v) |  |
 | RACF | `8500` (v) | `RACF` (v) | `RACF` |  |
-| RACF-KDFAES | **--** | `RACF-KDFAES` (v) | **--** |  |
+| RACF-KDFAES | **--** | `RACF-KDFAES` (v) | `RACF-KDFAES` (v) |  |
 | RACF-KDFAES | `14200` (v) | **--** | `RACF-KDFAES` (v) |  |
 | RADIOGATUN32 | no | **--** | `RADIOGATUN32` (v) |  |
 | RADIOGATUN64 | no | **--** | `RADIOGATUN64` (v) |  |

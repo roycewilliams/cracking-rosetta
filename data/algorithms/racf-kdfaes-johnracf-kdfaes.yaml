@@ -11,6 +11,12 @@ denotation:
   note: "john's own label for RACF-KDFAES, in 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200."
 status: "ok"
 tools:
+  mdxfind:
+    types: ["RACF-KDFAES"]
+    verified: "vector"
+    verified_at: "2026-09-04"
+    verified_with: "mdxfind"
+    note: "name match accepted by a curator on 2026-09-04 and not yet reproduced by this repository's own tooling; seed-vectors.pl and verify-vectors.pl decide it. See notes."
   john:
     cpu: ["RACF-KDFAES"]
     verified: "vector"
@@ -24,3 +30,8 @@ vectors:
     pass: "P@ssw0rd"
     source: "john"
     reads_in: ["john"]
+  - hash: "$racf-kdfaes$*USER*E7D7E66D000180000008003200100010*00112233445566778899AABBCCDDEEFF*57558AFDA9513B926E3E2BE86DFAF72D"
+    pass: "pass1234"
+    source: "mdxfind"
+    reads_in: ["mdxfind"]
+notes: "Accepted 2026-09-04 from a name match that was then measured. TRANSCODE, proven: john writes the KDFAES material as ONE 96-character hex field after the userid, and mdxfind splits it into three of 32 -- $racf$*USER1*<96 hex> becomes $racf-kdfaes$*USER1*<32>*<32>*<32> and reproduces under RACF-KDFAES pinned, handed to mdxfind with only the plaintext the john vector already states. Note that plain RACF does NOT crack it: the row is the KDFAES variant and the name match was pointing at the right type after all."

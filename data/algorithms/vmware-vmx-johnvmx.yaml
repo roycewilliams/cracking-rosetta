@@ -25,3 +25,4 @@ vectors:
     pass: "openwall"
     source: "john"
     reads_in: ["john"]
+notes: "Name match NOT resolved, 2026-09-04. mdxfind's VMWARE-VMX takes $vmx$<n>$<iterations>$<32-hex salt>$<64-hex digest>; this row's john-form vector carries $vmx$1$0$0$10000$<32-hex salt>$<218-hex blob>, and the blob is an encrypted keysafe that john verifies by decrypting, not a digest. There is no field rearrangement that turns one into the other, so this is not a transcode question: it needs a vector in mdxfind's own form."

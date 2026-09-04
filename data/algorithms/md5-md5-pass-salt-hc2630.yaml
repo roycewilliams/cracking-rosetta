@@ -23,3 +23,4 @@ vectors:
     pass: "hashcat"
     source: "hashcat"
     reads_in: ["hashcat"]
+notes: "FALSE FRIEND, measured 2026-09-04. absence.pl reports mdxfind's MD5-MD5PASS-SALT as a name match for this row and it is NOT this computation. hashcat calls mode 2630 md5(md5($pass.$salt)) and this row's own vector confirms it: md5(md5(\"hashcat\".\"0\")) is 0127eecea3120e34c8934ba3b72a390a. mdxfind's MD5-MD5PASS-SALT (e517) is md5(md5($pass).$salt), confirmed the same way against its own published example. The two differ in where the salt goes, and this row's id reads like the OTHER one. No mdxfind type publishes an example matching md5(md5($pass.$salt)) with a single salt field, which is consistent with mdxfind having no type for it."
