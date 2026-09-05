@@ -134,6 +134,12 @@ sub detroff {
     $s =~ s/\\&//g;             # zero-width
     $s =~ s/\\ / /g;            # unpaddable space
     $s =~ s/\\e/\\/g;           # literal backslash
+    $s =~ s/\\\\/\\/g;          # In troff, \\ is an escaped backslash and the
+                                #   rendered page shows one. Without this, the
+                                #   e409 nibble mask was extracted with the pair
+                                #   still doubled, so it did not match the entry
+                                #   that had quoted the page correctly -- and the
+                                #   entry was the side reported as wrong.
     $s =~ s/\s+/ /g;
     $s =~ s/^\s+|\s+$//g;
     return $s;
