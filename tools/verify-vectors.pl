@@ -155,7 +155,7 @@ use YAML::XS ();
 
 use lib "$RealBin/lib";
 use RosettaEmit qw(emit_entry);
-use RosettaTools qw(tool_path tool_env_help);
+use RosettaTools qw(tool_path tool_env_help tool_version);
 
 my $PROG = basename($0);
 my $ROOT = "$RealBin/..";
@@ -222,6 +222,20 @@ if (!@tools) { usage(); exit 2 }
 $hashcat = tool_path('hashcat', $hashcat);
 $mdxfind = tool_path('mdxfind', $mdxfind);
 $john = tool_path('john', $john);
+
+# WHAT verified_with RECORDS, AND WHY IT IS NOT JUST THE TOOL'S NAME
+#
+# This promoter wrote the bare strings 'hashcat', 'mdxfind' and 'john' for
+# months, which is where 1473 of them in the corpus come from. A tier says
+# "proven by this tool" and, without a version, cannot say by which build --
+# and WHICH build has twice decided whether a mapping was true here: the RAW
+# family repair of 2026-09-05 turned on mdxfind 1.545 against 1.576, and the
+# same day the mdxfind inventory and the installed binary stopped being the
+# same release at all. So ask each binary, and if one will not say, record
+# that rather than a guess.
+my %TOOL_VER = map { $_->[0] => (tool_version($_->[0], $_->[1])
+                                 // 'version not stated by the binary') }
+               ( ['hashcat', $hashcat], ['mdxfind', $mdxfind], ['john', $john] );
 $algdir  //= "$ROOT/data/algorithms";
 $workdir //= "$ROOT/tmp/verify";
 
@@ -902,9 +916,7 @@ if (!$dry) {
                 next if ($blk->{verified} // '') eq 'vector';
                 $blk->{verified}      = 'vector';
                 $blk->{verified_at}   = $today;
-                $blk->{verified_with} = $tool eq 'hashcat' ? 'hashcat'
-                                      : $tool eq 'mdxfind' ? 'mdxfind'
-                                      :                      'john';
+                $blk->{verified_with} = "$tool $TOOL_VER{$tool}";
                 $promoted{$tool}++;
                 $touched = 1;
             }
