@@ -486,6 +486,33 @@ mdxfind also accepts hashcat modes directly (`mdxfind -m 0`, `-m e1`,
   to run. The default is the CPU count. A lost match is indistinguishable from
   a genuine negative, which is the failure `absence.pl` exists to prevent, so
   run hashpipe at `-t 1` wherever its silence will be read as evidence.
+- **A NAME MATCH ACROSS TOOLS IS NOT EVIDENCE, AND IN THE HMAC FAMILY IT IS
+  INVERTED.** The rule above says to normalize names before matching. That
+  finds real pairs, and it also finds false ones, because two projects can
+  publish the same name for opposite constructions. Measured 2026-09-05, and
+  it had cost four rows.
+  john's `HMAC-SHA1` keys on the PASSWORD. That is not an inference: john's own
+  source says `ALGORITHM_NAME "password is key, SHA1 "`, and the same string
+  appears in `hmacMD5_fmt_plug.c`, `hmacSHA256_fmt_plug.c` and
+  `hmacSHA512_fmt_plug.c`. mdxfind splits the two keyings across two names --
+  Appendix A gives `HMAC-SHA1` (e215) as `hmac_sha1(pass, user)`, keyed on the
+  USER, and `HMAC-SHA1-KPASS` (e793) as `hmac_sha1(salt, pass)`, keyed on the
+  PASSWORD. **So john's `HMAC-SHA1` is mdxfind's `HMAC-SHA1-KPASS`, and the
+  two identifiers spelled identically are the two that do NOT correspond.**
+  The damage was symmetric and both halves looked plausible. john's format sat
+  on `hmac-sha1`, a row carrying no hashcat mode and no mdxfind type, so the
+  published table showed john implementing something no other tool did; and
+  `hmac-sha1-kpass`, which carries hashcat 150 and mdxfind `HMAC-SHA1-KPASS`,
+  asserted `john: absent` -- a false claim, repeated on all six of MD5, SHA1,
+  SHA224, SHA256, SHA384 and SHA512.
+  What settles it is a round trip in both directions, with the control run:
+  john's vector cracks under `mdxfind -M e793` and is REFUSED under `-M e215`,
+  and each KPASS row's vector cracks under john's `HMAC-*` once rewritten into
+  john's `<message>#<digest>` shape. The refusal is the half that matters --
+  without it a single crack cannot tell a correspondence from a coincidence.
+  Note where the name collision does NOT reach: hashcat numbers both keyings
+  rather than naming them (150 is key=$pass, 160 is key=$salt), so its column
+  was right throughout and is a useful third opinion on which row is which.
 - **Name separator drift.** The source sheet wrote `HAV128_4` where mdxfind
   writes `HAV128-4`. Normalize by stripping non-alphanumerics before matching;
   store the tool's exact spelling.
