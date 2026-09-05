@@ -1,0 +1,21 @@
+id: "sha512rawpasssalt"
+name: "SHA512RAWPASSSALT"
+status: "needs-review"
+tools:
+  mdxfind:
+    types: ["SHA512RAWPASSSALT"]
+    verified: "vector"
+    verified_at: "2026-09-05"
+    verified_with: "mdxfind RCS 1.576 (2026/09/02)"
+  crack:
+    supported: false
+relations:
+  - kind: "collides-on-subset"
+    entry: "sha512-pass-salt"
+    distinction: "iteration"
+    note: "Both mdxfind types reproduce BOTH entries' vectors at x01, measured 2026-09-05 with hashpipe -c pinned to each in turn: SHA512RAWPASSSALT and SHA512PASSSALT agree on every input at one iteration, because at depth 1 the only difference between them is whether the digest is emitted as raw bytes or as hex, and the stored form is hex either way. They are NOT the same computation, and depth 2 shows it: SHA512RAWPASSSALTx02 verifies sha512(sha512_raw($p.$s)) = e785d2e3... while SHA512PASSSALTx02 verifies sha512(sha512_hex($p.$s)) = 3de674ce..., for the same password123/DB1C19C0. So this is a coincidence on the x01 subset, which is every input this repository stores, and not an equivalence. It is also why john's dynamic_82 cracks sha512rawpasssalt's vector and is deliberately NOT recorded as a mapping there: per CLAUDE.md, record the trap, not the mapping."
+vectors:
+  - hash: "a7a2a6174d5c151e0df2052271a0184fb38ed4761209141cca085401d5be5584b4979af0f365204a11876fa7b6a83ebc31bd1fde7014e1456165393d20e74e59:DB1C19C0"
+    pass: "password123"
+    source: "mdxfind"
+    reads_in: ["mdxfind"]

@@ -18,7 +18,9 @@ tools:
     note: "no mode. Swept the 29 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-03 (tools/discover-hashcat.pl --all, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping."
   mdxfind:
     types: ["MD5MD5HUM"]
-    verified: "asserted"
+    verified: "vector"
+    verified_at: "2026-09-05"
+    verified_with: "mdxfind RCS 1.576 (2026/09/02)"
   john:
     verified: "absent"
     verified_at: "2026-09-04"
@@ -75,5 +77,9 @@ vectors:
   - hash: "d7d61eb5e27f983b1277b28340d72b49:0a"
     pass: "rosetta"
     source: "sheet"
+  - hash: "13c3f9d8348f34744861244ced0ec821:00- x 1"
+    pass: "password123"
+    source: "mdxfind"
+    reads_in: ["mdxfind"]
 legacy:
   hashes_org: "MD5HUMMD5"

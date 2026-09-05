@@ -11,6 +11,11 @@ denotation:
   note: "john's own label for SunMD5, in 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200."
 status: "ok"
 tools:
+  mdxfind:
+    types: ["SUNMD5"]
+    verified: "vector"
+    verified_at: "2026-09-05"
+    verified_with: "mdxfind RCS 1.576 (2026/09/02)"
   hashpipe:
     types: ["SUNMD5"]
     verified: "vector"
@@ -29,4 +34,4 @@ vectors:
   - hash: "$md5$rounds=904$Vc3VgyFx44iS8.Yu$Scf90iLWN6O6mT9TA06NK/"
     pass: "test"
     source: "john"
-    reads_in: ["john"]
+    reads_in: ["john", "mdxfind"]

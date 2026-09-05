@@ -1,0 +1,16 @@
+id: "argon2md5"
+name: "ARGON2MD5"
+status: "needs-review"
+tools:
+  mdxfind:
+    types: ["ARGON2MD5"]
+    verified: "vector"
+    verified_at: "2026-09-05"
+    verified_with: "mdxfind RCS 1.576 (2026/09/02)"
+  crack:
+    supported: false
+vectors:
+  - hash: "$argon2id$v=19$m=65536,t=3,p=1$QUFBQUFBQUFBQUFBQUFBQQ$tfFVjXN7s2JLYKv2e4ctPK5B/3gVohhZA/vcbKx4PVQ"
+    pass: "password123"
+    source: "mdxfind"
+    reads_in: ["mdxfind"]

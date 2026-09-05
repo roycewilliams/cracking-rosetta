@@ -11,6 +11,11 @@ denotation:
   note: "john's own label for oracle11, in 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200."
 status: "ok"
 tools:
+  mdxfind:
+    types: ["ORACLE11"]
+    verified: "vector"
+    verified_at: "2026-09-05"
+    verified_with: "mdxfind RCS 1.576 (2026/09/02)"
   hashpipe:
     types: ["ORACLE11"]
     verified: "vector"
@@ -29,4 +34,4 @@ vectors:
   - hash: "5FDAB69F543563582BA57894FE1C1361FB8ED57B903603F2C52ED1B4D642"
     pass: "abc123"
     source: "john"
-    reads_in: ["john"]
+    reads_in: ["john", "mdxfind"]

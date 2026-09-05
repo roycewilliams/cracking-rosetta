@@ -139,7 +139,8 @@ use YAML::XS ();
 use lib "$RealBin/lib";
 use RosettaEmit qw(emit_entry);
 use RosettaHx qw(is_multi_emit);
-use RosettaTools qw(tool_path tool_env_help);
+use RosettaTools qw(tool_path tool_env_help tool_version
+                    share_measurable share_unmeasurable_reason);
 
 my $PROG = basename($0);
 my $ROOT = "$RealBin/..";
@@ -176,7 +177,11 @@ Usage: $PROG [options]
    --max-per-entry N hold back entries matched by more than N types
                      (default 6; they are reported, never written)
    --max-share PCT   hold back a type matching more than PCT% of the corpus
-                     (default 20)
+                     (default 20). The corpus is the TARGET set, so a narrow
+                     run narrows the denominator: under --only it is one entry
+                     and every type that matched scores 100%. The guard still
+                     withholds, but reports the share as UNMEASURABLE rather
+                     than calling the type over-broad.
    --resume          reuse per-chunk results already in the work dir
    --apply           write the discovered mappings into data/algorithms
    -n, --dry-run     show the plan; run nothing, write nothing
@@ -251,7 +256,18 @@ die "$PROG: --chunk must be at least 1\n" if $chunk < 1;
 my $inv = eval { YAML::XS::LoadFile($inventory) }
     or do { print STDERR "$PROG: cannot load $inventory: $@\n"; exit 1 };
 
-my $mx_version = $inv->{version} // 'mdxfind';
+# See the note in discover-john.pl: this is the binary that RUNS, and on
+# 2026-09-05 it stopped being the build the inventory came from.
+my $mx_version = RosettaTools::tool_version('mdxfind', $mdxfind);
+if (!defined $mx_version) {
+    $mx_version = ($inv->{version} // 'unknown') . ' (per the inventory; the '
+                . 'binary would not state a version)';
+}
+elsif (($inv->{version} // '') ne $mx_version) {
+    printf STDERR "- NOTE: mdxfind binary reports %s; the inventory was built "
+                . "from %s. verified_with records the binary.\n",
+                $mx_version, $inv->{version} // '(unset)';
+}
 
 my @types = grep { defined $_->{index_num} && defined $_->{name} }
             @{ $inv->{types} || [] };
@@ -601,10 +617,19 @@ my %noisy_type = map { $_ => 1 }
                  grep { $type_hits{$_} * 100 > $max_share * $corpus }
                  keys %type_hits;
 
+# Whether a share verdict on this corpus says anything about the TYPE. Under
+# --only the corpus is one entry, so every type that matched scores 100% and
+# the guard has measured its own denominator; see RosettaTools. The guard still
+# withholds -- withholding is safe -- but it must not report what it did not
+# establish.
+my $share_ok = share_measurable($corpus, $max_share);
+my %over_broad = %noisy_type;    # before multi-emit joins the same set
+
 # A multi-emit type reproducing a vector does not identify the vector; see the
-# methodology note. It rides in the same %noisy_type set because the decision
-# is the same one -- report it, never write it -- and the held-back line then
-# names it like any other over-broad identifier.
+# methodology note. It rides in the same %noisy_type set because the DECISION
+# is the same one -- report it, never write it. The REASON is not, so the
+# held-back line separates the two and %over_broad above keeps the share count
+# honest; a type held for multi-emit was never measured to be over-broad.
 my %multi_emit;
 unless ($want_multi) {
     for my $t (keys %type_hits) {
@@ -641,7 +666,21 @@ for my $id (sort keys %hits) {
                      '; a second type is curation, not a fact'];
     }
     elsif (!@clean) {
-        push @held, [$id, \@t, 'every matching type is over-broad'];
+        # %noisy_type carries two unrelated verdicts by design -- an over-broad
+        # share and a multi-emit type -- and reporting one as the other is the
+        # same defect as reporting an unmeasurable share as over-breadth. Name
+        # the cause that actually applies to the types this entry matched.
+        my @me = grep {  $multi_emit{$_} } @t;
+        my @ob = grep { !$multi_emit{$_} } @t;
+        my @why;
+        push @why, 'multi-emit, so a match does not identify the vector: '
+                 . join(' ', @me) if @me;
+        push @why, ($share_ok
+                    ? (@me ? 'and the other matching type(s) are over-broad'
+                           : 'every matching type is over-broad')
+                    : share_unmeasurable_reason('type', $corpus, $max_share))
+            if @ob;
+        push @held, [$id, \@t, join('; ', @why)];
     }
     elsif (@clean > $max_per_entry) {
         push @held, [$id, \@clean, sprintf('%d types > --max-per-entry %d',
@@ -671,10 +710,23 @@ printf STDERR "- ran %d chunk(s) in %.1fs%s\n", $n, $elapsed,
     ($dry ? ' (dry run)' : '');
 printf STDERR "-   entries matched %d of %d target(s); applicable %d, held %d\n",
     scalar(keys %hits), $corpus, scalar @apply_list, scalar @held;
-if (%noisy_type) {
+# %over_broad, not %noisy_type: the multi-emit types get their own line below
+# and counting them here reported them twice, once under a reason that was not
+# theirs.
+if (%over_broad && $share_ok) {
     printf STDERR "-   %d over-broad type(s) ignored (> %d%% of the corpus): %s\n",
-        scalar keys %noisy_type, $max_share,
-        join(' ', map { "$_=$type_hits{$_}" } sort keys %noisy_type);
+        scalar keys %over_broad, $max_share,
+        join(' ', map { "$_=$type_hits{$_}" } sort keys %over_broad);
+}
+elsif (%over_broad) {
+    printf STDERR "-   %d type(s) held, share UNMEASURABLE: the corpus is %d "
+                . "%s, so a\n-   single hit is %g%% and trips --max-share %d by "
+                . "itself. That is a fact\n-   about this run, not about the "
+                . "type -- re-run against the whole corpus\n-   (--all, without "
+                . "--only) to measure it: %s\n",
+        scalar keys %over_broad, $corpus, ($corpus == 1 ? 'entry' : 'entries'),
+        ($corpus ? 100 / $corpus : 100), $max_share,
+        join(' ', map { "$_=$type_hits{$_}" } sort keys %over_broad);
 }
 if (%multi_emit) {
     printf STDERR "-   %d multi-emit type(s) reported but never written: %s\n",

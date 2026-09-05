@@ -1,0 +1,24 @@
+id: "sha1usercolonpass"
+name: "SHA1USERCOLONPASS"
+expression: "sha1($s.$c1.$p),c1=\\x3a"
+john_dynamic_expr: "dynamic=sha1($s.$c1.$p),c1=\\x3a"
+expression_proof:
+  verified: "vector"
+  verified_at: "2026-09-05"
+  verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
+  note: "round-tripped as --format=dynamic=<expr> against every vector this entry carries"
+category: "composite"
+status: "needs-review"
+tools:
+  mdxfind:
+    types: ["SHA1USERCOLONPASS"]
+    verified: "vector"
+    verified_at: "2026-09-05"
+    verified_with: "mdxfind RCS 1.576 (2026/09/02)"
+  crack:
+    supported: false
+vectors:
+  - hash: "0c0a719f6d39e6685856e8aef8317a41800bbe99:administrator"
+    pass: "password123"
+    source: "mdxfind"
+    reads_in: ["mdxfind"]

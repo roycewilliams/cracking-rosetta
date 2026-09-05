@@ -12,10 +12,11 @@ denotation:
 status: "ok"
 tools:
   mdxfind:
-    verified: "absent"
-    verified_at: "2026-09-03"
-    verified_with: "mdxfind RCS 1.545 (2026/08/29)"
-    note: "no type. Swept all 1002 mdxfind types on 2026-09-03 (a tools/discover-mdxfind.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable type ran to completion; a type killed at the timeout is counted as untested and withholds this verdict. No mdxfind type name matches any identifier this entry publishes either, normalized by the separator-drift rule. Corroborated by hashpipe, a second binary built from the same catalog: handed this entry's own hash and plaintext it names no type at all. It is the more direct instrument -- it recomputes rather than cracking -- and on this corpus it named a type for 58 entries the sweep alone called silent. This is the absence of an IDENTIFIER, not of the algorithm: if mdxfind gains one, this becomes a mapping."
+    types: ["MD5PASSSALTMD5PASSSALT"]
+    verified: "vector"
+    verified_at: "2026-09-05"
+    verified_with: "mdxfind RCS 1.576 (2026/09/02)"
+    note: "Round-tripped on the TRANSCRIBED form, not on the vector as stored: this entry keeps its vector in another tool's serialization, which mdxfind's reader does not parse. mdxfind pinned with -h reproduced MD5PASSSALTMD5PASSSALT as \"b8bbabb1eb9802a2e962de0207ca5172:aaaSXB:test1\", from data/mdxfind-transcodes.tsv. The plaintext is one this entry already stores, and the two strings are ONE piece of evidence written twice -- not two agreeing vectors."
   john:
     cpu: ["dynamic_1505"]
     verified: "vector"

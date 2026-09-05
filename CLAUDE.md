@@ -49,6 +49,26 @@ people expect are regenerated into `docs/` and `dist/`.
 | hashcat | `/usr/local/bin/hashcat` (v7.1.2-549-g8a15e210b) | `hashcat --hash-info` |
 | john | `/usr/local/scripts/johnl` -> `/usr/local/src/sec/crack/john-latest/run/john` | `john --list=format-details` |
 | mdxfind | `/usr/local/bin/mdxfind` (RCS 1.545, 2026-08-29) | `mdxfind -h` |
+
+**There are TWO mdxfind builds on this host and BOTH are verifiers.**
+`/usr/local/bin/mdxfind` is RCS 1.545, installed, and cannot be replaced by
+this account. `/home/claude/src/upstream/mdxfind/mdxfind` is RCS 1.576, built
+here from the upstream clone, and it is the ONLY binary on this host that has
+types e1003-e1027 or that computes the RAW family correctly. **Use it, and
+stamp its version.** That is already the corpus's practice -- the RAW-family
+repair of 2026-09-05 established 34 blocks at tier `vector` citing
+`mdxfind RCS 1.576 (2026/09/02)`, and the mdxfind seeding the same day added
+26 more.
+
+    tools/verify-vectors.pl --tool mdxfind \
+        --mdxfind /home/claude/src/upstream/mdxfind/mdxfind
+
+**"Not installed" is not "not usable", and conflating the two costs real
+coverage.** Measured 2026-09-05: 25 mdxfind mappings were written at tier
+`upstream` with notes saying "install 1.576 to promote", when the build that
+promotes them was already on the host. All 25 are now `vector`. What
+`verified_with:` must record is WHICH BINARY RAN -- never which one is
+installed, and never which one the inventory came from.
 | hashpipe | `/usr/local/bin/hashpipe` (v1.192, 2026-09-04) | `hashpipe -T` (see `tools/extract-hashpipe.pl`); feed it `hash:plaintext` on stdin, or `TYPE[xNN] hash[:salt]:pass` under `-c` |
 | Crack | not present | hand-maintained, frozen |
 
@@ -312,6 +332,85 @@ mdxfind also accepts hashcat modes directly (`mdxfind -m 0`, `-m e1`,
 `-m e1-e10`), which is itself a usable cross-check.
 
 ## Known pitfalls
+
+- **THE INVENTORY CAN BE AHEAD OF THE INSTALLED BINARY, and mdxfind's way of
+  saying so is indistinguishable from finding nothing.** `data/tools/mdxfind.yaml`
+  is regenerated from whatever upstream has released; `/usr/local/bin/mdxfind`
+  is whatever is installed. Measured 2026-09-05 those were RCS 1.576 and RCS
+  1.545, and 25 types existed only in the first. Pinning the binary to a type
+  it does not have -- `mdxfind -h '^SUNMD5$' -f hashes -i 1 words` -- prints
+  "No hash types selected" and **exits 0**, which a caller reading only for a
+  crack line cannot tell from a type that ran and found nothing. **Ask the
+  binary what it HAS before treating its silence as evidence**, and treat a
+  type it lacks as UNMEASURABLE there rather than as a failure.
+  **THE FIRST THING TO TRY IS ANOTHER mdxfind BUILD, NOT ANOTHER TOOL.**
+  `/home/claude/src/upstream/mdxfind/mdxfind` is RCS 1.576 and HAS
+  e1003-e1027. Point `--mdxfind` at it and the type verifies at tier `vector`
+  like any other. Reaching past it for a second-best oracle is how 25 mappings
+  spent a night at tier `upstream` carrying notes that told the reader to
+  install something the host already had. "Not installed" is not "not usable".
+  **hashpipe is the fallback for when NO local build has the type**:
+  installed, sharing mdxfind's type list, recomputing rather than cracking,
+  and `-c` pins a named type per line. What it establishes is tier `upstream`,
+  never `vector` -- `vector` means THIS tool round-tripped it under THIS
+  identifier. `tools/attach-mdxfind-ahead.pl` and `seed-orphans.pl
+  --via-hashpipe` do that, and both are a STOPGAP: run
+  `verify-vectors.pl --tool mdxfind --mdxfind <a build that has the type>`
+  afterwards and the tier goes to `vector`.
+  **A vector stored in ANOTHER tool's serialization is a third case, and it
+  is not an absence either.** john writes RVARY as `$rvary$<hex>`; mdxfind
+  wants the bare hex and its reader refuses the line, so the row says NOT
+  REPRODUCED about a mapping that reproduces perfectly well.
+  `data/mdxfind-transcodes.tsv` holds the type's own spelling of such a
+  vector, and `verify-vectors.pl` tries it as the LAST fallback -- after the
+  grouped and solo runs, only for an (entry, type) pair with nothing yet, and
+  only when the plaintext is one the entry already stores, so a line there
+  cannot smuggle in a different vector. Nine mappings reached tier `vector`
+  that way on 2026-09-05, and each block's note says the round trip used the
+  transcribed form: the two strings are ONE piece of evidence written twice.
+  **`hashpipe -c` does NOT read john dialect, although hashpipe's DETECTION
+  path does.** Measured 2026-09-05: `MD4SALTPASS $dynamic_31$<hash>$<salt>:pw`
+  is refused by `-c` and resolved by plain detection, which echoes the line
+  re-serialized into the type's own spelling. That asymmetry is what makes the
+  two-stage pipeline necessary -- detection PROPOSES the transcode, `-c`
+  pinned PROVES it -- and it is why a hand-written transcode is a hint about
+  spelling rather than a claim.
+  **And a corpus-wide detection run cannot attribute its own answers.**
+  hashpipe re-serializes what it read and refusals go to the other stream, so
+  a batch's output lines do not correspond to its input lines. Matching by
+  plaintext put `MD4SALTPASS` on any of the 27 entries whose plaintext is
+  `test1`. One line per invocation, or the answer belongs to no entry in
+  particular.
+
+- **`verified_with:` must name the binary that RAN, and three tools took it
+  from the inventory instead.** Fixed 2026-09-05 in `seed-orphans.pl` and all
+  three `discover-*.pl`; `RosettaTools::tool_version($name, $path)` asks the
+  binary and returns undef rather than guessing -- and on this host that
+  binary is often the LOCALLY BUILT mdxfind 1.576 rather than the installed
+  1.545, which is legitimate and is what the corpus already does. The two
+  coincided for weeks,
+  which is exactly why nobody noticed. A backlog of blocks still carries a
+  bare tool name with no version at all -- count it rather than trusting a
+  figure here, since every verification run changes it:
+
+      grep -h -oE 'verified_with: "(john|mdxfind|hashcat)"$' data/algorithms/*.yaml | sort | uniq -c
+
+  Measured 2026-09-05, before that day's hashcat re-verification sweep: 797
+  `mdxfind`, 376 `john`, 296 `hashcat`, across 962 entries.
+  **Do not bulk back-fill them**: stamping today's build onto a claim some
+  earlier build proved is inventing evidence, and 244 blocks openly cite
+  `mdxfind RCS 1.540`.
+
+- **A SECOND READER OF THE NOTATION IS A SECOND GRAMMAR.** `RosettaExpr`
+  learned john's `,cN=VALUE` constant suffix on 2026-09-04;
+  `denote-hx.pl`'s own `ill_formed()` did not, and on 2026-09-05
+  `--repair` proposed WITHDRAWING all 33 expressions in the corpus that carry
+  a constant -- four of which john had proved that morning. It does not
+  adjust: it deletes `expression:` and `john_dynamic_expr:` and writes
+  `expression_proof verified: absent` saying the string was never well-formed.
+  `RosettaExpr` now exports `split_constants` and `ill_formed()` calls it.
+  **If you widen the expression language again, grep for every place that
+  INSPECTS an expression, not just the place that evaluates one.**
 
 - **Type masking (mdxfind).** mdxfind reports the *first* internal type that
   reproduces a digest. `MD5CAP` is `cap(md5(pass))`, a no-op whenever the
@@ -971,6 +1070,53 @@ un-break, so they are restated here where a tool gets written:
 - **Both the code and the data are MIT.** Anything vendored has to be
   compatible and has to be recorded in `vendor/*/PROVENANCE.md` with the
   upstream commit.
+
+## Running something long: use tools/runbg.sh
+
+**Never hand-roll a background wait again.** `tools/runbg.sh start -- CMD` runs
+a command detached and prints a run directory; `runbg.sh wait DIR` blocks and
+exits with the COMMAND'S code. It is the only sanctioned way to background a
+sweep, a build or a corpus comparison here.
+
+The reason is four dead poll loops found on 2026-09-05, still spinning hours
+after their work had finished, from THREE distinct causes in a single day. All
+three are one mistake -- polling a predicate you inferred instead of observing
+what happened:
+
+- **The predicate matched the waiter itself.** `until ! pgrep -f 'make all'`
+  matches the polling loop's own command line, so the loop waits for itself to
+  disappear. It never fires and never notifies, which is indistinguishable
+  from work still in progress.
+- **The predicate matched the reassuring case.** `until grep -qE '\*\*\*'`
+  fired early on OpenSSL's "successfully configured" banner: a pattern meant to
+  catch failure caught success.
+- **The predicate's subject was rewritten underneath it**, leaving it
+  permanently unsatisfiable.
+
+`runbg.sh` never greps program output and never pattern-matches a process
+list. The runner writes ONE file after the command exits, containing its exit
+code, and waiting is "does that file exist". The signal comes from the same
+shell that ran the command, so it cannot coincide with anything and nothing
+else writes it. Four properties worth knowing:
+
+- **All three endings are reported**, because silence is not success: `done`
+  returns the job's own code, `vanished` (exit 3) means the pid is gone with no
+  status, `waited` (exit 4) means the budget expired and the job is STILL
+  RUNNING. A killed job comes back as its real code -- 137 for SIGKILL -- not
+  as "vanished", because the runner outlives its child and reaps it.
+- **The wait loop is bounded by an iteration cap**, not only a clock, so it
+  ends even if every check misfires.
+- **The job carries its own timeout**, so a run nobody waits on cannot outlive
+  its budget.
+- **stdout and stderr stay in separate files**, never merged -- the `hashpipe
+  -c` rule, where a merged stream is consistent with both a pass and a refusal.
+- **Each run gets a fresh directory**, so last run's output can never be read
+  as current. That trap is real: `tmp/binary-diff.out` was read as the current
+  result when it was the previous run's, because the re-run had sent stdout
+  elsewhere and never overwrote it.
+
+`tools/test-runbg.pl` asserts every one of those, including a job whose output
+carries all the decoy strings above. It runs in CI and needs no cracker.
 
 ## Conventions
 

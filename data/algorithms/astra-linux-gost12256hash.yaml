@@ -11,6 +11,11 @@ denotation:
   note: "john's own label for streebog256crypt, in 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200."
 status: "ok"
 tools:
+  mdxfind:
+    types: ["GOST12256CRYPT"]
+    verified: "vector"
+    verified_at: "2026-09-05"
+    verified_with: "mdxfind RCS 1.576 (2026/09/02)"
   john:
     cpu: ["streebog256crypt"]
     gpu: ["streebog256crypt-opencl"]
@@ -24,4 +29,4 @@ vectors:
   - hash: "$gost12256hash$password$awrQfwgXMa0BFMCtZu97GJKqeVszI/B2usmTf9cpOa/"
     pass: "magnum"
     source: "john"
-    reads_in: ["john"]
+    reads_in: ["john", "mdxfind"]

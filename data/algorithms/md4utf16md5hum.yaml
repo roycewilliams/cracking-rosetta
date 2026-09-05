@@ -1,0 +1,25 @@
+id: "md4utf16md5hum"
+name: "MD4UTF16MD5HUM"
+expression_proof:
+  verified: "absent"
+  verified_at: "2026-09-05"
+  verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
+  note: "mdxfind type MD4UTF16MD5HUM (e575) is MULTI-EMIT: it computes several candidate digests per input and matches if any one reproduces the stored hash. There is therefore no single expression to record, and writing one of the emitted forms into expression: would be a false claim even though the string itself is correct. This is also why two vectors of such a type can disagree with each other, and why a tool matching one of them is not evidence about the other."
+denotation:
+  text: "emit(md5(md4(utf16le(pass)).S))"
+  source: "mdxfind"
+  note: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A, entry for mdxfind type MD4UTF16MD5HUM (e575), which states emit(md5(md4(utf16le(pass)).S)) (S = \\n, \\r, etc.). This is what the type emits, not a single construction -- see expression_proof."
+status: "needs-review"
+tools:
+  mdxfind:
+    types: ["MD4UTF16MD5HUM"]
+    verified: "vector"
+    verified_at: "2026-09-05"
+    verified_with: "mdxfind RCS 1.545 (2026/08/29)"
+    note: "mdxfind's own published example for this identifier, recovered by mdxfind at this identifier with mdxfind's own published plaintext."
+  crack:
+    supported: false
+vectors:
+  - hash: "f25a2dde4e083267167911073d3c4a04:00- x 1"
+    pass: "password123"
+    source: "mdxfind"
