@@ -288,7 +288,7 @@ use YAML::XS ();
 
 use lib "$RealBin/lib";
 use RosettaEmit qw(emit_entry);
-use RosettaTools qw(tool_path tool_env_help);
+use RosettaTools qw(tool_path tool_env_help tool_version);
 
 my $PROG = basename($0);
 my $ROOT = "$RealBin/..";
@@ -410,7 +410,21 @@ my $today = strftime('%Y-%m-%d', localtime);
 my $inv = eval { YAML::XS::LoadFile($inventory) }
     or do { print STDERR "$PROG: cannot load $inventory: $@\n"; exit 1 };
 
-my $john_version = $inv->{version} // 'john';
+# The version of the binary that will actually RUN, not the one the
+# inventory was generated from. Those coincided until 2026-09-05, when
+# data/tools/mdxfind.yaml went to RCS 1.576 against an installed RCS 1.545 and
+# the sibling tool would have credited the wrong build with every claim. The
+# inventory is the fallback and it is marked as one.
+my $john_version = RosettaTools::tool_version('john', $john);
+if (!defined $john_version) {
+    $john_version = ($inv->{version} // 'unknown') . ' (per the inventory; the '
+                  . 'binary would not state a version)';
+}
+elsif (($inv->{version} // '') ne $john_version) {
+    printf STDERR "- NOTE: john binary reports %s; the inventory was built "
+                . "from %s. verified_with records the binary.\n",
+                $john_version, $inv->{version} // '(unset)';
+}
 
 # The device of every label, so an applied mapping is filed under the list
 # validate.pl expects instead of under the one the caller happened to be in.
@@ -1115,7 +1129,7 @@ if ($apply && !$dry) {
         if ($proven) {
             $blk->{verified}      = 'vector';
             $blk->{verified_at}   = $today;
-            $blk->{verified_with} = 'john';
+            $blk->{verified_with} = "john $john_version";
             $blk->{note} = 'format discovered by round-trip search, not by name';
         }
         else {

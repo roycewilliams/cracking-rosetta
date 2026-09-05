@@ -139,7 +139,7 @@ use YAML::XS ();
 use lib "$RealBin/lib";
 use RosettaEmit qw(emit_entry);
 use RosettaHx qw(is_multi_emit);
-use RosettaTools qw(tool_path tool_env_help);
+use RosettaTools qw(tool_path tool_env_help tool_version);
 
 my $PROG = basename($0);
 my $ROOT = "$RealBin/..";
@@ -251,7 +251,18 @@ die "$PROG: --chunk must be at least 1\n" if $chunk < 1;
 my $inv = eval { YAML::XS::LoadFile($inventory) }
     or do { print STDERR "$PROG: cannot load $inventory: $@\n"; exit 1 };
 
-my $mx_version = $inv->{version} // 'mdxfind';
+# See the note in discover-john.pl: this is the binary that RUNS, and on
+# 2026-09-05 it stopped being the build the inventory came from.
+my $mx_version = RosettaTools::tool_version('mdxfind', $mdxfind);
+if (!defined $mx_version) {
+    $mx_version = ($inv->{version} // 'unknown') . ' (per the inventory; the '
+                . 'binary would not state a version)';
+}
+elsif (($inv->{version} // '') ne $mx_version) {
+    printf STDERR "- NOTE: mdxfind binary reports %s; the inventory was built "
+                . "from %s. verified_with records the binary.\n",
+                $mx_version, $inv->{version} // '(unset)';
+}
 
 my @types = grep { defined $_->{index_num} && defined $_->{name} }
             @{ $inv->{types} || [] };

@@ -209,7 +209,7 @@ use YAML::XS ();
 
 use lib "$RealBin/lib";
 use RosettaEmit qw(emit_entry);
-use RosettaTools qw(tool_path tool_env_help);
+use RosettaTools qw(tool_path tool_env_help tool_version);
 
 my $PROG = basename($0);
 my $ROOT = "$RealBin/..";
@@ -315,7 +315,17 @@ die "$PROG: hashcat not executable at $hashcat\n" unless -x $hashcat;
 my $inv = eval { YAML::XS::LoadFile($inventory) }
     or do { print STDERR "$PROG: cannot load $inventory: $@\n"; exit 1 };
 
-my $hc_version = $inv->{version} // 'hashcat';
+# See the note in discover-john.pl: this is the binary that RUNS.
+my $hc_version = RosettaTools::tool_version('hashcat', $hashcat);
+if (!defined $hc_version) {
+    $hc_version = ($inv->{version} // 'unknown') . ' (per the inventory; the '
+                . 'binary would not state a version)';
+}
+elsif (($inv->{version} // '') ne $hc_version) {
+    printf STDERR "- NOTE: hashcat binary reports %s; the inventory was built "
+                . "from %s. verified_with records the binary.\n",
+                $hc_version, $inv->{version} // '(unset)';
+}
 
 # -m 2000 is STDOUT, a candidate printer rather than a hash type; see the
 # methodology note.
@@ -844,7 +854,7 @@ if ($apply && !$dry) {
         if ($proven) {
             $blk->{verified}      = 'vector';
             $blk->{verified_at}   = $today;
-            $blk->{verified_with} = $hc_version;
+            $blk->{verified_with} = "hashcat $hc_version";
             $blk->{note} = 'mode discovered by round-trip search, not by name';
         }
         else {
