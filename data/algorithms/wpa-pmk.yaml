@@ -14,6 +14,7 @@ tools:
     verified: "vector"
     verified_at: "2026-08-29"
     verified_with: "mdxfind"
+    note: "the vector below cracks, but mdxfind cannot GENERATE one: -z emits nothing for this type because a real WPA handshake supplies the ESSID and MAC addresses. A corpus sweep that emits a vector per type will therefore skip WPA-PMK, and that is expected rather than a vector waiting to be filled."
   hashpipe:
     types: ["WPA-PMK"]
     verified: "vector"

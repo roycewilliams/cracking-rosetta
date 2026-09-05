@@ -1,12 +1,15 @@
 id: "parallel"
 name: "PARALLEL"
-status: "needs-review"
+status: "ok"
 tools:
   hashcat:
     verified: "absent"
   mdxfind:
     types: ["PARALLEL"]
     verified: "asserted"
+    verified_at: "2026-09-04"
+    verified_with: "mdxfind RCS 1.576 (2026/09/02)"
+    note: "PARALLEL is not a hash. mdxfind's maintainer describes it as a measurement tool rather than an algorithm, and it emits nothing: measured 2026-09-04, run pinned with -M under -z alone, with -s and with -u, stdout empty in every case. So this entry can never reach tier vector and the absence of a vector is a property of the type, not a gap in this repository. The identifier itself is real -- it is in mdxfind's own type table -- and that is all the mapping claims."
   crack:
     supported: false
 notes: "No vector exists to seed, measured 2026-09-04, and this is the one type in the inventory for which that is a fact about the tools rather than a gap in this repository. hashpipe registers PARALLEL with no ht->example at all, so `hashpipe -T` skips it -- it is one of the two skipped types the generated data/tools/hashpipe.yaml header names -- and `hashpipe -G`, which generates a vector for a type that has none, emits nothing for it either because it has no compute function and no chain to drive. mdxfind's own inventory row (e426) carries no example_vector, and e426 is the single index mdxfind has that hashpipe does not. Nothing here can move until one of the two tools publishes a vector."
