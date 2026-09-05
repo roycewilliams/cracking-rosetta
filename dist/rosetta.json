@@ -1,5 +1,5 @@
 {
-   "count" : 1553,
+   "count" : 1563,
    "entries" : [
       {
          "alias" : "",
@@ -2581,6 +2581,67 @@
             "hashpipe" : "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one.",
             "john" : "format discovered by round-trip search, not by name",
             "mdxfind" : "type discovered by round-trip search, not by name"
+         },
+         "vecs" : 1
+      },
+      {
+         "alias" : "",
+         "application" : "",
+         "category" : "kdf",
+         "crack" : {
+            "ids" : [],
+            "state" : "no"
+         },
+         "cracknote" : "",
+         "denotation" : "argon2(md5(pass), salt, m, t, p)",
+         "expr" : "",
+         "expr_note" : "the Argon2 cost parameters m, t and p are read out of the stored form rather than fixed by the type, so there is no fixed expression to record.",
+         "expr_tier" : "absent",
+         "hash_length" : "",
+         "hash_length_basis" : "",
+         "hashcat" : {
+            "ids" : [],
+            "state" : "unknown"
+         },
+         "hashcat_salted" : "",
+         "hashcat_speed" : "",
+         "hashpipe" : {
+            "ids" : [
+               "ARGON2MD5"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
+         },
+         "id" : "argon2md5",
+         "john" : {
+            "ids" : [],
+            "state" : "unknown"
+         },
+         "john_expr" : "",
+         "john_salted" : "",
+         "john_work_factor" : "",
+         "legacy" : "",
+         "mdxfind" : {
+            "ids" : [
+               "ARGON2MD5"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
+         },
+         "mdxfind_salted" : "yes",
+         "name" : "ARGON2MD5",
+         "nesting_depth" : "",
+         "notes" : "Created 2026-09-05. vBulletin 6, and the direct successor to what BCRYPTMD5 (e451) models for vBulletin 5. Appendix A Note [43] records that the stored form is ordinary Argon2 MCF and carries NO marker distinguishing it from e987 ARGON2, so a line can be offered to either type and only the correct one verifies -- which is why this needs its own row rather than a note on the argon2 one. Neither john nor hashcat ships a vector for this scheme; the registered one was produced by argon2-cffi, a different implementation from the argon2 library mdxfind links, so the check is across implementations rather than self-generated.",
+         "primary_form" : "",
+         "relations" : [],
+         "sameas" : "",
+         "serialization" : "unknown",
+         "status" : "ok",
+         "tool_note" : {
+            "hashcat" : "",
+            "hashpipe" : "verified with hashpipe -c, which pins each line to its own leading TYPE label and runs no detection, at -t 1 and with the emitted label compared against the one asked for. Both precautions are load-bearing here: hashpipe -m does not restrict what a recognised wrapper reaches, and its results vary with the thread count.",
+            "john" : "",
+            "mdxfind" : "mdxfind e1020 ARGON2MD5."
          },
          "vecs" : 1
       },
@@ -31444,6 +31505,67 @@
             "state" : "no"
          },
          "cracknote" : "",
+         "denotation" : "emit(md4(utf16le(md5^N(pass) . S)))",
+         "expr" : "",
+         "expr_note" : "multi-emit, per Appendix A Note [24]: a type that emits several candidates per input has no single expression, and this repository does not record one for such a type. That is a fact about the construction, not about whether any tool can crack it.",
+         "expr_tier" : "absent",
+         "hash_length" : 32,
+         "hash_length_basis" : "observed",
+         "hashcat" : {
+            "ids" : [],
+            "state" : "unknown"
+         },
+         "hashcat_salted" : "",
+         "hashcat_speed" : "",
+         "hashpipe" : {
+            "ids" : [
+               "MD4UTF16MD5HUM"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
+         },
+         "id" : "md4utf16md5hum",
+         "john" : {
+            "ids" : [],
+            "state" : "unknown"
+         },
+         "john_expr" : "",
+         "john_salted" : "",
+         "john_work_factor" : "",
+         "legacy" : "",
+         "mdxfind" : {
+            "ids" : [
+               "MD4UTF16MD5HUM"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
+         },
+         "mdxfind_salted" : "no",
+         "name" : "MD4UTF16MD5HUM",
+         "nesting_depth" : "",
+         "notes" : "Created 2026-09-05. mdxfind e575 had no row here: it is one of the types that were in the inventory but in no queue, because GAPS.md carried an orphan-identifier section for hashcat only. The salt on the vector contains spaces, which is legal and is why the whole mdxfind-readable string is the hash field.",
+         "primary_form" : "",
+         "relations" : [],
+         "sameas" : "",
+         "serialization" : "unknown",
+         "status" : "ok",
+         "tool_note" : {
+            "hashcat" : "",
+            "hashpipe" : "verified with hashpipe -c, which pins each line to its own leading TYPE label and runs no detection, at -t 1 and with the emitted label compared against the one asked for. Both precautions are load-bearing here: hashpipe -m does not restrict what a recognised wrapper reaches, and its results vary with the thread count.",
+            "john" : "",
+            "mdxfind" : "mdxfind e575 MD4UTF16MD5HUM."
+         },
+         "vecs" : 1
+      },
+      {
+         "alias" : "",
+         "application" : "",
+         "category" : "composite",
+         "crack" : {
+            "ids" : [],
+            "state" : "no"
+         },
+         "cracknote" : "",
          "denotation" : "",
          "expr" : "md4(utf16(md5(md5($p))))",
          "expr_note" : "round-tripped as --format=dynamic=<expr> against every vector this entry carries",
@@ -32164,6 +32286,67 @@
             "hashpipe" : "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one.",
             "john" : "no format. Swept the 76 format(s) whose own valid() accepts this entry's own vector, as john --show=left reports them, on 2026-09-04 (a tools/discover-john.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. For john the control is also per ENTRY and not only per shape: every format counted above is one whose own loader ACCEPTED this hash, so each was asked this exact question and answered no. A format that cannot parse the hash is not counted at all, and an entry no format can parse is reported as unsearched rather than decided. Every applicable format ran to completion; a format killed at the timeout is counted as untested and withholds this verdict. No john format name matches any identifier this entry publishes either, normalized by the separator-drift rule. john nonetheless COMPUTES this: the entry carries a proven john_dynamic_expr, dynamic=md4(utf16(sha1($p))), which john's own dynamic compiler recovered this entry's plaintext from this entry's hash under. That is a runnable command and not a format identifier, which is why it stays out of this column -- putting it here would inflate john's coverage with something no --list=formats will ever show. Read this verdict as 'no named format', not as 'john cannot do it'. This is the absence of an IDENTIFIER, not of the algorithm: if john gains one, this becomes a mapping.",
             "mdxfind" : "mdxfind's own published example for this identifier, recovered by mdxfind at this identifier with mdxfind's own published plaintext."
+         },
+         "vecs" : 1
+      },
+      {
+         "alias" : "",
+         "application" : "",
+         "category" : "composite",
+         "crack" : {
+            "ids" : [],
+            "state" : "no"
+         },
+         "cracknote" : "",
+         "denotation" : "emit(md4(utf16le(sha1^N(pass) . S)))",
+         "expr" : "",
+         "expr_note" : "multi-emit, per Appendix A Note [24]. See the denotation.",
+         "expr_tier" : "absent",
+         "hash_length" : 32,
+         "hash_length_basis" : "observed",
+         "hashcat" : {
+            "ids" : [],
+            "state" : "unknown"
+         },
+         "hashcat_salted" : "",
+         "hashcat_speed" : "",
+         "hashpipe" : {
+            "ids" : [
+               "MD4UTF16SHA1HUM"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
+         },
+         "id" : "md4utf16sha1hum",
+         "john" : {
+            "ids" : [],
+            "state" : "unknown"
+         },
+         "john_expr" : "",
+         "john_salted" : "",
+         "john_work_factor" : "",
+         "legacy" : "",
+         "mdxfind" : {
+            "ids" : [
+               "MD4UTF16SHA1HUM"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
+         },
+         "mdxfind_salted" : "no",
+         "name" : "MD4UTF16SHA1HUM",
+         "nesting_depth" : "",
+         "notes" : "Created 2026-09-05. The SHA-1 sibling of md4utf16md5hum, and distinct from md4utf16sha1 (e574), which is not multi-emit. The salt on the vector contains spaces.",
+         "primary_form" : "",
+         "relations" : [],
+         "sameas" : "",
+         "serialization" : "unknown",
+         "status" : "ok",
+         "tool_note" : {
+            "hashcat" : "",
+            "hashpipe" : "verified with hashpipe -c, which pins each line to its own leading TYPE label and runs no detection, at -t 1 and with the emitted label compared against the one asked for. Both precautions are load-bearing here: hashpipe -m does not restrict what a recognised wrapper reaches, and its results vary with the thread count.",
+            "john" : "",
+            "mdxfind" : "mdxfind e576 MD4UTF16SHA1HUM."
          },
          "vecs" : 1
       },
@@ -45079,6 +45262,67 @@
          },
          "cracknote" : "",
          "denotation" : "",
+         "expr" : "",
+         "expr_note" : "",
+         "expr_tier" : "",
+         "hash_length" : 32,
+         "hash_length_basis" : "observed",
+         "hashcat" : {
+            "ids" : [],
+            "state" : "unknown"
+         },
+         "hashcat_salted" : "",
+         "hashcat_speed" : "",
+         "hashpipe" : {
+            "ids" : [
+               "MD5PASSSALTMD5PASSSALT"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
+         },
+         "id" : "md5passsaltmd5passsalt",
+         "john" : {
+            "ids" : [],
+            "state" : "unknown"
+         },
+         "john_expr" : "",
+         "john_salted" : "",
+         "john_work_factor" : "",
+         "legacy" : "",
+         "mdxfind" : {
+            "ids" : [
+               "MD5PASSSALTMD5PASSSALT"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
+         },
+         "mdxfind_salted" : "yes",
+         "name" : "MD5PASSSALTMD5PASSSALT",
+         "nesting_depth" : "",
+         "notes" : "Created 2026-09-05. Appendix A states the construction as md5(pass . salt . md5(pass . salt)), which is expressible in john dynamic notation, so no denotation: is recorded -- a denotation forecloses an expression, and this one may yet be proven. Run tools/derive-expressions.pl, which hands a candidate to john against this row own vector and either recovers the plaintext or does not. NOT seeded from hashpipe john_map.h: this type appears in JohnMapLocal[], whose numbering upstream own comment says is LOCAL to the machine that generated it.",
+         "primary_form" : "",
+         "relations" : [],
+         "sameas" : "",
+         "serialization" : "unknown",
+         "status" : "ok",
+         "tool_note" : {
+            "hashcat" : "",
+            "hashpipe" : "verified with hashpipe -c, which pins each line to its own leading TYPE label and runs no detection, at -t 1 and with the emitted label compared against the one asked for. Both precautions are load-bearing here: hashpipe -m does not restrict what a recognised wrapper reaches, and its results vary with the thread count.",
+            "john" : "",
+            "mdxfind" : "mdxfind e1007 MD5PASSSALTMD5PASSSALT."
+         },
+         "vecs" : 1
+      },
+      {
+         "alias" : "",
+         "application" : "",
+         "category" : "composite",
+         "crack" : {
+            "ids" : [],
+            "state" : "no"
+         },
+         "cracknote" : "",
+         "denotation" : "",
          "expr" : "md5($p.sha1($p))",
          "expr_note" : "round-tripped as --format=dynamic=<expr> against every vector this entry carries",
          "expr_tier" : "vector",
@@ -56596,6 +56840,67 @@
             "state" : "no"
          },
          "cracknote" : "",
+         "denotation" : "",
+         "expr" : "",
+         "expr_note" : "",
+         "expr_tier" : "",
+         "hash_length" : 64,
+         "hash_length_basis" : "observed",
+         "hashcat" : {
+            "ids" : [],
+            "state" : "unknown"
+         },
+         "hashcat_salted" : "",
+         "hashcat_speed" : "",
+         "hashpipe" : {
+            "ids" : [
+               "QAS-VASAUTH"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
+         },
+         "id" : "qas-vasauth",
+         "john" : {
+            "ids" : [],
+            "state" : "unknown"
+         },
+         "john_expr" : "",
+         "john_salted" : "",
+         "john_work_factor" : "",
+         "legacy" : "",
+         "mdxfind" : {
+            "ids" : [
+               "QAS-VASAUTH"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
+         },
+         "mdxfind_salted" : "yes",
+         "name" : "QAS-VASAUTH",
+         "nesting_depth" : "",
+         "notes" : "Created 2026-09-05. Quest QAS vas_auth. Appendix A states the construction as sha256(\"#\" . salt . \"-\" . pass); no denotation: is recorded because that is expressible -- john dynamic language has constants $c1..$c8 for exactly this, so the string literals are not an obstacle -- and a denotation would foreclose an expression that may yet be proven. Run tools/derive-expressions.pl. This row also closes a question CLAUDE.md left open: QAS-VASAUTH was the ONE hashpipe type name unreachable here by any identifier, and it is now reachable by its own.",
+         "primary_form" : "",
+         "relations" : [],
+         "sameas" : "",
+         "serialization" : "unknown",
+         "status" : "ok",
+         "tool_note" : {
+            "hashcat" : "",
+            "hashpipe" : "verified with hashpipe -c, which pins each line to its own leading TYPE label and runs no detection, at -t 1 and with the emitted label compared against the one asked for. Both precautions are load-bearing here: hashpipe -m does not restrict what a recognised wrapper reaches, and its results vary with the thread count.",
+            "john" : "",
+            "mdxfind" : "mdxfind e1008 QAS-VASAUTH."
+         },
+         "vecs" : 1
+      },
+      {
+         "alias" : "",
+         "application" : "",
+         "category" : "application",
+         "crack" : {
+            "ids" : [],
+            "state" : "no"
+         },
+         "cracknote" : "",
          "denotation" : "md5crypt(pass, salt)",
          "expr" : "",
          "expr_note" : "the construction upstream states for mdxfind type QNX-MD5 (e934) names md5crypt(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
@@ -61019,6 +61324,128 @@
             "hashpipe" : "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one.",
             "john" : "format discovered by round-trip search, not by name",
             "mdxfind" : ""
+         },
+         "vecs" : 1
+      },
+      {
+         "alias" : "",
+         "application" : "",
+         "category" : "application",
+         "crack" : {
+            "ids" : [],
+            "state" : "no"
+         },
+         "cracknote" : "",
+         "denotation" : "SAP CODVN H, SHA-256 flavour: h = sha256(pass . salt) for the first round and h = sha256(pass . h) for each of the remaining ITER-1 rounds, password truncated at 40 characters",
+         "expr" : "",
+         "expr_note" : "the iteration count is a runtime parameter read out of the stored form, so this construction cannot be written as a fixed expression at all. Appendix A Note [41] says so in those terms. That is separate from whether john has a FORMAT for it: it does, saph, which the sibling rows already carry.",
+         "expr_tier" : "absent",
+         "hash_length" : "",
+         "hash_length_basis" : "",
+         "hashcat" : {
+            "ids" : [],
+            "state" : "unknown"
+         },
+         "hashcat_salted" : "",
+         "hashcat_speed" : "",
+         "hashpipe" : {
+            "ids" : [
+               "SAPCODVNH256"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
+         },
+         "id" : "sapcodvnh256",
+         "john" : {
+            "ids" : [],
+            "state" : "unknown"
+         },
+         "john_expr" : "",
+         "john_salted" : "",
+         "john_work_factor" : "",
+         "legacy" : "",
+         "mdxfind" : {
+            "ids" : [
+               "SAPCODVNH256"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
+         },
+         "mdxfind_salted" : "yes",
+         "name" : "SAPCODVNH256",
+         "nesting_depth" : "",
+         "notes" : "Created 2026-09-05. Completes the CODVN H family this repository already carries as sapcodvnh (e904, SHA-1) and sapcodvnh512 (e984, SHA-512). Appendix A Note [41] records that all four of john saph SHA-256 and SHA-384 test vectors were reproduced by an independent implementation before either type was written.",
+         "primary_form" : "",
+         "relations" : [],
+         "sameas" : "",
+         "serialization" : "unknown",
+         "status" : "ok",
+         "tool_note" : {
+            "hashcat" : "",
+            "hashpipe" : "verified with hashpipe -c, which pins each line to its own leading TYPE label and runs no detection, at -t 1 and with the emitted label compared against the one asked for. Both precautions are load-bearing here: hashpipe -m does not restrict what a recognised wrapper reaches, and its results vary with the thread count.",
+            "john" : "",
+            "mdxfind" : "mdxfind e1016 SAPCODVNH256."
+         },
+         "vecs" : 1
+      },
+      {
+         "alias" : "",
+         "application" : "",
+         "category" : "application",
+         "crack" : {
+            "ids" : [],
+            "state" : "no"
+         },
+         "cracknote" : "",
+         "denotation" : "SAP CODVN H, SHA-384 flavour: h = sha384(pass . salt) for the first round and h = sha384(pass . h) for each of the remaining ITER-1 rounds, password truncated at 40 characters",
+         "expr" : "",
+         "expr_note" : "the iteration count is a runtime parameter read out of the stored form, per Appendix A Note [41].",
+         "expr_tier" : "absent",
+         "hash_length" : "",
+         "hash_length_basis" : "",
+         "hashcat" : {
+            "ids" : [],
+            "state" : "unknown"
+         },
+         "hashcat_salted" : "",
+         "hashcat_speed" : "",
+         "hashpipe" : {
+            "ids" : [
+               "SAPCODVNH384"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
+         },
+         "id" : "sapcodvnh384",
+         "john" : {
+            "ids" : [],
+            "state" : "unknown"
+         },
+         "john_expr" : "",
+         "john_salted" : "",
+         "john_work_factor" : "",
+         "legacy" : "",
+         "mdxfind" : {
+            "ids" : [
+               "SAPCODVNH384"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
+         },
+         "mdxfind_salted" : "yes",
+         "name" : "SAPCODVNH384",
+         "nesting_depth" : "",
+         "notes" : "Created 2026-09-05. The SHA-384 flavour, completing the family with sapcodvnh (e904), sapcodvnh512 (e984) and sapcodvnh256 (e1016).",
+         "primary_form" : "",
+         "relations" : [],
+         "sameas" : "",
+         "serialization" : "unknown",
+         "status" : "ok",
+         "tool_note" : {
+            "hashcat" : "",
+            "hashpipe" : "verified with hashpipe -c, which pins each line to its own leading TYPE label and runs no detection, at -t 1 and with the emitted label compared against the one asked for. Both precautions are load-bearing here: hashpipe -m does not restrict what a recognised wrapper reaches, and its results vary with the thread count.",
+            "john" : "",
+            "mdxfind" : "mdxfind e1017 SAPCODVNH384."
          },
          "vecs" : 1
       },
@@ -78209,6 +78636,128 @@
       {
          "alias" : "",
          "application" : "",
+         "category" : "composite",
+         "crack" : {
+            "ids" : [],
+            "state" : "no"
+         },
+         "cracknote" : "",
+         "denotation" : "sha1(\"*\" . upper(sha1(sha1_bin(md5(pass)))))",
+         "expr" : "",
+         "expr_note" : "multi-emit SQL5 construction, per Appendix A Notes [1] and [24].",
+         "expr_tier" : "absent",
+         "hash_length" : 40,
+         "hash_length_basis" : "observed",
+         "hashcat" : {
+            "ids" : [],
+            "state" : "unknown"
+         },
+         "hashcat_salted" : "",
+         "hashcat_speed" : "",
+         "hashpipe" : {
+            "ids" : [
+               "SHA1SQL5MD5"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
+         },
+         "id" : "sha1sql5md5",
+         "john" : {
+            "ids" : [],
+            "state" : "unknown"
+         },
+         "john_expr" : "",
+         "john_salted" : "",
+         "john_work_factor" : "",
+         "legacy" : "",
+         "mdxfind" : {
+            "ids" : [
+               "SHA1SQL5MD5"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
+         },
+         "mdxfind_salted" : "no",
+         "name" : "SHA1SQL5MD5",
+         "nesting_depth" : "",
+         "notes" : "Created 2026-09-05. Distinct from sha1md5sql5 (SHA1MD5SQL5) and sha1sql5-32 (SHA1SQL5-32), which this repository already carries: the operand order differs and each is its own mdxfind identifier.",
+         "primary_form" : "",
+         "relations" : [],
+         "sameas" : "",
+         "serialization" : "unknown",
+         "status" : "ok",
+         "tool_note" : {
+            "hashcat" : "",
+            "hashpipe" : "verified with hashpipe -c, which pins each line to its own leading TYPE label and runs no detection, at -t 1 and with the emitted label compared against the one asked for. Both precautions are load-bearing here: hashpipe -m does not restrict what a recognised wrapper reaches, and its results vary with the thread count.",
+            "john" : "",
+            "mdxfind" : "mdxfind e760 SHA1SQL5MD5."
+         },
+         "vecs" : 1
+      },
+      {
+         "alias" : "",
+         "application" : "",
+         "category" : "composite",
+         "crack" : {
+            "ids" : [],
+            "state" : "no"
+         },
+         "cracknote" : "",
+         "denotation" : "sha1(md5(\"*\" . upper(sha1(sha1_bin(md5(pass))))))",
+         "expr" : "",
+         "expr_note" : "multi-emit SQL5 construction, per Appendix A Notes [1] and [24].",
+         "expr_tier" : "absent",
+         "hash_length" : 40,
+         "hash_length_basis" : "observed",
+         "hashcat" : {
+            "ids" : [],
+            "state" : "unknown"
+         },
+         "hashcat_salted" : "",
+         "hashcat_speed" : "",
+         "hashpipe" : {
+            "ids" : [
+               "SHA1SQL5MD5MD5"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
+         },
+         "id" : "sha1sql5md5md5",
+         "john" : {
+            "ids" : [],
+            "state" : "unknown"
+         },
+         "john_expr" : "",
+         "john_salted" : "",
+         "john_work_factor" : "",
+         "legacy" : "",
+         "mdxfind" : {
+            "ids" : [
+               "SHA1SQL5MD5MD5"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
+         },
+         "mdxfind_salted" : "no",
+         "name" : "SHA1SQL5MD5MD5",
+         "nesting_depth" : "",
+         "notes" : "Created 2026-09-05. The md5-wrapped form of sha1sql5md5.",
+         "primary_form" : "",
+         "relations" : [],
+         "sameas" : "",
+         "serialization" : "unknown",
+         "status" : "ok",
+         "tool_note" : {
+            "hashcat" : "",
+            "hashpipe" : "verified with hashpipe -c, which pins each line to its own leading TYPE label and runs no detection, at -t 1 and with the emitted label compared against the one asked for. Both precautions are load-bearing here: hashpipe -m does not restrict what a recognised wrapper reaches, and its results vary with the thread count.",
+            "john" : "",
+            "mdxfind" : "mdxfind e761 SHA1SQL5MD5MD5."
+         },
+         "vecs" : 1
+      },
+      {
+         "alias" : "",
+         "application" : "",
          "category" : "",
          "crack" : {
             "ids" : [],
@@ -82188,8 +82737,15 @@
          "nesting_depth" : 1,
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "iteration",
+               "entry" : "sha512rawpasssalt",
+               "kind" : "collides-on-subset",
+               "note" : "Measured 2026-09-05. At depth one the two are numerically identical -- SHA512RAWPASSSALT (e1013) and SHA512PASSSALT (e386) both compute sha512(pass . salt) -- and they diverge only from depth two, where e1013 feeds the RAW digest back and e386 feeds the hex. So they agree on exactly the depth-one inputs and nowhere else. A corpus-wide mdxfind sweep duly reports e1013 on this row's vector; that is the mask, not a mapping, and the tie breaks to the lower eN."
+            }
+         ],
+         "sameas" : "collides with sha512rawpasssalt (iteration)",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -82704,6 +83260,74 @@
             "hashpipe" : "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one.",
             "john" : "no format. Swept the 2 format(s) whose own valid() accepts this entry's own vector, as john --show=left reports them, on 2026-09-04 (a tools/discover-john.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. For john the control is also per ENTRY and not only per shape: every format counted above is one whose own loader ACCEPTED this hash, so each was asked this exact question and answered no. A format that cannot parse the hash is not counted at all, and an entry no format can parse is reported as unsearched rather than decided. Every applicable format ran to completion; a format killed at the timeout is counted as untested and withholds this verdict. No john format name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if john gains one, this becomes a mapping.",
             "mdxfind" : "mdxfind's own published example for this identifier, recovered by mdxfind at this identifier with mdxfind's own published plaintext."
+         },
+         "vecs" : 1
+      },
+      {
+         "alias" : "",
+         "application" : "",
+         "category" : "composite",
+         "crack" : {
+            "ids" : [],
+            "state" : "no"
+         },
+         "cracknote" : "",
+         "denotation" : "",
+         "expr" : "",
+         "expr_note" : "",
+         "expr_tier" : "",
+         "hash_length" : 128,
+         "hash_length_basis" : "observed",
+         "hashcat" : {
+            "ids" : [],
+            "state" : "unknown"
+         },
+         "hashcat_salted" : "",
+         "hashcat_speed" : "",
+         "hashpipe" : {
+            "ids" : [
+               "SHA512RAWPASSSALT"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
+         },
+         "id" : "sha512rawpasssalt",
+         "john" : {
+            "ids" : [],
+            "state" : "unknown"
+         },
+         "john_expr" : "",
+         "john_salted" : "",
+         "john_work_factor" : "",
+         "legacy" : "",
+         "mdxfind" : {
+            "ids" : [
+               "SHA512RAWPASSSALT"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
+         },
+         "mdxfind_salted" : "yes",
+         "name" : "SHA512RAWPASSSALT",
+         "nesting_depth" : "",
+         "notes" : "Created 2026-09-05. Appendix A states the construction as sha512_bin(pass . salt) and glosses it \"BlackBerry ES10 at -i 100\". No denotation: is recorded because that is expressible and a denotation would foreclose it; run tools/derive-expressions.pl. Note what this row is NOT: at depth one it is numerically identical to SHA512PASSSALT (e386), which sha512-pass-salt and filezilla-server-ge-0-9-55 already carry, and the two differ only in ITERATION ROLE -- this one feeds the raw digest back. A corpus sweep will therefore report e1013 on those rows; that is the mask, not a mapping, and ties break to the lower eN.",
+         "primary_form" : "",
+         "relations" : [
+            {
+               "distinction" : "iteration",
+               "entry" : "sha512-pass-salt",
+               "kind" : "collides-on-subset",
+               "note" : "Measured 2026-09-05. At depth one the two are numerically identical -- SHA512RAWPASSSALT (e1013) and SHA512PASSSALT (e386) both compute sha512(pass . salt) -- and they diverge only from depth two, where e1013 feeds the RAW digest back and e386 feeds the hex. So they agree on exactly the depth-one inputs and nowhere else. A corpus-wide mdxfind sweep duly reports e1013 on this row's vector; that is the mask, not a mapping, and the tie breaks to the lower eN."
+            }
+         ],
+         "sameas" : "collides with sha512-pass-salt (iteration)",
+         "serialization" : "unknown",
+         "status" : "ok",
+         "tool_note" : {
+            "hashcat" : "",
+            "hashpipe" : "verified with hashpipe -c, which pins each line to its own leading TYPE label and runs no detection, at -t 1 and with the emitted label compared against the one asked for. Both precautions are load-bearing here: hashpipe -m does not restrict what a recognised wrapper reaches, and its results vary with the thread count.",
+            "john" : "",
+            "mdxfind" : "mdxfind e1013 SHA512RAWPASSSALT."
          },
          "vecs" : 1
       },
@@ -96212,7 +96836,7 @@
          "vecs" : 1
       }
    ],
-   "generated" : "2026-09-04",
+   "generated" : "2026-09-05",
    "merged" : 9,
    "tombstones" : [
       {

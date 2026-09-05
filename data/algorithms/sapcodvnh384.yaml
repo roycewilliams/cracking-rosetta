@@ -1,0 +1,34 @@
+id: "sapcodvnh384"
+name: "SAPCODVNH384"
+expression_proof:
+  verified: "absent"
+  verified_at: "2026-09-05"
+  verified_with: "hx Language Specification, Appendix A"
+  note: "the iteration count is a runtime parameter read out of the stored form, per Appendix A Note [41]."
+denotation:
+  text: "SAP CODVN H, SHA-384 flavour: h = sha384(pass . salt) for the first round and h = sha384(pass . h) for each of the remaining ITER-1 rounds, password truncated at 40 characters"
+  source: "mdxfind"
+  note: "Appendix A Note [41], same as the SHA-256 flavour: the iteration count is carried in the hash, so this is documentation rather than a compilable expression. hx Language Specification (Waffle), Appendix A, read 2026-09-05. The revision is later than the 1.15 the seeding tools cite, since Appendix A now carries e1003-e1027."
+category: "application"
+status: "ok"
+tools:
+  mdxfind:
+    types: ["SAPCODVNH384"]
+    verified: "vector"
+    verified_at: "2026-09-05"
+    verified_with: "mdxfind RCS 1.576 (2026/09/02)"
+    note: "mdxfind e1017 SAPCODVNH384."
+  hashpipe:
+    types: ["SAPCODVNH384"]
+    verified: "vector"
+    verified_at: "2026-09-05"
+    verified_with: "hashpipe RCS 1.193 (2026/09/05)"
+    note: "verified with hashpipe -c, which pins each line to its own leading TYPE label and runs no detection, at -t 1 and with the emitted label compared against the one asked for. Both precautions are load-bearing here: hashpipe -m does not restrict what a recognised wrapper reaches, and its results vary with the thread count."
+  crack:
+    supported: false
+vectors:
+  - hash: "{x-isSHA384, 5000}3O/F4YGKNmIYHDu7ZQ7Q+ioCOQi4HRY4yrggKptAU9DtmHigCuGqBiAPVbKbEAfGTzh4YlZLWUM="
+    pass: "booboo"
+    source: "mdxfind"
+    reads_in: ["mdxfind"]
+notes: "Created 2026-09-05. The SHA-384 flavour, completing the family with sapcodvnh (e904), sapcodvnh512 (e984) and sapcodvnh256 (e1016)."

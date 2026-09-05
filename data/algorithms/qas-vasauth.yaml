@@ -1,0 +1,25 @@
+id: "qas-vasauth"
+name: "QAS-VASAUTH"
+category: "application"
+status: "ok"
+tools:
+  mdxfind:
+    types: ["QAS-VASAUTH"]
+    verified: "vector"
+    verified_at: "2026-09-05"
+    verified_with: "mdxfind RCS 1.576 (2026/09/02)"
+    note: "mdxfind e1008 QAS-VASAUTH."
+  hashpipe:
+    types: ["QAS-VASAUTH"]
+    verified: "vector"
+    verified_at: "2026-09-05"
+    verified_with: "hashpipe RCS 1.193 (2026/09/05)"
+    note: "verified with hashpipe -c, which pins each line to its own leading TYPE label and runs no detection, at -t 1 and with the emitted label compared against the one asked for. Both precautions are load-bearing here: hashpipe -m does not restrict what a recognised wrapper reaches, and its results vary with the thread count."
+  crack:
+    supported: false
+vectors:
+  - hash: "3379b2f8bcff3e26cbbfff24a9e70933fc0dff54e6ca72938b09aab008ec344d:C34208EA-8C33-473D-A9B4-53FB40347EA0"
+    pass: "password123"
+    source: "mdxfind"
+    reads_in: ["mdxfind"]
+notes: "Created 2026-09-05. Quest QAS vas_auth. Appendix A states the construction as sha256(\"#\" . salt . \"-\" . pass); no denotation: is recorded because that is expressible -- john dynamic language has constants $c1..$c8 for exactly this, so the string literals are not an obstacle -- and a denotation would foreclose an expression that may yet be proven. Run tools/derive-expressions.pl. This row also closes a question CLAUDE.md left open: QAS-VASAUTH was the ONE hashpipe type name unreachable here by any identifier, and it is now reachable by its own."

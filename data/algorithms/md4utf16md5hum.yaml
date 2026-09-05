@@ -1,0 +1,34 @@
+id: "md4utf16md5hum"
+name: "MD4UTF16MD5HUM"
+expression_proof:
+  verified: "absent"
+  verified_at: "2026-09-05"
+  verified_with: "hx Language Specification, Appendix A"
+  note: "multi-emit, per Appendix A Note [24]: a type that emits several candidates per input has no single expression, and this repository does not record one for such a type. That is a fact about the construction, not about whether any tool can crack it."
+denotation:
+  text: "emit(md4(utf16le(md5^N(pass) . S)))"
+  source: "mdxfind"
+  note: "Appendix A states this with emit(), so the type is MULTI-EMIT: it computes several candidate digests per input and matches if any one reproduces the stored hash. A single expression: would be a false claim even when the string is one of the forms, which is why this is a denotation. hx Language Specification (Waffle), Appendix A, read 2026-09-05. The revision is later than the 1.15 the seeding tools cite, since Appendix A now carries e1003-e1027."
+category: "composite"
+status: "ok"
+tools:
+  mdxfind:
+    types: ["MD4UTF16MD5HUM"]
+    verified: "vector"
+    verified_at: "2026-09-05"
+    verified_with: "mdxfind RCS 1.576 (2026/09/02)"
+    note: "mdxfind e575 MD4UTF16MD5HUM."
+  hashpipe:
+    types: ["MD4UTF16MD5HUM"]
+    verified: "vector"
+    verified_at: "2026-09-05"
+    verified_with: "hashpipe RCS 1.193 (2026/09/05)"
+    note: "verified with hashpipe -c, which pins each line to its own leading TYPE label and runs no detection, at -t 1 and with the emitted label compared against the one asked for. Both precautions are load-bearing here: hashpipe -m does not restrict what a recognised wrapper reaches, and its results vary with the thread count."
+  crack:
+    supported: false
+vectors:
+  - hash: "f25a2dde4e083267167911073d3c4a04:00- x 1"
+    pass: "password123"
+    source: "mdxfind"
+    reads_in: ["mdxfind"]
+notes: "Created 2026-09-05. mdxfind e575 had no row here: it is one of the types that were in the inventory but in no queue, because GAPS.md carried an orphan-identifier section for hashcat only. The salt on the vector contains spaces, which is legal and is why the whole mdxfind-readable string is the hash field."

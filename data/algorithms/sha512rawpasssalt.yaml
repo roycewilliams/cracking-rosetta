@@ -1,0 +1,30 @@
+id: "sha512rawpasssalt"
+name: "SHA512RAWPASSSALT"
+category: "composite"
+status: "ok"
+tools:
+  mdxfind:
+    types: ["SHA512RAWPASSSALT"]
+    verified: "vector"
+    verified_at: "2026-09-05"
+    verified_with: "mdxfind RCS 1.576 (2026/09/02)"
+    note: "mdxfind e1013 SHA512RAWPASSSALT."
+  hashpipe:
+    types: ["SHA512RAWPASSSALT"]
+    verified: "vector"
+    verified_at: "2026-09-05"
+    verified_with: "hashpipe RCS 1.193 (2026/09/05)"
+    note: "verified with hashpipe -c, which pins each line to its own leading TYPE label and runs no detection, at -t 1 and with the emitted label compared against the one asked for. Both precautions are load-bearing here: hashpipe -m does not restrict what a recognised wrapper reaches, and its results vary with the thread count."
+  crack:
+    supported: false
+relations:
+  - kind: "collides-on-subset"
+    entry: "sha512-pass-salt"
+    distinction: "iteration"
+    note: "Measured 2026-09-05. At depth one the two are numerically identical -- SHA512RAWPASSSALT (e1013) and SHA512PASSSALT (e386) both compute sha512(pass . salt) -- and they diverge only from depth two, where e1013 feeds the RAW digest back and e386 feeds the hex. So they agree on exactly the depth-one inputs and nowhere else. A corpus-wide mdxfind sweep duly reports e1013 on this row's vector; that is the mask, not a mapping, and the tie breaks to the lower eN."
+vectors:
+  - hash: "a7a2a6174d5c151e0df2052271a0184fb38ed4761209141cca085401d5be5584b4979af0f365204a11876fa7b6a83ebc31bd1fde7014e1456165393d20e74e59:DB1C19C0"
+    pass: "password123"
+    source: "mdxfind"
+    reads_in: ["mdxfind"]
+notes: "Created 2026-09-05. Appendix A states the construction as sha512_bin(pass . salt) and glosses it \"BlackBerry ES10 at -i 100\". No denotation: is recorded because that is expressible and a denotation would foreclose it; run tools/derive-expressions.pl. Note what this row is NOT: at depth one it is numerically identical to SHA512PASSSALT (e386), which sha512-pass-salt and filezilla-server-ge-0-9-55 already carry, and the two differ only in ITERATION ROLE -- this one feeds the raw digest back. A corpus sweep will therefore report e1013 on those rows; that is the mask, not a mapping, and ties break to the lower eN."

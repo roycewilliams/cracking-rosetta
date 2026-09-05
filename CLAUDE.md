@@ -116,7 +116,16 @@ and hashpipe labels the same value `x01`. Since the suffix is part of the
 identity (see the pitfall below), **this repository follows mdxfind for
 `iterations:` and never seeds that field from a hashpipe source.**
 
-**The 25 names hashpipe has and mdxfind does not are TRANSIENT, and that is
+**RESOLVED 2026-09-05: the 25 arrived in mdxfind, exactly as predicted below,
+and the prediction is left standing because it came true.** Measured against
+mdxfind RCS 1.576, all 25 are now indices `e1003`-`e1027` of mdxfind's own type
+table, every one round-trips under `mdxfind -M eNNNN`, and every one now has a
+row here -- mdxfind coverage is 1027/1027. What follows is the reasoning as it
+stood, kept because the argument it settled is the one that recurs: whether a
+hashpipe-only name is grounds for a fourth column. It was not, and the reason
+it was not is that the list was transient.
+
+**The 25 names hashpipe had and mdxfind did not were TRANSIENT, and that was
 upstream's own account.** Waffle told Royce (relayed 2026-09-03) that they
 exist because he is improving hashpipe's overlapping support with algorithms
 JOHN supports. That is the author's statement of intent, not a measurement,
@@ -154,7 +163,9 @@ its own record in `data/upstream-disagreements.yaml`, and nothing here
 touches it. And because the divergence is transient by upstream's account,
 the thing to watch after the next `fetch-upstream.sh` is the list SHRINKING:
 if these types arrive in mdxfind, they stop being hashpipe-only and the
-question closes itself.
+question closes itself. **It closed on 2026-09-05.** The list is empty, and
+`QAS-VASAUTH` -- named above as the one hashpipe type unreachable here by any
+identifier -- is reachable by its own, on the `qas-vasauth` row.
 
 **What detects that it has stopped being true is
 `data/upstream-disagreements.yaml`, executed by `tools/check-upstream.pl`.**

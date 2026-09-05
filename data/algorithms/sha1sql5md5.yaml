@@ -1,0 +1,34 @@
+id: "sha1sql5md5"
+name: "SHA1SQL5MD5"
+expression_proof:
+  verified: "absent"
+  verified_at: "2026-09-05"
+  verified_with: "hx Language Specification, Appendix A"
+  note: "multi-emit SQL5 construction, per Appendix A Notes [1] and [24]."
+denotation:
+  text: "sha1(\"*\" . upper(sha1(sha1_bin(md5(pass)))))"
+  source: "mdxfind"
+  note: "Appendix A cites Notes [1] and [24] for this row: the SQL5 construction is multi-emit, so a single expression: would be a false claim. hx Language Specification (Waffle), Appendix A, read 2026-09-05. The revision is later than the 1.15 the seeding tools cite, since Appendix A now carries e1003-e1027."
+category: "composite"
+status: "ok"
+tools:
+  mdxfind:
+    types: ["SHA1SQL5MD5"]
+    verified: "vector"
+    verified_at: "2026-09-05"
+    verified_with: "mdxfind RCS 1.576 (2026/09/02)"
+    note: "mdxfind e760 SHA1SQL5MD5."
+  hashpipe:
+    types: ["SHA1SQL5MD5"]
+    verified: "vector"
+    verified_at: "2026-09-05"
+    verified_with: "hashpipe RCS 1.193 (2026/09/05)"
+    note: "verified with hashpipe -c, which pins each line to its own leading TYPE label and runs no detection, at -t 1 and with the emitted label compared against the one asked for. Both precautions are load-bearing here: hashpipe -m does not restrict what a recognised wrapper reaches, and its results vary with the thread count."
+  crack:
+    supported: false
+vectors:
+  - hash: "1a6a1e1d2a0cb4163755f3174017b18857465d10"
+    pass: "password123"
+    source: "mdxfind"
+    reads_in: ["mdxfind"]
+notes: "Created 2026-09-05. Distinct from sha1md5sql5 (SHA1MD5SQL5) and sha1sql5-32 (SHA1SQL5-32), which this repository already carries: the operand order differs and each is its own mdxfind identifier."

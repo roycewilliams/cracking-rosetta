@@ -34,6 +34,11 @@ tools:
     note: "format discovered by round-trip search, not by name"
   crack:
     supported: false
+relations:
+  - kind: "collides-on-subset"
+    entry: "sha512rawpasssalt"
+    distinction: "iteration"
+    note: "Measured 2026-09-05. At depth one the two are numerically identical -- SHA512RAWPASSSALT (e1013) and SHA512PASSSALT (e386) both compute sha512(pass . salt) -- and they diverge only from depth two, where e1013 feeds the RAW digest back and e386 feeds the hex. So they agree on exactly the depth-one inputs and nowhere else. A corpus-wide mdxfind sweep duly reports e1013 on this row's vector; that is the mask, not a mapping, and the tie breaks to the lower eN."
 vectors:
   - hash: "2efd3afb4c761d0bfe727bae35c18243f0119a4f2c4eb972c39b84933b0630e9ec64f564e24ea8c49e3e4b45d24117f1d5d5e983a9c62fd3ba0a53e084ae8b2d:ffAWQu"
     pass: "rosetta"
