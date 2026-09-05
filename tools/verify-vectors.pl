@@ -193,6 +193,9 @@ END_USAGE
 }
 
 my (@tools, $hashcat, $mdxfind, $john, $algdir, $workdir, @only, $help);
+# (entry, mode) pairs whose crack was attributed by a solo run because
+# hashcat echoed a different spelling of the hash than it was given.
+my %reserialized;
 my ($dry, $john_gpu);
 my $discover = 0;
 my $timeout = 120;
@@ -504,6 +507,7 @@ if ($want{hashcat} && $job{hashcat}) {
         $ran_ident{hashcat}{$mode} = 1;
         next if $dry;
 
+        my $solo_cracked = 0;
         my $hf = write_file("$workdir/hc.$mode.hash", map { $_->{hash} } @v);
         my $wf = write_file("$workdir/hc.$mode.word", map { $_->{pass} } @v);
 
@@ -546,6 +550,61 @@ if ($want{hashcat} && $job{hashcat}) {
             $cracked{hashcat}{ $vec->{id} }{$mode} = 1
                 if hc_plain_is($said, $vec->{pass});
         }
+        # SOLO FALLBACK. hashcat does not always echo the string it was
+        # GIVEN. Measured 2026-09-05 on v7.1.2-549-g8a15e210b: -m 26900 strips
+        # the trailing zero padding from the SNMPv3 engine-id field, so it is
+        # handed ...db57fd6000000000 and prints ...db57fd60 -- same credential,
+        # a line eight characters shorter. Attribution above is an exact match
+        # on the hash, which is exactly what makes a GROUPED run safe, since
+        # output lines do not correspond to input lines. So a re-serializing
+        # mode reads as "did not reproduce" and the block keeps a note saying
+        # hashcat failed to reproduce its own published example. That note was
+        # wrong about hashcat, and nothing in the data could tell it from a
+        # mode that genuinely does not crack.
+        #
+        # One hash and one candidate per invocation removes the attribution
+        # question rather than loosening it: there is no other hash the crack
+        # could belong to and no other plaintext it could have used, so the
+        # echoed spelling stops mattering. It fires only for a (vector, mode)
+        # pair the grouped run left with nothing, so the grouped run stays
+        # primary, a regression is structurally impossible, and the cost is
+        # bounded by what is still unexplained.
+        for my $vec (@v) {
+            next if $cracked{hashcat}{ $vec->{id} }{$mode};
+            next if $read{hashcat}{ $vec->{id} }{ $vec->{vi} };
+            my $sf = write_file("$workdir/hc.$mode.solo.hash", $vec->{hash});
+            my $sw = write_file("$workdir/hc.$mode.solo.word", $vec->{pass});
+            my ($c2, $o2) = run_capture($timeout, $hashcat,
+                '-m', $mode, '-a', '0', '--quiet', '--potfile-disable',
+                '--self-test-disable', '--backend-ignore-opencl', $sf, $sw);
+            next unless defined $o2;
+            my $hit = 0;
+            for my $line (split /\n/, $o2) {
+                # "<whatever hashcat calls the hash>:<plain>". The plaintext is
+                # still checked, because the tier promises the tool recovered
+                # THIS entry's plaintext; only the hash spelling is conceded.
+                next unless $line =~ /^(.+?):(.*)$/;
+                next unless length $1;
+                next unless hc_plain_is($2, $vec->{pass});
+                $hit = 1;
+                last;
+            }
+            next unless $hit;
+            $read{hashcat}{ $vec->{id} }{ $vec->{vi} } = 1;
+            $read_here{ $vec->{id} }{ $vec->{vi} } = 1;
+            $cracked{hashcat}{ $vec->{id} }{$mode} = 1;
+            # Two different causes send a pair here and they are not the same
+            # sentence. If the grouped run COMPLETED, it read this hash and
+            # echoed a spelling that did not match, which is a fact about the
+            # mode's serialization. If it did not complete, hashcat rejected
+            # the FILE and we learned nothing about the spelling at all. Saying
+            # the first when the second happened is a wrong reason attached to
+            # a right tier.
+            $reserialized{ $vec->{id} }{$mode} =
+                ($code == 0 || $code == 1) ? 'echo' : 'batch';
+            $solo_cracked = 1;
+        }
+
         # A run that did not COMPLETE is not evidence of anything, and the
         # reads_in rule below turns "did not run" into "does not read" unless
         # it is told. hashcat's own include/types.h: RC_FINAL_OK is 0 and
@@ -556,6 +615,21 @@ if ($want{hashcat} && $job{hashcat}) {
         unless ($code == 0 || $code == 1) {
             $failed_job{hashcat}{$mode} = $code;
             delete $ran_ident{hashcat}{$mode};
+            # ... unless a SOLO run of this same identifier cracked. hashcat
+            # exits 255 when ANY line of the hash file fails to parse, which
+            # throws away what every line that DID parse established. Measured
+            # 2026-09-05: qnx7-sha512 carries one vector in mdxfind's
+            # serialization and one in hashcat's; -m 19210 exits 255 on the
+            # pair, and cracks the mdxfind one on its own. Treating the
+            # identifier as unrun there is the batch's fault, not the mode's.
+            # A crack is a completed run by definition, so this can only ever
+            # convert "no verdict" into a verdict, and only on evidence that
+            # actually exists -- a solo run that merely finished proves
+            # nothing and does not qualify.
+            if ($solo_cracked) {
+                $ran_ident{hashcat}{$mode} = 1;
+                delete $failed_job{hashcat}{$mode};
+            }
         }
         # The count is VECTORS THIS IDENTIFIER READ, not vectors belonging to
         # an entry that cracked. An entry can carry one vector per tool -- a
@@ -1045,6 +1119,34 @@ if (!$dry) {
                       . "one this entry already stores, and the two strings "
                       . "are ONE piece of evidence written twice -- not two "
                       . "agreeing vectors.";
+                }
+                # Same idea, the other tool: the vector is the one stored, but
+                # hashcat prints a different spelling of it, so the crack was
+                # attributed by a run holding this hash and nothing else.
+                if ($tool eq 'hashcat' && $reserialized{$id}) {
+                    my $r = $reserialized{$id};
+                    my @echo  = sort { $a <=> $b } grep { $r->{$_} eq 'echo'  } keys %$r;
+                    my @batch = sort { $a <=> $b } grep { $r->{$_} eq 'batch' } keys %$r;
+                    my @why;
+                    push @why,
+                        "hashcat echoed a different spelling of this hash than "
+                      . "it was given under mode(s) " . join(', ', @echo)
+                      . ", and the grouped run attributes a crack by matching "
+                      . "the hash string -- its output lines do not correspond "
+                      . "to its input lines -- so it could not credit one"
+                        if @echo;
+                    push @why,
+                        "the grouped run under mode(s) " . join(', ', @batch)
+                      . " did not complete: hashcat exits 255 when ANY line of "
+                      . "the hash file fails to parse, which discards what the "
+                      . "lines that DID parse established"
+                        if @batch;
+                    $blk->{note} =
+                        "Round-tripped, but attributed by a SOLO run, because "
+                      . join('; and ', @why)
+                      . ". One hash and one candidate per invocation leaves "
+                      . "nothing else the crack could belong to. The stored "
+                      . "vector is unchanged and is the form hashcat was fed.";
                 }
                 $promoted{$tool}++;
                 $touched = 1;
