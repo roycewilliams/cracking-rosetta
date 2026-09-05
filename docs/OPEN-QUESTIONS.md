@@ -268,7 +268,7 @@ deliberately and splitting them is a judgment about what the row is *for* -
 one construction, or one thing people search for. Whoever put them together
 knew something; if that was you, say so.
 
-## Mappings believed but never reproduced (82)
+## Mappings believed but never reproduced (80)
 
 Counted here, listed in [GAPS.md](GAPS.md#1-believed-but-never-reproduced),
 because filling one is mechanical rather than a judgment call: the identifier

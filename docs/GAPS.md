@@ -17,7 +17,7 @@ Each row below links to its entry in the [browsable table](index.html).
 Gaps are absences; for the rows where something is known to be *odd*, see
 [OPEN-QUESTIONS.md](OPEN-QUESTIONS.md).
 
-## 1. Believed but never reproduced (80)
+## 1. Believed but never reproduced (78)
 
 The cheapest contribution in the repository, if you own the tool. Each of
 these already names an identifier and already carries a test vector; nobody
@@ -107,8 +107,6 @@ tools/verify-vectors.pl --tool <tool> --only <id> -v
 | [`veracrypt-whirlpool-xts-512-bit-legacy`](index.html#veracrypt-whirlpool-xts-512-bit-legacy) | hashcat | `13731` | upstream |
 | [`wpa-eapol-pbkdf2`](index.html#wpa-eapol-pbkdf2) | hashcat | `2500` | upstream |
 | [`wpa-eapol-pmk`](index.html#wpa-eapol-pmk) | hashcat | `2501` | upstream |
-| [`wpa-pbkdf2-pmkid-eapol`](index.html#wpa-pbkdf2-pmkid-eapol) | hashcat | `22000` | upstream |
-| [`wpa-pmk`](index.html#wpa-pmk) | hashcat | `22001` | upstream |
 | [`wpa-pmkid-pbkdf2`](index.html#wpa-pmkid-pbkdf2) | hashcat | `16800` | upstream |
 | [`wpa-pmkid-pmk`](index.html#wpa-pmkid-pmk) | hashcat | `16801` | upstream |
 

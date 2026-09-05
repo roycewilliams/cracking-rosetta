@@ -95589,8 +95589,8 @@
             "ids" : [
                22000
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "hashcat_salted" : "yes",
          "hashcat_speed" : "slow",
@@ -95621,10 +95621,10 @@
          "primary_form" : "",
          "relations" : [],
          "sameas" : "",
-         "serialization" : "unknown",
+         "serialization" : "shared",
          "status" : "needs-review",
          "tool_note" : {
-            "hashcat" : "NOT REPRODUCED HERE. hashcat publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: this mode wants binary capture input rather than a hash line. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool hashcat --only 22000 to retry.",
+            "hashcat" : "Round-tripped, but attributed by a SOLO run, because hashcat echoed a different spelling of this hash than it was given under mode(s) 22000, and the grouped run attributes a crack by matching the hash string -- its output lines do not correspond to its input lines -- so it could not credit one. One hash and one candidate per invocation leaves nothing else the crack could belong to. The stored vector is unchanged and is the form hashcat was fed.",
             "hashpipe" : "",
             "john" : "",
             "mdxfind" : "type discovered by round-trip search, not by name"
@@ -95650,8 +95650,8 @@
             "ids" : [
                22001
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "hashcat_salted" : "yes",
          "hashcat_speed" : "slow",
@@ -95685,10 +95685,10 @@
          "primary_form" : "",
          "relations" : [],
          "sameas" : "",
-         "serialization" : "unknown",
+         "serialization" : "shared",
          "status" : "needs-review",
          "tool_note" : {
-            "hashcat" : "hashcat mapping shipped in mdxfind's own type table",
+            "hashcat" : "Round-tripped, but attributed by a SOLO run, because hashcat echoed a different spelling of this hash than it was given under mode(s) 22001, and the grouped run attributes a crack by matching the hash string -- its output lines do not correspond to its input lines -- so it could not credit one. One hash and one candidate per invocation leaves nothing else the crack could belong to. The stored vector is unchanged and is the form hashcat was fed.",
             "hashpipe" : "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one.",
             "john" : "",
             "mdxfind" : "the vector below cracks, but mdxfind cannot GENERATE one: -z emits nothing for this type because a real WPA handshake supplies the ESSID and MAC addresses. A corpus sweep that emits a vector per type will therefore skip WPA-PMK, and that is expected rather than a vector waiting to be filled."

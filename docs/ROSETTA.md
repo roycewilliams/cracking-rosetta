@@ -1567,8 +1567,8 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | WPA-EAPOL | no | **--** | `WPA-EAPOL` (v) |  |
 | WPA-EAPOL-PBKDF2 | `2500` | **--** | **--** |  |
 | WPA-EAPOL-PMK | `2501` | **--** | **--** |  |
-| WPA-PBKDF2-PMKID+EAPOL | `22000` | **--** | `WPA-PMKID` (v) |  |
-| WPA-PMK | `22001` | **--** | `WPA-PMK` (v) |  |
+| WPA-PBKDF2-PMKID+EAPOL | `22000` (v) | **--** | `WPA-PMKID` (v) |  |
+| WPA-PMK | `22001` (v) | **--** | `WPA-PMK` (v) |  |
 | WPA-PMKID | no | **--** | `WPA-PMKID` (v) |  |
 | WPA-PMKID-PBKDF2 | `16800` | **--** | no |  |
 | WPA-PMKID-PMK | `16801` | **--** | no |  |
