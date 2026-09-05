@@ -219,6 +219,20 @@ jobs:
       - name: Vectors are the width their type emits, or say which form they are
         run: perl -Itools/lib tools/audit-vector-widths.pl --check
 
+      # denote-hx.pl writes a denotation only where none exists, so nothing
+      # ever re-read the specification for an entry once written -- 483 cite
+      # Appendix A at the revision they were written from. Vendoring hx.8 made
+      # the comparison a diff instead of a memory, and the first run found 15
+      # entries stating a different algorithm from the one the specification
+      # states; mdxfind.c agreed with the specification in every case. Two
+      # kinds of difference are exempt and the script says which: the appendix
+      # declining to give an expression at all (49 rows state prose), and an
+      # entry describing the whole emission set of a multi-emit type, which is
+      # richer than the single form the appendix prints. Pure vendored data --
+      # no cracker needed.
+      - name: No denotation contradicts the vendored specification
+        run: perl -Itools/lib tools/audit-denotations.pl --check
+
       # docs/index.html is the front door, and its behavior is a string that
       # render.pl builds -- so a wrong array index or selector passes perl -c,
       # passes validate.pl, and silently breaks the page's search. node is

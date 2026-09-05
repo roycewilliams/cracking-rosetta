@@ -6,9 +6,9 @@ expression_proof:
   verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
   note: "mdxfind type MD5SHA1MD5HUM (e378) is MULTI-EMIT: it computes several candidate digests per input and matches if any one reproduces the stored hash. There is therefore no single expression to record, and writing one of the emitted forms into expression: would be a false claim even though the string itself is correct. This is also why two vectors of such a type can disagree with each other, and why a tool matching one of them is not evidence about the other."
 denotation:
-  text: "emit(md5(sha1(md5(pass)).S))"
+  text: "emit(md5(sha1(md5^N(pass) . S)))"
   source: "mdxfind"
-  note: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A, entry for mdxfind type MD5SHA1MD5HUM (e378), which states emit(md5(sha1(md5(pass)).S)) (S = \\n, \\r, etc.). This is what the type emits, not a single construction -- see expression_proof."
+  note: "hx Language Specification, Appendix A, vendored as vendor/cynosureprime/hx.8 at commit 2139193c, entry for mdxfind type MD5SHA1MD5HUM (e378), which states emit(md5(sha1(md5^N(pass) . S))). CORRECTED 2026-09-05: this entry recorded emit(md5(sha1(md5(pass)).S)), and the two disagreed about the algorithm. The HUM block re-hashes the inner digest at the end of every iteration -- if (x < Maxniter) { if (len == 32) mymd5(cur, len, md5buf.h); else mysha1(cur, len, md5buf.h); } -- so the value the outer hash consumes is the inner digest applied N times, which is what the exponent in the specification records. The text recorded here described only the N=1 case. mdxfind.c is authoritative and it agrees with the specification, so the entry is what changed. Found by tools/audit-denotations.pl, which compares every denotation against the vendored appendix."
 status: "needs-review"
 tools:
   hashcat:
