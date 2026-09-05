@@ -91,36 +91,6 @@ The 4 type(s), as the binary spells them:
 
 `MD5BASE64MD5RAWSHA1`, `MD5BASE64MD5RAWMD5`, `MD5BASE64MD5RAWMD5MD5`, `MD5SQL5-32`
 
-## vendored hashpipe HASH_TYPES.md
-
-### the UC family: MD5UC (e2), SHA1UC (e182), SHA256UC (e488), MD5RAWUC (e383)
-
-*A stated construction the type does not compute.* Measured 2026-09-05 with mdxfind.c and mdxfind RCS 1.576 (2026/09/02).
-
-| | |
-|---|---|
-| the document states | `md5_uc(pass), sha1_uc(pass), sha256_uc(pass), hex(upper(md5_bin(pass)))` |
-| measured here | each type reports one further hash OVER that upper-case hex, first at x02 |
-
-RE-DIAGNOSED 2026-09-05 against mdxfind.c. This was recorded as a RENDERING fault -- an example printed in upper-case hex that the loader declines -- and re-casing was reported as no general fix because MD5UC, SHA256UC and RACF reproduced in neither case. The reason they do not is not the case of the letters. Each of these types renders its digest as upper-case hex with prmd5UC and then sets x = 2 before entering the iteration loop, so the value it presents for matching is one further hash OVER that upper-case hex, and it is reported at x02 because there is no x01. The published example is the INTERMEDIATE, the string at the moment prmd5UC produces it, which the type never offers. Measured for each: md5(md5_uc(pass)) is cb8bca2e221b4ae44c95ca2f70f8f407 and mdxfind reports it as MD5UCx02; sha1(sha1_uc(pass)) and sha256(sha256_uc(pass)) behave identically under e182 and e488. So no amount of re-casing was ever going to make these read back, which is why the earlier note could not explain them. The Appendix A rows have been corrected; the example vectors are hashpipe\x27s and are reported here rather than patched locally.
-
-Derived from the vendored catalog at render time, not typed here - 12 type(s):
-
-| Index | Type | Example digest as published |
-|---|---|---|
-| `e2` | `MD5UC` | `482C811DA5D5B4BC6D497FFA98491E38` |
-| `e182` | `SHA1UC` | `CBFDAC6008F9CAB4083784CBD1874F76618D2A97` |
-| `e376` | `MD5UCBASE64SHA1RAW` | `C20983CB4198E300BA28A9423660A9C9` |
-| `e383` | `MD5RAWUC` | `E8EEB4FFDBE6D08270590C63EACEFFC3` |
-| `e479` | `SHA1UCWRL` | `D9136DA58EA47FF05733763BDBC72BB81F74C452` |
-| `e488` | `SHA256UC` | `EF92B778BAFE771E89245B89ECBC08A44A4E166C06659911881F383D4473E94F` |
-| `e570` | `MD4UTF16UC` | `A9FDFA038C4B75EBC76DC855DD74F0DA` |
-| `e730` | `SHA1UCUTF16LE` | `9400AE28448E1364174DDE269B2CCE1BCA9D7EE8` |
-| `e881` | `RACF` | `6A182040F07213B8` |
-| `e892` | `NETWITNESS` | `7F6B6E9ECD0E25FA22A5CB1A6433CC193C70CF476B8294B9C0AAA8F583AE38D4` |
-| `e896` | `ORACLE7` | `192802346638CC4F` |
-| `e910` | `ORACLE12` | `00A4881893C78287CD84EB39D3DA49F05A4DF2FC48A97A70B0A9FC941C3CB465C5B0EEEF06686DA9F0B1BB3E0BEBFBBB65192CB51118EC775C9D1941724AF65941414141414141414141414141414141` |
-
 ## Disagreements that are tested on every build
 
 These are in `data/upstream-disagreements.yaml` rather than above, because each
@@ -133,11 +103,8 @@ that changes nothing a passing test rather than an absence of evidence.
 
 | Record | Kind | Recorded | What it holds |
 |---|---|---|---|
-| `appendix-a-md5rawuc-e383` | appendix-row-value | 2026-09-05 | Appendix A states MD5RAWUC (e383) as hex(upper(md5_bin(pass))), which applies upper() to raw bytes. |
+| `appendix-a-md5rawuc-e383` | appendix-row-value | 2026-09-05 | Appendix A states MD5RAWUC (e383) as hex(upper(md5_bin(pass))), which is one md5 round. |
 | `appendix-a-peoplesoft-e858` | appendix-row-value | 2026-09-05 | Appendix A states PEOPLESOFT (e858) as sha1(utf16be(upper(pass))). |
-| `appendix-a-uc-family-md5uc` | appendix-row-value | 2026-09-05 | Appendix A states MD5UC (e2) as md5_uc(pass), which is the intermediate: the type renders its digest as upper-case hex with prmd5UC and then sets x = 2 before the iteration loop, so what it presents for matching is one further hash over that hex, reported at x02 because there is no x01. Measured against mdxfind RCS 1.576: md5(md5_uc(pass)) reproduces exactly what mdxfind reports for e2. This is why the published example for this type reads back under neither case -- it is the intermediate, and re-casing was never going to fix it. See the uppercase-example-digests finding. |
-| `appendix-a-uc-family-sha1uc` | appendix-row-value | 2026-09-05 | Appendix A states SHA1UC (e182) as sha1_uc(pass), which is the intermediate: the type renders its digest as upper-case hex with prmd5UC and then sets x = 2 before the iteration loop, so what it presents for matching is one further hash over that hex, reported at x02 because there is no x01. Measured against mdxfind RCS 1.576: sha1(sha1_uc(pass)) reproduces exactly what mdxfind reports for e182. This is why the published example for this type reads back under neither case -- it is the intermediate, and re-casing was never going to fix it. See the uppercase-example-digests finding. |
-| `appendix-a-uc-family-sha256uc` | appendix-row-value | 2026-09-05 | Appendix A states SHA256UC (e488) as sha256_uc(pass), which is the intermediate: the type renders its digest as upper-case hex with prmd5UC and then sets x = 2 before the iteration loop, so what it presents for matching is one further hash over that hex, reported at x02 because there is no x01. Measured against mdxfind RCS 1.576: sha256(sha256_uc(pass)) reproduces exactly what mdxfind reports for e488. This is why the published example for this type reads back under neither case -- it is the intermediate, and re-casing was never going to fix it. See the uppercase-example-digests finding. |
 | `e607-example-vector` | catalog-row-value | 2026-09-02 | mdxfind 1.543 (2026-08-29) repaired a buffer-layout bug in e607. |
 | `hashpipe-john-map-agreement` | john-map-agreement | 2026-09-02 | hashpipe v1.189 (commit ab66e0f) publishes 132 verified john-to-hashpipe rows. |
 | `mdxfind-catalog-lags-binary` | catalog-index-set | 2026-09-02 | The catalog is published from a release; the local binary is ahead of it. |

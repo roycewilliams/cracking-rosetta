@@ -86,29 +86,4 @@ findings:
     in the source, so the note was right about them and the earlier measurement was
     wrong.'
   we_measured: one emission each; there is no shorter variant to take
-- document: vendored hashpipe HASH_TYPES.md
-  evidence:
-    computed: uppercase-example-digest
-  id: uppercase-example-digests
-  kind: wrong-construction
-  measured: 2026-09-05
-  measured_with: mdxfind.c and mdxfind RCS 1.576 (2026/09/02)
-  states: md5_uc(pass), sha1_uc(pass), sha256_uc(pass), hex(upper(md5_bin(pass)))
-  subject: 'the UC family: MD5UC (e2), SHA1UC (e182), SHA256UC (e488), MD5RAWUC (e383)'
-  summary: 'RE-DIAGNOSED 2026-09-05 against mdxfind.c. This was recorded as a RENDERING
-    fault -- an example printed in upper-case hex that the loader declines -- and
-    re-casing was reported as no general fix because MD5UC, SHA256UC and RACF reproduced
-    in neither case. The reason they do not is not the case of the letters. Each of
-    these types renders its digest as upper-case hex with prmd5UC and then sets x
-    = 2 before entering the iteration loop, so the value it presents for matching
-    is one further hash OVER that upper-case hex, and it is reported at x02 because
-    there is no x01. The published example is the INTERMEDIATE, the string at the
-    moment prmd5UC produces it, which the type never offers. Measured for each: md5(md5_uc(pass))
-    is cb8bca2e221b4ae44c95ca2f70f8f407 and mdxfind reports it as MD5UCx02; sha1(sha1_uc(pass))
-    and sha256(sha256_uc(pass)) behave identically under e182 and e488. So no amount
-    of re-casing was ever going to make these read back, which is why the earlier
-    note could not explain them. The Appendix A rows have been corrected; the example
-    vectors are hashpipe\x27s and are reported here rather than patched locally.'
-  we_measured: each type reports one further hash OVER that upper-case hex, first
-    at x02
 version: 1

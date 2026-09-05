@@ -15,10 +15,11 @@ disagreements:
   recorded: 2026-09-05
   upstream: vendor/cynosureprime/hx.8
   we_assert: base64(sha1_bin(utf16le(pass)))
-- because: Appendix A states MD5RAWUC (e383) as hex(upper(md5_bin(pass))), which applies
-    upper() to raw bytes. The measured construction is md5(upper(md5(md5_raw($p)))).
-    The finding of the same name on the published page carries the measurement; this
-    record retires it when upstream changes the row.
+- because: Appendix A states MD5RAWUC (e383) as hex(upper(md5_bin(pass))), which is
+    one md5 round. mdxfind takes md5 of the password, then md5 over those RAW 16 bytes,
+    then renders the result in upper-case hex -- two rounds, md5_uc(md5_bin(pass)).
+    The row as published evaluates to a value neither mdxfind nor hashpipe produces
+    for this type.
   entry: md5-strtoupper-md5-md5-plain-true
   id: appendix-a-md5rawuc-e383
   inventory: data/hx-appendix-a.txt
@@ -27,7 +28,7 @@ disagreements:
   publishes: hex(upper(md5_bin(pass)))
   recorded: 2026-09-05
   upstream: vendor/cynosureprime/hx.8
-  we_assert: md5(upper(md5(md5_bin(pass))))
+  we_assert: md5_uc(md5_bin(pass))
 - because: 'mdxfind 1.543 (2026-08-29) repaired a buffer-layout bug in e607. The old
     code staged the inner digest at linebuf+saltlen while writing the pepper at a
     fixed offset 32, so for any non-empty salt the hash covered the salt, then a TRUNCATED
@@ -126,52 +127,4 @@ disagreements:
   kind: john-map-agreement
   recorded: 2026-09-02
   upstream: vendor/cynosureprime/john_map.h
-- because: 'Appendix A states MD5UC (e2) as md5_uc(pass), which is the intermediate:
-    the type renders its digest as upper-case hex with prmd5UC and then sets x = 2
-    before the iteration loop, so what it presents for matching is one further hash
-    over that hex, reported at x02 because there is no x01. Measured against mdxfind
-    RCS 1.576: md5(md5_uc(pass)) reproduces exactly what mdxfind reports for e2. This
-    is why the published example for this type reads back under neither case -- it
-    is the intermediate, and re-casing was never going to fix it. See the uppercase-example-digests
-    finding.'
-  id: appendix-a-uc-family-md5uc
-  inventory: data/hx-appendix-a.txt
-  key: MD5UC
-  kind: appendix-row-value
-  publishes: md5_uc(pass)
-  recorded: 2026-09-05
-  upstream: vendor/cynosureprime/hx.8
-  we_assert: md5(md5_uc(pass))
-- because: 'Appendix A states SHA1UC (e182) as sha1_uc(pass), which is the intermediate:
-    the type renders its digest as upper-case hex with prmd5UC and then sets x = 2
-    before the iteration loop, so what it presents for matching is one further hash
-    over that hex, reported at x02 because there is no x01. Measured against mdxfind
-    RCS 1.576: sha1(sha1_uc(pass)) reproduces exactly what mdxfind reports for e182.
-    This is why the published example for this type reads back under neither case
-    -- it is the intermediate, and re-casing was never going to fix it. See the uppercase-example-digests
-    finding.'
-  id: appendix-a-uc-family-sha1uc
-  inventory: data/hx-appendix-a.txt
-  key: SHA1UC
-  kind: appendix-row-value
-  publishes: sha1_uc(pass)
-  recorded: 2026-09-05
-  upstream: vendor/cynosureprime/hx.8
-  we_assert: sha1(sha1_uc(pass))
-- because: 'Appendix A states SHA256UC (e488) as sha256_uc(pass), which is the intermediate:
-    the type renders its digest as upper-case hex with prmd5UC and then sets x = 2
-    before the iteration loop, so what it presents for matching is one further hash
-    over that hex, reported at x02 because there is no x01. Measured against mdxfind
-    RCS 1.576: sha256(sha256_uc(pass)) reproduces exactly what mdxfind reports for
-    e488. This is why the published example for this type reads back under neither
-    case -- it is the intermediate, and re-casing was never going to fix it. See the
-    uppercase-example-digests finding.'
-  id: appendix-a-uc-family-sha256uc
-  inventory: data/hx-appendix-a.txt
-  key: SHA256UC
-  kind: appendix-row-value
-  publishes: sha256_uc(pass)
-  recorded: 2026-09-05
-  upstream: vendor/cynosureprime/hx.8
-  we_assert: sha256(sha256_uc(pass))
 version: 1
