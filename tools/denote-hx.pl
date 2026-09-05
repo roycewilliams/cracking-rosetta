@@ -214,12 +214,16 @@ my $JVER = john_version();
 my $hx = parse_appendix($appendix);
 printf STDERR "- appendix: %d type(s)\n", scalar keys %$hx;
 
-# Appendix A carries its own revision, which moves independently of the
-# document revision printed on the page, so the citation names the vendored
-# file rather than a number that does not identify what was read. The commit
-# it came from is recorded once, in vendor/cynosureprime/PROVENANCE.md, by
-# tools/fetch-upstream.sh.
-my $HXCITE = 'hx Language Specification (Waffle), Appendix A, vendored as vendor/cynosureprime/hx.8';
+# The specification carries ONE version, the document's, printed in the running
+# header and bumped deliberately when the document is published. Appendix A is
+# part of that document and is identified by it; the RCS revision of the troff
+# file it happens to live in is bookkeeping about a file and is not a version
+# of anything to cite.
+#
+# The citation names the document and the vendored copy: the version says which
+# specification, and the vendored file is what a record can be executed against,
+# with the commit recorded once in vendor/cynosureprime/PROVENANCE.md.
+my $HXCITE = 'hx Language Specification $Revision: 1.16$ (Waffle), Appendix A, vendored as vendor/cynosureprime/hx.8';
 
 #-----------------------------------------------------------------------
 # ill_formed($expression) - the reasons an expression: already in the corpus

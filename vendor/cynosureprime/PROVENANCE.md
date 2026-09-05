@@ -27,10 +27,11 @@ troff font escapes and the multi-line `tbl` cells, which is the form
 published PDF because the troff is the source, it diffs, and a specification
 change is then visible in the same way a catalog change is.
 
-Appendix A carries its own revision and moves independently of the document
-revision printed on the page, so the commit in the table above is what
-identifies which Appendix A a finding was measured against. The number in the
-running header does not.
+The specification carries one version, the document's, printed in its running
+header and bumped when the document is published; Appendix A is part of that
+document and is identified by it. The commit in the table above is what pins
+the exact bytes this repository read, which is what a check-upstream record
+needs in order to run -- not a second version of the appendix.
 
 ## Why hashpipe's catalog and not mdxfind's
 
