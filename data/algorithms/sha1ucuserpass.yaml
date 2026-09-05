@@ -1,5 +1,11 @@
 id: "sha1ucuserpass"
 name: "SHA1UCUSERPASS"
+expression: "sha1(upper($s).$c1.$p),c1=\\x3a"
+expression_proof:
+  verified: "upstream"
+  verified_at: "2026-09-05"
+  verified_with: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A"
+  note: "transcribed from the hx specification's Appendix A entry for mdxfind type SHA1UCUSERPASS (e1005), which states sha1(upper(user) . \":\" . pass) (John dynamic_35). Transcription, not reproduction, so this is upstream and not vector; run derive-expressions.pl to try to promote it. An independent Digest:: computation of this string DOES reproduce this entry's own vector, checked 2026-09-05."
 status: "needs-review"
 tools:
   mdxfind:
