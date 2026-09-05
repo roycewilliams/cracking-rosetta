@@ -29,21 +29,6 @@ side still makes the claim, which is why the pairing matters.
 
 ## hx specification, Appendix A
 
-### MD5RAWUC (e383)
-
-*A stated construction the type does not compute.* Measured 2026-09-02 with john 1.9.0-jumbo-1+bleeding-9a336d800a.
-
-| | |
-|---|---|
-| the document states | `hex(upper(md5_bin(pass)))` |
-| measured here | `md5(upper(md5(md5_raw($p))))` |
-
-The row applies upper() to RAW BYTES and hexes the result afterwards, which is not the same operation as upper-casing the hex text and is not what the type does. The entry carrying this type reaches tier vector with the upper() outside the hex-emitting call, proven by john's own dynamic compiler against the entry's own vector. Note that the entry is at -i 2, so its expression carries one more round than the row describes; the defect being reported is the placement of upper(), which is independent of the iteration count.
-
-The evidence, as it stands in `data/algorithms/md5-strtoupper-md5-md5-plain-true.yaml` under `notes`:
-
-> The hx specification Appendix A row for mdxfind type MD5RAWUC (e383) states hex(upper(md5_bin(pass))), which applies upper() to RAW BYTES and hexes the result afterwards. That is a different operation from upper-casing the hex text, and it is not what the type computes: this entry reaches tier vector with the upper() outside the hex-emitting call, proven 2026-09-02 by john's own dynamic compiler against this entry's own vector. Note that this entry is at -i 2, so its expression carries one more round than the appendix row describes; the defect is the placement of upper(), which is independent of the iteration count. Recorded here because docs/UPSTREAM-FINDINGS.md renders this note rather than restating it.
-
 ### PEOPLESOFT (e858)
 
 *A stated construction the type does not compute.* Measured 2026-09-02 with mdxfind source RCS 1.545 (2026/08/29).
@@ -103,7 +88,6 @@ that changes nothing a passing test rather than an absence of evidence.
 
 | Record | Kind | Recorded | What it holds |
 |---|---|---|---|
-| `appendix-a-md5rawuc-e383` | appendix-row-value | 2026-09-05 | Appendix A states MD5RAWUC (e383) as hex(upper(md5_bin(pass))), which is one md5 round. |
 | `appendix-a-peoplesoft-e858` | appendix-row-value | 2026-09-05 | Appendix A states PEOPLESOFT (e858) as sha1(utf16be(upper(pass))). |
 | `e607-example-vector` | catalog-row-value | 2026-09-02 | mdxfind 1.543 (2026-08-29) repaired a buffer-layout bug in e607. |
 | `hashpipe-john-map-agreement` | john-map-agreement | 2026-09-02 | hashpipe v1.189 (commit ab66e0f) publishes 132 verified john-to-hashpipe rows. |

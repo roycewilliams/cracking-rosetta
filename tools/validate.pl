@@ -258,7 +258,7 @@ my %NO_RT_KEY = map { $_ => 1 } qw(reason note measured_at measured_with);
 # the identifier, so a failure to crack this row's vector says nothing about
 # the mapping; 'emits-nothing' means the tool's type produces no digest for
 # any input at all.
-my %IS_NO_RT_REASON = map { $_ => 1 } qw(different-algorithm emits-nothing);
+my %IS_NO_RT_REASON = map { $_ => 1 } qw(different-algorithm emits-nothing not-comparable);
 
 # Which key in each tool block holds the identifiers to cross-reference.
 my %IDENT_KEYS = (

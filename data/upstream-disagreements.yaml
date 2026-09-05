@@ -15,20 +15,6 @@ disagreements:
   recorded: 2026-09-05
   upstream: vendor/cynosureprime/hx.8
   we_assert: base64(sha1_bin(utf16le(pass)))
-- because: Appendix A states MD5RAWUC (e383) as hex(upper(md5_bin(pass))), which is
-    one md5 round. mdxfind takes md5 of the password, then md5 over those RAW 16 bytes,
-    then renders the result in upper-case hex -- two rounds, md5_uc(md5_bin(pass)).
-    The row as published evaluates to a value neither mdxfind nor hashpipe produces
-    for this type.
-  entry: md5-strtoupper-md5-md5-plain-true
-  id: appendix-a-md5rawuc-e383
-  inventory: data/hx-appendix-a.txt
-  key: MD5RAWUC
-  kind: appendix-row-value
-  publishes: hex(upper(md5_bin(pass)))
-  recorded: 2026-09-05
-  upstream: vendor/cynosureprime/hx.8
-  we_assert: md5_uc(md5_bin(pass))
 - because: 'mdxfind 1.543 (2026-08-29) repaired a buffer-layout bug in e607. The old
     code staged the inner digest at linebuf+saltlen while writing the pepper at a
     fixed offset 32, so for any non-empty salt the hash covered the salt, then a TRUNCATED

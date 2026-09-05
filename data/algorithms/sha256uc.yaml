@@ -14,6 +14,11 @@ tools:
   mdxfind:
     types: ["SHA256UC"]
     verified: "asserted"
+    no_round_trip:
+      reason: "not-comparable"
+      note: "mdxfind cannot present this row's vector, and that is a property of how it compares rather than a defect. It converts a loaded hash to binary, so upper(sha256($p)) and sha256($p) are the same bytes to it -- offer it this row's digest and it answers SHA256x01, because that is what those bytes are. A type distinguished only by hex case therefore cannot exist for mdxfind at depth one, and the first depth it can present is one hash further on, which it reports as SHA256UCx02. hashpipe compares the stored text, can tell the two apart, and verifies this row's vector as SHA256UCx01. Both are correct and they are not in conflict: each reports the first value its own comparison can distinguish. Appendix A's row, sha256_uc(pass), states the construction both implement. Measured 2026-09-05 against mdxfind RCS 1.576 and hashpipe RCS 1.193."
+      measured_at: "2026-09-05"
+      measured_with: "mdxfind RCS 1.576 (2026/09/02); hashpipe RCS 1.193 (2026/09/05)"
   crack:
     supported: false
 vectors:

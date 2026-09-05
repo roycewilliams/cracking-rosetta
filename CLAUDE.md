@@ -486,6 +486,31 @@ mdxfind also accepts hashcat modes directly (`mdxfind -m 0`, `-m e1`,
   to run. The default is the CPU count. A lost match is indistinguishable from
   a genuine negative, which is the failure `absence.pl` exists to prevent, so
   run hashpipe at `-t 1` wherever its silence will be read as evidence.
+- **mdxfind COMPARES BINARY, so a type distinguished only by hex case has no
+  comparable value at x01.** This is the explanation for a whole family of
+  rows that look broken and are not. mdxfind converts a loaded hash to binary,
+  so `upper(md5($p))` and `md5($p)` are the same sixteen bytes to it: offer it
+  `482C811DA5D5B4BC6D497FFA98491E38` and it answers **`MD5x01`**, because that
+  is what those bytes are. A type whose only distinguishing feature is the case
+  of the hex therefore cannot exist for mdxfind at depth one, and the first
+  depth it can present is one hash further on, which it reports as `x02`.
+  hashpipe compares the stored TEXT, can tell the two apart, and reports the
+  same type at `x01`. **Neither tool is wrong and they are not in conflict** --
+  each reports the first value its own comparison can distinguish, and
+  Appendix A's row states the construction both implement.
+  Measured 2026-09-05 for `MD5UC` (e2), `SHA1UC` (e182) and `SHA256UC` (e488):
+  each accepts the other tool's value under neither case, which is what the
+  binary comparison predicts.
+  The consequence for this repository is on the entry, not on the tool. Such a
+  row's published vector is the x01 value, so **mdxfind can never promote it
+  from that vector** -- those three sat at `upstream`/`asserted` for exactly
+  this reason and no re-run was going to move them. They now carry
+  `no_round_trip: reason: not-comparable`, which says so. An entry that instead
+  carries the x02 value declares `iterations: 2` and promotes normally, which
+  is what `md5-strtoupper-md5-md5-plain-true` does for `MD5RAWUC`.
+  **Do not read "reproduces in neither case" as a defect in the row.** It was
+  read that way once, and produced a finding against upstream for a document
+  that was correct.
 - **A NAME MATCH ACROSS TOOLS IS NOT EVIDENCE, AND IN THE HMAC FAMILY IT IS
   INVERTED.** The rule above says to normalize names before matching. That
   finds real pairs, and it also finds false ones, because two projects can

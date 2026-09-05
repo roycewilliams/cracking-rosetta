@@ -213,10 +213,11 @@
             ],
             "properties": {
               "reason": {
-                "description": "'different-algorithm' means this tool computes something else under the identifier named here, so this row's vector cannot exercise it and a failure to crack would say nothing about the mapping. 'emits-nothing' means the tool's own type produces no digest for any input, so it can never reproduce anything.",
+                "description": "'different-algorithm' means this tool computes something else under the identifier named here, so this row's vector cannot exercise it and a failure to crack would say nothing about the mapping. 'emits-nothing' means the tool's own type produces no digest for any input. 'not-comparable' means the tool computes this construction but cannot present the value at this depth for matching, because of how it compares -- mdxfind converts a loaded hash to binary, so a digest distinguished only by hex case is the same bytes as its lower-case twin and cannot be a distinct type, and the first depth it can present is one hash further on.",
                 "enum": [
                   "different-algorithm",
-                  "emits-nothing"
+                  "emits-nothing",
+                  "not-comparable"
                 ]
               },
               "note": {
@@ -273,10 +274,11 @@
             ],
             "properties": {
               "reason": {
-                "description": "'different-algorithm' means this tool computes something else under the identifier named here, so this row's vector cannot exercise it and a failure to crack would say nothing about the mapping. 'emits-nothing' means the tool's own type produces no digest for any input, so it can never reproduce anything.",
+                "description": "'different-algorithm' means this tool computes something else under the identifier named here, so this row's vector cannot exercise it and a failure to crack would say nothing about the mapping. 'emits-nothing' means the tool's own type produces no digest for any input. 'not-comparable' means the tool computes this construction but cannot present the value at this depth for matching, because of how it compares -- mdxfind converts a loaded hash to binary, so a digest distinguished only by hex case is the same bytes as its lower-case twin and cannot be a distinct type, and the first depth it can present is one hash further on.",
                 "enum": [
                   "different-algorithm",
-                  "emits-nothing"
+                  "emits-nothing",
+                  "not-comparable"
                 ]
               },
               "note": {
@@ -333,10 +335,11 @@
             ],
             "properties": {
               "reason": {
-                "description": "'different-algorithm' means this tool computes something else under the identifier named here, so this row's vector cannot exercise it and a failure to crack would say nothing about the mapping. 'emits-nothing' means the tool's own type produces no digest for any input, so it can never reproduce anything.",
+                "description": "'different-algorithm' means this tool computes something else under the identifier named here, so this row's vector cannot exercise it and a failure to crack would say nothing about the mapping. 'emits-nothing' means the tool's own type produces no digest for any input. 'not-comparable' means the tool computes this construction but cannot present the value at this depth for matching, because of how it compares -- mdxfind converts a loaded hash to binary, so a digest distinguished only by hex case is the same bytes as its lower-case twin and cannot be a distinct type, and the first depth it can present is one hash further on.",
                 "enum": [
                   "different-algorithm",
-                  "emits-nothing"
+                  "emits-nothing",
+                  "not-comparable"
                 ]
               },
               "note": {
@@ -388,10 +391,11 @@
             ],
             "properties": {
               "reason": {
-                "description": "'different-algorithm' means this tool computes something else under the identifier named here, so this row's vector cannot exercise it and a failure to crack would say nothing about the mapping. 'emits-nothing' means the tool's own type produces no digest for any input, so it can never reproduce anything.",
+                "description": "'different-algorithm' means this tool computes something else under the identifier named here, so this row's vector cannot exercise it and a failure to crack would say nothing about the mapping. 'emits-nothing' means the tool's own type produces no digest for any input. 'not-comparable' means the tool computes this construction but cannot present the value at this depth for matching, because of how it compares -- mdxfind converts a loaded hash to binary, so a digest distinguished only by hex case is the same bytes as its lower-case twin and cannot be a distinct type, and the first depth it can present is one hash further on.",
                 "enum": [
                   "different-algorithm",
-                  "emits-nothing"
+                  "emits-nothing",
+                  "not-comparable"
                 ]
               },
               "note": {
@@ -431,10 +435,11 @@
             ],
             "properties": {
               "reason": {
-                "description": "'different-algorithm' means this tool computes something else under the identifier named here, so this row's vector cannot exercise it and a failure to crack would say nothing about the mapping. 'emits-nothing' means the tool's own type produces no digest for any input, so it can never reproduce anything.",
+                "description": "'different-algorithm' means this tool computes something else under the identifier named here, so this row's vector cannot exercise it and a failure to crack would say nothing about the mapping. 'emits-nothing' means the tool's own type produces no digest for any input. 'not-comparable' means the tool computes this construction but cannot present the value at this depth for matching, because of how it compares -- mdxfind converts a loaded hash to binary, so a digest distinguished only by hex case is the same bytes as its lower-case twin and cannot be a distinct type, and the first depth it can present is one hash further on.",
                 "enum": [
                   "different-algorithm",
-                  "emits-nothing"
+                  "emits-nothing",
+                  "not-comparable"
                 ]
               },
               "note": {

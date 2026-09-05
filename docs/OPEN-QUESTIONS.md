@@ -269,7 +269,7 @@ describes. Reading the note is the whole job; supplying a vector is not.
 
 * [`sha1saltcx`](index.html#sha1saltcx) - SHA1SALTCX - A vector exists and is deliberately not recorded. The only published example -- mdxfind's own inventory row and the vendored hashpipe catalog carry the same string -- is a TEN-iteration hash, and this row declares no ite...
 
-## Mappings this row's vector cannot settle (1)
+## Mappings this row's vector cannot settle (4)
 
 Claimed, and carrying a vector, and still not a one-command job: the command
 has been run and could not decide. Where a tool computes something else under
@@ -280,6 +280,9 @@ contribution in the repository. Settling one means deciding what the row is
 for: whether the identifier belongs on it at all, or wants a row of its own.
 
 * [`md5specam`](index.html#md5specam) - mdxfind `MD5SPECAM` (different-algorithm) - mdxfind and hashpipe do not compute the same thing under this name, so this row's vector -- which is hashpipe's -- cannot exercise mdxfind's type and a failure to crack it would say nothing about the mapping. hashpipe's ...
+* [`md5uc`](index.html#md5uc) - mdxfind `MD5UC` (not-comparable) - mdxfind cannot present this row's vector, and that is a property of how it compares rather than a defect. It converts a loaded hash to binary, so upper(md5($p)) and md5($p) are the same bytes to it -- offer it this row's...
+* [`sha1uc`](index.html#sha1uc) - mdxfind `SHA1UC` (not-comparable) - mdxfind cannot present this row's vector, and that is a property of how it compares rather than a defect. It converts a loaded hash to binary, so upper(sha1($p)) and sha1($p) are the same bytes to it -- offer it this row...
+* [`sha256uc`](index.html#sha256uc) - mdxfind `SHA256UC` (not-comparable) - mdxfind cannot present this row's vector, and that is a property of how it compares rather than a defect. It converts a loaded hash to binary, so upper(sha256($p)) and sha256($p) are the same bytes to it -- offer it this...
 
 ## Rows that may be more than one algorithm
 

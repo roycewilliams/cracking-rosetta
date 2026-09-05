@@ -18,25 +18,6 @@ findings:
     all independent of each other: mdxfind''s own hx VM built standalone from the
     same tree, a recomputation in Perl, hashcat -m 133, and john''s dynamic compiler.'
   we_measured: base64(sha1_raw(utf16le($p)))
-- document: hx specification, Appendix A
-  evidence:
-    entry: md5-strtoupper-md5-md5-plain-true
-    field: notes
-    mentions: applies upper() to RAW BYTES
-  id: md5rawuc-e383-upper-applied-to-raw-bytes
-  kind: wrong-construction
-  measured: 2026-09-02
-  measured_with: john 1.9.0-jumbo-1+bleeding-9a336d800a
-  states: hex(upper(md5_bin(pass)))
-  subject: MD5RAWUC (e383)
-  summary: The row applies upper() to RAW BYTES and hexes the result afterwards, which
-    is not the same operation as upper-casing the hex text and is not what the type
-    does. The entry carrying this type reaches tier vector with the upper() outside
-    the hex-emitting call, proven by john's own dynamic compiler against the entry's
-    own vector. Note that the entry is at -i 2, so its expression carries one more
-    round than the row describes; the defect being reported is the placement of upper(),
-    which is independent of the iteration count.
-  we_measured: md5(upper(md5(md5_raw($p))))
 - document: hx specification, Note [24]
   evidence:
     check:
