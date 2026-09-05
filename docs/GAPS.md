@@ -17,7 +17,7 @@ Each row below links to its entry in the [browsable table](index.html).
 Gaps are absences; for the rows where something is known to be *odd*, see
 [OPEN-QUESTIONS.md](OPEN-QUESTIONS.md).
 
-## 1. Believed but never reproduced (82)
+## 1. Believed but never reproduced (80)
 
 The cheapest contribution in the repository, if you own the tool. Each of
 these already names an identifier and already carries a test vector; nobody
@@ -49,7 +49,6 @@ tools/verify-vectors.pl --tool <tool> --only <id> -v
 | [`plaintext`](index.html#plaintext) | john | `plaintext` | asserted |
 | [`progressencode-plain`](index.html#progressencode-plain) | mdxfind | `PROGRESSENCODE` | asserted |
 | [`pwsafe3`](index.html#pwsafe3) | hashcat | `5200` | upstream |
-| [`qnx7-sha512`](index.html#qnx7-sha512) | hashcat | `19210` | upstream |
 | [`radmin`](index.html#radmin) | john | `RAdmin`, `dynamic_1010` | asserted |
 | [`sha1-md5-md5-plain`](index.html#sha1-md5-md5-plain) | john | `dynamic_1025` | asserted |
 | [`sha1-md5-pass`](index.html#sha1-md5-pass) | john | `dynamic_1024`, `dynamic_23` | asserted |
@@ -68,7 +67,6 @@ tools/verify-vectors.pl --tool <tool> --only <id> -v
 | [`sha1wrluctruncsalt`](index.html#sha1wrluctruncsalt) | mdxfind | `SHA1WRLUCTRUNCSALT` | upstream |
 | [`sha256uc`](index.html#sha256uc) | mdxfind | `SHA256UC` | asserted |
 | [`smf-v1-1`](index.html#smf-v1-1) | john | `dynamic_25`, `dynamic_37` | asserted |
-| [`snmpv3-hmac-sha384-256`](index.html#snmpv3-hmac-sha384-256) | hashcat | `26900` | upstream |
 | [`stdout`](index.html#stdout) | hashcat | `2000` | upstream |
 | [`truecrypt-ripemd160-xts-1024-bit-boot-mode-legacy`](index.html#truecrypt-ripemd160-xts-1024-bit-boot-mode-legacy) | hashcat | `6242` | upstream |
 | [`truecrypt-ripemd160-xts-1024-bit-legacy`](index.html#truecrypt-ripemd160-xts-1024-bit-legacy) | hashcat | `6212` | upstream |

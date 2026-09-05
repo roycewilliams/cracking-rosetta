@@ -942,7 +942,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | QNX-MD5 | `19000` (v) | `qnx` (v) | `QNX-MD5` (v) |  |
 | QNX-SHA256 | `19100` (v) | `qnx` (v) | `QNX-SHA256` (v) |  |
 | QNX-SHA512 | `19200` (v) | `qnx` (v) | `QNX-SHA512` (v) |  |
-| QNX7-SHA512 | `19210` | **--** | `QNX7-SHA512` (v) |  |
+| QNX7-SHA512 | `19210` (v) | **--** | `QNX7-SHA512` (v) |  |
 | RACF | `8500` (v) | `RACF` (v) | `RACF` (v) |  |
 | RACF-KDFAES | **--** | `RACF-KDFAES` (v) | `RACF-KDFAES` (v) |  |
 | RACF-KDFAES | `14200` (v) | **--** | `RACF-KDFAES` (v) |  |
@@ -1422,7 +1422,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | SNMPv3 HMAC-SHA1-96 | `25200` (v) | `SNMP` (v) | no |  |
 | SNMPv3 HMAC-SHA224-128 | `26700` (v) | **--** | no |  |
 | SNMPv3 HMAC-SHA256-192 | `26800` (v) | **--** | no |  |
-| SNMPv3 HMAC-SHA384-256 | `26900` | **--** | no |  |
+| SNMPv3 HMAC-SHA384-256 | `26900` (v) | **--** | no |  |
 | SNMPv3 HMAC-SHA512-384 | `27300` (v) | **--** | no |  |
 | SOLARWINDS | `21500` (v) | `solarwinds` (v) | `SOLARWINDS` (v) |  |
 | SolarWinds Serv-U | `24` (v) | `dynamic_1009`<br>`dynamic_1017`<br>`dynamic_2004`<br>`dynamic_4` (v) | `MD5SALTPASS` (v) | same as md5-salt-pass (application); same as oscommerce-xt-commerce (application) |
