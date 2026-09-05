@@ -13,10 +13,10 @@ status: "ok"
 tools:
   mdxfind:
     types: ["MD5PASSSALTMD5PASSSALT"]
-    verified: "upstream"
+    verified: "vector"
     verified_at: "2026-09-05"
-    verified_with: "mdxfind RCS 1.576 (2026/09/02), per the inventory; the installed binary is mdxfind RCS 1.545 (2026/08/29) and does not have this type; hashpipe RCS 1.192 (2026/09/04) reproduced the vector"
-    note: "MD5PASSSALTMD5PASSSALT added 2026-09-05 by attach-mdxfind-ahead.pl. NOT ROUND-TRIPPED BY mdxfind HERE, and that is a fact about this host rather than about the type: the inventory is RCS 1.576 (2026/09/02) and the installed binary is RCS 1.545 (2026/08/29), so pinning it with -h selects no type at all and prints nothing a caller can distinguish from a type that ran and found nothing. hashpipe -- which shares mdxfind's type list -- was pinned to the bare type name with -c and reproduced THIS ENTRY'S OWN vector, emitting \"MD5PASSSALTMD5PASSSALTx01\" for b8bbabb1eb9802a2e962de0207ca5172:aaaSXB:test1. Where that line is not the vector as stored above, it is the same vector written in the type's own serialization -- ONE piece of evidence written twice, not two agreeing vectors. That is upstream verified by recomputation, which is what tier `upstream` means. To promote it: install mdxfind RCS 1.576 (2026/09/02), then verify-vectors.pl --tool mdxfind --only dynamic-1505."
+    verified_with: "mdxfind RCS 1.576 (2026/09/02)"
+    note: "Round-tripped on the TRANSCRIBED form, not on the vector as stored: this entry keeps its vector in another tool's serialization, which mdxfind's reader does not parse. mdxfind pinned with -h reproduced MD5PASSSALTMD5PASSSALT as \"b8bbabb1eb9802a2e962de0207ca5172:aaaSXB:test1\", from data/mdxfind-transcodes.tsv. The plaintext is one this entry already stores, and the two strings are ONE piece of evidence written twice -- not two agreeing vectors."
   john:
     cpu: ["dynamic_1505"]
     verified: "vector"

@@ -13,10 +13,9 @@ status: "ok"
 tools:
   mdxfind:
     types: ["DRAGONFLY3-64"]
-    verified: "upstream"
+    verified: "vector"
     verified_at: "2026-09-05"
-    verified_with: "mdxfind RCS 1.576 (2026/09/02), per the inventory; the installed binary is mdxfind RCS 1.545 (2026/08/29) and does not have this type; hashpipe RCS 1.192 (2026/09/04) reproduced the vector"
-    note: "DRAGONFLY3-64 added 2026-09-05 by attach-mdxfind-ahead.pl. NOT ROUND-TRIPPED BY mdxfind HERE, and that is a fact about this host rather than about the type: the inventory is RCS 1.576 (2026/09/02) and the installed binary is RCS 1.545 (2026/08/29), so pinning it with -h selects no type at all and prints nothing a caller can distinguish from a type that ran and found nothing. hashpipe -- which shares mdxfind's type list -- was pinned to the bare type name with -c and reproduced THIS ENTRY'S OWN vector, emitting \"DRAGONFLY3-64\" for $3$z$sNV7KLtLxvJRsj2MfBtGZFuzXP3CECITaFq/rvsy.Y.Q:magnum. Where that line is not the vector as stored above, it is the same vector written in the type's own serialization -- ONE piece of evidence written twice, not two agreeing vectors. That is upstream verified by recomputation, which is what tier `upstream` means. To promote it: install mdxfind RCS 1.576 (2026/09/02), then verify-vectors.pl --tool mdxfind --only dragonfly-bsd-3-w-bug-64-bit."
+    verified_with: "mdxfind RCS 1.576 (2026/09/02)"
   hashpipe:
     types: ["DRAGONFLY3-64"]
     verified: "vector"
@@ -35,4 +34,4 @@ vectors:
   - hash: "$3$z$sNV7KLtLxvJRsj2MfBtGZFuzXP3CECITaFq/rvsy.Y.Q"
     pass: "magnum"
     source: "john"
-    reads_in: ["john"]
+    reads_in: ["john", "mdxfind"]

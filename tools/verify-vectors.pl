@@ -255,6 +255,31 @@ for my $t (@tools) {
 make_path($workdir) unless -d $workdir;
 my $today = strftime('%Y-%m-%d', localtime);
 
+# TRANSCODES: the type's own serialization of a vector the entry stores in
+# some other tool's. john writes RVARY as "$rvary$<hex>" and mdxfind wants the
+# bare hex; dynamic_1602 wraps hash and salt and appends a user field that
+# QAS-VASAUTH ignores. Those vectors cannot verify as stored, and the row then
+# says NOT REPRODUCED about a mapping that reproduces perfectly well.
+#
+# A line here is a hint about SPELLING and never a claim: it is used only as
+# the LAST fallback, only for an (entry, type) pair that has nothing yet, and
+# it still has to survive a pinned run. Its plaintext must also be one the
+# entry itself stores, so a line cannot quietly introduce a different vector.
+my %TRANSCODE;
+if ($want{mdxfind}) {
+    my $tf = "$ROOT/data/mdxfind-transcodes.tsv";
+    if (open my $fh, '<', $tf) {
+        while (<$fh>) {
+            next if /^\s*(#|$)/;
+            chomp;
+            my ($ty, $id, $line) = split /\t/, $_, 3;
+            next unless defined $line && length $line;
+            $TRANSCODE{"$ty\0$id"} = $line;
+        }
+        close $fh;
+    }
+}
+
 # Which mdxfind types carry a salt, so -f or -F is chosen from the inventory.
 my (%MX_SALTED, %MX_PEPPER);
 if ($want{mdxfind}) {
@@ -436,6 +461,11 @@ sub mx_echo_is {
 }
 
 my (%cracked, %attempted, %failed_job, %mx_job_ids, %ran_ident);
+# (entry, type) pairs whose round trip used a line from
+# data/mdxfind-transcodes.tsv rather than the vector as stored. The block's
+# note says so, because otherwise the promotion reads as though the stored
+# string verified and a later reader would try it and be baffled.
+my %transcoded;
 my $ran = 0;
 
 # hc_plain_is($said, $want) - is the plaintext hashcat printed the plaintext
@@ -677,6 +707,45 @@ if ($want{mdxfind} && $job{mdxfind}) {
             $read{mdxfind}{ $vec->{id} }{ $vec->{vi} } = 1;
         }
 
+        # TRANSCODE FALLBACK, third and last. Same shape and same guarantee as
+        # the two above: the earlier runs stay primary, this only ever ADDS a
+        # verification, and it fires only for an (entry, type) pair that has
+        # nothing at all. What it changes is that the hash line comes from
+        # data/mdxfind-transcodes.tsv rather than from the entry, because the
+        # entry stores that vector in another tool's spelling and mdxfind
+        # cannot read it. The plaintext is checked against the entry's own
+        # vectors first, so a transcode line cannot smuggle in a different
+        # vector, and the block is marked so its note can say the round trip
+        # used the transcribed form -- ONE piece of evidence written twice,
+        # not two agreeing vectors.
+        for my $id (@ids) {
+            next if $cracked{mdxfind}{$id}{$type};
+            my $line = $TRANSCODE{"$type\0$id"} or next;
+            my ($tp) = $line =~ /:([^:]*)$/;
+            next unless defined $tp;
+            (my $th = $line) =~ s/:\Q$tp\E$//;
+            # the plaintext must be one this entry actually stores
+            next unless grep { ($_->{pass} // '') eq $tp }
+                        @{ $entry{$id}{vectors} || [] };
+            my $rf = ($th =~ /:/) ? '-F' : '-f';
+            my $hf = write_file("$workdir/mx.$safe.$it.tr.hash", $th);
+            my $wf = write_file("$workdir/mx.$safe.$it.tr.word", $tp);
+            my ($c3, $o3) = run_capture($timeout, $mdxfind,
+                '-h', "^\Q$type\E\$", $rf, $hf, '-i', $it, $wf);
+            next unless defined $o3;
+            my $hit = 0;
+            for my $line2 (split /\n/, $o3) {
+                next unless $line2 =~ /^\Q$type\E(?:x(\d+))?\s+\Q$th\E:\Q$tp\E\s*$/;
+                my $g = defined $1 ? $1 + 0 : $it;
+                next unless $g == $it;
+                $hit = 1;
+                last;
+            }
+            next unless $hit;
+            $cracked{mdxfind}{$id}{$type} = 1;
+            $transcoded{$id}{$type} = $line;
+        }
+
         # Accumulate: one type has a separate job per declared iteration
         # count, and assigning here would leave discovery seeing only the
         # entries of whichever iteration ran last.
@@ -909,7 +978,17 @@ if (!$dry) {
                 # "NOT REPRODUCED HERE ... the claim is upstream's, not this
                 # repository's". A reader of that row cannot tell which half
                 # to believe, and the tier is the load-bearing one.
-                if (($blk->{note} // '') =~ /^(hashcat mapping shipped|from hashpipe|vector replaced|NOT REPRODUCED HERE)/) {
+                # The last alternative is NOT anchored, on purpose.
+                # attach-mdxfind-ahead.pl writes "<TYPE> added <date> by
+                # attach-mdxfind-ahead.pl. NOT ROUND-TRIPPED BY mdxfind
+                # HERE...", so the marker is mid-string; seed-orphans
+                # --via-hashpipe writes the same sentence at the start.
+                # Measured 2026-09-05: 16 blocks reached tier `vector` under
+                # mdxfind RCS 1.576 while still carrying a note saying mdxfind
+                # had not run them, which is the exact contradiction the
+                # anchored list above was added to stop.
+                if (($blk->{note} // '') =~ /^(hashcat mapping shipped|from hashpipe|vector replaced|NOT REPRODUCED HERE)/
+                    || ($blk->{note} // '') =~ /NOT ROUND-TRIPPED BY mdxfind HERE/) {
                     delete $blk->{note};
                     $touched = 1;
                 }
@@ -917,6 +996,21 @@ if (!$dry) {
                 $blk->{verified}      = 'vector';
                 $blk->{verified_at}   = $today;
                 $blk->{verified_with} = "$tool $TOOL_VER{$tool}";
+                # Say when the string that verified is not the string stored.
+                if ($tool eq 'mdxfind' && $transcoded{$id}) {
+                    my @t = map { "$_ as \"$transcoded{$id}{$_}\"" }
+                            sort keys %{ $transcoded{$id} };
+                    $blk->{note} =
+                        "Round-tripped on the TRANSCRIBED form, not on the "
+                      . "vector as stored: this entry keeps its vector in "
+                      . "another tool's serialization, which mdxfind's reader "
+                      . "does not parse. mdxfind pinned with -h reproduced "
+                      . join('; ', @t)
+                      . ", from data/mdxfind-transcodes.tsv. The plaintext is "
+                      . "one this entry already stores, and the two strings "
+                      . "are ONE piece of evidence written twice -- not two "
+                      . "agreeing vectors.";
+                }
                 $promoted{$tool}++;
                 $touched = 1;
             }

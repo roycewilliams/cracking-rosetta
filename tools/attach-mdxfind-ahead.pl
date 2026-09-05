@@ -27,6 +27,22 @@
 # RECOMPUTES rather than cracking, and `-c` pins a named type per line -- the
 # equivalent of `mdxfind -h '^TYPE$'`.
 #
+# THIS IS A STOPGAP, AND IT IS THE SECOND THING TO REACH FOR
+#
+# Ask first whether ANOTHER mdxfind build on the host has the type. On
+# 2026-09-05 one did -- /home/claude/src/upstream/mdxfind/mdxfind, RCS 1.576,
+# built from the upstream clone -- and every one of the 25 mappings this tool
+# wrote at tier `upstream` went straight to `vector` under it. Not installed
+# is not the same as not usable, and the corpus already cited that build for
+# 34 blocks before this tool existed. So:
+#
+#     tools/verify-vectors.pl --tool mdxfind --mdxfind <build with the type>
+#
+# is the follow-up, and this tool's output is what you have until there is a
+# build to run. Where a vector is stored in another tool's serialization the
+# follow-up needs data/mdxfind-transcodes.tsv too, which verify-vectors reads
+# as its last fallback.
+#
 # TWO STAGES, BECAUSE ONE WOULD NOT BE EVIDENCE
 #
 #   1. PROPOSE. Each of an entry's vectors is fed to hashpipe's DETECTION path
@@ -138,8 +154,11 @@ Usage: $PROG --report | --apply [options]
    -v, --verbose     per-entry detail on stderr (repeatable)
    -h, --help        this help
 
-   Only a type the INSTALLED mdxfind does not have is considered; a type it
-   does have belongs to discover-mdxfind.pl, which has the better oracle.
+   Only a type the given mdxfind does not have is considered; a type it does
+   have belongs to discover-mdxfind.pl, which has the better oracle. Point
+   --mdxfind at a build that HAS the type and this tool correctly does
+   nothing -- which is the outcome to prefer, since that build can reach tier
+   `vector` and this cannot.
    Exit 0 success, 1 error, 2 usage.
 
 END

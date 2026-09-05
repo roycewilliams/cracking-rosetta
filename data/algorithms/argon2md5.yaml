@@ -4,13 +4,13 @@ status: "needs-review"
 tools:
   mdxfind:
     types: ["ARGON2MD5"]
-    verified: "upstream"
+    verified: "vector"
     verified_at: "2026-09-05"
-    verified_with: "mdxfind RCS 1.576 (2026/09/02), per the inventory; the installed binary is mdxfind RCS 1.545 (2026/08/29) and does not have this type; hashpipe RCS 1.192 (2026/09/04) reproduced the vector"
-    note: "NOT ROUND-TRIPPED BY mdxfind HERE, and that is a fact about this host rather than about the type. ARGON2MD5 is a type of RCS 1.576 (2026/09/02), and the installed binary is RCS 1.545 (2026/08/29), so pinning it with -h '^ARGON2MD5$' selects no type at all. hashpipe -- which shares mdxfind's type list -- was pinned to this exact name with -c and reproduced mdxfind's own published example, emitting it as \"ARGON2MD5x03\". That is upstream verified by recomputation, which is what tier `upstream` means. To promote it: install mdxfind RCS 1.576 (2026/09/02) and run seed-orphans.pl --tool mdxfind --only ARGON2MD5, then verify-vectors.pl --tool mdxfind."
+    verified_with: "mdxfind RCS 1.576 (2026/09/02)"
   crack:
     supported: false
 vectors:
   - hash: "$argon2id$v=19$m=65536,t=3,p=1$QUFBQUFBQUFBQUFBQUFBQQ$tfFVjXN7s2JLYKv2e4ctPK5B/3gVohhZA/vcbKx4PVQ"
     pass: "password123"
     source: "mdxfind"
+    reads_in: ["mdxfind"]

@@ -50,15 +50,25 @@ people expect are regenerated into `docs/` and `dist/`.
 | john | `/usr/local/scripts/johnl` -> `/usr/local/src/sec/crack/john-latest/run/john` | `john --list=format-details` |
 | mdxfind | `/usr/local/bin/mdxfind` (RCS 1.545, 2026-08-29) | `mdxfind -h` |
 
-**`data/tools/mdxfind.yaml` is RCS 1.576 and the INSTALLED binary is RCS
-1.545, since 2026-09-05.** The inventory is regenerated from whatever
-upstream releases; the binary is whatever this account can run, and it
-cannot write `/usr/local`. 25 types therefore exist in the data and in no
-binary here. What that costs, and the hashpipe route around it, is the first
-entry under Known pitfalls. The `Extraction command` column still names the
-canonical binary for every tier at `vector`; the 1.576 build used to
-regenerate the inventory lives at `/home/claude/src/upstream/mdxfind` and is
-a STAGING instrument, never a verifier.
+**There are TWO mdxfind builds on this host and BOTH are verifiers.**
+`/usr/local/bin/mdxfind` is RCS 1.545, installed, and cannot be replaced by
+this account. `/home/claude/src/upstream/mdxfind/mdxfind` is RCS 1.576, built
+here from the upstream clone, and it is the ONLY binary on this host that has
+types e1003-e1027 or that computes the RAW family correctly. **Use it, and
+stamp its version.** That is already the corpus's practice -- the RAW-family
+repair of 2026-09-05 established 34 blocks at tier `vector` citing
+`mdxfind RCS 1.576 (2026/09/02)`, and the mdxfind seeding the same day added
+26 more.
+
+    tools/verify-vectors.pl --tool mdxfind \
+        --mdxfind /home/claude/src/upstream/mdxfind/mdxfind
+
+**"Not installed" is not "not usable", and conflating the two costs real
+coverage.** Measured 2026-09-05: 25 mdxfind mappings were written at tier
+`upstream` with notes saying "install 1.576 to promote", when the build that
+promotes them was already on the host. All 25 are now `vector`. What
+`verified_with:` must record is WHICH BINARY RAN -- never which one is
+installed, and never which one the inventory came from.
 | hashpipe | `/usr/local/bin/hashpipe` (v1.192, 2026-09-04) | `hashpipe -T` (see `tools/extract-hashpipe.pl`); feed it `hash:plaintext` on stdin, or `TYPE[xNN] hash[:salt]:pass` under `-c` |
 | Crack | not present | hand-maintained, frozen |
 
@@ -239,12 +249,31 @@ mdxfind also accepts hashcat modes directly (`mdxfind -m 0`, `-m e1`,
   crack line cannot tell from a type that ran and found nothing. **Ask the
   binary what it HAS before treating its silence as evidence**, and treat a
   type it lacks as UNMEASURABLE there rather than as a failure.
-  **hashpipe is the second instrument for exactly this**: installed, sharing
-  mdxfind's type list, recomputing rather than cracking, and `-c` pins a named
-  type per line. What it establishes is tier `upstream`, never `vector` --
-  `vector` means THIS tool round-tripped it under THIS identifier, and mdxfind
-  has not. `tools/attach-mdxfind-ahead.pl` and `seed-orphans.pl
-  --via-hashpipe` do this and write the promotion command into the note.
+  **THE FIRST THING TO TRY IS ANOTHER mdxfind BUILD, NOT ANOTHER TOOL.**
+  `/home/claude/src/upstream/mdxfind/mdxfind` is RCS 1.576 and HAS
+  e1003-e1027. Point `--mdxfind` at it and the type verifies at tier `vector`
+  like any other. Reaching past it for a second-best oracle is how 25 mappings
+  spent a night at tier `upstream` carrying notes that told the reader to
+  install something the host already had. "Not installed" is not "not usable".
+  **hashpipe is the fallback for when NO local build has the type**:
+  installed, sharing mdxfind's type list, recomputing rather than cracking,
+  and `-c` pins a named type per line. What it establishes is tier `upstream`,
+  never `vector` -- `vector` means THIS tool round-tripped it under THIS
+  identifier. `tools/attach-mdxfind-ahead.pl` and `seed-orphans.pl
+  --via-hashpipe` do that, and both are a STOPGAP: run
+  `verify-vectors.pl --tool mdxfind --mdxfind <a build that has the type>`
+  afterwards and the tier goes to `vector`.
+  **A vector stored in ANOTHER tool's serialization is a third case, and it
+  is not an absence either.** john writes RVARY as `$rvary$<hex>`; mdxfind
+  wants the bare hex and its reader refuses the line, so the row says NOT
+  REPRODUCED about a mapping that reproduces perfectly well.
+  `data/mdxfind-transcodes.tsv` holds the type's own spelling of such a
+  vector, and `verify-vectors.pl` tries it as the LAST fallback -- after the
+  grouped and solo runs, only for an (entry, type) pair with nothing yet, and
+  only when the plaintext is one the entry already stores, so a line there
+  cannot smuggle in a different vector. Nine mappings reached tier `vector`
+  that way on 2026-09-05, and each block's note says the round trip used the
+  transcribed form: the two strings are ONE piece of evidence written twice.
   **`hashpipe -c` does NOT read john dialect, although hashpipe's DETECTION
   path does.** Measured 2026-09-05: `MD4SALTPASS $dynamic_31$<hash>$<salt>:pw`
   is refused by `-c` and resolved by plain detection, which echoes the line
@@ -262,7 +291,10 @@ mdxfind also accepts hashcat modes directly (`mdxfind -m 0`, `-m e1`,
 - **`verified_with:` must name the binary that RAN, and three tools took it
   from the inventory instead.** Fixed 2026-09-05 in `seed-orphans.pl` and all
   three `discover-*.pl`; `RosettaTools::tool_version($name, $path)` asks the
-  binary and returns undef rather than guessing. The two coincided for weeks,
+  binary and returns undef rather than guessing -- and on this host that
+  binary is often the LOCALLY BUILT mdxfind 1.576 rather than the installed
+  1.545, which is legitimate and is what the corpus already does. The two
+  coincided for weeks,
   which is exactly why nobody noticed. A backlog of blocks still carries a
   bare tool name with no version at all -- count it rather than trusting a
   figure here, since every verification run changes it:

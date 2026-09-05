@@ -11,13 +11,13 @@ status: "needs-review"
 tools:
   mdxfind:
     types: ["SHA1UCUSERPASS"]
-    verified: "upstream"
+    verified: "vector"
     verified_at: "2026-09-05"
-    verified_with: "mdxfind RCS 1.576 (2026/09/02), per the inventory; the installed binary is mdxfind RCS 1.545 (2026/08/29) and does not have this type; hashpipe RCS 1.192 (2026/09/04) reproduced the vector"
-    note: "NOT ROUND-TRIPPED BY mdxfind HERE, and that is a fact about this host rather than about the type. SHA1UCUSERPASS is a type of RCS 1.576 (2026/09/02), and the installed binary is RCS 1.545 (2026/08/29), so pinning it with -h '^SHA1UCUSERPASS$' selects no type at all. hashpipe -- which shares mdxfind's type list -- was pinned to this exact name with -c and reproduced mdxfind's own published example, emitting it as \"SHA1UCUSERPASSx01\". That is upstream verified by recomputation, which is what tier `upstream` means. To promote it: install mdxfind RCS 1.576 (2026/09/02) and run seed-orphans.pl --tool mdxfind --only SHA1UCUSERPASS, then verify-vectors.pl --tool mdxfind."
+    verified_with: "mdxfind RCS 1.576 (2026/09/02)"
   crack:
     supported: false
 vectors:
   - hash: "ed62e880d893dfe7f953000951602ce7932e8503:administrator"
     pass: "password123"
     source: "mdxfind"
+    reads_in: ["mdxfind"]
