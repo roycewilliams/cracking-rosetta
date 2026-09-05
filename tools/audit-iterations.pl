@@ -41,7 +41,7 @@
 #
 # THE REPAIR, AND WHY IT IS NOT CIRCULAR
 #
-# A wrong vector is deleted, not re-labelled: it belongs to a different entry
+# A wrong vector is deleted, not re-labeled: it belongs to a different entry
 # that already exists. That leaves entries with no vector at all, so a
 # replacement is taken from john's own regression corpus --
 # "john --format=dynamic_213 --list=format-tests" ships ciphertext and

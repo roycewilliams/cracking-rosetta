@@ -13,9 +13,13 @@ status: "needs-review"
 tools:
   john:
     cpu: ["PuTTY"]
-    verified: "upstream"
-    verified_at: "2026-08-31"
-    verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
-    note: "NOT REPRODUCED HERE. john publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: john publishes no plaintext for its example, and the example did not fall to the ~819 candidate plaintexts harvested from john's own source. The plaintext is findable, it was simply not in the list. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool john --only PuTTY to retry."
+    verified: "vector"
+    verified_at: "2026-09-04"
+    verified_with: "john"
   crack:
     supported: false
+vectors:
+  - hash: "$putty$1*16*1*0*10c434c33cf160352b7a5b3a1ecd8434f1066cac*432*000000077373682d647373000000806bb7ed4d03163f5be550dba68e0f1af7dae4b49f736ab452552a1163210c1366fd1f65a31bb526b1d3028a31d30b3315c19dc02417db99336f00b1f9565431d02fc59cd756ab6fe506b959df3799e4a70fcbe54ad9ef34d338014add8ac1f57f2a6dce8403c93709cb23d3c379f5de4f9fc45a73b3f9a43e6c1cc220bd38274b0000001500b4bf70cda203027a13135d43e459872eed384a3d0000008049a7d8e8d1db1630f9a9f6b1bf275d01e4287a4c2f038707d8c07ab664dbd264f6b4676de93c1f003bb57146a82314ab6c426628498209fa33c68a881abfd90dc1e978d430c9ace78d6c9895938494e91e3ca50132c9bde8fae4381e6fe59d03a9feee39b10cb2fea4e4d5f5ef10e523d34925f105eff665db2ac35e6cf0a1ac000000800def6e4f7ed4af0f1f8ed9524595d3fecd0a191ea9a6402d4235ee59ff2000011e36b5936280a3b5dc0b8d8ea7747e04ad92e46be8cb374d931c1e78bbdafea4ac16aba2e4b3cbd0779d28a609e848fb54332a169f24fac5e4c736c3dae4f95afe0aacaffb2d4829956fbd17d514614a45f8eefdd0d7d4982d101d72002f05fd*32*b38180c482949f3b4f44a20fd599c2cb411c671b4b120663bef9a61b360e442a*ssh-dss*aes256-cbc*dsa-key-20120721"
+    pass: "password"
+    source: "john"
+    reads_in: ["john"]

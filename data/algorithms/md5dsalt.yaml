@@ -14,3 +14,8 @@ tools:
     verified: "asserted"
   crack:
     supported: false
+vectors:
+  - hash: "4e8d3e56d0159708bced73cfad02555f:7aG7aG"
+    pass: "password123"
+    source: "hashpipe"
+notes: "The vector is hashpipe's published example, verified under hashpipe -c pinned to MD5DSALT, and mdxfind will not read it back, so the mdxfind mapping stays at tier `asserted`. Measured 2026-09-04: pinned with -h '^MD5DSALT$', mdxfind performs ZERO hash calculations on the line under -f and zero under -F, at every iteration count tried, so it is declining the input shape rather than computing and missing. hashpipe's verify_md5dsalt parses the line as a 32-hex digest, a colon, and a salt of 2 to 6 characters, then sweeps the ways that salt can be split -- this is one of the multi-emit DSALT types CLAUDE.md records, which is why no single expression belongs on this row either."

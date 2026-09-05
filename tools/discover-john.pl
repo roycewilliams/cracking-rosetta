@@ -19,6 +19,37 @@
 # hashpipe's john_map.h did upstream, and it did it the only way that can be
 # trusted: by running the hash.
 #
+# --loadable: WHICH FORMATS COULD EVEN HAVE ANSWERED
+#
+# A sweep's silence means nothing until you know the question was asked, and
+# absence.pl says so at length: for hashcat it asks `--identify`, which lists
+# every mode whose parser accepts an input. john has no --identify, which is
+# the whole reason absence.pl has never had a --tool john and why 802 entries
+# carry a john block at tier `none` -- measured 2026-09-04, against 623
+# entries where hashcat's silence has been MEASURED as absent.
+#
+# john has something better than --identify: its own loader. `--show=left`
+# prints the hashes that LOADED and were not cracked, and each line carries
+# the synthetic login this tool already puts in front of every hash. So one
+# invocation per format names exactly the corpus lines that format's valid()
+# accepted -- not a heuristic about lengths, the real parser answering about
+# itself. Measured 2026-09-04 on a three-line file: Raw-MD5 returned only the
+# 32-hex line, Raw-SHA1 only the 40-hex one, md5crypt only the $1$ one, and
+# bcrypt returned nothing at all.
+#
+# Two details it cost a measurement to learn, both handled below:
+#
+#   * john echoes its CANONICAL encoding, not what it was handed -- a bare
+#     digest comes back "$dynamic_0$..." -- which is the same reason
+#     attribution here is by login and never by searching for the hash.
+#   * LM SPLITS one hash into two halves and gives them logins "v0:1" and
+#     "v0:2". A trailing ":N" is stripped, or the format reads as loading
+#     nothing.
+#
+# It is cheap enough to be uninteresting: 0.056s to load a 2.6MB corpus, so
+# the whole inventory is well under a minute. The expensive half of a john
+# absence pass is the CRACKING sweep, which is the rest of this file.
+#
 # SEARCH DIRECTION: ONE JOB PER FORMAT, NOT PER ENTRY
 #
 # The naive shape is "for each entry, try every format", which is ~650 x ~960
@@ -59,7 +90,7 @@
 #
 # So each line carries a synthetic login and the run is followed by "--show",
 # which prints that login beside the plaintext. The login is ours; it survives
-# every canonicalisation, and the special cases go away.
+# every canonicalization, and the special cases go away.
 #
 # TAB IS THE FIELD SEPARATOR, WHICH BUYS TWO THINGS
 #
@@ -174,7 +205,7 @@
 # when the corpus holds a hash DELIBERATELY related to a true digest, which is
 # exactly what mdxfind's masked and truncated families are.
 #
-# So a claim is withheld only where the corpus itself realises the ambiguity:
+# So a claim is withheld only where the corpus itself realizes the ambiguity:
 # two DIFFERENT hashes in it that the format cannot tell apart. Excluding every
 # format that skips a word would throw away correct mappings in order to refuse
 # one that is not. This is the same rule discover-hashcat.pl arrived at, and it
@@ -292,6 +323,10 @@ Usage: $PROG [options]
                      (default 6; they are reported, never written)
    --max-share PCT   hold back a format matching more than PCT% of the corpus
                      (default 20)
+   --loadable        do NOT crack: for each candidate format, record which
+                     corpus lines its own valid() accepts, and write the
+                     matrix to <work>/loadable.tsv for absence.pl --tool
+                     john. Fast, and needs no GPU.
    --resume          reuse per-format results already in the work dir
    --apply           write the discovered mappings into data/algorithms
    -n, --dry-run     show the plan; run nothing, write nothing
@@ -318,6 +353,7 @@ my $max_share     = 20;
 my $canary_rounds = 12;
 my $canary_span   = 512;
 my $no_canary;
+my $loadable;
 
 GetOptions(
     'john=s'          => \$john,
@@ -338,6 +374,7 @@ GetOptions(
     'canary-span=i'   => \$canary_span,
     'max-per-entry=i' => \$max_per_entry,
     'max-share=i'     => \$max_share,
+    'loadable'        => \$loadable,
     'resume'          => \$resume,
     'apply'           => \$apply,
     'n|dry-run'       => \$dry,
@@ -482,6 +519,31 @@ printf STDERR "- %d format(s) x %d vector(s) from %d entry/entries\n",
 #-----------------------------------------------------------------------
 # Helpers.
 
+# write_matrix($path, $header, \%by_label, \%hash_of) - a (format, vector)
+# matrix, one pair per line: format, entry id, and the vector's HASH.
+#
+# Not the vid. Internally that is "$id\0<n>" where n is a GLOBAL sequence
+# number, so it identifies a vector only within one run and resolves to
+# nothing a reader or a later tool can look up. The hash is what absence.pl
+# needs anyway: a crack credited to a SIBLING row carrying the same hash
+# under a different plaintext is the trap that would otherwise publish as
+# this row's absence, and only the hash makes that visible.
+sub write_matrix {
+    my ($path, $header, $by_label, $hash_of) = @_;
+    open my $mf, '>', $path or die "$PROG: cannot write $path: $!\n";
+    print {$mf} $header;
+    my $pairs = 0;
+    for my $label (sort keys %$by_label) {
+        for my $vid (sort keys %{ $by_label->{$label} }) {
+            my ($id) = split /\0/, $vid, 2;
+            printf {$mf} "%s\t%s\t%s\n", $label, $id, $hash_of->{$vid} // '';
+            $pairs++;
+        }
+    }
+    close $mf or die "$PROG: cannot close $path: $!\n";
+    return $pairs;
+}
+
 sub write_file {
     my ($p, @lines) = @_;
     open my $fh, '>', $p or die "cannot write $p: $!\n";
@@ -534,6 +596,12 @@ my $jbin = basename($john);
 die "$PROG: john not executable at $john\n" unless -x $john;
 
 my %hits;          # entry id -> format -> 1
+my %loads;         # --loadable: format -> vector id -> 1, which lines
+                   # that format's own valid() accepted
+my %hash_of_vid;   # vector id -> the hash, for the evidence matrices
+$hash_of_vid{ $_->{vid} } = $_->{hash} for @vectors;
+my %per_fmt;       # format -> vector id -> 1, the transpose of %per_vector
+                   # and what the evidence file is written from
 my %per_vector;    # vector id -> format -> 1, so an entry whose vectors
                    # disagree can be spotted rather than merged
 my %fmt_hits;      # format -> count of entries
@@ -569,6 +637,36 @@ FORMAT: for my $label (@candidates) {
             if defined $salt && length $salt && $salt !~ /:/;
     }
     my $hf = write_file("$workdir/hash.$safe", @lines);
+
+    # --loadable asks john's LOADER what it accepts and stops there. No
+    # cracking, no wordlist, no session: --show is incompatible with
+    # --session, which is an "Invalid options combination", not a warning.
+    if ($loadable) {
+        # A SCRATCH pot, deliberately not $pot. --show still wants one, and
+        # writing an empty file into pot/ would make a later --resume crack
+        # run read `-e $pot` as "this format ran and cracked nothing".
+        my $lpot = "$workdir/loadable.pot";
+        unlink $lpot;
+        my (undef, $left) = run_capture($timeout, '/bin/sh', '-c',
+            sprintf('cd %s && exec ./%s --format=%s --field-separator-char=tab '
+                  . '--pot=%s --show=left %s 2>/dev/null',
+                    quotemeta($jdir), quotemeta($jbin), quotemeta($label),
+                    quotemeta($lpot), quotemeta($hf)));
+        my $accepted = 0;
+        for my $line (split /\n/, $left // '') {
+            my ($login) = split /\t/, $line, 2;
+            next unless defined $login;
+            # LM splits a hash into halves and suffixes the login ":1"/":2".
+            $login =~ s/:\d+$//;
+            my $v = $login_of{$login} or next;
+            next if $loads{$label}{ $v->{vid} }++;
+            $accepted++;
+        }
+        printf STDERR "-   [%4d/%4d] %-28s %4d line(s) load\n",
+            $n, scalar @candidates, $label, $accepted
+            if $verbose && ($accepted || $verbose > 1);
+        next FORMAT;
+    }
 
     my $code = 0;
     if ($resume && -e $pot) {
@@ -606,6 +704,7 @@ FORMAT: for my $label (@candidates) {
         for my $v (@vectors) {
             next unless $won{"$v->{hash}\0$v->{pass}"};
             $per_vector{ $v->{vid} }{$label} = 1;
+            $per_fmt{$label}{ $v->{vid} }  = 1;
             next if $hits{ $v->{id} }{$label}++;
             $found++;
         }
@@ -619,6 +718,83 @@ FORMAT: for my $label (@candidates) {
 }
 
 my $elapsed = time - $started;
+
+#-----------------------------------------------------------------------
+# The evidence files. absence.pl --tool john reads these three and nothing
+# else, because they are the only record of what the sweep actually did:
+#
+#   hits.tsv   the ATTRIBUTED cracks. A pot line cannot be attributed after
+#              the fact -- john echoes its canonical encoding, so the pot
+#              never holds the hash that was submitted -- so the attribution
+#              is written here by the run that performed it.
+#   ran        every format the sweep actually asked. A format absent from
+#              this file was never tried, which is not the same as one that
+#              tried and found nothing, and only this file tells them apart.
+#   timeouts   the formats killed at --timeout. Their pot exists and looks
+#              like a completed run that cracked little, so absence.pl
+#              treats anything listed here as never run.
+
+unless ($dry || $loadable) {   # --loadable measures the LOADER, not the sweep:
+                                 # writing an empty hits.tsv beside a real
+                                 # loadable.tsv is a trap, not a record
+    my $stamp = sprintf(
+          "# GENERATED by tools/discover-john.pl -- %s\n"
+        . "# john %s\n"
+        . "# %d format(s) run over %d vector(s) from %d entry/entries in %.1fs\n",
+            strftime('%Y-%m-%d', localtime), $john_version,
+            scalar(keys %ran), scalar @vectors, scalar(keys %targets), $elapsed);
+
+    my $npairs = write_matrix("$workdir/hits.tsv",
+        $stamp . "# format\tentry id\thash"
+               . "  -- this format reproduced this vector\n",
+        \%per_fmt, \%hash_of_vid);
+
+    open my $rf, '>', "$workdir/ran" or die "$PROG: cannot write ran: $!\n";
+    print {$rf} $stamp, "# one format label per line: the sweep asked it\n";
+    print {$rf} "$_\n" for sort keys %ran;
+    close $rf or die "$PROG: cannot close ran: $!\n";
+
+    open my $tf, '>', "$workdir/timeouts" or die "$PROG: cannot write timeouts: $!\n";
+    print {$tf} $stamp, "# one format label per line: killed at --timeout,\n"
+              . "# so its silence is not a measurement\n";
+    print {$tf} "$_\n" for sort keys %timed_out;
+    close $tf or die "$PROG: cannot close timeouts: $!\n";
+
+    printf STDERR "- evidence: %d attributed hit(s), %d format(s) run, "
+                . "%d timed out\n", $npairs, scalar(keys %ran),
+                  scalar(keys %timed_out);
+}
+
+#-----------------------------------------------------------------------
+# --loadable stops here: it has measured what each format can READ, which is
+# a different question from what it can crack, and it must never write a
+# mapping. The file is the john half of what <work>/identify.tsv is for
+# hashcat, and absence.pl --tool john refuses to run without it.
+
+if ($loadable) {
+    my $path  = "$workdir/loadable.tsv";
+    my $fmts  = scalar keys %loads;
+    my $pairs = write_matrix($path, sprintf(
+          "# GENERATED by tools/discover-john.pl --loadable -- %s\n"
+        . "# john %s\n"
+        . "# %d format(s) asked, %d vector(s) offered\n"
+        . "# format\tentry id\thash"
+        . "  -- a line this format's own valid() accepted\n",
+            strftime('%Y-%m-%d', localtime), $john_version,
+            scalar @candidates, scalar @vectors), \%loads, \%hash_of_vid);
+    printf STDERR "- %d format(s) accepted at least one line; %d (format, "
+                . "vector) pair(s) in %.1fs\n", $fmts, $pairs, $elapsed;
+    printf STDERR "- wrote %s\n", $path;
+    # A format that accepted nothing is not an error: bcrypt reads no bare
+    # digest. A run where NOTHING accepted anything is, because that is what
+    # a broken corpus or a wrong john path looks like.
+    if (!$pairs) {
+        print STDERR "$PROG: no format accepted any line -- that is not a "
+                   . "measurement, it is a broken run\n";
+        exit 1;
+    }
+    exit 0;
+}
 
 #-----------------------------------------------------------------------
 # The canary. Challenge every format that scored a hit with digests differing
@@ -769,7 +945,7 @@ sub range_summary {
     return join ',', @runs;
 }
 
-# Where the corpus itself realises the ambiguity: two DIFFERENT hashes this
+# Where the corpus itself realizes the ambiguity: two DIFFERENT hashes this
 # format cannot tell apart. Only there is a claim withheld.
 my %ambiguous;    # "label\0id" -> the other ids the format cannot distinguish
 for my $label (keys %ignored_pos) {

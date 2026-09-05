@@ -24,7 +24,7 @@
 #
 # mdxfind revision 1.543 repaired a buffer-layout bug in e607
 # SHA1MD5SALTPASSPEPPER, and upstream's own note says "any hash cracked as e607
-# before this revision will not verify against it". That is a behaviour change
+# before this revision will not verify against it". That is a behavior change
 # discovered by reading a revision log. With this file and --check it is a
 # command: 993 pinned jobs, and the ones that stopped reproducing are named.
 #
@@ -57,7 +57,7 @@
 #     mdxfind cracks truncated hashes on purpose -- that is a capability
 #     hashcat does not have, and it is why whole families here are truncations
 #     -- so it sets its comparison width from the SHORTEST hash in the file
-#     and honours it for every hash in that file. Measured 2026-09-03:
+#     and honors it for every hash in that file. Measured 2026-09-03:
 #     md5("rosetta") and its own 16-hex truncation together, pinned to MD5,
 #     print "Minimum hash length is 16 characters" and report ONLY the
 #     truncation, because at 16 characters the two ARE the same hash. Alone,
@@ -83,7 +83,7 @@
 # WHAT --check MEANS
 #
 # It reads the corpus and re-runs it. A row that no longer reproduces is a
-# behaviour change in the binary, not a defect in the file, so it exits 1 and
+# behavior change in the binary, not a defect in the file, so it exits 1 and
 # names the type. It writes nothing and touches no entry: promoting or
 # demoting a tier is verify-vectors.pl's job, and keeping the two apart is
 # what stops a regression run quietly rewriting the evidence it disagrees
@@ -228,7 +228,7 @@ sub run_capture {
 # THIS row?
 #
 # The plaintext must match exactly. The digest must too, except for hex case:
-# mdxfind normalises hex on read and echoes its own lower-case form, so a
+# mdxfind normalizes hex on read and echoes its own lower-case form, so a
 # vector recorded in upper case -- which is how the *UC types are published --
 # would have its own successful round trip rejected by a string compare. The
 # fold is narrow on purpose: it applies only when the recorded digest is pure

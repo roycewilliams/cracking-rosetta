@@ -12,7 +12,7 @@
 #
 # WHY format-details AND NOT format-all-details
 #
-# Both carry the same facts. format-all-details is self-labelling and needs no
+# Both carry the same facts. format-all-details is self-labeling and needs no
 # positional assumptions, but it is 16812 lines of column-aligned prose whose
 # alignment is a display choice. format-details is one tab-separated record
 # per format, 552 of them, and tabs do not drift. The field ORDER was pinned

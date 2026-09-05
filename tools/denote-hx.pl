@@ -80,7 +80,7 @@
 # withdrawn rather than adjusted.
 #
 # The specification is NOT vendored: this repository is MIT throughout and
-# the PDF carries no licence grant. Re-fetch it to tmp/hx/ to re-run this.
+# the PDF carries no license grant. Re-fetch it to tmp/hx/ to re-run this.
 #
 # Usage: denote-hx.pl [--appendix FILE] [--repair] [--apply] [-v]
 #
@@ -233,7 +233,7 @@ sub ill_formed {
     for my $c (split //, $x) { $bal++ if $c eq '('; $bal-- if $c eq ')' }
     push @why, 'has unbalanced parentheses' if $bal != 0;
     # ")(" is a prose gloss that was concatenated onto a finished expression
-    push @why, 'carries a parenthesised group after what is already a complete '
+    push @why, 'carries a parenthesized group after what is already a complete '
              . 'expression, which is how a prose gloss reaches the data' if $x =~ /\)\(/;
     my (%seen, @unk, @bare);
     while ($x =~ /(?<![\$\w])([A-Za-z][A-Za-z0-9_]*)(\(?)/g) {
@@ -269,7 +269,7 @@ for my $f (@files) {
     next unless $type;
     $seen++;
 
-    #-- --repair: withdraw a claim this repository cannot honour -----------
+    #-- --repair: withdraw a claim this repository cannot honor -----------
     if (defined $e->{expression} && length $e->{expression}) {
         my @why = ill_formed($e->{expression});
         if (@why && $repair) {

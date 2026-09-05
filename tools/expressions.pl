@@ -47,7 +47,7 @@
 # THE TRAILING COMMENT IS NOT PART OF THE EXPRESSION
 #
 # john appends a human note: "md5($p.$s) (joomla)", "sha1(sha1_raw($p)) (hash
-# truncated to length 32)". Stripping "the last parenthesised group" would
+# truncated to length 32)". Stripping "the last parenthesized group" would
 # mangle an expression that legitimately ends in a paren. So the expression is
 # taken as the text up to the first space at paren-depth zero, which is exactly
 # where john's own note begins.

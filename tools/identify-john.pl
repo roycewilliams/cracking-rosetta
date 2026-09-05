@@ -86,7 +86,7 @@
 # usually longer plaintext, which the degenerate cases do not. Labels that hit
 # on only one vector are reported and held: for a format with a single usable
 # vector -- Argon2, scrypt, krb5tgs -- one hit is all there is to have, and
-# accepting it is a judgement a human can make from the report with
+# accepting it is a judgment a human can make from the report with
 # --min-vectors 1 on that type.
 #
 # FORMATS NO ENTRY COVERS ARE REPORTED, NOT INVENTED

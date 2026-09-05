@@ -59,7 +59,7 @@
 #
 # NEVER DROP A TOKEN
 #
-# Every generator tokenises against a closed vocabulary and BAILS on the first
+# Every generator tokenizes against a closed vocabulary and BAILS on the first
 # token it does not know. This is the rule that keeps the tool honest.
 # MD5CAP's "CAP" is not in the vocabulary, so no candidate is emitted for it --
 # whereas silently ignoring the token would emit md5($p), which john would
@@ -101,7 +101,7 @@
 #
 # expression: is hx-style; john's dynamic compiler is not. hx writes a change
 # of representation as a wrapper -- upper(md5($p)) -- and john writes it as a
-# FLAVOUR of the hash function -- MD5($p). So md5(upper(md5($p))) is a syntax
+# FLAVOR of the hash function -- MD5($p). So md5(upper(md5($p))) is a syntax
 # error to john while md5(MD5($p)) compiles and cracks the same vector, which
 # is why 228 already-recorded expressions were failing to reproduce their own
 # vectors on 2026-09-02. RosettaJohn does that rewrite (or refuses the
@@ -783,7 +783,7 @@ ENTRY: for my $f (@files) {
         for my $c (@{ $pair->[1] }) {
             next unless defined $c && length $c;
             # An expression that never mentions the password is not a
-            # candidate for anything: mdxfind's bare "MD5SALT" tokenises to
+            # candidate for anything: mdxfind's bare "MD5SALT" tokenizes to
             # md5($s), which is the tokeniser losing an implicit operand
             # rather than a construction anyone computes.
             next unless $c =~ /\$p/;
@@ -819,7 +819,7 @@ ENTRY: for my $f (@files) {
     }
 
     # expression: is hx-style and john's dynamic compiler is not: it spells a
-    # representation change as a FLAVOUR of the hash function rather than as a
+    # representation change as a FLAVOR of the hash function rather than as a
     # wrapper, so md5(upper(md5($p))) is a syntax error and md5(MD5($p)) is the
     # same claim john will compile. RosettaJohn does that rewrite, or refuses
     # the candidate whole. What is handed to john may therefore differ from
@@ -880,7 +880,7 @@ ENTRY: for my $f (@files) {
             : 'round-tripped against every vector this entry carries as '
             . "--format=dynamic='$jexpr', which is this expression written in "
             . "john's own notation: john spells a representation change as a "
-            . 'flavour of the hash function, not as a wrapper. The two strings '
+            . 'flavor of the hash function, not as a wrapper. The two strings '
             . 'are ONE claim, not two pieces of evidence',
     };
     delete $e->{denotation};   # an expression supersedes the fallback wording

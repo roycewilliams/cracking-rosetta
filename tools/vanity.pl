@@ -38,7 +38,7 @@
 #     script on 16 cores.
 #
 # The reason it is still not used is THROUGHPUT ON THIS SHAPE OF WORK, and it
-# is the one measurement that matters. The fork parallelises over CANDIDATES
+# is the one measurement that matters. The fork parallelizes over CANDIDATES
 # WITHIN A SALT: 164.7 M/s is many plaintexts against one fixed salt. This job
 # pins the plaintext to `rosetta` and varies the salt, the exact inverse, so
 # the wordlist holds one word and the GPU is handed a batch of one while salt

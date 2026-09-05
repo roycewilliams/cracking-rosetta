@@ -15,6 +15,13 @@ tools:
     verified: "absent"
   mdxfind:
     types: ["SHA1SHA1HUM"]
-    verified: "asserted"
+    verified: "vector"
+    verified_at: "2026-09-04"
+    verified_with: "mdxfind"
   crack:
     supported: false
+vectors:
+  - hash: "0278c8de0e14d721dcc9ae4fda823b3f48f6fa0c:00- x 1"
+    pass: "password123"
+    source: "hashpipe"
+    reads_in: ["mdxfind"]

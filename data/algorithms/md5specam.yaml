@@ -12,3 +12,8 @@ tools:
     note: "special purpose and not for general use, per mdxfind's maintainer, and it emits nothing. Measured 2026-09-04, pinned with -M under -z: alone, with -s and with -u, stdout was empty in every case, and a run seeded from mdxfind's own regress/md5specamdef.txt produced nothing either. So no vector can be generated for it and this entry cannot reach tier vector; that is a property of the type rather than a gap here. The identifier is real and in mdxfind's type table, which is what the mapping records."
   crack:
     supported: false
+vectors:
+  - hash: "9018942a51656d6055f0c20024dd4f48"
+    pass: "password123"
+    source: "hashpipe"
+notes: "mdxfind and hashpipe do NOT compute the same thing under this name, measured 2026-09-04, and the vector on this row is hashpipe's. hashpipe's compute_md5specam is md5($p . md5_raw($p)) -- it takes neither salt nor user (it is registered with flags 0 and casts both away) -- and its published example 9018942a51656d6055f0c20024dd4f48:password123 was confirmed three independent ways: hashpipe -c pinned to MD5SPECAM, the source itself, and a recomputation in Perl. mdxfind's JOB_MD5SPECAM (mdxfind.c, the case at ~27795) reads a USERID off the line, lower-casing it up to the first colon, and breaks out when that field is empty -- it is a member of the AM family, whose sibling MD5AM hashpipe's own source records as md5(user . \"::\" . lower($p)). Pinned with -h '^MD5SPECAM$', mdxfind performs ZERO hash calculations on this line under -f and zero again under -F with a userid field appended, so it is declining the input shape rather than computing and missing. The mdxfind mapping therefore stays at tier `asserted`: what is on this row is proven for hashpipe's MD5SPECAM and says nothing yet about mdxfind's."

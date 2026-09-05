@@ -75,7 +75,7 @@
 # So attribution is: crack into a per-mode potfile, then re-read it with
 # --show against the same hash file, and match each output line back by
 # case-folded hash plus exact plaintext. Folding case is safe because it is
-# hashcat's own normalisation of its own input; it is not a search for
+# hashcat's own normalization of its own input; it is not a search for
 # something that passes. Where hashcat rewrites a hash by more than case the
 # line simply fails to match and no claim is made, which is the safe
 # direction.
@@ -552,7 +552,7 @@ my $elapsed = time - $started;
 # from the ones it cracked by exactly one hex character; see the methodology
 # note.
 #
-# It has to iterate, and the reason is itself a hashcat behaviour worth
+# It has to iterate, and the reason is itself a hashcat behavior worth
 # knowing: hashcat indexes its target list by the digest words it actually
 # COMPARES, so all eight one-nibble mutants of an ignored 32-bit word collapse
 # to one entry and only one of them is ever reported. Handing them over in a
@@ -689,7 +689,7 @@ sub range_summary {
 # exactly what mdxfind's masked and truncated families are, and exactly how
 # -m 100 "cracked" sha1lsb35, and(sha1($p), 0x00000fff..ff).
 #
-# So the claim is withheld only where the corpus itself realises the
+# So the claim is withheld only where the corpus itself realizes the
 # ambiguity: two DIFFERENT hashes in it that this mode cannot tell apart.
 # Blanket-excluding every mode that skips a word would have thrown away
 # twenty-odd mappings that are correct in order to refuse one that is not.

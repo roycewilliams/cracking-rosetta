@@ -19,7 +19,7 @@ package RosettaTools;
 #
 #   1. the explicit --john / --hashcat / --mdxfind flag  (the caller wins)
 #   2. $JOHN / $HASHCAT / $MDXFIND from the environment  (the clone's setup)
-#   3. the path this repository's data was generated with (unchanged behaviour)
+#   3. the path this repository's data was generated with (unchanged behavior)
 #   4. the name on PATH                                  (a packaged install)
 #
 # Keeping (3) means nothing changes for the machine that has been running

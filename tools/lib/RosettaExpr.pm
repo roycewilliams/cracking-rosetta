@@ -50,6 +50,50 @@ package RosettaExpr;
 # Digest::SHA and Encode are installed -- so adding them is a packaging
 # decision, not a code change. md4 is the single biggest lever left.
 #
+# IT WIDENED AGAIN ON 2026-09-04, BY $c1..$c8 -- AND THOSE ARE JOHN'S
+#
+# 31 of the corpus's 615 expressions failed here with no unknown function
+# token at all, and 30 of them were the same shape: john's dynamic constant
+# suffix, `md5($s.$c1.md5($p)),c1=-`. Not a vocabulary gap, a grammar one.
+# (The thirty-first is `md5(md5($s.$p):$s)`, a bare colon literal, which is
+# the other thing this grammar does not model. Left alone deliberately.)
+#
+# hx has NO constants in this form -- its own answer is a STRING LITERAL,
+# `md5(salt . "-" . md5(pass))` -- so the notation here is john's and john
+# is the oracle for it. What john does was read out of its source rather
+# than its documentation, on the rule CLAUDE.md already carries for the
+# dynamic language:
+#
+#   src/dynamic_compiler.c  find_the_extra_params()  where the list starts
+#                           get_param()              a comma ends a value,
+#                                                    unless backslashed
+#                           handle_extra_params()    c1..c8, and an EMPTY
+#                                                    value stops the scan
+#                           comp_get_symbol()        a $cN with no value is
+#                                                    an error, not a blank
+#   src/dynamic_utils.c     dynamic_Demangle()       \\ and \xHH, and a
+#                                                    backslash before
+#                                                    anything else is kept
+#
+# Three consequences worth naming, because each is a place a reasonable
+# guess is wrong:
+#
+#   - The list starts at the first comma at PAREN DEPTH ZERO, not at the
+#     first comma. john can afford `strchr(expr, ',')` because its own
+#     grammar has no comma inside an expression; this repository's does --
+#     `md5(cut($c1.upper(sha1(sha1_raw($p))),0,40)),c1=*` is a real entry.
+#   - An EMPTY value is not the empty string, it is a missing constant, and
+#     john refuses the expression. So do we. (No corpus entry has one; the
+#     one that looks like it, md5padmd5, is `c1= ` with a space.)
+#   - The values must be PACKED from c1. john's loop breaks at the first
+#     one it does not find, so a c2 without a c1 is not merely odd, it is
+#     unusable -- and it would silently compile here as a dropped token,
+#     which is the one thing this module exists not to do.
+#
+# The bytes never reach the eval. They live in a lexical array the compiled
+# sub closes over, and only the INDEX is written into the source, so the
+# rule that nothing from an entry file is interpolated still holds exactly.
+#
 # The bail rule is UNCHANGED and is what keeps the widening safe: an unknown
 # function, a wrong arity, a token outside the grammar, all return undef
 # rather than being skipped. Skipping a token silently changes the meaning of
@@ -65,7 +109,7 @@ package RosettaExpr;
 # carries the fixture and re-measures it with --oracle. Two that a careful
 # reading would still have got wrong, and which the oracle settled:
 #
-#   cap()  capitalises the first lower-case LETTER, not the first character.
+#   cap()  capitalizes the first lower-case LETTER, not the first character.
 #          cap('975790dfb...') moves the 'd' at index 6.
 #   pad()  TRUNCATES when the input is already longer than the width; it is
 #          "make it exactly this many bytes", not "at least".
@@ -342,6 +386,9 @@ sub _tokenize {
         if ($e =~ s/^(-?[0-9]+)//)              { push @t, [ int  => $1 ]; next }
         if ($e =~ s/^([A-Za-z][A-Za-z0-9_]*)//) { push @t, [ name => $1 ]; next }
         if ($e =~ s/^\$([ps])(?![A-Za-z0-9_])//){ push @t, [ var  => $1 ]; next }
+        # A constant reference. Only 1-8 exist; $c9 is not a token john
+        # accepts either, so it falls through and bails.
+        if ($e =~ s/^\$c([1-8])(?![A-Za-z0-9_])//){ push @t, [ const => $1 ]; next }
         if ($e =~ s/^([().,])//)                { push @t, [ punc => $1 ]; next }
         return;                                  # a token we do not know: bail
     }
@@ -357,14 +404,16 @@ sub _at {
 }
 
 # _parse_concat / _parse_term - return a fragment of PERL SOURCE, or undef.
-# $pos is an index into the token list, advanced in place.
+# $pos is an index into the token list, advanced in place. $const is the
+# constant map, threaded through so an unbound $cN can bail where it is
+# seen rather than being resolved later, or worse, silently.
 sub _parse_concat {
-    my ($t, $pos) = @_;
-    my $left = _parse_term($t, $pos);
+    my ($t, $pos, $const) = @_;
+    my $left = _parse_term($t, $pos, $const);
     return unless defined $left;
     while (_at($t, $pos, punc => '.')) {
         $pos->[0]++;
-        my $right = _parse_term($t, $pos);
+        my $right = _parse_term($t, $pos, $const);
         return unless defined $right;
         $left = "$left . $right";
     }
@@ -375,7 +424,7 @@ sub _parse_concat {
 # (only where the function declares that position an integer) or a full
 # concatenation. Returns the list of source fragments, or undef.
 sub _parse_args {
-    my ($t, $pos, $ints) = @_;
+    my ($t, $pos, $ints, $const) = @_;
     my @arg;
     while (1) {
         my $n = scalar @arg;                 # 0 is the value operand
@@ -384,7 +433,7 @@ sub _parse_args {
             $pos->[0]++;
         }
         else {
-            my $a = _parse_concat($t, $pos);
+            my $a = _parse_concat($t, $pos, $const);
             return unless defined $a;
             push @arg, $a;
         }
@@ -395,13 +444,21 @@ sub _parse_args {
 }
 
 sub _parse_term {
-    my ($t, $pos) = @_;
+    my ($t, $pos, $const) = @_;
     return unless $pos->[0] < @$t;
     my ($kind, $val) = @{ $t->[ $pos->[0] ] };
 
     if ($kind eq 'var') {
         $pos->[0]++;
         return $val eq 'p' ? '$_[0]' : '$_[1]';
+    }
+    # A constant. Only the INDEX is written into the source; the bytes stay
+    # in the lexical the compiled sub closes over. An index with no value
+    # bails, exactly as john's compiler refuses it.
+    if ($kind eq 'const') {
+        return unless defined $const->{$val};
+        $pos->[0]++;
+        return "\$C[$val]";
     }
     return unless $kind eq 'name';
 
@@ -416,7 +473,7 @@ sub _parse_term {
         $pos->[0]++;
         return unless _at($t, $pos, punc => '(');
         $pos->[0]++;
-        my $inner = _parse_concat($t, $pos);
+        my $inner = _parse_concat($t, $pos, $const);
         return unless defined $inner;
         return unless _at($t, $pos, punc => ')');   # arity is exactly one
         $pos->[0]++;
@@ -429,7 +486,7 @@ sub _parse_term {
     $pos->[0]++;
     return unless _at($t, $pos, punc => '(');
     $pos->[0]++;
-    my $arg = _parse_args($t, $pos, $ints);
+    my $arg = _parse_args($t, $pos, $ints, $const);
     return unless defined $arg;
     return unless _at($t, $pos, punc => ')');
     $pos->[0]++;
@@ -444,6 +501,82 @@ sub _parse_term {
     return "\$RosettaExpr::OP{'$name'}[0]->(" . join(', ', @$arg) . ')';
 }
 
+#-----------------------------------------------------------------------
+# The constant suffix. See the header for where each rule was read out of
+# john's source; the short version is that none of it is guessable.
+#-----------------------------------------------------------------------
+
+# _demangle($value) - john's dynamic_Demangle. \\ is a backslash, \xHH is a
+# byte (\x00 included -- john measures the length rather than trusting the
+# NUL), and a backslash before anything else is KEPT, escape and all.
+sub _demangle {
+    my ($v) = @_;
+    my $out = '';
+    my $i   = 0;
+    my $n   = length $v;
+    while ($i < $n) {
+        my $c = substr($v, $i, 1);
+        if ($c ne '\\') { $out .= $c; $i++; next }
+        $i++;
+        if ($i >= $n)                        { $out .= '\\'; last }
+        my $d = substr($v, $i, 1);
+        if ($d eq '\\')                      { $out .= '\\'; $i++; next }
+        if ($d ne 'x')                       { $out .= '\\';       next }
+        # \x, and john keeps the whole thing literally unless BOTH digits
+        # are there and both are hex.
+        my $hh = substr($v, $i + 1, 2);
+        if (length($hh) == 2 && $hh =~ /^[0-9A-Fa-f]{2}$/) {
+            $out .= chr hex $hh;
+            $i += 3;
+        }
+        else { $out .= '\\'; $i++ }
+    }
+    return $out;
+}
+
+# _split_params($expr) - ($body, \%const), or undef where the suffix is
+# present but is not something this module models. An expression with no
+# suffix returns an empty map, never undef.
+sub _split_params {
+    my ($e) = @_;
+
+    # The list starts at the first comma at paren depth ZERO. An unbalanced
+    # expression bails here rather than being parsed as a body.
+    my ($depth, $cut) = (0, undef);
+    for my $i (0 .. length($e) - 1) {
+        my $c = substr($e, $i, 1);
+        if    ($c eq '(') { $depth++ }
+        elsif ($c eq ')') { $depth--; return if $depth < 0 }
+        elsif ($c eq ',' && $depth == 0) { $cut = $i; last }
+    }
+    return ($e, {}) unless defined $cut;
+    my $body   = substr($e, 0, $cut);
+    my $params = substr($e, $cut + 1);
+
+    # A comma ends a value unless it is backslashed, which is john's rule
+    # in get_param() and is the only way a value can contain one.
+    my @piece = ('');
+    for my $i (0 .. length($params) - 1) {
+        my $c = substr($params, $i, 1);
+        if ($c eq ',' && ($i == 0 || substr($params, $i - 1, 1) ne '\\')) {
+            push @piece, ''; next;
+        }
+        $piece[-1] .= $c;
+    }
+
+    my %const;
+    for my $p (@piece) {
+        my ($k, $v) = $p =~ /^\s*c([1-8])=(.*)$/s or return;  # only cN=
+        return if exists $const{$k};                          # said twice
+        return unless length $v;      # john: an empty value is a MISSING one
+        $const{$k} = _demangle($v);
+    }
+    # Packed from c1, because john's scan breaks at the first gap and every
+    # constant after it is then unset.
+    for my $k (1 .. scalar keys %const) { return unless defined $const{$k} }
+    return ($body, \%const);
+}
+
 # compile_expression($expression) - a sub($pass, $salt) returning the value
 # the expression denotes (lower-case hex for a plain hash, but base64 or raw
 # bytes where the expression says so), or undef if any part of the expression
@@ -451,12 +584,18 @@ sub _parse_term {
 sub compile_expression {
     my ($expr) = @_;
     return unless defined $expr && length $expr;
-    my $t = _tokenize($expr) or return;
+    my ($src, $const) = _split_params($expr);
+    return unless defined $src;
+    my $t = _tokenize($src) or return;
     return unless @$t;
     my $pos = [0];
-    my $body = _parse_concat($t, $pos);
+    my $body = _parse_concat($t, $pos, $const);
     return unless defined $body;
     return unless $pos->[0] == @$t;              # trailing junk: bail
+    # 1-based, so $C[3] is $c3. The eval closes over this lexical; nothing
+    # from the entry file is interpolated into the source.
+    my @C;
+    $C[$_] = $const->{$_} for keys %$const;
     return scalar eval "sub { $body }";
 }
 

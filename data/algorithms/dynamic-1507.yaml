@@ -13,9 +13,13 @@ status: "needs-review"
 tools:
   john:
     cpu: ["dynamic_1507"]
-    verified: "upstream"
-    verified_at: "2026-08-31"
-    verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
-    note: "NOT REPRODUCED HERE. john publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: john publishes no plaintext for its example, and the example did not fall to the ~819 candidate plaintexts harvested from john's own source. The plaintext is findable, it was simply not in the list. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool john --only dynamic_1507 to retry."
+    verified: "vector"
+    verified_at: "2026-09-04"
+    verified_with: "john"
   crack:
     supported: false
+vectors:
+  - hash: "$dynamic_1507$d4eaf666d09316f9d61b14753353a73d5fbcf048"
+    pass: "test"
+    source: "john"
+    reads_in: ["john"]

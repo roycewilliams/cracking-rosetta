@@ -19,3 +19,7 @@ tools:
     note: "NOT REPRODUCED HERE. john publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: john publishes no plaintext for its example, and the example did not fall to the ~819 candidate plaintexts harvested from john's own source. The plaintext is findable, it was simply not in the list. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool john --only nethalflm to retry."
   crack:
     supported: false
+vectors:
+  - hash: "$NETHALFLM$1122334455667788$6E1EC36D3417CE9E09A4424309F116C4C991948DAEB4ADAD"
+    pass: "G3RG3P00!"
+    source: "john"

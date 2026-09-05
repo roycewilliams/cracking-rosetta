@@ -162,7 +162,7 @@ claim came from. Someone will verify it later and promote it. An honest
 of this repository is that you can trust the `vector` rows without checking.
 
 The automated checks on your PR deliberately never run a cracker, so this one
-is on your honour -- and it's the thing a maintainer will look at first.
+is on your honor -- and it's the thing a maintainer will look at first.
 
 ## Files you may and may not edit
 

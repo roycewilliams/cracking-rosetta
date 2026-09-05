@@ -11,7 +11,7 @@ If you can settle one, an issue saying so is a complete contribution. You do
 not need to open a pull request, and you do not need to be certain: "I have
 seen this format do X" is information this cannot derive.
 
-## Expressions that do not reproduce their own vectors (173)
+## Expressions that do not reproduce their own vectors (172)
 
 Each of these carries an expression transcribed from somewhere that states it
 - john's own `--list=subformats` for a format the entry has already proven, or
@@ -22,7 +22,7 @@ here: the string is a wrong transcription, the vector belongs to a different
 algorithm, john's dynamic compiler and its named format disagree about what
 the string means, or john's expression language simply has no way to write
 this construction - it has no `cut()`, `rev()` or `cap()`, and its base64
-flavour encodes the raw digest rather than the hex string.
+flavor encodes the raw digest rather than the hex string.
 
 The last of those is the common case rather than a corner: the expression is
 rewritten into john's own notation before it is tried - `upper(md5($p))`
@@ -94,7 +94,6 @@ what those vectors really are.
 | [`md5decbase64md5base64md5`](index.html#md5decbase64md5base64md5) | `md5(frombase64(md5(base64(md5($p)))))` | `-` | no john format, so john ships no control vectors; but RosettaExpr -- an implementation independent of all three crackers -- computes this expression over the entry's own vector(s) and reproduces 1 of ... |
 | [`md5md5ucp`](index.html#md5md5ucp) | `md5(upper(md5($p)).$c1),c1= ` | `-` | no john format on this entry, so john ships no control vectors, and RosettaExpr cannot compile this expression either -- nothing here can check it |
 | [`md5ntlmp`](index.html#md5ntlmp) | `md5(md4(utf16($p)).$c1),c1= ` | `-` | no john format on this entry, so john ships no control vectors, and RosettaExpr cannot compile this expression either -- nothing here can check it |
-| [`md5padmd5`](index.html#md5padmd5) | `md5($c1.md5($p).$c1),c1= ` | `-` | no john format on this entry, so john ships no control vectors, and RosettaExpr cannot compile this expression either -- nothing here can check it |
 | [`md5revmd5salt`](index.html#md5revmd5salt) | `md5(rev(md5($p)).$s)` | `-` | no john format, so john ships no control vectors; but RosettaExpr -- an implementation independent of all three crackers -- computes this expression over the entry's own vector(s) and reproduces 1 of ... |
 | [`md5sha0`](index.html#md5sha0) | `md5(sha0($p))` | `-` | no john format on this entry, so john ships no control vectors, and RosettaExpr cannot compile this expression either -- nothing here can check it |
 | [`md5sha1base64md5raw`](index.html#md5sha1base64md5raw) | `md5(sha1(base64(md5_raw($p))))` | `-` | no john format, so john ships no control vectors; but RosettaExpr -- an implementation independent of all three crackers -- computes this expression over the entry's own vector(s) and reproduces 1 of ... |
@@ -233,7 +232,7 @@ promote it.
 | Entry | Collides with | Why |
 |---|---|---|
 | [`aich`](index.html#aich) | `sha1lsb35` | AICH of a single block is SHA-1, and SHA1lsb35 is SHA-1 with the leading nibbles masked to zero, so any tool that ignores that field -- hashcat -m 100... |
-| [`md5`](index.html#md5) | `md5cap` | MD5CAP is cap(md5($p)), a no-op whenever the digest contains no letters to capitalise, so john's dynamic_2 and plain MD5 crack its vector without deno... |
+| [`md5`](index.html#md5) | `md5cap` | MD5CAP is cap(md5($p)), a no-op whenever the digest contains no letters to capitalize, so john's dynamic_2 and plain MD5 crack its vector without deno... |
 | [`md5-capitalise-md5-plain-username`](index.html#md5-capitalise-md5-plain-username) | `md5-md5-plain-salt-3` | MD5MD5USER and MD5CAPMD5USER differ only by cap() on the inner hex digest, which is a no-op whenever that digest starts with a digit. md5('rosetta') i... |
 | [`md5-md5-plain-salt-3`](index.html#md5-md5-plain-salt-3) | `md5-capitalise-md5-plain-username` | MD5MD5USER and MD5CAPMD5USER differ only by cap() on the inner hex digest, which is a no-op whenever that digest starts with a digit. md5('rosetta') i... |
 | [`md5-pass-md5-salt`](index.html#md5-pass-md5-salt) | `md5-plain-md5-plain` | md5($p.md5($p)) and md5($p.md5($s)) agree exactly when the salt is the password, which two of john's four dynamic_1011 test vectors happen to do |
@@ -245,67 +244,15 @@ promote it.
 | [`sha1lsb35`](index.html#sha1lsb35) | `sha1uc` | SHA1UC is SHA-1 written in uppercase hex and SHA1lsb35 is SHA-1 with the leading nibbles masked to zero, so a tool that skips that field cannot tell t... |
 | [`sha1uc`](index.html#sha1uc) | `sha1lsb35` | SHA1UC is SHA-1 written in uppercase hex and SHA1lsb35 is SHA-1 with the leading nibbles masked to zero, so a tool that skips that field cannot tell t... |
 
-## Entries nothing can prove yet (54)
+## Entries nothing can prove yet (2)
 
 No test vector, so no tier above `asserted` is reachable for any tool, however
 well equipped. Several are types whose publisher's own example does not
 reproduce under that type, which is itself a question worth an answer. Any
 hash-and-plaintext pair settles one.
 
-* [`1password-agile-keychain`](index.html#1password-agile-keychain) - 1Password Agile Keychain
-* [`1password-cloud-keychain`](index.html#1password-cloud-keychain) - 1Password Cloud Keychain
-* [`apple-dmg`](index.html#apple-dmg) - Apple DMG
-* [`battlenet`](index.html#battlenet) - Battlenet
-* [`bouncycastle`](index.html#bouncycastle) - BouncyCastle
-* [`cardano-encrypted-128-byte-secret-key-a-k-a-xprv`](index.html#cardano-encrypted-128-byte-secret-key-a-k-a-xprv) - Cardano Encrypted 128-byte Secret Key (a.k.a XPrv)
-* [`clearquest`](index.html#clearquest) - ClearQuest
-* [`dnssec-nsec3`](index.html#dnssec-nsec3) - DNSSEC NSEC3
-* [`dynamic-1015`](index.html#dynamic-1015) - dynamic_1015
-* [`dynamic-1030`](index.html#dynamic-1030) - dynamic_1030
-* [`dynamic-1034`](index.html#dynamic-1034) - dynamic_1034
-* [`dynamic-1401`](index.html#dynamic-1401) - dynamic_1401
-* [`dynamic-1506`](index.html#dynamic-1506) - dynamic_1506
-* [`dynamic-1507`](index.html#dynamic-1507) - dynamic_1507
-* [`dynamic-1529`](index.html#dynamic-1529) - dynamic_1529
-* [`dynamic-1602`](index.html#dynamic-1602) - dynamic_1602
-* [`enpass-password-manager`](index.html#enpass-password-manager) - Enpass Password Manager
-* [`freebsd-geli`](index.html#freebsd-geli) - FreeBSD GELI
-* [`gost-r-34-11-94`](index.html#gost-r-34-11-94) - GOST R 34.11-94
-* [`halflm-c-r`](index.html#halflm-c-r) - HalfLM C/R
-* [`haval-128-4`](index.html#haval-128-4) - HAVAL-128-4
-* [`java-keystore`](index.html#java-keystore) - Java KeyStore
-* [`lm-c-r`](index.html#lm-c-r) - LM C/R
-* [`luks`](index.html#luks) - LUKS
-* [`md5dsalt`](index.html#md5dsalt) - MD5DSALT
-* [`md5sha1hum`](index.html#md5sha1hum) - MD5SHA1HUM
-* [`md5sha1md5hum`](index.html#md5sha1md5hum) - MD5SHA1MD5HUM
-* [`md5specam`](index.html#md5specam) - MD5SPECAM
-* [`md5ucbase64md5raw`](index.html#md5ucbase64md5raw) - MD5UCBASE64MD5RAW
-* [`monero-wallet`](index.html#monero-wallet) - Monero Wallet
-* [`ms-cache-hash-dcc`](index.html#ms-cache-hash-dcc) - MS Cache Hash (DCC)
-* [`mschapv2-c-r`](index.html#mschapv2-c-r) - MSCHAPv2 C/R
-* [`ntlmv1-c-r-johnnetntlm-naive`](index.html#ntlmv1-c-r-johnnetntlm-naive) - NTLMv1 C/R
-* [`openbsd-softraid`](index.html#openbsd-softraid) - OpenBSD-SoftRAID
-* [`parallel`](index.html#parallel) - PARALLEL
-* [`password-manager`](index.html#password-manager) - Password Manager
-* [`pfx-p12`](index.html#pfx-p12) - (.pfx, .p12)
-* [`private-key-rsa-dsa-ecdsa-ed25519`](index.html#private-key-rsa-dsa-ecdsa-ed25519) - Private Key (RSA/DSA/ECDSA/ED25519)
-* [`raw-keccak`](index.html#raw-keccak) - Raw-Keccak
-* [`raw-sha3`](index.html#raw-sha3) - Raw-SHA3
-* [`restic-repository`](index.html#restic-repository) - Restic Repository
-* [`ripemd-128`](index.html#ripemd-128) - RIPEMD 128
-* [`ripemd-160`](index.html#ripemd-160) - RIPEMD 160
-* [`sha1md5hum`](index.html#sha1md5hum) - SHA1MD5HUM
-* [`sha1saltcx`](index.html#sha1saltcx) - SHA1SALTCX
-* [`sha1sha1hum`](index.html#sha1sha1hum) - SHA1SHA1HUM
-* [`sha256uc`](index.html#sha256uc) - SHA256UC
-* [`truecrypt-aes-twofish-serpent`](index.html#truecrypt-aes-twofish-serpent) - TrueCrypt AES/Twofish/Serpent
-* [`truecrypt-aes256-xts`](index.html#truecrypt-aes256-xts) - TrueCrypt AES256_XTS
-* [`truecrypt-aes256-xts-johntc-sha512`](index.html#truecrypt-aes256-xts-johntc-sha512) - TrueCrypt AES256_XTS
-* [`truecrypt-aes256-xts-johntc-whirlpool`](index.html#truecrypt-aes256-xts-johntc-whirlpool) - TrueCrypt AES256_XTS
-* [`wpa-wpa2-pmf-pmkid-master-key`](index.html#wpa-wpa2-pmf-pmkid-master-key) - WPA/WPA2/PMF/PMKID master key
-* [`wpa-wpa2-pmf-pmkid-psk`](index.html#wpa-wpa2-pmf-pmkid-psk) - WPA/WPA2/PMF/PMKID PSK
-* [`yaf-sha1`](index.html#yaf-sha1) - YAF-SHA1
+* [`parallel`](index.html#parallel) - PARALLEL - No vector exists to seed, measured 2026-09-04, and this is the one type in the inventory for which that is a fact about the tools rather than a gap in...
+* [`sha1saltcx`](index.html#sha1saltcx) - SHA1SALTCX - This row has NO vector and that is a deliberate withholding, measured 2026-09-04. The only example anyone publishes for this type -- mdxfind's own inv...
 
 ## Rows that may be more than one algorithm
 
@@ -314,14 +261,14 @@ fall to different constructions: `md5-md5-plain-salt` has five vectors
 answering to three different john dynamics, `md5-md5-plain-salt-2` has two,
 and `md5userpass` has two. Both `md5-md5-plain-salt*` entries also carry an
 `aliases:` list naming several algorithms, so the spreadsheet collated them
-deliberately and splitting them is a judgement about what the row is *for* -
+deliberately and splitting them is a judgment about what the row is *for* -
 one construction, or one thing people search for. Whoever put them together
 knew something; if that was you, say so.
 
-## Mappings believed but never reproduced (137)
+## Mappings believed but never reproduced (88)
 
 Counted here, listed in [GAPS.md](GAPS.md#1-believed-but-never-reproduced),
-because filling one is mechanical rather than a judgement call: the identifier
+because filling one is mechanical rather than a judgment call: the identifier
 and the vector are both already recorded, and one command decides it.
 
 ## What is deliberately not a question

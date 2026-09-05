@@ -177,7 +177,7 @@ findings:
     summary: >-
       As printed, all three rows compute a digest of the userid alone and never
       touch the candidate password, which would make them unusable as password
-      hashes. Appendix A's own neighbouring row gets it right -- e286
+      hashes. Appendix A's own neighboring row gets it right -- e286
       MD5MD5USER reads md5(md5(pass).user) -- and Note [24] gives the real
       forms for all of them, so this is a transcription fault in the appendix
       rather than a disagreement about the algorithm. It is worth reporting
@@ -262,3 +262,11 @@ findings:
       with those rows as well. Re-casing on failure is a search for a string
       that passes rather than a fix, which is why this is reported rather than
       patched locally.
+      SHA256UC is now measured further, 2026-09-04, and the result narrows the
+      bug rather than widening it: the published digest IS sha256 of the
+      published plaintext. Lower-cased and offered to mdxfind's own SHA256
+      type it reproduces at once, as SHA256x01, so the DIGEST in the catalog
+      is correct and it is the SHA256UC type that cannot read its own example
+      in either case. hashpipe verifies the same line under -c pinned to
+      SHA256UC, so the two tools disagree about that type and not about the
+      hash.

@@ -12,7 +12,7 @@ Migrated from a Google Sheet:
 **Never assert a mapping that has not been reproduced.** A row saying
 "hashcat 2811 == dynamic_12 == MD5-MD5SALTMD5PASS" is only trustworthy if a
 test vector was actually cracked by each named tool under that exact
-identifier. Unverified mappings are allowed, but must be labelled as such
+identifier. Unverified mappings are allowed, but must be labeled as such
 (see Verification tiers). This mirrors upstream Cynosureprime practice -- see
 the header of `hashpipe/john_map.h`: *"Formats whose vectors did not verify
 are absent rather than guessed."*
@@ -32,7 +32,7 @@ are absent rather than guessed."*
 ### Two-layer split -- why
 
 `data/tools/` is a mechanical dump of what each tool *actually supports*,
-regenerated from the canonical binary. `data/algorithms/` is human judgement:
+regenerated from the canonical binary. `data/algorithms/` is human judgment:
 which identifiers across tools denote the same algorithm. Keeping them apart
 means an upstream release regenerates one layer without touching curation,
 and diffs stay reviewable.
@@ -49,7 +49,7 @@ people expect are regenerated into `docs/` and `dist/`.
 | hashcat | `/usr/local/bin/hashcat` (v7.1.2-549-g8a15e210b) | `hashcat --hash-info` |
 | john | `/usr/local/scripts/johnl` -> `/usr/local/src/sec/crack/john-latest/run/john` | `john --list=format-details` |
 | mdxfind | `/usr/local/bin/mdxfind` (RCS 1.545, 2026-08-29) | `mdxfind -h` |
-| hashpipe | `/usr/local/bin/hashpipe` (v1.190, 2026-09-04) | `hashpipe -T` (see `tools/extract-hashpipe.pl`); feed it `hash:plaintext` on stdin, or `TYPE[xNN] hash[:salt]:pass` under `-c` |
+| hashpipe | `/usr/local/bin/hashpipe` (v1.192, 2026-09-04) | `hashpipe -T` (see `tools/extract-hashpipe.pl`); feed it `hash:plaintext` on stdin, or `TYPE[xNN] hash[:salt]:pass` under `-c` |
 | Crack | not present | hand-maintained, frozen |
 
 Upstream, for drift detection and as seed data:
@@ -76,7 +76,7 @@ the old code hashed the salt followed by a TRUNCATED digest, with output
 depending on salt length. Upstream's own note: "any hash cracked as e607 before
 this revision will not verify against it." Every `verified: vector` here is a
 measurement against the binary of the day, so after an upstream pull, diff the
-revision log for behaviour changes and re-verify what they touch -- do not
+revision log for behavior changes and re-verify what they touch -- do not
 rewrite entries from source while the binary is older than it.
 
 **hashpipe's SOURCE AND BINARY are now on this host too.** The source is
@@ -121,7 +121,7 @@ upstream's own account.** Waffle told Royce (relayed 2026-09-03) that they
 exist because he is improving hashpipe's overlapping support with algorithms
 JOHN supports. That is the author's statement of intent, not a measurement,
 so it is recorded as such -- but it predicts something checkable, and the
-check passes. Measured 2026-09-03 by normalising each of the 25 names (upper-
+check passes. Measured 2026-09-03 by normalizing each of the 25 names (upper-
 case, strip non-alphanumerics -- the separator-drift rule) and looking for it
 in `data/tools/john.yaml` and in every identifier `data/algorithms/` publishes
 (id, name, aliases, legacy, mdxfind types, john cpu/gpu labels): of the 25,
@@ -132,7 +132,7 @@ john-supported, which is exactly the overlap he describes.
 
 **So the argument for a fourth column is weaker than it looked, on its own
 headline example.** The case put to Royce on 2026-09-02 was that "someone
-arriving by MONGODB lands nowhere". They do not: `MONGODB` normalises onto a
+arriving by MONGODB lands nowhere". They do not: `MONGODB` normalizes onto a
 john format the `system-network` entry already carries. Only ONE of the 25 is
 unreachable here by any identifier: `QAS-VASAUTH`. Corrected 2026-09-03 --
 the first measurement said three, having matched on NAMES alone, but
@@ -244,38 +244,62 @@ mdxfind also accepts hashcat modes directly (`mdxfind -m 0`, `-m e1`,
   `mdxfind-corpus.pl` and `verify-vectors.pl` already read `(?:x(\d+))?`.
   No type in the inventory ends in `x<digits>`, so stripping a trailing
   suffix cannot eat a name.
-  **`hashpipe -c` re-admits this exact error, so never read it as a
-  boolean.** v1.190 added `-c`, which verifies each line against its own
-  leading `TYPE[xNN]` label and runs no detection -- a per-line TYPE PIN,
-  which is genuinely new and is the equivalent of `mdxfind -h '^TYPE$'`. The
-  type half is strict, measured against negative controls 2026-09-04: a
-  wrong type, a wrong plaintext and an unknown label are all refused, the
-  last fatally. The SUFFIX half is not. Measured over md5^1..md5^5,
-  sha1^1..sha1^3 and upstream's own salted `SHA1SALTPASS` vector, every
-  off-diagonal pair is refused EXCEPT a depth-1 match, which verifies under
-  any labelled depth: `MD5x05` accepts `md5($p)`. That is the 42-entry
-  defect above, waiting to happen again. The output is the guard -- `-c`
-  emits the depth it actually matched at, so **compare the emitted suffix
-  with the one you asked for** and never treat a line on stdout as
-  agreement. Note too that the emitted label is BARE where the input was
-  bare or `x01`, the same convention as mdxfind's bare lines.
-  **Upstream CONFIRMED this as a bug on 2026-09-04, so the guard above has a
-  shelf life and `tools/test-hashpipe-c.pl` is what measures when it
-  expires.** That test asserts the CURRENT behaviour on purpose, hole
-  included: when a fix lands it fails and says to drop the guard. It needs a
-  hashpipe binary, so it is not in CI -- `validate.yml` deliberately runs no
-  cracker -- and it skips loudly rather than silently when one is absent.
-  Worth knowing how the report landed, because it nearly did not: "by
-  design" came back first, on a demonstration that `MD5x03` rejects an
-  md5^4 digest -- which is true, and is a cell this hole does not touch. It
+  **`hashpipe -c` re-admitted this exact error twice, and is now clean.**
+  v1.190 added `-c`, which verifies each line against its own leading
+  `TYPE[xNN]` label and runs no detection -- a per-line TYPE PIN, the
+  equivalent of `mdxfind -h '^TYPE$'`. The type half was strict from the
+  start, measured against negative controls 2026-09-04: a wrong type, a
+  wrong plaintext and an unknown label are all refused, the last fatally.
+  The SUFFIX half took two fixes. In v1.190 a depth-1 match verified under
+  any labeled depth, so `MD5x05` accepted `md5($p)`; v1.191 closed that per
+  line and left it standing in a BATCH, where a line's plaintext could still
+  claim ANOTHER line's digest -- `MD5x02 <md5^2>` beside `MD5x03 <md5^1>`
+  verified both, the second emitted as `MD5x01`. v1.192 closed that too.
+  Measured 2026-09-04 on v1.192: every off-diagonal cell of md5^1..md5^5 is
+  refused, and that batch verifies the `x02` line and refuses the `x03` one.
+  **The reading traps are NOT version history and still apply in full.**
+  `-c` writes a VERIFIED line to stdout, relabelled with the depth that
+  actually matched, and echoes a REFUSED line to stderr VERBATIM. So:
+
+  - **Compare the emitted suffix with the one you asked for.** Never treat a
+    line on stdout as agreement. This is what caught both leaks.
+  - **Never read `-c` with the streams merged.** `echo 'MD5x03
+    <md5^1>:password' | hashpipe -c` prints the line straight back and looks
+    like a pass; on v1.190 it was one and on v1.191 it was the refusal echo,
+    and the command cannot tell you which. Use `2>/dev/null`, then a
+    positive control that must still print.
+  - **In a batch, output lines do not correspond one-to-one with input
+    lines**, since refusals go to the other stream. Match on the emitted
+    HASH, never on position.
+  - The emitted label is BARE where the input was bare or `x01`, the same
+    convention as mdxfind's bare lines.
+
+  **`tools/test-hashpipe-c.pl` measured all of it, and is why both fixes
+  were confirmed on the day they landed** rather than by someone remembering
+  to re-check. It asserts the CURRENT behavior on purpose, holes included,
+  so a fix FAILS it and the failure text says what to do -- which is what
+  happened at 1.191 and again at 1.192. It now also carries the opposite
+  control, correctly-labeled multi-line batches at mixed depths: a `-c`
+  that refused too much would satisfy the leak assertions exactly as a
+  correct fix does, and without those "the leak is gone" and "the batch path
+  is broken" are the same reading. It needs a hashpipe binary, so it is not
+  in CI -- `validate.yml` deliberately runs no cracker -- and it skips
+  loudly rather than silently when one is absent.
+  Worth knowing how the original report landed, because it nearly did not:
+  "by design" came back first, on a demonstration that `MD5x03` rejects an
+  md5^4 digest -- which is true, and is a cell the hole does not touch. It
   took the same file plus ONE line, `MD5x03` against md5^1, to separate the
   two claims. **A refutation aimed at a different cell of the matrix is not
-  a refutation**; show the cell.
+  a refutation**; show the cell. Both later readings of this flag went wrong
+  the same way, in the other direction -- a merged-stream one-liner, which
+  is consistent with a pass AND with a refusal -- which is why that is now
+  the second bullet above rather than a footnote here.
   **And `-c` numbers iterations mdxfind's way while the detect path does
-  not**: same binary, same hash, 2026-09-04, `-c` says `MD5CAPx02` where
-  plain stdin detection says `MD5CAPx01`. So v1.190 carries two numberings,
-  and `data/upstream-disagreements.yaml` still records the detect path's --
-  which is the one this repository uses as its hashpipe oracle.
+  not**: same binary, same hash, re-measured on v1.192, `-c` says
+  `MD5CAPx02` where plain stdin detection says `MD5CAPx01`. So hashpipe
+  carries two numberings, and `data/upstream-disagreements.yaml` still
+  records the detect path's -- which is the one this repository uses as its
+  hashpipe oracle. `test-hashpipe-c.pl` asserts that split too.
 - **Name separator drift.** The source sheet wrote `HAV128_4` where mdxfind
   writes `HAV128-4`. Normalize by stripping non-alphanumerics before matching;
   store the tool's exact spelling.
@@ -292,7 +316,7 @@ mdxfind also accepts hashcat modes directly (`mdxfind -m 0`, `-m e1`,
   **john elides too, and silently, at 896 characters.**
   `john --list=format-details` truncates `example_ciphertext` to 896
   characters with no marker at all; `--list=format-all-details` gives the same
-  field away by labelling it "Example ciphertext (truncated here)". 46 of this
+  field away by labeling it "Example ciphertext (truncated here)". 46 of this
   build's 552 formats are affected, and EVERY container format is, because
   their examples are whole volume headers. Measured 2026-09-01. The failure is
   worse than hashcat's because there is no marker: `diskcryptor` carried a note
@@ -302,6 +326,46 @@ mdxfind also accepts hashcat modes directly (`mdxfind -m 0`, `-m e1`,
   against 896 before concluding anything about the plaintext.** The full hash
   is in john's own `src/*_fmt_plug.c` test array; the rule that the source
   PROPOSES and john's crack PROVES still applies to the plaintext.
+  **`tools/seed-john-vectors.pl` is the answer to this, and it reads the
+  STRUCT rather than the file.** A first pass that scanned for
+  `#define FORMAT_LABEL` missed every format in `haval_fmt_plug.c`,
+  `ripemd_fmt_plug.c` and `truecrypt_fmt_plug.c`, because a file defining
+  several formats writes each label as a STRING LITERAL in its own `fmt_main`.
+  And the array is often not in that file at all: john keeps a container
+  format's tests in `<name>_common_plug.c`, and `wpapsk_fmt_plug.c` takes its
+  `tests` from the `wpapsk.h` it includes. So the label and the array
+  identifier are both read off the `fmt_main` params block, and the identifier
+  is resolved through the file's own `#include`s. `#if` is NOT evaluated, so a
+  conditionally compiled array yields the UNION of its branches -- `wpapsk.h`
+  has one `tests` whose `#ifdef WPAPMK` half carries PMK plaintexts -- which is
+  safe ONLY because john is the oracle and a pair from the wrong branch simply
+  fails to crack.
+- **Two john behaviours are indistinguishable from "did not crack" once the
+  output is discarded, and both were.** Measured 2026-09-04.
+  **The encoding refusal.** `john.c` line 930 refuses a format flagged
+  `FMT_UNICODE` but not `FMT_ENC` unless the encoding is raw or ISO-8859-1,
+  and this host's `john.conf` sets `DefaultEncoding = UTF-8` (line 274). It
+  prints one line on STDERR and exits; nothing is cracked. `dynamic_1507`
+  passes its own `--test=0` and cracks its own published vector the moment
+  `--input-encoding=iso-8859-1` is named. So a john job's stderr must be KEPT.
+  The retry is legitimate only where the plaintext is pure ASCII, since there
+  the two encodings feed the format identical bytes; on anything else the flag
+  would make the crack a claim about a different string. A refusal that
+  survives the flag is a FAILED job, not a zero: treating it as "ran and found
+  nothing" strikes john from `reads_in` on evidence never gathered.
+  **The case-insensitive plaintext.** john returns the plaintext it actually
+  found, and for a format without `FMT_CASE` that is not the string the
+  wordlist held: `netlm`'s own test array says `hiyagerge` and `john --show`
+  says `HIYAGERGE`. A byte-equal comparison reads that as a failure, which is
+  why `LM`, `netlm` and their neighbours sat unverified while every one of
+  them cracks its own vector on the first try. `FMT_CASE` is bit 0 of
+  `formats.h`, SET when the format IS case-sensitive, and it is carried in
+  `data/tools/john.yaml` as `flags`. Relax on case ONLY where john says the
+  bit is clear, and never on anything else.
+  **What is NOT one of these is a TRUNCATING format.** `nethalflm` takes seven
+  characters and returns `G3RG3P0` for john's own `G3RG3P00!`. The vector is
+  upstream's and correct; the strict comparison is also correct; they answer
+  different questions and the strict one is the one that gates a tier.
 - **Many hashcat modes do not compare the whole digest, so a crack is not
   automatically proof.** Measured on v7.1.2-549-g8a15e210b, 2026-08-31: `-m
   100` accepts any 40-hex string whose LAST 128 bits match `sha1($p)` --
@@ -329,7 +393,7 @@ mdxfind also accepts hashcat modes directly (`mdxfind -m 0`, `-m e1`,
   `hashcat: verified: absent` recording that the 2026-08-31 canary withheld
   exactly that claim, and although the canary re-measured -m 100 as skipping
   positions 0-7 in the same run. The same run proposed `md5cap <- -m 2600`,
-  another already-modelled trap. So the canary is a guard, not THE guard:
+  another already-modeled trap. So the canary is a guard, not THE guard:
   **never run `discover-hashcat.pl --apply` without reading its applicable
   list against the entries it names.**
 - **john has the same defect, at its own widths.** `Raw-SHA1-Linkedin` reads a
@@ -523,7 +587,7 @@ inflate john's coverage with something no `--list=formats` will ever show.
 ### `expression:` and `john_dynamic_expr:` are not always the same string
 
 `expression:` is hx-style. hx spells a change of REPRESENTATION as a wrapper;
-john spells it as a FLAVOUR of the hash function, and rejects the wrapper form
+john spells it as a FLAVOR of the hash function, and rejects the wrapper form
 outright:
 
     md5(upper(md5($p)))   hx        -- john: "Dyna expression syntax error"
@@ -550,7 +614,7 @@ rows.
 `src/dynamic_compiler.c` -- `comp_get_symbol`, the block after
 `LARGE_HASH_EDIT_POINT` -- also has `pad16($p)`, `pad20($p)`, `pad100($p)`,
 `utf16()` and `utf16be()`, and every hash has upper-case, `_raw`, `_64` and
-`_64c` flavours. Measured 2026-09-02: believing the doc refused 19 radmin2
+`_64c` flavors. Measured 2026-09-02: believing the doc refused 19 radmin2
 entries and 13 utf16 ones, on a day when 46 entries in this corpus already
 carried a PROVEN `john_dynamic_expr:` containing `utf16()`. Not every token
 the lexer accepts works: `pad16($p)` compiles and then dies with `unknown
@@ -658,7 +722,7 @@ than one entry. That is not noise -- it is the `id` being asked to carry four
 independent facts at once: the **computation**, the **representation** (hex
 case, base64, a `$1$` wrapper), the **deployment** (Joomla, vBulletin 3.8.5,
 osCommerce -- which hashcat gives separate modes), and the **tool identifier**.
-Only the last was ever modelled.
+Only the last was ever modeled.
 
 So an entry carries three fields for it. `category:` names the axis it sits on
 -- `primitive`, `composite`, `iterated`, `encoding`, `application`, `protocol`,

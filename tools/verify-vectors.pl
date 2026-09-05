@@ -265,6 +265,31 @@ if ($want{mdxfind}) {
     }
 }
 
+# Which john formats are CASE-INSENSITIVE, from john's own FMT_CASE flag.
+#
+# john returns the plaintext it actually found, and for a case-insensitive
+# format that is not the string the wordlist held: netlm's own test array says
+# "hiyagerge" and john --show says "HIYAGERGE". A byte-equal comparison reads
+# that as a failure, which is how LM, netlm and nethalflm sat unverified while
+# every one of them cracks its own vector on the first try.
+#
+# formats.h line 55: FMT_CASE is bit 0, SET when the format IS case-sensitive.
+# So the relaxation is applied only where john says the bit is clear, and only
+# to case; nothing else about the comparison moves.
+my %JOHN_NOCASE;
+if ($want{john}) {
+    my $jn = eval { YAML::XS::LoadFile("$ROOT/data/tools/john.yaml") };
+    if ($jn) {
+        for my $f (@{ $jn->{formats} }) {
+            next unless defined $f->{flags} && $f->{flags} =~ /^[0-9a-fA-F]+$/;
+            $JOHN_NOCASE{ lc $f->{label} } = 1 unless hex($f->{flags}) & 0x1;
+        }
+    }
+    else {
+        print STDERR "$PROG: cannot load the john inventory; every format is treated as case-sensitive.\n";
+    }
+}
+
 #-----------------------------------------------------------------------
 # Load entries.
 
@@ -372,7 +397,7 @@ sub vectors_for {
 
 # mx_echo_is($rest, $vec) - does mdxfind's "<hash>:<plain>" tail name THIS
 # vector? The plaintext must match exactly. The digest must too, except for
-# hex case: mdxfind normalises hex on read and echoes its OWN lowercase form,
+# hex case: mdxfind normalizes hex on read and echoes its OWN lowercase form,
 # so an entry whose vector is recorded in uppercase -- which is how the
 # vendored catalog renders 15 types, and how the *UC types are published --
 # had its own successful round-trip rejected by a string compare and was left
@@ -406,7 +431,7 @@ my $ran = 0;
 # password as $HEX[<hex>], and a vector may store either spelling: mode 9710's
 # vector here is "$HEX[91b2e062b9]" and hashcat's crack line ends
 # ":91b2e062b9". Both are the same five bytes. So one $HEX wrapper on either
-# side is unwrapped and nothing else is: a comparison that normalised harder
+# side is unwrapped and nothing else is: a comparison that normalized harder
 # than that would start accepting different plaintexts.
 sub hc_plain_is {
     my ($said, $want) = @_;
@@ -700,18 +725,45 @@ if ($want{john} && $job{john}) {
         my $pot = "$workdir/jn.$safe.pot";
         unlink $pot;
 
-        my ($code, undef) = run_capture($timeout, '/bin/sh', '-c',
-            sprintf('cd %s && ./%s --format=%s --field-separator-char=tab '
-                  . '--wordlist=%s --pot=%s --session=%s %s >/dev/null 2>&1',
-                    quotemeta($jdir), quotemeta($jbin), quotemeta($label),
-                    quotemeta($wf), quotemeta($pot), quotemeta("$workdir/jn.$safe"),
-                    quotemeta($hf)));
+        # john.c refuses to run a format flagged FMT_UNICODE but not FMT_ENC
+        # unless the configured encoding is raw or ISO-8859-1, and this host's
+        # john.conf sets DefaultEncoding = UTF-8. The refusal goes to stderr
+        # and is otherwise INDISTINGUISHABLE from a format that did not crack,
+        # which is why stderr is kept here rather than discarded. The retry is
+        # made only when john actually printed it, and it credits only vectors
+        # whose plaintext is pure ASCII, where the two encodings feed the
+        # format identical bytes and the flag therefore cannot change what was
+        # proven. A non-ASCII plaintext under the flag would be a claim about a
+        # different string, so it is left unproven.
+        my ($code, $shown, $enc_used, $enc_refused);
+        for my $enc ('', '--input-encoding=iso-8859-1 ') {
+            unlink $pot;
+            my ($c, $out) = run_capture($timeout, '/bin/sh', '-c',
+                sprintf('cd %s && ./%s --format=%s --field-separator-char=tab '
+                      . '%s--wordlist=%s --pot=%s --session=%s %s 2>&1 >/dev/null',
+                        quotemeta($jdir), quotemeta($jbin), quotemeta($label), $enc,
+                        quotemeta($wf), quotemeta($pot), quotemeta("$workdir/jn.$safe"),
+                        quotemeta($hf)));
+            $code = $c;
+            last if $code == -2;
+            if (index($out, 'does not yet support other encodings') >= 0) {
+                next unless length $enc;
+                # Refused even with the flag: john never ran, so this job is a
+                # FAILURE and not a silent zero. Treating it as "ran and found
+                # nothing" would strike john from reads_in and demote a mapping
+                # on evidence that was never gathered.
+                $enc_refused = 1;
+                last;
+            }
 
-        my (undef, $shown) = run_capture($timeout, '/bin/sh', '-c',
-            sprintf('cd %s && ./%s --show --format=%s --field-separator-char=tab '
-                  . '--pot=%s %s 2>/dev/null',
-                    quotemeta($jdir), quotemeta($jbin), quotemeta($label),
-                    quotemeta($pot), quotemeta($hf)));
+            (undef, $shown) = run_capture($timeout, '/bin/sh', '-c',
+                sprintf('cd %s && ./%s --show --format=%s --field-separator-char=tab '
+                      . '%s--pot=%s %s 2>/dev/null',
+                        quotemeta($jdir), quotemeta($jbin), quotemeta($label), $enc,
+                        quotemeta($pot), quotemeta($hf)));
+            $enc_used = length $enc ? 1 : 0;
+            last;
+        }
 
         # "<login>TAB<plaintext>"; a hash john deduplicated on load is shown
         # once, so a crack is spread to every vector carrying the same pair.
@@ -720,7 +772,9 @@ if ($want{john} && $job{john}) {
             my ($login, $pw) = split /\t/, $line, 2;
             next unless defined $login && defined $pw;
             my $vec = $login_of{$login} or next;
-            next unless $pw eq $vec->{pass};
+            next unless $pw eq $vec->{pass}
+                     || ($JOHN_NOCASE{ lc $label } && lc $pw eq lc $vec->{pass});
+            next if $enc_used && $vec->{pass} =~ /[^\x20-\x7e]/;
             $won{"$vec->{hash}\0$vec->{pass}"} = 1;
         }
         for my $vec (@v) {
@@ -728,8 +782,8 @@ if ($want{john} && $job{john}) {
             $cracked{john}{ $vec->{id} }{$label} = 1;
             $read{john}{ $vec->{id} }{ $vec->{vi} } = 1;
         }
-        if ($code == -2) {
-            $failed_job{john}{$label} = $code;
+        if ($code == -2 || $enc_refused) {
+            $failed_job{john}{$label} = $enc_refused ? -3 : $code;
             delete $ran_ident{john}{$label};     # see the hashcat note above
         }
         printf STDERR "-   john --format=%-22s %d hash(es) -> %d cracked%s\n",
@@ -904,8 +958,14 @@ for my $tool (sort keys %failed_job) {
     printf STDERR "- %s: %d job(s) did not complete (%d at the %ds timeout);"
                 . " their identifiers are treated as unrun\n",
         $tool, scalar @j, scalar @to, $timeout;
-    printf STDERR "-   %s exited %d\n", $_, $failed_job{$tool}{$_}
-        for grep { $failed_job{$tool}{$_} != -2 } @j;
+    for my $ident (grep { $failed_job{$tool}{$_} != -2 } @j) {
+        # -3 is john's FMT_UNICODE/FMT_ENC encoding refusal, which prints on
+        # stderr and otherwise reads exactly like a format that did not crack.
+        printf STDERR "-   %s %s\n", $ident,
+            $failed_job{$tool}{$ident} == -3
+                ? 'refused: the format takes only ISO-8859-1 and the plaintext is not ASCII'
+                : sprintf('exited %d', $failed_job{$tool}{$ident});
+    }
 }
 
 exit 0;

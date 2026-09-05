@@ -63,7 +63,7 @@
 # Recording APACHE-SHA on a raw-SHA-1 row would be false: the tool folded an
 # encoding difference that the row is precisely about. So a report counts only
 # when the hash mdxfind echoes is the hash the entry carries, compared
-# case-folded and nothing else. Case is folded because mdxfind normalises hex
+# case-folded and nothing else. Case is folded because mdxfind normalizes hex
 # on read and echoes its own case; every other rewrite is a different
 # representation and is refused.
 #
@@ -89,7 +89,7 @@
 # id was derived from it -- so a SECOND type appearing on the row is a
 # curation question rather than a fact: is it the same computation, or the
 # collides-on-subset relation that MD5 and MD5CAP have, or the encoding
-# relation that MD5 and MD5UC have? CLAUDE.md reserves that judgement for a
+# relation that MD5 and MD5UC have? CLAUDE.md reserves that judgment for a
 # person. So the finding is reported and never written, and the 156 rows the
 # ninth session flagged as "NOT REPRODUCED HERE" keep their note intact
 # instead of quietly acquiring a different type beside it.
@@ -497,7 +497,7 @@ write_file($wordfile, @words, @ctl_words);
 # "pass" must not win over "pass:word" where the corpus holds both.
 my @words_by_len = sort { length($b) <=> length($a) || $a cmp $b } @words;
 
-# Case-folded index of the corpus. mdxfind normalises hex on read and echoes
+# Case-folded index of the corpus. mdxfind normalizes hex on read and echoes
 # its own case; anything it rewrites further is a different representation and
 # must not match. The value is a list because two entries may carry the same
 # vector.

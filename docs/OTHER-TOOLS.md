@@ -20,7 +20,7 @@ Two things, and a column needs both.
 2. **A binary that can prove a mapping here.** The prime directive is that no
    mapping is asserted without a round-trip. A tool nobody can run against a
    vector on this host can only ever produce tier `asserted`, and a column of
-   `asserted` is a rumour with a schema.
+   `asserted` is a rumor with a schema.
 
 A tool that has the first and not the second can still be worth a **reference**
 -- a paragraph here, an alias on a row -- which is what this file is for.
@@ -33,7 +33,7 @@ its hashcat mode number where one exists, and it accepts a bare hashcat mode
 number as a mode name.
 
 **It does not earn a column, and the reason is measured.** On 2026-09-04 all
-132 published names were normalised by this repository's separator-drift rule
+132 published names were normalized by this repository's separator-drift rule
 (upper-case, strip non-alphanumerics) and looked for among every identifier
 this repository publishes -- id, name, aliases, legacy spellings, mdxfind and
 hashpipe types, john cpu and gpu labels, hashcat modes:
@@ -163,7 +163,7 @@ The honest comparison: all three identify by regex over a hash's shape and
 verify nothing. This repository verifies and does not identify. They are
 complements, not competitors, and the identification capability is a queued
 piece of work here -- to be written from this repository's own vector corpus,
-for the licence reason above.
+for the license reason above.
 
 ## Crackers with no general namespace
 

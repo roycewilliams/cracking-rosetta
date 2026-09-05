@@ -13,9 +13,13 @@ status: "needs-review"
 tools:
   john:
     cpu: ["restic"]
-    verified: "upstream"
-    verified_at: "2026-08-31"
-    verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
-    note: "NOT REPRODUCED HERE. john publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: john publishes no plaintext for its example, and the example did not fall to the ~819 candidate plaintexts harvested from john's own source. The plaintext is findable, it was simply not in the list. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool john --only restic to retry."
+    verified: "vector"
+    verified_at: "2026-09-04"
+    verified_with: "john"
   crack:
     supported: false
+vectors:
+  - hash: "$restic$scrypt*8192*8*1*ed29ad65948797a275f15b1da36fdd2b0247a7772d69ecfdf21141d837fb0780b6fb48cf7ccc3e4146a105dee0df4851256e204671d97c718c7e6b4a7a8cfb75*879acc157daa013218fcccf6b60be20f1e52baa893698a589f026165f51bbb1da03b0a5db42885d8bcffb34030b0bb26716e9f7c950cccb674494d63d104ee8808e713a7d483a6a0ef36b14aaac652eaa3a92b12f9d7a4cfead72ed0a216ccaeb0ddf9c6e94aa84c82590ae9a6ffc1b48b4fba163635ffb4e0633de668827e567e8c834539ae18d750be6f8f86f12101b04ab926fa570038eb6f78ef6021c1b1"
+    pass: "penance"
+    source: "john"
+    reads_in: ["john"]

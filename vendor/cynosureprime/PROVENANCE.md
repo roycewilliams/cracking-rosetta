@@ -10,8 +10,8 @@ change, so the diff shows exactly what upstream altered.
 
 | File | Source | Commit | Fetched |
 |---|---|---|---|
-| `hashpipe-HASH_TYPES.md` | [Cynosureprime/hashpipe](https://github.com/Cynosureprime/hashpipe) `HASH_TYPES.md` | `e528d881d96d81c97c57b88c7a0759ff6aec5770` (2026-09-04) | 2026-09-04 |
-| `john_map.h` | [Cynosureprime/hashpipe](https://github.com/Cynosureprime/hashpipe) `john_map.h` | `e528d881d96d81c97c57b88c7a0759ff6aec5770` (2026-09-04) | 2026-09-04 |
+| `hashpipe-HASH_TYPES.md` | [Cynosureprime/hashpipe](https://github.com/Cynosureprime/hashpipe) `HASH_TYPES.md` | `cad43ac72a2402a2fcdb23dd5fa60ddcc4f39df8` (2026-09-04) | 2026-09-04 |
+| `john_map.h` | [Cynosureprime/hashpipe](https://github.com/Cynosureprime/hashpipe) `john_map.h` | `cad43ac72a2402a2fcdb23dd5fa60ddcc4f39df8` (2026-09-04) | 2026-09-04 |
 
 ## Why hashpipe's catalog and not mdxfind's
 
@@ -25,7 +25,7 @@ on every name and every hashcat mapping; mdxfind's does not -- `e1` alone gives
 mdxfind's copy is therefore deliberately **not** vendored. See
 `tools/extract-mdxfind.pl`.
 
-## Licence
+## License
 
 Both projects are MIT licensed. See the LICENSE file in each upstream
 repository; these copies are included under those terms.

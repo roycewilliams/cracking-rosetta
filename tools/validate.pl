@@ -108,7 +108,7 @@ $tooldir //= "$ROOT/data/tools";
 #-----------------------------------------------------------------------
 # Scope: which entries the caller wants to hear about.
 #
-# Empty means "all of them", which is the gate's behaviour and what CI runs.
+# Empty means "all of them", which is the gate's behavior and what CI runs.
 
 my %scope = map { $_ => 1 } @only;
 
@@ -305,7 +305,7 @@ my %HP_TYPE = map { $_->{name} => $_ } @$hp_list;
 # type exists and a reader arriving by that name must land somewhere -- but it
 # cannot be at tier 'vector', because the tool cannot reproduce its own vector
 # for it, let alone ours. Measured 2026-09-03: BMW224 and BMW256, and they
-# return a DIFFERENT digest on every invocation, which is uninitialised state
+# return a DIFFERENT digest on every invocation, which is uninitialized state
 # rather than a wrong constant.
 my %HP_SELFTEST_FAIL =
     map { $_->{name} => 1 } grep { ($_->{selftest} // '') eq 'fail' } @$hp_list;
@@ -604,7 +604,7 @@ for my $file (@files) {
                 # it: measured 2026-09-02, 24 blocks carried both, and a
                 # reader of one of those rows had no way to tell which half
                 # to believe. It is a machine-written marker, so testing for
-                # it is a lookup rather than a judgement about prose.
+                # it is a lookup rather than a judgment about prose.
                 if (defined $tier && $tier eq 'vector'
                     && ($blk->{note} // '') =~ /^NOT REPRODUCED HERE/) {
                     err("%s: tools.%s is tier 'vector' but its note still says "

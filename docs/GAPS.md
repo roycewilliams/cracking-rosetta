@@ -17,7 +17,7 @@ Each row below links to its entry in the [browsable table](index.html).
 Gaps are absences; for the rows where something is known to be *odd*, see
 [OPEN-QUESTIONS.md](OPEN-QUESTIONS.md).
 
-## 1. Believed but never reproduced (83)
+## 1. Believed but never reproduced (86)
 
 The cheapest contribution in the repository, if you own the tool. Each of
 these already names an identifier and already carries a test vector; nobody
@@ -37,9 +37,11 @@ tools/verify-vectors.pl --tool <tool> --only <id> -v
 | [`generic-hash-bridged-python-interpreter-free-threading`](index.html#generic-hash-bridged-python-interpreter-free-threading) | hashcat | `72000` | upstream |
 | [`generic-hash-bridged-python-interpreter-with-gil`](index.html#generic-hash-bridged-python-interpreter-with-gil) | hashcat | `73000` | upstream |
 | [`generic-hash-bridged-rust`](index.html#generic-hash-bridged-rust) | hashcat | `74000` | upstream |
-| [`lm`](index.html#lm) | john | `LM`, `LM-opencl` | asserted |
+| [`halflm-c-r`](index.html#halflm-c-r) | john | `nethalflm` | upstream |
 | [`md5-md5-pass-salt`](index.html#md5-md5-pass-salt) | hashcat | `2611`, `2711` | asserted |
+| [`md5dsalt`](index.html#md5dsalt) | mdxfind | `MD5DSALT` | asserted |
 | [`md5md5hum`](index.html#md5md5hum) | mdxfind | `MD5MD5HUM` | asserted |
+| [`md5specam`](index.html#md5specam) | mdxfind | `MD5SPECAM` | asserted |
 | [`md5uc`](index.html#md5uc) | mdxfind | `MD5UC` | upstream |
 | [`md5ucmd5`](index.html#md5ucmd5) | mdxfind | `MD5UCMD5` | upstream |
 | [`mysql4-1-mysql5`](index.html#mysql4-1-mysql5) | john | `dynamic_1028`, `mysql-sha1`, `mysql-sha1-opencl` | asserted |
@@ -68,6 +70,7 @@ tools/verify-vectors.pl --tool <tool> --only <id> -v
 | [`sha1sha256truncsalt`](index.html#sha1sha256truncsalt) | mdxfind | `SHA1SHA256TRUNCSALT` | upstream |
 | [`sha1uc`](index.html#sha1uc) | mdxfind | `SHA1UC` | upstream |
 | [`sha1wrluctruncsalt`](index.html#sha1wrluctruncsalt) | mdxfind | `SHA1WRLUCTRUNCSALT` | upstream |
+| [`sha256uc`](index.html#sha256uc) | mdxfind | `SHA256UC` | asserted |
 | [`smf-v1-1`](index.html#smf-v1-1) | john | `dynamic_25`, `dynamic_37` | asserted |
 | [`snmpv3-hmac-sha384-256`](index.html#snmpv3-hmac-sha384-256) | hashcat | `26900` | upstream |
 | [`stdout`](index.html#stdout) | hashcat | `2000` | upstream |
@@ -115,7 +118,7 @@ tools/verify-vectors.pl --tool <tool> --only <id> -v
 | [`wpa-pmkid-pbkdf2`](index.html#wpa-pmkid-pbkdf2) | hashcat | `16800` | upstream |
 | [`wpa-pmkid-pmk`](index.html#wpa-pmkid-pmk) | hashcat | `16801` | upstream |
 
-## 2. No test vector at all (54)
+## 2. No test vector at all (2)
 
 Blocked on one piece of data, and it is the piece that does not require any
 tool: a hash and the plaintext that produces it. Nothing here can reach tier
@@ -124,60 +127,8 @@ equipped. If you have a vector for one of these - from a tool's own test
 suite, from your own scratch implementation, from a wordlist you cracked -
 that is the whole contribution.
 
-* [`pfx-p12`](index.html#pfx-p12) - (.pfx, .p12)
-* [`1password-agile-keychain`](index.html#1password-agile-keychain) - 1Password Agile Keychain
-* [`1password-cloud-keychain`](index.html#1password-cloud-keychain) - 1Password Cloud Keychain
-* [`apple-dmg`](index.html#apple-dmg) - Apple DMG
-* [`battlenet`](index.html#battlenet) - Battlenet
-* [`bouncycastle`](index.html#bouncycastle) - BouncyCastle
-* [`cardano-encrypted-128-byte-secret-key-a-k-a-xprv`](index.html#cardano-encrypted-128-byte-secret-key-a-k-a-xprv) - Cardano Encrypted 128-byte Secret Key (a.k.a XPrv)
-* [`clearquest`](index.html#clearquest) - ClearQuest
-* [`dnssec-nsec3`](index.html#dnssec-nsec3) - DNSSEC NSEC3
-* [`dynamic-1015`](index.html#dynamic-1015) - dynamic_1015
-* [`dynamic-1030`](index.html#dynamic-1030) - dynamic_1030
-* [`dynamic-1034`](index.html#dynamic-1034) - dynamic_1034
-* [`dynamic-1401`](index.html#dynamic-1401) - dynamic_1401
-* [`dynamic-1506`](index.html#dynamic-1506) - dynamic_1506
-* [`dynamic-1507`](index.html#dynamic-1507) - dynamic_1507
-* [`dynamic-1529`](index.html#dynamic-1529) - dynamic_1529
-* [`dynamic-1602`](index.html#dynamic-1602) - dynamic_1602
-* [`enpass-password-manager`](index.html#enpass-password-manager) - Enpass Password Manager
-* [`freebsd-geli`](index.html#freebsd-geli) - FreeBSD GELI
-* [`gost-r-34-11-94`](index.html#gost-r-34-11-94) - GOST R 34.11-94
-* [`halflm-c-r`](index.html#halflm-c-r) - HalfLM C/R
-* [`haval-128-4`](index.html#haval-128-4) - HAVAL-128-4
-* [`java-keystore`](index.html#java-keystore) - Java KeyStore
-* [`lm-c-r`](index.html#lm-c-r) - LM C/R
-* [`luks`](index.html#luks) - LUKS
-* [`md5dsalt`](index.html#md5dsalt) - MD5DSALT
-* [`md5sha1hum`](index.html#md5sha1hum) - MD5SHA1HUM
-* [`md5sha1md5hum`](index.html#md5sha1md5hum) - MD5SHA1MD5HUM
-* [`md5specam`](index.html#md5specam) - MD5SPECAM
-* [`md5ucbase64md5raw`](index.html#md5ucbase64md5raw) - MD5UCBASE64MD5RAW
-* [`monero-wallet`](index.html#monero-wallet) - Monero Wallet
-* [`ms-cache-hash-dcc`](index.html#ms-cache-hash-dcc) - MS Cache Hash (DCC)
-* [`mschapv2-c-r`](index.html#mschapv2-c-r) - MSCHAPv2 C/R
-* [`ntlmv1-c-r-johnnetntlm-naive`](index.html#ntlmv1-c-r-johnnetntlm-naive) - NTLMv1 C/R
-* [`openbsd-softraid`](index.html#openbsd-softraid) - OpenBSD-SoftRAID
 * [`parallel`](index.html#parallel) - PARALLEL
-* [`password-manager`](index.html#password-manager) - Password Manager
-* [`private-key-rsa-dsa-ecdsa-ed25519`](index.html#private-key-rsa-dsa-ecdsa-ed25519) - Private Key (RSA/DSA/ECDSA/ED25519)
-* [`raw-keccak`](index.html#raw-keccak) - Raw-Keccak
-* [`raw-sha3`](index.html#raw-sha3) - Raw-SHA3
-* [`restic-repository`](index.html#restic-repository) - Restic Repository
-* [`ripemd-128`](index.html#ripemd-128) - RIPEMD 128
-* [`ripemd-160`](index.html#ripemd-160) - RIPEMD 160
-* [`sha1md5hum`](index.html#sha1md5hum) - SHA1MD5HUM
 * [`sha1saltcx`](index.html#sha1saltcx) - SHA1SALTCX
-* [`sha1sha1hum`](index.html#sha1sha1hum) - SHA1SHA1HUM
-* [`sha256uc`](index.html#sha256uc) - SHA256UC
-* [`truecrypt-aes-twofish-serpent`](index.html#truecrypt-aes-twofish-serpent) - TrueCrypt AES/Twofish/Serpent
-* [`truecrypt-aes256-xts-johntc-sha512`](index.html#truecrypt-aes256-xts-johntc-sha512) - TrueCrypt AES256_XTS
-* [`truecrypt-aes256-xts-johntc-whirlpool`](index.html#truecrypt-aes256-xts-johntc-whirlpool) - TrueCrypt AES256_XTS
-* [`truecrypt-aes256-xts`](index.html#truecrypt-aes256-xts) - TrueCrypt AES256_XTS
-* [`wpa-wpa2-pmf-pmkid-master-key`](index.html#wpa-wpa2-pmf-pmkid-master-key) - WPA/WPA2/PMF/PMKID master key
-* [`wpa-wpa2-pmf-pmkid-psk`](index.html#wpa-wpa2-pmf-pmkid-psk) - WPA/WPA2/PMF/PMKID PSK
-* [`yaf-sha1`](index.html#yaf-sha1) - YAF-SHA1
 
 ## 3. A tool column nobody has filled
 
@@ -185,19 +136,27 @@ Real work rather than a one-liner: it means finding out whether the tool
 supports the construction at all, and under which identifier. The counts are
 the honest size of the job.
 
-### john: 994 entries say nothing
+### john: 283 entries say nothing
 
-A few that carry a vector and a proven expression, so there is a definite construction to look for, one per family:
+A few that carry a vector, so a candidate identifier can be tested at once, one per family:
 
-* [`gost-md5-plain-plain`](index.html#gost-md5-plain-plain) - `gost(md5($p).$p)` (and 1 more starting `gost`)
-* [`haval128-3-md5-plain`](index.html#haval128-3-md5-plain) - `haval128_3(md5($p))` (and 29 more starting `haval`)
-* [`huawei-sha1-md5-pass-salt`](index.html#huawei-sha1-md5-pass-salt) - `sha1(md5($p).$s)` (and 127 more starting `sha`)
-* [`md2-md5-plain`](index.html#md2-md5-plain) - `md2(md5($p))` (and 118 more starting `md`)
-* [`ripemd128-md5-plain`](index.html#ripemd128-md5-plain) - `ripemd128(md5($p))` (and 5 more starting `ripemd`)
-* [`tiger128-3-md5-plain`](index.html#tiger128-3-md5-plain) - `tiger(md5($p))` (and 1 more starting `tiger`)
-* [`whirlpool-md5-plain`](index.html#whirlpool-md5-plain) - `whirlpool(md5($p))` (and 3 more starting `whirlpool`)
+* [`1password-agilekeychain`](index.html#1password-agilekeychain) - `1Password, agilekeychain`
+* [`1password-cloudkeychain`](index.html#1password-cloudkeychain) - `1Password, cloudkeychain`
+* [`1password-mobilekeychain-1password-8`](index.html#1password-mobilekeychain-1password-8) - `1Password, mobilekeychain (1Password 8)`
+* [`7zip`](index.html#7zip) - `7ZIP`
+* [`aes-crypt-sha256`](index.html#aes-crypt-sha256) - `AES Crypt (SHA256)`
+* [`android-backup`](index.html#android-backup) - `Android Backup`
+* [`androidfde`](index.html#androidfde) - `ANDROIDFDE`
+* [`anope-irc-services-enc-sha256`](index.html#anope-irc-services-enc-sha256) - `Anope IRC Services (enc_sha256)`
+* [`arubaos`](index.html#arubaos) - `ARUBAOS`
+* [`as400-des`](index.html#as400-des) - `AS400-DES` (and 1 more starting `AS`)
+* [`authme`](index.html#authme) - `AUTHME`
+* [`awssigv4`](index.html#awssigv4) - `AWSSIGV4`
+* [`axcryptsha1`](index.html#axcryptsha1) - `cut(sha1($p),0,32)`
+* [`azuresync`](index.html#azuresync) - `AZURESYNC`
+* [`bcrypthmacsha256`](index.html#bcrypthmacsha256) - `BCRYPTHMACSHA256`
 
-All 994: filter `john_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
+All 283: filter `john_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
 
 Where such an entry carries an expression, john can already attack it without
 a named format:
@@ -210,7 +169,7 @@ That string is in the entry's `john_dynamic_expr:` field and in the CSV column
 of the same name. Take it from there rather than from the `expression` column:
 the expression is written in hx notation, which spells a change of
 representation as a wrapper - `md5(upper(md5($p)))` - where john spells it as a
-flavour of the hash function - `md5(MD5($p))` - and john rejects the first
+flavor of the hash function - `md5(MD5($p))` - and john rejects the first
 outright. It is deliberately **not** in john's column, which lists formats
 `--list=formats` will show; the gap worth filling is whether a named one exists.
 
@@ -223,16 +182,16 @@ A few that carry a vector, so a candidate identifier can be tested at once, one 
 * [`md5-authentication-hsrp-hsrpv2-vrrp-glbp`](index.html#md5-authentication-hsrp-hsrpv2-vrrp-glbp) - `"MD5 authentication" HSRP, HSRPv2, VRRP, GLBP`
 * [`md5-based-authentication-dahua`](index.html#md5-based-authentication-dahua) - `"MD5 based authentication" Dahua`
 * [`md5-based-authentication-vtp`](index.html#md5-based-authentication-vtp) - `"MD5 based authentication" VTP`
+* [`pfx-p12`](index.html#pfx-p12) - `(.pfx, .p12)`
+* [`1password-agile-keychain`](index.html#1password-agile-keychain) - `1Password Agile Keychain`
+* [`1password-cloud-keychain`](index.html#1password-cloud-keychain) - `1Password Cloud Keychain`
 * [`7-zip-archive-encryption`](index.html#7-zip-archive-encryption) - `7-Zip archive encryption`
 * [`andotp`](index.html#andotp) - `andOTP`
+* [`apple-dmg`](index.html#apple-dmg) - `Apple DMG`
 * [`armory-wallet`](index.html#armory-wallet) - `Armory wallet`
 * [`as-400-des`](index.html#as-400-des) - `AS/400 DES` (and 1 more starting `AS`)
 * [`astra-linux-gost12256hash`](index.html#astra-linux-gost12256hash) - `Astra Linux $gost12256hash$` (and 1 more starting `Astra`)
 * [`azuread`](index.html#azuread) - `AzureAD`
-* [`bitlocker-johnbitlocker`](index.html#bitlocker-johnbitlocker) - `BitLocker`
-* [`bitshares-wallet`](index.html#bitshares-wallet) - `BitShares Wallet`
-* [`bitwarden-password-manager`](index.html#bitwarden-password-manager) - `Bitwarden Password Manager`
-* [`blackberry-es10`](index.html#blackberry-es10) - `Blackberry-ES10`
 
 All 195: filter `hashcat_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
 
@@ -240,21 +199,21 @@ All 195: filter `hashcat_state` for `unknown` in [rosetta.csv](../dist/rosetta.c
 
 A few that carry a vector, so a candidate identifier can be tested at once, one per family:
 
+* [`pfx-p12`](index.html#pfx-p12) - `(.pfx, .p12)`
+* [`1password-agile-keychain`](index.html#1password-agile-keychain) - `1Password Agile Keychain`
+* [`1password-cloud-keychain`](index.html#1password-cloud-keychain) - `1Password Cloud Keychain`
 * [`1password-agilekeychain`](index.html#1password-agilekeychain) - `1Password, agilekeychain`
+* [`apple-dmg`](index.html#apple-dmg) - `Apple DMG`
 * [`astra-linux-gost12256hash`](index.html#astra-linux-gost12256hash) - `Astra Linux $gost12256hash$` (and 1 more starting `Astra`)
+* [`battlenet`](index.html#battlenet) - `Battlenet`
+* [`bouncycastle`](index.html#bouncycastle) - `BouncyCastle`
+* [`cardano-encrypted-128-byte-secret-key-a-k-a-xprv`](index.html#cardano-encrypted-128-byte-secret-key-a-k-a-xprv) - `Cardano Encrypted 128-byte Secret Key (a.k.a XPrv)`
+* [`clearquest`](index.html#clearquest) - `ClearQuest`
 * [`django-sha-1`](index.html#django-sha-1) - `Django (SHA-1)`
+* [`dnssec-nsec3`](index.html#dnssec-nsec3) - `DNSSEC NSEC3`
 * [`domain-cached-credentials-dcc-ms-cache-nt`](index.html#domain-cached-credentials-dcc-ms-cache-nt) - `Domain Cached Credentials (DCC), MS Cache (NT)` (and 1 more starting `Domain`)
-* [`hmac-sha1`](index.html#hmac-sha1) - `HMAC-SHA1` (and 3 more starting `HMAC`)
-* [`kerberos-5-etype-23-tgs-rep-nt`](index.html#kerberos-5-etype-23-tgs-rep-nt) - `Kerberos 5, etype 23, TGS-REP (NT)`
-* [`lotus-notes-domino-8-5`](index.html#lotus-notes-domino-8-5) - `Lotus Notes/Domino 8.5`
-* [`murmurhash64a-truncated-zero-seed`](index.html#murmurhash64a-truncated-zero-seed) - `MurmurHash64A truncated (zero seed)`
-* [`netntlmv1-netntlmv1-ess-nt`](index.html#netntlmv1-netntlmv1-ess-nt) - `NetNTLMv1 / NetNTLMv1+ESS (NT)` (and 1 more starting `NetNTLMv`)
-* [`netscreen`](index.html#netscreen) - `Netscreen`
-* [`oracle-11g`](index.html#oracle-11g) - `Oracle 11g`
-* [`password-safe-v2`](index.html#password-safe-v2) - `Password Safe v2`
-* [`pkzip-master-key`](index.html#pkzip-master-key) - `PKZIP Master Key` (and 1 more starting `PKZIP`)
-* [`sha1-substr-0-32`](index.html#sha1-substr-0-32) - `cut(sha1($p),0,32)`
-* [`stuffit5`](index.html#stuffit5) - `Stuffit5`
+* [`dynamic-1015`](index.html#dynamic-1015) - `dynamic_1015` (and 7 more starting `dynamic`)
+* [`enpass-password-manager`](index.html#enpass-password-manager) - `Enpass Password Manager`
 
 All 106: filter `mdxfind_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
 

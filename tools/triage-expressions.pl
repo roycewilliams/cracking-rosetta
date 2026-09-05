@@ -348,7 +348,7 @@ for my $file (@files) {
             # The expression compiles and the entry has vectors, but not one
             # of them is a bare digest this can line up against -- they are
             # in the producing tool's own serialization, or the construction
-            # needs a salt the vector does not carry. Reserialising them is
+            # needs a salt the vector does not carry. Reserializing them is
             # real work with real coverage behind it (STATE.md, "a vector in
             # a tool's native serialization"), and it is NOT evidence that
             # anything here is wrong.

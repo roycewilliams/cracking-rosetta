@@ -13,12 +13,12 @@
 # WHERE THE DUPLICATES CAME FROM
 #
 # The source spreadsheet carried two rows for the same algorithm more often
-# than anyone realised: one with a name in the Algorithm column, one with that
+# than anyone realized: one with a name in the Algorithm column, one with that
 # cell blank and only the mdxfind and hashes.org columns filled. The importer
 # names a blank row after its mdxfind type, so "IPB2+, MyBB1.2+" and
 # "MD5-MD5SALTMD5PASS" became two entries describing one thing. This was
 # invisible in the sheet and only became visible once identifiers were
-# normalised and cross-referenced. Measured 2026-08-29: 54 collisions covering
+# normalized and cross-referenced. Measured 2026-08-29: 54 collisions covering
 # 114 redundant entries.
 #
 # THE KEY IS THE mdxfind IDENTITY, INCLUDING ITERATIONS
@@ -39,7 +39,7 @@
 #
 # The loser's identifiers, vectors, legacy names and notes are folded into the
 # survivor, and its name is kept as an alias. The survivor is the entry a
-# person would recognise: one with a real name rather than a name the importer
+# person would recognize: one with a real name rather than a name the importer
 # generated from a tool's internal label.
 #
 # DRY RUN IS THE DEFAULT

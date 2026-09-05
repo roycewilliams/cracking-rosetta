@@ -53,11 +53,11 @@
 #                       which catalog-index-set structurally cannot: the
 #                       suffix is not in HASH_TYPES.md at all.
 #
-# The shape did not fully generalise, and that is recorded rather than
+# The shape did not fully generalize, and that is recorded rather than
 # papered over: a value disagreement is one string against one string, an
 # index-set disagreement is a set difference, and forcing the second into
 # publishes:/we_assert: would have meant writing a thousand indices into a
-# field. What DID generalise is the core and the three failure modes.
+# field. What DID generalize is the core and the three failure modes.
 
 version: 1
 
