@@ -235,6 +235,23 @@ recorded build at all, which cannot be checked even in principle.
 `verify-vectors.pl` wrote a bare `"mdxfind"` into the same field and now writes
 the inventory's version string, so what it promotes stays auditable.
 
+And the build is only one of three ways an absence measures the harness rather
+than the tool. The other two were found on 2026-09-05 by re-checking the john
+dynamics, and both produce a verdict indistinguishable from a real one:
+
+- **The tool could not read the vector.** A john dynamic is stored as
+  `$dynamic_NNNN$<digest>$<salt>$$U<user>`, which mdxfind cannot parse at all,
+  so the sweep offered it a string it was always going to decline. Fifteen
+  dynamics were recorded absent for that reason alone, and every one cracks
+  once the vector is rewritten into mdxfind's own field order. A sweep whose
+  input a tool cannot READ has measured the serialization, not the algorithm.
+- **The iteration bound was too low.** `dynamic_1004`, `_1005` and `_1006` are
+  md5 at six, seven and eight rounds. A sweep bounded below that finds nothing
+  and looks exactly like a missing type. mdxfind reports the depth it matched
+  at, so the bound belongs with the verdict.
+
+Both are now in `absence.pl`'s methodology, beside the build one.
+
 What closes an absence is cheap, and should be the reflex after any inventory
 refresh: sweep the corpus against the indices the refresh ADDED, one type per
 invocation, rather than re-running everything. Measured 2026-09-05: 25 types

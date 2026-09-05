@@ -11,6 +11,11 @@ denotation:
   note: "john's own label for dynamic_1507, in 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200."
 status: "needs-review"
 tools:
+  mdxfind:
+    verified: "absent"
+    verified_at: "2026-09-05"
+    verified_with: "mdxfind RCS 1.576 (2026/09/02)"
+    note: "RE-MEASURED 2026-09-05 against mdxfind RCS 1.576 (1027 types), because every mdxfind absence in this repository had been established against RCS 1.545 and the ones on john dynamics were additionally established by offering mdxfind a $dynamic_NNNN$ string it cannot parse. Both faults are fixed for this row: the vector was rewritten into mdxfind's own serialization and offered to full auto-detect over the whole catalog, single-threaded. Full auto-detect over all 1026 catalog types finds nothing that reproduces this row's vector in any field order the wrapper supports, so the absence now rests on the current binary and on a string mdxfind can actually read."
   john:
     cpu: ["dynamic_1507"]
     verified: "vector"

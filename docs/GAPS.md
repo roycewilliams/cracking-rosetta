@@ -205,7 +205,7 @@ A few that carry a vector, so a candidate identifier can be tested at once, one 
 
 All 205: filter `hashcat_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
 
-### mdxfind: 102 entries say nothing
+### mdxfind: 94 entries say nothing
 
 A few that carry a vector, so a candidate identifier can be tested at once, one per family:
 
@@ -221,11 +221,11 @@ A few that carry a vector, so a candidate identifier can be tested at once, one 
 * [`django-sha-1`](index.html#django-sha-1) - `Django (SHA-1)`
 * [`dnssec-nsec3`](index.html#dnssec-nsec3) - `DNSSEC NSEC3`
 * [`domain-cached-credentials-dcc-ms-cache-nt`](index.html#domain-cached-credentials-dcc-ms-cache-nt) - `Domain Cached Credentials (DCC), MS Cache (NT)` (and 1 more starting `Domain`)
-* [`dynamic-1015`](index.html#dynamic-1015) - `dynamic_1015` (and 7 more starting `dynamic`)
 * [`enpass-password-manager`](index.html#enpass-password-manager) - `Enpass Password Manager`
 * [`freebsd-geli`](index.html#freebsd-geli) - `FreeBSD GELI`
+* [`gost-r-34-11-94`](index.html#gost-r-34-11-94) - `GOST R 34.11-94`
 
-All 102: filter `mdxfind_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
+All 94: filter `mdxfind_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
 
 ## 4. Identifiers with no row here (66)
 

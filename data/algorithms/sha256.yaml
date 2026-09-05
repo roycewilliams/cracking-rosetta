@@ -34,6 +34,11 @@ tools:
     verified_with: "john"
   crack:
     supported: false
+relations:
+  - kind: "collides-on-subset"
+    entry: "dynamic-1029"
+    distinction: "truncation"
+    note: "Measured 2026-09-05. john states dynamic_1029 as \"sha256($p) (hash truncated to length 32)\", so the two agree on exactly the first 32 hex characters of sha256($p) and on nothing else. mdxfind's SHA256 does recover this row's 32-hex vector, because mdxfind compares at the length of the shortest hash it loaded and cracking a truncated digest is a capability it has by design. That is the tool being able to crack this, NOT the tool having an identifier for the truncation, so no mdxfind mapping is recorded here. Same call Royce made on sha1-substr-0-32."
 vectors:
   - hash: "27c3d3b047672ba2cf4abd7688e81f4fbb044eadeec897b665fc76636069daa7"
     pass: "rosetta"

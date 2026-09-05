@@ -197,34 +197,34 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | DRUPAL7 | `7900` (v) | `Drupal7` (v) | `DRUPAL7` (v) |  |
 | dummy | **--** | `dummy` (v) | no |  |
 | dynamic=md5($p) | **--** | `dynamic=md5($p)` (v) | no |  |
-| dynamic_1004 | **--** | `dynamic_1004` (v) | no |  |
-| dynamic_1005 | **--** | `dynamic_1005` (v) | no |  |
-| dynamic_1006 | **--** | `dynamic_1006` (v) | no |  |
-| dynamic_1008 | **--** | `dynamic_1008` (v) | no |  |
-| dynamic_1015 | **--** | `dynamic_1015` (v) | **--** |  |
-| dynamic_1029 | **--** | `dynamic_1029` (v) | no |  |
-| dynamic_1030 | **--** | `dynamic_1030` (v) | **--** |  |
-| dynamic_1031 | **--** | `dynamic_1031` (v) | no |  |
-| dynamic_1032 | **--** | `dynamic_1032` (v) | no |  |
-| dynamic_1034 | **--** | `dynamic_1034` (v) | **--** |  |
-| dynamic_1401 | **--** | `dynamic_1401` (v) | **--** |  |
+| dynamic_1004 | **--** | `dynamic_1004` (v) | `MD5 -i6` (v) |  |
+| dynamic_1005 | **--** | `dynamic_1005` (v) | `MD5 -i7` (v) |  |
+| dynamic_1006 | **--** | `dynamic_1006` (v) | `MD5 -i8` (v) |  |
+| dynamic_1008 | **--** | `dynamic_1008` (v) | `MD5PASSSALT` (v) |  |
+| dynamic_1015 | **--** | `dynamic_1015` (v) | `POSTGRESCRAM` (v) |  |
+| dynamic_1029 | **--** | `dynamic_1029` (v) | no | collides with sha256 (truncation) |
+| dynamic_1030 | **--** | `dynamic_1030` (v) | no | collides with whirlpool (truncation) |
+| dynamic_1031 | **--** | `dynamic_1031` (v) | no | collides with hash-gost-plain (truncation) |
+| dynamic_1032 | **--** | `dynamic_1032` (v) | `PEOPLESOFT` (v) |  |
+| dynamic_1034 | **--** | `dynamic_1034` (v) | `MD5PASSSALT` (v) |  |
+| dynamic_1401 | **--** | `dynamic_1401` (v) | `SKYPE` (v) |  |
 | dynamic_15 | **--** | `dynamic_15` (v) | `MD5USERMD5PASSSALT` (v) |  |
-| dynamic_1505 | **--** | `dynamic_1505` (v) | no |  |
-| dynamic_1506 | **--** | `dynamic_1506` (v) | **--** |  |
-| dynamic_1507 | **--** | `dynamic_1507` (v) | **--** |  |
-| dynamic_1528 | **--** | `dynamic_1528` (v) | no |  |
-| dynamic_1529 | **--** | `dynamic_1529` (v) | **--** |  |
-| dynamic_1550 | **--** | `dynamic_1550` (v) | no |  |
+| dynamic_1505 | **--** | `dynamic_1505` (v) | `MD5PASSSALTMD5PASSSALT` (v) |  |
+| dynamic_1506 | **--** | `dynamic_1506` (v) | no |  |
+| dynamic_1507 | **--** | `dynamic_1507` (v) | no |  |
+| dynamic_1528 | **--** | `dynamic_1528` (v) | `SHA256SALTPASSSALT` (v) |  |
+| dynamic_1529 | **--** | `dynamic_1529` (v) | no |  |
+| dynamic_1550 | **--** | `dynamic_1550` (v) | `MONGODB` (v) |  |
 | dynamic_1551 | **--** | `dynamic_1551` (v) | no |  |
 | dynamic_1552 | **--** | `dynamic_1552` (v) | no |  |
-| dynamic_1560 | **--** | `dynamic_1560` (v) | no |  |
+| dynamic_1560 | **--** | `dynamic_1560` (v) | `MD5SALT1SALT2` (v) |  |
 | dynamic_1590 | **--** | `dynamic_1590` (v) | no |  |
 | dynamic_16 | **--** | `dynamic_16` (v) | no |  |
-| dynamic_1602 | **--** | `dynamic_1602` (v) | **--** |  |
+| dynamic_1602 | **--** | `dynamic_1602` (v) | `QAS-VASAUTH` (v) |  |
 | dynamic_1608 | **--** | `dynamic_1608` (v) | no |  |
 | dynamic_18 | **--** | `dynamic_18` (v) | `POSTOFFICE` (v) |  |
-| dynamic_2002 | **--** | `dynamic_2002` (v) | no |  |
-| dynamic_2003 | **--** | `dynamic_2003` (v) | no |  |
+| dynamic_2002 | **--** | `dynamic_2002` (v) | `MD5 -i2` (v) |  |
+| dynamic_2003 | **--** | `dynamic_2003` (v) | `MD5 -i3` (v) |  |
 | dynamic_31 | **--** | `dynamic_31` (v) | `MD4SALTPASS` (v) |  |
 | dynamic_32 | **--** | `dynamic_32` (v) | `MD4PASSSALT` (v) |  |
 | dynamic_35 | **--** | `dynamic_35` (v) | `SHA1UCUSERPASS` (v) |  |
@@ -303,7 +303,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | HAMSI384 | no | no | `HAMSI384` (v) |  |
 | HAMSI512 | no | no | `HAMSI512` (v) |  |
 | has-160 (librhash) | no | `has-160` (v) | `HAS160` (v) |  |
-| hash('gost', $plain) | `6900` (v) | `dynamic_90` (v) | `GOST` (v) |  |
+| hash('gost', $plain) | `6900` (v) | `dynamic_90` (v) | `GOST` (v) | collides with dynamic-1031 (truncation) |
 | hash('gost-crypto', $plain) | no | no | `GOST-CRYPTO` (v) |  |
 | HashKnownHosts HMAC-SHA1 | **--** | `known_hosts` (v) | no |  |
 | HAV128 | no | `dynamic_160` (v) | `HAV128` (v) |  |
@@ -1314,7 +1314,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | SHA224PASSSALT | `1310` (v) | `dynamic_52` (v) | `SHA224PASSSALT` (v) |  |
 | SHA224SALTPASS | `1320` (v) | `dynamic_51` (v) | `SHA224SALTPASS` (v) |  |
 | SHA224SHA1 | `34500` (v) | no | `SHA224SHA1` (v) |  |
-| SHA256 | `1400` (v) | `Raw-SHA256`<br>`dynamic_60`<br>`raw-SHA256-opencl` (v) | `SHA256` (v) |  |
+| SHA256 | `1400` (v) | `Raw-SHA256`<br>`dynamic_60`<br>`raw-SHA256-opencl` (v) | `SHA256` (v) | collides with dynamic-1029 (truncation) |
 | SHA256 (2 iterations) | no | `dynamic_63` (v) | `SHA256 -i2` (v) |  |
 | sha256($pass.$salt) | `1410` (v) | `dynamic_62` (v) | `SHA256PASSSALT` (v) |  |
 | sha256($salt.$pass) | `1420` (v) | `dynamic_61` (v) | `SHA256SALTPASS` (v) | encoding of sha256rawsaltpass (encoding) |
@@ -1556,7 +1556,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | WEB2PY-SHA512 | `21600` (v) | **--** | `WEB2PY-SHA512` (v) |  |
 | WERKZEUG-MD5 | `30000` (v) | **--** | `WERKZEUG-MD5` (v) |  |
 | WERKZEUG-SHA256 | `30120` (v) | **--** | `WERKZEUG-SHA256` (v) |  |
-| Whirlpool | `6100` (v) | `dynamic_100`<br>`whirlpool` (v) | `WRL` (v) |  |
+| Whirlpool | `6100` (v) | `dynamic_100`<br>`whirlpool` (v) | `WRL` (v) | collides with dynamic-1030 (truncation) |
 | whirlpool(md5($plain)) | no | no | `WRLMD5` (v) |  |
 | whirlpool(md5($plain).$plain) | no | no | `WRLMD5PASS` (v) |  |
 | Windows Hello PIN/Password | `28100` (v) | **--** | no |  |

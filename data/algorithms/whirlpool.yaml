@@ -33,6 +33,11 @@ tools:
     verified_with: "john"
   crack:
     supported: false
+relations:
+  - kind: "collides-on-subset"
+    entry: "dynamic-1030"
+    distinction: "truncation"
+    note: "Measured 2026-09-05. john states dynamic_1030 as \"whirlpool($p) (hash truncated to length 32)\"; the two agree on the first 32 hex characters of whirlpool($p) and nowhere else. mdxfind's WRL recovers the 32-hex vector by comparing at the shortest loaded length, which is a capability rather than an identifier for the truncation."
 vectors:
   - hash: "b6b0e6ed07a82829cf9d9e93568e5224debefa714c9531a86b9365f8ec38d7eac7106778be2c1570367511ed635e45f3dd77893918bbdcb2e7c9b67dff9ffd97"
     pass: "rosetta"

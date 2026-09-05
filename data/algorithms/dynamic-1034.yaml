@@ -11,6 +11,12 @@ denotation:
   note: "john's own label for dynamic_1034, in 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200."
 status: "needs-review"
 tools:
+  mdxfind:
+    types: ["MD5PASSSALT"]
+    verified: "vector"
+    verified_at: "2026-09-05"
+    verified_with: "mdxfind RCS 1.576 (2026/09/02)"
+    note: "mdxfind e373 MD5PASSSALT, reached by rewriting this row's vector into mdxfind's serialization: john writes $dynamic_1034$<digest>$$U<user>; mdxfind reads <digest>:<user>, the user occupying the salt field. Added 2026-09-05."
   john:
     cpu: ["dynamic_1034"]
     verified: "vector"
@@ -22,4 +28,13 @@ vectors:
   - hash: "$dynamic_1034$bd6fd49a627ecdbe4031b2d52d5748ab$$Upostgres"
     pass: "openwall"
     source: "john"
+    form: "john"
     reads_in: ["john"]
+    credential: "dynamic-1034"
+  - hash: "bd6fd49a627ecdbe4031b2d52d5748ab:postgres"
+    pass: "openwall"
+    source: "mdxfind"
+    form: "mdxfind"
+    reads_in: ["mdxfind"]
+    credential: "dynamic-1034"
+notes: "The two vectors on this row are ONE credential written twice and must never be read as corroborating each other. john writes $dynamic_1034$<digest>$$U<user>; mdxfind reads <digest>:<user>, the user occupying the salt field. The re-encoding was proven rather than assumed: mdxfind pinned to MD5PASSSALT recovers this row's own stated plaintext from the rewritten string."

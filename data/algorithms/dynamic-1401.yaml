@@ -11,6 +11,12 @@ denotation:
   note: "john's own label for dynamic_1401, in 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200."
 status: "needs-review"
 tools:
+  mdxfind:
+    types: ["SKYPE"]
+    verified: "vector"
+    verified_at: "2026-09-05"
+    verified_with: "mdxfind RCS 1.576 (2026/09/02)"
+    note: "mdxfind e857 SKYPE, reached by rewriting this row's vector into mdxfind's serialization: john writes $dynamic_1401$<digest>$$U<user>; mdxfind reads <digest>:<user>. Added 2026-09-05."
   john:
     cpu: ["dynamic_1401"]
     verified: "vector"
@@ -22,4 +28,13 @@ vectors:
   - hash: "$dynamic_1401$27f6a9d892475e6ce0391de8d2d893f700000000$$Uusername"
     pass: "password"
     source: "john"
+    form: "john"
     reads_in: ["john"]
+    credential: "dynamic-1401"
+  - hash: "27f6a9d892475e6ce0391de8d2d893f700000000:username"
+    pass: "password"
+    source: "mdxfind"
+    form: "mdxfind"
+    reads_in: ["mdxfind"]
+    credential: "dynamic-1401"
+notes: "The two vectors on this row are ONE credential written twice and must never be read as corroborating each other. john writes $dynamic_1401$<digest>$$U<user>; mdxfind reads <digest>:<user>. The re-encoding was proven rather than assumed: mdxfind pinned to SKYPE recovers this row's own stated plaintext from the rewritten string."

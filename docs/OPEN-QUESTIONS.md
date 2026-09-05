@@ -215,7 +215,7 @@ what those vectors really are.
 | [`winphone`](index.html#winphone) | `sha256(utf16($p).fromhex($s))` | `-` | no john format, so john ships no control vectors; but RosettaExpr -- an implementation independent of all three crackers -- computes this expression over the entry's own vector(s) and reproduces 1 of ... |
 | [`yaf-sha1`](index.html#yaf-sha1) | `base64(sha1_raw(utf16($p).frombase64($s)))` | `-` | no john format on this entry, so john ships no control vectors, and the entry carries no vector of its own to check the expression against. The sentence "Not checkable locally: ... RosettaExpr cannot ... |
 
-## Cracked, but not by that name (14)
+## Cracked, but not by that name (20)
 
 A tool recovers the plaintext from one of these vectors without implementing
 the algorithm the row is about, so the identifier is deliberately **not**
@@ -232,6 +232,10 @@ promote it.
 | Entry | Collides with | Why |
 |---|---|---|
 | [`aich`](index.html#aich) | `sha1lsb35` | AICH of a single block is SHA-1, and SHA1lsb35 is SHA-1 with the leading nibbles masked to zero, so any tool that ignores that field -- hashcat -m 100... |
+| [`dynamic-1029`](index.html#dynamic-1029) | `sha256` | Measured 2026-09-05. john states dynamic_1029 as "sha256($p) (hash truncated to length 32)", so the two agree on exactly the first 32 hex characters o... |
+| [`dynamic-1030`](index.html#dynamic-1030) | `whirlpool` | Measured 2026-09-05. john states dynamic_1030 as "whirlpool($p) (hash truncated to length 32)"; the two agree on the first 32 hex characters of whirlp... |
+| [`dynamic-1031`](index.html#dynamic-1031) | `hash-gost-plain` | Measured 2026-09-05. john states dynamic_1031 as "gost($p) (hash truncated to length 32)"; the two agree on the first 32 hex characters of gost($p) an... |
+| [`hash-gost-plain`](index.html#hash-gost-plain) | `dynamic-1031` | Measured 2026-09-05. john states dynamic_1031 as "gost($p) (hash truncated to length 32)"; the two agree on the first 32 hex characters of gost($p) an... |
 | [`md5`](index.html#md5) | `md5cap` | MD5CAP is cap(md5($p)), a no-op whenever the digest contains no letters to capitalize, so john's dynamic_2 and plain MD5 crack its vector without deno... |
 | [`md5-capitalise-md5-plain-username`](index.html#md5-capitalise-md5-plain-username) | `md5-md5-plain-salt-3` | MD5MD5USER and MD5CAPMD5USER differ only by cap() on the inner hex digest, which is a no-op whenever that digest starts with a digit. md5('rosetta') i... |
 | [`md5-md5-plain-salt-3`](index.html#md5-md5-plain-salt-3) | `md5-capitalise-md5-plain-username` | MD5MD5USER and MD5CAPMD5USER differ only by cap() on the inner hex digest, which is a no-op whenever that digest starts with a digit. md5('rosetta') i... |
@@ -243,8 +247,10 @@ promote it.
 | [`sha1lsb35`](index.html#sha1lsb35) | `aich` | AICH of a single block is SHA-1, and SHA1lsb35 is SHA-1 with the leading nibbles masked to zero, so any tool that ignores that field -- hashcat -m 100... |
 | [`sha1lsb35`](index.html#sha1lsb35) | `sha1uc` | SHA1UC is SHA-1 written in uppercase hex and SHA1lsb35 is SHA-1 with the leading nibbles masked to zero, so a tool that skips that field cannot tell t... |
 | [`sha1uc`](index.html#sha1uc) | `sha1lsb35` | SHA1UC is SHA-1 written in uppercase hex and SHA1lsb35 is SHA-1 with the leading nibbles masked to zero, so a tool that skips that field cannot tell t... |
+| [`sha256`](index.html#sha256) | `dynamic-1029` | Measured 2026-09-05. john states dynamic_1029 as "sha256($p) (hash truncated to length 32)", so the two agree on exactly the first 32 hex characters o... |
 | [`sha512-pass-salt`](index.html#sha512-pass-salt) | `sha512rawpasssalt` | Measured 2026-09-05. At depth one the two are numerically identical -- SHA512RAWPASSSALT (e1013) and SHA512PASSSALT (e386) both compute sha512(pass . ... |
 | [`sha512rawpasssalt`](index.html#sha512rawpasssalt) | `sha512-pass-salt` | Measured 2026-09-05. At depth one the two are numerically identical -- SHA512RAWPASSSALT (e1013) and SHA512PASSSALT (e386) both compute sha512(pass . ... |
+| [`whirlpool`](index.html#whirlpool) | `dynamic-1030` | Measured 2026-09-05. john states dynamic_1030 as "whirlpool($p) (hash truncated to length 32)"; the two agree on the first 32 hex characters of whirlp... |
 
 ## Entries nothing can prove yet (0)
 

@@ -11,6 +11,12 @@ denotation:
   note: "john's own label for dynamic_1015, in 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200."
 status: "needs-review"
 tools:
+  mdxfind:
+    types: ["POSTGRESCRAM"]
+    verified: "vector"
+    verified_at: "2026-09-05"
+    verified_with: "mdxfind RCS 1.576 (2026/09/02)"
+    note: "mdxfind e906 POSTGRESCRAM, reached by rewriting this row's vector into mdxfind's serialization: john writes $dynamic_1015$<digest>$HEX$<challenge+$$U+user>; mdxfind reads its own $postgres$<user>*<challenge>*<digest> wrapper. Added 2026-09-05."
   john:
     cpu: ["dynamic_1015"]
     verified: "vector"
@@ -22,4 +28,13 @@ vectors:
   - hash: "$dynamic_1015$1d586cc8d137e5f1733f234d224393e8$HEX$f063f05d242455706f737467726573"
     pass: "openwall"
     source: "john"
+    form: "john"
     reads_in: ["john"]
+    credential: "dynamic-1015"
+  - hash: "$postgres$postgres*f063f05d*1d586cc8d137e5f1733f234d224393e8"
+    pass: "openwall"
+    source: "mdxfind"
+    form: "mdxfind"
+    reads_in: ["mdxfind"]
+    credential: "dynamic-1015"
+notes: "The two vectors on this row are ONE credential written twice and must never be read as corroborating each other. john writes $dynamic_1015$<digest>$HEX$<challenge+$$U+user>; mdxfind reads its own $postgres$<user>*<challenge>*<digest> wrapper. The re-encoding was proven rather than assumed: mdxfind pinned to POSTGRESCRAM recovers this row's own stated plaintext from the rewritten string."

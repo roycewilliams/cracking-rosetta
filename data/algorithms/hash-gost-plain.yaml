@@ -33,6 +33,11 @@ tools:
     verified_with: "john"
   crack:
     supported: false
+relations:
+  - kind: "collides-on-subset"
+    entry: "dynamic-1031"
+    distinction: "truncation"
+    note: "Measured 2026-09-05. john states dynamic_1031 as \"gost($p) (hash truncated to length 32)\"; the two agree on the first 32 hex characters of gost($p) and nowhere else. mdxfind's GOST recovers the 32-hex vector by comparing at the shortest loaded length, which is a capability rather than an identifier for the truncation."
 vectors:
   - hash: "e473da8002e5a1fd1e0d0ba3c22d57c86f793ec8a176c8fb3766909e8b4504e9"
     pass: "rosetta"
