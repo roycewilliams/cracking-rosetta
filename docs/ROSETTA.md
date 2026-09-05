@@ -393,23 +393,23 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | hmac("whirlpool", $plain, $salt) | no | no | `HMAC-WRL` (v) |  |
 | HMAC-BLAKE2S | `33300` (v) | no | `HMAC-BLAKE2S` (v) |  |
 | HMAC-MD5 / HMAC-SHA1, RSVP, IS-IS, OMAPI, RNDC, TSIG | **--** | `rsvp` (v) | no |  |
-| HMAC-MD5-KPASS | `50` (v) | `HMAC-MD5` (v) | `HMAC-MD5-KPASS` (v) |  |
+| HMAC-MD5-KPASS | `50` (v) | no | `HMAC-MD5-KPASS` (v) |  |
 | HMAC-RIPEMD160 (key = $salt) | `6060` (v) | no | `HMAC-RMD160` (v) |  |
 | HMAC-RIPEMD320 (key = $salt) | `33660` (v) | no | `HMAC-RMD320` (v) |  |
 | HMAC-RMD160-KPASS | `6050` (v) | no | `HMAC-RMD160-KPASS` (v) |  |
 | HMAC-RMD320-KPASS | `33650` (v) | no | `HMAC-RMD320-KPASS` (v) |  |
-| HMAC-SHA1 | **--** | `HMAC-SHA1` (v) | `HMAC-SHA1-KPASS` (v) | same as hmac-sha1-kpass (naming) |
-| HMAC-SHA1-KPASS | `150` (v) | `HMAC-SHA1` (v) | `HMAC-SHA1-KPASS` (v) | same as hmac-sha1 (naming) |
-| HMAC-SHA224 | **--** | `HMAC-SHA224` (v) | `HMAC-SHA224-KPASS` (v) | same as hmac-sha224-kpass (naming) |
-| HMAC-SHA224-KPASS | no | `HMAC-SHA224` (v) | `HMAC-SHA224-KPASS` (v) | same as hmac-sha224 (naming) |
+| HMAC-SHA1 | **--** | `HMAC-SHA1` (v) | **--** | same as hmac-sha1-kpass (naming) |
+| HMAC-SHA1-KPASS | `150` (v) | no | `HMAC-SHA1-KPASS` (v) | same as hmac-sha1 (naming) |
+| HMAC-SHA224 | **--** | `HMAC-SHA224` (v) | **--** | same as hmac-sha224-kpass (naming) |
+| HMAC-SHA224-KPASS | no | no | `HMAC-SHA224-KPASS` (v) | same as hmac-sha224 (naming) |
 | HMAC-SHA256 (key = $salt) | `1460` (v) | no | `HMAC-SHA256` (v) |  |
-| HMAC-SHA256-KPASS | `1450` (v) | `HMAC-SHA256` (v) | `HMAC-SHA256-KPASS` (v) |  |
-| HMAC-SHA384 | **--** | `HMAC-SHA384` (v) | `HMAC-SHA384-KPASS` (v) | same as hmac-sha384-kpass (naming) |
+| HMAC-SHA256-KPASS | `1450` (v) | no | `HMAC-SHA256-KPASS` (v) |  |
+| HMAC-SHA384 | **--** | `HMAC-SHA384` (v) | **--** | same as hmac-sha384-kpass (naming) |
 | HMAC-SHA384 | no | **--** | `HMAC-SHA384` (v) |  |
-| HMAC-SHA384-KPASS | no | `HMAC-SHA384` (v) | `HMAC-SHA384-KPASS` (v) | same as hmac-sha384-johnhmac-sha384 (naming) |
-| HMAC-SHA512 | **--** | `HMAC-SHA512` (v) | `HMAC-SHA512-KPASS` (v) | same as hmac-sha512-kpass (naming) |
+| HMAC-SHA384-KPASS | no | no | `HMAC-SHA384-KPASS` (v) | same as hmac-sha384-johnhmac-sha384 (naming) |
+| HMAC-SHA512 | **--** | `HMAC-SHA512` (v) | **--** | same as hmac-sha512-kpass (naming) |
 | HMAC-SHA512 (key = $salt) | `1760` (v) | no | `HMAC-SHA512` (v) |  |
-| HMAC-SHA512-KPASS | `1750` (v) | `HMAC-SHA512` (v) | `HMAC-SHA512-KPASS` (v) | same as hmac-sha512 (naming) |
+| HMAC-SHA512-KPASS | `1750` (v) | no | `HMAC-SHA512-KPASS` (v) | same as hmac-sha512 (naming) |
 | HMAC-STREEBOG256 | `11760` (v) | no | `HMAC-STREEBOG256` (v) |  |
 | HMAC-STREEBOG256-KPASS | `11750` (v) | no | `HMAC-STREEBOG256-KPASS` (v) |  |
 | HMAC-STREEBOG512 | `11860` (v) | no | `HMAC-STREEBOG512` (v) |  |

@@ -205,7 +205,7 @@ A few that carry a vector, so a candidate identifier can be tested at once, one 
 
 All 205: filter `hashcat_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
 
-### mdxfind: 90 entries say nothing
+### mdxfind: 94 entries say nothing
 
 A few that carry a vector, so a candidate identifier can be tested at once, one per family:
 
@@ -225,7 +225,7 @@ A few that carry a vector, so a candidate identifier can be tested at once, one 
 * [`freebsd-geli`](index.html#freebsd-geli) - `FreeBSD GELI`
 * [`gost-r-34-11-94`](index.html#gost-r-34-11-94) - `GOST R 34.11-94`
 
-All 90: filter `mdxfind_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
+All 94: filter `mdxfind_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
 
 ## 4. Identifiers with no row here (66)
 
