@@ -46542,12 +46542,12 @@
          "relations" : [],
          "sameas" : "",
          "serialization" : "unknown",
-         "status" : "needs-review",
+         "status" : "ok",
          "tool_note" : {
             "hashcat" : "",
             "hashpipe" : "",
             "john" : "",
-            "mdxfind" : ""
+            "mdxfind" : "special purpose and not for general use, per mdxfind's maintainer, and it emits nothing. Measured 2026-09-04, pinned with -M under -z: alone, with -s and with -u, stdout was empty in every case, and a run seeded from mdxfind's own regress/md5specamdef.txt produced nothing either. So MDXFIND can generate no vector for it and the mdxfind mapping cannot reach tier vector; that is a property of mdxfind's type rather than a gap here. Narrowed from \"this entry cannot reach tier vector\" on 2026-09-04: hashpipe ships an example for a type of the same name and it verifies, so the row now carries a vector. See notes: -- the two tools do not compute the same thing under this name, which does not touch the measurement above. The identifier is real and in mdxfind's type table, which is what the mapping records."
          },
          "vecs" : 1
       },
@@ -53073,12 +53073,12 @@
          "relations" : [],
          "sameas" : "",
          "serialization" : "unknown",
-         "status" : "needs-review",
+         "status" : "ok",
          "tool_note" : {
             "hashcat" : "",
             "hashpipe" : "",
             "john" : "",
-            "mdxfind" : ""
+            "mdxfind" : "PARALLEL is not a hash. mdxfind's maintainer describes it as a measurement tool rather than an algorithm, and it emits nothing: measured 2026-09-04, run pinned with -M under -z alone, with -s and with -u, stdout empty in every case. So this entry can never reach tier vector and the absence of a vector is a property of the type, not a gap in this repository. The identifier itself is real -- it is in mdxfind's own type table -- and that is all the mapping claims."
          },
          "vecs" : 0
       },
@@ -95038,7 +95038,7 @@
             "hashcat" : "hashcat mapping shipped in mdxfind's own type table",
             "hashpipe" : "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one.",
             "john" : "",
-            "mdxfind" : ""
+            "mdxfind" : "the vector below cracks, but mdxfind cannot GENERATE one: -z emits nothing for this type because a real WPA handshake supplies the ESSID and MAC addresses. A corpus sweep that emits a vector per type will therefore skip WPA-PMK, and that is expected rather than a vector waiting to be filled."
          },
          "vecs" : 1
       },
@@ -96227,6 +96227,6 @@
       "hashcat" : "v7.1.2-549-g8a15e210b",
       "hashpipe" : "RCS 1.192 (2026/09/04)",
       "john" : "1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200",
-      "mdxfind" : "RCS 1.545 (2026/08/29)"
+      "mdxfind" : "RCS 1.576 (2026/09/02)"
    }
 }
