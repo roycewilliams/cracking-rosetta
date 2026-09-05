@@ -14,10 +14,10 @@ status: "needs-review"
 tools:
   hashcat:
     modes: [22000]
-    verified: "upstream"
-    verified_at: "2026-08-31"
+    verified: "vector"
+    verified_at: "2026-09-05"
     verified_with: "hashcat v7.1.2-549-g8a15e210b"
-    note: "NOT REPRODUCED HERE. hashcat publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: this mode wants binary capture input rather than a hash line. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool hashcat --only 22000 to retry."
+    note: "Round-tripped, but attributed by a SOLO run, because hashcat echoed a different spelling of this hash than it was given under mode(s) 22000, and the grouped run attributes a crack by matching the hash string -- its output lines do not correspond to its input lines -- so it could not credit one. One hash and one candidate per invocation leaves nothing else the crack could belong to. The stored vector is unchanged and is the form hashcat was fed."
   mdxfind:
     types: ["WPA-PMKID"]
     verified: "vector"
@@ -30,4 +30,4 @@ vectors:
   - hash: "WPA*01*4d4fe7aac3a2cecab195321ceb99a7d0*fc690c158264*f4747f87f9f4*686173686361742d6573736964***"
     pass: "hashcat!"
     source: "hashcat"
-    reads_in: ["mdxfind"]
+    reads_in: ["hashcat", "mdxfind"]

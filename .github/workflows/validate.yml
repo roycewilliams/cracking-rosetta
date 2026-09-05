@@ -139,7 +139,16 @@ jobs:
       # arithmetic with hits fixed at 1, so it cannot drift from the rule it
       # describes; the boundaries are the assertions that matter. Needs no
       # cracker.
-      - name: Exercise the share guard's measurability rule
+      # It also asserts how hashcat's crack line is read. hc_line_plain_is is
+      # applied only to a SOLO run -- one hash, one candidate -- so the hash's
+      # spelling is conceded and the plaintext is not. It was wrong once,
+      # splitting on the FIRST colon, which on -m 22000's re-serialized line
+      # read the plaintext as "...:hashcat-essid:hashcat!" and recorded a
+      # successful round trip as a failure. A wrong answer there understates
+      # hashcat's support, which reads exactly like a mode that does not
+      # crack, so nothing downstream could have caught it. That exact line is
+      # a fixture.
+      - name: Exercise the share guard and the crack-line reader
         run: perl -Itools/lib tools/test-rosetta-tools.pl
 
       # RosettaExpr is the INDEPENDENT implementation triage uses as its
