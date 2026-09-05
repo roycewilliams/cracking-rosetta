@@ -611,7 +611,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | md5(md2($plain)) | no | no | `MD5MD2` (v) |  |
 | md5(md4($plain)) | no | `dynamic_34` (v) | `MD5MD4` (v) |  |
 | md5(md5($pass)) | `2600` (v) | `dynamic_2` (v) | `MD5 -i2` (v) |  |
-| md5(md5($pass).$salt) | `2611`<br>`2711` | `dynamic_1007`<br>`dynamic_2006`<br>`dynamic_6` (v) | `MD5-MD5PASS-SALT` (v) | same as vbulletin-v3-8-5 (application) |
+| md5(md5($pass).$salt) | `2611`<br>`2711` (v) | `dynamic_1007`<br>`dynamic_2006`<br>`dynamic_6` (v) | `MD5-MD5PASS-SALT` (v) | same as vbulletin-v3-8-5 (application) |
 | md5(md5($pass).md5($salt)) | `3910` (v) | `dynamic_13` (v) | `MD5-MD5PASSMD5SALT` (v) |  |
 | md5(md5($pass.$salt)) | `2630` (v) | no | `MD5PASSSALT -i2` (v) |  |
 | md5(md5($plain).":".$username) | no | no | `MD5MD5USER` (v) | collides with md5-capitalise-md5-plain-username (encoding) |
@@ -743,7 +743,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | MD5DSALT | no | **--** | `MD5DSALT` |  |
 | MD5GOSTMD5UC | no | no | `MD5GOSTMD5UC` (v) |  |
 | MD5LMUC | no | no | `MD5LMUC` (v) |  |
-| MD5MD5HUM | no | no | `MD5MD5HUM` |  |
+| MD5MD5HUM | no | no | `MD5MD5HUM` (v) |  |
 | MD5MD5MD5USER | `3610` (v) | no | `MD5MD5MD5USER` (v) |  |
 | MD5MD5SALT-SALT | no | no | `MD5MD5SALT-SALT` (v) |  |
 | MD5MD5SHA1SALT | no | no | `MD5MD5SHA1SALT` (v) |  |
@@ -1185,7 +1185,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | SHA1MD5TRUNCSALT | no | no | `SHA1MD5TRUNCSALT` |  |
 | SHA1MD5UC | no | no | `SHA1MD5UC` (v) |  |
 | SHA1MD5UC-MD5UCSALT | no | no | `SHA1MD5UC-MD5UCSALT` (v) |  |
-| SHA1MD5UC1LC | no | no | `SHA1MD5UC1LC` |  |
+| SHA1MD5UC1LC | no | no | `SHA1MD5UC1LC` (v) |  |
 | SHA1MD5UCMD5 | no | no | `SHA1MD5UCMD5` (v) |  |
 | SHA1MD5UCMD5UC | no | no | `SHA1MD5UCMD5UC` (v) |  |
 | SHA1MD5UCMD5UCMD5UC | no | no | `SHA1MD5UCMD5UCMD5UC` (v) |  |
