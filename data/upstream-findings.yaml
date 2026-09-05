@@ -1,250 +1,114 @@
-# Project: cracking-rosetta | Phase: upstream drift
-#
-# Places where this repository has MEASURED an upstream DOCUMENT to be wrong,
-# and cannot prove it with a test. CURATED. tools/upstream-findings.pl renders
-# docs/UPSTREAM-FINDINGS.md from it and checks what can be checked.
-#
-# WHY THIS IS NOT data/upstream-disagreements.yaml
-#
-# That file's entire worth is that check-upstream.pl EXECUTES every record in
-# it: upstream moved, our side was re-seeded, or the two converged. A record
-# it cannot run is a record that rots, so the rule there is that a
-# disagreement must be executable against a vendored file.
-#
-# Most of what this repository has found upstream to have got wrong is not
-# executable. The hx specification is a PDF that is not vendored here, so no
-# tool can diff Appendix A. Note [24] being blind to fallthrough is a claim
-# about what a note OMITS, and there is nothing to compare. A measured
-# emission count needs mdxfind and 17 minutes.
-#
-# Dropping those on the floor was the actual state until 2026-09-03: the
-# evidence was scattered across entry notes, module comments and commit
-# messages, where nobody outside the repository could read it. This file is
-# the index, and the document it renders is the thing to hand upstream.
-#
-# WHAT A RECORD IS, AND WHAT IT IS NOT
-#
-# A record is a CLAIM SKELETON plus a pointer to evidence that already exists
-# somewhere in this repository. It is deliberately not a place to retype the
-# evidence: a finding whose long form lives in an entry's expression_proof
-# note is rendered FROM that note, so there is one copy and it cannot drift.
-#
-# Every record: id, document, subject, kind, states, we_measured, measured,
-# and one evidence form. The kinds:
-#
-#   wrong-construction  the document states a construction the type does not
-#                       compute
-#   omission            the document is silent about something it covers
-#                       elsewhere, so a reader of it concludes the wrong thing
-#   rendering           the document's own example cannot be fed back to the
-#                       tool it documents
-#   question            something measured here disagrees with a document and
-#                       the measurement is NOT strong enough to overrule it.
-#                       Reported so upstream can settle it, never acted on.
-#
-# EVIDENCE, AND THE CHECKS THAT KEEP IT HONEST
-#
-# Two forms, and each carries checks the renderer runs on every build:
-#
-#   entry: <id>         the finding is carried by a curated entry. The entry
-#     field: <path>     must exist, the named note must be non-empty, that note
-#     mentions: <text>  must contain the mentions: text, and we_measured must
-#                       still equal the entry's own expression: or
-#                       denotation.text -- so re-seeding upstream's value back
-#                       over a corrected one FAILS the render, which is the
-#                       same failure mode (2) that check-upstream.pl exists to
-#                       catch.
-#
-#                       mentions: is required, not defaulted. The note is
-#                       QUOTED on the page as the evidence, and on 2026-09-03 a
-#                       record cited a note that turned out to be about john's
-#                       notation and to say nothing about the appendix row it
-#                       was offered as proof of. A default would have passed
-#                       exactly that case.
-#
-#   types: [...]        the finding is about a set of mdxfind types. Every
-#     check: [...]      name must be in data/tools/mdxfind.yaml, which catches
-#                       the separator-drift spelling trap, plus whichever of
-#                       these the record asserts:
-#                         multi-emit         RosettaHx::is_multi_emit agrees
-#                         uppercase-example  the vendored catalog really does
-#                                            render that type's example digest
-#                                            in upper-case hex
-#
-#   computed: <rule>    the subject list is DERIVED at render time rather than
-#                       typed, so the count cannot go stale. One rule exists:
-#                       uppercase-example-digest.
-#
-# A count that a tool can derive must never be typed here. The figure this
-# file used to carry in prose elsewhere -- "15 types' example digests in
-# uppercase hex" -- is not reproducible by any rule tried on either catalog
-# on 2026-09-03 (the leading-digest rule gives 12 on the vendored hashpipe
-# catalog and 10 on mdxfind's own), which is exactly what a derived list
-# prevents.
-
-version: 1
-
+---
 findings:
-  - id: "peoplesoft-e858-encoding-and-case"
-    document: "hx specification, Appendix A"
-    subject: "PEOPLESOFT (e858)"
-    kind: "wrong-construction"
-    states: "sha1(utf16be(upper(pass)))"
-    we_measured: "base64(sha1_raw(utf16le($p)))"
-    measured: "2026-09-02"
-    measured_with: "mdxfind source RCS 1.545 (2026/08/29)"
-    evidence:
-      entry: "peoplesoft"
-      field: "expression_proof.note"
-      mentions: "Appendix A is wrong TWICE"
-    summary: >-
-      Two errors in one row. The row states the big-endian widening and a
-      case fold; mdxfind.c's JOB_PEOPLESOFT converts the candidate through an
-      iconv descriptor opened UTF-8 to UTF-16LE//IGNORE and folds no case at
-      all, then base64-encodes the raw 20-byte digest rather than hexing it.
-      Corroborated four further ways, all independent of each other: mdxfind's
-      own hx VM built standalone from the same tree, a recomputation in Perl,
-      hashcat -m 133, and john's dynamic compiler.
-
-  - id: "md5rawuc-e383-upper-applied-to-raw-bytes"
-    document: "hx specification, Appendix A"
-    subject: "MD5RAWUC (e383)"
-    kind: "wrong-construction"
-    states: "hex(upper(md5_bin(pass)))"
-    we_measured: "md5(upper(md5(md5_raw($p))))"
-    measured: "2026-09-02"
-    measured_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a"
-    evidence:
-      entry: "md5-strtoupper-md5-md5-plain-true"
-      field: "notes"
-      mentions: "applies upper() to RAW BYTES"
-    summary: >-
-      The row applies upper() to RAW BYTES and hexes the result afterwards,
-      which is not the same operation as upper-casing the hex text and is not
-      what the type does. The entry carrying this type reaches tier vector
-      with the upper() outside the hex-emitting call, proven by john's own
-      dynamic compiler against the entry's own vector. Note that the entry is
-      at -i 2, so its expression carries one more round than the row
-      describes; the defect being reported is the placement of upper(), which
-      is independent of the iteration count.
-
-  - id: "note-24-blind-to-fallthrough"
-    document: "hx specification, Note [24]"
-    subject: "11 multi-emit types the note does not name"
-    kind: "omission"
-    states: "34 types emit several candidate digests per input"
-    we_measured: "at least 11 more do, by running the same C"
-    measured: "2026-09-02"
-    measured_with: "mdxfind source RCS 1.545 (2026/08/29); mdxfind -z"
-    evidence:
-      types:
-        - "MD5BASE64MD5RAWSHA1"
-        - "MD5BASE64MD5RAWMD5MD5"
-        - "MD5BASE64MD5RAWMD5"
-        - "MD5-DBL-PASS"
-        - "SHA1MD5MD5PASS"
-        - "MD5SQL5-32"
-        - "SHA1SQL5"
-        - "SHA1SQL5MD5"
-        - "SHA1SQL5MD5MD5"
-        - "MD52SALTMD5MD5"
-        - "MD52SALTMD5MD5MD5"
-      check: ["multi-emit"]
-    summary: >-
-      Note [24] names the types that sit AT a C case label whose body emits
-      several digests. It does not name the types that reach that same body by
-      falling through from an earlier label or by jumping into it, although
-      they run exactly the same code and therefore emit exactly as many. The
-      clearest case is mdxfind.c's b64md5raw block, which md5s the base64 of a
-      raw digest and then md5s the same string minus its "==" padding, and
-      checks both: MD5BASE64MD5RAWMD5 falls into it and MD5BASE64MD5RAWSHA1
-      jumps to it, and the note names neither. Each type listed here was
-      confirmed twice over -- the source says the body emits more than one,
-      and mdxfind -z agrees -- because a single expression for a multi-emit
-      type is a false claim even when the string is one of the forms.
-
-  - id: "doc-only-multi-emit-note-24"
-    document: "hx specification, Note [24]"
-    subject: "6 types the note calls multi-emit that measured one emission"
-    kind: "question"
-    states: "these types emit several candidate digests per input"
-    we_measured: "one emission each under a plain 'mdxfind -z' invocation"
-    measured: "2026-09-02"
-    measured_with: "mdxfind RCS 1.545 (2026/08/29), 1002 types swept in 1022s"
-    evidence:
-      types:
-        - "MD5BASE64SHA1RAW"
-        - "MD5UCBASE64SHA1RAW"
-        - "SHA1MD5BASE641SALT"
-        - "SHA1MD6TRUNC"
-        - "SHA1SALTSHA256UCTRUNC"
-        - "SHA1SALTSHA512UCTRUNC"
-      check: ["multi-emit"]
-    summary: >-
-      Nothing was withdrawn on these and nothing should be. A measured 1 is not
-      a refutation: several families take extra input -- a -u user list, a -j
-      pepper array, a salt file -- that a plain -z invocation does not supply,
-      and NTLM is the standing example of a type that prints one under -z while
-      hx Note [29] states it emits three. This is reported as a QUESTION
-      upstream can settle from the source rather than as a defect. What would
-      settle it is the invocation each of these needs in order to reach its
-      second emission, or confirmation that the document over-reaches.
-
-  - id: "doc-only-multi-emit-appendix-gloss"
-    document: "hx specification, Appendix A"
-    subject: "7 types the appendix's own gloss calls multi-emit that measured one emission"
-    kind: "question"
-    states: "these types emit several candidate digests per input"
-    we_measured: "one emission each under a plain 'mdxfind -z' invocation"
-    measured: "2026-09-02"
-    measured_with: "mdxfind RCS 1.545 (2026/08/29), 1002 types swept in 1022s"
-    evidence:
-      types:
-        - "SHA1MD5TRUNCSALT"
-        - "SHA1MD6CAPTRUNC"
-        - "SHA1SHA1PASS-TRUNC1SALT"
-        - "SHA1SHA1TRUNCSALT"
-        - "SHA1SHA512TRUNC1SALT"
-        - "SHA1WRLTRUNC"
-        - "SHA1WRLUCTRUNC"
-      check: []
-    summary: >-
-      The same question as the doc-only-multi-emit-note-24 record, split from
-      it because the evidence is a different document. Note [24] does not name these seven; what makes them
-      multi-emit here is Appendix A's own gloss -- an emit() call in the
-      expression, or a stated numeric range for a swept truncation length, as
-      in "sha1(cut(sha3_256(pass), 0, N)) (N = 21-64)". That is a document this
-      repository cannot vendor, being a PDF, so the only check this record can
-      run is that the seven names are spelled as the binary spells them. The
-      split is itself the useful part for anyone fixing this: six of the
-      thirteen are a Note [24] question and seven are an appendix question.
-
-  - id: "uppercase-example-digests"
-    document: "vendored hashpipe HASH_TYPES.md"
-    subject: "types whose example digest is rendered in upper-case hex"
-    kind: "rendering"
-    states: "the example is the complete self-test vector, in the format the tool accepts"
-    we_measured: "mdxfind's loader will not read those examples back"
-    measured: "2026-08-31"
-    measured_with: "mdxfind RCS 1.545 (2026/08/29)"
-    evidence:
-      computed: "uppercase-example-digest"
-    summary: >-
-      The catalog says every example passes its self-test and is in the format
-      the tool accepts as input. For these types the digest is printed in
-      upper-case hex, and feeding one back is not a round-trip -- it is a hash
-      the loader declines. Re-casing is not a general fix and must not be
-      treated as one: of the types this repository has chased, only
-      MD5UCBASE64SHA1RAW turned out to be purely a case problem, while MD5UC,
-      SHA256UC and RACF reproduce in neither case, so something else is wrong
-      with those rows as well. Re-casing on failure is a search for a string
-      that passes rather than a fix, which is why this is reported rather than
-      patched locally.
-      SHA256UC is now measured further, 2026-09-04, and the result narrows the
-      bug rather than widening it: the published digest IS sha256 of the
-      published plaintext. Lower-cased and offered to mdxfind's own SHA256
-      type it reproduces at once, as SHA256x01, so the DIGEST in the catalog
-      is correct and it is the SHA256UC type that cannot read its own example
-      in either case. hashpipe verifies the same line under -c pinned to
-      SHA256UC, so the two tools disagree about that type and not about the
-      hash.
+- document: hx specification, Appendix A
+  evidence:
+    entry: peoplesoft
+    field: expression_proof.note
+    mentions: Appendix A is wrong TWICE
+  id: peoplesoft-e858-encoding-and-case
+  kind: wrong-construction
+  measured: 2026-09-02
+  measured_with: mdxfind source RCS 1.545 (2026/08/29)
+  states: sha1(utf16be(upper(pass)))
+  subject: PEOPLESOFT (e858)
+  summary: 'Two errors in one row. The row states the big-endian widening and a case
+    fold; mdxfind.c''s JOB_PEOPLESOFT converts the candidate through an iconv descriptor
+    opened UTF-8 to UTF-16LE//IGNORE and folds no case at all, then base64-encodes
+    the raw 20-byte digest rather than hexing it. Corroborated four further ways,
+    all independent of each other: mdxfind''s own hx VM built standalone from the
+    same tree, a recomputation in Perl, hashcat -m 133, and john''s dynamic compiler.'
+  we_measured: base64(sha1_raw(utf16le($p)))
+- document: hx specification, Appendix A
+  evidence:
+    entry: md5-strtoupper-md5-md5-plain-true
+    field: notes
+    mentions: applies upper() to RAW BYTES
+  id: md5rawuc-e383-upper-applied-to-raw-bytes
+  kind: wrong-construction
+  measured: 2026-09-02
+  measured_with: john 1.9.0-jumbo-1+bleeding-9a336d800a
+  states: hex(upper(md5_bin(pass)))
+  subject: MD5RAWUC (e383)
+  summary: The row applies upper() to RAW BYTES and hexes the result afterwards, which
+    is not the same operation as upper-casing the hex text and is not what the type
+    does. The entry carrying this type reaches tier vector with the upper() outside
+    the hex-emitting call, proven by john's own dynamic compiler against the entry's
+    own vector. Note that the entry is at -i 2, so its expression carries one more
+    round than the row describes; the defect being reported is the placement of upper(),
+    which is independent of the iteration count.
+  we_measured: md5(upper(md5(md5_raw($p))))
+- document: hx specification, Note [24]
+  evidence:
+    check:
+    - multi-emit
+    types:
+    - MD5BASE64MD5RAWSHA1
+    - MD5BASE64MD5RAWMD5
+    - MD5BASE64MD5RAWMD5MD5
+    - MD5SQL5-32
+  id: note-24-blind-to-fallthrough
+  kind: omission
+  measured: 2026-09-05
+  measured_with: mdxfind.c
+  states: 34 types emit several candidate digests per input
+  subject: 4 multi-emit types the note does not name
+  summary: 'Note [24] enumerates the types that emit more than one digest per input.
+    Four are absent from it, by name and by index. MD5BASE64MD5RAWSHA1 (e242), MD5BASE64MD5RAWMD5
+    (e243) and MD5BASE64MD5RAWMD5MD5 (e244) fall through to the b64md5raw label, which
+    computes a second digest over len-2 and checks both, so they belong in the same
+    paragraph as e237 and e375. MD5SQL5-32 (e342) fills mdcur[0] through mdcur[7]
+    and emits eight digests per password, over the upper- and lower-case renderings
+    with and without the leading "1" and "*". Narrowed here from eleven types to four
+    on 2026-09-05: Note [24] has since grown to name the other seven.'
+  we_measured: at least 4 more do, by reading the cases in mdxfind.c
+- document: hx specification, Note [24]
+  evidence:
+    check:
+    - multi-emit
+    types:
+    - MD5BASE64SHA1RAW
+    - MD5UCBASE64SHA1RAW
+  id: doc-only-multi-emit-note-24
+  kind: wrong-construction
+  measured: 2026-09-05
+  measured_with: mdxfind.c, the JOB_MD5BASE64SHA1RAW case
+  states: both emit the full-length base64 string and a 2-character-shorter variant
+  subject: MD5BASE64SHA1RAW (e238), MD5UCBASE64SHA1RAW (e376)
+  summary: 'Note [24] groups these two with e237 MD5BASE64MD5RAW and e375 MD5UCBASE64MD5RAW
+    as emitting both the full base64 string and a two-character-shorter variant. mdxfind
+    has two code paths and only one does that: b64md5raw computes a second digest
+    over len-2, b64sha1raw sets x = 1 and goes straight to MDstart. The difference
+    is arithmetic rather than an oversight in the code -- an md5 digest is 16 bytes
+    and its base64 ends in two "=" characters, while a sha1 digest is 20 and its base64
+    ends in one, so for the SHA1RAW pair there is no two-character variant to take.
+    Narrowed here from six types to two on 2026-09-05: the other four -- SHA1MD5BASE641SALT,
+    SHA1MD6TRUNC, SHA1SALTSHA256UCTRUNC and SHA1SALTSHA512UCTRUNC -- are multi-emit
+    in the source, so the note was right about them and the earlier measurement was
+    wrong.'
+  we_measured: one emission each; there is no shorter variant to take
+- document: vendored hashpipe HASH_TYPES.md
+  evidence:
+    computed: uppercase-example-digest
+  id: uppercase-example-digests
+  kind: wrong-construction
+  measured: 2026-09-05
+  measured_with: mdxfind.c and mdxfind RCS 1.576 (2026/09/02)
+  states: md5_uc(pass), sha1_uc(pass), sha256_uc(pass), hex(upper(md5_bin(pass)))
+  subject: 'the UC family: MD5UC (e2), SHA1UC (e182), SHA256UC (e488), MD5RAWUC (e383)'
+  summary: 'RE-DIAGNOSED 2026-09-05 against mdxfind.c. This was recorded as a RENDERING
+    fault -- an example printed in upper-case hex that the loader declines -- and
+    re-casing was reported as no general fix because MD5UC, SHA256UC and RACF reproduced
+    in neither case. The reason they do not is not the case of the letters. Each of
+    these types renders its digest as upper-case hex with prmd5UC and then sets x
+    = 2 before entering the iteration loop, so the value it presents for matching
+    is one further hash OVER that upper-case hex, and it is reported at x02 because
+    there is no x01. The published example is the INTERMEDIATE, the string at the
+    moment prmd5UC produces it, which the type never offers. Measured for each: md5(md5_uc(pass))
+    is cb8bca2e221b4ae44c95ca2f70f8f407 and mdxfind reports it as MD5UCx02; sha1(sha1_uc(pass))
+    and sha256(sha256_uc(pass)) behave identically under e182 and e488. So no amount
+    of re-casing was ever going to make these read back, which is why the earlier
+    note could not explain them. The Appendix A rows have been corrected; the example
+    vectors are hashpipe\x27s and are reported here rather than patched locally.'
+  we_measured: each type reports one further hash OVER that upper-case hex, first
+    at x02
+version: 1

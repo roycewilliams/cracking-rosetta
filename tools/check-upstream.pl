@@ -101,6 +101,8 @@ use File::Basename qw(basename);
 use FindBin qw($RealBin);
 use Getopt::Long qw(GetOptions);
 use YAML::XS ();
+use lib "$RealBin/lib";
+use RosettaHx qw(strip_gloss);
 
 my $PROG = basename($0);
 my $ROOT = "$RealBin/..";
@@ -670,8 +672,11 @@ sub check_appendix_row {
         return;
     }
 
-    # The parenthesised gloss is not part of the construction.
-    (my $bare = $row) =~ s/\s*\([^()]*\)\s*$//;
+    # The parenthesised gloss is not part of the construction. RosettaHx owns
+    # that separation: a gloss is set off by whitespace and what precedes it
+    # must balance, so an argument list is left alone. A plain trailing-paren
+    # strip turns md5_uc(pass) into md5_uc and reports the row as moved.
+    my ($bare) = strip_gloss($row);
     $bare =~ s/^\s+|\s+$//g;
 
     # Convergence first, and reported alone: it retires both this record and
