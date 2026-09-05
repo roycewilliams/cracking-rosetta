@@ -263,10 +263,16 @@ mdxfind also accepts hashcat modes directly (`mdxfind -m 0`, `-m e1`,
   from the inventory instead.** Fixed 2026-09-05 in `seed-orphans.pl` and all
   three `discover-*.pl`; `RosettaTools::tool_version($name, $path)` asks the
   binary and returns undef rather than guessing. The two coincided for weeks,
-  which is exactly why nobody noticed. 1473 entries still carry a bare tool
-  name with no version at all (797 `mdxfind`, 380 `john`, 296 `hashcat`) --
-  **do not bulk back-fill them**: stamping today's build onto a claim some
-  earlier build proved is inventing evidence, and 244 entries openly cite
+  which is exactly why nobody noticed. A backlog of blocks still carries a
+  bare tool name with no version at all -- count it rather than trusting a
+  figure here, since every verification run changes it:
+
+      grep -h -oE 'verified_with: "(john|mdxfind|hashcat)"$' data/algorithms/*.yaml | sort | uniq -c
+
+  Measured 2026-09-05, before that day's hashcat re-verification sweep: 797
+  `mdxfind`, 376 `john`, 296 `hashcat`, across 962 entries.
+  **Do not bulk back-fill them**: stamping today's build onto a claim some
+  earlier build proved is inventing evidence, and 244 blocks openly cite
   `mdxfind RCS 1.540`.
 
 - **A SECOND READER OF THE NOTATION IS A SECOND GRAMMAR.** `RosettaExpr`
