@@ -198,6 +198,40 @@ The same four tiers apply to `expression:` via `expression_proof:` -- see
 **Expression language** below. It is the same kind of claim and deserves the
 same audit trail.
 
+### `absent` is a measurement, and it expires
+
+The other three tiers describe a claim that was proved. `absent` describes one
+that could not be, which makes it the only tier that can go wrong while nobody
+touches it: it is a statement about a BUILD, and the build moves.
+
+Measured 2026-09-05. Every one of the 343 mdxfind absences here had been
+established against mdxfind RCS 1.545 with 1002 types, by a full
+`discover-mdxfind.pl` sweep with positive controls -- careful work, correctly
+recorded. `data/tools/mdxfind.yaml` had since been regenerated at RCS 1.576
+with 1027. The 25 indices added between the two builds, `e1003`-`e1027`, are
+overwhelmingly John-shaped formats, and nineteen of the absences were about
+exactly those algorithms. The notes even said so, in terms: *"hashpipe DOES
+cover this algorithm, as type DRAGONFLY3-32, which mdxfind has no equivalent
+of ... This is the absence of an IDENTIFIER, not of the algorithm: if mdxfind
+gains one, this becomes a mapping."* mdxfind gained one. Nothing compared the
+two version strings, so nothing noticed, and the rows went on saying no.
+
+So **`verified_with` on an `absent` claim is load-bearing, not decoration.**
+`validate.pl` now reports every absence naming a build the inventory has moved
+past -- an advisory, because a stale absence is unverified rather than wrong.
+It found 327 mdxfind claims still at 1.545 and 19 hashcat claims with no
+recorded build at all, which cannot be checked even in principle.
+`verify-vectors.pl` wrote a bare `"mdxfind"` into the same field and now writes
+the inventory's version string, so what it promotes stays auditable.
+
+What closes an absence is cheap, and should be the reflex after any inventory
+refresh: sweep the corpus against the indices the refresh ADDED, one type per
+invocation, rather than re-running everything. Measured 2026-09-05: 25 types
+over 1761 hashes took under a minute.
+
+A GAPS.md section per tool is the other half. Only hashcat had one, so the 25
+new mdxfind types were in no queue and nobody had reason to look at them.
+
 ### An entry with no vector is not always a gap
 
 `GAPS.md` used to list every entry with no `vectors:` under "No test vector at
@@ -394,6 +428,36 @@ mdxfind also accepts hashcat modes directly (`mdxfind -m 0`, `-m e1`,
   carries two numberings, and `data/upstream-disagreements.yaml` still
   records the detect path's -- which is the one this repository uses as its
   hashpipe oracle. `test-hashpipe-c.pl` asserts that split too.
+- **A shared salt pool can MANUFACTURE a hit, not only suppress one.** The
+  entry above records that a large type selection suppresses matches. The
+  mirror image is real, measured 2026-09-05: sweeping 1761 corpus hashes with
+  `mdxfind -M e1003 -F <all>` reported a hit on the `md4` row, because with
+  every corpus salt loaded `MD4SALTPASS` finds a salt for which `md4($s.$p)`
+  equals `md4($p)` -- the empty one. Pinned to that row's own vector alone,
+  the same type cracks nothing. Four more hits in the same sweep had the same
+  shape: `SHA512RAWPASSSALT` on two `SHA512PASSSALT` rows, which are identical
+  at x01 and differ only in iteration role, and `SHA1UCUSERPASS` on `MANGOS`.
+  Every one was on a row already naming a LOWER `eN`, which is the existing
+  tie-break doing its job. **A corpus-wide sweep proposes; a run pinned to the
+  single row disposes.** Never record a mapping from the sweep line.
+- **hashpipe's `-m` does not restrict what a recognised wrapper reaches.**
+  Measured on hashpipe RCS 1.193, 2026-09-05, and reported upstream rather
+  than worked around here. `parse_line`'s prefix recogniser resolves a known
+  wrapper with `find_type_by_name("7ZIP")` and never consults `ModeList`, so
+  `printf '$7z$...' | hashpipe -m e1021` reports `7ZIP` although e1021 is
+  DRAGONFLY3-32. 61 types are named by a recogniser call site; over a
+  1743-line corpus with a 29-index `-m`, 96 of 122 results named a type
+  outside the selection. Types with no recogniser entry -- MONGODB, H3C,
+  DRAGONFLY3-32, SUNMD5, ORACLE11 -- obey `-m` correctly, which is the
+  control. So a `-m` pin is not yet the hashpipe equivalent of
+  `mdxfind -h '^TYPE$'`, and a tool treating it as one will record a mapping
+  the pin never proved.
+- **hashpipe loses matches as the thread count rises.** Same input, same
+  flags, five runs each, measured 2026-09-05: `-t 1` and `-t 2` give 122 every
+  time, `-t 4` gives 116, `-t 8` gives 117, `-t 16` gives 114-119 varying run
+  to run. The default is the CPU count. A lost match is indistinguishable from
+  a genuine negative, which is the failure `absence.pl` exists to prevent, so
+  run hashpipe at `-t 1` wherever its silence will be read as evidence.
 - **Name separator drift.** The source sheet wrote `HAV128_4` where mdxfind
   writes `HAV128-4`. Normalize by stripping non-alphanumerics before matching;
   store the tool's exact spelling.

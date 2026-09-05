@@ -241,6 +241,23 @@ for my $t (@tools) {
 make_path($workdir) unless -d $workdir;
 my $today = strftime('%Y-%m-%d', localtime);
 
+# The build each inventory was extracted from, so a tier this tool writes says
+# WHICH build established it.
+#
+# It used to write a bare "mdxfind". That is the whole provenance of a claim,
+# and without a version there is nothing later to compare against: measured
+# 2026-09-05, 327 mdxfind 'absent' claims named RCS 1.545 while the inventory
+# had moved to 1.576, and nineteen of them were wrong because the 25 indices
+# added between the two builds were exactly the types they said were missing.
+# Those at least NAMED a build and so were detectable once something looked;
+# a bare "mdxfind" is not. validate.pl now reports the mismatch, and this is
+# the other half - a claim that can be checked at all.
+my %INV_VERSION;
+for my $t (qw(hashcat john mdxfind hashpipe)) {
+    my $d = eval { YAML::XS::LoadFile("$ROOT/data/tools/$t.yaml") } or next;
+    $INV_VERSION{$t} = $d->{version} if defined $d->{version} && length $d->{version};
+}
+
 # Which mdxfind types carry a salt, so -f or -F is chosen from the inventory.
 my (%MX_SALTED, %MX_PEPPER);
 if ($want{mdxfind}) {
@@ -902,9 +919,9 @@ if (!$dry) {
                 next if ($blk->{verified} // '') eq 'vector';
                 $blk->{verified}      = 'vector';
                 $blk->{verified_at}   = $today;
-                $blk->{verified_with} = $tool eq 'hashcat' ? 'hashcat'
-                                      : $tool eq 'mdxfind' ? 'mdxfind'
-                                      :                      'john';
+                $blk->{verified_with} = defined $INV_VERSION{$tool}
+                                      ? "$tool $INV_VERSION{$tool}"
+                                      : $tool;
                 $promoted{$tool}++;
                 $touched = 1;
             }

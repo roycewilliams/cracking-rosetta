@@ -205,7 +205,7 @@ A few that carry a vector, so a candidate identifier can be tested at once, one 
 
 All 195: filter `hashcat_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
 
-### mdxfind: 106 entries say nothing
+### mdxfind: 102 entries say nothing
 
 A few that carry a vector, so a candidate identifier can be tested at once, one per family:
 
@@ -214,7 +214,6 @@ A few that carry a vector, so a candidate identifier can be tested at once, one 
 * [`1password-cloud-keychain`](index.html#1password-cloud-keychain) - `1Password Cloud Keychain`
 * [`1password-agilekeychain`](index.html#1password-agilekeychain) - `1Password, agilekeychain`
 * [`apple-dmg`](index.html#apple-dmg) - `Apple DMG`
-* [`astra-linux-gost12256hash`](index.html#astra-linux-gost12256hash) - `Astra Linux $gost12256hash$` (and 1 more starting `Astra`)
 * [`battlenet`](index.html#battlenet) - `Battlenet`
 * [`bouncycastle`](index.html#bouncycastle) - `BouncyCastle`
 * [`cardano-encrypted-128-byte-secret-key-a-k-a-xprv`](index.html#cardano-encrypted-128-byte-secret-key-a-k-a-xprv) - `Cardano Encrypted 128-byte Secret Key (a.k.a XPrv)`
@@ -224,16 +223,101 @@ A few that carry a vector, so a candidate identifier can be tested at once, one 
 * [`domain-cached-credentials-dcc-ms-cache-nt`](index.html#domain-cached-credentials-dcc-ms-cache-nt) - `Domain Cached Credentials (DCC), MS Cache (NT)` (and 1 more starting `Domain`)
 * [`dynamic-1015`](index.html#dynamic-1015) - `dynamic_1015` (and 7 more starting `dynamic`)
 * [`enpass-password-manager`](index.html#enpass-password-manager) - `Enpass Password Manager`
+* [`freebsd-geli`](index.html#freebsd-geli) - `FreeBSD GELI`
 
-All 106: filter `mdxfind_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
+All 102: filter `mdxfind_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
 
-## 4. hashcat modes with no row here (1)
+## 4. Identifiers with no row here (86)
 
-Whole algorithms rather than gaps in a row. Many are full-disk-encryption and
-wallet formats whose place in this table is still an open question; others are
-simply not written yet. hashcat publishes an example hash for each, so an
-entry can usually be created and proven in one sitting.
+Whole algorithms rather than gaps in a row. Each is an identifier a tool
+publishes and this table does not answer to, so somebody arriving by it lands
+nowhere. Many are full-disk-encryption and wallet formats whose place here is
+still an open question; others are simply not written yet.
+
+Every tool gets this section, not just hashcat. Until 2026-09-05 only hashcat
+had one, and the asymmetry hid a queue: mdxfind had gained twenty-five types
+that no row named, ten of them John-shaped formats this repository already had
+rows for and had recorded as mdxfind `absent`. Nothing pointed at them, so
+nobody looked.
+
+### hashcat: 1 with no row
+
+hashcat publishes an example hash for each, so an entry can usually be created and proven in one sitting.
 
 * `14600` - LUKS v1 (legacy)
 
-All 1 are listed by `tools/validate.pl -v`.
+### mdxfind: 10 with no row
+
+Both `mdxfind -N`-style catalogs and `hashpipe -N` publish a self-test vector per type, so these can be proven without hunting for a hash.
+
+* `MD4UTF16MD5HUM` - e575
+* `MD4UTF16SHA1HUM` - e576
+* `SHA1SQL5MD5` - e760
+* `SHA1SQL5MD5MD5` - e761
+* `MD5PASSSALTMD5PASSSALT` - e1007
+* `QAS-VASAUTH` - e1008
+* `SHA512RAWPASSSALT` - e1013
+* `SAPCODVNH256` - e1016
+* `SAPCODVNH384` - e1017
+* `ARGON2MD5` - e1020
+
+### john: 23 with no row
+
+john's own `src/*_fmt_plug.c` test arrays carry a vector for nearly every format; `tools/seed-john-vectors.pl` reads them.
+
+* `Drupal7-ztex`
+* `OpenBSD-SoftRAID-opencl`
+* `agilekeychain-opencl`
+* `bcrypt-ztex`
+* `cloudkeychain-opencl`
+* `descrypt-ztex`
+* `diskcryptor-opencl`
+* `dmg-opencl`
+* `enpass-opencl`
+* `geli-opencl`
+* `keystore-opencl`
+* `md5crypt-ztex`
+* `mscash-opencl`
+* `o5logon-opencl`
+* `pfx-opencl`
+* `phpass-ztex`
+* `sha256crypt-ztex`
+* `sha512crypt-ztex`
+* `sm3crypt-opencl`
+* `solarwinds-opencl`
+* `strip-opencl`
+* `wpapsk-opencl`
+* `wpapsk-pmk-opencl`
+
+### hashpipe: 52 with no row
+
+hashpipe ships a self-test vector for every registered type; `hashpipe -N` prints the table and `-G` generates one where a type has none.
+
+* `BMW224` - e56
+* `BMW256` - e57
+* `MD5MD5HUM` - e363
+* `SHA1MD5HUM` - e364
+* `SHA1SHA1HUM` - e365
+* `MD5SHA1HUM` - e366
+* `MD5UCBASE64MD5RAW` - e375
+* `MD5SHA1MD5HUM` - e378
+* `MD5DSALT` - e408
+* `MD5SPECAM` - e435
+* `YAF-SHA1` - e459
+* `SHA256UC` - e488
+* `SHA1SALTCX` - e521
+* `MD4UTF16MD5HUM` - e575
+* `MD4UTF16SHA1HUM` - e576
+* `SHA1SHA256UCxSHA256` - e582
+* `SHA1SHA256TRUNC` - e622
+* `SHA1SHA256TRUNCMD5` - e623
+* `SHA1SHA1TRUNC` - e626
+* `SHA1SHA256UCTRUNC` - e630
+* `SHA1WRLTRUNC` - e635
+* `SHA1SHA512TRUNC` - e636
+* `SHA1MD6TRUNC` - e644
+* `SHA1WRLUCTRUNC` - e653
+* `SHA1SHA1UCTRUNC` - e661
+
+All 52 are listed by `tools/validate.pl -v`.
+

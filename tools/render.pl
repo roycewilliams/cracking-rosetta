@@ -797,12 +797,45 @@ for my $r (@out) {
     }
 }
 
-# hashcat modes nobody has claimed. The inventory is the denominator the
-# coverage line in validate.pl uses, so this is the same set it counts.
-my %claimed_mode;
-for my $r (@out) { $claimed_mode{$_} = 1 for @{ $r->{hashcat}{ids} } }
-my @orphan_modes = grep { !$claimed_mode{ $_->{mode} } }
-                   @{ $inv{hashcat}{modes} || [] };
+# Identifiers nobody has claimed. The inventory is the denominator the coverage
+# line in validate.pl uses, so these are the same sets it counts, and the match
+# is exact for the same reason it is there.
+#
+# Only hashcat had this section until 2026-09-05, and the asymmetry hid a real
+# queue: mdxfind had gained 25 types that no row named, ten of them john-shaped
+# formats this repository already had rows for and had recorded as mdxfind
+# 'absent'. Nothing pointed at them, so nobody looked. A tool that publishes an
+# identifier is a tool someone will arrive by, whichever tool it is.
+my %orphan_ids;
+{
+    my %list = (
+        hashcat  => [ map { { id => $_->{mode}, label => ($_->{name}  // '?') } }
+                      @{ $inv{hashcat}{modes}   || [] } ],
+        mdxfind  => [ map { { id => $_->{name}, label => ($_->{index} // '?') } }
+                      @{ $inv{mdxfind}{types}   || [] } ],
+        john     => [ map { { id => $_->{label}, label => ($_->{name} // '') } }
+                      @{ $inv{john}{formats}    || [] } ],
+        hashpipe => [ map { { id => $_->{name}, label => ($_->{index} // '?') } }
+                      @{ $inv{hashpipe}{types}  || [] } ],
+    );
+    # Read the RAW entries, not the rendered cells. cell() decorates an mdxfind
+    # identifier with its iteration count -- "MD5CAP -i2" -- which is a display
+    # label and matches no inventory name, so scanning the cells reported two
+    # types as unclaimed that two rows name at tier vector. The coverage line in
+    # validate.pl reads the raw block, and these counts have to agree with it.
+    for my $tool (sort keys %list) {
+        my %claimed;
+        for my $e (@rows) {
+            my $b = $e->{tools}{$tool} or next;
+            my @ids = $tool eq 'hashcat' ? @{ $b->{modes} || [] }
+                    : $tool eq 'john'    ? (@{ $b->{cpu} || [] }, @{ $b->{gpu} || [] })
+                    :                      @{ $b->{types} || [] };
+            $claimed{$_} = 1 for @ids;
+        }
+        $orphan_ids{$tool} = [ grep { !$claimed{ $_->{id} } } @{ $list{$tool} } ];
+    }
+}
+my @orphan_modes = @{ $orphan_ids{hashcat} || [] };
 
 sub gaps_link {
     my ($r) = @_;
@@ -972,17 +1005,44 @@ outright. It is deliberately **not** in john's column, which lists formats
 GAPS_JOHN
 }
 
-printf {$gp} "## 4. hashcat modes with no row here (%d)\n\n", scalar @orphan_modes;
-print  {$gp} <<'GAPS_4';
-Whole algorithms rather than gaps in a row. Many are full-disk-encryption and
-wallet formats whose place in this table is still an open question; others are
-simply not written yet. hashcat publishes an example hash for each, so an
-entry can usually be created and proven in one sitting.
+{
+    my $total = 0;
+    $total += scalar @{ $orphan_ids{$_} } for keys %orphan_ids;
+    printf {$gp} "## 4. Identifiers with no row here (%d)\n\n", $total;
+    print {$gp} <<'GAPS_4';
+Whole algorithms rather than gaps in a row. Each is an identifier a tool
+publishes and this table does not answer to, so somebody arriving by it lands
+nowhere. Many are full-disk-encryption and wallet formats whose place here is
+still an open question; others are simply not written yet.
+
+Every tool gets this section, not just hashcat. Until 2026-09-05 only hashcat
+had one, and the asymmetry hid a queue: mdxfind had gained twenty-five types
+that no row named, ten of them John-shaped formats this repository already had
+rows for and had recorded as mdxfind `absent`. Nothing pointed at them, so
+nobody looked.
 
 GAPS_4
-printf {$gp} "* `%d` - %s\n", $_->{mode}, ($_->{name} // '?')
-    for @orphan_modes[0 .. ($#orphan_modes < 24 ? $#orphan_modes : 24)];
-printf {$gp} "\nAll %d are listed by `tools/validate.pl -v`.\n", scalar @orphan_modes;
+    my %blurb = (
+        hashcat  => 'hashcat publishes an example hash for each, so an entry can usually be created and proven in one sitting.',
+        mdxfind  => 'Both `mdxfind -N`-style catalogs and `hashpipe -N` publish a self-test vector per type, so these can be proven without hunting for a hash.',
+        john     => 'john\'s own `src/*_fmt_plug.c` test arrays carry a vector for nearly every format; `tools/seed-john-vectors.pl` reads them.',
+        hashpipe => 'hashpipe ships a self-test vector for every registered type; `hashpipe -N` prints the table and `-G` generates one where a type has none.',
+    );
+    for my $tool (qw(hashcat mdxfind john hashpipe)) {
+        my $o = $orphan_ids{$tool} || [];
+        printf {$gp} "### %s: %d with no row\n\n", $tool, scalar @$o;
+        if (!@$o) { print {$gp} "None.\n\n"; next }
+        print {$gp} "$blurb{$tool}\n\n";
+        my $cap = $#$o < 24 ? $#$o : 24;
+        for my $e (@{$o}[0 .. $cap]) {
+            printf {$gp} "* `%s`%s\n", $e->{id},
+                (length($e->{label} // '') ? " - $e->{label}" : '');
+        }
+        printf {$gp} "\nAll %d are listed by `tools/validate.pl -v`.\n\n", scalar @$o
+            if @$o > $cap + 1;
+        print {$gp} "\n" unless @$o > $cap + 1;
+    }
+}
 close $gp;
 
 #-----------------------------------------------------------------------

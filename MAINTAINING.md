@@ -91,6 +91,7 @@ Two rules that have each cost real time here:
 | Looking for missing John mappings | `tools/discover-john.pl`, then `tools/identify-john.pl` (the two search directions) |
 | Expressions | `tools/expressions.pl` (transcribe, tier `upstream`), then `tools/derive-expressions.pl` (prove, tier `vector`) |
 | Two entries share an expression | `tools/relate.pl` -- writes both sides; never hand-write one |
+| An inventory was regenerated at a newer build | Sweep the corpus against the indices the refresh ADDED, one type per invocation -- those are the only ones that can flip an `absent` claim, and `validate.pl` lists how many claims name an older build. Skipping this is how 19 mdxfind absences stayed wrong through a refresh that had already added their types |
 | Refreshing upstream copies | `tools/fetch-upstream.sh`, committed on its own -- it writes the commit and date into `vendor/*/PROVENANCE.md` itself; then `tools/check-upstream.pl --check -v` |
 | A known disagreement with an upstream document | `data/upstream-disagreements.yaml`, executed by `tools/check-upstream.pl`. Add a record only when the disagreement has been MEASURED; delete it the day the record reports `converged`, which means upstream fixed it |
 | Giving an entry a recognisable vector | `tools/vanity.pl --entry ID` (`--apply` to write) -- a second vector whose digest starts `dec0ded`, alongside the plain one, never over it |

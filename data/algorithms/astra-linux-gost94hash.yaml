@@ -11,6 +11,12 @@ denotation:
   note: "john's own label for gost94crypt, in 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200."
 status: "ok"
 tools:
+  mdxfind:
+    types: ["GOST94CRYPT"]
+    verified: "vector"
+    verified_at: "2026-09-05"
+    verified_with: "mdxfind RCS 1.576 (2026/09/02)"
+    note: "mdxfind e1026 GOST94CRYPT. Added 2026-09-05: no mdxfind block existed on this row and mdxfind has a type for this algorithm."
   hashpipe:
     types: ["GOST94CRYPT"]
     verified: "vector"
@@ -30,4 +36,4 @@ vectors:
   - hash: "$gost94hash$salt$sG.6rfU0vKHX4eL00bUDqjXxaAcQHqpJQlM3ctfj013"
     pass: "magnum"
     source: "john"
-    reads_in: ["john"]
+    reads_in: ["john", "mdxfind"]

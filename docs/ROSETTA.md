@@ -71,8 +71,8 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | AS400-DES | `8501` (v) | **--** | `AS400-DES` (v) |  |
 | AS400-SaltedSHA1 | **--** | `as400-ssha1` (v) | no |  |
 | AS400SSHA1 | `35200` (v) | **--** | `AS400SSHA1` (v) |  |
-| Astra Linux $gost12256hash$ | **--** | `streebog256crypt`<br>`streebog256crypt-opencl` (v) | **--** |  |
-| Astra Linux $gost94hash$ | **--** | `gost94crypt`<br>`gost94crypt-opencl` (v) | **--** |  |
+| Astra Linux $gost12256hash$ | **--** | `streebog256crypt`<br>`streebog256crypt-opencl` (v) | `GOST12256CRYPT` (v) |  |
+| Astra Linux $gost94hash$ | **--** | `gost94crypt`<br>`gost94crypt-opencl` (v) | `GOST94CRYPT` (v) |  |
 | Atlassian (PBKDF2-HMAC-SHA1) | `12001` (v) | `PBKDF2-HMAC-SHA1`<br>`PBKDF2-HMAC-SHA1-opencl` (v) | `PKCS5S2` (v) |  |
 | AUTHME | `20711` (v) | **--** | `AUTHME` (v) |  |
 | AWSSIGV4 | `28700` (v) | **--** | `AWSSIGV4` (v) |  |
@@ -188,10 +188,10 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | DPAPI masterkey file v1 (context 3) | `15310` (v) | `DPAPImk` (v) | no |  |
 | DPAPI masterkey file v2 (context 1 and 2) | `15900` (v) | `DPAPImk` (v) | no |  |
 | DPAPI masterkey file v2 (context 3) | `15910` (v) | `DPAPImk` (v) | no |  |
-| DragonFly BSD $3$ w/ bug, 32-bit | **--** | `dragonfly3-32` (v) | no |  |
-| DragonFly BSD $3$ w/ bug, 64-bit | **--** | `dragonfly3-64` (v) | no |  |
-| DragonFly BSD $4$ w/ bugs, 32-bit | **--** | `dragonfly4-32` (v) | no |  |
-| DragonFly BSD $4$ w/ bugs, 64-bit | **--** | `dragonfly4-64` (v) | no |  |
+| DragonFly BSD $3$ w/ bug, 32-bit | **--** | `dragonfly3-32` (v) | `DRAGONFLY3-32` (v) |  |
+| DragonFly BSD $3$ w/ bug, 64-bit | **--** | `dragonfly3-64` (v) | `DRAGONFLY3-64` (v) |  |
+| DragonFly BSD $4$ w/ bugs, 32-bit | **--** | `dragonfly4-32` (v) | `DRAGONFLY4-32` (v) |  |
+| DragonFly BSD $4$ w/ bugs, 64-bit | **--** | `dragonfly4-64` (v) | `DRAGONFLY4-64` (v) |  |
 | Drupal 7 | `7900` (v) | `Drupal7` (v) | `DRUPAL7` (v) |  |
 | DRUPAL7 | `7900` (v) | `Drupal7` (v) | `DRUPAL7` (v) |  |
 | dummy | **--** | `dummy` (v) | no |  |
@@ -207,7 +207,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | dynamic_1032 | **--** | `dynamic_1032` (v) | no |  |
 | dynamic_1034 | **--** | `dynamic_1034` (v) | **--** |  |
 | dynamic_1401 | **--** | `dynamic_1401` (v) | **--** |  |
-| dynamic_15 | **--** | `dynamic_15` (v) | no |  |
+| dynamic_15 | **--** | `dynamic_15` (v) | `MD5USERMD5PASSSALT` (v) |  |
 | dynamic_1505 | **--** | `dynamic_1505` (v) | no |  |
 | dynamic_1506 | **--** | `dynamic_1506` (v) | **--** |  |
 | dynamic_1507 | **--** | `dynamic_1507` (v) | **--** |  |
@@ -221,13 +221,13 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | dynamic_16 | **--** | `dynamic_16` (v) | no |  |
 | dynamic_1602 | **--** | `dynamic_1602` (v) | **--** |  |
 | dynamic_1608 | **--** | `dynamic_1608` (v) | no |  |
-| dynamic_18 | **--** | `dynamic_18` (v) | no |  |
+| dynamic_18 | **--** | `dynamic_18` (v) | `POSTOFFICE` (v) |  |
 | dynamic_2002 | **--** | `dynamic_2002` (v) | no |  |
 | dynamic_2003 | **--** | `dynamic_2003` (v) | no |  |
-| dynamic_31 | **--** | `dynamic_31` (v) | no |  |
-| dynamic_32 | **--** | `dynamic_32` (v) | no |  |
-| dynamic_35 | **--** | `dynamic_35` (v) | no |  |
-| dynamic_36 | **--** | `dynamic_36` (v) | no |  |
+| dynamic_31 | **--** | `dynamic_31` (v) | `MD4SALTPASS` (v) |  |
+| dynamic_32 | **--** | `dynamic_32` (v) | `MD4PASSSALT` (v) |  |
+| dynamic_35 | **--** | `dynamic_35` (v) | `SHA1UCUSERPASS` (v) |  |
+| dynamic_36 | **--** | `dynamic_36` (v) | `SHA1USERCOLONPASS` (v) |  |
 | dynamic_39 | **--** | `dynamic_39` (v) | no |  |
 | dynamic_40 | **--** | `dynamic_40` (v) | no |  |
 | ECHO224 | no | no | `ECHO224` (v) |  |
@@ -254,7 +254,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | EPISERVER | `141` (v) | **--** | `EPISERVER` (v) |  |
 | Episerver 6.x < .NET 4 | `141` (v) | **--** | `EPISERVER` (v) |  |
 | Episerver 6.x >= .NET 4 | `1441` (v) | **--** | `EPISERVER` (v) |  |
-| EPiServer SID | **--** | `EPI` (v) | no |  |
+| EPiServer SID | **--** | `EPI` (v) | `EPISERVER-SID` (v) |  |
 | Ethereum Pre-Sale Wallet, PBKDF2-HMAC-SHA256 | `16300` (v) | `ethereum`<br>`ethereum-presale-opencl` (v) | no |  |
 | Ethereum Wallet, PBKDF2-HMAC-SHA256 | `15600` (v) | `ethereum`<br>`ethereum-opencl` (v) | no |  |
 | Ethereum Wallet, SCRYPT | `15700` (v) | `ethereum` (v) | no |  |
@@ -294,7 +294,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | GROESTL384 | no | no | `GROESTL384` (v) |  |
 | GROESTL512 | no | no | `GROESTL512` (v) |  |
 | GRUB 2 | `7200` (v) | `PBKDF2-HMAC-SHA512`<br>`PBKDF2-HMAC-SHA512-opencl` (v) | `PBKDF2-SHA512` (v) |  |
-| H3C/Huawei/HPE | **--** | `h3c` (v) | no |  |
+| H3C/Huawei/HPE | **--** | `h3c` (v) | `H3C` (v) |  |
 | Half MD5 | `5100` (v) | no | `MD5` (v) |  |
 | HalfLM C/R | **--** | `nethalflm` | **--** |  |
 | HAMSI224 | no | no | `HAMSI224` (v) |  |
@@ -419,7 +419,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | IBM/Toshiba 4690 | **--** | `adxcrypt` (v) | no |  |
 | IKEPSK-MD5 | `5300` (v) | **--** | `IKEPSK-MD5` (v) |  |
 | IKEPSK-SHA1 | `5400` (v) | **--** | `IKEPSK-SHA1` (v) |  |
-| Invision Power Board 2.x | **--** | `ipb2` (v) | no |  |
+| Invision Power Board 2.x | **--** | `ipb2` (v) | `IPB2` (v) |  |
 | IPB2+, MyBB1.2+ | `2811` (v) | `dynamic_12` (v) | `MD5-MD5SALTMD5PASS` (v) |  |
 | iPhone passcode (UID key + System Keybag) | `26500` (v) | **--** | no |  |
 | IPMI 2.0 RAKP (RMCP+) | **--** | `RAKP-SHA1`<br>`RAKP-SHA1-opencl` (v) | no |  |
@@ -865,7 +865,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | OpenSSL "enc" encryption | **--** | `openssl-enc` (v) | no |  |
 | Oracle 10 | **--** | `oracle` (v) | no |  |
 | Oracle 10g-logon protocol | **--** | `o10glogon` (v) | no |  |
-| Oracle 11g | **--** | `oracle11` (v) | **--** |  |
+| Oracle 11g | **--** | `oracle11` (v) | `ORACLE11` (v) |  |
 | Oracle O3LOGON protocol | **--** | `o3logon` (v) | no |  |
 | Oracle O5LOGON protocol | **--** | `o5logon` (v) | no |  |
 | ORACLE12 | `12300` (v) | **--** | `ORACLE12` (v) |  |
@@ -922,7 +922,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | PKZIP Master Key (6 byte optimization) | `20510` (v) | **--** | **--** |  |
 | plaintext | `99999` (v) | `plaintext` | `NULL` (v) |  |
 | pomelo($plain) | no | no | `POMELO` (v) |  |
-| Post.Office | no | `po` (v) | no |  |
+| Post.Office | no | `po` (v) | `POSTOFFICE` (v) |  |
 | POSTGRESCRAM | `11100` (v) | `postgres` (v) | `POSTGRESCRAM` (v) |  |
 | POSTGRESQL | `12` (v) | `dynamic_1013` (v) | `POSTGRESQL` (v) |  |
 | POSTGRESSCRAM256 | `28600` (v) | **--** | `POSTGRESSCRAM256` (v) |  |
@@ -997,7 +997,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | RSA/DSA/EC/OpenSSH Private Keys ($4$) | `22941` (v) | `SSH`<br>`ssh-opencl` (v) | no |  |
 | RSA/DSA/EC/OpenSSH Private Keys ($5$) | `22951` (v) | `SSH`<br>`ssh-opencl` (v) | no |  |
 | RSA/DSA/EC/OpenSSH Private Keys ($6$) | `22921` (v) | `SSH`<br>`ssh-opencl` (v) | no |  |
-| RVARY | **--** | `RVARY` (v) | no |  |
+| RVARY | **--** | `RVARY` (v) | `RVARY` (v) |  |
 | S/Key | **--** | `skey` (v) | no |  |
 | salted | **--** | `Iterated-SHA1`<br>`Iterated-SHA1-opencl` (v) | no |  |
 | SAMSUNGSHA1 | `5800` (v) | no | `SAMSUNGSHA1` (v) |  |
@@ -1432,11 +1432,11 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | streebog-32($plain) | `11700` (v) | `Stribog-256` (v) | `STREEBOG-32` (v) | same as gost2012-32 (naming) |
 | streebog-64($plain) | `11800` (v) | `Stribog-512` (v) | `STREEBOG-64` (v) | same as gost2012-64 (naming) |
 | Stuffit5 | `24700` (v) | **--** | **--** |  |
-| SunMD5 | **--** | `SunMD5` (v) | **--** |  |
+| SunMD5 | **--** | `SunMD5` (v) | `SUNMD5` (v) |  |
 | SYBASE-ASE | `8000` (v) | `SybaseASE` (v) | `SYBASE-ASE` (v) |  |
 | Sybase-PROP | **--** | `Sybase-PROP` (v) | no |  |
 | SYMFONY256 | `35800` (v) | no | `SYMFONY256` (v) |  |
-| system / network | **--** | `MongoDB` (v) | no |  |
+| system / network | **--** | `MongoDB` (v) | `MONGODB` (v) |  |
 | TACACS | `16100` (v) | `tacacs-plus` (v) | `TACACS` (v) |  |
 | TCP MD5 Signatures, BGP, MSDP | **--** | `tcp-md5` (v) | no |  |
 | Teamspeak 3 (channel hash) | `28300` (v) | **--** | no |  |

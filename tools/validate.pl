@@ -359,6 +359,16 @@ my %tier_count;      # tool tier -> n
 my %expr_tier;       # expression_proof.verified -> n
 my ($n_expr, $n_denot, $n_novec) = (0, 0, 0);
 my %novec_reason;   # no_vector.reason -> n; the subset that is NOT a backlog
+
+# An 'absent' claim is a MEASUREMENT against a particular build, and it expires
+# when that tool gains types. Measured 2026-09-05: every one of the 343 mdxfind
+# absences here had been established against RCS 1.545 with 1002 types, while
+# data/tools/mdxfind.yaml had already moved to RCS 1.576 with 1027 -- and 19 of
+# those absences were wrong, because the 25 indices added between the two builds
+# are exactly the john-shaped types several of them named. The claims even said
+# so: "if mdxfind gains one, this becomes a mapping". Nothing compared the two
+# version strings, so nothing noticed. This does.
+my %absent_build;   # tool -> the build string the claim names -> n
 my $tombstones = 0;
 my %tomb;            # tombstone id -> { into => survivor id, file => ... }
 my %by_expression;   # expression -> [ ids ] , for the collision rule
@@ -405,6 +415,11 @@ for my $file (@files) {
         $n_novec++ unless ref $d->{vectors} eq 'ARRAY' && @{ $d->{vectors} };
         $novec_reason{ $d->{no_vector}{reason} // '?' }++
             if ref $d->{no_vector} eq 'HASH';
+        for my $t (qw(hashcat john mdxfind hashpipe)) {
+            my $b = $d->{tools}{$t} or next;
+            next unless ($b->{verified} // '') eq 'absent';
+            $absent_build{$t}{ $b->{verified_with} // '(unrecorded)' }++;
+        }
         $expr_tier{ $d->{expression_proof}{verified} // '?' }++
             if ref $d->{expression_proof} eq 'HASH';
         for my $t (qw(hashcat john mdxfind hashpipe crack)) {
@@ -1208,6 +1223,44 @@ if (@shown) {
 }
 
 unless ($quiet) {
+    # Absences that were measured against a build the inventory has moved past.
+    # Not an error: a stale claim is unverified, not necessarily wrong. But it
+    # is the one thing a reader cannot tell from the row, and it is how 19 wrong
+    # absences survived a refresh -- see the comment on %absent_build above.
+    {
+        my %invver = (hashcat  => $hc_doc->{version}, john     => $jn_doc->{version},
+                      mdxfind  => $mx_doc->{version}, hashpipe => $hp_doc->{version});
+        my @stale;
+        for my $t (sort keys %absent_build) {
+            my $cur = $invver{$t};
+            next unless defined $cur && length $cur;
+            for my $claimed (sort keys %{ $absent_build{$t} }) {
+                my $n = $absent_build{$t}{$claimed};
+                # An unrecorded build cannot be compared and is its own problem.
+                if ($claimed eq '(unrecorded)') {
+                    push @stale, [$t, $claimed, $cur, $n]; next;
+                }
+                # A claim is current when the build it names still appears in
+                # the inventory's version string. Deliberately a substring test
+                # rather than a version parse: the two strings are written by
+                # different tools and only have their build token in common.
+                my ($ctok) = $claimed =~ /((?:RCS\s+)?v?[0-9]+(?:\.[0-9]+)+(?:-[0-9A-Za-z.]+)?)/;
+                next if defined $ctok && index($cur, $ctok) >= 0;
+                push @stale, [$t, $claimed, $cur, $n];
+            }
+        }
+        if (@stale) {
+            my $total = 0; $total += $_->[3] for @stale;
+            printf STDERR "\n- Stale absences: %d 'absent' claim(s) name a build the inventory has\n"
+                        . "                  moved past. An absence expires when the tool gains types,\n"
+                        . "                  so each is unverified rather than wrong -- re-run the\n"
+                        . "                  matching discover-*.pl over the indices added since.\n",
+                   $total;
+            printf STDERR "                  %-8s %4d claim(s) measured against %s; inventory is %s\n",
+                   $_->[0], $_->[3], $_->[1], $_->[2] for @stale;
+        }
+    }
+
     printf STDERR "\n- Inventories: hashcat %d modes (%s), john %d formats (%s), mdxfind %d types (%s)\n",
         scalar(@$hc_list), $hc_doc->{version},
         scalar(@$jn_list), $jn_doc->{version},

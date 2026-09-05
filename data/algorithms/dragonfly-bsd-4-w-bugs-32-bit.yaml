@@ -12,10 +12,11 @@ denotation:
 status: "ok"
 tools:
   mdxfind:
-    verified: "absent"
-    verified_at: "2026-09-03"
-    verified_with: "mdxfind RCS 1.545 (2026/08/29)"
-    note: "no type. Swept all 1002 mdxfind types on 2026-09-03 (a tools/discover-mdxfind.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable type ran to completion; a type killed at the timeout is counted as untested and withholds this verdict. No mdxfind type name matches any identifier this entry publishes either, normalized by the separator-drift rule. hashpipe DOES cover this algorithm, as type DRAGONFLY4-32, which mdxfind has no equivalent of -- so that is corroboration rather than contradiction, and it is recorded here because there is no hashpipe column to record it in. This is the absence of an IDENTIFIER, not of the algorithm: if mdxfind gains one, this becomes a mapping."
+    types: ["DRAGONFLY4-32"]
+    verified: "vector"
+    verified_at: "2026-09-05"
+    verified_with: "mdxfind RCS 1.576 (2026/09/02)"
+    note: "mdxfind e1023 DRAGONFLY4-32. WITHDRAWN 2026-09-05, and the superseded claim is kept below because this repository published it. That sweep was measured against mdxfind RCS 1.545, which had 1002 types; the inventory here is now RCS 1.576 with 1027, and DRAGONFLY4-32 is one of the 25 indices e1003-e1027 added between them. The old note ends 'if mdxfind gains one, this becomes a mapping' -- it has, so it is. Superseded note follows. || no type. Swept all 1002 mdxfind types on 2026-09-03 (a tools/discover-mdxfind.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable type ran to completion; a type killed at the timeout is counted as untested and withholds this verdict. No mdxfind type name matches any identifier this entry publishes either, normalized by the separator-drift rule. hashpipe DOES cover this algorithm, as type DRAGONFLY4-32, which mdxfind has no equivalent of -- so that is corroboration rather than contradiction, and it is recorded here because there is no hashpipe column to record it in. This is the absence of an IDENTIFIER, not of the algorithm: if mdxfind gains one, this becomes a mapping."
   hashpipe:
     types: ["DRAGONFLY4-32"]
     verified: "vector"
@@ -34,4 +35,4 @@ vectors:
   - hash: "$4$7E48ul$K4u43llx1P184KZBoILl2hnFLBHj6.486TtxWA.EA1pLZuQS7P5k0LQqyEULux47.5vttDbSo/Cbpsez.AUI"
     pass: "magnum"
     source: "john"
-    reads_in: ["john"]
+    reads_in: ["john", "mdxfind"]
