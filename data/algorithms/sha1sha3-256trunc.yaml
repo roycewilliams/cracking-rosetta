@@ -19,17 +19,25 @@ tools:
   mdxfind:
     types: ["SHA1SHA3-256TRUNC"]
     verified: "vector"
-    verified_at: "2026-09-04"
-    verified_with: "mdxfind"
+    verified_at: "2026-09-05"
+    verified_with: "mdxfind RCS 1.576 (2026/09/02)"
+  hashpipe:
+    types: ["SHA1SHA3-256TRUNC"]
+    verified: "vector"
+    verified_at: "2026-09-05"
+    verified_with: "hashpipe RCS 1.193 (2026/09/05)"
+    note: "hashpipe e710 SHA1SHA3-256TRUNC. Verified with hashpipe -c, which pins each line to its own leading TYPE label and runs no detection, at -t 1 and with the emitted label compared against the one asked for. Both precautions matter on this build: -m does not restrict what a recognised wrapper reaches, and results vary with the thread count. This type had no column here until 2026-09-05 not because hashpipe could not verify it but because the vector it was offered was stored at 32 characters; hashpipe compares the whole digest and correctly refused. No iterations: is recorded from hashpipe -- the suffixes are different quantities and this repository follows mdxfind for that field."
   john:
     verified: "absent"
-    verified_at: "2026-09-04"
+    verified_at: "2026-09-05"
     verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
-    note: "no format. Swept the 76 format(s) whose own valid() accepts this entry's own vector, as john --show=left reports them, on 2026-09-04 (a tools/discover-john.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. For john the control is also per ENTRY and not only per shape: every format counted above is one whose own loader ACCEPTED this hash, so each was asked this exact question and answered no. A format that cannot parse the hash is not counted at all, and an entry no format can parse is reported as unsearched rather than decided. Every applicable format ran to completion; a format killed at the timeout is counted as untested and withholds this verdict. No john format name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if john gains one, this becomes a mapping."
+    note: "no format. This entry's vector was corrected on 2026-09-05 -- it had been stored as a 32-character prefix of the 40-character digest this type emits -- which retired the sweep previously recorded here, because that one measured a different string and the set of formats whose valid() accepts a 32-character hash is not the set that accepts a 40-character one. It was re-measured against the restored vector the same day, and NOT by the narrower method: every one of the 957 formats this build registers was run, not only those whose parser accepts the hash, so no format is excluded by a loader's opinion of the string. None reproduced this entry's plaintext and none timed out, so no format is counted as untested. No john format name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if john gains one, this becomes a mapping."
   crack:
     supported: false
 vectors:
-  - hash: "3a1f71639a8dc528b489817cd26225e9"
+  - hash: "3a1f71639a8dc528b489817cd26225e9ce875524:64"
     pass: "password123"
     source: "mdxfind"
+    form: "native"
     reads_in: ["mdxfind"]
+notes: "The vector is in mdxfind's native form: a 40-character sha1 digest, then a colon, then the truncation length N that produced it. mdxfind sweeps N from the inner digest's hex width down to 21, hashing both the leading and the trailing N characters, and reports the N that matched in the salt field; N=64 here is the full width, the case where the truncation is the identity. Until 2026-09-05 this row stored only the leading 32 characters of that digest. mdxfind reported a clean match anyway, because it converts loaded hashes to binary and compares at the shortest length it read, so a prefix verifies and the row looked proven -- while hashpipe, which compares the whole digest, refused it, which is why this row had no hashpipe column. The digest was restored from mdxfind -z, the authority's own generated output, and re-measured under both tools; the string previously stored is its first 32 characters, so this is the same hash the row always named. Twelve TRUNC rows were stored the same way and were corrected together. The thirteenth, sha1sha1trunc, is NOT corrected but extended, because there the 32-character string is john's own serialization rather than a truncation of this repository's making."

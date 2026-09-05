@@ -19,9 +19,15 @@ tools:
   mdxfind:
     types: ["SHA1WRLUCTRUNCSALT"]
     verified: "upstream"
-    verified_at: "2026-08-31"
-    verified_with: "mdxfind RCS 1.540 (2026/08/22)"
+    verified_at: "2026-09-05"
+    verified_with: "mdxfind RCS 1.576 (2026/09/02)"
     note: "NOT REPRODUCED HERE. mdxfind publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: the tool pinned to this identifier did not reproduce its own published example. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool mdxfind --only SHA1WRLUCTRUNCSALT to retry."
+  hashpipe:
+    types: ["SHA1WRLUCTRUNCSALT"]
+    verified: "vector"
+    verified_at: "2026-09-05"
+    verified_with: "hashpipe RCS 1.193 (2026/09/05)"
+    note: "hashpipe e672 SHA1WRLUCTRUNCSALT, verified with hashpipe -c against the CORRECTED vector -- a per-line pin with no detection, at -t 1, with stdout and stderr kept apart and the emitted label compared against the one asked for. That last precaution is what found the defect this row carried: hashpipe writes an unresolved line to stderr UNCHANGED, so a refusal printed on a shared terminal is character-for-character the input and reads as a pass. Under the previous vector this type refused, and so did mdxfind."
   john:
     verified: "absent"
     verified_at: "2026-09-04"
@@ -30,6 +36,8 @@ tools:
   crack:
     supported: false
 vectors:
-  - hash: "76b863a553ad0cf1bb8da94f9a0d427f1e6ca395:1122334455667788 128"
+  - hash: "18e34151169d78716359709e30233f238e5e9a54:1122334455667788 128"
     pass: "password123"
     source: "mdxfind"
+    form: "native"
+notes: "The vector recorded here until 2026-09-05 was STALE and no longer reproduced by anything: mdxfind answered None found, sorry! and hashpipe refused it. It was not a wrong mapping but an out-of-date digest. mdxfind's own change log records the cause -- e672 shared the lowercase sha1_truncsalt path with e683 and e739, so despite its UC name and its hx.8 definition it emitted a LOWERCASE whirlpool hex digest, and the fix was to uppercase it, verified upstream 108/108 against sha1(cut(upper(wrl(pass)),0,N).salt). The stored string was the pre-fix value. It is replaced with the digest mdxfind RCS 1.576 now emits for the same salt and the same N, generated with -z and re-measured under both tools, so the row again names something that exists. N=128 is the full width of whirlpool's hex, the case where the truncation is the identity; the salt field carries the literal salt and then N, separated by a space. This is a different defect from the twelve sibling TRUNC rows corrected alongside it: theirs were stored as 32-character prefixes of a live digest, while this one was a full-length digest of a superseded algorithm. A vector can go stale when the TOOL is corrected, and nothing in this repository re-checks that on its own."
