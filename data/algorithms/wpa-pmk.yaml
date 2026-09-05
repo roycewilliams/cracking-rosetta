@@ -5,10 +5,10 @@ status: "needs-review"
 tools:
   hashcat:
     modes: [22001]
-    verified: "upstream"
-    verified_at: "2026-08-29"
-    verified_with: "RCS 1.540 (2026/08/22)"
-    note: "hashcat mapping shipped in mdxfind's own type table"
+    verified: "vector"
+    verified_at: "2026-09-05"
+    verified_with: "hashcat v7.1.2-549-g8a15e210b"
+    note: "Round-tripped, but attributed by a SOLO run, because hashcat echoed a different spelling of this hash than it was given under mode(s) 22001, and the grouped run attributes a crack by matching the hash string -- its output lines do not correspond to its input lines -- so it could not credit one. One hash and one candidate per invocation leaves nothing else the crack could belong to. The stored vector is unchanged and is the form hashcat was fed."
   mdxfind:
     types: ["WPA-PMK"]
     verified: "vector"
@@ -27,4 +27,4 @@ vectors:
   - hash: "WPA*01*5ce7ebe97a1bbfeb2822ae627b726d5b*27462da350ac*accd10fb464e*686173686361742d6573736964***"
     pass: "88f43854ae7b1624fc2ab7724859e795130f4843c7535729e819cf92f39535dc"
     source: "mdxfind"
-    reads_in: ["mdxfind"]
+    reads_in: ["hashcat", "mdxfind"]
