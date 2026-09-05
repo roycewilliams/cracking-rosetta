@@ -17,7 +17,7 @@ Each row below links to its entry in the [browsable table](index.html).
 Gaps are absences; for the rows where something is known to be *odd*, see
 [OPEN-QUESTIONS.md](OPEN-QUESTIONS.md).
 
-## 1. Believed but never reproduced (76)
+## 1. Believed but never reproduced (74)
 
 The cheapest contribution in the repository, if you own the tool. Each of
 these already names an identifier and already carries a test vector; nobody
@@ -103,8 +103,6 @@ tools/verify-vectors.pl --tool <tool> --only <id> -v
 | [`veracrypt-whirlpool-xts-512-bit-legacy`](index.html#veracrypt-whirlpool-xts-512-bit-legacy) | hashcat | `13731` | upstream |
 | [`wpa-eapol-pbkdf2`](index.html#wpa-eapol-pbkdf2) | hashcat | `2500` | upstream |
 | [`wpa-eapol-pmk`](index.html#wpa-eapol-pmk) | hashcat | `2501` | upstream |
-| [`wpa-pbkdf2-pmkid-eapol`](index.html#wpa-pbkdf2-pmkid-eapol) | hashcat | `22000` | upstream |
-| [`wpa-pmk`](index.html#wpa-pmk) | hashcat | `22001` | upstream |
 | [`wpa-pmkid-pbkdf2`](index.html#wpa-pmkid-pbkdf2) | hashcat | `16800` | upstream |
 | [`wpa-pmkid-pmk`](index.html#wpa-pmkid-pmk) | hashcat | `16801` | upstream |
 
@@ -190,7 +188,7 @@ A few that carry a vector, so a candidate identifier can be tested at once, one 
 
 All 90: filter `mdxfind_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
 
-## 4. Identifiers with no row here (39)
+## 4. Identifiers with no row here (25)
 
 Whole algorithms rather than gaps in a row. Each is an identifier a tool
 publishes and this table does not answer to, so somebody arriving by it lands
@@ -241,23 +239,9 @@ john's own `src/*_fmt_plug.c` test arrays carry a vector for nearly every format
 * `wpapsk-opencl`
 * `wpapsk-pmk-opencl`
 
-### hashpipe: 15 with no row
+### hashpipe: 1 with no row
 
 hashpipe ships a self-test vector for every registered type; `hashpipe -N` prints the table and `-G` generates one where a type has none.
 
 * `SHA1SALTCX` - e521
-* `SHA1SHA256TRUNC` - e622
-* `SHA1SHA256TRUNCMD5` - e623
-* `SHA1SHA1TRUNC` - e626
-* `SHA1SHA256UCTRUNC` - e630
-* `SHA1WRLTRUNC` - e635
-* `SHA1SHA512TRUNC` - e636
-* `SHA1MD6TRUNC` - e644
-* `SHA1WRLUCTRUNC` - e653
-* `SHA1SHA1UCTRUNC` - e661
-* `SHA1WRLUCTRUNCSALT` - e672
-* `SHA1SHA512UCTRUNC` - e689
-* `SHA1SHA3-256TRUNC` - e710
-* `SHA1SHA384TRUNC` - e745
-* `SHA1RMD160TRUNC` - e746
 

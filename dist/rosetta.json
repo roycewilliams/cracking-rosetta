@@ -8739,7 +8739,7 @@
          "mdxfind_salted" : "no",
          "name" : "DANE RFC7929/RFC8162 SHA2-256",
          "nesting_depth" : "",
-         "notes" : "",
+         "notes" : "The vector is 56 hex characters where SHA256 emits 64, and that is hashcat's serialization for mode 30420 rather than a truncation introduced here: it is a SHA2-256 cut to 224 bits, and the stored string is the leading 56 characters of the sha256 of the plaintext. mdxfind also reads it, because it converts loaded hashes to binary and compares at the shortest length it read, so a prefix matches; form: records which spelling this is, so the width explains itself instead of reading as a lost quarter of a digest. Measured 2026-09-05.",
          "primary_form" : "",
          "relations" : [],
          "sameas" : "",
@@ -16883,7 +16883,7 @@
          "mdxfind_salted" : "no",
          "name" : "Half MD5",
          "nesting_depth" : "",
-         "notes" : "(n denoting the starting position n>=0)",
+         "notes" : "(n denoting the starting position n>=0) The vector is 16 hex characters where MD5 emits 32, which is the whole point of this entry rather than a defect: hashcat mode 5100 stores the leading half, and the stored string is the first 16 characters of the md5 of the plaintext. mdxfind reads it too, because it compares binary at the shortest length it read. form: records the spelling so an audit of digest widths does not read this as a lost half. Measured 2026-09-05.",
          "primary_form" : "",
          "relations" : [],
          "sameas" : "",
@@ -28886,7 +28886,7 @@
          "mdxfind_salted" : "no",
          "name" : "LM",
          "nesting_depth" : "",
-         "notes" : "",
+         "notes" : "The two vectors here are different credentials, not one credential written twice. The 32-character string is the LM pair as john writes it, and its second half is aad3b435b51404ee, the LM of the empty string; the 16-character string is a SINGLE half, which is what hashcat mode 3000 takes. form: on the shorter one records that its width is hashcat's serialization and not a truncation. Measured 2026-09-05.",
          "primary_form" : "",
          "relations" : [],
          "sameas" : "",
@@ -50818,7 +50818,7 @@
          "mdxfind_salted" : "no",
          "name" : "MySQL4.1/MySQL5",
          "nesting_depth" : 2,
-         "notes" : "",
+         "notes" : "The second vector is 32 hex characters where SQL5 emits 40, and it is john's own serialization: dynamic_1028 declares itself in dynamic.conf as sha1(sha1_raw($p)) (hash truncated to length 32), and the stored string is the leading 32 characters of that digest for the plaintext test1. mdxfind reads it as a prefix. The first vector is a different credential in the full 40-character form. Measured 2026-09-05.",
          "primary_form" : "",
          "relations" : [],
          "sameas" : "",
@@ -73242,7 +73242,7 @@
          "expr" : "",
          "expr_note" : "mdxfind type SHA1MD6TRUNC (e644) is MULTI-EMIT: it computes several candidate digests per input and matches if any one reproduces the stored hash. There is therefore no single expression to record, and writing one of the emitted forms into expression: would be a false claim even though the string itself is correct. This is also why two vectors of such a type can disagree with each other, and why a tool matching one of them is not evidence about the other.",
          "expr_tier" : "absent",
-         "hash_length" : 32,
+         "hash_length" : 40,
          "hash_length_basis" : "observed",
          "hashcat" : {
             "ids" : [],
@@ -73251,8 +73251,11 @@
          "hashcat_salted" : "",
          "hashcat_speed" : "",
          "hashpipe" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "SHA1MD6TRUNC"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "sha1md6trunc",
          "john" : {
@@ -73273,16 +73276,16 @@
          "mdxfind_salted" : "no",
          "name" : "SHA1MD6TRUNC",
          "nesting_depth" : "",
-         "notes" : "",
-         "primary_form" : "",
+         "notes" : "The vector is in mdxfind's native form: a 40-character sha1 digest, then a colon, then the truncation length N that produced it. mdxfind sweeps N from the inner digest's hex width down to 21, hashing both the leading and the trailing N characters, and reports the N that matched in the salt field; N=32 here is the full width, the case where the truncation is the identity. Until 2026-09-05 this row stored only the leading 32 characters of that digest. mdxfind reported a clean match anyway, because it converts loaded hashes to binary and compares at the shortest length it read, so a prefix verifies and the row looked proven -- while hashpipe, which compares the whole digest, refused it, which is why this row had no hashpipe column. The digest was restored from mdxfind -z, the authority's own generated output, and re-measured under both tools; the string previously stored is its first 32 characters, so this is the same hash the row always named. Twelve TRUNC rows were stored the same way and were corrected together. The thirteenth, sha1sha1trunc, is NOT corrected but extended, because there the 32-character string is john's own serialization rather than a truncation of this repository's making.",
+         "primary_form" : "native",
          "relations" : [],
          "sameas" : "",
          "serialization" : "unknown",
          "status" : "needs-review",
          "tool_note" : {
-            "hashcat" : "no mode. Swept the 12 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-03 (tools/discover-hashcat.pl --all, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
-            "hashpipe" : "",
-            "john" : "no format. Swept the 76 format(s) whose own valid() accepts this entry's own vector, as john --show=left reports them, on 2026-09-04 (a tools/discover-john.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. For john the control is also per ENTRY and not only per shape: every format counted above is one whose own loader ACCEPTED this hash, so each was asked this exact question and answered no. A format that cannot parse the hash is not counted at all, and an entry no format can parse is reported as unsearched rather than decided. Every applicable format ran to completion; a format killed at the timeout is counted as untested and withholds this verdict. No john format name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if john gains one, this becomes a mapping.",
+            "hashcat" : "no mode. Swept the 12 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-03 (tools/discover-hashcat.pl --all, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping. RE-MEASUREMENT OWED, and here is exactly what is owed. This entry's vector changed on 2026-09-05, from a 32-character prefix to the full 40-character digest the type emits, so the sweep described above measured a string this entry no longer carries, and the modes it searched were chosen by parsers reading the old width. The absence is therefore UNVERIFIED rather than wrong. It was not re-measured at the recorded binary because the only hashcat on this host is v6.2.5-609-gc4dfcf48f, older than the v7.1.2-549-g8a15e210b this claim and the inventory both name, and stamping a weaker binary would trade a stale measurement for a worse one. What WAS run on 2026-09-05, against the corrected vector, is a full v6.2.5 sweep of the 553 modes that binary could run against it -- 39 were skipped for having no plaintext of an acceptable length -- and not one matched. That corroborates the absence without replacing it: it is the same answer from an older binary, so it cannot speak for the modes v7.1.2 added.",
+            "hashpipe" : "hashpipe e644 SHA1MD6TRUNC. Verified with hashpipe -c, which pins each line to its own leading TYPE label and runs no detection, at -t 1 and with the emitted label compared against the one asked for. Both precautions matter on this build: -m does not restrict what a recognised wrapper reaches, and results vary with the thread count. This type had no column here until 2026-09-05 not because hashpipe could not verify it but because the vector it was offered was stored at 32 characters; hashpipe compares the whole digest and correctly refused. No iterations: is recorded from hashpipe -- the suffixes are different quantities and this repository follows mdxfind for that field.",
+            "john" : "no format. This entry's vector was corrected on 2026-09-05 -- it had been stored as a 32-character prefix of the 40-character digest this type emits -- which retired the sweep previously recorded here, because that one measured a different string and the set of formats whose valid() accepts a 32-character hash is not the set that accepts a 40-character one. It was re-measured against the restored vector the same day, and NOT by the narrower method: every one of the 957 formats this build registers was run, not only those whose parser accepts the hash, so no format is excluded by a loader's opinion of the string. None reproduced this entry's plaintext and none timed out, so no format is counted as untested. No john format name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if john gains one, this becomes a mapping.",
             "mdxfind" : ""
          },
          "vecs" : 1
@@ -73916,7 +73919,7 @@
          "expr" : "",
          "expr_note" : "mdxfind type SHA1RMD160TRUNC (e746) is MULTI-EMIT: it computes several candidate digests per input and matches if any one reproduces the stored hash. There is therefore no single expression to record, and writing one of the emitted forms into expression: would be a false claim even though the string itself is correct. This is also why two vectors of such a type can disagree with each other, and why a tool matching one of them is not evidence about the other.",
          "expr_tier" : "absent",
-         "hash_length" : 32,
+         "hash_length" : 40,
          "hash_length_basis" : "observed",
          "hashcat" : {
             "ids" : [],
@@ -73925,8 +73928,11 @@
          "hashcat_salted" : "",
          "hashcat_speed" : "",
          "hashpipe" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "SHA1RMD160TRUNC"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "sha1rmd160trunc",
          "john" : {
@@ -73947,16 +73953,16 @@
          "mdxfind_salted" : "no",
          "name" : "SHA1RMD160TRUNC",
          "nesting_depth" : "",
-         "notes" : "",
-         "primary_form" : "",
+         "notes" : "The vector is in mdxfind's native form: a 40-character sha1 digest, then a colon, then the truncation length N that produced it. mdxfind sweeps N from the inner digest's hex width down to 21, hashing both the leading and the trailing N characters, and reports the N that matched in the salt field; N=40 here is the full width, the case where the truncation is the identity. Until 2026-09-05 this row stored only the leading 32 characters of that digest. mdxfind reported a clean match anyway, because it converts loaded hashes to binary and compares at the shortest length it read, so a prefix verifies and the row looked proven -- while hashpipe, which compares the whole digest, refused it, which is why this row had no hashpipe column. The digest was restored from mdxfind -z, the authority's own generated output, and re-measured under both tools; the string previously stored is its first 32 characters, so this is the same hash the row always named. Twelve TRUNC rows were stored the same way and were corrected together. The thirteenth, sha1sha1trunc, is NOT corrected but extended, because there the 32-character string is john's own serialization rather than a truncation of this repository's making.",
+         "primary_form" : "native",
          "relations" : [],
          "sameas" : "",
          "serialization" : "unknown",
          "status" : "needs-review",
          "tool_note" : {
-            "hashcat" : "no mode. Swept the 12 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-03 (tools/discover-hashcat.pl --all, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
-            "hashpipe" : "",
-            "john" : "no format. Swept the 78 format(s) whose own valid() accepts this entry's own vector, as john --show=left reports them, on 2026-09-04 (a tools/discover-john.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. For john the control is also per ENTRY and not only per shape: every format counted above is one whose own loader ACCEPTED this hash, so each was asked this exact question and answered no. A format that cannot parse the hash is not counted at all, and an entry no format can parse is reported as unsearched rather than decided. Every applicable format ran to completion; a format killed at the timeout is counted as untested and withholds this verdict. No john format name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if john gains one, this becomes a mapping.",
+            "hashcat" : "no mode. Swept the 12 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-03 (tools/discover-hashcat.pl --all, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping. RE-MEASUREMENT OWED, and here is exactly what is owed. This entry's vector changed on 2026-09-05, from a 32-character prefix to the full 40-character digest the type emits, so the sweep described above measured a string this entry no longer carries, and the modes it searched were chosen by parsers reading the old width. The absence is therefore UNVERIFIED rather than wrong. It was not re-measured at the recorded binary because the only hashcat on this host is v6.2.5-609-gc4dfcf48f, older than the v7.1.2-549-g8a15e210b this claim and the inventory both name, and stamping a weaker binary would trade a stale measurement for a worse one. What WAS run on 2026-09-05, against the corrected vector, is a full v6.2.5 sweep of the 553 modes that binary could run against it -- 39 were skipped for having no plaintext of an acceptable length -- and not one matched. That corroborates the absence without replacing it: it is the same answer from an older binary, so it cannot speak for the modes v7.1.2 added.",
+            "hashpipe" : "hashpipe e746 SHA1RMD160TRUNC. Verified with hashpipe -c, which pins each line to its own leading TYPE label and runs no detection, at -t 1 and with the emitted label compared against the one asked for. Both precautions matter on this build: -m does not restrict what a recognised wrapper reaches, and results vary with the thread count. This type had no column here until 2026-09-05 not because hashpipe could not verify it but because the vector it was offered was stored at 32 characters; hashpipe compares the whole digest and correctly refused. No iterations: is recorded from hashpipe -- the suffixes are different quantities and this repository follows mdxfind for that field.",
+            "john" : "no format. This entry's vector was corrected on 2026-09-05 -- it had been stored as a 32-character prefix of the 40-character digest this type emits -- which retired the sweep previously recorded here, because that one measured a different string and the set of formats whose valid() accepts a 32-character hash is not the set that accepts a 40-character one. It was re-measured against the restored vector the same day, and NOT by the narrower method: every one of the 957 formats this build registers was run, not only those whose parser accepts the hash, so no format is excluded by a loader's opinion of the string. None reproduced this entry's plaintext and none timed out, so no format is counted as untested. No john format name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if john gains one, this becomes a mapping.",
             "mdxfind" : ""
          },
          "vecs" : 1
@@ -75926,8 +75932,8 @@
          "expr" : "",
          "expr_note" : "mdxfind type SHA1SHA1TRUNC (e626) is MULTI-EMIT: it computes several candidate digests per input and matches if any one reproduces the stored hash. There is therefore no single expression to record, and writing one of the emitted forms into expression: would be a false claim even though the string itself is correct. This is also why two vectors of such a type can disagree with each other, and why a tool matching one of them is not evidence about the other.",
          "expr_tier" : "absent",
-         "hash_length" : 32,
-         "hash_length_basis" : "observed",
+         "hash_length" : "32; 40",
+         "hash_length_basis" : "varies",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -75935,8 +75941,11 @@
          "hashcat_salted" : "",
          "hashcat_speed" : "",
          "hashpipe" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "SHA1SHA1TRUNC"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "sha1sha1trunc",
          "john" : {
@@ -75960,19 +75969,19 @@
          "mdxfind_salted" : "no",
          "name" : "SHA1SHA1TRUNC",
          "nesting_depth" : "",
-         "notes" : "",
-         "primary_form" : "",
+         "notes" : "This row carries ONE credential in two serializations, grouped by credential:. The native form is mdxfind's and hashpipe's: the full 40-character sha1 digest, a colon, then the truncation length N that produced it -- N=40 being the full width of the inner sha1 hex, the case where the truncation is the identity, which is exactly why this type and john's dynamic_1026 meet here at all. The second string is john's own spelling: dynamic_1026 declares itself in dynamic.conf as 'sha1(sha1($p)) (hash truncated to length 32)', so 32 hex characters is what john stores and compares, not a truncation this repository introduced. The re-encoding was proven, not assumed: john's form is the leading 32 characters of the native digest, john cracks its own form and CANNOT LOAD the 40-character one, and mdxfind reproduces the native form while also matching the 32-character prefix because it compares binary at the shortest length it read. Both were measured on 2026-09-05. The twelve sibling TRUNC rows had no such john format and their 32-character strings were simple truncations, so those were corrected in place rather than extended.",
+         "primary_form" : "native",
          "relations" : [],
          "sameas" : "",
          "serialization" : "shared",
          "status" : "needs-review",
          "tool_note" : {
             "hashcat" : "no mode. Swept the 12 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-03 (tools/discover-hashcat.pl --all, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
-            "hashpipe" : "",
+            "hashpipe" : "hashpipe e626 SHA1SHA1TRUNC, verified with hashpipe -c against the NATIVE vector added on 2026-09-05 -- a per-line pin with no detection, at -t 1, with the emitted label compared against the one asked for. hashpipe compares the whole digest, so it reads the 40-character form and not john's 32-character one; that is a difference of serialization and not of algorithm. No iterations: is recorded from hashpipe -- the suffixes are different quantities and this repository follows mdxfind for that field.",
             "john" : "format discovered by round-trip search, not by name",
             "mdxfind" : ""
          },
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -76597,7 +76606,7 @@
          "expr" : "",
          "expr_note" : "mdxfind type SHA1SHA1UCTRUNC (e661) is MULTI-EMIT: it computes several candidate digests per input and matches if any one reproduces the stored hash. There is therefore no single expression to record, and writing one of the emitted forms into expression: would be a false claim even though the string itself is correct. This is also why two vectors of such a type can disagree with each other, and why a tool matching one of them is not evidence about the other.",
          "expr_tier" : "absent",
-         "hash_length" : 32,
+         "hash_length" : 40,
          "hash_length_basis" : "observed",
          "hashcat" : {
             "ids" : [],
@@ -76606,8 +76615,11 @@
          "hashcat_salted" : "",
          "hashcat_speed" : "",
          "hashpipe" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "SHA1SHA1UCTRUNC"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "sha1sha1uctrunc",
          "john" : {
@@ -76628,16 +76640,16 @@
          "mdxfind_salted" : "no",
          "name" : "SHA1SHA1UCTRUNC",
          "nesting_depth" : "",
-         "notes" : "",
-         "primary_form" : "",
+         "notes" : "The vector is in mdxfind's native form: a 40-character sha1 digest, then a colon, then the truncation length N that produced it. mdxfind sweeps N from the inner digest's hex width down to 21, hashing both the leading and the trailing N characters, and reports the N that matched in the salt field; N=40 here is the full width, the case where the truncation is the identity. Until 2026-09-05 this row stored only the leading 32 characters of that digest. mdxfind reported a clean match anyway, because it converts loaded hashes to binary and compares at the shortest length it read, so a prefix verifies and the row looked proven -- while hashpipe, which compares the whole digest, refused it, which is why this row had no hashpipe column. The digest was restored from mdxfind -z, the authority's own generated output, and re-measured under both tools; the string previously stored is its first 32 characters, so this is the same hash the row always named. Twelve TRUNC rows were stored the same way and were corrected together. The thirteenth, sha1sha1trunc, is NOT corrected but extended, because there the 32-character string is john's own serialization rather than a truncation of this repository's making.",
+         "primary_form" : "native",
          "relations" : [],
          "sameas" : "",
          "serialization" : "unknown",
          "status" : "needs-review",
          "tool_note" : {
-            "hashcat" : "no mode. Swept the 12 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-03 (tools/discover-hashcat.pl --all, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
-            "hashpipe" : "",
-            "john" : "no format. Swept the 76 format(s) whose own valid() accepts this entry's own vector, as john --show=left reports them, on 2026-09-04 (a tools/discover-john.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. For john the control is also per ENTRY and not only per shape: every format counted above is one whose own loader ACCEPTED this hash, so each was asked this exact question and answered no. A format that cannot parse the hash is not counted at all, and an entry no format can parse is reported as unsearched rather than decided. Every applicable format ran to completion; a format killed at the timeout is counted as untested and withholds this verdict. No john format name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if john gains one, this becomes a mapping.",
+            "hashcat" : "no mode. Swept the 12 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-03 (tools/discover-hashcat.pl --all, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping. RE-MEASUREMENT OWED, and here is exactly what is owed. This entry's vector changed on 2026-09-05, from a 32-character prefix to the full 40-character digest the type emits, so the sweep described above measured a string this entry no longer carries, and the modes it searched were chosen by parsers reading the old width. The absence is therefore UNVERIFIED rather than wrong. It was not re-measured at the recorded binary because the only hashcat on this host is v6.2.5-609-gc4dfcf48f, older than the v7.1.2-549-g8a15e210b this claim and the inventory both name, and stamping a weaker binary would trade a stale measurement for a worse one. What WAS run on 2026-09-05, against the corrected vector, is a full v6.2.5 sweep of the 553 modes that binary could run against it -- 39 were skipped for having no plaintext of an acceptable length -- and not one matched. That corroborates the absence without replacing it: it is the same answer from an older binary, so it cannot speak for the modes v7.1.2 added.",
+            "hashpipe" : "hashpipe e661 SHA1SHA1UCTRUNC. Verified with hashpipe -c, which pins each line to its own leading TYPE label and runs no detection, at -t 1 and with the emitted label compared against the one asked for. Both precautions matter on this build: -m does not restrict what a recognised wrapper reaches, and results vary with the thread count. This type had no column here until 2026-09-05 not because hashpipe could not verify it but because the vector it was offered was stored at 32 characters; hashpipe compares the whole digest and correctly refused. No iterations: is recorded from hashpipe -- the suffixes are different quantities and this repository follows mdxfind for that field.",
+            "john" : "no format. This entry's vector was corrected on 2026-09-05 -- it had been stored as a 32-character prefix of the 40-character digest this type emits -- which retired the sweep previously recorded here, because that one measured a different string and the set of formats whose valid() accepts a 32-character hash is not the set that accepts a 40-character one. It was re-measured against the restored vector the same day, and NOT by the narrower method: every one of the 957 formats this build registers was run, not only those whose parser accepts the hash, so no format is excluded by a loader's opinion of the string. None reproduced this entry's plaintext and none timed out, so no format is counted as untested. No john format name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if john gains one, this becomes a mapping.",
             "mdxfind" : ""
          },
          "vecs" : 1
@@ -77204,7 +77216,7 @@
          "expr" : "",
          "expr_note" : "mdxfind type SHA1SHA256TRUNC (e622) is MULTI-EMIT: it computes several candidate digests per input and matches if any one reproduces the stored hash. There is therefore no single expression to record, and writing one of the emitted forms into expression: would be a false claim even though the string itself is correct. This is also why two vectors of such a type can disagree with each other, and why a tool matching one of them is not evidence about the other.",
          "expr_tier" : "absent",
-         "hash_length" : 32,
+         "hash_length" : 40,
          "hash_length_basis" : "observed",
          "hashcat" : {
             "ids" : [],
@@ -77213,8 +77225,11 @@
          "hashcat_salted" : "",
          "hashcat_speed" : "",
          "hashpipe" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "SHA1SHA256TRUNC"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "sha1sha256trunc",
          "john" : {
@@ -77235,16 +77250,16 @@
          "mdxfind_salted" : "no",
          "name" : "SHA1SHA256TRUNC",
          "nesting_depth" : "",
-         "notes" : "",
-         "primary_form" : "",
+         "notes" : "The vector is in mdxfind's native form: a 40-character sha1 digest, then a colon, then the truncation length N that produced it. mdxfind sweeps N from the inner digest's hex width down to 21, hashing both the leading and the trailing N characters, and reports the N that matched in the salt field; N=64 here is the full width, the case where the truncation is the identity. Until 2026-09-05 this row stored only the leading 32 characters of that digest. mdxfind reported a clean match anyway, because it converts loaded hashes to binary and compares at the shortest length it read, so a prefix verifies and the row looked proven -- while hashpipe, which compares the whole digest, refused it, which is why this row had no hashpipe column. The digest was restored from mdxfind -z, the authority's own generated output, and re-measured under both tools; the string previously stored is its first 32 characters, so this is the same hash the row always named. Twelve TRUNC rows were stored the same way and were corrected together. The thirteenth, sha1sha1trunc, is NOT corrected but extended, because there the 32-character string is john's own serialization rather than a truncation of this repository's making.",
+         "primary_form" : "native",
          "relations" : [],
          "sameas" : "",
          "serialization" : "unknown",
          "status" : "needs-review",
          "tool_note" : {
-            "hashcat" : "no mode. Swept the 12 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-03 (tools/discover-hashcat.pl --all, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
-            "hashpipe" : "",
-            "john" : "no format. Swept the 76 format(s) whose own valid() accepts this entry's own vector, as john --show=left reports them, on 2026-09-04 (a tools/discover-john.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. For john the control is also per ENTRY and not only per shape: every format counted above is one whose own loader ACCEPTED this hash, so each was asked this exact question and answered no. A format that cannot parse the hash is not counted at all, and an entry no format can parse is reported as unsearched rather than decided. Every applicable format ran to completion; a format killed at the timeout is counted as untested and withholds this verdict. No john format name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if john gains one, this becomes a mapping.",
+            "hashcat" : "no mode. Swept the 12 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-03 (tools/discover-hashcat.pl --all, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping. RE-MEASUREMENT OWED, and here is exactly what is owed. This entry's vector changed on 2026-09-05, from a 32-character prefix to the full 40-character digest the type emits, so the sweep described above measured a string this entry no longer carries, and the modes it searched were chosen by parsers reading the old width. The absence is therefore UNVERIFIED rather than wrong. It was not re-measured at the recorded binary because the only hashcat on this host is v6.2.5-609-gc4dfcf48f, older than the v7.1.2-549-g8a15e210b this claim and the inventory both name, and stamping a weaker binary would trade a stale measurement for a worse one. What WAS run on 2026-09-05, against the corrected vector, is a full v6.2.5 sweep of the 553 modes that binary could run against it -- 39 were skipped for having no plaintext of an acceptable length -- and not one matched. That corroborates the absence without replacing it: it is the same answer from an older binary, so it cannot speak for the modes v7.1.2 added.",
+            "hashpipe" : "hashpipe e622 SHA1SHA256TRUNC. Verified with hashpipe -c, which pins each line to its own leading TYPE label and runs no detection, at -t 1 and with the emitted label compared against the one asked for. Both precautions matter on this build: -m does not restrict what a recognised wrapper reaches, and results vary with the thread count. This type had no column here until 2026-09-05 not because hashpipe could not verify it but because the vector it was offered was stored at 32 characters; hashpipe compares the whole digest and correctly refused. No iterations: is recorded from hashpipe -- the suffixes are different quantities and this repository follows mdxfind for that field.",
+            "john" : "no format. This entry's vector was corrected on 2026-09-05 -- it had been stored as a 32-character prefix of the 40-character digest this type emits -- which retired the sweep previously recorded here, because that one measured a different string and the set of formats whose valid() accepts a 32-character hash is not the set that accepts a 40-character one. It was re-measured against the restored vector the same day, and NOT by the narrower method: every one of the 957 formats this build registers was run, not only those whose parser accepts the hash, so no format is excluded by a loader's opinion of the string. None reproduced this entry's plaintext and none timed out, so no format is counted as untested. No john format name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if john gains one, this becomes a mapping.",
             "mdxfind" : ""
          },
          "vecs" : 1
@@ -77262,7 +77277,7 @@
          "expr" : "",
          "expr_note" : "mdxfind type SHA1SHA256TRUNCMD5 (e623) is MULTI-EMIT: it computes several candidate digests per input and matches if any one reproduces the stored hash. There is therefore no single expression to record, and writing one of the emitted forms into expression: would be a false claim even though the string itself is correct. This is also why two vectors of such a type can disagree with each other, and why a tool matching one of them is not evidence about the other.",
          "expr_tier" : "absent",
-         "hash_length" : 32,
+         "hash_length" : 40,
          "hash_length_basis" : "observed",
          "hashcat" : {
             "ids" : [],
@@ -77271,8 +77286,11 @@
          "hashcat_salted" : "",
          "hashcat_speed" : "",
          "hashpipe" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "SHA1SHA256TRUNCMD5"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "sha1sha256truncmd5",
          "john" : {
@@ -77293,16 +77311,16 @@
          "mdxfind_salted" : "no",
          "name" : "SHA1SHA256TRUNCMD5",
          "nesting_depth" : "",
-         "notes" : "",
-         "primary_form" : "",
+         "notes" : "The vector is in mdxfind's native form: a 40-character sha1 digest, then a colon, then the truncation length N that produced it. mdxfind sweeps N from the inner digest's hex width down to 21, hashing both the leading and the trailing N characters, and reports the N that matched in the salt field; N=64 here is the full width, the case where the truncation is the identity. Until 2026-09-05 this row stored only the leading 32 characters of that digest. mdxfind reported a clean match anyway, because it converts loaded hashes to binary and compares at the shortest length it read, so a prefix verifies and the row looked proven -- while hashpipe, which compares the whole digest, refused it, which is why this row had no hashpipe column. The digest was restored from mdxfind -z, the authority's own generated output, and re-measured under both tools; the string previously stored is its first 32 characters, so this is the same hash the row always named. Twelve TRUNC rows were stored the same way and were corrected together. The thirteenth, sha1sha1trunc, is NOT corrected but extended, because there the 32-character string is john's own serialization rather than a truncation of this repository's making.",
+         "primary_form" : "native",
          "relations" : [],
          "sameas" : "",
          "serialization" : "unknown",
          "status" : "needs-review",
          "tool_note" : {
-            "hashcat" : "no mode. Swept the 12 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-03 (tools/discover-hashcat.pl --all, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
-            "hashpipe" : "",
-            "john" : "no format. Swept the 76 format(s) whose own valid() accepts this entry's own vector, as john --show=left reports them, on 2026-09-04 (a tools/discover-john.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. For john the control is also per ENTRY and not only per shape: every format counted above is one whose own loader ACCEPTED this hash, so each was asked this exact question and answered no. A format that cannot parse the hash is not counted at all, and an entry no format can parse is reported as unsearched rather than decided. Every applicable format ran to completion; a format killed at the timeout is counted as untested and withholds this verdict. No john format name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if john gains one, this becomes a mapping.",
+            "hashcat" : "no mode. Swept the 12 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-03 (tools/discover-hashcat.pl --all, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping. RE-MEASUREMENT OWED, and here is exactly what is owed. This entry's vector changed on 2026-09-05, from a 32-character prefix to the full 40-character digest the type emits, so the sweep described above measured a string this entry no longer carries, and the modes it searched were chosen by parsers reading the old width. The absence is therefore UNVERIFIED rather than wrong. It was not re-measured at the recorded binary because the only hashcat on this host is v6.2.5-609-gc4dfcf48f, older than the v7.1.2-549-g8a15e210b this claim and the inventory both name, and stamping a weaker binary would trade a stale measurement for a worse one. What WAS run on 2026-09-05, against the corrected vector, is a full v6.2.5 sweep of the 553 modes that binary could run against it -- 39 were skipped for having no plaintext of an acceptable length -- and not one matched. That corroborates the absence without replacing it: it is the same answer from an older binary, so it cannot speak for the modes v7.1.2 added.",
+            "hashpipe" : "hashpipe e623 SHA1SHA256TRUNCMD5. Verified with hashpipe -c, which pins each line to its own leading TYPE label and runs no detection, at -t 1 and with the emitted label compared against the one asked for. Both precautions matter on this build: -m does not restrict what a recognised wrapper reaches, and results vary with the thread count. This type had no column here until 2026-09-05 not because hashpipe could not verify it but because the vector it was offered was stored at 32 characters; hashpipe compares the whole digest and correctly refused. No iterations: is recorded from hashpipe -- the suffixes are different quantities and this repository follows mdxfind for that field.",
+            "john" : "no format. This entry's vector was corrected on 2026-09-05 -- it had been stored as a 32-character prefix of the 40-character digest this type emits -- which retired the sweep previously recorded here, because that one measured a different string and the set of formats whose valid() accepts a 32-character hash is not the set that accepts a 40-character one. It was re-measured against the restored vector the same day, and NOT by the narrower method: every one of the 957 formats this build registers was run, not only those whose parser accepts the hash, so no format is excluded by a loader's opinion of the string. None reproduced this entry's plaintext and none timed out, so no format is counted as untested. No john format name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if john gains one, this becomes a mapping.",
             "mdxfind" : ""
          },
          "vecs" : 1
@@ -78052,7 +78070,7 @@
          "expr" : "",
          "expr_note" : "mdxfind type SHA1SHA256UCTRUNC (e630) is MULTI-EMIT: it computes several candidate digests per input and matches if any one reproduces the stored hash. There is therefore no single expression to record, and writing one of the emitted forms into expression: would be a false claim even though the string itself is correct. This is also why two vectors of such a type can disagree with each other, and why a tool matching one of them is not evidence about the other.",
          "expr_tier" : "absent",
-         "hash_length" : 32,
+         "hash_length" : 40,
          "hash_length_basis" : "observed",
          "hashcat" : {
             "ids" : [],
@@ -78061,8 +78079,11 @@
          "hashcat_salted" : "",
          "hashcat_speed" : "",
          "hashpipe" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "SHA1SHA256UCTRUNC"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "sha1sha256uctrunc",
          "john" : {
@@ -78083,16 +78104,16 @@
          "mdxfind_salted" : "no",
          "name" : "SHA1SHA256UCTRUNC",
          "nesting_depth" : "",
-         "notes" : "",
-         "primary_form" : "",
+         "notes" : "The vector is in mdxfind's native form: a 40-character sha1 digest, then a colon, then the truncation length N that produced it. mdxfind sweeps N from the inner digest's hex width down to 21, hashing both the leading and the trailing N characters, and reports the N that matched in the salt field; N=64 here is the full width, the case where the truncation is the identity. Until 2026-09-05 this row stored only the leading 32 characters of that digest. mdxfind reported a clean match anyway, because it converts loaded hashes to binary and compares at the shortest length it read, so a prefix verifies and the row looked proven -- while hashpipe, which compares the whole digest, refused it, which is why this row had no hashpipe column. The digest was restored from mdxfind -z, the authority's own generated output, and re-measured under both tools; the string previously stored is its first 32 characters, so this is the same hash the row always named. Twelve TRUNC rows were stored the same way and were corrected together. The thirteenth, sha1sha1trunc, is NOT corrected but extended, because there the 32-character string is john's own serialization rather than a truncation of this repository's making.",
+         "primary_form" : "native",
          "relations" : [],
          "sameas" : "",
          "serialization" : "unknown",
          "status" : "needs-review",
          "tool_note" : {
-            "hashcat" : "no mode. Swept the 12 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-03 (tools/discover-hashcat.pl --all, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
-            "hashpipe" : "",
-            "john" : "no format. Swept the 76 format(s) whose own valid() accepts this entry's own vector, as john --show=left reports them, on 2026-09-04 (a tools/discover-john.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. For john the control is also per ENTRY and not only per shape: every format counted above is one whose own loader ACCEPTED this hash, so each was asked this exact question and answered no. A format that cannot parse the hash is not counted at all, and an entry no format can parse is reported as unsearched rather than decided. Every applicable format ran to completion; a format killed at the timeout is counted as untested and withholds this verdict. No john format name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if john gains one, this becomes a mapping.",
+            "hashcat" : "no mode. Swept the 12 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-03 (tools/discover-hashcat.pl --all, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping. RE-MEASUREMENT OWED, and here is exactly what is owed. This entry's vector changed on 2026-09-05, from a 32-character prefix to the full 40-character digest the type emits, so the sweep described above measured a string this entry no longer carries, and the modes it searched were chosen by parsers reading the old width. The absence is therefore UNVERIFIED rather than wrong. It was not re-measured at the recorded binary because the only hashcat on this host is v6.2.5-609-gc4dfcf48f, older than the v7.1.2-549-g8a15e210b this claim and the inventory both name, and stamping a weaker binary would trade a stale measurement for a worse one. What WAS run on 2026-09-05, against the corrected vector, is a full v6.2.5 sweep of the 553 modes that binary could run against it -- 39 were skipped for having no plaintext of an acceptable length -- and not one matched. That corroborates the absence without replacing it: it is the same answer from an older binary, so it cannot speak for the modes v7.1.2 added.",
+            "hashpipe" : "hashpipe e630 SHA1SHA256UCTRUNC. Verified with hashpipe -c, which pins each line to its own leading TYPE label and runs no detection, at -t 1 and with the emitted label compared against the one asked for. Both precautions matter on this build: -m does not restrict what a recognised wrapper reaches, and results vary with the thread count. This type had no column here until 2026-09-05 not because hashpipe could not verify it but because the vector it was offered was stored at 32 characters; hashpipe compares the whole digest and correctly refused. No iterations: is recorded from hashpipe -- the suffixes are different quantities and this repository follows mdxfind for that field.",
+            "john" : "no format. This entry's vector was corrected on 2026-09-05 -- it had been stored as a 32-character prefix of the 40-character digest this type emits -- which retired the sweep previously recorded here, because that one measured a different string and the set of formats whose valid() accepts a 32-character hash is not the set that accepts a 40-character one. It was re-measured against the restored vector the same day, and NOT by the narrower method: every one of the 957 formats this build registers was run, not only those whose parser accepts the hash, so no format is excluded by a loader's opinion of the string. None reproduced this entry's plaintext and none timed out, so no format is counted as untested. No john format name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if john gains one, this becomes a mapping.",
             "mdxfind" : ""
          },
          "vecs" : 1
@@ -78354,7 +78375,7 @@
          "expr" : "",
          "expr_note" : "mdxfind type SHA1SHA3-256TRUNC (e710) is MULTI-EMIT: it computes several candidate digests per input and matches if any one reproduces the stored hash. There is therefore no single expression to record, and writing one of the emitted forms into expression: would be a false claim even though the string itself is correct. This is also why two vectors of such a type can disagree with each other, and why a tool matching one of them is not evidence about the other.",
          "expr_tier" : "absent",
-         "hash_length" : 32,
+         "hash_length" : 40,
          "hash_length_basis" : "observed",
          "hashcat" : {
             "ids" : [],
@@ -78363,8 +78384,11 @@
          "hashcat_salted" : "",
          "hashcat_speed" : "",
          "hashpipe" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "SHA1SHA3-256TRUNC"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "sha1sha3-256trunc",
          "john" : {
@@ -78385,16 +78409,16 @@
          "mdxfind_salted" : "no",
          "name" : "SHA1SHA3-256TRUNC",
          "nesting_depth" : "",
-         "notes" : "",
-         "primary_form" : "",
+         "notes" : "The vector is in mdxfind's native form: a 40-character sha1 digest, then a colon, then the truncation length N that produced it. mdxfind sweeps N from the inner digest's hex width down to 21, hashing both the leading and the trailing N characters, and reports the N that matched in the salt field; N=64 here is the full width, the case where the truncation is the identity. Until 2026-09-05 this row stored only the leading 32 characters of that digest. mdxfind reported a clean match anyway, because it converts loaded hashes to binary and compares at the shortest length it read, so a prefix verifies and the row looked proven -- while hashpipe, which compares the whole digest, refused it, which is why this row had no hashpipe column. The digest was restored from mdxfind -z, the authority's own generated output, and re-measured under both tools; the string previously stored is its first 32 characters, so this is the same hash the row always named. Twelve TRUNC rows were stored the same way and were corrected together. The thirteenth, sha1sha1trunc, is NOT corrected but extended, because there the 32-character string is john's own serialization rather than a truncation of this repository's making.",
+         "primary_form" : "native",
          "relations" : [],
          "sameas" : "",
          "serialization" : "unknown",
          "status" : "needs-review",
          "tool_note" : {
-            "hashcat" : "no mode. Swept the 12 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-03 (tools/discover-hashcat.pl --all, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
-            "hashpipe" : "",
-            "john" : "no format. Swept the 76 format(s) whose own valid() accepts this entry's own vector, as john --show=left reports them, on 2026-09-04 (a tools/discover-john.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. For john the control is also per ENTRY and not only per shape: every format counted above is one whose own loader ACCEPTED this hash, so each was asked this exact question and answered no. A format that cannot parse the hash is not counted at all, and an entry no format can parse is reported as unsearched rather than decided. Every applicable format ran to completion; a format killed at the timeout is counted as untested and withholds this verdict. No john format name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if john gains one, this becomes a mapping.",
+            "hashcat" : "no mode. Swept the 12 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-03 (tools/discover-hashcat.pl --all, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping. RE-MEASUREMENT OWED, and here is exactly what is owed. This entry's vector changed on 2026-09-05, from a 32-character prefix to the full 40-character digest the type emits, so the sweep described above measured a string this entry no longer carries, and the modes it searched were chosen by parsers reading the old width. The absence is therefore UNVERIFIED rather than wrong. It was not re-measured at the recorded binary because the only hashcat on this host is v6.2.5-609-gc4dfcf48f, older than the v7.1.2-549-g8a15e210b this claim and the inventory both name, and stamping a weaker binary would trade a stale measurement for a worse one. What WAS run on 2026-09-05, against the corrected vector, is a full v6.2.5 sweep of the 553 modes that binary could run against it -- 39 were skipped for having no plaintext of an acceptable length -- and not one matched. That corroborates the absence without replacing it: it is the same answer from an older binary, so it cannot speak for the modes v7.1.2 added.",
+            "hashpipe" : "hashpipe e710 SHA1SHA3-256TRUNC. Verified with hashpipe -c, which pins each line to its own leading TYPE label and runs no detection, at -t 1 and with the emitted label compared against the one asked for. Both precautions matter on this build: -m does not restrict what a recognised wrapper reaches, and results vary with the thread count. This type had no column here until 2026-09-05 not because hashpipe could not verify it but because the vector it was offered was stored at 32 characters; hashpipe compares the whole digest and correctly refused. No iterations: is recorded from hashpipe -- the suffixes are different quantities and this repository follows mdxfind for that field.",
+            "john" : "no format. This entry's vector was corrected on 2026-09-05 -- it had been stored as a 32-character prefix of the 40-character digest this type emits -- which retired the sweep previously recorded here, because that one measured a different string and the set of formats whose valid() accepts a 32-character hash is not the set that accepts a 40-character one. It was re-measured against the restored vector the same day, and NOT by the narrower method: every one of the 957 formats this build registers was run, not only those whose parser accepts the hash, so no format is excluded by a loader's opinion of the string. None reproduced this entry's plaintext and none timed out, so no format is counted as untested. No john format name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if john gains one, this becomes a mapping.",
             "mdxfind" : ""
          },
          "vecs" : 1
@@ -78412,7 +78436,7 @@
          "expr" : "",
          "expr_note" : "mdxfind type SHA1SHA384TRUNC (e745) is MULTI-EMIT: it computes several candidate digests per input and matches if any one reproduces the stored hash. There is therefore no single expression to record, and writing one of the emitted forms into expression: would be a false claim even though the string itself is correct. This is also why two vectors of such a type can disagree with each other, and why a tool matching one of them is not evidence about the other.",
          "expr_tier" : "absent",
-         "hash_length" : 32,
+         "hash_length" : 40,
          "hash_length_basis" : "observed",
          "hashcat" : {
             "ids" : [],
@@ -78421,8 +78445,11 @@
          "hashcat_salted" : "",
          "hashcat_speed" : "",
          "hashpipe" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "SHA1SHA384TRUNC"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "sha1sha384trunc",
          "john" : {
@@ -78443,16 +78470,16 @@
          "mdxfind_salted" : "no",
          "name" : "SHA1SHA384TRUNC",
          "nesting_depth" : "",
-         "notes" : "",
-         "primary_form" : "",
+         "notes" : "The vector is in mdxfind's native form: a 40-character sha1 digest, then a colon, then the truncation length N that produced it. mdxfind sweeps N from the inner digest's hex width down to 21, hashing both the leading and the trailing N characters, and reports the N that matched in the salt field; N=96 here is the full width, the case where the truncation is the identity. Until 2026-09-05 this row stored only the leading 32 characters of that digest. mdxfind reported a clean match anyway, because it converts loaded hashes to binary and compares at the shortest length it read, so a prefix verifies and the row looked proven -- while hashpipe, which compares the whole digest, refused it, which is why this row had no hashpipe column. The digest was restored from mdxfind -z, the authority's own generated output, and re-measured under both tools; the string previously stored is its first 32 characters, so this is the same hash the row always named. Twelve TRUNC rows were stored the same way and were corrected together. The thirteenth, sha1sha1trunc, is NOT corrected but extended, because there the 32-character string is john's own serialization rather than a truncation of this repository's making.",
+         "primary_form" : "native",
          "relations" : [],
          "sameas" : "",
          "serialization" : "unknown",
          "status" : "needs-review",
          "tool_note" : {
-            "hashcat" : "no mode. Swept the 12 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-03 (tools/discover-hashcat.pl --all, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
-            "hashpipe" : "",
-            "john" : "no format. Swept the 76 format(s) whose own valid() accepts this entry's own vector, as john --show=left reports them, on 2026-09-04 (a tools/discover-john.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. For john the control is also per ENTRY and not only per shape: every format counted above is one whose own loader ACCEPTED this hash, so each was asked this exact question and answered no. A format that cannot parse the hash is not counted at all, and an entry no format can parse is reported as unsearched rather than decided. Every applicable format ran to completion; a format killed at the timeout is counted as untested and withholds this verdict. No john format name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if john gains one, this becomes a mapping.",
+            "hashcat" : "no mode. Swept the 12 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-03 (tools/discover-hashcat.pl --all, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping. RE-MEASUREMENT OWED, and here is exactly what is owed. This entry's vector changed on 2026-09-05, from a 32-character prefix to the full 40-character digest the type emits, so the sweep described above measured a string this entry no longer carries, and the modes it searched were chosen by parsers reading the old width. The absence is therefore UNVERIFIED rather than wrong. It was not re-measured at the recorded binary because the only hashcat on this host is v6.2.5-609-gc4dfcf48f, older than the v7.1.2-549-g8a15e210b this claim and the inventory both name, and stamping a weaker binary would trade a stale measurement for a worse one. What WAS run on 2026-09-05, against the corrected vector, is a full v6.2.5 sweep of the 553 modes that binary could run against it -- 39 were skipped for having no plaintext of an acceptable length -- and not one matched. That corroborates the absence without replacing it: it is the same answer from an older binary, so it cannot speak for the modes v7.1.2 added.",
+            "hashpipe" : "hashpipe e745 SHA1SHA384TRUNC. Verified with hashpipe -c, which pins each line to its own leading TYPE label and runs no detection, at -t 1 and with the emitted label compared against the one asked for. Both precautions matter on this build: -m does not restrict what a recognised wrapper reaches, and results vary with the thread count. This type had no column here until 2026-09-05 not because hashpipe could not verify it but because the vector it was offered was stored at 32 characters; hashpipe compares the whole digest and correctly refused. No iterations: is recorded from hashpipe -- the suffixes are different quantities and this repository follows mdxfind for that field.",
+            "john" : "no format. This entry's vector was corrected on 2026-09-05 -- it had been stored as a 32-character prefix of the 40-character digest this type emits -- which retired the sweep previously recorded here, because that one measured a different string and the set of formats whose valid() accepts a 32-character hash is not the set that accepts a 40-character one. It was re-measured against the restored vector the same day, and NOT by the narrower method: every one of the 957 formats this build registers was run, not only those whose parser accepts the hash, so no format is excluded by a loader's opinion of the string. None reproduced this entry's plaintext and none timed out, so no format is counted as untested. No john format name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if john gains one, this becomes a mapping.",
             "mdxfind" : ""
          },
          "vecs" : 1
@@ -78470,7 +78497,7 @@
          "expr" : "",
          "expr_note" : "mdxfind type SHA1SHA512TRUNC (e636) is MULTI-EMIT: it computes several candidate digests per input and matches if any one reproduces the stored hash. There is therefore no single expression to record, and writing one of the emitted forms into expression: would be a false claim even though the string itself is correct. This is also why two vectors of such a type can disagree with each other, and why a tool matching one of them is not evidence about the other.",
          "expr_tier" : "absent",
-         "hash_length" : 32,
+         "hash_length" : 40,
          "hash_length_basis" : "observed",
          "hashcat" : {
             "ids" : [],
@@ -78479,8 +78506,11 @@
          "hashcat_salted" : "",
          "hashcat_speed" : "",
          "hashpipe" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "SHA1SHA512TRUNC"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "sha1sha512trunc",
          "john" : {
@@ -78501,16 +78531,16 @@
          "mdxfind_salted" : "no",
          "name" : "SHA1SHA512TRUNC",
          "nesting_depth" : "",
-         "notes" : "",
-         "primary_form" : "",
+         "notes" : "The vector is in mdxfind's native form: a 40-character sha1 digest, then a colon, then the truncation length N that produced it. mdxfind sweeps N from the inner digest's hex width down to 21, hashing both the leading and the trailing N characters, and reports the N that matched in the salt field; N=128 here is the full width, the case where the truncation is the identity. Until 2026-09-05 this row stored only the leading 32 characters of that digest. mdxfind reported a clean match anyway, because it converts loaded hashes to binary and compares at the shortest length it read, so a prefix verifies and the row looked proven -- while hashpipe, which compares the whole digest, refused it, which is why this row had no hashpipe column. The digest was restored from mdxfind -z, the authority's own generated output, and re-measured under both tools; the string previously stored is its first 32 characters, so this is the same hash the row always named. Twelve TRUNC rows were stored the same way and were corrected together. The thirteenth, sha1sha1trunc, is NOT corrected but extended, because there the 32-character string is john's own serialization rather than a truncation of this repository's making.",
+         "primary_form" : "native",
          "relations" : [],
          "sameas" : "",
          "serialization" : "unknown",
          "status" : "needs-review",
          "tool_note" : {
-            "hashcat" : "no mode. Swept the 12 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-03 (tools/discover-hashcat.pl --all, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
-            "hashpipe" : "",
-            "john" : "no format. Swept the 76 format(s) whose own valid() accepts this entry's own vector, as john --show=left reports them, on 2026-09-04 (a tools/discover-john.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. For john the control is also per ENTRY and not only per shape: every format counted above is one whose own loader ACCEPTED this hash, so each was asked this exact question and answered no. A format that cannot parse the hash is not counted at all, and an entry no format can parse is reported as unsearched rather than decided. Every applicable format ran to completion; a format killed at the timeout is counted as untested and withholds this verdict. No john format name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if john gains one, this becomes a mapping.",
+            "hashcat" : "no mode. Swept the 12 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-03 (tools/discover-hashcat.pl --all, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping. RE-MEASUREMENT OWED, and here is exactly what is owed. This entry's vector changed on 2026-09-05, from a 32-character prefix to the full 40-character digest the type emits, so the sweep described above measured a string this entry no longer carries, and the modes it searched were chosen by parsers reading the old width. The absence is therefore UNVERIFIED rather than wrong. It was not re-measured at the recorded binary because the only hashcat on this host is v6.2.5-609-gc4dfcf48f, older than the v7.1.2-549-g8a15e210b this claim and the inventory both name, and stamping a weaker binary would trade a stale measurement for a worse one. What WAS run on 2026-09-05, against the corrected vector, is a full v6.2.5 sweep of the 553 modes that binary could run against it -- 39 were skipped for having no plaintext of an acceptable length -- and not one matched. That corroborates the absence without replacing it: it is the same answer from an older binary, so it cannot speak for the modes v7.1.2 added.",
+            "hashpipe" : "hashpipe e636 SHA1SHA512TRUNC. Verified with hashpipe -c, which pins each line to its own leading TYPE label and runs no detection, at -t 1 and with the emitted label compared against the one asked for. Both precautions matter on this build: -m does not restrict what a recognised wrapper reaches, and results vary with the thread count. This type had no column here until 2026-09-05 not because hashpipe could not verify it but because the vector it was offered was stored at 32 characters; hashpipe compares the whole digest and correctly refused. No iterations: is recorded from hashpipe -- the suffixes are different quantities and this repository follows mdxfind for that field.",
+            "john" : "no format. This entry's vector was corrected on 2026-09-05 -- it had been stored as a 32-character prefix of the 40-character digest this type emits -- which retired the sweep previously recorded here, because that one measured a different string and the set of formats whose valid() accepts a 32-character hash is not the set that accepts a 40-character one. It was re-measured against the restored vector the same day, and NOT by the narrower method: every one of the 957 formats this build registers was run, not only those whose parser accepts the hash, so no format is excluded by a loader's opinion of the string. None reproduced this entry's plaintext and none timed out, so no format is counted as untested. No john format name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if john gains one, this becomes a mapping.",
             "mdxfind" : ""
          },
          "vecs" : 1
@@ -78711,7 +78741,7 @@
          "expr" : "",
          "expr_note" : "mdxfind type SHA1SHA512UCTRUNC (e689) is MULTI-EMIT: it computes several candidate digests per input and matches if any one reproduces the stored hash. There is therefore no single expression to record, and writing one of the emitted forms into expression: would be a false claim even though the string itself is correct. This is also why two vectors of such a type can disagree with each other, and why a tool matching one of them is not evidence about the other.",
          "expr_tier" : "absent",
-         "hash_length" : 32,
+         "hash_length" : 40,
          "hash_length_basis" : "observed",
          "hashcat" : {
             "ids" : [],
@@ -78720,8 +78750,11 @@
          "hashcat_salted" : "",
          "hashcat_speed" : "",
          "hashpipe" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "SHA1SHA512UCTRUNC"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "sha1sha512uctrunc",
          "john" : {
@@ -78742,16 +78775,16 @@
          "mdxfind_salted" : "no",
          "name" : "SHA1SHA512UCTRUNC",
          "nesting_depth" : "",
-         "notes" : "",
-         "primary_form" : "",
+         "notes" : "The vector is in mdxfind's native form: a 40-character sha1 digest, then a colon, then the truncation length N that produced it. mdxfind sweeps N from the inner digest's hex width down to 21, hashing both the leading and the trailing N characters, and reports the N that matched in the salt field; N=128 here is the full width, the case where the truncation is the identity. Until 2026-09-05 this row stored only the leading 32 characters of that digest. mdxfind reported a clean match anyway, because it converts loaded hashes to binary and compares at the shortest length it read, so a prefix verifies and the row looked proven -- while hashpipe, which compares the whole digest, refused it, which is why this row had no hashpipe column. The digest was restored from mdxfind -z, the authority's own generated output, and re-measured under both tools; the string previously stored is its first 32 characters, so this is the same hash the row always named. Twelve TRUNC rows were stored the same way and were corrected together. The thirteenth, sha1sha1trunc, is NOT corrected but extended, because there the 32-character string is john's own serialization rather than a truncation of this repository's making.",
+         "primary_form" : "native",
          "relations" : [],
          "sameas" : "",
          "serialization" : "unknown",
          "status" : "needs-review",
          "tool_note" : {
-            "hashcat" : "no mode. Swept the 12 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-03 (tools/discover-hashcat.pl --all, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
-            "hashpipe" : "",
-            "john" : "no format. Swept the 76 format(s) whose own valid() accepts this entry's own vector, as john --show=left reports them, on 2026-09-04 (a tools/discover-john.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. For john the control is also per ENTRY and not only per shape: every format counted above is one whose own loader ACCEPTED this hash, so each was asked this exact question and answered no. A format that cannot parse the hash is not counted at all, and an entry no format can parse is reported as unsearched rather than decided. Every applicable format ran to completion; a format killed at the timeout is counted as untested and withholds this verdict. No john format name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if john gains one, this becomes a mapping.",
+            "hashcat" : "no mode. Swept the 12 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-03 (tools/discover-hashcat.pl --all, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping. RE-MEASUREMENT OWED, and here is exactly what is owed. This entry's vector changed on 2026-09-05, from a 32-character prefix to the full 40-character digest the type emits, so the sweep described above measured a string this entry no longer carries, and the modes it searched were chosen by parsers reading the old width. The absence is therefore UNVERIFIED rather than wrong. It was not re-measured at the recorded binary because the only hashcat on this host is v6.2.5-609-gc4dfcf48f, older than the v7.1.2-549-g8a15e210b this claim and the inventory both name, and stamping a weaker binary would trade a stale measurement for a worse one. What WAS run on 2026-09-05, against the corrected vector, is a full v6.2.5 sweep of the 553 modes that binary could run against it -- 39 were skipped for having no plaintext of an acceptable length -- and not one matched. That corroborates the absence without replacing it: it is the same answer from an older binary, so it cannot speak for the modes v7.1.2 added.",
+            "hashpipe" : "hashpipe e689 SHA1SHA512UCTRUNC. Verified with hashpipe -c, which pins each line to its own leading TYPE label and runs no detection, at -t 1 and with the emitted label compared against the one asked for. Both precautions matter on this build: -m does not restrict what a recognised wrapper reaches, and results vary with the thread count. This type had no column here until 2026-09-05 not because hashpipe could not verify it but because the vector it was offered was stored at 32 characters; hashpipe compares the whole digest and correctly refused. No iterations: is recorded from hashpipe -- the suffixes are different quantities and this repository follows mdxfind for that field.",
+            "john" : "no format. This entry's vector was corrected on 2026-09-05 -- it had been stored as a 32-character prefix of the 40-character digest this type emits -- which retired the sweep previously recorded here, because that one measured a different string and the set of formats whose valid() accepts a 32-character hash is not the set that accepts a 40-character one. It was re-measured against the restored vector the same day, and NOT by the narrower method: every one of the 957 formats this build registers was run, not only those whose parser accepts the hash, so no format is excluded by a loader's opinion of the string. None reproduced this entry's plaintext and none timed out, so no format is counted as untested. No john format name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if john gains one, this becomes a mapping.",
             "mdxfind" : ""
          },
          "vecs" : 1
@@ -79587,7 +79620,7 @@
          "expr" : "",
          "expr_note" : "mdxfind type SHA1WRLTRUNC (e635) is MULTI-EMIT: it computes several candidate digests per input and matches if any one reproduces the stored hash. There is therefore no single expression to record, and writing one of the emitted forms into expression: would be a false claim even though the string itself is correct. This is also why two vectors of such a type can disagree with each other, and why a tool matching one of them is not evidence about the other.",
          "expr_tier" : "absent",
-         "hash_length" : 32,
+         "hash_length" : 40,
          "hash_length_basis" : "observed",
          "hashcat" : {
             "ids" : [],
@@ -79596,8 +79629,11 @@
          "hashcat_salted" : "",
          "hashcat_speed" : "",
          "hashpipe" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "SHA1WRLTRUNC"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "sha1wrltrunc",
          "john" : {
@@ -79618,16 +79654,16 @@
          "mdxfind_salted" : "no",
          "name" : "SHA1WRLTRUNC",
          "nesting_depth" : "",
-         "notes" : "",
-         "primary_form" : "",
+         "notes" : "The vector is in mdxfind's native form: a 40-character sha1 digest, then a colon, then the truncation length N that produced it. mdxfind sweeps N from the inner digest's hex width down to 21, hashing both the leading and the trailing N characters, and reports the N that matched in the salt field; N=128 here is the full width, the case where the truncation is the identity. Until 2026-09-05 this row stored only the leading 32 characters of that digest. mdxfind reported a clean match anyway, because it converts loaded hashes to binary and compares at the shortest length it read, so a prefix verifies and the row looked proven -- while hashpipe, which compares the whole digest, refused it, which is why this row had no hashpipe column. The digest was restored from mdxfind -z, the authority's own generated output, and re-measured under both tools; the string previously stored is its first 32 characters, so this is the same hash the row always named. Twelve TRUNC rows were stored the same way and were corrected together. The thirteenth, sha1sha1trunc, is NOT corrected but extended, because there the 32-character string is john's own serialization rather than a truncation of this repository's making.",
+         "primary_form" : "native",
          "relations" : [],
          "sameas" : "",
          "serialization" : "unknown",
          "status" : "needs-review",
          "tool_note" : {
-            "hashcat" : "no mode. Swept the 12 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-03 (tools/discover-hashcat.pl --all, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
-            "hashpipe" : "",
-            "john" : "no format. Swept the 78 format(s) whose own valid() accepts this entry's own vector, as john --show=left reports them, on 2026-09-04 (a tools/discover-john.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. For john the control is also per ENTRY and not only per shape: every format counted above is one whose own loader ACCEPTED this hash, so each was asked this exact question and answered no. A format that cannot parse the hash is not counted at all, and an entry no format can parse is reported as unsearched rather than decided. Every applicable format ran to completion; a format killed at the timeout is counted as untested and withholds this verdict. No john format name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if john gains one, this becomes a mapping.",
+            "hashcat" : "no mode. Swept the 12 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-03 (tools/discover-hashcat.pl --all, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping. RE-MEASUREMENT OWED, and here is exactly what is owed. This entry's vector changed on 2026-09-05, from a 32-character prefix to the full 40-character digest the type emits, so the sweep described above measured a string this entry no longer carries, and the modes it searched were chosen by parsers reading the old width. The absence is therefore UNVERIFIED rather than wrong. It was not re-measured at the recorded binary because the only hashcat on this host is v6.2.5-609-gc4dfcf48f, older than the v7.1.2-549-g8a15e210b this claim and the inventory both name, and stamping a weaker binary would trade a stale measurement for a worse one. What WAS run on 2026-09-05, against the corrected vector, is a full v6.2.5 sweep of the 553 modes that binary could run against it -- 39 were skipped for having no plaintext of an acceptable length -- and not one matched. That corroborates the absence without replacing it: it is the same answer from an older binary, so it cannot speak for the modes v7.1.2 added.",
+            "hashpipe" : "hashpipe e635 SHA1WRLTRUNC. Verified with hashpipe -c, which pins each line to its own leading TYPE label and runs no detection, at -t 1 and with the emitted label compared against the one asked for. Both precautions matter on this build: -m does not restrict what a recognised wrapper reaches, and results vary with the thread count. This type had no column here until 2026-09-05 not because hashpipe could not verify it but because the vector it was offered was stored at 32 characters; hashpipe compares the whole digest and correctly refused. No iterations: is recorded from hashpipe -- the suffixes are different quantities and this repository follows mdxfind for that field.",
+            "john" : "no format. This entry's vector was corrected on 2026-09-05 -- it had been stored as a 32-character prefix of the 40-character digest this type emits -- which retired the sweep previously recorded here, because that one measured a different string and the set of formats whose valid() accepts a 32-character hash is not the set that accepts a 40-character one. It was re-measured against the restored vector the same day, and NOT by the narrower method: every one of the 957 formats this build registers was run, not only those whose parser accepts the hash, so no format is excluded by a loader's opinion of the string. None reproduced this entry's plaintext and none timed out, so no format is counted as untested. No john format name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if john gains one, this becomes a mapping.",
             "mdxfind" : ""
          },
          "vecs" : 1
@@ -79645,7 +79681,7 @@
          "expr" : "",
          "expr_note" : "mdxfind type SHA1WRLUCTRUNC (e653) is MULTI-EMIT: it computes several candidate digests per input and matches if any one reproduces the stored hash. There is therefore no single expression to record, and writing one of the emitted forms into expression: would be a false claim even though the string itself is correct. This is also why two vectors of such a type can disagree with each other, and why a tool matching one of them is not evidence about the other.",
          "expr_tier" : "absent",
-         "hash_length" : 32,
+         "hash_length" : 40,
          "hash_length_basis" : "observed",
          "hashcat" : {
             "ids" : [],
@@ -79654,8 +79690,11 @@
          "hashcat_salted" : "",
          "hashcat_speed" : "",
          "hashpipe" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "SHA1WRLUCTRUNC"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "sha1wrluctrunc",
          "john" : {
@@ -79676,16 +79715,16 @@
          "mdxfind_salted" : "no",
          "name" : "SHA1WRLUCTRUNC",
          "nesting_depth" : "",
-         "notes" : "",
-         "primary_form" : "",
+         "notes" : "The vector is in mdxfind's native form: a 40-character sha1 digest, then a colon, then the truncation length N that produced it. mdxfind sweeps N from the inner digest's hex width down to 21, hashing both the leading and the trailing N characters, and reports the N that matched in the salt field; N=128 here is the full width, the case where the truncation is the identity. Until 2026-09-05 this row stored only the leading 32 characters of that digest. mdxfind reported a clean match anyway, because it converts loaded hashes to binary and compares at the shortest length it read, so a prefix verifies and the row looked proven -- while hashpipe, which compares the whole digest, refused it, which is why this row had no hashpipe column. The digest was restored from mdxfind -z, the authority's own generated output, and re-measured under both tools; the string previously stored is its first 32 characters, so this is the same hash the row always named. Twelve TRUNC rows were stored the same way and were corrected together. The thirteenth, sha1sha1trunc, is NOT corrected but extended, because there the 32-character string is john's own serialization rather than a truncation of this repository's making.",
+         "primary_form" : "native",
          "relations" : [],
          "sameas" : "",
          "serialization" : "unknown",
          "status" : "needs-review",
          "tool_note" : {
-            "hashcat" : "no mode. Swept the 12 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-03 (tools/discover-hashcat.pl --all, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
-            "hashpipe" : "",
-            "john" : "no format. Swept the 78 format(s) whose own valid() accepts this entry's own vector, as john --show=left reports them, on 2026-09-04 (a tools/discover-john.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. For john the control is also per ENTRY and not only per shape: every format counted above is one whose own loader ACCEPTED this hash, so each was asked this exact question and answered no. A format that cannot parse the hash is not counted at all, and an entry no format can parse is reported as unsearched rather than decided. Every applicable format ran to completion; a format killed at the timeout is counted as untested and withholds this verdict. No john format name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if john gains one, this becomes a mapping.",
+            "hashcat" : "no mode. Swept the 12 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-03 (tools/discover-hashcat.pl --all, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping. RE-MEASUREMENT OWED, and here is exactly what is owed. This entry's vector changed on 2026-09-05, from a 32-character prefix to the full 40-character digest the type emits, so the sweep described above measured a string this entry no longer carries, and the modes it searched were chosen by parsers reading the old width. The absence is therefore UNVERIFIED rather than wrong. It was not re-measured at the recorded binary because the only hashcat on this host is v6.2.5-609-gc4dfcf48f, older than the v7.1.2-549-g8a15e210b this claim and the inventory both name, and stamping a weaker binary would trade a stale measurement for a worse one. What WAS run on 2026-09-05, against the corrected vector, is a full v6.2.5 sweep of the 553 modes that binary could run against it -- 39 were skipped for having no plaintext of an acceptable length -- and not one matched. That corroborates the absence without replacing it: it is the same answer from an older binary, so it cannot speak for the modes v7.1.2 added.",
+            "hashpipe" : "hashpipe e653 SHA1WRLUCTRUNC. Verified with hashpipe -c, which pins each line to its own leading TYPE label and runs no detection, at -t 1 and with the emitted label compared against the one asked for. Both precautions matter on this build: -m does not restrict what a recognised wrapper reaches, and results vary with the thread count. This type had no column here until 2026-09-05 not because hashpipe could not verify it but because the vector it was offered was stored at 32 characters; hashpipe compares the whole digest and correctly refused. No iterations: is recorded from hashpipe -- the suffixes are different quantities and this repository follows mdxfind for that field.",
+            "john" : "no format. This entry's vector was corrected on 2026-09-05 -- it had been stored as a 32-character prefix of the 40-character digest this type emits -- which retired the sweep previously recorded here, because that one measured a different string and the set of formats whose valid() accepts a 32-character hash is not the set that accepts a 40-character one. It was re-measured against the restored vector the same day, and NOT by the narrower method: every one of the 957 formats this build registers was run, not only those whose parser accepts the hash, so no format is excluded by a loader's opinion of the string. None reproduced this entry's plaintext and none timed out, so no format is counted as untested. No john format name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if john gains one, this becomes a mapping.",
             "mdxfind" : ""
          },
          "vecs" : 1
@@ -79712,8 +79751,11 @@
          "hashcat_salted" : "",
          "hashcat_speed" : "",
          "hashpipe" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "SHA1WRLUCTRUNCSALT"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "sha1wrluctruncsalt",
          "john" : {
@@ -79734,15 +79776,15 @@
          "mdxfind_salted" : "yes",
          "name" : "SHA1WRLUCTRUNCSALT",
          "nesting_depth" : "",
-         "notes" : "",
-         "primary_form" : "",
+         "notes" : "The vector recorded here until 2026-09-05 was STALE and no longer reproduced by anything: mdxfind answered None found, sorry! and hashpipe refused it. It was not a wrong mapping but an out-of-date digest. mdxfind's own change log records the cause -- e672 shared the lowercase sha1_truncsalt path with e683 and e739, so despite its UC name and its hx.8 definition it emitted a LOWERCASE whirlpool hex digest, and the fix was to uppercase it, verified upstream 108/108 against sha1(cut(upper(wrl(pass)),0,N).salt). The stored string was the pre-fix value. It is replaced with the digest mdxfind RCS 1.576 now emits for the same salt and the same N, generated with -z and re-measured under both tools, so the row again names something that exists. N=128 is the full width of whirlpool's hex, the case where the truncation is the identity; the salt field carries the literal salt and then N, separated by a space. This is a different defect from the twelve sibling TRUNC rows corrected alongside it: theirs were stored as 32-character prefixes of a live digest, while this one was a full-length digest of a superseded algorithm. A vector can go stale when the TOOL is corrected, and nothing in this repository re-checks that on its own.",
+         "primary_form" : "native",
          "relations" : [],
          "sameas" : "",
          "serialization" : "unknown",
          "status" : "needs-review",
          "tool_note" : {
             "hashcat" : "no mode. Swept the 17 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-03 (tools/discover-hashcat.pl --all, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
-            "hashpipe" : "",
+            "hashpipe" : "hashpipe e672 SHA1WRLUCTRUNCSALT, verified with hashpipe -c against the CORRECTED vector -- a per-line pin with no detection, at -t 1, with stdout and stderr kept apart and the emitted label compared against the one asked for. That last precaution is what found the defect this row carried: hashpipe writes an unresolved line to stderr UNCHANGED, so a refusal printed on a shared terminal is character-for-character the input and reads as a pass. Under the previous vector this type refused, and so did mdxfind.",
             "john" : "no format. Swept the 34 format(s) whose own valid() accepts this entry's own vector, as john --show=left reports them, on 2026-09-04 (a tools/discover-john.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. For john the control is also per ENTRY and not only per shape: every format counted above is one whose own loader ACCEPTED this hash, so each was asked this exact question and answered no. A format that cannot parse the hash is not counted at all, and an entry no format can parse is reported as unsearched rather than decided. Every applicable format ran to completion; a format killed at the timeout is counted as untested and withholds this verdict. No john format name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if john gains one, this becomes a mapping.",
             "mdxfind" : "NOT REPRODUCED HERE. mdxfind publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: the tool pinned to this identifier did not reproduce its own published example. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool mdxfind --only SHA1WRLUCTRUNCSALT to retry."
          },
@@ -95933,8 +95975,8 @@
             "ids" : [
                22000
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "hashcat_salted" : "yes",
          "hashcat_speed" : "slow",
@@ -95965,10 +96007,10 @@
          "primary_form" : "",
          "relations" : [],
          "sameas" : "",
-         "serialization" : "unknown",
+         "serialization" : "shared",
          "status" : "needs-review",
          "tool_note" : {
-            "hashcat" : "NOT REPRODUCED HERE. hashcat publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: this mode wants binary capture input rather than a hash line. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool hashcat --only 22000 to retry.",
+            "hashcat" : "Round-tripped, but attributed by a SOLO run, because hashcat echoed a different spelling of this hash than it was given under mode(s) 22000, and the grouped run attributes a crack by matching the hash string -- its output lines do not correspond to its input lines -- so it could not credit one. One hash and one candidate per invocation leaves nothing else the crack could belong to. The stored vector is unchanged and is the form hashcat was fed.",
             "hashpipe" : "",
             "john" : "",
             "mdxfind" : "type discovered by round-trip search, not by name"
@@ -95994,8 +96036,8 @@
             "ids" : [
                22001
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "hashcat_salted" : "yes",
          "hashcat_speed" : "slow",
@@ -96029,10 +96071,10 @@
          "primary_form" : "",
          "relations" : [],
          "sameas" : "",
-         "serialization" : "unknown",
+         "serialization" : "shared",
          "status" : "needs-review",
          "tool_note" : {
-            "hashcat" : "hashcat mapping shipped in mdxfind's own type table",
+            "hashcat" : "Round-tripped, but attributed by a SOLO run, because hashcat echoed a different spelling of this hash than it was given under mode(s) 22001, and the grouped run attributes a crack by matching the hash string -- its output lines do not correspond to its input lines -- so it could not credit one. One hash and one candidate per invocation leaves nothing else the crack could belong to. The stored vector is unchanged and is the form hashcat was fed.",
             "hashpipe" : "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one.",
             "john" : "",
             "mdxfind" : "the vector below cracks, but mdxfind cannot GENERATE one: -z emits nothing for this type because a real WPA handshake supplies the ESSID and MAC addresses. A corpus sweep that emits a vector per type will therefore skip WPA-PMK, and that is expected rather than a vector waiting to be filled."

@@ -155,7 +155,8 @@ use YAML::XS ();
 
 use lib "$RealBin/lib";
 use RosettaEmit qw(emit_entry);
-use RosettaTools qw(tool_path tool_env_help tool_version);
+use RosettaTools qw(tool_path tool_env_help tool_version
+                    hc_plain_is hc_line_plain_is);
 
 my $PROG = basename($0);
 my $ROOT = "$RealBin/..";
@@ -471,27 +472,10 @@ my (%cracked, %attempted, %failed_job, %mx_job_ids, %ran_ident);
 my %transcoded;
 my $ran = 0;
 
-# hc_plain_is($said, $want) - is the plaintext hashcat printed the plaintext
-# the vector records?
-#
-# The two do not always spell it the same way. hashcat writes a non-printable
-# password as $HEX[<hex>], and a vector may store either spelling: mode 9710's
-# vector here is "$HEX[91b2e062b9]" and hashcat's crack line ends
-# ":91b2e062b9". Both are the same five bytes. So one $HEX wrapper on either
-# side is unwrapped and nothing else is: a comparison that normalized harder
-# than that would start accepting different plaintexts.
-sub hc_plain_is {
-    my ($said, $want) = @_;
-    return 0 unless defined $said && defined $want;
-    return 1 if $said eq $want;
-    for my $p ([$said, $want], [$want, $said]) {
-        my ($a, $b) = @$p;
-        next unless $a =~ /^\$HEX\[([0-9a-fA-F]*)\]$/;
-        return 1 if lc($1) eq lc($b);              # the inner hex, as text
-        return 1 if pack('H*', $1) eq $b;          # the inner hex, as bytes
-    }
-    return 0;
-}
+# hc_plain_is and hc_line_plain_is live in RosettaTools: the second was wrong
+# once, and a wrong answer there understates hashcat's support, which reads
+# exactly like a mode that does not crack. They are pure and are asserted by
+# tools/test-rosetta-tools.pl without a GPU.
 
 #-----------------------------------------------------------------------
 # hashcat.
@@ -580,12 +564,11 @@ if ($want{hashcat} && $job{hashcat}) {
             next unless defined $o2;
             my $hit = 0;
             for my $line (split /\n/, $o2) {
-                # "<whatever hashcat calls the hash>:<plain>". The plaintext is
-                # still checked, because the tier promises the tool recovered
-                # THIS entry's plaintext; only the hash spelling is conceded.
-                next unless $line =~ /^(.+?):(.*)$/;
-                next unless length $1;
-                next unless hc_plain_is($2, $vec->{pass});
+                # The plaintext is still checked, because the tier promises
+                # the tool recovered THIS entry's plaintext; only the hash's
+                # spelling is conceded. See hc_line_plain_is for why the match
+                # runs from the END of the line.
+                next unless hc_line_plain_is($line, $vec->{pass});
                 $hit = 1;
                 last;
             }

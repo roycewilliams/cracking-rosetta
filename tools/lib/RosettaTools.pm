@@ -53,7 +53,8 @@ use warnings;
 
 use Exporter 'import';
 our @EXPORT_OK = qw(tool_path tool_env_help tool_version
-                    share_measurable share_unmeasurable_reason);
+                    share_measurable share_unmeasurable_reason
+                    hc_plain_is hc_line_plain_is);
 
 # The path each tool has had all along on the machine this data was generated
 # on. Do not change these to make a different machine work -- set the
@@ -189,6 +190,68 @@ sub share_unmeasurable_reason {
         $corpus, ($corpus == 1 ? 'entry' : 'entries'),
         ($corpus > 0 ? sprintf('%g', 100 / $corpus) : '100'),
         $max_share, $kind, $kind);
+}
+
+
+#-----------------------------------------------------------------------
+# READING HASHCAT'S CRACK LINE
+#
+# These live here rather than in the one script that calls them because the
+# second one was WRONG once and nothing could have caught it: a wrong answer
+# understates hashcat's support, which looks exactly like a mode that does not
+# crack. A pure function in a module can be asserted without a GPU.
+
+# hc_plain_is($said, $want) - is the plaintext hashcat printed the plaintext
+# the vector records?
+#
+# The two do not always spell it the same way. hashcat writes a non-printable
+# password as $HEX[<hex>], and a vector may store either spelling: mode 9710's
+# vector here is "$HEX[91b2e062b9]" and hashcat's crack line ends
+# ":91b2e062b9". Both are the same five bytes. So one $HEX wrapper on either
+# side is unwrapped and nothing else is: a comparison that normalized harder
+# than that would start accepting different plaintexts.
+sub hc_plain_is {
+    my ($said, $want) = @_;
+    return 0 unless defined $said && defined $want;
+    return 1 if $said eq $want;
+    for my $p ([$said, $want], [$want, $said]) {
+        my ($a, $b) = @$p;
+        next unless $a =~ /^\$HEX\[([0-9a-fA-F]*)\]$/;
+        return 1 if lc($1) eq lc($b);              # the inner hex, as text
+        return 1 if pack('H*', $1) eq $b;          # the inner hex, as bytes
+    }
+    return 0;
+}
+
+# hc_line_plain_is($line, $want) - does this whole crack line end in $want as a
+# colon-delimited FIELD?
+#
+# Only for a SOLO run, where the file held one hash and the wordlist one
+# candidate, so the line can only be about them and the hash's spelling stops
+# mattering. A grouped run must keep matching the hash string exactly, because
+# its output lines do not correspond to its input lines.
+#
+# Match from the END, never on the first colon: hashcat's re-serialization puts
+# colons in the hash half. Measured 2026-09-05 on v7.1.2-549-g8a15e210b,
+# -m 22000 is handed
+#   WPA*01*<pmkid>*<mac>*<mac>*<hex essid>***
+# and prints
+#   <pmkid>:<mac>:<mac>:<essid>:<plain>
+# -- different separators and the essid hex-decoded to text. Splitting on the
+# first colon read the plaintext as "<mac>:<mac>:<essid>:hashcat!" and the
+# round trip was recorded as a failure.
+#
+# The tail widens one field at a time so a plaintext containing a colon still
+# matches, and at least one field must remain ahead of it: a line that is
+# nothing but the candidate echoed back is not a crack.
+sub hc_line_plain_is {
+    my ($line, $want) = @_;
+    return 0 unless defined $line && defined $want;
+    my @f = split /:/, $line, -1;
+    for my $k (1 .. $#f) {
+        return 1 if hc_plain_is(join(':', @f[ @f - $k .. $#f ]), $want);
+    }
+    return 0;
 }
 
 1;
