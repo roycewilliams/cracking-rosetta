@@ -44,7 +44,9 @@ vectors:
   - hash: "299bd128c1101fd6"
     pass: "HASHCAT"
     source: "hashcat"
+    form: "hashcat"
     reads_in: ["hashcat", "mdxfind"]
 legacy:
   hashes_org: "LM"
   hashkiller: "n/a"
+notes: "The two vectors here are different credentials, not one credential written twice. The 32-character string is the LM pair as john writes it, and its second half is aad3b435b51404ee, the LM of the empty string; the 16-character string is a SINGLE half, which is what hashcat mode 3000 takes. form: on the shorter one records that its width is hashcat's serialization and not a truncation. Measured 2026-09-05."

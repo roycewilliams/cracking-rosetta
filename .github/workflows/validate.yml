@@ -195,6 +195,21 @@ jobs:
       - name: Exercise the absence pass
         run: perl -Itools/lib tools/test-absence.pl
 
+      # A vector stored narrower than its type's digest still round-trips.
+      # mdxfind converts loaded hashes to binary and compares at the shortest
+      # length it read, so a stored PREFIX matches and the entry is promoted to
+      # tier 'vector' on a value the algorithm never emits. Twelve TRUNC
+      # entries sat that way -- 32 characters of a 40-character sha1 -- and the
+      # only dissent was hashpipe refusing them, which reads as a gap nobody
+      # has filled rather than as a defect. The check is pure vendored data:
+      # widths come from example_vector in data/tools/mdxfind.yaml, so it needs
+      # no cracker and cannot be skipped for want of a binary. A width that
+      # differs is not by itself wrong -- half-md5, lm and hashcat's DANE are
+      # all real serializations -- so what this enforces is that a differing
+      # width DECLARES its form:.
+      - name: Vectors are the width their type emits, or say which form they are
+        run: perl -Itools/lib tools/audit-vector-widths.pl --check
+
       # docs/index.html is the front door, and its behavior is a string that
       # render.pl builds -- so a wrong array index or selector passes perl -c,
       # passes validate.pl, and silently breaks the page's search. node is
