@@ -885,7 +885,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | PARALLEL | no | **--** | `PARALLEL` |  |
 | Password Manager | **--** | `STRIP` (v) | **--** |  |
 | Password Safe | **--** | `pwsafe`<br>`pwsafe-opencl` (v) | no |  |
-| Password Safe v2 | `9000` | **--** | **--** |  |
+| Password Safe v2 | `9000` (v) | **--** | **--** |  |
 | PBKDF1-SHA1 | `32900` (v) | **--** | `PBKDF1-SHA1` (v) |  |
 | PBKDF2-HMAC-MD4 | **--** | `PBKDF2-HMAC-MD4`<br>`PBKDF2-HMAC-MD4-opencl` (v) | no |  |
 | PBKDF2-HMAC-MD5 | **--** | `PBKDF2-HMAC-MD5`<br>`PBKDF2-HMAC-MD5-opencl` (v) | no |  |
@@ -937,7 +937,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | PSK | **--** | `IKE` (v) | no |  |
 | PunBB | `4522` (v) | no | `SHA1SALTSHA1PASS` (v) |  |
 | Purdy | **--** | `OpenVMS` (v) | no |  |
-| PWSAFE3 | `5200` | **--** | `PWSAFE3` (v) |  |
+| PWSAFE3 | `5200` (v) | **--** | `PWSAFE3` (v) |  |
 | Python passlib pbkdf2-sha256 | `20300` (v) | `PBKDF2-HMAC-SHA256`<br>`PBKDF2-HMAC-SHA256-opencl` (v) | `PBKDF2-SHA256` (v) |  |
 | QNX-MD5 | `19000` (v) | `qnx` (v) | `QNX-MD5` (v) |  |
 | QNX-SHA256 | `19100` (v) | `qnx` (v) | `QNX-SHA256` (v) |  |
@@ -1470,81 +1470,81 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | TrueCrypt AES256_XTS | **--** | `tc_whirlpool` (v) | **--** |  |
 | TrueCrypt AES256_XTS | **--** | `tc_aes_xts` (v) | **--** |  |
 | TrueCrypt RIPEMD160 + XTS 1024 bit | `29312` (v) | **--** | no |  |
-| TrueCrypt RIPEMD160 + XTS 1024 bit (legacy) | `6212` | **--** | **--** |  |
+| TrueCrypt RIPEMD160 + XTS 1024 bit (legacy) | `6212` (v) | **--** | **--** |  |
 | TrueCrypt RIPEMD160 + XTS 1024 bit + boot-mode | `29342` (v) | **--** | no |  |
-| TrueCrypt RIPEMD160 + XTS 1024 bit + boot-mode (legacy) | `6242` | **--** | **--** |  |
+| TrueCrypt RIPEMD160 + XTS 1024 bit + boot-mode (legacy) | `6242` (v) | **--** | **--** |  |
 | TrueCrypt RIPEMD160 + XTS 1536 bit | `29313` (v) | **--** | no |  |
-| TrueCrypt RIPEMD160 + XTS 1536 bit (legacy) | `6213` | **--** | **--** |  |
+| TrueCrypt RIPEMD160 + XTS 1536 bit (legacy) | `6213` (v) | **--** | **--** |  |
 | TrueCrypt RIPEMD160 + XTS 1536 bit + boot-mode | `29343` (v) | **--** | no |  |
-| TrueCrypt RIPEMD160 + XTS 1536 bit + boot-mode (legacy) | `6243` | **--** | **--** |  |
+| TrueCrypt RIPEMD160 + XTS 1536 bit + boot-mode (legacy) | `6243` (v) | **--** | **--** |  |
 | TrueCrypt RIPEMD160 + XTS 512 bit | `29311` (v) | **--** | no |  |
-| TrueCrypt RIPEMD160 + XTS 512 bit (legacy) | `6211` | **--** | **--** |  |
+| TrueCrypt RIPEMD160 + XTS 512 bit (legacy) | `6211` (v) | **--** | **--** |  |
 | TrueCrypt RIPEMD160 + XTS 512 bit + boot-mode | `29341` (v) | **--** | no |  |
-| TrueCrypt RIPEMD160 + XTS 512 bit + boot-mode (legacy) | `6241` | **--** | **--** |  |
+| TrueCrypt RIPEMD160 + XTS 512 bit + boot-mode (legacy) | `6241` (v) | **--** | **--** |  |
 | TrueCrypt SHA512 + XTS 1024 bit | `29322` (v) | **--** | no |  |
-| TrueCrypt SHA512 + XTS 1024 bit (legacy) | `6222` | **--** | **--** |  |
+| TrueCrypt SHA512 + XTS 1024 bit (legacy) | `6222` (v) | **--** | **--** |  |
 | TrueCrypt SHA512 + XTS 1536 bit | `29323` (v) | **--** | no |  |
-| TrueCrypt SHA512 + XTS 1536 bit (legacy) | `6223` | **--** | **--** |  |
+| TrueCrypt SHA512 + XTS 1536 bit (legacy) | `6223` (v) | **--** | **--** |  |
 | TrueCrypt SHA512 + XTS 512 bit | `29321` (v) | **--** | no |  |
-| TrueCrypt SHA512 + XTS 512 bit (legacy) | `6221` | **--** | **--** |  |
+| TrueCrypt SHA512 + XTS 512 bit (legacy) | `6221` (v) | **--** | **--** |  |
 | TrueCrypt Whirlpool + XTS 1024 bit | `29332` (v) | **--** | no |  |
-| TrueCrypt Whirlpool + XTS 1024 bit (legacy) | `6232` | **--** | **--** |  |
+| TrueCrypt Whirlpool + XTS 1024 bit (legacy) | `6232` (v) | **--** | **--** |  |
 | TrueCrypt Whirlpool + XTS 1536 bit | `29333` (v) | **--** | no |  |
-| TrueCrypt Whirlpool + XTS 1536 bit (legacy) | `6233` | **--** | **--** |  |
+| TrueCrypt Whirlpool + XTS 1536 bit (legacy) | `6233` (v) | **--** | **--** |  |
 | TrueCrypt Whirlpool + XTS 512 bit | `29331` (v) | **--** | no |  |
-| TrueCrypt Whirlpool + XTS 512 bit (legacy) | `6231` | **--** | **--** |  |
+| TrueCrypt Whirlpool + XTS 512 bit (legacy) | `6231` (v) | **--** | **--** |  |
 | UMBRACO | `24800` (v) | **--** | `UMBRACO` (v) |  |
 | vBulletin < v3.8.5 | `2611` (v) | `dynamic_1007`<br>`dynamic_2006`<br>`dynamic_6` (v) | `MD5SALT` (v) | same as md5-md5-pass-salt (application); same as vbulletin-v3-8-5-2 (application) |
 | vBulletin > v3.8.5 | `2711` (v) | `dynamic_1007`<br>`dynamic_2006`<br>`dynamic_6` | `MD5SALT` (v) | same as vbulletin-v3-8-5 (application) |
 | VEEAM-VBK | `31200` (v) | **--** | `VEEAM-VBK` (v) |  |
 | VeraCrypt RIPEMD160 + XTS 1024 bit | `29412` (v) | **--** | no |  |
-| VeraCrypt RIPEMD160 + XTS 1024 bit (legacy) | `13712` | **--** | **--** |  |
+| VeraCrypt RIPEMD160 + XTS 1024 bit (legacy) | `13712` (v) | **--** | **--** |  |
 | VeraCrypt RIPEMD160 + XTS 1024 bit + boot-mode | `29442` (v) | **--** | no |  |
-| VeraCrypt RIPEMD160 + XTS 1024 bit + boot-mode (legacy) | `13742` | **--** | **--** |  |
+| VeraCrypt RIPEMD160 + XTS 1024 bit + boot-mode (legacy) | `13742` (v) | **--** | **--** |  |
 | VeraCrypt RIPEMD160 + XTS 1536 bit | `29413` (v) | **--** | no |  |
-| VeraCrypt RIPEMD160 + XTS 1536 bit (legacy) | `13713` | **--** | **--** |  |
+| VeraCrypt RIPEMD160 + XTS 1536 bit (legacy) | `13713` (v) | **--** | **--** |  |
 | VeraCrypt RIPEMD160 + XTS 1536 bit + boot-mode | `29443` (v) | **--** | no |  |
-| VeraCrypt RIPEMD160 + XTS 1536 bit + boot-mode (legacy) | `13743` | **--** | **--** |  |
+| VeraCrypt RIPEMD160 + XTS 1536 bit + boot-mode (legacy) | `13743` (v) | **--** | **--** |  |
 | VeraCrypt RIPEMD160 + XTS 512 bit | `29411` (v) | **--** | no |  |
-| VeraCrypt RIPEMD160 + XTS 512 bit (legacy) | `13711` | **--** | **--** |  |
+| VeraCrypt RIPEMD160 + XTS 512 bit (legacy) | `13711` (v) | **--** | **--** |  |
 | VeraCrypt RIPEMD160 + XTS 512 bit + boot-mode | `29441` (v) | **--** | no |  |
-| VeraCrypt RIPEMD160 + XTS 512 bit + boot-mode (legacy) | `13741` | **--** | **--** |  |
+| VeraCrypt RIPEMD160 + XTS 512 bit + boot-mode (legacy) | `13741` (v) | **--** | **--** |  |
 | VeraCrypt SHA256 + XTS 1024 bit | `29452` (v) | **--** | no |  |
-| VeraCrypt SHA256 + XTS 1024 bit (legacy) | `13752` | **--** | **--** |  |
+| VeraCrypt SHA256 + XTS 1024 bit (legacy) | `13752` (v) | **--** | **--** |  |
 | VeraCrypt SHA256 + XTS 1024 bit + boot-mode | `29462` (v) | **--** | no |  |
-| VeraCrypt SHA256 + XTS 1024 bit + boot-mode (legacy) | `13762` | **--** | **--** |  |
+| VeraCrypt SHA256 + XTS 1024 bit + boot-mode (legacy) | `13762` (v) | **--** | **--** |  |
 | VeraCrypt SHA256 + XTS 1536 bit | `29453` (v) | **--** | no |  |
-| VeraCrypt SHA256 + XTS 1536 bit (legacy) | `13753` | **--** | **--** |  |
+| VeraCrypt SHA256 + XTS 1536 bit (legacy) | `13753` (v) | **--** | **--** |  |
 | VeraCrypt SHA256 + XTS 1536 bit + boot-mode | `29463` (v) | **--** | no |  |
-| VeraCrypt SHA256 + XTS 1536 bit + boot-mode (legacy) | `13763` | **--** | **--** |  |
+| VeraCrypt SHA256 + XTS 1536 bit + boot-mode (legacy) | `13763` (v) | **--** | **--** |  |
 | VeraCrypt SHA256 + XTS 512 bit | `29451` (v) | **--** | no |  |
-| VeraCrypt SHA256 + XTS 512 bit (legacy) | `13751` | **--** | **--** |  |
+| VeraCrypt SHA256 + XTS 512 bit (legacy) | `13751` (v) | **--** | **--** |  |
 | VeraCrypt SHA256 + XTS 512 bit + boot-mode | `29461` (v) | **--** | no |  |
-| VeraCrypt SHA256 + XTS 512 bit + boot-mode (legacy) | `13761` | **--** | **--** |  |
+| VeraCrypt SHA256 + XTS 512 bit + boot-mode (legacy) | `13761` (v) | **--** | **--** |  |
 | VeraCrypt SHA512 + XTS 1024 bit | `29422` (v) | **--** | no |  |
-| VeraCrypt SHA512 + XTS 1024 bit (legacy) | `13722` | **--** | **--** |  |
+| VeraCrypt SHA512 + XTS 1024 bit (legacy) | `13722` (v) | **--** | **--** |  |
 | VeraCrypt SHA512 + XTS 1536 bit | `29423` (v) | **--** | no |  |
-| VeraCrypt SHA512 + XTS 1536 bit (legacy) | `13723` | **--** | **--** |  |
+| VeraCrypt SHA512 + XTS 1536 bit (legacy) | `13723` (v) | **--** | **--** |  |
 | VeraCrypt SHA512 + XTS 512 bit | `29421` (v) | **--** | no |  |
-| VeraCrypt SHA512 + XTS 512 bit (legacy) | `13721` | **--** | **--** |  |
+| VeraCrypt SHA512 + XTS 512 bit (legacy) | `13721` (v) | **--** | **--** |  |
 | VeraCrypt Streebog-512 + XTS 1024 bit | `29472` (v) | **--** | no |  |
-| VeraCrypt Streebog-512 + XTS 1024 bit (legacy) | `13772` | **--** | **--** |  |
+| VeraCrypt Streebog-512 + XTS 1024 bit (legacy) | `13772` (v) | **--** | **--** |  |
 | VeraCrypt Streebog-512 + XTS 1024 bit + boot-mode | `29482` (v) | **--** | no |  |
-| VeraCrypt Streebog-512 + XTS 1024 bit + boot-mode (legacy) | `13782` | **--** | **--** |  |
+| VeraCrypt Streebog-512 + XTS 1024 bit + boot-mode (legacy) | `13782` (v) | **--** | **--** |  |
 | VeraCrypt Streebog-512 + XTS 1536 bit | `29473` (v) | **--** | no |  |
-| VeraCrypt Streebog-512 + XTS 1536 bit (legacy) | `13773` | **--** | **--** |  |
+| VeraCrypt Streebog-512 + XTS 1536 bit (legacy) | `13773` (v) | **--** | **--** |  |
 | VeraCrypt Streebog-512 + XTS 1536 bit + boot-mode | `29483` (v) | **--** | no |  |
-| VeraCrypt Streebog-512 + XTS 1536 bit + boot-mode (legacy) | `13783` | **--** | **--** |  |
+| VeraCrypt Streebog-512 + XTS 1536 bit + boot-mode (legacy) | `13783` (v) | **--** | **--** |  |
 | VeraCrypt Streebog-512 + XTS 512 bit | `29471` (v) | **--** | no |  |
-| VeraCrypt Streebog-512 + XTS 512 bit (legacy) | `13771` | **--** | **--** |  |
+| VeraCrypt Streebog-512 + XTS 512 bit (legacy) | `13771` (v) | **--** | **--** |  |
 | VeraCrypt Streebog-512 + XTS 512 bit + boot-mode | `29481` (v) | **--** | no |  |
-| VeraCrypt Streebog-512 + XTS 512 bit + boot-mode (legacy) | `13781` | **--** | **--** |  |
+| VeraCrypt Streebog-512 + XTS 512 bit + boot-mode (legacy) | `13781` (v) | **--** | **--** |  |
 | VeraCrypt Whirlpool + XTS 1024 bit | `29432` (v) | **--** | no |  |
-| VeraCrypt Whirlpool + XTS 1024 bit (legacy) | `13732` | **--** | **--** |  |
+| VeraCrypt Whirlpool + XTS 1024 bit (legacy) | `13732` (v) | **--** | **--** |  |
 | VeraCrypt Whirlpool + XTS 1536 bit | `29433` (v) | **--** | no |  |
-| VeraCrypt Whirlpool + XTS 1536 bit (legacy) | `13733` | **--** | **--** |  |
+| VeraCrypt Whirlpool + XTS 1536 bit (legacy) | `13733` (v) | **--** | **--** |  |
 | VeraCrypt Whirlpool + XTS 512 bit | `29431` (v) | **--** | no |  |
-| VeraCrypt Whirlpool + XTS 512 bit (legacy) | `13731` | **--** | **--** |  |
+| VeraCrypt Whirlpool + XTS 512 bit (legacy) | `13731` (v) | **--** | **--** |  |
 | VirtualBox (PBKDF2-HMAC-SHA256 & AES-128-XTS) | `27500` (v) | **--** | no |  |
 | VirtualBox (PBKDF2-HMAC-SHA256 & AES-256-XTS) | `27600` (v) | **--** | no |  |
 | VirtualBox-VDI AES_XTS | **--** | `vdi` (v) | no |  |
@@ -1565,13 +1565,13 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | WLR1 | no | `whirlpool1` (v) | `WRL1` (v) |  |
 | WoltLab BB3 | **--** | `wbb3` (v) | no |  |
 | WPA-EAPOL | no | **--** | `WPA-EAPOL` (v) |  |
-| WPA-EAPOL-PBKDF2 | `2500` | **--** | **--** |  |
-| WPA-EAPOL-PMK | `2501` | **--** | **--** |  |
+| WPA-EAPOL-PBKDF2 | `2500` (v) | **--** | **--** |  |
+| WPA-EAPOL-PMK | `2501` (v) | **--** | **--** |  |
 | WPA-PBKDF2-PMKID+EAPOL | `22000` (v) | **--** | `WPA-PMKID` (v) |  |
 | WPA-PMK | `22001` (v) | **--** | `WPA-PMK` (v) |  |
 | WPA-PMKID | no | **--** | `WPA-PMKID` (v) |  |
-| WPA-PMKID-PBKDF2 | `16800` | **--** | no |  |
-| WPA-PMKID-PMK | `16801` | **--** | no |  |
+| WPA-PMKID-PBKDF2 | `16800` (v) | **--** | no |  |
+| WPA-PMKID-PMK | `16801` (v) | **--** | no |  |
 | WPA/WPA2/PMF/PMKID master key | **--** | `wpapsk-pmk` (v) | **--** |  |
 | WPA/WPA2/PMF/PMKID PSK | **--** | `wpapsk` (v) | **--** |  |
 | WPBCRYPT | `35500` (v) | **--** | `WPBCRYPT` (v) |  |

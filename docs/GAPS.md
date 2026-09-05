@@ -17,7 +17,7 @@ Each row below links to its entry in the [browsable table](index.html).
 Gaps are absences; for the rows where something is known to be *odd*, see
 [OPEN-QUESTIONS.md](OPEN-QUESTIONS.md).
 
-## 1. Believed but never reproduced (78)
+## 1. Believed but never reproduced (36)
 
 The cheapest contribution in the repository, if you own the tool. Each of
 these already names an identifier and already carries a test vector; nobody
@@ -45,10 +45,8 @@ tools/verify-vectors.pl --tool <tool> --only <id> -v
 | [`mysql4-1-mysql5`](index.html#mysql4-1-mysql5) | john | `dynamic_1028`, `mysql-sha1`, `mysql-sha1-opencl` | asserted |
 | [`netntlmv2`](index.html#netntlmv2) | john | `netlmv2`, `netntlmv2`, `ntlmv2-opencl` | asserted |
 | [`oscommerce-xt-commerce`](index.html#oscommerce-xt-commerce) | john | `dynamic_1009`, `dynamic_1017`, `dynamic_2004`, `dynamic_4`, `osc` | asserted |
-| [`password-safe-v2`](index.html#password-safe-v2) | hashcat | `9000` | upstream |
 | [`plaintext`](index.html#plaintext) | john | `plaintext` | asserted |
 | [`progressencode-plain`](index.html#progressencode-plain) | mdxfind | `PROGRESSENCODE` | asserted |
-| [`pwsafe3`](index.html#pwsafe3) | hashcat | `5200` | upstream |
 | [`radmin`](index.html#radmin) | john | `RAdmin`, `dynamic_1010` | asserted |
 | [`sha1-md5-md5-plain`](index.html#sha1-md5-md5-plain) | john | `dynamic_1025` | asserted |
 | [`sha1-md5-pass`](index.html#sha1-md5-pass) | john | `dynamic_1024`, `dynamic_23` | asserted |
@@ -68,47 +66,7 @@ tools/verify-vectors.pl --tool <tool> --only <id> -v
 | [`sha256uc`](index.html#sha256uc) | mdxfind | `SHA256UC` | asserted |
 | [`smf-v1-1`](index.html#smf-v1-1) | john | `dynamic_25`, `dynamic_37` | asserted |
 | [`stdout`](index.html#stdout) | hashcat | `2000` | upstream |
-| [`truecrypt-ripemd160-xts-1024-bit-boot-mode-legacy`](index.html#truecrypt-ripemd160-xts-1024-bit-boot-mode-legacy) | hashcat | `6242` | upstream |
-| [`truecrypt-ripemd160-xts-1024-bit-legacy`](index.html#truecrypt-ripemd160-xts-1024-bit-legacy) | hashcat | `6212` | upstream |
-| [`truecrypt-ripemd160-xts-1536-bit-boot-mode-legacy`](index.html#truecrypt-ripemd160-xts-1536-bit-boot-mode-legacy) | hashcat | `6243` | upstream |
-| [`truecrypt-ripemd160-xts-1536-bit-legacy`](index.html#truecrypt-ripemd160-xts-1536-bit-legacy) | hashcat | `6213` | upstream |
-| [`truecrypt-ripemd160-xts-512-bit-boot-mode-legacy`](index.html#truecrypt-ripemd160-xts-512-bit-boot-mode-legacy) | hashcat | `6241` | upstream |
-| [`truecrypt-ripemd160-xts-512-bit-legacy`](index.html#truecrypt-ripemd160-xts-512-bit-legacy) | hashcat | `6211` | upstream |
-| [`truecrypt-sha512-xts-1024-bit-legacy`](index.html#truecrypt-sha512-xts-1024-bit-legacy) | hashcat | `6222` | upstream |
-| [`truecrypt-sha512-xts-1536-bit-legacy`](index.html#truecrypt-sha512-xts-1536-bit-legacy) | hashcat | `6223` | upstream |
-| [`truecrypt-sha512-xts-512-bit-legacy`](index.html#truecrypt-sha512-xts-512-bit-legacy) | hashcat | `6221` | upstream |
-| [`truecrypt-whirlpool-xts-1024-bit-legacy`](index.html#truecrypt-whirlpool-xts-1024-bit-legacy) | hashcat | `6232` | upstream |
-| [`truecrypt-whirlpool-xts-1536-bit-legacy`](index.html#truecrypt-whirlpool-xts-1536-bit-legacy) | hashcat | `6233` | upstream |
-| [`truecrypt-whirlpool-xts-512-bit-legacy`](index.html#truecrypt-whirlpool-xts-512-bit-legacy) | hashcat | `6231` | upstream |
 | [`vbulletin-v3-8-5-2`](index.html#vbulletin-v3-8-5-2) | john | `dynamic_1007`, `dynamic_2006`, `dynamic_6` | asserted |
-| [`veracrypt-ripemd160-xts-1024-bit-boot-mode-legacy`](index.html#veracrypt-ripemd160-xts-1024-bit-boot-mode-legacy) | hashcat | `13742` | upstream |
-| [`veracrypt-ripemd160-xts-1024-bit-legacy`](index.html#veracrypt-ripemd160-xts-1024-bit-legacy) | hashcat | `13712` | upstream |
-| [`veracrypt-ripemd160-xts-1536-bit-boot-mode-legacy`](index.html#veracrypt-ripemd160-xts-1536-bit-boot-mode-legacy) | hashcat | `13743` | upstream |
-| [`veracrypt-ripemd160-xts-1536-bit-legacy`](index.html#veracrypt-ripemd160-xts-1536-bit-legacy) | hashcat | `13713` | upstream |
-| [`veracrypt-ripemd160-xts-512-bit-boot-mode-legacy`](index.html#veracrypt-ripemd160-xts-512-bit-boot-mode-legacy) | hashcat | `13741` | upstream |
-| [`veracrypt-ripemd160-xts-512-bit-legacy`](index.html#veracrypt-ripemd160-xts-512-bit-legacy) | hashcat | `13711` | upstream |
-| [`veracrypt-sha256-xts-1024-bit-boot-mode-legacy`](index.html#veracrypt-sha256-xts-1024-bit-boot-mode-legacy) | hashcat | `13762` | upstream |
-| [`veracrypt-sha256-xts-1024-bit-legacy`](index.html#veracrypt-sha256-xts-1024-bit-legacy) | hashcat | `13752` | upstream |
-| [`veracrypt-sha256-xts-1536-bit-boot-mode-legacy`](index.html#veracrypt-sha256-xts-1536-bit-boot-mode-legacy) | hashcat | `13763` | upstream |
-| [`veracrypt-sha256-xts-1536-bit-legacy`](index.html#veracrypt-sha256-xts-1536-bit-legacy) | hashcat | `13753` | upstream |
-| [`veracrypt-sha256-xts-512-bit-boot-mode-legacy`](index.html#veracrypt-sha256-xts-512-bit-boot-mode-legacy) | hashcat | `13761` | upstream |
-| [`veracrypt-sha256-xts-512-bit-legacy`](index.html#veracrypt-sha256-xts-512-bit-legacy) | hashcat | `13751` | upstream |
-| [`veracrypt-sha512-xts-1024-bit-legacy`](index.html#veracrypt-sha512-xts-1024-bit-legacy) | hashcat | `13722` | upstream |
-| [`veracrypt-sha512-xts-1536-bit-legacy`](index.html#veracrypt-sha512-xts-1536-bit-legacy) | hashcat | `13723` | upstream |
-| [`veracrypt-sha512-xts-512-bit-legacy`](index.html#veracrypt-sha512-xts-512-bit-legacy) | hashcat | `13721` | upstream |
-| [`veracrypt-streebog-512-xts-1024-bit-boot-mode-legacy`](index.html#veracrypt-streebog-512-xts-1024-bit-boot-mode-legacy) | hashcat | `13782` | upstream |
-| [`veracrypt-streebog-512-xts-1024-bit-legacy`](index.html#veracrypt-streebog-512-xts-1024-bit-legacy) | hashcat | `13772` | upstream |
-| [`veracrypt-streebog-512-xts-1536-bit-boot-mode-legacy`](index.html#veracrypt-streebog-512-xts-1536-bit-boot-mode-legacy) | hashcat | `13783` | upstream |
-| [`veracrypt-streebog-512-xts-1536-bit-legacy`](index.html#veracrypt-streebog-512-xts-1536-bit-legacy) | hashcat | `13773` | upstream |
-| [`veracrypt-streebog-512-xts-512-bit-boot-mode-legacy`](index.html#veracrypt-streebog-512-xts-512-bit-boot-mode-legacy) | hashcat | `13781` | upstream |
-| [`veracrypt-streebog-512-xts-512-bit-legacy`](index.html#veracrypt-streebog-512-xts-512-bit-legacy) | hashcat | `13771` | upstream |
-| [`veracrypt-whirlpool-xts-1024-bit-legacy`](index.html#veracrypt-whirlpool-xts-1024-bit-legacy) | hashcat | `13732` | upstream |
-| [`veracrypt-whirlpool-xts-1536-bit-legacy`](index.html#veracrypt-whirlpool-xts-1536-bit-legacy) | hashcat | `13733` | upstream |
-| [`veracrypt-whirlpool-xts-512-bit-legacy`](index.html#veracrypt-whirlpool-xts-512-bit-legacy) | hashcat | `13731` | upstream |
-| [`wpa-eapol-pbkdf2`](index.html#wpa-eapol-pbkdf2) | hashcat | `2500` | upstream |
-| [`wpa-eapol-pmk`](index.html#wpa-eapol-pmk) | hashcat | `2501` | upstream |
-| [`wpa-pmkid-pbkdf2`](index.html#wpa-pmkid-pbkdf2) | hashcat | `16800` | upstream |
-| [`wpa-pmkid-pmk`](index.html#wpa-pmkid-pmk) | hashcat | `16801` | upstream |
 
 ## 2. No test vector at all (2)
 
