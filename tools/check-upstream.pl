@@ -398,7 +398,7 @@ sub check_index_set {
     # The alias assertion. On every shared index the two must agree on the
     # name and on the hashcat mapping; this is the divergence detector
     # CLAUDE.md attributes to a tools/extract-hashpipe.pl that does not exist.
-    my (@name_bad, @mode_bad);
+    my (@name_bad, %mlive);
     for my $i (sort keys %$by_index) {
         my $ir = $inv_by_index{$i} or next;
         my $cr = $by_index->{$i};
@@ -407,26 +407,74 @@ sub check_index_set {
             if ($ir->{name} // '') ne $cr->{name};
         my ($cm, $im) = (norm_modes_catalog($cr->{modes}),
                          norm_modes_inventory($ir));
-        push @mode_bad, sprintf('%s (catalog [%s] / binary [%s])', $i, $cm, $im)
-            if $cm ne $im;
+        # kept as the two normalized strings, not as a formatted sentence:
+        # a record is compared against these, and re-parsing a message is how
+        # a check starts agreeing with itself rather than with the data
+        $mlive{$i} = { publishes => $cm, we_assert => $im } if $cm ne $im;
     }
-    for my $pair ([\@name_bad, 'name'], [\@mode_bad, 'hashcat mapping']) {
-        my ($bad, $what) = @$pair;
-        next unless @$bad;
+    # A NAME disagreement is the alias rule expiring outright and has no
+    # recorded-exception path: the two tools would be calling different things
+    # by one identifier, which is the thing this repository joins on.
+    if (@name_bad) {
         finding($id, 'alias-broken',
-            "%s and %s disagree on the %s of %d shared index/indices: %s. "
+            "%s and %s disagree on the name of %d shared index/indices: %s. "
           . "CLAUDE.md records hashpipe as an alias of mdxfind 'until that "
           . "stops being true'. This is that.",
-            $r->{upstream}, $r->{inventory}, $what, scalar @$bad,
-            join('; ', @$bad[0 .. ($#$bad > 4 ? 4 : $#$bad)])
-              . (@$bad > 5 ? sprintf(' ... (+%d)', @$bad - 5) : ''));
+            $r->{upstream}, $r->{inventory}, scalar @name_bad,
+            join('; ', @name_bad[0 .. ($#name_bad > 4 ? 4 : $#name_bad)])
+              . (@name_bad > 5 ? sprintf(' ... (+%d)', @name_bad - 5) : ''));
+    }
+
+    # A HASHCAT MAPPING disagreement can be recorded, because the two sides
+    # are not answering the same question. mdxfind's -h prints, per type,
+    # every mode that type can serve; hashpipe's catalog column is generated
+    # by INVERTING Maphashcat[], which maps each hashcat mode to ONE canonical
+    # index. Where several synonymous types can serve a mode, the two spellings
+    # differ without either being wrong -- and that is a fact worth carrying in
+    # the record rather than a reason to fail every build. An UNRECORDED one is
+    # still the alias rule expiring.
+    my %mrec = map { ($_->{index} // '') => $_ }
+               @{ ref $r->{mode_differs} eq 'ARRAY' ? $r->{mode_differs} : [] };
+    for my $i (sort keys %mlive) {
+        unless ($mrec{$i}) {
+            finding($id, 'alias-broken',
+                "%s and %s disagree on the hashcat mapping of %s, which this "
+              . "record does not list: catalog [%s], binary [%s]. CLAUDE.md "
+              . "records hashpipe as an alias of mdxfind 'until that stops "
+              . "being true'. Measure it, then add it to mode_differs: or fix "
+              . "the inventory.",
+                $r->{upstream}, $r->{inventory}, $i,
+                $mlive{$i}{publishes}, $mlive{$i}{we_assert});
+            next;
+        }
+        my $e = $mrec{$i};
+        finding($id, 'upstream-moved',
+            "%s: this record says the catalog publishes [%s], but it now "
+          . "publishes [%s].", $i, $e->{publishes} // '(unset)',
+            $mlive{$i}{publishes})
+            if ($e->{publishes} // '') ne $mlive{$i}{publishes};
+        finding($id, 'ours-moved',
+            "%s: this record says the inventory has [%s], but it now has "
+          . "[%s]. If that was a re-extraction from a different binary, say "
+          . "which one.", $i, $e->{we_assert} // '(unset)',
+            $mlive{$i}{we_assert})
+            if ($e->{we_assert} // '') ne $mlive{$i}{we_assert};
+    }
+    for my $i (sort keys %mrec) {
+        next if $mlive{$i};
+        finding($id, 'row-converged',
+            "%s: this record lists a hashcat-mapping disagreement here, but "
+          . "the two now agree. Drop that row from mode_differs:.", $i);
     }
 
     if ($verbose) {
+        my $shared = scalar grep { $inv_by_index{$_} } keys %$by_index;
         printf STDERR "-   %s: %d catalog row(s), %d inventory type(s), "
-                    . "%d shared index/indices agree on name and mapping\n",
+                    . "%d shared, %d name mismatch(es), %d hashcat-mapping "
+                    . "mismatch(es) of which %d recorded\n",
             $id, scalar(keys %$by_index), scalar(keys %inv_by_index),
-            scalar(grep { $inv_by_index{$_} } keys %$by_index);
+            $shared, scalar(@name_bad), scalar(keys %mlive),
+            scalar(grep { $mrec{$_} } keys %mlive);
     }
     return;
 }

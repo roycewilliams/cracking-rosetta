@@ -1,101 +1,240 @@
----
-disagreements:
-- because: 'mdxfind 1.543 (2026-08-29) repaired a buffer-layout bug in e607. The old
-    code staged the inner digest at linebuf+saltlen while writing the pepper at a
-    fixed offset 32, so for any non-empty salt the hash covered the salt, then a TRUNCATED
-    digest, then the pepper, and the output depended on the salt length. Upstream''s
-    own revision note says any hash cracked as e607 before that revision will not
-    verify against it. The catalog still publishes the PRE-FIX digest. The repaired
-    construction sha1(md5(salt . pass) . pepper) was established three independent
-    ways: the source at RCS 1.545, a Digest:: recomputation in perl that reproduces
-    786aab... under the old layout and 0992047f... under the new, and the rebuilt
-    binary cracking 0992047f... data/tools/mdxfind.yaml carries upstream''s value
-    too, CORRECTLY -- it is generated from this catalog -- which is checked here so
-    the generated layer cannot quietly stop matching the file it is generated from.'
-  entry: sha1md5saltpasspepper
-  id: e607-example-vector
-  inventory: data/tools/mdxfind.yaml
-  key: SHA1MD5SALTPASSPEPPER
-  kind: catalog-row-value
-  publishes: 786aab530907a783e9c25a2c7326ab7907ebf798:1122334455667788 1122334455667788:password123
-  recorded: 2026-09-02
-  upstream: vendor/cynosureprime/hashpipe-HASH_TYPES.md
-  we_assert: 0992047fa349ac4e5abb3fef6c0f3f8f8bc6d679:1122334455667788 1122334455667788:password123
-- absent_upstream:
-  - e426
-  - e1002
-  - e1003
-  - e1004
-  - e1005
-  - e1006
-  - e1007
-  - e1008
-  - e1009
-  - e1010
-  - e1011
-  - e1012
-  - e1013
-  - e1014
-  - e1015
-  - e1016
-  - e1017
-  - e1018
-  - e1019
-  - e1020
-  - e1021
-  - e1022
-  - e1023
-  - e1024
-  - e1025
-  - e1026
-  - e1027
-  because: 'The catalog is published from a release; the local binary is ahead of
-    it. Measured 2026-09-02: 1000 catalog rows at v1.102 against 1002 types in mdxfind
-    RCS 1.545. e1002 RMD256 is a hash type with no catalog row and therefore no example
-    vector, which is why the extractor reports fewer vectors than types; e426 PARALLEL
-    is a control type the catalog has never listed. The catalog SKIPS e426 rather
-    than renumbering around it, so the two index spaces line up and can be compared
-    directly -- that is what makes the agreement check below meaningful. CLAUDE.md
-    records hashpipe as an alias of mdxfind rather than a fourth column "until that
-    stops being true", and names a tools/extract-hashpipe.pl to detect the divergence.
-    That tool does not exist. This record is that detector: on every shared index
-    the catalog and the binary must agree on the name and on the hashcat mapping,
-    and a mismatch means the alias rule needs revisiting. RE-MEASURED 2026-09-04 against
-    mdxfind RCS 1.576: 1000 catalog rows against 1027 types, and the absent set grows
-    from 2 to 27. The lag WIDENED rather than closed, and that is upstream''s own
-    state rather than a stale local copy -- tools/fetch-upstream.sh was run the same
-    day, upstream HEAD moved e528d881 to cad43ac7, and both vendored files came back
-    byte-identical at v1.102. So re-fetching does not shrink this list and the record
-    is the only thing that carries the gap. What the 25 new indices ARE is the reason
-    to keep reading. They are EXACTLY the 25 names hashpipe had and mdxfind did not,
-    which CLAUDE.md records as transient on upstream''s own account and tells a reader
-    to watch for SHRINKING. Measured 2026-09-04 against data/tools/hashpipe.yaml:
-    25 hashpipe-only names against mdxfind 1.545, and ZERO against 1.576. QAS-VASAUTH,
-    the single one that reached no row here by any identifier, is now e1008. The prediction
-    held and the fourth-column question closes itself, which is what this detector
-    existed to see. The agreement half is unaffected: all 1000 shared indices still
-    agree on name and on hashcat mapping.'
-  id: mdxfind-catalog-lags-binary
-  inventory: data/tools/mdxfind.yaml
-  kind: catalog-index-set
-  recorded: 2026-09-02
-  upstream: vendor/cynosureprime/hashpipe-HASH_TYPES.md
-- because: |-
-    hashpipe v1.189 (commit ab66e0f) publishes 132 verified john-to-hashpipe rows. On the 126 this repository also names, the two agree; ONE does not.
-    FOUR ROWS WERE DROPPED ON 2026-09-05, AND WHY IS THE POINT OF THIS RECORD. dynamic_54, _64, _74 and _84 were listed here as an "iteration-numbering" disagreement: hashpipe published SHA224RAWx01 and this repository asserted SHA224RAW x02, and the same for the SHA256, 384 and 512 siblings. That diagnosis was WRONG. It was not a convention difference; it was a BUG in the mdxfind build of the day, and upstream's map was right the whole time.
-    mdxfind revision 1.290 (2026-04-09) regressed the RAW family as collateral to a buffer-aliasing fix: "the base was reported one round early, so x01 became X(pass) instead of X(X_bin(pass))", in upstream's own words, and "every RAW type became numerically identical to its plain sibling at x01". Revision 1.549 (2026-08-30) restored the correct semantics. This record was written on 2026-09-02 against an installed RCS 1.545, which still carried the regression, so the x02 it reported looked like a numbering convention rather than an off-by-one.
-    Measured 2026-09-05 with a locally built RCS 1.576: every one of those entries' own stored vectors reproduces at x01, and `hashpipe -c` pinned to the same type independently reports x01. The entries were corrected to x01, check_john_map reported all four rows converged, and they are dropped from differs: here. This is the third failure mode this register exists to catch -- convergence, which looks exactly like nothing having happened -- and it is the first time it has fired.
-    THE MD5CAP NUMBERING IS A SEPARATE AND STILL-REAL THING, and the old prose here conflated it with the above. JOB_MD5CAP's loop is `for (x = 2; x <= Maxiter; x++)` with checkhash INSIDE it, so mdxfind labels its first emitted value x02. That is genuine and survives: measured 2026-09-05 on RCS 1.576, MD5CAP still reproduces only at -i 2. It is not in differs: because john_map.h does not carry a row for it.
-    THE ONE THAT REMAINS IS MASKING, which is upstream's own documented hazard rather than a numbering difference. hashpipe reports the FIRST type that reproduces a digest, and john's dynamic_37 is `sha1(lc($u).$p)`, which its own subformat listing labels SMF. Whenever the userid is already lower case that is byte-identical to `sha1($s.$p)`, so SHA1SALTPASS reproduces the vector without denoting the algorithm. john names this one for us directly, so the entry keeps SMF; per CLAUDE.md that coincidence is a collides-on-subset relation, not a mapping.
-    NOTE WHAT IS DELIBERATELY NOT CHECKED. v1.189 also added JohnMapLocal[], 51 rows of config-defined dynamics. Upstream says their numbering is local to the generating machine and the table is for input only, and that is demonstrable here: upstream's dynamic_1013 is MD5PASSSALT and its dynamic_1014 is POSTGRESQL, while this host's john has them the other way round. check_john_map reads the first table only.
-  differs:
-  - john: dynamic_37
-    publishes: SHA1SALTPASS
-    we_assert: SMF x01
-    why: masking
-  id: hashpipe-john-map-agreement
-  inventory: data/algorithms
-  kind: john-map-agreement
-  recorded: 2026-09-02
-  upstream: vendor/cynosureprime/john_map.h
+# Project: cracking-rosetta | Phase: upstream drift
+#
+# Known disagreements with a vendored upstream document. CURATED -- never
+# generated, never bulk-populated. tools/check-upstream.pl executes it.
+#
+# WHY THIS FILE EXISTS
+#
+# vendor/ holds upstream's files byte for byte and is never edited, because
+# the re-fetch diff is the whole drift signal and one local "fix" inverts it:
+# a re-fetch would then report a false alarm every time upstream had NOT
+# changed, and go silent on the day it finally did. So where this repository
+# has established a value upstream publishes wrongly, the correction lives in
+# data/algorithms/ with its evidence and the two layers carry different
+# values on purpose.
+#
+# Nothing connected those two layers. This file is the connection, and
+# tools/check-upstream.pl fails three ways:
+#
+#   1. upstream no longer matches what is recorded here -- upstream moved,
+#      go look.
+#   2. our side no longer matches -- somebody re-seeded upstream's value over
+#      a proven one, which is exactly how the bad e607 vector arrived here.
+#   3. the two have CONVERGED -- upstream fixed it, delete the record. This
+#      is the state change nothing could detect at all: today it looks
+#      exactly like "nothing happened".
+#
+# (3) is the point. It makes a re-fetch that changes nothing a PASSING TEST
+# rather than an absence of evidence.
+#
+# KEEP IT SHORT. Two records that are checked beat twenty that are asserted.
+# A record is added when a disagreement has been established by measurement,
+# not when one is suspected.
+#
+# SHAPE
+#
+# Every record: id, kind, upstream, inventory, because, recorded. The rest is
+# whatever its kind needs, and the kinds are hard-coded in check-upstream.pl
+# rather than described by a mini-language. There are three, and adding a
+# fourth should feel expensive.
+#
+#   catalog-row-value   one row of a vendored catalog publishes a value we
+#                       have disproved. Adds: key, publishes, entry,
+#                       we_assert.
+#   catalog-index-set   the vendored catalog does not cover every type the
+#                       local binary has. Adds: absent_upstream, and
+#                       optionally mode_differs, a list of {index, publishes,
+#                       we_assert, why}. Also asserts the agreement that makes
+#                       hashpipe an ALIAS of mdxfind rather than a fourth
+#                       column: on every shared index the two agree on name
+#                       and on hashcat mapping.
+#                       A NAME disagreement has no recorded-exception path --
+#                       it means the two are calling different things by one
+#                       identifier, which is what this repository joins on. A
+#                       HASHCAT MAPPING disagreement does, because since
+#                       hashpipe v1.193 the catalog's mode column is generated
+#                       by inverting Maphashcat[], a mode-to-ONE-index map,
+#                       while mdxfind's -h prints every mode a type can serve.
+#                       Where several synonymous types serve one mode the two
+#                       spellings differ without either being wrong.
+#   john-map-agreement  hashpipe's john_map.h and this repository both say,
+#                       for a john dynamic, which hashpipe type reproduces it.
+#                       Adds: differs, a list of {john, publishes, we_assert,
+#                       why}. This is the kind that sees the ITERATION SUFFIX,
+#                       which catalog-index-set structurally cannot: the
+#                       suffix is not in HASH_TYPES.md at all.
+#
+# The shape did not fully generalize, and that is recorded rather than
+# papered over: a value disagreement is one string against one string, an
+# index-set disagreement is a set difference, and forcing the second into
+# publishes:/we_assert: would have meant writing a thousand indices into a
+# field. What DID generalize is the core and the three failure modes.
+
 version: 1
+
+disagreements:
+  - id: "mdxfind-catalog-lags-binary"
+    kind: "catalog-index-set"
+    upstream: "vendor/cynosureprime/hashpipe-HASH_TYPES.md"
+    inventory: "data/tools/mdxfind.yaml"
+    absent_upstream: ["e426"]
+    mode_differs:
+      - index: "e1"
+        publishes: "0,2600,5100"
+        we_assert: "0,2600,3500,5100"
+        why: "direction"
+      - index: "e17"
+        publishes: ""
+        we_assert: "6000"
+        why: "synonym"
+      - index: "e118"
+        publishes: "6000"
+        we_assert: ""
+        why: "synonym"
+      - index: "e303"
+        publishes: "3500"
+        we_assert: ""
+        why: "direction"
+      - index: "e369"
+        publishes: "1000"
+        we_assert: ""
+        why: "synonym"
+      - index: "e520"
+        publishes: "4520"
+        we_assert: "4520,4521,4522"
+        why: "synonym"
+      - index: "e579"
+        publishes: "4521,4522"
+        we_assert: ""
+        why: "synonym"
+      - index: "e786"
+        publishes: ""
+        we_assert: "1000"
+        why: "synonym"
+    recorded: "2026-09-02"
+    because: >-
+      The catalog is published from a release; the local binary is ahead of
+      it. Measured 2026-09-02: 1000 catalog rows at v1.102 against 1002 types
+      in mdxfind RCS 1.545. e1002 RMD256 is a hash type with no catalog row
+      and therefore no example vector, which is why the extractor reports
+      fewer vectors than types; e426 PARALLEL is a control type the catalog
+      has never listed. The catalog SKIPS e426 rather than renumbering around
+      it, so the two index spaces line up and can be compared directly -- that
+      is what makes the agreement check below meaningful. CLAUDE.md records
+      hashpipe as an alias of mdxfind rather than a fourth column "until that
+      stops being true", and names a tools/extract-hashpipe.pl to detect the
+      divergence. That tool does not exist. This record is that detector: on
+      every shared index the catalog and the binary must agree on the name and
+      on the hashcat mapping, and a mismatch means the alias rule needs
+      revisiting.
+      RE-MEASURED 2026-09-04 against mdxfind RCS 1.576: 1000 catalog rows
+      against 1027 types, and the absent set grows from 2 to 27. The lag
+      WIDENED rather than closed, and that is upstream's own state rather than
+      a stale local copy -- tools/fetch-upstream.sh was run the same day,
+      upstream HEAD moved e528d881 to cad43ac7, and both vendored files came
+      back byte-identical at v1.102. So re-fetching does not shrink this list
+      and the record is the only thing that carries the gap.
+      What the 25 new indices ARE is the reason to keep reading. They are
+      EXACTLY the 25 names hashpipe had and mdxfind did not, which CLAUDE.md
+      records as transient on upstream's own account and tells a reader to
+      watch for SHRINKING. Measured 2026-09-04 against data/tools/hashpipe.yaml:
+      25 hashpipe-only names against mdxfind 1.545, and ZERO against 1.576.
+      QAS-VASAUTH, the single one that reached no row here by any identifier,
+      is now e1008. The prediction held and the fourth-column question closes
+      itself, which is what this detector existed to see.
+
+      RE-MEASURED 2026-09-05 AND THE LAG IS ALL BUT SPENT. Upstream now
+      GENERATES HASH_TYPES.md from the hashpipe binary (commits 7197034 and
+      deecd38), so the vendored catalog goes from 1000 rows at v1.102 to 1026
+      at v1.193 and absent_upstream: falls from 27 indices to ONE. e426
+      PARALLEL is the survivor and always was: it is a control type rather
+      than a hash, the catalog has never listed it, and the catalog SKIPS its
+      index rather than renumbering around it, which is what keeps the two
+      index spaces comparable. When e426 appears upstream this record is spent
+      and check-upstream.pl will say so.
+
+      THE MODE HALF IS THE PART THAT CHANGED, and mdxfind did not move. All
+      1026 shared indices still agree on NAME. Eight disagree on the hashcat
+      mapping, and mdxfind RCS 1.545 and RCS 1.576 give byte-identical answers
+      on all eight, so the movement is entirely on the catalog side and it
+      arrived with the generator. hashpipe's Maphashcat[] is a
+      hashcat-mode-to-ONE-index map -- {3500, 303}, {1000, 369}, {6000, 118},
+      {4521, 579} -- and inverting it yields at most one type per mode.
+      mdxfind's -h column is the other relation entirely: every mode a type
+      can serve. So where two synonymous types can serve a mode the two
+      spellings differ with neither being wrong, and where a mode is an
+      ITERATION of a type mdxfind lists it against the base type while
+      hashpipe lists it against the type that names the composite.
+
+      why: "synonym" is the first case -- 6000 RIPEMD-160 against e17 RMD160
+      and e118 RIPEMD, 1000 NTLM against e369 NTLM and e786 NTLMH, 4521/4522
+      against e520 SHA1SALTSHA1PASS and e579 SHA1SHA1PASSSALT. why:
+      "direction" is the second -- 3500 is md5(md5(md5($p))), which mdxfind
+      serves as e1 MD5 at three iterations and hashpipe attributes to e303
+      MD5-2xMD5.
+      This is recorded rather than repaired because neither side is wrong and
+      because the mapping this repository publishes comes from the entries,
+      not from either column. An UNRECORDED mode disagreement still fails, and
+      a NAME disagreement has no exception path at all.
+
+  - id: "hashpipe-john-map-agreement"
+    kind: "john-map-agreement"
+    upstream: "vendor/cynosureprime/john_map.h"
+    inventory: "data/algorithms"
+    differs:
+      - john: "dynamic_37"
+        publishes: "SHA1SALTPASS"
+        we_assert: "SMF x01"
+        why: "masking"
+    recorded: "2026-09-02"
+    because: >-
+      hashpipe v1.189 (commit ab66e0f) publishes 132 verified john-to-hashpipe
+      rows. On the 126 this repository also names, the two agree; ONE does not.
+
+      FOUR ROWS WERE DROPPED ON 2026-09-05, AND WHY IS THE POINT OF THIS
+      RECORD. dynamic_54, _64, _74 and _84 were listed here as an
+      "iteration-numbering" disagreement: hashpipe published SHA224RAWx01 and
+      this repository asserted SHA224RAW x02, and the same for the SHA256, 384
+      and 512 siblings. That diagnosis was WRONG. It was not a convention
+      difference; it was a BUG in the mdxfind build of the day, and upstream's
+      map was right the whole time.
+
+      mdxfind revision 1.290 (2026-04-09) regressed the RAW family as collateral
+      to a buffer-aliasing fix: "the base was reported one round early, so x01
+      became X(pass) instead of X(X_bin(pass))", in upstream's own words, and
+      "every RAW type became numerically identical to its plain sibling at x01".
+      Revision 1.549 (2026-08-30) restored the correct semantics. This record
+      was written on 2026-09-02 against an installed RCS 1.545, which still
+      carried the regression, so the x02 it reported looked like a numbering
+      convention rather than an off-by-one.
+
+      Measured 2026-09-05 with a locally built RCS 1.576: every one of those
+      entries' own stored vectors reproduces at x01, and `hashpipe -c` pinned to
+      the same type independently reports x01. The entries were corrected to
+      x01, check_john_map reported all four rows converged, and they are dropped
+      from differs: here. This is the third failure mode this register exists to
+      catch -- convergence, which looks exactly like nothing having happened --
+      and it is the first time it has fired.
+
+      THE MD5CAP NUMBERING IS A SEPARATE AND STILL-REAL THING, and the old prose
+      here conflated it with the above. JOB_MD5CAP's loop is
+      `for (x = 2; x <= Maxiter; x++)` with checkhash INSIDE it, so mdxfind
+      labels its first emitted value x02. That is genuine and survives: measured
+      2026-09-05 on RCS 1.576, MD5CAP still reproduces only at -i 2. It is not
+      in differs: because john_map.h does not carry a row for it.
+
+      THE ONE THAT REMAINS IS MASKING, which is upstream's own documented hazard
+      rather than a numbering difference. hashpipe reports the FIRST type that reproduces a
+      digest, and john's dynamic_37 is `sha1(lc($u).$p)`, which its own
+      subformat listing labels SMF. Whenever the userid is already lower case
+      that is byte-identical to `sha1($s.$p)`, so SHA1SALTPASS reproduces the
+      vector without denoting the algorithm. john names this one for us
+      directly, so the entry keeps SMF; per CLAUDE.md that coincidence is a
+      collides-on-subset relation, not a mapping.
+
+      NOTE WHAT IS DELIBERATELY NOT CHECKED. v1.189 also added JohnMapLocal[],
+      51 rows of config-defined dynamics. Upstream says their numbering is
+      local to the generating machine and the table is for input only, and that
+      is demonstrable here: upstream's dynamic_1013 is MD5PASSSALT and its
+      dynamic_1014 is POSTGRESQL, while this host's john has them the other way
+      round. check_john_map reads the first table only.

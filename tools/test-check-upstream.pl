@@ -241,6 +241,10 @@ sub write_register {
                 . qq{        we_assert: "OTHERTYPE x03"\n}
                 . qq{        why: "iteration-numbering"\n};
     my $kind   = $over{kind}            // 'catalog-row-value';
+    # mode_differs: is optional on a catalog-index-set record, so the default
+    # is EMPTY -- the baseline must keep proving that an unrecorded hashcat
+    # mapping disagreement still fails.
+    my $modes  = $over{mode_differs}     // '';
     my $core   = $over{no_because} ? '' : "    because: \"a fixture\"\n";
     spit("$DIR/register.yaml", <<"YAML");
 version: 1
@@ -259,7 +263,7 @@ $core  - id: "index-set"
     upstream: "$REL/catalog.md"
     inventory: "$REL/inventory.yaml"
     absent_upstream: $absent
-    recorded: "2026-09-02"
+$modes    recorded: "2026-09-02"
     because: "a fixture"
   - id: "johnmap"
     kind: "john-map-agreement"
@@ -376,6 +380,42 @@ my @CASES = (
     {
         why   => 'the alias assertion: a hashcat mapping diverged',
         setup => sub { write_inventory(e999 => { modes => ['100', '110'] }) },
+        want  => ['index-set alias-broken'],
+    },
+    # mode_differs: exists because since hashpipe v1.193 the catalog's mode
+    # column is an INVERTED mode-to-one-index map while mdxfind's -h prints
+    # every mode a type can serve, so the two spell a synonym pair differently
+    # with neither being wrong. It must not become a way to silence the alias
+    # check, so all three states are asserted.
+    {
+        why   => 'a RECORDED hashcat mapping disagreement passes',
+        setup => sub { write_inventory(e999 => { modes => ['100', '110'] });
+                       write_register(mode_differs =>
+                           qq{    mode_differs:\n}
+                         . qq{      - index: "e999"\n}
+                         . qq{        publishes: "100"\n}
+                         . qq{        we_assert: "100,110"\n}
+                         . qq{        why: "synonym"\n}) },
+        want  => [],
+    },
+    {
+        why   => 'a recorded mapping disagreement whose upstream half moved',
+        setup => sub { write_catalog(e999 => { modes => '100,120' }) },
+        want  => ['index-set upstream-moved'],
+    },
+    {
+        why   => 'a recorded mapping disagreement whose OUR half moved',
+        setup => sub { write_catalog(); write_inventory(e999 => { modes => ['100', '130'] }) },
+        want  => ['index-set ours-moved'],
+    },
+    {
+        why   => 'a recorded mapping disagreement that converged is reported',
+        setup => sub { write_inventory() },
+        want  => ['index-set row-converged'],
+    },
+    {
+        why   => 'back to an empty mode_differs: the unrecorded case fails again',
+        setup => sub { write_register(); write_inventory(e999 => { modes => ['100', '110'] }) },
         want  => ['index-set alias-broken'],
     },
     {

@@ -95,6 +95,7 @@ use File::Basename qw(basename);
 use YAML::XS qw(LoadFile);
 use RosettaEmit qw(emit_entry);
 use RosettaHx qw(parse_appendix translate_hx is_multi_emit %FUNC);
+use RosettaExpr qw(split_constants);
 
 # verified_at is an AUDIT field: it says when the check ran, so it has to be
 # today's date and never a literal. seed-hx.pl carried '2026-08-31' hardcoded
@@ -242,6 +243,30 @@ sub ill_formed {
     my $bal = 0;
     for my $c (split //, $x) { $bal++ if $c eq '('; $bal-- if $c eq ')' }
     push @why, 'has unbalanced parentheses' if $bal != 0;
+
+    # john's dynamic language binds constants in a trailing `,cN=VALUE` list
+    # and refers to them as $cN inside the body. That list is NOT part of the
+    # body and must be split off before the body is scanned, using the same
+    # parser compile_expression uses -- a second reader of the notation is a
+    # second grammar, and the two drift.
+    #
+    # They had. Measured 2026-09-05: this check knew nothing of the list, so
+    # it read `c1` and `x3a` out of `sha1($s.$c1.$p),c1=\x3a` as bare operands
+    # and called ALL 33 expressions carrying a constant ill-formed -- four of
+    # which john had proved that same morning. --repair would have withdrawn
+    # every one. The paren check above runs first because an unbalanced
+    # expression makes the split bail, and "unbalanced" is the more useful
+    # reason to report.
+    if ($bal == 0) {
+        my ($body, $const) = RosettaExpr::split_constants($x);
+        if (defined $body) { $x = $body }
+        else {
+            push @why, 'carries a trailing constant list that is not john\'s '
+                     . '`,cN=VALUE` form -- see handle_extra_params() in '
+                     . 'src/dynamic_compiler.c'
+                if $x =~ /,\s*c\d/;
+        }
+    }
     # ")(" is a prose gloss that was concatenated onto a finished expression
     push @why, 'carries a parenthesized group after what is already a complete '
              . 'expression, which is how a prose gloss reaches the data' if $x =~ /\)\(/;

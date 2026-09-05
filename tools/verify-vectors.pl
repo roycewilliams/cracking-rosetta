@@ -155,7 +155,7 @@ use YAML::XS ();
 
 use lib "$RealBin/lib";
 use RosettaEmit qw(emit_entry);
-use RosettaTools qw(tool_path tool_env_help);
+use RosettaTools qw(tool_path tool_env_help tool_version);
 
 my $PROG = basename($0);
 my $ROOT = "$RealBin/..";
@@ -193,6 +193,9 @@ END_USAGE
 }
 
 my (@tools, $hashcat, $mdxfind, $john, $algdir, $workdir, @only, $help);
+# (entry, mode) pairs whose crack was attributed by a solo run because
+# hashcat echoed a different spelling of the hash than it was given.
+my %reserialized;
 my ($dry, $john_gpu);
 my $discover = 0;
 my $timeout = 120;
@@ -222,6 +225,20 @@ if (!@tools) { usage(); exit 2 }
 $hashcat = tool_path('hashcat', $hashcat);
 $mdxfind = tool_path('mdxfind', $mdxfind);
 $john = tool_path('john', $john);
+
+# WHAT verified_with RECORDS, AND WHY IT IS NOT JUST THE TOOL'S NAME
+#
+# This promoter wrote the bare strings 'hashcat', 'mdxfind' and 'john' for
+# months, which is where 1473 of them in the corpus come from. A tier says
+# "proven by this tool" and, without a version, cannot say by which build --
+# and WHICH build has twice decided whether a mapping was true here: the RAW
+# family repair of 2026-09-05 turned on mdxfind 1.545 against 1.576, and the
+# same day the mdxfind inventory and the installed binary stopped being the
+# same release at all. So ask each binary, and if one will not say, record
+# that rather than a guess.
+my %TOOL_VER = map { $_->[0] => (tool_version($_->[0], $_->[1])
+                                 // 'version not stated by the binary') }
+               ( ['hashcat', $hashcat], ['mdxfind', $mdxfind], ['john', $john] );
 $algdir  //= "$ROOT/data/algorithms";
 $workdir //= "$ROOT/tmp/verify";
 
@@ -241,21 +258,29 @@ for my $t (@tools) {
 make_path($workdir) unless -d $workdir;
 my $today = strftime('%Y-%m-%d', localtime);
 
-# The build each inventory was extracted from, so a tier this tool writes says
-# WHICH build established it.
+# TRANSCODES: the type's own serialization of a vector the entry stores in
+# some other tool's. john writes RVARY as "$rvary$<hex>" and mdxfind wants the
+# bare hex; dynamic_1602 wraps hash and salt and appends a user field that
+# QAS-VASAUTH ignores. Those vectors cannot verify as stored, and the row then
+# says NOT REPRODUCED about a mapping that reproduces perfectly well.
 #
-# It used to write a bare "mdxfind". That is the whole provenance of a claim,
-# and without a version there is nothing later to compare against: measured
-# 2026-09-05, 327 mdxfind 'absent' claims named RCS 1.545 while the inventory
-# had moved to 1.576, and nineteen of them were wrong because the 25 indices
-# added between the two builds were exactly the types they said were missing.
-# Those at least NAMED a build and so were detectable once something looked;
-# a bare "mdxfind" is not. validate.pl now reports the mismatch, and this is
-# the other half - a claim that can be checked at all.
-my %INV_VERSION;
-for my $t (qw(hashcat john mdxfind hashpipe)) {
-    my $d = eval { YAML::XS::LoadFile("$ROOT/data/tools/$t.yaml") } or next;
-    $INV_VERSION{$t} = $d->{version} if defined $d->{version} && length $d->{version};
+# A line here is a hint about SPELLING and never a claim: it is used only as
+# the LAST fallback, only for an (entry, type) pair that has nothing yet, and
+# it still has to survive a pinned run. Its plaintext must also be one the
+# entry itself stores, so a line cannot quietly introduce a different vector.
+my %TRANSCODE;
+if ($want{mdxfind}) {
+    my $tf = "$ROOT/data/mdxfind-transcodes.tsv";
+    if (open my $fh, '<', $tf) {
+        while (<$fh>) {
+            next if /^\s*(#|$)/;
+            chomp;
+            my ($ty, $id, $line) = split /\t/, $_, 3;
+            next unless defined $line && length $line;
+            $TRANSCODE{"$ty\0$id"} = $line;
+        }
+        close $fh;
+    }
 }
 
 # Which mdxfind types carry a salt, so -f or -F is chosen from the inventory.
@@ -439,6 +464,11 @@ sub mx_echo_is {
 }
 
 my (%cracked, %attempted, %failed_job, %mx_job_ids, %ran_ident);
+# (entry, type) pairs whose round trip used a line from
+# data/mdxfind-transcodes.tsv rather than the vector as stored. The block's
+# note says so, because otherwise the promotion reads as though the stored
+# string verified and a later reader would try it and be baffled.
+my %transcoded;
 my $ran = 0;
 
 # hc_plain_is($said, $want) - is the plaintext hashcat printed the plaintext
@@ -477,6 +507,7 @@ if ($want{hashcat} && $job{hashcat}) {
         $ran_ident{hashcat}{$mode} = 1;
         next if $dry;
 
+        my $solo_cracked = 0;
         my $hf = write_file("$workdir/hc.$mode.hash", map { $_->{hash} } @v);
         my $wf = write_file("$workdir/hc.$mode.word", map { $_->{pass} } @v);
 
@@ -500,14 +531,80 @@ if ($want{hashcat} && $job{hashcat}) {
         # shape this branch could not see. Tightening here can only ever
         # WITHHOLD a promotion, never invent one, because verify-vectors does
         # not demote.
+        # %read_here is THIS identifier's reads. %read is the tool's, across
+        # every identifier in the run, because that is what reads_in means --
+        # "which tools were proven to read this string". Counting the report
+        # line off %read credited an identifier with vectors an earlier one had
+        # read: measured 2026-09-05, md5-md5-pass-salt printed
+        # "dynamic_6  5 hash(es) -> 5 cracked" when dynamic_6 took 4 and
+        # dynamic_2006, which ran before it, took the fifth. Promotion is
+        # unaffected -- it is per identifier, off %cracked -- but this line is
+        # the human check on a tier, so it has to answer the question it asks.
+        my %read_here;
         for my $vec (@v) {
             next unless index($out, $vec->{hash}) >= 0;
             next unless $out =~ /^\Q$vec->{hash}\E:(.*)$/m;
             my $said = $1;
             $read{hashcat}{ $vec->{id} }{ $vec->{vi} } = 1;
+            $read_here{ $vec->{id} }{ $vec->{vi} } = 1;
             $cracked{hashcat}{ $vec->{id} }{$mode} = 1
                 if hc_plain_is($said, $vec->{pass});
         }
+        # SOLO FALLBACK. hashcat does not always echo the string it was
+        # GIVEN. Measured 2026-09-05 on v7.1.2-549-g8a15e210b: -m 26900 strips
+        # the trailing zero padding from the SNMPv3 engine-id field, so it is
+        # handed ...db57fd6000000000 and prints ...db57fd60 -- same credential,
+        # a line eight characters shorter. Attribution above is an exact match
+        # on the hash, which is exactly what makes a GROUPED run safe, since
+        # output lines do not correspond to input lines. So a re-serializing
+        # mode reads as "did not reproduce" and the block keeps a note saying
+        # hashcat failed to reproduce its own published example. That note was
+        # wrong about hashcat, and nothing in the data could tell it from a
+        # mode that genuinely does not crack.
+        #
+        # One hash and one candidate per invocation removes the attribution
+        # question rather than loosening it: there is no other hash the crack
+        # could belong to and no other plaintext it could have used, so the
+        # echoed spelling stops mattering. It fires only for a (vector, mode)
+        # pair the grouped run left with nothing, so the grouped run stays
+        # primary, a regression is structurally impossible, and the cost is
+        # bounded by what is still unexplained.
+        for my $vec (@v) {
+            next if $cracked{hashcat}{ $vec->{id} }{$mode};
+            next if $read{hashcat}{ $vec->{id} }{ $vec->{vi} };
+            my $sf = write_file("$workdir/hc.$mode.solo.hash", $vec->{hash});
+            my $sw = write_file("$workdir/hc.$mode.solo.word", $vec->{pass});
+            my ($c2, $o2) = run_capture($timeout, $hashcat,
+                '-m', $mode, '-a', '0', '--quiet', '--potfile-disable',
+                '--self-test-disable', '--backend-ignore-opencl', $sf, $sw);
+            next unless defined $o2;
+            my $hit = 0;
+            for my $line (split /\n/, $o2) {
+                # "<whatever hashcat calls the hash>:<plain>". The plaintext is
+                # still checked, because the tier promises the tool recovered
+                # THIS entry's plaintext; only the hash spelling is conceded.
+                next unless $line =~ /^(.+?):(.*)$/;
+                next unless length $1;
+                next unless hc_plain_is($2, $vec->{pass});
+                $hit = 1;
+                last;
+            }
+            next unless $hit;
+            $read{hashcat}{ $vec->{id} }{ $vec->{vi} } = 1;
+            $read_here{ $vec->{id} }{ $vec->{vi} } = 1;
+            $cracked{hashcat}{ $vec->{id} }{$mode} = 1;
+            # Two different causes send a pair here and they are not the same
+            # sentence. If the grouped run COMPLETED, it read this hash and
+            # echoed a spelling that did not match, which is a fact about the
+            # mode's serialization. If it did not complete, hashcat rejected
+            # the FILE and we learned nothing about the spelling at all. Saying
+            # the first when the second happened is a wrong reason attached to
+            # a right tier.
+            $reserialized{ $vec->{id} }{$mode} =
+                ($code == 0 || $code == 1) ? 'echo' : 'batch';
+            $solo_cracked = 1;
+        }
+
         # A run that did not COMPLETE is not evidence of anything, and the
         # reads_in rule below turns "did not run" into "does not read" unless
         # it is told. hashcat's own include/types.h: RC_FINAL_OK is 0 and
@@ -518,6 +615,21 @@ if ($want{hashcat} && $job{hashcat}) {
         unless ($code == 0 || $code == 1) {
             $failed_job{hashcat}{$mode} = $code;
             delete $ran_ident{hashcat}{$mode};
+            # ... unless a SOLO run of this same identifier cracked. hashcat
+            # exits 255 when ANY line of the hash file fails to parse, which
+            # throws away what every line that DID parse established. Measured
+            # 2026-09-05: qnx7-sha512 carries one vector in mdxfind's
+            # serialization and one in hashcat's; -m 19210 exits 255 on the
+            # pair, and cracks the mdxfind one on its own. Treating the
+            # identifier as unrun there is the batch's fault, not the mode's.
+            # A crack is a completed run by definition, so this can only ever
+            # convert "no verdict" into a verdict, and only on evidence that
+            # actually exists -- a solo run that merely finished proves
+            # nothing and does not qualify.
+            if ($solo_cracked) {
+                $ran_ident{hashcat}{$mode} = 1;
+                delete $failed_job{hashcat}{$mode};
+            }
         }
         # The count is VECTORS THIS IDENTIFIER READ, not vectors belonging to
         # an entry that cracked. An entry can carry one vector per tool -- a
@@ -527,7 +639,7 @@ if ($want{hashcat} && $job{hashcat}) {
         # the per-vector fact is what reads_in already records.
         printf STDERR "-   hashcat -m %-6s %d hash(es) -> %d cracked%s\n",
             $mode, scalar @v,
-            scalar(grep { $read{hashcat}{ $_->{id} }{ $_->{vi} } } @v),
+            scalar(grep { $read_here{ $_->{id} }{ $_->{vi} } } @v),
             ($code == -2 ? ' [TIMEOUT]' : '') if $verbose;
     }
 }
@@ -604,6 +716,17 @@ if ($want{mdxfind} && $job{mdxfind}) {
             }
         }
 
+        # %read_here is THIS identifier's reads. %read is the tool's, across
+        # every identifier in the run, because that is what reads_in means --
+        # "which tools were proven to read this string". Counting the report
+        # line off %read credited an identifier with vectors an earlier one had
+        # read: measured 2026-09-05, md5-md5-pass-salt printed
+        # "dynamic_6  5 hash(es) -> 5 cracked" when dynamic_6 took 4 and
+        # dynamic_2006, which ran before it, took the fifth. Promotion is
+        # unaffected -- it is per identifier, off %cracked -- but this line is
+        # the human check on a tier, so it has to answer the question it asks.
+        my %read_here;
+
         # Output lines look like "MD5x01 <hash>:<plain>". The suffix is the
         # iteration that actually matched and is part of the identity, so a
         # vector that falls at x01 does NOT verify an entry declaring x02 --
@@ -619,6 +742,7 @@ if ($want{mdxfind} && $job{mdxfind}) {
                 next unless mx_echo_is($rest, $vec);
                 $cracked{mdxfind}{ $vec->{id} }{$type} = 1;
                 $read{mdxfind}{ $vec->{id} }{ $vec->{vi} } = 1;
+                $read_here{ $vec->{id} }{ $vec->{vi} } = 1;
             }
         }
         # SOLO FALLBACK: mdxfind does not always echo the string it was GIVEN,
@@ -678,6 +802,46 @@ if ($want{mdxfind} && $job{mdxfind}) {
             next unless $found;
             $cracked{mdxfind}{ $vec->{id} }{$type} = 1;
             $read{mdxfind}{ $vec->{id} }{ $vec->{vi} } = 1;
+            $read_here{ $vec->{id} }{ $vec->{vi} } = 1;
+        }
+
+        # TRANSCODE FALLBACK, third and last. Same shape and same guarantee as
+        # the two above: the earlier runs stay primary, this only ever ADDS a
+        # verification, and it fires only for an (entry, type) pair that has
+        # nothing at all. What it changes is that the hash line comes from
+        # data/mdxfind-transcodes.tsv rather than from the entry, because the
+        # entry stores that vector in another tool's spelling and mdxfind
+        # cannot read it. The plaintext is checked against the entry's own
+        # vectors first, so a transcode line cannot smuggle in a different
+        # vector, and the block is marked so its note can say the round trip
+        # used the transcribed form -- ONE piece of evidence written twice,
+        # not two agreeing vectors.
+        for my $id (@ids) {
+            next if $cracked{mdxfind}{$id}{$type};
+            my $line = $TRANSCODE{"$type\0$id"} or next;
+            my ($tp) = $line =~ /:([^:]*)$/;
+            next unless defined $tp;
+            (my $th = $line) =~ s/:\Q$tp\E$//;
+            # the plaintext must be one this entry actually stores
+            next unless grep { ($_->{pass} // '') eq $tp }
+                        @{ $entry{$id}{vectors} || [] };
+            my $rf = ($th =~ /:/) ? '-F' : '-f';
+            my $hf = write_file("$workdir/mx.$safe.$it.tr.hash", $th);
+            my $wf = write_file("$workdir/mx.$safe.$it.tr.word", $tp);
+            my ($c3, $o3) = run_capture($timeout, $mdxfind,
+                '-h', "^\Q$type\E\$", $rf, $hf, '-i', $it, $wf);
+            next unless defined $o3;
+            my $hit = 0;
+            for my $line2 (split /\n/, $o3) {
+                next unless $line2 =~ /^\Q$type\E(?:x(\d+))?\s+\Q$th\E:\Q$tp\E\s*$/;
+                my $g = defined $1 ? $1 + 0 : $it;
+                next unless $g == $it;
+                $hit = 1;
+                last;
+            }
+            next unless $hit;
+            $cracked{mdxfind}{$id}{$type} = 1;
+            $transcoded{$id}{$type} = $line;
         }
 
         # Accumulate: one type has a separate job per declared iteration
@@ -690,7 +854,7 @@ if ($want{mdxfind} && $job{mdxfind}) {
         }
         printf STDERR "-   mdxfind %-24s i=%s %d hash(es) -> %d cracked%s\n",
             $type, $it, scalar @v,
-            scalar(grep { $read{mdxfind}{ $_->{id} }{ $_->{vi} } } @v),
+            scalar(grep { $read_here{ $_->{id} }{ $_->{vi} } } @v),
             ($code == -2 ? ' [TIMEOUT]' : '') if $verbose;
     }
 }
@@ -794,10 +958,21 @@ if ($want{john} && $job{john}) {
             next if $enc_used && $vec->{pass} =~ /[^\x20-\x7e]/;
             $won{"$vec->{hash}\0$vec->{pass}"} = 1;
         }
+        # %read_here is THIS identifier's reads. %read is the tool's, across
+        # every identifier in the run, because that is what reads_in means --
+        # "which tools were proven to read this string". Counting the report
+        # line off %read credited an identifier with vectors an earlier one had
+        # read: measured 2026-09-05, md5-md5-pass-salt printed
+        # "dynamic_6  5 hash(es) -> 5 cracked" when dynamic_6 took 4 and
+        # dynamic_2006, which ran before it, took the fifth. Promotion is
+        # unaffected -- it is per identifier, off %cracked -- but this line is
+        # the human check on a tier, so it has to answer the question it asks.
+        my %read_here;
         for my $vec (@v) {
             next unless $won{"$vec->{hash}\0$vec->{pass}"};
             $cracked{john}{ $vec->{id} }{$label} = 1;
             $read{john}{ $vec->{id} }{ $vec->{vi} } = 1;
+            $read_here{ $vec->{id} }{ $vec->{vi} } = 1;
         }
         if ($code == -2 || $enc_refused) {
             $failed_job{john}{$label} = $enc_refused ? -3 : $code;
@@ -805,7 +980,7 @@ if ($want{john} && $job{john}) {
         }
         printf STDERR "-   john --format=%-22s %d hash(es) -> %d cracked%s\n",
             $label, scalar @v,
-            scalar(grep { $read{john}{ $_->{id} }{ $_->{vi} } } @v),
+            scalar(grep { $read_here{ $_->{id} }{ $_->{vi} } } @v),
             ($code == -2 ? ' [TIMEOUT]' : '') if $verbose;
     }
 }
@@ -912,16 +1087,67 @@ if (!$dry) {
                 # "NOT REPRODUCED HERE ... the claim is upstream's, not this
                 # repository's". A reader of that row cannot tell which half
                 # to believe, and the tier is the load-bearing one.
-                if (($blk->{note} // '') =~ /^(hashcat mapping shipped|from hashpipe|vector replaced|NOT REPRODUCED HERE)/) {
+                # The last alternative is NOT anchored, on purpose.
+                # attach-mdxfind-ahead.pl writes "<TYPE> added <date> by
+                # attach-mdxfind-ahead.pl. NOT ROUND-TRIPPED BY mdxfind
+                # HERE...", so the marker is mid-string; seed-orphans
+                # --via-hashpipe writes the same sentence at the start.
+                # Measured 2026-09-05: 16 blocks reached tier `vector` under
+                # mdxfind RCS 1.576 while still carrying a note saying mdxfind
+                # had not run them, which is the exact contradiction the
+                # anchored list above was added to stop.
+                if (($blk->{note} // '') =~ /^(hashcat mapping shipped|from hashpipe|vector replaced|NOT REPRODUCED HERE)/
+                    || ($blk->{note} // '') =~ /NOT ROUND-TRIPPED BY mdxfind HERE/) {
                     delete $blk->{note};
                     $touched = 1;
                 }
                 next if ($blk->{verified} // '') eq 'vector';
                 $blk->{verified}      = 'vector';
                 $blk->{verified_at}   = $today;
-                $blk->{verified_with} = defined $INV_VERSION{$tool}
-                                      ? "$tool $INV_VERSION{$tool}"
-                                      : $tool;
+                $blk->{verified_with} = "$tool $TOOL_VER{$tool}";
+                # Say when the string that verified is not the string stored.
+                if ($tool eq 'mdxfind' && $transcoded{$id}) {
+                    my @t = map { "$_ as \"$transcoded{$id}{$_}\"" }
+                            sort keys %{ $transcoded{$id} };
+                    $blk->{note} =
+                        "Round-tripped on the TRANSCRIBED form, not on the "
+                      . "vector as stored: this entry keeps its vector in "
+                      . "another tool's serialization, which mdxfind's reader "
+                      . "does not parse. mdxfind pinned with -h reproduced "
+                      . join('; ', @t)
+                      . ", from data/mdxfind-transcodes.tsv. The plaintext is "
+                      . "one this entry already stores, and the two strings "
+                      . "are ONE piece of evidence written twice -- not two "
+                      . "agreeing vectors.";
+                }
+                # Same idea, the other tool: the vector is the one stored, but
+                # hashcat prints a different spelling of it, so the crack was
+                # attributed by a run holding this hash and nothing else.
+                if ($tool eq 'hashcat' && $reserialized{$id}) {
+                    my $r = $reserialized{$id};
+                    my @echo  = sort { $a <=> $b } grep { $r->{$_} eq 'echo'  } keys %$r;
+                    my @batch = sort { $a <=> $b } grep { $r->{$_} eq 'batch' } keys %$r;
+                    my @why;
+                    push @why,
+                        "hashcat echoed a different spelling of this hash than "
+                      . "it was given under mode(s) " . join(', ', @echo)
+                      . ", and the grouped run attributes a crack by matching "
+                      . "the hash string -- its output lines do not correspond "
+                      . "to its input lines -- so it could not credit one"
+                        if @echo;
+                    push @why,
+                        "the grouped run under mode(s) " . join(', ', @batch)
+                      . " did not complete: hashcat exits 255 when ANY line of "
+                      . "the hash file fails to parse, which discards what the "
+                      . "lines that DID parse established"
+                        if @batch;
+                    $blk->{note} =
+                        "Round-tripped, but attributed by a SOLO run, because "
+                      . join('; and ', @why)
+                      . ". One hash and one candidate per invocation leaves "
+                      . "nothing else the crack could belong to. The stored "
+                      . "vector is unchanged and is the form hashcat was fed.";
+                }
                 $promoted{$tool}++;
                 $touched = 1;
             }

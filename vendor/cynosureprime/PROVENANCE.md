@@ -10,9 +10,9 @@ change, so the diff shows exactly what upstream altered.
 
 | File | Source | Commit | Fetched |
 |---|---|---|---|
-| `hashpipe-HASH_TYPES.md` | [Cynosureprime/hashpipe](https://github.com/Cynosureprime/hashpipe) `HASH_TYPES.md` | `cad43ac72a2402a2fcdb23dd5fa60ddcc4f39df8` (2026-09-04) | 2026-09-04 |
+| `hashpipe-HASH_TYPES.md` | [Cynosureprime/hashpipe](https://github.com/Cynosureprime/hashpipe) `HASH_TYPES.md` | `deecd388a34301b2bcc34c5b5985b53bc07aaece` (2026-09-05) | 2026-09-05 |
 | `hx.8` | [Cynosureprime/hx](https://github.com/Cynosureprime/hx) `hx.8` | `2139193c41bdedd5f3625c5b941afad700f34c7a` (2026-09-05) | 2026-09-05 |
-| `john_map.h` | [Cynosureprime/hashpipe](https://github.com/Cynosureprime/hashpipe) `john_map.h` | `cad43ac72a2402a2fcdb23dd5fa60ddcc4f39df8` (2026-09-04) | 2026-09-04 |
+| `john_map.h` | [Cynosureprime/hashpipe](https://github.com/Cynosureprime/hashpipe) `john_map.h` | `deecd388a34301b2bcc34c5b5985b53bc07aaece` (2026-09-05) | 2026-09-05 |
 
 ## What `hx.8` is
 
@@ -66,44 +66,62 @@ re-seeded back to upstream's value, or the two converging -- was detectable.
 The prose here is the human account; the register is the part that fails.
 **Delete an item from both when its record converges.**
 
-Re-fetched 2026-09-02 at commit `6ebf0069`: **both files came back
-byte-identical to the 2026-08-29 copy** even though upstream HEAD had moved, so
-what follows is upstream's current published state rather than a stale local
-copy.
+Re-fetched 2026-09-05 at commit `deecd388`. `john_map.h` came back
+byte-identical; `HASH_TYPES.md` did not, and the change is large and good:
+upstream now GENERATES it from the hashpipe binary rather than maintaining it
+by hand, so it goes from 1000 types at v1.102 to **1026 at v1.193**.
 
-* **`e607 SHA1MD5SALTPASSPEPPER` publishes a pre-fix digest.**
-  Register record: `e607-example-vector`. mdxfind 1.543
-  (2026-08-29) repaired a buffer-layout bug in that type; its own revision log
-  says "any hash cracked as e607 before this revision will not verify against
-  it". The catalog still carries `786aab530907a783e9c25a2c7326ab7907ebf798`,
-  which is the OLD construction `sha1(cut(salt . md5(salt . pass), 0, 32) .
-  pepper)`. The repaired form `sha1(md5(salt . pass) . pepper)` gives
-  `0992047fa349ac4e5abb3fef6c0f3f8f8bc6d679` for the same salt, pepper and
-  plaintext, established three independent ways and recorded on the
-  `sha1md5saltpasspepper` entry.
+**`e607 SHA1MD5SALTPASSPEPPER` is no longer listed here.** It was, until
+2026-09-05, and the record `e607-example-vector` is the reason it could be
+dropped rather than forgotten: the catalog published the pre-fix digest
+`786aab53...` for a construction mdxfind 1.543 had repaired, and the 2026-09-05
+re-fetch brought back `0992047f...`, which is the value this repository had
+established three independent ways and asserted on the
+`sha1md5saltpasspepper` entry. `check-upstream.pl` reported `converged`, which
+is the third failure mode -- the one that otherwise looks exactly like nothing
+having happened -- and the record and this bullet were deleted together.
 
-* **The catalog lags the binary by design.**
+* **The catalog lags the binary by design, and as of 2026-09-05 by one index.**
   Register record: `mdxfind-catalog-lags-binary`, which also carries the
   assertion that makes hashpipe an alias of mdxfind rather than a fourth
   column: on every shared index the catalog and the local inventory agree on
-  the name and on the hashcat mapping. Measured 2026-09-02: 1000 types at
-  v1.102 here against 1002 in the local mdxfind (RCS 1.545). `e1002 RMD256` has no catalog row and
-  therefore no example vector, which is why the extractor reports fewer example
-  vectors than types.
+  the name and on the hashcat mapping. Measured 2026-09-05: 1026 catalog rows
+  at v1.193 against 1027 types in the inventory (mdxfind RCS 1.576). The one
+  index upstream does not list is `e426 PARALLEL`, a control type rather than a
+  hash, which the catalog SKIPS rather than renumbering around -- and that skip
+  is what keeps the two index spaces comparable at all.
 
-* **`john_map.h` numbers ITERATIONS in hashpipe's scheme, not mdxfind's.**
-  Register record: `hashpipe-john-map-agreement`. Measured 2026-09-02 with
-  both binaries on this host, same hash and same plaintext, each pinned to the
-  named type: mdxfind reports `SHA224RAWx01` for plain `sha224($p)` and
-  `SHA224RAWx02` for `sha224(sha224_raw($p))`, while hashpipe calls the plain
-  one `SHA224x01` and the raw-fed one `SHA224RAWx01`. The same offset holds for
-  `SHA256RAW`, `SHA384RAW`, `SHA512RAW`, `MD5RAW` and `MD5CAP`. Four rows of
-  `JohnMap[]` are affected (`dynamic_54`, `_64`, `_74`, `_84`), and a fifth,
-  `dynamic_37`, publishes `SHA1SALTPASS` where john's own subformat listing
-  says `sha1(lc($u).$p) (SMF)` -- hashpipe reports the first type that
-  reproduces a digest, and those two coincide whenever the userid is already
-  lower case. `tools/seed-upstream.pl` reads this register and refuses all
-  five rather than seeding them.
+* **Eight shared indices now disagree on the hashcat mapping, and mdxfind did
+  not move.** Same register record, `mode_differs:`. All 1026 shared indices
+  agree on the NAME. The mode column changed when upstream started generating
+  the catalog: it is the inverse of hashpipe's `Maphashcat[]`, which maps each
+  hashcat mode to ONE canonical index, whereas mdxfind's `-h` prints every mode
+  a type can serve. Measured 2026-09-05, mdxfind RCS 1.545 and RCS 1.576 answer
+  identically on all eight, so the movement is entirely on the catalog side.
+  Six are synonym pairs (6000 between `e17 RMD160` and `e118 RIPEMD`, 1000
+  between `e369 NTLM` and `e786 NTLMH`, 4521/4522 between `e520` and `e579`)
+  and two are a mode that is an ITERATION of a type (3500 = md5(md5(md5($p))),
+  which mdxfind serves as `e1 MD5` at three iterations and hashpipe attributes
+  to `e303 MD5-2xMD5`). Neither spelling is wrong, so this is recorded rather
+  than repaired -- but an UNRECORDED mapping disagreement still fails, and a
+  NAME disagreement has no exception path at all.
+
+* **`john_map.h` disagrees on one row, and it is MASKING rather than
+  numbering.** Register record: `hashpipe-john-map-agreement`. `dynamic_37`
+  publishes `SHA1SALTPASS` where john's own subformat listing says
+  `sha1(lc($u).$p) (SMF)`; hashpipe reports the first type that reproduces a
+  digest, and those two coincide whenever the userid is already lower case.
+  `tools/seed-upstream.pl` reads this register and refuses that row rather
+  than seeding it.
+  **Four rows were dropped on 2026-09-05 and the reason is worth keeping.**
+  `dynamic_54`, `_64`, `_74` and `_84` were recorded on 2026-09-02 as an
+  iteration-numbering convention difference, hashpipe publishing `SHA224RAWx01`
+  where this repository asserted `SHA224RAW x02` and the same for the SHA256,
+  384 and 512 siblings. That diagnosis was WRONG. mdxfind revision 1.290 had
+  regressed the RAW family so that every RAW type became numerically identical
+  to its plain sibling at x01, revision 1.549 restored it, and the installed
+  RCS 1.545 of that day still carried the regression. Upstream's map was right
+  the whole time. All four converged and were deleted.
 
 * **`JohnMapLocal[]` must never be seeded from.** Not a disagreement and so
   not a register record, but the same class of hazard. hashpipe v1.189 added a

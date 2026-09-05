@@ -14,10 +14,10 @@ status: "needs-review"
 tools:
   hashcat:
     modes: [26900]
-    verified: "upstream"
-    verified_at: "2026-08-31"
+    verified: "vector"
+    verified_at: "2026-09-05"
     verified_with: "hashcat v7.1.2-549-g8a15e210b"
-    note: "NOT REPRODUCED HERE. hashcat publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: the tool pinned to this identifier did not reproduce its own published example. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool hashcat --only 26900 to retry."
+    note: "Round-tripped, but attributed by a SOLO run, because hashcat echoed a different spelling of this hash than it was given under mode(s) 26900, and the grouped run attributes a crack by matching the hash string -- its output lines do not correspond to its input lines -- so it could not credit one. One hash and one candidate per invocation leaves nothing else the crack could belong to. The stored vector is unchanged and is the form hashcat was fed."
   mdxfind:
     verified: "absent"
     verified_at: "2026-09-03"
@@ -29,3 +29,4 @@ vectors:
   - hash: "$SNMPv3$5$45889431$3081a70201033011020455c0c85c020300ffe30401010201030450304e041180001f88808106d566db57fd600000000002011002020118040e6d61747269785f5348412d333834042000000000000000000000000000000000000000000000000000000000000000000400303d041180001f88808106d566db57fd60000000000400a226020411b3c3590201000201003018301606082b06010201010200060a2b06010401bf0803020a$80001f88808106d566db57fd6000000000$89424907553231aaa27055f4b3b0a97c626ed4cdc4b660d903765b607af792a5"
     pass: "hashcat1"
     source: "hashcat"
+    reads_in: ["hashcat"]

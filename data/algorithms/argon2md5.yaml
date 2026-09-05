@@ -1,29 +1,12 @@
 id: "argon2md5"
 name: "ARGON2MD5"
-expression_proof:
-  verified: "absent"
-  verified_at: "2026-09-05"
-  verified_with: "hx Language Specification, Appendix A"
-  note: "the Argon2 cost parameters m, t and p are read out of the stored form rather than fixed by the type, so there is no fixed expression to record."
-denotation:
-  text: "argon2(md5(pass), salt, m, t, p)"
-  source: "mdxfind"
-  note: "Appendix A Note [43]: vBulletin 6, Argon2 over the MD5 of the password rather than the password itself. The inner digest is the 32-character lowercase HEX, not the 16 raw bytes. m, t and p are runtime parameters carried in the stored form, so this is not a fixed expression. hx Language Specification (Waffle), Appendix A, read 2026-09-05. The revision is later than the 1.15 the seeding tools cite, since Appendix A now carries e1003-e1027."
-category: "kdf"
-status: "ok"
+status: "needs-review"
 tools:
   mdxfind:
     types: ["ARGON2MD5"]
     verified: "vector"
     verified_at: "2026-09-05"
     verified_with: "mdxfind RCS 1.576 (2026/09/02)"
-    note: "mdxfind e1020 ARGON2MD5."
-  hashpipe:
-    types: ["ARGON2MD5"]
-    verified: "vector"
-    verified_at: "2026-09-05"
-    verified_with: "hashpipe RCS 1.193 (2026/09/05)"
-    note: "verified with hashpipe -c, which pins each line to its own leading TYPE label and runs no detection, at -t 1 and with the emitted label compared against the one asked for. Both precautions are load-bearing here: hashpipe -m does not restrict what a recognised wrapper reaches, and its results vary with the thread count."
   crack:
     supported: false
 vectors:
@@ -31,4 +14,3 @@ vectors:
     pass: "password123"
     source: "mdxfind"
     reads_in: ["mdxfind"]
-notes: "Created 2026-09-05. vBulletin 6, and the direct successor to what BCRYPTMD5 (e451) models for vBulletin 5. Appendix A Note [43] records that the stored form is ordinary Argon2 MCF and carries NO marker distinguishing it from e987 ARGON2, so a line can be offered to either type and only the correct one verifies -- which is why this needs its own row rather than a note on the argon2 one. Neither john nor hashcat ships a vector for this scheme; the registered one was produced by argon2-cffi, a different implementation from the argon2 library mdxfind links, so the check is across implementations rather than self-generated."
