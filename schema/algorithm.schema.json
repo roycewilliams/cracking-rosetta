@@ -203,7 +203,37 @@
             "verified_with": {
               "type": "string"
             },
-            "note": {
+            "no_round_trip": {
+            "type": "object",
+            "additionalProperties": false,
+            "description": "Why this tool's mapping cannot be promoted to tier 'vector' from THIS entry's vectors, when that has been measured rather than merely not attempted. GAPS.md ranks a claimed-but-unproven mapping as the cheapest contribution in the repository -- 'one command decides it' -- which is only true where the command can decide. Where it has been run and cannot, saying so keeps the queue honest and stops the same measurement being repeated. Scoped to the entry and the tool: it says nothing about whether the tool could round-trip some OTHER vector, and it never changes the tier, which stays whatever the evidence supports.",
+            "required": [
+              "reason",
+              "note"
+            ],
+            "properties": {
+              "reason": {
+                "description": "'different-algorithm' means this tool computes something else under the identifier named here, so this row's vector cannot exercise it and a failure to crack would say nothing about the mapping. 'emits-nothing' means the tool's own type produces no digest for any input, so it can never reproduce anything.",
+                "enum": [
+                  "different-algorithm",
+                  "emits-nothing"
+                ]
+              },
+              "note": {
+                "type": "string",
+                "minLength": 1,
+                "description": "Required. State what was measured, so the next reader audits the claim instead of re-running it."
+              },
+              "measured_at": {
+                "type": "string",
+                "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+              },
+              "measured_with": {
+                "type": "string"
+              }
+            }
+          },
+          "note": {
               "type": "string"
             }
           }
@@ -233,7 +263,37 @@
             "verified_with": {
               "type": "string"
             },
-            "note": {
+            "no_round_trip": {
+            "type": "object",
+            "additionalProperties": false,
+            "description": "Why this tool's mapping cannot be promoted to tier 'vector' from THIS entry's vectors, when that has been measured rather than merely not attempted. GAPS.md ranks a claimed-but-unproven mapping as the cheapest contribution in the repository -- 'one command decides it' -- which is only true where the command can decide. Where it has been run and cannot, saying so keeps the queue honest and stops the same measurement being repeated. Scoped to the entry and the tool: it says nothing about whether the tool could round-trip some OTHER vector, and it never changes the tier, which stays whatever the evidence supports.",
+            "required": [
+              "reason",
+              "note"
+            ],
+            "properties": {
+              "reason": {
+                "description": "'different-algorithm' means this tool computes something else under the identifier named here, so this row's vector cannot exercise it and a failure to crack would say nothing about the mapping. 'emits-nothing' means the tool's own type produces no digest for any input, so it can never reproduce anything.",
+                "enum": [
+                  "different-algorithm",
+                  "emits-nothing"
+                ]
+              },
+              "note": {
+                "type": "string",
+                "minLength": 1,
+                "description": "Required. State what was measured, so the next reader audits the claim instead of re-running it."
+              },
+              "measured_at": {
+                "type": "string",
+                "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+              },
+              "measured_with": {
+                "type": "string"
+              }
+            }
+          },
+          "note": {
               "type": "string"
             }
           }
@@ -263,7 +323,37 @@
             "verified_with": {
               "type": "string"
             },
-            "note": {
+            "no_round_trip": {
+            "type": "object",
+            "additionalProperties": false,
+            "description": "Why this tool's mapping cannot be promoted to tier 'vector' from THIS entry's vectors, when that has been measured rather than merely not attempted. GAPS.md ranks a claimed-but-unproven mapping as the cheapest contribution in the repository -- 'one command decides it' -- which is only true where the command can decide. Where it has been run and cannot, saying so keeps the queue honest and stops the same measurement being repeated. Scoped to the entry and the tool: it says nothing about whether the tool could round-trip some OTHER vector, and it never changes the tier, which stays whatever the evidence supports.",
+            "required": [
+              "reason",
+              "note"
+            ],
+            "properties": {
+              "reason": {
+                "description": "'different-algorithm' means this tool computes something else under the identifier named here, so this row's vector cannot exercise it and a failure to crack would say nothing about the mapping. 'emits-nothing' means the tool's own type produces no digest for any input, so it can never reproduce anything.",
+                "enum": [
+                  "different-algorithm",
+                  "emits-nothing"
+                ]
+              },
+              "note": {
+                "type": "string",
+                "minLength": 1,
+                "description": "Required. State what was measured, so the next reader audits the claim instead of re-running it."
+              },
+              "measured_at": {
+                "type": "string",
+                "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+              },
+              "measured_with": {
+                "type": "string"
+              }
+            }
+          },
+          "note": {
               "type": "string"
             }
           }
@@ -288,7 +378,37 @@
             "verified_with": {
               "type": "string"
             },
-            "note": {
+            "no_round_trip": {
+            "type": "object",
+            "additionalProperties": false,
+            "description": "Why this tool's mapping cannot be promoted to tier 'vector' from THIS entry's vectors, when that has been measured rather than merely not attempted. GAPS.md ranks a claimed-but-unproven mapping as the cheapest contribution in the repository -- 'one command decides it' -- which is only true where the command can decide. Where it has been run and cannot, saying so keeps the queue honest and stops the same measurement being repeated. Scoped to the entry and the tool: it says nothing about whether the tool could round-trip some OTHER vector, and it never changes the tier, which stays whatever the evidence supports.",
+            "required": [
+              "reason",
+              "note"
+            ],
+            "properties": {
+              "reason": {
+                "description": "'different-algorithm' means this tool computes something else under the identifier named here, so this row's vector cannot exercise it and a failure to crack would say nothing about the mapping. 'emits-nothing' means the tool's own type produces no digest for any input, so it can never reproduce anything.",
+                "enum": [
+                  "different-algorithm",
+                  "emits-nothing"
+                ]
+              },
+              "note": {
+                "type": "string",
+                "minLength": 1,
+                "description": "Required. State what was measured, so the next reader audits the claim instead of re-running it."
+              },
+              "measured_at": {
+                "type": "string",
+                "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+              },
+              "measured_with": {
+                "type": "string"
+              }
+            }
+          },
+          "note": {
               "type": "string"
             }
           }
@@ -301,7 +421,37 @@
             "supported": {
               "type": "boolean"
             },
-            "note": {
+            "no_round_trip": {
+            "type": "object",
+            "additionalProperties": false,
+            "description": "Why this tool's mapping cannot be promoted to tier 'vector' from THIS entry's vectors, when that has been measured rather than merely not attempted. GAPS.md ranks a claimed-but-unproven mapping as the cheapest contribution in the repository -- 'one command decides it' -- which is only true where the command can decide. Where it has been run and cannot, saying so keeps the queue honest and stops the same measurement being repeated. Scoped to the entry and the tool: it says nothing about whether the tool could round-trip some OTHER vector, and it never changes the tier, which stays whatever the evidence supports.",
+            "required": [
+              "reason",
+              "note"
+            ],
+            "properties": {
+              "reason": {
+                "description": "'different-algorithm' means this tool computes something else under the identifier named here, so this row's vector cannot exercise it and a failure to crack would say nothing about the mapping. 'emits-nothing' means the tool's own type produces no digest for any input, so it can never reproduce anything.",
+                "enum": [
+                  "different-algorithm",
+                  "emits-nothing"
+                ]
+              },
+              "note": {
+                "type": "string",
+                "minLength": 1,
+                "description": "Required. State what was measured, so the next reader audits the claim instead of re-running it."
+              },
+              "measured_at": {
+                "type": "string",
+                "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+              },
+              "measured_with": {
+                "type": "string"
+              }
+            }
+          },
+          "note": {
               "type": "string"
             }
           }

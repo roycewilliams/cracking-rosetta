@@ -238,16 +238,27 @@ my %REL_MIRROR = (
     'truncates'         => 'truncates',
 );
 
+# no_round_trip on every one of them: it is a statement about whether THIS
+# entry's vectors can exercise THAT tool's identifier, which every column can
+# fail to do for its own reasons.
 my %TOOL_KEY = (
-    hashcat  => { map { $_ => 1 } qw(modes verified verified_at verified_with note) },
-    john     => { map { $_ => 1 } qw(cpu gpu verified verified_at verified_with note) },
-    mdxfind  => { map { $_ => 1 } qw(types iterations verified verified_at verified_with note) },
+    hashcat  => { map { $_ => 1 } qw(modes verified verified_at verified_with note no_round_trip) },
+    john     => { map { $_ => 1 } qw(cpu gpu verified verified_at verified_with note no_round_trip) },
+    mdxfind  => { map { $_ => 1 } qw(types iterations verified verified_at verified_with note no_round_trip) },
     # No iterations: hashpipe's suffix reports the algorithm's own round count
     # read out of the hash where mdxfind's counts outer re-hashing driven by
     # -i, so the two are different quantities. See the schema.
-    hashpipe => { map { $_ => 1 } qw(types verified verified_at verified_with note) },
-    crack    => { map { $_ => 1 } qw(supported note) },
+    hashpipe => { map { $_ => 1 } qw(types verified verified_at verified_with note no_round_trip) },
+    crack    => { map { $_ => 1 } qw(supported note no_round_trip) },
 );
+
+my %NO_RT_KEY = map { $_ => 1 } qw(reason note measured_at measured_with);
+# Why this entry's vectors cannot promote this tool's mapping. Measured, not
+# assumed: 'different-algorithm' means the tool computes something else under
+# the identifier, so a failure to crack this row's vector says nothing about
+# the mapping; 'emits-nothing' means the tool's type produces no digest for
+# any input at all.
+my %IS_NO_RT_REASON = map { $_ => 1 } qw(different-algorithm emits-nothing);
 
 # Which key in each tool block holds the identifiers to cross-reference.
 my %IDENT_KEYS = (
@@ -666,6 +677,77 @@ for my $file (@files) {
                     && !(ref $d->{vectors} eq 'ARRAY' && @{ $d->{vectors} })) {
                     err("%s: tools.%s.verified is 'vector' but the entry has no vectors",
                         $file, $tool);
+                }
+
+                # --- no_round_trip ---------------------------------------
+                #
+                # GAPS.md sells a claimed-but-unproven mapping as the
+                # cheapest contribution there is: the identifier and the
+                # vector are both on the row, so "one command decides it".
+                # That is only true where the command CAN decide. mdxfind's
+                # MD5SPECAM reads a userid off the line and performs zero
+                # hash calculations on this row's vector -- which is
+                # hashpipe's, for a type of the same name that computes
+                # something else -- so running it settles nothing, and the
+                # queue was advertising a job that had already been done and
+                # had come back inconclusive.
+                my $nrt = $blk->{no_round_trip};
+                if (defined $nrt) {
+                    if (ref $nrt ne 'HASH') {
+                        err("%s: tools.%s.no_round_trip must be a mapping",
+                            $file, $tool);
+                    }
+                    else {
+                        for my $k (sort keys %$nrt) {
+                            err("%s: unknown key 'tools.%s.no_round_trip.%s'",
+                                $file, $tool, $k) unless $NO_RT_KEY{$k};
+                        }
+
+                        my $reason = $nrt->{reason};
+                        if (!defined $reason || !length $reason) {
+                            err("%s: tools.%s.no_round_trip needs a 'reason'",
+                                $file, $tool);
+                        }
+                        elsif (!$IS_NO_RT_REASON{$reason}) {
+                            err("%s: tools.%s.no_round_trip.reason '%s' is not "
+                              . "one of: %s", $file, $tool, $reason,
+                                join(', ', sort keys %IS_NO_RT_REASON));
+                        }
+
+                        err("%s: tools.%s.no_round_trip needs a 'note' saying "
+                          . "what was measured", $file, $tool)
+                            unless defined $nrt->{note} && length $nrt->{note};
+
+                        if (defined $nrt->{measured_at}
+                            && $nrt->{measured_at} !~ /^\d{4}-\d{2}-\d{2}$/) {
+                            err("%s: tools.%s.no_round_trip.measured_at '%s' "
+                              . "is not YYYY-MM-DD", $file, $tool,
+                                $nrt->{measured_at});
+                        }
+
+                        # The contradiction that matters. 'vector' means this
+                        # tool DID reproduce one of this entry's vectors, so
+                        # a standing statement that it cannot is stale by
+                        # definition -- and leaving both would let a reader
+                        # pick whichever half they liked.
+                        if (defined $tier && $tier eq 'vector') {
+                            err("%s: tools.%s is tier 'vector' but carries a "
+                              . "no_round_trip block saying this entry's "
+                              . "vectors cannot promote it; the round trip "
+                              . "happened, so the block comes out",
+                                $file, $tool);
+                        }
+
+                        # 'absent' says the tool does not support this
+                        # algorithm at all. Then there is no identifier for a
+                        # vector to fail against and nothing to explain.
+                        if (defined $tier && $tier eq 'absent') {
+                            err("%s: tools.%s is tier 'absent', so there is no "
+                              . "mapping for a vector to promote and "
+                              . "no_round_trip has nothing to say", $file,
+                                $tool);
+                        }
+                    }
                 }
 
                 # And a block must not say the opposite of its own tier.

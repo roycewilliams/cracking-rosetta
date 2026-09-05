@@ -17,7 +17,7 @@ Each row below links to its entry in the [browsable table](index.html).
 Gaps are absences; for the rows where something is known to be *odd*, see
 [OPEN-QUESTIONS.md](OPEN-QUESTIONS.md).
 
-## 1. Believed but never reproduced (86)
+## 1. Believed but never reproduced (85)
 
 The cheapest contribution in the repository, if you own the tool. Each of
 these already names an identifier and already carries a test vector; nobody
@@ -41,7 +41,6 @@ tools/verify-vectors.pl --tool <tool> --only <id> -v
 | [`md5-md5-pass-salt`](index.html#md5-md5-pass-salt) | hashcat | `2611`, `2711` | asserted |
 | [`md5dsalt`](index.html#md5dsalt) | mdxfind | `MD5DSALT` | asserted |
 | [`md5md5hum`](index.html#md5md5hum) | mdxfind | `MD5MD5HUM` | asserted |
-| [`md5specam`](index.html#md5specam) | mdxfind | `MD5SPECAM` | asserted |
 | [`md5uc`](index.html#md5uc) | mdxfind | `MD5UC` | upstream |
 | [`md5ucmd5`](index.html#md5ucmd5) | mdxfind | `MD5UCMD5` | upstream |
 | [`mysql4-1-mysql5`](index.html#mysql4-1-mysql5) | john | `dynamic_1028`, `mysql-sha1`, `mysql-sha1-opencl` | asserted |
@@ -117,6 +116,14 @@ tools/verify-vectors.pl --tool <tool> --only <id> -v
 | [`wpa-pmk`](index.html#wpa-pmk) | hashcat | `22001` | upstream |
 | [`wpa-pmkid-pbkdf2`](index.html#wpa-pmkid-pbkdf2) | hashcat | `16800` | upstream |
 | [`wpa-pmkid-pmk`](index.html#wpa-pmkid-pmk) | hashcat | `16801` | upstream |
+
+One further mapping is claimed, carries a vector, and is deliberately **not**
+in that table: somebody has already run the command, and it cannot decide.
+Where a tool computes something else under the identifier the row names, its
+failure to crack this row's vector is not evidence against the mapping - so
+the pair is in [OPEN-QUESTIONS.md](OPEN-QUESTIONS.md#mappings-this-rows-vector-cannot-settle)
+as a question about what the row is for, which is a curator's job rather than
+a one-liner.
 
 ## 2. No test vector at all (0)
 

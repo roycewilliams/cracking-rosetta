@@ -341,6 +341,11 @@ my (%tally, %state_count);
 # generated document's benefit would appear as a null on every row and widen
 # the published contract without anyone deciding to.
 my %no_vector_of;
+# And why a given tool's mapping cannot be promoted from THIS entry's vectors,
+# keyed "<id>\0<tool>". Section 1 below calls a claimed mapping with a vector
+# beside it the cheapest contribution in the repository -- "one command decides
+# it" -- which is only true where the command can decide.
+my %no_round_trip_of;
 my @out;
 for my $e (@rows) {
     my %r = (
@@ -502,6 +507,10 @@ for my $e (@rows) {
     $tally{ $r{status} }++;
     $no_vector_of{ $r{id} } = $e->{no_vector}
         if ref $e->{no_vector} eq 'HASH';
+    for my $tool (keys %{ $e->{tools} || {} }) {
+        my $nrt = $e->{tools}{$tool}{no_round_trip};
+        $no_round_trip_of{ "$r{id}\0$tool" } = $nrt if ref $nrt eq 'HASH';
+    }
     push @out, \%r;
 }
 
@@ -760,7 +769,7 @@ close $md;
 # Everything here is derived, so it cannot drift from the data the way a
 # hand-kept "help wanted" list does.
 
-my (@promotable, @novector, @novec_settled, %unknown_by_tool);
+my (@promotable, @novector, @novec_settled, @no_round_trip, %unknown_by_tool);
 for my $r (@out) {
     # A gap is something nobody has said yet. An entry carrying a no_vector:
     # block has said it, and said why -- so it is not asked for here, and the
@@ -773,8 +782,18 @@ for my $r (@out) {
         push @{ $unknown_by_tool{$t} }, $r if $c->{state} eq 'unknown';
         # 'claimed' is the render-side name for a tier of upstream or
         # asserted: identifiers are recorded, nothing round-tripped them.
-        push @promotable, { row => $r, tool => $t, tier => $c->{tier} // '?' }
-            if $c->{state} eq 'claimed' && $r->{vecs};
+        if ($c->{state} eq 'claimed' && $r->{vecs}) {
+            # A measured "this row's vector cannot exercise that identifier"
+            # takes the pair out of the queue rather than leaving it at the
+            # top of it. mdxfind's MD5SPECAM reads a userid off the line and
+            # performs zero hash calculations on this row's vector, which is
+            # hashpipe's for a type of the same name computing something
+            # else: the command has been run, and it decided nothing.
+            my $nrt = $no_round_trip_of{ "$r->{id}\0$t" };
+            push @{ $nrt ? \@no_round_trip : \@promotable },
+                { row => $r, tool => $t, tier => $c->{tier} // '?',
+                  why => $nrt };
+        }
     }
 }
 
@@ -830,6 +849,20 @@ for my $g (sort { $a->{row}{id} cmp $b->{row}{id} } @promotable) {
     printf {$gp} "| %s | %s | `%s` | %s |\n", gaps_link($g->{row}), $g->{tool},
         join('`, `', @{ $g->{row}{ $g->{tool} }{ids} }), $g->{tier};
 }
+if (@no_round_trip) {
+    printf {$gp} <<'GAPS_1_NRT',
+%s claimed, carries a vector, and is deliberately **not**
+in that table: somebody has already run the command, and it cannot decide.
+Where a tool computes something else under the identifier the row names, its
+failure to crack this row's vector is not evidence against the mapping - so
+the pair is in [OPEN-QUESTIONS.md](OPEN-QUESTIONS.md#mappings-this-rows-vector-cannot-settle)
+as a question about what the row is for, which is a curator's job rather than
+a one-liner.
+GAPS_1_NRT
+        (@no_round_trip == 1
+         ? "\nOne further mapping is"
+         : sprintf("\n%d further mappings are", scalar @no_round_trip));
+}
 
 printf {$gp} "\n## 2. No test vector at all (%d)\n\n", scalar @novector;
 if (@novector) {
@@ -851,9 +884,8 @@ none, and neither recorded reason is a contribution anyone is waiting for.
 GAPS_2_NONE
 }
 if (@novec_settled) {
-    printf {$gp} <<'GAPS_2_SETTLED', scalar @novec_settled;
-
-%d further entries carry no vector and are deliberately **not** listed above.
+    printf {$gp} <<'GAPS_2_SETTLED',
+%s no vector and are deliberately **not** listed above.
 Their reason is on record rather than outstanding: one is a type that computes
 nothing at all, so no plaintext has a hash to be paired with and no equipment
 will ever produce one, and another withholds a published vector because storing
@@ -863,6 +895,9 @@ does not exist, or that would not be accepted if it arrived. They are in
 [OPEN-QUESTIONS.md](OPEN-QUESTIONS.md) instead - the withheld one as a question
 for a curator, the impossible one as no question at all.
 GAPS_2_SETTLED
+        (@novec_settled == 1
+         ? "\nOne further entry carries"
+         : sprintf("\n%d further entries carry", scalar @novec_settled));
 }
 
 print {$gp} "\n## 3. A tool column nobody has filled\n\n";
@@ -1127,6 +1162,36 @@ OQ_WITHHELD
         (my $note = $no_vector_of{ $r->{id} }{note}) =~ s/\s+/ /g;
         $note = substr($note, 0, 220) . '...' if length $note > 223;
         printf {$oq} "* %s - %s - %s\n", gaps_link($r), $r->{name}, $note;
+    }
+}
+else {
+    print {$oq} "None.\n";
+}
+
+# The same shape one level down: not the entry that cannot be proven, but one
+# TOOL's mapping on it. Kept separate because the question is different --
+# there, what is this row for; here, is this tool's identifier even the same
+# algorithm as the rest of the row.
+printf {$oq} "\n## Mappings this row's vector cannot settle (%d)\n\n",
+    scalar @no_round_trip;
+if (@no_round_trip) {
+    print {$oq} <<'OQ_NRT';
+Claimed, and carrying a vector, and still not a one-command job: the command
+has been run and could not decide. Where a tool computes something else under
+the identifier this row names, its failure to crack this row's vector is not
+evidence against the mapping - so the pair is here rather than at the top of
+[GAPS.md](GAPS.md), where it would have been advertised as the cheapest
+contribution in the repository. Settling one means deciding what the row is
+for: whether the identifier belongs on it at all, or wants a row of its own.
+
+OQ_NRT
+    for my $g (sort { $a->{row}{id} cmp $b->{row}{id}
+                   || $a->{tool}    cmp $b->{tool} } @no_round_trip) {
+        (my $note = $g->{why}{note}) =~ s/\s+/ /g;
+        $note = substr($note, 0, 220) . '...' if length $note > 223;
+        printf {$oq} "* %s - %s `%s` (%s) - %s\n", gaps_link($g->{row}),
+            $g->{tool}, join('`, `', @{ $g->{row}{ $g->{tool} }{ids} }),
+            $g->{why}{reason} // '?', $note;
     }
 }
 else {

@@ -261,6 +261,18 @@ describes. Reading the note is the whole job; supplying a vector is not.
 
 * [`sha1saltcx`](index.html#sha1saltcx) - SHA1SALTCX - A vector exists and is deliberately not recorded. The only published example -- mdxfind's own inventory row and the vendored hashpipe catalog carry the same string -- is a TEN-iteration hash, and this row declares no ite...
 
+## Mappings this row's vector cannot settle (1)
+
+Claimed, and carrying a vector, and still not a one-command job: the command
+has been run and could not decide. Where a tool computes something else under
+the identifier this row names, its failure to crack this row's vector is not
+evidence against the mapping - so the pair is here rather than at the top of
+[GAPS.md](GAPS.md), where it would have been advertised as the cheapest
+contribution in the repository. Settling one means deciding what the row is
+for: whether the identifier belongs on it at all, or wants a row of its own.
+
+* [`md5specam`](index.html#md5specam) - mdxfind `MD5SPECAM` (different-algorithm) - mdxfind and hashpipe do not compute the same thing under this name, so this row's vector -- which is hashpipe's -- cannot exercise mdxfind's type and a failure to crack it would say nothing about the mapping. hashpipe's ...
+
 ## Rows that may be more than one algorithm
 
 Not derivable from a field, so stated here. Three entries carry vectors that

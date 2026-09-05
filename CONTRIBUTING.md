@@ -97,6 +97,27 @@ so -- that is a better contribution than the vector would have been. The block
 is illegal alongside `vectors:`, so a vector arriving later means the block
 comes out.
 
+A mapping can also be marked as one this row's vector cannot settle, which is
+why it is not in `GAPS.md`'s "believed but never reproduced" table even though
+it looks like it belongs there:
+
+```yaml
+tools:
+  mdxfind:
+    types: ["MD5SPECAM"]
+    verified: "asserted"
+    no_round_trip:
+      reason: "different-algorithm"   # or "emits-nothing"
+      note: "mdxfind computes something else under this name, so this row's
+             vector cannot exercise it"
+      measured_at: "2026-09-04"
+```
+
+It means the command has been run and could not decide -- so please don't
+report back that the vector failed to crack, because that is the recorded
+finding rather than news. What would help is deciding whether the identifier
+belongs on that row at all.
+
 ### ...add a mapping a tool is missing
 
 Find the entry in `data/algorithms/`, add the block, and be honest about the

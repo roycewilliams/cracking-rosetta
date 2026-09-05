@@ -250,6 +250,48 @@ on every row and widened the published contract without anyone deciding to.
 It lives in a lookup beside the rows instead. **Anything added to that hash is
 published; check `git diff dist/` before believing a render is clean.**
 
+### And a mapping with a vector beside it is not always one command away
+
+The same defect one level down, and it survived the fix above because it is a
+different predicate. `GAPS.md` section 1 ranks a claimed-but-unproven mapping
+as the cheapest contribution in the repository -- the identifier and the vector
+are both already on the row, so "one command decides it" -- and selects on
+`state eq 'claimed' && $r->{vecs}`. It cannot see whether the command CAN
+decide.
+
+`md5specam` is the case, and note that it was ALREADY correct about everything
+except the queue it sat in. mdxfind and hashpipe do not compute the same thing
+under that name: hashpipe's `compute_md5specam` is `md5($p . md5_raw($p))` and
+takes neither salt nor user, while mdxfind's `JOB_MD5SPECAM` reads a userid off
+the line and breaks out when that field is empty. The row's vector is
+hashpipe's. Pinned with `-h '^MD5SPECAM$'`, mdxfind performs ZERO hash
+calculations on it under `-f` and zero again under `-F` with a userid appended
+-- it declines the input shape rather than computing and missing -- so a
+failure to crack is not evidence against the mapping, and the tier correctly
+stayed at `asserted`. What was wrong was advertising it as a one-liner.
+
+So `tools.<tool>.no_round_trip:` says that this ENTRY's vectors cannot exercise
+that TOOL's identifier, with the same `reason:` + required `note:` +
+`measured_at`/`measured_with` shape. Two reasons: `different-algorithm` (the
+tool computes something else under that identifier) and `emits-nothing` (the
+tool's type produces no digest for any input). It is scoped deliberately: it
+says nothing about whether the tool could round-trip some OTHER vector, and it
+never changes the tier, which stays whatever the evidence supports.
+
+`validate.pl` refuses it at tier `vector` -- the round trip demonstrably
+happened, so the block is stale -- and at tier `absent`, where there is no
+mapping for a vector to promote and nothing to explain. `render.pl` moves the
+pair out of `GAPS.md` section 1 and into `OPEN-QUESTIONS.md` under "Mappings
+this row's vector cannot settle", because the question that IS open is a
+curator's: does that identifier belong on this row at all, or does it want a
+row of its own.
+
+Note the shape this shares with `no_vector:` above, since a third instance
+will want the same treatment: **a queue that selects on the absence of
+evidence will keep proposing work that has already been done.** Both fixes
+record the measurement that closed the question, in a field a generator can
+read, and let the queue subtract it.
+
 ## Round-trip verification recipes
 
 These are proven working in this environment.
