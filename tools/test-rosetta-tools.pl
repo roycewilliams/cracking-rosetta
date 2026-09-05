@@ -35,6 +35,16 @@
 # The reason string is asserted too, negatively: it must not call an
 # identifier over-broad when nothing established that it was.
 #
+# READING HASHCAT'S CRACK LINE is the second thing here, and it is here for
+# the same reason: a wrong answer understates hashcat's support, which reads
+# exactly like a mode that does not crack, so nothing downstream can catch it.
+# hc_line_plain_is is only ever applied to a SOLO run -- one hash, one
+# candidate -- so the hash's spelling does not have to match; the plaintext
+# still does. It was wrong once, splitting on the FIRST colon, which on
+# -m 22000's re-serialized line read the plaintext as
+# "fc690c158264:f4747f87f9f4:hashcat-essid:hashcat!" and recorded a successful
+# round trip as a failure. That exact line is the first assertion below.
+#
 # USAGE
 #   perl -Itools/lib tools/test-rosetta-tools.pl
 #   Exit 0 all assertions passed, 1 one or more failed, 2 usage.
@@ -50,7 +60,8 @@ use warnings;
 
 use FindBin qw($RealBin);
 use lib "$RealBin/lib";
-use RosettaTools qw(share_measurable share_unmeasurable_reason);
+use RosettaTools qw(share_measurable share_unmeasurable_reason
+                    hc_plain_is hc_line_plain_is);
 
 my $PROG = 'test-rosetta-tools.pl';
 
@@ -115,6 +126,52 @@ check($r =~ /--all/,         'and how to get a run that CAN measure it',   $r);
 my $r4 = share_unmeasurable_reason('type', 4, 20);
 check($r4 =~ /\b4 entries\b/, 'plural corpus reads correctly',             $r4);
 check($r4 =~ /\b25%/,         'and it states the share one hit would be',  $r4);
+
+#-----------------------------------------------------------------------
+# Reading hashcat's crack line. [ line, want, expected, why ]
+
+my $WPA22000 = '4d4fe7aac3a2cecab195321ceb99a7d0:fc690c158264:f4747f87f9f4:'
+             . 'hashcat-essid:hashcat!';
+
+my @LINES = (
+    [ $WPA22000, 'hashcat!', 1,
+      'the -m 22000 line that split on the first colon and lost the crack' ],
+    [ $WPA22000, 'hashcat',  0,
+      'and it is not satisfied by a plaintext that is merely a prefix'     ],
+    [ $WPA22000, 'hashcat-essid', 0,
+      'nor by an inner field that is not the last one'                     ],
+    [ '5f4dcc3b5aa765d61d8327deb882cf99:password', 'password', 1,
+      'the ordinary two-field crack line'                                  ],
+    [ '05b56c69b512a1c641fc59d1070df60b:abc123:rosetta', 'rosetta', 1,
+      'a salted line, where the salt is a field of its own'                ],
+    [ 'deadbeef:a:b', 'a:b', 1,
+      'a plaintext containing a colon still matches, widening the tail'    ],
+    [ 'password', 'password', 0,
+      'a bare echo of the candidate is not a crack: no hash field ahead'   ],
+    [ '', 'password', 0,          'an empty line is not a crack'           ],
+    [ 'deadbeef:', '', 1,         'an empty plaintext is a real field'     ],
+    [ 'deadbeef:91b2e062b9', '$HEX[91b2e062b9]', 1,
+      'the $HEX spelling on the vector side is unwrapped'                  ],
+    [ 'deadbeef:$HEX[91b2e062b9]', '91b2e062b9', 1,
+      'and on hashcat\'s side'                                             ],
+    [ 'deadbeef:cafe', 'beef', 0,
+      'a substring of a field is not a field'                              ],
+);
+
+for my $c (@LINES) {
+    my ($line, $want, $expect, $why) = @$c;
+    my $got = hc_line_plain_is($line, $want) ? 1 : 0;
+    check($got == $expect, $why,
+          sprintf('line=%s want=%s expected %d got %d', $line, $want, $expect, $got));
+}
+
+# hc_plain_is on its own: one $HEX wrapper either way and nothing more.
+check( hc_plain_is('password', 'password'),          'identical plaintexts');
+check( hc_plain_is('$HEX[6162]', 'ab'),              '$HEX unwraps to bytes');
+check( hc_plain_is('$HEX[6162]', '6162'),            'and compares as text too');
+check(!hc_plain_is('PASSWORD', 'password'),          'case is not normalized');
+check(!hc_plain_is('$HEX[6162]', 'abc'),             'a wrong plaintext still fails');
+check(!hc_plain_is(undef, 'password'),               'undef is not a match');
 
 printf STDERR "- %d passed, %d failed\n", $pass, $fail;
 exit($fail ? 1 : 0);
