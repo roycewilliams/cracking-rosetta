@@ -14,10 +14,10 @@ status: "needs-review"
 tools:
   hashcat:
     modes: [6222]
-    verified: "upstream"
-    verified_at: "2026-08-31"
+    verified: "vector"
+    verified_at: "2026-09-05"
     verified_with: "hashcat v7.1.2-549-g8a15e210b"
-    note: "NOT REPRODUCED HERE. hashcat publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: hashcat's example for this mode is a volume header rather than a digest, so a plain -a 0 wordlist attack cannot consume it. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool hashcat --only 6222 to retry."
+    note: "Round-tripped, but attributed by a SOLO run, because under mode(s) 6222 hashcat's parser reads the FILE'S BYTES, and this entry stores the container header as hex because YAML holds text, so the round trip was run against the decoded bytes. The stored hex is unchanged and is what decodes to them; reads_in does NOT list hashcat for it, because hashcat did not read that string. One hash and one candidate per invocation leaves nothing else the crack could belong to. The stored vector is unchanged."
   crack:
     supported: false
 vectors:
