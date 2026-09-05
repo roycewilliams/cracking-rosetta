@@ -10,6 +10,11 @@ tools:
     note: "NOT ROUND-TRIPPED BY mdxfind HERE, and that is a fact about this host rather than about the type. SHA512RAWPASSSALT is a type of RCS 1.576 (2026/09/02), and the installed binary is RCS 1.545 (2026/08/29), so pinning it with -h '^SHA512RAWPASSSALT$' selects no type at all. hashpipe -- which shares mdxfind's type list -- was pinned to this exact name with -c and reproduced mdxfind's own published example, emitting it as \"SHA512RAWPASSSALTx01\". That is upstream verified by recomputation, which is what tier `upstream` means. To promote it: install mdxfind RCS 1.576 (2026/09/02) and run seed-orphans.pl --tool mdxfind --only SHA512RAWPASSSALT, then verify-vectors.pl --tool mdxfind."
   crack:
     supported: false
+relations:
+  - kind: "collides-on-subset"
+    entry: "sha512-pass-salt"
+    distinction: "iteration"
+    note: "Both mdxfind types reproduce BOTH entries' vectors at x01, measured 2026-09-05 with hashpipe -c pinned to each in turn: SHA512RAWPASSSALT and SHA512PASSSALT agree on every input at one iteration, because at depth 1 the only difference between them is whether the digest is emitted as raw bytes or as hex, and the stored form is hex either way. They are NOT the same computation, and depth 2 shows it: SHA512RAWPASSSALTx02 verifies sha512(sha512_raw($p.$s)) = e785d2e3... while SHA512PASSSALTx02 verifies sha512(sha512_hex($p.$s)) = 3de674ce..., for the same password123/DB1C19C0. So this is a coincidence on the x01 subset, which is every input this repository stores, and not an equivalence. It is also why john's dynamic_82 cracks sha512rawpasssalt's vector and is deliberately NOT recorded as a mapping there: per CLAUDE.md, record the trap, not the mapping."
 vectors:
   - hash: "a7a2a6174d5c151e0df2052271a0184fb38ed4761209141cca085401d5be5584b4979af0f365204a11876fa7b6a83ebc31bd1fde7014e1456165393d20e74e59:DB1C19C0"
     pass: "password123"
