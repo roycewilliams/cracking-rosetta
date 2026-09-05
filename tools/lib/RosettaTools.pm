@@ -52,7 +52,8 @@ use strict;
 use warnings;
 
 use Exporter 'import';
-our @EXPORT_OK = qw(tool_path tool_env_help tool_version);
+our @EXPORT_OK = qw(tool_path tool_env_help tool_version
+                    share_measurable share_unmeasurable_reason);
 
 # The path each tool has had all along on the machine this data was generated
 # on. Do not change these to make a different machine work -- set the
@@ -136,6 +137,58 @@ sub tool_version {
 sub tool_env_help {
     my ($name) = @_;
     return sprintf('$%s, else %s', $ENV_VAR{$name}, $DEFAULT{$name});
+}
+
+
+#-----------------------------------------------------------------------
+# THE --max-share GUARD, AND WHEN IT HAS MEASURED NOTHING
+#
+# All three discovery tools hold back an identifier that matched more than
+# --max-share percent of the corpus:
+#
+#     $hits{$_} * 100 > $max_share * $corpus
+#
+# The corpus is the TARGET set, so every option that narrows the targets
+# narrows the denominator. Under --only it is 1, every format that matched at
+# all scores 100%, and the entry is held saying "every matching format is
+# over-broad" -- which is not what was measured and reads like a fact about
+# the format. Measured 2026-09-05: saph on sapcodvnh256 was held that way, and
+# the same run as --format '^saph$' --all measures its true share at 4 of 1561
+# and applies.
+#
+# The guard is right to withhold and wrong to explain. Withholding a claim
+# costs coverage; explaining one wrongly writes a sentence into the review
+# file that a reader will believe. So neither tool drops the guard on a narrow
+# run -- it reports the share as unmeasurable instead.
+#
+# The predicate is the guard's own arithmetic with hits fixed at 1: if a
+# SINGLE hit already trips the threshold, then every identifier that matched
+# is over-broad by construction and the comparison has distinguished nothing.
+# Deriving it that way rather than testing for --only is deliberate -- it is
+# --mirror-gpu and a small --all-less run too, it scales with --max-share, and
+# it cannot drift away from the rule it describes.
+
+# share_measurable($corpus, $max_share) - true when a share verdict on this
+# corpus says something about the identifier rather than about the run.
+sub share_measurable {
+    my ($corpus, $max_share) = @_;
+    return 0 unless defined $corpus && defined $max_share;
+    return 0 if $corpus <= 0 || $max_share <= 0;
+    return 100 <= $max_share * $corpus ? 1 : 0;
+}
+
+# share_unmeasurable_reason($kind, $corpus, $max_share) - what to say instead.
+# $kind is the tool's word for its identifier: format, type, mode.
+sub share_unmeasurable_reason {
+    my ($kind, $corpus, $max_share) = @_;
+    return sprintf(
+        'share UNMEASURABLE: the corpus is %d %s, so a single hit is %s%% and '
+      . 'trips --max-share %d by itself. Every matching %s is held, which is a '
+      . 'fact about this run and not about the %s -- re-run against the whole '
+      . 'corpus (--all, without --only) to measure the share',
+        $corpus, ($corpus == 1 ? 'entry' : 'entries'),
+        ($corpus > 0 ? sprintf('%g', 100 / $corpus) : '100'),
+        $max_share, $kind, $kind);
 }
 
 1;

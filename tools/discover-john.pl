@@ -288,7 +288,8 @@ use YAML::XS ();
 
 use lib "$RealBin/lib";
 use RosettaEmit qw(emit_entry);
-use RosettaTools qw(tool_path tool_env_help tool_version);
+use RosettaTools qw(tool_path tool_env_help tool_version
+                    share_measurable share_unmeasurable_reason);
 
 my $PROG = basename($0);
 my $ROOT = "$RealBin/..";
@@ -322,7 +323,11 @@ Usage: $PROG [options]
    --max-per-entry N hold back entries matched by more than N formats
                      (default 6; they are reported, never written)
    --max-share PCT   hold back a format matching more than PCT% of the corpus
-                     (default 20)
+                     (default 20). The corpus is the TARGET set, so a narrow
+                     run narrows the denominator: under --only it is one entry
+                     and every format that matched scores 100%. The guard still
+                     withholds, but reports the share as UNMEASURABLE rather
+                     than calling the format over-broad.
    --loadable        do NOT crack: for each candidate format, record which
                      corpus lines its own valid() accepts, and write the
                      matrix to <work>/loadable.tsv for absence.pl --tool
@@ -991,6 +996,13 @@ my %noisy_fmt = map { $_ => 1 }
                 grep { $fmt_hits{$_} * 100 > $max_share * $corpus }
                 keys %fmt_hits;
 
+# Whether a share verdict on this corpus says anything about the FORMAT. Under
+# --only the corpus is one entry, so every format that matched scores 100% and
+# the guard has measured its own denominator; see RosettaTools. The guard still
+# withholds -- withholding is safe -- but it must not report what it did not
+# establish.
+my $share_ok = share_measurable($corpus, $max_share);
+
 my %excluded = map { $_ => 1 } @exclude;
 
 # See the methodology note: what "crypt" cracks is a fact about this host's
@@ -1040,7 +1052,9 @@ for my $id (sort keys %hits) {
     elsif (!@clean) {
         # In mirror mode the stray hits were already reported above with the
         # reason that actually applies; do not report them again as over-broad.
-        push @held, [$id, \@f, 'every matching format is over-broad']
+        push @held, [$id, \@f, $share_ok
+                       ? 'every matching format is over-broad'
+                       : share_unmeasurable_reason('format', $corpus, $max_share)]
             unless $mirror_gpu;
     }
     elsif (@clean > $max_per_entry) {
@@ -1072,9 +1086,19 @@ printf STDERR "- ran %d format(s) in %.1fs%s\n", $n, $elapsed,
     ($dry ? ' (dry run)' : '');
 printf STDERR "-   entries matched %d of %d target(s); applicable %d, held %d\n",
     scalar(keys %hits), $corpus, scalar @apply_list, scalar @held;
-if (%noisy_fmt) {
+if (%noisy_fmt && $share_ok) {
     printf STDERR "-   %d over-broad format(s) ignored (> %d%% of the corpus): %s\n",
         scalar keys %noisy_fmt, $max_share,
+        join(' ', map { "$_=$fmt_hits{$_}" } sort keys %noisy_fmt);
+}
+elsif (%noisy_fmt) {
+    printf STDERR "-   %d format(s) held, share UNMEASURABLE: the corpus is %d "
+                . "%s, so a\n-   single hit is %g%% and trips --max-share %d by "
+                . "itself. That is a fact\n-   about this run, not about the "
+                . "format -- re-run against the whole corpus\n-   (--all, without "
+                . "--only) to measure it: %s\n",
+        scalar keys %noisy_fmt, $corpus, ($corpus == 1 ? 'entry' : 'entries'),
+        ($corpus ? 100 / $corpus : 100), $max_share,
         join(' ', map { "$_=$fmt_hits{$_}" } sort keys %noisy_fmt);
 }
 if (%timed_out) {

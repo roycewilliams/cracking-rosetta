@@ -129,6 +129,19 @@ jobs:
       - name: Exercise the expression translator
         run: perl -Itools/lib tools/test-rosetta-john.pl
 
+      # The --max-share guard in the three discovery tools holds back an
+      # identifier matching more than PCT% of the corpus, and the corpus is the
+      # TARGET set -- so under --only it is one entry, every identifier that
+      # matched scores 100%, and the guard reported "every matching format is
+      # over-broad" about a format it had not measured. Measured 2026-09-05 on
+      # saph. Withholding is safe; a wrong reason is not, and it lands in a
+      # review file a human then believes. The predicate is the guard's own
+      # arithmetic with hits fixed at 1, so it cannot drift from the rule it
+      # describes; the boundaries are the assertions that matter. Needs no
+      # cracker.
+      - name: Exercise the share guard's measurability rule
+        run: perl -Itools/lib tools/test-rosetta-tools.pl
+
       # RosettaExpr is the INDEPENDENT implementation triage uses as its
       # control, and on its answer curate.pl either files a human question or
       # suppresses one. An off-by-one in cut(), or a cap() that moved the
