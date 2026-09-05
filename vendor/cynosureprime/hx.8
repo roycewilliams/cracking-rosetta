@@ -881,7 +881,7 @@ e854	MACOSX7	pbkdf2_sha512(pass, salt, N, 128) \fI(macOS 10.7+)\fP
 e855	POSTGRESQL	md5(pass . user) \fI(PostgreSQL)\fP
 e856	JUNIPERSSG	juniper_encode(md5_bin(user . ":Administration Tools:" . pass))
 e857	SKYPE	md5(user . fromhex("0a") . "skyper" . fromhex("0a") . pass) \fI(Skype)\fP
-e858	PEOPLESOFT	sha1(utf16be(upper(pass))) \fI(PeopleSoft)\fP
+e858	PEOPLESOFT	base64(sha1_bin(utf16le(pass))) \fI(PeopleSoft)\fP
 e859	EPISERVER	base64(sha1_bin(salt . pass)) \fI(EPiServer v0)\fP
 e860	HMAILSERVER	sha256(salt . pass) \fI(hMailServer)\fP
 e861	CISCOPIX	cisco_pix_encode(md5_bin(pad(pass, 16))) \fI(Cisco PIX)\fP
@@ -2031,6 +2031,16 @@ then iterates a fifth variant over 119 single-byte salt
 values and emits an additional digest per byte.
 .P
 .B "Multi-form SQL5 family (SHA1SQL5, SHA1SQL5MD5, etc.)."
+.B e342
+.RB ( MD5SQL5-32 )
+belongs to this family too: it renders the inner digest in both upper and
+lower case and emits eight digests per password, over each case with and
+without the leading
+.B 1
+and
+.B *
+characters.
+.P
 The SHA1SQL5 multi-emit construction is documented in
 Note [1].
 The related types
@@ -2068,24 +2078,40 @@ pair emit three salt-placement variants of the digest
 .RB "raw" " unprefixed,"
 .RB "and" " suffix variants)."
 .P
-.B "Base64-RAW colon-or-no-colon emit."
+.B "Base64-RAW padding-variant emit."
 The
 .B e237
 .RB ( MD5BASE64MD5RAW )
+type, its UC counterpart
+.B e375
+.RB ( MD5UCBASE64MD5RAW ),
+and the three composites that share its code path \(em
+.B e242
+.RB ( MD5BASE64MD5RAWSHA1 ),
+.B e243
+.RB ( MD5BASE64MD5RAWMD5 )
 and
-.B e238
-.RB ( MD5BASE64SHA1RAW )
-types and their UC counterparts
-.RB ( e375 " MD5UCBASE64MD5RAW,"
-.B e376
-MD5UCBASE64SHA1RAW)
-emit
+.B e244
+.RB ( MD5BASE64MD5RAWMD5MD5 )
+\(em emit
 .B both
 the full-length base64 string and a 2-character-shorter
 variant
 (the base64 encoding without trailing
 .B ==
 padding) per password.
+.P
+The SHA1RAW pair
+.RB ( e238 " MD5BASE64SHA1RAW,"
+.B e376
+MD5UCBASE64SHA1RAW)
+emit
+.B once
+each and are not part of this family. The variant exists because an md5
+digest is 16 bytes, whose base64 encoding ends in two
+.B =
+characters; a sha1 digest is 20 bytes and its base64 encoding ends in one,
+so there is no two-character variant to take.
 .P
 .B "PHPBB3 colon-prefix emit."
 The

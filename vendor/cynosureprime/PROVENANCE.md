@@ -11,7 +11,7 @@ change, so the diff shows exactly what upstream altered.
 | File | Source | Commit | Fetched |
 |---|---|---|---|
 | `hashpipe-HASH_TYPES.md` | [Cynosureprime/hashpipe](https://github.com/Cynosureprime/hashpipe) `HASH_TYPES.md` | `cad43ac72a2402a2fcdb23dd5fa60ddcc4f39df8` (2026-09-04) | 2026-09-04 |
-| `hx.8` | [Cynosureprime/hx](https://github.com/Cynosureprime/hx) `hx.8` | `34272a484edb3cf8c12b8fd5d4afadc12d9211e8` (2026-09-05) | 2026-09-05 |
+| `hx.8` | [Cynosureprime/hx](https://github.com/Cynosureprime/hx) `hx.8` | `2139193c41bdedd5f3625c5b941afad700f34c7a` (2026-09-05) | 2026-09-05 |
 | `john_map.h` | [Cynosureprime/hashpipe](https://github.com/Cynosureprime/hashpipe) `john_map.h` | `cad43ac72a2402a2fcdb23dd5fa60ddcc4f39df8` (2026-09-04) | 2026-09-04 |
 
 ## What `hx.8` is

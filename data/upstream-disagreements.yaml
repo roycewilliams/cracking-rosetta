@@ -1,20 +1,5 @@
 ---
 disagreements:
-- because: 'Appendix A states PEOPLESOFT (e858) as sha1(utf16be(upper(pass))). The
-    measured construction is base64(sha1_raw(utf16le($p))): little-endian UTF-16 rather
-    than big-endian, no upper(), and the digest stored base64 rather than hex. The
-    finding of the same name on the published page carries the measurement. This record
-    is what notices upstream fixing it, which the page cannot do on its own -- it
-    checks our side only.'
-  entry: peoplesoft
-  id: appendix-a-peoplesoft-e858
-  inventory: data/hx-appendix-a.txt
-  key: PEOPLESOFT
-  kind: appendix-row-value
-  publishes: sha1(utf16be(upper(pass)))
-  recorded: 2026-09-05
-  upstream: vendor/cynosureprime/hx.8
-  we_assert: base64(sha1_bin(utf16le(pass)))
 - because: 'mdxfind 1.543 (2026-08-29) repaired a buffer-layout bug in e607. The old
     code staged the inner digest at linebuf+saltlen while writing the pepper at a
     fixed offset 32, so for any non-empty salt the hash covered the salt, then a TRUNCATED
