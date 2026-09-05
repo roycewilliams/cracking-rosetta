@@ -566,7 +566,7 @@ $T->{attach_expr} //= sub { to_expr($TOOL{$tool}{label}->($_[0])) };
 # Tool-specific setup.
 
 if ($tool eq 'mdxfind') {
-    my $appx = "$ROOT/tmp/hx/appA.txt";
+    my $appx = "$ROOT/data/hx-appendix-a.txt";
     if (-f $appx) {
         $HX = parse_appendix($appx);
         printf STDERR "- hx appendix: %d type(s), used to attach\n", scalar keys %$HX;
@@ -574,7 +574,8 @@ if ($tool eq 'mdxfind') {
     elsif ($attach) {
         print STDERR "$PROG: no hx appendix at $appx, so --attach has nothing to "
                    . "match on for mdxfind (type names are not expression-shaped). "
-                   . "Re-fetch hx.pdf -- see STATE.md -- or skip --attach and "
+                   . "Run tools/extract-hx.pl, which renders it from "
+                   . "vendor/cynosureprime/hx.8 -- or skip --attach and "
                    . "accept that a type describing a computation an entry already "
                    . "has will become a duplicate row.\n";
     }

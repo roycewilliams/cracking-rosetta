@@ -597,7 +597,108 @@ sub check_john_map {
     return;
 }
 
+#-----------------------------------------------------------------------
+# appendix-row-value: one row of Appendix A states a construction this
+# repository has measured to be something else.
+#
+# Appendix A states what each mdxfind type computes, and it is the source
+# behind every denotation: this repository attributes to mdxfind. A row that
+# states the wrong construction is worth reporting, and worth EXECUTING,
+# because the event that matters is upstream FIXING it: a resolved finding
+# left on the published page is a claim that upstream is wrong when it is not.
+#
+# vendor/cynosureprime/hx.8 is Appendix A's troff and tools/extract-hx.pl
+# renders it into the table this reads, so the row is available on every build.
+#
+# Three outcomes, ordered as the other checkers order them:
+#
+#   converged      the row now states what we measured. Delete this record and
+#                  the finding it backs.
+#   upstream-moved the row states neither value. Re-measure first.
+#   (silent)       the row still states the wrong construction; the finding is
+#                  live and the published page is right.
+sub check_appendix_row {
+    my ($r) = @_;
+    my $id = $r->{id};
+
+    for my $k (qw(key publishes we_assert)) {
+        finding($id, 'malformed', "record has no %s:", $k), return
+            unless defined $r->{$k} && length $r->{$k};
+    }
+
+    # upstream: is Appendix A's troff as vendored; inventory: is the table
+    # tools/extract-hx.pl renders from it, which is what parses. Both are
+    # read, so a rendering that has gone stale against its own source is
+    # caught here rather than being trusted silently.
+    my $path = "$ROOT/$r->{inventory}";
+
+    my ($row, $idx);
+    open my $fh, '<', $path or die "$PROG: $path: $!\n";
+    while (my $l = <$fh>) {
+        next if $l =~ /^\s*#/;
+        chomp $l;
+        my @f = split /\t/, $l, 3;
+        next unless @f == 3 && $f[1] eq $r->{key};
+        ($idx, $row) = ($f[0], $f[2]);
+        last;
+    }
+    close $fh;
+
+    # The vendored troff is the authority for whether the type still exists.
+    my $in_source = 0;
+    if (open my $vf, '<', "$ROOT/$r->{upstream}") {
+        while (my $l = <$vf>) { $in_source = 1, last if $l =~ /^e\d+\t\Q$r->{key}\E\t/ }
+        close $vf;
+    }
+
+    unless (defined $row) {
+        finding($id, 'upstream-moved',
+            $in_source
+              ? "%s has no row for %s, but %s does. The rendering is stale: "
+              . "re-run tools/extract-hx.pl."
+              : "%s no longer has a row for %s (nor does %s). Upstream may "
+              . "have renamed or retired the type; re-measure and update or "
+              . "delete this record.",
+            $r->{inventory}, $r->{key}, $r->{upstream});
+        return;
+    }
+    unless ($in_source) {
+        finding($id, 'upstream-moved',
+            "%s still has a row for %s but %s does not. The rendering is "
+          . "stale: re-run tools/extract-hx.pl.",
+            $r->{inventory}, $r->{key}, $r->{upstream});
+        return;
+    }
+
+    # The parenthesised gloss is not part of the construction.
+    (my $bare = $row) =~ s/\s*\([^()]*\)\s*$//;
+    $bare =~ s/^\s+|\s+$//g;
+
+    # Convergence first, and reported alone: it retires both this record and
+    # the finding on the published page.
+    if ($bare eq $r->{we_assert} || $row eq $r->{we_assert}) {
+        finding($id, 'converged',
+            "Appendix A now states\n      %s\n    for %s (%s), which is what "
+          . "this repository measured. Upstream fixed it: delete this record "
+          . "AND the matching finding in data/upstream-findings.yaml, so the "
+          . "published page stops reporting a resolved disagreement.",
+            $bare, $r->{key}, $idx // '?');
+        return;
+    }
+
+    if ($bare ne $r->{publishes}) {
+        finding($id, 'upstream-moved',
+            "Appendix A now states\n      %s\n    for %s (%s), but this record "
+          . "was written against\n      %s\n    It is neither the old value nor "
+          . "ours, so re-measure before changing anything.",
+            $bare, $r->{key}, $idx // '?', $r->{publishes});
+    }
+
+    return;
+}
+
 my %KIND = (
+    'appendix-row-value' => \&check_appendix_row,
     'catalog-row-value'  => \&check_row_value,
     'catalog-index-set'  => \&check_index_set,
     'john-map-agreement' => \&check_john_map,

@@ -8,16 +8,20 @@ package RosettaHx;
 #-----------------------------------------------------------------------
 # METHODOLOGY AND WHY THIS EXISTS
 #
-# Appendix A of the hx Language Specification (Waffle, rev 1.15, Aug 2026)
-# states an hx expression for 1011 mdxfind types. Two tools consume it and
+# Appendix A of the hx Language Specification (Waffle) states an hx expression
+# for most mdxfind types. Two tools consume it and
 # they must agree, because they write MUTUALLY EXCLUSIVE fields: seed-hx.pl
 # writes expression:, denote-hx.pl writes denotation:, and validate.pl fails
 # an entry carrying both. Two private copies of "is this expressible here"
 # would eventually disagree, and the day they do an entry says the same thing
 # twice at two strengths. So the boundary lives here, once.
 #
-# The specification is NOT vendored: this repository is MIT throughout and the
-# PDF carries no license grant. Re-fetch it to tmp/hx/ to re-run either tool.
+# The specification is vendored. Its source is MIT, published at
+# github.com/Cynosureprime/hx, and `vendor/cynosureprime/hx.8` is Appendix A's
+# troff as upstream writes it, refreshed by tools/fetch-upstream.sh with the
+# commit recorded in vendor/cynosureprime/PROVENANCE.md.
+# tools/extract-hx.pl renders it into data/hx-appendix-a.txt, which is what
+# parse_appendix below reads.
 #
 # WHAT THE BOUNDARY IS
 #

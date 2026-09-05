@@ -18,29 +18,16 @@ going quietly out of date.
 disagreement that can be tested against a file vendored into this repository
 is a record in `data/upstream-disagreements.yaml`, executed by
 `tools/check-upstream.pl` on every build; those are summarized at the end. The
-findings here cannot be tested that way - the hx specification is a PDF that
-is not vendored, an omission has nothing to diff against, and an emission
-count needs the binary - so they are recorded, checked as far as they can be,
-and published.
+findings here are the ones that cannot be tested that way: an omission has
+nothing to diff against, and an emission count needs the binary. Where a
+finding *can* be executed it is paired with a record - Appendix A is vendored,
+so a row stating the wrong construction is checked on every build, and the
+record is what notices upstream fixing it. This page checks only that our own
+side still makes the claim, which is why the pairing matters.
 
 **How to read a `question`.** 2 of the findings below are measurements that disagree with a document and are *not* strong enough to overrule it. They are here so upstream can settle them from the source, and nothing in this repository has been withdrawn on the strength of them.
 
 ## hx specification, Appendix A
-
-### SHA1MD5USER (e308), MD5CAPMD5USER (e354), MD5CAPMD5MD5USER (e355)
-
-*A stated construction the type does not compute.* Measured 2026-08-31 with hx specification Note [24]; mdxfind RCS 1.545 (2026/08/29).
-
-| | |
-|---|---|
-| the document states | `sha1(md5(user)), md5(cap(md5(user))), md5(cap(md5(md5(user))))` |
-| measured here | each of the three hashes the PASSWORD; the user is the second operand |
-
-As printed, all three rows compute a digest of the userid alone and never touch the candidate password, which would make them unusable as password hashes. Appendix A's own neighboring row gets it right -- e286 MD5MD5USER reads md5(md5(pass).user) -- and Note [24] gives the real forms for all of them, so this is a transcription fault in the appendix rather than a disagreement about the algorithm. It is worth reporting because a reader building from the appendix alone gets a construction that cannot crack anything, and because any tool transcribing the appendix has to refuse a row that never mentions the password.
-
-The 3 type(s), as the binary spells them:
-
-`SHA1MD5USER`, `MD5CAPMD5USER`, `MD5CAPMD5MD5USER`
 
 ### 7 types the appendix's own gloss calls multi-emit that measured one emission
 
@@ -161,6 +148,8 @@ that changes nothing a passing test rather than an absence of evidence.
 
 | Record | Kind | Recorded | What it holds |
 |---|---|---|---|
+| `appendix-a-md5rawuc-e383` | appendix-row-value | 2026-09-05 | Appendix A states MD5RAWUC (e383) as hex(upper(md5_bin(pass))), which applies upper() to raw bytes. |
+| `appendix-a-peoplesoft-e858` | appendix-row-value | 2026-09-05 | Appendix A states PEOPLESOFT (e858) as sha1(utf16be(upper(pass))). |
 | `e607-example-vector` | catalog-row-value | 2026-09-02 | mdxfind 1.543 (2026-08-29) repaired a buffer-layout bug in e607. |
 | `hashpipe-john-map-agreement` | john-map-agreement | 2026-09-02 | hashpipe v1.189 (commit ab66e0f) publishes 132 verified john-to-hashpipe rows. |
 | `mdxfind-catalog-lags-binary` | catalog-index-set | 2026-09-02 | The catalog is published from a release; the local binary is ahead of it. |

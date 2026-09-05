@@ -62,6 +62,39 @@
 version: 1
 
 disagreements:
+  - id: "appendix-a-peoplesoft-e858"
+    kind: "appendix-row-value"
+    upstream: "vendor/cynosureprime/hx.8"
+    inventory: "data/hx-appendix-a.txt"
+    key: "PEOPLESOFT"
+    publishes: "sha1(utf16be(upper(pass)))"
+    we_assert: "base64(sha1_raw(utf16le($p)))"
+    entry: "peoplesoft"
+    recorded: "2026-09-05"
+    because: >-
+      Appendix A states PEOPLESOFT (e858) as sha1(utf16be(upper(pass))). The
+      measured construction is base64(sha1_raw(utf16le($p))): little-endian
+      UTF-16 rather than big-endian, no upper(), and the digest stored base64
+      rather than hex. The finding of the same name on the published page
+      carries the measurement. This record is what notices upstream fixing it,
+      which the page cannot do on its own -- it checks our side only.
+
+  - id: "appendix-a-md5rawuc-e383"
+    kind: "appendix-row-value"
+    upstream: "vendor/cynosureprime/hx.8"
+    inventory: "data/hx-appendix-a.txt"
+    key: "MD5RAWUC"
+    publishes: "hex(upper(md5_bin(pass)))"
+    we_assert: "md5(upper(md5(md5_raw($p))))"
+    entry: "md5-strtoupper-md5-md5-plain-true"
+    recorded: "2026-09-05"
+    because: >-
+      Appendix A states MD5RAWUC (e383) as hex(upper(md5_bin(pass))), which
+      applies upper() to raw bytes. The measured construction is
+      md5(upper(md5(md5_raw($p)))). The finding of the same name on the
+      published page carries the measurement; this record retires it when
+      upstream changes the row.
+
   - id: "e607-example-vector"
     kind: "catalog-row-value"
     upstream: "vendor/cynosureprime/hashpipe-HASH_TYPES.md"

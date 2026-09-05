@@ -163,28 +163,6 @@ findings:
       and mdxfind -z agrees -- because a single expression for a multi-emit
       type is a false claim even when the string is one of the forms.
 
-  - id: "appendix-a-omits-the-password-operand"
-    document: "hx specification, Appendix A"
-    subject: "SHA1MD5USER (e308), MD5CAPMD5USER (e354), MD5CAPMD5MD5USER (e355)"
-    kind: "wrong-construction"
-    states: "sha1(md5(user)), md5(cap(md5(user))), md5(cap(md5(md5(user))))"
-    we_measured: "each of the three hashes the PASSWORD; the user is the second operand"
-    measured: "2026-08-31"
-    measured_with: "hx specification Note [24]; mdxfind RCS 1.545 (2026/08/29)"
-    evidence:
-      types: ["SHA1MD5USER", "MD5CAPMD5USER", "MD5CAPMD5MD5USER"]
-      check: []
-    summary: >-
-      As printed, all three rows compute a digest of the userid alone and never
-      touch the candidate password, which would make them unusable as password
-      hashes. Appendix A's own neighboring row gets it right -- e286
-      MD5MD5USER reads md5(md5(pass).user) -- and Note [24] gives the real
-      forms for all of them, so this is a transcription fault in the appendix
-      rather than a disagreement about the algorithm. It is worth reporting
-      because a reader building from the appendix alone gets a construction
-      that cannot crack anything, and because any tool transcribing the
-      appendix has to refuse a row that never mentions the password.
-
   - id: "doc-only-multi-emit-note-24"
     document: "hx specification, Note [24]"
     subject: "6 types the note calls multi-emit that measured one emission"

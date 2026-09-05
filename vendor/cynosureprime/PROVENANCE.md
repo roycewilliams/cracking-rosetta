@@ -11,7 +11,26 @@ change, so the diff shows exactly what upstream altered.
 | File | Source | Commit | Fetched |
 |---|---|---|---|
 | `hashpipe-HASH_TYPES.md` | [Cynosureprime/hashpipe](https://github.com/Cynosureprime/hashpipe) `HASH_TYPES.md` | `cad43ac72a2402a2fcdb23dd5fa60ddcc4f39df8` (2026-09-04) | 2026-09-04 |
+| `hx.8` | [Cynosureprime/hx](https://github.com/Cynosureprime/hx) `hx.8` | `34272a484edb3cf8c12b8fd5d4afadc12d9211e8` (2026-09-05) | 2026-09-05 |
 | `john_map.h` | [Cynosureprime/hashpipe](https://github.com/Cynosureprime/hashpipe) `john_map.h` | `cad43ac72a2402a2fcdb23dd5fa60ddcc4f39df8` (2026-09-04) | 2026-09-04 |
+
+## What `hx.8` is
+
+Appendix A of the hx Language Specification: one row per registered mdxfind
+type, giving its index, its name and the expression it computes. It is the
+authority behind every `denotation:` this repository sources to mdxfind, and
+behind the expressions `seed-hx.pl` proposes.
+
+`tools/extract-hx.pl` renders it into `data/hx-appendix-a.txt`, resolving the
+troff font escapes and the multi-line `tbl` cells, which is the form
+`RosettaHx::parse_appendix` reads. The troff is vendored rather than the
+published PDF because the troff is the source, it diffs, and a specification
+change is then visible in the same way a catalog change is.
+
+Appendix A carries its own revision and moves independently of the document
+revision printed on the page, so the commit in the table above is what
+identifies which Appendix A a finding was measured against. The number in the
+running header does not.
 
 ## Why hashpipe's catalog and not mdxfind's
 
@@ -27,7 +46,7 @@ mdxfind's copy is therefore deliberately **not** vendored. See
 
 ## License
 
-Both projects are MIT licensed. See the LICENSE file in each upstream
+All three projects are MIT licensed. See the LICENSE file in each upstream
 repository; these copies are included under those terms.
 
 ## Known stale rows, and why they are not corrected here

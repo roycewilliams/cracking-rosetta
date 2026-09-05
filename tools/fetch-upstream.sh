@@ -23,33 +23,51 @@ set -e
 
 root=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
 dest="$root/vendor/cynosureprime"
-repo=Cynosureprime/hashpipe
-base=https://raw.githubusercontent.com/$repo
-
-mkdir -p "$dest"
-for f in HASH_TYPES.md john_map.h; do
-    out="$dest/$(echo "$f" | sed 's/^HASH_TYPES.md$/hashpipe-HASH_TYPES.md/')"
-    printf -- '- fetching %s\n' "$f" >&2
-    curl -fsS -m 60 -o "$out" "$base/HEAD/$f"
-done
-
-meta=$(curl -fsS -m 30 "https://api.github.com/repos/$repo/commits?per_page=1" \
-       | python3 -c 'import json,sys
-c = json.load(sys.stdin)[0]
-print(c["sha"], c["commit"]["committer"]["date"][:10])')
-
-sha=${meta%% *}
-cdate=${meta##* }
 today=$(date -u +%Y-%m-%d)
 
-printf -- '- %s is now at %s (%s)\n' "$repo" "$sha" "$cdate" >&2
+mkdir -p "$dest"
+
+# repo:remote-path:local-name -- two upstreams, because the specification is
+# its own repository. hx.8 is Appendix A, the statement of what each mdxfind
+# type computes; tools/extract-hx.pl renders it into data/hx-appendix-a.txt.
+set -- \
+    "Cynosureprime/hashpipe:HASH_TYPES.md:hashpipe-HASH_TYPES.md" \
+    "Cynosureprime/hashpipe:john_map.h:john_map.h" \
+    "Cynosureprime/hx:hx.8:hx.8"
+
+for spec in "$@"; do
+    repo=${spec%%:*}; rest=${spec#*:}
+    remote=${rest%%:*}; local_name=${rest##*:}
+    printf -- '- fetching %s from %s\n' "$remote" "$repo" >&2
+    curl -fsS -m 60 -o "$dest/$local_name" \
+        "https://raw.githubusercontent.com/$repo/HEAD/$remote"
+done
+
+# One HEAD per repo, so each vendored file records the commit of the
+# repository it actually came from rather than of whichever was asked last.
+head_of() {
+    curl -fsS -m 30 "https://api.github.com/repos/$1/commits?per_page=1" \
+      | python3 -c 'import json,sys
+c = json.load(sys.stdin)[0]
+print(c["sha"], c["commit"]["committer"]["date"][:10])'
+}
+
+hp_meta=$(head_of Cynosureprime/hashpipe)
+hx_meta=$(head_of Cynosureprime/hx)
+
+sha=${hp_meta%% *};    cdate=${hp_meta##* }
+hx_sha=${hx_meta%% *}; hx_cdate=${hx_meta##* }
+
+printf -- '- Cynosureprime/hashpipe is now at %s (%s)\n' "$sha" "$cdate" >&2
+printf -- '- Cynosureprime/hx is now at %s (%s)\n' "$hx_sha" "$hx_cdate" >&2
 
 # Patch the Commit and Fetched columns. Whole-line anchors, exactly-once or
 # fail: a patch that silently changes nothing is indistinguishable from one
 # that worked, which is the whole failure mode. Bytes in, bytes out -- the
 # table sits in a file that is pure ASCII today but nothing here should be
 # what changes that.
-PROV="$dest/PROVENANCE.md" SHA="$sha" CDATE="$cdate" TODAY="$today" python3 <<'PYPATCH'
+PROV="$dest/PROVENANCE.md" SHA="$sha" CDATE="$cdate" TODAY="$today" \
+HX_SHA="$hx_sha" HX_CDATE="$hx_cdate" python3 <<'PYPATCH'
 import os, re, sys, tempfile
 
 prov  = os.environ["PROV"]
@@ -60,7 +78,13 @@ today = os.environ["TODAY"]
 with open(prov, "rb") as fh:
     text = fh.read()
 
-for name in (b"hashpipe-HASH_TYPES.md", b"john_map.h"):
+hx_sha   = os.environ["HX_SHA"]
+hx_cdate = os.environ["HX_CDATE"]
+
+# Each file is stamped with ITS OWN repository's HEAD.
+for name, s, d in ((b"hashpipe-HASH_TYPES.md", sha, cdate),
+                   (b"john_map.h",             sha, cdate),
+                   (b"hx.8",                   hx_sha, hx_cdate)):
     # The whole row, start of line through end of line, so the newline sits
     # inside both the old and the new block and cancels out.
     pat = re.compile(rb"^\| `" + re.escape(name) + rb"` \|([^|]*)\|[^|]*\|[^|]*\|[ \t]*$",
@@ -70,7 +94,7 @@ for name in (b"hashpipe-HASH_TYPES.md", b"john_map.h"):
         sys.exit("fetch-upstream: %s matched %d row(s) in %s, refusing to patch"
                  % (name.decode(), len(found), prov))
     row = b"| `%s` |%s| `%s` (%s) | %s |" % (
-        name, found[0], sha.encode(), cdate.encode(), today.encode())
+        name, found[0], s.encode(), d.encode(), today.encode())
     text = pat.sub(lambda _m: row, text, count=1)
 
 # Write complete, then rename, preserving the mode. Never truncate the target
@@ -88,7 +112,8 @@ except BaseException:
 print("- PROVENANCE.md now records %s, fetched %s" % (sha[:8], today))
 PYPATCH
 
-printf -- '- next: re-run the extractors and tools/seed-upstream.pl, then\n' >&2
+printf -- '- next: tools/extract-hx.pl, the other extractors and\n' >&2
+printf -- '-       tools/seed-upstream.pl, then\n' >&2
 printf -- '-       %s/tools/check-upstream.pl --check -v\n' "$root" >&2
 printf -- '-       which is what tells you whether a recorded disagreement with\n' >&2
 printf -- '-       upstream moved, or was fixed and can be deleted.\n' >&2

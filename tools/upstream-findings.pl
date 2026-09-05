@@ -36,11 +36,19 @@
 #
 # That register's worth is that check-upstream.pl runs every record in it, and
 # the rule there is that a record must be executable against a vendored file.
-# None of these are. The hx specification is a PDF that is not vendored, so
-# nothing can diff Appendix A; an omission from Note [24] has nothing to
-# compare against; an emission count needs mdxfind and 17 minutes. Forcing
-# them into the register would put unrunnable records in the one file whose
-# value is that all of its records run.
+# Some of these are, and those belong in the register rather than here: a row
+# of Appendix A that states the wrong construction is checked by an
+# appendix-row-value record, because Appendix A is vendored as
+# vendor/cynosureprime/hx.8 and rendered by tools/extract-hx.pl. The findings
+# left on this page are the ones nothing can execute -- an omission from Note
+# [24] has nothing to compare against, and an emission count needs mdxfind and
+# 17 minutes. Forcing those into the register would put unrunnable records in
+# the one file whose value is that all of its records run.
+#
+# A finding here and a record there are two halves of one claim: this page
+# states what was measured, the record notices when upstream acts on it. The
+# page checks OUR side only, so without the record a resolved finding stays
+# published and reads exactly like a live one.
 #
 # THE CHECKS ARE THE POINT, AND THEY RUN ON EVERY BUILD
 #
@@ -393,10 +401,12 @@ going quietly out of date.
 disagreement that can be tested against a file vendored into this repository
 is a record in `data/upstream-disagreements.yaml`, executed by
 `tools/check-upstream.pl` on every build; those are summarized at the end. The
-findings here cannot be tested that way - the hx specification is a PDF that
-is not vendored, an omission has nothing to diff against, and an emission
-count needs the binary - so they are recorded, checked as far as they can be,
-and published.
+findings here are the ones that cannot be tested that way: an omission has
+nothing to diff against, and an emission count needs the binary. Where a
+finding *can* be executed it is paired with a record - Appendix A is vendored,
+so a row stating the wrong construction is checked on every build, and the
+record is what notices upstream fixing it. This page checks only that our own
+side still makes the claim, which is why the pairing matters.
 
 HEAD
 
