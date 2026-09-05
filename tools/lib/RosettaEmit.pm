@@ -141,7 +141,7 @@ sub emit_records {
 my @ENTRY_ORDER = qw(
     id name aliases expression john_dynamic_expr expression_proof denotation
     category application application_version status merged_into
-    tools relations vectors legacy notes
+    tools relations vectors no_vector legacy notes
 );
 # hashpipe sits next to mdxfind because that is where a reader looks for it:
 # one catalog, two binaries. It carries no iterations field -- see the schema
@@ -190,10 +190,19 @@ my @RELATION_KEYS = qw(kind entry distinction note);
 # expression -- a pseudo-expression in a richer language than john's dynamic
 # ('hmac("sha1", $plain, $salt)'), or simply the label a suite uses. It carries
 # a source so it is never an unattributed human claim.
+#
+# no_vector: is why an entry carries no vectors, where that is a settled fact
+# rather than a backlog. GAPS.md asks the world for a vector for every entry
+# that has none, and for some entries -- a type whose case in mdxfind.c
+# computes no digest at all -- that request cannot be answered by anyone. The
+# reason lived in notes: as prose, which no generator could read, so both
+# generated documents went on asking. It is not a tier: nothing here is
+# promoted, and validate.pl refuses it beside vectors:.
 my %FLAT_BLOCKS = (
     legacy           => [qw(hashes_org hashkiller)],
     expression_proof => [qw(verified verified_at verified_with note)],
     denotation       => [qw(text source note)],
+    no_vector        => [qw(reason note measured_at measured_with)],
 );
 
 # Skip a value that carries no information: undef, empty string, empty list,

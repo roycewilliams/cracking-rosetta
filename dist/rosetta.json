@@ -53066,7 +53066,7 @@
          "mdxfind_salted" : "no",
          "name" : "PARALLEL",
          "nesting_depth" : "",
-         "notes" : "No vector exists to seed, measured 2026-09-04, and this is the one type in the inventory for which that is a fact about the tools rather than a gap in this repository. hashpipe registers PARALLEL with no ht->example at all, so `hashpipe -T` skips it -- it is one of the two skipped types the generated data/tools/hashpipe.yaml header names -- and `hashpipe -G`, which generates a vector for a type that has none, emits nothing for it either because it has no compute function and no chain to drive. mdxfind's own inventory row (e426) carries no example_vector, and e426 is the single index mdxfind has that hashpipe does not. Nothing here can move until one of the two tools publishes a vector.",
+         "notes" : "No vector exists to seed, measured 2026-09-04, and this is the one type in the inventory for which that is a fact about the tools rather than a gap in this repository. hashpipe registers PARALLEL with no ht->example at all, so `hashpipe -T` skips it -- it is one of the two skipped types the generated data/tools/hashpipe.yaml header names -- and `hashpipe -G`, which generates a vector for a type that has none, emits nothing for it either because it has no compute function and no chain to drive. mdxfind's own inventory row (e426) carries no example_vector, and e426 is the single index mdxfind has that hashpipe does not. So nothing here is waiting on a contribution: no_vector records that as a property of the type rather than as a gap in this repository.",
          "primary_form" : "",
          "relations" : [],
          "sameas" : "",

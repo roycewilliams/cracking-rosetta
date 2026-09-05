@@ -329,6 +329,18 @@ sub same_as {
 }
 
 my (%tally, %state_count);
+
+# Why an entry carries no vectors, where that is settled rather than pending.
+# GAPS.md and OPEN-QUESTIONS.md both used to treat "no vectors" as a single
+# state and ask the world to fill it; where the type emits nothing there is
+# nothing to fill, and the request sent a willing contributor after something
+# that is not there.
+#
+# Kept OUT of the row hash on purpose. That hash is the export shape -- it is
+# serialized whole into dist/rosetta.json -- so a field carried there for a
+# generated document's benefit would appear as a null on every row and widen
+# the published contract without anyone deciding to.
+my %no_vector_of;
 my @out;
 for my $e (@rows) {
     my %r = (
@@ -488,6 +500,8 @@ for my $e (@rows) {
         $state_count{$t}{ $c->{state} }++;
     }
     $tally{ $r{status} }++;
+    $no_vector_of{ $r{id} } = $e->{no_vector}
+        if ref $e->{no_vector} eq 'HASH';
     push @out, \%r;
 }
 
@@ -746,9 +760,14 @@ close $md;
 # Everything here is derived, so it cannot drift from the data the way a
 # hand-kept "help wanted" list does.
 
-my (@promotable, @novector, %unknown_by_tool);
+my (@promotable, @novector, @novec_settled, %unknown_by_tool);
 for my $r (@out) {
-    push @novector, $r unless $r->{vecs};
+    # A gap is something nobody has said yet. An entry carrying a no_vector:
+    # block has said it, and said why -- so it is not asked for here, and the
+    # count stops implying it is outstanding.
+    unless ($r->{vecs}) {
+        push @{ $no_vector_of{ $r->{id} } ? \@novec_settled : \@novector }, $r;
+    }
     for my $t (qw(hashcat john mdxfind)) {
         my $c = $r->{$t};
         push @{ $unknown_by_tool{$t} }, $r if $c->{state} eq 'unknown';
@@ -813,7 +832,8 @@ for my $g (sort { $a->{row}{id} cmp $b->{row}{id} } @promotable) {
 }
 
 printf {$gp} "\n## 2. No test vector at all (%d)\n\n", scalar @novector;
-print  {$gp} <<'GAPS_2';
+if (@novector) {
+    print {$gp} <<'GAPS_2';
 Blocked on one piece of data, and it is the piece that does not require any
 tool: a hash and the plaintext that produces it. Nothing here can reach tier
 `vector` without one, so these rows cannot be proven by anyone, however well
@@ -822,7 +842,28 @@ suite, from your own scratch implementation, from a wordlist you cracked -
 that is the whole contribution.
 
 GAPS_2
-printf {$gp} "* %s - %s\n", gaps_link($_), $_->{name} for @novector;
+    printf {$gp} "* %s - %s\n", gaps_link($_), $_->{name} for @novector;
+}
+else {
+    print {$gp} <<'GAPS_2_NONE';
+None outstanding. Every entry that carries no vector records why it carries
+none, and neither recorded reason is a contribution anyone is waiting for.
+GAPS_2_NONE
+}
+if (@novec_settled) {
+    printf {$gp} <<'GAPS_2_SETTLED', scalar @novec_settled;
+
+%d further entries carry no vector and are deliberately **not** listed above.
+Their reason is on record rather than outstanding: one is a type that computes
+nothing at all, so no plaintext has a hash to be paired with and no equipment
+will ever produce one, and another withholds a published vector because storing
+it would put a digest under a row describing a different iteration depth.
+Asking the world for a vector for either would be asking for something that
+does not exist, or that would not be accepted if it arrived. They are in
+[OPEN-QUESTIONS.md](OPEN-QUESTIONS.md) instead - the withheld one as a question
+for a curator, the impossible one as no question at all.
+GAPS_2_SETTLED
+}
 
 print {$gp} "\n## 3. A tool column nobody has filled\n\n";
 print {$gp} <<'GAPS_3';
@@ -930,7 +971,19 @@ close $gp;
 
 my @expr_unproven = grep { $_->{expr} && $_->{expr_tier} ne 'vector'
                                       && $_->{expr_tier} ne 'absent' } @out;
-my @novec_q       = grep { !$_->{vecs} } @out;
+my @novec_q       = grep { !$_->{vecs} && !$no_vector_of{ $_->{id} } } @out;
+# An entry whose no_vector: reason is 'withheld' has a vector somewhere and is
+# waiting on a decision, not on data. One whose reason is 'impossible' is
+# waiting on nothing at all, and is not a question in the first place.
+sub novec_reason_is {
+    my ($reason) = @_;
+    return grep {
+        my $nv = $no_vector_of{ $_->{id} };
+        !$_->{vecs} && $nv && ($nv->{reason} // '') eq $reason;
+    } @out;
+}
+my @novec_withheld = novec_reason_is('withheld');
+my @novec_never    = novec_reason_is('impossible');
 my @traps;
 for my $r (@out) {
     push @traps, { row => $r, rel => $_ }
@@ -1031,18 +1084,53 @@ for my $t (sort { $a->{row}{id} cmp $b->{row}{id} } @traps) {
 }
 
 printf {$oq} "\n## Entries nothing can prove yet (%d)\n\n", scalar @novec_q;
-print  {$oq} <<'OQ_NOVEC';
+if (@novec_q) {
+    print {$oq} <<'OQ_NOVEC';
 No test vector, so no tier above `asserted` is reachable for any tool, however
 well equipped. Several are types whose publisher's own example does not
 reproduce under that type, which is itself a question worth an answer. Any
 hash-and-plaintext pair settles one.
 
 OQ_NOVEC
-for my $r (sort { $a->{id} cmp $b->{id} } @novec_q) {
-    (my $note = $r->{notes}) =~ s/\s+/ /g;
-    $note = substr($note, 0, 150) . '...' if length $note > 153;
-    printf {$oq} "* %s - %s%s\n", gaps_link($r), $r->{name},
-        (length $note ? " - $note" : '');
+    for my $r (sort { $a->{id} cmp $b->{id} } @novec_q) {
+        (my $note = $r->{notes}) =~ s/\s+/ /g;
+        $note = substr($note, 0, 150) . '...' if length $note > 153;
+        printf {$oq} "* %s - %s%s\n", gaps_link($r), $r->{name},
+            (length $note ? " - $note" : '');
+    }
+}
+else {
+    print {$oq} <<'OQ_NOVEC_NONE';
+None. Every entry that carries no vector now records why it carries none, and
+neither recorded reason is "nobody has got round to it". The two states that
+used to sit under this heading are below and, for the one that is not a
+question at all, at the end of this document.
+OQ_NOVEC_NONE
+}
+
+# A vector for these EXISTS. What is missing is a decision about what the row
+# is for, and until that is made a contributed vector would be refused -- so
+# listing them beside "nobody has supplied one" was asking the wrong people
+# for the wrong thing.
+printf {$oq} "\n## A vector exists, and is deliberately withheld (%d)\n\n",
+    scalar @novec_withheld;
+if (@novec_withheld) {
+    print {$oq} <<'OQ_WITHHELD';
+Not a data gap. Somebody publishes a vector for each of these, and storing it
+under the row as it currently stands would assert something the vector does
+not support - most often a depth, since the iteration suffix is identity and
+not a tuning knob. What is owed is a curator's decision about what the row
+describes. Reading the note is the whole job; supplying a vector is not.
+
+OQ_WITHHELD
+    for my $r (sort { $a->{id} cmp $b->{id} } @novec_withheld) {
+        (my $note = $no_vector_of{ $r->{id} }{note}) =~ s/\s+/ /g;
+        $note = substr($note, 0, 220) . '...' if length $note > 223;
+        printf {$oq} "* %s - %s - %s\n", gaps_link($r), $r->{name}, $note;
+    }
+}
+else {
+    print {$oq} "None.\n";
 }
 
 print {$oq} <<"OQ_MIXED";
@@ -1071,6 +1159,18 @@ and the vector are both already recorded, and one command decides it.
   already proves; grinding through it by hand would be worse than leaving it.
 * **Crack's coverage.** Frozen at its 1996 manual on purpose - [CRACK.md](CRACK.md).
 OQ_MIXED
+
+# Derived, not prose, so that marking another type stops it being asked for
+# without anyone remembering to edit this list.
+if (@novec_never) {
+    printf {$oq} "* **A vector for %s.** %s\n",
+        join(' or ', map { sprintf('`%s`', $_->{id}) } @novec_never),
+        (@novec_never == 1 ? 'It cannot have one.' : 'Neither can have one.')
+        . ' The type computes no digest at all, so there is no hash for any'
+        . ' plaintext to produce - which makes the absence a fact about the'
+        . " tool rather than a gap here. Each entry's `no_vector:` block"
+        . ' states what was measured.';
+}
 close $oq;
 
 #-----------------------------------------------------------------------

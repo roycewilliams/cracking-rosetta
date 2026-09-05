@@ -118,17 +118,20 @@ tools/verify-vectors.pl --tool <tool> --only <id> -v
 | [`wpa-pmkid-pbkdf2`](index.html#wpa-pmkid-pbkdf2) | hashcat | `16800` | upstream |
 | [`wpa-pmkid-pmk`](index.html#wpa-pmkid-pmk) | hashcat | `16801` | upstream |
 
-## 2. No test vector at all (2)
+## 2. No test vector at all (0)
 
-Blocked on one piece of data, and it is the piece that does not require any
-tool: a hash and the plaintext that produces it. Nothing here can reach tier
-`vector` without one, so these rows cannot be proven by anyone, however well
-equipped. If you have a vector for one of these - from a tool's own test
-suite, from your own scratch implementation, from a wordlist you cracked -
-that is the whole contribution.
+None outstanding. Every entry that carries no vector records why it carries
+none, and neither recorded reason is a contribution anyone is waiting for.
 
-* [`parallel`](index.html#parallel) - PARALLEL
-* [`sha1saltcx`](index.html#sha1saltcx) - SHA1SALTCX
+2 further entries carry no vector and are deliberately **not** listed above.
+Their reason is on record rather than outstanding: one is a type that computes
+nothing at all, so no plaintext has a hash to be paired with and no equipment
+will ever produce one, and another withholds a published vector because storing
+it would put a digest under a row describing a different iteration depth.
+Asking the world for a vector for either would be asking for something that
+does not exist, or that would not be accepted if it arrived. They are in
+[OPEN-QUESTIONS.md](OPEN-QUESTIONS.md) instead - the withheld one as a question
+for a curator, the impossible one as no question at all.
 
 ## 3. A tool column nobody has filled
 

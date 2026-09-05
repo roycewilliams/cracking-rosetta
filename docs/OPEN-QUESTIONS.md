@@ -244,15 +244,22 @@ promote it.
 | [`sha1lsb35`](index.html#sha1lsb35) | `sha1uc` | SHA1UC is SHA-1 written in uppercase hex and SHA1lsb35 is SHA-1 with the leading nibbles masked to zero, so a tool that skips that field cannot tell t... |
 | [`sha1uc`](index.html#sha1uc) | `sha1lsb35` | SHA1UC is SHA-1 written in uppercase hex and SHA1lsb35 is SHA-1 with the leading nibbles masked to zero, so a tool that skips that field cannot tell t... |
 
-## Entries nothing can prove yet (2)
+## Entries nothing can prove yet (0)
 
-No test vector, so no tier above `asserted` is reachable for any tool, however
-well equipped. Several are types whose publisher's own example does not
-reproduce under that type, which is itself a question worth an answer. Any
-hash-and-plaintext pair settles one.
+None. Every entry that carries no vector now records why it carries none, and
+neither recorded reason is "nobody has got round to it". The two states that
+used to sit under this heading are below and, for the one that is not a
+question at all, at the end of this document.
 
-* [`parallel`](index.html#parallel) - PARALLEL - No vector exists to seed, measured 2026-09-04, and this is the one type in the inventory for which that is a fact about the tools rather than a gap in...
-* [`sha1saltcx`](index.html#sha1saltcx) - SHA1SALTCX - This row has NO vector and that is a deliberate withholding, measured 2026-09-04. The only example anyone publishes for this type -- mdxfind's own inv...
+## A vector exists, and is deliberately withheld (1)
+
+Not a data gap. Somebody publishes a vector for each of these, and storing it
+under the row as it currently stands would assert something the vector does
+not support - most often a depth, since the iteration suffix is identity and
+not a tuning knob. What is owed is a curator's decision about what the row
+describes. Reading the note is the whole job; supplying a vector is not.
+
+* [`sha1saltcx`](index.html#sha1saltcx) - SHA1SALTCX - A vector exists and is deliberately not recorded. The only published example -- mdxfind's own inventory row and the vendored hashpipe catalog carry the same string -- is a TEN-iteration hash, and this row declares no ite...
 
 ## Rows that may be more than one algorithm
 
@@ -277,3 +284,4 @@ and the vector are both already recorded, and one command decides it.
 * **`category:` on most entries.** Unfilled, and derivable from what the entry
   already proves; grinding through it by hand would be worse than leaving it.
 * **Crack's coverage.** Frozen at its 1996 manual on purpose - [CRACK.md](CRACK.md).
+* **A vector for `parallel`.** It cannot have one. The type computes no digest at all, so there is no hash for any plaintext to produce - which makes the absence a fact about the tool rather than a gap here. Each entry's `no_vector:` block states what was measured.

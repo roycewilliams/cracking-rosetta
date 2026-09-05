@@ -362,6 +362,38 @@
         }
       }
     },
+    "no_vector": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Why this entry carries no vectors, when the reason is a settled fact rather than a backlog. An entry with no vectors and no no_vector: block is an ordinary gap -- nobody has supplied one yet -- and the generated GAPS.md asks for it. This block says that asking would be wrong, and why, so a contributor is not sent looking for something that is not there. Illegal alongside vectors:, which would make the entry deny what it also carries.",
+      "required": [
+        "reason",
+        "note"
+      ],
+      "properties": {
+        "reason": {
+          "description": "Fixed vocabulary, and the two values are not degrees of the same thing. 'impossible' means no vector can exist: the type emits nothing, so there is no hash for any plaintext to produce, and nobody -- however well equipped -- can supply one. 'withheld' means a vector exists but recording it here would assert something false about THIS row, so what is missing is a curator's decision rather than a contributor's data.",
+          "enum": [
+            "impossible",
+            "withheld"
+          ]
+        },
+        "note": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Required, because an unexplained 'impossible' is indistinguishable from a shrug and would foreclose the very question it claims to settle. State what was measured, or what decision is owed."
+        },
+        "measured_at": {
+          "type": "string",
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$",
+          "description": "ISO date the claim was established. Deliberately not called verified_at: this is not a tier and nothing here is ever promoted."
+        },
+        "measured_with": {
+          "type": "string",
+          "description": "Version string of whatever established it, e.g. the mdxfind build the type was pinned under."
+        }
+      }
+    },
     "legacy": {
       "type": "object",
       "additionalProperties": false,

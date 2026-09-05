@@ -174,19 +174,31 @@ my %FORM = map { $_ => 1 } qw(native hashcat john mdxfind);
 # the drift the merge was meant to remove.
 my @TOMB_FORBIDDEN = qw(
     expression john_dynamic_expr expression_proof denotation category
-    application application_version tools vectors aliases legacy
+    application application_version tools vectors no_vector aliases legacy
 );
 
 my %TOP_KEY = map { $_ => 1 } qw(
     id name aliases expression john_dynamic_expr expression_proof denotation
     category application application_version status merged_into
-    tools relations vectors legacy notes
+    tools relations vectors no_vector legacy notes
 );
 
 my %EXPR_PROOF_KEY = map { $_ => 1 } qw(verified verified_at verified_with note);
 my %DENOTATION_KEY = map { $_ => 1 } qw(text source note);
 my %IS_DENOT_SOURCE = map { $_ => 1 }
     qw(sheet mdxfind hashcat john hashpipe hashes.org human);
+
+my %NO_VECTOR_KEY = map { $_ => 1 } qw(reason note measured_at measured_with);
+
+# Why an entry carries no vectors, where that is a settled fact rather than a
+# backlog. The distinction is the whole point: GAPS.md asks the world for a
+# vector for every entry that has none, and for some entries that request is
+# not merely unanswered but unanswerable. 'impossible' means the type emits
+# nothing at all, so no plaintext has a hash to be paired with; 'withheld'
+# means a vector exists and recording it HERE would assert something false,
+# which is a curator's decision and not a contributor's data. An entry with
+# neither block nor vectors stays an ordinary gap and is still asked for.
+my %IS_NO_VECTOR_REASON = map { $_ => 1 } qw(impossible withheld);
 
 my %IS_CATEGORY = map { $_ => 1 } qw(
     primitive composite iterated encoding application protocol kdf
@@ -335,6 +347,7 @@ my %seen_id;
 my %tier_count;      # tool tier -> n
 my %expr_tier;       # expression_proof.verified -> n
 my ($n_expr, $n_denot, $n_novec) = (0, 0, 0);
+my %novec_reason;   # no_vector.reason -> n; the subset that is NOT a backlog
 my $tombstones = 0;
 my %tomb;            # tombstone id -> { into => survivor id, file => ... }
 my %by_expression;   # expression -> [ ids ] , for the collision rule
@@ -379,6 +392,8 @@ for my $file (@files) {
         $n_expr++  if defined $d->{expression} && length $d->{expression};
         $n_denot++ if ref $d->{denotation} eq 'HASH';
         $n_novec++ unless ref $d->{vectors} eq 'ARRAY' && @{ $d->{vectors} };
+        $novec_reason{ $d->{no_vector}{reason} // '?' }++
+            if ref $d->{no_vector} eq 'HASH';
         $expr_tier{ $d->{expression_proof}{verified} // '?' }++
             if ref $d->{expression_proof} eq 'HASH';
         for my $t (qw(hashcat john mdxfind hashpipe crack)) {
@@ -542,6 +557,64 @@ for my $file (@files) {
             # a reader has no way to know which one to believe.
             err("%s: denotation is set alongside an expression; denotation is "
               . "for entries that have none", $file) if $has_expr;
+        }
+    }
+
+    # --- no_vector ------------------------------------------------------
+    #
+    # GAPS.md tells the world that every entry with no vectors is waiting for
+    # one, and names the contribution as "a hash and the plaintext that
+    # produces it". For some entries that is not a gap at all: mdxfind's
+    # PARALLEL computes nothing -- its case in mdxfind.c increments the hash
+    # counter and breaks -- so there is no digest for any plaintext to
+    # produce and no amount of equipment will supply one. Asking anyway sends
+    # a willing contributor after something that is not there, and the fact
+    # that it is not there is exactly what the repository knows and was
+    # saying only in prose.
+    #
+    # So the reason becomes data. It is deliberately NOT a tier: nothing here
+    # is promoted, and 'impossible' is not a weaker 'vector'.
+    my $novec = $d->{no_vector};
+    if (defined $novec) {
+        if (ref $novec ne 'HASH') {
+            err("%s: 'no_vector' must be a mapping", $file);
+        }
+        else {
+            for my $k (sort keys %$novec) {
+                err("%s: unknown key 'no_vector.%s'", $file, $k)
+                    unless $NO_VECTOR_KEY{$k};
+            }
+
+            my $reason = $novec->{reason};
+            if (!defined $reason || !length $reason) {
+                err("%s: no_vector needs a 'reason'", $file);
+            }
+            elsif (!$IS_NO_VECTOR_REASON{$reason}) {
+                err("%s: no_vector.reason '%s' is not one of: %s", $file,
+                    $reason, join(', ', sort keys %IS_NO_VECTOR_REASON));
+            }
+
+            # An unexplained 'impossible' forecloses the question it claims
+            # to settle, and is indistinguishable from a shrug. The note is
+            # what a later reader audits the claim against.
+            err("%s: no_vector needs a 'note' saying what was measured or "
+              . "what decision is owed", $file)
+                unless defined $novec->{note} && length $novec->{note};
+
+            if (defined $novec->{measured_at}
+                && $novec->{measured_at} !~ /^\d{4}-\d{2}-\d{2}$/) {
+                err("%s: no_vector.measured_at '%s' is not YYYY-MM-DD",
+                    $file, $novec->{measured_at});
+            }
+
+            # The one that keeps it honest. A vector arriving later is the
+            # good outcome, and it must not leave a stale denial standing
+            # beside the thing it denies.
+            if (ref $d->{vectors} eq 'ARRAY' && @{ $d->{vectors} }) {
+                err("%s: no_vector is set alongside %d vector(s); it is for "
+                  . "entries that have none -- drop the block", $file,
+                  scalar @{ $d->{vectors} });
+            }
         }
     }
 
@@ -1098,14 +1171,22 @@ unless ($quiet) {
             join('  ', map { "$_ $tier_count{$_}" }
                  grep { $tier_count{$_} } qw(vector upstream asserted absent));
         printf STDERR "- Expression:  %d of %d entries carry one (%s); "
-                    . "no vector at all %d; denotation %d\n",
+                    . "no vector at all %d%s; denotation %d\n",
             # Live entries only: a tombstone carries no expression by rule,
             # so counting it in the denominator would report a slow decline
             # every time a merge succeeded.
             $n_expr, $entries - $tombstones,
             join(', ', map { "$_ $expr_tier{$_}" }
                  grep { $expr_tier{$_} } qw(vector upstream asserted absent)),
-            $n_novec, $n_denot;
+            $n_novec,
+            (%novec_reason
+             ? sprintf(' (of which %d settled: %s)',
+                       eval { my $s = 0; $s += $_ for values %novec_reason; $s },
+                       join(', ', map { "$_ $novec_reason{$_}" }
+                            grep { $novec_reason{$_} }
+                            qw(impossible withheld)))
+             : ''),
+            $n_denot;
 
         my @unmapped = sort { $a <=> $b } grep { !$hit_hc{$_} } map { $_->{mode} } @$hc_list;
         printf STDERR "-   hashcat modes with no entry: %d (first: %s)\n",

@@ -198,6 +198,58 @@ The same four tiers apply to `expression:` via `expression_proof:` -- see
 **Expression language** below. It is the same kind of claim and deserves the
 same audit trail.
 
+### An entry with no vector is not always a gap
+
+`GAPS.md` used to list every entry with no `vectors:` under "No test vector at
+all", and tell the reader that supplying one "is the whole contribution".
+`OPEN-QUESTIONS.md` listed the same set under "Entries nothing can prove yet".
+Both were generated from one predicate -- the entry has no vectors -- which
+cannot see the difference between a backlog and a settled fact.
+
+For `parallel` the request was unanswerable. mdxfind's `JOB_PARALLEL` case is
+`hashcnt += Maxiter; break;`: it advances the hash counter and returns,
+computing no digest and calling no `checkhash`. There is no hash for any
+plaintext to produce, which is also why e426 is the one index mdxfind has that
+hashpipe does not -- there is nothing there to implement. Upstream had already
+established this and it was recorded in the entry's `notes:`, in prose, where
+no generator could read it, so both documents went on asking.
+
+So the reason is data. `no_vector:` carries a `reason:`, a required `note:`
+and the usual `measured_at`/`measured_with`, and the vocabulary is exactly two
+values that are NOT degrees of one thing:
+
+- `impossible` -- no vector can exist. The type emits nothing, so nobody can
+                  supply one however well equipped. Not a question.
+- `withheld`   -- a vector exists, and storing it under the row as written
+                  would assert something false. `sha1saltcx` is the case: the
+                  only published example is a ten-iteration hash and the row
+                  declares no iteration count, which the schema reads as one.
+                  What is missing is a curator's decision, not a contributor's
+                  data.
+
+Deliberately not a fifth tier. Tiers say how well a claim is known and can be
+promoted; this says why a claim will never be made, and nothing about it is
+promoted. `validate.pl` refuses it beside `vectors:` -- a vector arriving is
+the good outcome and must not leave a stale denial standing next to the thing
+it denies -- refuses an unknown `reason:`, and refuses a missing `note:`,
+because an unexplained `impossible` is indistinguishable from a shrug and
+forecloses the question it claims to settle. It is also on the tombstone
+forbidden list: a tombstone asserts nothing, and this is an assertion.
+
+`render.pl` then routes rather than hides. The `impossible` ones appear under
+`OPEN-QUESTIONS.md`'s "What is deliberately not a question", derived so that
+marking another type stops it being asked for without anyone editing a list;
+the `withheld` ones get their own section stating the decision that is owed;
+and `GAPS.md` says how many it set aside and why, so the count shrinking is
+visible rather than silent.
+
+One trap worth keeping, because it was nearly shipped: the row hash in
+`render.pl` IS the export shape -- `dist/rosetta.json` serializes it whole --
+so carrying `no_vector` there for a document's benefit put `"no_vector": null`
+on every row and widened the published contract without anyone deciding to.
+It lives in a lookup beside the rows instead. **Anything added to that hash is
+published; check `git diff dist/` before believing a render is clean.**
+
 ## Round-trip verification recipes
 
 These are proven working in this environment.
