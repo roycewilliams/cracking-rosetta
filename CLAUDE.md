@@ -49,6 +49,16 @@ people expect are regenerated into `docs/` and `dist/`.
 | hashcat | `/usr/local/bin/hashcat` (v7.1.2-549-g8a15e210b) | `hashcat --hash-info` |
 | john | `/usr/local/scripts/johnl` -> `/usr/local/src/sec/crack/john-latest/run/john` | `john --list=format-details` |
 | mdxfind | `/usr/local/bin/mdxfind` (RCS 1.545, 2026-08-29) | `mdxfind -h` |
+
+**`data/tools/mdxfind.yaml` is RCS 1.576 and the INSTALLED binary is RCS
+1.545, since 2026-09-05.** The inventory is regenerated from whatever
+upstream releases; the binary is whatever this account can run, and it
+cannot write `/usr/local`. 25 types therefore exist in the data and in no
+binary here. What that costs, and the hashpipe route around it, is the first
+entry under Known pitfalls. The `Extraction command` column still names the
+canonical binary for every tier at `vector`; the 1.576 build used to
+regenerate the inventory lives at `/home/claude/src/upstream/mdxfind` and is
+a STAGING instrument, never a verifier.
 | hashpipe | `/usr/local/bin/hashpipe` (v1.192, 2026-09-04) | `hashpipe -T` (see `tools/extract-hashpipe.pl`); feed it `hash:plaintext` on stdin, or `TYPE[xNN] hash[:salt]:pass` under `-c` |
 | Crack | not present | hand-maintained, frozen |
 
@@ -218,6 +228,57 @@ mdxfind also accepts hashcat modes directly (`mdxfind -m 0`, `-m e1`,
 `-m e1-e10`), which is itself a usable cross-check.
 
 ## Known pitfalls
+
+- **THE INVENTORY CAN BE AHEAD OF THE INSTALLED BINARY, and mdxfind's way of
+  saying so is indistinguishable from finding nothing.** `data/tools/mdxfind.yaml`
+  is regenerated from whatever upstream has released; `/usr/local/bin/mdxfind`
+  is whatever is installed. Measured 2026-09-05 those were RCS 1.576 and RCS
+  1.545, and 25 types existed only in the first. Pinning the binary to a type
+  it does not have -- `mdxfind -h '^SUNMD5$' -f hashes -i 1 words` -- prints
+  "No hash types selected" and **exits 0**, which a caller reading only for a
+  crack line cannot tell from a type that ran and found nothing. **Ask the
+  binary what it HAS before treating its silence as evidence**, and treat a
+  type it lacks as UNMEASURABLE there rather than as a failure.
+  **hashpipe is the second instrument for exactly this**: installed, sharing
+  mdxfind's type list, recomputing rather than cracking, and `-c` pins a named
+  type per line. What it establishes is tier `upstream`, never `vector` --
+  `vector` means THIS tool round-tripped it under THIS identifier, and mdxfind
+  has not. `tools/attach-mdxfind-ahead.pl` and `seed-orphans.pl
+  --via-hashpipe` do this and write the promotion command into the note.
+  **`hashpipe -c` does NOT read john dialect, although hashpipe's DETECTION
+  path does.** Measured 2026-09-05: `MD4SALTPASS $dynamic_31$<hash>$<salt>:pw`
+  is refused by `-c` and resolved by plain detection, which echoes the line
+  re-serialized into the type's own spelling. That asymmetry is what makes the
+  two-stage pipeline necessary -- detection PROPOSES the transcode, `-c`
+  pinned PROVES it -- and it is why a hand-written transcode is a hint about
+  spelling rather than a claim.
+  **And a corpus-wide detection run cannot attribute its own answers.**
+  hashpipe re-serializes what it read and refusals go to the other stream, so
+  a batch's output lines do not correspond to its input lines. Matching by
+  plaintext put `MD4SALTPASS` on any of the 27 entries whose plaintext is
+  `test1`. One line per invocation, or the answer belongs to no entry in
+  particular.
+
+- **`verified_with:` must name the binary that RAN, and three tools took it
+  from the inventory instead.** Fixed 2026-09-05 in `seed-orphans.pl` and all
+  three `discover-*.pl`; `RosettaTools::tool_version($name, $path)` asks the
+  binary and returns undef rather than guessing. The two coincided for weeks,
+  which is exactly why nobody noticed. 1473 entries still carry a bare tool
+  name with no version at all (797 `mdxfind`, 380 `john`, 296 `hashcat`) --
+  **do not bulk back-fill them**: stamping today's build onto a claim some
+  earlier build proved is inventing evidence, and 244 entries openly cite
+  `mdxfind RCS 1.540`.
+
+- **A SECOND READER OF THE NOTATION IS A SECOND GRAMMAR.** `RosettaExpr`
+  learned john's `,cN=VALUE` constant suffix on 2026-09-04;
+  `denote-hx.pl`'s own `ill_formed()` did not, and on 2026-09-05
+  `--repair` proposed WITHDRAWING all 33 expressions in the corpus that carry
+  a constant -- four of which john had proved that morning. It does not
+  adjust: it deletes `expression:` and `john_dynamic_expr:` and writes
+  `expression_proof verified: absent` saying the string was never well-formed.
+  `RosettaExpr` now exports `split_constants` and `ill_formed()` calls it.
+  **If you widen the expression language again, grep for every place that
+  INSPECTS an expression, not just the place that evaluates one.**
 
 - **Type masking (mdxfind).** mdxfind reports the *first* internal type that
   reproduces a digest. `MD5CAP` is `cap(md5(pass))`, a no-op whenever the
