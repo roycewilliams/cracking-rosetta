@@ -91,7 +91,11 @@ disagreements:
     kind: "catalog-index-set"
     upstream: "vendor/cynosureprime/hashpipe-HASH_TYPES.md"
     inventory: "data/tools/mdxfind.yaml"
-    absent_upstream: ["e426", "e1002"]
+    absent_upstream: ["e426", "e1002", "e1003", "e1004", "e1005", "e1006",
+                      "e1007", "e1008", "e1009", "e1010", "e1011", "e1012",
+                      "e1013", "e1014", "e1015", "e1016", "e1017", "e1018",
+                      "e1019", "e1020", "e1021", "e1022", "e1023", "e1024",
+                      "e1025", "e1026", "e1027"]
     recorded: "2026-09-02"
     because: >-
       The catalog is published from a release; the local binary is ahead of
@@ -108,6 +112,23 @@ disagreements:
       every shared index the catalog and the binary must agree on the name and
       on the hashcat mapping, and a mismatch means the alias rule needs
       revisiting.
+      RE-MEASURED 2026-09-04 against mdxfind RCS 1.576: 1000 catalog rows
+      against 1027 types, and the absent set grows from 2 to 27. The lag
+      WIDENED rather than closed, and that is upstream's own state rather than
+      a stale local copy -- tools/fetch-upstream.sh was run the same day,
+      upstream HEAD moved e528d881 to cad43ac7, and both vendored files came
+      back byte-identical at v1.102. So re-fetching does not shrink this list
+      and the record is the only thing that carries the gap.
+      What the 25 new indices ARE is the reason to keep reading. They are
+      EXACTLY the 25 names hashpipe had and mdxfind did not, which CLAUDE.md
+      records as transient on upstream's own account and tells a reader to
+      watch for SHRINKING. Measured 2026-09-04 against data/tools/hashpipe.yaml:
+      25 hashpipe-only names against mdxfind 1.545, and ZERO against 1.576.
+      QAS-VASAUTH, the single one that reached no row here by any identifier,
+      is now e1008. The prediction held and the fourth-column question closes
+      itself, which is what this detector existed to see. The agreement half
+      is unaffected: all 1000 shared indices still agree on name and on
+      hashcat mapping.
 
   - id: "hashpipe-john-map-agreement"
     kind: "john-map-agreement"

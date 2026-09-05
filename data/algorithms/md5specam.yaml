@@ -9,7 +9,7 @@ tools:
     verified: "asserted"
     verified_at: "2026-09-04"
     verified_with: "mdxfind RCS 1.576 (2026/09/02)"
-    note: "special purpose and not for general use, per mdxfind's maintainer, and it emits nothing. Measured 2026-09-04, pinned with -M under -z: alone, with -s and with -u, stdout was empty in every case, and a run seeded from mdxfind's own regress/md5specamdef.txt produced nothing either. So no vector can be generated for it and this entry cannot reach tier vector; that is a property of the type rather than a gap here. The identifier is real and in mdxfind's type table, which is what the mapping records."
+    note: "special purpose and not for general use, per mdxfind's maintainer, and it emits nothing. Measured 2026-09-04, pinned with -M under -z: alone, with -s and with -u, stdout was empty in every case, and a run seeded from mdxfind's own regress/md5specamdef.txt produced nothing either. So MDXFIND can generate no vector for it and the mdxfind mapping cannot reach tier vector; that is a property of mdxfind's type rather than a gap here. Narrowed from \"this entry cannot reach tier vector\" on 2026-09-04: hashpipe ships an example for a type of the same name and it verifies, so the row now carries a vector. See notes: -- the two tools do not compute the same thing under this name, which does not touch the measurement above. The identifier is real and in mdxfind's type table, which is what the mapping records."
   crack:
     supported: false
 vectors:
