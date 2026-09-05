@@ -14,10 +14,10 @@ status: "needs-review"
 tools:
   hashcat:
     modes: [16800]
-    verified: "upstream"
-    verified_at: "2026-08-31"
+    verified: "vector"
+    verified_at: "2026-09-05"
     verified_with: "hashcat v7.1.2-549-g8a15e210b"
-    note: "NOT REPRODUCED HERE. hashcat publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: this mode wants binary capture input rather than a hash line. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool hashcat --only 16800 to retry."
+    note: "Round-tripped, but attributed by a SOLO run, because hashcat echoed a different spelling of this hash than it was given under mode(s) 16800, and the grouped run attributes a crack by matching the hash string -- its output lines do not correspond to its input lines -- so it could not credit one. One hash and one candidate per invocation leaves nothing else the crack could belong to. The stored vector is unchanged and is the form hashcat was fed. Mode(s) 16800 are DEPRECATED in this hashcat and refuse to run at all -- exit 255, nothing attempted -- so the round trip was made with --deprecated-check-disable. That is a statement about what upstream recommends, not about what the plugin computes; reproduce it with that flag."
   mdxfind:
     verified: "absent"
     verified_at: "2026-09-03"
@@ -29,3 +29,4 @@ vectors:
   - hash: "2582a8281bf9d4308d6f5731d0e61c61:4604ba734d4e:89acf0e761f4:ed487162465a774bfba60eb603a39f3a"
     pass: "hashcat!"
     source: "hashcat"
+    reads_in: ["hashcat"]
