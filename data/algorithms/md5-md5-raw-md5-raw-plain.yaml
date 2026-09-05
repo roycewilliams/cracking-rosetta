@@ -17,10 +17,10 @@ tools:
     note: "no mode. Swept the 12 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-03 (tools/discover-hashcat.pl --all, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping."
   mdxfind:
     types: ["MD5RAWMD5RAW"]
-    iterations: 2
     verified: "vector"
-    verified_at: "2026-08-29"
-    verified_with: "mdxfind"
+    verified_at: "2026-09-05"
+    verified_with: "mdxfind RCS 1.576 (2026/09/02)"
+    note: "`iterations` was corrected from 2 to 1 on 2026-09-05. The vector is right and was never in doubt; the DEPTH LABEL was wrong, inherited from a binary that reported the base one round early. mdxfind revision 1.290 (2026-04-09) regressed the RAW family -- \"the base was reported one round early, so x01 became X(pass) instead of X(X_bin(pass))\" -- and revision 1.549 (2026-08-30) restored it. Measured 2026-09-05: this entry's own stored vector reproduces under mdxfind RCS 1.576 at x01, and `hashpipe -c` pinned to the same type independently reports x01. It reproduced at x02 only under the regressed RCS 1.545, which is where the 2 came from. Note what this ALSO settles: hashpipe's john_map.h has published x01 for these types all along, and data/upstream-disagreements.yaml recorded that as an \"iteration-numbering\" convention difference. It was not a convention difference; it was this bug, and upstream's map was right."
   hashpipe:
     types: ["MD5RAWMD5RAW"]
     verified: "vector"

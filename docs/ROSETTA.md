@@ -163,7 +163,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | custom CRC-32 | **--** | `PST` (v) | no |  |
 | DAHUA | `3730` (v) | **--** | `DAHUA` |  |
 | DAHUA-AUTH | `24900` (v) | **--** | `DAHUA-AUTH` (v) |  |
-| DANE RFC7929/RFC8162 SHA2-256 | `30420` (v) | no | `SHA256`<br>`SHA256RAW` (v) |  |
+| DANE RFC7929/RFC8162 SHA2-256 | `30420` (v) | no | `SHA256` (v) |  |
 | Dashlane Password Manager | **--** | `dashlane`<br>`dashlane-opencl` (v) | no |  |
 | DCC2 | `2100` (v) | `mscash2`<br>`mscash2-opencl` (v) | `DCC2` (v) |  |
 | DES3ENCRYPT | `14100` (v) | **--** | `DES3ENCRYPT` (v) |  |
@@ -295,7 +295,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | GROESTL512 | no | no | `GROESTL512` (v) |  |
 | GRUB 2 | `7200` (v) | `PBKDF2-HMAC-SHA512`<br>`PBKDF2-HMAC-SHA512-opencl` (v) | `PBKDF2-SHA512` (v) |  |
 | H3C/Huawei/HPE | **--** | `h3c` (v) | no |  |
-| Half MD5 | `5100` (v) | no | `MD5`<br>`MD5RAW` (v) |  |
+| Half MD5 | `5100` (v) | no | `MD5` (v) |  |
 | HalfLM C/R | **--** | `nethalflm` | **--** |  |
 | HAMSI224 | no | no | `HAMSI224` (v) |  |
 | HAMSI256 | no | no | `HAMSI256` (v) |  |
@@ -620,7 +620,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | md5(md5($plain).md5($plain).md5($plain)) | no | no | `MD5-3xMD5` (v) |  |
 | md5(md5($plain).md5(md5($plain))) | no | no | `MD5-DBL-PASS` (v) |  |
 | md5(md5($plain).sha1($plain)) | no | no | `MD5-1xMD5SHA1` (v) |  |
-| md5(md5($plain, true)) | no | `dynamic_1300` (v) | `MD5RAW -i2` (v) |  |
+| md5(md5($plain, true)) | no | `dynamic_1300` (v) | `MD5RAW` (v) |  |
 | md5(md5($salt).$pass) | no | `dynamic_2008`<br>`dynamic_8` (v) | `MD5-MD5SALT-PASS` (v) |  |
 | md5(md5($salt.$plain).":".$salt) | no | `dynamic_1350` (v) | `MD5HEXSALT` (v) |  |
 | md5(md5(md5($pass))) | `3500` (v) | `dynamic_3` (v) | `MD5 -i3` (v) |  |
@@ -644,7 +644,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | md5(md5(md5(md5(md5(md5($plain))))).$salt) | no | no | `MD51SALTMD5MD5MD5MD5MD5` (v) |  |
 | md5(md5(sha1($plain)).md5(sha1($plain))) | no | no | `MD5-2xMD5-SHA1` (v) |  |
 | md5(md5(sha1($plain)).<br>md5(sha1($plain)).<br>md5(sha1($plain))) | no | no | `MD5-3xMD5-SHA1` (v) |  |
-| md5(md5_raw(md5_raw($plain))) | no | no | `MD5RAWMD5RAW -i2` (v) |  |
+| md5(md5_raw(md5_raw($plain))) | no | no | `MD5RAWMD5RAW` (v) |  |
 | md5(mysql3($plain)) | no | no | `MD5SQL3` (v) |  |
 | md5(ntlm($plain)) | no | no | `MD5NTLM` (v) |  |
 | MD5(Palshop) | **--** | `Palshop` (v) | no |  |
@@ -966,9 +966,9 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | Raw-Keccak | **--** | `Raw-Keccak` (v) | **--** |  |
 | Raw-MD5u | `70` (v) | `Raw-MD5u` (v) | `MD5UTF16LE` (v) |  |
 | Raw-SHA1-AxCrypt | no | `Raw-SHA1-AxCrypt` (v) | no |  |
-| Raw-SHA224 | `1300` (v) | `Raw-SHA224`<br>`dynamic_50` (v) | `SHA224`<br>`SHA224RAW` (v) | duplicate of sha224 |
+| Raw-SHA224 | `1300` (v) | `Raw-SHA224`<br>`dynamic_50` (v) | `SHA224` (v) | duplicate of sha224 |
 | Raw-SHA3 | **--** | `Raw-SHA3` (v) | **--** |  |
-| Raw-SHA384 | `10800` (v) | `Raw-SHA384`<br>`dynamic_70` (v) | `SHA384`<br>`SHA384RAW` (v) | duplicate of sha384 |
+| Raw-SHA384 | `10800` (v) | `Raw-SHA384`<br>`dynamic_70` (v) | `SHA384` (v) | duplicate of sha384 |
 | RC4 104-bit DropN | `33502` (v) | **--** | no |  |
 | RC4 40-bit DropN | `33500` (v) | **--** | no |  |
 | RC4 72-bit DropN | `33501` (v) | **--** | no |  |
@@ -1066,11 +1066,11 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | sha1(sha1($plain).substr($plain,0,1)) | `4510` (v) | `dynamic_1502` (v) | `SHA1-1xSHA1psubp` (v) | same as sha1-sha1-plain-salt (application) |
 | sha1(sha1(md5($plain)).sha1($plain)) | no | no | `SHA1-1xSHA1MD5pSHA1p` (v) |  |
 | sha1(sha1(md5($plain)).sha1(md5($plain))) | no | no | `SHA1-2xSHA1-MD5` (v) |  |
-| sha1(sha1(md5($plain),true)) | no | no | `MYSQL5MD5 -i2`<br>`SHA1SHA1RAWMD5 -i2` (v) |  |
+| sha1(sha1(md5($plain),true)) | no | no | `MYSQL5MD5`<br>`SHA1SHA1RAWMD5` (v) |  |
 | sha1(sha1(md5(md5($plain))).<br>sha1(md5(md5($plain)))) | no | no | `SHA1-2xSHA1-MD5MD5` (v) |  |
-| sha1(sha1(md5(md5($plain)),true)) | no | no | `SHA1SHA1RAWMD5MD5 -i2` (v) |  |
+| sha1(sha1(md5(md5($plain)),true)) | no | no | `SHA1SHA1RAWMD5MD5` (v) |  |
 | sha1(sha1(md5(md5(md5($plain)))).<br>sha1(md5(md5(md5($plain))))) | no | no | `SHA1-2xSHA1-MD5MD5MD5` (v) |  |
-| sha1(sha1(md5(md5(md5($plain))),true)) | no | no | `SHA1SHA1RAWMD5MD5MD5 -i2` (v) |  |
+| sha1(sha1(md5(md5(md5($plain))),true)) | no | no | `SHA1SHA1RAWMD5MD5MD5` (v) |  |
 | sha1(sha1(sha1($pass))) | no | `dynamic_1027`<br>`dynamic_26` | `SHA1 -i3` (v) |  |
 | sha1(sha1(sha1($plain)).sha1(sha1($plain))) | no | no | `SHA1-2xSHA1-SHA1` (v) |  |
 | sha1(sha256($plain)) | no | no | `SHA1SHA256` (v) |  |
@@ -1301,7 +1301,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | SHA224 (2 iterations) | `34400` (v) | `dynamic_53` (v) | `SHA224 -i2` (v) |  |
 | sha224(md5($plain)) | no | no | `SHA224MD5` (v) |  |
 | sha224(md5($plain),$plain) | no | no | `SHA224MD5PASS` (v) |  |
-| sha224(sha224($plain, true)) | no | `dynamic_54` (v) | `SHA224RAW -i2` (v) |  |
+| sha224(sha224($plain, true)) | no | `dynamic_54` (v) | `SHA224RAW` (v) |  |
 | SHA224PASSSALT | `1310` (v) | `dynamic_52` (v) | `SHA224PASSSALT` (v) |  |
 | SHA224SALTPASS | `1320` (v) | `dynamic_51` (v) | `SHA224SALTPASS` (v) |  |
 | SHA224SHA1 | `34500` (v) | no | `SHA224SHA1` (v) |  |
@@ -1315,7 +1315,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | sha256(md5($salt.$plain).":".$salt) | no | no | `SHA256HEXSALT` (v) |  |
 | sha256(sha1($plain)) | no | no | `SHA256SHA1` (v) |  |
 | sha256(sha256($pass.$salt)) | `20730` (v) | no | `SHA256PASSSALT -i2` (v) |  |
-| sha256(sha256($plain, true)) | `21400` (v) | `dynamic_64` (v) | `SHA256RAW -i2` (v) |  |
+| sha256(sha256($plain, true)) | `21400` (v) | `dynamic_64` (v) | `SHA256RAW` (v) |  |
 | sha256(sha512($plain)) | no | no | `SHA256SHA512` (v) |  |
 | SHA256-SALTSHA256RAW | `21420` (v) | no | `SHA256-SALTSHA256RAW` (v) |  |
 | sha256crypt | `7400` (v) | `sha256crypt`<br>`sha256crypt-opencl` (v) | `SHA256CRYPT` (v) |  |
@@ -1339,7 +1339,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | SHA384 (2 iterations) | no | `dynamic_73` (v) | `SHA384 -i2` (v) |  |
 | sha384(md5($plain)) | no | no | `SHA384MD5` (v) |  |
 | sha384(md5($plain),$plain) | no | no | `SHA384MD5PASS` (v) |  |
-| sha384(sha384($plain, true)) | no | `dynamic_74` (v) | `SHA384RAW -i2` (v) |  |
+| sha384(sha384($plain, true)) | no | `dynamic_74` (v) | `SHA384RAW` (v) |  |
 | SHA384PASSSALT | `10810` (v) | `dynamic_72` (v) | `SHA384PASSSALT` (v) |  |
 | SHA384SALTPASS | `10820` (v) | `dynamic_71` (v) | `SHA384SALTPASS` (v) |  |
 | SHA384UTF16LE | `10870` (v) | no | `SHA384UTF16LE` (v) |  |
@@ -1351,7 +1351,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | sha512($salt.$pass) | `1720` (v) | `dynamic_81` (v) | `SHA512SALTPASS` (v) |  |
 | sha512(md5($plain)) | no | no | `SHA512MD5` (v) |  |
 | sha512(md5($plain),$plain) | no | no | `SHA512MD5PASS` (v) |  |
-| sha512(sha512($plain, true)) | `21000` (v) | `dynamic_84` (v) | `SHA512RAW -i2` (v) |  |
+| sha512(sha512($plain, true)) | `21000` (v) | `dynamic_84` (v) | `SHA512RAW` (v) |  |
 | sha512(sha512_bin($pass).$salt) | `32420` (v) | no | `SHA512SHA512RAWUSER` (v) |  |
 | SHA512-CUSTOM1 | no | no | `SHA512-CUSTOM1` (v) |  |
 | sha512crypt | `1800` (v) | `sha512crypt`<br>`sha512crypt-opencl` (v) | `SHA512CRYPT` (v) |  |

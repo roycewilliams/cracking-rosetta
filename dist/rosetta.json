@@ -8655,8 +8655,7 @@
          "legacy" : "",
          "mdxfind" : {
             "ids" : [
-               "SHA256",
-               "SHA256RAW"
+               "SHA256"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -8674,7 +8673,7 @@
             "hashcat" : "hashcat's own published example hash for this mode, recovered by hashcat at this mode with hashcat's own published plaintext.",
             "hashpipe" : "",
             "john" : "no format. Swept the 29 format(s) whose own valid() accepts this entry's own vector, as john --show=left reports them, on 2026-09-04 (a tools/discover-john.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. For john the control is also per ENTRY and not only per shape: every format counted above is one whose own loader ACCEPTED this hash, so each was asked this exact question and answered no. A format that cannot parse the hash is not counted at all, and an entry no format can parse is reported as unsearched rather than decided. Every applicable format ran to completion; a format killed at the timeout is counted as untested and withholds this verdict. No john format name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if john gains one, this becomes a mapping.",
-            "mdxfind" : "type discovered by round-trip search, not by name"
+            "mdxfind" : "type discovered by round-trip search, not by name. The RAW type was dropped from this mapping on 2026-09-05 because it was never true. mdxfind revision 1.290 (2026-04-09) regressed the RAW family so that every RAW type became numerically identical to its plain sibling at x01 -- upstream's own words in revision 1.549, which restored the correct semantics on 2026-08-30. This row's vector is the PLAIN digest (or a truncation of one), so under the regression it verified as the RAW type as well, and the mapping reached tier `vector` on a coincidence rather than on the algorithm. Measured 2026-09-05 by tmp/binary-diff.pl over all 1294 mdxfind vector claims: this claim reproduces under mdxfind RCS 1.545 and NOT under RCS 1.576. hashpipe settles which is right and it is 1.576 -- its own SHA224 example is exactly sha224 of its plaintext while its SHA224RAW example is a different digest entirely, so RAW and plain differ in the third implementation too. The plain type remains and still verifies against the installed binary; nothing else on this row changes."
          },
          "vecs" : 1
       },
@@ -16677,8 +16676,7 @@
          "legacy" : "CUTn-16MD5; n/a",
          "mdxfind" : {
             "ids" : [
-               "MD5",
-               "MD5RAW"
+               "MD5"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -16696,7 +16694,7 @@
             "hashcat" : "",
             "hashpipe" : "",
             "john" : "no format. Swept the 3 format(s) whose own valid() accepts this entry's own vector, as john --show=left reports them, on 2026-09-04 (a tools/discover-john.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. For john the control is also per ENTRY and not only per shape: every format counted above is one whose own loader ACCEPTED this hash, so each was asked this exact question and answered no. A format that cannot parse the hash is not counted at all, and an entry no format can parse is reported as unsearched rather than decided. Every applicable format ran to completion; a format killed at the timeout is counted as untested and withholds this verdict. No john format name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if john gains one, this becomes a mapping.",
-            "mdxfind" : "type discovered by round-trip search, not by name"
+            "mdxfind" : "type discovered by round-trip search, not by name. The RAW type was dropped from this mapping on 2026-09-05 because it was never true. mdxfind revision 1.290 (2026-04-09) regressed the RAW family so that every RAW type became numerically identical to its plain sibling at x01 -- upstream's own words in revision 1.549, which restored the correct semantics on 2026-08-30. This row's vector is the PLAIN digest (or a truncation of one), so under the regression it verified as the RAW type as well, and the mapping reached tier `vector` on a coincidence rather than on the algorithm. Measured 2026-09-05 by tmp/binary-diff.pl over all 1294 mdxfind vector claims: this claim reproduces under mdxfind RCS 1.545 and NOT under RCS 1.576. hashpipe settles which is right and it is 1.576 -- its own SHA224 example is exactly sha224 of its plaintext while its SHA224RAW example is a different digest entirely, so RAW and plain differ in the third implementation too. The plain type remains and still verifies against the installed binary; nothing else on this row changes."
          },
          "vecs" : 1
       },
@@ -37005,7 +37003,7 @@
          "legacy" : "MD5RAWMD5",
          "mdxfind" : {
             "ids" : [
-               "MD5RAW -i2"
+               "MD5RAW"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -37023,7 +37021,7 @@
             "hashcat" : "no mode. Swept the 12 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-03 (tools/discover-hashcat.pl --all, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
             "hashpipe" : "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one.",
             "john" : "format discovered by round-trip search, not by name",
-            "mdxfind" : ""
+            "mdxfind" : "`iterations` was corrected from 2 to 1 on 2026-09-05. The vector is right and was never in doubt; the DEPTH LABEL was wrong, inherited from a binary that reported the base one round early. mdxfind revision 1.290 (2026-04-09) regressed the RAW family -- \"the base was reported one round early, so x01 became X(pass) instead of X(X_bin(pass))\" -- and revision 1.549 (2026-08-30) restored it. Measured 2026-09-05: this entry's own stored vector reproduces under mdxfind RCS 1.576 at x01, and `hashpipe -c` pinned to the same type independently reports x01. It reproduced at x02 only under the regressed RCS 1.545, which is where the 2 came from. Note what this ALSO settles: hashpipe's john_map.h has published x01 for these types all along, and data/upstream-disagreements.yaml recorded that as an \"iteration-numbering\" convention difference. It was not a convention difference; it was this bug, and upstream's map was right."
          },
          "vecs" : 1
       },
@@ -38497,7 +38495,7 @@
          "legacy" : "",
          "mdxfind" : {
             "ids" : [
-               "MD5RAWMD5RAW -i2"
+               "MD5RAWMD5RAW"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -38515,7 +38513,7 @@
             "hashcat" : "no mode. Swept the 12 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-03 (tools/discover-hashcat.pl --all, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
             "hashpipe" : "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one.",
             "john" : "no format. Swept the 76 format(s) whose own valid() accepts this entry's own vector, as john --show=left reports them, on 2026-09-04 (a tools/discover-john.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. For john the control is also per ENTRY and not only per shape: every format counted above is one whose own loader ACCEPTED this hash, so each was asked this exact question and answered no. A format that cannot parse the hash is not counted at all, and an entry no format can parse is reported as unsearched rather than decided. Every applicable format ran to completion; a format killed at the timeout is counted as untested and withholds this verdict. No john format name matches any identifier this entry publishes either, normalized by the separator-drift rule. john nonetheless COMPUTES this: the entry carries a proven john_dynamic_expr, dynamic=md5(md5_raw(md5_raw($p))), which john's own dynamic compiler recovered this entry's plaintext from this entry's hash under. That is a runnable command and not a format identifier, which is why it stays out of this column -- putting it here would inflate john's coverage with something no --list=formats will ever show. Read this verdict as 'no named format', not as 'john cannot do it'. This is the absence of an IDENTIFIER, not of the algorithm: if john gains one, this becomes a mapping.",
-            "mdxfind" : ""
+            "mdxfind" : "`iterations` was corrected from 2 to 1 on 2026-09-05. The vector is right and was never in doubt; the DEPTH LABEL was wrong, inherited from a binary that reported the base one round early. mdxfind revision 1.290 (2026-04-09) regressed the RAW family -- \"the base was reported one round early, so x01 became X(pass) instead of X(X_bin(pass))\" -- and revision 1.549 (2026-08-30) restored it. Measured 2026-09-05: this entry's own stored vector reproduces under mdxfind RCS 1.576 at x01, and `hashpipe -c` pinned to the same type independently reports x01. It reproduced at x02 only under the regressed RCS 1.545, which is where the 2 came from. Note what this ALSO settles: hashpipe's john_map.h has published x01 for these types all along, and data/upstream-disagreements.yaml recorded that as an \"iteration-numbering\" convention difference. It was not a convention difference; it was this bug, and upstream's map was right."
          },
          "vecs" : 1
       },
@@ -58449,8 +58447,7 @@
          "legacy" : "SHA224; n/a",
          "mdxfind" : {
             "ids" : [
-               "SHA224",
-               "SHA224RAW"
+               "SHA224"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -58475,7 +58472,7 @@
             "hashcat" : "mode discovered by round-trip search, not by name",
             "hashpipe" : "",
             "john" : "john's own published example ciphertext for this format, recovered by john under this format. john publishes no plaintext, so the plaintext was found by handing john its own example and a candidate list -- what john recovered IS the plaintext, by construction. dynamic_50 came from sha224 in the 2026-09-01 merge, proven there at tier vector.",
-            "mdxfind" : "type discovered by round-trip search, not by name"
+            "mdxfind" : "type discovered by round-trip search, not by name. The RAW type was dropped from this mapping on 2026-09-05 because it was never true. mdxfind revision 1.290 (2026-04-09) regressed the RAW family so that every RAW type became numerically identical to its plain sibling at x01 -- upstream's own words in revision 1.549, which restored the correct semantics on 2026-08-30. This row's vector is the PLAIN digest (or a truncation of one), so under the regression it verified as the RAW type as well, and the mapping reached tier `vector` on a coincidence rather than on the algorithm. Measured 2026-09-05 by tmp/binary-diff.pl over all 1294 mdxfind vector claims: this claim reproduces under mdxfind RCS 1.545 and NOT under RCS 1.576. hashpipe settles which is right and it is 1.576 -- its own SHA224 example is exactly sha224 of its plaintext while its SHA224RAW example is a different digest entirely, so RAW and plain differ in the third implementation too. The plain type remains and still verifies against the installed binary; nothing else on this row changes."
          },
          "vecs" : 2
       },
@@ -58580,8 +58577,7 @@
          "legacy" : "SHA384",
          "mdxfind" : {
             "ids" : [
-               "SHA384",
-               "SHA384RAW"
+               "SHA384"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -58606,7 +58602,7 @@
             "hashcat" : "mode discovered by round-trip search, not by name",
             "hashpipe" : "",
             "john" : "john's own published example ciphertext for this format, recovered by john under this format. john publishes no plaintext, so the plaintext was found by handing john its own example and a candidate list -- what john recovered IS the plaintext, by construction. dynamic_70 came from sha384 in the 2026-09-01 merge, proven there at tier vector.",
-            "mdxfind" : "type discovered by round-trip search, not by name"
+            "mdxfind" : "type discovered by round-trip search, not by name. The RAW type was dropped from this mapping on 2026-09-05 because it was never true. mdxfind revision 1.290 (2026-04-09) regressed the RAW family so that every RAW type became numerically identical to its plain sibling at x01 -- upstream's own words in revision 1.549, which restored the correct semantics on 2026-08-30. This row's vector is the PLAIN digest (or a truncation of one), so under the regression it verified as the RAW type as well, and the mapping reached tier `vector` on a coincidence rather than on the algorithm. Measured 2026-09-05 by tmp/binary-diff.pl over all 1294 mdxfind vector claims: this claim reproduces under mdxfind RCS 1.545 and NOT under RCS 1.576. hashpipe settles which is right and it is 1.576 -- its own SHA224 example is exactly sha224 of its plaintext while its SHA224RAW example is a different digest entirely, so RAW and plain differ in the third implementation too. The plain type remains and still verifies against the installed binary; nothing else on this row changes."
          },
          "vecs" : 2
       },
@@ -64752,8 +64748,8 @@
          "legacy" : "SHA1RAWSHA1MD5",
          "mdxfind" : {
             "ids" : [
-               "MYSQL5MD5 -i2",
-               "SHA1SHA1RAWMD5 -i2"
+               "MYSQL5MD5",
+               "SHA1SHA1RAWMD5"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -64771,7 +64767,7 @@
             "hashcat" : "no mode. Swept the 7 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-03 (tools/discover-hashcat.pl --all, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
             "hashpipe" : "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one.",
             "john" : "no format. Swept the 29 format(s) whose own valid() accepts this entry's own vector, as john --show=left reports them, on 2026-09-04 (a tools/discover-john.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. For john the control is also per ENTRY and not only per shape: every format counted above is one whose own loader ACCEPTED this hash, so each was asked this exact question and answered no. A format that cannot parse the hash is not counted at all, and an entry no format can parse is reported as unsearched rather than decided. Every applicable format ran to completion; a format killed at the timeout is counted as untested and withholds this verdict. No john format name matches any identifier this entry publishes either, normalized by the separator-drift rule. john nonetheless COMPUTES this: the entry carries a proven john_dynamic_expr, dynamic=sha1(sha1_raw(md5($p))), which john's own dynamic compiler recovered this entry's plaintext from this entry's hash under. That is a runnable command and not a format identifier, which is why it stays out of this column -- putting it here would inflate john's coverage with something no --list=formats will ever show. Read this verdict as 'no named format', not as 'john cannot do it'. This is the absence of an IDENTIFIER, not of the algorithm: if john gains one, this becomes a mapping.",
-            "mdxfind" : "MYSQL5MD5 added 2026-08-31 by seed-orphans.pl: mdxfind names it \"MYSQL5MD5\", which is this entry's own expression, and mdxfind at that identifier recovers this entry's own vector. It had no entry at all before."
+            "mdxfind" : "MYSQL5MD5 added 2026-08-31 by seed-orphans.pl: mdxfind names it \"MYSQL5MD5\", which is this entry's own expression, and mdxfind at that identifier recovers this entry's own vector. It had no entry at all before. `iterations` was corrected from 2 to 1 on 2026-09-05. The vector is right and was never in doubt; the DEPTH LABEL was wrong, inherited from a binary that reported the base one round early. mdxfind revision 1.290 (2026-04-09) regressed the RAW family -- \"the base was reported one round early, so x01 became X(pass) instead of X(X_bin(pass))\" -- and revision 1.549 (2026-08-30) restored it. Measured 2026-09-05: this entry's own stored vector reproduces under mdxfind RCS 1.576 at x01, and `hashpipe -c` pinned to the same type independently reports x01. It reproduced at x02 only under the regressed RCS 1.545, which is where the 2 came from. Note what this ALSO settles: hashpipe's john_map.h has published x01 for these types all along, and data/upstream-disagreements.yaml recorded that as an \"iteration-numbering\" convention difference. It was not a convention difference; it was this bug, and upstream's map was right."
          },
          "vecs" : 1
       },
@@ -64875,7 +64871,7 @@
          "legacy" : "SHA1RAWSHA1MD5X2",
          "mdxfind" : {
             "ids" : [
-               "SHA1SHA1RAWMD5MD5 -i2"
+               "SHA1SHA1RAWMD5MD5"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -64893,7 +64889,7 @@
             "hashcat" : "no mode. Swept the 7 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-03 (tools/discover-hashcat.pl --all, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
             "hashpipe" : "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one.",
             "john" : "no format. Swept the 29 format(s) whose own valid() accepts this entry's own vector, as john --show=left reports them, on 2026-09-04 (a tools/discover-john.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. For john the control is also per ENTRY and not only per shape: every format counted above is one whose own loader ACCEPTED this hash, so each was asked this exact question and answered no. A format that cannot parse the hash is not counted at all, and an entry no format can parse is reported as unsearched rather than decided. Every applicable format ran to completion; a format killed at the timeout is counted as untested and withholds this verdict. No john format name matches any identifier this entry publishes either, normalized by the separator-drift rule. john nonetheless COMPUTES this: the entry carries a proven john_dynamic_expr, dynamic=sha1(sha1_raw(md5(md5($p)))), which john's own dynamic compiler recovered this entry's plaintext from this entry's hash under. That is a runnable command and not a format identifier, which is why it stays out of this column -- putting it here would inflate john's coverage with something no --list=formats will ever show. Read this verdict as 'no named format', not as 'john cannot do it'. This is the absence of an IDENTIFIER, not of the algorithm: if john gains one, this becomes a mapping.",
-            "mdxfind" : ""
+            "mdxfind" : "`iterations` was corrected from 2 to 1 on 2026-09-05. The vector is right and was never in doubt; the DEPTH LABEL was wrong, inherited from a binary that reported the base one round early. mdxfind revision 1.290 (2026-04-09) regressed the RAW family -- \"the base was reported one round early, so x01 became X(pass) instead of X(X_bin(pass))\" -- and revision 1.549 (2026-08-30) restored it. Measured 2026-09-05: this entry's own stored vector reproduces under mdxfind RCS 1.576 at x01, and `hashpipe -c` pinned to the same type independently reports x01. It reproduced at x02 only under the regressed RCS 1.545, which is where the 2 came from. Note what this ALSO settles: hashpipe's john_map.h has published x01 for these types all along, and data/upstream-disagreements.yaml recorded that as an \"iteration-numbering\" convention difference. It was not a convention difference; it was this bug, and upstream's map was right."
          },
          "vecs" : 1
       },
@@ -64997,7 +64993,7 @@
          "legacy" : "SHA1RAWSHA1MD5X3",
          "mdxfind" : {
             "ids" : [
-               "SHA1SHA1RAWMD5MD5MD5 -i2"
+               "SHA1SHA1RAWMD5MD5MD5"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -65015,7 +65011,7 @@
             "hashcat" : "no mode. Swept the 7 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-03 (tools/discover-hashcat.pl --all, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
             "hashpipe" : "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one.",
             "john" : "no format. Swept the 29 format(s) whose own valid() accepts this entry's own vector, as john --show=left reports them, on 2026-09-04 (a tools/discover-john.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. For john the control is also per ENTRY and not only per shape: every format counted above is one whose own loader ACCEPTED this hash, so each was asked this exact question and answered no. A format that cannot parse the hash is not counted at all, and an entry no format can parse is reported as unsearched rather than decided. Every applicable format ran to completion; a format killed at the timeout is counted as untested and withholds this verdict. No john format name matches any identifier this entry publishes either, normalized by the separator-drift rule. john nonetheless COMPUTES this: the entry carries a proven john_dynamic_expr, dynamic=sha1(sha1_raw(md5(md5(md5($p))))), which john's own dynamic compiler recovered this entry's plaintext from this entry's hash under. That is a runnable command and not a format identifier, which is why it stays out of this column -- putting it here would inflate john's coverage with something no --list=formats will ever show. Read this verdict as 'no named format', not as 'john cannot do it'. This is the absence of an IDENTIFIER, not of the algorithm: if john gains one, this becomes a mapping.",
-            "mdxfind" : ""
+            "mdxfind" : "`iterations` was corrected from 2 to 1 on 2026-09-05. The vector is right and was never in doubt; the DEPTH LABEL was wrong, inherited from a binary that reported the base one round early. mdxfind revision 1.290 (2026-04-09) regressed the RAW family -- \"the base was reported one round early, so x01 became X(pass) instead of X(X_bin(pass))\" -- and revision 1.549 (2026-08-30) restored it. Measured 2026-09-05: this entry's own stored vector reproduces under mdxfind RCS 1.576 at x01, and `hashpipe -c` pinned to the same type independently reports x01. It reproduced at x02 only under the regressed RCS 1.545, which is where the 2 came from. Note what this ALSO settles: hashpipe's john_map.h has published x01 for these types all along, and data/upstream-disagreements.yaml recorded that as an \"iteration-numbering\" convention difference. It was not a convention difference; it was this bug, and upstream's map was right."
          },
          "vecs" : 1
       },
@@ -79141,7 +79137,7 @@
          "legacy" : "SHA224RAWSHA224",
          "mdxfind" : {
             "ids" : [
-               "SHA224RAW -i2"
+               "SHA224RAW"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -79159,7 +79155,7 @@
             "hashcat" : "no mode. Swept the 6 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-03 (tools/discover-hashcat.pl --all, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
             "hashpipe" : "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one.",
             "john" : "",
-            "mdxfind" : ""
+            "mdxfind" : "`iterations` was corrected from 2 to 1 on 2026-09-05. The vector is right and was never in doubt; the DEPTH LABEL was wrong, inherited from a binary that reported the base one round early. mdxfind revision 1.290 (2026-04-09) regressed the RAW family -- \"the base was reported one round early, so x01 became X(pass) instead of X(X_bin(pass))\" -- and revision 1.549 (2026-08-30) restored it. Measured 2026-09-05: this entry's own stored vector reproduces under mdxfind RCS 1.576 at x01, and `hashpipe -c` pinned to the same type independently reports x01. It reproduced at x02 only under the regressed RCS 1.545, which is where the 2 came from. Note what this ALSO settles: hashpipe's john_map.h has published x01 for these types all along, and data/upstream-disagreements.yaml recorded that as an \"iteration-numbering\" convention difference. It was not a convention difference; it was this bug, and upstream's map was right."
          },
          "vecs" : 1
       },
@@ -80055,7 +80051,7 @@
          "legacy" : "SHA256RAWSHA256",
          "mdxfind" : {
             "ids" : [
-               "SHA256RAW -i2"
+               "SHA256RAW"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -80073,7 +80069,7 @@
             "hashcat" : "",
             "hashpipe" : "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one.",
             "john" : "",
-            "mdxfind" : ""
+            "mdxfind" : "`iterations` was corrected from 2 to 1 on 2026-09-05. The vector is right and was never in doubt; the DEPTH LABEL was wrong, inherited from a binary that reported the base one round early. mdxfind revision 1.290 (2026-04-09) regressed the RAW family -- \"the base was reported one round early, so x01 became X(pass) instead of X(X_bin(pass))\" -- and revision 1.549 (2026-08-30) restored it. Measured 2026-09-05: this entry's own stored vector reproduces under mdxfind RCS 1.576 at x01, and `hashpipe -c` pinned to the same type independently reports x01. It reproduced at x02 only under the regressed RCS 1.545, which is where the 2 came from. Note what this ALSO settles: hashpipe's john_map.h has published x01 for these types all along, and data/upstream-disagreements.yaml recorded that as an \"iteration-numbering\" convention difference. It was not a convention difference; it was this bug, and upstream's map was right."
          },
          "vecs" : 1
       },
@@ -81601,7 +81597,7 @@
          "legacy" : "SHA384RAWSHA384",
          "mdxfind" : {
             "ids" : [
-               "SHA384RAW -i2"
+               "SHA384RAW"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -81619,7 +81615,7 @@
             "hashcat" : "no mode. Swept the 4 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-03 (tools/discover-hashcat.pl --all, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
             "hashpipe" : "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one.",
             "john" : "",
-            "mdxfind" : ""
+            "mdxfind" : "`iterations` was corrected from 2 to 1 on 2026-09-05. The vector is right and was never in doubt; the DEPTH LABEL was wrong, inherited from a binary that reported the base one round early. mdxfind revision 1.290 (2026-04-09) regressed the RAW family -- \"the base was reported one round early, so x01 became X(pass) instead of X(X_bin(pass))\" -- and revision 1.549 (2026-08-30) restored it. Measured 2026-09-05: this entry's own stored vector reproduces under mdxfind RCS 1.576 at x01, and `hashpipe -c` pinned to the same type independently reports x01. It reproduced at x02 only under the regressed RCS 1.545, which is where the 2 came from. Note what this ALSO settles: hashpipe's john_map.h has published x01 for these types all along, and data/upstream-disagreements.yaml recorded that as an \"iteration-numbering\" convention difference. It was not a convention difference; it was this bug, and upstream's map was right."
          },
          "vecs" : 1
       },
@@ -82384,7 +82380,7 @@
          "legacy" : "SHA512RAWSHA512",
          "mdxfind" : {
             "ids" : [
-               "SHA512RAW -i2"
+               "SHA512RAW"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -82402,7 +82398,7 @@
             "hashcat" : "",
             "hashpipe" : "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one.",
             "john" : "",
-            "mdxfind" : ""
+            "mdxfind" : "`iterations` was corrected from 2 to 1 on 2026-09-05. The vector is right and was never in doubt; the DEPTH LABEL was wrong, inherited from a binary that reported the base one round early. mdxfind revision 1.290 (2026-04-09) regressed the RAW family -- \"the base was reported one round early, so x01 became X(pass) instead of X(X_bin(pass))\" -- and revision 1.549 (2026-08-30) restored it. Measured 2026-09-05: this entry's own stored vector reproduces under mdxfind RCS 1.576 at x01, and `hashpipe -c` pinned to the same type independently reports x01. It reproduced at x02 only under the regressed RCS 1.545, which is where the 2 came from. Note what this ALSO settles: hashpipe's john_map.h has published x01 for these types all along, and data/upstream-disagreements.yaml recorded that as an \"iteration-numbering\" convention difference. It was not a convention difference; it was this bug, and upstream's map was right."
          },
          "vecs" : 1
       },

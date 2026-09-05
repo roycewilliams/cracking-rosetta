@@ -19,11 +19,11 @@ tools:
     verified_with: "hashcat v7.1.2-549-g8a15e210b"
     note: "hashcat's own published example hash for this mode, recovered by hashcat at this mode with hashcat's own published plaintext."
   mdxfind:
-    types: ["SHA256", "SHA256RAW"]
+    types: ["SHA256"]
     verified: "vector"
-    verified_at: "2026-08-31"
-    verified_with: "mdxfind RCS 1.540 (2026/08/22)"
-    note: "type discovered by round-trip search, not by name"
+    verified_at: "2026-09-05"
+    verified_with: "mdxfind RCS 1.545 (2026/08/29)"
+    note: "type discovered by round-trip search, not by name. The RAW type was dropped from this mapping on 2026-09-05 because it was never true. mdxfind revision 1.290 (2026-04-09) regressed the RAW family so that every RAW type became numerically identical to its plain sibling at x01 -- upstream's own words in revision 1.549, which restored the correct semantics on 2026-08-30. This row's vector is the PLAIN digest (or a truncation of one), so under the regression it verified as the RAW type as well, and the mapping reached tier `vector` on a coincidence rather than on the algorithm. Measured 2026-09-05 by tmp/binary-diff.pl over all 1294 mdxfind vector claims: this claim reproduces under mdxfind RCS 1.545 and NOT under RCS 1.576. hashpipe settles which is right and it is 1.576 -- its own SHA224 example is exactly sha224 of its plaintext while its SHA224RAW example is a different digest entirely, so RAW and plain differ in the third implementation too. The plain type remains and still verifies against the installed binary; nothing else on this row changes."
   john:
     verified: "absent"
     verified_at: "2026-09-04"

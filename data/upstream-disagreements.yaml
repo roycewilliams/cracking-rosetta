@@ -139,45 +139,45 @@ disagreements:
         publishes: "SHA1SALTPASS"
         we_assert: "SMF x01"
         why: "masking"
-      - john: "dynamic_54"
-        publishes: "SHA224RAWx01"
-        we_assert: "SHA224RAW x02"
-        why: "iteration-numbering"
-      - john: "dynamic_64"
-        publishes: "SHA256RAWx01"
-        we_assert: "SHA256RAW x02"
-        why: "iteration-numbering"
-      - john: "dynamic_74"
-        publishes: "SHA384RAWx01"
-        we_assert: "SHA384RAW x02"
-        why: "iteration-numbering"
-      - john: "dynamic_84"
-        publishes: "SHA512RAWx01"
-        we_assert: "SHA512RAW x02"
-        why: "iteration-numbering"
     recorded: "2026-09-02"
     because: >-
       hashpipe v1.189 (commit ab66e0f) publishes 132 verified john-to-hashpipe
-      rows. On the 126 this repository also names, the two agree; these five do
-      not, and they are two different disagreements.
+      rows. On the 126 this repository also names, the two agree; ONE does not.
 
-      FOUR ARE ITERATION NUMBERING, and they are the reason this kind exists.
-      mdxfind and hashpipe report DIFFERENT SUFFIXES for the same computation.
-      Measured 2026-09-02 on this host, same hash and same plaintext, each tool
-      pinned to the named type: mdxfind says MD5RAWx02 / SHA1RAWx02 /
-      SHA256RAWx02 / SHA512RAWx02 / MD5CAPx02 where hashpipe says the same five
-      at x01. The cause is visible in mdxfind's source: JOB_MD5CAP's loop is
+      FOUR ROWS WERE DROPPED ON 2026-09-05, AND WHY IS THE POINT OF THIS
+      RECORD. dynamic_54, _64, _74 and _84 were listed here as an
+      "iteration-numbering" disagreement: hashpipe published SHA224RAWx01 and
+      this repository asserted SHA224RAW x02, and the same for the SHA256, 384
+      and 512 siblings. That diagnosis was WRONG. It was not a convention
+      difference; it was a BUG in the mdxfind build of the day, and upstream's
+      map was right the whole time.
+
+      mdxfind revision 1.290 (2026-04-09) regressed the RAW family as collateral
+      to a buffer-aliasing fix: "the base was reported one round early, so x01
+      became X(pass) instead of X(X_bin(pass))", in upstream's own words, and
+      "every RAW type became numerically identical to its plain sibling at x01".
+      Revision 1.549 (2026-08-30) restored the correct semantics. This record
+      was written on 2026-09-02 against an installed RCS 1.545, which still
+      carried the regression, so the x02 it reported looked like a numbering
+      convention rather than an off-by-one.
+
+      Measured 2026-09-05 with a locally built RCS 1.576: every one of those
+      entries' own stored vectors reproduces at x01, and `hashpipe -c` pinned to
+      the same type independently reports x01. The entries were corrected to
+      x01, check_john_map reported all four rows converged, and they are dropped
+      from differs: here. This is the third failure mode this register exists to
+      catch -- convergence, which looks exactly like nothing having happened --
+      and it is the first time it has fired.
+
+      THE MD5CAP NUMBERING IS A SEPARATE AND STILL-REAL THING, and the old prose
+      here conflated it with the above. JOB_MD5CAP's loop is
       `for (x = 2; x <= Maxiter; x++)` with checkhash INSIDE it, so mdxfind
-      labels its first emitted value x02 and hashpipe labels the same value
-      x01. CLAUDE.md is explicit that the suffix is part of the identity, so
-      this is the alias rule breaking. This repository follows mdxfind, which
-      is its canonical source for that column and the tool its verification
-      recipes and audit-iterations.pl both use; nothing here is wrong, and the
-      risk this record guards is a future seed importing hashpipe's numbering
-      into a field that means mdxfind's.
+      labels its first emitted value x02. That is genuine and survives: measured
+      2026-09-05 on RCS 1.576, MD5CAP still reproduces only at -i 2. It is not
+      in differs: because john_map.h does not carry a row for it.
 
-      ONE IS MASKING, which is upstream's own documented hazard rather than a
-      numbering difference. hashpipe reports the FIRST type that reproduces a
+      THE ONE THAT REMAINS IS MASKING, which is upstream's own documented hazard
+      rather than a numbering difference. hashpipe reports the FIRST type that reproduces a
       digest, and john's dynamic_37 is `sha1(lc($u).$p)`, which its own
       subformat listing labels SMF. Whenever the userid is already lower case
       that is byte-identical to `sha1($s.$p)`, so SHA1SALTPASS reproduces the
