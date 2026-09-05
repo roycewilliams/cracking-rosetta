@@ -11,6 +11,12 @@ denotation:
   note: "john's own label for SunMD5, in 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200."
 status: "ok"
 tools:
+  mdxfind:
+    types: ["SUNMD5"]
+    verified: "upstream"
+    verified_at: "2026-09-05"
+    verified_with: "mdxfind RCS 1.576 (2026/09/02), per the inventory; the installed binary is mdxfind RCS 1.545 (2026/08/29) and does not have this type; hashpipe RCS 1.192 (2026/09/04) reproduced the vector"
+    note: "SUNMD5 added 2026-09-05 by attach-mdxfind-ahead.pl. NOT ROUND-TRIPPED BY mdxfind HERE, and that is a fact about this host rather than about the type: the inventory is RCS 1.576 (2026/09/02) and the installed binary is RCS 1.545 (2026/08/29), so pinning it with -h selects no type at all and prints nothing a caller can distinguish from a type that ran and found nothing. hashpipe -- which shares mdxfind's type list -- was pinned to the bare type name with -c and reproduced THIS ENTRY'S OWN vector, emitting \"SUNMD5x5000\" for $md5$rounds=904$Vc3VgyFx44iS8.Yu$Scf90iLWN6O6mT9TA06NK/:test. Where that line is not the vector as stored above, it is the same vector written in the type's own serialization -- ONE piece of evidence written twice, not two agreeing vectors. That is upstream verified by recomputation, which is what tier `upstream` means. To promote it: install mdxfind RCS 1.576 (2026/09/02), then verify-vectors.pl --tool mdxfind --only sunmd5."
   hashpipe:
     types: ["SUNMD5"]
     verified: "vector"

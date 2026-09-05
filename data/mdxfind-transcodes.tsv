@@ -1,0 +1,21 @@
+# cracking-rosetta | data/mdxfind-transcodes.tsv
+#
+# TYPE <TAB> entry-id <TAB> hash[:salt]:plaintext
+#
+# One line per case where hashpipe's `-c` reader cannot parse the vector as the
+# entry stores it, and the type's own serialization has to be supplied. john
+# writes RVARY as "$rvary$<hex>" where mdxfind wants the bare hex; EPiServer's
+# john form is two 0x-prefixed fields separated by a space; dynamic_1602 wraps
+# hash and salt in "$dynamic_1602$...$...$$U<user>" and QAS-VASAUTH ignores the
+# user field entirely.
+#
+# These are hints about SPELLING, never claims. tools/attach-mdxfind-ahead.pl
+# still has to see the line come back on stdout from `hashpipe -c` pinned to
+# the named type, or nothing is written. A line here and the entry's stored
+# vector are ONE piece of evidence written twice; the entry's note says so, so
+# that a later reader does not count them as two agreeing vectors.
+#
+# Read by tools/attach-mdxfind-ahead.pl --transcode.
+RVARY	rvary	5aa70358a9c369e0:QWERTY1
+EPISERVER-SID	episerver-sid	4d5efdfa143edf74193076f174ac47cebf2f417f:5F1D84A6DE97E2BEFB637A3CB5318AFEF0750B856CF1836BD1D4470175BE:Abc.!23
+QAS-VASAUTH	dynamic-1602	9b4d1328a3dc064704301d2da2975f97b9212d8f08539214b27fd3106dc208ff:C34208EA-8C33-473D-A9B4-53FB40347EA0:P0rtcu11i5!
