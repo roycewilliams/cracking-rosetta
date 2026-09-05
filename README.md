@@ -92,6 +92,13 @@ Full instructions: [CONTRIBUTING.md](CONTRIBUTING.md) if you want to add or corr
 ```
 data/algorithms/*.yaml   curated, one file per algorithm - the PR surface
 data/tools/*.yaml        generated inventories - never hand-edited
+data/upstream-disagreements.yaml
+                         where we knowingly differ from a vendored catalog,
+                         executed by tools/check-upstream.pl
+data/mdxfind-transcodes.tsv
+                         a vector written in an mdxfind type's own
+                         serialization, where the stored form cannot be read
+                         back - a hint about spelling, still proven before use
 schema/                  entry shape, for editors and consumers
 tools/                   extractors, validator, verifier, review helpers
 vendor/cynosureprime/    vendored upstream catalogs, with provenance
