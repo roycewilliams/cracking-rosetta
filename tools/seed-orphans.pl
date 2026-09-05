@@ -129,6 +129,7 @@ use lib "$RealBin/lib";
 use Getopt::Long qw(GetOptions);
 use File::Basename qw(basename);
 use File::Path qw(make_path);
+use POSIX qw(strftime);
 use YAML::XS qw(LoadFile);
 use RosettaEmit qw(emit_entry);
 use RosettaTools qw(tool_path tool_env_help);
@@ -140,8 +141,13 @@ my $ROOT = "$RealBin/..";
 my $algdir  = "$ROOT/data/algorithms";
 my $workdir = "$ROOT/tmp/orphans";
 my ($tool, $binary, $candfile);
+my ($hp_binary, $via_hp) = (undef, 0);
 my ($apply, $attach, $verbose, $help, $dry, $unverified) = (0,0,0,0,0,0);
 my $timeout = 60;
+# verified_at is the day the measurement was MADE, so it is read from the
+# clock rather than typed. It used to be the literal 2026-08-31 in all three
+# writers, which would have back-dated every later run's evidence.
+my $DATE = strftime('%Y-%m-%d', gmtime);
 my $limit   = 0;
 my @only;
 my $had_args = scalar @ARGV;
@@ -167,6 +173,11 @@ Usage: $PROG --tool hashcat|mdxfind|john [options]
    --only IDENT     just this mode/type/format (repeatable)
    --limit N        stop after N identifiers attempted
    --timeout N      seconds per tool run (default 60)
+   --date YYYY-MM-DD  verified_at to record (default: today, UTC)
+   --via-hashpipe   mdxfind only: for a type the INSTALLED mdxfind binary
+                    does not have, verify the example with hashpipe -c
+                    pinned to the same type name and write tier `upstream`.
+   --hashpipe PATH  that binary (\$HASHPIPE, else /usr/local/bin/hashpipe)
    --apply          write; without it, report only
    -n, --dry-run    decide ids and report, run nothing
    -v, --verbose    per-identifier detail on stderr (repeatable)
@@ -189,6 +200,9 @@ GetOptions(
     'only=s'       => \@only,
     'limit=i'      => \$limit,
     'timeout=i'    => \$timeout,
+    'date=s'       => \$DATE,
+    'via-hashpipe' => \$via_hp,
+    'hashpipe=s'   => \$hp_binary,
     'apply'        => \$apply,
     'dry-run|n'    => \$dry,
     'verbose|v+'   => \$verbose,
@@ -415,6 +429,8 @@ my %TOOL = (
         denote   => 1,
         ident    => sub { $_[0]{mode} },
         label    => sub { $_[0]{name} },
+        binver   => sub { my $v = `\Q$_[0]\E --version 2>&1 </dev/null`;
+                          return $v =~ /^\s*(v?[\w.+-]+)\s*$/m ? $1 : undef },
         category => sub { $HC_CATEGORY{ $_[0]{category} // '' } },
         kind     => sub { $_[0]{category} // '' },
         # ($hash, $pass) from the published example
@@ -451,6 +467,9 @@ my %TOOL = (
         label    => sub { $_[0]{name} },
         category => sub { undef },
         kind     => sub { 'mdxfind type' },
+        binver   => sub { my $v = `\Q$_[0]\E -V 2>&1 </dev/null`;
+                          return $v =~ m{RCS/mdxfind\.c,v\s+(\S+)\s+(\S+)}
+                                 ? "RCS $1 ($2)" : undef },
         # An mdxfind TYPE NAME is not expression-shaped, so the default
         # name-based attach can never fire for this tool -- and without an
         # attach path a type describing a computation an entry already has
@@ -500,6 +519,10 @@ my %TOOL = (
         denote   => 1,
         ident    => sub { $_[0]{label} },
         label    => sub { $_[0]{format_name} // $_[0]{label} },
+        binver   => sub { my $d = $_[0]; $d =~ s{/[^/]+$}{};
+                          my $x = $_[0]; $x =~ s{^.*/}{};
+                          my $v = `cd \Q$d\E && ./\Q$x\E --list=build-info 2>/dev/null </dev/null`;
+                          return $v =~ /^Version:\s*(.+?)\s*$/m ? $1 : undef },
         category => sub { undef },
         kind     => sub { 'john format' },
         # john publishes no plaintext, so the example is the ciphertext and
@@ -616,12 +639,78 @@ for my $f (@files) {
 }
 
 my $inv   = LoadFile("$ROOT/data/tools/$T->{inv_file}");
-my $VER   = $inv->{version} // $tool;
+
+# verified_with must name the instrument that RAN, which is not always the one
+# the inventory was built from. Measured 2026-09-05: data/tools/mdxfind.yaml
+# came from mdxfind 1.576 while the installed binary here is 1.545, so taking
+# the version from the inventory stamped every round-trip with a build that
+# never ran it. Ask the binary; fall back to the inventory only when it will
+# not say, and mark that fallback rather than hiding it.
+my $INV_VER = $inv->{version} // $tool;
+my $VER     = ($dry ? undef : $T->{binver} && $T->{binver}->($binary)) // $INV_VER;
+if ($VER ne $INV_VER) {
+    printf STDERR "- NOTE: %s binary reports %s; the inventory was built from %s. "
+                . "verified_with records the binary.\n", $tool, $VER, $INV_VER;
+}
 my @recs  = @{ $inv->{ $T->{inv_key} } };
 my @orphans = grep { !$claimed{ $T->{ident}->($_) } } @recs;
 @orphans = grep { $want_ident{ $T->{ident}->($_) } } @orphans if @only;
 printf STDERR "- %s: %d orphan identifier(s)%s\n", $tool, scalar @orphans,
     (@only ? ' (filtered by --only)' : '');
+
+#-----------------------------------------------------------------------
+# THE INVENTORY CAN BE AHEAD OF THE INSTALLED BINARY
+#
+# data/tools/mdxfind.yaml is regenerated from whatever mdxfind upstream has
+# released; /usr/local/bin/mdxfind is whatever is installed. On 2026-09-05
+# those were 1.576 and 1.545, and 25 types existed only in the first. Pinning
+# the installed binary to a type it does not have prints "No hash types
+# selected" and exits 0 -- indistinguishable, to a caller reading only the
+# absence of a crack line, from a type that ran and found nothing. So ask the
+# binary what it HAS, once, and treat a type it lacks as unmeasurable there
+# rather than as a failure.
+#
+# hashpipe is the second instrument for exactly this. It shares mdxfind's type
+# list, it is installed here, and `-c` pins a named type per line -- the
+# equivalent of `mdxfind -h '^TYPE$'`. What it establishes is upstream's claim
+# reproduced by recomputation, which is tier `upstream` and not tier `vector`:
+# `vector` means THIS tool round-tripped it under THIS identifier, and mdxfind
+# has not. The row says so and names the command that would promote it.
+my %MX_HAVE;
+if ($tool eq 'mdxfind' && !$dry) {
+    my $h = `\Q$binary\E -h 2>&1 </dev/null`;
+    $MX_HAVE{$1} = 1 while $h =~ /^e\d+\s+\S+\s+(\S+)/mg;
+    printf STDERR "- installed mdxfind has %d type(s)\n", scalar keys %MX_HAVE
+        if $verbose;
+}
+
+$hp_binary ||= $ENV{HASHPIPE} || '/usr/local/bin/hashpipe';
+my $HP_VER;
+sub hp_version {
+    return $HP_VER if defined $HP_VER;
+    my $v = `\Q$hp_binary\E -V 2>&1 </dev/null`;
+    $HP_VER = $v =~ m{RCS/hashpipe\.c,v\s+(\S+)\s+(\S+)} ? "RCS $1 ($2)" : 'unknown';
+    return $HP_VER;
+}
+
+# hashpipe -c writes a VERIFIED line to stdout, relabelled with the depth that
+# actually matched, and echoes a REFUSED line to stderr VERBATIM. The streams
+# must stay separate: with them merged, a refusal and a pass look identical.
+# Returns (1, '', $emitted_label) on success.
+sub hp_verify {
+    my ($ident, $vector) = @_;
+    my $s  = safe($ident);
+    my $in = write_file("$workdir/hp.$s.in", "$ident $vector");
+    # run_capture already sends the child's stderr to /dev/null, so $out is
+    # stdout alone -- the separation -c requires.
+    my ($code, $out) = run_capture($timeout, undef, $hp_binary, '-c', $in);
+    return (0, 'timeout') if $code == -2;
+    for my $line (split /\n/, $out) {
+        next unless $line =~ /^(\Q$ident\E(?:x\d+)?)\s+\Q$vector\E$/;
+        return (1, '', $1);
+    }
+    return (0, 'hashpipe -c refused the line');
+}
 
 my ($tried, $ok, $failed, $wrote, $attached, %why) = (0,0,0,0,0);
 my %used;
@@ -638,6 +727,9 @@ for my $r (@orphans) {
         next;
     }
     my ($hash, $pass) = @ex;
+
+    # Is this identifier one the installed binary can even be asked about?
+    my $absent_here = ($tool eq 'mdxfind' && %MX_HAVE && !$MX_HAVE{$ident}) ? 1 : 0;
 
     #-- attach ------------------------------------------------------------
     my $expr = $T->{attach_expr}->($r);
@@ -669,9 +761,9 @@ for my $r (@orphans) {
             @s = $tool eq 'hashcat' ? sort { $a <=> $b } @s : sort @s;
             $blk->{ $T->{id_key} } = \@s;
             $blk->{verified}      = 'vector';
-            $blk->{verified_at}   = '2026-08-31';
+            $blk->{verified_at}   = $DATE;
             $blk->{verified_with} = "$tool $VER";
-            $blk->{note} = "$ident added 2026-08-31 by seed-orphans.pl: $tool "
+            $blk->{note} = "$ident added $DATE by seed-orphans.pl: $tool "
                          . "names it \"$label\", which is this entry's own "
                          . "expression, and $tool at that identifier recovers "
                          . "this entry's own vector. It had no entry at all before.";
@@ -688,9 +780,26 @@ for my $r (@orphans) {
     $tried++;
     # In --dry-run john has no plaintext yet: it is discovered by the real
     # run, so stand one in rather than reporting every format as a failure.
-    my ($cracked, $err, $found, $stated) = $dry
-        ? (1, '', (defined $pass ? $pass : '(discovered at run time)'), 0)
-        : $T->{verify}->($ident, $hash, $pass, $r);
+    my ($cracked, $err, $found, $stated, $hp_label);
+    if ($dry) {
+        ($cracked, $err, $found, $stated) =
+            (1, '', (defined $pass ? $pass : '(discovered at run time)'), 0);
+    }
+    elsif ($absent_here) {
+        unless ($via_hp) {
+            $failed++;
+            $why{'type postdates the installed mdxfind binary '
+                 . "($VER); re-run with --via-hashpipe"}++;
+            printf STDERR "  SKIP  %-24s %-34s not in the installed binary\n",
+                $ident, $label;
+            next;
+        }
+        ($cracked, $err, $hp_label) = hp_verify($ident, $r->{example_vector});
+        ($found, $stated) = ($pass, 0);
+    }
+    else {
+        ($cracked, $err, $found, $stated) = $T->{verify}->($ident, $hash, $pass, $r);
+    }
     $pass = $found if defined $found;
     my $proven = ($cracked && defined $pass) ? 1 : 0;
     unless ($proven) {
@@ -718,10 +827,26 @@ for my $r (@orphans) {
         tools  => {
             $T->{tool_key} => {
                 $T->{id_key}  => [ $ident ],
-                verified      => ($proven ? 'vector' : 'upstream'),
-                verified_at   => '2026-08-31',
-                verified_with => "$tool $VER",
-                note          => !$proven
+                verified      => (($proven && !$absent_here) ? 'vector' : 'upstream'),
+                verified_at   => $DATE,
+                verified_with => ($proven && $absent_here)
+                    ? "mdxfind $INV_VER, per the inventory; the installed "
+                    . "binary is mdxfind $VER and does not have this type; "
+                    . "hashpipe " . hp_version() . " reproduced the vector"
+                    : "$tool $VER",
+                note          => ($proven && $absent_here)
+                    ? "NOT ROUND-TRIPPED BY mdxfind HERE, and that is a fact "
+                    . "about this host rather than about the type. $ident is "
+                    . "a type of $INV_VER, and the installed binary is $VER, so pinning "
+                    . "it with -h '^$ident\$' selects no type at all. hashpipe "
+                    . "-- which shares mdxfind's type list -- was pinned to this "
+                    . "exact name with -c and reproduced mdxfind's own published "
+                    . "example, emitting it as \"$hp_label\". That is upstream "
+                    . "verified by recomputation, which is what tier `upstream` "
+                    . "means. To promote it: install mdxfind $INV_VER and run "
+                    . "seed-orphans.pl --tool mdxfind --only $ident, then "
+                    . "verify-vectors.pl --tool mdxfind."
+                    : !$proven
                     ? "NOT REPRODUCED HERE. $tool publishes this identifier and a "
                     . "worked example, which is what tier `upstream` means, but the "
                     . "local round-trip FAILED: " . why_failed($tool, $label, $err)
@@ -787,7 +912,7 @@ for my $r (@orphans) {
         };
         $entry->{expression_proof} = {
             verified      => 'absent',
-            verified_at   => '2026-08-31',
+            verified_at   => $DATE,
             verified_with => "$tool $VER",
             note          => $bare
                 ? "$tool $ident is \"$label\" ($kind). It is a bare construction, "

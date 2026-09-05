@@ -144,7 +144,17 @@ use Digest::SHA qw(sha1 sha1_hex sha224 sha224_hex sha256 sha256_hex
 use MIME::Base64 qw(encode_base64);
 
 use Exporter 'import';
-our @EXPORT_OK = qw(compile_expression expr_functions);
+our @EXPORT_OK = qw(compile_expression expr_functions split_constants);
+
+# split_constants($expression) -> ($body, \%const) or ()
+#
+# Exported because a second reader of the notation is a second GRAMMAR, and
+# the two drift. denote-hx.pl's ill_formed() had its own idea of what an
+# expression may contain and did not know about the `,cN=VALUE` list at all,
+# so on 2026-09-05 it called all 33 expressions carrying a constant
+# ill-formed -- including four john had PROVEN that morning -- and --repair
+# would have withdrawn every one of them. It now asks here instead.
+sub split_constants { return _split_params(@_) }
 
 # Hex-emitting form: the default role for every hash in hx.
 our %HASH = (

@@ -11,7 +11,7 @@ If you can settle one, an issue saying so is a complete contribution. You do
 not need to open a pull request, and you do not need to be certain: "I have
 seen this format do X" is information this cannot derive.
 
-## Expressions that do not reproduce their own vectors (172)
+## Expressions that do not reproduce their own vectors (173)
 
 Each of these carries an expression transcribed from somewhere that states it
 - john's own `--list=subformats` for a format the entry has already proven, or
@@ -198,6 +198,7 @@ what those vectors really are.
 | [`sha1sha256u40`](index.html#sha1sha256u40) | `sha1(cut(sha256($p),0,40))` | `-` | no john format, so john ships no control vectors; but RosettaExpr -- an implementation independent of all three crackers -- computes this expression over the entry's own vector(s) and reproduces 1 of ... |
 | [`sha1sha256u42`](index.html#sha1sha256u42) | `sha1(cut(sha256($p),0,42))` | `-` | no john format, so john ships no control vectors; but RosettaExpr -- an implementation independent of all three crackers -- computes this expression over the entry's own vector(s) and reproduces 1 of ... |
 | [`sha1sql5-32`](index.html#sha1sql5-32) | `sha1(cut(upper(sha1(sha1_raw($p))),0,32))` | `-` | no john format, so john ships no control vectors; but RosettaExpr -- an implementation independent of all three crackers -- computes this expression over the entry's own vector(s) and reproduces 1 of ... |
+| [`sha1ucuserpass`](index.html#sha1ucuserpass) | `sha1(upper($s).$c1.$p),c1=\x3a` | `-` | transcribed from the hx specification's Appendix A entry for mdxfind type SHA1UCUSERPASS (e1005), which states sha1(upper(user) . ":" . pass) (John dynamic_35). Transcription, not reproduction, so thi... |
 | [`sha256sha256salt`](index.html#sha256sha256salt) | `sha256(sha256($p).$s)` | `dynamic_1503`, `dynamic_65` | the expression is correct -- computed here with Digest:: it reproduces all 6 of john's own test vectors for dynamic_1503 -- but john's ad-hoc compiler will not take it with this format's 64-character ... |
 | [`sha512-custom1`](index.html#sha512-custom1) | `sha512(md5(sha1(md5($c1.$p.$c2)))),c1=$3dfhgjhgG65-,c2=23ewdfwGh5RG65?` | `-` | no john format on this entry, so john ships no control vectors, and RosettaExpr cannot compile this expression either -- nothing here can check it |
 | [`sha512saltmd5`](index.html#sha512saltmd5) | `sha512($s.md5($p))` | `-` | no john format, so john ships no control vectors; but RosettaExpr -- an implementation independent of all three crackers -- computes this expression over the entry's own vector(s) and reproduces 1 of ... |
@@ -292,7 +293,7 @@ deliberately and splitting them is a judgment about what the row is *for* -
 one construction, or one thing people search for. Whoever put them together
 knew something; if that was you, say so.
 
-## Mappings believed but never reproduced (88)
+## Mappings believed but never reproduced (82)
 
 Counted here, listed in [GAPS.md](GAPS.md#1-believed-but-never-reproduced),
 because filling one is mechanical rather than a judgment call: the identifier

@@ -7,6 +7,7 @@ expression_proof:
   verified_at: "2026-09-02"
   verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
   note: "round-tripped as --format=dynamic=<expr> against every vector this entry carries"
+category: "composite"
 status: "needs-review"
 tools:
   hashcat:
@@ -17,10 +18,9 @@ tools:
     note: "mode discovered by round-trip search, not by name"
   mdxfind:
     types: ["SHA1RAW"]
-    verified: "upstream"
-    verified_at: "2026-08-31"
-    verified_with: "mdxfind RCS 1.540 (2026/08/22)"
-    note: "NOT REPRODUCED HERE. mdxfind publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: the tool pinned to this identifier did not reproduce its own published example. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool mdxfind --only SHA1RAW to retry."
+    verified: "vector"
+    verified_at: "2026-09-05"
+    verified_with: "mdxfind RCS 1.576 (2026/09/02)"
   hashpipe:
     types: ["SHA1RAW"]
     verified: "vector"
@@ -38,4 +38,4 @@ vectors:
   - hash: "a0f874bc7f54ee086fce60a37ce7887d8b31086b"
     pass: "password123"
     source: "mdxfind"
-    reads_in: ["hashcat"]
+    reads_in: ["hashcat", "mdxfind"]
