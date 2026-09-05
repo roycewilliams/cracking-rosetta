@@ -42,10 +42,21 @@
 #                       have disproved. Adds: key, publishes, entry,
 #                       we_assert.
 #   catalog-index-set   the vendored catalog does not cover every type the
-#                       local binary has. Adds: absent_upstream. Also asserts
-#                       the agreement that makes hashpipe an ALIAS of mdxfind
-#                       rather than a fourth column: on every shared index the
-#                       two agree on name and on hashcat mapping.
+#                       local binary has. Adds: absent_upstream, and
+#                       optionally mode_differs, a list of {index, publishes,
+#                       we_assert, why}. Also asserts the agreement that makes
+#                       hashpipe an ALIAS of mdxfind rather than a fourth
+#                       column: on every shared index the two agree on name
+#                       and on hashcat mapping.
+#                       A NAME disagreement has no recorded-exception path --
+#                       it means the two are calling different things by one
+#                       identifier, which is what this repository joins on. A
+#                       HASHCAT MAPPING disagreement does, because since
+#                       hashpipe v1.193 the catalog's mode column is generated
+#                       by inverting Maphashcat[], a mode-to-ONE-index map,
+#                       while mdxfind's -h prints every mode a type can serve.
+#                       Where several synonymous types serve one mode the two
+#                       spellings differ without either being wrong.
 #   john-map-agreement  hashpipe's john_map.h and this repository both say,
 #                       for a john dynamic, which hashpipe type reproduces it.
 #                       Adds: differs, a list of {john, publishes, we_assert,
@@ -62,40 +73,44 @@
 version: 1
 
 disagreements:
-  - id: "e607-example-vector"
-    kind: "catalog-row-value"
-    upstream: "vendor/cynosureprime/hashpipe-HASH_TYPES.md"
-    inventory: "data/tools/mdxfind.yaml"
-    key: "SHA1MD5SALTPASSPEPPER"
-    entry: "sha1md5saltpasspepper"
-    publishes: "786aab530907a783e9c25a2c7326ab7907ebf798:1122334455667788 1122334455667788:password123"
-    we_assert: "0992047fa349ac4e5abb3fef6c0f3f8f8bc6d679:1122334455667788 1122334455667788:password123"
-    recorded: "2026-09-02"
-    because: >-
-      mdxfind 1.543 (2026-08-29) repaired a buffer-layout bug in e607. The old
-      code staged the inner digest at linebuf+saltlen while writing the pepper
-      at a fixed offset 32, so for any non-empty salt the hash covered the
-      salt, then a TRUNCATED digest, then the pepper, and the output depended
-      on the salt length. Upstream's own revision note says any hash cracked
-      as e607 before that revision will not verify against it. The catalog
-      still publishes the PRE-FIX digest. The repaired construction
-      sha1(md5(salt . pass) . pepper) was established three independent ways:
-      the source at RCS 1.545, a Digest:: recomputation in perl that
-      reproduces 786aab... under the old layout and 0992047f... under the new,
-      and the rebuilt binary cracking 0992047f... data/tools/mdxfind.yaml
-      carries upstream's value too, CORRECTLY -- it is generated from this
-      catalog -- which is checked here so the generated layer cannot quietly
-      stop matching the file it is generated from.
-
   - id: "mdxfind-catalog-lags-binary"
     kind: "catalog-index-set"
     upstream: "vendor/cynosureprime/hashpipe-HASH_TYPES.md"
     inventory: "data/tools/mdxfind.yaml"
-    absent_upstream: ["e426", "e1002", "e1003", "e1004", "e1005", "e1006",
-                      "e1007", "e1008", "e1009", "e1010", "e1011", "e1012",
-                      "e1013", "e1014", "e1015", "e1016", "e1017", "e1018",
-                      "e1019", "e1020", "e1021", "e1022", "e1023", "e1024",
-                      "e1025", "e1026", "e1027"]
+    absent_upstream: ["e426"]
+    mode_differs:
+      - index: "e1"
+        publishes: "0,2600,5100"
+        we_assert: "0,2600,3500,5100"
+        why: "direction"
+      - index: "e17"
+        publishes: ""
+        we_assert: "6000"
+        why: "synonym"
+      - index: "e118"
+        publishes: "6000"
+        we_assert: ""
+        why: "synonym"
+      - index: "e303"
+        publishes: "3500"
+        we_assert: ""
+        why: "direction"
+      - index: "e369"
+        publishes: "1000"
+        we_assert: ""
+        why: "synonym"
+      - index: "e520"
+        publishes: "4520"
+        we_assert: "4520,4521,4522"
+        why: "synonym"
+      - index: "e579"
+        publishes: "4521,4522"
+        we_assert: ""
+        why: "synonym"
+      - index: "e786"
+        publishes: ""
+        we_assert: "1000"
+        why: "synonym"
     recorded: "2026-09-02"
     because: >-
       The catalog is published from a release; the local binary is ahead of
@@ -126,9 +141,41 @@ disagreements:
       25 hashpipe-only names against mdxfind 1.545, and ZERO against 1.576.
       QAS-VASAUTH, the single one that reached no row here by any identifier,
       is now e1008. The prediction held and the fourth-column question closes
-      itself, which is what this detector existed to see. The agreement half
-      is unaffected: all 1000 shared indices still agree on name and on
-      hashcat mapping.
+      itself, which is what this detector existed to see.
+
+      RE-MEASURED 2026-09-05 AND THE LAG IS ALL BUT SPENT. Upstream now
+      GENERATES HASH_TYPES.md from the hashpipe binary (commits 7197034 and
+      deecd38), so the vendored catalog goes from 1000 rows at v1.102 to 1026
+      at v1.193 and absent_upstream: falls from 27 indices to ONE. e426
+      PARALLEL is the survivor and always was: it is a control type rather
+      than a hash, the catalog has never listed it, and the catalog SKIPS its
+      index rather than renumbering around it, which is what keeps the two
+      index spaces comparable. When e426 appears upstream this record is spent
+      and check-upstream.pl will say so.
+
+      THE MODE HALF IS THE PART THAT CHANGED, and mdxfind did not move. All
+      1026 shared indices still agree on NAME. Eight disagree on the hashcat
+      mapping, and mdxfind RCS 1.545 and RCS 1.576 give byte-identical answers
+      on all eight, so the movement is entirely on the catalog side and it
+      arrived with the generator. hashpipe's Maphashcat[] is a
+      hashcat-mode-to-ONE-index map -- {3500, 303}, {1000, 369}, {6000, 118},
+      {4521, 579} -- and inverting it yields at most one type per mode.
+      mdxfind's -h column is the other relation entirely: every mode a type
+      can serve. So where two synonymous types can serve a mode the two
+      spellings differ with neither being wrong, and where a mode is an
+      ITERATION of a type mdxfind lists it against the base type while
+      hashpipe lists it against the type that names the composite.
+
+      why: "synonym" is the first case -- 6000 RIPEMD-160 against e17 RMD160
+      and e118 RIPEMD, 1000 NTLM against e369 NTLM and e786 NTLMH, 4521/4522
+      against e520 SHA1SALTSHA1PASS and e579 SHA1SHA1PASSSALT. why:
+      "direction" is the second -- 3500 is md5(md5(md5($p))), which mdxfind
+      serves as e1 MD5 at three iterations and hashpipe attributes to e303
+      MD5-2xMD5.
+      This is recorded rather than repaired because neither side is wrong and
+      because the mapping this repository publishes comes from the entries,
+      not from either column. An UNRECORDED mode disagreement still fails, and
+      a NAME disagreement has no exception path at all.
 
   - id: "hashpipe-john-map-agreement"
     kind: "john-map-agreement"
