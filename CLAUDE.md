@@ -878,6 +878,53 @@ un-break, so they are restated here where a tool gets written:
   compatible and has to be recorded in `vendor/*/PROVENANCE.md` with the
   upstream commit.
 
+## Running something long: use tools/runbg.sh
+
+**Never hand-roll a background wait again.** `tools/runbg.sh start -- CMD` runs
+a command detached and prints a run directory; `runbg.sh wait DIR` blocks and
+exits with the COMMAND'S code. It is the only sanctioned way to background a
+sweep, a build or a corpus comparison here.
+
+The reason is four dead poll loops found on 2026-09-05, still spinning hours
+after their work had finished, from THREE distinct causes in a single day. All
+three are one mistake -- polling a predicate you inferred instead of observing
+what happened:
+
+- **The predicate matched the waiter itself.** `until ! pgrep -f 'make all'`
+  matches the polling loop's own command line, so the loop waits for itself to
+  disappear. It never fires and never notifies, which is indistinguishable
+  from work still in progress.
+- **The predicate matched the reassuring case.** `until grep -qE '\*\*\*'`
+  fired early on OpenSSL's "successfully configured" banner: a pattern meant to
+  catch failure caught success.
+- **The predicate's subject was rewritten underneath it**, leaving it
+  permanently unsatisfiable.
+
+`runbg.sh` never greps program output and never pattern-matches a process
+list. The runner writes ONE file after the command exits, containing its exit
+code, and waiting is "does that file exist". The signal comes from the same
+shell that ran the command, so it cannot coincide with anything and nothing
+else writes it. Four properties worth knowing:
+
+- **All three endings are reported**, because silence is not success: `done`
+  returns the job's own code, `vanished` (exit 3) means the pid is gone with no
+  status, `waited` (exit 4) means the budget expired and the job is STILL
+  RUNNING. A killed job comes back as its real code -- 137 for SIGKILL -- not
+  as "vanished", because the runner outlives its child and reaps it.
+- **The wait loop is bounded by an iteration cap**, not only a clock, so it
+  ends even if every check misfires.
+- **The job carries its own timeout**, so a run nobody waits on cannot outlive
+  its budget.
+- **stdout and stderr stay in separate files**, never merged -- the `hashpipe
+  -c` rule, where a merged stream is consistent with both a pass and a refusal.
+- **Each run gets a fresh directory**, so last run's output can never be read
+  as current. That trap is real: `tmp/binary-diff.out` was read as the current
+  result when it was the previous run's, because the re-run had sent stdout
+  elsewhere and never overwrote it.
+
+`tools/test-runbg.pl` asserts every one of those, including a job whose output
+carries all the decoy strings above. It runs in CI and needs no cracker.
+
 ## Conventions
 
 - ETL and tooling in **Perl** (see global CLAUDE.md). The one-shot sheet

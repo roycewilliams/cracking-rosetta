@@ -157,6 +157,18 @@ jobs:
       - name: Exercise the register's failure modes
         run: perl -Itools/lib tools/test-check-upstream.pl
 
+      # Every long measurement here gets backgrounded and waited on, and on
+      # 2026-09-05 four such waits were found still spinning hours after their
+      # work had finished. Three distinct causes in one day, all the same
+      # mistake: the waiter polled a predicate it inferred rather than
+      # observing what happened. runbg.sh replaces the pattern; its whole claim
+      # is "this wait will end", which is worthless asserted and cheap to
+      # check. Every termination path gets an assertion, and the script carries
+      # its own alarm so a regression fails loudly instead of hanging CI.
+      # Needs no cracker.
+      - name: Prove the background-job wrapper terminates
+        run: perl tools/test-runbg.pl
+
       # absence.pl writes tier 'absent' in bulk, and a false one is invisible:
       # an empty column and a wrong "does not support this" read the same to a
       # human, and the second stops anyone looking again -- which is what the
