@@ -14,10 +14,10 @@ status: "needs-review"
 tools:
   hashcat:
     modes: [5200]
-    verified: "upstream"
-    verified_at: "2026-08-29"
-    verified_with: "RCS 1.540 (2026/08/22)"
-    note: "hashcat mapping shipped in mdxfind's own type table"
+    verified: "vector"
+    verified_at: "2026-09-05"
+    verified_with: "hashcat v7.1.2-549-g8a15e210b"
+    note: "Round-tripped, but attributed by a SOLO run, because under mode(s) 5200 hashcat's parser reads the FILE'S BYTES, and this entry stores the container header as hex because YAML holds text, so the round trip was run against the decoded bytes. The stored hex is unchanged and is what decodes to them; reads_in does NOT list hashcat for it, because hashcat did not read that string. One hash and one candidate per invocation leaves nothing else the crack could belong to. The stored vector is unchanged."
   mdxfind:
     types: ["PWSAFE3"]
     verified: "vector"

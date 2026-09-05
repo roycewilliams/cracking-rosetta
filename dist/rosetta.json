@@ -53602,8 +53602,8 @@
             "ids" : [
                9000
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "hashcat_salted" : "yes",
          "hashcat_speed" : "slow",
@@ -53634,7 +53634,7 @@
          "serialization" : "unknown",
          "status" : "needs-review",
          "tool_note" : {
-            "hashcat" : "NOT REPRODUCED HERE. hashcat publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: the tool pinned to this identifier did not reproduce its own published example. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool hashcat --only 9000 to retry.",
+            "hashcat" : "Round-tripped, but attributed by a SOLO run, because under mode(s) 9000 hashcat's parser reads the FILE'S BYTES, and this entry stores the container header as hex because YAML holds text, so the round trip was run against the decoded bytes. The stored hex is unchanged and is what decodes to them; reads_in does NOT list hashcat for it, because hashcat did not read that string. One hash and one candidate per invocation leaves nothing else the crack could belong to. The stored vector is unchanged.",
             "hashpipe" : "",
             "john" : "",
             "mdxfind" : ""
@@ -56815,8 +56815,8 @@
             "ids" : [
                5200
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "hashcat_salted" : "yes",
          "hashcat_speed" : "slow",
@@ -56853,7 +56853,7 @@
          "serialization" : "unknown",
          "status" : "needs-review",
          "tool_note" : {
-            "hashcat" : "hashcat mapping shipped in mdxfind's own type table",
+            "hashcat" : "Round-tripped, but attributed by a SOLO run, because under mode(s) 5200 hashcat's parser reads the FILE'S BYTES, and this entry stores the container header as hex because YAML holds text, so the round trip was run against the decoded bytes. The stored hex is unchanged and is what decodes to them; reads_in does NOT list hashcat for it, because hashcat did not read that string. One hash and one candidate per invocation leaves nothing else the crack could belong to. The stored vector is unchanged.",
             "hashpipe" : "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one.",
             "john" : "",
             "mdxfind" : ""
@@ -90064,8 +90064,8 @@
             "ids" : [
                6212
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "hashcat_salted" : "yes",
          "hashcat_speed" : "slow",
@@ -90096,7 +90096,7 @@
          "serialization" : "unknown",
          "status" : "needs-review",
          "tool_note" : {
-            "hashcat" : "NOT REPRODUCED HERE. hashcat publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: hashcat's example for this mode is a volume header rather than a digest, so a plain -a 0 wordlist attack cannot consume it. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool hashcat --only 6212 to retry.",
+            "hashcat" : "Round-tripped, but attributed by a SOLO run, because under mode(s) 6212 hashcat's parser reads the FILE'S BYTES, and this entry stores the container header as hex because YAML holds text, so the round trip was run against the decoded bytes. The stored hex is unchanged and is what decodes to them; reads_in does NOT list hashcat for it, because hashcat did not read that string. One hash and one candidate per invocation leaves nothing else the crack could belong to. The stored vector is unchanged.",
             "hashpipe" : "",
             "john" : "",
             "mdxfind" : ""
@@ -90180,8 +90180,8 @@
             "ids" : [
                6242
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "hashcat_salted" : "yes",
          "hashcat_speed" : "slow",
@@ -90212,7 +90212,7 @@
          "serialization" : "unknown",
          "status" : "needs-review",
          "tool_note" : {
-            "hashcat" : "NOT REPRODUCED HERE. hashcat publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: hashcat's example for this mode is a volume header rather than a digest, so a plain -a 0 wordlist attack cannot consume it. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool hashcat --only 6242 to retry.",
+            "hashcat" : "Round-tripped, but attributed by a SOLO run, because under mode(s) 6242 hashcat's parser reads the FILE'S BYTES, and this entry stores the container header as hex because YAML holds text, so the round trip was run against the decoded bytes. The stored hex is unchanged and is what decodes to them; reads_in does NOT list hashcat for it, because hashcat did not read that string. One hash and one candidate per invocation leaves nothing else the crack could belong to. The stored vector is unchanged.",
             "hashpipe" : "",
             "john" : "",
             "mdxfind" : ""
@@ -90296,8 +90296,8 @@
             "ids" : [
                6213
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "hashcat_salted" : "yes",
          "hashcat_speed" : "slow",
@@ -90328,7 +90328,7 @@
          "serialization" : "unknown",
          "status" : "needs-review",
          "tool_note" : {
-            "hashcat" : "NOT REPRODUCED HERE. hashcat publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: hashcat's example for this mode is a volume header rather than a digest, so a plain -a 0 wordlist attack cannot consume it. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool hashcat --only 6213 to retry.",
+            "hashcat" : "Round-tripped, but attributed by a SOLO run, because under mode(s) 6213 hashcat's parser reads the FILE'S BYTES, and this entry stores the container header as hex because YAML holds text, so the round trip was run against the decoded bytes. The stored hex is unchanged and is what decodes to them; reads_in does NOT list hashcat for it, because hashcat did not read that string. One hash and one candidate per invocation leaves nothing else the crack could belong to. The stored vector is unchanged.",
             "hashpipe" : "",
             "john" : "",
             "mdxfind" : ""
@@ -90412,8 +90412,8 @@
             "ids" : [
                6243
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "hashcat_salted" : "yes",
          "hashcat_speed" : "slow",
@@ -90444,7 +90444,7 @@
          "serialization" : "unknown",
          "status" : "needs-review",
          "tool_note" : {
-            "hashcat" : "NOT REPRODUCED HERE. hashcat publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: hashcat's example for this mode is a volume header rather than a digest, so a plain -a 0 wordlist attack cannot consume it. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool hashcat --only 6243 to retry.",
+            "hashcat" : "Round-tripped, but attributed by a SOLO run, because under mode(s) 6243 hashcat's parser reads the FILE'S BYTES, and this entry stores the container header as hex because YAML holds text, so the round trip was run against the decoded bytes. The stored hex is unchanged and is what decodes to them; reads_in does NOT list hashcat for it, because hashcat did not read that string. One hash and one candidate per invocation leaves nothing else the crack could belong to. The stored vector is unchanged.",
             "hashpipe" : "",
             "john" : "",
             "mdxfind" : ""
@@ -90528,8 +90528,8 @@
             "ids" : [
                6211
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "hashcat_salted" : "yes",
          "hashcat_speed" : "slow",
@@ -90560,7 +90560,7 @@
          "serialization" : "unknown",
          "status" : "needs-review",
          "tool_note" : {
-            "hashcat" : "NOT REPRODUCED HERE. hashcat publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: hashcat's example for this mode is a volume header rather than a digest, so a plain -a 0 wordlist attack cannot consume it. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool hashcat --only 6211 to retry.",
+            "hashcat" : "Round-tripped, but attributed by a SOLO run, because under mode(s) 6211 hashcat's parser reads the FILE'S BYTES, and this entry stores the container header as hex because YAML holds text, so the round trip was run against the decoded bytes. The stored hex is unchanged and is what decodes to them; reads_in does NOT list hashcat for it, because hashcat did not read that string. One hash and one candidate per invocation leaves nothing else the crack could belong to. The stored vector is unchanged.",
             "hashpipe" : "",
             "john" : "",
             "mdxfind" : ""
@@ -90644,8 +90644,8 @@
             "ids" : [
                6241
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "hashcat_salted" : "yes",
          "hashcat_speed" : "slow",
@@ -90676,7 +90676,7 @@
          "serialization" : "unknown",
          "status" : "needs-review",
          "tool_note" : {
-            "hashcat" : "NOT REPRODUCED HERE. hashcat publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: hashcat's example for this mode is a volume header rather than a digest, so a plain -a 0 wordlist attack cannot consume it. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool hashcat --only 6241 to retry.",
+            "hashcat" : "Round-tripped, but attributed by a SOLO run, because under mode(s) 6241 hashcat's parser reads the FILE'S BYTES, and this entry stores the container header as hex because YAML holds text, so the round trip was run against the decoded bytes. The stored hex is unchanged and is what decodes to them; reads_in does NOT list hashcat for it, because hashcat did not read that string. One hash and one candidate per invocation leaves nothing else the crack could belong to. The stored vector is unchanged.",
             "hashpipe" : "",
             "john" : "",
             "mdxfind" : ""
@@ -90760,8 +90760,8 @@
             "ids" : [
                6222
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "hashcat_salted" : "yes",
          "hashcat_speed" : "slow",
@@ -90792,7 +90792,7 @@
          "serialization" : "unknown",
          "status" : "needs-review",
          "tool_note" : {
-            "hashcat" : "NOT REPRODUCED HERE. hashcat publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: hashcat's example for this mode is a volume header rather than a digest, so a plain -a 0 wordlist attack cannot consume it. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool hashcat --only 6222 to retry.",
+            "hashcat" : "Round-tripped, but attributed by a SOLO run, because under mode(s) 6222 hashcat's parser reads the FILE'S BYTES, and this entry stores the container header as hex because YAML holds text, so the round trip was run against the decoded bytes. The stored hex is unchanged and is what decodes to them; reads_in does NOT list hashcat for it, because hashcat did not read that string. One hash and one candidate per invocation leaves nothing else the crack could belong to. The stored vector is unchanged.",
             "hashpipe" : "",
             "john" : "",
             "mdxfind" : ""
@@ -90876,8 +90876,8 @@
             "ids" : [
                6223
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "hashcat_salted" : "yes",
          "hashcat_speed" : "slow",
@@ -90908,7 +90908,7 @@
          "serialization" : "unknown",
          "status" : "needs-review",
          "tool_note" : {
-            "hashcat" : "NOT REPRODUCED HERE. hashcat publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: hashcat's example for this mode is a volume header rather than a digest, so a plain -a 0 wordlist attack cannot consume it. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool hashcat --only 6223 to retry.",
+            "hashcat" : "Round-tripped, but attributed by a SOLO run, because under mode(s) 6223 hashcat's parser reads the FILE'S BYTES, and this entry stores the container header as hex because YAML holds text, so the round trip was run against the decoded bytes. The stored hex is unchanged and is what decodes to them; reads_in does NOT list hashcat for it, because hashcat did not read that string. One hash and one candidate per invocation leaves nothing else the crack could belong to. The stored vector is unchanged.",
             "hashpipe" : "",
             "john" : "",
             "mdxfind" : ""
@@ -90992,8 +90992,8 @@
             "ids" : [
                6221
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "hashcat_salted" : "yes",
          "hashcat_speed" : "slow",
@@ -91024,7 +91024,7 @@
          "serialization" : "unknown",
          "status" : "needs-review",
          "tool_note" : {
-            "hashcat" : "NOT REPRODUCED HERE. hashcat publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: hashcat's example for this mode is a volume header rather than a digest, so a plain -a 0 wordlist attack cannot consume it. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool hashcat --only 6221 to retry.",
+            "hashcat" : "Round-tripped, but attributed by a SOLO run, because under mode(s) 6221 hashcat's parser reads the FILE'S BYTES, and this entry stores the container header as hex because YAML holds text, so the round trip was run against the decoded bytes. The stored hex is unchanged and is what decodes to them; reads_in does NOT list hashcat for it, because hashcat did not read that string. One hash and one candidate per invocation leaves nothing else the crack could belong to. The stored vector is unchanged.",
             "hashpipe" : "",
             "john" : "",
             "mdxfind" : ""
@@ -91108,8 +91108,8 @@
             "ids" : [
                6232
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "hashcat_salted" : "yes",
          "hashcat_speed" : "slow",
@@ -91140,7 +91140,7 @@
          "serialization" : "unknown",
          "status" : "needs-review",
          "tool_note" : {
-            "hashcat" : "NOT REPRODUCED HERE. hashcat publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: hashcat's example for this mode is a volume header rather than a digest, so a plain -a 0 wordlist attack cannot consume it. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool hashcat --only 6232 to retry.",
+            "hashcat" : "Round-tripped, but attributed by a SOLO run, because under mode(s) 6232 hashcat's parser reads the FILE'S BYTES, and this entry stores the container header as hex because YAML holds text, so the round trip was run against the decoded bytes. The stored hex is unchanged and is what decodes to them; reads_in does NOT list hashcat for it, because hashcat did not read that string. One hash and one candidate per invocation leaves nothing else the crack could belong to. The stored vector is unchanged.",
             "hashpipe" : "",
             "john" : "",
             "mdxfind" : ""
@@ -91224,8 +91224,8 @@
             "ids" : [
                6233
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "hashcat_salted" : "yes",
          "hashcat_speed" : "slow",
@@ -91256,7 +91256,7 @@
          "serialization" : "unknown",
          "status" : "needs-review",
          "tool_note" : {
-            "hashcat" : "NOT REPRODUCED HERE. hashcat publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: hashcat's example for this mode is a volume header rather than a digest, so a plain -a 0 wordlist attack cannot consume it. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool hashcat --only 6233 to retry.",
+            "hashcat" : "Round-tripped, but attributed by a SOLO run, because under mode(s) 6233 hashcat's parser reads the FILE'S BYTES, and this entry stores the container header as hex because YAML holds text, so the round trip was run against the decoded bytes. The stored hex is unchanged and is what decodes to them; reads_in does NOT list hashcat for it, because hashcat did not read that string. One hash and one candidate per invocation leaves nothing else the crack could belong to. The stored vector is unchanged.",
             "hashpipe" : "",
             "john" : "",
             "mdxfind" : ""
@@ -91340,8 +91340,8 @@
             "ids" : [
                6231
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "hashcat_salted" : "yes",
          "hashcat_speed" : "slow",
@@ -91372,7 +91372,7 @@
          "serialization" : "unknown",
          "status" : "needs-review",
          "tool_note" : {
-            "hashcat" : "NOT REPRODUCED HERE. hashcat publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: hashcat's example for this mode is a volume header rather than a digest, so a plain -a 0 wordlist attack cannot consume it. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool hashcat --only 6231 to retry.",
+            "hashcat" : "Round-tripped, but attributed by a SOLO run, because under mode(s) 6231 hashcat's parser reads the FILE'S BYTES, and this entry stores the container header as hex because YAML holds text, so the round trip was run against the decoded bytes. The stored hex is unchanged and is what decodes to them; reads_in does NOT list hashcat for it, because hashcat did not read that string. One hash and one candidate per invocation leaves nothing else the crack could belong to. The stored vector is unchanged.",
             "hashpipe" : "",
             "john" : "",
             "mdxfind" : ""
@@ -91742,8 +91742,8 @@
             "ids" : [
                13712
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "hashcat_salted" : "yes",
          "hashcat_speed" : "slow",
@@ -91774,7 +91774,7 @@
          "serialization" : "unknown",
          "status" : "needs-review",
          "tool_note" : {
-            "hashcat" : "NOT REPRODUCED HERE. hashcat publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: hashcat's example for this mode is a volume header rather than a digest, so a plain -a 0 wordlist attack cannot consume it. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool hashcat --only 13712 to retry.",
+            "hashcat" : "Round-tripped, but attributed by a SOLO run, because under mode(s) 13712 hashcat's parser reads the FILE'S BYTES, and this entry stores the container header as hex because YAML holds text, so the round trip was run against the decoded bytes. The stored hex is unchanged and is what decodes to them; reads_in does NOT list hashcat for it, because hashcat did not read that string. One hash and one candidate per invocation leaves nothing else the crack could belong to. The stored vector is unchanged.",
             "hashpipe" : "",
             "john" : "",
             "mdxfind" : ""
@@ -91858,8 +91858,8 @@
             "ids" : [
                13742
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "hashcat_salted" : "yes",
          "hashcat_speed" : "slow",
@@ -91890,7 +91890,7 @@
          "serialization" : "unknown",
          "status" : "needs-review",
          "tool_note" : {
-            "hashcat" : "NOT REPRODUCED HERE. hashcat publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: hashcat's example for this mode is a volume header rather than a digest, so a plain -a 0 wordlist attack cannot consume it. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool hashcat --only 13742 to retry.",
+            "hashcat" : "Round-tripped, but attributed by a SOLO run, because under mode(s) 13742 hashcat's parser reads the FILE'S BYTES, and this entry stores the container header as hex because YAML holds text, so the round trip was run against the decoded bytes. The stored hex is unchanged and is what decodes to them; reads_in does NOT list hashcat for it, because hashcat did not read that string. One hash and one candidate per invocation leaves nothing else the crack could belong to. The stored vector is unchanged.",
             "hashpipe" : "",
             "john" : "",
             "mdxfind" : ""
@@ -91974,8 +91974,8 @@
             "ids" : [
                13713
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "hashcat_salted" : "yes",
          "hashcat_speed" : "slow",
@@ -92006,7 +92006,7 @@
          "serialization" : "unknown",
          "status" : "needs-review",
          "tool_note" : {
-            "hashcat" : "NOT REPRODUCED HERE. hashcat publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: hashcat's example for this mode is a volume header rather than a digest, so a plain -a 0 wordlist attack cannot consume it. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool hashcat --only 13713 to retry.",
+            "hashcat" : "Round-tripped, but attributed by a SOLO run, because under mode(s) 13713 hashcat's parser reads the FILE'S BYTES, and this entry stores the container header as hex because YAML holds text, so the round trip was run against the decoded bytes. The stored hex is unchanged and is what decodes to them; reads_in does NOT list hashcat for it, because hashcat did not read that string. One hash and one candidate per invocation leaves nothing else the crack could belong to. The stored vector is unchanged.",
             "hashpipe" : "",
             "john" : "",
             "mdxfind" : ""
@@ -92090,8 +92090,8 @@
             "ids" : [
                13743
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "hashcat_salted" : "yes",
          "hashcat_speed" : "slow",
@@ -92122,7 +92122,7 @@
          "serialization" : "unknown",
          "status" : "needs-review",
          "tool_note" : {
-            "hashcat" : "NOT REPRODUCED HERE. hashcat publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: hashcat's example for this mode is a volume header rather than a digest, so a plain -a 0 wordlist attack cannot consume it. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool hashcat --only 13743 to retry.",
+            "hashcat" : "Round-tripped, but attributed by a SOLO run, because under mode(s) 13743 hashcat's parser reads the FILE'S BYTES, and this entry stores the container header as hex because YAML holds text, so the round trip was run against the decoded bytes. The stored hex is unchanged and is what decodes to them; reads_in does NOT list hashcat for it, because hashcat did not read that string. One hash and one candidate per invocation leaves nothing else the crack could belong to. The stored vector is unchanged.",
             "hashpipe" : "",
             "john" : "",
             "mdxfind" : ""
@@ -92206,8 +92206,8 @@
             "ids" : [
                13711
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "hashcat_salted" : "yes",
          "hashcat_speed" : "slow",
@@ -92238,7 +92238,7 @@
          "serialization" : "unknown",
          "status" : "needs-review",
          "tool_note" : {
-            "hashcat" : "NOT REPRODUCED HERE. hashcat publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: hashcat's example for this mode is a volume header rather than a digest, so a plain -a 0 wordlist attack cannot consume it. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool hashcat --only 13711 to retry.",
+            "hashcat" : "Round-tripped, but attributed by a SOLO run, because under mode(s) 13711 hashcat's parser reads the FILE'S BYTES, and this entry stores the container header as hex because YAML holds text, so the round trip was run against the decoded bytes. The stored hex is unchanged and is what decodes to them; reads_in does NOT list hashcat for it, because hashcat did not read that string. One hash and one candidate per invocation leaves nothing else the crack could belong to. The stored vector is unchanged.",
             "hashpipe" : "",
             "john" : "",
             "mdxfind" : ""
@@ -92322,8 +92322,8 @@
             "ids" : [
                13741
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "hashcat_salted" : "yes",
          "hashcat_speed" : "slow",
@@ -92354,7 +92354,7 @@
          "serialization" : "unknown",
          "status" : "needs-review",
          "tool_note" : {
-            "hashcat" : "NOT REPRODUCED HERE. hashcat publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: hashcat's example for this mode is a volume header rather than a digest, so a plain -a 0 wordlist attack cannot consume it. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool hashcat --only 13741 to retry.",
+            "hashcat" : "Round-tripped, but attributed by a SOLO run, because under mode(s) 13741 hashcat's parser reads the FILE'S BYTES, and this entry stores the container header as hex because YAML holds text, so the round trip was run against the decoded bytes. The stored hex is unchanged and is what decodes to them; reads_in does NOT list hashcat for it, because hashcat did not read that string. One hash and one candidate per invocation leaves nothing else the crack could belong to. The stored vector is unchanged.",
             "hashpipe" : "",
             "john" : "",
             "mdxfind" : ""
@@ -92438,8 +92438,8 @@
             "ids" : [
                13752
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "hashcat_salted" : "yes",
          "hashcat_speed" : "slow",
@@ -92470,7 +92470,7 @@
          "serialization" : "unknown",
          "status" : "needs-review",
          "tool_note" : {
-            "hashcat" : "NOT REPRODUCED HERE. hashcat publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: hashcat's example for this mode is a volume header rather than a digest, so a plain -a 0 wordlist attack cannot consume it. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool hashcat --only 13752 to retry.",
+            "hashcat" : "Round-tripped, but attributed by a SOLO run, because under mode(s) 13752 hashcat's parser reads the FILE'S BYTES, and this entry stores the container header as hex because YAML holds text, so the round trip was run against the decoded bytes. The stored hex is unchanged and is what decodes to them; reads_in does NOT list hashcat for it, because hashcat did not read that string. One hash and one candidate per invocation leaves nothing else the crack could belong to. The stored vector is unchanged.",
             "hashpipe" : "",
             "john" : "",
             "mdxfind" : ""
@@ -92554,8 +92554,8 @@
             "ids" : [
                13762
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "hashcat_salted" : "yes",
          "hashcat_speed" : "slow",
@@ -92586,7 +92586,7 @@
          "serialization" : "unknown",
          "status" : "needs-review",
          "tool_note" : {
-            "hashcat" : "NOT REPRODUCED HERE. hashcat publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: hashcat's example for this mode is a volume header rather than a digest, so a plain -a 0 wordlist attack cannot consume it. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool hashcat --only 13762 to retry.",
+            "hashcat" : "Round-tripped, but attributed by a SOLO run, because under mode(s) 13762 hashcat's parser reads the FILE'S BYTES, and this entry stores the container header as hex because YAML holds text, so the round trip was run against the decoded bytes. The stored hex is unchanged and is what decodes to them; reads_in does NOT list hashcat for it, because hashcat did not read that string. One hash and one candidate per invocation leaves nothing else the crack could belong to. The stored vector is unchanged.",
             "hashpipe" : "",
             "john" : "",
             "mdxfind" : ""
@@ -92670,8 +92670,8 @@
             "ids" : [
                13753
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "hashcat_salted" : "yes",
          "hashcat_speed" : "slow",
@@ -92702,7 +92702,7 @@
          "serialization" : "unknown",
          "status" : "needs-review",
          "tool_note" : {
-            "hashcat" : "NOT REPRODUCED HERE. hashcat publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: hashcat's example for this mode is a volume header rather than a digest, so a plain -a 0 wordlist attack cannot consume it. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool hashcat --only 13753 to retry.",
+            "hashcat" : "Round-tripped, but attributed by a SOLO run, because under mode(s) 13753 hashcat's parser reads the FILE'S BYTES, and this entry stores the container header as hex because YAML holds text, so the round trip was run against the decoded bytes. The stored hex is unchanged and is what decodes to them; reads_in does NOT list hashcat for it, because hashcat did not read that string. One hash and one candidate per invocation leaves nothing else the crack could belong to. The stored vector is unchanged.",
             "hashpipe" : "",
             "john" : "",
             "mdxfind" : ""
@@ -92786,8 +92786,8 @@
             "ids" : [
                13763
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "hashcat_salted" : "yes",
          "hashcat_speed" : "slow",
@@ -92818,7 +92818,7 @@
          "serialization" : "unknown",
          "status" : "needs-review",
          "tool_note" : {
-            "hashcat" : "NOT REPRODUCED HERE. hashcat publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: hashcat's example for this mode is a volume header rather than a digest, so a plain -a 0 wordlist attack cannot consume it. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool hashcat --only 13763 to retry.",
+            "hashcat" : "Round-tripped, but attributed by a SOLO run, because under mode(s) 13763 hashcat's parser reads the FILE'S BYTES, and this entry stores the container header as hex because YAML holds text, so the round trip was run against the decoded bytes. The stored hex is unchanged and is what decodes to them; reads_in does NOT list hashcat for it, because hashcat did not read that string. One hash and one candidate per invocation leaves nothing else the crack could belong to. The stored vector is unchanged.",
             "hashpipe" : "",
             "john" : "",
             "mdxfind" : ""
@@ -92902,8 +92902,8 @@
             "ids" : [
                13751
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "hashcat_salted" : "yes",
          "hashcat_speed" : "slow",
@@ -92934,7 +92934,7 @@
          "serialization" : "unknown",
          "status" : "needs-review",
          "tool_note" : {
-            "hashcat" : "NOT REPRODUCED HERE. hashcat publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: hashcat's example for this mode is a volume header rather than a digest, so a plain -a 0 wordlist attack cannot consume it. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool hashcat --only 13751 to retry.",
+            "hashcat" : "Round-tripped, but attributed by a SOLO run, because under mode(s) 13751 hashcat's parser reads the FILE'S BYTES, and this entry stores the container header as hex because YAML holds text, so the round trip was run against the decoded bytes. The stored hex is unchanged and is what decodes to them; reads_in does NOT list hashcat for it, because hashcat did not read that string. One hash and one candidate per invocation leaves nothing else the crack could belong to. The stored vector is unchanged.",
             "hashpipe" : "",
             "john" : "",
             "mdxfind" : ""
@@ -93018,8 +93018,8 @@
             "ids" : [
                13761
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "hashcat_salted" : "yes",
          "hashcat_speed" : "slow",
@@ -93050,7 +93050,7 @@
          "serialization" : "unknown",
          "status" : "needs-review",
          "tool_note" : {
-            "hashcat" : "NOT REPRODUCED HERE. hashcat publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: hashcat's example for this mode is a volume header rather than a digest, so a plain -a 0 wordlist attack cannot consume it. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool hashcat --only 13761 to retry.",
+            "hashcat" : "Round-tripped, but attributed by a SOLO run, because under mode(s) 13761 hashcat's parser reads the FILE'S BYTES, and this entry stores the container header as hex because YAML holds text, so the round trip was run against the decoded bytes. The stored hex is unchanged and is what decodes to them; reads_in does NOT list hashcat for it, because hashcat did not read that string. One hash and one candidate per invocation leaves nothing else the crack could belong to. The stored vector is unchanged.",
             "hashpipe" : "",
             "john" : "",
             "mdxfind" : ""
@@ -93134,8 +93134,8 @@
             "ids" : [
                13722
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "hashcat_salted" : "yes",
          "hashcat_speed" : "slow",
@@ -93166,7 +93166,7 @@
          "serialization" : "unknown",
          "status" : "needs-review",
          "tool_note" : {
-            "hashcat" : "NOT REPRODUCED HERE. hashcat publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: hashcat's example for this mode is a volume header rather than a digest, so a plain -a 0 wordlist attack cannot consume it. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool hashcat --only 13722 to retry.",
+            "hashcat" : "Round-tripped, but attributed by a SOLO run, because under mode(s) 13722 hashcat's parser reads the FILE'S BYTES, and this entry stores the container header as hex because YAML holds text, so the round trip was run against the decoded bytes. The stored hex is unchanged and is what decodes to them; reads_in does NOT list hashcat for it, because hashcat did not read that string. One hash and one candidate per invocation leaves nothing else the crack could belong to. The stored vector is unchanged.",
             "hashpipe" : "",
             "john" : "",
             "mdxfind" : ""
@@ -93250,8 +93250,8 @@
             "ids" : [
                13723
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "hashcat_salted" : "yes",
          "hashcat_speed" : "slow",
@@ -93282,7 +93282,7 @@
          "serialization" : "unknown",
          "status" : "needs-review",
          "tool_note" : {
-            "hashcat" : "NOT REPRODUCED HERE. hashcat publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: hashcat's example for this mode is a volume header rather than a digest, so a plain -a 0 wordlist attack cannot consume it. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool hashcat --only 13723 to retry.",
+            "hashcat" : "Round-tripped, but attributed by a SOLO run, because under mode(s) 13723 hashcat's parser reads the FILE'S BYTES, and this entry stores the container header as hex because YAML holds text, so the round trip was run against the decoded bytes. The stored hex is unchanged and is what decodes to them; reads_in does NOT list hashcat for it, because hashcat did not read that string. One hash and one candidate per invocation leaves nothing else the crack could belong to. The stored vector is unchanged.",
             "hashpipe" : "",
             "john" : "",
             "mdxfind" : ""
@@ -93366,8 +93366,8 @@
             "ids" : [
                13721
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "hashcat_salted" : "yes",
          "hashcat_speed" : "slow",
@@ -93398,7 +93398,7 @@
          "serialization" : "unknown",
          "status" : "needs-review",
          "tool_note" : {
-            "hashcat" : "NOT REPRODUCED HERE. hashcat publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: hashcat's example for this mode is a volume header rather than a digest, so a plain -a 0 wordlist attack cannot consume it. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool hashcat --only 13721 to retry.",
+            "hashcat" : "Round-tripped, but attributed by a SOLO run, because under mode(s) 13721 hashcat's parser reads the FILE'S BYTES, and this entry stores the container header as hex because YAML holds text, so the round trip was run against the decoded bytes. The stored hex is unchanged and is what decodes to them; reads_in does NOT list hashcat for it, because hashcat did not read that string. One hash and one candidate per invocation leaves nothing else the crack could belong to. The stored vector is unchanged.",
             "hashpipe" : "",
             "john" : "",
             "mdxfind" : ""
@@ -93482,8 +93482,8 @@
             "ids" : [
                13772
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "hashcat_salted" : "yes",
          "hashcat_speed" : "slow",
@@ -93514,7 +93514,7 @@
          "serialization" : "unknown",
          "status" : "needs-review",
          "tool_note" : {
-            "hashcat" : "NOT REPRODUCED HERE. hashcat publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: hashcat's example for this mode is a volume header rather than a digest, so a plain -a 0 wordlist attack cannot consume it. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool hashcat --only 13772 to retry.",
+            "hashcat" : "Round-tripped, but attributed by a SOLO run, because under mode(s) 13772 hashcat's parser reads the FILE'S BYTES, and this entry stores the container header as hex because YAML holds text, so the round trip was run against the decoded bytes. The stored hex is unchanged and is what decodes to them; reads_in does NOT list hashcat for it, because hashcat did not read that string. One hash and one candidate per invocation leaves nothing else the crack could belong to. The stored vector is unchanged.",
             "hashpipe" : "",
             "john" : "",
             "mdxfind" : ""
@@ -93598,8 +93598,8 @@
             "ids" : [
                13782
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "hashcat_salted" : "yes",
          "hashcat_speed" : "slow",
@@ -93630,7 +93630,7 @@
          "serialization" : "unknown",
          "status" : "needs-review",
          "tool_note" : {
-            "hashcat" : "NOT REPRODUCED HERE. hashcat publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: hashcat's example for this mode is a volume header rather than a digest, so a plain -a 0 wordlist attack cannot consume it. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool hashcat --only 13782 to retry.",
+            "hashcat" : "Round-tripped, but attributed by a SOLO run, because under mode(s) 13782 hashcat's parser reads the FILE'S BYTES, and this entry stores the container header as hex because YAML holds text, so the round trip was run against the decoded bytes. The stored hex is unchanged and is what decodes to them; reads_in does NOT list hashcat for it, because hashcat did not read that string. One hash and one candidate per invocation leaves nothing else the crack could belong to. The stored vector is unchanged.",
             "hashpipe" : "",
             "john" : "",
             "mdxfind" : ""
@@ -93714,8 +93714,8 @@
             "ids" : [
                13773
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "hashcat_salted" : "yes",
          "hashcat_speed" : "slow",
@@ -93746,7 +93746,7 @@
          "serialization" : "unknown",
          "status" : "needs-review",
          "tool_note" : {
-            "hashcat" : "NOT REPRODUCED HERE. hashcat publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: hashcat's example for this mode is a volume header rather than a digest, so a plain -a 0 wordlist attack cannot consume it. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool hashcat --only 13773 to retry.",
+            "hashcat" : "Round-tripped, but attributed by a SOLO run, because under mode(s) 13773 hashcat's parser reads the FILE'S BYTES, and this entry stores the container header as hex because YAML holds text, so the round trip was run against the decoded bytes. The stored hex is unchanged and is what decodes to them; reads_in does NOT list hashcat for it, because hashcat did not read that string. One hash and one candidate per invocation leaves nothing else the crack could belong to. The stored vector is unchanged.",
             "hashpipe" : "",
             "john" : "",
             "mdxfind" : ""
@@ -93830,8 +93830,8 @@
             "ids" : [
                13783
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "hashcat_salted" : "yes",
          "hashcat_speed" : "slow",
@@ -93862,7 +93862,7 @@
          "serialization" : "unknown",
          "status" : "needs-review",
          "tool_note" : {
-            "hashcat" : "NOT REPRODUCED HERE. hashcat publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: hashcat's example for this mode is a volume header rather than a digest, so a plain -a 0 wordlist attack cannot consume it. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool hashcat --only 13783 to retry.",
+            "hashcat" : "Round-tripped, but attributed by a SOLO run, because under mode(s) 13783 hashcat's parser reads the FILE'S BYTES, and this entry stores the container header as hex because YAML holds text, so the round trip was run against the decoded bytes. The stored hex is unchanged and is what decodes to them; reads_in does NOT list hashcat for it, because hashcat did not read that string. One hash and one candidate per invocation leaves nothing else the crack could belong to. The stored vector is unchanged.",
             "hashpipe" : "",
             "john" : "",
             "mdxfind" : ""
@@ -93946,8 +93946,8 @@
             "ids" : [
                13771
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "hashcat_salted" : "yes",
          "hashcat_speed" : "slow",
@@ -93978,7 +93978,7 @@
          "serialization" : "unknown",
          "status" : "needs-review",
          "tool_note" : {
-            "hashcat" : "NOT REPRODUCED HERE. hashcat publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: hashcat's example for this mode is a volume header rather than a digest, so a plain -a 0 wordlist attack cannot consume it. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool hashcat --only 13771 to retry.",
+            "hashcat" : "Round-tripped, but attributed by a SOLO run, because under mode(s) 13771 hashcat's parser reads the FILE'S BYTES, and this entry stores the container header as hex because YAML holds text, so the round trip was run against the decoded bytes. The stored hex is unchanged and is what decodes to them; reads_in does NOT list hashcat for it, because hashcat did not read that string. One hash and one candidate per invocation leaves nothing else the crack could belong to. The stored vector is unchanged.",
             "hashpipe" : "",
             "john" : "",
             "mdxfind" : ""
@@ -94062,8 +94062,8 @@
             "ids" : [
                13781
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "hashcat_salted" : "yes",
          "hashcat_speed" : "slow",
@@ -94094,7 +94094,7 @@
          "serialization" : "unknown",
          "status" : "needs-review",
          "tool_note" : {
-            "hashcat" : "NOT REPRODUCED HERE. hashcat publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: hashcat's example for this mode is a volume header rather than a digest, so a plain -a 0 wordlist attack cannot consume it. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool hashcat --only 13781 to retry.",
+            "hashcat" : "Round-tripped, but attributed by a SOLO run, because under mode(s) 13781 hashcat's parser reads the FILE'S BYTES, and this entry stores the container header as hex because YAML holds text, so the round trip was run against the decoded bytes. The stored hex is unchanged and is what decodes to them; reads_in does NOT list hashcat for it, because hashcat did not read that string. One hash and one candidate per invocation leaves nothing else the crack could belong to. The stored vector is unchanged.",
             "hashpipe" : "",
             "john" : "",
             "mdxfind" : ""
@@ -94178,8 +94178,8 @@
             "ids" : [
                13732
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "hashcat_salted" : "yes",
          "hashcat_speed" : "slow",
@@ -94210,7 +94210,7 @@
          "serialization" : "unknown",
          "status" : "needs-review",
          "tool_note" : {
-            "hashcat" : "NOT REPRODUCED HERE. hashcat publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: hashcat's example for this mode is a volume header rather than a digest, so a plain -a 0 wordlist attack cannot consume it. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool hashcat --only 13732 to retry.",
+            "hashcat" : "Round-tripped, but attributed by a SOLO run, because under mode(s) 13732 hashcat's parser reads the FILE'S BYTES, and this entry stores the container header as hex because YAML holds text, so the round trip was run against the decoded bytes. The stored hex is unchanged and is what decodes to them; reads_in does NOT list hashcat for it, because hashcat did not read that string. One hash and one candidate per invocation leaves nothing else the crack could belong to. The stored vector is unchanged.",
             "hashpipe" : "",
             "john" : "",
             "mdxfind" : ""
@@ -94294,8 +94294,8 @@
             "ids" : [
                13733
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "hashcat_salted" : "yes",
          "hashcat_speed" : "slow",
@@ -94326,7 +94326,7 @@
          "serialization" : "unknown",
          "status" : "needs-review",
          "tool_note" : {
-            "hashcat" : "NOT REPRODUCED HERE. hashcat publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: hashcat's example for this mode is a volume header rather than a digest, so a plain -a 0 wordlist attack cannot consume it. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool hashcat --only 13733 to retry.",
+            "hashcat" : "Round-tripped, but attributed by a SOLO run, because under mode(s) 13733 hashcat's parser reads the FILE'S BYTES, and this entry stores the container header as hex because YAML holds text, so the round trip was run against the decoded bytes. The stored hex is unchanged and is what decodes to them; reads_in does NOT list hashcat for it, because hashcat did not read that string. One hash and one candidate per invocation leaves nothing else the crack could belong to. The stored vector is unchanged.",
             "hashpipe" : "",
             "john" : "",
             "mdxfind" : ""
@@ -94410,8 +94410,8 @@
             "ids" : [
                13731
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "hashcat_salted" : "yes",
          "hashcat_speed" : "slow",
@@ -94442,7 +94442,7 @@
          "serialization" : "unknown",
          "status" : "needs-review",
          "tool_note" : {
-            "hashcat" : "NOT REPRODUCED HERE. hashcat publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: hashcat's example for this mode is a volume header rather than a digest, so a plain -a 0 wordlist attack cannot consume it. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool hashcat --only 13731 to retry.",
+            "hashcat" : "Round-tripped, but attributed by a SOLO run, because under mode(s) 13731 hashcat's parser reads the FILE'S BYTES, and this entry stores the container header as hex because YAML holds text, so the round trip was run against the decoded bytes. The stored hex is unchanged and is what decodes to them; reads_in does NOT list hashcat for it, because hashcat did not read that string. One hash and one candidate per invocation leaves nothing else the crack could belong to. The stored vector is unchanged.",
             "hashpipe" : "",
             "john" : "",
             "mdxfind" : ""
@@ -95718,8 +95718,8 @@
             "ids" : [
                2500
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "hashcat_salted" : "yes",
          "hashcat_speed" : "slow",
@@ -95750,7 +95750,7 @@
          "serialization" : "unknown",
          "status" : "needs-review",
          "tool_note" : {
-            "hashcat" : "NOT REPRODUCED HERE. hashcat publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: this mode wants binary capture input rather than a hash line. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool hashcat --only 2500 to retry.",
+            "hashcat" : "Round-tripped, but attributed by a SOLO run, because under mode(s) 2500 hashcat's parser reads the FILE'S BYTES, and this entry stores the container header as hex because YAML holds text, so the round trip was run against the decoded bytes. The stored hex is unchanged and is what decodes to them; reads_in does NOT list hashcat for it, because hashcat did not read that string. One hash and one candidate per invocation leaves nothing else the crack could belong to. The stored vector is unchanged. Mode(s) 2500 are DEPRECATED in this hashcat and refuse to run at all -- exit 255, nothing attempted -- so the round trip was made with --deprecated-check-disable. That is a statement about what upstream recommends, not about what the plugin computes; reproduce it with that flag.",
             "hashpipe" : "",
             "john" : "",
             "mdxfind" : ""
@@ -95776,8 +95776,8 @@
             "ids" : [
                2501
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "hashcat_salted" : "yes",
          "hashcat_speed" : "slow",
@@ -95808,7 +95808,7 @@
          "serialization" : "unknown",
          "status" : "needs-review",
          "tool_note" : {
-            "hashcat" : "NOT REPRODUCED HERE. hashcat publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: this mode wants binary capture input rather than a hash line. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool hashcat --only 2501 to retry.",
+            "hashcat" : "Round-tripped, but attributed by a SOLO run, because under mode(s) 2501 hashcat's parser reads the FILE'S BYTES, and this entry stores the container header as hex because YAML holds text, so the round trip was run against the decoded bytes. The stored hex is unchanged and is what decodes to them; reads_in does NOT list hashcat for it, because hashcat did not read that string. One hash and one candidate per invocation leaves nothing else the crack could belong to. The stored vector is unchanged. Mode(s) 2501 are DEPRECATED in this hashcat and refuse to run at all -- exit 255, nothing attempted -- so the round trip was made with --deprecated-check-disable. That is a statement about what upstream recommends, not about what the plugin computes; reproduce it with that flag.",
             "hashpipe" : "",
             "john" : "",
             "mdxfind" : ""
@@ -96020,8 +96020,8 @@
             "ids" : [
                16800
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "hashcat_salted" : "yes",
          "hashcat_speed" : "slow",
@@ -96052,7 +96052,7 @@
          "serialization" : "unknown",
          "status" : "needs-review",
          "tool_note" : {
-            "hashcat" : "NOT REPRODUCED HERE. hashcat publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: this mode wants binary capture input rather than a hash line. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool hashcat --only 16800 to retry.",
+            "hashcat" : "Round-tripped, but attributed by a SOLO run, because hashcat echoed a different spelling of this hash than it was given under mode(s) 16800, and the grouped run attributes a crack by matching the hash string -- its output lines do not correspond to its input lines -- so it could not credit one. One hash and one candidate per invocation leaves nothing else the crack could belong to. The stored vector is unchanged and is the form hashcat was fed. Mode(s) 16800 are DEPRECATED in this hashcat and refuse to run at all -- exit 255, nothing attempted -- so the round trip was made with --deprecated-check-disable. That is a statement about what upstream recommends, not about what the plugin computes; reproduce it with that flag.",
             "hashpipe" : "",
             "john" : "",
             "mdxfind" : "no type. Swept all 1002 mdxfind types on 2026-09-03 (a tools/discover-mdxfind.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable type ran to completion; a type killed at the timeout is counted as untested and withholds this verdict. No mdxfind type name matches any identifier this entry publishes either, normalized by the separator-drift rule. Corroborated by hashpipe, a second binary built from the same catalog: handed this entry's own hash and plaintext it names no type at all. It is the more direct instrument -- it recomputes rather than cracking -- and on this corpus it named a type for 58 entries the sweep alone called silent. This is the absence of an IDENTIFIER, not of the algorithm: if mdxfind gains one, this becomes a mapping."
@@ -96078,8 +96078,8 @@
             "ids" : [
                16801
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "hashcat_salted" : "yes",
          "hashcat_speed" : "slow",
@@ -96110,7 +96110,7 @@
          "serialization" : "unknown",
          "status" : "needs-review",
          "tool_note" : {
-            "hashcat" : "NOT REPRODUCED HERE. hashcat publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: this mode wants binary capture input rather than a hash line. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool hashcat --only 16801 to retry.",
+            "hashcat" : "Round-tripped, but attributed by a SOLO run, because hashcat echoed a different spelling of this hash than it was given under mode(s) 16801, and the grouped run attributes a crack by matching the hash string -- its output lines do not correspond to its input lines -- so it could not credit one. One hash and one candidate per invocation leaves nothing else the crack could belong to. The stored vector is unchanged and is the form hashcat was fed. Mode(s) 16801 are DEPRECATED in this hashcat and refuse to run at all -- exit 255, nothing attempted -- so the round trip was made with --deprecated-check-disable. That is a statement about what upstream recommends, not about what the plugin computes; reproduce it with that flag.",
             "hashpipe" : "",
             "john" : "",
             "mdxfind" : "no type. Swept all 1002 mdxfind types on 2026-09-03 (a tools/discover-mdxfind.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable type ran to completion; a type killed at the timeout is counted as untested and withholds this verdict. No mdxfind type name matches any identifier this entry publishes either, normalized by the separator-drift rule. Corroborated by hashpipe, a second binary built from the same catalog: handed this entry's own hash and plaintext it names no type at all. It is the more direct instrument -- it recomputes rather than cracking -- and on this corpus it named a type for 58 entries the sweep alone called silent. This is the absence of an IDENTIFIER, not of the algorithm: if mdxfind gains one, this becomes a mapping."
