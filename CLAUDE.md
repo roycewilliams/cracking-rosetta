@@ -678,6 +678,49 @@ mdxfind also accepts hashcat modes directly (`mdxfind -m 0`, `-m e1`,
   characters and returns `G3RG3P0` for john's own `G3RG3P00!`. The vector is
   upstream's and correct; the strict comparison is also correct; they answer
   different questions and the strict one is the one that gates a tier.
+- **A HASHCAT "FAILURE" IS USUALLY A QUESTION ABOUT THE INPUT, NOT THE MODE.**
+  Measured 2026-09-05: of 51 hashcat blocks below tier `vector`, 47 turned out
+  to be provable and NOT ONE of the four causes was hashcat failing to
+  reproduce its own example. Each is invisible in the same way -- the block
+  ends up saying "the tool pinned to this identifier did not reproduce its own
+  published example", which is what a genuinely unsupported algorithm looks
+  like too.
+  - **hashcat re-serializes.** It does not always echo the string it was
+    GIVEN, so attributing a crack by matching the hash string fails. `-m 26900`
+    is handed an SNMPv3 engine-id ending `fd6000000000` and prints one ending
+    `fd60`; `-m 22000` is handed `WPA*01*<pmkid>*<mac>*<mac>*<hex essid>***`
+    and prints `<pmkid>:<mac>:<mac>:<essid>:<plain>` -- different separators
+    and the essid hex-decoded to text.
+  - **hashcat exits 255 when ANY line of the hash file fails to parse**, which
+    discards what every line that DID parse established. `qnx7-sha512` carries
+    one vector in mdxfind's spelling and one in hashcat's; `-m 19210` exits 255
+    on the pair and cracks the mdxfind one alone.
+  - **40 of 593 modes publish `example_hash_format: hex-encoded (binary file
+    only)`** -- the container and password-manager families, whose hash IS a
+    volume header or a database file. hashcat's parser reads the FILE'S BYTES,
+    and an entry stores that header as hex because YAML holds text. Hand
+    hashcat the hex and it rejects the file or loads the ASCII as a header and
+    exhausts. Decode it and the whole TrueCrypt/VeraCrypt/Password Safe family
+    cracks first try.
+  - **A DEPRECATED plugin refuses to run at all** -- exit 255, nothing
+    attempted -- until `--deprecated-check-disable` is passed. 2500, 2501,
+    16800 and 16801 all reproduce their own vector with it. Deprecated is a
+    statement about what upstream RECOMMENDS, not about what the plugin
+    computes, and the row exists precisely because someone will arrive holding
+    a `-m 2500` hash.
+
+  `verify-vectors.pl` handles all four: grouped run, then a SOLO run (one hash,
+  one candidate, so the echoed spelling stops mattering), then a BINARY run
+  against the decoded bytes, with the deprecation flag applied per mode from
+  the inventory. **The solo relaxation is legitimate ONLY because the file
+  holds one hash**: a grouped run must keep matching the string exactly, since
+  its output lines do not correspond to its input lines. And the binary route
+  must NOT set `reads_in` -- hashcat did not read that string, it read the
+  bytes the string encodes, and saying otherwise asserts the stored
+  serialization is one hashcat accepts.
+  **Read the report's two counts as two claims**: `0 cracked (+1 as decoded
+  bytes)` is not a contradiction beside a promotion.
+
 - **Many hashcat modes do not compare the whole digest, so a crack is not
   automatically proof.** Measured on v7.1.2-549-g8a15e210b, 2026-08-31: `-m
   100` accepts any 40-hex string whose LAST 128 bits match `sha1($p)` --

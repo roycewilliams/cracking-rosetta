@@ -284,6 +284,40 @@ if ($want{mdxfind}) {
     }
 }
 
+# Which hashcat modes publish their example as a BINARY FILE rendered in hex.
+#
+# hashcat --hash-info calls it example_hash_format, and for 40 of 593 modes it
+# is "hex-encoded (binary file only)": the container and password-manager
+# families, whose "hash" is a volume header or a database file. hashcat's
+# parser for those reads the FILE'S BYTES, so handing it the hex TEXT is
+# handing it a different object -- it either rejects the file (exit 255) or
+# loads 168 bytes of ASCII as though they were the header and exhausts.
+# Neither is hashcat failing to reproduce its own example, and both were
+# recorded as exactly that.
+my (%HC_BINARY, %HC_DEPRECATED);
+if ($want{hashcat}) {
+    my $hc = eval { YAML::XS::LoadFile("$ROOT/data/tools/hashcat.yaml") };
+    if ($hc) {
+        $HC_BINARY{ $_->{mode} } = 1
+            for grep { ($_->{example_hash_format} // '') =~ /^hex-encoded/ }
+                @{ $hc->{modes} };
+        # A DEPRECATED plugin refuses to run at all -- exit 255, nothing
+        # attempted -- unless the check is disabled. Measured 2026-09-05: the
+        # four WPA plugins hashcat replaced with 22000/22001 (2500, 2501,
+        # 16800, 16801) all exit 255 here, which is indistinguishable from a
+        # mode that cannot consume its input, and all four reproduce their own
+        # vector the moment the flag is passed. Deprecated is a statement about
+        # what upstream RECOMMENDS, not about what the plugin computes, and the
+        # row exists because someone will arrive holding a -m 2500 hash.
+        $HC_DEPRECATED{ $_->{mode} } = 1
+            for grep { $_->{deprecated} } @{ $hc->{modes} };
+    }
+    else {
+        print STDERR "$PROG: cannot load the hashcat inventory; no mode will "
+                   . "be tried as a binary file.\n";
+    }
+}
+
 # Which mdxfind types carry a salt, so -f or -F is chosen from the inventory.
 my (%MX_SALTED, %MX_PEPPER);
 if ($want{mdxfind}) {
@@ -492,12 +526,16 @@ if ($want{hashcat} && $job{hashcat}) {
         next if $dry;
 
         my $solo_cracked = 0;
+        my %bin_here;      # cracked as DECODED BYTES, so never a reads_in
+        # Only where the inventory says so, and nowhere else: every other
+        # mode's command line stays byte-identical to what it always was.
+        my @depr = $HC_DEPRECATED{$mode} ? ('--deprecated-check-disable') : ();
         my $hf = write_file("$workdir/hc.$mode.hash", map { $_->{hash} } @v);
         my $wf = write_file("$workdir/hc.$mode.word", map { $_->{pass} } @v);
 
         my ($code, $out) = run_capture($timeout, $hashcat,
             '-m', $mode, '-a', '0', '--quiet', '--potfile-disable',
-            '--self-test-disable', '--backend-ignore-opencl', $hf, $wf);
+            '--self-test-disable', '--backend-ignore-opencl', @depr, $hf, $wf);
 
         # hashcat prints "<hash>:<plain>" for each crack, and the two facts
         # that line carries are NOT the same claim.
@@ -560,7 +598,7 @@ if ($want{hashcat} && $job{hashcat}) {
             my $sw = write_file("$workdir/hc.$mode.solo.word", $vec->{pass});
             my ($c2, $o2) = run_capture($timeout, $hashcat,
                 '-m', $mode, '-a', '0', '--quiet', '--potfile-disable',
-                '--self-test-disable', '--backend-ignore-opencl', $sf, $sw);
+                '--self-test-disable', '--backend-ignore-opencl', @depr, $sf, $sw);
             next unless defined $o2;
             my $hit = 0;
             for my $line (split /\n/, $o2) {
@@ -586,6 +624,59 @@ if ($want{hashcat} && $job{hashcat}) {
             $reserialized{ $vec->{id} }{$mode} =
                 ($code == 0 || $code == 1) ? 'echo' : 'batch';
             $solo_cracked = 1;
+        }
+
+        # BINARY FALLBACK, third and last. Same shape and same guarantee as
+        # the solo run above -- one hash, one candidate, so attribution is not
+        # in question -- and it changes exactly one thing: what the hash file
+        # CONTAINS. The entry stores a container's header as hex because YAML
+        # holds text, and hashcat's parser for these modes wants the bytes.
+        #
+        # Measured 2026-09-05, all three cracking on the first try once
+        # decoded and none of them before: password-safe-v2 (-m 9000, 336 hex
+        # -> 168 bytes), pwsafe3 (-m 5200, 144 -> 72) and
+        # truecrypt-ripemd160-xts-512-bit-legacy (-m 6211, 1024 -> 512).
+        #
+        # Gated on the INVENTORY, not on the string looking like hex: a plain
+        # md5 vector is also 32 hex characters, and decoding one to 16 bytes
+        # for -m 0 would be a run that could only ever waste time. hashcat's
+        # own example_hash_format is the fact that says which modes take a
+        # file, so this fires only where hashcat has said so itself.
+        if ($HC_BINARY{$mode}) {
+            for my $vec (@v) {
+                next if $cracked{hashcat}{ $vec->{id} }{$mode};
+                next if $read{hashcat}{ $vec->{id} }{ $vec->{vi} };
+                # Even-length pure hex, or there is nothing to decode.
+                next unless $vec->{hash} =~ /^[0-9a-fA-F]+$/
+                         && length($vec->{hash}) % 2 == 0;
+                my $bin = pack 'H*', $vec->{hash};
+                my $bf  = "$workdir/hc.$mode.bin";
+                open my $fh, '>:raw', $bf or next;
+                print {$fh} $bin;
+                close $fh;
+                my $bw = write_file("$workdir/hc.$mode.bin.word", $vec->{pass});
+                my ($c3, $o3) = run_capture($timeout, $hashcat,
+                    '-m', $mode, '-a', '0', '--quiet', '--potfile-disable',
+                    '--self-test-disable', '--backend-ignore-opencl', @depr,
+                    $bf, $bw);
+                next unless defined $o3;
+                my $hit = 0;
+                for my $line (split /\n/, $o3) {
+                    next unless hc_line_plain_is($line, $vec->{pass});
+                    $hit = 1;
+                    last;
+                }
+                next unless $hit;
+                # NOT reads_in. reads_in records that the tool read THIS
+                # STRING, and hashcat did not read this string -- it read the
+                # bytes the string encodes. Saying otherwise would claim the
+                # stored serialization is one hashcat accepts, which is the
+                # very thing that is false here.
+                $cracked{hashcat}{ $vec->{id} }{$mode} = 1;
+                $reserialized{ $vec->{id} }{$mode} = 'binary';
+                $solo_cracked = 1;
+                $bin_here{ $vec->{id} }{ $vec->{vi} } = 1;
+            }
         }
 
         # A run that did not COMPLETE is not evidence of anything, and the
@@ -620,9 +711,18 @@ if ($want{hashcat} && $job{hashcat}) {
         # counting per entry printed "2 hash(es) -> 2 cracked" where hashcat
         # read one of them. Promotion is unaffected: it is per identifier, and
         # the per-vector fact is what reads_in already records.
-        printf STDERR "-   hashcat -m %-6s %d hash(es) -> %d cracked%s\n",
+        # The two counts are different claims and the line says both. "cracked"
+        # is vectors this identifier READ, which is what reads_in records; a
+        # vector cracked as decoded bytes was never read as stored, so counting
+        # it there would assert the stored serialization is one hashcat
+        # accepts. Reporting only the first printed "0 cracked" beside a
+        # promotion, which reads as a contradiction rather than as the two
+        # facts it is.
+        my $nbin = scalar(grep { $bin_here{ $_->{id} }{ $_->{vi} } } @v);
+        printf STDERR "-   hashcat -m %-6s %d hash(es) -> %d cracked%s%s\n",
             $mode, scalar @v,
             scalar(grep { $read_here{ $_->{id} }{ $_->{vi} } } @v),
+            ($nbin ? " (+$nbin as decoded bytes)" : ''),
             ($code == -2 ? ' [TIMEOUT]' : '') if $verbose;
     }
 }
@@ -1106,10 +1206,14 @@ if (!$dry) {
                 # Same idea, the other tool: the vector is the one stored, but
                 # hashcat prints a different spelling of it, so the crack was
                 # attributed by a run holding this hash and nothing else.
-                if ($tool eq 'hashcat' && $reserialized{$id}) {
-                    my $r = $reserialized{$id};
-                    my @echo  = sort { $a <=> $b } grep { $r->{$_} eq 'echo'  } keys %$r;
-                    my @batch = sort { $a <=> $b } grep { $r->{$_} eq 'batch' } keys %$r;
+                if ($tool eq 'hashcat'
+                    && ($reserialized{$id}
+                        || grep { $HC_DEPRECATED{$_} } @idents)) {
+                    my $r = $reserialized{$id} || {};
+                    my @echo  = sort { $a <=> $b } grep { $r->{$_} eq 'echo'   } keys %$r;
+                    my @batch = sort { $a <=> $b } grep { $r->{$_} eq 'batch'  } keys %$r;
+                    my @bin   = sort { $a <=> $b } grep { $r->{$_} eq 'binary' } keys %$r;
+                    my @dep   = sort { $a <=> $b } grep { $HC_DEPRECATED{$_} } @idents;
                     my @why;
                     push @why,
                         "hashcat echoed a different spelling of this hash than "
@@ -1124,12 +1228,41 @@ if (!$dry) {
                       . "the hash file fails to parse, which discards what the "
                       . "lines that DID parse established"
                         if @batch;
-                    $blk->{note} =
-                        "Round-tripped, but attributed by a SOLO run, because "
-                      . join('; and ', @why)
-                      . ". One hash and one candidate per invocation leaves "
-                      . "nothing else the crack could belong to. The stored "
-                      . "vector is unchanged and is the form hashcat was fed.";
+                    push @why,
+                        "under mode(s) " . join(', ', @bin)
+                      . " hashcat's parser reads the FILE'S BYTES, and this "
+                      . "entry stores the container header as hex because YAML "
+                      . "holds text, so the round trip was run against the "
+                      . "decoded bytes. The stored hex is unchanged and is what "
+                      . "decodes to them; reads_in does NOT list hashcat for it, "
+                      . "because hashcat did not read that string"
+                        if @bin;
+                    # Not a reason the SOLO run was needed -- a reason the run
+                    # needed a flag at all -- so it is a sentence of its own
+                    # and it is written even when nothing was re-serialized.
+                    my $dep_note = @dep
+                        ? "Mode(s) " . join(', ', @dep) . " are DEPRECATED in "
+                        . "this hashcat and refuse to run at all -- exit 255, "
+                        . "nothing attempted -- so the round trip was made with "
+                        . "--deprecated-check-disable. That is a statement about "
+                        . "what upstream recommends, not about what the plugin "
+                        . "computes; reproduce it with that flag."
+                        : '';
+                    if (@why) {
+                        $blk->{note} =
+                            "Round-tripped, but attributed by a SOLO run, "
+                          . "because " . join('; and ', @why)
+                          . ". One hash and one candidate per invocation leaves "
+                          . "nothing else the crack could belong to."
+                          . ((@echo || @batch) && !@bin
+                             ? " The stored vector is unchanged and is the form "
+                             . "hashcat was fed."
+                             : " The stored vector is unchanged.")
+                          . ($dep_note ? " $dep_note" : '');
+                    }
+                    else {
+                        $blk->{note} = $dep_note;
+                    }
                 }
                 $promoted{$tool}++;
                 $touched = 1;
