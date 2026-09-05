@@ -1,29 +1,18 @@
 id: "sapcodvnh256"
 name: "SAPCODVNH256"
-expression_proof:
-  verified: "absent"
-  verified_at: "2026-09-05"
-  verified_with: "hx Language Specification, Appendix A"
-  note: "the iteration count is a runtime parameter read out of the stored form, so this construction cannot be written as a fixed expression at all. Appendix A Note [41] says so in those terms. That is separate from whether john has a FORMAT for it: it does, saph, which the sibling rows already carry."
-denotation:
-  text: "SAP CODVN H, SHA-256 flavour: h = sha256(pass . salt) for the first round and h = sha256(pass . h) for each of the remaining ITER-1 rounds, password truncated at 40 characters"
-  source: "mdxfind"
-  note: "Appendix A Note [41] states the construction and says plainly that the iteration count is carried in the hash rather than fixed by the type, so it is a runtime parameter and the row is documentation rather than a compilable expression. hx Language Specification (Waffle), Appendix A, read 2026-09-05. The revision is later than the 1.15 the seeding tools cite, since Appendix A now carries e1003-e1027."
-category: "application"
-status: "ok"
+status: "needs-review"
 tools:
   mdxfind:
     types: ["SAPCODVNH256"]
     verified: "vector"
     verified_at: "2026-09-05"
     verified_with: "mdxfind RCS 1.576 (2026/09/02)"
-    note: "mdxfind e1016 SAPCODVNH256."
-  hashpipe:
-    types: ["SAPCODVNH256"]
+  john:
+    cpu: ["saph"]
     verified: "vector"
     verified_at: "2026-09-05"
-    verified_with: "hashpipe RCS 1.193 (2026/09/05)"
-    note: "verified with hashpipe -c, which pins each line to its own leading TYPE label and runs no detection, at -t 1 and with the emitted label compared against the one asked for. Both precautions are load-bearing here: hashpipe -m does not restrict what a recognised wrapper reaches, and its results vary with the thread count."
+    verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
+    note: "format discovered by round-trip search, not by name"
   crack:
     supported: false
 vectors:
@@ -31,4 +20,3 @@ vectors:
     pass: "booboo"
     source: "mdxfind"
     reads_in: ["mdxfind"]
-notes: "Created 2026-09-05. Completes the CODVN H family this repository already carries as sapcodvnh (e904, SHA-1) and sapcodvnh512 (e984, SHA-512). Appendix A Note [41] records that all four of john saph SHA-256 and SHA-384 test vectors were reproduced by an independent implementation before either type was written."

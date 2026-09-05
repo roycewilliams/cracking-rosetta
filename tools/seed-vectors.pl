@@ -215,22 +215,40 @@ for my $f (@files) {
         # not evidence.
         my %have = map { ($_->{hash} // '') . "\0" . ($_->{pass} // '') => 1 }
                    @{ $e->{vectors} };
+        # Every identifier, not just the first: a block reaches tier 'vector'
+        # only when EVERY identifier it names round-trips, so the example that
+        # makes the block provable is often not the lowest-numbered one. See
+        # the note on candidates().
         my @c = grep { $below{ $_->{tool} } && !$have{ "$_->{hash}\0$_->{pass}" } }
-                candidates($e, $id, $path);
+                candidates($e, $id, $path, 1);
         push @cand, @c;
         push @noscore, $id unless @c;
     }
     else {
         $targets++;
         # One entry, one vector: the preference order in candidates() decides.
-        my @c = candidates($e, $id, $path);
+        my @c = candidates($e, $id, $path, 0);
         if (@c) { push @cand, $c[0] }
         else    { push @noscore, $id }
     }
 }
 
-# candidates($entry, $id, $path) - at most one published example per tool,
+# candidates($entry, $id, $path, $every) - published examples for this entry,
 # mdxfind first, in the order a caller that wants only one should prefer them.
+#
+# $every picks between the two jobs this has. Seeding an entry with NO vector
+# wants exactly one, and the preference order decides which. Filling a block
+# that is below tier 'vector' wants one per IDENTIFIER, because the tier is
+# granted only when every identifier in the block round-trips, and the example
+# that makes that possible is routinely not the first.
+#
+# Measured 2026-09-05: md5-md5-pass-salt names hashcat 2611 and 2711, both
+# md5(md5($p).$s). It already carried 2611's own example, so taking only the
+# lowest-numbered mode yielded a candidate the entry already had, which was
+# filtered as a duplicate and reported as "no published example" -- a wrong
+# reason for a block whose missing evidence was sitting in the inventory. 2611
+# cracks any salt length and 2711 only its own 30-character convention, so no
+# vector already on the entry could ever have proved 2711.
 #
 # mdxfind leads because it reaches most entries and its example_vector is
 # already the shape the corpus stores. example_vector is "<hash>[:<extra>]:<pass>"
@@ -238,7 +256,7 @@ for my $f (@files) {
 # ":<pass>" removed -- computed by stripping, never by splitting on ':', because
 # a salt may itself contain colons.
 sub candidates {
-    my ($e, $id, $path) = @_;
+    my ($e, $id, $path, $every) = @_;
     my @out;
 
     if ($want{mdxfind}) {
@@ -261,7 +279,7 @@ sub candidates {
                 hash   => substr($ev, 0, length($ev) - length($suffix)),
                 pass   => $ep,
             };
-            last;
+            last unless $every;
         }
     }
 
@@ -282,7 +300,7 @@ sub candidates {
                 hash  => $eh,
                 pass  => $ep,
             };
-            last;
+            last unless $every;
         }
     }
 

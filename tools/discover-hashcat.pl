@@ -209,7 +209,8 @@ use YAML::XS ();
 
 use lib "$RealBin/lib";
 use RosettaEmit qw(emit_entry);
-use RosettaTools qw(tool_path tool_env_help);
+use RosettaTools qw(tool_path tool_env_help tool_version
+                    share_measurable share_unmeasurable_reason);
 
 my $PROG = basename($0);
 my $ROOT = "$RealBin/..";
@@ -240,7 +241,11 @@ Usage: $PROG [options]
    --max-per-entry N hold back entries matched by more than N modes
                      (default 6; they are reported, never written)
    --max-share PCT   hold back a mode matching more than PCT% of the corpus
-                     (default 20)
+                     (default 20). The corpus is the TARGET set, so a narrow
+                     run narrows the denominator: under --only it is one entry
+                     and every mode that matched scores 100%. The guard still
+                     withholds, but reports the share as UNMEASURABLE rather
+                     than calling the mode over-broad.
    --resume          reuse per-mode results already in the work dir
    --apply           write the discovered mappings into data/algorithms
    -n, --dry-run     show the plan; run nothing, write nothing
@@ -315,7 +320,17 @@ die "$PROG: hashcat not executable at $hashcat\n" unless -x $hashcat;
 my $inv = eval { YAML::XS::LoadFile($inventory) }
     or do { print STDERR "$PROG: cannot load $inventory: $@\n"; exit 1 };
 
-my $hc_version = $inv->{version} // 'hashcat';
+# See the note in discover-john.pl: this is the binary that RUNS.
+my $hc_version = RosettaTools::tool_version('hashcat', $hashcat);
+if (!defined $hc_version) {
+    $hc_version = ($inv->{version} // 'unknown') . ' (per the inventory; the '
+                . 'binary would not state a version)';
+}
+elsif (($inv->{version} // '') ne $hc_version) {
+    printf STDERR "- NOTE: hashcat binary reports %s; the inventory was built "
+                . "from %s. verified_with records the binary.\n",
+                $hc_version, $inv->{version} // '(unset)';
+}
 
 # -m 2000 is STDOUT, a candidate printer rather than a hash type; see the
 # methodology note.
@@ -724,6 +739,13 @@ my %noisy_mode = map { $_ => 1 }
                  grep { $mode_hits{$_} * 100 > $max_share * $corpus }
                  keys %mode_hits;
 
+# Whether a share verdict on this corpus says anything about the MODE. Under
+# --only the corpus is one entry, so every mode that matched scores 100% and
+# the guard has measured its own denominator; see RosettaTools. The guard still
+# withholds -- withholding is safe -- but it must not report what it did not
+# establish.
+my $share_ok = share_measurable($corpus, $max_share);
+
 
 
 my %excluded = map { $_ => 1 } @exclude;
@@ -757,7 +779,9 @@ for my $id (sort keys %hits) {
                     $ambiguous{"$_\0$id"}) } @amb)];
     }
     elsif (!@clean) {
-        push @held, [$id, \@m, 'every matching mode is over-broad'];
+        push @held, [$id, \@m, $share_ok
+                       ? 'every matching mode is over-broad'
+                       : share_unmeasurable_reason('mode', $corpus, $max_share)];
     }
     elsif (@clean > $max_per_entry) {
         push @held, [$id, \@clean, sprintf('%d modes > --max-per-entry %d',
@@ -796,9 +820,19 @@ printf STDERR "- ran %d mode(s) in %.1fs%s\n", $n, $elapsed,
     ($dry ? ' (dry run)' : '');
 printf STDERR "-   entries matched %d of %d target(s); applicable %d, held %d\n",
     scalar(keys %hits), $corpus, scalar @apply_list, scalar @held;
-if (%noisy_mode) {
+if (%noisy_mode && $share_ok) {
     printf STDERR "-   %d over-broad mode(s) ignored (> %d%% of the corpus): %s\n",
         scalar keys %noisy_mode, $max_share,
+        join(' ', map { "$_=$mode_hits{$_}" } sort { $a <=> $b } keys %noisy_mode);
+}
+elsif (%noisy_mode) {
+    printf STDERR "-   %d mode(s) held, share UNMEASURABLE: the corpus is %d "
+                . "%s, so a\n-   single hit is %g%% and trips --max-share %d by "
+                . "itself. That is a fact\n-   about this run, not about the "
+                . "mode -- re-run against the whole corpus\n-   (--all, without "
+                . "--only) to measure it: %s\n",
+        scalar keys %noisy_mode, $corpus, ($corpus == 1 ? 'entry' : 'entries'),
+        ($corpus ? 100 / $corpus : 100), $max_share,
         join(' ', map { "$_=$mode_hits{$_}" } sort { $a <=> $b } keys %noisy_mode);
 }
 if (%ignored_pos) {
@@ -844,7 +878,7 @@ if ($apply && !$dry) {
         if ($proven) {
             $blk->{verified}      = 'vector';
             $blk->{verified_at}   = $today;
-            $blk->{verified_with} = $hc_version;
+            $blk->{verified_with} = "hashcat $hc_version";
             $blk->{note} = 'mode discovered by round-trip search, not by name';
         }
         else {
