@@ -12,7 +12,9 @@ status: "needs-review"
 tools:
   hashcat:
     modes: [2611, 2711]
-    verified: "asserted"
+    verified: "vector"
+    verified_at: "2026-09-05"
+    verified_with: "hashcat v7.1.2-549-g8a15e210b"
   mdxfind:
     types: ["MD5-MD5PASS-SALT"]
     verified: "vector"
@@ -53,6 +55,10 @@ vectors:
   - hash: "dec0ded8b80d1519ca9990ebaa03edf8:rosettans91e9"
     pass: "rosetta"
     source: "vanity"
+    reads_in: ["hashcat", "john", "mdxfind"]
+  - hash: "0844fbb2fdeda31884a7a45ec2010bb6:324410183853308365427804872426"
+    pass: "hashcat"
+    source: "hashcat"
     reads_in: ["hashcat", "john", "mdxfind"]
 legacy:
   hashes_org: "VBULLETIN"

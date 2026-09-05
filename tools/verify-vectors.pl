@@ -527,11 +527,22 @@ if ($want{hashcat} && $job{hashcat}) {
         # shape this branch could not see. Tightening here can only ever
         # WITHHOLD a promotion, never invent one, because verify-vectors does
         # not demote.
+        # %read_here is THIS identifier's reads. %read is the tool's, across
+        # every identifier in the run, because that is what reads_in means --
+        # "which tools were proven to read this string". Counting the report
+        # line off %read credited an identifier with vectors an earlier one had
+        # read: measured 2026-09-05, md5-md5-pass-salt printed
+        # "dynamic_6  5 hash(es) -> 5 cracked" when dynamic_6 took 4 and
+        # dynamic_2006, which ran before it, took the fifth. Promotion is
+        # unaffected -- it is per identifier, off %cracked -- but this line is
+        # the human check on a tier, so it has to answer the question it asks.
+        my %read_here;
         for my $vec (@v) {
             next unless index($out, $vec->{hash}) >= 0;
             next unless $out =~ /^\Q$vec->{hash}\E:(.*)$/m;
             my $said = $1;
             $read{hashcat}{ $vec->{id} }{ $vec->{vi} } = 1;
+            $read_here{ $vec->{id} }{ $vec->{vi} } = 1;
             $cracked{hashcat}{ $vec->{id} }{$mode} = 1
                 if hc_plain_is($said, $vec->{pass});
         }
@@ -554,7 +565,7 @@ if ($want{hashcat} && $job{hashcat}) {
         # the per-vector fact is what reads_in already records.
         printf STDERR "-   hashcat -m %-6s %d hash(es) -> %d cracked%s\n",
             $mode, scalar @v,
-            scalar(grep { $read{hashcat}{ $_->{id} }{ $_->{vi} } } @v),
+            scalar(grep { $read_here{ $_->{id} }{ $_->{vi} } } @v),
             ($code == -2 ? ' [TIMEOUT]' : '') if $verbose;
     }
 }
@@ -631,6 +642,17 @@ if ($want{mdxfind} && $job{mdxfind}) {
             }
         }
 
+        # %read_here is THIS identifier's reads. %read is the tool's, across
+        # every identifier in the run, because that is what reads_in means --
+        # "which tools were proven to read this string". Counting the report
+        # line off %read credited an identifier with vectors an earlier one had
+        # read: measured 2026-09-05, md5-md5-pass-salt printed
+        # "dynamic_6  5 hash(es) -> 5 cracked" when dynamic_6 took 4 and
+        # dynamic_2006, which ran before it, took the fifth. Promotion is
+        # unaffected -- it is per identifier, off %cracked -- but this line is
+        # the human check on a tier, so it has to answer the question it asks.
+        my %read_here;
+
         # Output lines look like "MD5x01 <hash>:<plain>". The suffix is the
         # iteration that actually matched and is part of the identity, so a
         # vector that falls at x01 does NOT verify an entry declaring x02 --
@@ -646,6 +668,7 @@ if ($want{mdxfind} && $job{mdxfind}) {
                 next unless mx_echo_is($rest, $vec);
                 $cracked{mdxfind}{ $vec->{id} }{$type} = 1;
                 $read{mdxfind}{ $vec->{id} }{ $vec->{vi} } = 1;
+                $read_here{ $vec->{id} }{ $vec->{vi} } = 1;
             }
         }
         # SOLO FALLBACK: mdxfind does not always echo the string it was GIVEN,
@@ -705,6 +728,7 @@ if ($want{mdxfind} && $job{mdxfind}) {
             next unless $found;
             $cracked{mdxfind}{ $vec->{id} }{$type} = 1;
             $read{mdxfind}{ $vec->{id} }{ $vec->{vi} } = 1;
+            $read_here{ $vec->{id} }{ $vec->{vi} } = 1;
         }
 
         # TRANSCODE FALLBACK, third and last. Same shape and same guarantee as
@@ -756,7 +780,7 @@ if ($want{mdxfind} && $job{mdxfind}) {
         }
         printf STDERR "-   mdxfind %-24s i=%s %d hash(es) -> %d cracked%s\n",
             $type, $it, scalar @v,
-            scalar(grep { $read{mdxfind}{ $_->{id} }{ $_->{vi} } } @v),
+            scalar(grep { $read_here{ $_->{id} }{ $_->{vi} } } @v),
             ($code == -2 ? ' [TIMEOUT]' : '') if $verbose;
     }
 }
@@ -860,10 +884,21 @@ if ($want{john} && $job{john}) {
             next if $enc_used && $vec->{pass} =~ /[^\x20-\x7e]/;
             $won{"$vec->{hash}\0$vec->{pass}"} = 1;
         }
+        # %read_here is THIS identifier's reads. %read is the tool's, across
+        # every identifier in the run, because that is what reads_in means --
+        # "which tools were proven to read this string". Counting the report
+        # line off %read credited an identifier with vectors an earlier one had
+        # read: measured 2026-09-05, md5-md5-pass-salt printed
+        # "dynamic_6  5 hash(es) -> 5 cracked" when dynamic_6 took 4 and
+        # dynamic_2006, which ran before it, took the fifth. Promotion is
+        # unaffected -- it is per identifier, off %cracked -- but this line is
+        # the human check on a tier, so it has to answer the question it asks.
+        my %read_here;
         for my $vec (@v) {
             next unless $won{"$vec->{hash}\0$vec->{pass}"};
             $cracked{john}{ $vec->{id} }{$label} = 1;
             $read{john}{ $vec->{id} }{ $vec->{vi} } = 1;
+            $read_here{ $vec->{id} }{ $vec->{vi} } = 1;
         }
         if ($code == -2 || $enc_refused) {
             $failed_job{john}{$label} = $enc_refused ? -3 : $code;
@@ -871,7 +906,7 @@ if ($want{john} && $job{john}) {
         }
         printf STDERR "-   john --format=%-22s %d hash(es) -> %d cracked%s\n",
             $label, scalar @v,
-            scalar(grep { $read{john}{ $_->{id} }{ $_->{vi} } } @v),
+            scalar(grep { $read_here{ $_->{id} }{ $_->{vi} } } @v),
             ($code == -2 ? ' [TIMEOUT]' : '') if $verbose;
     }
 }
