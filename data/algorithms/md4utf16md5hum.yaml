@@ -17,6 +17,12 @@ tools:
     verified_at: "2026-09-05"
     verified_with: "mdxfind RCS 1.545 (2026/08/29)"
     note: "mdxfind's own published example for this identifier, recovered by mdxfind at this identifier with mdxfind's own published plaintext."
+  hashpipe:
+    types: ["MD4UTF16MD5HUM"]
+    verified: "vector"
+    verified_at: "2026-09-05"
+    verified_with: "hashpipe RCS 1.193 (2026/09/05)"
+    note: "hashpipe e575 MD4UTF16MD5HUM. verified with hashpipe -c, which pins each line to its own leading TYPE label and runs no detection, at -t 1 and with the emitted label compared against the one asked for. Both precautions matter on this build: -m does not restrict what a recognised wrapper reaches, and results vary with the thread count. No iterations: is recorded from hashpipe -- the suffixes are different quantities and this repository follows mdxfind for that field."
   crack:
     supported: false
 vectors:

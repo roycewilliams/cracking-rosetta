@@ -18,6 +18,12 @@ tools:
     verified: "vector"
     verified_at: "2026-09-04"
     verified_with: "mdxfind"
+  hashpipe:
+    types: ["MD5UCBASE64MD5RAW"]
+    verified: "vector"
+    verified_at: "2026-09-05"
+    verified_with: "hashpipe RCS 1.193 (2026/09/05)"
+    note: "hashpipe e375 MD5UCBASE64MD5RAW. verified with hashpipe -c, which pins each line to its own leading TYPE label and runs no detection, at -t 1 and with the emitted label compared against the one asked for. Both precautions matter on this build: -m does not restrict what a recognised wrapper reaches, and results vary with the thread count. No iterations: is recorded from hashpipe -- the suffixes are different quantities and this repository follows mdxfind for that field."
   crack:
     supported: false
 vectors:

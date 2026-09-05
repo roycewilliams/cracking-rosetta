@@ -190,7 +190,7 @@ A few that carry a vector, so a candidate identifier can be tested at once, one 
 
 All 90: filter `mdxfind_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
 
-## 4. Identifiers with no row here (73)
+## 4. Identifiers with no row here (39)
 
 Whole algorithms rather than gaps in a row. Each is an identifier a tool
 publishes and this table does not answer to, so somebody arriving by it lands
@@ -241,26 +241,11 @@ john's own `src/*_fmt_plug.c` test arrays carry a vector for nearly every format
 * `wpapsk-opencl`
 * `wpapsk-pmk-opencl`
 
-### hashpipe: 49 with no row
+### hashpipe: 15 with no row
 
 hashpipe ships a self-test vector for every registered type; `hashpipe -N` prints the table and `-G` generates one where a type has none.
 
-* `BMW224` - e56
-* `BMW256` - e57
-* `MD5MD5HUM` - e363
-* `SHA1MD5HUM` - e364
-* `SHA1SHA1HUM` - e365
-* `MD5SHA1HUM` - e366
-* `MD5UCBASE64MD5RAW` - e375
-* `MD5SHA1MD5HUM` - e378
-* `MD5DSALT` - e408
-* `MD5SPECAM` - e435
-* `YAF-SHA1` - e459
-* `SHA256UC` - e488
 * `SHA1SALTCX` - e521
-* `MD4UTF16MD5HUM` - e575
-* `MD4UTF16SHA1HUM` - e576
-* `SHA1SHA256UCxSHA256` - e582
 * `SHA1SHA256TRUNC` - e622
 * `SHA1SHA256TRUNCMD5` - e623
 * `SHA1SHA1TRUNC` - e626
@@ -270,6 +255,9 @@ hashpipe ships a self-test vector for every registered type; `hashpipe -N` print
 * `SHA1MD6TRUNC` - e644
 * `SHA1WRLUCTRUNC` - e653
 * `SHA1SHA1UCTRUNC` - e661
-
-All 49 are listed by `tools/validate.pl -v`.
+* `SHA1WRLUCTRUNCSALT` - e672
+* `SHA1SHA512UCTRUNC` - e689
+* `SHA1SHA3-256TRUNC` - e710
+* `SHA1SHA384TRUNC` - e745
+* `SHA1RMD160TRUNC` - e746
 

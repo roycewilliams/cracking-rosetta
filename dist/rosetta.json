@@ -2606,8 +2606,11 @@
          "hashcat_salted" : "",
          "hashcat_speed" : "",
          "hashpipe" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "ARGON2MD5"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "argon2md5",
          "john" : {
@@ -2636,7 +2639,7 @@
          "status" : "needs-review",
          "tool_note" : {
             "hashcat" : "",
-            "hashpipe" : "",
+            "hashpipe" : "hashpipe e1020 ARGON2MD5. verified with hashpipe -c, which pins each line to its own leading TYPE label and runs no detection, at -t 1 and with the emitted label compared against the one asked for. Both precautions matter on this build: -m does not restrict what a recognised wrapper reaches, and results vary with the thread count. No iterations: is recorded from hashpipe -- the suffixes are different quantities and this repository follows mdxfind for that field.",
             "john" : "",
             "mdxfind" : ""
          },
@@ -3033,8 +3036,11 @@
          "hashcat_salted" : "",
          "hashcat_speed" : "",
          "hashpipe" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "GOST12256CRYPT"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "astra-linux-gost12256hash",
          "john" : {
@@ -3067,7 +3073,7 @@
          "status" : "ok",
          "tool_note" : {
             "hashcat" : "",
-            "hashpipe" : "",
+            "hashpipe" : "hashpipe e1025 GOST12256CRYPT. verified with hashpipe -c, which pins each line to its own leading TYPE label and runs no detection, at -t 1 and with the emitted label compared against the one asked for. Both precautions matter on this build: -m does not restrict what a recognised wrapper reaches, and results vary with the thread count. No iterations: is recorded from hashpipe -- the suffixes are different quantities and this repository follows mdxfind for that field.",
             "john" : "john's own published example ciphertext for this format, recovered by john under this format. john publishes no plaintext, so the plaintext was found by handing john its own example and a candidate list -- what john recovered IS the plaintext, by construction.",
             "mdxfind" : "mdxfind e1025 GOST12256CRYPT. Added 2026-09-05: no mdxfind block existed on this row and mdxfind has a type for this algorithm."
          },
@@ -6592,8 +6598,11 @@
          "hashcat_salted" : "",
          "hashcat_speed" : "",
          "hashpipe" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "BMW224"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "bmw224",
          "john" : {
@@ -6622,7 +6631,7 @@
          "status" : "ok",
          "tool_note" : {
             "hashcat" : "no mode. Swept the 6 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-03 (tools/discover-hashcat.pl --all, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
-            "hashpipe" : "",
+            "hashpipe" : "hashpipe e56 BMW224. verified with hashpipe -c, which pins each line to its own leading TYPE label and runs no detection, at -t 1 and with the emitted label compared against the one asked for. Both precautions matter on this build: -m does not restrict what a recognised wrapper reaches, and results vary with the thread count. No iterations: is recorded from hashpipe -- the suffixes are different quantities and this repository follows mdxfind for that field.",
             "john" : "no format. Swept the 29 format(s) whose own valid() accepts this entry's own vector, as john --show=left reports them, on 2026-09-04 (a tools/discover-john.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. For john the control is also per ENTRY and not only per shape: every format counted above is one whose own loader ACCEPTED this hash, so each was asked this exact question and answered no. A format that cannot parse the hash is not counted at all, and an entry no format can parse is reported as unsearched rather than decided. Every applicable format ran to completion; a format killed at the timeout is counted as untested and withholds this verdict. No john format name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if john gains one, this becomes a mapping.",
             "mdxfind" : ""
          },
@@ -6650,8 +6659,11 @@
          "hashcat_salted" : "",
          "hashcat_speed" : "",
          "hashpipe" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "BMW256"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "bmw256",
          "john" : {
@@ -6680,7 +6692,7 @@
          "status" : "ok",
          "tool_note" : {
             "hashcat" : "no mode. Swept the 10 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-03 (tools/discover-hashcat.pl --all, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
-            "hashpipe" : "",
+            "hashpipe" : "hashpipe e57 BMW256. verified with hashpipe -c, which pins each line to its own leading TYPE label and runs no detection, at -t 1 and with the emitted label compared against the one asked for. Both precautions matter on this build: -m does not restrict what a recognised wrapper reaches, and results vary with the thread count. No iterations: is recorded from hashpipe -- the suffixes are different quantities and this repository follows mdxfind for that field.",
             "john" : "no format. Swept the 56 format(s) whose own valid() accepts this entry's own vector, as john --show=left reports them, on 2026-09-04 (a tools/discover-john.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. For john the control is also per ENTRY and not only per shape: every format counted above is one whose own loader ACCEPTED this hash, so each was asked this exact question and answered no. A format that cannot parse the hash is not counted at all, and an entry no format can parse is reported as unsearched rather than decided. Every applicable format ran to completion; a format killed at the timeout is counted as untested and withholds this verdict. No john format name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if john gains one, this becomes a mapping.",
             "mdxfind" : ""
          },
@@ -11421,8 +11433,11 @@
          "hashcat_salted" : "",
          "hashcat_speed" : "",
          "hashpipe" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "MD5USERMD5PASSSALT"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "dynamic-15",
          "john" : {
@@ -11454,7 +11469,7 @@
          "status" : "ok",
          "tool_note" : {
             "hashcat" : "",
-            "hashpipe" : "",
+            "hashpipe" : "hashpipe e1011 MD5USERMD5PASSSALT. verified with hashpipe -c, which pins each line to its own leading TYPE label and runs no detection, at -t 1 and with the emitted label compared against the one asked for. Both precautions matter on this build: -m does not restrict what a recognised wrapper reaches, and results vary with the thread count. No iterations: is recorded from hashpipe -- the suffixes are different quantities and this repository follows mdxfind for that field.",
             "john" : "john's own published example ciphertext for this format, recovered by john under this format. john publishes no plaintext, so the plaintext was found by handing john its own example and a candidate list -- what john recovered IS the plaintext, by construction.",
             "mdxfind" : "mdxfind e1011 MD5USERMD5PASSSALT, reached by rewriting this row's vector into mdxfind's serialization: john writes $dynamic_15$<digest>$<salt>$$U<user>; mdxfind reads <digest>:<salt>:<user>. WITHDRAWN 2026-09-05 and kept below, because this repository published it. That sweep ran against mdxfind RCS 1.545 with 1002 types and could only ever have offered it the john-form string; the inventory here is now RCS 1.576 with 1027. Superseded note follows. || no type. Swept all 1002 mdxfind types on 2026-09-03 (a tools/discover-mdxfind.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable type ran to completion; a type killed at the timeout is counted as untested and withholds this verdict. No mdxfind type name matches any identifier this entry publishes either, normalized by the separator-drift rule. Corroborated by hashpipe, a second binary built from the same catalog: handed this entry's own hash and plaintext it names no type at all. It is the more direct instrument -- it recomputes rather than cracking -- and on this corpus it named a type for 58 entries the sweep alone called silent. This is the absence of an IDENTIFIER, not of the algorithm: if mdxfind gains one, this becomes a mapping."
          },
@@ -12251,8 +12266,11 @@
          "hashcat_salted" : "",
          "hashcat_speed" : "",
          "hashpipe" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "POSTOFFICE"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "dynamic-18",
          "john" : {
@@ -12284,7 +12302,7 @@
          "status" : "ok",
          "tool_note" : {
             "hashcat" : "",
-            "hashpipe" : "",
+            "hashpipe" : "hashpipe e1009 POSTOFFICE. verified with hashpipe -c, which pins each line to its own leading TYPE label and runs no detection, at -t 1 and with the emitted label compared against the one asked for. Both precautions matter on this build: -m does not restrict what a recognised wrapper reaches, and results vary with the thread count. No iterations: is recorded from hashpipe -- the suffixes are different quantities and this repository follows mdxfind for that field.",
             "john" : "john's own published example ciphertext for this format, recovered by john under this format. john publishes no plaintext, so the plaintext was found by handing john its own example and a candidate list -- what john recovered IS the plaintext, by construction.",
             "mdxfind" : "mdxfind e1009 POSTOFFICE, reached by rewriting this row's vector into mdxfind's serialization: john writes $dynamic_18$<digest>$<salt>; mdxfind reads <digest>:<salt>. WITHDRAWN 2026-09-05 and kept below, because this repository published it. That sweep ran against mdxfind RCS 1.545 with 1002 types and could only ever have offered it the john-form string; the inventory here is now RCS 1.576 with 1027. Superseded note follows. || no type. Swept all 1002 mdxfind types on 2026-09-03 (a tools/discover-mdxfind.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable type ran to completion; a type killed at the timeout is counted as untested and withholds this verdict. No mdxfind type name matches any identifier this entry publishes either, normalized by the separator-drift rule. Corroborated by hashpipe, a second binary built from the same catalog: handed this entry's own hash and plaintext it names no type at all. It is the more direct instrument -- it recomputes rather than cracking -- and on this corpus it named a type for 58 entries the sweep alone called silent. This is the absence of an IDENTIFIER, not of the algorithm: if mdxfind gains one, this becomes a mapping."
          },
@@ -12434,8 +12452,11 @@
          "hashcat_salted" : "",
          "hashcat_speed" : "",
          "hashpipe" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "MD4SALTPASS"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "dynamic-31",
          "john" : {
@@ -12467,7 +12488,7 @@
          "status" : "ok",
          "tool_note" : {
             "hashcat" : "",
-            "hashpipe" : "",
+            "hashpipe" : "hashpipe e1003 MD4SALTPASS. verified with hashpipe -c, which pins each line to its own leading TYPE label and runs no detection, at -t 1 and with the emitted label compared against the one asked for. Both precautions matter on this build: -m does not restrict what a recognised wrapper reaches, and results vary with the thread count. No iterations: is recorded from hashpipe -- the suffixes are different quantities and this repository follows mdxfind for that field.",
             "john" : "john's own published example ciphertext for this format, recovered by john under this format. john publishes no plaintext, so the plaintext was found by handing john its own example and a candidate list -- what john recovered IS the plaintext, by construction.",
             "mdxfind" : "mdxfind e1003 MD4SALTPASS, reached by rewriting this row's vector into mdxfind's serialization: john writes $dynamic_31$<digest>$<salt>; mdxfind reads <digest>:<salt>. WITHDRAWN 2026-09-05 and kept below, because this repository published it. That sweep ran against mdxfind RCS 1.545 with 1002 types and could only ever have offered it the john-form string; the inventory here is now RCS 1.576 with 1027. Superseded note follows. || no type. Swept all 1002 mdxfind types on 2026-09-03 (a tools/discover-mdxfind.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable type ran to completion; a type killed at the timeout is counted as untested and withholds this verdict. No mdxfind type name matches any identifier this entry publishes either, normalized by the separator-drift rule. Corroborated by hashpipe, a second binary built from the same catalog: handed this entry's own hash and plaintext it names no type at all. It is the more direct instrument -- it recomputes rather than cracking -- and on this corpus it named a type for 58 entries the sweep alone called silent. This is the absence of an IDENTIFIER, not of the algorithm: if mdxfind gains one, this becomes a mapping."
          },
@@ -12495,8 +12516,11 @@
          "hashcat_salted" : "",
          "hashcat_speed" : "",
          "hashpipe" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "MD4PASSSALT"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "dynamic-32",
          "john" : {
@@ -12528,7 +12552,7 @@
          "status" : "ok",
          "tool_note" : {
             "hashcat" : "",
-            "hashpipe" : "",
+            "hashpipe" : "hashpipe e1004 MD4PASSSALT. verified with hashpipe -c, which pins each line to its own leading TYPE label and runs no detection, at -t 1 and with the emitted label compared against the one asked for. Both precautions matter on this build: -m does not restrict what a recognised wrapper reaches, and results vary with the thread count. No iterations: is recorded from hashpipe -- the suffixes are different quantities and this repository follows mdxfind for that field.",
             "john" : "john's own published example ciphertext for this format, recovered by john under this format. john publishes no plaintext, so the plaintext was found by handing john its own example and a candidate list -- what john recovered IS the plaintext, by construction.",
             "mdxfind" : "mdxfind e1004 MD4PASSSALT, reached by rewriting this row's vector into mdxfind's serialization: john writes $dynamic_32$<digest>$<salt>; mdxfind reads <digest>:<salt>. WITHDRAWN 2026-09-05 and kept below, because this repository published it. That sweep ran against mdxfind RCS 1.545 with 1002 types and could only ever have offered it the john-form string; the inventory here is now RCS 1.576 with 1027. Superseded note follows. || no type. Swept all 1002 mdxfind types on 2026-09-03 (a tools/discover-mdxfind.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable type ran to completion; a type killed at the timeout is counted as untested and withholds this verdict. No mdxfind type name matches any identifier this entry publishes either, normalized by the separator-drift rule. Corroborated by hashpipe, a second binary built from the same catalog: handed this entry's own hash and plaintext it names no type at all. It is the more direct instrument -- it recomputes rather than cracking -- and on this corpus it named a type for 58 entries the sweep alone called silent. This is the absence of an IDENTIFIER, not of the algorithm: if mdxfind gains one, this becomes a mapping."
          },
@@ -12556,8 +12580,11 @@
          "hashcat_salted" : "",
          "hashcat_speed" : "",
          "hashpipe" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "SHA1UCUSERPASS"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "dynamic-35",
          "john" : {
@@ -12589,7 +12616,7 @@
          "status" : "ok",
          "tool_note" : {
             "hashcat" : "",
-            "hashpipe" : "",
+            "hashpipe" : "hashpipe e1005 SHA1UCUSERPASS. verified with hashpipe -c, which pins each line to its own leading TYPE label and runs no detection, at -t 1 and with the emitted label compared against the one asked for. Both precautions matter on this build: -m does not restrict what a recognised wrapper reaches, and results vary with the thread count. No iterations: is recorded from hashpipe -- the suffixes are different quantities and this repository follows mdxfind for that field.",
             "john" : "john's own published example ciphertext for this format, recovered by john under this format. john publishes no plaintext, so the plaintext was found by handing john its own example and a candidate list -- what john recovered IS the plaintext, by construction.",
             "mdxfind" : "mdxfind e1005 SHA1UCUSERPASS, reached by rewriting this row's vector into mdxfind's serialization: john writes $dynamic_35$<digest>$$U<user>; mdxfind reads <digest>:<user>. WITHDRAWN 2026-09-05 and kept below, because this repository published it. That sweep ran against mdxfind RCS 1.545 with 1002 types and could only ever have offered it the john-form string; the inventory here is now RCS 1.576 with 1027. Superseded note follows. || no type. Swept all 1002 mdxfind types on 2026-09-03 (a tools/discover-mdxfind.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable type ran to completion; a type killed at the timeout is counted as untested and withholds this verdict. No mdxfind type name matches any identifier this entry publishes either, normalized by the separator-drift rule. Corroborated by hashpipe, a second binary built from the same catalog: handed this entry's own hash and plaintext it names no type at all. It is the more direct instrument -- it recomputes rather than cracking -- and on this corpus it named a type for 58 entries the sweep alone called silent. This is the absence of an IDENTIFIER, not of the algorithm: if mdxfind gains one, this becomes a mapping."
          },
@@ -12617,8 +12644,11 @@
          "hashcat_salted" : "",
          "hashcat_speed" : "",
          "hashpipe" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "SHA1USERCOLONPASS"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "dynamic-36",
          "john" : {
@@ -12650,7 +12680,7 @@
          "status" : "ok",
          "tool_note" : {
             "hashcat" : "",
-            "hashpipe" : "",
+            "hashpipe" : "hashpipe e1006 SHA1USERCOLONPASS. verified with hashpipe -c, which pins each line to its own leading TYPE label and runs no detection, at -t 1 and with the emitted label compared against the one asked for. Both precautions matter on this build: -m does not restrict what a recognised wrapper reaches, and results vary with the thread count. No iterations: is recorded from hashpipe -- the suffixes are different quantities and this repository follows mdxfind for that field.",
             "john" : "john's own published example ciphertext for this format, recovered by john under this format. john publishes no plaintext, so the plaintext was found by handing john its own example and a candidate list -- what john recovered IS the plaintext, by construction.",
             "mdxfind" : "mdxfind e1006 SHA1USERCOLONPASS, reached by rewriting this row's vector into mdxfind's serialization: john writes $dynamic_36$<digest>$$U<user>; mdxfind reads <digest>:<user>. WITHDRAWN 2026-09-05 and kept below, because this repository published it. That sweep ran against mdxfind RCS 1.545 with 1002 types and could only ever have offered it the john-form string; the inventory here is now RCS 1.576 with 1027. Superseded note follows. || no type. Swept all 1002 mdxfind types on 2026-09-03 (a tools/discover-mdxfind.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable type ran to completion; a type killed at the timeout is counted as untested and withholds this verdict. No mdxfind type name matches any identifier this entry publishes either, normalized by the separator-drift rule. Corroborated by hashpipe, a second binary built from the same catalog: handed this entry's own hash and plaintext it names no type at all. It is the more direct instrument -- it recomputes rather than cracking -- and on this corpus it named a type for 58 entries the sweep alone called silent. This is the absence of an IDENTIFIER, not of the algorithm: if mdxfind gains one, this becomes a mapping."
          },
@@ -14271,8 +14301,11 @@
          "hashcat_salted" : "",
          "hashcat_speed" : "",
          "hashpipe" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "EPISERVER-SID"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "episerver-sid",
          "john" : {
@@ -14304,7 +14337,7 @@
          "status" : "ok",
          "tool_note" : {
             "hashcat" : "",
-            "hashpipe" : "",
+            "hashpipe" : "hashpipe e1014 EPISERVER-SID. verified with hashpipe -c, which pins each line to its own leading TYPE label and runs no detection, at -t 1 and with the emitted label compared against the one asked for. Both precautions matter on this build: -m does not restrict what a recognised wrapper reaches, and results vary with the thread count. No iterations: is recorded from hashpipe -- the suffixes are different quantities and this repository follows mdxfind for that field.",
             "john" : "john's own published example ciphertext for this format, recovered by john under this format. john publishes no plaintext, so the plaintext was found by handing john its own example and a candidate list -- what john recovered IS the plaintext, by construction.",
             "mdxfind" : "mdxfind e1014 EPISERVER-SID, reached by rewriting this row's vector into mdxfind's serialization: john writes 0x<SID> 0x<digest> space separated with the SID first; mdxfind reads <digest>:<SID>. WITHDRAWN 2026-09-05 and kept below, because this repository published it. That sweep ran against mdxfind RCS 1.545 with 1002 types and could only ever have offered it the john-form string; the inventory here is now RCS 1.576 with 1027. Superseded note follows. || no type. Swept all 1002 mdxfind types on 2026-09-03 (a tools/discover-mdxfind.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable type ran to completion; a type killed at the timeout is counted as untested and withholds this verdict. No mdxfind type name matches any identifier this entry publishes either, normalized by the separator-drift rule. Corroborated by hashpipe, a second binary built from the same catalog: handed this entry's own hash and plaintext it names no type at all. It is the more direct instrument -- it recomputes rather than cracking -- and on this corpus it named a type for 58 entries the sweep alone called silent. This is the absence of an IDENTIFIER, not of the algorithm: if mdxfind gains one, this becomes a mapping."
          },
@@ -24634,8 +24667,11 @@
          "hashcat_salted" : "",
          "hashcat_speed" : "",
          "hashpipe" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "IPB2"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "invision-power-board-2-x",
          "john" : {
@@ -24667,7 +24703,7 @@
          "status" : "ok",
          "tool_note" : {
             "hashcat" : "",
-            "hashpipe" : "",
+            "hashpipe" : "hashpipe e1010 IPB2. verified with hashpipe -c, which pins each line to its own leading TYPE label and runs no detection, at -t 1 and with the emitted label compared against the one asked for. Both precautions matter on this build: -m does not restrict what a recognised wrapper reaches, and results vary with the thread count. No iterations: is recorded from hashpipe -- the suffixes are different quantities and this repository follows mdxfind for that field.",
             "john" : "john's own published example ciphertext for this format, recovered by john under this format. john publishes no plaintext, so the plaintext was found by handing john its own example and a candidate list -- what john recovered IS the plaintext, by construction.",
             "mdxfind" : "mdxfind e1010 IPB2, reached by rewriting this row's vector into mdxfind's serialization: john writes $IPB2$<salt>$<digest> with the SALT first; mdxfind reads <digest>:<salt>. WITHDRAWN 2026-09-05 and kept below, because this repository published it. That sweep ran against mdxfind RCS 1.545 with 1002 types and could only ever have offered it the john-form string; the inventory here is now RCS 1.576 with 1027. Superseded note follows. || no type. Swept all 1002 mdxfind types on 2026-09-03 (a tools/discover-mdxfind.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable type ran to completion; a type killed at the timeout is counted as untested and withholds this verdict. No mdxfind type name matches any identifier this entry publishes either, normalized by the separator-drift rule. Corroborated by hashpipe, a second binary built from the same catalog: handed this entry's own hash and plaintext it names no type at all. It is the more direct instrument -- it recomputes rather than cracking -- and on this corpus it named a type for 58 entries the sweep alone called silent. This is the absence of an IDENTIFIER, not of the algorithm: if mdxfind gains one, this becomes a mapping."
          },
@@ -31618,8 +31654,11 @@
          "hashcat_salted" : "",
          "hashcat_speed" : "",
          "hashpipe" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "MD4UTF16MD5HUM"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "md4utf16md5hum",
          "john" : {
@@ -31648,7 +31687,7 @@
          "status" : "needs-review",
          "tool_note" : {
             "hashcat" : "",
-            "hashpipe" : "",
+            "hashpipe" : "hashpipe e575 MD4UTF16MD5HUM. verified with hashpipe -c, which pins each line to its own leading TYPE label and runs no detection, at -t 1 and with the emitted label compared against the one asked for. Both precautions matter on this build: -m does not restrict what a recognised wrapper reaches, and results vary with the thread count. No iterations: is recorded from hashpipe -- the suffixes are different quantities and this repository follows mdxfind for that field.",
             "john" : "",
             "mdxfind" : "mdxfind's own published example for this identifier, recovered by mdxfind at this identifier with mdxfind's own published plaintext."
          },
@@ -32408,8 +32447,11 @@
          "hashcat_salted" : "",
          "hashcat_speed" : "",
          "hashpipe" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "MD4UTF16SHA1HUM"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "md4utf16sha1hum",
          "john" : {
@@ -32438,7 +32480,7 @@
          "status" : "needs-review",
          "tool_note" : {
             "hashcat" : "",
-            "hashpipe" : "",
+            "hashpipe" : "hashpipe e576 MD4UTF16SHA1HUM. verified with hashpipe -c, which pins each line to its own leading TYPE label and runs no detection, at -t 1 and with the emitted label compared against the one asked for. Both precautions matter on this build: -m does not restrict what a recognised wrapper reaches, and results vary with the thread count. No iterations: is recorded from hashpipe -- the suffixes are different quantities and this repository follows mdxfind for that field.",
             "john" : "",
             "mdxfind" : "mdxfind's own published example for this identifier, recovered by mdxfind at this identifier with mdxfind's own published plaintext."
          },
@@ -33198,8 +33240,11 @@
          "hashcat_salted" : "",
          "hashcat_speed" : "",
          "hashpipe" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "MD4UTF16SHA256x"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "md4utf16sha256x",
          "john" : {
@@ -33228,7 +33273,7 @@
          "status" : "needs-review",
          "tool_note" : {
             "hashcat" : "no mode. Swept the 12 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-03 (tools/discover-hashcat.pl --all, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
-            "hashpipe" : "",
+            "hashpipe" : "hashpipe e707 MD4UTF16SHA256x. verified with hashpipe -c, which pins each line to its own leading TYPE label and runs no detection, at -t 1 and with the emitted label compared against the one asked for. Both precautions matter on this build: -m does not restrict what a recognised wrapper reaches, and results vary with the thread count. No iterations: is recorded from hashpipe -- the suffixes are different quantities and this repository follows mdxfind for that field.",
             "john" : "no format. Swept the 7 format(s) whose own valid() accepts this entry's own vector, as john --show=left reports them, on 2026-09-04 (a tools/discover-john.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. For john the control is also per ENTRY and not only per shape: every format counted above is one whose own loader ACCEPTED this hash, so each was asked this exact question and answered no. A format that cannot parse the hash is not counted at all, and an entry no format can parse is reported as unsearched rather than decided. Every applicable format ran to completion; a format killed at the timeout is counted as untested and withholds this verdict. No john format name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if john gains one, this becomes a mapping.",
             "mdxfind" : ""
          },
@@ -44578,8 +44623,11 @@
          "hashcat_salted" : "",
          "hashcat_speed" : "",
          "hashpipe" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "MD5DSALT"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "md5dsalt",
          "john" : {
@@ -44608,7 +44656,7 @@
          "status" : "needs-review",
          "tool_note" : {
             "hashcat" : "",
-            "hashpipe" : "",
+            "hashpipe" : "hashpipe e408 MD5DSALT. verified with hashpipe -c, which pins each line to its own leading TYPE label and runs no detection, at -t 1 and with the emitted label compared against the one asked for. Both precautions matter on this build: -m does not restrict what a recognised wrapper reaches, and results vary with the thread count. No iterations: is recorded from hashpipe -- the suffixes are different quantities and this repository follows mdxfind for that field.",
             "john" : "",
             "mdxfind" : ""
          },
@@ -44758,8 +44806,11 @@
          "hashcat_salted" : "",
          "hashcat_speed" : "",
          "hashpipe" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "MD5MD5HUM"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "md5md5hum",
          "john" : {
@@ -44788,7 +44839,7 @@
          "status" : "needs-review",
          "tool_note" : {
             "hashcat" : "no mode. Swept the 29 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-03 (tools/discover-hashcat.pl --all, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
-            "hashpipe" : "",
+            "hashpipe" : "hashpipe e363 MD5MD5HUM. verified with hashpipe -c, which pins each line to its own leading TYPE label and runs no detection, at -t 1 and with the emitted label compared against the one asked for. Both precautions matter on this build: -m does not restrict what a recognised wrapper reaches, and results vary with the thread count. No iterations: is recorded from hashpipe -- the suffixes are different quantities and this repository follows mdxfind for that field.",
             "john" : "no format. Swept the 63 format(s) whose own valid() accepts this entry's own vector, as john --show=left reports them, on 2026-09-04 (a tools/discover-john.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. For john the control is also per ENTRY and not only per shape: every format counted above is one whose own loader ACCEPTED this hash, so each was asked this exact question and answered no. A format that cannot parse the hash is not counted at all, and an entry no format can parse is reported as unsearched rather than decided. Every applicable format ran to completion; a format killed at the timeout is counted as untested and withholds this verdict. No john format name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if john gains one, this becomes a mapping.",
             "mdxfind" : ""
          },
@@ -45737,8 +45788,11 @@
          "hashcat_salted" : "",
          "hashcat_speed" : "",
          "hashpipe" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "MD5SHA1HUM"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "md5sha1hum",
          "john" : {
@@ -45767,7 +45821,7 @@
          "status" : "needs-review",
          "tool_note" : {
             "hashcat" : "",
-            "hashpipe" : "",
+            "hashpipe" : "hashpipe e366 MD5SHA1HUM. verified with hashpipe -c, which pins each line to its own leading TYPE label and runs no detection, at -t 1 and with the emitted label compared against the one asked for. Both precautions matter on this build: -m does not restrict what a recognised wrapper reaches, and results vary with the thread count. No iterations: is recorded from hashpipe -- the suffixes are different quantities and this repository follows mdxfind for that field.",
             "john" : "",
             "mdxfind" : ""
          },
@@ -45856,8 +45910,11 @@
          "hashcat_salted" : "",
          "hashcat_speed" : "",
          "hashpipe" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "MD5SHA1MD5HUM"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "md5sha1md5hum",
          "john" : {
@@ -45886,7 +45943,7 @@
          "status" : "needs-review",
          "tool_note" : {
             "hashcat" : "",
-            "hashpipe" : "",
+            "hashpipe" : "hashpipe e378 MD5SHA1MD5HUM. verified with hashpipe -c, which pins each line to its own leading TYPE label and runs no detection, at -t 1 and with the emitted label compared against the one asked for. Both precautions matter on this build: -m does not restrict what a recognised wrapper reaches, and results vary with the thread count. No iterations: is recorded from hashpipe -- the suffixes are different quantities and this repository follows mdxfind for that field.",
             "john" : "",
             "mdxfind" : ""
          },
@@ -46652,8 +46709,11 @@
          "hashcat_salted" : "no",
          "hashcat_speed" : "fast",
          "hashpipe" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "MD5SHA1x"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "md5sha1x",
          "john" : {
@@ -46685,7 +46745,7 @@
          "status" : "needs-review",
          "tool_note" : {
             "hashcat" : "mode discovered by round-trip search, not by name",
-            "hashpipe" : "",
+            "hashpipe" : "hashpipe e702 MD5SHA1x. verified with hashpipe -c, which pins each line to its own leading TYPE label and runs no detection, at -t 1 and with the emitted label compared against the one asked for. Both precautions matter on this build: -m does not restrict what a recognised wrapper reaches, and results vary with the thread count. No iterations: is recorded from hashpipe -- the suffixes are different quantities and this repository follows mdxfind for that field.",
             "john" : "format discovered by round-trip search, not by name",
             "mdxfind" : ""
          },
@@ -46896,8 +46956,11 @@
          "hashcat_salted" : "",
          "hashcat_speed" : "",
          "hashpipe" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "MD5SPECAM"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "md5specam",
          "john" : {
@@ -46926,7 +46989,7 @@
          "status" : "ok",
          "tool_note" : {
             "hashcat" : "",
-            "hashpipe" : "",
+            "hashpipe" : "hashpipe e435 MD5SPECAM. verified with hashpipe -c, which pins each line to its own leading TYPE label and runs no detection, at -t 1 and with the emitted label compared against the one asked for. Both precautions matter on this build: -m does not restrict what a recognised wrapper reaches, and results vary with the thread count. No iterations: is recorded from hashpipe -- the suffixes are different quantities and this repository follows mdxfind for that field.",
             "john" : "",
             "mdxfind" : "special purpose and not for general use, per mdxfind's maintainer, and it emits nothing. Measured 2026-09-04, pinned with -M under -z: alone, with -s and with -u, stdout was empty in every case, and a run seeded from mdxfind's own regress/md5specamdef.txt produced nothing either. So MDXFIND can generate no vector for it and the mdxfind mapping cannot reach tier vector; that is a property of mdxfind's type rather than a gap here. Narrowed from \"this entry cannot reach tier vector\" on 2026-09-04: hashpipe ships an example for a type of the same name and it verifies, so the row now carries a vector. See notes: -- the two tools do not compute the same thing under this name, which does not touch the measurement above. The identifier is real and in mdxfind's type table, which is what the mapping records."
          },
@@ -47396,8 +47459,11 @@
          "hashcat_salted" : "",
          "hashcat_speed" : "",
          "hashpipe" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "MD5UCBASE64MD5RAW"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "md5ucbase64md5raw",
          "john" : {
@@ -47426,7 +47492,7 @@
          "status" : "needs-review",
          "tool_note" : {
             "hashcat" : "",
-            "hashpipe" : "",
+            "hashpipe" : "hashpipe e375 MD5UCBASE64MD5RAW. verified with hashpipe -c, which pins each line to its own leading TYPE label and runs no detection, at -t 1 and with the emitted label compared against the one asked for. Both precautions matter on this build: -m does not restrict what a recognised wrapper reaches, and results vary with the thread count. No iterations: is recorded from hashpipe -- the suffixes are different quantities and this repository follows mdxfind for that field.",
             "john" : "",
             "mdxfind" : ""
          },
@@ -60051,8 +60117,11 @@
          "hashcat_salted" : "",
          "hashcat_speed" : "",
          "hashpipe" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "RMD256"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "ripemd256",
          "john" : {
@@ -60084,7 +60153,7 @@
          "status" : "ok",
          "tool_note" : {
             "hashcat" : "no mode. Swept the 10 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-03 (tools/discover-hashcat.pl --all, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
-            "hashpipe" : "",
+            "hashpipe" : "hashpipe e1002 RMD256. verified with hashpipe -c, which pins each line to its own leading TYPE label and runs no detection, at -t 1 and with the emitted label compared against the one asked for. Both precautions matter on this build: -m does not restrict what a recognised wrapper reaches, and results vary with the thread count. No iterations: is recorded from hashpipe -- the suffixes are different quantities and this repository follows mdxfind for that field.",
             "john" : "format discovered by round-trip search, not by name",
             "mdxfind" : "type discovered by round-trip search, not by name"
          },
@@ -60813,8 +60882,11 @@
          "hashcat_salted" : "",
          "hashcat_speed" : "",
          "hashpipe" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "RVARY"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "rvary",
          "john" : {
@@ -60846,7 +60918,7 @@
          "status" : "ok",
          "tool_note" : {
             "hashcat" : "",
-            "hashpipe" : "",
+            "hashpipe" : "hashpipe e1012 RVARY. verified with hashpipe -c, which pins each line to its own leading TYPE label and runs no detection, at -t 1 and with the emitted label compared against the one asked for. Both precautions matter on this build: -m does not restrict what a recognised wrapper reaches, and results vary with the thread count. No iterations: is recorded from hashpipe -- the suffixes are different quantities and this repository follows mdxfind for that field.",
             "john" : "john's own published example ciphertext for this format, recovered by john under this format. john publishes no plaintext, so the plaintext was found by handing john its own example and a candidate list -- what john recovered IS the plaintext, by construction.",
             "mdxfind" : "mdxfind e1012 RVARY, reached by rewriting this row's vector into mdxfind's serialization: john writes $rvary$<digest>; mdxfind reads the bare digest. WITHDRAWN 2026-09-05 and kept below, because this repository published it. That sweep ran against mdxfind RCS 1.545 with 1002 types and could only ever have offered it the john-form string; the inventory here is now RCS 1.576 with 1027. Superseded note follows. || no type. Swept all 1002 mdxfind types on 2026-09-03 (a tools/discover-mdxfind.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable type ran to completion; a type killed at the timeout is counted as untested and withholds this verdict. No mdxfind type name matches any identifier this entry publishes either, normalized by the separator-drift rule. Corroborated by hashpipe, a second binary built from the same catalog: handed this entry's own hash and plaintext it names no type at all. It is the more direct instrument -- it recomputes rather than cracking -- and on this corpus it named a type for 58 entries the sweep alone called silent. This is the absence of an IDENTIFIER, not of the algorithm: if mdxfind gains one, this becomes a mapping."
          },
@@ -61443,8 +61515,11 @@
          "hashcat_salted" : "",
          "hashcat_speed" : "",
          "hashpipe" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "SAPCODVNH256"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "sapcodvnh256",
          "john" : {
@@ -61476,7 +61551,7 @@
          "status" : "needs-review",
          "tool_note" : {
             "hashcat" : "",
-            "hashpipe" : "",
+            "hashpipe" : "hashpipe e1016 SAPCODVNH256. verified with hashpipe -c, which pins each line to its own leading TYPE label and runs no detection, at -t 1 and with the emitted label compared against the one asked for. Both precautions matter on this build: -m does not restrict what a recognised wrapper reaches, and results vary with the thread count. No iterations: is recorded from hashpipe -- the suffixes are different quantities and this repository follows mdxfind for that field.",
             "john" : "format discovered by round-trip search, not by name",
             "mdxfind" : ""
          },
@@ -61504,8 +61579,11 @@
          "hashcat_salted" : "",
          "hashcat_speed" : "",
          "hashpipe" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "SAPCODVNH384"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "sapcodvnh384",
          "john" : {
@@ -61537,7 +61615,7 @@
          "status" : "needs-review",
          "tool_note" : {
             "hashcat" : "",
-            "hashpipe" : "",
+            "hashpipe" : "hashpipe e1017 SAPCODVNH384. verified with hashpipe -c, which pins each line to its own leading TYPE label and runs no detection, at -t 1 and with the emitted label compared against the one asked for. Both precautions matter on this build: -m does not restrict what a recognised wrapper reaches, and results vary with the thread count. No iterations: is recorded from hashpipe -- the suffixes are different quantities and this repository follows mdxfind for that field.",
             "john" : "format discovered by round-trip search, not by name",
             "mdxfind" : ""
          },
@@ -70303,8 +70381,11 @@
          "hashcat_salted" : "",
          "hashcat_speed" : "",
          "hashpipe" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "SHA1MD5HUM"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "sha1md5hum",
          "john" : {
@@ -70333,7 +70414,7 @@
          "status" : "needs-review",
          "tool_note" : {
             "hashcat" : "",
-            "hashpipe" : "",
+            "hashpipe" : "hashpipe e364 SHA1MD5HUM. verified with hashpipe -c, which pins each line to its own leading TYPE label and runs no detection, at -t 1 and with the emitted label compared against the one asked for. Both precautions matter on this build: -m does not restrict what a recognised wrapper reaches, and results vary with the thread count. No iterations: is recorded from hashpipe -- the suffixes are different quantities and this repository follows mdxfind for that field.",
             "john" : "",
             "mdxfind" : ""
          },
@@ -72316,8 +72397,11 @@
          "hashcat_salted" : "",
          "hashcat_speed" : "",
          "hashpipe" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "SHA1MD5UC1LC"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "sha1md5uc1lc",
          "john" : {
@@ -72346,7 +72430,7 @@
          "status" : "needs-review",
          "tool_note" : {
             "hashcat" : "no mode. Swept the 7 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-03 (tools/discover-hashcat.pl --all, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
-            "hashpipe" : "",
+            "hashpipe" : "hashpipe e731 SHA1MD5UC1LC. verified with hashpipe -c, which pins each line to its own leading TYPE label and runs no detection, at -t 1 and with the emitted label compared against the one asked for. Both precautions matter on this build: -m does not restrict what a recognised wrapper reaches, and results vary with the thread count. No iterations: is recorded from hashpipe -- the suffixes are different quantities and this repository follows mdxfind for that field.",
             "john" : "no format. Swept the 5 format(s) whose own valid() accepts this entry's own vector, as john --show=left reports them, on 2026-09-04 (a tools/discover-john.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. For john the control is also per ENTRY and not only per shape: every format counted above is one whose own loader ACCEPTED this hash, so each was asked this exact question and answered no. A format that cannot parse the hash is not counted at all, and an entry no format can parse is reported as unsearched rather than decided. Every applicable format ran to completion; a format killed at the timeout is counted as untested and withholds this verdict. No john format name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if john gains one, this becomes a mapping.",
             "mdxfind" : ""
          },
@@ -75421,8 +75505,11 @@
          "hashcat_salted" : "",
          "hashcat_speed" : "",
          "hashpipe" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "SHA1SHA1HUM"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "sha1sha1hum",
          "john" : {
@@ -75451,7 +75538,7 @@
          "status" : "needs-review",
          "tool_note" : {
             "hashcat" : "",
-            "hashpipe" : "",
+            "hashpipe" : "hashpipe e365 SHA1SHA1HUM. verified with hashpipe -c, which pins each line to its own leading TYPE label and runs no detection, at -t 1 and with the emitted label compared against the one asked for. Both precautions matter on this build: -m does not restrict what a recognised wrapper reaches, and results vary with the thread count. No iterations: is recorded from hashpipe -- the suffixes are different quantities and this repository follows mdxfind for that field.",
             "john" : "",
             "mdxfind" : ""
          },
@@ -78093,8 +78180,11 @@
          "hashcat_salted" : "",
          "hashcat_speed" : "",
          "hashpipe" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "SHA1SHA256UCxSHA256"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "sha1sha256ucxsha256",
          "john" : {
@@ -78123,7 +78213,7 @@
          "status" : "needs-review",
          "tool_note" : {
             "hashcat" : "no mode. Swept the 7 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-03 (tools/discover-hashcat.pl --all, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
-            "hashpipe" : "",
+            "hashpipe" : "hashpipe e582 SHA1SHA256UCxSHA256. verified with hashpipe -c, which pins each line to its own leading TYPE label and runs no detection, at -t 1 and with the emitted label compared against the one asked for. Both precautions matter on this build: -m does not restrict what a recognised wrapper reaches, and results vary with the thread count. No iterations: is recorded from hashpipe -- the suffixes are different quantities and this repository follows mdxfind for that field.",
             "john" : "no format. Swept the 5 format(s) whose own valid() accepts this entry's own vector, as john --show=left reports them, on 2026-09-04 (a tools/discover-john.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. For john the control is also per ENTRY and not only per shape: every format counted above is one whose own loader ACCEPTED this hash, so each was asked this exact question and answered no. A format that cannot parse the hash is not counted at all, and an entry no format can parse is reported as unsearched rather than decided. Every applicable format ran to completion; a format killed at the timeout is counted as untested and withholds this verdict. No john format name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if john gains one, this becomes a mapping.",
             "mdxfind" : ""
          },
@@ -78749,8 +78839,11 @@
          "hashcat_salted" : "",
          "hashcat_speed" : "",
          "hashpipe" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "SHA1SQL5MD5"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "sha1sql5md5",
          "john" : {
@@ -78779,7 +78872,7 @@
          "status" : "needs-review",
          "tool_note" : {
             "hashcat" : "",
-            "hashpipe" : "",
+            "hashpipe" : "hashpipe e760 SHA1SQL5MD5. verified with hashpipe -c, which pins each line to its own leading TYPE label and runs no detection, at -t 1 and with the emitted label compared against the one asked for. Both precautions matter on this build: -m does not restrict what a recognised wrapper reaches, and results vary with the thread count. No iterations: is recorded from hashpipe -- the suffixes are different quantities and this repository follows mdxfind for that field.",
             "john" : "",
             "mdxfind" : "mdxfind's own published example for this identifier, recovered by mdxfind at this identifier with mdxfind's own published plaintext."
          },
@@ -78807,8 +78900,11 @@
          "hashcat_salted" : "",
          "hashcat_speed" : "",
          "hashpipe" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "SHA1SQL5MD5MD5"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "sha1sql5md5md5",
          "john" : {
@@ -78837,7 +78933,7 @@
          "status" : "needs-review",
          "tool_note" : {
             "hashcat" : "",
-            "hashpipe" : "",
+            "hashpipe" : "hashpipe e761 SHA1SQL5MD5MD5. verified with hashpipe -c, which pins each line to its own leading TYPE label and runs no detection, at -t 1 and with the emitted label compared against the one asked for. Both precautions matter on this build: -m does not restrict what a recognised wrapper reaches, and results vary with the thread count. No iterations: is recorded from hashpipe -- the suffixes are different quantities and this repository follows mdxfind for that field.",
             "john" : "",
             "mdxfind" : "mdxfind's own published example for this identifier, recovered by mdxfind at this identifier with mdxfind's own published plaintext."
          },
@@ -81431,8 +81527,11 @@
          "hashcat_salted" : "",
          "hashcat_speed" : "",
          "hashpipe" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "SHA256UC"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "sha256uc",
          "john" : {
@@ -81461,7 +81560,7 @@
          "status" : "needs-review",
          "tool_note" : {
             "hashcat" : "",
-            "hashpipe" : "",
+            "hashpipe" : "hashpipe e488 SHA256UC. verified with hashpipe -c, which pins each line to its own leading TYPE label and runs no detection, at -t 1 and with the emitted label compared against the one asked for. Both precautions matter on this build: -m does not restrict what a recognised wrapper reaches, and results vary with the thread count. No iterations: is recorded from hashpipe -- the suffixes are different quantities and this repository follows mdxfind for that field.",
             "john" : "",
             "mdxfind" : ""
          },
@@ -96889,8 +96988,11 @@
          "hashcat_salted" : "",
          "hashcat_speed" : "",
          "hashpipe" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "YAF-SHA1"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "yaf-sha1",
          "john" : {
@@ -96919,7 +97021,7 @@
          "status" : "needs-review",
          "tool_note" : {
             "hashcat" : "",
-            "hashpipe" : "",
+            "hashpipe" : "hashpipe e459 YAF-SHA1. verified with hashpipe -c, which pins each line to its own leading TYPE label and runs no detection, at -t 1 and with the emitted label compared against the one asked for. Both precautions matter on this build: -m does not restrict what a recognised wrapper reaches, and results vary with the thread count. No iterations: is recorded from hashpipe -- the suffixes are different quantities and this repository follows mdxfind for that field.",
             "john" : "",
             "mdxfind" : ""
          },
