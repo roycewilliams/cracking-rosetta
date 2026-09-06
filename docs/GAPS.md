@@ -106,27 +106,27 @@ A few that carry a vector and a proven expression, so there is a definite constr
 
 All 210: filter `hashcat_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
 
-### mdxfind: 106 entries say nothing
+### mdxfind: 72 entries say nothing
 
 A few that carry a vector, so a candidate identifier can be tested at once, one per family:
 
-* [`pfx-p12`](index.html#pfx-p12) - `(.pfx, .p12)`
-* [`1password-agile-keychain`](index.html#1password-agile-keychain) - `1Password Agile Keychain`
-* [`1password-cloud-keychain`](index.html#1password-cloud-keychain) - `1Password Cloud Keychain`
 * [`1password-agilekeychain`](index.html#1password-agilekeychain) - `1Password, agilekeychain`
-* [`apple-dmg`](index.html#apple-dmg) - `Apple DMG`
-* [`battlenet`](index.html#battlenet) - `Battlenet`
-* [`bouncycastle`](index.html#bouncycastle) - `BouncyCastle`
-* [`cardano-encrypted-128-byte-secret-key-a-k-a-xprv`](index.html#cardano-encrypted-128-byte-secret-key-a-k-a-xprv) - `Cardano Encrypted 128-byte Secret Key (a.k.a XPrv)`
-* [`clearquest`](index.html#clearquest) - `ClearQuest`
 * [`django-sha-1`](index.html#django-sha-1) - `Django (SHA-1)`
-* [`dnssec-nsec3`](index.html#dnssec-nsec3) - `DNSSEC NSEC3`
 * [`domain-cached-credentials-dcc-ms-cache-nt`](index.html#domain-cached-credentials-dcc-ms-cache-nt) - `Domain Cached Credentials (DCC), MS Cache (NT)` (and 1 more starting `Domain`)
-* [`dynamic-1015`](index.html#dynamic-1015) - `dynamic_1015` (and 6 more starting `dynamic`)
-* [`enpass-password-manager`](index.html#enpass-password-manager) - `Enpass Password Manager`
-* [`freebsd-geli`](index.html#freebsd-geli) - `FreeBSD GELI`
+* [`dynamic-1030`](index.html#dynamic-1030) - `dynamic_1030`
+* [`gost-r-34-11-94`](index.html#gost-r-34-11-94) - `GOST R 34.11-94`
+* [`haval-128-4`](index.html#haval-128-4) - `HAVAL-128-4`
+* [`hmac-sha1`](index.html#hmac-sha1) - `HMAC-SHA1` (and 3 more starting `HMAC`)
+* [`kerberos-5-etype-23-tgs-rep-nt`](index.html#kerberos-5-etype-23-tgs-rep-nt) - `Kerberos 5, etype 23, TGS-REP (NT)`
+* [`lotus-notes-domino-8-5`](index.html#lotus-notes-domino-8-5) - `Lotus Notes/Domino 8.5`
+* [`murmurhash64a-truncated-zero-seed`](index.html#murmurhash64a-truncated-zero-seed) - `MurmurHash64A truncated (zero seed)`
+* [`lmv2-c-r`](index.html#lmv2-c-r) - `NETLMv2`
+* [`netntlmv1-netntlmv1-ess-nt`](index.html#netntlmv1-netntlmv1-ess-nt) - `NetNTLMv1 / NetNTLMv1+ESS (NT)` (and 1 more starting `NetNTLMv`)
+* [`netscreen`](index.html#netscreen) - `Netscreen`
+* [`password-safe-v2`](index.html#password-safe-v2) - `Password Safe v2`
+* [`pkzip-master-key`](index.html#pkzip-master-key) - `PKZIP Master Key` (and 1 more starting `PKZIP`)
 
-All 106: filter `mdxfind_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
+All 72: filter `mdxfind_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
 
 ## 4. hashcat modes with no row here (1)
 

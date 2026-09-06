@@ -29,9 +29,9 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | "MD5 authentication" HSRP, HSRPv2, VRRP, GLBP | **--** | `hsrp` (v) | no |  |
 | "MD5 based authentication" Dahua | **--** | `dahua` (v) | no |  |
 | "MD5 based authentication" VTP | **--** | `vtp` (v) | no |  |
-| (.pfx, .p12) | **--** | `pfx` (v) | **--** |  |
-| 1Password Agile Keychain | **--** | `agilekeychain` (v) | **--** |  |
-| 1Password Cloud Keychain | **--** | `cloudkeychain` (v) | **--** |  |
+| (.pfx, .p12) | **--** | `pfx` (v) | no |  |
+| 1Password Agile Keychain | **--** | `agilekeychain` (v) | no |  |
+| 1Password Cloud Keychain | **--** | `cloudkeychain` (v) | no |  |
 | 1Password, agilekeychain | `6600` (v) | **--** | **--** |  |
 | 1Password, cloudkeychain | `8200` (v) | **--** | no |  |
 | 1Password, mobilekeychain (1Password 8) | `31800` (v) | **--** | no |  |
@@ -57,7 +57,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | ANSIBLE-VAULT | `16900` (v) | `ansible`<br>`ansible-opencl` (v) | `ANSIBLE-VAULT` (v) |  |
 | Apache $apr1$ | `1600` (v) | `md5crypt`<br>`md5crypt-long`<br>`md5crypt-opencl` (v) | `APR1` (v) |  |
 | APFS | `18300` (v) | `FVDE`<br>`FVDE-opencl` (v) | `APFS` (v) |  |
-| Apple DMG | **--** | `dmg` (v) | **--** |  |
+| Apple DMG | **--** | `dmg` (v) | no |  |
 | Apple iWork '09 or newer | `23300` (v) | `iwork`<br>`iwork-opencl` (v) | `APPLE-IWORK` (v) |  |
 | Apple Secure Notes | `16200` (v) | `notes`<br>`notes-opencl` (v) | `APPLE-SECURE-NOTES` (v) |  |
 | APPLE-IWORK | `23300` (v) | no | `APPLE-IWORK` (v) |  |
@@ -83,7 +83,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | AXCRYPTSHA1 | `13300` (v) | **--** | `AXCRYPTSHA1` (v) | same as sha1-substr-0-32 (encoding) |
 | AzureAD | **--** | `AzureAD` (v) | no |  |
 | AZURESYNC | `12800` (v) | **--** | `AZURESYNC` (v) |  |
-| Battlenet | **--** | `WoWSRP` (v) | **--** |  |
+| Battlenet | **--** | `WoWSRP` (v) | no |  |
 | Bcrypt | `3200` (v) | `bcrypt`<br>`bcrypt-opencl` (v) | `BCRYPT` (v) |  |
 | bcrypt(md5($pass)) | `25600` (v) | no | `BCRYPTMD5` (v) |  |
 | bcrypt(md5($plain)) | `25600` (v) | no | `BCRYPTMD5` (v) |  |
@@ -134,10 +134,10 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | BMW256 | no | no | `BMW256` (v) |  |
 | BMW384 | no | no | `BMW384` (v) |  |
 | BMW512 | no | no | `BMW512` (v) |  |
-| BouncyCastle | **--** | `BKS` (v) | **--** |  |
+| BouncyCastle | **--** | `BKS` (v) | no |  |
 | BSDICRYPT | `12400` (v) | `bsdicrypt` (v) | `BSDICRYPT` (v) |  |
 | C/R | **--** | `MSCHAPv2` (v) | no |  |
-| Cardano Encrypted 128-byte Secret Key (a.k.a XPrv) | **--** | `cardano` (v) | **--** |  |
+| Cardano Encrypted 128-byte Secret Key (a.k.a XPrv) | **--** | `cardano` (v) | no |  |
 | ChaCha20 | `15400` (v) | **--** | no |  |
 | Cisco ASA | **--** | `asa-md5` (v) | `CISCOASA` (v) |  |
 | CISCO4 | `5700` (v) | `Raw-SHA256`<br>`raw-SHA256-opencl` (v) | `CISCO4` (v) |  |
@@ -146,7 +146,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | CISCOASA | `2410` (v) | `dynamic_20` (v) | `CISCOASA` (v) | same as md5-pass-salt (application) |
 | CISCOISE | `5720` (v) | `Iterated-SHA256`<br>`Iterated-SHA256-opencl` (v) | `CISCOISE` (v) |  |
 | CISCOPIX | `2400` (v) | `dynamic_19`<br>`pix-md5` (v) | `CISCOPIX` (v) |  |
-| ClearQuest | **--** | `cq` (v) | **--** |  |
+| ClearQuest | **--** | `cq` (v) | no |  |
 | CMIYC | **--** | **--** | `CMIYC` (v) |  |
 | COLDFUSION10 | `12600` (v) | `dynamic_1588` (v) | `COLDFUSION10` (v) |  |
 | CRAMMD5 | `10200` (v) | `HMAC-MD5` (v) | `CRAMMD5` (v) |  |
@@ -178,7 +178,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | Django | **--** | `Django` (v) | no |  |
 | Django (SHA-1) | `124` (v) | **--** | **--** | same as sha1-salt-pass (encoding) |
 | django-scrypt | **--** | `django-scrypt` (v) | no |  |
-| DNSSEC NSEC3 | **--** | `nsec3` (v) | **--** |  |
+| DNSSEC NSEC3 | **--** | `nsec3` (v) | `NSEC3` (v) |  |
 | Dogechain.info Wallet | `32500` (v) | **--** | no |  |
 | Domain Cached Credentials (DCC), MS Cache (NT) | `31500` (v) | no | **--** |  |
 | Domain Cached Credentials 2 (DCC2), MS Cache 2, (NT) | `31600` (v) | no | **--** |  |
@@ -201,19 +201,19 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | dynamic_1005 | **--** | `dynamic_1005` (v) | no |  |
 | dynamic_1006 | **--** | `dynamic_1006` (v) | no |  |
 | dynamic_1008 | **--** | `dynamic_1008` (v) | no |  |
-| dynamic_1015 | **--** | `dynamic_1015` (v) | **--** |  |
+| dynamic_1015 | **--** | `dynamic_1015` (v) | no |  |
 | dynamic_1029 | **--** | `dynamic_1029` (v) | no |  |
 | dynamic_1030 | **--** | `dynamic_1030` (v) | **--** |  |
 | dynamic_1031 | **--** | `dynamic_1031` (v) | no |  |
 | dynamic_1032 | **--** | `dynamic_1032` (v) | no |  |
-| dynamic_1034 | **--** | `dynamic_1034` (v) | **--** |  |
-| dynamic_1401 | **--** | `dynamic_1401` (v) | **--** |  |
+| dynamic_1034 | **--** | `dynamic_1034` (v) | `POSTGRESQL` (v) |  |
+| dynamic_1401 | **--** | `dynamic_1401` (v) | `SKYPE` (v) |  |
 | dynamic_15 | **--** | `dynamic_15` (v) | `MD5USERMD5PASSSALT` (v) |  |
 | dynamic_1505 | **--** | `dynamic_1505` (v) | `MD5PASSSALTMD5PASSSALT` (v) |  |
-| dynamic_1506 | **--** | `dynamic_1506` (v) | **--** |  |
-| dynamic_1507 | **--** | `dynamic_1507` (v) | **--** |  |
+| dynamic_1506 | **--** | `dynamic_1506` (v) | no |  |
+| dynamic_1507 | **--** | `dynamic_1507` (v) | no |  |
 | dynamic_1528 | **--** | `dynamic_1528` (v) | no |  |
-| dynamic_1529 | **--** | `dynamic_1529` (v) | **--** |  |
+| dynamic_1529 | **--** | `dynamic_1529` (v) | no |  |
 | dynamic_1550 | **--** | `dynamic_1550` (v) | no |  |
 | dynamic_1551 | **--** | `dynamic_1551` (v) | no |  |
 | dynamic_1552 | **--** | `dynamic_1552` (v) | no |  |
@@ -250,7 +250,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | ENCsecurity Datavault (MD5/no keychain) | `29930` (v) | `ENCDataVault-MD5` (v) | no |  |
 | ENCsecurity Datavault (PBKDF2/keychain) | `29920` (v) | `ENCDataVault-PBKDF2` (v) | no |  |
 | ENCsecurity Datavault (PBKDF2/no keychain) | `29910` (v) | `ENCDataVault-PBKDF2` (v) | no |  |
-| Enpass Password Manager | **--** | `enpass` (v) | **--** |  |
+| Enpass Password Manager | **--** | `enpass` (v) | no |  |
 | EPiServer | **--** | `EPiServer` (v) | `EPISERVER` (v) |  |
 | EPISERVER | `141` (v) | **--** | `EPISERVER` (v) |  |
 | Episerver 6.x < .NET 4 | `141` (v) | **--** | `EPISERVER` (v) |  |
@@ -265,7 +265,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | Flask Session Cookie ($salt.$salt.$pass) | `29100` (v) | **--** | no |  |
 | FORTIGATE | `7000` (v) | `Fortigate` (v) | `FORTIGATE` (v) |  |
 | FORTIGATE256 | `26300` (v) | `Fortigate256` (v) | `FORTIGATE256` (v) |  |
-| FreeBSD GELI | **--** | `geli` (v) | **--** |  |
+| FreeBSD GELI | **--** | `geli` (v) | no |  |
 | FUGUE224 | no | no | `FUGUE224` (v) |  |
 | FUGUE256 | no | no | `FUGUE256` (v) |  |
 | FUGUE384 | no | no | `FUGUE384` (v) |  |
@@ -297,7 +297,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | GRUB 2 | `7200` (v) | `PBKDF2-HMAC-SHA512`<br>`PBKDF2-HMAC-SHA512-opencl` (v) | `PBKDF2-SHA512` (v) |  |
 | H3C/Huawei/HPE | **--** | `h3c` (v) | `H3C` (v) |  |
 | Half MD5 | `5100` (v) | no | `MD5` (v) |  |
-| HalfLM C/R | **--** | `nethalflm` | **--** |  |
+| HalfLM C/R | **--** | `nethalflm` | no |  |
 | HAMSI224 | no | no | `HAMSI224` (v) |  |
 | HAMSI256 | no | no | `HAMSI256` (v) |  |
 | HAMSI384 | no | no | `HAMSI384` (v) |  |
@@ -433,7 +433,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | ISCSI-CHAP | `4800` (v) | **--** | `ISCSI-CHAP` (v) |  |
 | iTunes backup < 10.0 | `14700` (v) | `itunes-backup` (v) | no |  |
 | iTunes backup >= 10.0 | `14800` (v) | `itunes-backup` (v) | no |  |
-| Java KeyStore | **--** | `keystore` (v) | **--** |  |
+| Java KeyStore | **--** | `keystore` (v) | no |  |
 | Java Object hashCode() | `18700` (v) | **--** | no |  |
 | Jetico BestCrypt (.jbc) | **--** | `BestCrypt` (v) | no |  |
 | JH224 | no | no | `JH224` (v) |  |
@@ -489,14 +489,14 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | LEET-SHA512-WRL-USER | no | no | `LEET-SHA512-WRL-USER` (v) |  |
 | Linux Kernel Crypto API (2.4) | `14500` (v) | **--** | no |  |
 | LM | `3000` (v) | `LM`<br>`LM-opencl` (v) | `LM` (v) |  |
-| LM C/R | **--** | `netlm` (v) | **--** |  |
+| LM C/R | **--** | `netlm` (v) | no |  |
 | Lotus Notes/Domino 5 | `8600` (v) | `lotus5`<br>`lotus5-opencl` (v) | `DOMINO5` (v) |  |
 | Lotus Notes/Domino 8.5 | **--** | `lotus85` (v) | **--** |  |
 | LUFFA224 | no | no | `LUFFA224` (v) |  |
 | LUFFA256 | no | no | `LUFFA256` (v) |  |
 | LUFFA384 | no | no | `LUFFA384` (v) |  |
 | LUFFA512 | no | no | `LUFFA512` (v) |  |
-| LUKS | **--** | `LUKS` (v) | **--** |  |
+| LUKS | **--** | `LUKS` (v) | no |  |
 | LUKS v1 RIPEMD-160 + AES | `29541` (v) | **--** | no |  |
 | LUKS v1 RIPEMD-160 + Serpent | `29542` (v) | **--** | no |  |
 | LUKS v1 RIPEMD-160 + Twofish | `29543` (v) | **--** | no |  |
@@ -804,13 +804,13 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | MetaMask Wallet (needs all data, checks AES-GCM tag) | `26600` (v) | **--** | no |  |
 | MetaMask Wallet (short hash, plaintext check) | `26610` (v) | **--** | no |  |
 | Microsoft Money (2002 to Money Plus) | **--** | `money` (v) | no |  |
-| Monero Wallet | **--** | `Monero` (v) | **--** |  |
+| Monero Wallet | **--** | `Monero` (v) | no |  |
 | MONGODB-SHA1 | `24100` (v) | **--** | `MONGODB-SHA1` (v) |  |
 | MONGODB-SHA256 | `24200` (v) | **--** | `MONGODB-SHA256` (v) |  |
 | Mozilla key3.db | **--** | `Mozilla` (v) | no |  |
 | Mozilla key3.db | `26000` (v) | **--** | no |  |
 | Mozilla key4.db | `26100` (v) | **--** | no |  |
-| MS Cache Hash (DCC) | **--** | `mscash` (v) | **--** |  |
+| MS Cache Hash (DCC) | **--** | `mscash` (v) | `MSCACHE` (v) |  |
 | MS Office 2007 | `9400` (v) | `Office`<br>`office-opencl` (v) | no |  |
 | MS Office 2010 | `9500` (v) | `Office`<br>`office-opencl` (v) | no |  |
 | MS Office 2013 | `9600` (v) | `Office`<br>`office-opencl` (v) | no |  |
@@ -823,7 +823,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | MS Office <= 2003 $3/$4, SHA1 + RC4 | `9800` (v) | `oldoffice`<br>`oldoffice-opencl` (v) | no |  |
 | MS Office SheetProtection - legacy 16-bit verifier | no | no | no |  |
 | mscache($plain) | `1100` (v) | no | `MSCACHE` (v) |  |
-| MSCHAPv2 C/R | **--** | `mschapv2-naive` (v) | **--** |  |
+| MSCHAPv2 C/R | **--** | `mschapv2-naive` (v) | no |  |
 | MSONLINE | `33700` (v) | **--** | `MSONLINE` (v) |  |
 | MSSNTP | `31300` (v) | `timeroast`<br>`timeroast-opencl` (v) | `MSSNTP` (v) |  |
 | MSSQL2000 | `131` (v) | `mssql` (v) | `MSSQL2000` (v) |  |
@@ -860,12 +860,12 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | Nokia operator unlock | **--** | `SL3`<br>`SL3-opencl` (v) | no |  |
 | NSEC3 | `8300` (v) | **--** | `NSEC3` (v) |  |
 | NTLMH | `1000` (v) | `NT`<br>`NT-long`<br>`dynamic_33`<br>`NT-long-opencl`<br>`NT-opencl` (v) | `NTLMH` (v) | same as md4-utf16-le-utf-8-plain (naming); same as md4-utf16-plain (naming) |
-| NTLMv1 C/R | **--** | `netntlm-naive` (v) | **--** |  |
+| NTLMv1 C/R | **--** | `netntlm-naive` (v) | `NETNTLMV1` (v) |  |
 | NTLMv1 C/R | **--** | `netntlm` (v) | no |  |
 | Nuked-Klan CMS | **--** | `nk` (v) | no |  |
 | Open Document Format (ODF) 1.1 (SHA-1, Blowfish) | `18600` (v) | `ODF`<br>`ODF-opencl` (v) | no |  |
 | Open Document Format (ODF) 1.2 (SHA-256, AES) | `18400` (v) | `ODF`<br>`ODF-opencl` (v) | no |  |
-| OpenBSD-SoftRAID | **--** | `OpenBSD-SoftRAID` (v) | **--** |  |
+| OpenBSD-SoftRAID | **--** | `OpenBSD-SoftRAID` (v) | no |  |
 | OpenSSL "enc" encryption | **--** | `openssl-enc` (v) | no |  |
 | Oracle 10 | **--** | `oracle` (v) | no |  |
 | Oracle 10g-logon protocol | **--** | `o10glogon` (v) | no |  |
@@ -884,7 +884,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | Panama | no | `Panama`<br>`dynamic_320` (v) | `PANAMA` (v) | duplicate of panama |
 | PANAMA (2 iterations) | no | `dynamic_323` (v) | `PANAMA -i2` (v) |  |
 | PARALLEL | no | **--** | `PARALLEL` |  |
-| Password Manager | **--** | `STRIP` (v) | **--** |  |
+| Password Manager | **--** | `STRIP` (v) | no |  |
 | Password Safe | **--** | `pwsafe`<br>`pwsafe-opencl` (v) | no |  |
 | Password Safe v2 | `9000` (v) | **--** | **--** |  |
 | PBKDF1-SHA1 | `32900` (v) | **--** | `PBKDF1-SHA1` (v) |  |
@@ -932,7 +932,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | POSTGRESSCRAM256 | `28600` (v) | **--** | `POSTGRESSCRAM256` (v) |  |
 | PrestaShop | `11000` (v) | `dynamic_1017`<br>`dynamic_2004` (v) | `MD5SALTPASS` (v) |  |
 | Prim'X Zed! encrypted archives | **--** | `zed`<br>`zed-opencl` (v) | no |  |
-| Private Key (RSA/DSA/ECDSA/ED25519) | **--** | `PuTTY` (v) | **--** |  |
+| Private Key (RSA/DSA/ECDSA/ED25519) | **--** | `PuTTY` (v) | no |  |
 | progressencode($plain) | `26200` (v) | no | `PROGRESSENCODE` |  |
 | PS-TOKEN | `13500` (v) | no | `PS-TOKEN` (v) |  |
 | PSK | **--** | `IKE` (v) | no |  |
@@ -967,7 +967,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | RAR3-p (Compressed) | `23800` (v) | `rar`<br>`rar-opencl` (v) | no |  |
 | RAR3-p (Uncompressed) | `23700` (v) | `rar`<br>`rar-opencl` (v) | no |  |
 | RAR5 | `13000` (v) | `RAR5`<br>`RAR5-opencl` (v) | no |  |
-| Raw-Keccak | **--** | `Raw-Keccak` (v) | **--** |  |
+| Raw-Keccak | **--** | `Raw-Keccak` (v) | `KECCAK512` (v) |  |
 | Raw-MD5u | `70` (v) | `Raw-MD5u` (v) | `MD5UTF16LE` (v) |  |
 | Raw-SHA1-AxCrypt | no | `Raw-SHA1-AxCrypt` (v) | no |  |
 | Raw-SHA224 | `1300` (v) | `Raw-SHA224`<br>`dynamic_50` (v) | `SHA224` (v) | duplicate of sha224 |
@@ -978,7 +978,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | RC4 72-bit DropN | `33501` (v) | **--** | no |  |
 | REDHAT389DS | `10901` (v) | **--** | `REDHAT389DS` (v) |  |
 | Redmine | `4521` (v) | `dynamic_1501` (v) | `SHA1SALTSHA1PASS` (v) |  |
-| Restic Repository | **--** | `restic` (v) | **--** |  |
+| Restic Repository | **--** | `restic` (v) | no |  |
 | RIPEMD 128 | **--** | `ripemd-128` (v) | **--** |  |
 | RIPEMD 160 | **--** | `ripemd-160` (v) | **--** |  |
 | ripemd($plain) | no | no | `RIPEMD` (v) |  |
@@ -1469,11 +1469,11 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | TIGER2 | no | no | `TIGER2` (v) |  |
 | TOTP (HMAC-SHA1) | `18100` (v) | **--** | **--** |  |
 | Tripcode | `16000` (v) | `tripcode` (v) | no |  |
-| TrueCrypt AES/Twofish/Serpent | **--** | `tc_ripemd160boot` (v) | **--** |  |
+| TrueCrypt AES/Twofish/Serpent | **--** | `tc_ripemd160boot` (v) | no |  |
 | TrueCrypt AES256_XTS | **--** | `tc_ripemd160`<br>`TrueCrypt-opencl` (v) | no |  |
-| TrueCrypt AES256_XTS | **--** | `tc_sha512` (v) | **--** |  |
-| TrueCrypt AES256_XTS | **--** | `tc_whirlpool` (v) | **--** |  |
-| TrueCrypt AES256_XTS | **--** | `tc_aes_xts` (v) | **--** |  |
+| TrueCrypt AES256_XTS | **--** | `tc_sha512` (v) | no |  |
+| TrueCrypt AES256_XTS | **--** | `tc_whirlpool` (v) | no |  |
+| TrueCrypt AES256_XTS | **--** | `tc_aes_xts` (v) | no |  |
 | TrueCrypt RIPEMD160 + XTS 1024 bit | `29312` (v) | **--** | no |  |
 | TrueCrypt RIPEMD160 + XTS 1024 bit (legacy) | `6212` (v) | **--** | **--** |  |
 | TrueCrypt RIPEMD160 + XTS 1024 bit + boot-mode | `29342` (v) | **--** | no |  |

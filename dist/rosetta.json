@@ -330,7 +330,7 @@
          "legacy" : "",
          "mdxfind" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "mdxfind_salted" : "",
          "name" : "(.pfx, .p12)",
@@ -345,7 +345,7 @@
             "hashcat" : "",
             "hashpipe" : "",
             "john" : "",
-            "mdxfind" : ""
+            "mdxfind" : "no type. Swept all 1027 mdxfind types on 2026-09-06, in 4 separate runs over different corpora, (a tools/discover-mdxfind.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable type ran to completion; a type killed at the timeout is counted as untested and withholds this verdict. No mdxfind type name matches any identifier this entry publishes either, normalized by the separator-drift rule. Corroborated by hashpipe, a second binary built from the same catalog: handed this entry's own hash and plaintext it names no type at all. It is the more direct instrument -- it recomputes rather than cracking -- and on this corpus it named a type for 58 entries the sweep alone called silent. This is the absence of an IDENTIFIER, not of the algorithm: if mdxfind gains one, this becomes a mapping."
          },
          "vecs" : 1
       },
@@ -388,7 +388,7 @@
          "legacy" : "",
          "mdxfind" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "mdxfind_salted" : "",
          "name" : "1Password Agile Keychain",
@@ -403,7 +403,7 @@
             "hashcat" : "",
             "hashpipe" : "",
             "john" : "",
-            "mdxfind" : ""
+            "mdxfind" : "no type. Swept all 1027 mdxfind types on 2026-09-06, in 4 separate runs over different corpora, (a tools/discover-mdxfind.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable type ran to completion; a type killed at the timeout is counted as untested and withholds this verdict. No mdxfind type name matches any identifier this entry publishes either, normalized by the separator-drift rule. Corroborated by hashpipe, a second binary built from the same catalog: handed this entry's own hash and plaintext it names no type at all. It is the more direct instrument -- it recomputes rather than cracking -- and on this corpus it named a type for 58 entries the sweep alone called silent. This is the absence of an IDENTIFIER, not of the algorithm: if mdxfind gains one, this becomes a mapping."
          },
          "vecs" : 1
       },
@@ -446,7 +446,7 @@
          "legacy" : "",
          "mdxfind" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "mdxfind_salted" : "",
          "name" : "1Password Cloud Keychain",
@@ -461,7 +461,7 @@
             "hashcat" : "",
             "hashpipe" : "",
             "john" : "",
-            "mdxfind" : ""
+            "mdxfind" : "no type. Swept all 1027 mdxfind types on 2026-09-06, in 4 separate runs over different corpora, (a tools/discover-mdxfind.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable type ran to completion; a type killed at the timeout is counted as untested and withholds this verdict. No mdxfind type name matches any identifier this entry publishes either, normalized by the separator-drift rule. Corroborated by hashpipe, a second binary built from the same catalog: handed this entry's own hash and plaintext it names no type at all. It is the more direct instrument -- it recomputes rather than cracking -- and on this corpus it named a type for 58 entries the sweep alone called silent. This is the absence of an IDENTIFIER, not of the algorithm: if mdxfind gains one, this becomes a mapping."
          },
          "vecs" : 1
       },
@@ -2096,7 +2096,7 @@
          "legacy" : "",
          "mdxfind" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "mdxfind_salted" : "",
          "name" : "Apple DMG",
@@ -2111,7 +2111,7 @@
             "hashcat" : "",
             "hashpipe" : "",
             "john" : "",
-            "mdxfind" : ""
+            "mdxfind" : "no type. Swept all 1027 mdxfind types on 2026-09-06, in 4 separate runs over different corpora, (a tools/discover-mdxfind.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable type ran to completion; a type killed at the timeout is counted as untested and withholds this verdict. No mdxfind type name matches any identifier this entry publishes either, normalized by the separator-drift rule. Corroborated by hashpipe, a second binary built from the same catalog: handed this entry's own hash and plaintext it names no type at all. It is the more direct instrument -- it recomputes rather than cracking -- and on this corpus it named a type for 58 entries the sweep alone called silent. This is the absence of an IDENTIFIER, not of the algorithm: if mdxfind gains one, this becomes a mapping."
          },
          "vecs" : 1
       },
@@ -3751,7 +3751,7 @@
          "legacy" : "",
          "mdxfind" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "mdxfind_salted" : "",
          "name" : "Battlenet",
@@ -3766,7 +3766,7 @@
             "hashcat" : "",
             "hashpipe" : "",
             "john" : "",
-            "mdxfind" : ""
+            "mdxfind" : "no type. Swept all 1027 mdxfind types on 2026-09-06, in 4 separate runs over different corpora, (a tools/discover-mdxfind.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable type ran to completion; a type killed at the timeout is counted as untested and withholds this verdict. No mdxfind type name matches any identifier this entry publishes either, normalized by the separator-drift rule. Corroborated by hashpipe, a second binary built from the same catalog: handed this entry's own hash and plaintext it names no type at all. It is the more direct instrument -- it recomputes rather than cracking -- and on this corpus it named a type for 58 entries the sweep alone called silent. This is the absence of an IDENTIFIER, not of the algorithm: if mdxfind gains one, this becomes a mapping."
          },
          "vecs" : 1
       },
@@ -6847,7 +6847,7 @@
          "legacy" : "",
          "mdxfind" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "mdxfind_salted" : "",
          "name" : "BouncyCastle",
@@ -6862,7 +6862,7 @@
             "hashcat" : "",
             "hashpipe" : "",
             "john" : "",
-            "mdxfind" : ""
+            "mdxfind" : "no type. Swept all 1027 mdxfind types on 2026-09-06, in 4 separate runs over different corpora, (a tools/discover-mdxfind.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable type ran to completion; a type killed at the timeout is counted as untested and withholds this verdict. No mdxfind type name matches any identifier this entry publishes either, normalized by the separator-drift rule. Corroborated by hashpipe, a second binary built from the same catalog: handed this entry's own hash and plaintext it names no type at all. It is the more direct instrument -- it recomputes rather than cracking -- and on this corpus it named a type for 58 entries the sweep alone called silent. This is the absence of an IDENTIFIER, not of the algorithm: if mdxfind gains one, this becomes a mapping."
          },
          "vecs" : 1
       },
@@ -7030,7 +7030,7 @@
          "legacy" : "",
          "mdxfind" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "mdxfind_salted" : "",
          "name" : "Cardano Encrypted 128-byte Secret Key (a.k.a XPrv)",
@@ -7045,7 +7045,7 @@
             "hashcat" : "",
             "hashpipe" : "",
             "john" : "",
-            "mdxfind" : ""
+            "mdxfind" : "no type. Swept all 1027 mdxfind types on 2026-09-06, in 4 separate runs over different corpora, (a tools/discover-mdxfind.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable type ran to completion; a type killed at the timeout is counted as untested and withholds this verdict. No mdxfind type name matches any identifier this entry publishes either, normalized by the separator-drift rule. Corroborated by hashpipe, a second binary built from the same catalog: handed this entry's own hash and plaintext it names no type at all. It is the more direct instrument -- it recomputes rather than cracking -- and on this corpus it named a type for 58 entries the sweep alone called silent. This is the absence of an IDENTIFIER, not of the algorithm: if mdxfind gains one, this becomes a mapping."
          },
          "vecs" : 1
       },
@@ -7620,7 +7620,7 @@
          "legacy" : "",
          "mdxfind" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "mdxfind_salted" : "",
          "name" : "ClearQuest",
@@ -7635,7 +7635,7 @@
             "hashcat" : "",
             "hashpipe" : "",
             "john" : "",
-            "mdxfind" : ""
+            "mdxfind" : "no type. Swept all 1027 mdxfind types on 2026-09-06, in 4 separate runs over different corpora, (a tools/discover-mdxfind.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable type ran to completion; a type killed at the timeout is counted as untested and withholds this verdict. No mdxfind type name matches any identifier this entry publishes either, normalized by the separator-drift rule. Corroborated by hashpipe, a second binary built from the same catalog: handed this entry's own hash and plaintext it names no type at all. It is the more direct instrument -- it recomputes rather than cracking -- and on this corpus it named a type for 58 entries the sweep alone called silent. This is the absence of an IDENTIFIER, not of the algorithm: if mdxfind gains one, this becomes a mapping."
          },
          "vecs" : 1
       },
@@ -9574,10 +9574,13 @@
          "john_work_factor" : "iteration count",
          "legacy" : "",
          "mdxfind" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "NSEC3"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
-         "mdxfind_salted" : "",
+         "mdxfind_salted" : "no",
          "name" : "DNSSEC NSEC3",
          "nesting_depth" : "",
          "notes" : "",
@@ -9590,7 +9593,7 @@
             "hashcat" : "",
             "hashpipe" : "",
             "john" : "",
-            "mdxfind" : ""
+            "mdxfind" : "Round-tripped on the TRANSCRIBED form, not on the vector as stored: this entry keeps its vector in another tool's serialization, which mdxfind's reader does not parse. mdxfind pinned with -h reproduced NSEC3 as \"hgmlgembs8j1dhkrmhbu1ggh3jmgkrjn:.example.com.:4141414141414141:100:www\", from data/mdxfind-transcodes.tsv. The plaintext is one this entry already stores, and the two strings are ONE piece of evidence written twice -- not two agreeing vectors."
          },
          "vecs" : 1
       },
@@ -10987,7 +10990,7 @@
          "legacy" : "",
          "mdxfind" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "mdxfind_salted" : "",
          "name" : "dynamic_1015",
@@ -11002,7 +11005,7 @@
             "hashcat" : "",
             "hashpipe" : "",
             "john" : "",
-            "mdxfind" : ""
+            "mdxfind" : "no type. Swept all 1027 mdxfind types on 2026-09-06, in 4 separate runs over different corpora, (a tools/discover-mdxfind.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable type ran to completion; a type killed at the timeout is counted as untested and withholds this verdict. No mdxfind type name matches any identifier this entry publishes either, normalized by the separator-drift rule. Corroborated by hashpipe, a second binary built from the same catalog: handed this entry's own hash and plaintext it names no type at all. It is the more direct instrument -- it recomputes rather than cracking -- and on this corpus it named a type for 58 entries the sweep alone called silent. This is the absence of an IDENTIFIER, not of the algorithm: if mdxfind gains one, this becomes a mapping."
          },
          "vecs" : 1
       },
@@ -11276,10 +11279,13 @@
          "john_work_factor" : "",
          "legacy" : "",
          "mdxfind" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "POSTGRESQL"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
-         "mdxfind_salted" : "",
+         "mdxfind_salted" : "no",
          "name" : "dynamic_1034",
          "nesting_depth" : "",
          "notes" : "",
@@ -11292,7 +11298,7 @@
             "hashcat" : "",
             "hashpipe" : "",
             "john" : "",
-            "mdxfind" : ""
+            "mdxfind" : "Round-tripped on the TRANSCRIBED form, not on the vector as stored: this entry keeps its vector in another tool's serialization, which mdxfind's reader does not parse. mdxfind pinned with -h reproduced POSTGRESQL as \"bd6fd49a627ecdbe4031b2d52d5748ab:postgres:openwall\", from data/mdxfind-transcodes.tsv. The plaintext is one this entry already stores, and the two strings are ONE piece of evidence written twice -- not two agreeing vectors."
          },
          "vecs" : 1
       },
@@ -11334,10 +11340,13 @@
          "john_work_factor" : "",
          "legacy" : "",
          "mdxfind" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "SKYPE"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
-         "mdxfind_salted" : "",
+         "mdxfind_salted" : "no",
          "name" : "dynamic_1401",
          "nesting_depth" : "",
          "notes" : "",
@@ -11350,7 +11359,7 @@
             "hashcat" : "",
             "hashpipe" : "",
             "john" : "",
-            "mdxfind" : ""
+            "mdxfind" : "Round-tripped on the TRANSCRIBED form, not on the vector as stored: this entry keeps its vector in another tool's serialization, which mdxfind's reader does not parse. mdxfind pinned with -h reproduced SKYPE as \"27f6a9d892475e6ce0391de8d2d893f7:username:password\", from data/mdxfind-transcodes.tsv. The plaintext is one this entry already stores, and the two strings are ONE piece of evidence written twice -- not two agreeing vectors."
          },
          "vecs" : 1
       },
@@ -11515,7 +11524,7 @@
          "legacy" : "",
          "mdxfind" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "mdxfind_salted" : "",
          "name" : "dynamic_1506",
@@ -11530,7 +11539,7 @@
             "hashcat" : "",
             "hashpipe" : "",
             "john" : "",
-            "mdxfind" : ""
+            "mdxfind" : "no type. Swept all 1027 mdxfind types on 2026-09-06, in 4 separate runs over different corpora, (a tools/discover-mdxfind.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable type ran to completion; a type killed at the timeout is counted as untested and withholds this verdict. No mdxfind type name matches any identifier this entry publishes either, normalized by the separator-drift rule. Corroborated by hashpipe, a second binary built from the same catalog: handed this entry's own hash and plaintext it names no type at all. It is the more direct instrument -- it recomputes rather than cracking -- and on this corpus it named a type for 58 entries the sweep alone called silent. This is the absence of an IDENTIFIER, not of the algorithm: if mdxfind gains one, this becomes a mapping."
          },
          "vecs" : 1
       },
@@ -11573,7 +11582,7 @@
          "legacy" : "",
          "mdxfind" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "mdxfind_salted" : "",
          "name" : "dynamic_1507",
@@ -11588,7 +11597,7 @@
             "hashcat" : "",
             "hashpipe" : "",
             "john" : "",
-            "mdxfind" : ""
+            "mdxfind" : "no type. Swept all 1027 mdxfind types on 2026-09-06, in 4 separate runs over different corpora, (a tools/discover-mdxfind.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable type ran to completion; a type killed at the timeout is counted as untested and withholds this verdict. No mdxfind type name matches any identifier this entry publishes either, normalized by the separator-drift rule. Corroborated by hashpipe, a second binary built from the same catalog: handed this entry's own hash and plaintext it names no type at all. It is the more direct instrument -- it recomputes rather than cracking -- and on this corpus it named a type for 58 entries the sweep alone called silent. This is the absence of an IDENTIFIER, not of the algorithm: if mdxfind gains one, this becomes a mapping."
          },
          "vecs" : 1
       },
@@ -11689,7 +11698,7 @@
          "legacy" : "",
          "mdxfind" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "mdxfind_salted" : "",
          "name" : "dynamic_1529",
@@ -11704,7 +11713,7 @@
             "hashcat" : "",
             "hashpipe" : "",
             "john" : "",
-            "mdxfind" : ""
+            "mdxfind" : "no type. Swept all 1027 mdxfind types on 2026-09-06, in 4 separate runs over different corpora, (a tools/discover-mdxfind.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable type ran to completion; a type killed at the timeout is counted as untested and withholds this verdict. No mdxfind type name matches any identifier this entry publishes either, normalized by the separator-drift rule. Corroborated by hashpipe, a second binary built from the same catalog: handed this entry's own hash and plaintext it names no type at all. It is the more direct instrument -- it recomputes rather than cracking -- and on this corpus it named a type for 58 entries the sweep alone called silent. This is the absence of an IDENTIFIER, not of the algorithm: if mdxfind gains one, this becomes a mapping."
          },
          "vecs" : 1
       },
@@ -13914,7 +13923,7 @@
          "legacy" : "",
          "mdxfind" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "mdxfind_salted" : "",
          "name" : "Enpass Password Manager",
@@ -13929,7 +13938,7 @@
             "hashcat" : "",
             "hashpipe" : "",
             "john" : "",
-            "mdxfind" : ""
+            "mdxfind" : "no type. Swept all 1027 mdxfind types on 2026-09-06, in 4 separate runs over different corpora, (a tools/discover-mdxfind.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable type ran to completion; a type killed at the timeout is counted as untested and withholds this verdict. No mdxfind type name matches any identifier this entry publishes either, normalized by the separator-drift rule. Corroborated by hashpipe, a second binary built from the same catalog: handed this entry's own hash and plaintext it names no type at all. It is the more direct instrument -- it recomputes rather than cracking -- and on this corpus it named a type for 58 entries the sweep alone called silent. This is the absence of an IDENTIFIER, not of the algorithm: if mdxfind gains one, this becomes a mapping."
          },
          "vecs" : 1
       },
@@ -14850,7 +14859,7 @@
          "legacy" : "",
          "mdxfind" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "mdxfind_salted" : "",
          "name" : "FreeBSD GELI",
@@ -14865,7 +14874,7 @@
             "hashcat" : "",
             "hashpipe" : "",
             "john" : "",
-            "mdxfind" : ""
+            "mdxfind" : "no type. Swept all 1027 mdxfind types on 2026-09-06, in 4 separate runs over different corpora, (a tools/discover-mdxfind.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable type ran to completion; a type killed at the timeout is counted as untested and withholds this verdict. No mdxfind type name matches any identifier this entry publishes either, normalized by the separator-drift rule. Corroborated by hashpipe, a second binary built from the same catalog: handed this entry's own hash and plaintext it names no type at all. It is the more direct instrument -- it recomputes rather than cracking -- and on this corpus it named a type for 58 entries the sweep alone called silent. This is the absence of an IDENTIFIER, not of the algorithm: if mdxfind gains one, this becomes a mapping."
          },
          "vecs" : 1
       },
@@ -16837,7 +16846,7 @@
          "legacy" : "",
          "mdxfind" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "mdxfind_salted" : "",
          "name" : "HalfLM C/R",
@@ -16852,7 +16861,7 @@
             "hashcat" : "",
             "hashpipe" : "",
             "john" : "NOT REPRODUCED HERE, and CORRECTED 2026-09-06 about why. john publishes this identifier and a worked example, which is what tier `upstream` means. The earlier note on this row said the local round trip failed because john publishes no plaintext for its example and the plaintext was not in the ~819 candidates harvested from john's source. That is wrong, and it sends a reader looking for a wordlist that cannot help. The plaintext is G3RG3P00!, this row already stores it, and john recovers it on the first try. What john returns is G3RG3P0 -- seven characters -- and it says so itself: \"Note: Passwords longer than 7 truncated (property of the hash)\". nethalflm is a TRUNCATING format, so the strict byte comparison that gates a tier is not satisfied and should not be: the vector is upstream's and correct, the comparison is correct, and they answer different questions. This is NOT the case-insensitive-plaintext relaxation, which applies only where john says FMT_CASE is clear. Re-running seed-orphans.pl on this format will not change it.",
-            "mdxfind" : ""
+            "mdxfind" : "no type. Swept all 1027 mdxfind types on 2026-09-06, in 4 separate runs over different corpora, (a tools/discover-mdxfind.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable type ran to completion; a type killed at the timeout is counted as untested and withholds this verdict. No mdxfind type name matches any identifier this entry publishes either, normalized by the separator-drift rule. Corroborated by hashpipe, a second binary built from the same catalog: handed this entry's own hash and plaintext it names no type at all. It is the more direct instrument -- it recomputes rather than cracking -- and on this corpus it named a type for 58 entries the sweep alone called silent. This is the absence of an IDENTIFIER, not of the algorithm: if mdxfind gains one, this becomes a mapping."
          },
          "vecs" : 1
       },
@@ -25341,7 +25350,7 @@
          "legacy" : "",
          "mdxfind" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "mdxfind_salted" : "",
          "name" : "Java KeyStore",
@@ -25356,7 +25365,7 @@
             "hashcat" : "",
             "hashpipe" : "",
             "john" : "",
-            "mdxfind" : ""
+            "mdxfind" : "no type. Swept all 1027 mdxfind types on 2026-09-06, in 4 separate runs over different corpora, (a tools/discover-mdxfind.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable type ran to completion; a type killed at the timeout is counted as untested and withholds this verdict. No mdxfind type name matches any identifier this entry publishes either, normalized by the separator-drift rule. Corroborated by hashpipe, a second binary built from the same catalog: handed this entry's own hash and plaintext it names no type at all. It is the more direct instrument -- it recomputes rather than cracking -- and on this corpus it named a type for 58 entries the sweep alone called silent. This is the absence of an IDENTIFIER, not of the algorithm: if mdxfind gains one, this becomes a mapping."
          },
          "vecs" : 1
       },
@@ -28800,7 +28809,7 @@
          "legacy" : "",
          "mdxfind" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "mdxfind_salted" : "",
          "name" : "LM C/R",
@@ -28815,7 +28824,7 @@
             "hashcat" : "",
             "hashpipe" : "",
             "john" : "",
-            "mdxfind" : ""
+            "mdxfind" : "no type. Swept all 1027 mdxfind types on 2026-09-06, in 4 separate runs over different corpora, (a tools/discover-mdxfind.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable type ran to completion; a type killed at the timeout is counted as untested and withholds this verdict. No mdxfind type name matches any identifier this entry publishes either, normalized by the separator-drift rule. Corroborated by hashpipe, a second binary built from the same catalog: handed this entry's own hash and plaintext it names no type at all. It is the more direct instrument -- it recomputes rather than cracking -- and on this corpus it named a type for 58 entries the sweep alone called silent. This is the absence of an IDENTIFIER, not of the algorithm: if mdxfind gains one, this becomes a mapping."
          },
          "vecs" : 1
       },
@@ -29225,7 +29234,7 @@
          "legacy" : "",
          "mdxfind" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "mdxfind_salted" : "",
          "name" : "LUKS",
@@ -29240,7 +29249,7 @@
             "hashcat" : "",
             "hashpipe" : "",
             "john" : "",
-            "mdxfind" : ""
+            "mdxfind" : "no type. Swept all 1027 mdxfind types on 2026-09-06, in 4 separate runs over different corpora, (a tools/discover-mdxfind.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable type ran to completion; a type killed at the timeout is counted as untested and withholds this verdict. No mdxfind type name matches any identifier this entry publishes either, normalized by the separator-drift rule. Corroborated by hashpipe, a second binary built from the same catalog: handed this entry's own hash and plaintext it names no type at all. It is the more direct instrument -- it recomputes rather than cracking -- and on this corpus it named a type for 58 entries the sweep alone called silent. This is the absence of an IDENTIFIER, not of the algorithm: if mdxfind gains one, this becomes a mapping."
          },
          "vecs" : 1
       },
@@ -48422,7 +48431,7 @@
          "legacy" : "",
          "mdxfind" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "mdxfind_salted" : "",
          "name" : "Monero Wallet",
@@ -48437,7 +48446,7 @@
             "hashcat" : "",
             "hashpipe" : "",
             "john" : "",
-            "mdxfind" : ""
+            "mdxfind" : "no type. Swept all 1027 mdxfind types on 2026-09-06, in 4 separate runs over different corpora, (a tools/discover-mdxfind.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable type ran to completion; a type killed at the timeout is counted as untested and withholds this verdict. No mdxfind type name matches any identifier this entry publishes either, normalized by the separator-drift rule. Corroborated by hashpipe, a second binary built from the same catalog: handed this entry's own hash and plaintext it names no type at all. It is the more direct instrument -- it recomputes rather than cracking -- and on this corpus it named a type for 58 entries the sweep alone called silent. This is the absence of an IDENTIFIER, not of the algorithm: if mdxfind gains one, this becomes a mapping."
          },
          "vecs" : 1
       },
@@ -48781,10 +48790,13 @@
          "john_work_factor" : "",
          "legacy" : "",
          "mdxfind" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "MSCACHE"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
-         "mdxfind_salted" : "",
+         "mdxfind_salted" : "no",
          "name" : "MS Cache Hash (DCC)",
          "nesting_depth" : "",
          "notes" : "",
@@ -48797,7 +48809,7 @@
             "hashcat" : "",
             "hashpipe" : "",
             "john" : "",
-            "mdxfind" : ""
+            "mdxfind" : "Round-tripped on the TRANSCRIBED form, not on the vector as stored: this entry keeps its vector in another tool's serialization, which mdxfind's reader does not parse. mdxfind pinned with -h reproduced MSCACHE as \"ab60bdb4493822b175486810ac2abe63:test2:test2\", from data/mdxfind-transcodes.tsv. The plaintext is one this entry already stores, and the two strings are ONE piece of evidence written twice -- not two agreeing vectors."
          },
          "vecs" : 1
       },
@@ -49559,7 +49571,7 @@
          "legacy" : "",
          "mdxfind" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "mdxfind_salted" : "",
          "name" : "MSCHAPv2 C/R",
@@ -49574,7 +49586,7 @@
             "hashcat" : "",
             "hashpipe" : "",
             "john" : "",
-            "mdxfind" : ""
+            "mdxfind" : "no type. Swept all 1027 mdxfind types on 2026-09-06, in 4 separate runs over different corpora, (a tools/discover-mdxfind.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable type ran to completion; a type killed at the timeout is counted as untested and withholds this verdict. No mdxfind type name matches any identifier this entry publishes either, normalized by the separator-drift rule. Corroborated by hashpipe, a second binary built from the same catalog: handed this entry's own hash and plaintext it names no type at all. It is the more direct instrument -- it recomputes rather than cracking -- and on this corpus it named a type for 58 entries the sweep alone called silent. This is the absence of an IDENTIFIER, not of the algorithm: if mdxfind gains one, this becomes a mapping."
          },
          "vecs" : 1
       },
@@ -51926,10 +51938,13 @@
          "john_work_factor" : "",
          "legacy" : "",
          "mdxfind" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "NETNTLMV1"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
-         "mdxfind_salted" : "",
+         "mdxfind_salted" : "yes",
          "name" : "NTLMv1 C/R",
          "nesting_depth" : "",
          "notes" : "",
@@ -51942,7 +51957,7 @@
             "hashcat" : "",
             "hashpipe" : "",
             "john" : "",
-            "mdxfind" : ""
+            "mdxfind" : "Round-tripped on the TRANSCRIBED form, not on the vector as stored: this entry keeps its vector in another tool's serialization, which mdxfind's reader does not parse. mdxfind pinned with -h reproduced NETNTLMV1 as \"::X:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa:BFCCAF26128EC95F9999C9792F49434267A1D9B0EF89BFFB:1122334455667788:g3rg3g3rg3g3rg3\", from data/mdxfind-transcodes.tsv. The plaintext is one this entry already stores, and the two strings are ONE piece of evidence written twice -- not two agreeing vectors."
          },
          "vecs" : 1
       },
@@ -52225,7 +52240,7 @@
          "legacy" : "",
          "mdxfind" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "mdxfind_salted" : "",
          "name" : "OpenBSD-SoftRAID",
@@ -52240,7 +52255,7 @@
             "hashcat" : "",
             "hashpipe" : "",
             "john" : "",
-            "mdxfind" : ""
+            "mdxfind" : "no type. Swept all 1027 mdxfind types on 2026-09-06, in 4 separate runs over different corpora, (a tools/discover-mdxfind.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable type ran to completion; a type killed at the timeout is counted as untested and withholds this verdict. No mdxfind type name matches any identifier this entry publishes either, normalized by the separator-drift rule. Corroborated by hashpipe, a second binary built from the same catalog: handed this entry's own hash and plaintext it names no type at all. It is the more direct instrument -- it recomputes rather than cracking -- and on this corpus it named a type for 58 entries the sweep alone called silent. This is the absence of an IDENTIFIER, not of the algorithm: if mdxfind gains one, this becomes a mapping."
          },
          "vecs" : 1
       },
@@ -53397,7 +53412,7 @@
          "legacy" : "",
          "mdxfind" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "mdxfind_salted" : "",
          "name" : "Password Manager",
@@ -53412,7 +53427,7 @@
             "hashcat" : "",
             "hashpipe" : "",
             "john" : "",
-            "mdxfind" : ""
+            "mdxfind" : "no type. Swept all 1027 mdxfind types on 2026-09-06, in 4 separate runs over different corpora, (a tools/discover-mdxfind.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable type ran to completion; a type killed at the timeout is counted as untested and withholds this verdict. No mdxfind type name matches any identifier this entry publishes either, normalized by the separator-drift rule. Corroborated by hashpipe, a second binary built from the same catalog: handed this entry's own hash and plaintext it names no type at all. It is the more direct instrument -- it recomputes rather than cracking -- and on this corpus it named a type for 58 entries the sweep alone called silent. This is the absence of an IDENTIFIER, not of the algorithm: if mdxfind gains one, this becomes a mapping."
          },
          "vecs" : 1
       },
@@ -56361,7 +56376,7 @@
          "legacy" : "",
          "mdxfind" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "mdxfind_salted" : "",
          "name" : "Private Key (RSA/DSA/ECDSA/ED25519)",
@@ -56376,7 +56391,7 @@
             "hashcat" : "",
             "hashpipe" : "",
             "john" : "",
-            "mdxfind" : ""
+            "mdxfind" : "no type. Swept all 1027 mdxfind types on 2026-09-06, in 4 separate runs over different corpora, (a tools/discover-mdxfind.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable type ran to completion; a type killed at the timeout is counted as untested and withholds this verdict. No mdxfind type name matches any identifier this entry publishes either, normalized by the separator-drift rule. Corroborated by hashpipe, a second binary built from the same catalog: handed this entry's own hash and plaintext it names no type at all. It is the more direct instrument -- it recomputes rather than cracking -- and on this corpus it named a type for 58 entries the sweep alone called silent. This is the absence of an IDENTIFIER, not of the algorithm: if mdxfind gains one, this becomes a mapping."
          },
          "vecs" : 1
       },
@@ -58537,10 +58552,13 @@
          "john_work_factor" : "",
          "legacy" : "",
          "mdxfind" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "KECCAK512"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
-         "mdxfind_salted" : "",
+         "mdxfind_salted" : "no",
          "name" : "Raw-Keccak",
          "nesting_depth" : "",
          "notes" : "",
@@ -58553,7 +58571,7 @@
             "hashcat" : "",
             "hashpipe" : "",
             "john" : "",
-            "mdxfind" : ""
+            "mdxfind" : "Round-tripped on the TRANSCRIBED form, not on the vector as stored: this entry keeps its vector in another tool's serialization, which mdxfind's reader does not parse. mdxfind pinned with -h reproduced KECCAK512 as \"d135bb84d0439dbac432247ee573a23ea7d3c9deb2a968eb31d47c4fb45f1ef4422d6c531b5b9bd6f449ebcc449ea94d0a8f05f62130fda612da53c79659f609:The quick brown fox jumps over the lazy dog\", from data/mdxfind-transcodes.tsv. The plaintext is one this entry already stores, and the two strings are ONE piece of evidence written twice -- not two agreeing vectors."
          },
          "vecs" : 1
       },
@@ -59225,7 +59243,7 @@
          "legacy" : "",
          "mdxfind" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "mdxfind_salted" : "",
          "name" : "Restic Repository",
@@ -59240,7 +59258,7 @@
             "hashcat" : "",
             "hashpipe" : "",
             "john" : "",
-            "mdxfind" : ""
+            "mdxfind" : "no type. Swept all 1027 mdxfind types on 2026-09-06, in 4 separate runs over different corpora, (a tools/discover-mdxfind.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable type ran to completion; a type killed at the timeout is counted as untested and withholds this verdict. No mdxfind type name matches any identifier this entry publishes either, normalized by the separator-drift rule. Corroborated by hashpipe, a second binary built from the same catalog: handed this entry's own hash and plaintext it names no type at all. It is the more direct instrument -- it recomputes rather than cracking -- and on this corpus it named a type for 58 entries the sweep alone called silent. This is the absence of an IDENTIFIER, not of the algorithm: if mdxfind gains one, this becomes a mapping."
          },
          "vecs" : 1
       },
@@ -69091,8 +69109,8 @@
          },
          "cracknote" : "",
          "denotation" : "",
-         "expr" : "$c1.cut(sha1($p),8),c1=00000000",
-         "expr_note" : "transcribed from the hx specification's Appendix A entry for mdxfind type SHA1lsb32 (e398), which states \"00000000\" . cut(sha1(pass), 8). Transcription, not reproduction, so this is upstream and not vector; run derive-expressions.pl to try to promote it.; TRIAGE 2026-09-05 [expression-wrong]: no john format, but RosettaExpr -- an implementation independent of all three crackers -- computes this expression over the entry's own vector(s) and reproduces none of them. Either the expression or the vector is wrong",
+         "expr" : "cut($c1.cut(sha1($p),8),0,32),c1=00000000",
+         "expr_note" : "transcribed from the hx specification's Appendix A entry for mdxfind type SHA1lsb32 (e398), which states \"00000000\" . cut(sha1(pass), 8), and CORRECTED 2026-09-06 for the comparison width. Appendix A states the 40-character construction; mdxfind stores and matches only its first 32. mdxfind.c JOB_SHA1lsb32 zeroes the leading four bytes of the digest (curin.i[0] = 0) and then calls checkhash(&curin, 32, x, job), so the width is stated in the source and never reached the expression -- which is why the uncorrected string yielded 0000000008f9cab4083784cbd1874f76618d2a97 where this entry's own vector is its first 32 characters, and why triage flagged it expression-wrong on 2026-09-05. The vector was never in doubt: it is upstream's and hashpipe reproduces it pinned to this type. RosettaExpr, an implementation independent of all three crackers, now reproduces it from the corrected string. Still upstream and not vector: john's dynamic expression language has no substring operator, so nothing has compiled this string and round-tripped it.",
          "expr_tier" : "upstream",
          "hash_length" : 32,
          "hash_length_basis" : "observed",
@@ -89829,7 +89847,7 @@
          "legacy" : "",
          "mdxfind" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "mdxfind_salted" : "",
          "name" : "TrueCrypt AES/Twofish/Serpent",
@@ -89844,7 +89862,7 @@
             "hashcat" : "",
             "hashpipe" : "",
             "john" : "",
-            "mdxfind" : ""
+            "mdxfind" : "no type. Swept all 1027 mdxfind types on 2026-09-06, in 4 separate runs over different corpora, (a tools/discover-mdxfind.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable type ran to completion; a type killed at the timeout is counted as untested and withholds this verdict. No mdxfind type name matches any identifier this entry publishes either, normalized by the separator-drift rule. Corroborated by hashpipe, a second binary built from the same catalog: handed this entry's own hash and plaintext it names no type at all. It is the more direct instrument -- it recomputes rather than cracking -- and on this corpus it named a type for 58 entries the sweep alone called silent. This is the absence of an IDENTIFIER, not of the algorithm: if mdxfind gains one, this becomes a mapping."
          },
          "vecs" : 1
       },
@@ -89946,7 +89964,7 @@
          "legacy" : "",
          "mdxfind" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "mdxfind_salted" : "",
          "name" : "TrueCrypt AES256_XTS",
@@ -89961,7 +89979,7 @@
             "hashcat" : "",
             "hashpipe" : "",
             "john" : "",
-            "mdxfind" : ""
+            "mdxfind" : "no type. Swept all 1027 mdxfind types on 2026-09-06, in 4 separate runs over different corpora, (a tools/discover-mdxfind.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable type ran to completion; a type killed at the timeout is counted as untested and withholds this verdict. No mdxfind type name matches any identifier this entry publishes either, normalized by the separator-drift rule. Corroborated by hashpipe, a second binary built from the same catalog: handed this entry's own hash and plaintext it names no type at all. It is the more direct instrument -- it recomputes rather than cracking -- and on this corpus it named a type for 58 entries the sweep alone called silent. This is the absence of an IDENTIFIER, not of the algorithm: if mdxfind gains one, this becomes a mapping."
          },
          "vecs" : 1
       },
@@ -90004,7 +90022,7 @@
          "legacy" : "",
          "mdxfind" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "mdxfind_salted" : "",
          "name" : "TrueCrypt AES256_XTS",
@@ -90019,7 +90037,7 @@
             "hashcat" : "",
             "hashpipe" : "",
             "john" : "",
-            "mdxfind" : ""
+            "mdxfind" : "no type. Swept all 1027 mdxfind types on 2026-09-06, in 4 separate runs over different corpora, (a tools/discover-mdxfind.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable type ran to completion; a type killed at the timeout is counted as untested and withholds this verdict. No mdxfind type name matches any identifier this entry publishes either, normalized by the separator-drift rule. Corroborated by hashpipe, a second binary built from the same catalog: handed this entry's own hash and plaintext it names no type at all. It is the more direct instrument -- it recomputes rather than cracking -- and on this corpus it named a type for 58 entries the sweep alone called silent. This is the absence of an IDENTIFIER, not of the algorithm: if mdxfind gains one, this becomes a mapping."
          },
          "vecs" : 1
       },
@@ -90062,7 +90080,7 @@
          "legacy" : "",
          "mdxfind" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "mdxfind_salted" : "",
          "name" : "TrueCrypt AES256_XTS",
@@ -90077,7 +90095,7 @@
             "hashcat" : "",
             "hashpipe" : "",
             "john" : "",
-            "mdxfind" : ""
+            "mdxfind" : "no type. Swept all 1027 mdxfind types on 2026-09-06, in 4 separate runs over different corpora, (a tools/discover-mdxfind.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable type ran to completion; a type killed at the timeout is counted as untested and withholds this verdict. No mdxfind type name matches any identifier this entry publishes either, normalized by the separator-drift rule. Corroborated by hashpipe, a second binary built from the same catalog: handed this entry's own hash and plaintext it names no type at all. It is the more direct instrument -- it recomputes rather than cracking -- and on this corpus it named a type for 58 entries the sweep alone called silent. This is the absence of an IDENTIFIER, not of the algorithm: if mdxfind gains one, this becomes a mapping."
          },
          "vecs" : 1
       },
