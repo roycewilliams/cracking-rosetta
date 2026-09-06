@@ -11,6 +11,12 @@ denotation:
   note: "john's own label for Raw-Keccak, in 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200."
 status: "needs-review"
 tools:
+  mdxfind:
+    types: ["KECCAK512"]
+    verified: "vector"
+    verified_at: "2026-09-06"
+    verified_with: "mdxfind RCS 1.576 (2026/09/02)"
+    note: "Round-tripped on the TRANSCRIBED form, not on the vector as stored: this entry keeps its vector in another tool's serialization, which mdxfind's reader does not parse. mdxfind pinned with -h reproduced KECCAK512 as \"d135bb84d0439dbac432247ee573a23ea7d3c9deb2a968eb31d47c4fb45f1ef4422d6c531b5b9bd6f449ebcc449ea94d0a8f05f62130fda612da53c79659f609:The quick brown fox jumps over the lazy dog\", from data/mdxfind-transcodes.tsv. The plaintext is one this entry already stores, and the two strings are ONE piece of evidence written twice -- not two agreeing vectors."
   john:
     cpu: ["Raw-Keccak"]
     verified: "vector"

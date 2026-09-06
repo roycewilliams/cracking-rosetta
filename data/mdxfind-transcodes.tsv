@@ -25,3 +25,9 @@ MD5USERMD5PASSSALT	dynamic-15	6093d5cb3e2f99d9110eb9c4bbca5f8c:aaaSXB:joeblow:te
 MD5PASSSALTMD5PASSSALT	dynamic-1505	b8bbabb1eb9802a2e962de0207ca5172:aaaSXB:test1
 POSTOFFICE	dynamic-18	0c78bdef7d5448105cfbbc9aaa490a44:550c41c11bab48f9dbd8203ed313eef0:abc123
 IPB2	invision-power-board-2-x	d891f03a7327639bc632d62a7f302604:2e75504633:welcome
+KECCAK512	raw-keccak	d135bb84d0439dbac432247ee573a23ea7d3c9deb2a968eb31d47c4fb45f1ef4422d6c531b5b9bd6f449ebcc449ea94d0a8f05f62130fda612da53c79659f609:The quick brown fox jumps over the lazy dog
+MSCACHE	ms-cache-hash-dcc	ab60bdb4493822b175486810ac2abe63:test2:test2
+NETNTLMV1	ntlmv1-c-r-johnnetntlm-naive	::X:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa:BFCCAF26128EC95F9999C9792F49434267A1D9B0EF89BFFB:1122334455667788:g3rg3g3rg3g3rg3
+NSEC3	dnssec-nsec3	hgmlgembs8j1dhkrmhbu1ggh3jmgkrjn:.example.com.:4141414141414141:100:www
+SKYPE	dynamic-1401	27f6a9d892475e6ce0391de8d2d893f7:username:password
+POSTGRESQL	dynamic-1034	bd6fd49a627ecdbe4031b2d52d5748ab:postgres:openwall
