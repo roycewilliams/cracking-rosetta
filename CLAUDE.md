@@ -624,6 +624,41 @@ mdxfind also accepts hashcat modes directly (`mdxfind -m 0`, `-m e1`,
   "Minimum hash length is N characters" once per invocation -- reports the
   number, says what to do when it is one, and writes the count into the claim
   it publishes.
+- **THE NAME VETO IS AN EXACT MATCH, AND MOST OF THE TIME THE TWO TOOLS
+  DECORATE THE SAME STEM DIFFERENTLY.** `absence.pl` withholds an absence
+  when a tool identifier normalizes onto something the entry publishes, and
+  that is deliberately exact -- a substring is a hint for a curator, never a
+  mapping. What it cannot see is a match wearing a suffix, a prefix or
+  another tool's serialization. Measured 2026-09-06 on the 37 mdxfind
+  absences the e1003-e1027 sweep extension made decidable: SIX were wrong,
+  and mdxfind had every one of them. `raw-keccak` against `KECCAK512` (width
+  suffix), `dnssec-nsec3` against `NSEC3` (stem too short to be a substring),
+  `ms-cache-hash-dcc` against `MSCACHE`, `ntlmv1-c-r-johnnetntlm-naive`
+  against `NETNTLMV1`, `dynamic-1401` against `SKYPE`, `dynamic-1034` against
+  `POSTGRESQL`. All six are tier `vector` now.
+  **Do not answer this with a fuzzier veto.** It was tried: matching on
+  shared alphabetic runs of four or more characters withholds 176 of the 328
+  absences already published, because `PASS`, `HASH` and `SALT` are stems of
+  hundreds of type names. The gate stays where it already was -- a person
+  reads the applicable list -- and `absence.pl --exclude ID` is where that
+  read gets written down. An excluded entry is still classified and still
+  reported, in its own group, and an id no run classified as absent is
+  reported rather than accepted silently.
+  **Every one of the six was ALSO a serialization the sweep could not read**,
+  which is the deeper reason and the thing to check first: a row whose vector
+  is in another tool's spelling was never in mdxfind's search at all, so its
+  silence says nothing. `data/mdxfind-transcodes.tsv` is where the type's own
+  spelling goes, and `verify-vectors.pl` promotes from it.
+- **A TIMED-OUT CHUNK STILL WRITES ITS RANGE FILE, AND `absence.pl` READS
+  COVERAGE OFF THE FILE NAME.** Measured 2026-09-06: the full corpus against
+  e1003-e1027 hit its 900s timeout -- those types are KDFs and the corpus
+  carried 485 salts -- and left a ZERO-BYTE `out/e1003-e1027.txt`. Folding
+  that into a union directory asserts the range was swept while carrying no
+  evidence at all. The discovery tool's own work dir has a `timeouts` file
+  that says otherwise; a union directory does not inherit it. **Check that a
+  chunk file is non-empty before folding it**, and prefer the LEAN corpus for
+  a KDF range: the same 25 types over the lean corpus took 1.0s at
+  `--chunk 50` and 14.5s as 25 single-type runs.
 - **A canary must never mutate a base64 digest.** The mutation is defined on
   TEXT and the claim is about a DIGEST, and those coincide only where the text
   IS the digest. Measured 2026-09-01: challenging john's `Raw-SHA1` reported
@@ -649,6 +684,13 @@ mdxfind also accepts hashcat modes directly (`mdxfind -m 0`, `-m e1`,
   gives 16 and 12. `docs/UPSTREAM-FINDINGS.md` DERIVES the list from the
   vendored catalog on every build and states the rule beside it, so the number
   cannot go stale again. Read it there.
+  **Case is not the only decoration a published example carries.** Measured
+  2026-09-06: `POSTGRESQL`'s own example is
+  `md5c3a6d24526b9285dd98be631e8271309:testuser`, carrying PostgreSQL's `md5`
+  prefix, and mdxfind will not read that back either -- the bare 32 hex plus
+  the user through `-F` loads and cracks first try. Same lesson, wider than
+  hex case: **when a type's own example does not load, the question is what
+  the example is WEARING, not whether the type works.**
 - **A PEPPER type cannot be verified from its vector alone, and the catalog
   hides the pepper in the salt field.** A pepper is a site-wide secret that
   appears in no hash and cannot be derived from one; hx makes it a BUILT-IN
