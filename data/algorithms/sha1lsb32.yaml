@@ -1,11 +1,11 @@
 id: "sha1lsb32"
 name: "SHA1lsb32"
-expression: "$c1.cut(sha1($p),8),c1=00000000"
+expression: "cut($c1.cut(sha1($p),8),0,32),c1=00000000"
 expression_proof:
   verified: "upstream"
-  verified_at: "2026-09-02"
-  verified_with: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A"
-  note: "transcribed from the hx specification's Appendix A entry for mdxfind type SHA1lsb32 (e398), which states \"00000000\" . cut(sha1(pass), 8). Transcription, not reproduction, so this is upstream and not vector; run derive-expressions.pl to try to promote it.; TRIAGE 2026-09-05 [expression-wrong]: no john format, but RosettaExpr -- an implementation independent of all three crackers -- computes this expression over the entry's own vector(s) and reproduces none of them. Either the expression or the vector is wrong"
+  verified_at: "2026-09-06"
+  verified_with: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A; mdxfind.c RCS 1.576 (2026/09/02)"
+  note: "transcribed from the hx specification's Appendix A entry for mdxfind type SHA1lsb32 (e398), which states \"00000000\" . cut(sha1(pass), 8), and CORRECTED 2026-09-06 for the comparison width. Appendix A states the 40-character construction; mdxfind stores and matches only its first 32. mdxfind.c JOB_SHA1lsb32 zeroes the leading four bytes of the digest (curin.i[0] = 0) and then calls checkhash(&curin, 32, x, job), so the width is stated in the source and never reached the expression -- which is why the uncorrected string yielded 0000000008f9cab4083784cbd1874f76618d2a97 where this entry's own vector is its first 32 characters, and why triage flagged it expression-wrong on 2026-09-05. The vector was never in doubt: it is upstream's and hashpipe reproduces it pinned to this type. RosettaExpr, an implementation independent of all three crackers, now reproduces it from the corrected string. Still upstream and not vector: john's dynamic expression language has no substring operator, so nothing has compiled this string and round-tripped it."
 category: "composite"
 status: "ok"
 tools:
