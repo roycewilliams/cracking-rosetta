@@ -300,6 +300,11 @@ Usage: $PROG --tool mdxfind|hashcat|john --from DIR [options]
                      they are treated as never run (default: <from>/timeouts
                      when it exists). A run killed at the timeout looks
                      exactly like one that cracked nothing.
+   --exclude ID      never write 'absent' onto this entry (repeatable). It is
+                     still classified and reported, in its own group, so the
+                     reason a curator held it back stays visible in the run.
+                     CLAUDE.md requires the applicable list to be READ before
+                     --apply; this is where that read gets recorded.
    --apply           write 'absent' onto the entries the sweep decided
    --reearn          also target entries whose verdict is 'absent' with no
                      date, version or note -- a claim nobody ever checked.
@@ -315,9 +320,11 @@ END_USAGE
 }
 
 my $single_run;
+my @exclude;
 my ($tool, $from, $algdir, $invpath, $apply, $reearn, $timeouts, $hashcat,
     $no_identify, $hashpipe, $no_hashpipe, $verbose, $help);
 GetOptions(
+    'exclude=s@'    => \@exclude,
     'tool=s'        => \$tool,
     'from=s'        => \$from,
     'hashcat=s'     => \$hashcat,
@@ -1128,6 +1135,35 @@ for my $id (sort keys %target) {
 }
 
 #-----------------------------------------------------------------------
+# A CURATOR'S READ, RECORDED IN THE RUN.
+#
+# The name veto is an EXACT normalized match on purpose, and it cannot see a
+# tool that names the same algorithm with different decoration. Measured
+# 2026-09-06 on the 37 absences the e1003-e1027 sweep extension made
+# decidable: six were wrong, every one because mdxfind HAS the algorithm under
+# a name the veto could not match and a serialization the sweep cannot read --
+# raw-keccak against KECCAK512, dnssec-nsec3 against NSEC3, ms-cache-hash-dcc
+# against MSCACHE, ntlmv1-c-r-johnnetntlm-naive against NETNTLMV1,
+# dynamic-1401 against SKYPE, dynamic-1034 against POSTGRESQL. All six are
+# mappings now.
+#
+# A fuzzier veto was tried and is not the answer: matching on shared
+# alphabetic stems of four or more characters withholds 176 of the 328
+# absences already published, because PASS, HASH and SALT are stems of
+# hundreds of type names. So the gate stays where CLAUDE.md already puts it --
+# a person reads the list -- and this is how that read is written down. An
+# excluded entry is still classified and still reported; only the write is
+# withheld.
+my %exclude = map { $_ => 1 } @exclude;
+my @held_by_curator = grep { $exclude{ $_->[0] } } @absent;
+@absent             = grep { !$exclude{ $_->[0] } } @absent;
+for my $id (sort keys %exclude) {
+    next if grep { $_->[0] eq $id } @held_by_curator;
+    print STDERR "$PROG: --exclude $id names an entry this run did not "
+               . "classify as absent; nothing to hold back.\n";
+}
+
+#-----------------------------------------------------------------------
 # Report, then optionally write.
 
 printf STDERR "- %d target(s): %d with no %s verdict, %d re-earning a bare one\n",
@@ -1143,7 +1179,8 @@ printf STDERR "-   %-28s %d\n", $_->[0], scalar @{ $_->[1] } for
     [ 'no vector at all'          => \@novector   ],
     [ 'sweep found an identifier' => \@swept_hit  ],
     [ 'same hash, other plaintext'=> \@othertext  ],
-    [ 'hashpipe names a type'     => \@hp_hit     ];
+    [ 'hashpipe names a type'     => \@hp_hit     ],
+    [ 'held back by --exclude'    => \@held_by_curator ];
 
 # A bare claim the evidence CONTRADICTS is the outcome worth a reader's time,
 # and it is never written: see the methodology note.
@@ -1160,7 +1197,8 @@ if ($verbose) {
                [ 'MASKED'     => \@maskrisk   ],
                [ 'NO VECTOR'  => \@novector   ], [ 'SWEEP HIT' => \@swept_hit  ],
                [ 'SAME HASH, ANOTHER PLAINTEXT' => \@othertext ],
-               [ 'HASHPIPE NAMES A TYPE' => \@hp_hit ]) {
+               [ 'HASHPIPE NAMES A TYPE' => \@hp_hit ],
+               [ 'HELD BACK BY --exclude' => \@held_by_curator ]) {
         next unless @{ $g->[1] };
         print STDERR "\n- $g->[0]\n";
         printf STDERR "    %-52s %s\n", @$_ for @{ $g->[1] };

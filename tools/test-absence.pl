@@ -576,6 +576,55 @@ for my $tool (qw(mdxfind hashcat john)) {
               "$tool second apply: the decided entry is no longer a target");
     }
 
+    # 4a. --exclude: a curator's read, recorded in the run.
+    #
+    #     Two assertions, and neither is readable without the other. Excluding
+    #     an entry must stop the write and report it in its own class; and a
+    #     run whose --exclude names something else must still write, or "the
+    #     exclusion worked" and "--apply stopped working" are the same
+    #     reading. An id no run classified as absent is reported rather than
+    #     accepted in silence, because a typo would otherwise look exactly
+    #     like a successful hold-back.
+    write_entries($tool);
+    write_evidence($tool);
+    {
+        my ($rc, $out) = run_tool($tool, '--exclude', 'decidable', '--apply');
+        check($rc == 0, "$tool exclude: exits 0");
+        check(verdict($tool, 'decidable') eq '',
+              "$tool exclude: the named entry is not written",
+              "verdict is '" . verdict($tool, 'decidable') . "'");
+        check(!!($out =~ /^-\s+held back by --exclude\s+1$/m),
+              "$tool exclude: it is reported in its own class");
+        # It must LEAVE the absent class, not sit in both: count it against
+        # the same run without the exclusion.
+        write_entries($tool);
+        write_evidence($tool);
+        my (undef, $plain) = run_tool($tool);
+        my ($n0) = $plain =~ /^-\s+absent \(swept, nothing\)\s+(\d+)$/m;
+        write_entries($tool);
+        write_evidence($tool);
+        my (undef, $held) = run_tool($tool, '--exclude', 'decidable');
+        my ($n1) = $held =~ /^-\s+absent \(swept, nothing\)\s+(\d+)$/m;
+        check(defined $n0 && defined $n1 && $n1 == $n0 - 1,
+              "$tool exclude: it left the absent class rather than sitting in both",
+              "absent went " . ($n0 // '?') . " -> " . ($n1 // '?'));
+
+        my (undef, $vout) = run_tool($tool, '--exclude', 'decidable', '-v');
+        check(!!($vout =~ /HELD BACK BY --exclude/),
+              "$tool exclude: -v names the held-back entries");
+
+        # The control: the same run shape, excluding something else, still
+        # writes. Without it, a broken --apply passes every assertion above.
+        write_entries($tool);
+        write_evidence($tool);
+        ($rc, $out) = run_tool($tool, '--exclude', 'ctrl', '--apply');
+        check(verdict($tool, 'decidable') eq 'absent',
+              "$tool exclude: an unrelated exclusion does not stop the write",
+              "verdict is '" . verdict($tool, 'decidable') . "'");
+        check(!!($out =~ /--exclude ctrl names an entry this run did not/),
+              "$tool exclude: an id nothing classified as absent is reported");
+    }
+
     # 4b. An identifier the sweep could not finish is not a tested one, and
     #     the evidence on disk cannot say so: the discovery tools write a
     #     potfile or a chunk file for a killed run too, so --resume can tell
