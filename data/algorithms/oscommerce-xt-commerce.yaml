@@ -29,7 +29,9 @@ tools:
     note: "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one."
   john:
     cpu: ["dynamic_1009", "dynamic_1017", "dynamic_2004", "dynamic_4", "osc"]
-    verified: "asserted"
+    verified: "vector"
+    verified_at: "2026-09-06"
+    verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
   crack:
     supported: false
 relations:
@@ -46,10 +48,18 @@ vectors:
     pass: "rosetta"
     source: "sheet"
     reads_in: ["hashcat", "john", "mdxfind"]
+    credential: 1
   - hash: "dec0dedb8b2d4ff878ae6add4128b8ac:rosettagz5gk"
     pass: "rosetta"
     source: "vanity"
     reads_in: ["john", "mdxfind"]
+  - hash: "$OSC$6162$3c415b5a7f60c974c4de8c631e5c05f0"
+    pass: "rosetta"
+    source: "john"
+    form: "john"
+    reads_in: ["john"]
+    credential: 1
 legacy:
   hashes_org: "OSCOMMERCE"
   hashkiller: "osCommerce, xt:Commerce"
+notes: "Vector 'john' added 2026-09-06: the SAME credential as this row's first vector, re-serialized into the form john's osc format reads. It is not independent evidence -- do not read two agreeing vectors here as corroboration. The two spellings differ in ORDER and in ENCODING: this row stores <hash>:<salt> with the salt as text, and osc wants $OSC$<salt as hex>$<hash>, so the salt 'ab' becomes 6162. Measured 2026-09-06: handed the colon form, osc answers \"No password hashes loaded\", while the four dynamics on this row read it unchanged. The re-encoding was not assumed: the $OSC$ string was handed to john with only the plaintext the stored vector already states, and fell."

@@ -22,8 +22,11 @@ tools:
     verified_with: "hashpipe RCS 1.189 (2026/09/02)"
     note: "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one."
   john:
-    cpu: ["dynamic_1007", "dynamic_2006", "dynamic_6"]
-    verified: "asserted"
+    cpu: ["dynamic_2006"]
+    verified: "vector"
+    verified_at: "2026-09-06"
+    verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
+    note: "dynamic_6 and dynamic_1007 were REMOVED 2026-09-06. Both compute this row's construction and neither is wrong about it; neither can LOAD this row's vector. john caps their salt at 23 bytes, and a vBulletin salt from 3.8.5 on is 30, which is the whole reason john ships dynamic_2006 -- its own subformat listing calls it \"md5(md5($p).$s) (vBulletin, PW > 55 bytes or/and salt > 23 bytes)\". Measured 2026-09-06 with the vector spelled $dynamic_N$<hash>$<salt> so that the parser could not be the variable: dynamic_6 and dynamic_1007 do not load it at all, dynamic_2006 loads and cracks it, and the control -- john's own 6-byte-salt example -- falls to dynamic_6 on the first try. They keep their proof on vbulletin-v3-8-5, the short-salt row, where all three are tier vector."
   crack:
     supported: false
 relations:

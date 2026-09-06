@@ -27,7 +27,9 @@ tools:
     note: "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one."
   john:
     cpu: ["dynamic_25", "dynamic_37"]
-    verified: "asserted"
+    verified: "vector"
+    verified_at: "2026-09-06"
+    verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
   crack:
     supported: false
 vectors:
@@ -35,7 +37,14 @@ vectors:
     pass: "rosetta"
     source: "sheet"
     reads_in: ["hashcat", "john", "mdxfind"]
+    credential: 1
+  - hash: "$dynamic_37$c127b5d28f587364a7c034865384c53040226025$$Utestuser"
+    pass: "rosetta"
+    source: "john"
+    form: "john"
+    reads_in: ["john"]
+    credential: 1
 legacy:
   hashes_org: "SHA1(SALTPLAIN)"
   hashkiller: "SMF < v1.1"
-notes: "(using lowercase username as salt)"
+notes: "(using lowercase username as salt) Vector 'john' added 2026-09-06: the SAME credential already above, re-serialized into the form john's dynamic_37 reads. It is not independent evidence -- do not read two agreeing vectors here as corroboration. The two spellings differ in where the USERNAME goes: this row stores SMF's own <hash>:<user>, and dynamic_37 -- sha1(lc($u).$p) -- takes the username in a $$U field, $dynamic_37$<hash>$$U<user>. Measured 2026-09-06: handed the colon form, dynamic_37 answers \"No password hashes loaded\", while dynamic_25 reads it unchanged because it treats the same trailing field as a salt. The re-encoding was not assumed: the $$U string was handed to john with only the plaintext the stored vector already states, and fell."
