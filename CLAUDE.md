@@ -465,6 +465,48 @@ mdxfind also accepts hashcat modes directly (`mdxfind -m 0`, `-m e1`,
   characters and returns `G3RG3P0` for john's own `G3RG3P00!`. The vector is
   upstream's and correct; the strict comparison is also correct; they answer
   different questions and the strict one is the one that gates a tier.
+- **A JOHN "FAILURE" IS USUALLY A QUESTION ABOUT THE INPUT TOO.** Measured
+  2026-09-06 on the thirteen rows whose john block sat below tier `vector`:
+  they were four problems, and only two of the thirteen were john failing to
+  compute anything. Each is invisible the same way -- the row ends up saying
+  the tool did not reproduce its own example, which is what a genuinely absent
+  format looks like.
+  - **The parser refused the spelling** -- six rows. john publishes TWO
+    identifiers for one computation that do NOT share a serialization, and the
+    row stored one of them: `$dynamic_19$` against `pix-md5`'s bare digest,
+    `$radmin2$` and UPPER-case hex against `dynamic_1010`'s bare lower-case,
+    `dynamic_37`'s `$$U<user>` field against SMF's own `<hash>:<user>`,
+    `$OSC$<salt as hex>$<hash>` against `<hash>:<salt>`, john's `plaintext`
+    `$0$` tag, and `mysql-sha1`'s leading star against mdxfind's bare SQL5.
+    The tell is **"No password hashes loaded"** -- and `verify-vectors.pl`
+    discards john's stderr, so you will not see it from a sweep.
+  - **The identifier computes something else.** `dynamic_1024/1025/1026/1027/
+    1028` compute a construction CUT TO 32 hex. The control that settles it:
+    each cracks the first 32 hex of the row's own digest and, handed the full
+    40, does not LOAD at all.
+  - **A capability boundary.** `dynamic_6` and `dynamic_1007` are right about
+    vBulletin and cap their salt at 23 bytes; a vBulletin salt from 3.8.5 on
+    is 30, which is why john ships `dynamic_2006` for "salt > 23 bytes".
+  - **The row held two computations.** `netntlmv2` cracked three of four
+    vectors and refused the fourth; `netlmv2` cracked the fourth and refused
+    the three.
+
+  Two operational traps come with driving john by hand, and both look like a
+  failed mapping:
+  - **Pass `--session` somewhere writable.** Otherwise john writes `john.log`
+    into its own run directory, which is `royce`-owned, and dies `chmod: ...
+    Operation not permitted` at exit 1 having cracked nothing.
+  - **`--field-separator-char=\t` splits on the LETTER `t`.** john takes the
+    two characters literally and says so on stderr -- "using field sep char
+    't' (0x74)". The spelling that works is `--field-separator-char=tab`.
+
+  And the rule against seeding from `john_map.h`'s second table is now a
+  MEASUREMENT rather than a policy: all five wrong mappings above are in
+  `JohnMapLocal[]`, which maps `dynamic_1024` to `SHA1MD5x01` -- the
+  UNTRUNCATED construction -- while john's own shipped `run/dynamic.conf`
+  computes it truncated. **`run/dynamic.conf` is the instrument for what a
+  dynamic computes**; it carries the definition and the `Test=` vectors, and
+  `--list=subformats` states the same thing in one line.
 - **A HASHCAT "FAILURE" IS USUALLY A QUESTION ABOUT THE INPUT, NOT THE MODE.**
   Measured 2026-09-05: of 51 hashcat blocks below tier `vector`, 47 turned out
   to be provable and NOT ONE of the four causes was hashcat failing to
