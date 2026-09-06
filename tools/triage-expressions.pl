@@ -266,47 +266,86 @@ for my $file (@files) {
     next unless $tier eq 'upstream' || $tier eq 'asserted';
     $seen++;
 
-    my ($fmt) = @{ $d->{tools}{john}{cpu} || [] };
-    my @t = $fmt ? format_tests($fmt) : ();
-    my $got = @t ? try_expression($expr, \@t) : 0;
+    my $fn = compile_expression($expr);
 
-    # Is the format's own digest plain hex, and how wide?
-    my ($width, $nonhex) = (0, 0);
-    for my $x (@t) {
-        my ($digest) = split /\$/, $x->{bare};
-        if (defined $digest && $digest =~ /^[0-9a-fA-F]+$/) {
-            $width = length $digest if length($digest) > $width;
+    # EVERY john format this entry names, not just the first.
+    #
+    # One entry routinely names several formats that are the SAME computation
+    # in different SERIALIZATIONS, and an expression can only describe one of
+    # them. Measured 2026-09-05 on mysql4-1-mysql5, which names dynamic_1028
+    # and mysql-sha1: john's own subformat listing calls dynamic_1028
+    # "sha1(sha1_raw($p)) (hash truncated to length 32)", while mysql-sha1
+    # stores the same computation as "*" followed by the digest in upper case.
+    # The entry's expression, $c1.upper(sha1(sha1_raw($p))),c1=*, describes
+    # mysql-sha1 exactly and reproduces none of dynamic_1028's vectors --
+    # the leading "*" defeats even the truncation check below. Testing the
+    # FIRST label only reported `expression-wrong` about an expression that is
+    # right, on an entry whose every vector is also right.
+    #
+    # The independent recomputation is what selects, not try_expression: john's
+    # ad-hoc compiler is handed the hx-style string and rejects wrappers it
+    # spells as flavours -- upper(F(x)) is F_UPPERCASED(x) to john -- so $got
+    # is 0 for every label here and could not tell them apart. Ranked by
+    # vectors REPRODUCED, then by fewest CONTRADICTED, which can only move a
+    # verdict from worse to better: a label explaining nothing cannot displace
+    # one explaining something.
+    my @labels = @{ $d->{tools}{john}{cpu} || [] };
+    my ($fmt, $got, $width, $nonhex, $ind_ok, $ind_no, $ind_cut);
+    my @t;
+    for my $label (@labels) {
+        my @tt = format_tests($label) or next;
+
+        # Is this format's own digest plain hex, and how wide?
+        my ($w, $nh) = (0, 0);
+        for my $x (@tt) {
+            my ($digest) = split /\$/, $x->{bare};
+            if (defined $digest && $digest =~ /^[0-9a-fA-F]+$/) {
+                $w = length $digest if length($digest) > $w;
+            }
+            else { $nh++ }
         }
-        else { $nonhex++ }
+
+        # The independent check: does the expression, computed here, reproduce
+        # john's OWN test vectors for this format? This is the difference
+        # between a wrong string and a compiler that cannot eat a right one,
+        # and no amount of john runs can tell them apart.
+        my ($iok, $ino, $icut) = (0, 0, 0);
+        if ($fn) {
+            for my $x (@tt) {
+                my ($digest, $salt) = split /\$/, $x->{bare}, 2;
+                next unless defined $digest;
+                $salt = '' unless defined $salt;
+                my $mine = eval { $fn->($x->{pass}, $salt) };
+                next unless defined $mine;
+                if (lc($digest) eq lc($mine)) { $iok++; next }
+                # A stored digest that is a PREFIX of what the expression
+                # computes is not a wrong expression, it is a format that
+                # truncates -- and this is proof of it rather than an
+                # inference from the width.
+                if (length($digest) < length($mine)
+                    && lc($digest) eq lc(substr($mine, 0, length $digest))) {
+                    $icut++;
+                    next;
+                }
+                $ino++;
+            }
+        }
+
+        my $better = !defined $fmt
+                  || $iok > $ind_ok
+                  || ($iok == $ind_ok && $ino < $ind_no);
+        next unless $better;
+        ($fmt, $width, $nonhex, $ind_ok, $ind_no, $ind_cut)
+            = ($label, $w, $nh, $iok, $ino, $icut);
+        @t = @tt;
     }
+    ($ind_ok, $ind_no, $ind_cut) = (0, 0, 0) unless defined $fmt;
+    ($width, $nonhex) = (0, 0) unless defined $fmt;
+    $fmt = $labels[0] unless defined $fmt;
+    $got = @t ? try_expression($expr, \@t) : 0;
+
     my ($outer) = $expr =~ /^([A-Za-z0-9_]+)\s*\(/;
     my $expect  = $outer ? $WIDTH{ lc $outer } : undef;
-
-    # The independent check: does the expression, computed here, reproduce
-    # john's OWN test vectors for the format that printed it? This is the
-    # difference between a wrong string and a compiler that cannot eat a right
-    # one, and no amount of john runs can tell them apart.
-    my $fn = compile_expression($expr);
-    my ($ind_ok, $ind_no, $ind_cut) = (0, 0, 0);
-    if ($fn) {
-        for my $x (@t) {
-            my ($digest, $salt) = split /\$/, $x->{bare}, 2;
-            next unless defined $digest;
-            $salt = '' unless defined $salt;
-            my $mine = eval { $fn->($x->{pass}, $salt) };
-            next unless defined $mine;
-            if (lc($digest) eq lc($mine)) { $ind_ok++; next }
-            # A stored digest that is a PREFIX of what the expression computes
-            # is not a wrong expression, it is a format that truncates -- and
-            # this is proof of it rather than an inference from the width.
-            if (length($digest) < length($mine)
-                && lc($digest) eq lc(substr($mine, 0, length $digest))) {
-                $ind_cut++;
-                next;
-            }
-            $ind_no++;
-        }
-    }
 
     # And a control at a salt length nothing could object to: if the compiled
     # expression recovers a vector we computed ourselves with a two-character
@@ -466,6 +505,30 @@ for my $file (@files) {
               . 'vectors. The expression describes the computation, not the '
               . 'cut', $fmt, $width, $ind_cut);
     }
+    elsif ($fn && $expr =~ /\$s/ && !$max_salt && !$nonhex) {
+        # !$nonhex keeps this out of format-encoding's way. Where the
+        # ciphertext is not plain hex at all, THAT is the more specific reason
+        # the control is unusable and it already has a verdict; this one is for
+        # the case format-encoding cannot see -- a ciphertext that is entirely
+        # hex and still carries its salt inside the hash string.
+        # The control was never applied. A format whose ciphertext carries the
+        # salt INSIDE one field -- rather than as a $-separated second field --
+        # yields no salt to compute with, and the expression is then evaluated
+        # with the empty string, which produces a confidently wrong digest
+        # rather than an error. Measured 2026-09-05 on netscaler: Citrix_NS10
+        # stores "1" + 8 hex of salt + 40 hex of SHA-1 in a single field, and
+        # sha1($s.$p.$c1),c1=\x00 is exactly right -- by hand,
+        # sha1("00000000"."password123"."\0") is the digest inside this entry's
+        # own vector. Calling that expression-wrong was a verdict about the
+        # PARSER, stated as a fact about the algorithm.
+        $verdict = 'salt-not-parsed';
+        $note = sprintf('the expression needs a salt and %s does not publish '
+              . 'one as a separate field -- its test ciphertexts carry the salt '
+              . 'inside the hash string -- so the expression was computed with '
+              . 'an empty salt and could not match. That is a limit of this '
+              . 'check, not evidence about the expression: nothing here has '
+              . 'tested it', $fmt);
+    }
     elsif ($fn && $ind_no && !$ind_ok && !$nonhex) {
         $verdict = 'expression-wrong';
         $note = sprintf('the expression does not describe %s: computed here '
@@ -513,7 +576,28 @@ for my $file (@files) {
     # cannot grow a stack of stale diagnoses.
     my $old = $pf->{note} // '';
     $old =~ s/;?\s*TRIAGE \d{4}-\d{2}-\d{2}(?: \[[a-z-]+\])?:.*$//s;
+
+    # Withdraw a machine-written clause that this very run contradicts.
+    #
+    # seed-hx.pl writes "Not checkable locally: the construction uses functions
+    # RosettaExpr cannot compile, so this rests on upstream's word alone" when
+    # it cannot compile the expression. RosettaExpr has been widened twice
+    # since -- the $c1 constants most recently -- so a good many of those are
+    # now compiled and checked, and the note kept the old sentence beside the
+    # new diagnosis. Measured 2026-09-05: 10 entries said the expression could
+    # not be checked locally next to a verdict that exists ONLY because it was.
+    # mysql4-1-mysql5 said it while triage was reporting that the expression
+    # reproduces all 6 of john's own mysql-sha1 vectors.
+    #
+    # Only where THIS run compiled it ($fn) -- the sentence is still true, and
+    # must stay, wherever it still cannot be compiled.
+    my $UNCHECKABLE = "Not checkable locally: the construction uses functions "
+                    . "RosettaExpr cannot compile, so this rests on upstream's "
+                    . "word alone.";
+    $old =~ s/\s*\Q$UNCHECKABLE\E//s if $fn;
+
     $old =~ s/\s+$//;
+    $old =~ s/;\s*$//;
     my $new = (length $old ? "$old; " : '') . "TRIAGE $TODAY [$verdict]: $note";
     next if ($pf->{note} // '') eq $new;
     $pf->{note} = $new;

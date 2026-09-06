@@ -5,7 +5,7 @@ expression_proof:
   verified: "upstream"
   verified_at: "2026-09-02"
   verified_with: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A"
-  note: "transcribed from the hx specification's Appendix A entry for mdxfind type SHA1lsb32 (e398), which states \"00000000\" . cut(sha1(pass), 8). Transcription, not reproduction, so this is upstream and not vector; run derive-expressions.pl to try to promote it. Not checkable locally: the construction uses functions RosettaExpr cannot compile, so this rests on upstream's word alone.; TRIAGE 2026-09-04 [no-john-format]: no john format on this entry, so john ships no control vectors, and RosettaExpr cannot compile this expression either -- nothing here can check it"
+  note: "transcribed from the hx specification's Appendix A entry for mdxfind type SHA1lsb32 (e398), which states \"00000000\" . cut(sha1(pass), 8). Transcription, not reproduction, so this is upstream and not vector; run derive-expressions.pl to try to promote it.; TRIAGE 2026-09-05 [expression-wrong]: no john format, but RosettaExpr -- an implementation independent of all three crackers -- computes this expression over the entry's own vector(s) and reproduces none of them. Either the expression or the vector is wrong"
 category: "composite"
 status: "ok"
 tools:

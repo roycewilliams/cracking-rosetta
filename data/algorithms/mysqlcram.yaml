@@ -5,7 +5,7 @@ expression_proof:
   verified: "upstream"
   verified_at: "2026-08-31"
   verified_with: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A"
-  note: "transcribed from the hx specification's Appendix A entry for mdxfind type MYSQLCRAM (e907), which states upper(sha1(sha1_bin(pass))). Transcription, not reproduction, so this is upstream and not vector; run derive-expressions.pl to try to promote it.; TRIAGE 2026-09-04 [format-encoding]: mysqlna has its own ciphertext encoding rather than plain hex, so a generic expression cannot be checked against it however correctly it describes the computation. The sentence \"Not checkable locally: ... RosettaExpr cannot compile\" was withdrawn on 2026-09-04: RosettaExpr was widened by sha224, sha384 and the utf16 family and compiles this expression, so the claim was false. The tier is untouched -- what changed is this repository's reach, not the evidence."
+  note: "transcribed from the hx specification's Appendix A entry for mdxfind type MYSQLCRAM (e907), which states upper(sha1(sha1_bin(pass))). Transcription, not reproduction, so this is upstream and not vector; run derive-expressions.pl to try to promote it.; TRIAGE 2026-09-05 [format-encoding]: mysqlna has its own ciphertext encoding rather than plain hex, so a generic expression cannot be checked against it however correctly it describes the computation"
 category: "composite"
 status: "needs-review"
 tools:

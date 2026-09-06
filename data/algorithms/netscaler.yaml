@@ -5,7 +5,7 @@ expression_proof:
   verified: "upstream"
   verified_at: "2026-09-02"
   verified_with: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A"
-  note: "transcribed from the hx specification's Appendix A entry for mdxfind type NETSCALER (e878), which states sha1(salt . pass . fromhex(\"00\")) (NetScaler; trailing NUL byte). Transcription, not reproduction, so this is upstream and not vector; run derive-expressions.pl to try to promote it. Not checkable locally: the construction uses functions RosettaExpr cannot compile, so this rests on upstream's word alone.; TRIAGE 2026-09-04 [compiler-disagrees]: compiled with --format=dynamic this expression recovers none of john's own test vectors for Citrix_NS10 either, so john's dynamic compiler and its named format disagree about what the string means; this is an upstream question, not a data error here"
+  note: "transcribed from the hx specification's Appendix A entry for mdxfind type NETSCALER (e878), which states sha1(salt . pass . fromhex(\"00\")) (NetScaler; trailing NUL byte). Transcription, not reproduction, so this is upstream and not vector; run derive-expressions.pl to try to promote it.; TRIAGE 2026-09-05 [salt-not-parsed]: the expression needs a salt and Citrix_NS10 does not publish one as a separate field -- its test ciphertexts carry the salt inside the hash string -- so the expression was computed with an empty salt and could not match. That is a limit of this check, not evidence about the expression: nothing here has tested it"
 category: "application"
 status: "ok"
 tools:
