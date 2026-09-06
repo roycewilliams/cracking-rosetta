@@ -507,6 +507,16 @@ mdxfind also accepts hashcat modes directly (`mdxfind -m 0`, `-m e1`,
   computes it truncated. **`run/dynamic.conf` is the instrument for what a
   dynamic computes**; it carries the definition and the `Test=` vectors, and
   `--list=subformats` states the same thing in one line.
+
+  **`verify-vectors.pl` now retries NATIVELY when the grouped scheme could
+  not PARSE a ciphertext**, gated on john's own `--show` summary saying it
+  loaded nothing -- so a format that loaded its hashes and failed to crack
+  them never reaches the retry. `tools/test-verify-native.pl` asserts all of
+  it, including the two controls without which the code cannot be read: that
+  a format which LOADS and fails does not trigger the retry (or "the gate
+  fires correctly" and "the gate fires always" are the same reading), and
+  that a TRUNCATING format still fails. It needs a cracker, so it is not in
+  CI and it skips loudly.
 - **A HASHCAT "FAILURE" IS USUALLY A QUESTION ABOUT THE INPUT, NOT THE MODE.**
   Measured 2026-09-05: of 51 hashcat blocks below tier `vector`, 47 turned out
   to be provable and NOT ONE of the four causes was hashcat failing to
