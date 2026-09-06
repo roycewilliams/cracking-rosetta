@@ -27,11 +27,13 @@ tools:
     verified_at: "2026-09-03"
     verified_with: "hashpipe RCS 1.189 (2026/09/02)"
     note: "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one."
-  john:
-    cpu: ["dynamic_1027", "dynamic_26"]
-    verified: "asserted"
   crack:
     supported: false
+relations:
+  - kind: "truncates"
+    entry: "sha1-sha1-sha1-pass-substr-0-32"
+    distinction: "truncation"
+    note: "This row is sha1-sha1-sha1-pass cut to its first 32 hex characters. dynamic_1027 computes this and will not load the untruncated 40-hex digest at all -- measured 2026-09-06."
 vectors:
   - hash: "1caaf7f2d96062e475905da8eb1434376b0e8bf8"
     pass: "rosetta"
@@ -40,4 +42,4 @@ vectors:
 legacy:
   hashes_org: "SHA1X3"
   hashkiller: "sha1(sha1(sha1($pass)))"
-notes: "hashcat-legacy had mode 4600 for this; modern hashcat has no equivalent (source: the migrated sheet, unverified here - hashcat-legacy is EOL and not installed)"
+notes: "hashcat-legacy had mode 4600 for this; modern hashcat has no equivalent (source: the migrated sheet, unverified here - hashcat-legacy is EOL and not installed) dynamic_1027 and dynamic_26 were both REMOVED 2026-09-06, and with them this row's whole john block, for the reasons recorded on sha1-sha1-pass. dynamic_1027 computes this row's construction CUT TO 32 hex characters and now has its own row, sha1-sha1-sha1-pass-substr-0-32; dynamic_26 is plain sha1($p) and lives on the sha1 row. This row is NOT claiming john cannot do the algorithm -- its john_dynamic_expr is proven and runnable -- only that john ships no FORMAT identifier for it that anyone has reproduced here."

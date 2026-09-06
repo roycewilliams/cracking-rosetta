@@ -1,0 +1,27 @@
+id: "lmv2-c-r"
+name: "NETLMv2"
+expression_proof:
+  verified: "absent"
+  verified_at: "2026-09-06"
+  verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
+  note: "Split off netntlmv2 on 2026-09-06. Like its NETNTLMv2 sibling this is an HMAC-MD5 challenge-response construction, and john's dynamic EXPRESSION language has no hmac() token -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK it: john has the format, and it is in tools.john.cpu."
+denotation:
+  text: "NETLMv2"
+  source: "john"
+  note: "john's own label for netlmv2, in 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200. Upstream states no construction for this row that has been read here, so the label is what it carries."
+category: "protocol"
+status: "needs-review"
+tools:
+  john:
+    cpu: ["netlmv2"]
+    verified: "asserted"
+    verified_at: "2026-09-06"
+    verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
+    note: "ROUND-TRIPPED BY HAND, and held at asserted for a reason that is about this repository tooling and not about the mapping. Measured 2026-09-06: john pinned to --format=netlmv2 and handed this row own vector NATIVELY -- no synthetic login, no --field-separator-char -- recovers this row own plaintext on the first try. That is what tier vector means everywhere else. It is not written here because verify-vectors.pl is the promoter and it structurally CANNOT drive this format: it writes a synthetic login and a TAB before every hash, and a NETLMv2 ciphertext EMBEDS its own login, so displacing that field is exactly what breaks the parse. Promoting by hand would put a tier on this row that no tool in the repository can re-check, which is the one thing a tier is supposed to rule out. The fix is a native path in verify-vectors.pl for the challenge-response family -- probe-gpu.pl already has one, but writes only tools.john.gpu -- and it is on the backlog."
+  crack:
+    supported: false
+vectors:
+  - hash: "aTest:::1122334455667788:83B59F1536D3321DBF1FAEC14ADB1675:A1E7281FE8C10E53"
+    pass: "SomeFancyP4$$w0rdHere"
+    source: "john"
+notes: "Created 2026-09-06 by splitting netntlmv2, which was holding two computations -- something CLAUDE.md forbids and that row's own notes had already flagged and left to a curator. The split is a measurement, not a reading of the names: handed to john NATIVELY, one vector at a time, netntlmv2 cracks the other three vectors of that row and REFUSES this one, while netlmv2 cracks this one and refuses those three. Each format declines to load the other's string, so the two are not alternative spellings. This vector is john's own published example and is the short one -- an 8-byte blob, far short of an NTLMv2 one, which is what made it visible in the first place. NETLMv2 is john-only: no hashcat mode, mdxfind type or hashpipe type carries the name. NOTE FOR ANYONE VERIFYING THIS ROW: verify-vectors.pl cannot check it. It writes a synthetic login and a TAB before each hash, which is right for a hash that is only a digest and wrong here, because a NETLMv2 ciphertext EMBEDS its own login and john will not parse it once that field has been displaced. Hand it to john natively."

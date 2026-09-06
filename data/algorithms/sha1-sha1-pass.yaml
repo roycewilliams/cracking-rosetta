@@ -27,9 +27,6 @@ tools:
     verified_at: "2026-09-03"
     verified_with: "hashpipe RCS 1.189 (2026/09/02)"
     note: "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one."
-  john:
-    cpu: ["dynamic_1026", "dynamic_26"]
-    verified: "asserted"
   crack:
     supported: false
 vectors:
@@ -40,3 +37,4 @@ vectors:
 legacy:
   hashes_org: "SHA1X2"
   hashkiller: "sha1(sha1($pass))"
+notes: "dynamic_1026 and dynamic_26 were both REMOVED 2026-09-06, and with them this row's whole john block. Neither was a spelling problem. dynamic_1026 computes this row's construction CUT TO 32 hex characters; its correct home already existed, since sha1sha1trunc's stored vector IS cut(sha1(sha1($p)),0,32) -- confirmed by recomputation that day -- and it is at tier vector there. dynamic_26 is plain sha1($p): it LOADS this row's 40-hex vector and does not crack it, while the same format cracks sha1(\"rosetta\") on the first try, which is the control that separates the two readings. It has been on the sha1 row at tier vector since 2026-09-04. This row is NOT claiming john cannot do the algorithm -- its john_dynamic_expr is proven and runnable -- only that john ships no FORMAT identifier for it that anyone has reproduced here."

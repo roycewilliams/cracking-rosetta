@@ -27,11 +27,13 @@ tools:
     verified_at: "2026-09-03"
     verified_with: "hashpipe RCS 1.189 (2026/09/02)"
     note: "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one."
-  john:
-    cpu: ["dynamic_1025"]
-    verified: "asserted"
   crack:
     supported: false
+relations:
+  - kind: "truncates"
+    entry: "sha1-md5-md5-plain-substr-0-32"
+    distinction: "truncation"
+    note: "This row is sha1-md5-md5-plain cut to its first 32 hex characters. dynamic_1025 computes this and will not load the untruncated 40-hex digest at all -- measured 2026-09-06."
 vectors:
   - hash: "38b10490b54283ec6a45a5f0dc27529b84ed2588"
     pass: "rosetta"
@@ -40,3 +42,4 @@ vectors:
 legacy:
   hashes_org: "SHA1MD5X2"
   hashkiller: "sha1(md5(md5($pass)))"
+notes: "dynamic_1025 was REMOVED 2026-09-06 and with it this row's whole john block: it was the only john identifier here, and it computes this row's construction CUT TO 32 hex characters. Measured with the vector spelled $dynamic_1025$<hash>, it cracks the first 32 hex of this row's own digest and does not load the full 40. It now has its own row, sha1-md5-md5-plain-substr-0-32. This row is NOT claiming john cannot do the algorithm -- its john_dynamic_expr is proven and runnable -- only that john ships no FORMAT identifier for it that anyone has reproduced here."

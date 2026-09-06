@@ -1,5 +1,5 @@
 {
-   "count" : 1563,
+   "count" : 1568,
    "entries" : [
       {
          "alias" : "",
@@ -7550,8 +7550,8 @@
                "dynamic_19",
                "pix-md5"
             ],
-            "state" : "claimed",
-            "tier" : "upstream"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "john_expr" : "",
          "john_salted" : "no",
@@ -7567,7 +7567,7 @@
          "mdxfind_salted" : "no",
          "name" : "CISCOPIX",
          "nesting_depth" : "",
-         "notes" : "",
+         "notes" : "Vector 'john' added 2026-09-06: the SAME credential already above, re-serialized into the form john's dynamic_19 reads. It is not independent evidence -- do not read two agreeing vectors here as corroboration. john publishes ONE Cisco PIX computation under two identifiers that do not share a serialization: pix-md5 reads the bare 16-character digest this row already stored and dynamic_19 wants it behind a $dynamic_19$ tag. Measured 2026-09-06: handed the bare string, dynamic_19 answers \"No password hashes loaded\", which is its parser refusing the spelling and not the mode failing to compute. The re-encoding was not assumed: the tagged string was handed to john with only the plaintext the stored vector already states, and fell.",
          "primary_form" : "",
          "relations" : [],
          "sameas" : "",
@@ -7576,10 +7576,10 @@
          "tool_note" : {
             "hashcat" : "",
             "hashpipe" : "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one.",
-            "john" : "from hashpipe john_map.h, confirmed upstream by recomputation",
+            "john" : "",
             "mdxfind" : ""
          },
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -16851,7 +16851,7 @@
          "tool_note" : {
             "hashcat" : "",
             "hashpipe" : "",
-            "john" : "NOT REPRODUCED HERE. john publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: john publishes no plaintext for its example, and the example did not fall to the ~819 candidate plaintexts harvested from john's own source. The plaintext is findable, it was simply not in the list. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool john --only nethalflm to retry.",
+            "john" : "NOT REPRODUCED HERE, and CORRECTED 2026-09-06 about why. john publishes this identifier and a worked example, which is what tier `upstream` means. The earlier note on this row said the local round trip failed because john publishes no plaintext for its example and the plaintext was not in the ~819 candidates harvested from john's source. That is wrong, and it sends a reader looking for a wordlist that cannot help. The plaintext is G3RG3P00!, this row already stores it, and john recovers it on the first try. What john returns is G3RG3P0 -- seven characters -- and it says so itself: \"Note: Passwords longer than 7 truncated (property of the hash)\". nethalflm is a TRUNCATING format, so the strict byte comparison that gates a tier is not satisfied and should not be: the vector is upstream's and correct, the comparison is correct, and they answer different questions. This is NOT the case-insensitive-plaintext relaxation, which applies only where john says FMT_CASE is clear. Re-running seed-orphans.pl on this format will not change it.",
             "mdxfind" : ""
          },
          "vecs" : 1
@@ -50546,8 +50546,8 @@
          "expr" : "$c1.upper(sha1(sha1_raw($p))),c1=*",
          "expr_note" : "transcribed from the hx specification's Appendix A entry for mdxfind type SQL5 (e259), which states \"*\" . upper(sha1(sha1_bin(pass))). Transcription, not reproduction, so this is upstream and not vector; run derive-expressions.pl to try to promote it.; TRIAGE 2026-09-05 [compiler-cannot]: the expression is correct -- computed here with Digest:: it reproduces all 6 of john's own test vectors for mysql-sha1 -- and john's ad-hoc compiler still recovers none of them, so the string is right and --format=dynamic cannot execute it",
          "expr_tier" : "upstream",
-         "hash_length" : "32; 40",
-         "hash_length_basis" : "varies",
+         "hash_length" : 40,
+         "hash_length_basis" : "observed",
          "hashcat" : {
             "ids" : [
                300
@@ -50567,12 +50567,11 @@
          "id" : "mysql4-1-mysql5",
          "john" : {
             "ids" : [
-               "dynamic_1028",
                "mysql-sha1",
                "mysql-sha1-opencl"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "john_expr" : "",
          "john_salted" : "no",
@@ -50588,7 +50587,7 @@
          "mdxfind_salted" : "no",
          "name" : "MySQL4.1/MySQL5",
          "nesting_depth" : 2,
-         "notes" : "",
+         "notes" : "Two corrections 2026-09-06, both measured. dynamic_1028 was REMOVED: it computes sha1(sha1_raw($p)) CUT TO 32 hex characters -- no leading star and no upper-casing, so it is not MySQL5 at all -- and it now has its own row, sha1raw-substr-0-32, under the construction it actually computes. The vector 06c0bf5b64ece2f648b5f048a7190390 / test1 went with it: it is john's own published Test= line for dynamic_1028, harvested onto this row because this row named that format, and it is 32 hex characters where a MySQL5 hash is a star and 40. Vector 'john' added in its place: the SAME credential as this row's first vector, re-serialized into the form john's mysql-sha1 reads. It is not independent evidence -- do not read two agreeing vectors here as corroboration. mdxfind's SQL5 emits the bare lower-case digest this row already stored; john wants a leading star and UPPER-case hex, the shape of its own published example. Handed the bare string, mysql-sha1 answers \"No password hashes loaded\". The re-encoding was not assumed: the starred string was handed to john with only the plaintext the stored vector already states, and fell.",
          "primary_form" : "",
          "relations" : [],
          "sameas" : "",
@@ -50597,7 +50596,7 @@
          "tool_note" : {
             "hashcat" : "",
             "hashpipe" : "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one.",
-            "john" : "john's own test vector for this format is reproduced by mdxfind pinned to SQL5 at iteration 1",
+            "john" : "",
             "mdxfind" : ""
          },
          "vecs" : 2
@@ -51000,6 +50999,64 @@
             "state" : "no"
          },
          "cracknote" : "",
+         "denotation" : "NETLMv2",
+         "expr" : "",
+         "expr_note" : "Split off netntlmv2 on 2026-09-06. Like its NETNTLMv2 sibling this is an HMAC-MD5 challenge-response construction, and john's dynamic EXPRESSION language has no hmac() token -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK it: john has the format, and it is in tools.john.cpu.",
+         "expr_tier" : "absent",
+         "hash_length" : "",
+         "hash_length_basis" : "",
+         "hashcat" : {
+            "ids" : [],
+            "state" : "unknown"
+         },
+         "hashcat_salted" : "",
+         "hashcat_speed" : "",
+         "hashpipe" : {
+            "ids" : [],
+            "state" : "unknown"
+         },
+         "id" : "lmv2-c-r",
+         "john" : {
+            "ids" : [
+               "netlmv2"
+            ],
+            "state" : "claimed",
+            "tier" : "asserted"
+         },
+         "john_expr" : "",
+         "john_salted" : "yes",
+         "john_work_factor" : "",
+         "legacy" : "",
+         "mdxfind" : {
+            "ids" : [],
+            "state" : "unknown"
+         },
+         "mdxfind_salted" : "",
+         "name" : "NETLMv2",
+         "nesting_depth" : "",
+         "notes" : "Created 2026-09-06 by splitting netntlmv2, which was holding two computations -- something CLAUDE.md forbids and that row's own notes had already flagged and left to a curator. The split is a measurement, not a reading of the names: handed to john NATIVELY, one vector at a time, netntlmv2 cracks the other three vectors of that row and REFUSES this one, while netlmv2 cracks this one and refuses those three. Each format declines to load the other's string, so the two are not alternative spellings. This vector is john's own published example and is the short one -- an 8-byte blob, far short of an NTLMv2 one, which is what made it visible in the first place. NETLMv2 is john-only: no hashcat mode, mdxfind type or hashpipe type carries the name. NOTE FOR ANYONE VERIFYING THIS ROW: verify-vectors.pl cannot check it. It writes a synthetic login and a TAB before each hash, which is right for a hash that is only a digest and wrong here, because a NETLMv2 ciphertext EMBEDS its own login and john will not parse it once that field has been displaced. Hand it to john natively.",
+         "primary_form" : "",
+         "relations" : [],
+         "sameas" : "",
+         "serialization" : "unknown",
+         "status" : "needs-review",
+         "tool_note" : {
+            "hashcat" : "",
+            "hashpipe" : "",
+            "john" : "ROUND-TRIPPED BY HAND, and held at asserted for a reason that is about this repository tooling and not about the mapping. Measured 2026-09-06: john pinned to --format=netlmv2 and handed this row own vector NATIVELY -- no synthetic login, no --field-separator-char -- recovers this row own plaintext on the first try. That is what tier vector means everywhere else. It is not written here because verify-vectors.pl is the promoter and it structurally CANNOT drive this format: it writes a synthetic login and a TAB before every hash, and a NETLMv2 ciphertext EMBEDS its own login, so displacing that field is exactly what breaks the parse. Promoting by hand would put a tier on this row that no tool in the repository can re-check, which is the one thing a tier is supposed to rule out. The fix is a native path in verify-vectors.pl for the challenge-response family -- probe-gpu.pl already has one, but writes only tools.john.gpu -- and it is on the backlog.",
+            "mdxfind" : ""
+         },
+         "vecs" : 1
+      },
+      {
+         "alias" : "",
+         "application" : "",
+         "category" : "protocol",
+         "crack" : {
+            "ids" : [],
+            "state" : "no"
+         },
+         "cracknote" : "",
          "denotation" : "des_block(md4(utf16le(pass)), challenge)",
          "expr" : "",
          "expr_note" : "the construction upstream states for mdxfind type NETNTLMV1 (e897) names des_block(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
@@ -51147,7 +51204,6 @@
          "id" : "netntlmv2",
          "john" : {
             "ids" : [
-               "netlmv2",
                "netntlmv2",
                "ntlmv2-opencl"
             ],
@@ -51168,7 +51224,7 @@
          "mdxfind_salted" : "yes",
          "name" : "NETNTLMV2",
          "nesting_depth" : "",
-         "notes" : "john reads BOTH tools' NTLMv2 serializations: measured 2026-09-01, netntlmv2 and ntlmv2-opencl load and crack this entry's hashcat-form vectors (USER::DOMAIN:challenge:response:blob) unchanged. An earlier run of this session reported \"No password hashes loaded\" and three re-serialized vectors were briefly added on that basis; the cause was a --field-separator-char=tab passed by the probing tool, which governs how john splits LOGIN from HASH when READING a file, so a tab made john treat each whole line as one login. The vectors were withdrawn and the tool fixed. Kerberos AS-REP is NOT like this: john genuinely cannot read hashcat's $krb5asrep$ field order, which is why those rows do carry a transcoded vector. Two reasons this block is still tier asserted, neither of which is doubt about NETNTLMv2 itself. (1) It names netlmv2, a DIFFERENT computation, and a block carries one tier for every identifier in it; netlmv2 recovers none of these vectors, and the fourth vector (aTest:::...:A1E7281FE8C10E53, an 8-byte blob far short of an NTLMv2 one) looks like the NETLMv2 one. That is a row holding two computations, which CLAUDE.md forbids, and splitting it is curation. (2) verify-vectors.pl cannot check this format at all: it writes a synthetic login and a TAB before each hash, which is right for a hash that is only a digest and wrong here, because a NETNTLMv2 ciphertext EMBEDS its own login (USER::DOMAIN:...) and john will not parse it once that field has been displaced. Measured 2026-09-01: the same vectors load and crack under netntlmv2 and ntlmv2-opencl when handed to john natively, 3 of 4, and verify-vectors.pl reports 0 of 4 for all three identifiers.",
+         "notes" : "john reads BOTH tools' NTLMv2 serializations: measured 2026-09-01, netntlmv2 and ntlmv2-opencl load and crack this entry's hashcat-form vectors (USER::DOMAIN:challenge:response:blob) unchanged. An earlier run of this session reported \"No password hashes loaded\" and three re-serialized vectors were briefly added on that basis; the cause was a --field-separator-char=tab passed by the probing tool, which governs how john splits LOGIN from HASH when READING a file, so a tab made john treat each whole line as one login. The vectors were withdrawn and the tool fixed. Kerberos AS-REP is NOT like this: john genuinely cannot read hashcat's $krb5asrep$ field order, which is why those rows do carry a transcoded vector. Two reasons this block is still tier asserted, neither of which is doubt about NETNTLMv2 itself. (1) It names netlmv2, a DIFFERENT computation, and a block carries one tier for every identifier in it; netlmv2 recovers none of these vectors, and the fourth vector (aTest:::...:A1E7281FE8C10E53, an 8-byte blob far short of an NTLMv2 one) looks like the NETLMv2 one. That is a row holding two computations, which CLAUDE.md forbids, and splitting it is curation. (2) verify-vectors.pl cannot check this format at all: it writes a synthetic login and a TAB before each hash, which is right for a hash that is only a digest and wrong here, because a NETNTLMv2 ciphertext EMBEDS its own login (USER::DOMAIN:...) and john will not parse it once that field has been displaced. Measured 2026-09-01: the same vectors load and crack under netntlmv2 and ntlmv2-opencl when handed to john natively, 3 of 4, and verify-vectors.pl reports 0 of 4 for all three identifiers. SPLIT 2026-09-06. netlmv2 and the aTest::: vector moved to their own row, lmv2-c-r. This resolves reason (1) in the paragraph above, which had been recorded here since 2026-09-01 and left to a curator: the row was holding two computations. The split was measured rather than read off the names -- handed to john natively, one vector at a time, netntlmv2 cracks the three vectors still here and REFUSES the aTest one, while netlmv2 cracks the aTest one and refuses these three, each declining to LOAD the other's string. Reason (2) stands unchanged and always will: verify-vectors.pl cannot check a challenge-response format at all, because it displaces the login field this ciphertext embeds, so this block is verified by hand or not at all.",
          "primary_form" : "",
          "relations" : [],
          "sameas" : "",
@@ -51177,10 +51233,10 @@
          "tool_note" : {
             "hashcat" : "",
             "hashpipe" : "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one.",
-            "john" : "john's own test vector for this format is reproduced by mdxfind pinned to NETNTLMV2 at iteration 1 GPU build(s) ntlmv2-opencl proven on 2026-09-01 by cracking this entry's own vector(s) under that exact format; john ships no CPU format of that name, so discover-john.pl --mirror-gpu could not place them.",
+            "john" : "john's own test vector for this format is reproduced by mdxfind pinned to NETNTLMV2 at iteration 1 GPU build(s) ntlmv2-opencl proven on 2026-09-01 by cracking this entry's own vector(s) under that exact format; john ships no CPU format of that name, so discover-john.pl --mirror-gpu could not place them. AMENDED 2026-09-06: both identifiers this block still names have now round-tripped this row own vectors. netlmv2 -- the one that never did, and the reason this block sat at asserted -- has been split off to lmv2-c-r. Measured that day, john pinned to --format=netntlmv2 and handed the vectors NATIVELY, one at a time: it recovers the plaintext of all three vectors still on this row. ntlmv2-opencl was proven the same way on 2026-09-01. What holds this block below tier vector is now ONLY that verify-vectors.pl cannot drive a challenge-response format -- it writes a synthetic login and a TAB before every hash, and this ciphertext embeds its own login -- so a promotion here would be a tier no tool in the repository can re-check. See lmv2-c-r for the same note and the backlog item that closes both.",
             "mdxfind" : ""
          },
-         "vecs" : 4
+         "vecs" : 3
       },
       {
          "alias" : "",
@@ -52768,8 +52824,8 @@
                "dynamic_4",
                "osc"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "john_expr" : "dynamic=md5($s.$p)",
          "john_salted" : "yes",
@@ -52785,7 +52841,7 @@
          "mdxfind_salted" : "yes",
          "name" : "osCommerce, xt:Commerce",
          "nesting_depth" : 1,
-         "notes" : "",
+         "notes" : "Vector 'john' added 2026-09-06: the SAME credential as this row's first vector, re-serialized into the form john's osc format reads. It is not independent evidence -- do not read two agreeing vectors here as corroboration. The two spellings differ in ORDER and in ENCODING: this row stores <hash>:<salt> with the salt as text, and osc wants $OSC$<salt as hex>$<hash>, so the salt 'ab' becomes 6162. Measured 2026-09-06: handed the colon form, osc answers \"No password hashes loaded\", while the four dynamics on this row read it unchanged. The re-encoding was not assumed: the $OSC$ string was handed to john with only the plaintext the stored vector already states, and fell.",
          "primary_form" : "",
          "relations" : [
             {
@@ -52810,7 +52866,7 @@
             "john" : "",
             "mdxfind" : ""
          },
-         "vecs" : 2
+         "vecs" : 3
       },
       {
          "alias" : "",
@@ -55791,8 +55847,8 @@
             "ids" : [
                "plaintext"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "john_expr" : "",
          "john_salted" : "no",
@@ -55808,7 +55864,7 @@
          "mdxfind_salted" : "no",
          "name" : "plaintext",
          "nesting_depth" : "",
-         "notes" : "",
+         "notes" : "Vector 'john' added 2026-09-06: the SAME credential as this row's hashcat vector, re-serialized into the form john's plaintext format reads. It is not independent evidence -- do not read two agreeing vectors here as corroboration. All three tools spell a cleartext 'hash' differently: hashcat takes the string itself, mdxfind takes it null-padded and hex-encoded, and john wants a $0$ tag in front of it, which is the shape of its own published example $0$cleartext. Measured 2026-09-06: handed the bare string, john's plaintext format answers \"No password hashes loaded\". The re-encoding was not assumed: the tagged string was handed to john with only the plaintext the stored vector already states, and fell.",
          "primary_form" : "",
          "relations" : [],
          "sameas" : "",
@@ -55820,7 +55876,7 @@
             "john" : "",
             "mdxfind" : ""
          },
-         "vecs" : 2
+         "vecs" : 3
       },
       {
          "alias" : "",
@@ -57432,8 +57488,8 @@
                "RAdmin",
                "dynamic_1010"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "john_expr" : "dynamic=md5(pad100($p))",
          "john_salted" : "no",
@@ -57449,7 +57505,7 @@
          "mdxfind_salted" : "no",
          "name" : "Radmin",
          "nesting_depth" : 1,
-         "notes" : "",
+         "notes" : "Vector 'john' added 2026-09-06: the SAME credential already above, re-serialized into the form john's RAdmin format reads. It is not independent evidence -- do not read two agreeing vectors here as corroboration. john's two identifiers for this algorithm disagree on spelling: dynamic_1010 reads the bare 32 hex characters this row already stored, and RAdmin wants $radmin2$ followed by UPPER-case hex, which is the shape of its own published example. Measured 2026-09-06: handed the bare lower-case string, RAdmin answers \"No password hashes loaded\". The re-encoding was not assumed: the tagged string was handed to john with only the plaintext the stored vector already states, and fell.",
          "primary_form" : "",
          "relations" : [],
          "sameas" : "",
@@ -57461,7 +57517,7 @@
             "john" : "",
             "mdxfind" : ""
          },
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -62941,11 +62997,10 @@
          "id" : "sha1-md5-pass",
          "john" : {
             "ids" : [
-               "dynamic_1024",
                "dynamic_23"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "john_expr" : "dynamic=sha1(md5($p))",
          "john_salted" : "no",
@@ -62961,15 +63016,87 @@
          "mdxfind_salted" : "no",
          "name" : "sha1(md5($pass))",
          "nesting_depth" : 2,
-         "notes" : "",
+         "notes" : "dynamic_1024 was REMOVED 2026-09-06: it computes this row's construction CUT TO 32 hex characters, so it is a different computation and the mapping was false. Measured with the vector spelled $dynamic_1024$<hash>, it cracks the first 32 hex of this row's own digest and does not load the full 40. It now has its own row, sha1-md5-pass-substr-0-32, reachable through the truncates relation below. dynamic_23 is unaffected and cracks this row's vector.",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "truncation",
+               "entry" : "sha1-md5-pass-substr-0-32",
+               "kind" : "truncates",
+               "note" : "This row is sha1-md5-pass cut to its first 32 hex characters. john ships them as two formats, dynamic_1024 here and dynamic_23 there, and dynamic_1024 will not load the untruncated 40-hex digest at all -- measured 2026-09-06."
+            }
+         ],
+         "sameas" : "truncates sha1-md5-pass-substr-0-32 (truncation)",
          "serialization" : "shared",
          "status" : "needs-review",
          "tool_note" : {
             "hashcat" : "",
             "hashpipe" : "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one.",
+            "john" : "",
+            "mdxfind" : ""
+         },
+         "vecs" : 1
+      },
+      {
+         "alias" : "",
+         "application" : "",
+         "category" : "composite",
+         "crack" : {
+            "ids" : [],
+            "state" : "no"
+         },
+         "cracknote" : "",
+         "denotation" : "",
+         "expr" : "cut(sha1(md5($p)),0,32)",
+         "expr_note" : "john's own --list=subformats states dynamic_1024 as \"sha1(md5($p)) (hash truncated to length 32)\", for an identifier this row proves by round-trip, and the construction was recomputed independently here with Digest::MD5 and Digest::SHA against john's published Test= vector before it was stored. Tier stays upstream and CANNOT become vector, for the same reason sha1-substr-0-32 records: cut() has no john dynamic spelling at all (RosettaJohn %NO_JOHN), so john's compiler can never be handed this string, and there is no john_dynamic_expr on this row for the same reason -- dropping the cut would run happily and produce the full digest, not the 32 hex characters stored here.",
+         "expr_tier" : "upstream",
+         "hash_length" : 32,
+         "hash_length_basis" : "observed",
+         "hashcat" : {
+            "ids" : [],
+            "state" : "unknown"
+         },
+         "hashcat_salted" : "",
+         "hashcat_speed" : "",
+         "hashpipe" : {
+            "ids" : [],
+            "state" : "unknown"
+         },
+         "id" : "sha1-md5-pass-substr-0-32",
+         "john" : {
+            "ids" : [
+               "dynamic_1024"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
+         },
+         "john_expr" : "",
+         "john_salted" : "no",
+         "john_work_factor" : "",
+         "legacy" : "",
+         "mdxfind" : {
+            "ids" : [],
+            "state" : "unknown"
+         },
+         "mdxfind_salted" : "",
+         "name" : "sha1(md5($pass)).Substr(0, 32)",
+         "nesting_depth" : 2,
+         "notes" : "Created 2026-09-06. This row exists because dynamic_1024 was sitting on sha1-md5-pass, which computes the same thing UNTRUNCATED, and the mapping was false. Measured that day, with the vector spelled $dynamic_1024$<hash> so that the parser could not be the variable: dynamic_1024 cracks the first 32 hex characters of sha1-md5-pass's own digest, and handed that row's FULL digest it does not load at all. A format that refuses the string is not a format that computed it and missed. The vector(s) here are john's own published Test= lines from run/dynamic.conf, each recomputed independently with Digest:: before being stored. Note what this row is NOT: mdxfind's TRUNC family truncates the INNER digest and hashes the result, which is a different construction -- see sha1sha1trunc and its neighbours.",
+         "primary_form" : "",
+         "relations" : [
+            {
+               "distinction" : "truncation",
+               "entry" : "sha1-md5-pass",
+               "kind" : "truncates",
+               "note" : "This row is sha1-md5-pass cut to its first 32 hex characters. john ships them as two formats, dynamic_1024 here and dynamic_23 there, and dynamic_1024 will not load the untruncated 40-hex digest at all -- measured 2026-09-06."
+            }
+         ],
+         "sameas" : "truncates sha1-md5-pass (truncation)",
+         "serialization" : "unknown",
+         "status" : "needs-review",
+         "tool_note" : {
+            "hashcat" : "",
+            "hashpipe" : "",
             "john" : "",
             "mdxfind" : ""
          },
@@ -63400,14 +63527,11 @@
          },
          "id" : "sha1-md5-md5-plain",
          "john" : {
-            "ids" : [
-               "dynamic_1025"
-            ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "ids" : [],
+            "state" : "unknown"
          },
          "john_expr" : "dynamic=sha1(md5(md5($p)))",
-         "john_salted" : "no",
+         "john_salted" : "",
          "john_work_factor" : "",
          "legacy" : "SHA1MD5X2; sha1(md5(md5($pass)))",
          "mdxfind" : {
@@ -63420,15 +63544,87 @@
          "mdxfind_salted" : "no",
          "name" : "sha1(md5(md5($plain)))",
          "nesting_depth" : 3,
-         "notes" : "",
+         "notes" : "dynamic_1025 was REMOVED 2026-09-06 and with it this row's whole john block: it was the only john identifier here, and it computes this row's construction CUT TO 32 hex characters. Measured with the vector spelled $dynamic_1025$<hash>, it cracks the first 32 hex of this row's own digest and does not load the full 40. It now has its own row, sha1-md5-md5-plain-substr-0-32. This row is NOT claiming john cannot do the algorithm -- its john_dynamic_expr is proven and runnable -- only that john ships no FORMAT identifier for it that anyone has reproduced here.",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "truncation",
+               "entry" : "sha1-md5-md5-plain-substr-0-32",
+               "kind" : "truncates",
+               "note" : "This row is sha1-md5-md5-plain cut to its first 32 hex characters. dynamic_1025 computes this and will not load the untruncated 40-hex digest at all -- measured 2026-09-06."
+            }
+         ],
+         "sameas" : "truncates sha1-md5-md5-plain-substr-0-32 (truncation)",
          "serialization" : "shared",
          "status" : "needs-review",
          "tool_note" : {
             "hashcat" : "",
             "hashpipe" : "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one.",
+            "john" : "",
+            "mdxfind" : ""
+         },
+         "vecs" : 1
+      },
+      {
+         "alias" : "",
+         "application" : "",
+         "category" : "composite",
+         "crack" : {
+            "ids" : [],
+            "state" : "no"
+         },
+         "cracknote" : "",
+         "denotation" : "",
+         "expr" : "cut(sha1(md5(md5($p))),0,32)",
+         "expr_note" : "john's own --list=subformats states dynamic_1025 as \"sha1(md5(md5($p))) (hash truncated to length 32)\", for an identifier this row proves by round-trip, and the construction was recomputed independently here with Digest::MD5 and Digest::SHA against john's published Test= vector before it was stored. Tier stays upstream and CANNOT become vector, for the same reason sha1-substr-0-32 records: cut() has no john dynamic spelling at all (RosettaJohn %NO_JOHN), so john's compiler can never be handed this string, and there is no john_dynamic_expr on this row for the same reason -- dropping the cut would run happily and produce the full digest, not the 32 hex characters stored here.",
+         "expr_tier" : "upstream",
+         "hash_length" : 32,
+         "hash_length_basis" : "observed",
+         "hashcat" : {
+            "ids" : [],
+            "state" : "unknown"
+         },
+         "hashcat_salted" : "",
+         "hashcat_speed" : "",
+         "hashpipe" : {
+            "ids" : [],
+            "state" : "unknown"
+         },
+         "id" : "sha1-md5-md5-plain-substr-0-32",
+         "john" : {
+            "ids" : [
+               "dynamic_1025"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
+         },
+         "john_expr" : "",
+         "john_salted" : "no",
+         "john_work_factor" : "",
+         "legacy" : "",
+         "mdxfind" : {
+            "ids" : [],
+            "state" : "unknown"
+         },
+         "mdxfind_salted" : "",
+         "name" : "sha1(md5(md5($plain))).Substr(0, 32)",
+         "nesting_depth" : 3,
+         "notes" : "Created 2026-09-06. This row exists because dynamic_1025 was sitting on sha1-md5-md5-plain, which computes the same thing UNTRUNCATED, and the mapping was false. Measured that day, with the vector spelled $dynamic_1025$<hash> so that the parser could not be the variable: dynamic_1025 cracks the first 32 hex characters of sha1-md5-md5-plain's own digest, and handed that row's FULL digest it does not load at all. A format that refuses the string is not a format that computed it and missed. The vector(s) here are john's own published Test= lines from run/dynamic.conf, each recomputed independently with Digest:: before being stored. Note what this row is NOT: mdxfind's TRUNC family truncates the INNER digest and hashes the result, which is a different construction -- see sha1sha1trunc and its neighbours.",
+         "primary_form" : "",
+         "relations" : [
+            {
+               "distinction" : "truncation",
+               "entry" : "sha1-md5-md5-plain",
+               "kind" : "truncates",
+               "note" : "This row is sha1-md5-md5-plain cut to its first 32 hex characters. dynamic_1025 computes this and will not load the untruncated 40-hex digest at all -- measured 2026-09-06."
+            }
+         ],
+         "sameas" : "truncates sha1-md5-md5-plain (truncation)",
+         "serialization" : "unknown",
+         "status" : "needs-review",
+         "tool_note" : {
+            "hashcat" : "",
+            "hashpipe" : "",
             "john" : "",
             "mdxfind" : ""
          },
@@ -64626,15 +64822,11 @@
          },
          "id" : "sha1-sha1-pass",
          "john" : {
-            "ids" : [
-               "dynamic_1026",
-               "dynamic_26"
-            ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "ids" : [],
+            "state" : "unknown"
          },
          "john_expr" : "dynamic=sha1(sha1($p))",
-         "john_salted" : "no",
+         "john_salted" : "",
          "john_work_factor" : "",
          "legacy" : "SHA1X2; sha1(sha1($pass))",
          "mdxfind" : {
@@ -64647,7 +64839,7 @@
          "mdxfind_salted" : "no",
          "name" : "sha1(sha1($pass))",
          "nesting_depth" : 2,
-         "notes" : "",
+         "notes" : "dynamic_1026 and dynamic_26 were both REMOVED 2026-09-06, and with them this row's whole john block. Neither was a spelling problem. dynamic_1026 computes this row's construction CUT TO 32 hex characters; its correct home already existed, since sha1sha1trunc's stored vector IS cut(sha1(sha1($p)),0,32) -- confirmed by recomputation that day -- and it is at tier vector there. dynamic_26 is plain sha1($p): it LOADS this row's 40-hex vector and does not crack it, while the same format cracks sha1(\"rosetta\") on the first try, which is the control that separates the two readings. It has been on the sha1 row at tier vector since 2026-09-04. This row is NOT claiming john cannot do the algorithm -- its john_dynamic_expr is proven and runnable -- only that john ships no FORMAT identifier for it that anyone has reproduced here.",
          "primary_form" : "",
          "relations" : [],
          "sameas" : "",
@@ -65392,15 +65584,11 @@
          },
          "id" : "sha1-sha1-sha1-pass",
          "john" : {
-            "ids" : [
-               "dynamic_1027",
-               "dynamic_26"
-            ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "ids" : [],
+            "state" : "unknown"
          },
          "john_expr" : "dynamic=sha1(sha1(sha1($p)))",
-         "john_salted" : "no",
+         "john_salted" : "",
          "john_work_factor" : "",
          "legacy" : "SHA1X3; sha1(sha1(sha1($pass)))",
          "mdxfind" : {
@@ -65413,10 +65601,17 @@
          "mdxfind_salted" : "no",
          "name" : "sha1(sha1(sha1($pass)))",
          "nesting_depth" : 3,
-         "notes" : "hashcat-legacy had mode 4600 for this; modern hashcat has no equivalent (source: the migrated sheet, unverified here - hashcat-legacy is EOL and not installed)",
+         "notes" : "hashcat-legacy had mode 4600 for this; modern hashcat has no equivalent (source: the migrated sheet, unverified here - hashcat-legacy is EOL and not installed) dynamic_1027 and dynamic_26 were both REMOVED 2026-09-06, and with them this row's whole john block, for the reasons recorded on sha1-sha1-pass. dynamic_1027 computes this row's construction CUT TO 32 hex characters and now has its own row, sha1-sha1-sha1-pass-substr-0-32; dynamic_26 is plain sha1($p) and lives on the sha1 row. This row is NOT claiming john cannot do the algorithm -- its john_dynamic_expr is proven and runnable -- only that john ships no FORMAT identifier for it that anyone has reproduced here.",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "truncation",
+               "entry" : "sha1-sha1-sha1-pass-substr-0-32",
+               "kind" : "truncates",
+               "note" : "This row is sha1-sha1-sha1-pass cut to its first 32 hex characters. dynamic_1027 computes this and will not load the untruncated 40-hex digest at all -- measured 2026-09-06."
+            }
+         ],
+         "sameas" : "truncates sha1-sha1-sha1-pass-substr-0-32 (truncation)",
          "serialization" : "unknown",
          "status" : "needs-review",
          "tool_note" : {
@@ -65426,6 +65621,71 @@
             "mdxfind" : ""
          },
          "vecs" : 1
+      },
+      {
+         "alias" : "",
+         "application" : "",
+         "category" : "iterated",
+         "crack" : {
+            "ids" : [],
+            "state" : "no"
+         },
+         "cracknote" : "",
+         "denotation" : "",
+         "expr" : "cut(sha1(sha1(sha1($p))),0,32)",
+         "expr_note" : "john's own --list=subformats states dynamic_1027 as \"sha1(sha1(sha1($p))) (hash truncated to length 32)\", for an identifier this row proves by round-trip, and the construction was recomputed independently here with Digest::MD5 and Digest::SHA against john's published Test= vector before it was stored. Tier stays upstream and CANNOT become vector, for the same reason sha1-substr-0-32 records: cut() has no john dynamic spelling at all (RosettaJohn %NO_JOHN), so john's compiler can never be handed this string, and there is no john_dynamic_expr on this row for the same reason -- dropping the cut would run happily and produce the full digest, not the 32 hex characters stored here.",
+         "expr_tier" : "upstream",
+         "hash_length" : 32,
+         "hash_length_basis" : "fixed",
+         "hashcat" : {
+            "ids" : [],
+            "state" : "unknown"
+         },
+         "hashcat_salted" : "",
+         "hashcat_speed" : "",
+         "hashpipe" : {
+            "ids" : [],
+            "state" : "unknown"
+         },
+         "id" : "sha1-sha1-sha1-pass-substr-0-32",
+         "john" : {
+            "ids" : [
+               "dynamic_1027"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
+         },
+         "john_expr" : "",
+         "john_salted" : "no",
+         "john_work_factor" : "",
+         "legacy" : "",
+         "mdxfind" : {
+            "ids" : [],
+            "state" : "unknown"
+         },
+         "mdxfind_salted" : "",
+         "name" : "sha1(sha1(sha1($pass))).Substr(0, 32)",
+         "nesting_depth" : 3,
+         "notes" : "Created 2026-09-06. This row exists because dynamic_1027 was sitting on sha1-sha1-sha1-pass, which computes the same thing UNTRUNCATED, and the mapping was false. Measured that day, with the vector spelled $dynamic_1027$<hash> so that the parser could not be the variable: dynamic_1027 cracks the first 32 hex characters of sha1-sha1-sha1-pass's own digest, and handed that row's FULL digest it does not load at all. A format that refuses the string is not a format that computed it and missed. The vector(s) here are john's own published Test= lines from run/dynamic.conf, each recomputed independently with Digest:: before being stored. Note what this row is NOT: mdxfind's TRUNC family truncates the INNER digest and hashes the result, which is a different construction -- see sha1sha1trunc and its neighbours.",
+         "primary_form" : "",
+         "relations" : [
+            {
+               "distinction" : "truncation",
+               "entry" : "sha1-sha1-sha1-pass",
+               "kind" : "truncates",
+               "note" : "This row is sha1-sha1-sha1-pass cut to its first 32 hex characters. dynamic_1027 computes this and will not load the untruncated 40-hex digest at all -- measured 2026-09-06."
+            }
+         ],
+         "sameas" : "truncates sha1-sha1-sha1-pass (truncation)",
+         "serialization" : "unknown",
+         "status" : "needs-review",
+         "tool_note" : {
+            "hashcat" : "",
+            "hashpipe" : "",
+            "john" : "",
+            "mdxfind" : ""
+         },
+         "vecs" : 3
       },
       {
          "alias" : "",
@@ -65487,6 +65747,71 @@
             "mdxfind" : ""
          },
          "vecs" : 1
+      },
+      {
+         "alias" : "",
+         "application" : "",
+         "category" : "composite",
+         "crack" : {
+            "ids" : [],
+            "state" : "no"
+         },
+         "cracknote" : "",
+         "denotation" : "",
+         "expr" : "cut(sha1(sha1_raw($p)),0,32)",
+         "expr_note" : "john's own --list=subformats states dynamic_1028 as \"sha1(sha1_raw($p)) (hash truncated to length 32)\", for an identifier this row proves by round-trip, and the construction was recomputed independently here with Digest::MD5 and Digest::SHA against john's published Test= vector before it was stored. Tier stays upstream and CANNOT become vector, for the same reason sha1-substr-0-32 records: cut() has no john dynamic spelling at all (RosettaJohn %NO_JOHN), so john's compiler can never be handed this string, and there is no john_dynamic_expr on this row for the same reason -- dropping the cut would run happily and produce the full digest, not the 32 hex characters stored here.",
+         "expr_tier" : "upstream",
+         "hash_length" : 32,
+         "hash_length_basis" : "fixed",
+         "hashcat" : {
+            "ids" : [],
+            "state" : "unknown"
+         },
+         "hashcat_salted" : "",
+         "hashcat_speed" : "",
+         "hashpipe" : {
+            "ids" : [],
+            "state" : "unknown"
+         },
+         "id" : "sha1raw-substr-0-32",
+         "john" : {
+            "ids" : [
+               "dynamic_1028"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
+         },
+         "john_expr" : "",
+         "john_salted" : "no",
+         "john_work_factor" : "",
+         "legacy" : "",
+         "mdxfind" : {
+            "ids" : [],
+            "state" : "unknown"
+         },
+         "mdxfind_salted" : "",
+         "name" : "sha1(sha1_raw($pass)).Substr(0, 32)",
+         "nesting_depth" : 2,
+         "notes" : "Created 2026-09-06. This row exists because dynamic_1028 was sitting on sha1raw, which computes the same thing UNTRUNCATED, and the mapping was false. Measured that day, with the vector spelled $dynamic_1028$<hash> so that the parser could not be the variable: dynamic_1028 cracks the first 32 hex characters of sha1raw's own digest, and handed that row's FULL digest it does not load at all. A format that refuses the string is not a format that computed it and missed. The vector(s) here are john's own published Test= lines from run/dynamic.conf, each recomputed independently with Digest:: before being stored. Note what this row is NOT: mdxfind's TRUNC family truncates the INNER digest and hashes the result, which is a different construction -- see sha1sha1trunc and its neighbours.",
+         "primary_form" : "",
+         "relations" : [
+            {
+               "distinction" : "truncation",
+               "entry" : "sha1raw",
+               "kind" : "truncates",
+               "note" : "This row is sha1raw cut to its first 32 hex characters. dynamic_1028 computes this; it had been sitting on mysql4-1-mysql5, which adds a leading star and upper-cases the digest, so that row was wrong about it twice over -- measured 2026-09-06."
+            }
+         ],
+         "sameas" : "truncates sha1raw (truncation)",
+         "serialization" : "unknown",
+         "status" : "needs-review",
+         "tool_note" : {
+            "hashcat" : "",
+            "hashpipe" : "",
+            "john" : "",
+            "mdxfind" : ""
+         },
+         "vecs" : 3
       },
       {
          "alias" : "",
@@ -73274,8 +73599,15 @@
          "nesting_depth" : 2,
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "truncation",
+               "entry" : "sha1raw-substr-0-32",
+               "kind" : "truncates",
+               "note" : "This row is sha1raw cut to its first 32 hex characters. dynamic_1028 computes this; it had been sitting on mysql4-1-mysql5, which adds a leading star and upper-cases the digest, so that row was wrong about it twice over -- measured 2026-09-06."
+            }
+         ],
+         "sameas" : "truncates sha1raw-substr-0-32 (truncation)",
          "serialization" : "shared",
          "status" : "needs-review",
          "tool_note" : {
@@ -85907,8 +86239,8 @@
                "dynamic_25",
                "dynamic_37"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "john_expr" : "",
          "john_salted" : "yes",
@@ -85924,7 +86256,7 @@
          "mdxfind_salted" : "no",
          "name" : "SMF < v1.1",
          "nesting_depth" : 1,
-         "notes" : "(using lowercase username as salt)",
+         "notes" : "(using lowercase username as salt) Vector 'john' added 2026-09-06: the SAME credential already above, re-serialized into the form john's dynamic_37 reads. It is not independent evidence -- do not read two agreeing vectors here as corroboration. The two spellings differ in where the USERNAME goes: this row stores SMF's own <hash>:<user>, and dynamic_37 -- sha1(lc($u).$p) -- takes the username in a $$U field, $dynamic_37$<hash>$$U<user>. Measured 2026-09-06: handed the colon form, dynamic_37 answers \"No password hashes loaded\", while dynamic_25 reads it unchanged because it treats the same trailing field as a salt. The re-encoding was not assumed: the $$U string was handed to john with only the plaintext the stored vector already states, and fell.",
          "primary_form" : "",
          "relations" : [],
          "sameas" : "",
@@ -85936,7 +86268,7 @@
             "john" : "",
             "mdxfind" : ""
          },
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -91321,12 +91653,10 @@
          "id" : "vbulletin-v3-8-5-2",
          "john" : {
             "ids" : [
-               "dynamic_1007",
-               "dynamic_2006",
-               "dynamic_6"
+               "dynamic_2006"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "john_expr" : "",
          "john_salted" : "yes",
@@ -91358,7 +91688,7 @@
          "tool_note" : {
             "hashcat" : "",
             "hashpipe" : "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one.",
-            "john" : "",
+            "john" : "dynamic_6 and dynamic_1007 were REMOVED 2026-09-06. Both compute this row's construction and neither is wrong about it; neither can LOAD this row's vector. john caps their salt at 23 bytes, and a vBulletin salt from 3.8.5 on is 30, which is the whole reason john ships dynamic_2006 -- its own subformat listing calls it \"md5(md5($p).$s) (vBulletin, PW > 55 bytes or/and salt > 23 bytes)\". Measured 2026-09-06 with the vector spelled $dynamic_N$<hash>$<salt> so that the parser could not be the variable: dynamic_6 and dynamic_1007 do not load it at all, dynamic_2006 loads and cracks it, and the control -- john's own 6-byte-salt example -- falls to dynamic_6 on the first try. They keep their proof on vbulletin-v3-8-5, the short-salt row, where all three are tier vector.",
             "mdxfind" : ""
          },
          "vecs" : 1
@@ -96809,7 +97139,7 @@
          "vecs" : 1
       }
    ],
-   "generated" : "2026-09-05",
+   "generated" : "2026-09-06",
    "merged" : 9,
    "tombstones" : [
       {

@@ -34,6 +34,11 @@ tools:
     note: "no format. Swept the 29 format(s) whose own valid() accepts this entry's own vector, as john --show=left reports them, on 2026-09-04 (a tools/discover-john.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. For john the control is also per ENTRY and not only per shape: every format counted above is one whose own loader ACCEPTED this hash, so each was asked this exact question and answered no. A format that cannot parse the hash is not counted at all, and an entry no format can parse is reported as unsearched rather than decided. Every applicable format ran to completion; a format killed at the timeout is counted as untested and withholds this verdict. No john format name matches any identifier this entry publishes either, normalized by the separator-drift rule. john nonetheless COMPUTES this: the entry carries a proven john_dynamic_expr, dynamic=sha1(sha1_raw($p)), which john's own dynamic compiler recovered this entry's plaintext from this entry's hash under. That is a runnable command and not a format identifier, which is why it stays out of this column -- putting it here would inflate john's coverage with something no --list=formats will ever show. Read this verdict as 'no named format', not as 'john cannot do it'. This is the absence of an IDENTIFIER, not of the algorithm: if john gains one, this becomes a mapping."
   crack:
     supported: false
+relations:
+  - kind: "truncates"
+    entry: "sha1raw-substr-0-32"
+    distinction: "truncation"
+    note: "This row is sha1raw cut to its first 32 hex characters. dynamic_1028 computes this; it had been sitting on mysql4-1-mysql5, which adds a leading star and upper-cases the digest, so that row was wrong about it twice over -- measured 2026-09-06."
 vectors:
   - hash: "a0f874bc7f54ee086fce60a37ce7887d8b31086b"
     pass: "password123"

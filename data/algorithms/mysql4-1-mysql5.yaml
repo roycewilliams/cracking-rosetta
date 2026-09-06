@@ -26,12 +26,11 @@ tools:
     verified_with: "hashpipe RCS 1.189 (2026/09/02)"
     note: "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one."
   john:
-    cpu: ["dynamic_1028", "mysql-sha1"]
+    cpu: ["mysql-sha1"]
     gpu: ["mysql-sha1-opencl"]
-    verified: "asserted"
-    verified_at: "2026-08-29"
-    verified_with: "mdxfind"
-    note: "john's own test vector for this format is reproduced by mdxfind pinned to SQL5 at iteration 1"
+    verified: "vector"
+    verified_at: "2026-09-06"
+    verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
   crack:
     supported: false
 vectors:
@@ -39,10 +38,14 @@ vectors:
     pass: "rosetta"
     source: "sheet"
     reads_in: ["hashcat", "mdxfind"]
-  - hash: "06c0bf5b64ece2f648b5f048a7190390"
-    pass: "test1"
+    credential: 1
+  - hash: "*8236C4133430071E41C5103876D103299D348814"
+    pass: "rosetta"
     source: "john"
-    reads_in: ["john", "mdxfind"]
+    form: "john"
+    reads_in: ["john"]
+    credential: 1
 legacy:
   hashes_org: "MYSQL5"
   hashkiller: "MySQL4.1/MySQL5"
+notes: "Two corrections 2026-09-06, both measured. dynamic_1028 was REMOVED: it computes sha1(sha1_raw($p)) CUT TO 32 hex characters -- no leading star and no upper-casing, so it is not MySQL5 at all -- and it now has its own row, sha1raw-substr-0-32, under the construction it actually computes. The vector 06c0bf5b64ece2f648b5f048a7190390 / test1 went with it: it is john's own published Test= line for dynamic_1028, harvested onto this row because this row named that format, and it is 32 hex characters where a MySQL5 hash is a star and 40. Vector 'john' added in its place: the SAME credential as this row's first vector, re-serialized into the form john's mysql-sha1 reads. It is not independent evidence -- do not read two agreeing vectors here as corroboration. mdxfind's SQL5 emits the bare lower-case digest this row already stored; john wants a leading star and UPPER-case hex, the shape of its own published example. Handed the bare string, mysql-sha1 answers \"No password hashes loaded\". The re-encoding was not assumed: the starred string was handed to john with only the plaintext the stored vector already states, and fell."

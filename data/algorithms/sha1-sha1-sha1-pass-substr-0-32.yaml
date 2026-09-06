@@ -1,0 +1,37 @@
+id: "sha1-sha1-sha1-pass-substr-0-32"
+name: "sha1(sha1(sha1($pass))).Substr(0, 32)"
+expression: "cut(sha1(sha1(sha1($p))),0,32)"
+expression_proof:
+  verified: "upstream"
+  verified_at: "2026-09-06"
+  verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
+  note: "john's own --list=subformats states dynamic_1027 as \"sha1(sha1(sha1($p))) (hash truncated to length 32)\", for an identifier this row proves by round-trip, and the construction was recomputed independently here with Digest::MD5 and Digest::SHA against john's published Test= vector before it was stored. Tier stays upstream and CANNOT become vector, for the same reason sha1-substr-0-32 records: cut() has no john dynamic spelling at all (RosettaJohn %NO_JOHN), so john's compiler can never be handed this string, and there is no john_dynamic_expr on this row for the same reason -- dropping the cut would run happily and produce the full digest, not the 32 hex characters stored here."
+category: "iterated"
+status: "needs-review"
+tools:
+  john:
+    cpu: ["dynamic_1027"]
+    verified: "vector"
+    verified_at: "2026-09-06"
+    verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
+  crack:
+    supported: false
+relations:
+  - kind: "truncates"
+    entry: "sha1-sha1-sha1-pass"
+    distinction: "truncation"
+    note: "This row is sha1-sha1-sha1-pass cut to its first 32 hex characters. dynamic_1027 computes this and will not load the untruncated 40-hex digest at all -- measured 2026-09-06."
+vectors:
+  - hash: "b8443c12b3066dac22b3857b2fb779b4"
+    pass: "leelee"
+    source: "john"
+    reads_in: ["john"]
+  - hash: "00aeb6dc5e6269a6b2f39728cd8a6812"
+    pass: "test1"
+    source: "john"
+    reads_in: ["john"]
+  - hash: "54e45916fb79f7be1c695828fdba4491"
+    pass: "test3"
+    source: "john"
+    reads_in: ["john"]
+notes: "Created 2026-09-06. This row exists because dynamic_1027 was sitting on sha1-sha1-sha1-pass, which computes the same thing UNTRUNCATED, and the mapping was false. Measured that day, with the vector spelled $dynamic_1027$<hash> so that the parser could not be the variable: dynamic_1027 cracks the first 32 hex characters of sha1-sha1-sha1-pass's own digest, and handed that row's FULL digest it does not load at all. A format that refuses the string is not a format that computed it and missed. The vector(s) here are john's own published Test= lines from run/dynamic.conf, each recomputed independently with Digest:: before being stored. Note what this row is NOT: mdxfind's TRUNC family truncates the INNER digest and hashes the result, which is a different construction -- see sha1sha1trunc and its neighbours."
