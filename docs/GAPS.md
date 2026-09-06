@@ -17,7 +17,7 @@ Each row below links to its entry in the [browsable table](index.html).
 Gaps are absences; for the rows where something is known to be *odd*, see
 [OPEN-QUESTIONS.md](OPEN-QUESTIONS.md).
 
-## 1. Believed but never reproduced (26)
+## 1. Believed but never reproduced (24)
 
 The cheapest contribution in the repository, if you own the tool. Each of
 these already names an identifier and already carries a test vector; nobody
@@ -37,12 +37,10 @@ tools/verify-vectors.pl --tool <tool> --only <id> -v
 | [`generic-hash-bridged-python-interpreter-with-gil`](index.html#generic-hash-bridged-python-interpreter-with-gil) | hashcat | `73000` | upstream |
 | [`generic-hash-bridged-rust`](index.html#generic-hash-bridged-rust) | hashcat | `74000` | upstream |
 | [`halflm-c-r`](index.html#halflm-c-r) | john | `nethalflm` | upstream |
-| [`lmv2-c-r`](index.html#lmv2-c-r) | john | `netlmv2` | asserted |
 | [`md5dsalt`](index.html#md5dsalt) | mdxfind | `MD5DSALT` | asserted |
 | [`md5specam`](index.html#md5specam) | mdxfind | `MD5SPECAM` | asserted |
 | [`md5uc`](index.html#md5uc) | mdxfind | `MD5UC` | upstream |
 | [`md5ucmd5`](index.html#md5ucmd5) | mdxfind | `MD5UCMD5` | upstream |
-| [`netntlmv2`](index.html#netntlmv2) | john | `netntlmv2`, `ntlmv2-opencl` | asserted |
 | [`progressencode-plain`](index.html#progressencode-plain) | mdxfind | `PROGRESSENCODE` | asserted |
 | [`sha1md5truncsalt`](index.html#sha1md5truncsalt) | mdxfind | `SHA1MD5TRUNCSALT` | upstream |
 | [`sha1md5xsalt`](index.html#sha1md5xsalt) | mdxfind | `SHA1MD5xSALT` | upstream |

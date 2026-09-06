@@ -68,6 +68,25 @@
 #
 # The rewrite adds no claim of its own: a wrong mapping still fails to crack.
 #
+# THE GROUPED john SCHEME CANNOT READ A CHALLENGE-RESPONSE FORMAT
+#
+# Every john line below carries a synthetic login and a TAB, which is right for a
+# hash that is only a digest and wrong for one that EMBEDS its own login: a
+# NETNTLMv2 or NETLMv2 ciphertext is USER::DOMAIN:challenge:response:blob, and
+# displacing that first field is exactly what stops john parsing it. john then
+# loads nothing, which is indistinguishable from a format that ran and found
+# nothing -- and that is how netntlmv2 sat below tier 'vector' for a week while
+# every identifier it named round-tripped by hand.
+#
+# So a grouped run that LOADED NOTHING is retried natively. The gate is john's own
+# --show summary, which is already captured, and it cannot mask a failed crack:
+# zero hashes loaded is a PARSE refusal, and a format that loaded its hashes and
+# did not crack them never reaches the retry. The retry is ONE VECTOR PER
+# INVOCATION, for the reason the hashcat solo run gives -- john re-inserts the
+# plaintext into the ciphertext's own line structure, so a batch's output lines do
+# not correspond to its input lines and the answer would belong to no vector in
+# particular. One hash and one candidate makes the attribution structural.
+#
 # PROMOTION IS ALL-OR-NOTHING PER TOOL BLOCK
 #
 # tools.john.cpu can list several formats. The block is promoted only when
@@ -504,6 +523,11 @@ my (%cracked, %attempted, %failed_job, %mx_job_ids, %ran_ident);
 # note says so, because otherwise the promotion reads as though the stored
 # string verified and a later reader would try it and be baffled.
 my %transcoded;
+# (entry, label) pairs whose round trip was made NATIVELY -- one vector per
+# invocation, with no synthetic login and no --field-separator-char -- because the
+# grouped scheme could not parse the ciphertext at all. The block's note says so:
+# the command that reproduces it is not the command this tool normally runs.
+my %native_john;
 my $ran = 0;
 
 # hc_plain_is and hc_line_plain_is live in RosettaTools: the second was wrong
@@ -1041,6 +1065,63 @@ if ($want{john} && $job{john}) {
             next if $enc_used && $vec->{pass} =~ /[^\x20-\x7e]/;
             $won{"$vec->{hash}\0$vec->{pass}"} = 1;
         }
+
+        # Nothing cracked AND nothing loaded: see the methodology note above.
+        # john's --show prints its summary on stdout after the cracked lines, so
+        # the count is already in hand and this gate costs no extra invocation.
+        # Zero LOADED is a parse refusal; a format that loaded its hashes and
+        # failed to crack them never reaches this retry.
+        my $loaded = -1;
+        $loaded = $1 + $2
+            if defined $shown
+            && $shown =~ /^(\d+) password hash(?:es)? cracked, (\d+) left$/m;
+        if (!%won && $loaded == 0 && !$enc_refused && $code != -2) {
+            my $nvi = 0;
+            for my $vec (@v) {
+                my $ns   = "$safe.native." . $nvi++;
+                my $nhf  = write_file("$workdir/jn.$ns.hash", $vec->{hash});
+                my $nwf  = write_file("$workdir/jn.$ns.word", $vec->{pass});
+                my $npot = "$workdir/jn.$ns.pot";
+                unlink $npot;
+
+                # --session must NOT end in digits: john refuses one outright,
+                # "Invalid session name: all-digits suffix", and exits having done
+                # NOTHING -- which is indistinguishable here from a format that ran
+                # and cracked nothing. Measured 2026-09-06, when the per-vector
+                # counter made every session name end in one.
+
+                my ($nc) = run_capture($timeout, '/bin/sh', '-c',
+                    sprintf('cd %s && ./%s --format=%s --wordlist=%s --pot=%s '
+                          . '--session=%s %s >/dev/null 2>&1',
+                            quotemeta($jdir), quotemeta($jbin), quotemeta($label),
+                            quotemeta($nwf), quotemeta($npot),
+                            quotemeta("$workdir/jn.$ns.sess"), quotemeta($nhf)));
+                next if $nc == -2;
+
+                my (undef, $nshown) = run_capture($timeout, '/bin/sh', '-c',
+                    sprintf('cd %s && ./%s --show --format=%s --pot=%s %s 2>/dev/null',
+                            quotemeta($jdir), quotemeta($jbin), quotemeta($label),
+                            quotemeta($npot), quotemeta($nhf)));
+
+                # --show does not always put the plaintext last: where the format
+                # has a login field john re-inserts it into the original line
+                # structure instead of appending it. So match a whole
+                # colon-delimited FIELD, never the end of the line. The summary
+                # line is skipped rather than split, or an entry whose plaintext
+                # is a bare number could match the summary's own digits.
+                for my $line (split /\n/, $nshown // '') {
+                    next if $line =~ /^\d+ password hash(?:es)? cracked, \d+ left$/;
+                    next unless grep {
+                                    $_ eq $vec->{pass}
+                                 || ($JOHN_NOCASE{ lc $label }
+                                     && lc $_ eq lc $vec->{pass})
+                                } split /:/, $line, -1;
+                    $won{"$vec->{hash}\0$vec->{pass}"} = 1;
+                    $native_john{ $vec->{id} }{$label} = 1;
+                    last;
+                }
+            }
+        }
         # %read_here is THIS identifier's reads. %read is the tool's, across
         # every identifier in the run, because that is what reads_in means --
         # "which tools were proven to read this string". Counting the report
@@ -1263,6 +1344,25 @@ if (!$dry) {
                     else {
                         $blk->{note} = $dep_note;
                     }
+                }
+                # The vector is the one stored and john read it unchanged; what
+                # differs is the COMMAND, so a reader who reruns the tool's usual
+                # invocation and sees nothing is not looking at a regression.
+                if ($tool eq 'john' && $native_john{$id}) {
+                    my @n = sort keys %{ $native_john{$id} };
+                    $blk->{note} =
+                        "Round-tripped NATIVELY, one vector per invocation: "
+                      . "format(s) " . join(', ', @n) . " could not parse this "
+                      . "entry's vectors under the grouped scheme this tool "
+                      . "normally uses, which writes a synthetic login and a TAB "
+                      . "before every hash. This ciphertext EMBEDS its own login, "
+                      . "so displacing that field is what breaks the parse -- john "
+                      . "loaded nothing, which is not the same as cracking "
+                      . "nothing, and its own --show summary is what said so. The "
+                      . "stored vector is unchanged and is exactly what john was "
+                      . "handed. Reproduce it with: john --format=<label> "
+                      . "--wordlist=<one candidate> <one hash>, with no "
+                      . "--field-separator-char.";
                 }
                 $promoted{$tool}++;
                 $touched = 1;

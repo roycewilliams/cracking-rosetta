@@ -31,23 +31,23 @@ tools:
   john:
     cpu: ["netntlmv2"]
     gpu: ["ntlmv2-opencl"]
-    verified: "asserted"
-    verified_at: "2026-08-29"
-    verified_with: "mdxfind"
-    note: "john's own test vector for this format is reproduced by mdxfind pinned to NETNTLMV2 at iteration 1 GPU build(s) ntlmv2-opencl proven on 2026-09-01 by cracking this entry's own vector(s) under that exact format; john ships no CPU format of that name, so discover-john.pl --mirror-gpu could not place them. AMENDED 2026-09-06: both identifiers this block still names have now round-tripped this row own vectors. netlmv2 -- the one that never did, and the reason this block sat at asserted -- has been split off to lmv2-c-r. Measured that day, john pinned to --format=netntlmv2 and handed the vectors NATIVELY, one at a time: it recovers the plaintext of all three vectors still on this row. ntlmv2-opencl was proven the same way on 2026-09-01. What holds this block below tier vector is now ONLY that verify-vectors.pl cannot drive a challenge-response format -- it writes a synthetic login and a TAB before every hash, and this ciphertext embeds its own login -- so a promotion here would be a tier no tool in the repository can re-check. See lmv2-c-r for the same note and the backlog item that closes both."
+    verified: "vector"
+    verified_at: "2026-09-06"
+    verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
+    note: "Round-tripped NATIVELY, one vector per invocation: format(s) netntlmv2 could not parse this entry's vectors under the grouped scheme this tool normally uses, which writes a synthetic login and a TAB before every hash. This ciphertext EMBEDS its own login, so displacing that field is what breaks the parse -- john loaded nothing, which is not the same as cracking nothing, and its own --show summary is what said so. The stored vector is unchanged and is exactly what john was handed. Reproduce it with: john --format=<label> --wordlist=<one candidate> <one hash>, with no --field-separator-char."
   crack:
     supported: false
 vectors:
   - hash: "user::domain:1122334455667788:d5add1cebafed2180b3cca8728f5aff8:01010000000000000000000000000000aabbccdd1122334400000000"
     pass: "password123"
     source: "mdxfind"
-    reads_in: ["mdxfind"]
+    reads_in: ["john", "mdxfind"]
   - hash: "NTlmv2::TESTWORKGROUP:1122334455667788:07659A550D5E9D02996DFD95C87EC1D5:0101000000000000006CF6385B74CA01B3610B02D99732DD000000000200120057004F0052004B00470052004F00550050000100200044004100540041002E00420049004E0043002D0053004500430055005200490000000000"
     pass: "password"
     source: "john"
-    reads_in: ["mdxfind"]
+    reads_in: ["john", "mdxfind"]
   - hash: "0UL5G37JOI0SX::6VB1IS0KA74:ebe1afa18b7fbfa6:aab8bf8675658dd2a939458a1077ba08:010100000000000031c8aa092510945398b9f7b7dde1a9fb00000000f7876f2b04b700"
     pass: "hashcat"
     source: "hashcat"
-    reads_in: ["hashcat", "mdxfind"]
+    reads_in: ["hashcat", "john", "mdxfind"]
 notes: "john reads BOTH tools' NTLMv2 serializations: measured 2026-09-01, netntlmv2 and ntlmv2-opencl load and crack this entry's hashcat-form vectors (USER::DOMAIN:challenge:response:blob) unchanged. An earlier run of this session reported \"No password hashes loaded\" and three re-serialized vectors were briefly added on that basis; the cause was a --field-separator-char=tab passed by the probing tool, which governs how john splits LOGIN from HASH when READING a file, so a tab made john treat each whole line as one login. The vectors were withdrawn and the tool fixed. Kerberos AS-REP is NOT like this: john genuinely cannot read hashcat's $krb5asrep$ field order, which is why those rows do carry a transcoded vector. Two reasons this block is still tier asserted, neither of which is doubt about NETNTLMv2 itself. (1) It names netlmv2, a DIFFERENT computation, and a block carries one tier for every identifier in it; netlmv2 recovers none of these vectors, and the fourth vector (aTest:::...:A1E7281FE8C10E53, an 8-byte blob far short of an NTLMv2 one) looks like the NETLMv2 one. That is a row holding two computations, which CLAUDE.md forbids, and splitting it is curation. (2) verify-vectors.pl cannot check this format at all: it writes a synthetic login and a TAB before each hash, which is right for a hash that is only a digest and wrong here, because a NETNTLMv2 ciphertext EMBEDS its own login (USER::DOMAIN:...) and john will not parse it once that field has been displaced. Measured 2026-09-01: the same vectors load and crack under netntlmv2 and ntlmv2-opencl when handed to john natively, 3 of 4, and verify-vectors.pl reports 0 of 4 for all three identifiers. SPLIT 2026-09-06. netlmv2 and the aTest::: vector moved to their own row, lmv2-c-r. This resolves reason (1) in the paragraph above, which had been recorded here since 2026-09-01 and left to a curator: the row was holding two computations. The split was measured rather than read off the names -- handed to john natively, one vector at a time, netntlmv2 cracks the three vectors still here and REFUSES the aTest one, while netlmv2 cracks the aTest one and refuses these three, each declining to LOAD the other's string. Reason (2) stands unchanged and always will: verify-vectors.pl cannot check a challenge-response format at all, because it displaces the login field this ciphertext embeds, so this block is verified by hand or not at all."

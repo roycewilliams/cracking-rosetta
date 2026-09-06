@@ -51020,8 +51020,8 @@
             "ids" : [
                "netlmv2"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "john_expr" : "",
          "john_salted" : "yes",
@@ -51043,7 +51043,7 @@
          "tool_note" : {
             "hashcat" : "",
             "hashpipe" : "",
-            "john" : "ROUND-TRIPPED BY HAND, and held at asserted for a reason that is about this repository tooling and not about the mapping. Measured 2026-09-06: john pinned to --format=netlmv2 and handed this row own vector NATIVELY -- no synthetic login, no --field-separator-char -- recovers this row own plaintext on the first try. That is what tier vector means everywhere else. It is not written here because verify-vectors.pl is the promoter and it structurally CANNOT drive this format: it writes a synthetic login and a TAB before every hash, and a NETLMv2 ciphertext EMBEDS its own login, so displacing that field is exactly what breaks the parse. Promoting by hand would put a tier on this row that no tool in the repository can re-check, which is the one thing a tier is supposed to rule out. The fix is a native path in verify-vectors.pl for the challenge-response family -- probe-gpu.pl already has one, but writes only tools.john.gpu -- and it is on the backlog.",
+            "john" : "Round-tripped NATIVELY, one vector per invocation: format(s) netlmv2 could not parse this entry's vectors under the grouped scheme this tool normally uses, which writes a synthetic login and a TAB before every hash. This ciphertext EMBEDS its own login, so displacing that field is what breaks the parse -- john loaded nothing, which is not the same as cracking nothing, and its own --show summary is what said so. The stored vector is unchanged and is exactly what john was handed. Reproduce it with: john --format=<label> --wordlist=<one candidate> <one hash>, with no --field-separator-char.",
             "mdxfind" : ""
          },
          "vecs" : 1
@@ -51207,8 +51207,8 @@
                "netntlmv2",
                "ntlmv2-opencl"
             ],
-            "state" : "claimed",
-            "tier" : "asserted"
+            "state" : "proven",
+            "tier" : "vector"
          },
          "john_expr" : "",
          "john_salted" : "yes",
@@ -51233,7 +51233,7 @@
          "tool_note" : {
             "hashcat" : "",
             "hashpipe" : "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one.",
-            "john" : "john's own test vector for this format is reproduced by mdxfind pinned to NETNTLMV2 at iteration 1 GPU build(s) ntlmv2-opencl proven on 2026-09-01 by cracking this entry's own vector(s) under that exact format; john ships no CPU format of that name, so discover-john.pl --mirror-gpu could not place them. AMENDED 2026-09-06: both identifiers this block still names have now round-tripped this row own vectors. netlmv2 -- the one that never did, and the reason this block sat at asserted -- has been split off to lmv2-c-r. Measured that day, john pinned to --format=netntlmv2 and handed the vectors NATIVELY, one at a time: it recovers the plaintext of all three vectors still on this row. ntlmv2-opencl was proven the same way on 2026-09-01. What holds this block below tier vector is now ONLY that verify-vectors.pl cannot drive a challenge-response format -- it writes a synthetic login and a TAB before every hash, and this ciphertext embeds its own login -- so a promotion here would be a tier no tool in the repository can re-check. See lmv2-c-r for the same note and the backlog item that closes both.",
+            "john" : "Round-tripped NATIVELY, one vector per invocation: format(s) netntlmv2 could not parse this entry's vectors under the grouped scheme this tool normally uses, which writes a synthetic login and a TAB before every hash. This ciphertext EMBEDS its own login, so displacing that field is what breaks the parse -- john loaded nothing, which is not the same as cracking nothing, and its own --show summary is what said so. The stored vector is unchanged and is exactly what john was handed. Reproduce it with: john --format=<label> --wordlist=<one candidate> <one hash>, with no --field-separator-char.",
             "mdxfind" : ""
          },
          "vecs" : 3
@@ -61300,7 +61300,7 @@
          "primary_form" : "",
          "relations" : [],
          "sameas" : "",
-         "serialization" : "unknown",
+         "serialization" : "shared",
          "status" : "needs-review",
          "tool_note" : {
             "hashcat" : "",
@@ -61361,7 +61361,7 @@
          "primary_form" : "",
          "relations" : [],
          "sameas" : "",
-         "serialization" : "unknown",
+         "serialization" : "shared",
          "status" : "needs-review",
          "tool_note" : {
             "hashcat" : "",
@@ -81353,7 +81353,7 @@
          "mdxfind_salted" : "yes",
          "name" : "SHA256RAWSALTPASS",
          "nesting_depth" : 1,
-         "notes" : "",
+         "notes" : "Vector 'john' added 2026-09-06: the SAME credential as this row first vector -- john own published example -- re-serialized into the form its FormSpring format reads. It is not independent evidence; do not read two agreeing vectors here as corroboration. The two spellings differ only in the SALT SEPARATOR: this row stores <hash>:<salt> and FormSpring wants <hash>$<salt>. Surfaced 2026-09-06 by a full john sweep, which reported this block verified under dynamic_61 and NOT under FormSpring while the block itself stood at tier vector -- failure never demotes, so the inconsistency was invisible until every identifier ran in one pass. The re-encoding was not assumed: the $-separated string was handed to john with only the plaintext the stored vector already states, and fell. NOTE why the other two vectors are NOT transcoded: FormSpring is a THIN dynamic_61 restricted to a 2-DIGIT salt, which john own formspring_fmt_plug.c states in its header comment -- it exists for salt regeneration, -regen-lost-salts=6, which enumerates 00 to 99. Salts 'Salt' and 'rosettaadsde1' are 4 and 13 characters and do not load under it at all, which is a capability boundary and not a spelling. dynamic_61 reads all three.",
          "primary_form" : "",
          "relations" : [
             {
@@ -81372,7 +81372,7 @@
             "john" : "john's own test vector for this format is reproduced by mdxfind pinned to SHA256RAWSALTPASS at iteration 1",
             "mdxfind" : ""
          },
-         "vecs" : 3
+         "vecs" : 4
       },
       {
          "alias" : "",

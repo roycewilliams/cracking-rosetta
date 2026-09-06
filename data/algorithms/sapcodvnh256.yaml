@@ -19,4 +19,4 @@ vectors:
   - hash: "{x-isSHA256, 3000}UqMnsr5BYN+uornWC7yhGa/Wj0u5tshX19mDUQSlgih6OTFoZjRpMQ=="
     pass: "booboo"
     source: "mdxfind"
-    reads_in: ["mdxfind"]
+    reads_in: ["john", "mdxfind"]

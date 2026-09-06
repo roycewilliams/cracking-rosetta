@@ -846,10 +846,10 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | NetIQ SSPR (PBKDF2WithHmacSHA512) | `32070` (v) | `PBKDF2-HMAC-SHA512`<br>`PBKDF2-HMAC-SHA512-opencl` (v) | no |  |
 | NetIQ SSPR (SHA-256 with Salt) | `32030` (v) | `sspr`<br>`sspr-opencl` (v) | `SSPR-SHA256` (v) |  |
 | NetIQ SSPR (SHA-512 with Salt) | `32040` (v) | `sspr`<br>`sspr-opencl` (v) | `SSPR-SHA512` (v) |  |
-| NETLMv2 | **--** | `netlmv2` | **--** |  |
+| NETLMv2 | **--** | `netlmv2` (v) | **--** |  |
 | NETNTLMV1 | `5500` (v) | **--** | `NETNTLMV1` (v) |  |
 | NetNTLMv1 / NetNTLMv1+ESS (NT) | `27000` (v) | **--** | **--** |  |
-| NETNTLMV2 | `5600` (v) | `netntlmv2`<br>`ntlmv2-opencl` | `NETNTLMV2` (v) |  |
+| NETNTLMV2 | `5600` (v) | `netntlmv2`<br>`ntlmv2-opencl` (v) | `NETNTLMV2` (v) |  |
 | NetNTLMv2 (NT) | `27100` (v) | **--** | **--** |  |
 | NETSCALER | `8100` (v) | `Citrix_NS10` (v) | `NETSCALER` (v) |  |
 | NETSCALER-PBKDF2 | `33900` (v) | **--** | `NETSCALER-PBKDF2` (v) |  |

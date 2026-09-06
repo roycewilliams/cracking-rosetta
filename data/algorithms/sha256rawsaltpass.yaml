@@ -44,6 +44,7 @@ vectors:
     pass: "test1"
     source: "john"
     reads_in: ["hashcat", "john", "mdxfind"]
+    credential: 1
   - hash: "5ac28834ed8be26198bde055d77ba012ef5207441d415de9ea8e55b504d07afa:Salt"
     pass: "password123"
     source: "mdxfind"
@@ -52,3 +53,10 @@ vectors:
     pass: "rosetta"
     source: "vanity"
     reads_in: ["hashcat", "john", "mdxfind"]
+  - hash: "2a4fa0bf8c6a01dd625d3141746451ba51e07f99dc9143f1e25a37f65cb02eb4$RA"
+    pass: "test1"
+    source: "john"
+    form: "john"
+    reads_in: ["john"]
+    credential: 1
+notes: "Vector 'john' added 2026-09-06: the SAME credential as this row first vector -- john own published example -- re-serialized into the form its FormSpring format reads. It is not independent evidence; do not read two agreeing vectors here as corroboration. The two spellings differ only in the SALT SEPARATOR: this row stores <hash>:<salt> and FormSpring wants <hash>$<salt>. Surfaced 2026-09-06 by a full john sweep, which reported this block verified under dynamic_61 and NOT under FormSpring while the block itself stood at tier vector -- failure never demotes, so the inconsistency was invisible until every identifier ran in one pass. The re-encoding was not assumed: the $-separated string was handed to john with only the plaintext the stored vector already states, and fell. NOTE why the other two vectors are NOT transcoded: FormSpring is a THIN dynamic_61 restricted to a 2-DIGIT salt, which john own formspring_fmt_plug.c states in its header comment -- it exists for salt regeneration, -regen-lost-salts=6, which enumerates 00 to 99. Salts 'Salt' and 'rosettaadsde1' are 4 and 13 characters and do not load under it at all, which is a capability boundary and not a spelling. dynamic_61 reads all three."
