@@ -133,6 +133,30 @@ USAGE
 # ASCII string in this corpus. Those passwords are written as \x escapes so
 # this file stays ASCII on disk.
 my @CASES = (
+    # --- the literal colon, added 2026-09-06 ------------------------
+    # john prints a literal colon inside a dynamic expression and elides
+    # the concatenation dots around it, so md5(A:B) and md5(A.:.B) are one
+    # string written two ways. Measured against this build's 404 subformat
+    # expressions: THREE carry a colon (dynamic_1350, _35, _36) and nothing
+    # carries any other literal. hx is undef on these: whether hx spells a
+    # colon the same way has not been measured, and the oracle skips a case
+    # with no hx expression rather than asserting a guess.
+    [ undef, 'md5(md5($s.$p):$s)', '2b48e5e02eb00ea6aaad1d64fabc3f4a',
+      'a colon juxtaposed between two operands' ],
+    [ undef, 'md5(md5($s.$p).:.$s)', '2b48e5e02eb00ea6aaad1d64fabc3f4a',
+      'the same expression with the dots written out' ],
+    [ undef, 'md5($s:$p)', '45b022c2c43ce8549d40c489f2da4f68',
+      'a colon between two variables' ],
+    [ undef, 'md5($p:)', '7667142a0de7ff9b470f983956caed65',
+      'a trailing colon, which is an operand with nothing after it' ],
+    # THE CONTROL THAT MAKES THE FOUR ABOVE READABLE. Juxtaposition is
+    # legal ONLY beside a colon. Without this, "the colon rule works" and
+    # "concatenation is now optional everywhere" are the same measurement,
+    # and the second would let md5($s$p) silently mean md5($s.$p).
+    [ undef, 'md5($s$p)', undef,
+      'CONTROL: juxtaposition without a colon is still refused' ],
+    [ undef, 'md5($p$p)', undef,
+      'CONTROL: and refused for a repeated variable too' ],
     # --- the four hashes, plain -------------------------------------
     [ 'md5(pass)',    'md5($p)',    '975790dfb2854c88094fe62477a7d5f3',
       'md5' ],

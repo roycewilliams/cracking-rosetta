@@ -399,7 +399,11 @@ sub _tokenize {
         # A constant reference. Only 1-8 exist; $c9 is not a token john
         # accepts either, so it falls through and bails.
         if ($e =~ s/^\$c([1-8])(?![A-Za-z0-9_])//){ push @t, [ const => $1 ]; next }
-        if ($e =~ s/^([().,])//)                { push @t, [ punc => $1 ]; next }
+        # ':' is punctuation AND an operand. john prints a literal colon
+        # inside an expression and elides the concatenation dots around it,
+        # so md5(A:B) and md5(A.:.B) are the same string written two ways.
+        # See _parse_term and _parse_concat, which is where that is resolved.
+        if ($e =~ s/^([().,:])//)               { push @t, [ punc => $1 ]; next }
         return;                                  # a token we do not know: bail
     }
     return \@t;
@@ -417,15 +421,43 @@ sub _at {
 # $pos is an index into the token list, advanced in place. $const is the
 # constant map, threaded through so an unbound $cN can bail where it is
 # seen rather than being resolved later, or worse, silently.
+# A colon may stand where a '.' would, on either side of itself, because john
+# writes md5(A:B) for md5(A . ":" . B). Juxtaposition is permitted ONLY next
+# to a colon: $prev_colon gates it, so md5($s$p) is still the syntax error it
+# always was and two operands cannot silently run together.
+sub _begins_term {
+    my ($t, $pos) = @_;
+    return 0 unless $pos->[0] < @$t;
+    my ($kind) = @{ $t->[ $pos->[0] ] };
+    return $kind eq 'var' || $kind eq 'const' || $kind eq 'name' || $kind eq 'int';
+}
+
 sub _parse_concat {
     my ($t, $pos, $const) = @_;
     my $left = _parse_term($t, $pos, $const);
     return unless defined $left;
-    while (_at($t, $pos, punc => '.')) {
-        $pos->[0]++;
-        my $right = _parse_term($t, $pos, $const);
-        return unless defined $right;
-        $left = "$left . $right";
+    my $prev_colon = 0;
+    while (1) {
+        if (_at($t, $pos, punc => '.')) {
+            $pos->[0]++;
+            my $right = _parse_term($t, $pos, $const);
+            return unless defined $right;
+            $left = "$left . $right";
+            $prev_colon = 0;
+        }
+        elsif (_at($t, $pos, punc => ':')) {
+            my $right = _parse_term($t, $pos, $const);   # consumes the ':'
+            return unless defined $right;
+            $left = "$left . $right";
+            $prev_colon = 1;
+        }
+        elsif ($prev_colon && _begins_term($t, $pos)) {
+            my $right = _parse_term($t, $pos, $const);
+            return unless defined $right;
+            $left = "$left . $right";
+            $prev_colon = 0;
+        }
+        else { last }
     }
     return $left;
 }
@@ -457,6 +489,21 @@ sub _parse_term {
     my ($t, $pos, $const) = @_;
     return unless $pos->[0] < @$t;
     my ($kind, $val) = @{ $t->[ $pos->[0] ] };
+
+    # A literal colon. It is the only literal in the notation, and it is here
+    # because john's --list=subformats prints one: dynamic_1350 is
+    # md5(md5($s.$p):$s) and dynamic_35/36 are sha1(uc($u).:.$p) and
+    # sha1($u.:.$p). Measured 2026-09-06 against this build's 404 subformat
+    # expressions: three carry a colon and nothing else carries any other
+    # literal, so this widens the grammar by exactly what john uses and no
+    # more. A general string literal is NOT added -- an unquoted literal
+    # would make every unknown token look like data instead of bailing, and
+    # bailing on the first unknown token is what keeps a wrong expression
+    # from proving itself.
+    if ($kind eq 'punc' && $val eq ':') {
+        $pos->[0]++;
+        return "':'";
+    }
 
     if ($kind eq 'var') {
         $pos->[0]++;

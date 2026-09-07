@@ -920,6 +920,31 @@ flag: Flag=MGF_KEYS_INPUT_pad16` in this build, which is a defect in the
 build rather than a fact about the notation, so it is still emitted and john
 still gets to be the oracle.
 
+**john PRINTS an expression its own compiler REFUSES, and the colon is the
+case.** `--list=subformats` renders `dynamic_1350` as `md5(md5($s.$p):$s)`,
+eliding the concatenation dots around a literal colon. Handed back, john
+answers `The only things valid to follow a ) char are a . or a )`, and the
+quoted spelling `md5(md5($s.$p).":".$s)` fails too, at `Invalid token
+following the . character`. Measured 2026-09-06 with the control beside it:
+`md5($s.$p)` loads in the same run. Three of this build's 404 subformat
+expressions carry a colon -- `dynamic_1350`, `dynamic_35`, `dynamic_36` --
+and nothing carries any other literal.
+
+So `RosettaExpr` learned the bare colon on 2026-09-06 and
+`RosettaJohn::hx_to_john` did NOT, and that split is deliberate. The two
+readers answer different questions: RosettaExpr says what the string
+COMPUTES, which is how an independent implementation corroborates a vector;
+`hx_to_john` says what john will RUN, and handing john a string it refuses
+would turn a compile error into "the expression did not prove". **An entry
+whose expression contains a colon can therefore never reach
+`expression_proof: vector`** -- john cannot be its oracle -- and that is a
+fact about john, not a gap here. Do not "fix" `hx_to_john` to pass it.
+
+Juxtaposition in `RosettaExpr` is legal ONLY beside a colon. `md5($s$p)` is
+still refused, and `tools/test-rosetta-expr.pl` asserts both halves: without
+the refusal case, "the colon rule works" and "concatenation is now optional
+everywhere" would be the same measurement.
+
 ### The expression carries its own tier
 
 `expression:` is a gate -- `validate.pl` fails a build where two entries claim
