@@ -106,12 +106,11 @@ A few that carry a vector and a proven expression, so there is a definite constr
 
 All 204: filter `hashcat_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
 
-### mdxfind: 68 entries say nothing
+### mdxfind: 67 entries say nothing
 
 A few that carry a vector, so a candidate identifier can be tested at once, one per family:
 
 * [`1password-agilekeychain`](index.html#1password-agilekeychain) - `1Password, agilekeychain`
-* [`django-sha-1`](index.html#django-sha-1) - `Django (SHA-1)`
 * [`domain-cached-credentials-dcc-ms-cache-nt`](index.html#domain-cached-credentials-dcc-ms-cache-nt) - `Domain Cached Credentials (DCC), MS Cache (NT)` (and 1 more starting `Domain`)
 * [`dynamic-1030`](index.html#dynamic-1030) - `dynamic_1030`
 * [`hmac-sha1`](index.html#hmac-sha1) - `HMAC-SHA1` (and 3 more starting `HMAC`)
@@ -125,8 +124,9 @@ A few that carry a vector, so a candidate identifier can be tested at once, one 
 * [`password-safe-v2`](index.html#password-safe-v2) - `Password Safe v2`
 * [`pkzip-master-key`](index.html#pkzip-master-key) - `PKZIP Master Key` (and 1 more starting `PKZIP`)
 * [`sha1-md5-pass-substr-0-32`](index.html#sha1-md5-pass-substr-0-32) - `cut(sha1(md5($p)),0,32)` (and 4 more starting `cut`)
+* [`stuffit5`](index.html#stuffit5) - `Stuffit5`
 
-All 68: filter `mdxfind_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
+All 67: filter `mdxfind_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
 
 ## 4. hashcat modes with no row here (1)
 

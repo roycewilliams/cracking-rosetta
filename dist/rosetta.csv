@@ -151,7 +151,7 @@ diskcryptor-sha512-xts-1024-bit,DiskCryptor SHA512 + XTS 1024 bit,,,absent,,Disk
 diskcryptor-sha512-xts-1536-bit,DiskCryptor SHA512 + XTS 1536 bit,,,absent,,DiskCryptor SHA512 + XTS 1536 bit,application,,ok,,20013,proven,,unknown,,no,,unknown,no,1,unknown,,yes,slow,,,,,,,,,
 diskcryptor-sha512-xts-512-bit,DiskCryptor SHA512 + XTS 512 bit,,,absent,,DiskCryptor SHA512 + XTS 512 bit,application,,ok,,20011,proven,,unknown,,no,,unknown,no,1,unknown,,yes,slow,,,,,,,,,
 django,Django,,,absent,,Django,,,ok,,,unknown,Django,proven,,no,,unknown,no,1,unknown,,,,yes,iteration count,,,,,,,
-django-sha-1,Django (SHA-1),,,absent,,Django (SHA-1),application,,ok,,124,proven,,unknown,,unknown,,unknown,no,1,unknown,,yes,fast,,,,,,,same as sha1-salt-pass (encoding),,
+django-sha-1,Django (SHA-1),,,absent,,Django (SHA-1),application,,ok,,124,proven,,unknown,SHA1SALTPASS,proven,,unknown,no,1,unknown,,yes,fast,,,yes,,,,same as sha1-salt-pass (encoding),,
 django-scrypt,django-scrypt,,,absent,,django-scrypt,,,ok,,,unknown,django-scrypt,proven,,no,,unknown,no,1,unknown,,,,yes,"N,r,p",,,,,,,
 dnssec-nsec3,DNSSEC NSEC3,,,absent,,DNSSEC NSEC3,,,needs-review,,,unknown,nsec3,proven,NSEC3,proven,,unknown,no,1,unknown,,,,yes,iteration count,no,,,,,,
 dogechain-info-wallet,Dogechain.info Wallet,,,absent,,Dogechain.info Wallet,application,,ok,,32500,proven,,unknown,,no,,unknown,no,1,unknown,,yes,slow,,,,,,,,,

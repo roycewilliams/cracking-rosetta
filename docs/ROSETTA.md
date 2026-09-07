@@ -176,7 +176,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | DiskCryptor SHA512 + XTS 1536 bit | `20013` (v) | **--** | no |  |
 | DiskCryptor SHA512 + XTS 512 bit | `20011` (v) | **--** | no |  |
 | Django | **--** | `Django` (v) | no |  |
-| Django (SHA-1) | `124` (v) | **--** | **--** | same as sha1-salt-pass (encoding) |
+| Django (SHA-1) | `124` (v) | **--** | `SHA1SALTPASS` (v) | same as sha1-salt-pass (encoding) |
 | django-scrypt | **--** | `django-scrypt` (v) | no |  |
 | DNSSEC NSEC3 | **--** | `nsec3` (v) | `NSEC3` (v) |  |
 | Dogechain.info Wallet | `32500` (v) | **--** | no |  |
