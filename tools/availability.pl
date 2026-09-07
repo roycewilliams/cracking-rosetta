@@ -50,12 +50,47 @@
 #             mdxfind.c, parsed at each tag.
 #   hashpipe  as mdxfind, in hashpipe.c.
 #
-# john is NOT covered. There is no claude-owned clone (john lives under
-# /usr/local/src/sec/crack, royce-owned, and the corpus rule is not to run git
-# in another user's repository), and a john format label lives in an fmt_main
-# struct rather than in a file name, so the cheap file-based derivation does
-# not apply. Its absence is stated in README rather than being published as
-# empty rows, because an empty first_version already means something else.
+#   john      tags are RELEASES, but only nine are jumbo releases and the
+#             newest is 1.9.0-Jumbo-1, dated 2019-05-14. A label is not a
+#             file, so the instrument is git's pickaxe: the commit that first
+#             ADDED the quoted literal "<label>" under src/. Covered as of
+#             2026-09-06, with a claude-owned clone at
+#             /home/claude/src/upstream/john.
+#
+# JOHN IS THE STARKEST CASE THIS FILE HAS, AND THAT IS THE POINT. This host
+# runs 1.9.0-jumbo-1+bleeding-9a336d800a; HEAD is contained in NO tag, so
+# every format added since May 2019 is in no release at all. A reader who
+# installed john from a distribution package has 1.9.0-Jumbo-1 and does not
+# have them. hashcat's thirteen unreleased modes are a footnote beside it.
+#
+# THE INSTRUMENT, AND WHAT WAS MEASURED BEFORE CHOOSING IT. Three candidates
+# were tried against the 402 named labels the committed inventory lists,
+# at HEAD, on 2026-09-06:
+#
+#   a struct-field literal (^\s*"label",$)            12 of 402
+#   #define FORMAT_LABEL + struct field + suffix     376 of 402
+#   any quoted literal anywhere in src/              401 of 402
+#
+# The first two lose formats because several share one file and spell the
+# label differently, which is the same defect CLAUDE.md records for
+# seed-john-vectors.pl. The third has the recall but a tree grep cannot say
+# WHEN, and a common word in an unrelated context would answer early -- the
+# reassuring direction, which is the wrong one to be wrong in.
+#
+# So the pickaxe, which asks when the literal ENTERED src/ rather than
+# whether it is there, and a guard on top of it: the introducing commit must
+# have touched a file whose name looks like a format implementation
+# (_fmt_plug.c, _plug.c, _fmt.c, fmt_*.c). A label whose literal first
+# appears somewhere else is WITHHELD -- empty first_version, empty
+# first_seen_date -- and counted, rather than published as a date this
+# derivation cannot defend.
+#
+# DYNAMICS ARE NOT COVERED and are not published as rows. The 150 dynamic_N
+# labels are defined in configuration (run/dynamic.conf) and in
+# dynamic_preloads.c, not by a C string literal that the pickaxe can follow,
+# so the instrument above does not apply to them. Their absence is stated
+# here and in README rather than published as empty rows, because an empty
+# first_version already means "in no release".
 #
 # THE OBSERVATION FLOOR, AND WHY A COLUMN CARRIES IT
 #
@@ -124,6 +159,7 @@ my %CLONE = (
     hashcat  => '/home/claude/src/upstream/hashcat',
     mdxfind  => '/home/claude/src/upstream/mdxfind',
     hashpipe => '/home/claude/src/upstream/hashpipe',
+    john     => '/home/claude/src/upstream/john',
 );
 # The file each tool keeps its type table in. hashcat has none: a mode is a
 # file, which is why its derivation is exact and the other two are a parse.
@@ -134,11 +170,12 @@ sub usage {
 
 Usage: $PROG [options]
 
-   --tool NAME       hashcat, mdxfind, hashpipe or all (default: all;
+   --tool NAME       hashcat, mdxfind, hashpipe, john or all (default: all;
                      repeatable)
    --clone-hashcat PATH   upstream clone (default: $CLONE{hashcat})
    --clone-mdxfind PATH   upstream clone (default: $CLONE{mdxfind})
    --clone-hashpipe PATH  upstream clone (default: $CLONE{hashpipe})
+   --clone-john PATH      upstream clone (default: $CLONE{john})
    --tools DIR       generated inventories (default: data/tools)
    -o, --out FILE    write here instead of stdout
    -v, --verbose     per-tool counts on stderr (repeatable)
@@ -165,6 +202,7 @@ GetOptions(
     'clone-hashcat=s'  => \$CLONE{hashcat},
     'clone-mdxfind=s'  => \$CLONE{mdxfind},
     'clone-hashpipe=s' => \$CLONE{hashpipe},
+    'clone-john=s'     => \$CLONE{john},
     'tools=s'          => \$tools_dir,
     'out|o=s'          => \$outfile,
     'verbose|v+'       => \$verbose,
@@ -176,11 +214,11 @@ $tools_dir //= "$ROOT/data/tools";
 
 @tool = ('all') unless @tool;
 my %want = map { $_ => 1 } @tool;
-if ($want{all}) { %want = map { $_ => 1 } qw(hashcat mdxfind hashpipe) }
+if ($want{all}) { %want = map { $_ => 1 } qw(hashcat mdxfind hashpipe john) }
 for my $t (sort keys %want) {
-    next if $t =~ /^(hashcat|mdxfind|hashpipe)$/;
-    print STDERR "$PROG: --tool must be hashcat, mdxfind, hashpipe or all, "
-               . "not '$t'.\n";
+    next if $t =~ /^(hashcat|mdxfind|hashpipe|john)$/;
+    print STDERR "$PROG: --tool must be hashcat, mdxfind, hashpipe, john or "
+               . "all, not '$t'.\n";
     exit 2;
 }
 
@@ -296,6 +334,117 @@ sub availability_hashcat {
 }
 
 #-----------------------------------------------------------------------
+# john: a label is not a file, so the pickaxe answers when the literal
+# entered src/. See the header for the three instruments that were measured
+# before this one was chosen, and for the guard below.
+
+# Only these tags are jumbo RELEASES. john also carries 1.7.9, 1.8.0, 1.9.0
+# (core, not jumbo) and CUDA / JOHN_1_7 / Owl-*-release, which are not
+# releases of this tool at all -- and `--sort=v:refname` puts those LAST, so
+# taking the final tag would name Owl-3_1-release as john's latest release.
+sub john_releases {
+    my ($dir) = @_;
+    return grep { /^\d+\.\d+(?:\.\d+)?-[Jj]umbo-\d+$/ }
+           git($dir, 'tag', '--sort=v:refname');
+}
+
+# The guard: a format's label enters src/ in a format implementation. If the
+# introducing commit touched none, the pickaxe found the string somewhere
+# else and the row is withheld rather than dated.
+sub looks_like_format_file {
+    return scalar grep { m{(?:_fmt_plug|_plug|_fmt)\.[ch]$|/fmt_[^/]*\.[ch]$} } @_;
+}
+
+sub availability_john {
+    my ($dir, $inv) = @_;
+    my @rel = john_releases($dir) or die "$PROG: no jumbo release tag in $dir\n";
+    my $latest = $rel[-1];
+    my $floor  = $rel[0];
+
+    my (@rows, $withheld, $bulked, $skipped_dynamic);
+    for my $f (@{ $inv->{formats} }) {
+        my $label = $f->{label} // next;
+        # dynamics are configuration, not a literal the pickaxe can follow
+        if ($label =~ /^dynamic_/) { $skipped_dynamic++; next }
+
+        # NO --diff-filter=A here, and that is the whole difference from the
+        # hashcat derivation above. There the identifier IS a file, so "the
+        # commit that added the file" is exact. Here it is a string, and
+        # asking for a commit that both added a FILE and changed the count of
+        # the string answers with the first NEW FILE that happens to mention
+        # it: measured 2026-09-06, that dated "NT" to 2022-03-31 and called
+        # it unreleased, when NT is one of the oldest formats john has.
+        my ($add) = git($dir, 'log', '-S', "\"$label\"",
+                        '--reverse', '--format=%H%x09%ad', '--date=short',
+                        '--', 'src/');
+        my ($sha, $date) = defined $add ? split(/\t/, $add, 2) : ();
+
+        my ($first, $fdate, $intro, $bulk) = ('', '', '', 0);
+        if (defined $sha && length $sha) {
+            my @touched = git($dir, 'show', '--name-only', '--format=', $sha);
+            my $nfmt = looks_like_format_file(@touched);
+            # A commit touching a handful of format files introduced this
+            # format. One touching dozens is a tree-wide refactor that merely
+            # moved the string, so the count first CHANGED there while the
+            # label may be much older -- "NT" lands on a 114-file commit of
+            # 2013-06-09 that way. Such a row keeps its release as an UPPER
+            # BOUND and says so through first_version_exact: no.
+            $bulk = 1 if $nfmt > 4;
+            $bulked++ if $bulk;
+            if ($nfmt) {
+                $intro = $bulk ? '' : ($date // '');
+                my @in = grep { /^\d+\.\d+(?:\.\d+)?-[Jj]umbo-\d+$/ }
+                         git($dir, 'tag', '--sort=v:refname', '--contains', $sha);
+                $first = $in[0] // '';
+                $fdate = length $first ? tag_date($dir, $first) : '';
+            }
+            else { $withheld++ }
+        }
+        else { $withheld++ }
+
+        # In the newest release? The pickaxe says when it ARRIVED; presence
+        # today is a separate question, and a label introduced before the
+        # latest release could still have been removed since. Ask the tree.
+        my $in_latest = 'no';
+        if (length $first) {
+            my @hit = grep { length }
+                      git($dir, 'grep', '-l', '-F', "\"$label\"", $latest, '--', 'src/');
+            $in_latest = @hit ? 'yes' : 'no';
+        }
+
+        push @rows, {
+            tool       => 'john',
+            identifier => $label,
+            index      => '',
+            name       => $f->{algorithm_name} // '',
+            first      => $first,
+            first_date => $fdate,
+            exact      => length $first
+                            ? (($first eq $floor || $bulk) ? 'no' : 'yes') : '',
+            introduced => $intro,
+            in_latest  => $in_latest,
+            latest     => $latest,
+            sort       => 0,   # not numeric: the comparator falls
+                               # through to identifier cmp for john
+        };
+    }
+    # Two reasons a row carries no first_seen_date, reported apart because
+    # they are different facts: the pickaxe could not attribute the literal
+    # at all, or it attributed it to a tree-wide refactor whose date says
+    # nothing about this format. Both leave the column empty, and their SUM
+    # is what a reader counting empty dates in the file will find.
+    printf STDERR "- john: %d format(s), %d jumbo release tag(s), latest %s, "
+                . "floor %s; %d undated (%d with no introducing commit under "
+                . "src/ or touching no format file, %d attributed to a "
+                . "refactor of more than four format files), %d dynamic(s) "
+                . "not covered\n",
+        scalar @rows, scalar @rel, $latest, $floor,
+        ($withheld // 0) + ($bulked // 0), $withheld // 0, $bulked // 0,
+        $skipped_dynamic // 0 if $verbose;
+    return @rows;
+}
+
+#-----------------------------------------------------------------------
 # mdxfind and hashpipe: parse Types[] at every tag.
 
 sub availability_types {
@@ -383,7 +532,7 @@ sub csv_field {
 }
 
 my @all;
-for my $t (qw(hashcat mdxfind hashpipe)) {
+for my $t (qw(hashcat john mdxfind hashpipe)) {
     next unless $want{$t};
     my $dir = $CLONE{$t};
     unless (-d "$dir/.git") {
@@ -397,6 +546,7 @@ for my $t (qw(hashcat mdxfind hashpipe)) {
     my $inv = eval { YAML::XS::LoadFile($path) }
         or die "$PROG: cannot load $path: $@\n";
     push @all, $t eq 'hashcat' ? availability_hashcat($dir, $inv)
+             : $t eq 'john'  ? availability_john($dir, $inv)
                                : availability_types($t, $dir, $inv);
 }
 die "$PROG: nothing to write.\n" unless @all;

@@ -1620,6 +1620,408 @@ hashpipe,DRAGONFLY4-64,e1024,DRAGONFLY4-64,v1.189,2026-09-02,yes,2026-09-02,yes,
 hashpipe,GOST12256CRYPT,e1025,GOST12256CRYPT,v1.189,2026-09-02,yes,2026-09-02,yes,v1.194
 hashpipe,GOST94CRYPT,e1026,GOST94CRYPT,v1.189,2026-09-02,yes,2026-09-02,yes,v1.194
 hashpipe,SUNMD5,e1027,SUNMD5,v1.189,2026-09-02,yes,2026-09-02,yes,v1.194
+john,7z,,SHA256 512/512 AVX-512 16x AES,1.8.0-jumbo-1,2014-12-18,yes,2013-06-16,yes,1.9.0-Jumbo-1
+john,7z-opencl,,SHA256 AES OpenCL,1.8.0-jumbo-1,2014-12-18,yes,2013-06-17,yes,1.9.0-Jumbo-1
+john,AFS,,DES 48/64 4K,1.9.0-Jumbo-1,2019-05-14,no,,yes,1.9.0-Jumbo-1
+john,AndroidBackup,,PBKDF2-SHA1 512/512 AVX-512 16x AES,1.9.0-Jumbo-1,2019-05-14,yes,2018-05-25,yes,1.9.0-Jumbo-1
+john,AndroidBackup-opencl,,PBKDF2-SHA1 AES OpenCL,1.9.0-Jumbo-1,2019-05-14,yes,2018-05-26,yes,1.9.0-Jumbo-1
+john,Argon2,,BlaMka 512/512 AVX512F,,,,2024-11-09,no,1.9.0-Jumbo-1
+john,AxCrypt,,PBKDF2-SHA512/SHA1 AES 32/64,1.9.0-Jumbo-1,2019-05-14,yes,2016-01-07,yes,1.9.0-Jumbo-1
+john,AzureAD,,PBKDF2-SHA256 512/512 AVX-512 16x,1.9.0-Jumbo-1,2019-05-14,yes,2015-11-02,yes,1.9.0-Jumbo-1
+john,BKS,,PKCS#12 PBE (SHA1) 512/512 AVX-512 16x,1.9.0-Jumbo-1,2019-05-14,yes,2016-06-19,yes,1.9.0-Jumbo-1
+john,BestCrypt,,PKCS#12 PBE (SHA1/SHA2) 32/64,1.9.0-Jumbo-1,2019-05-14,yes,2017-03-14,yes,1.9.0-Jumbo-1
+john,BestCryptVE4,,"scrypt Salsa20/8 128/128 AVX512VL, AES/TwoFish/Serpent/Camellia",,,,2021-03-30,no,1.9.0-Jumbo-1
+john,BitLocker,,SHA-256 AES 32/64,1.9.0-Jumbo-1,2019-05-14,yes,2017-03-14,yes,1.9.0-Jumbo-1
+john,BitLocker-opencl,,SHA256 AES OpenCL,1.9.0-Jumbo-1,2019-05-14,yes,2017-05-18,yes,1.9.0-Jumbo-1
+john,Bitcoin,,SHA512 AES 512/512 AVX-512 8x,1.8.0-jumbo-1,2014-12-18,no,,yes,1.9.0-Jumbo-1
+john,Bitcoin-opencl,,SHA512 AES OpenCL,,,,2021-04-21,no,1.9.0-Jumbo-1
+john,Bitwarden,,PBKDF2-SHA256 AES 512/512 AVX-512 16x,1.9.0-Jumbo-1,2019-05-14,yes,2018-01-07,yes,1.9.0-Jumbo-1
+john,Blackberry-ES10,,SHA-512 512/512 AVX-512 8x,1.9.0-Jumbo-1,2019-05-14,no,,yes,1.9.0-Jumbo-1
+john,Blockchain,,PBKDF2-SHA1 AES 512/512 AVX-512 16x,1.8.0-jumbo-1,2014-12-18,no,,yes,1.9.0-Jumbo-1
+john,CRC32,,CRC32 32/64 CRC-32C AVX,1.8.0-jumbo-1,2014-12-18,no,,yes,1.9.0-Jumbo-1
+john,Citrix_NS10,,SHA1 512/512 AVX-512 16x,1.8.0-jumbo-1,2014-12-18,yes,2013-11-07,yes,1.9.0-Jumbo-1
+john,Clipperz,,SHA256 32/64 GMP-exp,1.8.0-jumbo-1,2014-12-18,no,,yes,1.9.0-Jumbo-1
+john,DPAPImk,,SHA1/MD4 PBKDF2-(SHA1/SHA512)-DPAPI-variant 3DES/AES256 512/512 AVX-512 16x,1.9.0-Jumbo-1,2019-05-14,yes,2017-04-24,yes,1.9.0-Jumbo-1
+john,Django,,PBKDF2-SHA256 512/512 AVX-512 16x,1.7.9-jumbo-6,2012-06-29,yes,2012-05-21,yes,1.9.0-Jumbo-1
+john,Drupal7,,SHA512 512/512 AVX-512 8x,1.8.0-jumbo-1,2014-12-18,no,,yes,1.9.0-Jumbo-1
+john,Drupal7-ztex,,SHA512 ZTEX,1.9.0-Jumbo-1,2019-05-14,yes,2018-07-22,yes,1.9.0-Jumbo-1
+john,ENCDataVault-MD5,,"MD5, AES",,,,2022-02-20,no,1.9.0-Jumbo-1
+john,ENCDataVault-PBKDF2,,PBKDF2-HMAC-SHA256 512/512 AVX-512 16x,,,,2022-02-20,no,1.9.0-Jumbo-1
+john,EPI,,SHA1 32/64,1.8.0-jumbo-1,2014-12-18,no,,yes,1.9.0-Jumbo-1
+john,EPiServer,,SHA1/SHA256 512/512 AVX-512 16x,1.7.9-jumbo-6,2012-06-29,yes,2012-04-05,yes,1.9.0-Jumbo-1
+john,EncFS,,PBKDF2-SHA1 512/512 AVX-512 16x AES,1.8.0-jumbo-1,2014-12-18,no,,yes,1.9.0-Jumbo-1
+john,EncFS-opencl,,PBKDF2-SHA1 AES OpenCL,1.9.0-Jumbo-1,2019-05-14,yes,2018-05-03,yes,1.9.0-Jumbo-1
+john,FVDE,,PBKDF2-SHA256 AES 512/512 AVX-512 16x,1.9.0-Jumbo-1,2019-05-14,yes,2017-02-21,yes,1.9.0-Jumbo-1
+john,FVDE-opencl,,PBKDF2-SHA256 AES OpenCL,1.9.0-Jumbo-1,2019-05-14,yes,2017-03-01,yes,1.9.0-Jumbo-1
+john,FormSpring,,sha256($s.$p) 512/512 AVX-512 16x,1.8.0-jumbo-1,2014-12-18,no,,yes,1.9.0-Jumbo-1
+john,Fortigate,,SHA1 32/64,1.8.0-jumbo-1,2014-12-18,no,,yes,1.9.0-Jumbo-1
+john,Fortigate256,,SHA256 32/64,1.9.0-Jumbo-1,2019-05-14,yes,2018-07-08,yes,1.9.0-Jumbo-1
+john,HAVAL-128-4,,32/64,1.8.0-jumbo-1,2014-12-18,yes,2014-06-24,yes,1.9.0-Jumbo-1
+john,HAVAL-256-3,,32/64,1.8.0-jumbo-1,2014-12-18,yes,2014-06-24,yes,1.9.0-Jumbo-1
+john,HMAC-MD5,,"password is key, MD5 512/512 AVX-512 16x3",1.8.0-jumbo-1,2014-12-18,no,,yes,1.9.0-Jumbo-1
+john,HMAC-SHA1,,"password is key, SHA1 512/512 AVX-512 16x",1.8.0-jumbo-1,2014-12-18,no,,yes,1.9.0-Jumbo-1
+john,HMAC-SHA224,,"password is key, SHA224 512/512 AVX-512 16x",1.8.0-jumbo-1,2014-12-18,no,,yes,1.9.0-Jumbo-1
+john,HMAC-SHA256,,"password is key, SHA256 512/512 AVX-512 16x",1.8.0-jumbo-1,2014-12-18,no,,yes,1.9.0-Jumbo-1
+john,HMAC-SHA384,,"password is key, SHA384 512/512 AVX-512 8x",1.8.0-jumbo-1,2014-12-18,no,,yes,1.9.0-Jumbo-1
+john,HMAC-SHA512,,"password is key, SHA512 512/512 AVX-512 8x",1.8.0-jumbo-1,2014-12-18,no,,yes,1.9.0-Jumbo-1
+john,IKE,,HMAC MD5/SHA1 32/64,1.8.0-jumbo-1,2014-12-18,no,,yes,1.9.0-Jumbo-1
+john,Iterated-SHA1,,SHA1 ($s.$p) 512/512 AVX-512 16x,,,,2025-11-11,no,1.9.0-Jumbo-1
+john,Iterated-SHA1-opencl,,SHA1 ($s.$p) OpenCL,,,,2025-11-11,no,1.9.0-Jumbo-1
+john,Iterated-SHA256,,SHA256 ($s.$p) 512/512 AVX-512 16x,,,,2026-02-07,no,1.9.0-Jumbo-1
+john,Iterated-SHA256-opencl,,SHA256 ($s.$p) OpenCL,,,,2026-02-07,no,1.9.0-Jumbo-1
+john,KeePass,,AES/Argon2 512/512 AVX512F,1.8.0-jumbo-1,2014-12-18,no,,yes,1.9.0-Jumbo-1
+john,KeePass-Argon2-opencl,,BlaMka OpenCL,,,,2023-11-08,no,1.9.0-Jumbo-1
+john,KeePass-opencl,,AES OpenCL,1.9.0-Jumbo-1,2019-05-14,yes,2018-02-02,yes,1.9.0-Jumbo-1
+john,LM,,DES 512/512 AVX512F,1.7.9-jumbo-3,2011-12-16,no,,yes,1.9.0-Jumbo-1
+john,LM-opencl,,DES BS OpenCL,1.9.0-Jumbo-1,2019-05-14,yes,2015-07-16,yes,1.9.0-Jumbo-1
+john,LUKS,,PBKDF2-SHA1 512/512 AVX-512 16x,1.8.0-jumbo-1,2014-12-18,yes,2013-04-27,yes,1.9.0-Jumbo-1
+john,LastPass,,PBKDF2-SHA256 AES 512/512 AVX-512 16x,1.8.0-jumbo-1,2014-12-18,no,,yes,1.9.0-Jumbo-1
+john,MD2,,MD2 32/64,1.8.0-jumbo-1,2014-12-18,yes,2013-05-18,yes,1.9.0-Jumbo-1
+john,MSCHAPv2,,MD4 DES (ESS MD5) 512/512 AVX-512 16x3,1.8.0-jumbo-1,2014-12-18,no,,yes,1.9.0-Jumbo-1
+john,MediaWiki,,md5($s.md5($p)) 512/512 AVX-512 16x3,1.8.0-jumbo-1,2014-12-18,no,,yes,1.9.0-Jumbo-1
+john,Monero,,Pseudo-AES/Keccak/BLAKE/Groestl/JH/Skein/ChaCha 128/128 AVX AES-NI,,,,2025-02-16,no,1.9.0-Jumbo-1
+john,MongoDB,,MD5 32/64,1.8.0-jumbo-1,2014-12-18,no,,yes,1.9.0-Jumbo-1
+john,Mozilla,,SHA1 3DES 32/64,1.7.9-jumbo-6,2012-06-29,yes,2012-03-24,yes,1.9.0-Jumbo-1
+john,NT,,MD4 512/512 AVX-512 16x3,1.8.0-jumbo-1,2014-12-18,no,,yes,1.9.0-Jumbo-1
+john,NT-long,,md4(utf16($p)) 512/512 AVX-512 16x3,,,,2022-03-31,no,1.9.0-Jumbo-1
+john,NT-long-opencl,,MD4 OpenCL,,,,2023-01-30,no,1.9.0-Jumbo-1
+john,NT-opencl,,MD4 OpenCL,1.9.0-Jumbo-1,2019-05-14,no,,yes,1.9.0-Jumbo-1
+john,ODF,,PBKDF2-SHA1 512/512 AVX-512 16x BF/AES,1.7.9-jumbo-6,2012-06-29,yes,2012-06-17,yes,1.9.0-Jumbo-1
+john,ODF-opencl,,PBKDF2-SHA1 BF/AES OpenCL,1.8.0-jumbo-1,2014-12-18,no,,yes,1.9.0-Jumbo-1
+john,Office,,SHA1 512/512 AVX-512 16x / SHA512 512/512 AVX-512 8x AES,1.7.9-jumbo-6,2012-06-29,yes,2012-04-02,yes,1.9.0-Jumbo-1
+john,OpenBSD-SoftRAID,,PBKDF2-SHA1 512/512 AVX-512 16x,1.8.0-jumbo-1,2014-12-18,yes,2014-11-18,yes,1.9.0-Jumbo-1
+john,OpenBSD-SoftRAID-opencl,,PBKDF2-SHA1 AES OpenCL,1.9.0-Jumbo-1,2019-05-14,yes,2017-12-25,yes,1.9.0-Jumbo-1
+john,OpenVMS,,32/64,1.8.0-jumbo-1,2014-12-18,no,,yes,1.9.0-Jumbo-1
+john,Oracle12C,,PBKDF2-SHA512 512/512 AVX-512 8x,1.9.0-Jumbo-1,2019-05-14,yes,2015-06-02,yes,1.9.0-Jumbo-1
+john,Oubliette-Blowfish,,SHA1/Blowfish 32/64,,,,2025-03-04,no,1.9.0-Jumbo-1
+john,Oubliette-IDEA,,SHA1/IDEA 32/64,,,,2025-03-04,no,1.9.0-Jumbo-1
+john,PBKDF2-HMAC-MD4,,PBKDF2-MD4 512/512 AVX-512 16x3,1.9.0-Jumbo-1,2019-05-14,yes,2015-06-20,yes,1.9.0-Jumbo-1
+john,PBKDF2-HMAC-MD4-opencl,,PBKDF2-MD4 OpenCL,1.9.0-Jumbo-1,2019-05-14,yes,2015-06-20,yes,1.9.0-Jumbo-1
+john,PBKDF2-HMAC-MD5,,PBKDF2-MD5 512/512 AVX-512 16x3,1.9.0-Jumbo-1,2019-05-14,yes,2015-06-20,yes,1.9.0-Jumbo-1
+john,PBKDF2-HMAC-MD5-opencl,,PBKDF2-MD5 OpenCL,1.9.0-Jumbo-1,2019-05-14,yes,2015-06-19,yes,1.9.0-Jumbo-1
+john,PBKDF2-HMAC-SHA1,,PBKDF2-SHA1 512/512 AVX-512 16x,1.8.0-jumbo-1,2014-12-18,yes,2014-01-05,yes,1.9.0-Jumbo-1
+john,PBKDF2-HMAC-SHA1-opencl,,PBKDF2-SHA1 OpenCL,1.8.0-jumbo-1,2014-12-18,yes,2014-09-04,yes,1.9.0-Jumbo-1
+john,PBKDF2-HMAC-SHA256,,PBKDF2-SHA256 512/512 AVX-512 16x,1.8.0-jumbo-1,2014-12-18,yes,2013-07-16,yes,1.9.0-Jumbo-1
+john,PBKDF2-HMAC-SHA256-opencl,,PBKDF2-SHA256 OpenCL,1.8.0-jumbo-1,2014-12-18,yes,2013-07-23,yes,1.9.0-Jumbo-1
+john,PBKDF2-HMAC-SHA512,,PBKDF2-SHA512 512/512 AVX-512 8x,1.8.0-jumbo-1,2014-12-18,no,,yes,1.9.0-Jumbo-1
+john,PBKDF2-HMAC-SHA512-opencl,,PBKDF2-SHA512 OpenCL,1.9.0-Jumbo-1,2019-05-14,yes,2015-07-08,yes,1.9.0-Jumbo-1
+john,PDF,,MD5-RC4 / SHA2-AES 32/64,1.7.9-jumbo-3,2011-12-16,no,,yes,1.9.0-Jumbo-1
+john,PEM,,PBKDF2-SHA1 512/512 AVX-512 16x 3DES/AES,1.9.0-Jumbo-1,2019-05-14,yes,2015-10-23,yes,1.9.0-Jumbo-1
+john,PHPS,,md5(md5($p).$s) 512/512 AVX-512 16x3,1.8.0-jumbo-1,2014-12-18,no,,yes,1.9.0-Jumbo-1
+john,PHPS2,,md5(md5($p).$s) 512/512 AVX-512 16x3,1.9.0-Jumbo-1,2019-05-14,yes,2015-06-19,yes,1.9.0-Jumbo-1
+john,PKZIP,,32/64,1.7.9-jumbo-6,2012-06-29,no,,yes,1.9.0-Jumbo-1
+john,PST,,32/64,1.8.0-jumbo-1,2014-12-18,no,,yes,1.9.0-Jumbo-1
+john,Padlock,,PBKDF2-SHA256 AES 512/512 AVX-512 16x,1.9.0-Jumbo-1,2019-05-14,yes,2017-03-12,yes,1.9.0-Jumbo-1
+john,Palshop,,MD5 + SHA1 32/64,1.9.0-Jumbo-1,2019-05-14,yes,2016-07-23,yes,1.9.0-Jumbo-1
+john,Panama,,Panama 32/64,1.8.0-jumbo-1,2014-12-18,yes,2013-05-18,yes,1.9.0-Jumbo-1
+john,PuTTY,,SHA1/AES 32/64,1.8.0-jumbo-1,2014-12-18,no,,yes,1.9.0-Jumbo-1
+john,RACF,,DES 32/64,1.7.9-jumbo-6,2012-06-29,yes,2012-03-10,yes,1.9.0-Jumbo-1
+john,RACF-KDFAES,,DES/HMAC-SHA256/AES 32/64,1.9.0-Jumbo-1,2019-05-14,yes,2018-12-05,yes,1.9.0-Jumbo-1
+john,RAKP-MD5,,HMAC-MD5 512/512 AVX-512 16x3,,,,2026-07-05,no,1.9.0-Jumbo-1
+john,RAKP-MD5-opencl,,HMAC-MD5 OpenCL,,,,2026-07-05,no,1.9.0-Jumbo-1
+john,RAKP-SHA1,,HMAC-SHA1 512/512 AVX-512 16x,,,,2026-07-21,no,1.9.0-Jumbo-1
+john,RAKP-SHA1-opencl,,HMAC-SHA1 OpenCL,,,,2026-07-21,no,1.9.0-Jumbo-1
+john,RAKP-SHA256,,HMAC-SHA256 512/512 AVX-512 16x,,,,2026-07-05,no,1.9.0-Jumbo-1
+john,RAKP-SHA256-opencl,,HMAC-SHA256 OpenCL,,,,2026-07-05,no,1.9.0-Jumbo-1
+john,RAR5,,PBKDF2-SHA256 512/512 AVX-512 16x,1.8.0-jumbo-1,2014-12-18,yes,2013-05-11,yes,1.9.0-Jumbo-1
+john,RAR5-opencl,,PBKDF2-SHA256 OpenCL,1.8.0-jumbo-1,2014-12-18,yes,2014-08-26,yes,1.9.0-Jumbo-1
+john,RAdmin,,MD5 32/64,1.8.0-jumbo-1,2014-12-18,no,,yes,1.9.0-Jumbo-1
+john,RVARY,,DES 32/64,,,,2020-11-29,no,1.9.0-Jumbo-1
+john,Raw-Blake2,,BLAKE2b 512 128/128 AVX,1.8.0-jumbo-1,2014-12-18,no,,yes,1.9.0-Jumbo-1
+john,Raw-Keccak,,Keccak 512 32/64,1.8.0-jumbo-1,2014-12-18,no,,yes,1.9.0-Jumbo-1
+john,Raw-Keccak-256,,Keccak 256 32/64,1.8.0-jumbo-1,2014-12-18,no,,yes,1.9.0-Jumbo-1
+john,Raw-MD4,,MD4 512/512 AVX-512 16x3,1.8.0-jumbo-1,2014-12-18,no,,yes,1.9.0-Jumbo-1
+john,Raw-MD5,,MD5 512/512 AVX-512 16x3,1.8.0-jumbo-1,2014-12-18,no,,yes,1.9.0-Jumbo-1
+john,Raw-MD5u,,md5(utf16($p)) 512/512 AVX-512 16x3,1.8.0-jumbo-1,2014-12-18,no,,yes,1.9.0-Jumbo-1
+john,Raw-SHA1,,SHA1 512/512 AVX-512 16x,1.8.0-jumbo-1,2014-12-18,no,,yes,1.9.0-Jumbo-1
+john,Raw-SHA1-AxCrypt,,SHA1 512/512 AVX-512 16x,1.9.0-Jumbo-1,2019-05-14,yes,2016-01-18,yes,1.9.0-Jumbo-1
+john,Raw-SHA1-Linkedin,,SHA1 512/512 AVX-512 16x,1.8.0-jumbo-1,2014-12-18,no,,yes,1.9.0-Jumbo-1
+john,Raw-SHA224,,SHA224 512/512 AVX-512 16x,1.8.0-jumbo-1,2014-12-18,no,,yes,1.9.0-Jumbo-1
+john,Raw-SHA256,,SHA256 512/512 AVX-512 16x,1.8.0-jumbo-1,2014-12-18,no,,yes,1.9.0-Jumbo-1
+john,Raw-SHA3,,SHA3 512 32/64,1.9.0-Jumbo-1,2019-05-14,no,,yes,1.9.0-Jumbo-1
+john,Raw-SHA384,,SHA384 512/512 AVX-512 8x,1.8.0-jumbo-1,2014-12-18,no,,yes,1.9.0-Jumbo-1
+john,Raw-SHA512,,SHA512 512/512 AVX-512 8x,1.8.0-jumbo-1,2014-12-18,no,,yes,1.9.0-Jumbo-1
+john,Raw-SM3,,SM3 32/64,,,,2025-11-25,no,1.9.0-Jumbo-1
+john,SCRAM-PBKDF2-SHA1,,PBKDF2-SHA1/SCRAM 512/512 AVX-512 16x,,,,2025-04-26,no,1.9.0-Jumbo-1
+john,SCRAM-PBKDF2-SHA1-MongoDB,,PBKDF2-SHA1/MD5/SCRAM 512/512 AVX-512 16x,,,,2025-04-26,no,1.9.0-Jumbo-1
+john,SCRAM-PBKDF2-SHA256,,PBKDF2-SHA256/SCRAM 512/512 AVX-512 16x,,,,2025-04-26,no,1.9.0-Jumbo-1
+john,SIP,,MD5 32/64,1.7.9-jumbo-6,2012-06-29,yes,2012-03-11,yes,1.9.0-Jumbo-1
+john,SL3,,SHA1 512/512 AVX-512 16x,1.9.0-Jumbo-1,2019-05-14,yes,2017-06-10,yes,1.9.0-Jumbo-1
+john,SL3-opencl,,SHA1 OpenCL,1.9.0-Jumbo-1,2019-05-14,yes,2017-06-12,yes,1.9.0-Jumbo-1
+john,SNMP,,HMAC-MD5-96/HMAC-SHA1-96 32/64,1.9.0-Jumbo-1,2019-05-14,yes,2017-04-20,yes,1.9.0-Jumbo-1
+john,SSH,,MD5/bcrypt-pbkdf/[3]DES/AES 32/64,1.7.9-jumbo-6,2012-06-29,yes,2012-05-13,yes,1.9.0-Jumbo-1
+john,SSHA512,,SHA512 ($p.$s) 512/512 AVX-512 8x,1.8.0-jumbo-1,2014-12-18,yes,2013-08-15,yes,1.9.0-Jumbo-1
+john,STRIP,,PBKDF2-SHA1 512/512 AVX-512 16x,1.8.0-jumbo-1,2014-12-18,no,,yes,1.9.0-Jumbo-1
+john,Salted-SHA1,,SHA1 ($p.$s) 512/512 AVX-512 16x,1.8.0-jumbo-1,2014-12-18,no,,yes,1.9.0-Jumbo-1
+john,Siemens-S7,,HMAC-SHA1 32/64,1.8.0-jumbo-1,2014-12-18,no,,yes,1.9.0-Jumbo-1
+john,Signal,,PKCS#12 PBE (SHA1) 32/64,1.9.0-Jumbo-1,2019-05-14,yes,2018-06-17,yes,1.9.0-Jumbo-1
+john,Snefru-128,,32/64,1.8.0-jumbo-1,2014-12-18,no,,yes,1.9.0-Jumbo-1
+john,Snefru-256,,32/64,1.8.0-jumbo-1,2014-12-18,no,,yes,1.9.0-Jumbo-1
+john,Stribog-256,,GOST R 34.11-2012 128/128 AVX 1x,1.9.0-Jumbo-1,2019-05-14,yes,2015-05-16,yes,1.9.0-Jumbo-1
+john,Stribog-512,,GOST R 34.11-2012 128/128 AVX 1x,1.9.0-Jumbo-1,2019-05-14,yes,2015-05-16,yes,1.9.0-Jumbo-1
+john,SunMD5,,MD5 512/512 AVX-512 16x3,1.8.0-jumbo-1,2014-12-18,yes,2012-08-04,yes,1.9.0-Jumbo-1
+john,Sybase-PROP,,salted FEAL-8 32/64,1.8.0-jumbo-1,2014-12-18,yes,2014-02-26,yes,1.9.0-Jumbo-1
+john,SybaseASE,,SHA256 512/512 AVX-512 16x,1.9.0-Jumbo-1,2019-05-14,no,,yes,1.9.0-Jumbo-1
+john,Tiger,,Tiger 32/64,1.8.0-jumbo-1,2014-12-18,yes,2013-04-27,yes,1.9.0-Jumbo-1
+john,TrueCrypt-opencl,,RIPEMD160 AES256_XTS OpenCL,1.9.0-Jumbo-1,2019-05-14,yes,2018-02-13,yes,1.9.0-Jumbo-1
+john,VNC,,DES 32/64,1.7.9-jumbo-6,2012-06-29,yes,2012-03-14,yes,1.9.0-Jumbo-1
+john,WoWSRP,,SHA1 32/64 GMP-exp,1.8.0-jumbo-1,2014-12-18,no,,yes,1.9.0-Jumbo-1
+john,XSHA512-free-opencl,,"SHA512 ($s.$p) OpenCL (efficient at ""many salts"" only)",1.9.0-Jumbo-1,2019-05-14,yes,2016-08-22,yes,1.9.0-Jumbo-1
+john,XSHA512-opencl,,SHA512 OpenCL,1.8.0-jumbo-1,2014-12-18,no,,yes,1.9.0-Jumbo-1
+john,ZIP,,PBKDF2-SHA1 512/512 AVX-512 16x,1.7.9-jumbo-3,2011-12-16,no,,yes,1.9.0-Jumbo-1
+john,ZIP-opencl,,PBKDF2-SHA1 OpenCL,1.9.0-Jumbo-1,2019-05-14,no,,yes,1.9.0-Jumbo-1
+john,ZipMonster,,MD5-512/512 AVX-512 16x3 x 50000,1.9.0-Jumbo-1,2019-05-14,yes,2016-07-30,yes,1.9.0-Jumbo-1
+john,adxcrypt,,ADXCRYPT 32/64,1.9.0-Jumbo-1,2019-05-14,yes,2018-08-16,yes,1.9.0-Jumbo-1
+john,agilekeychain,,PBKDF2-SHA1 AES 512/512 AVX-512 16x,1.8.0-jumbo-1,2014-12-18,yes,2012-07-20,yes,1.9.0-Jumbo-1
+john,agilekeychain-opencl,,PBKDF2-SHA1 AES OpenCL,1.8.0-jumbo-1,2014-12-18,yes,2012-07-20,yes,1.9.0-Jumbo-1
+john,aix-ssha1,,PBKDF2-SHA1 512/512 AVX-512 16x,1.8.0-jumbo-1,2014-12-18,yes,2013-05-07,yes,1.9.0-Jumbo-1
+john,aix-ssha256,,PBKDF2-SHA256 512/512 AVX-512 16x,1.8.0-jumbo-1,2014-12-18,yes,2013-05-07,yes,1.9.0-Jumbo-1
+john,aix-ssha512,,PBKDF2-SHA512 512/512 AVX-512 8x,1.8.0-jumbo-1,2014-12-18,yes,2013-05-07,yes,1.9.0-Jumbo-1
+john,andOTP,,SHA256 32/64,1.9.0-Jumbo-1,2019-05-14,yes,2018-05-18,yes,1.9.0-Jumbo-1
+john,ansible,,PBKDF2-SHA256 HMAC-256 512/512 AVX-512 16x,1.9.0-Jumbo-1,2019-05-14,yes,2018-02-27,yes,1.9.0-Jumbo-1
+john,ansible-opencl,,PBKDF2-SHA256 HMAC-SHA256 OpenCL,1.9.0-Jumbo-1,2019-05-14,yes,2018-03-20,yes,1.9.0-Jumbo-1
+john,argon2-opencl,,BlaMka OpenCL,,,,2023-12-04,no,1.9.0-Jumbo-1
+john,armory,,SHA512/AES/secp256k1/SHA256/RIPEMD160 512/512 AVX-512 8x,,,,2024-01-09,no,1.9.0-Jumbo-1
+john,as400-des,,DES 32/64,1.9.0-Jumbo-1,2019-05-14,yes,2016-09-05,yes,1.9.0-Jumbo-1
+john,as400-ssha1,,sha1(utf16be(space_pad_10(uc($s)).$p)) (IBM AS/400 SHA1) 512/512 AVX-512 16x1,1.9.0-Jumbo-1,2019-05-14,yes,2016-08-30,yes,1.9.0-Jumbo-1
+john,asa-md5,,md5($p.$s) (Cisco ASA) 512/512 AVX-512 16x3,1.8.0-jumbo-1,2014-12-18,yes,2013-04-04,yes,1.9.0-Jumbo-1
+john,axcrypt-opencl,,AES SHA1 OpenCL,1.9.0-Jumbo-1,2019-05-14,yes,2018-08-05,yes,1.9.0-Jumbo-1
+john,axcrypt2-opencl,,PBKDF2-SHA512 AES OpenCL,1.9.0-Jumbo-1,2019-05-14,yes,2018-12-24,yes,1.9.0-Jumbo-1
+john,bcrypt,,Blowfish 32/64 X3,1.7.9-jumbo-3,2011-12-16,no,,yes,1.9.0-Jumbo-1
+john,bcrypt-opencl,,Blowfish OpenCL,1.8.0-jumbo-1,2014-12-18,yes,2013-05-30,yes,1.9.0-Jumbo-1
+john,bcrypt-ztex,,Blowfish ZTEX,,,,,no,1.9.0-Jumbo-1
+john,bfegg,,Blowfish 32/64,1.7.9-jumbo-3,2011-12-16,no,,yes,1.9.0-Jumbo-1
+john,bitshares,,SHA512/AES/secp256k1/SHA256 64/64,1.9.0-Jumbo-1,2019-05-14,yes,2018-01-31,yes,1.9.0-Jumbo-1
+john,bitwarden-opencl,,PBKDF2-SHA256 AES OpenCL,1.9.0-Jumbo-1,2019-05-14,yes,2018-01-08,yes,1.9.0-Jumbo-1
+john,blockchain-opencl,,PBKDF2-SHA1 AES OpenCL,1.8.0-jumbo-1,2014-12-18,yes,2013-06-08,yes,1.9.0-Jumbo-1
+john,bsdicrypt,,DES 512/512 AVX512F,1.9.0-Jumbo-1,2019-05-14,no,,yes,1.9.0-Jumbo-1
+john,cardano,,PBKDF2-SHA512/BLAKE2b/ChaCha20 512/512 AVX-512 8x,,,,2022-08-23,no,1.9.0-Jumbo-1
+john,chap,,MD5 32/64,1.8.0-jumbo-1,2014-12-18,yes,2012-09-13,yes,1.9.0-Jumbo-1
+john,cloudkeychain,,PBKDF2-SHA512 512/512 AVX-512 8x,1.8.0-jumbo-1,2014-12-18,yes,2013-04-13,yes,1.9.0-Jumbo-1
+john,cloudkeychain-opencl,,PBKDF2-SHA512 AES OpenCL,1.9.0-Jumbo-1,2019-05-14,yes,2018-10-01,yes,1.9.0-Jumbo-1
+john,cq,,CQWeb,1.8.0-jumbo-1,2014-12-18,yes,2014-10-11,yes,1.9.0-Jumbo-1
+john,crypt,,?/64,1.9.0-Jumbo-1,2019-05-14,yes,2010-06-12,yes,1.9.0-Jumbo-1
+john,cryptoSafe,,AES-256-CBC,,,,2021-09-11,no,1.9.0-Jumbo-1
+john,cryptosafe-opencl,,AES-256-CBC OpenCL,,,,2021-09-11,no,1.9.0-Jumbo-1
+john,dahua,,MD5 32/64,1.8.0-jumbo-1,2014-12-18,yes,2014-10-13,yes,1.9.0-Jumbo-1
+john,dashlane,,AES PBKDF2-SHA1 512/512 AVX-512 16x,1.9.0-Jumbo-1,2019-05-14,no,,yes,1.9.0-Jumbo-1
+john,dashlane-opencl,,PBKDF2-SHA1 OpenCL AES,1.9.0-Jumbo-1,2019-05-14,no,,yes,1.9.0-Jumbo-1
+john,descrypt,,DES 512/512 AVX512F,1.7.9-jumbo-6,2012-06-29,no,,yes,1.9.0-Jumbo-1
+john,descrypt-opencl,,DES OpenCL,1.8.0-jumbo-1,2014-12-18,yes,2013-05-15,yes,1.9.0-Jumbo-1
+john,descrypt-ztex,,DES ZTEX,,,,,no,1.9.0-Jumbo-1
+john,diskcryptor,,PBKDF2-SHA512 512/512 AVX-512 8x,1.9.0-Jumbo-1,2019-05-14,yes,2018-12-19,yes,1.9.0-Jumbo-1
+john,diskcryptor-aes-opencl,,PBKDF2-SHA512 AES OpenCL,1.9.0-Jumbo-1,2019-05-14,yes,2018-12-19,yes,1.9.0-Jumbo-1
+john,diskcryptor-opencl,,PBKDF2-SHA512 OpenCL,1.9.0-Jumbo-1,2019-05-14,yes,2018-12-19,yes,1.9.0-Jumbo-1
+john,django-scrypt,,Salsa20/8 128/128 AVX512VL,1.8.0-jumbo-1,2014-12-18,yes,2013-05-19,yes,1.9.0-Jumbo-1
+john,dmd5,,MD5 32/64,1.7.9-jumbo-3,2011-12-16,no,,yes,1.9.0-Jumbo-1
+john,dmg,,PBKDF2-SHA1 512/512 AVX-512 16x 3DES/AES,1.8.0-jumbo-1,2014-12-18,yes,2012-08-25,yes,1.9.0-Jumbo-1
+john,dmg-opencl,,PBKDF2-SHA1 3DES/AES OpenCL,1.8.0-jumbo-1,2014-12-18,yes,2012-09-01,yes,1.9.0-Jumbo-1
+john,dominosec,,8/64,1.7.9-jumbo-3,2011-12-16,no,,yes,1.9.0-Jumbo-1
+john,dominosec8,,8/64,1.9.0-Jumbo-1,2019-05-14,yes,2015-05-16,yes,1.9.0-Jumbo-1
+john,dragonfly3-32,,SHA256 32/64,1.7.9-jumbo-6,2012-06-29,yes,2012-01-19,yes,1.9.0-Jumbo-1
+john,dragonfly3-64,,SHA256 32/64,1.7.9-jumbo-6,2012-06-29,yes,2012-01-19,yes,1.9.0-Jumbo-1
+john,dragonfly4-32,,SHA512 64/64,1.7.9-jumbo-6,2012-06-29,yes,2012-01-19,yes,1.9.0-Jumbo-1
+john,dragonfly4-64,,SHA512 64/64,1.7.9-jumbo-6,2012-06-29,yes,2012-01-19,yes,1.9.0-Jumbo-1
+john,dummy,,N/A,,,,,no,1.9.0-Jumbo-1
+john,dynamic=md5($p),,512/512 AVX-512 16x3,1.9.0-Jumbo-1,2019-05-14,yes,2015-06-26,no,1.9.0-Jumbo-1
+john,eCryptfs,,SHA512 512/512 AVX-512 8x,1.8.0-jumbo-1,2014-12-18,yes,2013-07-28,yes,1.9.0-Jumbo-1
+john,eigrp,,MD5/SHA-256 32/64,1.8.0-jumbo-1,2014-12-18,yes,2014-09-09,yes,1.9.0-Jumbo-1
+john,electrum,,SHA256 AES / PBKDF2-SHA512 512/512 AVX-512 16x,1.9.0-Jumbo-1,2019-05-14,yes,2017-05-12,yes,1.9.0-Jumbo-1
+john,electrum-modern-opencl,,PBKDF2-SHA512 OpenCL,1.9.0-Jumbo-1,2019-05-14,yes,2017-06-21,yes,1.9.0-Jumbo-1
+john,enpass,,PBKDF2-SHA1/SHA512 512/512 AVX-512 8x,1.9.0-Jumbo-1,2019-05-14,yes,2017-01-20,yes,1.9.0-Jumbo-1
+john,enpass-opencl,,PBKDF2-SHA1/SHA512 AES OpenCL,1.9.0-Jumbo-1,2019-05-14,yes,2017-01-20,yes,1.9.0-Jumbo-1
+john,ethereum,,PBKDF2-SHA256/scrypt Keccak 512/512 AVX-512 16x,1.9.0-Jumbo-1,2019-05-14,yes,2017-05-04,yes,1.9.0-Jumbo-1
+john,ethereum-opencl,,PBKDF2-SHA256 Keccak OpenCL,1.9.0-Jumbo-1,2019-05-14,yes,2017-06-13,yes,1.9.0-Jumbo-1
+john,ethereum-presale-opencl,,PBKDF2-SHA256 AES Keccak OpenCL,1.9.0-Jumbo-1,2019-05-14,yes,2017-06-14,yes,1.9.0-Jumbo-1
+john,fde,,PBKDF2-SHA1 512/512 AVX-512 16x SHA256/AES,1.8.0-jumbo-1,2014-12-18,yes,2013-05-08,yes,1.9.0-Jumbo-1
+john,geli,,PBKDF2-SHA512 512/512 AVX-512 16x,1.9.0-Jumbo-1,2019-05-14,yes,2017-04-13,yes,1.9.0-Jumbo-1
+john,geli-opencl,,PBKDF2-SHA512 AES OpenCL,1.9.0-Jumbo-1,2019-05-14,yes,2017-06-22,yes,1.9.0-Jumbo-1
+john,gost,,64/64,1.7.9-jumbo-6,2012-06-29,yes,2012-06-01,yes,1.9.0-Jumbo-1
+john,gost94crypt,,GOST R 34.11-94 32/64,,,,,no,1.9.0-Jumbo-1
+john,gost94crypt-opencl,,GOST R 34.11-94 OpenCL,,,,,no,1.9.0-Jumbo-1
+john,gpg,,32/64,1.8.0-jumbo-1,2014-12-18,yes,2012-08-12,yes,1.9.0-Jumbo-1
+john,gpg-opencl,,SHA1/SHA2 OpenCL,1.8.0-jumbo-1,2014-12-18,yes,2012-08-15,yes,1.9.0-Jumbo-1
+john,h3c,,SHA512 512/512 AVX-512 8x,,,,2025-06-09,no,1.9.0-Jumbo-1
+john,hMailServer,,sha256($s.$p) 512/512 AVX-512 16x,1.8.0-jumbo-1,2014-12-18,no,,yes,1.9.0-Jumbo-1
+john,has-160,,HAS-160 32/64,1.9.0-Jumbo-1,2019-05-14,yes,2015-05-17,yes,1.9.0-Jumbo-1
+john,hdaa,,MD5 512/512 AVX-512 16x3,1.7.9-jumbo-3,2011-12-16,no,,yes,1.9.0-Jumbo-1
+john,hsrp,,MD5 32/64,1.8.0-jumbo-1,2014-12-18,yes,2014-09-01,yes,1.9.0-Jumbo-1
+john,ipb2,,MD5 512/512 AVX-512 16x3,1.7.9-jumbo-3,2011-12-16,no,,yes,1.9.0-Jumbo-1
+john,itunes-backup,,PBKDF2-SHA1 AES 512/512 AVX-512 16x,1.9.0-Jumbo-1,2019-05-14,yes,2017-02-05,yes,1.9.0-Jumbo-1
+john,iwork,,PBKDF2-SHA1 AES 512/512 AVX-512 16x,1.9.0-Jumbo-1,2019-05-14,yes,2015-11-19,yes,1.9.0-Jumbo-1
+john,iwork-opencl,,PBKDF2-SHA1 AES OpenCL,1.9.0-Jumbo-1,2019-05-14,yes,2015-11-21,yes,1.9.0-Jumbo-1
+john,keplr,,"scrypt Salsa20/8 128/128 AVX512VL, SHA256 32/64",,,,2023-09-26,no,1.9.0-Jumbo-1
+john,keychain,,PBKDF2-SHA1 3DES 512/512 AVX-512 16x,1.7.9-jumbo-6,2012-06-29,yes,2012-04-09,yes,1.9.0-Jumbo-1
+john,keychain-opencl,,PBKDF2-SHA1 3DES OpenCL,1.8.0-jumbo-1,2014-12-18,yes,2012-07-19,yes,1.9.0-Jumbo-1
+john,keyring,,SHA256 AES 512/512 AVX-512 16x,1.8.0-jumbo-1,2014-12-18,yes,2012-07-29,yes,1.9.0-Jumbo-1
+john,keyring-opencl,,SHA256 AES OpenCL,1.8.0-jumbo-1,2014-12-18,yes,2013-06-14,yes,1.9.0-Jumbo-1
+john,keystore,,SHA1 512/512 AVX-512 16x,1.8.0-jumbo-1,2014-12-18,yes,2013-02-04,yes,1.9.0-Jumbo-1
+john,keystore-opencl,,SHA1 OpenCL,1.9.0-Jumbo-1,2019-05-14,yes,2016-01-19,yes,1.9.0-Jumbo-1
+john,known_hosts,,SHA1 32/64,1.8.0-jumbo-1,2014-12-18,yes,2014-07-02,yes,1.9.0-Jumbo-1
+john,krb4,,DES 32/64,1.7.9-jumbo-3,2011-12-16,no,,yes,1.9.0-Jumbo-1
+john,krb5,,3DES 32/64,1.7.9-jumbo-3,2011-12-16,no,,yes,1.9.0-Jumbo-1
+john,krb5-17,,DES / PBKDF2-SHA1 512/512 AVX-512 16x AES,1.9.0-Jumbo-1,2019-05-14,yes,2017-10-20,yes,1.9.0-Jumbo-1
+john,krb5-18,,DES / PBKDF2-SHA1 512/512 AVX-512 16x AES,1.8.0-jumbo-1,2014-12-18,yes,2012-09-06,yes,1.9.0-Jumbo-1
+john,krb5-3,,DES / PBKDF2-SHA1 512/512 AVX-512 16x AES,1.9.0-Jumbo-1,2019-05-14,yes,2017-10-23,yes,1.9.0-Jumbo-1
+john,krb5asrep,,MD4 HMAC-MD5 RC4 / PBKDF2 HMAC-SHA1 AES 512/512 AVX-512 16x,1.9.0-Jumbo-1,2019-05-14,yes,2017-08-28,yes,1.9.0-Jumbo-1
+john,krb5asrep-aes-opencl,,PBKDF2-SHA1 AES OpenCL,1.9.0-Jumbo-1,2019-05-14,yes,2017-12-02,yes,1.9.0-Jumbo-1
+john,krb5pa-md5,,MD4 HMAC-MD5 RC4 32/64,1.8.0-jumbo-1,2014-12-18,yes,2012-12-09,yes,1.9.0-Jumbo-1
+john,krb5pa-md5-opencl,,MD4 HMAC-MD5 RC4 OpenCL,1.8.0-jumbo-1,2014-12-18,yes,2013-10-11,yes,1.9.0-Jumbo-1
+john,krb5pa-sha1,,PBKDF2-SHA1 (AES-CTS-HMAC-SHA1-96)512/512 AVX-512 16x,1.8.0-jumbo-1,2014-12-18,yes,2012-12-08,yes,1.9.0-Jumbo-1
+john,krb5pa-sha1-opencl,,PBKDF2-SHA1 (AES-CTS-HMAC-SHA1-96) OpenCL,1.8.0-jumbo-1,2014-12-18,yes,2012-12-09,yes,1.9.0-Jumbo-1
+john,krb5tgs,,MD4 HMAC-MD5 RC4,1.9.0-Jumbo-1,2019-05-14,yes,2015-09-30,yes,1.9.0-Jumbo-1
+john,krb5tgs-opencl,,MD4 HMAC-MD5 RC4 OpenCL,,,,2023-01-24,no,1.9.0-Jumbo-1
+john,krb5tgs-sha1,,PBKDF2 HMAC-SHA1 AES 512/512 AVX-512 16x,,,,,no,1.9.0-Jumbo-1
+john,krb5tgs-sha1-opencl,,PBKDF2-SHA1 AES-CTS OpenCL,,,,,no,1.9.0-Jumbo-1
+john,kwallet,,SHA1 / PBKDF2-SHA512 512/512 AVX-512 8x,1.8.0-jumbo-1,2014-12-18,yes,2013-01-14,yes,1.9.0-Jumbo-1
+john,leet,,SHA-512(512/512 AVX-512 8x) + Whirlpool(OpenSSL/64),1.9.0-Jumbo-1,2019-05-14,yes,2016-10-18,yes,1.9.0-Jumbo-1
+john,lotus5,,8/64 X3,1.7.9-jumbo-3,2011-12-16,no,,yes,1.9.0-Jumbo-1
+john,lotus5-opencl,,OpenCL,1.8.0-jumbo-1,2014-12-18,yes,2014-05-19,yes,1.9.0-Jumbo-1
+john,lotus85,,8/64,1.8.0-jumbo-1,2014-12-18,yes,2013-12-22,yes,1.9.0-Jumbo-1
+john,lp,,PBKDF2-SHA256 512/512 AVX-512 16x,1.8.0-jumbo-1,2014-12-18,yes,2013-01-05,yes,1.9.0-Jumbo-1
+john,lp-opencl,,PBKDF2-SHA256 AES OpenCL,1.9.0-Jumbo-1,2019-05-14,no,,yes,1.9.0-Jumbo-1
+john,lpcli,,PBKDF2-SHA256 512/512 AVX-512 16x,1.9.0-Jumbo-1,2019-05-14,yes,2017-08-14,yes,1.9.0-Jumbo-1
+john,lpcli-opencl,,PBKDF2-SHA256 AES OpenCL,1.9.0-Jumbo-1,2019-05-14,no,,yes,1.9.0-Jumbo-1
+john,md5crypt,,MD5 512/512 AVX-512 16x3,1.7.9-jumbo-6,2012-06-29,no,,yes,1.9.0-Jumbo-1
+john,md5crypt-long,,MD5 32/64,1.9.0-Jumbo-1,2019-05-14,yes,2019-05-09,yes,1.9.0-Jumbo-1
+john,md5crypt-opencl,,MD5 OpenCL,1.7.9-jumbo-6,2012-06-29,no,,yes,1.9.0-Jumbo-1
+john,md5crypt-ztex,,md5crypt ZTEX,,,,,no,1.9.0-Jumbo-1
+john,md5ns,,md5($s.$p) (OSC) (PW > 31 bytes) 512/512 AVX-512 16x3,1.7.9-jumbo-3,2011-12-16,no,,yes,1.9.0-Jumbo-1
+john,mdc2,,MDC-2DES,1.8.0-jumbo-1,2014-12-18,yes,2014-11-11,yes,1.9.0-Jumbo-1
+john,money,,MD5/SHA1 32/64,1.7.9-jumbo-3,2011-12-16,no,,yes,1.9.0-Jumbo-1
+john,mscash,,MD4 32/64,1.7.9-jumbo-3,2011-12-16,no,,yes,1.9.0-Jumbo-1
+john,mscash-opencl,,MD4 OpenCL,1.8.0-jumbo-1,2014-12-18,yes,2013-07-27,yes,1.9.0-Jumbo-1
+john,mscash2,,PBKDF2-SHA1 512/512 AVX-512 16x,1.7.9-jumbo-3,2011-12-16,no,,yes,1.9.0-Jumbo-1
+john,mscash2-opencl,,PBKDF2-SHA1 OpenCL,1.7.9-jumbo-6,2012-06-29,yes,2012-04-03,yes,1.9.0-Jumbo-1
+john,mschapv2-naive,,MD4 DES 512/512 AVX512F naive,1.8.0-jumbo-1,2014-12-18,yes,2013-02-05,yes,1.9.0-Jumbo-1
+john,mssql,,SHA1 512/512 AVX-512 16x,1.7.9-jumbo-3,2011-12-16,no,,yes,1.9.0-Jumbo-1
+john,mssql05,,SHA1 512/512 AVX-512 16x,1.7.9-jumbo-3,2011-12-16,no,,yes,1.9.0-Jumbo-1
+john,mssql12,,SHA512 512/512 AVX-512 8x,1.8.0-jumbo-1,2014-12-18,yes,2012-08-21,yes,1.9.0-Jumbo-1
+john,multibit,,MD5/scrypt AES 32/64,1.9.0-Jumbo-1,2019-05-14,yes,2017-05-14,yes,1.9.0-Jumbo-1
+john,mysql,,32/64,1.7.9-jumbo-3,2011-12-16,no,,yes,1.9.0-Jumbo-1
+john,mysql-sha1,,SHA1 512/512 AVX-512 16x,1.7.9-jumbo-3,2011-12-16,no,,yes,1.9.0-Jumbo-1
+john,mysql-sha1-opencl,,SHA1 OpenCL,1.7.9-jumbo-6,2012-06-29,yes,2012-02-03,yes,1.9.0-Jumbo-1
+john,mysqlna,,SHA1 32/64,1.8.0-jumbo-1,2014-12-18,yes,2012-08-25,yes,1.9.0-Jumbo-1
+john,net-ah,,MD5 32/64,1.9.0-Jumbo-1,2019-05-14,yes,2017-04-12,yes,1.9.0-Jumbo-1
+john,net-md5,,MD5 32/64 or dynamic_39,1.8.0-jumbo-1,2014-12-18,yes,2013-10-23,yes,1.9.0-Jumbo-1
+john,net-sha1,,SHA1 32/64 or dynamic_40,1.8.0-jumbo-1,2014-12-18,yes,2013-10-23,yes,1.9.0-Jumbo-1
+john,nethalflm,,DES 32/64,1.7.9-jumbo-3,2011-12-16,no,,yes,1.9.0-Jumbo-1
+john,netlm,,DES 32/64,1.7.9-jumbo-3,2011-12-16,no,,yes,1.9.0-Jumbo-1
+john,netlmv2,,MD4 HMAC-MD5 32/64,1.7.9-jumbo-3,2011-12-16,no,,yes,1.9.0-Jumbo-1
+john,netntlm,,MD4 DES (ESS MD5) 512/512 AVX-512 16x3,1.7.9-jumbo-3,2011-12-16,no,,yes,1.9.0-Jumbo-1
+john,netntlm-naive,,MD4 DES (ESS MD5) DES 512/512 AVX512F naive,1.8.0-jumbo-1,2014-12-18,yes,2013-02-05,yes,1.9.0-Jumbo-1
+john,netntlmv2,,MD4 HMAC-MD5 32/64,1.7.9-jumbo-3,2011-12-16,no,,yes,1.9.0-Jumbo-1
+john,nk,,SHA1 MD5 32/64,1.8.0-jumbo-1,2014-12-18,yes,2012-07-10,yes,1.9.0-Jumbo-1
+john,notes,,PBKDF2-SHA256 AES 512/512 AVX-512 16x,1.9.0-Jumbo-1,2019-05-14,yes,2017-12-14,yes,1.9.0-Jumbo-1
+john,notes-opencl,,PBKDF2-SHA256 AES OpenCL,1.9.0-Jumbo-1,2019-05-14,yes,2017-12-14,yes,1.9.0-Jumbo-1
+john,nsec3,,SHA1 32/64,1.9.0-Jumbo-1,2019-05-14,yes,2016-08-14,yes,1.9.0-Jumbo-1
+john,ntlmv2-opencl,,MD4 HMAC-MD5 OpenCL,1.8.0-jumbo-1,2014-12-18,yes,2012-10-17,yes,1.9.0-Jumbo-1
+john,o10glogon,,DES-AES128-MD5 32/64,1.9.0-Jumbo-1,2019-05-14,yes,2016-10-10,yes,1.9.0-Jumbo-1
+john,o3logon,,SHA1 DES 32/64,1.9.0-Jumbo-1,2019-05-14,yes,2016-08-25,yes,1.9.0-Jumbo-1
+john,o5logon,,MD5 SHA1 AES 32/64,1.8.0-jumbo-1,2014-12-18,yes,2012-09-29,yes,1.9.0-Jumbo-1
+john,o5logon-opencl,,MD5 SHA1 AES OpenCL,1.8.0-jumbo-1,2014-12-18,yes,2014-03-31,yes,1.9.0-Jumbo-1
+john,office-opencl,,SHA1/SHA512 AES OpenCL,1.8.0-jumbo-1,2014-12-18,yes,2012-09-13,yes,1.9.0-Jumbo-1
+john,oldoffice,,MD5/SHA1 RC4 32/64,1.8.0-jumbo-1,2014-12-18,yes,2012-07-29,yes,1.9.0-Jumbo-1
+john,oldoffice-opencl,,MD5/SHA1 RC4 OpenCL,1.8.0-jumbo-1,2014-12-18,yes,2014-11-24,yes,1.9.0-Jumbo-1
+john,openssl-enc,,32/64,1.8.0-jumbo-1,2014-12-18,yes,2013-05-04,yes,1.9.0-Jumbo-1
+john,oracle,,DES 32/64,1.7.9-jumbo-3,2011-12-16,no,,yes,1.9.0-Jumbo-1
+john,oracle11,,SHA1 512/512 AVX-512 16x,1.7.9-jumbo-3,2011-12-16,no,,yes,1.9.0-Jumbo-1
+john,osc,,md5($s.$p) (OSC) 512/512 AVX-512 16x3,1.7.9-jumbo-6,2012-06-29,yes,2012-05-01,yes,1.9.0-Jumbo-1
+john,ospf,,HMAC-SHA-X 32/64,1.9.0-Jumbo-1,2019-05-14,yes,2017-05-16,yes,1.9.0-Jumbo-1
+john,pdf-opencl,,MD5-RC4 / SHA2-AES OpenCL,,,,2024-09-30,no,1.9.0-Jumbo-1
+john,pem-opencl,,PBKDF2-SHA1 3DES/AES OpenCL,1.9.0-Jumbo-1,2019-05-14,yes,2017-12-01,yes,1.9.0-Jumbo-1
+john,pfx,,PKCS#12 PBE (SHA1/SHA2) 512/512 AVX-512 16x,1.8.0-jumbo-1,2014-12-18,yes,2012-06-29,yes,1.9.0-Jumbo-1
+john,pfx-opencl,,PKCS#12 PBE (SHA1/SHA-256/512) OpenCL,1.9.0-Jumbo-1,2019-05-14,yes,2017-06-18,yes,1.9.0-Jumbo-1
+john,pgpdisk,,SHA1 64,1.9.0-Jumbo-1,2019-05-14,yes,2017-08-21,yes,1.9.0-Jumbo-1
+john,pgpdisk-opencl,,SHA1 AES/TwoFish/CAST OpenCL,1.9.0-Jumbo-1,2019-05-14,yes,2017-08-25,yes,1.9.0-Jumbo-1
+john,pgpsda,,SHA1 64,1.9.0-Jumbo-1,2019-05-14,yes,2017-09-03,yes,1.9.0-Jumbo-1
+john,pgpsda-opencl,,SHA1 CAST OpenCL,1.9.0-Jumbo-1,2019-05-14,yes,2017-09-06,yes,1.9.0-Jumbo-1
+john,pgpwde,,S2K-SHA1 32/64,1.9.0-Jumbo-1,2019-05-14,yes,2017-08-19,yes,1.9.0-Jumbo-1
+john,pgpwde-opencl,,SHA1 AES OpenCL,1.9.0-Jumbo-1,2019-05-14,yes,2017-08-25,yes,1.9.0-Jumbo-1
+john,phpass,,phpass ($P$ or $H$) 512/512 AVX-512 16x3,1.7.9-jumbo-3,2011-12-16,no,,yes,1.9.0-Jumbo-1
+john,phpass-opencl,,MD5 OpenCL,1.7.9-jumbo-6,2012-06-29,no,,no,1.9.0-Jumbo-1
+john,phpass-ztex,,phpass ($P$ or $H$),,,,,no,1.9.0-Jumbo-1
+john,pix-md5,,md5($p) (Cisco PIX) 512/512 AVX-512 16x3,1.7.9-jumbo-3,2011-12-16,no,,yes,1.9.0-Jumbo-1
+john,plaintext,,n/a,1.9.0-Jumbo-1,2019-05-14,yes,2015-01-30,yes,1.9.0-Jumbo-1
+john,po,,MD5 32/64,1.7.9-jumbo-3,2011-12-16,no,,yes,1.9.0-Jumbo-1
+john,postgres,,MD5 32/64,1.8.0-jumbo-1,2014-12-18,yes,2013-03-19,yes,1.9.0-Jumbo-1
+john,pwsafe,,SHA256 512/512 AVX-512 16x,1.7.9-jumbo-6,2012-06-29,yes,2012-05-09,yes,1.9.0-Jumbo-1
+john,pwsafe-opencl,,SHA256 OpenCL,1.7.9-jumbo-6,2012-06-29,no,,yes,1.9.0-Jumbo-1
+john,qnx,,QNX 32/64,1.9.0-Jumbo-1,2019-05-14,yes,2015-12-29,yes,1.9.0-Jumbo-1
+john,radius,,MD5 32/64,1.9.0-Jumbo-1,2019-05-14,yes,2018-06-17,yes,1.9.0-Jumbo-1
+john,rar,,SHA1 512/512 AVX-512 16x AES,1.7.9-jumbo-3,2011-12-16,no,,yes,1.9.0-Jumbo-1
+john,rar-opencl,,SHA1 OpenCL AES,1.8.0-jumbo-1,2014-12-18,yes,2012-12-21,yes,1.9.0-Jumbo-1
+john,raw-MD4-opencl,,MD4 OpenCL,1.9.0-Jumbo-1,2019-05-14,no,,yes,1.9.0-Jumbo-1
+john,raw-MD5-opencl,,MD5 OpenCL,1.9.0-Jumbo-1,2019-05-14,no,,yes,1.9.0-Jumbo-1
+john,raw-SHA1-opencl,,SHA1 OpenCL,1.9.0-Jumbo-1,2019-05-14,no,,yes,1.9.0-Jumbo-1
+john,raw-SHA256-opencl,,SHA256 OpenCL,1.9.0-Jumbo-1,2019-05-14,no,,yes,1.9.0-Jumbo-1
+john,raw-SHA512-free-opencl,,"SHA512 OpenCL (inefficient, development use mostly)",1.9.0-Jumbo-1,2019-05-14,no,,yes,1.9.0-Jumbo-1
+john,raw-SHA512-opencl,,SHA512 OpenCL,1.9.0-Jumbo-1,2019-05-14,no,,yes,1.9.0-Jumbo-1
+john,restic,,"scrypt Salsa20/8 128/128 AVX512VL, Poly1305",,,,2020-12-27,no,1.9.0-Jumbo-1
+john,ripemd-128,,32/64,1.8.0-jumbo-1,2014-12-18,yes,2013-04-27,yes,1.9.0-Jumbo-1
+john,ripemd-160,,32/64,1.8.0-jumbo-1,2014-12-18,yes,2013-04-27,yes,1.9.0-Jumbo-1
+john,rsvp,,MD5 32/64,1.8.0-jumbo-1,2014-12-18,yes,2014-10-16,yes,1.9.0-Jumbo-1
+john,salted-SHA1-opencl,,SHA1 ($p.$s) OpenCL,1.9.0-Jumbo-1,2019-05-14,no,,yes,1.9.0-Jumbo-1
+john,sapb,,MD5 512/512 AVX-512 16x3,1.7.9-jumbo-3,2011-12-16,no,,yes,1.9.0-Jumbo-1
+john,sapg,,SHA1 512/512 AVX-512 16x,1.7.9-jumbo-3,2011-12-16,no,,yes,1.9.0-Jumbo-1
+john,saph,,SHA-1/SHA-2 512/512 AVX-512 16x,1.9.0-Jumbo-1,2019-05-14,yes,2014-12-20,yes,1.9.0-Jumbo-1
+john,sappse,,PKCS#12 PBE (SHA1) 512/512 AVX-512 16x 3DES,1.9.0-Jumbo-1,2019-05-14,yes,2018-07-16,yes,1.9.0-Jumbo-1
+john,sappse-opencl,,PKCS#12 PBE (SHA1) OpenCL,1.9.0-Jumbo-1,2019-05-14,yes,2018-07-15,yes,1.9.0-Jumbo-1
+john,scrypt,,Salsa20/8 128/128 AVX512VL,1.8.0-jumbo-1,2014-12-18,yes,2013-05-19,yes,1.9.0-Jumbo-1
+john,securezip,,SHA1 AES 32/64,1.9.0-Jumbo-1,2019-05-14,yes,2017-11-03,yes,1.9.0-Jumbo-1
+john,sha1crypt,,PBKDF1-SHA1 512/512 AVX-512 16x,1.8.0-jumbo-1,2014-12-18,yes,2014-05-29,yes,1.9.0-Jumbo-1
+john,sha1crypt-opencl,,PBKDF1-SHA1 OpenCL,1.8.0-jumbo-1,2014-12-18,yes,2014-08-28,yes,1.9.0-Jumbo-1
+john,sha256crypt,,SHA256 512/512 AVX-512 16x,1.7.9-jumbo-6,2012-06-29,no,,yes,1.9.0-Jumbo-1
+john,sha256crypt-opencl,,SHA256 OpenCL,1.8.0-jumbo-1,2014-12-18,yes,2012-07-20,yes,1.9.0-Jumbo-1
+john,sha256crypt-ztex,,sha256crypt ZTEX,,,,,no,1.9.0-Jumbo-1
+john,sha512crypt,,SHA512 512/512 AVX-512 8x,1.7.9-jumbo-6,2012-06-29,no,,yes,1.9.0-Jumbo-1
+john,sha512crypt-opencl,,SHA512 OpenCL,1.7.9-jumbo-6,2012-06-29,no,,yes,1.9.0-Jumbo-1
+john,sha512crypt-ztex,,sha512crypt ZTEX,,,,,no,1.9.0-Jumbo-1
+john,skein-256,,Skein 32/64,1.8.0-jumbo-1,2014-12-18,yes,2013-05-18,yes,1.9.0-Jumbo-1
+john,skein-512,,Skein 32/64,1.8.0-jumbo-1,2014-12-18,yes,2013-05-18,yes,1.9.0-Jumbo-1
+john,skey,,MD4/MD5/SHA1/RMD160 32/64,1.7.9-jumbo-3,2011-12-16,no,,yes,1.9.0-Jumbo-1
+john,sm3crypt,,SM3 32/64,,,,2025-11-17,no,1.9.0-Jumbo-1
+john,sm3crypt-opencl,,SM3 OpenCL,,,,2025-11-17,no,1.9.0-Jumbo-1
+john,solarwinds,,PBKDF2-SHA1 512/512 AVX-512 16x,1.9.0-Jumbo-1,2019-05-14,yes,2018-11-03,yes,1.9.0-Jumbo-1
+john,solarwinds-opencl,,PBKDF2-SHA1 OpenCL,1.9.0-Jumbo-1,2019-05-14,yes,2018-11-03,yes,1.9.0-Jumbo-1
+john,ssh-opencl,,MD5/[3]DES/AES OpenCL,1.9.0-Jumbo-1,2019-05-14,yes,2018-07-25,yes,1.9.0-Jumbo-1
+john,sspr,,MD5/SHA1/SHA256/SHA512 32/64,1.9.0-Jumbo-1,2019-05-14,yes,2017-11-13,yes,1.9.0-Jumbo-1
+john,sspr-opencl,,MD5/SHA1/SHA2 OpenCL,1.9.0-Jumbo-1,2019-05-14,yes,2018-01-04,yes,1.9.0-Jumbo-1
+john,streebog256crypt,,GOST R 34.11-2012 128/128 AVX 1x,,,,,no,1.9.0-Jumbo-1
+john,streebog256crypt-opencl,,GOST R 34.11-2012 OpenCL,,,,,no,1.9.0-Jumbo-1
+john,streebog512crypt,,GOST R 34.11-2012 128/128 AVX 1x,,,,,no,1.9.0-Jumbo-1
+john,streebog512crypt-opencl,,GOST R 34.11-2012 OpenCL,,,,,no,1.9.0-Jumbo-1
+john,strip-opencl,,PBKDF2-SHA1 AES OpenCL,1.8.0-jumbo-1,2014-12-18,yes,2012-09-09,yes,1.9.0-Jumbo-1
+john,tacacs-plus,,MD5 32/64,1.9.0-Jumbo-1,2019-05-14,yes,2017-11-26,yes,1.9.0-Jumbo-1
+john,tc_aes_xts,,SHA512/RIPEMD160/WHIRLPOOL 512/512 AVX-512 8x,1.8.0-jumbo-1,2014-12-18,yes,2014-12-13,yes,1.9.0-Jumbo-1
+john,tc_ripemd160,,RIPEMD160 32/64,1.8.0-jumbo-1,2014-12-18,yes,2012-07-22,yes,1.9.0-Jumbo-1
+john,tc_ripemd160boot,,RIPEMD160 32/64,1.9.0-Jumbo-1,2019-05-14,no,,yes,1.9.0-Jumbo-1
+john,tc_sha512,,SHA512 512/512 AVX-512 8x,1.8.0-jumbo-1,2014-12-18,yes,2012-07-22,yes,1.9.0-Jumbo-1
+john,tc_whirlpool,,WHIRLPOOL 32/64,1.8.0-jumbo-1,2014-12-18,yes,2012-07-22,yes,1.9.0-Jumbo-1
+john,tcp-md5,,MD5 32/64,1.8.0-jumbo-1,2014-12-18,yes,2013-10-28,yes,1.9.0-Jumbo-1
+john,telegram,,PBKDF2-SHA1/SHA512 512/512 AVX-512 16x AES,1.9.0-Jumbo-1,2019-05-14,yes,2018-07-02,yes,1.9.0-Jumbo-1
+john,telegram-opencl,,PBKDF2-SHA1 AES OpenCL,1.9.0-Jumbo-1,2019-05-14,yes,2018-07-05,yes,1.9.0-Jumbo-1
+john,tezos,,PBKDF2-SHA512 512/512 AVX-512 8x,1.9.0-Jumbo-1,2019-05-14,yes,2018-07-22,yes,1.9.0-Jumbo-1
+john,tezos-opencl,,PBKDF2-SHA512 OpenCL,1.9.0-Jumbo-1,2019-05-14,yes,2018-07-24,yes,1.9.0-Jumbo-1
+john,timeroast,,MD4+MD5 32/64,,,,2023-03-02,no,1.9.0-Jumbo-1
+john,timeroast-opencl,,MD4+MD5 OpenCL,,,,2023-03-02,no,1.9.0-Jumbo-1
+john,tripcode,,DES 512/512 AVX512F,1.9.0-Jumbo-1,2019-05-14,yes,2011-10-16,yes,1.9.0-Jumbo-1
+john,vdi,,PBKDF2-SHA256 512/512 AVX-512 16x + AES_XTS,1.9.0-Jumbo-1,2019-05-14,yes,2015-12-11,yes,1.9.0-Jumbo-1
+john,vmx,,PBKDF2-SHA1 AES 512/512 AVX-512 16x,1.9.0-Jumbo-1,2019-05-14,yes,2019-02-03,yes,1.9.0-Jumbo-1
+john,vmx-opencl,,PBKDF2-SHA1 AES OpenCL,1.9.0-Jumbo-1,2019-05-14,yes,2019-02-03,yes,1.9.0-Jumbo-1
+john,vtp,,MD5 32/64,1.8.0-jumbo-1,2014-12-18,yes,2014-10-07,yes,1.9.0-Jumbo-1
+john,wbb3,,SHA1 32/64,1.7.9-jumbo-6,2012-06-29,yes,2012-05-21,yes,1.9.0-Jumbo-1
+john,whirlpool,,WHIRLPOOL 32/64,1.8.0-jumbo-1,2014-12-18,yes,2012-07-22,yes,1.9.0-Jumbo-1
+john,whirlpool0,,WHIRLPOOL-0 32/64,1.8.0-jumbo-1,2014-12-18,yes,2013-04-28,yes,1.9.0-Jumbo-1
+john,whirlpool1,,WHIRLPOOL-1 32/64,1.8.0-jumbo-1,2014-12-18,yes,2013-04-28,yes,1.9.0-Jumbo-1
+john,wpapsk,,PBKDF2-SHA1 512/512 AVX-512 16x HMAC-SHA256/AES-CMAC 32/64,1.7.9-jumbo-6,2012-06-29,yes,2012-04-13,yes,1.9.0-Jumbo-1
+john,wpapsk-opencl,,PBKDF2-SHA1 HMAC-SHA256/AES-CMAC OpenCL,1.7.9-jumbo-6,2012-06-29,yes,2012-04-13,yes,1.9.0-Jumbo-1
+john,wpapsk-pmk,,MD5/SHA-1/HMAC-SHA256/AES-CMAC 32/64,1.9.0-Jumbo-1,2019-05-14,yes,2017-09-14,yes,1.9.0-Jumbo-1
+john,wpapsk-pmk-opencl,,MD5/SHA-1/HMAC-SHA256/AES-CMAC OpenCL,1.9.0-Jumbo-1,2019-05-14,yes,2017-09-14,yes,1.9.0-Jumbo-1
+john,xsha,,SHA1 ($s.$p)512/512 AVX-512 16x,1.7.9-jumbo-3,2011-12-16,no,,yes,1.9.0-Jumbo-1
+john,xsha512,,SHA512 ($s.$p) 512/512 AVX-512 8x,1.7.9-jumbo-3,2011-12-16,no,,yes,1.9.0-Jumbo-1
+john,zed,,PKCS#12 PBE (SHA1/SHA256) 512/512 AVX-512 16x,,,,2019-11-27,no,1.9.0-Jumbo-1
+john,zed-opencl,,PKCS#12 PBE (SHA1/SHA256) OpenCL,,,,2019-11-27,no,1.9.0-Jumbo-1
 mdxfind,MD5,e1,MD5,v1.213,2026-03-23,no,2026-03-23,yes,v1.579
 mdxfind,MD5UC,e2,MD5UC,v1.213,2026-03-23,no,2026-03-23,yes,v1.579
 mdxfind,MD4,e3,MD4,v1.213,2026-03-23,no,2026-03-23,yes,v1.579
