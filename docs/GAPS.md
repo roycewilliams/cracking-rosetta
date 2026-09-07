@@ -97,14 +97,14 @@ flavor of the hash function - `md5(MD5($p))` - and john rejects the first
 outright. It is deliberately **not** in john's column, which lists formats
 `--list=formats` will show; the gap worth filling is whether a named one exists.
 
-### hashcat: 209 entries say nothing
+### hashcat: 204 entries say nothing
 
 A few that carry a vector and a proven expression, so there is a definite construction to look for, one per family:
 
 * [`dynamic-15`](index.html#dynamic-15) - `md5($u.md5($p).$s)` (and 2 more starting `md`)
 * [`sha1usercolonpass`](index.html#sha1usercolonpass) - `sha1($s.$c1.$p),c1=\x3a`
 
-All 209: filter `hashcat_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
+All 204: filter `hashcat_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
 
 ### mdxfind: 68 entries say nothing
 

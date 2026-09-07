@@ -1,5 +1,5 @@
 {
-   "count" : 1569,
+   "count" : 1564,
    "entries" : [
       {
          "alias" : "",
@@ -15486,67 +15486,6 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "",
-         "crack" : {
-            "ids" : [],
-            "state" : "no"
-         },
-         "cracknote" : "",
-         "denotation" : "GOST R 34.11-94",
-         "expr" : "",
-         "expr_note" : "john publishes this as \"GOST R 34.11-94\" and no category, so what kind of construction it is has not been established here. Its name is not expression-shaped and john's dynamic EXPRESSION language cannot be handed it, so there is no expression on this row. That says nothing about whether any tool can CRACK it, and it is not a claim that the algorithm HAS no expression -- run seed-hx.pl and derive-expressions.pl, which can settle that from evidence.",
-         "expr_tier" : "absent",
-         "hash_length" : 64,
-         "hash_length_basis" : "observed",
-         "hashcat" : {
-            "ids" : [],
-            "state" : "unknown"
-         },
-         "hashcat_salted" : "",
-         "hashcat_speed" : "",
-         "hashpipe" : {
-            "ids" : [],
-            "state" : "unknown"
-         },
-         "id" : "gost-r-34-11-94",
-         "john" : {
-            "ids" : [
-               "gost"
-            ],
-            "state" : "proven",
-            "tier" : "vector"
-         },
-         "john_expr" : "",
-         "john_salted" : "yes",
-         "john_work_factor" : "",
-         "legacy" : "",
-         "mdxfind" : {
-            "ids" : [
-               "GOST"
-            ],
-            "state" : "proven",
-            "tier" : "vector"
-         },
-         "mdxfind_salted" : "no",
-         "name" : "GOST R 34.11-94",
-         "nesting_depth" : "",
-         "notes" : "",
-         "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
-         "serialization" : "shared",
-         "status" : "needs-review",
-         "tool_note" : {
-            "hashcat" : "",
-            "hashpipe" : "",
-            "john" : "",
-            "mdxfind" : "type named by hashpipe and present in mdxfind too, which contradicts an absence rather than corroborating one -- absence.pl held the absence back for exactly that reason. The corpus sweep never arranged the match, which is the salt-pool effect CLAUDE.md records, not a fact about the type: pinned with -h '^GOST$' it cracks this row's own vector first try, bare hex, no transcode, no plumbing."
-         },
-         "vecs" : 1
-      },
-      {
-         "alias" : "",
-         "application" : "",
          "category" : "composite",
          "crack" : {
             "ids" : [],
@@ -17177,7 +17116,7 @@
          "vecs" : 1
       },
       {
-         "alias" : "",
+         "alias" : "GOST R 34.11-94",
          "application" : "",
          "category" : "primitive",
          "crack" : {
@@ -17190,7 +17129,7 @@
          "expr_note" : "round-tripped as --format=dynamic=<expr> against every vector this entry carries",
          "expr_tier" : "vector",
          "hash_length" : 64,
-         "hash_length_basis" : "observed",
+         "hash_length_basis" : "fixed",
          "hashcat" : {
             "ids" : [
                6900
@@ -17210,13 +17149,14 @@
          "id" : "hash-gost-plain",
          "john" : {
             "ids" : [
-               "dynamic_90"
+               "dynamic_90",
+               "gost"
             ],
             "state" : "proven",
             "tier" : "vector"
          },
          "john_expr" : "dynamic=gost($p)",
-         "john_salted" : "no",
+         "john_salted" : "mixed",
          "john_work_factor" : "",
          "legacy" : "GOST",
          "mdxfind" : {
@@ -17231,17 +17171,24 @@
          "nesting_depth" : 1,
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "none",
+               "entry" : "gost-r-34-11-94",
+               "kind" : "duplicate-of",
+               "note" : "merged 2026-09-07: Merged 2026-09-06, decided by Royce. These five john-named rows and their survivors are one computation, proven twice over: john's dynamic compiler recovers each loser's own plaintext from its own hash under the expression the survivor already carries at tier vector (gost($p), haval128_4($p), sha3_512($p), ripemd128($p), ripemd160($p)), and mdxfind pinned to ONE type reproduces BOTH rows' vectors on two different plaintexts. NOT the streebog-64-plain/gost2012-64 case, which stayed two rows under distinction naming: there the two rows carried two DIFFERENT mdxfind types, so each name had an identifier of its own. Here both rows carried the SAME type, and the loser was a strictly poorer view -- john's named format and nothing else, no hashcat mode, no hashpipe block -- so a reader arriving by john's label was landing on an incomplete answer. The label survives as an alias and as a john identifier on this row, and the tombstone redirects."
+            }
+         ],
+         "sameas" : "duplicate of gost-r-34-11-94",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
             "hashcat" : "",
             "hashpipe" : "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one.",
-            "john" : "",
+            "john" : "gost came from gost-r-34-11-94 in the 2026-09-07 merge, proven there at tier vector.",
             "mdxfind" : ""
          },
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -17491,7 +17438,7 @@
          "vecs" : 1
       },
       {
-         "alias" : "",
+         "alias" : "HAVAL-128-4",
          "application" : "",
          "category" : "primitive",
          "crack" : {
@@ -17504,7 +17451,7 @@
          "expr_note" : "round-tripped as --format=dynamic=<expr> against every vector this entry carries",
          "expr_tier" : "vector",
          "hash_length" : 32,
-         "hash_length_basis" : "observed",
+         "hash_length_basis" : "fixed",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -17521,7 +17468,8 @@
          "id" : "hav128-4",
          "john" : {
             "ids" : [
-               "dynamic_170"
+               "dynamic_170",
+               "HAVAL-128-4"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -17542,17 +17490,24 @@
          "nesting_depth" : 1,
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "none",
+               "entry" : "haval-128-4",
+               "kind" : "duplicate-of",
+               "note" : "merged 2026-09-07: Merged 2026-09-06, decided by Royce. These five john-named rows and their survivors are one computation, proven twice over: john's dynamic compiler recovers each loser's own plaintext from its own hash under the expression the survivor already carries at tier vector (gost($p), haval128_4($p), sha3_512($p), ripemd128($p), ripemd160($p)), and mdxfind pinned to ONE type reproduces BOTH rows' vectors on two different plaintexts. NOT the streebog-64-plain/gost2012-64 case, which stayed two rows under distinction naming: there the two rows carried two DIFFERENT mdxfind types, so each name had an identifier of its own. Here both rows carried the SAME type, and the loser was a strictly poorer view -- john's named format and nothing else, no hashcat mode, no hashpipe block -- so a reader arriving by john's label was landing on an incomplete answer. The label survives as an alias and as a john identifier on this row, and the tombstone redirects."
+            }
+         ],
+         "sameas" : "duplicate of haval-128-4",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
             "hashcat" : "no mode. Swept the 12 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-03 (tools/discover-hashcat.pl --all, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
             "hashpipe" : "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one.",
-            "john" : "",
+            "john" : "HAVAL-128-4 came from haval-128-4 in the 2026-09-07 merge, proven there at tier vector.",
             "mdxfind" : ""
          },
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -19215,67 +19170,6 @@
             "hashpipe" : "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one.",
             "john" : "",
             "mdxfind" : ""
-         },
-         "vecs" : 1
-      },
-      {
-         "alias" : "",
-         "application" : "",
-         "category" : "",
-         "crack" : {
-            "ids" : [],
-            "state" : "no"
-         },
-         "cracknote" : "",
-         "denotation" : "HAVAL-128-4",
-         "expr" : "",
-         "expr_note" : "john publishes this as \"HAVAL-128-4\" and no category, so what kind of construction it is has not been established here. Its name is not expression-shaped and john's dynamic EXPRESSION language cannot be handed it, so there is no expression on this row. That says nothing about whether any tool can CRACK it, and it is not a claim that the algorithm HAS no expression -- run seed-hx.pl and derive-expressions.pl, which can settle that from evidence.",
-         "expr_tier" : "absent",
-         "hash_length" : 32,
-         "hash_length_basis" : "observed",
-         "hashcat" : {
-            "ids" : [],
-            "state" : "unknown"
-         },
-         "hashcat_salted" : "",
-         "hashcat_speed" : "",
-         "hashpipe" : {
-            "ids" : [],
-            "state" : "unknown"
-         },
-         "id" : "haval-128-4",
-         "john" : {
-            "ids" : [
-               "HAVAL-128-4"
-            ],
-            "state" : "proven",
-            "tier" : "vector"
-         },
-         "john_expr" : "",
-         "john_salted" : "no",
-         "john_work_factor" : "",
-         "legacy" : "",
-         "mdxfind" : {
-            "ids" : [
-               "HAV128-4"
-            ],
-            "state" : "proven",
-            "tier" : "vector"
-         },
-         "mdxfind_salted" : "no",
-         "name" : "HAVAL-128-4",
-         "nesting_depth" : "",
-         "notes" : "",
-         "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
-         "serialization" : "shared",
-         "status" : "needs-review",
-         "tool_note" : {
-            "hashcat" : "",
-            "hashpipe" : "",
-            "john" : "",
-            "mdxfind" : "type named by hashpipe and present in mdxfind too, which contradicts an absence rather than corroborating one -- absence.pl held the absence back for exactly that reason. The corpus sweep never arranged the match, which is the salt-pool effect CLAUDE.md records, not a fact about the type: pinned with -h '^HAV128-4$' it cracks this row's own vector first try, bare hex, no transcode, no plumbing."
          },
          "vecs" : 1
       },
@@ -58840,67 +58734,6 @@
          "vecs" : 2
       },
       {
-         "alias" : "",
-         "application" : "",
-         "category" : "",
-         "crack" : {
-            "ids" : [],
-            "state" : "no"
-         },
-         "cracknote" : "",
-         "denotation" : "Raw-SHA3",
-         "expr" : "",
-         "expr_note" : "john publishes this as \"Raw-SHA3\" and no category, so what kind of construction it is has not been established here. Its name is not expression-shaped and john's dynamic EXPRESSION language cannot be handed it, so there is no expression on this row. That says nothing about whether any tool can CRACK it, and it is not a claim that the algorithm HAS no expression -- run seed-hx.pl and derive-expressions.pl, which can settle that from evidence.",
-         "expr_tier" : "absent",
-         "hash_length" : 128,
-         "hash_length_basis" : "observed",
-         "hashcat" : {
-            "ids" : [],
-            "state" : "unknown"
-         },
-         "hashcat_salted" : "",
-         "hashcat_speed" : "",
-         "hashpipe" : {
-            "ids" : [],
-            "state" : "unknown"
-         },
-         "id" : "raw-sha3",
-         "john" : {
-            "ids" : [
-               "Raw-SHA3"
-            ],
-            "state" : "proven",
-            "tier" : "vector"
-         },
-         "john_expr" : "",
-         "john_salted" : "no",
-         "john_work_factor" : "",
-         "legacy" : "",
-         "mdxfind" : {
-            "ids" : [
-               "SHA3-512"
-            ],
-            "state" : "proven",
-            "tier" : "vector"
-         },
-         "mdxfind_salted" : "no",
-         "name" : "Raw-SHA3",
-         "nesting_depth" : "",
-         "notes" : "",
-         "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
-         "serialization" : "shared",
-         "status" : "needs-review",
-         "tool_note" : {
-            "hashcat" : "",
-            "hashpipe" : "",
-            "john" : "",
-            "mdxfind" : "type named by hashpipe and present in mdxfind too, which contradicts an absence rather than corroborating one -- absence.pl held the absence back for exactly that reason. The corpus sweep never arranged the match, which is the salt-pool effect CLAUDE.md records, not a fact about the type: pinned with -h '^SHA3-512$' it cracks this row's own vector first try, bare hex, no transcode, no plumbing."
-         },
-         "vecs" : 1
-      },
-      {
          "alias" : "sha384",
          "application" : "",
          "category" : "primitive",
@@ -59341,128 +59174,6 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "RIPEMD 128",
-         "expr" : "",
-         "expr_note" : "john publishes this as \"RIPEMD 128\" and no category, so what kind of construction it is has not been established here. Its name is not expression-shaped and john's dynamic EXPRESSION language cannot be handed it, so there is no expression on this row. That says nothing about whether any tool can CRACK it, and it is not a claim that the algorithm HAS no expression -- run seed-hx.pl and derive-expressions.pl, which can settle that from evidence.",
-         "expr_tier" : "absent",
-         "hash_length" : 32,
-         "hash_length_basis" : "observed",
-         "hashcat" : {
-            "ids" : [],
-            "state" : "unknown"
-         },
-         "hashcat_salted" : "",
-         "hashcat_speed" : "",
-         "hashpipe" : {
-            "ids" : [],
-            "state" : "unknown"
-         },
-         "id" : "ripemd-128",
-         "john" : {
-            "ids" : [
-               "ripemd-128"
-            ],
-            "state" : "proven",
-            "tier" : "vector"
-         },
-         "john_expr" : "",
-         "john_salted" : "no",
-         "john_work_factor" : "",
-         "legacy" : "",
-         "mdxfind" : {
-            "ids" : [
-               "RMD128"
-            ],
-            "state" : "proven",
-            "tier" : "vector"
-         },
-         "mdxfind_salted" : "no",
-         "name" : "RIPEMD 128",
-         "nesting_depth" : "",
-         "notes" : "",
-         "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
-         "serialization" : "shared",
-         "status" : "needs-review",
-         "tool_note" : {
-            "hashcat" : "",
-            "hashpipe" : "",
-            "john" : "",
-            "mdxfind" : "type named by hashpipe and present in mdxfind too, which contradicts an absence rather than corroborating one -- absence.pl held the absence back for exactly that reason. The corpus sweep never arranged the match, which is the salt-pool effect CLAUDE.md records, not a fact about the type: pinned with -h '^RMD128$' it cracks this row's own vector first try, bare hex, no transcode, no plumbing."
-         },
-         "vecs" : 1
-      },
-      {
-         "alias" : "",
-         "application" : "",
-         "category" : "",
-         "crack" : {
-            "ids" : [],
-            "state" : "no"
-         },
-         "cracknote" : "",
-         "denotation" : "RIPEMD 160",
-         "expr" : "",
-         "expr_note" : "john publishes this as \"RIPEMD 160\" and no category, so what kind of construction it is has not been established here. Its name is not expression-shaped and john's dynamic EXPRESSION language cannot be handed it, so there is no expression on this row. That says nothing about whether any tool can CRACK it, and it is not a claim that the algorithm HAS no expression -- run seed-hx.pl and derive-expressions.pl, which can settle that from evidence.",
-         "expr_tier" : "absent",
-         "hash_length" : 40,
-         "hash_length_basis" : "observed",
-         "hashcat" : {
-            "ids" : [],
-            "state" : "unknown"
-         },
-         "hashcat_salted" : "",
-         "hashcat_speed" : "",
-         "hashpipe" : {
-            "ids" : [],
-            "state" : "unknown"
-         },
-         "id" : "ripemd-160",
-         "john" : {
-            "ids" : [
-               "ripemd-160"
-            ],
-            "state" : "proven",
-            "tier" : "vector"
-         },
-         "john_expr" : "",
-         "john_salted" : "no",
-         "john_work_factor" : "",
-         "legacy" : "",
-         "mdxfind" : {
-            "ids" : [
-               "RMD160"
-            ],
-            "state" : "proven",
-            "tier" : "vector"
-         },
-         "mdxfind_salted" : "no",
-         "name" : "RIPEMD 160",
-         "nesting_depth" : "",
-         "notes" : "",
-         "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
-         "serialization" : "shared",
-         "status" : "needs-review",
-         "tool_note" : {
-            "hashcat" : "",
-            "hashpipe" : "",
-            "john" : "",
-            "mdxfind" : "type named by hashpipe and present in mdxfind too, which contradicts an absence rather than corroborating one -- absence.pl held the absence back for exactly that reason. The corpus sweep never arranged the match, which is the salt-pool effect CLAUDE.md records, not a fact about the type: pinned with -h '^RMD160$' it cracks this row's own vector first try, bare hex, no transcode, no plumbing."
-         },
-         "vecs" : 1
-      },
-      {
-         "alias" : "",
-         "application" : "",
-         "category" : "",
-         "crack" : {
-            "ids" : [],
-            "state" : "no"
-         },
-         "cracknote" : "",
          "denotation" : "ripemd($plain)",
          "expr" : "",
          "expr_note" : "john's dynamic expression vocabulary has no ripemd(), so this construction cannot be written as an expression; that is separate from whether john has a FORMAT for it",
@@ -59516,7 +59227,7 @@
          "vecs" : 1
       },
       {
-         "alias" : "",
+         "alias" : "RIPEMD 128",
          "application" : "",
          "category" : "primitive",
          "crack" : {
@@ -59529,7 +59240,7 @@
          "expr_note" : "round-tripped as --format=dynamic=<expr> against every vector this entry carries",
          "expr_tier" : "vector",
          "hash_length" : 32,
-         "hash_length_basis" : "observed",
+         "hash_length_basis" : "fixed",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -59546,7 +59257,8 @@
          "id" : "ripemd128",
          "john" : {
             "ids" : [
-               "dynamic_120"
+               "dynamic_120",
+               "ripemd-128"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -59567,17 +59279,24 @@
          "nesting_depth" : 1,
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "none",
+               "entry" : "ripemd-128",
+               "kind" : "duplicate-of",
+               "note" : "merged 2026-09-07: Merged 2026-09-06, decided by Royce. These five john-named rows and their survivors are one computation, proven twice over: john's dynamic compiler recovers each loser's own plaintext from its own hash under the expression the survivor already carries at tier vector (gost($p), haval128_4($p), sha3_512($p), ripemd128($p), ripemd160($p)), and mdxfind pinned to ONE type reproduces BOTH rows' vectors on two different plaintexts. NOT the streebog-64-plain/gost2012-64 case, which stayed two rows under distinction naming: there the two rows carried two DIFFERENT mdxfind types, so each name had an identifier of its own. Here both rows carried the SAME type, and the loser was a strictly poorer view -- john's named format and nothing else, no hashcat mode, no hashpipe block -- so a reader arriving by john's label was landing on an incomplete answer. The label survives as an alias and as a john identifier on this row, and the tombstone redirects."
+            }
+         ],
+         "sameas" : "duplicate of ripemd-128",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
             "hashcat" : "no mode. Swept the 12 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-03 (tools/discover-hashcat.pl --all, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
             "hashpipe" : "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one.",
-            "john" : "",
+            "john" : "ripemd-128 came from ripemd-128 in the 2026-09-07 merge, proven there at tier vector.",
             "mdxfind" : ""
          },
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -59763,7 +59482,7 @@
          "vecs" : 1
       },
       {
-         "alias" : "",
+         "alias" : "RIPEMD 160",
          "application" : "",
          "category" : "primitive",
          "crack" : {
@@ -59776,7 +59495,7 @@
          "expr_note" : "round-tripped as --format=dynamic=<expr> against every vector this entry carries",
          "expr_tier" : "vector",
          "hash_length" : 40,
-         "hash_length_basis" : "observed",
+         "hash_length_basis" : "fixed",
          "hashcat" : {
             "ids" : [
                6000
@@ -59796,7 +59515,8 @@
          "id" : "ripemd160",
          "john" : {
             "ids" : [
-               "dynamic_130"
+               "dynamic_130",
+               "ripemd-160"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -59817,17 +59537,24 @@
          "nesting_depth" : 1,
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "none",
+               "entry" : "ripemd-160",
+               "kind" : "duplicate-of",
+               "note" : "merged 2026-09-07: Merged 2026-09-06, decided by Royce. These five john-named rows and their survivors are one computation, proven twice over: john's dynamic compiler recovers each loser's own plaintext from its own hash under the expression the survivor already carries at tier vector (gost($p), haval128_4($p), sha3_512($p), ripemd128($p), ripemd160($p)), and mdxfind pinned to ONE type reproduces BOTH rows' vectors on two different plaintexts. NOT the streebog-64-plain/gost2012-64 case, which stayed two rows under distinction naming: there the two rows carried two DIFFERENT mdxfind types, so each name had an identifier of its own. Here both rows carried the SAME type, and the loser was a strictly poorer view -- john's named format and nothing else, no hashcat mode, no hashpipe block -- so a reader arriving by john's label was landing on an incomplete answer. The label survives as an alias and as a john identifier on this row, and the tombstone redirects."
+            }
+         ],
+         "sameas" : "duplicate of ripemd-160",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
             "hashcat" : "",
             "hashpipe" : "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one.",
-            "john" : "",
+            "john" : "ripemd-160 came from ripemd-160 in the 2026-09-07 merge, proven there at tier vector.",
             "mdxfind" : ""
          },
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -82308,7 +82035,7 @@
          "vecs" : 1
       },
       {
-         "alias" : "",
+         "alias" : "Raw-SHA3",
          "application" : "",
          "category" : "primitive",
          "crack" : {
@@ -82321,7 +82048,7 @@
          "expr_note" : "round-tripped as --format=dynamic=<expr> against every vector this entry carries",
          "expr_tier" : "vector",
          "hash_length" : 128,
-         "hash_length_basis" : "observed",
+         "hash_length_basis" : "fixed",
          "hashcat" : {
             "ids" : [
                17600
@@ -82341,7 +82068,8 @@
          "id" : "sha3-512-plain",
          "john" : {
             "ids" : [
-               "dynamic_400"
+               "dynamic_400",
+               "Raw-SHA3"
             ],
             "state" : "proven",
             "tier" : "vector"
@@ -82362,17 +82090,24 @@
          "nesting_depth" : 1,
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "none",
+               "entry" : "raw-sha3",
+               "kind" : "duplicate-of",
+               "note" : "merged 2026-09-07: Merged 2026-09-06, decided by Royce. These five john-named rows and their survivors are one computation, proven twice over: john's dynamic compiler recovers each loser's own plaintext from its own hash under the expression the survivor already carries at tier vector (gost($p), haval128_4($p), sha3_512($p), ripemd128($p), ripemd160($p)), and mdxfind pinned to ONE type reproduces BOTH rows' vectors on two different plaintexts. NOT the streebog-64-plain/gost2012-64 case, which stayed two rows under distinction naming: there the two rows carried two DIFFERENT mdxfind types, so each name had an identifier of its own. Here both rows carried the SAME type, and the loser was a strictly poorer view -- john's named format and nothing else, no hashcat mode, no hashpipe block -- so a reader arriving by john's label was landing on an incomplete answer. The label survives as an alias and as a john identifier on this row, and the tombstone redirects."
+            }
+         ],
+         "sameas" : "duplicate of raw-sha3",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
             "hashcat" : "",
             "hashpipe" : "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one.",
-            "john" : "",
+            "john" : "Raw-SHA3 came from raw-sha3 in the 2026-09-07 merge, proven there at tier vector.",
             "mdxfind" : ""
          },
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -97234,13 +96969,27 @@
       }
    ],
    "generated" : "2026-09-06",
-   "merged" : 9,
+   "merged" : 14,
    "tombstones" : [
+      {
+         "id" : "gost-r-34-11-94",
+         "merged_into" : "hash-gost-plain",
+         "name" : "GOST R 34.11-94",
+         "relations_text" : "duplicate of hash-gost-plain",
+         "status" : "merged"
+      },
       {
          "id" : "hav256",
          "merged_into" : "haval-256-3",
          "name" : "HAV256",
          "relations_text" : "duplicate of haval-256-3",
+         "status" : "merged"
+      },
+      {
+         "id" : "haval-128-4",
+         "merged_into" : "hav128-4",
+         "name" : "HAVAL-128-4",
+         "relations_text" : "duplicate of hav128-4",
          "status" : "merged"
       },
       {
@@ -97262,6 +97011,27 @@
          "merged_into" : "panama-johnpanama",
          "name" : "PANAMA",
          "relations_text" : "duplicate of panama-johnpanama",
+         "status" : "merged"
+      },
+      {
+         "id" : "raw-sha3",
+         "merged_into" : "sha3-512-plain",
+         "name" : "Raw-SHA3",
+         "relations_text" : "duplicate of sha3-512-plain",
+         "status" : "merged"
+      },
+      {
+         "id" : "ripemd-128",
+         "merged_into" : "ripemd128",
+         "name" : "RIPEMD 128",
+         "relations_text" : "duplicate of ripemd128",
+         "status" : "merged"
+      },
+      {
+         "id" : "ripemd-160",
+         "merged_into" : "ripemd160",
+         "name" : "RIPEMD 160",
+         "relations_text" : "duplicate of ripemd160",
          "status" : "merged"
       },
       {
