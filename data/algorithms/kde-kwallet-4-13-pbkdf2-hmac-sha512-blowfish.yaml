@@ -1,0 +1,27 @@
+id: "kde-kwallet-4-13-pbkdf2-hmac-sha512-blowfish"
+name: "KDE KWallet 4.13+ (PBKDF2-HMAC-SHA512, Blowfish)"
+expression_proof:
+  verified: "absent"
+  verified_at: "2026-09-07"
+  verified_with: "hashcat v7.1.2-606-ge2a7ab834"
+  note: "hashcat 36400 is a container or application format. john's dynamic expression language describes constructions over a password and a salt; it cannot express a container's KDF-plus-cipher, so this has no expression and will not acquire one. That says nothing about whether john can CRACK it -- run discover-john.pl, and if john has a format it goes in tools.john."
+denotation:
+  text: "KDE KWallet 4.13+ (PBKDF2-HMAC-SHA512, Blowfish)"
+  source: "hashcat"
+  note: "hashcat's own label for 36400, category \"Password Manager\", in v7.1.2-606-ge2a7ab834. This is a container or application format rather than a bare construction, so there is no single digest expression to record."
+category: "application"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [36400]
+    verified: "vector"
+    verified_at: "2026-09-07"
+    verified_with: "hashcat v7.1.2-606-ge2a7ab834"
+    note: "hashcat's own published example for this identifier, recovered by hashcat at this identifier with hashcat's own published plaintext."
+  crack:
+    supported: false
+vectors:
+  - hash: "$kwallet$88$45975b748f882d01a9584f6bd2a564b3a0a3ceb0d9a192c7a1a335282a1b276c57d7a529016dd943bfa1cfffdd1387f029c9aaab41ba3ff4f07c07f71f222301$1$56$8f90f3b63faf4049373703f896d3511136696af6ce60b92010daa397c6eb8ea4c867288e61694002d3c152ef4d8e3119bf39cbcd6b65edb8$50000"
+    pass: "hashcat"
+    source: "hashcat"
+    reads_in: ["hashcat"]

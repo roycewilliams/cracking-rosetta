@@ -74,13 +74,13 @@ Real work rather than a one-liner: it means finding out whether the tool
 supports the construction at all, and under which identifier. The counts are
 the honest size of the job.
 
-### john: 294 entries say nothing
+### john: 295 entries say nothing
 
 A few that carry a vector and a proven expression, so there is a definite construction to look for, one per family:
 
 * [`sha1-md5-md5-plain`](index.html#sha1-md5-md5-plain) - `sha1(md5(md5($p)))` (and 3 more starting `sha`)
 
-All 294: filter `john_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
+All 295: filter `john_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
 
 Where such an entry carries an expression, john can already attack it without
 a named format:
@@ -97,16 +97,16 @@ flavor of the hash function - `md5(MD5($p))` - and john rejects the first
 outright. It is deliberately **not** in john's column, which lists formats
 `--list=formats` will show; the gap worth filling is whether a named one exists.
 
-### hashcat: 210 entries say nothing
+### hashcat: 209 entries say nothing
 
 A few that carry a vector and a proven expression, so there is a definite construction to look for, one per family:
 
 * [`dynamic-15`](index.html#dynamic-15) - `md5($u.md5($p).$s)` (and 2 more starting `md`)
 * [`sha1usercolonpass`](index.html#sha1usercolonpass) - `sha1($s.$c1.$p),c1=\x3a`
 
-All 210: filter `hashcat_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
+All 209: filter `hashcat_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
 
-### mdxfind: 72 entries say nothing
+### mdxfind: 73 entries say nothing
 
 A few that carry a vector, so a candidate identifier can be tested at once, one per family:
 
@@ -117,6 +117,7 @@ A few that carry a vector, so a candidate identifier can be tested at once, one 
 * [`gost-r-34-11-94`](index.html#gost-r-34-11-94) - `GOST R 34.11-94`
 * [`haval-128-4`](index.html#haval-128-4) - `HAVAL-128-4`
 * [`hmac-sha1`](index.html#hmac-sha1) - `HMAC-SHA1` (and 3 more starting `HMAC`)
+* [`kde-kwallet-4-13-pbkdf2-hmac-sha512-blowfish`](index.html#kde-kwallet-4-13-pbkdf2-hmac-sha512-blowfish) - `KDE KWallet 4.13+ (PBKDF2-HMAC-SHA512, Blowfish)`
 * [`kerberos-5-etype-23-tgs-rep-nt`](index.html#kerberos-5-etype-23-tgs-rep-nt) - `Kerberos 5, etype 23, TGS-REP (NT)`
 * [`lotus-notes-domino-8-5`](index.html#lotus-notes-domino-8-5) - `Lotus Notes/Domino 8.5`
 * [`murmurhash64a-truncated-zero-seed`](index.html#murmurhash64a-truncated-zero-seed) - `MurmurHash64A truncated (zero seed)`
@@ -124,9 +125,8 @@ A few that carry a vector, so a candidate identifier can be tested at once, one 
 * [`netntlmv1-netntlmv1-ess-nt`](index.html#netntlmv1-netntlmv1-ess-nt) - `NetNTLMv1 / NetNTLMv1+ESS (NT)` (and 1 more starting `NetNTLMv`)
 * [`netscreen`](index.html#netscreen) - `Netscreen`
 * [`password-safe-v2`](index.html#password-safe-v2) - `Password Safe v2`
-* [`pkzip-master-key`](index.html#pkzip-master-key) - `PKZIP Master Key` (and 1 more starting `PKZIP`)
 
-All 72: filter `mdxfind_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
+All 73: filter `mdxfind_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
 
 ## 4. hashcat modes with no row here (1)
 

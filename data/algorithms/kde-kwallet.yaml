@@ -11,6 +11,12 @@ denotation:
   note: "john's own label for kwallet, in 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200."
 status: "ok"
 tools:
+  hashcat:
+    modes: [36410]
+    verified: "vector"
+    verified_at: "2026-09-06"
+    verified_with: "hashcat v7.1.2-606-ge2a7ab834"
+    note: "Round-tripped, but attributed by a SOLO run, because hashcat echoed a different spelling of this hash than it was given under mode(s) 36410, and the grouped run attributes a crack by matching the hash string -- its output lines do not correspond to its input lines -- so it could not credit one. One hash and one candidate per invocation leaves nothing else the crack could belong to. The stored vector is unchanged and is the form hashcat was fed."
   mdxfind:
     verified: "absent"
     verified_at: "2026-09-03"
@@ -28,4 +34,4 @@ vectors:
   - hash: "$kwallet$112$25be8c9cdaa53f5404d7809ff48a37752b325c8ccd296fbd537440dfcef9d66f72940e97141d21702b325c8ccd296fbd537440dfcef9d66fcd953cf1e41904b0c494ad1e718760e74c4487cc1449233d85525e7974da221774010bb9582b1d68b55ea9288f53a2be6bd15b93a5e1b33d"
     pass: "openwall"
     source: "john"
-    reads_in: ["john"]
+    reads_in: ["hashcat", "john"]
