@@ -31,3 +31,4 @@ NETNTLMV1	ntlmv1-c-r-johnnetntlm-naive	::X:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 NSEC3	dnssec-nsec3	hgmlgembs8j1dhkrmhbu1ggh3jmgkrjn:.example.com.:4141414141414141:100:www
 SKYPE	dynamic-1401	27f6a9d892475e6ce0391de8d2d893f7:username:password
 POSTGRESQL	dynamic-1034	bd6fd49a627ecdbe4031b2d52d5748ab:postgres:openwall
+SHA1SALTPASS	django-sha-1	02d5916550edf7fc8c886f044887f4b1abf9b013:fe76b:hashcat

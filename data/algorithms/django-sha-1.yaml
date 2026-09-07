@@ -18,6 +18,12 @@ tools:
     verified_at: "2026-08-31"
     verified_with: "hashcat v7.1.2-549-g8a15e210b"
     note: "hashcat's own published example hash for this mode, recovered by hashcat at this mode with hashcat's own published plaintext."
+  mdxfind:
+    types: ["SHA1SALTPASS"]
+    verified: "vector"
+    verified_at: "2026-09-06"
+    verified_with: "mdxfind RCS 1.579 (2026/09/06)"
+    note: "Round-tripped on the TRANSCRIBED form, not on the vector as stored: this entry keeps its vector in another tool's serialization, which mdxfind's reader does not parse. mdxfind pinned with -h reproduced SHA1SALTPASS as \"02d5916550edf7fc8c886f044887f4b1abf9b013:fe76b:hashcat\", from data/mdxfind-transcodes.tsv. The plaintext is one this entry already stores, and the two strings are ONE piece of evidence written twice -- not two agreeing vectors."
   crack:
     supported: false
 relations:
