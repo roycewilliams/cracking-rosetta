@@ -1,31 +1,10 @@
 id: "gost-r-34-11-94"
 name: "GOST R 34.11-94"
-expression_proof:
-  verified: "absent"
-  verified_at: "2026-08-31"
-  verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
-  note: "john publishes this as \"GOST R 34.11-94\" and no category, so what kind of construction it is has not been established here. Its name is not expression-shaped and john's dynamic EXPRESSION language cannot be handed it, so there is no expression on this row. That says nothing about whether any tool can CRACK it, and it is not a claim that the algorithm HAS no expression -- run seed-hx.pl and derive-expressions.pl, which can settle that from evidence."
-denotation:
-  text: "GOST R 34.11-94"
-  source: "john"
-  note: "john's own label for gost, in 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200."
-status: "needs-review"
-tools:
-  mdxfind:
-    types: ["GOST"]
-    verified: "vector"
-    verified_at: "2026-09-06"
-    verified_with: "mdxfind RCS 1.579 (2026/09/06)"
-    note: "type named by hashpipe and present in mdxfind too, which contradicts an absence rather than corroborating one -- absence.pl held the absence back for exactly that reason. The corpus sweep never arranged the match, which is the salt-pool effect CLAUDE.md records, not a fact about the type: pinned with -h '^GOST$' it cracks this row's own vector first try, bare hex, no transcode, no plumbing."
-  john:
-    cpu: ["gost"]
-    verified: "vector"
-    verified_at: "2026-09-04"
-    verified_with: "john"
-  crack:
-    supported: false
-vectors:
-  - hash: "d42c539e367c66e9c88a801f6649349c21871b4344c6a573f849fdce62f314dd"
-    pass: "a"
-    source: "john"
-    reads_in: ["john", "mdxfind"]
+status: "merged"
+merged_into: "hash-gost-plain"
+relations:
+  - kind: "duplicate-of"
+    entry: "hash-gost-plain"
+    distinction: "none"
+    note: "merged 2026-09-07: Merged 2026-09-06, decided by Royce. These five john-named rows and their survivors are one computation, proven twice over: john's dynamic compiler recovers each loser's own plaintext from its own hash under the expression the survivor already carries at tier vector (gost($p), haval128_4($p), sha3_512($p), ripemd128($p), ripemd160($p)), and mdxfind pinned to ONE type reproduces BOTH rows' vectors on two different plaintexts. NOT the streebog-64-plain/gost2012-64 case, which stayed two rows under distinction naming: there the two rows carried two DIFFERENT mdxfind types, so each name had an identifier of its own. Here both rows carried the SAME type, and the loser was a strictly poorer view -- john's named format and nothing else, no hashcat mode, no hashpipe block -- so a reader arriving by john's label was landing on an incomplete answer. The label survives as an alias and as a john identifier on this row, and the tombstone redirects."
+notes: "Tombstone. This id is kept so links and dist/rosetta.csv keys still resolve; every claim it made now lives in hash-gost-plain.yaml. Merged 2026-09-06, decided by Royce. These five john-named rows and their survivors are one computation, proven twice over: john's dynamic compiler recovers each loser's own plaintext from its own hash under the expression the survivor already carries at tier vector (gost($p), haval128_4($p), sha3_512($p), ripemd128($p), ripemd160($p)), and mdxfind pinned to ONE type reproduces BOTH rows' vectors on two different plaintexts. NOT the streebog-64-plain/gost2012-64 case, which stayed two rows under distinction naming: there the two rows carried two DIFFERENT mdxfind types, so each name had an identifier of its own. Here both rows carried the SAME type, and the loser was a strictly poorer view -- john's named format and nothing else, no hashcat mode, no hashpipe block -- so a reader arriving by john's label was landing on an incomplete answer. The label survives as an alias and as a john identifier on this row, and the tombstone redirects."

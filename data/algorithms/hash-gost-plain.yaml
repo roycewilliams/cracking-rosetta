@@ -1,5 +1,6 @@
 id: "hash-gost-plain"
 name: "hash('gost', $plain)"
+aliases: ["GOST R 34.11-94"]
 expression: "gost($p)"
 john_dynamic_expr: "dynamic=gost($p)"
 expression_proof:
@@ -27,16 +28,26 @@ tools:
     verified_with: "hashpipe RCS 1.189 (2026/09/02)"
     note: "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one."
   john:
-    cpu: ["dynamic_90"]
+    cpu: ["dynamic_90", "gost"]
     verified: "vector"
     verified_at: "2026-08-29"
     verified_with: "john"
+    note: "gost came from gost-r-34-11-94 in the 2026-09-07 merge, proven there at tier vector."
   crack:
     supported: false
+relations:
+  - kind: "duplicate-of"
+    entry: "gost-r-34-11-94"
+    distinction: "none"
+    note: "merged 2026-09-07: Merged 2026-09-06, decided by Royce. These five john-named rows and their survivors are one computation, proven twice over: john's dynamic compiler recovers each loser's own plaintext from its own hash under the expression the survivor already carries at tier vector (gost($p), haval128_4($p), sha3_512($p), ripemd128($p), ripemd160($p)), and mdxfind pinned to ONE type reproduces BOTH rows' vectors on two different plaintexts. NOT the streebog-64-plain/gost2012-64 case, which stayed two rows under distinction naming: there the two rows carried two DIFFERENT mdxfind types, so each name had an identifier of its own. Here both rows carried the SAME type, and the loser was a strictly poorer view -- john's named format and nothing else, no hashcat mode, no hashpipe block -- so a reader arriving by john's label was landing on an incomplete answer. The label survives as an alias and as a john identifier on this row, and the tombstone redirects."
 vectors:
   - hash: "e473da8002e5a1fd1e0d0ba3c22d57c86f793ec8a176c8fb3766909e8b4504e9"
     pass: "rosetta"
     source: "sheet"
     reads_in: ["hashcat", "john", "mdxfind"]
+  - hash: "d42c539e367c66e9c88a801f6649349c21871b4344c6a573f849fdce62f314dd"
+    pass: "a"
+    source: "john"
+    reads_in: ["john", "mdxfind"]
 legacy:
   hashes_org: "GOST"

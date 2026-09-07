@@ -1,5 +1,6 @@
 id: "hav128-4"
 name: "HAV128-4"
+aliases: ["HAVAL-128-4"]
 expression: "haval128_4($p)"
 john_dynamic_expr: "dynamic=haval128_4($p)"
 expression_proof:
@@ -27,16 +28,26 @@ tools:
     verified_with: "hashpipe RCS 1.189 (2026/09/02)"
     note: "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one."
   john:
-    cpu: ["dynamic_170"]
+    cpu: ["dynamic_170", "HAVAL-128-4"]
     verified: "vector"
     verified_at: "2026-08-29"
     verified_with: "john"
+    note: "HAVAL-128-4 came from haval-128-4 in the 2026-09-07 merge, proven there at tier vector."
   crack:
     supported: false
+relations:
+  - kind: "duplicate-of"
+    entry: "haval-128-4"
+    distinction: "none"
+    note: "merged 2026-09-07: Merged 2026-09-06, decided by Royce. These five john-named rows and their survivors are one computation, proven twice over: john's dynamic compiler recovers each loser's own plaintext from its own hash under the expression the survivor already carries at tier vector (gost($p), haval128_4($p), sha3_512($p), ripemd128($p), ripemd160($p)), and mdxfind pinned to ONE type reproduces BOTH rows' vectors on two different plaintexts. NOT the streebog-64-plain/gost2012-64 case, which stayed two rows under distinction naming: there the two rows carried two DIFFERENT mdxfind types, so each name had an identifier of its own. Here both rows carried the SAME type, and the loser was a strictly poorer view -- john's named format and nothing else, no hashcat mode, no hashpipe block -- so a reader arriving by john's label was landing on an incomplete answer. The label survives as an alias and as a john identifier on this row, and the tombstone redirects."
 vectors:
   - hash: "51b4626418f85a5947b6f2e6fe9bbeb9"
     pass: "rosetta"
     source: "sheet"
+    reads_in: ["john", "mdxfind"]
+  - hash: "6f2132867c9648419adcd5013e532fa2"
+    pass: "abc"
+    source: "john"
     reads_in: ["john", "mdxfind"]
 legacy:
   hashes_org: "HAVAL128-4"
