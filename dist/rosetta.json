@@ -15521,23 +15521,26 @@
          "john_work_factor" : "",
          "legacy" : "",
          "mdxfind" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "GOST"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
-         "mdxfind_salted" : "",
+         "mdxfind_salted" : "no",
          "name" : "GOST R 34.11-94",
          "nesting_depth" : "",
          "notes" : "",
          "primary_form" : "",
          "relations" : [],
          "sameas" : "",
-         "serialization" : "unknown",
+         "serialization" : "shared",
          "status" : "needs-review",
          "tool_note" : {
             "hashcat" : "",
             "hashpipe" : "",
             "john" : "",
-            "mdxfind" : ""
+            "mdxfind" : "type named by hashpipe and present in mdxfind too, which contradicts an absence rather than corroborating one -- absence.pl held the absence back for exactly that reason. The corpus sweep never arranged the match, which is the salt-pool effect CLAUDE.md records, not a fact about the type: pinned with -h '^GOST$' it cracks this row's own vector first try, bare hex, no transcode, no plumbing."
          },
          "vecs" : 1
       },
@@ -19253,23 +19256,26 @@
          "john_work_factor" : "",
          "legacy" : "",
          "mdxfind" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "HAV128-4"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
-         "mdxfind_salted" : "",
+         "mdxfind_salted" : "no",
          "name" : "HAVAL-128-4",
          "nesting_depth" : "",
          "notes" : "",
          "primary_form" : "",
          "relations" : [],
          "sameas" : "",
-         "serialization" : "unknown",
+         "serialization" : "shared",
          "status" : "needs-review",
          "tool_note" : {
             "hashcat" : "",
             "hashpipe" : "",
             "john" : "",
-            "mdxfind" : ""
+            "mdxfind" : "type named by hashpipe and present in mdxfind too, which contradicts an absence rather than corroborating one -- absence.pl held the absence back for exactly that reason. The corpus sweep never arranged the match, which is the salt-pool effect CLAUDE.md records, not a fact about the type: pinned with -h '^HAV128-4$' it cracks this row's own vector first try, bare hex, no transcode, no plumbing."
          },
          "vecs" : 1
       },
@@ -58871,23 +58877,26 @@
          "john_work_factor" : "",
          "legacy" : "",
          "mdxfind" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "SHA3-512"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
-         "mdxfind_salted" : "",
+         "mdxfind_salted" : "no",
          "name" : "Raw-SHA3",
          "nesting_depth" : "",
          "notes" : "",
          "primary_form" : "",
          "relations" : [],
          "sameas" : "",
-         "serialization" : "unknown",
+         "serialization" : "shared",
          "status" : "needs-review",
          "tool_note" : {
             "hashcat" : "",
             "hashpipe" : "",
             "john" : "",
-            "mdxfind" : ""
+            "mdxfind" : "type named by hashpipe and present in mdxfind too, which contradicts an absence rather than corroborating one -- absence.pl held the absence back for exactly that reason. The corpus sweep never arranged the match, which is the salt-pool effect CLAUDE.md records, not a fact about the type: pinned with -h '^SHA3-512$' it cracks this row's own vector first try, bare hex, no transcode, no plumbing."
          },
          "vecs" : 1
       },
@@ -59361,23 +59370,26 @@
          "john_work_factor" : "",
          "legacy" : "",
          "mdxfind" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "RMD128"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
-         "mdxfind_salted" : "",
+         "mdxfind_salted" : "no",
          "name" : "RIPEMD 128",
          "nesting_depth" : "",
          "notes" : "",
          "primary_form" : "",
          "relations" : [],
          "sameas" : "",
-         "serialization" : "unknown",
+         "serialization" : "shared",
          "status" : "needs-review",
          "tool_note" : {
             "hashcat" : "",
             "hashpipe" : "",
             "john" : "",
-            "mdxfind" : ""
+            "mdxfind" : "type named by hashpipe and present in mdxfind too, which contradicts an absence rather than corroborating one -- absence.pl held the absence back for exactly that reason. The corpus sweep never arranged the match, which is the salt-pool effect CLAUDE.md records, not a fact about the type: pinned with -h '^RMD128$' it cracks this row's own vector first try, bare hex, no transcode, no plumbing."
          },
          "vecs" : 1
       },
@@ -59419,23 +59431,26 @@
          "john_work_factor" : "",
          "legacy" : "",
          "mdxfind" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "RMD160"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
-         "mdxfind_salted" : "",
+         "mdxfind_salted" : "no",
          "name" : "RIPEMD 160",
          "nesting_depth" : "",
          "notes" : "",
          "primary_form" : "",
          "relations" : [],
          "sameas" : "",
-         "serialization" : "unknown",
+         "serialization" : "shared",
          "status" : "needs-review",
          "tool_note" : {
             "hashcat" : "",
             "hashpipe" : "",
             "john" : "",
-            "mdxfind" : ""
+            "mdxfind" : "type named by hashpipe and present in mdxfind too, which contradicts an absence rather than corroborating one -- absence.pl held the absence back for exactly that reason. The corpus sweep never arranged the match, which is the salt-pool effect CLAUDE.md records, not a fact about the type: pinned with -h '^RMD160$' it cracks this row's own vector first try, bare hex, no transcode, no plumbing."
          },
          "vecs" : 1
       },
@@ -97287,7 +97302,7 @@
    ],
    "tools" : {
       "hashcat" : "v7.1.2-606-ge2a7ab834",
-      "hashpipe" : "RCS 1.192 (2026/09/04)",
+      "hashpipe" : "RCS 1.194 (2026/09/05)",
       "john" : "1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200",
       "mdxfind" : "RCS 1.579 (2026/09/06)"
    }

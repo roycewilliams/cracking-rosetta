@@ -276,7 +276,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | Generic Hash [Bridged: Rust] | `74000` | **--** | no |  |
 | GNOME Keyring | **--** | `keyring`<br>`keyring-opencl` (v) | no |  |
 | GOST (2 iterations) | no | `dynamic_93` (v) | `GOST -i2` (v) |  |
-| GOST R 34.11-94 | **--** | `gost` (v) | **--** |  |
+| GOST R 34.11-94 | **--** | `gost` (v) | `GOST` (v) |  |
 | gost(md5($plain).$plain) | no | no | `GOSTMD5PASS` (v) |  |
 | gost(md5($salt.$plain).":".$salt) | no | no | `GOSTHEXSALT` (v) |  |
 | GOST-YESCRYPT | `36200` (v) | **--** | `GOST-YESCRYPT` (v) |  |
@@ -335,7 +335,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | HAV256-4 (2 iterations) | no | `dynamic_293` (v) | `HAV256-4 -i2` (v) |  |
 | HAV256-5 | no | `dynamic_300` (v) | `HAV256-5` (v) |  |
 | HAV256-5 (2 iterations) | no | `dynamic_303` (v) | `HAV256-5 -i2` (v) |  |
-| HAVAL-128-4 | **--** | `HAVAL-128-4` (v) | **--** |  |
+| HAVAL-128-4 | **--** | `HAVAL-128-4` (v) | `HAV128-4` (v) |  |
 | HAVAL-256-3 | no | `HAVAL-256-3`<br>`dynamic_280` (v) | `HAV256` (v) | duplicate of hav256 |
 | haval128_3(md5($plain)) | no | no | `HAV128MD5` (v) |  |
 | haval128_3(md5($plain).$plain) | no | no | `HAV128MD5PASS` (v) |  |
@@ -972,7 +972,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | Raw-MD5u | `70` (v) | `Raw-MD5u` (v) | `MD5UTF16LE` (v) |  |
 | Raw-SHA1-AxCrypt | no | `Raw-SHA1-AxCrypt` (v) | no |  |
 | Raw-SHA224 | `1300` (v) | `Raw-SHA224`<br>`dynamic_50` (v) | `SHA224` (v) | duplicate of sha224 |
-| Raw-SHA3 | **--** | `Raw-SHA3` (v) | **--** |  |
+| Raw-SHA3 | **--** | `Raw-SHA3` (v) | `SHA3-512` (v) |  |
 | Raw-SHA384 | `10800` (v) | `Raw-SHA384`<br>`dynamic_70` (v) | `SHA384` (v) | duplicate of sha384 |
 | RC4 104-bit DropN | `33502` (v) | **--** | no |  |
 | RC4 40-bit DropN | `33500` (v) | **--** | no |  |
@@ -980,8 +980,8 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | REDHAT389DS | `10901` (v) | **--** | `REDHAT389DS` (v) |  |
 | Redmine | `4521` (v) | `dynamic_1501` (v) | `SHA1SALTSHA1PASS` (v) |  |
 | Restic Repository | **--** | `restic` (v) | no |  |
-| RIPEMD 128 | **--** | `ripemd-128` (v) | **--** |  |
-| RIPEMD 160 | **--** | `ripemd-160` (v) | **--** |  |
+| RIPEMD 128 | **--** | `ripemd-128` (v) | `RMD128` (v) |  |
+| RIPEMD 160 | **--** | `ripemd-160` (v) | `RMD160` (v) |  |
 | ripemd($plain) | no | no | `RIPEMD` (v) |  |
 | ripemd128 | no | `dynamic_120` (v) | `RMD128` (v) |  |
 | ripemd128(md5($plain)) | no | no | `RMD128MD5` (v) |  |
