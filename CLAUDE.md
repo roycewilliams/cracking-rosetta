@@ -98,7 +98,7 @@ coverage.** Measured 2026-09-05: 25 mdxfind mappings were written at tier
 promotes them was already on the host. All 25 are now `vector`. What
 `verified_with:` must record is WHICH BINARY RAN -- never which one is
 installed, and never which one the inventory came from.
-| hashpipe | `/usr/local/bin/hashpipe` (v1.192, 2026-09-04) | `hashpipe -T` (see `tools/extract-hashpipe.pl`); feed it `hash:plaintext` on stdin, or `TYPE[xNN] hash[:salt]:pass` under `-c` |
+| hashpipe | `/home/claude/src/upstream/hashpipe/hashpipe` (RCS 1.194, 2026/09/05) | `hashpipe -T` (see `tools/extract-hashpipe.pl`); feed it `hash:plaintext` on stdin, or `TYPE[xNN] hash[:salt]:pass` under `-c` |
 | Crack | not present | hand-maintained, frozen |
 
 Upstream, for drift detection and as seed data:
@@ -128,17 +128,27 @@ measurement against the binary of the day, so after an upstream pull, diff the
 revision log for behavior changes and re-verify what they touch -- do not
 rewrite entries from source while the binary is older than it.
 
-**hashpipe's SOURCE AND BINARY are now on this host too.** The source is
-`/usr/local/src/sec/crack/hashpipe`, MIT; the binary is INSTALLED at
-`/usr/local/bin/hashpipe` beside hashcat and mdxfind, since 2026-09-04. It
-was run out of its working tree before that, and the move is not
-housekeeping: rebuilding from a fresh clone that day moved the tree to
-`hashpipe.old`, which would have taken the old path with it. Working since
-2026-09-02 and at v1.190 (commit `e528d88`) since 2026-09-04. It takes
-`hash:plaintext` on stdin and names the type that reproduces it, which makes
-it a THIRD independent oracle beside mdxfind and john rather than a document
-to be read. The same authority order applies as for mdxfind: source, then
-binary, then specification, then `HASH_TYPES.md`.
+**hashpipe's SOURCE AND BINARY are now on this host too, and since 2026-09-06
+the CANONICAL binary is the local build.** The source is
+`/usr/local/src/sec/crack/hashpipe`, MIT, with a claude-owned clone at
+`/home/claude/src/upstream/hashpipe` that this account can pull and build.
+`/usr/local/bin/hashpipe` is RCS 1.192, installed 2026-09-04, `royce`-owned
+and not replaceable from here; under the track-tip policy it is a verifier
+for anything it HAS and not the source of an inventory -- the same standing
+mdxfind's and hashcat's installed binaries have. The local build is RCS 1.194
+(2026/09/05) and is what `data/tools/hashpipe.yaml` was extracted from.
+Pass `--hashpipe` or set `$HASHPIPE`; the tools' default still points at
+`/usr/local/bin`. It takes `hash:plaintext` on stdin and names the type that
+reproduces it, which makes it a THIRD independent oracle beside mdxfind and
+john rather than a document to be read. The same authority order applies as
+for mdxfind: source, then binary, then specification, then `HASH_TYPES.md`.
+
+**Build it with `make`, not `make deps`, unless the dependency archives are
+missing.** The tree carries `libsph.a` and friends already built; a plain
+`make` relinks in seconds. If they ever have to be rebuilt, use hashpipe's
+own `make deps` and nothing else -- it passes `-fno-strict-aliasing`
+(`Makefile` line 268), which is what BMW224/BMW256 need and what a hand-built
+sphlib gets wrong. See the self-test paragraph below.
 
 **All 1026 types now reproduce their own vectors** (`hashpipe -T`, 1026
 passed, 0 failed, 2 skipped for the two registered types that ship no
@@ -151,19 +161,38 @@ miscompiles its 32-bit core, so a `libsph.a` built without
 **The lesson is the durable part: a self-test failure is evidence about the
 BUILD, and only sometimes about the tool.**
 
-**hashpipe is still not a separate column, but the alias rule now has a
-measured exception.** Its type list was diffed against the local mdxfind
-binary on 2026-08-29: 1000 vs 1001 types, zero name mismatches, zero
+**hashpipe is still not a separate column, and the alias rule's one measured
+exception CLOSED on 2026-09-06.** Its type list was diffed against the local
+mdxfind binary on 2026-08-29: 1000 vs 1001 types, zero name mismatches, zero
 hashcat-mode mismatches (mdxfind has one extra index, e426). Names and
-hashcat modes still agree. **Iteration suffixes do not.** Measured 2026-09-02,
-same hash and same plaintext, each tool pinned to the named type: mdxfind
-reports `MD5RAWx02`, `SHA1RAWx02`, `SHA256RAWx02`, `SHA512RAWx02` and
-`MD5CAPx02` where hashpipe reports all five at `x01`. The cause is in
-mdxfind's source -- `JOB_MD5CAP`'s loop is `for (x = 2; x <= Maxiter; x++)`
-with `checkhash` INSIDE it, so mdxfind labels its first emitted value `x02`
-and hashpipe labels the same value `x01`. Since the suffix is part of the
-identity (see the pitfall below), **this repository follows mdxfind for
-`iterations:` and never seeds that field from a hashpipe source.**
+hashcat modes agree. **Iteration suffixes did not, and now do.** The
+exception was five types -- `MD5RAW`, `SHA1RAW`, `SHA256RAW`, `SHA512RAW`
+and `MD5CAP` -- which mdxfind reported at `x02` and hashpipe at `x01` on
+2026-09-02. That was ONE description over TWO unrelated defects, which is
+why it took two corrections to clear:
+
+- **The RAW four were mdxfind's**, not a convention. Revision 1.290
+  (2026-04-09) regressed the family and 1.549 (2026-08-30) restored it, so
+  hashpipe had been right all along; the entries were corrected to `x01` on
+  2026-09-05 and `data/upstream-disagreements.yaml` records the correction.
+- **`MD5CAP` was hashpipe's, and only on its DETECT path.** `JOB_MD5CAP`'s
+  loop is `for (x = 2; x <= Maxiter; x++)` with `checkhash` INSIDE it, so
+  the type's first emitted value IS `x02` and `MD5CAPx01` cannot exist.
+  hashpipe's `-c` read the registered `base_iter` and said `x02`; detection
+  stamped a flat 1 and the whole ladder came out one short. v1.194
+  (2026/09/05) fixes it at 17 base sites and 7 ladder sites.
+
+Measured 2026-09-06 on this host: hashpipe 1.194 detection, hashpipe 1.194
+`-c` and mdxfind 1.579 all report `MD5CAPx02` for the same vector, and all
+three report `MD5RAW` at `x01`. The installed 1.192 still says `MD5CAPx01`,
+which is the control that says the fix and not the measurement moved.
+
+**The rule the divergence produced stands without it**: this repository
+follows mdxfind for `iterations:` and never seeds that field from a hashpipe
+source. It was never really a workaround -- the suffix is part of the
+identity, mdxfind is the instrument that defines it, and the schema gives
+hashpipe no `iterations` field at all. What changes is that the rule no
+longer has a disagreement behind it to point at.
 
 **The 25 names hashpipe has and mdxfind does not are TRANSIENT, and that is
 upstream's own account.** Waffle told Royce (relayed 2026-09-03) that they
@@ -422,12 +451,16 @@ mdxfind also accepts hashcat modes directly (`mdxfind -m 0`, `-m e1`,
   the same way, in the other direction -- a merged-stream one-liner, which
   is consistent with a pass AND with a refusal -- which is why that is now
   the second bullet above rather than a footnote here.
-  **And `-c` numbers iterations mdxfind's way while the detect path does
-  not**: same binary, same hash, re-measured on v1.192, `-c` says
-  `MD5CAPx02` where plain stdin detection says `MD5CAPx01`. So hashpipe
-  carries two numberings, and `data/upstream-disagreements.yaml` still
-  records the detect path's -- which is the one this repository uses as its
-  hashpipe oracle. `test-hashpipe-c.pl` asserts that split too.
+  **`-c` and the detect path NUMBERED ITERATIONS DIFFERENTLY UNTIL v1.194,
+  and a tool reading either has to know which it has.** Same binary, same
+  hash: on v1.192 `-c` says `MD5CAPx02` where plain stdin detection says
+  `MD5CAPx01`, so that build carries two numberings. v1.194 makes detection
+  read the registered `base_iter` and both paths say `x02`, agreeing with
+  mdxfind. Measured 2026-09-06 against both builds.
+  `test-hashpipe-c.pl` asserts BOTH paths as of 2026-09-06 -- and a
+  `base_iter` 1 control beside them, since without it "the fix landed" and
+  "every depth shifted by one" are the same reading. Asserting only `-c` is
+  precisely how the half that moved went unasserted for two revisions.
 - **Name separator drift.** The source sheet wrote `HAV128_4` where mdxfind
   writes `HAV128-4`. Normalize by stripping non-alphanumerics before matching;
   store the tool's exact spelling.

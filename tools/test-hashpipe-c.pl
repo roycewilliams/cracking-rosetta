@@ -165,6 +165,23 @@ sub run_c {
     };
 }
 
+# run_detect($line) - the UNPINNED path: no -c, so hashpipe identifies the
+# line itself and stamps the depth it believes. It is a different code path
+# from -c and it has carried a different answer; see the MD5CAP block below.
+sub run_detect {
+    my ($line) = @_;
+    my ($o, $e) = ("$TMP/do", "$TMP/de");
+    open my $in, '|-', "'$HP' > '$o' 2> '$e'" or die "cannot run $HP: $!\n";
+    print {$in} "$line\n";
+    close $in;
+    my $out = do { local (@ARGV, $/) = ($o); <> } // '';
+    my @out = grep { length } split /\n/, $out;
+    return {
+        verified => (scalar @out ? 1 : 0),
+        label    => (@out ? (split / /, $out[0])[0] : ''),
+    };
+}
+
 my ($pass_n, $fail_n) = (0, 0);
 sub check {
     my ($ok, $why, $detail) = @_;
@@ -294,14 +311,37 @@ check(!$r->{verified} && $r->{exit} == 2,
       'a line with no label at all is fatal too',
       sprintf("     exit=%d stderr=%s\n", $r->{exit}, $r->{stderr}));
 
-# MD5CAP is the type whose two numberings disagree: -c calls this vector
-# MD5CAPx02, mdxfind's way, where the DETECT path calls it MD5CAPx01. That
-# split is what data/upstream-disagreements.yaml records, and it survived
-# 1.191, so it is asserted here rather than only written down.
+# MD5CAP IS THE TYPE THE TWO PATHS USED TO DISAGREE ABOUT, AND SINCE v1.194
+# THEY DO NOT. mdxfind's JOB_MD5CAP loops `for (x = 2; ...)` with checkhash
+# inside it, so the type's first emitted value IS x02 and MD5CAPx01 cannot
+# exist. `-c` has read the registered base_iter since it was added; the
+# DETECT path stamped a flat 1 and came out one short, which is what
+# v1.194's revision note fixes and what this repository recorded as a
+# hashpipe/mdxfind numbering divergence.
+#
+# Both paths are asserted, because only asserting one is how the divergence
+# went unnoticed for two revisions: the file pinned `-c` and the half that
+# actually moved was written down in prose instead. A regression in either
+# direction now fails here.
 $r = run_c('MD5CAP bd62daf88a5f6d734e91228e7f2e540a:rosetta');
 check($r->{verified} && $r->{label} eq 'MD5CAPx02',
       'a bare label is emitted at the depth that matched: MD5CAP -> MD5CAPx02',
       sprintf("     verified=%d label=%s\n", $r->{verified}, $r->{label}));
+
+my $d = run_detect('bd62daf88a5f6d734e91228e7f2e540a:rosetta');
+check($d->{verified} && $d->{label} eq 'MD5CAPx02',
+      'the DETECT path agrees with -c on the depth: MD5CAP -> MD5CAPx02 '
+    . '(x01 here means a build older than v1.194)',
+      sprintf("     verified=%d label=%s\n", $d->{verified}, $d->{label}));
+
+# The control that makes the pair readable. A type whose base_iter is 1 must
+# be unmoved by all of it -- otherwise "the base_iter fix landed" and "every
+# depth shifted by one" are the same reading. MD5RAW is the sibling the RAW
+# repair of 2026-09-05 settled at x01 in all three tools.
+$d = run_detect('ee60a4f373b088203688211b5f3f56f5:rosetta');
+check($d->{verified} && $d->{label} eq 'MD5RAWx01',
+      'control: a base_iter 1 type is unmoved -- MD5RAW -> MD5RAWx01',
+      sprintf("     verified=%d label=%s\n", $d->{verified}, $d->{label}));
 
 printf STDERR "- %d passed, %d failed (hashpipe %s)\n", $pass_n, $fail_n, $HP;
 printf STDERR "- the v1.190 per-line depth-1 leak is present in %d of %d "

@@ -216,12 +216,30 @@ disagreements:
       catch -- convergence, which looks exactly like nothing having happened --
       and it is the first time it has fired.
 
-      THE MD5CAP NUMBERING IS A SEPARATE AND STILL-REAL THING, and the old prose
-      here conflated it with the above. JOB_MD5CAP's loop is
-      `for (x = 2; x <= Maxiter; x++)` with checkhash INSIDE it, so mdxfind
-      labels its first emitted value x02. That is genuine and survives: measured
-      2026-09-05 on RCS 1.576, MD5CAP still reproduces only at -i 2. It is not
-      in differs: because john_map.h does not carry a row for it.
+      THE MD5CAP NUMBERING WAS A SEPARATE THING, AND IT CONVERGED ON
+      2026-09-06. The old prose here conflated it with the RAW four above, and
+      then called it permanent. JOB_MD5CAP's loop is
+      `for (x = 2; x <= Maxiter; x++)` with checkhash INSIDE it, so the type's
+      first emitted value IS x02 and MD5CAPx01 cannot exist -- that part was
+      right, and mdxfind still reproduces this type only at -i 2 (re-measured
+      2026-09-06 on the local RCS 1.579). What was wrong was calling the
+      disagreement mdxfind-against-hashpipe. It was hashpipe against ITSELF:
+      `-c` read the registered base_iter and answered x02, while the DETECT
+      path stamped a flat 1. hashpipe v1.194 (2026/09/05) makes detection read
+      base_iter too. Measured 2026-09-06 on this host, one hash and one
+      plaintext: mdxfind 1.579, hashpipe 1.194 detection and hashpipe 1.194 -c
+      all say MD5CAPx02, where the installed hashpipe 1.192 says MD5CAPx01.
+      The 1.192 reading is the control -- it says the tool moved and not the
+      measurement.
+
+      This never reached differs:, because john_map.h carries no row for
+      MD5CAP, so check_john_map could not have caught the convergence and
+      nothing here fails on it. That is the reason it is written down at
+      length instead: the assertion that survived was a sentence in CLAUDE.md
+      and a comment in tools/test-hashpipe-c.pl, and the test pinned `-c`
+      only -- the half that actually moved was asserted nowhere. The test now
+      asserts both paths, with a base_iter 1 control (MD5RAW at x01) beside
+      them.
 
       THE ONE THAT REMAINS IS MASKING, which is upstream's own documented hazard
       rather than a numbering difference. hashpipe reports the FIRST type that reproduces a
