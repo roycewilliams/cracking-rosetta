@@ -51004,23 +51004,26 @@
          "john_work_factor" : "",
          "legacy" : "",
          "mdxfind" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "NETNTLMV2"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
-         "mdxfind_salted" : "",
+         "mdxfind_salted" : "yes",
          "name" : "NETLMv2",
          "nesting_depth" : "",
-         "notes" : "Created 2026-09-06 by splitting netntlmv2, which was holding two computations -- something CLAUDE.md forbids and that row's own notes had already flagged and left to a curator. The split is a measurement, not a reading of the names: handed to john NATIVELY, one vector at a time, netntlmv2 cracks the other three vectors of that row and REFUSES this one, while netlmv2 cracks this one and refuses those three. Each format declines to load the other's string, so the two are not alternative spellings. This vector is john's own published example and is the short one -- an 8-byte blob, far short of an NTLMv2 one, which is what made it visible in the first place. NETLMv2 is john-only: no hashcat mode, mdxfind type or hashpipe type carries the name. NOTE FOR ANYONE VERIFYING THIS ROW: verify-vectors.pl cannot check it. It writes a synthetic login and a TAB before each hash, which is right for a hash that is only a digest and wrong here, because a NETLMv2 ciphertext EMBEDS its own login and john will not parse it once that field has been displaced. Hand it to john natively.",
+         "notes" : "Created 2026-09-06 by splitting netntlmv2, which was holding two computations -- something CLAUDE.md forbids and that row's own notes had already flagged and left to a curator. The split is a measurement, not a reading of the names: handed to john NATIVELY, one vector at a time, netntlmv2 cracks the other three vectors of that row and REFUSES this one, while netlmv2 cracks this one and refuses those three. Each format declines to load the other's string, so the two are not alternative spellings. This vector is john's own published example and is the short one -- an 8-byte blob, far short of an NTLMv2 one, which is what made it visible in the first place. NETLMv2 is john-only: no hashcat mode, mdxfind type or hashpipe type carries the name. NOTE FOR ANYONE VERIFYING THIS ROW: verify-vectors.pl cannot check it. It writes a synthetic login and a TAB before each hash, which is right for a hash that is only a digest and wrong here, because a NETLMv2 ciphertext EMBEDS its own login and john will not parse it once that field has been displaced. Hand it to john natively. CORRECTED 2026-09-07: the sentence above says NETLMv2 is john-only because no hashcat mode, mdxfind type or hashpipe type CARRIES THE NAME. That is still true and it is about names. It must not be read as a claim about capability, which the lean chunk-1 sweep of that date measured to be false: mdxfind pinned to NETNTLMV2 reproduces this row's vector. See the mdxfind block for what that identifier does and does not establish. The name veto in absence.pl is exactly this shape of blind spot, and it is why an absence was never published here.",
          "primary_form" : "",
          "relations" : [],
          "sameas" : "",
-         "serialization" : "unknown",
+         "serialization" : "shared",
          "status" : "needs-review",
          "tool_note" : {
             "hashcat" : "",
             "hashpipe" : "",
             "john" : "Round-tripped NATIVELY, one vector per invocation: format(s) netlmv2 could not parse this entry's vectors under the grouped scheme this tool normally uses, which writes a synthetic login and a TAB before every hash. This ciphertext EMBEDS its own login, so displacing that field is what breaks the parse -- john loaded nothing, which is not the same as cracking nothing, and its own --show summary is what said so. The stored vector is unchanged and is exactly what john was handed. Reproduce it with: john --format=<label> --wordlist=<one candidate> <one hash>, with no --field-separator-char.",
-            "mdxfind" : ""
+            "mdxfind" : "Found by the lean chunk-1 mdxfind sweep of 2026-09-07 and round-tripped pinned. WHAT THE IDENTIFIER DOES AND DOES NOT SAY: mdxfind has no NETLMV2 type -- its only neighbours are e897 NETNTLMV1 and e898 NETNTLMV2 -- and NETNTLMV2 pinned reproduces ALL FOUR vectors across this entry and netntlmv2, which is the pair john needs TWO formats for. That is the family, not a fluke: LMv2 and NTLMv2 responses are the same HMAC-MD5 construction over a blob, and mdxfind takes the blob as given where john's two parsers do not. The negative control is NETNTLMV1, which refuses all four in the same run. So this is a real mapping for a reader holding an LMv2 response -- and it is NOT a discriminator: pinned to NETNTLMV2, mdxfind cannot tell this row from netntlmv2 the way john's netlmv2 and netntlmv2 can, each of which refuses the other's string. Whether the two rows therefore want a relation is a curator's call and has not been made."
          },
          "vecs" : 1
       },

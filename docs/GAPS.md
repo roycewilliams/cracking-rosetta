@@ -106,7 +106,7 @@ A few that carry a vector and a proven expression, so there is a definite constr
 
 All 204: filter `hashcat_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
 
-### mdxfind: 67 entries say nothing
+### mdxfind: 66 entries say nothing
 
 A few that carry a vector, so a candidate identifier can be tested at once, one per family:
 
@@ -118,15 +118,15 @@ A few that carry a vector, so a candidate identifier can be tested at once, one 
 * [`kerberos-5-etype-23-tgs-rep-nt`](index.html#kerberos-5-etype-23-tgs-rep-nt) - `Kerberos 5, etype 23, TGS-REP (NT)`
 * [`lotus-notes-domino-8-5`](index.html#lotus-notes-domino-8-5) - `Lotus Notes/Domino 8.5`
 * [`murmurhash64a-truncated-zero-seed`](index.html#murmurhash64a-truncated-zero-seed) - `MurmurHash64A truncated (zero seed)`
-* [`lmv2-c-r`](index.html#lmv2-c-r) - `NETLMv2`
 * [`netntlmv1-netntlmv1-ess-nt`](index.html#netntlmv1-netntlmv1-ess-nt) - `NetNTLMv1 / NetNTLMv1+ESS (NT)` (and 1 more starting `NetNTLMv`)
 * [`netscreen`](index.html#netscreen) - `Netscreen`
 * [`password-safe-v2`](index.html#password-safe-v2) - `Password Safe v2`
 * [`pkzip-master-key`](index.html#pkzip-master-key) - `PKZIP Master Key` (and 1 more starting `PKZIP`)
 * [`sha1-md5-pass-substr-0-32`](index.html#sha1-md5-pass-substr-0-32) - `cut(sha1(md5($p)),0,32)` (and 4 more starting `cut`)
 * [`stuffit5`](index.html#stuffit5) - `Stuffit5`
+* [`totp-hmac-sha1`](index.html#totp-hmac-sha1) - `TOTP (HMAC-SHA1)`
 
-All 67: filter `mdxfind_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
+All 66: filter `mdxfind_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
 
 ## 4. hashcat modes with no row here (1)
 
