@@ -11,6 +11,12 @@ denotation:
   note: "john's own label for HAVAL-128-4, in 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200."
 status: "needs-review"
 tools:
+  mdxfind:
+    types: ["HAV128-4"]
+    verified: "vector"
+    verified_at: "2026-09-06"
+    verified_with: "mdxfind RCS 1.579 (2026/09/06)"
+    note: "type named by hashpipe and present in mdxfind too, which contradicts an absence rather than corroborating one -- absence.pl held the absence back for exactly that reason. The corpus sweep never arranged the match, which is the salt-pool effect CLAUDE.md records, not a fact about the type: pinned with -h '^HAV128-4$' it cracks this row's own vector first try, bare hex, no transcode, no plumbing."
   john:
     cpu: ["HAVAL-128-4"]
     verified: "vector"
@@ -22,4 +28,4 @@ vectors:
   - hash: "6f2132867c9648419adcd5013e532fa2"
     pass: "abc"
     source: "john"
-    reads_in: ["john"]
+    reads_in: ["john", "mdxfind"]
