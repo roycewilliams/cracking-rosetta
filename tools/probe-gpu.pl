@@ -94,7 +94,7 @@ my $PROG   = 'probe-gpu.pl';
 my $JOHN   = $ENV{JOHN} || '/usr/local/scripts/johnl';
 my $ALGDIR = "$FindBin::Bin/../data/algorithms";
 my $WORK   = "$FindBin::Bin/../tmp/probe-gpu";
-my $TODAY  = do { my @t = gmtime; sprintf('%04d-%02d-%02d', $t[5]+1900, $t[4]+1, $t[3]) };
+my $TODAY  = do { my @t = localtime; sprintf('%04d-%02d-%02d', $t[5]+1900, $t[4]+1, $t[3]) };
 
 my (@pairs, $from, $timeout, $apply, $reuse, $verbose, $help);
 $timeout = 900;

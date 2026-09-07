@@ -75,7 +75,7 @@ use YAML::XS ();
 use RosettaEmit qw(entry_text);
 
 my $ALGDIR  = "$FindBin::Bin/../data/algorithms";
-my $TODAY   = do { my @t = gmtime; sprintf('%04d-%02d-%02d', $t[5]+1900, $t[4]+1, $t[3]) };
+my $TODAY   = do { my @t = localtime; sprintf('%04d-%02d-%02d', $t[5]+1900, $t[4]+1, $t[3]) };
 
 my (@pairs, $from, $note, $apply, $verbose, $help);
 GetOptions(

@@ -133,7 +133,7 @@ my $hp_binary = $ENV{HASHPIPE} || '/usr/local/bin/hashpipe';
 my $mx_binary = $ENV{MDXFIND}  || '/usr/local/bin/mdxfind';
 my $transfile;
 my ($report, $apply, $verbose, $help) = (0,0,0,0);
-my $DATE = strftime('%Y-%m-%d', gmtime);
+my $DATE = strftime('%Y-%m-%d', localtime);
 my @only;
 my $had = scalar @ARGV;
 

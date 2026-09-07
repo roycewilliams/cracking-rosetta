@@ -147,7 +147,7 @@ my $timeout = 60;
 # verified_at is the day the measurement was MADE, so it is read from the
 # clock rather than typed. It used to be the literal 2026-08-31 in all three
 # writers, which would have back-dated every later run's evidence.
-my $DATE = strftime('%Y-%m-%d', gmtime);
+my $DATE = strftime('%Y-%m-%d', localtime);
 my $limit   = 0;
 my @only;
 my $had_args = scalar @ARGV;
