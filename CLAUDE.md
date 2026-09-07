@@ -44,18 +44,47 @@ people expect are regenerated into `docs/` and `dist/`.
 
 ## Canonical sources
 
+**THIS REPOSITORY TRACKS UPSTREAM TIP, NOT RELEASES.** Decided by Royce
+2026-09-06. Where a locally built bleeding-edge binary and an installed
+release disagree about what exists, the tip wins and the inventory is
+regenerated from it. The reason is that the alternative is worse: a release
+lags by months, and the mappings people actually arrive asking about are the
+new ones. **The cost is real and is stated here rather than discovered:**
+measured 2026-09-06, 13 of hashcat's 595 modes exist in NO release -- 17050,
+34301, 35300, 35400, 35500, 35600, 35700, 35800, 36100, 36200, 36300, 36400,
+36410 -- and this repository publishes all 13 at tier `vector`. A reader on
+hashcat 7.1.2 does not have them. See "Open questions for Royce" in STATE.md
+for the proposal to publish that difference rather than leave it implicit.
+
 | Tool | Binary / source | Extraction command |
 |---|---|---|
-| hashcat | `/usr/local/bin/hashcat` (v7.1.2-549-g8a15e210b) | `hashcat --hash-info` |
+| hashcat | `/home/claude/src/upstream/hashcat/hashcat` (v7.1.2-606-ge2a7ab834) | `hashcat --hash-info --machine-readable` |
 | john | `/usr/local/scripts/johnl` -> `/usr/local/src/sec/crack/john-latest/run/john` | `john --list=format-details` |
-| mdxfind | `/usr/local/bin/mdxfind` (RCS 1.545, 2026-08-29) | `mdxfind -h` |
+| mdxfind | `/home/claude/src/upstream/mdxfind/mdxfind` (RCS 1.579, 2026-09-06) | `mdxfind -h` |
+
+The installed binaries -- `/usr/local/bin/hashcat` (v7.1.2-549-g8a15e210b),
+`/usr/local/bin/mdxfind` (RCS 1.545) -- are `root`- and `royce`-owned and
+cannot be replaced by this account. They are still perfectly good verifiers
+for anything they HAVE; what they must not be is the source of an inventory.
+
+**Build mdxfind CPU-only.** `make` auto-enables OpenCL on the presence of
+`/usr/include/CL/cl.h`, and the resulting binary claims the GPU by default:
+measured 2026-09-06, 28.7 seconds for a one-hash one-word job that takes 0.01
+seconds with `-G none`, because it JIT-compiles kernels when `MDXFIND_CACHE`
+is unset -- and it would contend with hashcat for the GPU, which has already
+corrupted data on this host twice. It also appends ` [GPU]` to 109 rows of
+the `-h` table, which `extract-mdxfind.pl`'s four-column regex does not
+match, so a regenerated inventory silently loses those types. The marker is
+build-gated rather than new. The invocation:
+
+    make clean && make OPENCL_GPU= OSOPT=-fgnu89-inline mdxfind
 
 **There are TWO mdxfind builds on this host and BOTH are verifiers.**
 `/usr/local/bin/mdxfind` is RCS 1.545, installed, and cannot be replaced by
-this account. `/home/claude/src/upstream/mdxfind/mdxfind` is RCS 1.576, built
-here from the upstream clone, and it is the ONLY binary on this host that has
-types e1003-e1027 or that computes the RAW family correctly. **Use it, and
-stamp its version.** That is already the corpus's practice -- the RAW-family
+this account. `/home/claude/src/upstream/mdxfind/mdxfind` is the local build,
+RCS 1.579 since 2026-09-06 and 1.576 before that, and it is the ONLY binary
+on this host that has types e1003-e1027 or that computes the RAW family
+correctly. **Use it, and stamp its version.** That is already the corpus's practice -- the RAW-family
 repair of 2026-09-05 established 34 blocks at tier `vector` citing
 `mdxfind RCS 1.576 (2026/09/02)`, and the mdxfind seeding the same day added
 26 more.
