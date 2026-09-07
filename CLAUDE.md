@@ -716,11 +716,26 @@ mdxfind also accepts hashcat modes directly (`mdxfind -m 0`, `-m e1`,
   e1003-e1027 hit its 900s timeout -- those types are KDFs and the corpus
   carried 485 salts -- and left a ZERO-BYTE `out/e1003-e1027.txt`. Folding
   that into a union directory asserts the range was swept while carrying no
-  evidence at all. The discovery tool's own work dir has a `timeouts` file
-  that says otherwise; a union directory does not inherit it. **Check that a
-  chunk file is non-empty before folding it**, and prefer the LEAN corpus for
-  a KDF range: the same 25 types over the lean corpus took 1.0s at
-  `--chunk 50` and 14.5s as 25 single-type runs.
+  evidence at all. **Check that a chunk file is non-empty before folding it**,
+  and prefer the LEAN corpus for a KDF range: the same 25 types over the lean
+  corpus took 1.0s at `--chunk 50` and 14.5s as 25 single-type runs.
+  **DO NOT RELY ON A `timeouts` FILE. Only `discover-john.pl` writes one.**
+  This paragraph used to say "the discovery tool's own work dir has a
+  `timeouts` file that says otherwise", and that is false for two of the three
+  tools. Measured 2026-09-07: `discover-mdxfind.pl` and `discover-hashcat.pl`
+  PRINT the list on stderr and write no file; the `timeouts` files sitting in
+  `tmp/mx-sweep-fresh/` and `tmp/hc-sweep-fresh/` were written BY HAND and
+  say so in their own first line. `absence.pl` defaults to `<from>/timeouts`
+  only `if -r` it, so where none exists it proceeds silently and a timed-out
+  range counts as swept.
+  **And a timeout list, even a correct one, is necessary but not sufficient.**
+  A chunk KILLED from outside leaves the same zero-byte range file and appears
+  in no list at all, because the tool never got to report it. Measured
+  2026-09-07 on a 1027-chunk run: 11 zero-byte files, TEN of them in the
+  tool's own timeout list and the eleventh (`e455`, PHPBB3) the chunk that was
+  in flight when the run was stopped to free the binary. Real coverage was
+  1016 of 1027, and only the file sizes said so. **The zero-byte test is the
+  one that covers both causes; make it the check you actually run.**
 - **A canary must never mutate a base64 digest.** The mutation is defined on
   TEXT and the claim is about a DIGEST, and those coincide only where the text
   IS the digest. Measured 2026-09-01: challenging john's `Raw-SHA1` reported
