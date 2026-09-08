@@ -204,7 +204,7 @@ my %IS_CATEGORY = map { $_ => 1 } qw(
 # 'distinction' says why both entries nonetheless exist.
 my %IS_REL_KIND = map { $_ => 1 } qw(
     same-computation encodes input-encoding iterates truncates
-    collides-on-subset duplicate-of
+    collides-on-subset duplicate-of covers covered-by
 );
 # 'naming' is deliberately in this list and not in %JOINS_EXPRESSION's
 # reasoning: it is the answer a curator gives when a proposed duplicate turns
@@ -231,6 +231,11 @@ my %REL_MIRROR = (
     'duplicate-of'      => 'duplicate-of',
     'iterates'          => 'iterates',
     'truncates'         => 'truncates',
+    # The one asymmetric pair. Every kind above mirrors to itself and lets the
+    # note carry the direction; `covers` states the direction in the kind word
+    # itself, so a self-mirror would assert both "A covers B" and "B covers A".
+    'covers'            => 'covered-by',
+    'covered-by'        => 'covers',
 );
 
 my %TOOL_KEY = (

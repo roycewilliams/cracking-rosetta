@@ -150,6 +150,18 @@ else {
 #-----------------------------------------------------------------------
 # Load only the entries the edges touch.
 
+# What each kind mirrors to on the other entry. Every kind here mirrors to
+# ITSELF except covers/covered-by: those state their direction in the kind
+# word, so a same-kind mirror would assert both halves of a contradiction.
+# validate.pl carries the same table as %REL_MIRROR and is what FAILS when a
+# mirror is missing or wrong; this one only decides what gets written. Keep
+# them in step -- a kind present here and absent there passes silently, since
+# an unlisted kind falls back to mirroring itself on both sides.
+my %MIRROR = (
+    'covers'     => 'covered-by',
+    'covered-by' => 'covers',
+);
+
 my (%entry, %path, %dirty);
 sub load {
     my ($id) = @_;
@@ -201,10 +213,16 @@ for my $w (@want) {
     }
     unless (load($a) && load($b)) { $failed++; next }
 
-    # The mirror carries the same kind, distinction and note: these edges are
-    # symmetric statements about a pair, not directed claims about one of them.
+    # The mirror carries the same distinction and note, and USUALLY the same
+    # kind: these edges are symmetric statements about a pair, not directed
+    # claims about one of them. `covers` is the exception and the only one --
+    # its direction is in the kind word, so its mirror is `covered-by` and a
+    # same-kind mirror would state both halves of a contradiction. Keep this
+    # table in step with %REL_MIRROR in validate.pl, which is what FAILS when
+    # a mirror is missing or wrong.
+    my $mirror = $MIRROR{ $w->{kind} } // $w->{kind};
     my $n = put_edge($a, $b, $w->{kind}, $w->{distinction}, $w->{note})
-          + put_edge($b, $a, $w->{kind}, $w->{distinction}, $w->{note});
+          + put_edge($b, $a, $mirror,    $w->{distinction}, $w->{note});
     $changes += $n;
     $dirty{$a} = $dirty{$b} = 1 if $n;
 

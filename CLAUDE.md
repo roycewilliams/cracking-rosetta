@@ -1076,7 +1076,8 @@ So an entry carries three fields for it. `category:` names the axis it sits on
 
 `kind` says what the relationship is -- `same-computation`, `encodes`,
 `input-encoding`, `iterates`, `truncates`, `collides-on-subset`,
-`duplicate-of`. `distinction` says why both rows nonetheless exist --
+`duplicate-of`, `covers`, `covered-by`. `distinction` says why both rows
+nonetheless exist --
 `application`, `encoding`, `input-encoding`, `iteration`, `truncation`,
 `salt-convention`, `naming`, `none`. `none` is legal only with
 `duplicate-of`, which is how a merge gets proposed in data rather than in a

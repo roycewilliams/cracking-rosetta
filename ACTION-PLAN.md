@@ -364,6 +364,23 @@ field rather than a hint buried in `aliases:` or prose.
    | `truncates` | this entry is the other, cut short |
    | `collides-on-subset` | agrees only on a degenerate class of inputs |
    | `duplicate-of` | no distinction survives; one of these should go |
+   | `covers` | this identifier accepts a SUPERSET of what the other's does |
+   | `covered-by` | the mirror of `covers`, and the only asymmetric mirror |
+
+   **`covers` was added 2026-09-08, and it is the vocabulary's only asymmetric
+   pair.** Every other kind mirrors to ITSELF and leaves the direction to the
+   note; `covers` states its direction in the kind word, so a same-kind mirror
+   would put "A covers B" and "B covers A" in the tree at once. It earned
+   itself against the WPA family: hashcat 22000 "WPA-PBKDF2-PMKID+EAPOL" and
+   22001 "WPA-PMK-PMKID+EAPOL" each accept EITHER a PMKID or an EAPOL
+   handshake, where five other rows carry one artifact apiece. Neither
+   existing kind states that -- `same-computation` overstates, because the
+   covering mode also accepts what the other does not, and
+   `collides-on-subset` means the opposite thing, two genuinely DIFFERENT
+   computations agreeing on a degenerate class of inputs.
+   **It is deliberately NOT in `%JOINS_EXPRESSION`**: `covers` does not assert
+   that two entries compute the same thing, so it must never license them to
+   share an `expression:`.
 
    `distinction` says why both rows nonetheless exist:
 

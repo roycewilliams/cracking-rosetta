@@ -137,9 +137,11 @@
               "iterates",
               "truncates",
               "collides-on-subset",
-              "duplicate-of"
+              "duplicate-of",
+              "covers",
+              "covered-by"
             ],
-            "description": "same-computation: identical bytes in, identical bytes out. encodes: same digest, different textual encoding. input-encoding: same primitive over a re-encoded plaintext. iterates: this entry is the other applied N times. truncates: this entry is the other, cut short. collides-on-subset: agrees only on a degenerate class of inputs, so a tool may crack one entry's vector without denoting it. duplicate-of: no distinction survives and one of these should go."
+            "description": "same-computation: identical bytes in, identical bytes out. encodes: same digest, different textual encoding. input-encoding: same primitive over a re-encoded plaintext. iterates: this entry is the other applied N times. truncates: this entry is the other, cut short. collides-on-subset: agrees only on a degenerate class of inputs, so a tool may crack one entry's vector without denoting it. duplicate-of: no distinction survives and one of these should go. covers: this entry's identifier accepts a SUPERSET of what the other's does -- hashcat 22000 takes either a PMKID or an EAPOL handshake where wpa-eapol takes only the second -- so the two are not one computation and the pair must not share an expression on the strength of this edge. covered-by: the mirror of covers, and the only asymmetric mirror in the vocabulary."
           },
           "entry": {
             "type": "string",
