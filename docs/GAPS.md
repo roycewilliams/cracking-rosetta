@@ -74,13 +74,13 @@ Real work rather than a one-liner: it means finding out whether the tool
 supports the construction at all, and under which identifier. The counts are
 the honest size of the job.
 
-### john: 292 entries say nothing
+### john: 290 entries say nothing
 
 A few that carry a vector and a proven expression, so there is a definite construction to look for, one per family:
 
 * [`sha1-md5-md5-plain`](index.html#sha1-md5-md5-plain) - `sha1(md5(md5($p)))` (and 3 more starting `sha`)
 
-All 292: filter `john_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
+All 290: filter `john_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
 
 Where such an entry carries an expression, john can already attack it without
 a named format:
@@ -97,14 +97,14 @@ flavor of the hash function - `md5(MD5($p))` - and john rejects the first
 outright. It is deliberately **not** in john's column, which lists formats
 `--list=formats` will show; the gap worth filling is whether a named one exists.
 
-### hashcat: 203 entries say nothing
+### hashcat: 202 entries say nothing
 
 A few that carry a vector and a proven expression, so there is a definite construction to look for, one per family:
 
 * [`dynamic-15`](index.html#dynamic-15) - `md5($u.md5($p).$s)` (and 2 more starting `md`)
 * [`sha1usercolonpass`](index.html#sha1usercolonpass) - `sha1($s.$c1.$p),c1=\x3a`
 
-All 203: filter `hashcat_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
+All 202: filter `hashcat_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
 
 ### mdxfind: 64 entries say nothing
 

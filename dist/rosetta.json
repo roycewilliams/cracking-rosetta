@@ -1,5 +1,5 @@
 {
-   "count" : 1553,
+   "count" : 1545,
    "entries" : [
       {
          "alias" : "",
@@ -3987,7 +3987,7 @@
          "vecs" : 1
       },
       {
-         "alias" : "",
+         "alias" : "bcrypt(md5($plain))",
          "application" : "",
          "category" : "kdf",
          "crack" : {
@@ -4012,77 +4012,14 @@
          "hashcat_salted" : "yes",
          "hashcat_speed" : "slow",
          "hashpipe" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "BCRYPTMD5"
+            ],
+            "match" : "",
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "bcrypt-md5-pass",
-         "john" : {
-            "ids" : [],
-            "state" : "no"
-         },
-         "john_expr" : "",
-         "john_salted" : "",
-         "john_work_factor" : "",
-         "legacy" : "",
-         "mdxfind" : {
-            "ids" : [
-               "BCRYPTMD5"
-            ],
-            "match" : "",
-            "state" : "proven",
-            "tier" : "vector"
-         },
-         "mdxfind_salted" : "no",
-         "name" : "bcrypt(md5($pass))",
-         "nesting_depth" : "",
-         "notes" : "",
-         "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
-         "serialization" : "shared",
-         "status" : "ok",
-         "tool_note" : {
-            "hashcat" : "hashcat's own published example hash for this mode, recovered by hashcat at this mode with hashcat's own published plaintext.",
-            "hashpipe" : "",
-            "john" : "no format. Swept the 2 format(s) whose own valid() accepts this entry's own vector, as john --show=left reports them, on 2026-09-04 (a tools/discover-john.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. For john the control is also per ENTRY and not only per shape: every format counted above is one whose own loader ACCEPTED this hash, so each was asked this exact question and answered no. A format that cannot parse the hash is not counted at all, and an entry no format can parse is reported as unsearched rather than decided. Every applicable format ran to completion; a format killed at the timeout is counted as untested and withholds this verdict. No john format name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if john gains one, this becomes a mapping.",
-            "mdxfind" : "type discovered by round-trip search, not by name"
-         },
-         "vecs" : 1
-      },
-      {
-         "alias" : "",
-         "application" : "",
-         "category" : "kdf",
-         "crack" : {
-            "ids" : [],
-            "state" : "no"
-         },
-         "cracknote" : "",
-         "denotation" : "bcrypt(md5($plain))",
-         "expr" : "",
-         "expr_note" : "john's dynamic expression vocabulary has no bcrypt(), so this construction cannot be written as an expression; that is separate from whether john has a FORMAT for it",
-         "expr_tier" : "absent",
-         "hash_length" : "",
-         "hash_length_basis" : "",
-         "hashcat" : {
-            "ids" : [
-               25600
-            ],
-            "match" : "",
-            "state" : "proven",
-            "tier" : "vector"
-         },
-         "hashcat_salted" : "yes",
-         "hashcat_speed" : "slow",
-         "hashpipe" : {
-            "ids" : [
-               "BCRYPTMD5"
-            ],
-            "match" : "",
-            "state" : "proven",
-            "tier" : "vector"
-         },
-         "id" : "bcrypt-md5-plain",
          "john" : {
             "ids" : [],
             "state" : "no"
@@ -4100,24 +4037,31 @@
             "tier" : "vector"
          },
          "mdxfind_salted" : "no",
-         "name" : "bcrypt(md5($plain))",
+         "name" : "bcrypt(md5($pass))",
          "nesting_depth" : "",
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "none",
+               "entry" : "bcrypt-md5-plain",
+               "kind" : "duplicate-of",
+               "note" : "merged 2026-09-08: Merged 2026-09-08 on Royce's rule, stated the other way round: hashcat's own name for mode 25600 is \"bcrypt(md5($pass))\", character for character the survivor's id, and the -plain spelling matches no tool. The hashpipe type this row carried and the survivor did not is a seeding artifact -- both rows name mdxfind's BCRYPTMD5 and hashpipe shares mdxfind's type list."
+            }
+         ],
+         "sameas" : "duplicate of bcrypt-md5-plain",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
-            "hashcat" : "mode discovered by round-trip search, not by name",
+            "hashcat" : "hashcat's own published example hash for this mode, recovered by hashcat at this mode with hashcat's own published plaintext.",
             "hashpipe" : "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one.",
             "john" : "no format. Swept the 2 format(s) whose own valid() accepts this entry's own vector, as john --show=left reports them, on 2026-09-04 (a tools/discover-john.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. For john the control is also per ENTRY and not only per shape: every format counted above is one whose own loader ACCEPTED this hash, so each was asked this exact question and answered no. A format that cannot parse the hash is not counted at all, and an entry no format can parse is reported as unsearched rather than decided. Every applicable format ran to completion; a format killed at the timeout is counted as untested and withholds this verdict. No john format name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if john gains one, this becomes a mapping.",
-            "mdxfind" : ""
+            "mdxfind" : "type discovered by round-trip search, not by name"
          },
-         "vecs" : 1
+         "vecs" : 2
       },
       {
-         "alias" : "",
+         "alias" : "bcrypt(sha1($plain))",
          "application" : "",
          "category" : "kdf",
          "crack" : {
@@ -4142,77 +4086,14 @@
          "hashcat_salted" : "yes",
          "hashcat_speed" : "slow",
          "hashpipe" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "BCRYPTSHA1"
+            ],
+            "match" : "",
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "bcrypt-sha1-pass",
-         "john" : {
-            "ids" : [],
-            "state" : "no"
-         },
-         "john_expr" : "",
-         "john_salted" : "",
-         "john_work_factor" : "",
-         "legacy" : "",
-         "mdxfind" : {
-            "ids" : [
-               "BCRYPTSHA1"
-            ],
-            "match" : "",
-            "state" : "proven",
-            "tier" : "vector"
-         },
-         "mdxfind_salted" : "no",
-         "name" : "bcrypt(sha1($pass))",
-         "nesting_depth" : "",
-         "notes" : "",
-         "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
-         "serialization" : "shared",
-         "status" : "ok",
-         "tool_note" : {
-            "hashcat" : "hashcat's own published example hash for this mode, recovered by hashcat at this mode with hashcat's own published plaintext.",
-            "hashpipe" : "",
-            "john" : "no format. Swept the 2 format(s) whose own valid() accepts this entry's own vector, as john --show=left reports them, on 2026-09-04 (a tools/discover-john.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. For john the control is also per ENTRY and not only per shape: every format counted above is one whose own loader ACCEPTED this hash, so each was asked this exact question and answered no. A format that cannot parse the hash is not counted at all, and an entry no format can parse is reported as unsearched rather than decided. Every applicable format ran to completion; a format killed at the timeout is counted as untested and withholds this verdict. No john format name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if john gains one, this becomes a mapping.",
-            "mdxfind" : "type discovered by round-trip search, not by name"
-         },
-         "vecs" : 1
-      },
-      {
-         "alias" : "",
-         "application" : "",
-         "category" : "kdf",
-         "crack" : {
-            "ids" : [],
-            "state" : "no"
-         },
-         "cracknote" : "",
-         "denotation" : "bcrypt(sha1($plain))",
-         "expr" : "",
-         "expr_note" : "john's dynamic expression vocabulary has no bcrypt(), so this construction cannot be written as an expression; that is separate from whether john has a FORMAT for it",
-         "expr_tier" : "absent",
-         "hash_length" : "",
-         "hash_length_basis" : "",
-         "hashcat" : {
-            "ids" : [
-               25800
-            ],
-            "match" : "",
-            "state" : "proven",
-            "tier" : "vector"
-         },
-         "hashcat_salted" : "yes",
-         "hashcat_speed" : "slow",
-         "hashpipe" : {
-            "ids" : [
-               "BCRYPTSHA1"
-            ],
-            "match" : "",
-            "state" : "proven",
-            "tier" : "vector"
-         },
-         "id" : "bcrypt-sha1-plain",
          "john" : {
             "ids" : [],
             "state" : "no"
@@ -4230,21 +4111,28 @@
             "tier" : "vector"
          },
          "mdxfind_salted" : "no",
-         "name" : "bcrypt(sha1($plain))",
+         "name" : "bcrypt(sha1($pass))",
          "nesting_depth" : "",
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "none",
+               "entry" : "bcrypt-sha1-plain",
+               "kind" : "duplicate-of",
+               "note" : "merged 2026-09-08: Merged 2026-09-08 on Royce's rule, stated the other way round: hashcat's own name for mode 25800 is \"bcrypt(sha1($pass))\", character for character the survivor's id, and the -plain spelling matches no tool. The hashpipe type this row carried and the survivor did not is a seeding artifact -- both rows name mdxfind's BCRYPTSHA1 and hashpipe shares mdxfind's type list."
+            }
+         ],
+         "sameas" : "duplicate of bcrypt-sha1-plain",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
-            "hashcat" : "mode discovered by round-trip search, not by name",
+            "hashcat" : "hashcat's own published example hash for this mode, recovered by hashcat at this mode with hashcat's own published plaintext.",
             "hashpipe" : "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one.",
             "john" : "no format. Swept the 2 format(s) whose own valid() accepts this entry's own vector, as john --show=left reports them, on 2026-09-04 (a tools/discover-john.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. For john the control is also per ENTRY and not only per shape: every format counted above is one whose own loader ACCEPTED this hash, so each was asked this exact question and answered no. A format that cannot parse the hash is not counted at all, and an entry no format can parse is reported as unsearched rather than decided. Every applicable format ran to completion; a format killed at the timeout is counted as untested and withholds this verdict. No john format name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if john gains one, this becomes a mapping.",
-            "mdxfind" : ""
+            "mdxfind" : "type discovered by round-trip search, not by name"
          },
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -10850,78 +10738,7 @@
          "vecs" : 1
       },
       {
-         "alias" : "",
-         "application" : "",
-         "category" : "",
-         "crack" : {
-            "ids" : [],
-            "state" : "no"
-         },
-         "cracknote" : "",
-         "denotation" : "phpass(pass, salt, N)",
-         "expr" : "",
-         "expr_note" : "the construction upstream states for mdxfind type DRUPAL7 (e876) names phpass(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
-         "expr_tier" : "absent",
-         "hash_length" : "",
-         "hash_length_basis" : "",
-         "hashcat" : {
-            "ids" : [
-               7900
-            ],
-            "match" : "",
-            "state" : "proven",
-            "tier" : "vector"
-         },
-         "hashcat_salted" : "yes",
-         "hashcat_speed" : "slow",
-         "hashpipe" : {
-            "ids" : [
-               "DRUPAL7"
-            ],
-            "match" : "",
-            "state" : "proven",
-            "tier" : "vector"
-         },
-         "id" : "drupal-7",
-         "john" : {
-            "ids" : [
-               "Drupal7"
-            ],
-            "match" : "",
-            "state" : "proven",
-            "tier" : "vector"
-         },
-         "john_expr" : "",
-         "john_salted" : "yes",
-         "john_work_factor" : "iteration count",
-         "legacy" : "DRUPAL7",
-         "mdxfind" : {
-            "ids" : [
-               "DRUPAL7"
-            ],
-            "match" : "",
-            "state" : "proven",
-            "tier" : "vector"
-         },
-         "mdxfind_salted" : "no",
-         "name" : "Drupal 7",
-         "nesting_depth" : "",
-         "notes" : "",
-         "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
-         "serialization" : "shared",
-         "status" : "ok",
-         "tool_note" : {
-            "hashcat" : "",
-            "hashpipe" : "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one.",
-            "john" : "format discovered by round-trip search, not by name",
-            "mdxfind" : "type discovered by round-trip search, not by name"
-         },
-         "vecs" : 1
-      },
-      {
-         "alias" : "",
+         "alias" : "Drupal 7",
          "application" : "",
          "category" : "",
          "crack" : {
@@ -10965,7 +10782,7 @@
          "john_expr" : "",
          "john_salted" : "yes",
          "john_work_factor" : "iteration count",
-         "legacy" : "",
+         "legacy" : "DRUPAL7",
          "mdxfind" : {
             "ids" : [
                "DRUPAL7"
@@ -10979,8 +10796,15 @@
          "nesting_depth" : "",
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "none",
+               "entry" : "drupal-7",
+               "kind" : "duplicate-of",
+               "note" : "merged 2026-09-08: Merged 2026-09-08 on Royce's rule: where two tools name one computation, hashcat's published name becomes the id. Both hashcat (mode 7900) and john (format label) spell it \"Drupal7\"; the hyphenated form matches neither tool. Note the losing row held the tidier display name \"Drupal 7\", which moves to the survivor, so nothing readable is lost -- only the id changes."
+            }
+         ],
+         "sameas" : "duplicate of drupal-7",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -10989,7 +10813,7 @@
             "john" : "format discovered by round-trip search, not by name",
             "mdxfind" : ""
          },
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -14423,73 +14247,6 @@
          "vecs" : 1
       },
       {
-         "alias" : "",
-         "application" : "",
-         "category" : "",
-         "crack" : {
-            "ids" : [],
-            "state" : "no"
-         },
-         "cracknote" : "",
-         "denotation" : "EPiServer",
-         "expr" : "",
-         "expr_note" : "john publishes this as \"EPiServer\" and no category, so what kind of construction it is has not been established here. Its name is not expression-shaped and john's dynamic EXPRESSION language cannot be handed it, so there is no expression on this row. That says nothing about whether any tool can CRACK it, and it is not a claim that the algorithm HAS no expression -- run seed-hx.pl and derive-expressions.pl, which can settle that from evidence.",
-         "expr_tier" : "absent",
-         "hash_length" : "",
-         "hash_length_basis" : "",
-         "hashcat" : {
-            "ids" : [],
-            "state" : "unknown"
-         },
-         "hashcat_salted" : "",
-         "hashcat_speed" : "",
-         "hashpipe" : {
-            "ids" : [
-               "EPISERVER"
-            ],
-            "match" : "",
-            "state" : "proven",
-            "tier" : "vector"
-         },
-         "id" : "episerver-johnepiserver",
-         "john" : {
-            "ids" : [
-               "EPiServer"
-            ],
-            "match" : "",
-            "state" : "proven",
-            "tier" : "vector"
-         },
-         "john_expr" : "",
-         "john_salted" : "yes",
-         "john_work_factor" : "hash type [1:SHA1 2:SHA256]",
-         "legacy" : "",
-         "mdxfind" : {
-            "ids" : [
-               "EPISERVER"
-            ],
-            "match" : "",
-            "state" : "proven",
-            "tier" : "vector"
-         },
-         "mdxfind_salted" : "no",
-         "name" : "EPiServer",
-         "nesting_depth" : "",
-         "notes" : "Accepted 2026-09-04 from a name match that was then measured. TRANSCODE, proven: mdxfind's EPISERVER reader REFUSES base64 padding on the DIGEST field and accepts it on the salt. This entry's own vector reproduces under EPISERVER pinned with the single trailing '=' removed from the digest, handed to mdxfind with only the plaintext the john vector already states. That is why the 2026-09-03 sweep found this row's two siblings and not this row: their digests happen to be unpadded. The vector stored for mdxfind is mdxfind's own example rather than the transcode, because an independent credential is better evidence than the same one written twice.",
-         "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
-         "serialization" : "divergent",
-         "status" : "ok",
-         "tool_note" : {
-            "hashcat" : "",
-            "hashpipe" : "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one.",
-            "john" : "john's own published example ciphertext for this format, recovered by john under this format. john publishes no plaintext, so the plaintext was found by handing john its own example and a candidate list -- what john recovered IS the plaintext, by construction.",
-            "mdxfind" : "name match accepted by a curator on 2026-09-04 and not yet reproduced by this repository's own tooling; seed-vectors.pl and verify-vectors.pl decide it. See notes."
-         },
-         "vecs" : 2
-      },
-      {
          "alias" : "Episerver 6.x < .NET 4",
          "application" : "",
          "category" : "application",
@@ -14524,12 +14281,16 @@
          },
          "id" : "episerver",
          "john" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "EPiServer"
+            ],
+            "match" : "",
+            "state" : "proven",
+            "tier" : "vector"
          },
          "john_expr" : "",
-         "john_salted" : "",
-         "john_work_factor" : "",
+         "john_salted" : "yes",
+         "john_work_factor" : "hash type [1:SHA1 2:SHA256]",
          "legacy" : "",
          "mdxfind" : {
             "ids" : [
@@ -14542,7 +14303,7 @@
          "mdxfind_salted" : "no",
          "name" : "EPISERVER",
          "nesting_depth" : 1,
-         "notes" : "",
+         "notes" : "Accepted 2026-09-04 from a name match that was then measured. TRANSCODE, proven: mdxfind's EPISERVER reader REFUSES base64 padding on the DIGEST field and accepts it on the salt. This entry's own vector reproduces under EPISERVER pinned with the single trailing '=' removed from the digest, handed to mdxfind with only the plaintext the john vector already states. That is why the 2026-09-03 sweep found this row's two siblings and not this row: their digests happen to be unpadded. The vector stored for mdxfind is mdxfind's own example rather than the transcode, because an independent credential is better evidence than the same one written twice.",
          "primary_form" : "",
          "relations" : [
             {
@@ -14550,18 +14311,24 @@
                "entry" : "episerver-6-x-lt-net-4",
                "kind" : "duplicate-of",
                "note" : "merged 2026-09-07: Strict subset: the loser published hashcat 141 and mdxfind EPISERVER, both of which the survivor already carries, and the survivor adds hashpipe EPISERVER. The siblings episerver-6-x-ge-net-4 (hashcat 1441) and episerver-johnepiserver (john EPiServer) each carry an identifier of their own and are NOT merged here."
+            },
+            {
+               "distinction" : "none",
+               "entry" : "episerver-johnepiserver",
+               "kind" : "duplicate-of",
+               "note" : "merged 2026-09-08: Merged 2026-09-08. The naming rule does not reach this pair, because neither row was poorer: this one held the john format, the survivor holds hashcat 141 plus a proven expression and an alias, and both held the same mdxfind and hashpipe types and two vectors each. The survivor is chosen because episerver is already this family's established survivor -- 794b4eb merged episerver-6-x-lt-net-4 into it on 2026-09-06 -- so a second consolidation into the same id keeps the family on one row rather than splitting it a different way. The merge gives one row naming all four tools."
             }
          ],
-         "sameas" : "duplicate of episerver-6-x-lt-net-4",
-         "serialization" : "shared",
+         "sameas" : "duplicate of episerver-6-x-lt-net-4; duplicate of episerver-johnepiserver",
+         "serialization" : "divergent",
          "status" : "needs-review",
          "tool_note" : {
             "hashcat" : "mode discovered by round-trip search, not by name",
             "hashpipe" : "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one.",
-            "john" : "",
+            "john" : "john's own published example ciphertext for this format, recovered by john under this format. john publishes no plaintext, so the plaintext was found by handing john its own example and a candidate list -- what john recovered IS the plaintext, by construction.",
             "mdxfind" : "mdxfind's own published example for this identifier, recovered by mdxfind at this identifier with mdxfind's own published plaintext."
          },
-         "vecs" : 2
+         "vecs" : 3
       },
       {
          "alias" : "",
@@ -27845,70 +27612,6 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "protocol",
-         "crack" : {
-            "ids" : [],
-            "state" : "no"
-         },
-         "cracknote" : "",
-         "denotation" : "Kerberos 5 AS-REP etype 17/18/23",
-         "expr" : "",
-         "expr_note" : "john publishes this as \"Kerberos 5 AS-REP etype 17/18/23\" and no category, so what kind of construction it is has not been established here. Its name is not expression-shaped and john's dynamic EXPRESSION language cannot be handed it, so there is no expression on this row. That says nothing about whether any tool can CRACK it, and it is not a claim that the algorithm HAS no expression -- run seed-hx.pl and derive-expressions.pl, which can settle that from evidence.",
-         "expr_tier" : "absent",
-         "hash_length" : "",
-         "hash_length_basis" : "",
-         "hashcat" : {
-            "ids" : [
-               32100
-            ],
-            "match" : "",
-            "state" : "proven",
-            "tier" : "vector"
-         },
-         "hashcat_salted" : "yes",
-         "hashcat_speed" : "slow",
-         "hashpipe" : {
-            "ids" : [],
-            "state" : "unknown"
-         },
-         "id" : "kerberos-5-as-rep-etype-17-18-23",
-         "john" : {
-            "ids" : [
-               "krb5asrep",
-               "krb5asrep-aes-opencl"
-            ],
-            "match" : "",
-            "state" : "proven",
-            "tier" : "vector"
-         },
-         "john_expr" : "",
-         "john_salted" : "yes",
-         "john_work_factor" : "etype",
-         "legacy" : "",
-         "mdxfind" : {
-            "ids" : [],
-            "state" : "no"
-         },
-         "mdxfind_salted" : "",
-         "name" : "Kerberos 5 AS-REP etype 17/18/23",
-         "nesting_depth" : "",
-         "notes" : "",
-         "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
-         "serialization" : "shared",
-         "status" : "ok",
-         "tool_note" : {
-            "hashcat" : "mode discovered by round-trip search, not by name",
-            "hashpipe" : "",
-            "john" : "john's own published example ciphertext for this format, recovered by john under this format. john publishes no plaintext, so the plaintext was found by handing john its own example and a candidate list -- what john recovered IS the plaintext, by construction. GPU build(s) krb5asrep-aes-opencl proven on 2026-09-01 by cracking this entry's own vector(s) under that exact format; john ships no CPU format of that name, so discover-john.pl --mirror-gpu could not place them.",
-            "mdxfind" : "no type. Swept all 1002 mdxfind types on 2026-09-03 (a tools/discover-mdxfind.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable type ran to completion; a type killed at the timeout is counted as untested and withholds this verdict. No mdxfind type name matches any identifier this entry publishes either, normalized by the separator-drift rule. Corroborated by hashpipe, a second binary built from the same catalog: handed this entry's own hash and plaintext it names no type at all. It is the more direct instrument -- it recomputes rather than cracking -- and on this corpus it named a type for 58 entries the sweep alone called silent. This is the absence of an IDENTIFIER, not of the algorithm: if mdxfind gains one, this becomes a mapping."
-         },
-         "vecs" : 1
-      },
-      {
-         "alias" : "",
-         "application" : "",
          "category" : "",
          "crack" : {
             "ids" : [],
@@ -28144,7 +27847,7 @@
          "vecs" : 1
       },
       {
-         "alias" : "",
+         "alias" : "Kerberos 5 AS-REP etype 17/18/23",
          "application" : "",
          "category" : "protocol",
          "crack" : {
@@ -28195,9 +27898,16 @@
          "nesting_depth" : "",
          "notes" : "Vector(s) 'hashcat' added 2026-09-01: the SAME Kerberos 5 AS-REP credential(s) already above, re-serialized into the form john reads. They are not independent evidence -- do not read two agreeing vectors here as corroboration. hashcat writes $krb5asrep$<et>$<user>$<REALM>$<checksum>$<data>; john writes $krb5asrep$<et>$<REALM><user>$<data>$<checksum>. The re-encoding was not assumed: each transcoded string was handed to john with only the plaintext the hashcat vector already states, and fell under both the CPU format and the GPU build.",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
-         "serialization" : "divergent",
+         "relations" : [
+            {
+               "distinction" : "none",
+               "entry" : "kerberos-5-as-rep-etype-17-18-23",
+               "kind" : "duplicate-of",
+               "note" : "merged 2026-09-08: Merged 2026-09-08, and NOT on the naming rule -- this one is decided by CLAUDE.md's \"one entry is one computation\". This row was named for THREE etypes at once, which no single row can be, while its only hashcat mode is 32100, \"Kerberos 5, etype 17, AS-REP\" -- etype 17 alone. Rows for etype 18 (mode 32200) and etype 23 (mode 18200) already exist separately, so the three-etype name overlapped two other rows. The survivor also carries two vectors to this row's one. john's krb5asrep genuinely does cover all three etypes with one format, and that is why it is named on all three rows; a format spanning several computations does not make them one entry."
+            }
+         ],
+         "sameas" : "duplicate of kerberos-5-as-rep-etype-17-18-23",
+         "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
             "hashcat" : "hashcat's own published example hash for this mode, recovered by hashcat at this mode with hashcat's own published plaintext.",
@@ -28205,7 +27915,7 @@
             "john" : "GPU build(s) krb5asrep-aes-opencl proven on 2026-09-01 by cracking this entry's own vector(s) under that exact format; john ships no CPU format of that name, so discover-john.pl --mirror-gpu could not place them. CPU format krb5asrep added the same day and on the same evidence: it loads and cracks the transcoded vector too. john covers etypes 17, 18 and 23 under this one identifier, which is why kerberos-5-as-rep-etype-17-18-23 names it as well.",
             "mdxfind" : "no type. Swept all 1002 mdxfind types on 2026-09-03 (a tools/discover-mdxfind.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable type ran to completion; a type killed at the timeout is counted as untested and withholds this verdict. No mdxfind type name matches any identifier this entry publishes either, normalized by the separator-drift rule. Corroborated by hashpipe, a second binary built from the same catalog: handed this entry's own hash and plaintext it names no type at all. It is the more direct instrument -- it recomputes rather than cracking -- and on this corpus it named a type for 58 entries the sweep alone called silent. This is the absence of an IDENTIFIER, not of the algorithm: if mdxfind gains one, this becomes a mapping."
          },
-         "vecs" : 2
+         "vecs" : 3
       },
       {
          "alias" : "",
@@ -39229,7 +38939,7 @@
          "vecs" : 1
       },
       {
-         "alias" : "",
+         "alias" : "MD5-MD5MD5PASSSALT-PEP",
          "application" : "",
          "category" : "composite",
          "crack" : {
@@ -39242,7 +38952,7 @@
          "expr_note" : "the construction upstream states for mdxfind type MD5-MD5MD5PASSSALT-PEP (e819) uses a PEPPER: a site-wide secret that appears in no hash and cannot be derived from one. hx makes it a built-in variable beside pass, salt and salt2, with its own slot in the VM, and mdxfind reads it from a file (-j global array, -P per-type). john's dynamic expression language has no equivalent: $s2 is a second PER-HASH salt, not a site secret, and a $c1 constant would have to carry the value, which is exactly what a pepper does not publish. The absence therefore holds for every possible pepper rather than for this vector, which is what makes it a lookup. It says nothing about whether john can CRACK this. Established from mdxfind's source (hx.y line 19, hx_vm.c HX_SLOT_PEPPER) on 2026-09-02.",
          "expr_tier" : "absent",
          "hash_length" : 32,
-         "hash_length_basis" : "observed",
+         "hash_length_basis" : "fixed",
          "hashcat" : {
             "ids" : [
                31700
@@ -39254,8 +38964,12 @@
          "hashcat_salted" : "yes",
          "hashcat_speed" : "fast",
          "hashpipe" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "MD5-MD5MD5PASSSALT-PEP"
+            ],
+            "match" : "",
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "md5-md5-md5-plain-salt1-salt2",
          "john" : {
@@ -39279,17 +38993,24 @@
          "nesting_depth" : "",
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "none",
+               "entry" : "md5-md5md5passsalt-pep",
+               "kind" : "duplicate-of",
+               "note" : "merged 2026-09-08: Merged 2026-09-08 on Royce's rule: where two tools name one computation, hashcat's published name becomes the id. hashcat's own name for mode 31700 is \"md5(md5(md5($pass).$salt1).$salt2)\", which is the survivor's id; MD5-MD5MD5PASSSALT-PEP is mdxfind's type name for the same construction. The hashpipe type this row carried and the survivor did not is a seeding artifact, not a difference in substance -- both rows name the same mdxfind type and hashpipe shares mdxfind's type list. The mdxfind spelling stays findable as an alias and as this tombstone."
+            }
+         ],
+         "sameas" : "duplicate of md5-md5md5passsalt-pep",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
             "hashcat" : "",
-            "hashpipe" : "",
+            "hashpipe" : "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one.",
             "john" : "",
             "mdxfind" : "type discovered by round-trip search, not by name"
          },
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -44465,73 +44186,6 @@
             "hashpipe" : "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one.",
             "john" : "no format. Swept the 76 format(s) whose own valid() accepts this entry's own vector, as john --show=left reports them, on 2026-09-04 (a tools/discover-john.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. For john the control is also per ENTRY and not only per shape: every format counted above is one whose own loader ACCEPTED this hash, so each was asked this exact question and answered no. A format that cannot parse the hash is not counted at all, and an entry no format can parse is reported as unsearched rather than decided. Every applicable format ran to completion; a format killed at the timeout is counted as untested and withholds this verdict. No john format name matches any identifier this entry publishes either, normalized by the separator-drift rule. john nonetheless COMPUTES this: the entry carries a proven john_dynamic_expr, dynamic=md5(md5($p).md5($p).md5($p).md5($p).md5($p).md5($p)), which john's own dynamic compiler recovered this entry's plaintext from this entry's hash under. That is a runnable command and not a format identifier, which is why it stays out of this column -- putting it here would inflate john's coverage with something no --list=formats will ever show. Read this verdict as 'no named format', not as 'john cannot do it'. This is the absence of an IDENTIFIER, not of the algorithm: if john gains one, this becomes a mapping.",
             "mdxfind" : "mdxfind's own published example for this identifier, recovered by mdxfind at this identifier with mdxfind's own published plaintext."
-         },
-         "vecs" : 1
-      },
-      {
-         "alias" : "",
-         "application" : "",
-         "category" : "composite",
-         "crack" : {
-            "ids" : [],
-            "state" : "no"
-         },
-         "cracknote" : "",
-         "denotation" : "md5(md5(md5(pass) . salt) . pepper)",
-         "expr" : "",
-         "expr_note" : "Withdrawn 2026-08-31. This entry carried the expression \"md5(md5(md5($p).$s).pepper)\", transcribed from the hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A entry for mdxfind type MD5-MD5MD5PASSSALT-PEP (e819) by a parser that has since been corrected: it carries the bare operand pepper, which john's dynamic language cannot bind. Nothing can compile that string, so it was a claim rather than a fact, and it is withdrawn rather than adjusted -- guessing what upstream meant is exactly what the expression field exists to stop. Re-run seed-hx.pl and denote-hx.pl to settle this entry from the corrected parse. Settled here: the construction upstream states for mdxfind type MD5-MD5MD5PASSSALT-PEP (e819) uses a PEPPER: a site-wide secret that appears in no hash and cannot be derived from one. hx makes it a built-in variable beside pass, salt and salt2, with its own slot in the VM, and mdxfind reads it from a file (-j global array, -P per-type). john's dynamic expression language has no equivalent: $s2 is a second PER-HASH salt, not a site secret, and a $c1 constant would have to carry the value, which is exactly what a pepper does not publish. The absence therefore holds for every possible pepper rather than for this vector, which is what makes it a lookup. It says nothing about whether john can CRACK this. Established from mdxfind's source (hx.y line 19, hx_vm.c HX_SLOT_PEPPER) on 2026-09-02.",
-         "expr_tier" : "absent",
-         "hash_length" : 32,
-         "hash_length_basis" : "observed",
-         "hashcat" : {
-            "ids" : [
-               31700
-            ],
-            "match" : "",
-            "state" : "proven",
-            "tier" : "vector"
-         },
-         "hashcat_salted" : "yes",
-         "hashcat_speed" : "fast",
-         "hashpipe" : {
-            "ids" : [
-               "MD5-MD5MD5PASSSALT-PEP"
-            ],
-            "match" : "",
-            "state" : "proven",
-            "tier" : "vector"
-         },
-         "id" : "md5-md5md5passsalt-pep",
-         "john" : {
-            "ids" : [],
-            "state" : "unknown"
-         },
-         "john_expr" : "",
-         "john_salted" : "",
-         "john_work_factor" : "",
-         "legacy" : "",
-         "mdxfind" : {
-            "ids" : [
-               "MD5-MD5MD5PASSSALT-PEP"
-            ],
-            "match" : "",
-            "state" : "proven",
-            "tier" : "vector"
-         },
-         "mdxfind_salted" : "yes",
-         "name" : "MD5-MD5MD5PASSSALT-PEP",
-         "nesting_depth" : "",
-         "notes" : "",
-         "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
-         "serialization" : "shared",
-         "status" : "ok",
-         "tool_note" : {
-            "hashcat" : "",
-            "hashpipe" : "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one.",
-            "john" : "",
-            "mdxfind" : ""
          },
          "vecs" : 1
       },
@@ -65009,7 +64663,7 @@
          "vecs" : 1
       },
       {
-         "alias" : "",
+         "alias" : "SHA1-SALT-SPECIAL",
          "application" : "",
          "category" : "composite",
          "crack" : {
@@ -65022,7 +64676,7 @@
          "expr_note" : "",
          "expr_tier" : "",
          "hash_length" : 40,
-         "hash_length_basis" : "observed",
+         "hash_length_basis" : "fixed",
          "hashcat" : {
             "ids" : [
                14400
@@ -65034,8 +64688,12 @@
          "hashcat_salted" : "yes",
          "hashcat_speed" : "fast",
          "hashpipe" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "SHA1-SALT-SPECIAL"
+            ],
+            "match" : "",
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "sha1-cx",
          "john" : {
@@ -65059,17 +64717,24 @@
          "nesting_depth" : "",
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "none",
+               "entry" : "sha1-salt-special",
+               "kind" : "duplicate-of",
+               "note" : "merged 2026-09-08: Merged 2026-09-08 on Royce's rule: where two tools name one computation, hashcat's published name becomes the id. Both rows are the same computation under two names -- hashcat calls mode 14400 \"sha1(CX)\" and mdxfind calls the type SHA1-SALT-SPECIAL -- and nothing in the data separates them. The hashpipe type this row carried and the survivor did not is a seeding artifact rather than a difference in substance: both rows name mdxfind's SHA1-SALT-SPECIAL, and hashpipe shares mdxfind's type list, so either row could have carried it. SHA1-SALT-SPECIAL stays findable as an alias on the survivor and as this tombstone."
+            }
+         ],
+         "sameas" : "duplicate of sha1-salt-special",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
             "hashcat" : "hashcat's own published example hash for this mode, recovered by hashcat at this mode with hashcat's own published plaintext.",
-            "hashpipe" : "",
+            "hashpipe" : "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one.",
             "john" : "no format. Swept the 34 format(s) whose own valid() accepts this entry's own vector, as john --show=left reports them, on 2026-09-04 (a tools/discover-john.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. For john the control is also per ENTRY and not only per shape: every format counted above is one whose own loader ACCEPTED this hash, so each was asked this exact question and answered no. A format that cannot parse the hash is not counted at all, and an entry no format can parse is reported as unsearched rather than decided. Every applicable format ran to completion; a format killed at the timeout is counted as untested and withholds this verdict. No john format name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if john gains one, this becomes a mapping.",
             "mdxfind" : "type discovered by round-trip search, not by name"
          },
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -70256,73 +69921,6 @@
             "hashcat" : "",
             "hashpipe" : "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one.",
             "john" : "",
-            "mdxfind" : ""
-         },
-         "vecs" : 1
-      },
-      {
-         "alias" : "",
-         "application" : "",
-         "category" : "composite",
-         "crack" : {
-            "ids" : [],
-            "state" : "no"
-         },
-         "cracknote" : "",
-         "denotation" : "",
-         "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
-         "hash_length" : 40,
-         "hash_length_basis" : "observed",
-         "hashcat" : {
-            "ids" : [
-               14400
-            ],
-            "match" : "",
-            "state" : "proven",
-            "tier" : "vector"
-         },
-         "hashcat_salted" : "yes",
-         "hashcat_speed" : "fast",
-         "hashpipe" : {
-            "ids" : [
-               "SHA1-SALT-SPECIAL"
-            ],
-            "match" : "",
-            "state" : "proven",
-            "tier" : "vector"
-         },
-         "id" : "sha1-salt-special",
-         "john" : {
-            "ids" : [],
-            "state" : "no"
-         },
-         "john_expr" : "",
-         "john_salted" : "",
-         "john_work_factor" : "",
-         "legacy" : "",
-         "mdxfind" : {
-            "ids" : [
-               "SHA1-SALT-SPECIAL"
-            ],
-            "match" : "",
-            "state" : "proven",
-            "tier" : "vector"
-         },
-         "mdxfind_salted" : "yes",
-         "name" : "SHA1-SALT-SPECIAL",
-         "nesting_depth" : "",
-         "notes" : "",
-         "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
-         "serialization" : "shared",
-         "status" : "ok",
-         "tool_note" : {
-            "hashcat" : "mode discovered by round-trip search, not by name",
-            "hashpipe" : "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one.",
-            "john" : "no format. Swept the 34 format(s) whose own valid() accepts this entry's own vector, as john --show=left reports them, on 2026-09-04 (a tools/discover-john.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. For john the control is also per ENTRY and not only per shape: every format counted above is one whose own loader ACCEPTED this hash, so each was asked this exact question and answered no. A format that cannot parse the hash is not counted at all, and an entry no format can parse is reported as unsearched rather than decided. Every applicable format ran to completion; a format killed at the timeout is counted as untested and withholds this verdict. No john format name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if john gains one, this becomes a mapping.",
             "mdxfind" : ""
          },
          "vecs" : 1
@@ -86362,7 +85960,7 @@
          "vecs" : 1
       },
       {
-         "alias" : "",
+         "alias" : "SHA512SHA512RAWUSER",
          "application" : "",
          "category" : "composite",
          "crack" : {
@@ -86371,11 +85969,11 @@
          },
          "cracknote" : "",
          "denotation" : "",
-         "expr" : "",
-         "expr_note" : "",
-         "expr_tier" : "",
+         "expr" : "sha512(sha512_raw($p).$s)",
+         "expr_note" : "round-tripped as --format=dynamic=<expr> against every vector this entry carries",
+         "expr_tier" : "vector",
          "hash_length" : 128,
-         "hash_length_basis" : "observed",
+         "hash_length_basis" : "fixed",
          "hashcat" : {
             "ids" : [
                32420
@@ -86387,15 +85985,19 @@
          "hashcat_salted" : "yes",
          "hashcat_speed" : "fast",
          "hashpipe" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "SHA512SHA512RAWUSER"
+            ],
+            "match" : "",
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "sha512-sha512-bin-pass-salt",
          "john" : {
             "ids" : [],
             "state" : "no"
          },
-         "john_expr" : "",
+         "john_expr" : "dynamic=sha512(sha512_raw($p).$s)",
          "john_salted" : "",
          "john_work_factor" : "",
          "legacy" : "",
@@ -86409,20 +86011,27 @@
          },
          "mdxfind_salted" : "no",
          "name" : "sha512(sha512_bin($pass).$salt)",
-         "nesting_depth" : "",
+         "nesting_depth" : 2,
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "none",
+               "entry" : "sha512sha512rawuser",
+               "kind" : "duplicate-of",
+               "note" : "merged 2026-09-08: Merged 2026-09-08 on Royce's rule: where two tools name one computation, hashcat's published name becomes the id. hashcat's own name for mode 32420 is \"sha512(sha512_bin($pass).$salt)\", which is the survivor's id; SHA512SHA512RAWUSER is mdxfind's type name for the same construction. This row also carried the proven expression sha512(sha512_raw($p).$s), which moves to the survivor. The hashpipe type is a seeding artifact rather than a difference in substance -- both rows name the same mdxfind type."
+            }
+         ],
+         "sameas" : "duplicate of sha512sha512rawuser",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
             "hashcat" : "hashcat's own published example hash for this mode, recovered by hashcat at this mode with hashcat's own published plaintext.",
-            "hashpipe" : "",
+            "hashpipe" : "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one.",
             "john" : "no format. Swept the 24 format(s) whose own valid() accepts this entry's own vector, as john --show=left reports them, on 2026-09-04 (a tools/discover-john.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. For john the control is also per ENTRY and not only per shape: every format counted above is one whose own loader ACCEPTED this hash, so each was asked this exact question and answered no. A format that cannot parse the hash is not counted at all, and an entry no format can parse is reported as unsearched rather than decided. Every applicable format ran to completion; a format killed at the timeout is counted as untested and withholds this verdict. No john format name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if john gains one, this becomes a mapping.",
             "mdxfind" : "type discovered by round-trip search, not by name"
          },
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -86817,73 +86426,6 @@
             "mdxfind" : ""
          },
          "vecs" : 2
-      },
-      {
-         "alias" : "",
-         "application" : "",
-         "category" : "composite",
-         "crack" : {
-            "ids" : [],
-            "state" : "no"
-         },
-         "cracknote" : "",
-         "denotation" : "",
-         "expr" : "sha512(sha512_raw($p).$s)",
-         "expr_note" : "round-tripped as --format=dynamic=<expr> against every vector this entry carries",
-         "expr_tier" : "vector",
-         "hash_length" : 128,
-         "hash_length_basis" : "observed",
-         "hashcat" : {
-            "ids" : [
-               32420
-            ],
-            "match" : "",
-            "state" : "proven",
-            "tier" : "vector"
-         },
-         "hashcat_salted" : "yes",
-         "hashcat_speed" : "fast",
-         "hashpipe" : {
-            "ids" : [
-               "SHA512SHA512RAWUSER"
-            ],
-            "match" : "",
-            "state" : "proven",
-            "tier" : "vector"
-         },
-         "id" : "sha512sha512rawuser",
-         "john" : {
-            "ids" : [],
-            "state" : "no"
-         },
-         "john_expr" : "dynamic=sha512(sha512_raw($p).$s)",
-         "john_salted" : "",
-         "john_work_factor" : "",
-         "legacy" : "",
-         "mdxfind" : {
-            "ids" : [
-               "SHA512SHA512RAWUSER"
-            ],
-            "match" : "",
-            "state" : "proven",
-            "tier" : "vector"
-         },
-         "mdxfind_salted" : "no",
-         "name" : "SHA512SHA512RAWUSER",
-         "nesting_depth" : 2,
-         "notes" : "",
-         "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
-         "serialization" : "shared",
-         "status" : "ok",
-         "tool_note" : {
-            "hashcat" : "mode discovered by round-trip search, not by name",
-            "hashpipe" : "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one.",
-            "john" : "no format. Swept the 24 format(s) whose own valid() accepts this entry's own vector, as john --show=left reports them, on 2026-09-04 (a tools/discover-john.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. For john the control is also per ENTRY and not only per shape: every format counted above is one whose own loader ACCEPTED this hash, so each was asked this exact question and answered no. A format that cannot parse the hash is not counted at all, and an entry no format can parse is reported as unsearched rather than decided. Every applicable format ran to completion; a format killed at the timeout is counted as untested and withholds this verdict. No john format name matches any identifier this entry publishes either, normalized by the separator-drift rule. john nonetheless COMPUTES this: the entry carries a proven john_dynamic_expr, dynamic=sha512(sha512_raw($p).$s), which john's own dynamic compiler recovered this entry's plaintext from this entry's hash under. That is a runnable command and not a format identifier, which is why it stays out of this column -- putting it here would inflate john's coverage with something no --list=formats will ever show. Read this verdict as 'no named format', not as 'john cannot do it'. This is the absence of an IDENTIFIER, not of the algorithm: if john gains one, this becomes a mapping.",
-            "mdxfind" : ""
-         },
-         "vecs" : 1
       },
       {
          "alias" : "",
@@ -100606,12 +100148,40 @@
       }
    ],
    "generated" : "2026-09-07",
-   "merged" : 25,
+   "merged" : 33,
    "tombstones" : [
+      {
+         "id" : "bcrypt-md5-plain",
+         "merged_into" : "bcrypt-md5-pass",
+         "name" : "bcrypt(md5($plain))",
+         "relations_text" : "duplicate of bcrypt-md5-pass",
+         "status" : "merged"
+      },
+      {
+         "id" : "bcrypt-sha1-plain",
+         "merged_into" : "bcrypt-sha1-pass",
+         "name" : "bcrypt(sha1($plain))",
+         "relations_text" : "duplicate of bcrypt-sha1-pass",
+         "status" : "merged"
+      },
+      {
+         "id" : "drupal-7",
+         "merged_into" : "drupal7",
+         "name" : "Drupal 7",
+         "relations_text" : "duplicate of drupal7",
+         "status" : "merged"
+      },
       {
          "id" : "episerver-6-x-lt-net-4",
          "merged_into" : "episerver",
          "name" : "Episerver 6.x < .NET 4",
+         "relations_text" : "duplicate of episerver",
+         "status" : "merged"
+      },
+      {
+         "id" : "episerver-johnepiserver",
+         "merged_into" : "episerver",
+         "name" : "EPiServer",
          "relations_text" : "duplicate of episerver",
          "status" : "merged"
       },
@@ -100669,6 +100239,20 @@
          "merged_into" : "hmac-sha512-key-salt",
          "name" : "hmac(\"sha512\", $plain, $salt)",
          "relations_text" : "duplicate of hmac-sha512-key-salt",
+         "status" : "merged"
+      },
+      {
+         "id" : "kerberos-5-as-rep-etype-17-18-23",
+         "merged_into" : "kerberos-5-etype-17-as-rep",
+         "name" : "Kerberos 5 AS-REP etype 17/18/23",
+         "relations_text" : "duplicate of kerberos-5-etype-17-as-rep",
+         "status" : "merged"
+      },
+      {
+         "id" : "md5-md5md5passsalt-pep",
+         "merged_into" : "md5-md5-md5-plain-salt1-salt2",
+         "name" : "MD5-MD5MD5PASSSALT-PEP",
+         "relations_text" : "duplicate of md5-md5-md5-plain-salt1-salt2",
          "status" : "merged"
       },
       {
@@ -100742,6 +100326,13 @@
          "status" : "merged"
       },
       {
+         "id" : "sha1-salt-special",
+         "merged_into" : "sha1-cx",
+         "name" : "SHA1-SALT-SPECIAL",
+         "relations_text" : "duplicate of sha1-cx",
+         "status" : "merged"
+      },
+      {
          "id" : "sha224",
          "merged_into" : "raw-sha224",
          "name" : "SHA224",
@@ -100753,6 +100344,13 @@
          "merged_into" : "raw-sha384",
          "name" : "sha384",
          "relations_text" : "duplicate of raw-sha384",
+         "status" : "merged"
+      },
+      {
+         "id" : "sha512sha512rawuser",
+         "merged_into" : "sha512-sha512-bin-pass-salt",
+         "name" : "SHA512SHA512RAWUSER",
+         "relations_text" : "duplicate of sha512-sha512-bin-pass-salt",
          "status" : "merged"
       },
       {
