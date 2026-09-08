@@ -1,5 +1,5 @@
 {
-   "count" : 1557,
+   "count" : 1553,
    "entries" : [
       {
          "alias" : "",
@@ -21904,70 +21904,6 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "composite",
-         "crack" : {
-            "ids" : [],
-            "state" : "no"
-         },
-         "cracknote" : "",
-         "denotation" : "hmac(\"ripemd160\", $plain, $salt)",
-         "expr" : "",
-         "expr_note" : "john's dynamic expression vocabulary has no hmac(), so this construction cannot be written as an expression; that is separate from whether john has a FORMAT for it",
-         "expr_tier" : "absent",
-         "hash_length" : 40,
-         "hash_length_basis" : "observed",
-         "hashcat" : {
-            "ids" : [
-               6060
-            ],
-            "state" : "proven",
-            "tier" : "vector"
-         },
-         "hashcat_salted" : "yes",
-         "hashcat_speed" : "fast",
-         "hashpipe" : {
-            "ids" : [
-               "HMAC-RMD160"
-            ],
-            "state" : "proven",
-            "tier" : "vector"
-         },
-         "id" : "hmac-ripemd160-plain-salt",
-         "john" : {
-            "ids" : [],
-            "state" : "no"
-         },
-         "john_expr" : "",
-         "john_salted" : "",
-         "john_work_factor" : "",
-         "legacy" : "not supported",
-         "mdxfind" : {
-            "ids" : [
-               "HMAC-RMD160"
-            ],
-            "state" : "proven",
-            "tier" : "vector"
-         },
-         "mdxfind_salted" : "no",
-         "name" : "hmac(\"ripemd160\", $plain, $salt)",
-         "nesting_depth" : "",
-         "notes" : "",
-         "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
-         "serialization" : "shared",
-         "status" : "ok",
-         "tool_note" : {
-            "hashcat" : "mode discovered by round-trip search, not by name",
-            "hashpipe" : "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one.",
-            "john" : "no format. Swept the 33 format(s) whose own valid() accepts this entry's own vector, as john --show=left reports them, on 2026-09-04 (a tools/discover-john.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. For john the control is also per ENTRY and not only per shape: every format counted above is one whose own loader ACCEPTED this hash, so each was asked this exact question and answered no. A format that cannot parse the hash is not counted at all, and an entry no format can parse is reported as unsearched rather than decided. Every applicable format ran to completion; a format killed at the timeout is counted as untested and withholds this verdict. No john format name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if john gains one, this becomes a mapping.",
-            "mdxfind" : ""
-         },
-         "vecs" : 1
-      },
-      {
-         "alias" : "",
-         "application" : "",
          "category" : "",
          "crack" : {
             "ids" : [],
@@ -22022,70 +21958,6 @@
             "hashcat" : "no mode. Swept the 16 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-03 (tools/discover-hashcat.pl --all, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
             "hashpipe" : "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one.",
             "john" : "no format. Swept the 56 format(s) whose own valid() accepts this entry's own vector, as john --show=left reports them, on 2026-09-04 (a tools/discover-john.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. For john the control is also per ENTRY and not only per shape: every format counted above is one whose own loader ACCEPTED this hash, so each was asked this exact question and answered no. A format that cannot parse the hash is not counted at all, and an entry no format can parse is reported as unsearched rather than decided. Every applicable format ran to completion; a format killed at the timeout is counted as untested and withholds this verdict. No john format name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if john gains one, this becomes a mapping.",
-            "mdxfind" : ""
-         },
-         "vecs" : 1
-      },
-      {
-         "alias" : "",
-         "application" : "",
-         "category" : "composite",
-         "crack" : {
-            "ids" : [],
-            "state" : "no"
-         },
-         "cracknote" : "",
-         "denotation" : "hmac(\"ripemd320\", $plain, $salt)",
-         "expr" : "",
-         "expr_note" : "john's dynamic expression vocabulary has no hmac(), so this construction cannot be written as an expression; that is separate from whether john has a FORMAT for it",
-         "expr_tier" : "absent",
-         "hash_length" : 80,
-         "hash_length_basis" : "observed",
-         "hashcat" : {
-            "ids" : [
-               33660
-            ],
-            "state" : "proven",
-            "tier" : "vector"
-         },
-         "hashcat_salted" : "yes",
-         "hashcat_speed" : "fast",
-         "hashpipe" : {
-            "ids" : [
-               "HMAC-RMD320"
-            ],
-            "state" : "proven",
-            "tier" : "vector"
-         },
-         "id" : "hmac-ripemd320-plain-salt",
-         "john" : {
-            "ids" : [],
-            "state" : "no"
-         },
-         "john_expr" : "",
-         "john_salted" : "",
-         "john_work_factor" : "",
-         "legacy" : "not supported",
-         "mdxfind" : {
-            "ids" : [
-               "HMAC-RMD320"
-            ],
-            "state" : "proven",
-            "tier" : "vector"
-         },
-         "mdxfind_salted" : "no",
-         "name" : "hmac(\"ripemd320\", $plain, $salt)",
-         "nesting_depth" : "",
-         "notes" : "",
-         "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
-         "serialization" : "shared",
-         "status" : "ok",
-         "tool_note" : {
-            "hashcat" : "mode discovered by round-trip search, not by name",
-            "hashpipe" : "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one.",
-            "john" : "no format. Swept the 5 format(s) whose own valid() accepts this entry's own vector, as john --show=left reports them, on 2026-09-04 (a tools/discover-john.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. For john the control is also per ENTRY and not only per shape: every format counted above is one whose own loader ACCEPTED this hash, so each was asked this exact question and answered no. A format that cannot parse the hash is not counted at all, and an entry no format can parse is reported as unsearched rather than decided. Every applicable format ran to completion; a format killed at the timeout is counted as untested and withholds this verdict. No john format name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if john gains one, this becomes a mapping.",
             "mdxfind" : ""
          },
          "vecs" : 1
@@ -22211,134 +22083,6 @@
             "hashcat" : "no mode. Swept the 2 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-03 (tools/discover-hashcat.pl --all, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
             "hashpipe" : "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one.",
             "john" : "no format. Swept the 35 format(s) whose own valid() accepts this entry's own vector, as john --show=left reports them, on 2026-09-04 (a tools/discover-john.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. For john the control is also per ENTRY and not only per shape: every format counted above is one whose own loader ACCEPTED this hash, so each was asked this exact question and answered no. A format that cannot parse the hash is not counted at all, and an entry no format can parse is reported as unsearched rather than decided. Every applicable format ran to completion; a format killed at the timeout is counted as untested and withholds this verdict. No john format name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if john gains one, this becomes a mapping.",
-            "mdxfind" : ""
-         },
-         "vecs" : 1
-      },
-      {
-         "alias" : "",
-         "application" : "",
-         "category" : "composite",
-         "crack" : {
-            "ids" : [],
-            "state" : "no"
-         },
-         "cracknote" : "",
-         "denotation" : "hmac(\"sha256\", $plain, $salt)",
-         "expr" : "",
-         "expr_note" : "john's dynamic expression vocabulary has no hmac(), so this construction cannot be written as an expression; that is separate from whether john has a FORMAT for it",
-         "expr_tier" : "absent",
-         "hash_length" : 64,
-         "hash_length_basis" : "observed",
-         "hashcat" : {
-            "ids" : [
-               1460
-            ],
-            "state" : "proven",
-            "tier" : "vector"
-         },
-         "hashcat_salted" : "yes",
-         "hashcat_speed" : "fast",
-         "hashpipe" : {
-            "ids" : [
-               "HMAC-SHA256"
-            ],
-            "state" : "proven",
-            "tier" : "vector"
-         },
-         "id" : "hmac-sha256-plain-salt",
-         "john" : {
-            "ids" : [],
-            "state" : "no"
-         },
-         "john_expr" : "",
-         "john_salted" : "",
-         "john_work_factor" : "",
-         "legacy" : "not supported",
-         "mdxfind" : {
-            "ids" : [
-               "HMAC-SHA256"
-            ],
-            "state" : "proven",
-            "tier" : "vector"
-         },
-         "mdxfind_salted" : "no",
-         "name" : "hmac(\"sha256\", $plain, $salt)",
-         "nesting_depth" : "",
-         "notes" : "",
-         "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
-         "serialization" : "shared",
-         "status" : "ok",
-         "tool_note" : {
-            "hashcat" : "mode discovered by round-trip search, not by name",
-            "hashpipe" : "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one.",
-            "john" : "no format. Swept the 56 format(s) whose own valid() accepts this entry's own vector, as john --show=left reports them, on 2026-09-04 (a tools/discover-john.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. For john the control is also per ENTRY and not only per shape: every format counted above is one whose own loader ACCEPTED this hash, so each was asked this exact question and answered no. A format that cannot parse the hash is not counted at all, and an entry no format can parse is reported as unsearched rather than decided. Every applicable format ran to completion; a format killed at the timeout is counted as untested and withholds this verdict. No john format name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if john gains one, this becomes a mapping.",
-            "mdxfind" : ""
-         },
-         "vecs" : 1
-      },
-      {
-         "alias" : "",
-         "application" : "",
-         "category" : "composite",
-         "crack" : {
-            "ids" : [],
-            "state" : "no"
-         },
-         "cracknote" : "",
-         "denotation" : "hmac(\"sha512\", $plain, $salt)",
-         "expr" : "",
-         "expr_note" : "john's dynamic expression vocabulary has no hmac(), so this construction cannot be written as an expression; that is separate from whether john has a FORMAT for it",
-         "expr_tier" : "absent",
-         "hash_length" : 128,
-         "hash_length_basis" : "observed",
-         "hashcat" : {
-            "ids" : [
-               1760
-            ],
-            "state" : "proven",
-            "tier" : "vector"
-         },
-         "hashcat_salted" : "yes",
-         "hashcat_speed" : "fast",
-         "hashpipe" : {
-            "ids" : [
-               "HMAC-SHA512"
-            ],
-            "state" : "proven",
-            "tier" : "vector"
-         },
-         "id" : "hmac-sha512-plain-salt",
-         "john" : {
-            "ids" : [],
-            "state" : "no"
-         },
-         "john_expr" : "",
-         "john_salted" : "",
-         "john_work_factor" : "",
-         "legacy" : "not supported",
-         "mdxfind" : {
-            "ids" : [
-               "HMAC-SHA512"
-            ],
-            "state" : "proven",
-            "tier" : "vector"
-         },
-         "mdxfind_salted" : "no",
-         "name" : "hmac(\"sha512\", $plain, $salt)",
-         "nesting_depth" : "",
-         "notes" : "",
-         "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
-         "serialization" : "shared",
-         "status" : "ok",
-         "tool_note" : {
-            "hashcat" : "mode discovered by round-trip search, not by name",
-            "hashpipe" : "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one.",
-            "john" : "no format. Swept the 24 format(s) whose own valid() accepts this entry's own vector, as john --show=left reports them, on 2026-09-04 (a tools/discover-john.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. For john the control is also per ENTRY and not only per shape: every format counted above is one whose own loader ACCEPTED this hash, so each was asked this exact question and answered no. A format that cannot parse the hash is not counted at all, and an entry no format can parse is reported as unsearched rather than decided. Every applicable format ran to completion; a format killed at the timeout is counted as untested and withholds this verdict. No john format name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if john gains one, this becomes a mapping.",
             "mdxfind" : ""
          },
          "vecs" : 1
@@ -22896,7 +22640,7 @@
          "vecs" : 1
       },
       {
-         "alias" : "",
+         "alias" : "hmac(\"ripemd160\", $plain, $salt)",
          "application" : "",
          "category" : "composite",
          "crack" : {
@@ -22909,7 +22653,7 @@
          "expr_note" : "hashcat mode 6060 is \"HMAC-RIPEMD160 (key = $salt)\" (Raw Hash authenticated). It is a bare construction, but john's dynamic EXPRESSION language has no token for it, so it cannot be written as an expression here. That says nothing about whether john can CRACK it -- run discover-john.pl, and if john has a format it goes in tools.john.",
          "expr_tier" : "absent",
          "hash_length" : 40,
-         "hash_length_basis" : "observed",
+         "hash_length_basis" : "fixed",
          "hashcat" : {
             "ids" : [
                6060
@@ -22920,8 +22664,11 @@
          "hashcat_salted" : "yes",
          "hashcat_speed" : "fast",
          "hashpipe" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "HMAC-RMD160"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "hmac-ripemd160-key-salt",
          "john" : {
@@ -22931,7 +22678,7 @@
          "john_expr" : "",
          "john_salted" : "",
          "john_work_factor" : "",
-         "legacy" : "",
+         "legacy" : "not supported",
          "mdxfind" : {
             "ids" : [
                "HMAC-RMD160"
@@ -22942,22 +22689,29 @@
          "mdxfind_salted" : "no",
          "name" : "HMAC-RIPEMD160 (key = $salt)",
          "nesting_depth" : "",
-         "notes" : "",
+         "notes" : "THE ALIAS hmac(\"ripemd160\", $plain, $salt) MISSTATES THE KEY ORDER AND IS KEPT ANYWAY, decided by Royce 2026-09-07, because it is a name people search by. Read it as a LABEL, not a specification: it reads as key=$plain, and this row's computation is key=$salt. Recomputation settled that on 2026-09-07 rather than either name -- hmac(key => salt, msg => pass) reproduces the stored digests of both merged rows and hmac(key => pass, msg => salt) reproduces neither -- and hashcat agrees: its key=$pass modes are a different number and neither row ever named one. The name: field above is the authoritative one.",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "none",
+               "entry" : "hmac-ripemd160-plain-salt",
+               "kind" : "duplicate-of",
+               "note" : "merged 2026-09-07: Both rows publish hashcat 6060, which hashcat itself names \"HMAC-RIPEMD160 (key = $salt)\", and mdxfind HMAC-RMD160; the cross-check of 2026-09-07 reproduced both rows' vectors under each shared identifier."
+            }
+         ],
+         "sameas" : "duplicate of hmac-ripemd160-plain-salt",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
             "hashcat" : "hashcat's own published example hash for this mode, recovered by hashcat at this mode with hashcat's own published plaintext.",
-            "hashpipe" : "",
+            "hashpipe" : "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one.",
             "john" : "no format. Swept the 33 format(s) whose own valid() accepts this entry's own vector, as john --show=left reports them, on 2026-09-04 (a tools/discover-john.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. For john the control is also per ENTRY and not only per shape: every format counted above is one whose own loader ACCEPTED this hash, so each was asked this exact question and answered no. A format that cannot parse the hash is not counted at all, and an entry no format can parse is reported as unsearched rather than decided. Every applicable format ran to completion; a format killed at the timeout is counted as untested and withholds this verdict. No john format name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if john gains one, this becomes a mapping.",
             "mdxfind" : "type discovered by round-trip search, not by name"
          },
-         "vecs" : 1
+         "vecs" : 2
       },
       {
-         "alias" : "",
+         "alias" : "hmac(\"ripemd320\", $plain, $salt)",
          "application" : "",
          "category" : "composite",
          "crack" : {
@@ -22970,7 +22724,7 @@
          "expr_note" : "hashcat mode 33660 is \"HMAC-RIPEMD320 (key = $salt)\" (Raw Hash authenticated). It is a bare construction, but john's dynamic EXPRESSION language has no token for it, so it cannot be written as an expression here. That says nothing about whether john can CRACK it -- run discover-john.pl, and if john has a format it goes in tools.john.",
          "expr_tier" : "absent",
          "hash_length" : 80,
-         "hash_length_basis" : "observed",
+         "hash_length_basis" : "fixed",
          "hashcat" : {
             "ids" : [
                33660
@@ -22981,8 +22735,11 @@
          "hashcat_salted" : "yes",
          "hashcat_speed" : "fast",
          "hashpipe" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "HMAC-RMD320"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "hmac-ripemd320-key-salt",
          "john" : {
@@ -22992,7 +22749,7 @@
          "john_expr" : "",
          "john_salted" : "",
          "john_work_factor" : "",
-         "legacy" : "",
+         "legacy" : "not supported",
          "mdxfind" : {
             "ids" : [
                "HMAC-RMD320"
@@ -23003,19 +22760,26 @@
          "mdxfind_salted" : "no",
          "name" : "HMAC-RIPEMD320 (key = $salt)",
          "nesting_depth" : "",
-         "notes" : "",
+         "notes" : "THE ALIAS hmac(\"ripemd320\", $plain, $salt) MISSTATES THE KEY ORDER AND IS KEPT ANYWAY, decided by Royce 2026-09-07, because it is a name people search by. Read it as a LABEL, not a specification: it reads as key=$plain, and this row's computation is key=$salt. Recomputation settled that on 2026-09-07 rather than either name -- hmac(key => salt, msg => pass) reproduces the stored digests of both merged rows and hmac(key => pass, msg => salt) reproduces neither -- and hashcat agrees: its key=$pass modes are a different number and neither row ever named one. The name: field above is the authoritative one.",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "none",
+               "entry" : "hmac-ripemd320-plain-salt",
+               "kind" : "duplicate-of",
+               "note" : "merged 2026-09-07: Both rows publish hashcat 33660, which hashcat itself names \"HMAC-RIPEMD320 (key = $salt)\", and mdxfind HMAC-RMD320; the cross-check of 2026-09-07 reproduced both rows' vectors under each shared identifier."
+            }
+         ],
+         "sameas" : "duplicate of hmac-ripemd320-plain-salt",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
             "hashcat" : "hashcat's own published example hash for this mode, recovered by hashcat at this mode with hashcat's own published plaintext.",
-            "hashpipe" : "",
+            "hashpipe" : "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one.",
             "john" : "no format. Swept the 5 format(s) whose own valid() accepts this entry's own vector, as john --show=left reports them, on 2026-09-04 (a tools/discover-john.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. For john the control is also per ENTRY and not only per shape: every format counted above is one whose own loader ACCEPTED this hash, so each was asked this exact question and answered no. A format that cannot parse the hash is not counted at all, and an entry no format can parse is reported as unsearched rather than decided. Every applicable format ran to completion; a format killed at the timeout is counted as untested and withholds this verdict. No john format name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if john gains one, this becomes a mapping.",
             "mdxfind" : "type discovered by round-trip search, not by name"
          },
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -23415,7 +23179,7 @@
          "vecs" : 1
       },
       {
-         "alias" : "",
+         "alias" : "hmac(\"sha256\", $plain, $salt)",
          "application" : "",
          "category" : "composite",
          "crack" : {
@@ -23428,7 +23192,7 @@
          "expr_note" : "hashcat mode 1460 is \"HMAC-SHA256 (key = $salt)\" (Raw Hash authenticated). It is a bare construction, but john's dynamic EXPRESSION language has no token for it, so it cannot be written as an expression here. That says nothing about whether john can CRACK it -- run discover-john.pl, and if john has a format it goes in tools.john.",
          "expr_tier" : "absent",
          "hash_length" : 64,
-         "hash_length_basis" : "observed",
+         "hash_length_basis" : "fixed",
          "hashcat" : {
             "ids" : [
                1460
@@ -23439,8 +23203,11 @@
          "hashcat_salted" : "yes",
          "hashcat_speed" : "fast",
          "hashpipe" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "HMAC-SHA256"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "hmac-sha256-key-salt",
          "john" : {
@@ -23450,7 +23217,7 @@
          "john_expr" : "",
          "john_salted" : "",
          "john_work_factor" : "",
-         "legacy" : "",
+         "legacy" : "not supported",
          "mdxfind" : {
             "ids" : [
                "HMAC-SHA256"
@@ -23461,19 +23228,26 @@
          "mdxfind_salted" : "no",
          "name" : "HMAC-SHA256 (key = $salt)",
          "nesting_depth" : "",
-         "notes" : "",
+         "notes" : "THE ALIAS hmac(\"sha256\", $plain, $salt) MISSTATES THE KEY ORDER AND IS KEPT ANYWAY, decided by Royce 2026-09-07, because it is a name people search by. Read it as a LABEL, not a specification: it reads as key=$plain, and this row's computation is key=$salt. Recomputation settled that on 2026-09-07 rather than either name -- hmac(key => salt, msg => pass) reproduces the stored digests of both merged rows and hmac(key => pass, msg => salt) reproduces neither -- and hashcat agrees: its key=$pass modes are a different number and neither row ever named one. The name: field above is the authoritative one.",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "none",
+               "entry" : "hmac-sha256-plain-salt",
+               "kind" : "duplicate-of",
+               "note" : "merged 2026-09-07: Both rows publish hashcat 1460, which hashcat itself names \"HMAC-SHA256 (key = $salt)\", and mdxfind HMAC-SHA256. Settled by RECOMPUTATION rather than by either name: hmac_sha256(key => salt, msg => pass) reproduces BOTH rows' stored digests and hmac_sha256(key => pass, msg => salt) reproduces neither."
+            }
+         ],
+         "sameas" : "duplicate of hmac-sha256-plain-salt",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
             "hashcat" : "hashcat's own published example hash for this mode, recovered by hashcat at this mode with hashcat's own published plaintext.",
-            "hashpipe" : "",
+            "hashpipe" : "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one.",
             "john" : "no format. Swept the 56 format(s) whose own valid() accepts this entry's own vector, as john --show=left reports them, on 2026-09-04 (a tools/discover-john.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. For john the control is also per ENTRY and not only per shape: every format counted above is one whose own loader ACCEPTED this hash, so each was asked this exact question and answered no. A format that cannot parse the hash is not counted at all, and an entry no format can parse is reported as unsearched rather than decided. Every applicable format ran to completion; a format killed at the timeout is counted as untested and withholds this verdict. No john format name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if john gains one, this becomes a mapping.",
             "mdxfind" : "type discovered by round-trip search, not by name"
          },
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -23799,7 +23573,7 @@
          "vecs" : 1
       },
       {
-         "alias" : "",
+         "alias" : "hmac(\"sha512\", $plain, $salt)",
          "application" : "",
          "category" : "composite",
          "crack" : {
@@ -23812,7 +23586,7 @@
          "expr_note" : "hashcat mode 1760 is \"HMAC-SHA512 (key = $salt)\" (Raw Hash authenticated). It is a bare construction, but john's dynamic EXPRESSION language has no token for it, so it cannot be written as an expression here. That says nothing about whether john can CRACK it -- run discover-john.pl, and if john has a format it goes in tools.john.",
          "expr_tier" : "absent",
          "hash_length" : 128,
-         "hash_length_basis" : "observed",
+         "hash_length_basis" : "fixed",
          "hashcat" : {
             "ids" : [
                1760
@@ -23823,8 +23597,11 @@
          "hashcat_salted" : "yes",
          "hashcat_speed" : "fast",
          "hashpipe" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "HMAC-SHA512"
+            ],
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "hmac-sha512-key-salt",
          "john" : {
@@ -23834,7 +23611,7 @@
          "john_expr" : "",
          "john_salted" : "",
          "john_work_factor" : "",
-         "legacy" : "",
+         "legacy" : "not supported",
          "mdxfind" : {
             "ids" : [
                "HMAC-SHA512"
@@ -23845,19 +23622,26 @@
          "mdxfind_salted" : "no",
          "name" : "HMAC-SHA512 (key = $salt)",
          "nesting_depth" : "",
-         "notes" : "",
+         "notes" : "THE ALIAS hmac(\"sha512\", $plain, $salt) MISSTATES THE KEY ORDER AND IS KEPT ANYWAY, decided by Royce 2026-09-07, because it is a name people search by. Read it as a LABEL, not a specification: it reads as key=$plain, and this row's computation is key=$salt. Recomputation settled that on 2026-09-07 rather than either name -- hmac(key => salt, msg => pass) reproduces the stored digests of both merged rows and hmac(key => pass, msg => salt) reproduces neither -- and hashcat agrees: its key=$pass modes are a different number and neither row ever named one. The name: field above is the authoritative one.",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "none",
+               "entry" : "hmac-sha512-plain-salt",
+               "kind" : "duplicate-of",
+               "note" : "merged 2026-09-07: Both rows publish hashcat 1760, which hashcat itself names \"HMAC-SHA512 (key = $salt)\", and mdxfind HMAC-SHA512. Settled by RECOMPUTATION rather than by either name: hmac_sha512(key => salt, msg => pass) reproduces both rows' stored digests and hmac_sha512(key => pass, msg => salt) reproduces neither."
+            }
+         ],
+         "sameas" : "duplicate of hmac-sha512-plain-salt",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
             "hashcat" : "hashcat's own published example hash for this mode, recovered by hashcat at this mode with hashcat's own published plaintext.",
-            "hashpipe" : "",
+            "hashpipe" : "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one.",
             "john" : "no format. Swept the 24 format(s) whose own valid() accepts this entry's own vector, as john --show=left reports them, on 2026-09-04 (a tools/discover-john.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. For john the control is also per ENTRY and not only per shape: every format counted above is one whose own loader ACCEPTED this hash, so each was asked this exact question and answered no. A format that cannot parse the hash is not counted at all, and an entry no format can parse is reported as unsearched rather than decided. Every applicable format ran to completion; a format killed at the timeout is counted as untested and withholds this verdict. No john format name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if john gains one, this becomes a mapping.",
             "mdxfind" : "type discovered by round-trip search, not by name"
          },
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -97472,7 +97256,7 @@
       }
    ],
    "generated" : "2026-09-07",
-   "merged" : 21,
+   "merged" : 25,
    "tombstones" : [
       {
          "id" : "episerver-6-x-lt-net-4",
@@ -97507,6 +97291,34 @@
          "merged_into" : "hav128-4",
          "name" : "HAVAL-128-4",
          "relations_text" : "duplicate of hav128-4",
+         "status" : "merged"
+      },
+      {
+         "id" : "hmac-ripemd160-plain-salt",
+         "merged_into" : "hmac-ripemd160-key-salt",
+         "name" : "hmac(\"ripemd160\", $plain, $salt)",
+         "relations_text" : "duplicate of hmac-ripemd160-key-salt",
+         "status" : "merged"
+      },
+      {
+         "id" : "hmac-ripemd320-plain-salt",
+         "merged_into" : "hmac-ripemd320-key-salt",
+         "name" : "hmac(\"ripemd320\", $plain, $salt)",
+         "relations_text" : "duplicate of hmac-ripemd320-key-salt",
+         "status" : "merged"
+      },
+      {
+         "id" : "hmac-sha256-plain-salt",
+         "merged_into" : "hmac-sha256-key-salt",
+         "name" : "hmac(\"sha256\", $plain, $salt)",
+         "relations_text" : "duplicate of hmac-sha256-key-salt",
+         "status" : "merged"
+      },
+      {
+         "id" : "hmac-sha512-plain-salt",
+         "merged_into" : "hmac-sha512-key-salt",
+         "name" : "hmac(\"sha512\", $plain, $salt)",
+         "relations_text" : "duplicate of hmac-sha512-key-salt",
          "status" : "merged"
       },
       {
