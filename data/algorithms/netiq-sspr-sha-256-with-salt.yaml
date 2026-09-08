@@ -1,40 +1,10 @@
 id: "netiq-sspr-sha-256-with-salt"
 name: "NetIQ SSPR (SHA-256 with Salt)"
-expression_proof:
-  verified: "absent"
-  verified_at: "2026-08-31"
-  verified_with: "hashcat v7.1.2-549-g8a15e210b"
-  note: "hashcat mode 32030 is a Enterprise Application Software (EAS) format. john's dynamic expression language describes constructions over a password and a salt; it cannot express a container's KDF-plus-cipher, so this has no expression and will not acquire one. That says nothing about whether john can CRACK it -- run discover-john.pl, and if john has a format it goes in tools.john."
-denotation:
-  text: "NetIQ SSPR (SHA-256 with Salt)"
-  source: "hashcat"
-  note: "hashcat's own label for mode 32030, category \"Enterprise Application Software (EAS)\", in v7.1.2-549-g8a15e210b. This is a container or application format rather than a bare construction, so there is no single digest expression to record."
-category: "application"
-status: "ok"
-tools:
-  hashcat:
-    modes: [32030]
-    verified: "vector"
-    verified_at: "2026-08-31"
-    verified_with: "hashcat v7.1.2-549-g8a15e210b"
-    note: "hashcat's own published example hash for this mode, recovered by hashcat at this mode with hashcat's own published plaintext."
-  mdxfind:
-    types: ["SSPR-SHA256"]
-    verified: "vector"
-    verified_at: "2026-09-04"
-    verified_with: "mdxfind RCS 1.545 (2026/08/29)"
-    note: "type discovered by round-trip search, not by name"
-  john:
-    cpu: ["sspr"]
-    gpu: ["sspr-opencl"]
-    verified: "vector"
-    verified_at: "2026-08-31"
-    verified_with: "john"
-    note: "format discovered by round-trip search, not by name"
-  crack:
-    supported: false
-vectors:
-  - hash: "$sspr$3$100000$ODk2NDA5Mjc2NDIwMjMwMjQyMTQ1NzMz$7195873d47c7e3627510862e37fe7cab9bc83b91feecb9864841bf80cff92419"
-    pass: "hashcat"
-    source: "hashcat"
-    reads_in: ["hashcat", "john", "mdxfind"]
+status: "merged"
+merged_into: "sspr-sha256"
+relations:
+  - kind: "duplicate-of"
+    entry: "sspr-sha256"
+    distinction: "none"
+    note: "merged 2026-09-07: Strict subset: the loser's identifiers (hashcat 32030, mdxfind SSPR-SHA256, john sspr) are all on the survivor, which adds hashpipe SSPR-SHA256. NOTE the sibling adobe-aem-sspr-sha-256-with-salt is NOT merged: it carries hashcat 32031, a mode of its own, so it is a distinct landing place and wants an edge rather than a tombstone."
+notes: "Tombstone. This id is kept so links and dist/rosetta.csv keys still resolve; every claim it made now lives in sspr-sha256.yaml. Strict subset: the loser's identifiers (hashcat 32030, mdxfind SSPR-SHA256, john sspr) are all on the survivor, which adds hashpipe SSPR-SHA256. NOTE the sibling adobe-aem-sspr-sha-256-with-salt is NOT merged: it carries hashcat 32031, a mode of its own, so it is a distinct landing place and wants an edge rather than a tombstone."

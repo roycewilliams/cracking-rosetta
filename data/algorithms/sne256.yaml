@@ -1,5 +1,6 @@
 id: "sne256"
 name: "SNE256"
+aliases: ["Snefru-256"]
 expression: "snefru256($p)"
 expression_proof:
   verified: "upstream"
@@ -34,8 +35,17 @@ tools:
     note: "format discovered by round-trip search, not by name"
   crack:
     supported: false
+relations:
+  - kind: "duplicate-of"
+    entry: "snefru-256"
+    distinction: "none"
+    note: "merged 2026-09-07: Strictly poorer: the loser published one identifier (john Snefru-256) and the survivor publishes that plus mdxfind and hashpipe SNE256. Confirmed one computation 2026-09-07 by pinning the shared identifiers against both rows' vectors."
 vectors:
   - hash: "2f6e918a85cbfd8b021388ab4bddcbc5e506722a01aac5afb22aa0ed3796c98d"
     pass: "password123"
     source: "mdxfind"
     reads_in: ["john", "mdxfind"]
+  - hash: "$snefru$4170e04e900e6221562ceb5ff6ea27fa9b9b0d9587add44a4379a02619c5a106"
+    pass: "mystrongpassword"
+    source: "john"
+    reads_in: ["john"]

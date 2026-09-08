@@ -1,43 +1,10 @@
 id: "snefru-128"
 name: "Snefru-128"
-expression_proof:
-  verified: "absent"
-  verified_at: "2026-08-31"
-  verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
-  note: "john publishes this as \"Snefru-128\" and no category, so what kind of construction it is has not been established here. Its name is not expression-shaped and john's dynamic EXPRESSION language cannot be handed it, so there is no expression on this row. That says nothing about whether any tool can CRACK it, and it is not a claim that the algorithm HAS no expression -- run seed-hx.pl and derive-expressions.pl, which can settle that from evidence."
-denotation:
-  text: "Snefru-128"
-  source: "john"
-  note: "john's own label for Snefru-128, in 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200."
-status: "ok"
-tools:
-  hashcat:
-    verified: "absent"
-    verified_at: "2026-09-03"
-    verified_with: "hashcat v7.1.2-549-g8a15e210b"
-    note: "no mode. Swept the 12 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-03 (tools/discover-hashcat.pl --all, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping."
-  mdxfind:
-    types: ["SNE128"]
-    verified: "vector"
-    verified_at: "2026-08-31"
-    verified_with: "mdxfind RCS 1.540 (2026/08/22)"
-    note: "type discovered by round-trip search, not by name"
-  hashpipe:
-    types: ["SNE128"]
-    verified: "vector"
-    verified_at: "2026-09-03"
-    verified_with: "hashpipe RCS 1.189 (2026/09/02)"
-    note: "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one."
-  john:
-    cpu: ["Snefru-128"]
-    verified: "vector"
-    verified_at: "2026-08-31"
-    verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
-    note: "john's own published example ciphertext for this format, recovered by john under this format. john publishes no plaintext, so the plaintext was found by handing john its own example and a candidate list -- what john recovered IS the plaintext, by construction."
-  crack:
-    supported: false
-vectors:
-  - hash: "53b8a9b1c9ed00174d88d705fb7bae30"
-    pass: "mystrongpassword"
-    source: "john"
-    reads_in: ["john", "mdxfind"]
+status: "merged"
+merged_into: "sne128"
+relations:
+  - kind: "duplicate-of"
+    entry: "sne128"
+    distinction: "none"
+    note: "merged 2026-09-07: Strictly poorer: the loser published one identifier (john Snefru-128) and the survivor publishes that plus mdxfind and hashpipe SNE128. Confirmed one computation 2026-09-07 by pinning the shared identifiers against both rows' vectors."
+notes: "Tombstone. This id is kept so links and dist/rosetta.csv keys still resolve; every claim it made now lives in sne128.yaml. Strictly poorer: the loser published one identifier (john Snefru-128) and the survivor publishes that plus mdxfind and hashpipe SNE128. Confirmed one computation 2026-09-07 by pinning the shared identifiers against both rows' vectors."

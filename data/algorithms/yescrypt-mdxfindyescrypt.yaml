@@ -1,39 +1,10 @@
 id: "yescrypt-mdxfindyescrypt"
 name: "YESCRYPT"
-expression_proof:
-  verified: "absent"
-  verified_at: "2026-08-31"
-  verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
-  note: "the construction upstream states for mdxfind type YESCRYPT (e995) names yescrypt(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:."
-denotation:
-  text: "yescrypt(pass, salt, N, r, p)"
-  source: "mdxfind"
-  note: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A, entry for mdxfind type YESCRYPT (e995), which states yescrypt(pass, salt, N, r, p)."
-category: "kdf"
-status: "ok"
-tools:
-  hashcat:
-    modes: [36100]
-    verified: "vector"
-    verified_at: "2026-08-31"
-    verified_with: "v7.1.2-549-g8a15e210b"
-    note: "mode discovered by round-trip search, not by name"
-  mdxfind:
-    types: ["YESCRYPT"]
-    verified: "vector"
-    verified_at: "2026-08-31"
-    verified_with: "mdxfind RCS 1.540 (2026/08/22)"
-    note: "mdxfind's own published example for this identifier, recovered by mdxfind at this identifier with mdxfind's own published plaintext."
-  hashpipe:
-    types: ["YESCRYPT"]
-    verified: "vector"
-    verified_at: "2026-09-03"
-    verified_with: "hashpipe RCS 1.189 (2026/09/02)"
-    note: "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one."
-  crack:
-    supported: false
-vectors:
-  - hash: "$y$j9T$oJqQoBLMgF5$pBqTJqEvFJtoVI6cTYyiWvIC2SChnMT0afD0GTKETv7"
-    pass: "password123"
-    source: "mdxfind"
-    reads_in: ["hashcat", "mdxfind"]
+status: "merged"
+merged_into: "yescrypt"
+relations:
+  - kind: "duplicate-of"
+    entry: "yescrypt"
+    distinction: "none"
+    note: "merged 2026-09-07: The loser's id is a seeding artifact -- the tool name concatenated onto its own type name -- and it publishes nothing yescrypt does not. Confirmed one computation 2026-09-07: mdxfind YESCRYPT pinned reproduces both rows' vectors."
+notes: "Tombstone. This id is kept so links and dist/rosetta.csv keys still resolve; every claim it made now lives in yescrypt.yaml. The loser's id is a seeding artifact -- the tool name concatenated onto its own type name -- and it publishes nothing yescrypt does not. Confirmed one computation 2026-09-07: mdxfind YESCRYPT pinned reproduces both rows' vectors."

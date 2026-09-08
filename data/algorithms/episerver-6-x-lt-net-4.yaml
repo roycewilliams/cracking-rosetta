@@ -1,33 +1,10 @@
 id: "episerver-6-x-lt-net-4"
 name: "Episerver 6.x < .NET 4"
-expression_proof:
-  verified: "absent"
-  verified_at: "2026-08-31"
-  verified_with: "hashcat v7.1.2-549-g8a15e210b"
-  note: "hashcat mode 141 is a FTP, HTTP, SMTP, LDAP Server format. john's dynamic expression language describes constructions over a password and a salt; it cannot express a container's KDF-plus-cipher, so this has no expression and will not acquire one. That says nothing about whether john can CRACK it -- run discover-john.pl, and if john has a format it goes in tools.john."
-denotation:
-  text: "Episerver 6.x < .NET 4"
-  source: "hashcat"
-  note: "hashcat's own label for mode 141, category \"FTP, HTTP, SMTP, LDAP Server\", in v7.1.2-549-g8a15e210b. This is a container or application format rather than a bare construction, so there is no single digest expression to record."
-category: "application"
-status: "ok"
-tools:
-  hashcat:
-    modes: [141]
-    verified: "vector"
-    verified_at: "2026-08-31"
-    verified_with: "hashcat v7.1.2-549-g8a15e210b"
-    note: "hashcat's own published example hash for this mode, recovered by hashcat at this mode with hashcat's own published plaintext."
-  mdxfind:
-    types: ["EPISERVER"]
-    verified: "vector"
-    verified_at: "2026-09-04"
-    verified_with: "mdxfind RCS 1.545 (2026/08/29)"
-    note: "type discovered by round-trip search, not by name"
-  crack:
-    supported: false
-vectors:
-  - hash: "$episerver$*0*MjEwNA==*ZUgAmuaYTqAvisD0A427FA3oaWU"
-    pass: "hashcat"
-    source: "hashcat"
-    reads_in: ["hashcat", "mdxfind"]
+status: "merged"
+merged_into: "episerver"
+relations:
+  - kind: "duplicate-of"
+    entry: "episerver"
+    distinction: "none"
+    note: "merged 2026-09-07: Strict subset: the loser published hashcat 141 and mdxfind EPISERVER, both of which the survivor already carries, and the survivor adds hashpipe EPISERVER. The siblings episerver-6-x-ge-net-4 (hashcat 1441) and episerver-johnepiserver (john EPiServer) each carry an identifier of their own and are NOT merged here."
+notes: "Tombstone. This id is kept so links and dist/rosetta.csv keys still resolve; every claim it made now lives in episerver.yaml. Strict subset: the loser published hashcat 141 and mdxfind EPISERVER, both of which the survivor already carries, and the survivor adds hashpipe EPISERVER. The siblings episerver-6-x-ge-net-4 (hashcat 1441) and episerver-johnepiserver (john EPiServer) each carry an identifier of their own and are NOT merged here."

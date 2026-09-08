@@ -1,5 +1,6 @@
 id: "sspr-sha512"
 name: "SSPR-SHA512"
+aliases: ["NetIQ SSPR (SHA-512 with Salt)"]
 expression_proof:
   verified: "absent"
   verified_at: "2026-08-31"
@@ -39,8 +40,17 @@ tools:
     note: "format discovered by round-trip search, not by name"
   crack:
     supported: false
+relations:
+  - kind: "duplicate-of"
+    entry: "netiq-sspr-sha-512-with-salt"
+    distinction: "none"
+    note: "merged 2026-09-07: Strict subset: the loser's identifiers (hashcat 32040, mdxfind SSPR-SHA512, john sspr) are all on the survivor, which adds hashpipe SSPR-SHA512. NOTE the sibling adobe-aem-sspr-sha-512-with-salt is NOT merged: it carries hashcat 32041, a mode of its own."
 vectors:
   - hash: "$sspr$4$100000$NzYwNjMyNDc2MTQ2OTE4NTUzODAyODE3$f1a614b4400702da2d49c8ee3f3b5f835dabc92ba1fd192471cbab80e9f3acb24edcfb0fa0b7acf74233a1f87c880f76a3052d5bd68e5f1fdcfbaafd7f98c08e"
     pass: "password123"
     source: "mdxfind"
+    reads_in: ["hashcat", "john", "mdxfind"]
+  - hash: "$sspr$4$100000$NzYwNjMyNDc2MTQ2OTE4NTUzODAyODE3$0ce2e8b8efa4280e6e003d77cb45d45300dff3960c5c073f68303565fe62fe4ff3ada8cee7d3b87d0457335ab0df73c5c64ee1f71ccf6b8bd43a316ecb42ecd4"
+    pass: "hashcat"
+    source: "hashcat"
     reads_in: ["hashcat", "john", "mdxfind"]
