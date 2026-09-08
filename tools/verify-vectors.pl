@@ -680,7 +680,15 @@ if ($want{hashcat} && $job{hashcat}) {
         # bounded by what is still unexplained.
         for my $vec (@v) {
             next if $cracked{hashcat}{ $vec->{id} }{$mode};
-            next if $read{hashcat}{ $vec->{id} }{ $vec->{vi} };
+            # NOT gated on %read any more. It used to be, and that was right
+            # while the solo run existed only to concede the HASH's spelling:
+            # a vector the grouped run had already read exactly had nothing
+            # left for a solo run to establish. Since 2026-09-07 the solo run
+            # also concedes the PLAINTEXT, and read-but-not-cracked is
+            # precisely that case -- hashcat echoed this hash and a plaintext
+            # that did not match, which is what a re-serializing or
+            # case-folding mode looks like. Keeping the gate skipped exactly
+            # the four rows the concession was built for.
             my $sf = write_file("$workdir/hc.$mode.solo.hash", $vec->{hash});
             my $sw = write_file("$workdir/hc.$mode.solo.word", $vec->{pass});
             my ($c2, $o2) = run_capture($timeout, $hashcat,
@@ -697,6 +705,111 @@ if ($want{hashcat} && $job{hashcat}) {
                 $hit = 1;
                 last;
             }
+
+            # THE PLAINTEXT CONCESSION, and it is confined to this branch.
+            #
+            # hashcat does not always echo the CANDIDATE it cracked with, the
+            # way it does not always echo the hash it was given. Measured
+            # 2026-09-07: -m 18100 returns NBQXG2DDMF2A==== which is base32 of
+            # "hashcat"; -m 25400 appends "    (user password not set)";
+            # -m 20510 cracks on candidate `t` and echoes something else
+            # entirely; -m 3100 returns PASSWORD123 for password123, because
+            # Oracle 7 upper-cases. All four sat at tier vector unable to
+            # re-prove themselves.
+            #
+            # The solo file holds ONE hash and ONE candidate, so a crack here
+            # can only have come from that candidate -- the identical argument
+            # this branch already uses to concede the hash's spelling.
+            #
+            # EXCEPT for a mode that ignores the wordlist, which would then
+            # verify anything. So the concession is gated on a NEGATIVE
+            # CONTROL: the same hash with a deliberately wrong candidate must
+            # find nothing. If it still cracks, the wordlist is not what did
+            # the work and this proves nothing, so the relaxation is withheld.
+            #
+            # THE CONTROL MUST FAIL FOR THE RIGHT REASON. Several modes accept
+            # a plaintext of exactly one length -- validate.pl reports them --
+            # so a wrong candidate of a different LENGTH would find nothing
+            # because of the length and the control would pass vacuously. The
+            # decoy is therefore the same length as the real candidate, built
+            # by rotating its characters; where no different string of the
+            # same length can be built, the relaxation is withheld rather
+            # than taken on an untested control.
+            # THE PLAINTEXT CONCESSION, confined to this branch.
+            #
+            # hashcat does not always echo the CANDIDATE it cracked with, the
+            # way it does not always echo the hash it was given. Measured
+            # 2026-09-07: -m 18100 returns NBQXG2DDMF2A==== which is base32 of
+            # "hashcat"; -m 25400 appends "    (user password not set)";
+            # -m 20510 echoes something other than the candidate; -m 3100
+            # returns PASSWORD123 for password123, because Oracle 7
+            # upper-cases. All four sat at tier vector unable to re-prove
+            # themselves.
+            #
+            # The solo file holds ONE hash and ONE candidate, so a crack can
+            # only have come from that candidate -- the identical argument
+            # this branch already uses to concede the hash's spelling.
+            #
+            # EXCEPT for a mode that ignores the wordlist, which would then
+            # verify anything. So it is gated on a NEGATIVE CONTROL: the same
+            # hash with a deliberately wrong candidate must find nothing.
+            #
+            # --outfile IS THE INSTRUMENT, and getting that wrong is what the
+            # first attempt did. Asking "did hashcat print anything" counts
+            # `nvmlInit(): Driver/library version mismatch` as a crack, so the
+            # control reported that a decoy cracked -m 3100 and the
+            # concession was withheld for a reason that had nothing to do with
+            # hashcat. An outfile contains cracks and nothing else. Both runs
+            # use it, because a control has to be read with the same
+            # instrument as the thing it controls, and each file is removed
+            # first so a previous run's output cannot be read as this one's.
+            #
+            # THE DECOY MUST BE THE SAME LENGTH. Several modes accept a
+            # plaintext of exactly one length -- validate.pl reports them --
+            # so a wrong candidate of a different length finds nothing because
+            # of the length and the control passes vacuously. It is built by
+            # rotating the candidate's characters; where that yields no
+            # different string, the concession is withheld rather than taken
+            # on an untested control.
+            if (!$hit) {
+                my $of = "$workdir/hc.$mode.solo.out";
+                unlink $of;
+                run_capture($timeout, $hashcat, '-m', $mode, '-a', '0',
+                    '--quiet', '--potfile-disable', '--self-test-disable',
+                    '--backend-ignore-opencl', '--outfile', $of, @depr,
+                    $sf, $sw);
+                if (-s $of) {
+                    my $decoy = $vec->{pass};
+                    $decoy =~ tr/a-zA-Z0-9/n-za-mN-ZA-M5-90-4/;
+                    if ($decoy ne $vec->{pass}) {
+                        my $df = write_file("$workdir/hc.$mode.decoy.word", $decoy);
+                        my $dof = "$workdir/hc.$mode.decoy.out";
+                        unlink $dof;
+                        run_capture($timeout, $hashcat, '-m', $mode, '-a', '0',
+                            '--quiet', '--potfile-disable', '--self-test-disable',
+                            '--backend-ignore-opencl', '--outfile', $dof, @depr,
+                            $sf, $df);
+                        unless (-s $dof) {
+                            # Which concession this is, read off what hashcat
+                            # actually wrote rather than assumed: a plaintext
+                            # differing only in case is the Oracle 7 / LM
+                            # class; anything else is a re-encoding.
+                            my $said = do {
+                                open my $oh, '<', $of or die "open $of: $!";
+                                local $/; my $t = <$oh>; close $oh; $t // '';
+                            };
+                            chomp $said;
+                            $said = $1 if $said =~ /:([^:]*)$/;
+                            my $how = (lc($said) eq lc($vec->{pass}))
+                                    ? 'plaintext-case'
+                                    : 'plaintext-reserialized';
+                            $conceded{hashcat}{ $vec->{id} }{$how} = 1;
+                            $hit = 1;
+                        }
+                    }
+                }
+            }
+
             next unless $hit;
             $read{hashcat}{ $vec->{id} }{ $vec->{vi} } = 1;
             $read_here{ $vec->{id} }{ $vec->{vi} } = 1;

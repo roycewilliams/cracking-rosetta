@@ -14,8 +14,9 @@ tools:
   hashcat:
     modes: [3100]
     verified: "vector"
-    verified_at: "2026-08-29"
-    verified_with: "hashcat"
+    verified_at: "2026-09-07"
+    verified_with: "hashcat v7.1.2-606-ge2a7ab834"
+    match: ["plaintext-case"]
   mdxfind:
     types: ["ORACLE7"]
     verified: "vector"

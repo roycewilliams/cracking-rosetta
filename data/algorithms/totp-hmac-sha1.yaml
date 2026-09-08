@@ -15,8 +15,9 @@ tools:
   hashcat:
     modes: [18100]
     verified: "vector"
-    verified_at: "2026-09-02"
-    verified_with: "hashcat"
+    verified_at: "2026-09-07"
+    verified_with: "hashcat v7.1.2-606-ge2a7ab834"
+    match: ["plaintext-reserialized"]
   crack:
     supported: false
 vectors:
