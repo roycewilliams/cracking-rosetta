@@ -1,5 +1,6 @@
 id: "drupal7"
 name: "DRUPAL7"
+aliases: ["Drupal 7"]
 expression_proof:
   verified: "absent"
   verified_at: "2026-08-31"
@@ -35,8 +36,19 @@ tools:
     note: "format discovered by round-trip search, not by name"
   crack:
     supported: false
+relations:
+  - kind: "duplicate-of"
+    entry: "drupal-7"
+    distinction: "none"
+    note: "merged 2026-09-08: Merged 2026-09-08 on Royce's rule: where two tools name one computation, hashcat's published name becomes the id. Both hashcat (mode 7900) and john (format label) spell it \"Drupal7\"; the hyphenated form matches neither tool. Note the losing row held the tidier display name \"Drupal 7\", which moves to the survivor, so nothing readable is lost -- only the id changes."
 vectors:
   - hash: "$S$C00000000uP3JXd.0IL30e76wJH2NZ/Ovd0AALo.mjXytygeAP9u"
     pass: "password123"
     source: "mdxfind"
     reads_in: ["hashcat", "john", "mdxfind"]
+  - hash: "$S$5PpDG6SBfYKrvTHtiMzdZBWjwqOTTiW1Qntn1Sf4jO2PFhkrchMP"
+    pass: "rosetta"
+    source: "sheet"
+    reads_in: ["hashcat", "john", "mdxfind"]
+legacy:
+  hashes_org: "DRUPAL7"

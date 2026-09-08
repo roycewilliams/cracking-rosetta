@@ -28,6 +28,12 @@ tools:
     verified_at: "2026-09-03"
     verified_with: "hashpipe RCS 1.189 (2026/09/02)"
     note: "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one."
+  john:
+    cpu: ["EPiServer"]
+    verified: "vector"
+    verified_at: "2026-08-31"
+    verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
+    note: "john's own published example ciphertext for this format, recovered by john under this format. john publishes no plaintext, so the plaintext was found by handing john its own example and a candidate list -- what john recovered IS the plaintext, by construction."
   crack:
     supported: false
 relations:
@@ -35,6 +41,10 @@ relations:
     entry: "episerver-6-x-lt-net-4"
     distinction: "none"
     note: "merged 2026-09-07: Strict subset: the loser published hashcat 141 and mdxfind EPISERVER, both of which the survivor already carries, and the survivor adds hashpipe EPISERVER. The siblings episerver-6-x-ge-net-4 (hashcat 1441) and episerver-johnepiserver (john EPiServer) each carry an identifier of their own and are NOT merged here."
+  - kind: "duplicate-of"
+    entry: "episerver-johnepiserver"
+    distinction: "none"
+    note: "merged 2026-09-08: Merged 2026-09-08. The naming rule does not reach this pair, because neither row was poorer: this one held the john format, the survivor holds hashcat 141 plus a proven expression and an alias, and both held the same mdxfind and hashpipe types and two vectors each. The survivor is chosen because episerver is already this family's established survivor -- 794b4eb merged episerver-6-x-lt-net-4 into it on 2026-09-06 -- so a second consolidation into the same id keeps the family on one row rather than splitting it a different way. The merge gives one row naming all four tools."
 vectors:
   - hash: "$episerver$*0*RGVm*qNFZycuVKKgy9gzqwETNNLxZ+vg"
     pass: "password123"
@@ -44,3 +54,8 @@ vectors:
     pass: "hashcat"
     source: "hashcat"
     reads_in: ["hashcat", "mdxfind"]
+  - hash: "$episerver$*0*fGJ2wn/5WlzqQoDeCA2kXA==*UQgnz/vPWap9UeD8Dhaw3h/fgFA="
+    pass: "testPassword"
+    source: "john"
+    reads_in: ["john"]
+notes: "Accepted 2026-09-04 from a name match that was then measured. TRANSCODE, proven: mdxfind's EPISERVER reader REFUSES base64 padding on the DIGEST field and accepts it on the salt. This entry's own vector reproduces under EPISERVER pinned with the single trailing '=' removed from the digest, handed to mdxfind with only the plaintext the john vector already states. That is why the 2026-09-03 sweep found this row's two siblings and not this row: their digests happen to be unpadded. The vector stored for mdxfind is mdxfind's own example rather than the transcode, because an independent credential is better evidence than the same one written twice."

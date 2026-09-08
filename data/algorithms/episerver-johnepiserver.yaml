@@ -1,43 +1,10 @@
 id: "episerver-johnepiserver"
 name: "EPiServer"
-expression_proof:
-  verified: "absent"
-  verified_at: "2026-08-31"
-  verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
-  note: "john publishes this as \"EPiServer\" and no category, so what kind of construction it is has not been established here. Its name is not expression-shaped and john's dynamic EXPRESSION language cannot be handed it, so there is no expression on this row. That says nothing about whether any tool can CRACK it, and it is not a claim that the algorithm HAS no expression -- run seed-hx.pl and derive-expressions.pl, which can settle that from evidence."
-denotation:
-  text: "EPiServer"
-  source: "john"
-  note: "john's own label for EPiServer, in 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200."
-status: "ok"
-tools:
-  mdxfind:
-    types: ["EPISERVER"]
-    verified: "vector"
-    verified_at: "2026-09-07"
-    verified_with: "mdxfind RCS 1.579 (2026/09/06)"
-    note: "name match accepted by a curator on 2026-09-04 and not yet reproduced by this repository's own tooling; seed-vectors.pl and verify-vectors.pl decide it. See notes."
-  hashpipe:
-    types: ["EPISERVER"]
-    verified: "vector"
-    verified_at: "2026-09-03"
-    verified_with: "hashpipe RCS 1.189 (2026/09/02)"
-    note: "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one."
-  john:
-    cpu: ["EPiServer"]
-    verified: "vector"
-    verified_at: "2026-08-31"
-    verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
-    note: "john's own published example ciphertext for this format, recovered by john under this format. john publishes no plaintext, so the plaintext was found by handing john its own example and a candidate list -- what john recovered IS the plaintext, by construction."
-  crack:
-    supported: false
-vectors:
-  - hash: "$episerver$*0*fGJ2wn/5WlzqQoDeCA2kXA==*UQgnz/vPWap9UeD8Dhaw3h/fgFA="
-    pass: "testPassword"
-    source: "john"
-    reads_in: ["john"]
-  - hash: "$episerver$*0*RGVm*qNFZycuVKKgy9gzqwETNNLxZ+vg"
-    pass: "password123"
-    source: "mdxfind"
-    reads_in: ["mdxfind"]
-notes: "Accepted 2026-09-04 from a name match that was then measured. TRANSCODE, proven: mdxfind's EPISERVER reader REFUSES base64 padding on the DIGEST field and accepts it on the salt. This entry's own vector reproduces under EPISERVER pinned with the single trailing '=' removed from the digest, handed to mdxfind with only the plaintext the john vector already states. That is why the 2026-09-03 sweep found this row's two siblings and not this row: their digests happen to be unpadded. The vector stored for mdxfind is mdxfind's own example rather than the transcode, because an independent credential is better evidence than the same one written twice."
+status: "merged"
+merged_into: "episerver"
+relations:
+  - kind: "duplicate-of"
+    entry: "episerver"
+    distinction: "none"
+    note: "merged 2026-09-08: Merged 2026-09-08. The naming rule does not reach this pair, because neither row was poorer: this one held the john format, the survivor holds hashcat 141 plus a proven expression and an alias, and both held the same mdxfind and hashpipe types and two vectors each. The survivor is chosen because episerver is already this family's established survivor -- 794b4eb merged episerver-6-x-lt-net-4 into it on 2026-09-06 -- so a second consolidation into the same id keeps the family on one row rather than splitting it a different way. The merge gives one row naming all four tools."
+notes: "Tombstone. This id is kept so links and dist/rosetta.csv keys still resolve; every claim it made now lives in episerver.yaml. Merged 2026-09-08. The naming rule does not reach this pair, because neither row was poorer: this one held the john format, the survivor holds hashcat 141 plus a proven expression and an alias, and both held the same mdxfind and hashpipe types and two vectors each. The survivor is chosen because episerver is already this family's established survivor -- 794b4eb merged episerver-6-x-lt-net-4 into it on 2026-09-06 -- so a second consolidation into the same id keeps the family on one row rather than splitting it a different way. The merge gives one row naming all four tools."

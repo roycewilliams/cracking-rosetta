@@ -1,37 +1,10 @@
 id: "md5-md5md5passsalt-pep"
 name: "MD5-MD5MD5PASSSALT-PEP"
-expression_proof:
-  verified: "absent"
-  verified_at: "2026-09-02"
-  verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
-  note: "Withdrawn 2026-08-31. This entry carried the expression \"md5(md5(md5($p).$s).pepper)\", transcribed from the hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A entry for mdxfind type MD5-MD5MD5PASSSALT-PEP (e819) by a parser that has since been corrected: it carries the bare operand pepper, which john's dynamic language cannot bind. Nothing can compile that string, so it was a claim rather than a fact, and it is withdrawn rather than adjusted -- guessing what upstream meant is exactly what the expression field exists to stop. Re-run seed-hx.pl and denote-hx.pl to settle this entry from the corrected parse. Settled here: the construction upstream states for mdxfind type MD5-MD5MD5PASSSALT-PEP (e819) uses a PEPPER: a site-wide secret that appears in no hash and cannot be derived from one. hx makes it a built-in variable beside pass, salt and salt2, with its own slot in the VM, and mdxfind reads it from a file (-j global array, -P per-type). john's dynamic expression language has no equivalent: $s2 is a second PER-HASH salt, not a site secret, and a $c1 constant would have to carry the value, which is exactly what a pepper does not publish. The absence therefore holds for every possible pepper rather than for this vector, which is what makes it a lookup. It says nothing about whether john can CRACK this. Established from mdxfind's source (hx.y line 19, hx_vm.c HX_SLOT_PEPPER) on 2026-09-02."
-denotation:
-  text: "md5(md5(md5(pass) . salt) . pepper)"
-  source: "mdxfind"
-  note: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A, entry for mdxfind type MD5-MD5MD5PASSSALT-PEP (e819), which states md5(md5(md5(pass) . salt) . pepper)."
-category: "composite"
-status: "ok"
-tools:
-  hashcat:
-    modes: [31700]
-    verified: "vector"
-    verified_at: "2026-09-07"
-    verified_with: "hashcat v7.1.2-606-ge2a7ab834"
-  mdxfind:
-    types: ["MD5-MD5MD5PASSSALT-PEP"]
-    verified: "vector"
-    verified_at: "2026-09-07"
-    verified_with: "mdxfind RCS 1.579 (2026/09/06)"
-  hashpipe:
-    types: ["MD5-MD5MD5PASSSALT-PEP"]
-    verified: "vector"
-    verified_at: "2026-09-03"
-    verified_with: "hashpipe RCS 1.189 (2026/09/02)"
-    note: "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one."
-  crack:
-    supported: false
-vectors:
-  - hash: "ee7c5e3d9be506a265c21e426add16ec:Salt:Pepper"
-    pass: "password123"
-    source: "mdxfind"
-    reads_in: ["hashcat", "mdxfind"]
+status: "merged"
+merged_into: "md5-md5-md5-plain-salt1-salt2"
+relations:
+  - kind: "duplicate-of"
+    entry: "md5-md5-md5-plain-salt1-salt2"
+    distinction: "none"
+    note: "merged 2026-09-08: Merged 2026-09-08 on Royce's rule: where two tools name one computation, hashcat's published name becomes the id. hashcat's own name for mode 31700 is \"md5(md5(md5($pass).$salt1).$salt2)\", which is the survivor's id; MD5-MD5MD5PASSSALT-PEP is mdxfind's type name for the same construction. The hashpipe type this row carried and the survivor did not is a seeding artifact, not a difference in substance -- both rows name the same mdxfind type and hashpipe shares mdxfind's type list. The mdxfind spelling stays findable as an alias and as this tombstone."
+notes: "Tombstone. This id is kept so links and dist/rosetta.csv keys still resolve; every claim it made now lives in md5-md5-md5-plain-salt1-salt2.yaml. Merged 2026-09-08 on Royce's rule: where two tools name one computation, hashcat's published name becomes the id. hashcat's own name for mode 31700 is \"md5(md5(md5($pass).$salt1).$salt2)\", which is the survivor's id; MD5-MD5MD5PASSSALT-PEP is mdxfind's type name for the same construction. The hashpipe type this row carried and the survivor did not is a seeding artifact, not a difference in substance -- both rows name the same mdxfind type and hashpipe shares mdxfind's type list. The mdxfind spelling stays findable as an alias and as this tombstone."

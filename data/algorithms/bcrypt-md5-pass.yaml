@@ -1,5 +1,6 @@
 id: "bcrypt-md5-pass"
 name: "bcrypt(md5($pass))"
+aliases: ["bcrypt(md5($plain))"]
 expression_proof:
   verified: "absent"
   verified_at: "2026-09-05"
@@ -24,6 +25,12 @@ tools:
     verified_at: "2026-09-04"
     verified_with: "mdxfind RCS 1.545 (2026/08/29)"
     note: "type discovered by round-trip search, not by name"
+  hashpipe:
+    types: ["BCRYPTMD5"]
+    verified: "vector"
+    verified_at: "2026-09-03"
+    verified_with: "hashpipe RCS 1.189 (2026/09/02)"
+    note: "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one."
   john:
     verified: "absent"
     verified_at: "2026-09-04"
@@ -31,8 +38,19 @@ tools:
     note: "no format. Swept the 2 format(s) whose own valid() accepts this entry's own vector, as john --show=left reports them, on 2026-09-04 (a tools/discover-john.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. For john the control is also per ENTRY and not only per shape: every format counted above is one whose own loader ACCEPTED this hash, so each was asked this exact question and answered no. A format that cannot parse the hash is not counted at all, and an entry no format can parse is reported as unsearched rather than decided. Every applicable format ran to completion; a format killed at the timeout is counted as untested and withholds this verdict. No john format name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if john gains one, this becomes a mapping."
   crack:
     supported: false
+relations:
+  - kind: "duplicate-of"
+    entry: "bcrypt-md5-plain"
+    distinction: "none"
+    note: "merged 2026-09-08: Merged 2026-09-08 on Royce's rule, stated the other way round: hashcat's own name for mode 25600 is \"bcrypt(md5($pass))\", character for character the survivor's id, and the -plain spelling matches no tool. The hashpipe type this row carried and the survivor did not is a seeding artifact -- both rows name mdxfind's BCRYPTMD5 and hashpipe shares mdxfind's type list."
 vectors:
   - hash: "$2a$05$/VT2Xs2dMd8GJKfrXhjYP.DkTjOVrY12yDN7/6I8ZV0q/1lEohLru"
     pass: "hashcat"
     source: "hashcat"
     reads_in: ["hashcat", "mdxfind"]
+  - hash: "$2y$12$sQAjI1tnXS4PCojWebPGteIV7AVSonJFTkP95UaMg.PSZEFLxDpWe"
+    pass: "rosetta"
+    source: "sheet"
+    reads_in: ["hashcat", "mdxfind"]
+legacy:
+  hashes_org: "BCRYPTMD5"

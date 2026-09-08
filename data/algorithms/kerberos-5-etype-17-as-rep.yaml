@@ -1,5 +1,6 @@
 id: "kerberos-5-etype-17-as-rep"
 name: "Kerberos 5, etype 17, AS-REP"
+aliases: ["Kerberos 5 AS-REP etype 17/18/23"]
 expression_proof:
   verified: "absent"
   verified_at: "2026-08-31"
@@ -32,6 +33,11 @@ tools:
     note: "GPU build(s) krb5asrep-aes-opencl proven on 2026-09-01 by cracking this entry's own vector(s) under that exact format; john ships no CPU format of that name, so discover-john.pl --mirror-gpu could not place them. CPU format krb5asrep added the same day and on the same evidence: it loads and cracks the transcoded vector too. john covers etypes 17, 18 and 23 under this one identifier, which is why kerberos-5-as-rep-etype-17-18-23 names it as well."
   crack:
     supported: false
+relations:
+  - kind: "duplicate-of"
+    entry: "kerberos-5-as-rep-etype-17-18-23"
+    distinction: "none"
+    note: "merged 2026-09-08: Merged 2026-09-08, and NOT on the naming rule -- this one is decided by CLAUDE.md's \"one entry is one computation\". This row was named for THREE etypes at once, which no single row can be, while its only hashcat mode is 32100, \"Kerberos 5, etype 17, AS-REP\" -- etype 17 alone. Rows for etype 18 (mode 32200) and etype 23 (mode 18200) already exist separately, so the three-etype name overlapped two other rows. The survivor also carries two vectors to this row's one. john's krb5asrep genuinely does cover all three etypes with one format, and that is why it is named on all three rows; a format spanning several computations does not make them one entry."
 vectors:
   - hash: "$krb5asrep$17$user$EXAMPLE.COM$a419c4030e555734b06c2629$c09a1421f96eb126c757a4b87830381f142477d9a85b2beb3093dbfd44f38ddb6016a479537fb7b36e046315869fe79187217971ff6a12c1e0a2df3f68045e03814b21f756d8981f781803d65e8572823c88979581d93cf7d768f2efced16f3719b8d1004d9e73d798de255383476bced47d1982f16be77d0feb55a1f44f58bd013fa4caee58ac614caf0f1cf9101ec9623c5b8c2a1491b73f134f074790088fdb360b5ebce0d32a8145ed00a81ddf77188e150b92d8e8ddd0285d27f1514253e5546e6bba864b362bb1e6483b26d08fa4cc268bfbefe0f690039bcc524b774599df3680c1c3431d891bfa99514a877f964e"
     pass: "hashcat"
@@ -45,4 +51,8 @@ vectors:
     form: "john"
     reads_in: ["john"]
     credential: 1
+  - hash: "$krb5asrep$17$EXAMPLE.COMhero$4e7c79214fd330b2e505a4c75e257e4686029136d54f92ce91bb69d5ffc064e64e925b3ae8bc1df431c74ccaf2075cb4a1a32151b0848964e147bf6f8e4a50caa7931faad50433991e016e312c70ad9007e38166f8df39eda3edd2445cce757e062d0919e663a67eb9fdb472b2a840cf521f18bd794947bcc0c0c6394cc5a60b860c963640867e623732206e7bf904d3b066a17b6f4ea3fd6d74f110ee80052e5297f7a19aaec22e22d582d183d43d6ca1792da187a3a182d1f479c5b4692841ccd701a63735d64584c4f8d199d67876dae5181f4eadfe75e454d0587d0953d7e16cb1b63265da6188b10c1746a2e83c41707bd03fcb2d460d1c6802826a0347b5ee7cdbe5384acad139b4395928bd$7ed0277ba9b853008cc62abe"
+    pass: "abcd"
+    source: "john"
+    reads_in: ["hashcat", "john"]
 notes: "Vector(s) 'hashcat' added 2026-09-01: the SAME Kerberos 5 AS-REP credential(s) already above, re-serialized into the form john reads. They are not independent evidence -- do not read two agreeing vectors here as corroboration. hashcat writes $krb5asrep$<et>$<user>$<REALM>$<checksum>$<data>; john writes $krb5asrep$<et>$<REALM><user>$<data>$<checksum>. The re-encoding was not assumed: each transcoded string was handed to john with only the plaintext the hashcat vector already states, and fell under both the CPU format and the GPU build."

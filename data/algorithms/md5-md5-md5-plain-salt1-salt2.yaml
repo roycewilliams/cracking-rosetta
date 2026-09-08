@@ -1,5 +1,6 @@
 id: "md5-md5-md5-plain-salt1-salt2"
 name: "md5(md5(md5($plain).$salt1).$salt2)"
+aliases: ["MD5-MD5MD5PASSSALT-PEP"]
 expression_proof:
   verified: "absent"
   verified_at: "2026-09-05"
@@ -23,12 +24,27 @@ tools:
     verified_at: "2026-09-04"
     verified_with: "mdxfind RCS 1.545 (2026/08/29)"
     note: "type discovered by round-trip search, not by name"
+  hashpipe:
+    types: ["MD5-MD5MD5PASSSALT-PEP"]
+    verified: "vector"
+    verified_at: "2026-09-03"
+    verified_with: "hashpipe RCS 1.189 (2026/09/02)"
+    note: "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one."
   crack:
     supported: false
+relations:
+  - kind: "duplicate-of"
+    entry: "md5-md5md5passsalt-pep"
+    distinction: "none"
+    note: "merged 2026-09-08: Merged 2026-09-08 on Royce's rule: where two tools name one computation, hashcat's published name becomes the id. hashcat's own name for mode 31700 is \"md5(md5(md5($pass).$salt1).$salt2)\", which is the survivor's id; MD5-MD5MD5PASSSALT-PEP is mdxfind's type name for the same construction. The hashpipe type this row carried and the survivor did not is a seeding artifact, not a difference in substance -- both rows name the same mdxfind type and hashpipe shares mdxfind's type list. The mdxfind spelling stays findable as an alias and as this tombstone."
 vectors:
   - hash: "c7a971e405313d0ecc22e37e8b2424a1:2316355934:478467"
     pass: "hashcat"
     source: "hashcat"
+    reads_in: ["hashcat", "mdxfind"]
+  - hash: "ee7c5e3d9be506a265c21e426add16ec:Salt:Pepper"
+    pass: "password123"
+    source: "mdxfind"
     reads_in: ["hashcat", "mdxfind"]
 legacy:
   hashes_org: "not supported"

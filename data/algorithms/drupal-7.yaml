@@ -1,45 +1,10 @@
 id: "drupal-7"
 name: "Drupal 7"
-expression_proof:
-  verified: "absent"
-  verified_at: "2026-09-05"
-  verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
-  note: "the construction upstream states for mdxfind type DRUPAL7 (e876) names phpass(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:."
-denotation:
-  text: "phpass(pass, salt, N)"
-  source: "mdxfind"
-  note: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A, entry for mdxfind type DRUPAL7 (e876), which states phpass(pass, salt, N) (Drupal 7)."
-status: "ok"
-tools:
-  hashcat:
-    modes: [7900]
-    verified: "vector"
-    verified_at: "2026-09-07"
-    verified_with: "hashcat v7.1.2-606-ge2a7ab834"
-  mdxfind:
-    types: ["DRUPAL7"]
-    verified: "vector"
-    verified_at: "2026-09-04"
-    verified_with: "mdxfind RCS 1.545 (2026/08/29)"
-    note: "type discovered by round-trip search, not by name"
-  hashpipe:
-    types: ["DRUPAL7"]
-    verified: "vector"
-    verified_at: "2026-09-03"
-    verified_with: "hashpipe RCS 1.189 (2026/09/02)"
-    note: "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one."
-  john:
-    cpu: ["Drupal7"]
-    verified: "vector"
-    verified_at: "2026-09-07"
-    verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
-    note: "format discovered by round-trip search, not by name"
-  crack:
-    supported: false
-vectors:
-  - hash: "$S$5PpDG6SBfYKrvTHtiMzdZBWjwqOTTiW1Qntn1Sf4jO2PFhkrchMP"
-    pass: "rosetta"
-    source: "sheet"
-    reads_in: ["hashcat", "john", "mdxfind"]
-legacy:
-  hashes_org: "DRUPAL7"
+status: "merged"
+merged_into: "drupal7"
+relations:
+  - kind: "duplicate-of"
+    entry: "drupal7"
+    distinction: "none"
+    note: "merged 2026-09-08: Merged 2026-09-08 on Royce's rule: where two tools name one computation, hashcat's published name becomes the id. Both hashcat (mode 7900) and john (format label) spell it \"Drupal7\"; the hyphenated form matches neither tool. Note the losing row held the tidier display name \"Drupal 7\", which moves to the survivor, so nothing readable is lost -- only the id changes."
+notes: "Tombstone. This id is kept so links and dist/rosetta.csv keys still resolve; every claim it made now lives in drupal7.yaml. Merged 2026-09-08 on Royce's rule: where two tools name one computation, hashcat's published name becomes the id. Both hashcat (mode 7900) and john (format label) spell it \"Drupal7\"; the hyphenated form matches neither tool. Note the losing row held the tidier display name \"Drupal 7\", which moves to the survivor, so nothing readable is lost -- only the id changes."
