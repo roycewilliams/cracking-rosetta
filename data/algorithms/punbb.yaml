@@ -31,6 +31,15 @@ tools:
     note: "no format. Swept the 33 format(s) whose own valid() accepts this entry's own vector, as john --show=left reports them, on 2026-09-04 (a tools/discover-john.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. For john the control is also per ENTRY and not only per shape: every format counted above is one whose own loader ACCEPTED this hash, so each was asked this exact question and answered no. A format that cannot parse the hash is not counted at all, and an entry no format can parse is reported as unsearched rather than decided. Every applicable format ran to completion; a format killed at the timeout is counted as untested and withholds this verdict. No john format name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if john gains one, this becomes a mapping."
   crack:
     supported: false
+relations:
+  - kind: "same-computation"
+    entry: "redmine"
+    distinction: "application"
+    note: "Both rows are one computation, and each exists because a tool publishes a separate identifier for it: hashcat 4522 \"PunBB\" against hashcat 4521 \"Redmine\". PROVEN RATHER THAN INFERRED, 2026-09-08: mdxfind pinned to ^SHA1SALTSHA1PASS$ reproduced every member of this cluster from its OWN stored vector, against the local build RCS 1.579. A shared type name alone would not have established it -- mdxfind's EPISERVER reproduces a SHA-1 row and a SHA-256 row because the string carries a variant tag it dispatches on -- so the second control is that every digest in this cluster is 40 characters wide, which leaves the type no variant field to have read."
+  - kind: "same-computation"
+    entry: "sha1-salt-sha1-plain"
+    distinction: "application"
+    note: "Both rows are one computation, and each exists because a tool publishes a separate identifier for it: hashcat 4522 \"PunBB\" against hashcat 4520 \"sha1($salt.sha1($pass))\". PROVEN RATHER THAN INFERRED, 2026-09-08: mdxfind pinned to ^SHA1SALTSHA1PASS$ reproduced every member of this cluster from its OWN stored vector, against the local build RCS 1.579. A shared type name alone would not have established it -- mdxfind's EPISERVER reproduces a SHA-1 row and a SHA-256 row because the string carries a variant tag it dispatches on -- so the second control is that every digest in this cluster is 40 characters wide, which leaves the type no variant field to have read."
 vectors:
   - hash: "9038129c474caa3f0de56f38db84033d0fe1d4b8:365563602032"
     pass: "hashcat"

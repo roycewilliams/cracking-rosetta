@@ -45,6 +45,10 @@ relations:
     entry: "netiq-sspr-sha-512-with-salt"
     distinction: "none"
     note: "merged 2026-09-07: Strict subset: the loser's identifiers (hashcat 32040, mdxfind SSPR-SHA512, john sspr) are all on the survivor, which adds hashpipe SSPR-SHA512. NOTE the sibling adobe-aem-sspr-sha-512-with-salt is NOT merged: it carries hashcat 32041, a mode of its own."
+  - kind: "same-computation"
+    entry: "adobe-aem-sspr-sha-512-with-salt"
+    distinction: "application"
+    note: "Both rows are one computation, and each exists because a tool publishes a separate identifier for it: hashcat 32041 \"Adobe AEM (SSPR, SHA-512 with Salt)\" against hashcat 32040 \"NetIQ SSPR (SHA-512 with Salt)\". PROVEN RATHER THAN INFERRED, 2026-09-08: mdxfind pinned to ^SSPR-SHA512$ reproduced every member of this cluster from its OWN stored vector, against the local build RCS 1.579. A shared type name alone would not have established it -- mdxfind's EPISERVER reproduces a SHA-1 row and a SHA-256 row because the string carries a variant tag it dispatches on -- so the second control is that every digest in this cluster is 128 characters wide, which leaves the type no variant field to have read."
 vectors:
   - hash: "$sspr$4$100000$NzYwNjMyNDc2MTQ2OTE4NTUzODAyODE3$f1a614b4400702da2d49c8ee3f3b5f835dabc92ba1fd192471cbab80e9f3acb24edcfb0fa0b7acf74233a1f87c880f76a3052d5bd68e5f1fdcfbaafd7f98c08e"
     pass: "password123"

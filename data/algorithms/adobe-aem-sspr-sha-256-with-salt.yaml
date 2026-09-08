@@ -33,6 +33,11 @@ tools:
     note: "format discovered by round-trip search, not by name"
   crack:
     supported: false
+relations:
+  - kind: "same-computation"
+    entry: "sspr-sha256"
+    distinction: "application"
+    note: "Both rows are one computation, and each exists because a tool publishes a separate identifier for it: hashcat 32031 \"Adobe AEM (SSPR, SHA-256 with Salt)\" against hashcat 32030 \"NetIQ SSPR (SHA-256 with Salt)\". PROVEN RATHER THAN INFERRED, 2026-09-08: mdxfind pinned to ^SSPR-SHA256$ reproduced every member of this cluster from its OWN stored vector, against the local build RCS 1.579. A shared type name alone would not have established it -- mdxfind's EPISERVER reproduces a SHA-1 row and a SHA-256 row because the string carries a variant tag it dispatches on -- so the second control is that every digest in this cluster is 64 characters wide, which leaves the type no variant field to have read."
 vectors:
   - hash: "$sspr$3$1000$f9bbf1381f481427$a1b45fd7eb190cc7f0bf831698cb777207eebbb4b7ea2abd6fff84be539aae62"
     pass: "hashcat"

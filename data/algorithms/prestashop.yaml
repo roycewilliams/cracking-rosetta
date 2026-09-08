@@ -38,6 +38,19 @@ tools:
     note: "format discovered by round-trip search, not by name"
   crack:
     supported: false
+relations:
+  - kind: "same-computation"
+    entry: "md5-salt-pass"
+    distinction: "application"
+    note: "Both rows are one computation, and each exists because a tool publishes a separate identifier for it: hashcat 20 \"md5($salt.$pass)\" against hashcat 11000 \"PrestaShop\". PROVEN RATHER THAN INFERRED, 2026-09-08: mdxfind pinned to ^MD5SALTPASS$ reproduced every member of this cluster from its OWN stored vector, against the local build RCS 1.579. A shared type name alone would not have established it -- mdxfind's EPISERVER reproduces a SHA-1 row and a SHA-256 row because the string carries a variant tag it dispatches on -- so the second control is that every digest in this cluster is 32 characters wide, which leaves the type no variant field to have read."
+  - kind: "same-computation"
+    entry: "oscommerce-xt-commerce"
+    distinction: "application"
+    note: "Both rows are one computation, and each exists because a tool publishes a separate identifier for it: hashcat 21 \"osCommerce, xt:Commerce\" against hashcat 11000 \"PrestaShop\". PROVEN RATHER THAN INFERRED, 2026-09-08: mdxfind pinned to ^MD5SALTPASS$ reproduced every member of this cluster from its OWN stored vector, against the local build RCS 1.579. A shared type name alone would not have established it -- mdxfind's EPISERVER reproduces a SHA-1 row and a SHA-256 row because the string carries a variant tag it dispatches on -- so the second control is that every digest in this cluster is 32 characters wide, which leaves the type no variant field to have read."
+  - kind: "same-computation"
+    entry: "solarwinds-serv-u"
+    distinction: "application"
+    note: "Both rows are one computation, and each exists because a tool publishes a separate identifier for it: hashcat 11000 \"PrestaShop\" against hashcat 24 \"SolarWinds Serv-U\". PROVEN RATHER THAN INFERRED, 2026-09-08: mdxfind pinned to ^MD5SALTPASS$ reproduced every member of this cluster from its OWN stored vector, against the local build RCS 1.579. A shared type name alone would not have established it -- mdxfind's EPISERVER reproduces a SHA-1 row and a SHA-256 row because the string carries a variant tag it dispatches on -- so the second control is that every digest in this cluster is 32 characters wide, which leaves the type no variant field to have read."
 vectors:
   - hash: "f22cade043e7214200206dbffca49fd9:27167508161455764247627144160038845437138252877014827848"
     pass: "hashcat"

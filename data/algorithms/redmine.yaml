@@ -32,6 +32,15 @@ tools:
     note: "format discovered by round-trip search, not by name"
   crack:
     supported: false
+relations:
+  - kind: "same-computation"
+    entry: "punbb"
+    distinction: "application"
+    note: "Both rows are one computation, and each exists because a tool publishes a separate identifier for it: hashcat 4522 \"PunBB\" against hashcat 4521 \"Redmine\". PROVEN RATHER THAN INFERRED, 2026-09-08: mdxfind pinned to ^SHA1SALTSHA1PASS$ reproduced every member of this cluster from its OWN stored vector, against the local build RCS 1.579. A shared type name alone would not have established it -- mdxfind's EPISERVER reproduces a SHA-1 row and a SHA-256 row because the string carries a variant tag it dispatches on -- so the second control is that every digest in this cluster is 40 characters wide, which leaves the type no variant field to have read."
+  - kind: "same-computation"
+    entry: "sha1-salt-sha1-plain"
+    distinction: "application"
+    note: "Both rows are one computation, and each exists because a tool publishes a separate identifier for it: hashcat 4521 \"Redmine\" against hashcat 4520 \"sha1($salt.sha1($pass))\". PROVEN RATHER THAN INFERRED, 2026-09-08: mdxfind pinned to ^SHA1SALTSHA1PASS$ reproduced every member of this cluster from its OWN stored vector, against the local build RCS 1.579. A shared type name alone would not have established it -- mdxfind's EPISERVER reproduces a SHA-1 row and a SHA-256 row because the string carries a variant tag it dispatches on -- so the second control is that every digest in this cluster is 40 characters wide, which leaves the type no variant field to have read."
 vectors:
   - hash: "c18e826af2a78c7b9b7261452613233417e65817:28246535720688452723483475753333"
     pass: "hashcat"
