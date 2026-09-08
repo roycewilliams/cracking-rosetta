@@ -1110,7 +1110,16 @@ if ($want{mdxfind} && $job{mdxfind}) {
             # the plaintext must be one this entry actually stores
             next unless grep { ($_->{pass} // '') eq $tp }
                         @{ $entry{$id}{vectors} || [] };
-            my $rf = ($th =~ /:/) ? '-F' : '-f';
+            # -f or -F from the INVENTORY first, the line's shape second.
+            # Asking only whether the transcoded line contains a colon reads
+            # the serialization instead of the type: mdxfind's WPA types are
+            # salted (flags f,s) and spell their fields with '*', so the colon
+            # test chose -f and mdxfind loaded nothing -- measured 2026-09-07,
+            # with the type's own published vector under -f as the control,
+            # which fails the same way. This is a union of the two tests, so it
+            # can only widen: NSEC3, whose flag is F rather than s, still
+            # reaches -F through the colon.
+            my $rf = ($MX_SALTED{$type} || $th =~ /:/) ? '-F' : '-f';
             my $hf = write_file("$workdir/mx.$safe.$it.tr.hash", $th);
             my $wf = write_file("$workdir/mx.$safe.$it.tr.word", $tp);
             my ($c3, $o3) = run_capture($timeout, $mdxfind,
