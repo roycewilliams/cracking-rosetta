@@ -63,8 +63,8 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | APPLE-IWORK | `23300` (v) | no | `APPLE-IWORK` (v) |  |
 | APPLE-KEYCHAIN | `23100` (v) | `keychain`<br>`keychain-opencl` (v) | `APPLE-KEYCHAIN` (v) |  |
 | APPLE-SECURE-NOTES | `16700` (v) | `FVDE`<br>`FVDE-opencl` (v) | `APPLE-SECURE-NOTES` (v) |  |
-| ARGON2 | `34000` (v) | `Argon2`<br>`argon2-opencl` (v) | `ARGON2` (v) |  |
-| Argon2id [Bridged: reference implementation + tunings] | `70000` (v) | `Argon2`<br>`argon2-opencl` (v) | `ARGON2` (v) |  |
+| ARGON2 | `34000` (v) | `Argon2`<br>`argon2-opencl` (v) | `ARGON2` (v) | covers argon2id-bridged-reference-implementation-tunings (naming) |
+| Argon2id [Bridged: reference implementation + tunings] | `70000` (v) | `Argon2`<br>`argon2-opencl` (v) | `ARGON2` (v) | covered-by argon2 (naming) |
 | ARGON2MD5 | **--** | **--** | `ARGON2MD5` (v) |  |
 | Armory wallet | **--** | `armory` (v) | no |  |
 | ARUBAOS | `125` (v) | **--** | `ARUBAOS` (v) |  |
@@ -287,7 +287,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | GROESTL256 | no | no | `GROESTL256` (v) |  |
 | GROESTL384 | no | no | `GROESTL384` (v) |  |
 | GROESTL512 | no | no | `GROESTL512` (v) |  |
-| GRUB 2 | `7200` (v) | `PBKDF2-HMAC-SHA512`<br>`PBKDF2-HMAC-SHA512-opencl` (v) | `PBKDF2-SHA512` (v) |  |
+| GRUB 2 | `7200` (v) | `PBKDF2-HMAC-SHA512`<br>`PBKDF2-HMAC-SHA512-opencl` (v) | `PBKDF2-SHA512` (v) | same as macos-v10-8-pbkdf2-sha512 (application); same as pbkdf2-hmac-sha512 (application); same as pbkdf2-sha512-plain (application) |
 | H3C/Huawei/HPE | **--** | `h3c` (v) | `H3C` (v) |  |
 | Half MD5 | `5100` (v) | no | `MD5` (v) | iterates md5-md5-md5-md5-md5-pass (iteration); iterates md5-md5-md5-md5-pass (iteration); iterates md5-md5-md5-pass (iteration); iterates md5-md5-pass (iteration) |
 | HalfLM C/R | **--** | `nethalflm` | no |  |
@@ -499,7 +499,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | LUKS v1 SHA-512 + Twofish | `29533` (v) | **--** | no |  |
 | LUKS v2 argon2 + SHA-256 + AES | `34100` (v) | **--** | no |  |
 | Mac OS X 10.4 - 10.6 | `122` (v) | `xsha` (v) | `MACOSX` (v) |  |
-| macOS v10.8+ (PBKDF2-SHA512) | `7100` (v) | `PBKDF2-HMAC-SHA512`<br>`PBKDF2-HMAC-SHA512-opencl` (v) | `PBKDF2-SHA512` (v) |  |
+| macOS v10.8+ (PBKDF2-SHA512) | `7100` (v) | `PBKDF2-HMAC-SHA512`<br>`PBKDF2-HMAC-SHA512-opencl` (v) | `PBKDF2-SHA512` (v) | same as grub-2 (application); same as pbkdf2-hmac-sha512 (application); same as pbkdf2-sha512-plain (application) |
 | MACOSX | `122` (v) | no | `MACOSX` (v) |  |
 | MACOSX7 | `1722` (v) | `xsha512`<br>`XSHA512-opencl`<br>`XSHA512-free-opencl` (v) | `MACOSX7` (v) |  |
 | MANGOS | no | no | `MANGOS` (v) |  |
@@ -828,8 +828,8 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | MYSQL-SHA256CRYPT | `7401` (v) | **--** | `MYSQL-SHA256CRYPT` (v) |  |
 | MySQL4.1/MySQL5 | `300` (v) | `mysql-sha1`<br>`mysql-sha1-opencl` (v) | `SQL5` (v) |  |
 | MYSQLCRAM | `11200` (v) | `mysqlna` (v) | `MYSQLCRAM` (v) |  |
-| NetIQ SSPR (PBKDF2WithHmacSHA1) | `32050` (v) | `PBKDF2-HMAC-SHA1`<br>`PBKDF2-HMAC-SHA1-opencl` (v) | `PBKDF2-SHA1` (v) |  |
-| NetIQ SSPR (PBKDF2WithHmacSHA256) | `32060` (v) | `PBKDF2-HMAC-SHA256`<br>`PBKDF2-HMAC-SHA256-opencl` (v) | `PBKDF2-SHA256` (v) |  |
+| NetIQ SSPR (PBKDF2WithHmacSHA1) | `32050` (v) | `PBKDF2-HMAC-SHA1`<br>`PBKDF2-HMAC-SHA1-opencl` (v) | `PBKDF2-SHA1` (v) | same as pbkdf2-hmac-sha1 (application); same as pbkdf2-sha1-plain (application) |
+| NetIQ SSPR (PBKDF2WithHmacSHA256) | `32060` (v) | `PBKDF2-HMAC-SHA256`<br>`PBKDF2-HMAC-SHA256-opencl` (v) | `PBKDF2-SHA256` (v) | same as pbkdf2-hmac-sha256 (application); same as pbkdf2-sha256-plain (application); same as python-passlib-pbkdf2-sha256 (application) |
 | NetIQ SSPR (PBKDF2WithHmacSHA512) | `32070` (v) | `PBKDF2-HMAC-SHA512`<br>`PBKDF2-HMAC-SHA512-opencl` (v) | no |  |
 | NETLMv2 | **--** | `netlmv2` (v) | `NETNTLMV2` (v) |  |
 | NETNTLMV1 | `5500` (v) | **--** | `NETNTLMV1` (v) |  |
@@ -875,13 +875,13 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | PBKDF1-SHA1 | `32900` (v) | **--** | `PBKDF1-SHA1` (v) |  |
 | PBKDF2-HMAC-MD4 | **--** | `PBKDF2-HMAC-MD4`<br>`PBKDF2-HMAC-MD4-opencl` (v) | no |  |
 | PBKDF2-HMAC-MD5 | **--** | `PBKDF2-HMAC-MD5`<br>`PBKDF2-HMAC-MD5-opencl` (v) | no |  |
-| PBKDF2-HMAC-SHA1 | `12000` (v) | **--** | `PBKDF2-SHA1` (v) |  |
-| PBKDF2-HMAC-SHA256 | `10900` (v) | **--** | `PBKDF2-SHA256` (v) |  |
-| PBKDF2-HMAC-SHA512 | `12100` (v) | **--** | `PBKDF2-SHA512` (v) |  |
+| PBKDF2-HMAC-SHA1 | `12000` (v) | **--** | `PBKDF2-SHA1` (v) | same as netiq-sspr-pbkdf2withhmacsha1 (application); same as pbkdf2-sha1-plain (application) |
+| PBKDF2-HMAC-SHA256 | `10900` (v) | **--** | `PBKDF2-SHA256` (v) | same as netiq-sspr-pbkdf2withhmacsha256 (application); same as pbkdf2-sha256-plain (application); same as python-passlib-pbkdf2-sha256 (application) |
+| PBKDF2-HMAC-SHA512 | `12100` (v) | **--** | `PBKDF2-SHA512` (v) | same as grub-2 (application); same as macos-v10-8-pbkdf2-sha512 (application); same as pbkdf2-sha512-plain (application) |
 | pbkdf2-md5($plain) | `11900` (v) | **--** | `PBKDF2-MD5` (v) |  |
-| pbkdf2-sha1($plain) | `20400` (v) | **--** | `PBKDF2-SHA1` (v) |  |
-| pbkdf2-sha256($plain) | `10000` (v) | **--** | `PBKDF2-SHA256` (v) |  |
-| pbkdf2-sha512($plain) | `20200` (v) | `PBKDF2-HMAC-SHA512`<br>`PBKDF2-HMAC-SHA512-opencl` (v) | `PBKDF2-SHA512` (v) |  |
+| pbkdf2-sha1($plain) | `20400` (v) | **--** | `PBKDF2-SHA1` (v) | same as netiq-sspr-pbkdf2withhmacsha1 (application); same as pbkdf2-hmac-sha1 (application) |
+| pbkdf2-sha256($plain) | `10000` (v) | **--** | `PBKDF2-SHA256` (v) | same as netiq-sspr-pbkdf2withhmacsha256 (application); same as pbkdf2-hmac-sha256 (application); same as python-passlib-pbkdf2-sha256 (application) |
+| pbkdf2-sha512($plain) | `20200` (v) | `PBKDF2-HMAC-SHA512`<br>`PBKDF2-HMAC-SHA512-opencl` (v) | `PBKDF2-SHA512` (v) | same as grub-2 (application); same as macos-v10-8-pbkdf2-sha512 (application); same as pbkdf2-hmac-sha512 (application) |
 | PDF 1.1 - 1.3 (Acrobat 2 - 4) | `10400` (v) | `PDF`<br>`pdf-opencl` (v) | no |  |
 | PDF 1.1 - 1.3 (Acrobat 2 - 4), collider #1 | `10410` (v) | **--** | no |  |
 | PDF 1.1 - 1.3 (Acrobat 2 - 4), collider #2 | `10420` (v) | **--** | no |  |
@@ -924,7 +924,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | PunBB | `4522` (v) | no | `SHA1SALTSHA1PASS` (v) | same as redmine (application); same as sha1-salt-sha1-plain (application) |
 | Purdy | **--** | `OpenVMS` (v) | no |  |
 | PWSAFE3 | `5200` (v) | **--** | `PWSAFE3` (v) |  |
-| Python passlib pbkdf2-sha256 | `20300` (v) | `PBKDF2-HMAC-SHA256`<br>`PBKDF2-HMAC-SHA256-opencl` (v) | `PBKDF2-SHA256` (v) |  |
+| Python passlib pbkdf2-sha256 | `20300` (v) | `PBKDF2-HMAC-SHA256`<br>`PBKDF2-HMAC-SHA256-opencl` (v) | `PBKDF2-SHA256` (v) | same as netiq-sspr-pbkdf2withhmacsha256 (application); same as pbkdf2-hmac-sha256 (application); same as pbkdf2-sha256-plain (application) |
 | QNX-MD5 | `19000` (v) | `qnx` (v) | `QNX-MD5` (v) |  |
 | QNX-SHA256 | `19100` (v) | `qnx` (v) | `QNX-SHA256` (v) |  |
 | QNX-SHA512 | `19200` (v) | `qnx` (v) | `QNX-SHA512` (v) |  |
@@ -998,10 +998,10 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | SAPCODVNH512 | `35000` (v) | `saph` (v) | `SAPCODVNH512` (v) |  |
 | SCRAM-PBKDF2-SHA1-MongoDB | **--** | `SCRAM-PBKDF2-SHA1-MongoDB` (v) | no |  |
 | SCRAM-PBKDF2-SHA256 | **--** | `SCRAM-PBKDF2-SHA256` (v) | no |  |
-| SCRYPT | `8900` (v) | `scrypt` (v) | `SCRYPT` (v) |  |
-| scrypt [Bridged: Scrypt-Jane SMix] | `70100` (v) | **--** | `SCRYPT` (v) |  |
-| scrypt [Bridged: Scrypt-Yescrypt] | `70200` (v) | **--** | `SCRYPT` (v) |  |
-| scryptcrypt, scrypt (Unix) | `36300` (v) | `scrypt` (v) | `SCRYPT` (v) |  |
+| SCRYPT | `8900` (v) | `scrypt` (v) | `SCRYPT` (v) | same as scrypt-bridged-scrypt-jane-smix (application); same as scrypt-bridged-scrypt-yescrypt (application); same as scryptcrypt-scrypt-unix (application) |
+| scrypt [Bridged: Scrypt-Jane SMix] | `70100` (v) | **--** | `SCRYPT` (v) | same as scrypt (application); same as scrypt-bridged-scrypt-yescrypt (naming); same as scryptcrypt-scrypt-unix (application) |
+| scrypt [Bridged: Scrypt-Yescrypt] | `70200` (v) | **--** | `SCRYPT` (v) | same as scrypt (application); same as scrypt-bridged-scrypt-jane-smix (naming); same as scryptcrypt-scrypt-unix (application) |
+| scryptcrypt, scrypt (Unix) | `36300` (v) | `scrypt` (v) | `SCRYPT` (v) | same as scrypt (application); same as scrypt-bridged-scrypt-jane-smix (application); same as scrypt-bridged-scrypt-yescrypt (application) |
 | SecureCRT MasterPassphrase v2 | `31400` (v) | **--** | no |  |
 | SecureZIP AES-128 | `23001` (v) | `securezip` (v) | no |  |
 | SecureZIP AES-192 | `23002` (v) | `securezip` (v) | no |  |
