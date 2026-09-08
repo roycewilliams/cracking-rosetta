@@ -280,9 +280,20 @@ my @CASES = (
     # --- the refusals ----------------------------------------------
     # Each of these must come back undef. A value here is a token that got
     # dropped or guessed, and triage would spend it on a verdict.
-    [ undef, 'md4($p)',           undef,
-      'md4 is real hx, but there is no Digest::MD4 on this host' ],
-    [ undef, 'whirlpool($p)',     undef, 'no whirlpool here' ],
+    # md4 and whirlpool were UNCONDITIONAL refusals here until 2026-09-08,
+    # on the ground that this host had no module for them. libcryptx-perl is
+    # installed now and RosettaExpr registers sixteen tokens from it, so the
+    # assertion moved into @OPTIONAL below rather than being deleted: on a
+    # host without CryptX -- CI, today -- the refusal is still what must
+    # happen, and asserting only the present case would make CI fail for a
+    # reason that is not a defect.
+    #
+    # gost stays here and unconditional. CryptX 0.077 does not have it in any
+    # configuration, so it is the control that says the bail rule still
+    # works; without it, "the refusals are correct" and "everything compiles
+    # now" would be the same reading.
+    [ undef, 'gost($p)',          undef,
+      'gost is real hx and is in no CryptX release on this host' ],
     # sha224($p) and utf16($p) were refusals here until 2026-09-04, and both
     # reasons are recorded above where they are now computed. The utf16 one
     # was wrong when it was written -- hx HAS utf16le, and RosettaHx's
@@ -401,6 +412,46 @@ my @CASES = (
     [ undef, 'md5($p.":".$s)',    undef, 'string literals are not modeled' ],
     [ undef, '',                  undef, 'the empty expression' ],
 );
+
+# THE OPTIONAL TOKENS, one assertion each, chosen from what this host has.
+#
+# The expected values are the ALGORITHMS' OWN published test vectors -- the
+# "abc" digest from each specification -- and NOT digests of $PASS. That
+# matters: for these tokens the only implementation on this host is the one
+# under test, so a value read back out of RosettaExpr would agree with it by
+# construction and assert nothing at all. A published vector is independent of
+# every implementation here, and it is what catches a token wired to the wrong
+# FUNCTION rather than merely to a function -- a tiger at the wrong width
+# compiles and returns a plausible 48 hex characters.
+#
+# The fifth tuple element is the per-case password, already supported by the
+# harness for the utf16 family.
+my %OPTIONAL = (
+    'md4($p)'        => 'a448017aaf21d8525fc10ae87aa6729d',
+    'md2($p)'        => 'da853b0d3f88d99b30283a69e6ded6bb',
+    'ripemd128($p)'  => 'c14a12199c66e4ba84636b0f69144c77',
+    'ripemd160($p)'  => '8eb208f7e05d987a9b044a8e98c6b087f15a0bfc',
+    'tiger($p)'      => '2aab1484e8c158f2bfb8c5ff41b57a525129131c957b5f93',
+    'sha3_256($p)'   => '3a985da74fe225b2045c172d6bd390bd855f086e3e9d525b46bfe24511431532',
+    'keccak_256($p)' => '4e03657aea45a94fc7d47ba826c8d667c0d1e6e33a64a036ec44f58fa12d6c45',
+    'whirlpool($p)'  => '4e2448a4c6f486bb16b6562c73b4020bf3043e3a731bce721ae1b303d97e6d4c'
+                      . '7181eebdb6c57e277d0e34957114cbd6c797fc9d95d8b582d225292076d4eef5',
+);
+my %HAVE = map { $_ => 1 } RosettaExpr::optional_tokens();
+for my $expr (sort keys %OPTIONAL) {
+    my ($tok) = $expr =~ /^(\w+)\(/;
+    if ($HAVE{$tok}) {
+        push @CASES, [ undef, $expr, $OPTIONAL{$expr},
+            "$tok: CryptX is present, so it must reproduce the published "
+          . "\"abc\" vector from its own specification", 'abc' ];
+    }
+    else {
+        push @CASES, [ undef, $expr, undef,
+            "$tok: no CryptX on this host, so it must still be REFUSED", 'abc' ];
+    }
+}
+printf "# optional tokens registered on this host: %s\n",
+    (join(' ', RosettaExpr::optional_tokens()) || '(none -- CryptX absent)');
 
 my ($pass_n, $fail_n) = (0, 0);
 sub check {

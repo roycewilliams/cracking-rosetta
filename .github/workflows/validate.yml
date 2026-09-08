@@ -60,7 +60,7 @@ jobs:
       - name: Install Perl deps
         run: |
           sudo apt-get update -qq
-          sudo apt-get install -y --no-install-recommends libyaml-libyaml-perl
+          sudo apt-get install -y --no-install-recommends libyaml-libyaml-perl libcryptx-perl
 
       # A tool that no longer compiles is a broken gate, not a passing one, so
       # this runs before the gate itself.

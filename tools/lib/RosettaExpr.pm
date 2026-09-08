@@ -177,6 +177,62 @@ our %RAW = (
 );
 
 #-----------------------------------------------------------------------
+# The tokens CryptX supplies, registered ONLY where the module is present.
+#
+# The six above come from core Perl and are unconditional; everything here is
+# conditional, because CI installs only libyaml-libyaml-perl and a hard
+# dependency would break it. A token whose module is missing is simply never
+# registered, and an unregistered function token is refused exactly as it was
+# before this table existed -- so a narrower host checks fewer claims and
+# asserts nothing new. That asymmetry is the whole safety argument: this
+# module CHECKS expressions that other tools proved, and the bail rule means
+# one it cannot compile is never evaluated wrongly.
+#
+# WHAT IS STILL OUTSIDE, and why it is not an oversight: gost, haval (in all
+# fifteen width-and-round variants), snefru, sha0, panama, skein and sm3.
+# None is in CryptX 0.077 -- sm3 arrived in a later release, so the version
+# matters and not just the package. Measured against this host 2026-09-08.
+#
+# `tiger` maps to Tiger192, the standard width. That mapping is an assertion
+# and is checked the only way it can be: against the corpus's own vectors,
+# where a wrong width compiles happily and then fails to reproduce.
+my %CRYPTX = (
+    md4        => ['Crypt::Digest::MD4',        'md4'],
+    md2        => ['Crypt::Digest::MD2',        'md2'],
+    whirlpool  => ['Crypt::Digest::Whirlpool',  'whirlpool'],
+    ripemd128  => ['Crypt::Digest::RIPEMD128',  'ripemd128'],
+    ripemd160  => ['Crypt::Digest::RIPEMD160',  'ripemd160'],
+    ripemd256  => ['Crypt::Digest::RIPEMD256',  'ripemd256'],
+    ripemd320  => ['Crypt::Digest::RIPEMD320',  'ripemd320'],
+    tiger      => ['Crypt::Digest::Tiger192',   'tiger192'],
+    sha3_224   => ['Crypt::Digest::SHA3_224',   'sha3_224'],
+    sha3_256   => ['Crypt::Digest::SHA3_256',   'sha3_256'],
+    sha3_384   => ['Crypt::Digest::SHA3_384',   'sha3_384'],
+    sha3_512   => ['Crypt::Digest::SHA3_512',   'sha3_512'],
+    keccak_224 => ['Crypt::Digest::Keccak224',  'keccak224'],
+    keccak_256 => ['Crypt::Digest::Keccak256',  'keccak256'],
+    keccak_384 => ['Crypt::Digest::Keccak384',  'keccak384'],
+    keccak_512 => ['Crypt::Digest::Keccak512',  'keccak512'],
+);
+
+# Which of the above this host actually has, in the order they were tried.
+our @OPTIONAL_TOKENS;
+
+for my $tok (sort keys %CRYPTX) {
+    my ($mod, $fn) = @{ $CRYPTX{$tok} };
+    next unless eval "require $mod; 1";
+    my $hex = $mod->can("${fn}_hex") or next;
+    my $raw = $mod->can($fn)         or next;
+    $HASH{$tok} = $hex;
+    $RAW{$tok}  = $raw;
+    push @OPTIONAL_TOKENS, $tok;
+}
+
+# What this host can compute beyond core Perl. Reported by the tools rather
+# than assumed, because the answer differs between this host and CI.
+sub optional_tokens { return @OPTIONAL_TOKENS }
+
+#-----------------------------------------------------------------------
 # The representation and slicing operators, each a transcription of the
 # matching fn_* in mdxfind's hx_func.c. Kept as named subs rather than
 # inlined source so the emitted expression stays a flat chain of calls.
