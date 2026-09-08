@@ -106,7 +106,7 @@ A few that carry a vector and a proven expression, so there is a definite constr
 
 All 203: filter `hashcat_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
 
-### mdxfind: 66 entries say nothing
+### mdxfind: 64 entries say nothing
 
 A few that carry a vector, so a candidate identifier can be tested at once, one per family:
 
@@ -126,7 +126,7 @@ A few that carry a vector, so a candidate identifier can be tested at once, one 
 * [`stuffit5`](index.html#stuffit5) - `Stuffit5`
 * [`totp-hmac-sha1`](index.html#totp-hmac-sha1) - `TOTP (HMAC-SHA1)`
 
-All 66: filter `mdxfind_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
+All 64: filter `mdxfind_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
 
 ## 4. hashcat modes with no row here (1)
 

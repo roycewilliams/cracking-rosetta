@@ -1563,8 +1563,8 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | WPA-PMKID | no | **--** | `WPA-PMKID` (v) |  |
 | WPA-PMKID-PBKDF2 | `16800` (v) | **--** | no |  |
 | WPA-PMKID-PMK | `16801` (v) | **--** | no |  |
-| WPA/WPA2/PMF/PMKID master key | **--** | `wpapsk-pmk` (v) | **--** |  |
-| WPA/WPA2/PMF/PMKID PSK | **--** | `wpapsk` (v) | **--** |  |
+| WPA/WPA2/PMF/PMKID master key | **--** | `wpapsk-pmk` (v) | `WPA-PMK` (v) |  |
+| WPA/WPA2/PMF/PMKID PSK | **--** | `wpapsk` (v) | `WPA-EAPOL` (v) |  |
 | WPBCRYPT | `35500` (v) | **--** | `WPBCRYPT` (v) |  |
 | WRL (2 iterations) | no | `dynamic_103` (v) | `WRL -i2` (v) | iterates whirlpool (iteration) |
 | wrl(sha512($plain)) | no | no | `WRLSHA512` (v) |  |
