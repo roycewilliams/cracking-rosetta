@@ -20,7 +20,7 @@ relations:
   - kind: "truncates"
     entry: "sha1-md5-md5-plain"
     distinction: "truncation"
-    note: "This row is sha1-md5-md5-plain cut to its first 32 hex characters. dynamic_1025 computes this and will not load the untruncated 40-hex digest at all -- measured 2026-09-06."
+    note: "This row is sha1-md5-md5-plain cut to its first 32 hex characters. dynamic_1025 computes this and will not load the untruncated 40-hex digest at all -- measured 2026-09-06. mdxfind reproduces this row under SHA1MD5MD5 (e287), pinned, through its generic truncated matching -- at a comparison width of 32 where the type's own digest is 40. NO mdxfind mapping is recorded: decided by Royce 2026-09-07 that finding a row is not denoting it. SHA1MD5 was pinned in the same run and REFUSED, so the match discriminates."
 vectors:
   - hash: "f122db007ed655921f98184e4302bba8"
     pass: 123456

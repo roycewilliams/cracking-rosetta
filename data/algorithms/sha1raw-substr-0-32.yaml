@@ -20,7 +20,7 @@ relations:
   - kind: "truncates"
     entry: "sha1raw"
     distinction: "truncation"
-    note: "This row is sha1raw cut to its first 32 hex characters. dynamic_1028 computes this; it had been sitting on mysql4-1-mysql5, which adds a leading star and upper-cases the digest, so that row was wrong about it twice over -- measured 2026-09-06."
+    note: "This row is sha1raw cut to its first 32 hex characters. dynamic_1028 computes this; it had been sitting on mysql4-1-mysql5, which adds a leading star and upper-cases the digest, so that row was wrong about it twice over -- measured 2026-09-06. mdxfind reproduces this row under BOTH SHA1RAW (e34) and SQL5 (e259), pinned, through its generic truncated matching at a comparison width of 32. NO mdxfind mapping is recorded: decided by Royce 2026-09-07 that finding a row is not denoting it. Two types matching one 32-hex digest is itself the argument -- at that width they are not distinguishable, so neither name identifies the row."
 vectors:
   - hash: "79239e0207cd5f6a472c8795c73b451d"
     pass: "rainbow"

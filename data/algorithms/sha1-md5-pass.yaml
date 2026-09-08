@@ -37,7 +37,7 @@ relations:
   - kind: "truncates"
     entry: "sha1-md5-pass-substr-0-32"
     distinction: "truncation"
-    note: "This row is sha1-md5-pass cut to its first 32 hex characters. john ships them as two formats, dynamic_1024 here and dynamic_23 there, and dynamic_1024 will not load the untruncated 40-hex digest at all -- measured 2026-09-06."
+    note: "This row is sha1-md5-pass cut to its first 32 hex characters. john ships them as two formats, dynamic_1024 here and dynamic_23 there, and dynamic_1024 will not load the untruncated 40-hex digest at all -- measured 2026-09-06. mdxfind reproduces this row under SHA1MD5 (e160), pinned, through its generic truncated matching -- at a comparison width of 32 where SHA1MD5's own digest is 40. NO mdxfind mapping is recorded for it: decided by Royce 2026-09-07 that finding a row is not denoting it, the same rule that makes john's dynamic_2 a collides-on-subset edge on md5cap rather than a mapping. SHA1MD5MD5 was pinned in the same run and REFUSED, so the match discriminates rather than being a width artefact."
 vectors:
   - hash: "3bf822d967c6059cc1bb6713421eecf065b840e9"
     pass: "rosetta"

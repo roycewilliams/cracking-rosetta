@@ -18,6 +18,11 @@ tools:
     verified_with: "john"
   crack:
     supported: false
+relations:
+  - kind: "truncates"
+    entry: "whirlpool"
+    distinction: "truncation"
+    note: "john's own run/dynamic.conf states dynamic_1030 as \"whirlpool($p) (hash truncated to length 32)\", which is the instrument for what a dynamic computes; its digest is 32 hex where whirlpool's is 128. Edge written 2026-09-07."
 vectors:
   - hash: "$dynamic_1030$56fd4ecb153a08b65a73b51e3c8ca369"
     pass: "spiral"

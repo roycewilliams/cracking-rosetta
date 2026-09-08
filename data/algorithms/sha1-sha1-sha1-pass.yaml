@@ -41,7 +41,7 @@ relations:
   - kind: "truncates"
     entry: "sha1-sha1-sha1-pass-substr-0-32"
     distinction: "truncation"
-    note: "This row is sha1-sha1-sha1-pass cut to its first 32 hex characters. dynamic_1027 computes this and will not load the untruncated 40-hex digest at all -- measured 2026-09-06."
+    note: "This row is sha1-sha1-sha1-pass cut to its first 32 hex characters. dynamic_1027 computes this and will not load the untruncated 40-hex digest at all -- measured 2026-09-06. NOT a truncated-match row, checked 2026-09-07. STATE.md had listed it with the three above on hashpipe naming SHA1MD5, and pinned, SHA1MD5 REFUSES this row's vector. SHA1SHA1SHA1 would be the type to want and mdxfind DOES NOT HAVE IT -- absent from the inventory -- so its silence is unmeasurable rather than negative, per CLAUDE.md. No mdxfind type is known to reproduce this row at any width."
 vectors:
   - hash: "1caaf7f2d96062e475905da8eb1434376b0e8bf8"
     pass: "rosetta"

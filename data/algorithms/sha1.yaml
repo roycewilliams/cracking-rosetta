@@ -47,7 +47,7 @@ relations:
   - kind: "truncates"
     entry: "sha1-substr-0-32"
     distinction: "truncation"
-    note: "sha1-substr-0-32 is this computation cut to its first 32 hex characters. Split out of that row on 2026-09-04 by Royce's decision: it was carrying both, and only john's dynamic_1023 truncates. Every identifier here computes plain SHA-1 and no cut, and every one of them was round-tripped against this vector before the split -- nothing was re-tiered by moving it."
+    note: "sha1-substr-0-32 is this computation cut to its first 32 hex characters. Split out of that row on 2026-09-04 by Royce's decision: it was carrying both, and only john's dynamic_1023 truncates. Every identifier here computes plain SHA-1 and no cut, and every one of them was round-tripped against this vector before the split -- nothing was re-tiered by moving it. mdxfind reproduces this row under BOTH SHA1 (e8) and AICH (e21), pinned, through its generic truncated matching at a comparison width of 32. NO mdxfind mapping is recorded: decided by Royce 2026-09-07 that finding a row is not denoting it. MD5 was pinned in the same run and REFUSED, which is the control that says the match is about these types and not about mdxfind reading a short digest loosely."
 vectors:
   - hash: "d21af7ece046af0e12d3c38472792cd5f081c39f"
     pass: "rosetta"
