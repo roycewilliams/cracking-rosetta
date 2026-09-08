@@ -33,6 +33,11 @@ tools:
     verified_with: "john"
   crack:
     supported: false
+relations:
+  - kind: "iterates"
+    entry: "sha3-384-x2"
+    distinction: "iteration"
+    note: "Both rows name mdxfind type SHA3-384; this one at -i 2 and sha3-384-plain at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
 vectors:
   - hash: "2650013dd6e61219ead77e373ca202155fee08726885f895a29ad4a5fd1a1a7fc9f9c33aa1a9fe08690aa9e8bfd934ee"
     pass: "rosetta"

@@ -36,6 +36,10 @@ relations:
     entry: "sha384"
     distinction: "none"
     note: "merged 2026-09-01: one computation under two names, proven by john's dynamic compiler against both vectors. Royce chose the john-named row on 2026-09-01: raw-sha384 is john's own Raw-SHA384 spelling, and dynamic_70 now sits beside it so a reader arriving by either name lands here"
+  - kind: "iterates"
+    entry: "sha384-x2"
+    distinction: "iteration"
+    note: "Both rows name mdxfind type SHA384; this one at -i 2 and raw-sha384 at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
 vectors:
   - hash: "a8b64babd0aca91a59bdbb7761b421d4f2bb38280d3a75ba0f21f2bebc45583d446c598660c94ce680c47d19c30783a7"
     pass: "password"

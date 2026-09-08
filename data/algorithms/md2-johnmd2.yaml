@@ -25,6 +25,11 @@ tools:
     note: "john's own published example ciphertext for this format, recovered by john under this format. john publishes no plaintext, so the plaintext was found by handing john its own example and a candidate list -- what john recovered IS the plaintext, by construction."
   crack:
     supported: false
+relations:
+  - kind: "iterates"
+    entry: "md2-x2"
+    distinction: "iteration"
+    note: "Both rows name mdxfind type MD2; this one at -i 2 and md2-johnmd2 at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
 vectors:
   - hash: "$md2$ab4f496bfb2a530b219ff33031fe06b0"
     pass: "message digest"

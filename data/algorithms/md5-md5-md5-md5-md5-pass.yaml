@@ -35,6 +35,27 @@ tools:
     note: "dynamic_0 removed 2026-08-29: verify-vectors showed it does not reproduce this vector"
   crack:
     supported: false
+relations:
+  - kind: "iterates"
+    entry: "half-md5"
+    distinction: "iteration"
+    note: "Both rows name mdxfind type MD5; this one at -i 5 and half-md5 at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+  - kind: "iterates"
+    entry: "md5"
+    distinction: "iteration"
+    note: "Both rows name mdxfind type MD5; this one at -i 5 and md5 at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+  - kind: "iterates"
+    entry: "md5-md5-md5-md5-pass"
+    distinction: "iteration"
+    note: "Both rows name mdxfind type MD5; this one at -i 5 and md5-md5-md5-md5-pass at -i 4. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+  - kind: "iterates"
+    entry: "md5-md5-md5-pass"
+    distinction: "iteration"
+    note: "Both rows name mdxfind type MD5; this one at -i 5 and md5-md5-md5-pass at -i 3. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+  - kind: "iterates"
+    entry: "md5-md5-pass"
+    distinction: "iteration"
+    note: "Both rows name mdxfind type MD5; this one at -i 5 and md5-md5-pass at -i 2. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
 vectors:
   - hash: "5381baf622596c5d73d0e693827e303c"
     pass: "rosetta"

@@ -33,6 +33,11 @@ tools:
     verified_with: "john"
   crack:
     supported: false
+relations:
+  - kind: "iterates"
+    entry: "wrl-x2"
+    distinction: "iteration"
+    note: "Both rows name mdxfind type WRL; this one at -i 2 and whirlpool at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
 vectors:
   - hash: "b6b0e6ed07a82829cf9d9e93568e5224debefa714c9531a86b9365f8ec38d7eac7106778be2c1570367511ed635e45f3dd77893918bbdcb2e7c9b67dff9ffd97"
     pass: "rosetta"

@@ -24,6 +24,11 @@ tools:
     verified_with: "john"
   crack:
     supported: false
+relations:
+  - kind: "iterates"
+    entry: "skein512-x2"
+    distinction: "iteration"
+    note: "Both rows name mdxfind type SKEIN512; this one at -i 2 and skein-512 at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
 vectors:
   - hash: "490bbb3ef0f8df6acbbedd71b126be9ca6916f5c4fe9368f66a0010fa2a0601586ca2e658868f9bbc02e45f3229b9c7d3a829b168e08141ff528b02f098c0a53"
     pass: "password123"

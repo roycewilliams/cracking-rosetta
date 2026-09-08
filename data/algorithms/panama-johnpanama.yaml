@@ -40,6 +40,10 @@ relations:
     entry: "panama"
     distinction: "none"
     note: "merged 2026-09-01: one computation under two names, proven by john's dynamic compiler against both vectors. Royce chose the john-named row on 2026-09-01: panama-johnpanama carries john's Panama format, and dynamic_320 now sits beside it so a reader arriving by either name lands here"
+  - kind: "iterates"
+    entry: "panama-x2"
+    distinction: "iteration"
+    note: "Both rows name mdxfind type PANAMA; this one at -i 2 and panama-johnpanama at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
 vectors:
   - hash: "049d698307d8541f22870dfa0a551099d3d02bc6d57c610a06a4585ed8d35ff8"
     pass: "T"

@@ -35,6 +35,11 @@ tools:
     note: "GPU build(s) raw-SHA512-free-opencl proven on 2026-09-01 by cracking this entry's own vector(s) under that exact format; john ships no CPU format of that name, so discover-john.pl --mirror-gpu could not place them."
   crack:
     supported: false
+relations:
+  - kind: "iterates"
+    entry: "sha512-x2"
+    distinction: "iteration"
+    note: "Both rows name mdxfind type SHA512; this one at -i 2 and sha512 at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
 vectors:
   - hash: "a914375619cd494d3079f93dd4a7ed8848fbe4da9929700cdc4c31819a3f0685ec3f7e100762826f16c9a9a1f5983e1a25af01058ab0a178190322f8661f8137"
     pass: "rosetta"

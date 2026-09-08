@@ -35,6 +35,27 @@ tools:
     verified_with: "john"
   crack:
     supported: false
+relations:
+  - kind: "iterates"
+    entry: "half-md5"
+    distinction: "iteration"
+    note: "Both rows name mdxfind type MD5; this one at -i 2 and half-md5 at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+  - kind: "iterates"
+    entry: "md5"
+    distinction: "iteration"
+    note: "Both rows name mdxfind type MD5; this one at -i 2 and md5 at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+  - kind: "iterates"
+    entry: "md5-md5-md5-md5-md5-pass"
+    distinction: "iteration"
+    note: "Both rows name mdxfind type MD5; this one at -i 5 and md5-md5-pass at -i 2. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+  - kind: "iterates"
+    entry: "md5-md5-md5-md5-pass"
+    distinction: "iteration"
+    note: "Both rows name mdxfind type MD5; this one at -i 4 and md5-md5-pass at -i 2. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+  - kind: "iterates"
+    entry: "md5-md5-md5-pass"
+    distinction: "iteration"
+    note: "Both rows name mdxfind type MD5; this one at -i 3 and md5-md5-pass at -i 2. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
 vectors:
   - hash: "bd62daf88a5f6d734e91228e7f2e540a"
     pass: "rosetta"

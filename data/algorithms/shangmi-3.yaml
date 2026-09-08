@@ -42,6 +42,10 @@ relations:
     entry: "sm3"
     distinction: "none"
     note: "merged 2026-09-01: one computation under two names, proven by john's dynamic compiler against both vectors. Royce chose the john-named row on 2026-09-01: shangmi-3 carries john's Raw-SM3, and dynamic_450 now sits beside it so a reader arriving by either name lands here"
+  - kind: "iterates"
+    entry: "sm3-x2"
+    distinction: "iteration"
+    note: "Both rows name mdxfind type SM3; this one at -i 2 and shangmi-3 at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
 vectors:
   - hash: "66c7f0f462eeedd9d1f2d46bdc10e4e24167c4875cf2f7a2297da02b8f4ba8e0"
     pass: "abc"

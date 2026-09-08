@@ -34,6 +34,11 @@ tools:
     verified_with: "john"
   crack:
     supported: false
+relations:
+  - kind: "iterates"
+    entry: "hav160-3"
+    distinction: "iteration"
+    note: "Both rows name mdxfind type HAV160-3; this one at -i 2 and hav160-3 at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
 vectors:
   - hash: "b66b73afa08d75cc148a855d0616ede367a9d145"
     pass: "abc"

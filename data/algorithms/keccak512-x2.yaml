@@ -34,6 +34,15 @@ tools:
     verified_with: "john"
   crack:
     supported: false
+relations:
+  - kind: "iterates"
+    entry: "keccak512"
+    distinction: "iteration"
+    note: "Both rows name mdxfind type KECCAK512; this one at -i 2 and keccak512 at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+  - kind: "iterates"
+    entry: "raw-keccak"
+    distinction: "iteration"
+    note: "Both rows name mdxfind type KECCAK512; this one at -i 2 and raw-keccak at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
 vectors:
   - hash: "c09a72223b5e3950fa5a31db971213565aa833ca238570fa7cb909ca826321c08f0027bb185b52eac64efd6dd6f6cf16694802f108dc9bb8f400ef9fc5241c95"
     pass: "abc"

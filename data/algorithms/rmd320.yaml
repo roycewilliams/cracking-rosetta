@@ -39,6 +39,10 @@ relations:
     entry: "ripemd320"
     distinction: "none"
     note: "ripemd320 was the sheet's spelling of this row and was merged into it on 2026-08-30; that id survives only as a tombstone. The name here is the sheet's because it is the recognisable one; RMD320 is mdxfind's terse spelling and is kept as an alias."
+  - kind: "iterates"
+    entry: "rmd320-x2"
+    distinction: "iteration"
+    note: "Both rows name mdxfind type RMD320; this one at -i 2 and rmd320 at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
 vectors:
   - hash: "e3a8ce82f0e176fd498227b3994bf3b238197c98a9576c7e5741b5a7f22cfab7ef9c2bbf462d2a32"
     pass: "password123"

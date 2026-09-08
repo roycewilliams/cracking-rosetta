@@ -30,6 +30,14 @@ tools:
   crack:
     supported: false
 relations:
+  - kind: "iterates"
+    entry: "sha1"
+    distinction: "iteration"
+    note: "Both rows name mdxfind type SHA1; this one at -i 3 and sha1 at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+  - kind: "iterates"
+    entry: "sha1-sha1-pass"
+    distinction: "iteration"
+    note: "Both rows name mdxfind type SHA1; this one at -i 3 and sha1-sha1-pass at -i 2. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
   - kind: "truncates"
     entry: "sha1-sha1-sha1-pass-substr-0-32"
     distinction: "truncation"
