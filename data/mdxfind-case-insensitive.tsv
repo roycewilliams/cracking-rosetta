@@ -1,0 +1,25 @@
+# cracking-rosetta | data/mdxfind-case-insensitive.tsv
+#
+# TYPE <TAB> reason
+#
+# mdxfind types whose recovered PLAINTEXT may differ from the stored one in
+# case alone, because the type upper- or lower-cases its input before hashing.
+# verify-vectors.pl relaxes its plaintext comparison on case for these types
+# and for no others.
+#
+# WHY THIS IS A LIST AND NOT A FLAG. john publishes FMT_CASE -- bit 0 of
+# formats.h, SET when the format IS case-sensitive -- and verify-vectors.pl
+# reads it straight out of data/tools/john.yaml, so john's half of this
+# problem needs no file. mdxfind's inventory carries no equivalent bit, so
+# the only honest alternative to a list is a guess. Every line here therefore
+# names WHAT WAS MEASURED, and a type is added only after the measurement.
+#
+# WHAT THIS FILE MUST NOT BECOME. Relaxing on case is a real weakening of the
+# comparison: it accepts a plaintext that is not the string the wordlist held.
+# It is legitimate only where the type makes the difference by construction --
+# where no input could have produced the stored case. Do NOT add a type
+# because a vector "nearly" matched; that is searching for something that
+# passes, which is the same error as re-casing an upper-case digest until it
+# loads.
+#
+MD5LM	MD5LM is md5(LM($p)) and LM upper-cases its input before the outer md5, so the plaintext mdxfind recovers is upper case BY CONSTRUCTION and no input could have produced the stored lower-case form. Measured 2026-09-06 against three builds -- installed 1.545, local 1.576 and local 1.579 -- all three returning ROSETTA where md5-lm-plain stores rosetta. The row had sat at tier vector from an earlier, laxer pass and a strict re-verification refused it; this is what makes the strict comparison and the row agree again.

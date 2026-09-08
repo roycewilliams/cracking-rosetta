@@ -386,6 +386,36 @@ if ($want{john}) {
     }
 }
 
+# Which mdxfind types are CASE-INSENSITIVE about the plaintext they return.
+#
+# The same defect as john's netlm, in the other tool: MD5LM is md5(LM($p)) and
+# LM upper-cases, so mdxfind returns ROSETTA where the row stores rosetta and
+# a byte-exact comparison reads a perfectly good round trip as a failure.
+#
+# john publishes FMT_CASE and the block above reads it. mdxfind's inventory
+# carries NO equivalent bit, so this cannot be derived and is a curated list
+# instead -- data/mdxfind-case-insensitive.tsv, one type per line with the
+# measurement that put it there. A missing or unreadable file means NO type is
+# relaxed, which is the strict behaviour this tool had before: the failure
+# direction is toward refusing a real crack, never toward accepting a wrong
+# one.
+my %MX_NOCASE;
+if ($want{mdxfind}) {
+    my $cf = "$ROOT/data/mdxfind-case-insensitive.tsv";
+    if (open my $ch, '<', $cf) {
+        while (my $l = <$ch>) {
+            next if $l =~ /^\s*#/ || $l !~ /\S/;
+            my ($t) = split /\t/, $l;
+            $t =~ s/^\s+|\s+$//g;
+            $MX_NOCASE{$t} = 1 if length $t;
+        }
+        close $ch;
+    }
+    elsif (-e $cf) {
+        print STDERR "$PROG: cannot read $cf: $!; every type treated as case-sensitive.\n";
+    }
+}
+
 #-----------------------------------------------------------------------
 # Load entries.
 
@@ -507,13 +537,30 @@ sub vectors_for {
 # hex strings differing only in case are the same digest, so nothing that was
 # a failure becomes a pass.
 sub mx_echo_is {
-    my ($rest, $vec) = @_;
+    my ($rest, $vec, $type) = @_;
     my $want = "$vec->{hash}:$vec->{pass}";
     return 1 if $rest eq $want;
+
+    # A type that upper- or lower-cases its input returns a plaintext that
+    # differs from the stored one in case alone -- MD5LM is md5(LM($p)) and
+    # LM upper-cases, so ROSETTA comes back for rosetta. Relaxed ONLY for a
+    # type named in data/mdxfind-case-insensitive.tsv, and ONLY on case.
+    # Everything else about the comparison, the salt included, still has to
+    # match exactly.
+    if (defined $type && $MX_NOCASE{$type} && lc $rest eq lc $want) {
+        return 1;
+    }
+
     return 0 unless $vec->{hash} =~ /^[0-9A-Fa-f]+$/;
     my $tail = ":$vec->{pass}";
-    return 0 unless length($rest) > length($tail);
-    return 0 unless substr($rest, -length($tail)) eq $tail;
+    if (defined $type && $MX_NOCASE{$type}) {
+        return 0 unless length($rest) > length($tail);
+        return 0 unless lc(substr($rest, -length($tail))) eq lc($tail);
+    }
+    else {
+        return 0 unless length($rest) > length($tail);
+        return 0 unless substr($rest, -length($tail)) eq $tail;
+    }
     return lc(substr($rest, 0, length($rest) - length($tail))) eq lc($vec->{hash});
 }
 
@@ -846,7 +893,7 @@ if ($want{mdxfind} && $job{mdxfind}) {
             next unless $got == $it;
             my $rest = $2;
             for my $vec (@v) {
-                next unless mx_echo_is($rest, $vec);
+                next unless mx_echo_is($rest, $vec, $type);
                 $cracked{mdxfind}{ $vec->{id} }{$type} = 1;
                 $read{mdxfind}{ $vec->{id} }{ $vec->{vi} } = 1;
                 $read_here{ $vec->{id} }{ $vec->{vi} } = 1;
