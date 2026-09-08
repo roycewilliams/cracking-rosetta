@@ -546,6 +546,37 @@ if ($tool eq 'mdxfind') {
     closedir $eh;
     die "$PROG: no chunk output under $from/out\n" unless @chunks;
 
+    # A ZERO-BYTE RANGE FILE IS NOT AN EMPTY RESULT, IT IS AN ABANDONED RUN.
+    # Coverage is read off the file NAME below, so folding one in asserts that
+    # its range was swept while carrying no evidence at all. mdxfind prints
+    # "Minimum hash length is N characters" once per invocation, so a chunk
+    # that actually ran leaves at least that line; nothing else can produce a
+    # file of length zero.
+    #
+    # This catches strictly more than the timeouts file does. Measured
+    # 2026-09-07 on a 1027-chunk run: 11 zero-byte files, ten of them named in
+    # <from>/timeouts and the eleventh the chunk that was in flight when the
+    # run was killed from outside -- which never reached the line that would
+    # have reported it, and so appears in no list anywhere. Right instrument,
+    # wrong instance is as wrong as the wrong instrument.
+    # Deliberately NOT cross-referenced against <from>/timeouts here: that file
+    # is read much further down, and a guard that depends on state it does not
+    # yet have is the kind of check that passes for the wrong reason. The cause
+    # does not change the verdict anyway -- a zero-byte file carries no
+    # evidence however it came to be empty -- so the message points at the
+    # timeouts file rather than pretending to have read it.
+    my @empty = grep { -z "$from/out/$_" } @chunks;
+    if (@empty) {
+        die "$PROG: $from/out holds " . scalar(@empty) . " ZERO-BYTE range "
+          . "file(s), which assert coverage they do not carry:\n"
+          . "  " . join(' ', @empty) . "\n"
+          . "  Any named in $from/timeouts were killed at the sweep's own\n"
+          . "  --timeout. Any NOT named there were interrupted from outside,\n"
+          . "  which no timeout list can ever show.\n"
+          . "  Re-run those ranges, or delete the empty files and accept the\n"
+          . "  reduced coverage explicitly. Do not fold them into a union.\n";
+    }
+
     my %is_type = map { $_ => 1 } values %ident_name;
 
     # report_type($token) - the type a report line's first field names, or

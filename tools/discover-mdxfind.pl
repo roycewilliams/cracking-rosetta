@@ -738,6 +738,33 @@ if (%timed_out) {
         scalar keys %timed_out, $timeout, join(' ', sort keys %timed_out);
 }
 
+# WRITE THE LIST DOWN, ALWAYS. absence.pl reads <from>/timeouts and treats
+# what it names as never run -- but it defaults to that path only `if -r` it,
+# so until 2026-09-07 this tool printed the list to stderr and wrote nothing,
+# and a missing file read exactly like a clean sweep. The file is written even
+# when EMPTY for the same reason: "nothing timed out" and "this tool did not
+# say" have to be different readings, and only a file that is always there can
+# make them so.
+#
+# IT IS STILL NOT SUFFICIENT ON ITS OWN, and the header comment says why: a
+# chunk KILLED from outside leaves the same zero-byte range file and never
+# reaches this line, so it appears in no list. absence.pl's zero-byte check is
+# what covers that; this file covers the case where the range output is a
+# legitimate empty result rather than an abandoned one.
+{
+    my $tf_path = "$workdir/timeouts";
+    open my $tf, '>', $tf_path
+        or die "$PROG: cannot write $tf_path: $!\n";
+    printf {$tf} "# Chunks killed at --timeout %ds by %s on %s.\n",
+        $timeout, $PROG, scalar localtime;
+    print {$tf} "# The types in them were NOT tested. absence.pl reads this\n"
+              . "# file and treats what it names as never run.\n";
+    print {$tf} "# Empty below the comments: nothing timed out.\n"
+        unless %timed_out;
+    print {$tf} "$_\n" for sort keys %timed_out;
+    close $tf or die "$PROG: cannot close $tf_path: $!\n";
+}
+
 #-----------------------------------------------------------------------
 # Apply.
 
