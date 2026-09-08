@@ -37,8 +37,8 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | 1Password, mobilekeychain (1Password 8) | `31800` (v) | **--** | no |  |
 | 7-Zip archive encryption | **--** | `7z`<br>`7z-opencl` (v) | `7ZIP` (v) |  |
 | 7ZIP | `11600` (v) | **--** | `7ZIP` (v) |  |
-| Adobe AEM (SSPR, SHA-256 with Salt) | `32031` (v) | `sspr`<br>`sspr-opencl` (v) | `SSPR-SHA256` (v) |  |
-| Adobe AEM (SSPR, SHA-512 with Salt) | `32041` (v) | `sspr`<br>`sspr-opencl` (v) | `SSPR-SHA512` (v) |  |
+| Adobe AEM (SSPR, SHA-256 with Salt) | `32031` (v) | `sspr`<br>`sspr-opencl` (v) | `SSPR-SHA256` (v) | same as sspr-sha256 (application) |
+| Adobe AEM (SSPR, SHA-512 with Salt) | `32041` (v) | `sspr`<br>`sspr-opencl` (v) | `SSPR-SHA512` (v) | same as sspr-sha512 (application) |
 | AES Crypt (SHA256) | `22400` (v) | **--** | no |  |
 | AES128-NOKDF | `26401` (v) | no | `AES128-NOKDF` (v) |  |
 | AES192-NOKDF | `26402` (v) | no | `AES192-NOKDF` (v) |  |
@@ -256,7 +256,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | Ethereum Wallet, SCRYPT | `15700` (v) | `ethereum` (v) | no |  |
 | Exodus Desktop Wallet (scrypt) | `28200` (v) | **--** | no |  |
 | FileVault 2 | `16700` (v) | `FVDE`<br>`FVDE-opencl` (v) | `APPLE-SECURE-NOTES` (v) |  |
-| FileZilla Server >= 0.9.55 | `15000` (v) | `dynamic_82` (v) | `SHA512PASSSALT` (v) |  |
+| FileZilla Server >= 0.9.55 | `15000` (v) | `dynamic_82` (v) | `SHA512PASSSALT` (v) | same as sha512-pass-salt (application) |
 | Flask Session Cookie ($salt.$salt.$pass) | `29100` (v) | **--** | no |  |
 | FORTIGATE | `7000` (v) | `Fortigate` (v) | `FORTIGATE` (v) |  |
 | FORTIGATE256 | `26300` (v) | `Fortigate256` (v) | `FORTIGATE256` (v) |  |
@@ -562,7 +562,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | md5($plain.md5($plain)) | no | no | `MD5PASSMD5` (v) | collides with md5-pass-md5-salt (salt-convention) |
 | md5($plain.md5(md5($plain))) | no | no | `MD5PASSMD5MD5PASS` (v) |  |
 | md5($plain.sha1(md5($plain)))) | no | no | `MD5PASSSHA1MD5` (v) |  |
-| md5($salt.$pass) | `20` (v) | `dynamic_1009`<br>`dynamic_1017`<br>`dynamic_2004`<br>`dynamic_4` (v) | `MD5SALTPASS` (v) | same as oscommerce-xt-commerce (application); same as solarwinds-serv-u (application) |
+| md5($salt.$pass) | `20` (v) | `dynamic_1009`<br>`dynamic_1017`<br>`dynamic_2004`<br>`dynamic_4` (v) | `MD5SALTPASS` (v) | same as oscommerce-xt-commerce (application); same as prestashop (application); same as solarwinds-serv-u (application) |
 | md5($salt.$pass.$salt) | `3800` (v) | `dynamic_2005`<br>`dynamic_5` (v) | `MD5SALTPASSSALT` (v) |  |
 | md5($salt.$salt.strtoupper(md5($plain))) | no | no | `MD51SALTMD5UC` (v) |  |
 | md5($salt.md5($pass)) | `3710` (v) | `dynamic_2009`<br>`dynamic_9` (v) | `MD5SALTMD5PASS` (v) | same as md5-userid-md5-plain (salt-convention) |
@@ -860,7 +860,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | ORACLE12 | `12300` (v) | **--** | `ORACLE12` (v) |  |
 | Oracle12C | **--** | `Oracle12C` (v) | no |  |
 | ORACLE7 | `3100` (v) | **--** | `ORACLE7` (v) |  |
-| osCommerce, xt:Commerce | `21` (v) | `dynamic_1009`<br>`dynamic_1017`<br>`dynamic_2004`<br>`dynamic_4`<br>`osc` (v) | `MD5SALTPASS` (v) | same as md5-salt-pass (application); same as solarwinds-serv-u (application) |
+| osCommerce, xt:Commerce | `21` (v) | `dynamic_1009`<br>`dynamic_1017`<br>`dynamic_2004`<br>`dynamic_4`<br>`osc` (v) | `MD5SALTPASS` (v) | same as md5-salt-pass (application); same as prestashop (application); same as solarwinds-serv-u (application) |
 | OSPF / IS-IS | **--** | `ospf` (v) | no |  |
 | OTM-SHA256 | `20600` (v) | **--** | `OTM-SHA256` (v) |  |
 | Oubliette Blowfish | **--** | `Oubliette-Blowfish` (v) | no |  |
@@ -915,13 +915,13 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | POSTGRESCRAM | `11100` (v) | `postgres` (v) | `POSTGRESCRAM` (v) |  |
 | POSTGRESQL | `12` (v) | `dynamic_1013` (v) | `POSTGRESQL` (v) |  |
 | POSTGRESSCRAM256 | `28600` (v) | **--** | `POSTGRESSCRAM256` (v) |  |
-| PrestaShop | `11000` (v) | `dynamic_1017`<br>`dynamic_2004` (v) | `MD5SALTPASS` (v) |  |
+| PrestaShop | `11000` (v) | `dynamic_1017`<br>`dynamic_2004` (v) | `MD5SALTPASS` (v) | same as md5-salt-pass (application); same as oscommerce-xt-commerce (application); same as solarwinds-serv-u (application) |
 | Prim'X Zed! encrypted archives | **--** | `zed`<br>`zed-opencl` (v) | no |  |
 | Private Key (RSA/DSA/ECDSA/ED25519) | **--** | `PuTTY` (v) | no |  |
 | progressencode($plain) | `26200` (v) | no | `PROGRESSENCODE` |  |
 | PS-TOKEN | `13500` (v) | no | `PS-TOKEN` (v) |  |
 | PSK | **--** | `IKE` (v) | no |  |
-| PunBB | `4522` (v) | no | `SHA1SALTSHA1PASS` (v) |  |
+| PunBB | `4522` (v) | no | `SHA1SALTSHA1PASS` (v) | same as redmine (application); same as sha1-salt-sha1-plain (application) |
 | Purdy | **--** | `OpenVMS` (v) | no |  |
 | PWSAFE3 | `5200` (v) | **--** | `PWSAFE3` (v) |  |
 | Python passlib pbkdf2-sha256 | `20300` (v) | `PBKDF2-HMAC-SHA256`<br>`PBKDF2-HMAC-SHA256-opencl` (v) | `PBKDF2-SHA256` (v) |  |
@@ -961,7 +961,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | RC4 40-bit DropN | `33500` (v) | **--** | no |  |
 | RC4 72-bit DropN | `33501` (v) | **--** | no |  |
 | REDHAT389DS | `10901` (v) | **--** | `REDHAT389DS` (v) |  |
-| Redmine | `4521` (v) | `dynamic_1501` (v) | `SHA1SALTSHA1PASS` (v) |  |
+| Redmine | `4521` (v) | `dynamic_1501` (v) | `SHA1SALTSHA1PASS` (v) | same as punbb (application); same as sha1-salt-sha1-plain (application) |
 | Restic Repository | **--** | `restic` (v) | no |  |
 | ripemd($plain) | no | no | `RIPEMD` (v) |  |
 | ripemd128 | no | `dynamic_120`<br>`ripemd-128` (v) | `RMD128` (v) | duplicate of ripemd-128; iterates rmd128-x2 (iteration) |
@@ -1013,7 +1013,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | sha1($plain.sha1($plain)) | no | no | `SHA1PASSSHA1` (v) |  |
 | sha1($salt.$pass) | `120` (v) | `dynamic_25` (v) | `SHA1SALTPASS` (v) | same as django-sha-1 (encoding) |
 | sha1($salt.$pass.$salt) | `4900` (v) | `dynamic_1504` (v) | `SHA1SALTPASSSALT` (v) |  |
-| sha1($salt.sha1($plain)) | `4520` (v) | `dynamic_1501` (v) | `SHA1SALTSHA1PASS` (v) |  |
+| sha1($salt.sha1($plain)) | `4520` (v) | `dynamic_1501` (v) | `SHA1SALTSHA1PASS` (v) | same as punbb (application); same as redmine (application) |
 | sha1($salt.sha1($salt.sha1($plain))) (AKA Opencart) | `13900` (v) | `dynamic_38` (v) | `SHA1SALTSHA1SALTSHA1PASS` (v) | same as wbb3 (application) |
 | sha1(base64_encode($plain)) | no | no | `SHA1BASE64` (v) |  |
 | sha1(base64_encode(md5($plain, true))) | no | no | `SHA1BASE64MD5RAW` (v) |  |
@@ -1342,7 +1342,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | SHA384UTF16LESALTPASS | `10840` (v) | no | `SHA384UTF16LESALTPASS` (v) |  |
 | SHA512 | `1700` (v) | `Raw-SHA512`<br>`dynamic_80`<br>`raw-SHA512-opencl`<br>`raw-SHA512-free-opencl` (v) | `SHA512` (v) | iterates sha512-x2 (iteration) |
 | SHA512 (2 iterations) | no | `dynamic_83` (v) | `SHA512 -i2` (v) | iterates sha512 (iteration) |
-| sha512($pass.$salt) | `1710` (v) | `dynamic_82` (v) | `SHA512PASSSALT` (v) | collides with sha512rawpasssalt (iteration) |
+| sha512($pass.$salt) | `1710` (v) | `dynamic_82` (v) | `SHA512PASSSALT` (v) | collides with sha512rawpasssalt (iteration); same as filezilla-server-ge-0-9-55 (application) |
 | sha512($salt.$pass) | `1720` (v) | `dynamic_81` (v) | `SHA512SALTPASS` (v) |  |
 | sha512(md5($plain)) | no | no | `SHA512MD5` (v) |  |
 | sha512(md5($plain),$plain) | no | no | `SHA512MD5PASS` (v) |  |
@@ -1408,7 +1408,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | SNMPv3 HMAC-SHA384-256 | `26900` (v) | **--** | no |  |
 | SNMPv3 HMAC-SHA512-384 | `27300` (v) | **--** | no |  |
 | SOLARWINDS | `21500` (v) | `solarwinds` (v) | `SOLARWINDS` (v) |  |
-| SolarWinds Serv-U | `24` (v) | `dynamic_1009`<br>`dynamic_1017`<br>`dynamic_2004`<br>`dynamic_4` (v) | `MD5SALTPASS` (v) | same as md5-salt-pass (application); same as oscommerce-xt-commerce (application) |
+| SolarWinds Serv-U | `24` (v) | `dynamic_1009`<br>`dynamic_1017`<br>`dynamic_2004`<br>`dynamic_4` (v) | `MD5SALTPASS` (v) | same as md5-salt-pass (application); same as oscommerce-xt-commerce (application); same as prestashop (application) |
 | SOLARWINDS2 | `21501` (v) | **--** | `SOLARWINDS2` (v) |  |
 | SQLCIPHER | `24600` (v) | **--** | `SQLCIPHER` (v) |  |
 | SRP | **--** | `Clipperz` (v) | no |  |
@@ -1418,8 +1418,8 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | SSPR-MD5 | `32000` (v) | `sspr`<br>`sspr-opencl` (v) | `SSPR-MD5` (v) |  |
 | SSPR-SHA1 | `32010` (v) | `sspr`<br>`sspr-opencl` (v) | `SSPR-SHA1` (v) |  |
 | SSPR-SHA1S | `32020` (v) | `sspr`<br>`sspr-opencl` (v) | `SSPR-SHA1S` (v) |  |
-| SSPR-SHA256 | `32030` (v) | `sspr`<br>`sspr-opencl` (v) | `SSPR-SHA256` (v) | duplicate of netiq-sspr-sha-256-with-salt |
-| SSPR-SHA512 | `32040` (v) | `sspr`<br>`sspr-opencl` (v) | `SSPR-SHA512` (v) | duplicate of netiq-sspr-sha-512-with-salt |
+| SSPR-SHA256 | `32030` (v) | `sspr`<br>`sspr-opencl` (v) | `SSPR-SHA256` (v) | duplicate of netiq-sspr-sha-256-with-salt; same as adobe-aem-sspr-sha-256-with-salt (application) |
+| SSPR-SHA512 | `32040` (v) | `sspr`<br>`sspr-opencl` (v) | `SSPR-SHA512` (v) | duplicate of netiq-sspr-sha-512-with-salt; same as adobe-aem-sspr-sha-512-with-salt (application) |
 | Stargazer Stellar Wallet XLM | `25500` (v) | **--** | no |  |
 | STDOUT | `2000` | **--** | no |  |
 | streebog-32($plain) | `11700` (v) | `Stribog-256` (v) | `STREEBOG-32` (v) | same as gost2012-32 (naming) |

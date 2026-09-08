@@ -837,8 +837,15 @@
          "nesting_depth" : "",
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "application",
+               "entry" : "sspr-sha256",
+               "kind" : "same-computation",
+               "note" : "Both rows are one computation, and each exists because a tool publishes a separate identifier for it: hashcat 32031 \"Adobe AEM (SSPR, SHA-256 with Salt)\" against hashcat 32030 \"NetIQ SSPR (SHA-256 with Salt)\". PROVEN RATHER THAN INFERRED, 2026-09-08: mdxfind pinned to ^SSPR-SHA256$ reproduced every member of this cluster from its OWN stored vector, against the local build RCS 1.579. A shared type name alone would not have established it -- mdxfind's EPISERVER reproduces a SHA-1 row and a SHA-256 row because the string carries a variant tag it dispatches on -- so the second control is that every digest in this cluster is 64 characters wide, which leaves the type no variant field to have read."
+            }
+         ],
+         "sameas" : "same as sspr-sha256 (application)",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -905,8 +912,15 @@
          "nesting_depth" : "",
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "application",
+               "entry" : "sspr-sha512",
+               "kind" : "same-computation",
+               "note" : "Both rows are one computation, and each exists because a tool publishes a separate identifier for it: hashcat 32041 \"Adobe AEM (SSPR, SHA-512 with Salt)\" against hashcat 32040 \"NetIQ SSPR (SHA-512 with Salt)\". PROVEN RATHER THAN INFERRED, 2026-09-08: mdxfind pinned to ^SSPR-SHA512$ reproduced every member of this cluster from its OWN stored vector, against the local build RCS 1.579. A shared type name alone would not have established it -- mdxfind's EPISERVER reproduces a SHA-1 row and a SHA-256 row because the string carries a variant tag it dispatches on -- so the second control is that every digest in this cluster is 128 characters wide, which leaves the type no variant field to have read."
+            }
+         ],
+         "sameas" : "same as sspr-sha512 (application)",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -14833,8 +14847,15 @@
          "nesting_depth" : "",
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "application",
+               "entry" : "sha512-pass-salt",
+               "kind" : "same-computation",
+               "note" : "Both rows are one computation, and each exists because a tool publishes a separate identifier for it: hashcat 15000 \"FileZilla Server >= 0.9.55\" against hashcat 1710 \"sha512($pass.$salt)\". PROVEN RATHER THAN INFERRED, 2026-09-08: mdxfind pinned to ^SHA512PASSSALT$ reproduced every member of this cluster from its OWN stored vector, against the local build RCS 1.579. A shared type name alone would not have established it -- mdxfind's EPISERVER reproduces a SHA-1 row and a SHA-256 row because the string carries a variant tag it dispatches on -- so the second control is that every digest in this cluster is 128 characters wide, which leaves the type no variant field to have read."
+            }
+         ],
+         "sameas" : "same as sha512-pass-salt (application)",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -35030,16 +35051,22 @@
                "distinction" : "application",
                "entry" : "oscommerce-xt-commerce",
                "kind" : "same-computation",
-               "note" : "osCommerce and xt:Commerce use md5($s.$p); hashcat gives that mode 21 against 20 for the generic form"
+               "note" : "Both rows are one computation, and each exists because a tool publishes a separate identifier for it: hashcat 20 \"md5($salt.$pass)\" against hashcat 21 \"osCommerce, xt:Commerce\". PROVEN RATHER THAN INFERRED, 2026-09-08: mdxfind pinned to ^MD5SALTPASS$ reproduced every member of this cluster from its OWN stored vector, against the local build RCS 1.579. A shared type name alone would not have established it -- mdxfind's EPISERVER reproduces a SHA-1 row and a SHA-256 row because the string carries a variant tag it dispatches on -- so the second control is that every digest in this cluster is 32 characters wide, which leaves the type no variant field to have read."
+            },
+            {
+               "distinction" : "application",
+               "entry" : "prestashop",
+               "kind" : "same-computation",
+               "note" : "Both rows are one computation, and each exists because a tool publishes a separate identifier for it: hashcat 20 \"md5($salt.$pass)\" against hashcat 11000 \"PrestaShop\". PROVEN RATHER THAN INFERRED, 2026-09-08: mdxfind pinned to ^MD5SALTPASS$ reproduced every member of this cluster from its OWN stored vector, against the local build RCS 1.579. A shared type name alone would not have established it -- mdxfind's EPISERVER reproduces a SHA-1 row and a SHA-256 row because the string carries a variant tag it dispatches on -- so the second control is that every digest in this cluster is 32 characters wide, which leaves the type no variant field to have read."
             },
             {
                "distinction" : "application",
                "entry" : "solarwinds-serv-u",
                "kind" : "same-computation",
-               "note" : "SolarWinds Serv-U stores md5($s.$p); the generic construction is md5-salt-pass. Proven here by john --format=dynamic='md5($s.$p)' against this entry's own vector, 2026-09-01."
+               "note" : "Both rows are one computation, and each exists because a tool publishes a separate identifier for it: hashcat 20 \"md5($salt.$pass)\" against hashcat 24 \"SolarWinds Serv-U\". PROVEN RATHER THAN INFERRED, 2026-09-08: mdxfind pinned to ^MD5SALTPASS$ reproduced every member of this cluster from its OWN stored vector, against the local build RCS 1.579. A shared type name alone would not have established it -- mdxfind's EPISERVER reproduces a SHA-1 row and a SHA-256 row because the string carries a variant tag it dispatches on -- so the second control is that every digest in this cluster is 32 characters wide, which leaves the type no variant field to have read."
             }
          ],
-         "sameas" : "same as oscommerce-xt-commerce (application); same as solarwinds-serv-u (application)",
+         "sameas" : "same as oscommerce-xt-commerce (application); same as prestashop (application); same as solarwinds-serv-u (application)",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -54380,16 +54407,22 @@
                "distinction" : "application",
                "entry" : "md5-salt-pass",
                "kind" : "same-computation",
-               "note" : "osCommerce and xt:Commerce use md5($s.$p); hashcat gives that mode 21 against 20 for the generic form"
+               "note" : "Both rows are one computation, and each exists because a tool publishes a separate identifier for it: hashcat 20 \"md5($salt.$pass)\" against hashcat 21 \"osCommerce, xt:Commerce\". PROVEN RATHER THAN INFERRED, 2026-09-08: mdxfind pinned to ^MD5SALTPASS$ reproduced every member of this cluster from its OWN stored vector, against the local build RCS 1.579. A shared type name alone would not have established it -- mdxfind's EPISERVER reproduces a SHA-1 row and a SHA-256 row because the string carries a variant tag it dispatches on -- so the second control is that every digest in this cluster is 32 characters wide, which leaves the type no variant field to have read."
+            },
+            {
+               "distinction" : "application",
+               "entry" : "prestashop",
+               "kind" : "same-computation",
+               "note" : "Both rows are one computation, and each exists because a tool publishes a separate identifier for it: hashcat 21 \"osCommerce, xt:Commerce\" against hashcat 11000 \"PrestaShop\". PROVEN RATHER THAN INFERRED, 2026-09-08: mdxfind pinned to ^MD5SALTPASS$ reproduced every member of this cluster from its OWN stored vector, against the local build RCS 1.579. A shared type name alone would not have established it -- mdxfind's EPISERVER reproduces a SHA-1 row and a SHA-256 row because the string carries a variant tag it dispatches on -- so the second control is that every digest in this cluster is 32 characters wide, which leaves the type no variant field to have read."
             },
             {
                "distinction" : "application",
                "entry" : "solarwinds-serv-u",
                "kind" : "same-computation",
-               "note" : "Both are products storing md5($s.$p); hashcat gives them separate modes, so both rows stay."
+               "note" : "Both rows are one computation, and each exists because a tool publishes a separate identifier for it: hashcat 21 \"osCommerce, xt:Commerce\" against hashcat 24 \"SolarWinds Serv-U\". PROVEN RATHER THAN INFERRED, 2026-09-08: mdxfind pinned to ^MD5SALTPASS$ reproduced every member of this cluster from its OWN stored vector, against the local build RCS 1.579. A shared type name alone would not have established it -- mdxfind's EPISERVER reproduces a SHA-1 row and a SHA-256 row because the string carries a variant tag it dispatches on -- so the second control is that every digest in this cluster is 32 characters wide, which leaves the type no variant field to have read."
             }
          ],
-         "sameas" : "same as md5-salt-pass (application); same as solarwinds-serv-u (application)",
+         "sameas" : "same as md5-salt-pass (application); same as prestashop (application); same as solarwinds-serv-u (application)",
          "serialization" : "shared",
          "status" : "needs-review",
          "tool_note" : {
@@ -57911,8 +57944,27 @@
          "nesting_depth" : "",
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "application",
+               "entry" : "md5-salt-pass",
+               "kind" : "same-computation",
+               "note" : "Both rows are one computation, and each exists because a tool publishes a separate identifier for it: hashcat 20 \"md5($salt.$pass)\" against hashcat 11000 \"PrestaShop\". PROVEN RATHER THAN INFERRED, 2026-09-08: mdxfind pinned to ^MD5SALTPASS$ reproduced every member of this cluster from its OWN stored vector, against the local build RCS 1.579. A shared type name alone would not have established it -- mdxfind's EPISERVER reproduces a SHA-1 row and a SHA-256 row because the string carries a variant tag it dispatches on -- so the second control is that every digest in this cluster is 32 characters wide, which leaves the type no variant field to have read."
+            },
+            {
+               "distinction" : "application",
+               "entry" : "oscommerce-xt-commerce",
+               "kind" : "same-computation",
+               "note" : "Both rows are one computation, and each exists because a tool publishes a separate identifier for it: hashcat 21 \"osCommerce, xt:Commerce\" against hashcat 11000 \"PrestaShop\". PROVEN RATHER THAN INFERRED, 2026-09-08: mdxfind pinned to ^MD5SALTPASS$ reproduced every member of this cluster from its OWN stored vector, against the local build RCS 1.579. A shared type name alone would not have established it -- mdxfind's EPISERVER reproduces a SHA-1 row and a SHA-256 row because the string carries a variant tag it dispatches on -- so the second control is that every digest in this cluster is 32 characters wide, which leaves the type no variant field to have read."
+            },
+            {
+               "distinction" : "application",
+               "entry" : "solarwinds-serv-u",
+               "kind" : "same-computation",
+               "note" : "Both rows are one computation, and each exists because a tool publishes a separate identifier for it: hashcat 11000 \"PrestaShop\" against hashcat 24 \"SolarWinds Serv-U\". PROVEN RATHER THAN INFERRED, 2026-09-08: mdxfind pinned to ^MD5SALTPASS$ reproduced every member of this cluster from its OWN stored vector, against the local build RCS 1.579. A shared type name alone would not have established it -- mdxfind's EPISERVER reproduces a SHA-1 row and a SHA-256 row because the string carries a variant tag it dispatches on -- so the second control is that every digest in this cluster is 32 characters wide, which leaves the type no variant field to have read."
+            }
+         ],
+         "sameas" : "same as md5-salt-pass (application); same as oscommerce-xt-commerce (application); same as solarwinds-serv-u (application)",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -58286,8 +58338,21 @@
          "nesting_depth" : "",
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "application",
+               "entry" : "redmine",
+               "kind" : "same-computation",
+               "note" : "Both rows are one computation, and each exists because a tool publishes a separate identifier for it: hashcat 4522 \"PunBB\" against hashcat 4521 \"Redmine\". PROVEN RATHER THAN INFERRED, 2026-09-08: mdxfind pinned to ^SHA1SALTSHA1PASS$ reproduced every member of this cluster from its OWN stored vector, against the local build RCS 1.579. A shared type name alone would not have established it -- mdxfind's EPISERVER reproduces a SHA-1 row and a SHA-256 row because the string carries a variant tag it dispatches on -- so the second control is that every digest in this cluster is 40 characters wide, which leaves the type no variant field to have read."
+            },
+            {
+               "distinction" : "application",
+               "entry" : "sha1-salt-sha1-plain",
+               "kind" : "same-computation",
+               "note" : "Both rows are one computation, and each exists because a tool publishes a separate identifier for it: hashcat 4522 \"PunBB\" against hashcat 4520 \"sha1($salt.sha1($pass))\". PROVEN RATHER THAN INFERRED, 2026-09-08: mdxfind pinned to ^SHA1SALTSHA1PASS$ reproduced every member of this cluster from its OWN stored vector, against the local build RCS 1.579. A shared type name alone would not have established it -- mdxfind's EPISERVER reproduces a SHA-1 row and a SHA-256 row because the string carries a variant tag it dispatches on -- so the second control is that every digest in this cluster is 40 characters wide, which leaves the type no variant field to have read."
+            }
+         ],
+         "sameas" : "same as redmine (application); same as sha1-salt-sha1-plain (application)",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -60903,8 +60968,21 @@
          "nesting_depth" : "",
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "application",
+               "entry" : "punbb",
+               "kind" : "same-computation",
+               "note" : "Both rows are one computation, and each exists because a tool publishes a separate identifier for it: hashcat 4522 \"PunBB\" against hashcat 4521 \"Redmine\". PROVEN RATHER THAN INFERRED, 2026-09-08: mdxfind pinned to ^SHA1SALTSHA1PASS$ reproduced every member of this cluster from its OWN stored vector, against the local build RCS 1.579. A shared type name alone would not have established it -- mdxfind's EPISERVER reproduces a SHA-1 row and a SHA-256 row because the string carries a variant tag it dispatches on -- so the second control is that every digest in this cluster is 40 characters wide, which leaves the type no variant field to have read."
+            },
+            {
+               "distinction" : "application",
+               "entry" : "sha1-salt-sha1-plain",
+               "kind" : "same-computation",
+               "note" : "Both rows are one computation, and each exists because a tool publishes a separate identifier for it: hashcat 4521 \"Redmine\" against hashcat 4520 \"sha1($salt.sha1($pass))\". PROVEN RATHER THAN INFERRED, 2026-09-08: mdxfind pinned to ^SHA1SALTSHA1PASS$ reproduced every member of this cluster from its OWN stored vector, against the local build RCS 1.579. A shared type name alone would not have established it -- mdxfind's EPISERVER reproduces a SHA-1 row and a SHA-256 row because the string carries a variant tag it dispatches on -- so the second control is that every digest in this cluster is 40 characters wide, which leaves the type no variant field to have read."
+            }
+         ],
+         "sameas" : "same as punbb (application); same as sha1-salt-sha1-plain (application)",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -64383,8 +64461,21 @@
          "nesting_depth" : 2,
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "application",
+               "entry" : "punbb",
+               "kind" : "same-computation",
+               "note" : "Both rows are one computation, and each exists because a tool publishes a separate identifier for it: hashcat 4522 \"PunBB\" against hashcat 4520 \"sha1($salt.sha1($pass))\". PROVEN RATHER THAN INFERRED, 2026-09-08: mdxfind pinned to ^SHA1SALTSHA1PASS$ reproduced every member of this cluster from its OWN stored vector, against the local build RCS 1.579. A shared type name alone would not have established it -- mdxfind's EPISERVER reproduces a SHA-1 row and a SHA-256 row because the string carries a variant tag it dispatches on -- so the second control is that every digest in this cluster is 40 characters wide, which leaves the type no variant field to have read."
+            },
+            {
+               "distinction" : "application",
+               "entry" : "redmine",
+               "kind" : "same-computation",
+               "note" : "Both rows are one computation, and each exists because a tool publishes a separate identifier for it: hashcat 4521 \"Redmine\" against hashcat 4520 \"sha1($salt.sha1($pass))\". PROVEN RATHER THAN INFERRED, 2026-09-08: mdxfind pinned to ^SHA1SALTSHA1PASS$ reproduced every member of this cluster from its OWN stored vector, against the local build RCS 1.579. A shared type name alone would not have established it -- mdxfind's EPISERVER reproduces a SHA-1 row and a SHA-256 row because the string carries a variant tag it dispatches on -- so the second control is that every digest in this cluster is 40 characters wide, which leaves the type no variant field to have read."
+            }
+         ],
+         "sameas" : "same as punbb (application); same as redmine (application)",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -85678,9 +85769,15 @@
                "entry" : "sha512rawpasssalt",
                "kind" : "collides-on-subset",
                "note" : "Both mdxfind types reproduce BOTH entries' vectors at x01, measured 2026-09-05 with hashpipe -c pinned to each in turn: SHA512RAWPASSSALT and SHA512PASSSALT agree on every input at one iteration, because at depth 1 the only difference between them is whether the digest is emitted as raw bytes or as hex, and the stored form is hex either way. They are NOT the same computation, and depth 2 shows it: SHA512RAWPASSSALTx02 verifies sha512(sha512_raw($p.$s)) = e785d2e3... while SHA512PASSSALTx02 verifies sha512(sha512_hex($p.$s)) = 3de674ce..., for the same password123/DB1C19C0. So this is a coincidence on the x01 subset, which is every input this repository stores, and not an equivalence. It is also why john's dynamic_82 cracks sha512rawpasssalt's vector and is deliberately NOT recorded as a mapping there: per CLAUDE.md, record the trap, not the mapping."
+            },
+            {
+               "distinction" : "application",
+               "entry" : "filezilla-server-ge-0-9-55",
+               "kind" : "same-computation",
+               "note" : "Both rows are one computation, and each exists because a tool publishes a separate identifier for it: hashcat 15000 \"FileZilla Server >= 0.9.55\" against hashcat 1710 \"sha512($pass.$salt)\". PROVEN RATHER THAN INFERRED, 2026-09-08: mdxfind pinned to ^SHA512PASSSALT$ reproduced every member of this cluster from its OWN stored vector, against the local build RCS 1.579. A shared type name alone would not have established it -- mdxfind's EPISERVER reproduces a SHA-1 row and a SHA-256 row because the string carries a variant tag it dispatches on -- so the second control is that every digest in this cluster is 128 characters wide, which leaves the type no variant field to have read."
             }
          ],
-         "sameas" : "collides with sha512rawpasssalt (iteration)",
+         "sameas" : "collides with sha512rawpasssalt (iteration); same as filezilla-server-ge-0-9-55 (application)",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -90086,16 +90183,22 @@
                "distinction" : "application",
                "entry" : "md5-salt-pass",
                "kind" : "same-computation",
-               "note" : "SolarWinds Serv-U stores md5($s.$p); the generic construction is md5-salt-pass. Proven here by john --format=dynamic='md5($s.$p)' against this entry's own vector, 2026-09-01."
+               "note" : "Both rows are one computation, and each exists because a tool publishes a separate identifier for it: hashcat 20 \"md5($salt.$pass)\" against hashcat 24 \"SolarWinds Serv-U\". PROVEN RATHER THAN INFERRED, 2026-09-08: mdxfind pinned to ^MD5SALTPASS$ reproduced every member of this cluster from its OWN stored vector, against the local build RCS 1.579. A shared type name alone would not have established it -- mdxfind's EPISERVER reproduces a SHA-1 row and a SHA-256 row because the string carries a variant tag it dispatches on -- so the second control is that every digest in this cluster is 32 characters wide, which leaves the type no variant field to have read."
             },
             {
                "distinction" : "application",
                "entry" : "oscommerce-xt-commerce",
                "kind" : "same-computation",
-               "note" : "Both are products storing md5($s.$p); hashcat gives them separate modes, so both rows stay."
+               "note" : "Both rows are one computation, and each exists because a tool publishes a separate identifier for it: hashcat 21 \"osCommerce, xt:Commerce\" against hashcat 24 \"SolarWinds Serv-U\". PROVEN RATHER THAN INFERRED, 2026-09-08: mdxfind pinned to ^MD5SALTPASS$ reproduced every member of this cluster from its OWN stored vector, against the local build RCS 1.579. A shared type name alone would not have established it -- mdxfind's EPISERVER reproduces a SHA-1 row and a SHA-256 row because the string carries a variant tag it dispatches on -- so the second control is that every digest in this cluster is 32 characters wide, which leaves the type no variant field to have read."
+            },
+            {
+               "distinction" : "application",
+               "entry" : "prestashop",
+               "kind" : "same-computation",
+               "note" : "Both rows are one computation, and each exists because a tool publishes a separate identifier for it: hashcat 11000 \"PrestaShop\" against hashcat 24 \"SolarWinds Serv-U\". PROVEN RATHER THAN INFERRED, 2026-09-08: mdxfind pinned to ^MD5SALTPASS$ reproduced every member of this cluster from its OWN stored vector, against the local build RCS 1.579. A shared type name alone would not have established it -- mdxfind's EPISERVER reproduces a SHA-1 row and a SHA-256 row because the string carries a variant tag it dispatches on -- so the second control is that every digest in this cluster is 32 characters wide, which leaves the type no variant field to have read."
             }
          ],
-         "sameas" : "same as md5-salt-pass (application); same as oscommerce-xt-commerce (application)",
+         "sameas" : "same as md5-salt-pass (application); same as oscommerce-xt-commerce (application); same as prestashop (application)",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -90791,9 +90894,15 @@
                "entry" : "netiq-sspr-sha-256-with-salt",
                "kind" : "duplicate-of",
                "note" : "merged 2026-09-07: Strict subset: the loser's identifiers (hashcat 32030, mdxfind SSPR-SHA256, john sspr) are all on the survivor, which adds hashpipe SSPR-SHA256. NOTE the sibling adobe-aem-sspr-sha-256-with-salt is NOT merged: it carries hashcat 32031, a mode of its own, so it is a distinct landing place and wants an edge rather than a tombstone."
+            },
+            {
+               "distinction" : "application",
+               "entry" : "adobe-aem-sspr-sha-256-with-salt",
+               "kind" : "same-computation",
+               "note" : "Both rows are one computation, and each exists because a tool publishes a separate identifier for it: hashcat 32031 \"Adobe AEM (SSPR, SHA-256 with Salt)\" against hashcat 32030 \"NetIQ SSPR (SHA-256 with Salt)\". PROVEN RATHER THAN INFERRED, 2026-09-08: mdxfind pinned to ^SSPR-SHA256$ reproduced every member of this cluster from its OWN stored vector, against the local build RCS 1.579. A shared type name alone would not have established it -- mdxfind's EPISERVER reproduces a SHA-1 row and a SHA-256 row because the string carries a variant tag it dispatches on -- so the second control is that every digest in this cluster is 64 characters wide, which leaves the type no variant field to have read."
             }
          ],
-         "sameas" : "duplicate of netiq-sspr-sha-256-with-salt",
+         "sameas" : "duplicate of netiq-sspr-sha-256-with-salt; same as adobe-aem-sspr-sha-256-with-salt (application)",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -90870,9 +90979,15 @@
                "entry" : "netiq-sspr-sha-512-with-salt",
                "kind" : "duplicate-of",
                "note" : "merged 2026-09-07: Strict subset: the loser's identifiers (hashcat 32040, mdxfind SSPR-SHA512, john sspr) are all on the survivor, which adds hashpipe SSPR-SHA512. NOTE the sibling adobe-aem-sspr-sha-512-with-salt is NOT merged: it carries hashcat 32041, a mode of its own."
+            },
+            {
+               "distinction" : "application",
+               "entry" : "adobe-aem-sspr-sha-512-with-salt",
+               "kind" : "same-computation",
+               "note" : "Both rows are one computation, and each exists because a tool publishes a separate identifier for it: hashcat 32041 \"Adobe AEM (SSPR, SHA-512 with Salt)\" against hashcat 32040 \"NetIQ SSPR (SHA-512 with Salt)\". PROVEN RATHER THAN INFERRED, 2026-09-08: mdxfind pinned to ^SSPR-SHA512$ reproduced every member of this cluster from its OWN stored vector, against the local build RCS 1.579. A shared type name alone would not have established it -- mdxfind's EPISERVER reproduces a SHA-1 row and a SHA-256 row because the string carries a variant tag it dispatches on -- so the second control is that every digest in this cluster is 128 characters wide, which leaves the type no variant field to have read."
             }
          ],
-         "sameas" : "duplicate of netiq-sspr-sha-512-with-salt",
+         "sameas" : "duplicate of netiq-sspr-sha-512-with-salt; same as adobe-aem-sspr-sha-512-with-salt (application)",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
