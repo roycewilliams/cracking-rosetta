@@ -5,7 +5,7 @@ expression_proof:
   verified: "upstream"
   verified_at: "2026-09-02"
   verified_with: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A"
-  note: "transcribed from the hx specification's Appendix A entry for mdxfind type SSHA512BASE64 (e836), which states \"{SSHA512}\" . base64(sha512_bin(pass . salt) . salt). Transcription, not reproduction, so this is upstream and not vector; run derive-expressions.pl to try to promote it.; TRIAGE 2026-09-05 [format-encoding]: SSHA512 has its own ciphertext encoding rather than plain hex, so a generic expression cannot be checked against it however correctly it describes the computation"
+  note: "transcribed from the hx specification's Appendix A entry for mdxfind type SSHA512BASE64 (e836), which states \"{SSHA512}\" . base64(sha512_bin(pass . salt) . salt). Transcription, not reproduction, so this is upstream and not vector; run derive-expressions.pl to try to promote it.; TRIAGE 2026-09-08 [format-encoding]: SSHA512 has its own ciphertext encoding rather than plain hex, so a generic expression cannot be checked against it however correctly it describes the computation"
 category: "application"
 status: "ok"
 tools:

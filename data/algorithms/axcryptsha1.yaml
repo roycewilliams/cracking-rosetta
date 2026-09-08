@@ -5,7 +5,7 @@ expression_proof:
   verified: "upstream"
   verified_at: "2026-08-31"
   verified_with: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A"
-  note: "transcribed from the hx specification's Appendix A entry for mdxfind type AXCRYPTSHA1 (e916), which states cut(sha1(pass), 0, 32). Transcription, not reproduction, so this is upstream and not vector; run derive-expressions.pl to try to promote it.; TRIAGE 2026-09-05 [native-serialization]: no john format, and RosettaExpr can compute this expression but none of the entry's 1 vector(s) is a bare digest to compare it against -- each is in a tool's own serialization, or lacks a salt the expression needs. The expression is unchecked, not contradicted"
+  note: "transcribed from the hx specification's Appendix A entry for mdxfind type AXCRYPTSHA1 (e916), which states cut(sha1(pass), 0, 32). Transcription, not reproduction, so this is upstream and not vector; run derive-expressions.pl to try to promote it.; TRIAGE 2026-09-08 [native-serialization]: no john format, and RosettaExpr can compute this expression but none of the entry's 1 vector(s) is a bare digest to compare it against -- each is in a tool's own serialization, or lacks a salt the expression needs. The expression is unchecked, not contradicted"
 category: "application"
 status: "needs-review"
 tools:

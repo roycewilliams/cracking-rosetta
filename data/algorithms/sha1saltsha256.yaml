@@ -5,7 +5,7 @@ expression_proof:
   verified: "upstream"
   verified_at: "2026-08-31"
   verified_with: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A"
-  note: "transcribed from the hx specification's Appendix A entry for mdxfind type SHA1SALTSHA256 (e619), which states sha1(salt . sha256(pass)). Transcription, not reproduction, so this is upstream and not vector; run derive-expressions.pl to try to promote it. An independent Digest:: computation of this string DOES reproduce this entry's own vector, checked 2026-08-31.; TRIAGE 2026-09-05 [corroborated]: no john format, so john ships no control vectors; but RosettaExpr -- an implementation independent of all three crackers -- computes this expression over the entry's own vector(s) and reproduces 1 of 1. That is corroboration, not tier vector, which needs john's own compiler"
+  note: "transcribed from the hx specification's Appendix A entry for mdxfind type SHA1SALTSHA256 (e619), which states sha1(salt . sha256(pass)). Transcription, not reproduction, so this is upstream and not vector; run derive-expressions.pl to try to promote it. An independent Digest:: computation of this string DOES reproduce this entry's own vector, checked 2026-08-31.; TRIAGE 2026-09-08 [corroborated]: no john format, so john ships no control vectors; but RosettaExpr -- an implementation independent of all three crackers -- computes this expression over the entry's own vector(s) and reproduces 1 of 1. That is corroboration, not tier vector, which needs john's own compiler"
 category: "composite"
 status: "needs-review"
 tools:

@@ -6,7 +6,7 @@ expression_proof:
   verified: "upstream"
   verified_at: "2026-08-29"
   verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
-  note: "transcribed from john --list=subformats for an identifier this entry proved by round-trip; TRIAGE 2026-09-05 [compiler-disagrees]: compiled with --format=dynamic this expression recovers none of john's own test vectors for dynamic_433 either, so john's dynamic compiler and its named format disagree about what the string means; this is an upstream question, not a data error here"
+  note: "transcribed from john --list=subformats for an identifier this entry proved by round-trip; TRIAGE 2026-09-08 [compiler-cannot]: the expression is correct -- computed here with Digest:: it reproduces all 6 of john's own test vectors for dynamic_433 -- and john's ad-hoc compiler still recovers none of them, so the string is right and --format=dynamic cannot execute it"
 category: "iterated"
 status: "needs-review"
 tools:
