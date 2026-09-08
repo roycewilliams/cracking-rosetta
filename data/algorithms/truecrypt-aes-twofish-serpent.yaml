@@ -19,8 +19,8 @@ tools:
   john:
     cpu: ["tc_ripemd160boot"]
     verified: "vector"
-    verified_at: "2026-09-04"
-    verified_with: "john"
+    verified_at: "2026-09-07"
+    verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
   crack:
     supported: false
 vectors:

@@ -20,8 +20,8 @@ tools:
     cpu: ["tc_ripemd160"]
     gpu: ["TrueCrypt-opencl"]
     verified: "vector"
-    verified_at: "2026-09-01"
-    verified_with: "john"
+    verified_at: "2026-09-07"
+    verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
     note: "Round-tripped here on 2026-09-01, under both tc_ripemd160 and TrueCrypt-opencl, against both vectors this entry carries. It had been tier upstream with a note saying the local round trip FAILED; the real obstacle was that john --list=format-details truncates example_ciphertext at 896 characters, so the volume header in data/tools/john.yaml is not a loadable hash. The vectors here come from john's own src/opencl_tc_fmt_plug.c test array, and john found their plaintexts -- see notes:. GPU build TrueCrypt-opencl has no CPU format of that name, so discover-john.pl --mirror-gpu could not place it; tools/probe-gpu.pl proved it."
   crack:
     supported: false

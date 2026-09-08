@@ -30,8 +30,8 @@ tools:
     cpu: ["Raw-SHA512", "dynamic_80"]
     gpu: ["raw-SHA512-opencl", "raw-SHA512-free-opencl"]
     verified: "vector"
-    verified_at: "2026-09-01"
-    verified_with: "john"
+    verified_at: "2026-09-07"
+    verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
     note: "GPU build(s) raw-SHA512-free-opencl proven on 2026-09-01 by cracking this entry's own vector(s) under that exact format; john ships no CPU format of that name, so discover-john.pl --mirror-gpu could not place them."
   crack:
     supported: false

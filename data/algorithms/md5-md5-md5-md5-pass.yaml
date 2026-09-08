@@ -30,8 +30,8 @@ tools:
   john:
     cpu: ["dynamic_1001"]
     verified: "vector"
-    verified_at: "2026-08-29"
-    verified_with: "john"
+    verified_at: "2026-09-07"
+    verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
     note: "dynamic_0 removed 2026-08-29: verify-vectors showed it does not reproduce this vector"
   crack:
     supported: false

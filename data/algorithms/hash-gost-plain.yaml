@@ -30,8 +30,8 @@ tools:
   john:
     cpu: ["dynamic_90", "gost"]
     verified: "vector"
-    verified_at: "2026-08-29"
-    verified_with: "john"
+    verified_at: "2026-09-07"
+    verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
     note: "gost came from gost-r-34-11-94 in the 2026-09-07 merge, proven there at tier vector."
   crack:
     supported: false

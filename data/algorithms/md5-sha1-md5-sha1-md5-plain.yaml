@@ -29,8 +29,8 @@ tools:
   john:
     cpu: ["dynamic_1022"]
     verified: "vector"
-    verified_at: "2026-08-29"
-    verified_with: "john"
+    verified_at: "2026-09-07"
+    verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
     note: "format discovered by round-trip search, not by name"
   crack:
     supported: false

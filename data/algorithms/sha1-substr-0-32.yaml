@@ -12,8 +12,8 @@ tools:
   john:
     cpu: ["dynamic_1023"]
     verified: "vector"
-    verified_at: "2026-08-29"
-    verified_with: "john"
+    verified_at: "2026-09-07"
+    verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
     note: "dynamic_1023 is the only identifier on this row that truncates; john states it as \"sha1($p) (hash truncated to length 32)\". The plain-SHA-1 identifiers this row used to carry moved to the sha1 entry on 2026-09-04."
   crack:
     supported: false

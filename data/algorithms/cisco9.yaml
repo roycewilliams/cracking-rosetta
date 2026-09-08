@@ -31,8 +31,8 @@ tools:
   john:
     cpu: ["scrypt"]
     verified: "vector"
-    verified_at: "2026-08-29"
-    verified_with: "john"
+    verified_at: "2026-09-07"
+    verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
     note: "john's own test vector for this format is reproduced by mdxfind pinned to CISCO9 at iteration 1"
   crack:
     supported: false

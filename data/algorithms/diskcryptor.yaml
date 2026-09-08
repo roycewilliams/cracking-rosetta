@@ -20,8 +20,8 @@ tools:
     cpu: ["diskcryptor"]
     gpu: ["diskcryptor-aes-opencl"]
     verified: "vector"
-    verified_at: "2026-09-01"
-    verified_with: "john"
+    verified_at: "2026-09-07"
+    verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
     note: "Round-tripped here on 2026-09-01, under both diskcryptor and diskcryptor-aes-opencl, against both vectors this entry carries. It had been tier upstream with a note blaming the ~819 candidate plaintexts harvested from john's source for not containing the answer; that diagnosis was wrong. john --list=format-details truncates example_ciphertext at 896 characters, so the header being attacked was never a loadable hash and no wordlist could have cracked it. The vectors here come from john's own src/diskcryptor_common_plug.c test array. Only the two AES-XTS vectors are carried, so the AES-only GPU build round-trips every one of them; john's CPU format also reads the Twofish and Serpent examples. GPU build diskcryptor-aes-opencl has no CPU format of that name, so discover-john.pl --mirror-gpu could not place it; tools/probe-gpu.pl proved it."
   crack:
     supported: false
