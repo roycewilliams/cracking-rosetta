@@ -14,8 +14,8 @@ tools:
   hashcat:
     modes: [17600]
     verified: "vector"
-    verified_at: "2026-08-29"
-    verified_with: "hashcat"
+    verified_at: "2026-09-07"
+    verified_with: "hashcat v7.1.2-606-ge2a7ab834"
   mdxfind:
     types: ["SHA3-512"]
     verified: "vector"
@@ -52,6 +52,6 @@ vectors:
   - hash: "6eb7b86765bf96a8467b72401231539cbb830f6c64120954c4567272f613f1364d6a80084234fa3400d306b9f5e10c341bbdc5894d9b484a8c7deea9cbe4e265"
     pass: "abcd"
     source: "john"
-    reads_in: ["john", "mdxfind"]
+    reads_in: ["hashcat", "john", "mdxfind"]
 legacy:
   hashes_org: "SHA3-512"

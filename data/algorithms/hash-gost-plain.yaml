@@ -14,8 +14,8 @@ tools:
   hashcat:
     modes: [6900]
     verified: "vector"
-    verified_at: "2026-08-29"
-    verified_with: "hashcat"
+    verified_at: "2026-09-07"
+    verified_with: "hashcat v7.1.2-606-ge2a7ab834"
   mdxfind:
     types: ["GOST"]
     verified: "vector"
@@ -52,6 +52,6 @@ vectors:
   - hash: "d42c539e367c66e9c88a801f6649349c21871b4344c6a573f849fdce62f314dd"
     pass: "a"
     source: "john"
-    reads_in: ["john", "mdxfind"]
+    reads_in: ["hashcat", "john", "mdxfind"]
 legacy:
   hashes_org: "GOST"

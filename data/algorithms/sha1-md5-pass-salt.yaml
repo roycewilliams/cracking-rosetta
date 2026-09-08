@@ -13,8 +13,8 @@ tools:
   hashcat:
     modes: [4710]
     verified: "vector"
-    verified_at: "2026-08-30"
-    verified_with: "hashcat"
+    verified_at: "2026-09-07"
+    verified_with: "hashcat v7.1.2-606-ge2a7ab834"
   mdxfind:
     types: ["SHA1MD5PASS-SALT", "SHA1-MD5PASSSALT", "SHA1MD5SALT"]
     verified: "vector"

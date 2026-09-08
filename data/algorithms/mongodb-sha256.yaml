@@ -14,8 +14,8 @@ tools:
   hashcat:
     modes: [24200]
     verified: "vector"
-    verified_at: "2026-08-29"
-    verified_with: "hashcat"
+    verified_at: "2026-09-07"
+    verified_with: "hashcat v7.1.2-606-ge2a7ab834"
   mdxfind:
     types: ["MONGODB-SHA256"]
     verified: "vector"
