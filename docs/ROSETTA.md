@@ -1547,16 +1547,16 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | WinZip | `13600` (v) | `ZIP`<br>`ZIP-opencl` (v) | no |  |
 | WLR1 | no | `whirlpool1` (v) | `WRL1` (v) |  |
 | WoltLab BB3 | **--** | `wbb3` (v) | no |  |
-| WPA-EAPOL | no | **--** | `WPA-EAPOL` (v) |  |
-| WPA-EAPOL-PBKDF2 | `2500` (v) | **--** | **--** |  |
-| WPA-EAPOL-PMK | `2501` (v) | **--** | **--** |  |
-| WPA-PBKDF2-PMKID+EAPOL | `22000` (v) | **--** | `WPA-PMKID` (v) |  |
-| WPA-PMK | `22001` (v) | **--** | `WPA-PMK` (v) |  |
-| WPA-PMKID | no | **--** | `WPA-PMKID` (v) |  |
-| WPA-PMKID-PBKDF2 | `16800` (v) | **--** | no |  |
-| WPA-PMKID-PMK | `16801` (v) | **--** | no |  |
-| WPA/WPA2/PMF/PMKID master key | **--** | `wpapsk-pmk` (v) | `WPA-PMK` (v) |  |
-| WPA/WPA2/PMF/PMKID PSK | **--** | `wpapsk` (v) | `WPA-EAPOL` (v) |  |
+| WPA-EAPOL | no | **--** | `WPA-EAPOL` (v) | covered-by wpa-pbkdf2-pmkid-eapol (naming); same as wpa-eapol-pbkdf2 (naming); same as wpa-wpa2-pmf-pmkid-psk (naming) |
+| WPA-EAPOL-PBKDF2 | `2500` (v) | **--** | **--** | covered-by wpa-pbkdf2-pmkid-eapol (naming); same as wpa-eapol (naming); same as wpa-wpa2-pmf-pmkid-psk (naming) |
+| WPA-EAPOL-PMK | `2501` (v) | **--** | **--** | covered-by wpa-pmk (naming); same as wpa-wpa2-pmf-pmkid-master-key (naming) |
+| WPA-PBKDF2-PMKID+EAPOL | `22000` (v) | **--** | `WPA-PMKID` (v) | covers wpa-eapol (naming); covers wpa-eapol-pbkdf2 (naming); covers wpa-pmkid (naming); covers wpa-pmkid-pbkdf2 (naming); covers wpa-wpa2-pmf-pmkid-psk (naming) |
+| WPA-PMK | `22001` (v) | **--** | `WPA-PMK` (v) | covers wpa-eapol-pmk (naming); covers wpa-pmkid-pmk (naming); covers wpa-wpa2-pmf-pmkid-master-key (naming) |
+| WPA-PMKID | no | **--** | `WPA-PMKID` (v) | covered-by wpa-pbkdf2-pmkid-eapol (naming); same as wpa-pmkid-pbkdf2 (naming) |
+| WPA-PMKID-PBKDF2 | `16800` (v) | **--** | no | covered-by wpa-pbkdf2-pmkid-eapol (naming); same as wpa-pmkid (naming) |
+| WPA-PMKID-PMK | `16801` (v) | **--** | no | covered-by wpa-pmk (naming) |
+| WPA/WPA2/PMF/PMKID master key | **--** | `wpapsk-pmk` (v) | `WPA-PMK` (v) | covered-by wpa-pmk (naming); same as wpa-eapol-pmk (naming) |
+| WPA/WPA2/PMF/PMKID PSK | **--** | `wpapsk` (v) | `WPA-EAPOL` (v) | covered-by wpa-pbkdf2-pmkid-eapol (naming); same as wpa-eapol (naming); same as wpa-eapol-pbkdf2 (naming) |
 | WPBCRYPT | `35500` (v) | **--** | `WPBCRYPT` (v) |  |
 | WRL (2 iterations) | no | `dynamic_103` (v) | `WRL -i2` (v) | iterates whirlpool (iteration) |
 | wrl(sha512($plain)) | no | no | `WRLSHA512` (v) |  |
