@@ -37,6 +37,11 @@ tools:
     note: "john's own test vector for this format is reproduced by mdxfind pinned to ARGON2 at iteration 1"
   crack:
     supported: false
+relations:
+  - kind: "covers"
+    entry: "argon2id-bridged-reference-implementation-tunings"
+    distinction: "naming"
+    note: "hashcat 34000 \"Argon2\" accepts a SUPERSET of what 70000 \"Argon2id [Bridged: reference implementation + tunings]\" does. Measured 2026-09-08 on v7.1.2-606, with a WRONGCANDIDATE control that found nothing: 34000 cracks this entry's argon2d vector AND its argon2id one, while 70000 REFUSES the argon2d string outright -- \"Hash parsing error in hashfile\", exit 255 -- and cracks the argon2id one. So the variant is read out of the string and 34000 spans the family. NOTE WHAT THIS CORRECTS: argon2 was reported on 2026-09-08 as holding two computations in one row, in breach of \"one entry is one computation\", and it is not -- hashcat's own mode name is the family, so the row names its identifier faithfully, the same standing wpa-pbkdf2-pmkid-eapol has. No split is owed."
 vectors:
   - hash: "3118004b2f9ce8fcf3abc2fdf9623b85988db360951c607456beb26821381a12:aaaaaaaaaaaaaaaabbbbbbbbbbbbbbbb:3_32_2_67108864"
     pass: "password123"

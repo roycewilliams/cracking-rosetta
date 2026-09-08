@@ -33,6 +33,15 @@ tools:
     note: "format discovered by round-trip search, not by name"
   crack:
     supported: false
+relations:
+  - kind: "same-computation"
+    entry: "pbkdf2-hmac-sha1"
+    distinction: "application"
+    note: "One computation, hashcat 32050 \"NetIQ SSPR (PBKDF2WithHmacSHA1)\" against hashcat 12000 \"PBKDF2-HMAC-SHA1\". PROVEN, not inferred from the shared type name: mdxfind pinned to ^PBKDF2-SHA1$ reproduced BOTH rows from their own stored vectors, one invocation per row with one hash and one candidate, against the local build RCS 1.579 on 2026-09-08. The solo shape is not a convenience -- a grouped run attributes by matching the echoed hash string, and mdxfind RE-SERIALIZES these: it returns grub-2's \"grub.pbkdf2.sha512.1024.<salt>.<digest>\" as \"$ml$1024$...\", and the SSPR and passlib rows as \"sha256:<iter>:<b64 salt>:<b64 digest>\". An earlier grouped test reported four of these rows as NOT reproduced for that reason alone, and every one of them was already at tier vector with mdxfind in its reads_in. The two rows differ in the KDF's PARAMETERS -- iteration count, output length, and for scrypt N/r/p -- which are carried inside the hash string. Royce decided 2026-09-08 that those are INPUTS like a salt rather than part of the computation, which is why one mdxfind type reads every member of this cluster, and which follows the md5($s.$p) cluster already committed with four rows whose salts differ freely."
+  - kind: "same-computation"
+    entry: "pbkdf2-sha1-plain"
+    distinction: "application"
+    note: "One computation, hashcat 32050 \"NetIQ SSPR (PBKDF2WithHmacSHA1)\" against hashcat 20400 \"Python passlib pbkdf2-sha1\". PROVEN, not inferred from the shared type name: mdxfind pinned to ^PBKDF2-SHA1$ reproduced BOTH rows from their own stored vectors, one invocation per row with one hash and one candidate, against the local build RCS 1.579 on 2026-09-08. The solo shape is not a convenience -- a grouped run attributes by matching the echoed hash string, and mdxfind RE-SERIALIZES these: it returns grub-2's \"grub.pbkdf2.sha512.1024.<salt>.<digest>\" as \"$ml$1024$...\", and the SSPR and passlib rows as \"sha256:<iter>:<b64 salt>:<b64 digest>\". An earlier grouped test reported four of these rows as NOT reproduced for that reason alone, and every one of them was already at tier vector with mdxfind in its reads_in. The two rows differ in the KDF's PARAMETERS -- iteration count, output length, and for scrypt N/r/p -- which are carried inside the hash string. Royce decided 2026-09-08 that those are INPUTS like a salt rather than part of the computation, which is why one mdxfind type reads every member of this cluster, and which follows the md5($s.$p) cluster already committed with four rows whose salts differ freely."
 vectors:
   - hash: "$pbkdf2-hmac-sha1$100000$7134180503252384106490944216249411431665011151428170747164626720$990e0c5f62b1384d48cbe3660329b9741c4a8473"
     pass: "hashcat"
