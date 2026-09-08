@@ -21,8 +21,8 @@ tools:
   mdxfind:
     types: ["PBKDF2-SHA512"]
     verified: "vector"
-    verified_at: "2026-09-04"
-    verified_with: "mdxfind"
+    verified_at: "2026-09-07"
+    verified_with: "mdxfind RCS 1.579 (2026/09/06)"
     note: "proposed by hashpipe, reproduced by mdxfind pinned, and not yet re-run by this repository's own verifier; verify-vectors.pl decides it. See notes."
   john:
     cpu: ["PBKDF2-HMAC-SHA512"]

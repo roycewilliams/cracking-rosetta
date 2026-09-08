@@ -20,8 +20,8 @@ tools:
   mdxfind:
     types: ["BCRYPTMD5"]
     verified: "vector"
-    verified_at: "2026-08-29"
-    verified_with: "mdxfind"
+    verified_at: "2026-09-07"
+    verified_with: "mdxfind RCS 1.579 (2026/09/06)"
   hashpipe:
     types: ["BCRYPTMD5"]
     verified: "vector"

@@ -18,8 +18,8 @@ tools:
   mdxfind:
     types: ["MD5padMD5"]
     verified: "vector"
-    verified_at: "2026-08-30"
-    verified_with: "mdxfind"
+    verified_at: "2026-09-07"
+    verified_with: "mdxfind RCS 1.579 (2026/09/06)"
   hashpipe:
     types: ["MD5padMD5"]
     verified: "vector"

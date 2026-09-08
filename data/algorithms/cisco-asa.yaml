@@ -14,8 +14,8 @@ tools:
   mdxfind:
     types: ["CISCOASA"]
     verified: "vector"
-    verified_at: "2026-09-04"
-    verified_with: "mdxfind"
+    verified_at: "2026-09-07"
+    verified_with: "mdxfind RCS 1.579 (2026/09/06)"
     note: "name match accepted by a curator on 2026-09-04 and not yet reproduced by this repository's own tooling; seed-vectors.pl and verify-vectors.pl decide it. See notes for what was measured by hand first."
   john:
     cpu: ["asa-md5"]

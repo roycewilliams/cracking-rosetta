@@ -19,8 +19,8 @@ tools:
   mdxfind:
     types: ["MD4UTF16", "NTLM"]
     verified: "vector"
-    verified_at: "2026-08-30"
-    verified_with: "mdxfind"
+    verified_at: "2026-09-07"
+    verified_with: "mdxfind RCS 1.579 (2026/09/06)"
     note: "NTLM (e369) came in with the merge of ntlm-plain-md4-utf16-le-plain; both types were re-run pinned against this entry's vector on 2026-08-30. mdxfind's third spelling, NTLMH (e786), keeps its own entry - see the relation."
   hashpipe:
     types: ["MD4UTF16", "NTLM"]
