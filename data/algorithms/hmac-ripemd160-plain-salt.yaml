@@ -1,44 +1,10 @@
 id: "hmac-ripemd160-plain-salt"
 name: "hmac(\"ripemd160\", $plain, $salt)"
-expression_proof:
-  verified: "absent"
-  verified_at: "2026-08-29"
-  verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
-  note: "john's dynamic expression vocabulary has no hmac(), so this construction cannot be written as an expression; that is separate from whether john has a FORMAT for it"
-denotation:
-  text: "hmac(\"ripemd160\", $plain, $salt)"
-  source: "sheet"
-category: "composite"
-status: "ok"
-tools:
-  hashcat:
-    modes: [6060]
-    verified: "vector"
-    verified_at: "2026-08-31"
-    verified_with: "v7.1.2-549-g8a15e210b"
-    note: "mode discovered by round-trip search, not by name"
-  mdxfind:
-    types: ["HMAC-RMD160"]
-    verified: "vector"
-    verified_at: "2026-08-29"
-    verified_with: "mdxfind"
-  hashpipe:
-    types: ["HMAC-RMD160"]
-    verified: "vector"
-    verified_at: "2026-09-03"
-    verified_with: "hashpipe RCS 1.189 (2026/09/02)"
-    note: "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one."
-  john:
-    verified: "absent"
-    verified_at: "2026-09-04"
-    verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
-    note: "no format. Swept the 33 format(s) whose own valid() accepts this entry's own vector, as john --show=left reports them, on 2026-09-04 (a tools/discover-john.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. For john the control is also per ENTRY and not only per shape: every format counted above is one whose own loader ACCEPTED this hash, so each was asked this exact question and answered no. A format that cannot parse the hash is not counted at all, and an entry no format can parse is reported as unsearched rather than decided. Every applicable format ran to completion; a format killed at the timeout is counted as untested and withholds this verdict. No john format name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if john gains one, this becomes a mapping."
-  crack:
-    supported: false
-vectors:
-  - hash: "ed4cb7ad83efb24dab418984d2000afb9aedf48a:abc123"
-    pass: "rosetta"
-    source: "sheet"
-    reads_in: ["hashcat", "mdxfind"]
-legacy:
-  hashes_org: "not supported"
+status: "merged"
+merged_into: "hmac-ripemd160-key-salt"
+relations:
+  - kind: "duplicate-of"
+    entry: "hmac-ripemd160-key-salt"
+    distinction: "none"
+    note: "merged 2026-09-07: Both rows publish hashcat 6060, which hashcat itself names \"HMAC-RIPEMD160 (key = $salt)\", and mdxfind HMAC-RMD160; the cross-check of 2026-09-07 reproduced both rows' vectors under each shared identifier."
+notes: "Tombstone. This id is kept so links and dist/rosetta.csv keys still resolve; every claim it made now lives in hmac-ripemd160-key-salt.yaml. Both rows publish hashcat 6060, which hashcat itself names \"HMAC-RIPEMD160 (key = $salt)\", and mdxfind HMAC-RMD160; the cross-check of 2026-09-07 reproduced both rows' vectors under each shared identifier."
