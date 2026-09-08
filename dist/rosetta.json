@@ -1,5 +1,5 @@
 {
-   "count" : 1564,
+   "count" : 1557,
    "entries" : [
       {
          "alias" : "",
@@ -8729,8 +8729,15 @@
          "nesting_depth" : "",
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "iteration",
+               "entry" : "sha256-x2",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type SHA256; this one at -i 2 and dane-rfc7929-rfc8162-sha2-256 at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            }
+         ],
+         "sameas" : "iterates sha256-x2 (iteration)",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -11116,8 +11123,15 @@
          "nesting_depth" : "",
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "truncation",
+               "entry" : "whirlpool",
+               "kind" : "truncates",
+               "note" : "john's own run/dynamic.conf states dynamic_1030 as \"whirlpool($p) (hash truncated to length 32)\", which is the instrument for what a dynamic computes; its digest is 32 hex where whirlpool's is 128. Edge written 2026-09-07."
+            }
+         ],
+         "sameas" : "truncates whirlpool (truncation)",
          "serialization" : "unknown",
          "status" : "needs-review",
          "tool_note" : {
@@ -14010,7 +14024,7 @@
          "vecs" : 2
       },
       {
-         "alias" : "",
+         "alias" : "Episerver 6.x < .NET 4",
          "application" : "",
          "category" : "application",
          "crack" : {
@@ -14061,8 +14075,15 @@
          "nesting_depth" : 1,
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "none",
+               "entry" : "episerver-6-x-lt-net-4",
+               "kind" : "duplicate-of",
+               "note" : "merged 2026-09-07: Strict subset: the loser published hashcat 141 and mdxfind EPISERVER, both of which the survivor already carries, and the survivor adds hashpipe EPISERVER. The siblings episerver-6-x-ge-net-4 (hashcat 1441) and episerver-johnepiserver (john EPiServer) each carry an identifier of their own and are NOT merged here."
+            }
+         ],
+         "sameas" : "duplicate of episerver-6-x-lt-net-4",
          "serialization" : "shared",
          "status" : "needs-review",
          "tool_note" : {
@@ -14071,68 +14092,7 @@
             "john" : "",
             "mdxfind" : "mdxfind's own published example for this identifier, recovered by mdxfind at this identifier with mdxfind's own published plaintext."
          },
-         "vecs" : 1
-      },
-      {
-         "alias" : "",
-         "application" : "",
-         "category" : "application",
-         "crack" : {
-            "ids" : [],
-            "state" : "no"
-         },
-         "cracknote" : "",
-         "denotation" : "Episerver 6.x < .NET 4",
-         "expr" : "",
-         "expr_note" : "hashcat mode 141 is a FTP, HTTP, SMTP, LDAP Server format. john's dynamic expression language describes constructions over a password and a salt; it cannot express a container's KDF-plus-cipher, so this has no expression and will not acquire one. That says nothing about whether john can CRACK it -- run discover-john.pl, and if john has a format it goes in tools.john.",
-         "expr_tier" : "absent",
-         "hash_length" : "",
-         "hash_length_basis" : "",
-         "hashcat" : {
-            "ids" : [
-               141
-            ],
-            "state" : "proven",
-            "tier" : "vector"
-         },
-         "hashcat_salted" : "yes",
-         "hashcat_speed" : "fast",
-         "hashpipe" : {
-            "ids" : [],
-            "state" : "unknown"
-         },
-         "id" : "episerver-6-x-lt-net-4",
-         "john" : {
-            "ids" : [],
-            "state" : "unknown"
-         },
-         "john_expr" : "",
-         "john_salted" : "",
-         "john_work_factor" : "",
-         "legacy" : "",
-         "mdxfind" : {
-            "ids" : [
-               "EPISERVER"
-            ],
-            "state" : "proven",
-            "tier" : "vector"
-         },
-         "mdxfind_salted" : "no",
-         "name" : "Episerver 6.x < .NET 4",
-         "nesting_depth" : "",
-         "notes" : "",
-         "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
-         "serialization" : "shared",
-         "status" : "ok",
-         "tool_note" : {
-            "hashcat" : "hashcat's own published example hash for this mode, recovered by hashcat at this mode with hashcat's own published plaintext.",
-            "hashpipe" : "",
-            "john" : "",
-            "mdxfind" : "type discovered by round-trip search, not by name"
-         },
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -15474,8 +15434,15 @@
          "nesting_depth" : 2,
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "iteration",
+               "entry" : "hash-gost-plain",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type GOST; this one at -i 2 and hash-gost-plain at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            }
+         ],
+         "sameas" : "iterates hash-gost-plain (iteration)",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -15617,70 +15584,6 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "gost_yescrypt(pass, salt)",
-         "expr" : "",
-         "expr_note" : "the construction upstream states for mdxfind type GOST-YESCRYPT (e998) names gost_yescrypt(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
-         "expr_tier" : "absent",
-         "hash_length" : "",
-         "hash_length_basis" : "",
-         "hashcat" : {
-            "ids" : [
-               36200
-            ],
-            "state" : "proven",
-            "tier" : "vector"
-         },
-         "hashcat_salted" : "yes",
-         "hashcat_speed" : "slow",
-         "hashpipe" : {
-            "ids" : [
-               "GOST-YESCRYPT"
-            ],
-            "state" : "proven",
-            "tier" : "vector"
-         },
-         "id" : "gost-yescrypt-mdxfindgost-yescrypt",
-         "john" : {
-            "ids" : [],
-            "state" : "unknown"
-         },
-         "john_expr" : "",
-         "john_salted" : "",
-         "john_work_factor" : "",
-         "legacy" : "",
-         "mdxfind" : {
-            "ids" : [
-               "GOST-YESCRYPT"
-            ],
-            "state" : "proven",
-            "tier" : "vector"
-         },
-         "mdxfind_salted" : "yes",
-         "name" : "GOST-YESCRYPT",
-         "nesting_depth" : "",
-         "notes" : "",
-         "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
-         "serialization" : "shared",
-         "status" : "ok",
-         "tool_note" : {
-            "hashcat" : "mode discovered by round-trip search, not by name",
-            "hashpipe" : "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one.",
-            "john" : "",
-            "mdxfind" : "mdxfind's own published example for this identifier, recovered by mdxfind at this identifier with mdxfind's own published plaintext."
-         },
-         "vecs" : 1
-      },
-      {
-         "alias" : "",
-         "application" : "",
-         "category" : "kdf",
-         "crack" : {
-            "ids" : [],
-            "state" : "no"
-         },
-         "cracknote" : "",
          "denotation" : "gost-yescrypt",
          "expr" : "",
          "expr_note" : "hashcat mode 36200 is \"gost-yescrypt\" (Generic KDF). It is a bare construction, but john's dynamic EXPRESSION language has no token for it, so it cannot be written as an expression here. That says nothing about whether john can CRACK it -- run discover-john.pl, and if john has a format it goes in tools.john.",
@@ -15724,8 +15627,15 @@
          "nesting_depth" : "",
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "none",
+               "entry" : "gost-yescrypt-mdxfindgost-yescrypt",
+               "kind" : "duplicate-of",
+               "note" : "merged 2026-09-07: The loser's id is a seeding artifact -- the tool name concatenated onto its own type name -- and it publishes nothing gost-yescrypt does not. Confirmed one computation 2026-09-07: mdxfind GOST-YESCRYPT pinned reproduces both rows' vectors."
+            }
+         ],
+         "sameas" : "duplicate of gost-yescrypt-mdxfindgost-yescrypt",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -15734,7 +15644,7 @@
             "john" : "",
             "mdxfind" : "type discovered by round-trip search, not by name"
          },
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -16740,8 +16650,33 @@
          "nesting_depth" : "",
          "notes" : "(n denoting the starting position n>=0)",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "iteration",
+               "entry" : "md5-md5-md5-md5-md5-pass",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type MD5; this one at -i 5 and half-md5 at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            },
+            {
+               "distinction" : "iteration",
+               "entry" : "md5-md5-md5-md5-pass",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type MD5; this one at -i 4 and half-md5 at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            },
+            {
+               "distinction" : "iteration",
+               "entry" : "md5-md5-md5-pass",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type MD5; this one at -i 3 and half-md5 at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            },
+            {
+               "distinction" : "iteration",
+               "entry" : "md5-md5-pass",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type MD5; this one at -i 2 and half-md5 at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            }
+         ],
+         "sameas" : "iterates md5-md5-md5-md5-md5-pass (iteration); iterates md5-md5-md5-md5-pass (iteration); iterates md5-md5-md5-pass (iteration); iterates md5-md5-pass (iteration)",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -17180,9 +17115,15 @@
                "entry" : "gost-r-34-11-94",
                "kind" : "duplicate-of",
                "note" : "merged 2026-09-07: Merged 2026-09-06, decided by Royce. These five john-named rows and their survivors are one computation, proven twice over: john's dynamic compiler recovers each loser's own plaintext from its own hash under the expression the survivor already carries at tier vector (gost($p), haval128_4($p), sha3_512($p), ripemd128($p), ripemd160($p)), and mdxfind pinned to ONE type reproduces BOTH rows' vectors on two different plaintexts. NOT the streebog-64-plain/gost2012-64 case, which stayed two rows under distinction naming: there the two rows carried two DIFFERENT mdxfind types, so each name had an identifier of its own. Here both rows carried the SAME type, and the loser was a strictly poorer view -- john's named format and nothing else, no hashcat mode, no hashpipe block -- so a reader arriving by john's label was landing on an incomplete answer. The label survives as an alias and as a john identifier on this row, and the tombstone redirects."
+            },
+            {
+               "distinction" : "iteration",
+               "entry" : "gost-x2",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type GOST; this one at -i 2 and hash-gost-plain at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
             }
          ],
-         "sameas" : "duplicate of gost-r-34-11-94",
+         "sameas" : "duplicate of gost-r-34-11-94; iterates gost-x2 (iteration)",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -17364,8 +17305,15 @@
          "nesting_depth" : 1,
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "iteration",
+               "entry" : "hav128-x2",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type HAV128; this one at -i 2 and hav128 at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            }
+         ],
+         "sameas" : "iterates hav128-x2 (iteration)",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -17428,8 +17376,15 @@
          "nesting_depth" : 2,
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "iteration",
+               "entry" : "hav128",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type HAV128; this one at -i 2 and hav128 at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            }
+         ],
+         "sameas" : "iterates hav128 (iteration)",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -17499,9 +17454,15 @@
                "entry" : "haval-128-4",
                "kind" : "duplicate-of",
                "note" : "merged 2026-09-07: Merged 2026-09-06, decided by Royce. These five john-named rows and their survivors are one computation, proven twice over: john's dynamic compiler recovers each loser's own plaintext from its own hash under the expression the survivor already carries at tier vector (gost($p), haval128_4($p), sha3_512($p), ripemd128($p), ripemd160($p)), and mdxfind pinned to ONE type reproduces BOTH rows' vectors on two different plaintexts. NOT the streebog-64-plain/gost2012-64 case, which stayed two rows under distinction naming: there the two rows carried two DIFFERENT mdxfind types, so each name had an identifier of its own. Here both rows carried the SAME type, and the loser was a strictly poorer view -- john's named format and nothing else, no hashcat mode, no hashpipe block -- so a reader arriving by john's label was landing on an incomplete answer. The label survives as an alias and as a john identifier on this row, and the tombstone redirects."
+            },
+            {
+               "distinction" : "iteration",
+               "entry" : "hav128-4-x2",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type HAV128-4; this one at -i 2 and hav128-4 at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
             }
          ],
-         "sameas" : "duplicate of haval-128-4",
+         "sameas" : "duplicate of haval-128-4; iterates hav128-4-x2 (iteration)",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -17564,8 +17525,15 @@
          "nesting_depth" : 2,
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "iteration",
+               "entry" : "hav128-4",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type HAV128-4; this one at -i 2 and hav128-4 at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            }
+         ],
+         "sameas" : "iterates hav128-4 (iteration)",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -17628,8 +17596,15 @@
          "nesting_depth" : 1,
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "iteration",
+               "entry" : "hav128-5-x2",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type HAV128-5; this one at -i 2 and hav128-5 at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            }
+         ],
+         "sameas" : "iterates hav128-5-x2 (iteration)",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -17692,8 +17667,15 @@
          "nesting_depth" : 2,
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "iteration",
+               "entry" : "hav128-5",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type HAV128-5; this one at -i 2 and hav128-5 at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            }
+         ],
+         "sameas" : "iterates hav128-5 (iteration)",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -17756,8 +17738,15 @@
          "nesting_depth" : 1,
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "iteration",
+               "entry" : "hav160-3-x2",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type HAV160-3; this one at -i 2 and hav160-3 at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            }
+         ],
+         "sameas" : "iterates hav160-3-x2 (iteration)",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -17820,8 +17809,15 @@
          "nesting_depth" : 2,
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "iteration",
+               "entry" : "hav160-3",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type HAV160-3; this one at -i 2 and hav160-3 at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            }
+         ],
+         "sameas" : "iterates hav160-3 (iteration)",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -17884,8 +17880,15 @@
          "nesting_depth" : 1,
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "iteration",
+               "entry" : "hav160-4-x2",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type HAV160-4; this one at -i 2 and hav160-4 at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            }
+         ],
+         "sameas" : "iterates hav160-4-x2 (iteration)",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -17948,8 +17951,15 @@
          "nesting_depth" : 2,
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "iteration",
+               "entry" : "hav160-4",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type HAV160-4; this one at -i 2 and hav160-4 at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            }
+         ],
+         "sameas" : "iterates hav160-4 (iteration)",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -18012,8 +18022,15 @@
          "nesting_depth" : 1,
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "iteration",
+               "entry" : "hav160-5-x2",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type HAV160-5; this one at -i 2 and hav160-5 at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            }
+         ],
+         "sameas" : "iterates hav160-5-x2 (iteration)",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -18076,8 +18093,15 @@
          "nesting_depth" : 2,
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "iteration",
+               "entry" : "hav160-5",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type HAV160-5; this one at -i 2 and hav160-5 at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            }
+         ],
+         "sameas" : "iterates hav160-5 (iteration)",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -18140,8 +18164,15 @@
          "nesting_depth" : 1,
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "iteration",
+               "entry" : "hav192-3-x2",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type HAV192-3; this one at -i 2 and hav192-3 at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            }
+         ],
+         "sameas" : "iterates hav192-3-x2 (iteration)",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -18204,8 +18235,15 @@
          "nesting_depth" : 2,
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "iteration",
+               "entry" : "hav192-3",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type HAV192-3; this one at -i 2 and hav192-3 at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            }
+         ],
+         "sameas" : "iterates hav192-3 (iteration)",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -18268,8 +18306,15 @@
          "nesting_depth" : 1,
          "notes" : "sheet vector corrected 2026-08-29: the HAVAL-192 4-pass and 5-pass example hashes were swapped in the source sheet. mdxfind pinned to each type and john dynamic_230/dynamic_240 independently agree on the pairing now recorded.",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "iteration",
+               "entry" : "hav192-4-x2",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type HAV192-4; this one at -i 2 and hav192-4 at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            }
+         ],
+         "sameas" : "iterates hav192-4-x2 (iteration)",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -18332,8 +18377,15 @@
          "nesting_depth" : 2,
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "iteration",
+               "entry" : "hav192-4",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type HAV192-4; this one at -i 2 and hav192-4 at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            }
+         ],
+         "sameas" : "iterates hav192-4 (iteration)",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -18396,8 +18448,15 @@
          "nesting_depth" : 1,
          "notes" : "sheet vector corrected 2026-08-29: the HAVAL-192 4-pass and 5-pass example hashes were swapped in the source sheet. mdxfind pinned to each type and john dynamic_230/dynamic_240 independently agree on the pairing now recorded.",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "iteration",
+               "entry" : "hav192-5-x2",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type HAV192-5; this one at -i 2 and hav192-5 at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            }
+         ],
+         "sameas" : "iterates hav192-5-x2 (iteration)",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -18460,8 +18519,15 @@
          "nesting_depth" : 2,
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "iteration",
+               "entry" : "hav192-5",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type HAV192-5; this one at -i 2 and hav192-5 at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            }
+         ],
+         "sameas" : "iterates hav192-5 (iteration)",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -18524,8 +18590,15 @@
          "nesting_depth" : 1,
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "iteration",
+               "entry" : "hav224-3-x2",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type HAV224-3; this one at -i 2 and hav224-3 at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            }
+         ],
+         "sameas" : "iterates hav224-3-x2 (iteration)",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -18588,8 +18661,15 @@
          "nesting_depth" : 2,
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "iteration",
+               "entry" : "hav224-3",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type HAV224-3; this one at -i 2 and hav224-3 at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            }
+         ],
+         "sameas" : "iterates hav224-3 (iteration)",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -18652,8 +18732,15 @@
          "nesting_depth" : 1,
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "iteration",
+               "entry" : "hav224-4-x2",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type HAV224-4; this one at -i 2 and hav224-4 at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            }
+         ],
+         "sameas" : "iterates hav224-4-x2 (iteration)",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -18716,8 +18803,15 @@
          "nesting_depth" : 2,
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "iteration",
+               "entry" : "hav224-4",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type HAV224-4; this one at -i 2 and hav224-4 at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            }
+         ],
+         "sameas" : "iterates hav224-4 (iteration)",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -18780,8 +18874,15 @@
          "nesting_depth" : 1,
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "iteration",
+               "entry" : "hav224-5-x2",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type HAV224-5; this one at -i 2 and hav224-5 at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            }
+         ],
+         "sameas" : "iterates hav224-5-x2 (iteration)",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -18844,8 +18945,15 @@
          "nesting_depth" : 2,
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "iteration",
+               "entry" : "hav224-5",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type HAV224-5; this one at -i 2 and hav224-5 at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            }
+         ],
+         "sameas" : "iterates hav224-5 (iteration)",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -18908,8 +19016,15 @@
          "nesting_depth" : 2,
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "iteration",
+               "entry" : "haval-256-3",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type HAV256; this one at -i 2 and haval-256-3 at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            }
+         ],
+         "sameas" : "iterates haval-256-3 (iteration)",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -18972,8 +19087,15 @@
          "nesting_depth" : 1,
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "iteration",
+               "entry" : "hav256-4-x2",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type HAV256-4; this one at -i 2 and hav256-4 at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            }
+         ],
+         "sameas" : "iterates hav256-4-x2 (iteration)",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -19036,8 +19158,15 @@
          "nesting_depth" : 2,
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "iteration",
+               "entry" : "hav256-4",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type HAV256-4; this one at -i 2 and hav256-4 at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            }
+         ],
+         "sameas" : "iterates hav256-4 (iteration)",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -19100,8 +19229,15 @@
          "nesting_depth" : 1,
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "iteration",
+               "entry" : "hav256-5-x2",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type HAV256-5; this one at -i 2 and hav256-5 at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            }
+         ],
+         "sameas" : "iterates hav256-5-x2 (iteration)",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -19164,8 +19300,15 @@
          "nesting_depth" : 2,
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "iteration",
+               "entry" : "hav256-5",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type HAV256-5; this one at -i 2 and hav256-5 at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            }
+         ],
+         "sameas" : "iterates hav256-5 (iteration)",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -19235,9 +19378,15 @@
                "entry" : "hav256",
                "kind" : "duplicate-of",
                "note" : "merged 2026-09-01: one computation under two names, proven by john's dynamic compiler against both vectors. Royce chose the john-named row on 2026-09-01: haval-256-3 is john's own HAVAL-256-3 spelling, and dynamic_280 now sits beside it so a reader arriving by either name lands here"
+            },
+            {
+               "distinction" : "iteration",
+               "entry" : "hav256-x2",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type HAV256; this one at -i 2 and haval-256-3 at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
             }
          ],
-         "sameas" : "duplicate of hav256",
+         "sameas" : "duplicate of hav256; iterates hav256-x2 (iteration)",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -25750,13 +25899,19 @@
          "primary_form" : "",
          "relations" : [
             {
+               "distinction" : "iteration",
+               "entry" : "md5-md5-pass-salt-hc2630",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type MD5PASSSALT; this one at -i 2 and joomla at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            },
+            {
                "distinction" : "application",
                "entry" : "md5-pass-salt",
                "kind" : "same-computation",
                "note" : "hashcat separates these: mode 11 assumes Joomla's fixed-length salt, mode 10 is the generic construction"
             }
          ],
-         "sameas" : "same as md5-pass-salt (application)",
+         "sameas" : "iterates md5-md5-pass-salt-hc2630 (iteration); same as md5-pass-salt (application)",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -26136,8 +26291,15 @@
          "nesting_depth" : 1,
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "iteration",
+               "entry" : "keccak224-x2",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type KECCAK224; this one at -i 2 and keccak224 at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            }
+         ],
+         "sameas" : "iterates keccak224-x2 (iteration)",
          "serialization" : "shared",
          "status" : "needs-review",
          "tool_note" : {
@@ -26200,8 +26362,15 @@
          "nesting_depth" : 2,
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "iteration",
+               "entry" : "keccak224",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type KECCAK224; this one at -i 2 and keccak224 at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            }
+         ],
+         "sameas" : "iterates keccak224 (iteration)",
          "serialization" : "shared",
          "status" : "needs-review",
          "tool_note" : {
@@ -26268,8 +26437,15 @@
          "nesting_depth" : 1,
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "iteration",
+               "entry" : "keccak256-x2",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type KECCAK256; this one at -i 2 and keccak256 at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            }
+         ],
+         "sameas" : "iterates keccak256-x2 (iteration)",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -26332,8 +26508,15 @@
          "nesting_depth" : 2,
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "iteration",
+               "entry" : "keccak256",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type KECCAK256; this one at -i 2 and keccak256 at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            }
+         ],
+         "sameas" : "iterates keccak256 (iteration)",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -26399,8 +26582,15 @@
          "nesting_depth" : 1,
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "iteration",
+               "entry" : "keccak384-x2",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type KECCAK384; this one at -i 2 and keccak384 at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            }
+         ],
+         "sameas" : "iterates keccak384-x2 (iteration)",
          "serialization" : "shared",
          "status" : "needs-review",
          "tool_note" : {
@@ -26463,8 +26653,15 @@
          "nesting_depth" : 2,
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "iteration",
+               "entry" : "keccak384",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type KECCAK384; this one at -i 2 and keccak384 at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            }
+         ],
+         "sameas" : "iterates keccak384 (iteration)",
          "serialization" : "shared",
          "status" : "needs-review",
          "tool_note" : {
@@ -26530,8 +26727,15 @@
          "nesting_depth" : 1,
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "iteration",
+               "entry" : "keccak512-x2",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type KECCAK512; this one at -i 2 and keccak512 at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            }
+         ],
+         "sameas" : "iterates keccak512-x2 (iteration)",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -26594,8 +26798,21 @@
          "nesting_depth" : 2,
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "iteration",
+               "entry" : "keccak512",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type KECCAK512; this one at -i 2 and keccak512 at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            },
+            {
+               "distinction" : "iteration",
+               "entry" : "raw-keccak",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type KECCAK512; this one at -i 2 and raw-keccak at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            }
+         ],
+         "sameas" : "iterates keccak512 (iteration); iterates raw-keccak (iteration)",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -30343,8 +30560,15 @@
          "nesting_depth" : "",
          "notes" : "Accepted 2026-09-04 from a name match that was then measured. TRANSCODE, proven: john writes $md2$<hex> and mdxfind wants the bare digest, so this entry's own john-form vector reproduces under mdxfind pinned to MD2 once the $md2$ prefix is dropped -- handed to mdxfind with only the plaintext the john vector already states.",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "iteration",
+               "entry" : "md2-x2",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type MD2; this one at -i 2 and md2-johnmd2 at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            }
+         ],
+         "sameas" : "iterates md2-x2 (iteration)",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -30407,8 +30631,15 @@
          "nesting_depth" : 1,
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "iteration",
+               "entry" : "md2-x2",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type MD2; this one at -i 2 and md2 at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            }
+         ],
+         "sameas" : "iterates md2-x2 (iteration)",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -30471,8 +30702,21 @@
          "nesting_depth" : 2,
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "iteration",
+               "entry" : "md2",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type MD2; this one at -i 2 and md2 at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            },
+            {
+               "distinction" : "iteration",
+               "entry" : "md2-johnmd2",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type MD2; this one at -i 2 and md2-johnmd2 at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            }
+         ],
+         "sameas" : "iterates md2 (iteration); iterates md2-johnmd2 (iteration)",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -33311,9 +33555,33 @@
                "entry" : "md5uc",
                "kind" : "encodes",
                "note" : "MD5UC is the same digest written in uppercase hex; john and hashcat both fold the case on load, which is why the same identifiers crack both"
+            },
+            {
+               "distinction" : "iteration",
+               "entry" : "md5-md5-md5-md5-md5-pass",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type MD5; this one at -i 5 and md5 at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            },
+            {
+               "distinction" : "iteration",
+               "entry" : "md5-md5-md5-md5-pass",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type MD5; this one at -i 4 and md5 at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            },
+            {
+               "distinction" : "iteration",
+               "entry" : "md5-md5-md5-pass",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type MD5; this one at -i 3 and md5 at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            },
+            {
+               "distinction" : "iteration",
+               "entry" : "md5-md5-pass",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type MD5; this one at -i 2 and md5 at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
             }
          ],
-         "sameas" : "collides with md5cap (encoding); encoding of md5cdab-order-of-32bit-values (encoding); encoding of md5uc (encoding)",
+         "sameas" : "collides with md5cap (encoding); encoding of md5cdab-order-of-32bit-values (encoding); encoding of md5uc (encoding); iterates md5-md5-md5-md5-md5-pass (iteration); iterates md5-md5-md5-md5-pass (iteration); iterates md5-md5-md5-pass (iteration); iterates md5-md5-pass (iteration)",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -33689,6 +33957,12 @@
          "primary_form" : "",
          "relations" : [
             {
+               "distinction" : "iteration",
+               "entry" : "md5-md5-pass-salt-hc2630",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type MD5PASSSALT; this one at -i 2 and md5-pass-salt at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            },
+            {
                "distinction" : "application",
                "entry" : "ciscoasa",
                "kind" : "same-computation",
@@ -33701,7 +33975,7 @@
                "note" : "hashcat separates these: mode 11 assumes Joomla's fixed-length salt, mode 10 is the generic construction"
             }
          ],
-         "sameas" : "same as ciscoasa (application); same as joomla (application)",
+         "sameas" : "iterates md5-md5-pass-salt-hc2630 (iteration); same as ciscoasa (application); same as joomla (application)",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -36377,8 +36651,39 @@
          "nesting_depth" : 2,
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "iteration",
+               "entry" : "half-md5",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type MD5; this one at -i 2 and half-md5 at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            },
+            {
+               "distinction" : "iteration",
+               "entry" : "md5",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type MD5; this one at -i 2 and md5 at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            },
+            {
+               "distinction" : "iteration",
+               "entry" : "md5-md5-md5-md5-md5-pass",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type MD5; this one at -i 5 and md5-md5-pass at -i 2. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            },
+            {
+               "distinction" : "iteration",
+               "entry" : "md5-md5-md5-md5-pass",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type MD5; this one at -i 4 and md5-md5-pass at -i 2. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            },
+            {
+               "distinction" : "iteration",
+               "entry" : "md5-md5-md5-pass",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type MD5; this one at -i 3 and md5-md5-pass at -i 2. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            }
+         ],
+         "sameas" : "iterates half-md5 (iteration); iterates md5 (iteration); iterates md5-md5-md5-md5-md5-pass (iteration); iterates md5-md5-md5-md5-pass (iteration); iterates md5-md5-md5-pass (iteration)",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -36582,8 +36887,21 @@
          "nesting_depth" : 2,
          "notes" : "FALSE FRIEND, measured 2026-09-04. absence.pl reports mdxfind's MD5-MD5PASS-SALT as a name match for this row and it is NOT this computation. hashcat calls mode 2630 md5(md5($pass.$salt)) and this row's own vector confirms it: md5(md5(\"hashcat\".\"0\")) is 0127eecea3120e34c8934ba3b72a390a. mdxfind's MD5-MD5PASS-SALT (e517) is md5(md5($pass).$salt), confirmed the same way against its own published example. The two differ in where the salt goes, and this row's id reads like the OTHER one. That was written before the answer turned up, and the answer is the ITERATION COUNT: mdxfind's MD5PASSSALT is md5($pass.$salt) at one iteration and md5(md5($pass.$salt)) at two, so this row is MD5PASSSALT x02. A --iterations 2 sweep found it on 2026-09-04 and it verifies pinned at that count. No type's published EXAMPLE matches the construction because every example is printed at one iteration, which is why looking for one found nothing.",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "iteration",
+               "entry" : "joomla",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type MD5PASSSALT; this one at -i 2 and joomla at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            },
+            {
+               "distinction" : "iteration",
+               "entry" : "md5-pass-salt",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type MD5PASSSALT; this one at -i 2 and md5-pass-salt at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            }
+         ],
+         "sameas" : "iterates joomla (iteration); iterates md5-pass-salt (iteration)",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -37401,8 +37719,39 @@
          "nesting_depth" : 3,
          "notes" : "renamed 2026-08-29 - the sheet named this md5(md5($salt).$pass), but the vector is md5^3(\"rosetta\") and hashcat 3500, mdxfind MD5 -i 3, john dynamic_3 and both legacy columns all agree",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "iteration",
+               "entry" : "half-md5",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type MD5; this one at -i 3 and half-md5 at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            },
+            {
+               "distinction" : "iteration",
+               "entry" : "md5",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type MD5; this one at -i 3 and md5 at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            },
+            {
+               "distinction" : "iteration",
+               "entry" : "md5-md5-md5-md5-md5-pass",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type MD5; this one at -i 5 and md5-md5-md5-pass at -i 3. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            },
+            {
+               "distinction" : "iteration",
+               "entry" : "md5-md5-md5-md5-pass",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type MD5; this one at -i 4 and md5-md5-md5-pass at -i 3. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            },
+            {
+               "distinction" : "iteration",
+               "entry" : "md5-md5-pass",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type MD5; this one at -i 3 and md5-md5-pass at -i 2. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            }
+         ],
+         "sameas" : "iterates half-md5 (iteration); iterates md5 (iteration); iterates md5-md5-md5-md5-md5-pass (iteration); iterates md5-md5-md5-md5-pass (iteration); iterates md5-md5-pass (iteration)",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -37901,8 +38250,39 @@
          "nesting_depth" : 4,
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "iteration",
+               "entry" : "half-md5",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type MD5; this one at -i 4 and half-md5 at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            },
+            {
+               "distinction" : "iteration",
+               "entry" : "md5",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type MD5; this one at -i 4 and md5 at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            },
+            {
+               "distinction" : "iteration",
+               "entry" : "md5-md5-md5-md5-md5-pass",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type MD5; this one at -i 5 and md5-md5-md5-md5-pass at -i 4. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            },
+            {
+               "distinction" : "iteration",
+               "entry" : "md5-md5-md5-pass",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type MD5; this one at -i 4 and md5-md5-md5-pass at -i 3. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            },
+            {
+               "distinction" : "iteration",
+               "entry" : "md5-md5-pass",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type MD5; this one at -i 4 and md5-md5-pass at -i 2. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            }
+         ],
+         "sameas" : "iterates half-md5 (iteration); iterates md5 (iteration); iterates md5-md5-md5-md5-md5-pass (iteration); iterates md5-md5-md5-pass (iteration); iterates md5-md5-pass (iteration)",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -38270,8 +38650,39 @@
          "nesting_depth" : 5,
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "iteration",
+               "entry" : "half-md5",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type MD5; this one at -i 5 and half-md5 at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            },
+            {
+               "distinction" : "iteration",
+               "entry" : "md5",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type MD5; this one at -i 5 and md5 at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            },
+            {
+               "distinction" : "iteration",
+               "entry" : "md5-md5-md5-md5-pass",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type MD5; this one at -i 5 and md5-md5-md5-md5-pass at -i 4. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            },
+            {
+               "distinction" : "iteration",
+               "entry" : "md5-md5-md5-pass",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type MD5; this one at -i 5 and md5-md5-md5-pass at -i 3. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            },
+            {
+               "distinction" : "iteration",
+               "entry" : "md5-md5-pass",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type MD5; this one at -i 5 and md5-md5-pass at -i 2. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            }
+         ],
+         "sameas" : "iterates half-md5 (iteration); iterates md5 (iteration); iterates md5-md5-md5-md5-pass (iteration); iterates md5-md5-md5-pass (iteration); iterates md5-md5-pass (iteration)",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -50839,136 +51250,6 @@
       {
          "alias" : "",
          "application" : "",
-         "category" : "application",
-         "crack" : {
-            "ids" : [],
-            "state" : "no"
-         },
-         "cracknote" : "",
-         "denotation" : "NetIQ SSPR (SHA-256 with Salt)",
-         "expr" : "",
-         "expr_note" : "hashcat mode 32030 is a Enterprise Application Software (EAS) format. john's dynamic expression language describes constructions over a password and a salt; it cannot express a container's KDF-plus-cipher, so this has no expression and will not acquire one. That says nothing about whether john can CRACK it -- run discover-john.pl, and if john has a format it goes in tools.john.",
-         "expr_tier" : "absent",
-         "hash_length" : "",
-         "hash_length_basis" : "",
-         "hashcat" : {
-            "ids" : [
-               32030
-            ],
-            "state" : "proven",
-            "tier" : "vector"
-         },
-         "hashcat_salted" : "yes",
-         "hashcat_speed" : "slow",
-         "hashpipe" : {
-            "ids" : [],
-            "state" : "unknown"
-         },
-         "id" : "netiq-sspr-sha-256-with-salt",
-         "john" : {
-            "ids" : [
-               "sspr",
-               "sspr-opencl"
-            ],
-            "state" : "proven",
-            "tier" : "vector"
-         },
-         "john_expr" : "",
-         "john_salted" : "yes",
-         "john_work_factor" : "KDF [0:MD5 1:SHA1 2:SHA1_SALT 3:SHA256_SALT 4:SHA512_SALT],iteration count",
-         "legacy" : "",
-         "mdxfind" : {
-            "ids" : [
-               "SSPR-SHA256"
-            ],
-            "state" : "proven",
-            "tier" : "vector"
-         },
-         "mdxfind_salted" : "yes",
-         "name" : "NetIQ SSPR (SHA-256 with Salt)",
-         "nesting_depth" : "",
-         "notes" : "",
-         "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
-         "serialization" : "shared",
-         "status" : "ok",
-         "tool_note" : {
-            "hashcat" : "hashcat's own published example hash for this mode, recovered by hashcat at this mode with hashcat's own published plaintext.",
-            "hashpipe" : "",
-            "john" : "format discovered by round-trip search, not by name",
-            "mdxfind" : "type discovered by round-trip search, not by name"
-         },
-         "vecs" : 1
-      },
-      {
-         "alias" : "",
-         "application" : "",
-         "category" : "application",
-         "crack" : {
-            "ids" : [],
-            "state" : "no"
-         },
-         "cracknote" : "",
-         "denotation" : "NetIQ SSPR (SHA-512 with Salt)",
-         "expr" : "",
-         "expr_note" : "hashcat mode 32040 is a Enterprise Application Software (EAS) format. john's dynamic expression language describes constructions over a password and a salt; it cannot express a container's KDF-plus-cipher, so this has no expression and will not acquire one. That says nothing about whether john can CRACK it -- run discover-john.pl, and if john has a format it goes in tools.john.",
-         "expr_tier" : "absent",
-         "hash_length" : "",
-         "hash_length_basis" : "",
-         "hashcat" : {
-            "ids" : [
-               32040
-            ],
-            "state" : "proven",
-            "tier" : "vector"
-         },
-         "hashcat_salted" : "yes",
-         "hashcat_speed" : "slow",
-         "hashpipe" : {
-            "ids" : [],
-            "state" : "unknown"
-         },
-         "id" : "netiq-sspr-sha-512-with-salt",
-         "john" : {
-            "ids" : [
-               "sspr",
-               "sspr-opencl"
-            ],
-            "state" : "proven",
-            "tier" : "vector"
-         },
-         "john_expr" : "",
-         "john_salted" : "yes",
-         "john_work_factor" : "KDF [0:MD5 1:SHA1 2:SHA1_SALT 3:SHA256_SALT 4:SHA512_SALT],iteration count",
-         "legacy" : "",
-         "mdxfind" : {
-            "ids" : [
-               "SSPR-SHA512"
-            ],
-            "state" : "proven",
-            "tier" : "vector"
-         },
-         "mdxfind_salted" : "yes",
-         "name" : "NetIQ SSPR (SHA-512 with Salt)",
-         "nesting_depth" : "",
-         "notes" : "",
-         "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
-         "serialization" : "shared",
-         "status" : "ok",
-         "tool_note" : {
-            "hashcat" : "hashcat's own published example hash for this mode, recovered by hashcat at this mode with hashcat's own published plaintext.",
-            "hashpipe" : "",
-            "john" : "format discovered by round-trip search, not by name",
-            "mdxfind" : "type discovered by round-trip search, not by name"
-         },
-         "vecs" : 1
-      },
-      {
-         "alias" : "",
-         "application" : "",
          "category" : "protocol",
          "crack" : {
             "ids" : [],
@@ -53205,9 +53486,15 @@
                "entry" : "panama",
                "kind" : "duplicate-of",
                "note" : "merged 2026-09-01: one computation under two names, proven by john's dynamic compiler against both vectors. Royce chose the john-named row on 2026-09-01: panama-johnpanama carries john's Panama format, and dynamic_320 now sits beside it so a reader arriving by either name lands here"
+            },
+            {
+               "distinction" : "iteration",
+               "entry" : "panama-x2",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type PANAMA; this one at -i 2 and panama-johnpanama at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
             }
          ],
-         "sameas" : "duplicate of panama",
+         "sameas" : "duplicate of panama; iterates panama-x2 (iteration)",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -53270,8 +53557,15 @@
          "nesting_depth" : 2,
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "iteration",
+               "entry" : "panama-johnpanama",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type PANAMA; this one at -i 2 and panama-johnpanama at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            }
+         ],
+         "sameas" : "iterates panama-johnpanama (iteration)",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -58530,8 +58824,15 @@
          "nesting_depth" : "",
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "iteration",
+               "entry" : "keccak512-x2",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type KECCAK512; this one at -i 2 and raw-keccak at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            }
+         ],
+         "sameas" : "iterates keccak512-x2 (iteration)",
          "serialization" : "unknown",
          "status" : "needs-review",
          "tool_note" : {
@@ -58726,9 +59027,15 @@
                "entry" : "sha224",
                "kind" : "duplicate-of",
                "note" : "merged 2026-09-01: one computation under two names, proven by john's dynamic compiler against both vectors. Royce chose the john-named row on 2026-09-01: raw-sha224 is john's own Raw-SHA224 spelling, and dynamic_50 now sits beside it so a reader arriving by either name lands here"
+            },
+            {
+               "distinction" : "iteration",
+               "entry" : "sha224-x2",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type SHA224; this one at -i 2 and raw-sha224 at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
             }
          ],
-         "sameas" : "duplicate of sha224",
+         "sameas" : "duplicate of sha224; iterates sha224-x2 (iteration)",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -58798,9 +59105,15 @@
                "entry" : "sha384",
                "kind" : "duplicate-of",
                "note" : "merged 2026-09-01: one computation under two names, proven by john's dynamic compiler against both vectors. Royce chose the john-named row on 2026-09-01: raw-sha384 is john's own Raw-SHA384 spelling, and dynamic_70 now sits beside it so a reader arriving by either name lands here"
+            },
+            {
+               "distinction" : "iteration",
+               "entry" : "sha384-x2",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type SHA384; this one at -i 2 and raw-sha384 at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
             }
          ],
-         "sameas" : "duplicate of sha384",
+         "sameas" : "duplicate of sha384; iterates sha384-x2 (iteration)",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -59291,9 +59604,15 @@
                "entry" : "ripemd-128",
                "kind" : "duplicate-of",
                "note" : "merged 2026-09-07: Merged 2026-09-06, decided by Royce. These five john-named rows and their survivors are one computation, proven twice over: john's dynamic compiler recovers each loser's own plaintext from its own hash under the expression the survivor already carries at tier vector (gost($p), haval128_4($p), sha3_512($p), ripemd128($p), ripemd160($p)), and mdxfind pinned to ONE type reproduces BOTH rows' vectors on two different plaintexts. NOT the streebog-64-plain/gost2012-64 case, which stayed two rows under distinction naming: there the two rows carried two DIFFERENT mdxfind types, so each name had an identifier of its own. Here both rows carried the SAME type, and the loser was a strictly poorer view -- john's named format and nothing else, no hashcat mode, no hashpipe block -- so a reader arriving by john's label was landing on an incomplete answer. The label survives as an alias and as a john identifier on this row, and the tombstone redirects."
+            },
+            {
+               "distinction" : "iteration",
+               "entry" : "rmd128-x2",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type RMD128; this one at -i 2 and ripemd128 at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
             }
          ],
-         "sameas" : "duplicate of ripemd-128",
+         "sameas" : "duplicate of ripemd-128; iterates rmd128-x2 (iteration)",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -59549,9 +59868,15 @@
                "entry" : "ripemd-160",
                "kind" : "duplicate-of",
                "note" : "merged 2026-09-07: Merged 2026-09-06, decided by Royce. These five john-named rows and their survivors are one computation, proven twice over: john's dynamic compiler recovers each loser's own plaintext from its own hash under the expression the survivor already carries at tier vector (gost($p), haval128_4($p), sha3_512($p), ripemd128($p), ripemd160($p)), and mdxfind pinned to ONE type reproduces BOTH rows' vectors on two different plaintexts. NOT the streebog-64-plain/gost2012-64 case, which stayed two rows under distinction naming: there the two rows carried two DIFFERENT mdxfind types, so each name had an identifier of its own. Here both rows carried the SAME type, and the loser was a strictly poorer view -- john's named format and nothing else, no hashcat mode, no hashpipe block -- so a reader arriving by john's label was landing on an incomplete answer. The label survives as an alias and as a john identifier on this row, and the tombstone redirects."
+            },
+            {
+               "distinction" : "iteration",
+               "entry" : "rmd160-x2",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type RMD160; this one at -i 2 and ripemd160 at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
             }
          ],
-         "sameas" : "duplicate of ripemd-160",
+         "sameas" : "duplicate of ripemd-160; iterates rmd160-x2 (iteration)",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -59806,9 +60131,15 @@
                "entry" : "ripemd320",
                "kind" : "duplicate-of",
                "note" : "ripemd320 was the sheet's spelling of this row and was merged into it on 2026-08-30; that id survives only as a tombstone. The name here is the sheet's because it is the recognisable one; RMD320 is mdxfind's terse spelling and is kept as an alias."
+            },
+            {
+               "distinction" : "iteration",
+               "entry" : "rmd320-x2",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type RMD320; this one at -i 2 and rmd320 at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
             }
          ],
-         "sameas" : "duplicate of ripemd320",
+         "sameas" : "duplicate of ripemd320; iterates rmd320-x2 (iteration)",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -59871,8 +60202,15 @@
          "nesting_depth" : 2,
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "iteration",
+               "entry" : "ripemd128",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type RMD128; this one at -i 2 and ripemd128 at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            }
+         ],
+         "sameas" : "iterates ripemd128 (iteration)",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -59996,8 +60334,15 @@
          "nesting_depth" : 2,
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "iteration",
+               "entry" : "ripemd160",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type RMD160; this one at -i 2 and ripemd160 at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            }
+         ],
+         "sameas" : "iterates ripemd160 (iteration)",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -60060,8 +60405,15 @@
          "nesting_depth" : 2,
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "iteration",
+               "entry" : "rmd320",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type RMD320; this one at -i 2 and rmd320 at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            }
+         ],
+         "sameas" : "iterates rmd320 (iteration)",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -61936,13 +62288,25 @@
          "primary_form" : "",
          "relations" : [
             {
+               "distinction" : "iteration",
+               "entry" : "sha1-sha1-pass",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type SHA1; this one at -i 2 and sha1 at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            },
+            {
+               "distinction" : "iteration",
+               "entry" : "sha1-sha1-sha1-pass",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type SHA1; this one at -i 3 and sha1 at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            },
+            {
                "distinction" : "truncation",
                "entry" : "sha1-substr-0-32",
                "kind" : "truncates",
-               "note" : "sha1-substr-0-32 is this computation cut to its first 32 hex characters. Split out of that row on 2026-09-04 by Royce's decision: it was carrying both, and only john's dynamic_1023 truncates. Every identifier here computes plain SHA-1 and no cut, and every one of them was round-tripped against this vector before the split -- nothing was re-tiered by moving it."
+               "note" : "sha1-substr-0-32 is this computation cut to its first 32 hex characters. Split out of that row on 2026-09-04 by Royce's decision: it was carrying both, and only john's dynamic_1023 truncates. Every identifier here computes plain SHA-1 and no cut, and every one of them was round-tripped against this vector before the split -- nothing was re-tiered by moving it. mdxfind reproduces this row under BOTH SHA1 (e8) and AICH (e21), pinned, through its generic truncated matching at a comparison width of 32. NO mdxfind mapping is recorded: decided by Royce 2026-09-07 that finding a row is not denoting it. MD5 was pinned in the same run and REFUSED, which is the control that says the match is about these types and not about mdxfind reading a short digest loosely."
             }
          ],
-         "sameas" : "truncates sha1-substr-0-32 (truncation)",
+         "sameas" : "iterates sha1-sha1-pass (iteration); iterates sha1-sha1-sha1-pass (iteration); truncates sha1-substr-0-32 (truncation)",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -62850,7 +63214,7 @@
                "distinction" : "truncation",
                "entry" : "sha1-md5-pass-substr-0-32",
                "kind" : "truncates",
-               "note" : "This row is sha1-md5-pass cut to its first 32 hex characters. john ships them as two formats, dynamic_1024 here and dynamic_23 there, and dynamic_1024 will not load the untruncated 40-hex digest at all -- measured 2026-09-06."
+               "note" : "This row is sha1-md5-pass cut to its first 32 hex characters. john ships them as two formats, dynamic_1024 here and dynamic_23 there, and dynamic_1024 will not load the untruncated 40-hex digest at all -- measured 2026-09-06. mdxfind reproduces this row under SHA1MD5 (e160), pinned, through its generic truncated matching -- at a comparison width of 32 where SHA1MD5's own digest is 40. NO mdxfind mapping is recorded for it: decided by Royce 2026-09-07 that finding a row is not denoting it, the same rule that makes john's dynamic_2 a collides-on-subset edge on md5cap rather than a mapping. SHA1MD5MD5 was pinned in the same run and REFUSED, so the match discriminates rather than being a width artefact."
             }
          ],
          "sameas" : "truncates sha1-md5-pass-substr-0-32 (truncation)",
@@ -62915,7 +63279,7 @@
                "distinction" : "truncation",
                "entry" : "sha1-md5-pass",
                "kind" : "truncates",
-               "note" : "This row is sha1-md5-pass cut to its first 32 hex characters. john ships them as two formats, dynamic_1024 here and dynamic_23 there, and dynamic_1024 will not load the untruncated 40-hex digest at all -- measured 2026-09-06."
+               "note" : "This row is sha1-md5-pass cut to its first 32 hex characters. john ships them as two formats, dynamic_1024 here and dynamic_23 there, and dynamic_1024 will not load the untruncated 40-hex digest at all -- measured 2026-09-06. mdxfind reproduces this row under SHA1MD5 (e160), pinned, through its generic truncated matching -- at a comparison width of 32 where SHA1MD5's own digest is 40. NO mdxfind mapping is recorded for it: decided by Royce 2026-09-07 that finding a row is not denoting it, the same rule that makes john's dynamic_2 a collides-on-subset edge on md5cap rather than a mapping. SHA1MD5MD5 was pinned in the same run and REFUSED, so the match discriminates rather than being a width artefact."
             }
          ],
          "sameas" : "truncates sha1-md5-pass (truncation)",
@@ -63378,7 +63742,7 @@
                "distinction" : "truncation",
                "entry" : "sha1-md5-md5-plain-substr-0-32",
                "kind" : "truncates",
-               "note" : "This row is sha1-md5-md5-plain cut to its first 32 hex characters. dynamic_1025 computes this and will not load the untruncated 40-hex digest at all -- measured 2026-09-06."
+               "note" : "This row is sha1-md5-md5-plain cut to its first 32 hex characters. dynamic_1025 computes this and will not load the untruncated 40-hex digest at all -- measured 2026-09-06. mdxfind reproduces this row under SHA1MD5MD5 (e287), pinned, through its generic truncated matching -- at a comparison width of 32 where the type's own digest is 40. NO mdxfind mapping is recorded: decided by Royce 2026-09-07 that finding a row is not denoting it. SHA1MD5 was pinned in the same run and REFUSED, so the match discriminates."
             }
          ],
          "sameas" : "truncates sha1-md5-md5-plain-substr-0-32 (truncation)",
@@ -63443,7 +63807,7 @@
                "distinction" : "truncation",
                "entry" : "sha1-md5-md5-plain",
                "kind" : "truncates",
-               "note" : "This row is sha1-md5-md5-plain cut to its first 32 hex characters. dynamic_1025 computes this and will not load the untruncated 40-hex digest at all -- measured 2026-09-06."
+               "note" : "This row is sha1-md5-md5-plain cut to its first 32 hex characters. dynamic_1025 computes this and will not load the untruncated 40-hex digest at all -- measured 2026-09-06. mdxfind reproduces this row under SHA1MD5MD5 (e287), pinned, through its generic truncated matching -- at a comparison width of 32 where the type's own digest is 40. NO mdxfind mapping is recorded: decided by Royce 2026-09-07 that finding a row is not denoting it. SHA1MD5 was pinned in the same run and REFUSED, so the match discriminates."
             }
          ],
          "sameas" : "truncates sha1-md5-md5-plain (truncation)",
@@ -64668,8 +65032,21 @@
          "nesting_depth" : 2,
          "notes" : "dynamic_1026 and dynamic_26 were both REMOVED 2026-09-06, and with them this row's whole john block. Neither was a spelling problem. dynamic_1026 computes this row's construction CUT TO 32 hex characters; its correct home already existed, since sha1sha1trunc's stored vector IS cut(sha1(sha1($p)),0,32) -- confirmed by recomputation that day -- and it is at tier vector there. dynamic_26 is plain sha1($p): it LOADS this row's 40-hex vector and does not crack it, while the same format cracks sha1(\"rosetta\") on the first try, which is the control that separates the two readings. It has been on the sha1 row at tier vector since 2026-09-04. This row is NOT claiming john cannot do the algorithm -- its john_dynamic_expr is proven and runnable -- only that john ships no FORMAT identifier for it that anyone has reproduced here.",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "iteration",
+               "entry" : "sha1",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type SHA1; this one at -i 2 and sha1 at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            },
+            {
+               "distinction" : "iteration",
+               "entry" : "sha1-sha1-sha1-pass",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type SHA1; this one at -i 3 and sha1-sha1-pass at -i 2. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            }
+         ],
+         "sameas" : "iterates sha1 (iteration); iterates sha1-sha1-sha1-pass (iteration)",
          "serialization" : "shared",
          "status" : "needs-review",
          "tool_note" : {
@@ -65432,13 +65809,25 @@
          "primary_form" : "",
          "relations" : [
             {
+               "distinction" : "iteration",
+               "entry" : "sha1",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type SHA1; this one at -i 3 and sha1 at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            },
+            {
+               "distinction" : "iteration",
+               "entry" : "sha1-sha1-pass",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type SHA1; this one at -i 3 and sha1-sha1-pass at -i 2. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            },
+            {
                "distinction" : "truncation",
                "entry" : "sha1-sha1-sha1-pass-substr-0-32",
                "kind" : "truncates",
-               "note" : "This row is sha1-sha1-sha1-pass cut to its first 32 hex characters. dynamic_1027 computes this and will not load the untruncated 40-hex digest at all -- measured 2026-09-06."
+               "note" : "This row is sha1-sha1-sha1-pass cut to its first 32 hex characters. dynamic_1027 computes this and will not load the untruncated 40-hex digest at all -- measured 2026-09-06. NOT a truncated-match row, checked 2026-09-07. STATE.md had listed it with the three above on hashpipe naming SHA1MD5, and pinned, SHA1MD5 REFUSES this row's vector. SHA1SHA1SHA1 would be the type to want and mdxfind DOES NOT HAVE IT -- absent from the inventory -- so its silence is unmeasurable rather than negative, per CLAUDE.md. No mdxfind type is known to reproduce this row at any width."
             }
          ],
-         "sameas" : "truncates sha1-sha1-sha1-pass-substr-0-32 (truncation)",
+         "sameas" : "iterates sha1 (iteration); iterates sha1-sha1-pass (iteration); truncates sha1-sha1-sha1-pass-substr-0-32 (truncation)",
          "serialization" : "unknown",
          "status" : "needs-review",
          "tool_note" : {
@@ -65500,7 +65889,7 @@
                "distinction" : "truncation",
                "entry" : "sha1-sha1-sha1-pass",
                "kind" : "truncates",
-               "note" : "This row is sha1-sha1-sha1-pass cut to its first 32 hex characters. dynamic_1027 computes this and will not load the untruncated 40-hex digest at all -- measured 2026-09-06."
+               "note" : "This row is sha1-sha1-sha1-pass cut to its first 32 hex characters. dynamic_1027 computes this and will not load the untruncated 40-hex digest at all -- measured 2026-09-06. NOT a truncated-match row, checked 2026-09-07. STATE.md had listed it with the three above on hashpipe naming SHA1MD5, and pinned, SHA1MD5 REFUSES this row's vector. SHA1SHA1SHA1 would be the type to want and mdxfind DOES NOT HAVE IT -- absent from the inventory -- so its silence is unmeasurable rather than negative, per CLAUDE.md. No mdxfind type is known to reproduce this row at any width."
             }
          ],
          "sameas" : "truncates sha1-sha1-sha1-pass (truncation)",
@@ -65626,7 +66015,7 @@
                "distinction" : "truncation",
                "entry" : "sha1raw",
                "kind" : "truncates",
-               "note" : "This row is sha1raw cut to its first 32 hex characters. dynamic_1028 computes this; it had been sitting on mysql4-1-mysql5, which adds a leading star and upper-cases the digest, so that row was wrong about it twice over -- measured 2026-09-06."
+               "note" : "This row is sha1raw cut to its first 32 hex characters. dynamic_1028 computes this; it had been sitting on mysql4-1-mysql5, which adds a leading star and upper-cases the digest, so that row was wrong about it twice over -- measured 2026-09-06. mdxfind reproduces this row under BOTH SHA1RAW (e34) and SQL5 (e259), pinned, through its generic truncated matching at a comparison width of 32. NO mdxfind mapping is recorded: decided by Royce 2026-09-07 that finding a row is not denoting it. Two types matching one 32-hex digest is itself the argument -- at that width they are not distinguishable, so neither name identifies the row."
             }
          ],
          "sameas" : "truncates sha1raw (truncation)",
@@ -68155,7 +68544,7 @@
                "distinction" : "truncation",
                "entry" : "sha1",
                "kind" : "truncates",
-               "note" : "This row is sha1 cut to its first 32 hex characters. RESOLVED 2026-09-04 by Royce: the plain-SHA-1 identifiers this row carried -- hashcat 100, mdxfind SHA1, hashpipe SHA1, john dynamic_26 and raw-SHA1-opencl -- compute no cut and moved to the new sha1 row with the 40-hex vector they were proven against. Note what is NOT a mapping: mdxfind's SHA1 and hashpipe's SHA1 do recover the 32-hex vector, because mdxfind compares at the length of the shortest hash it loaded and cracking a truncated digest is a capability it has by design. That is the tool being able to crack this, not the tool having an identifier for the truncation, and \"mdxfind -h '^SHA1$'\" is still the command for it."
+               "note" : "This row is sha1 cut to its first 32 hex characters. RESOLVED 2026-09-04 by Royce: the plain-SHA-1 identifiers this row carried -- hashcat 100, mdxfind SHA1, hashpipe SHA1, john dynamic_26 and raw-SHA1-opencl -- compute no cut and moved to the new sha1 row with the 40-hex vector they were proven against. Note what is NOT a mapping: mdxfind's SHA1 and hashpipe's SHA1 do recover the 32-hex vector, because mdxfind compares at the length of the shortest hash it loaded and cracking a truncated digest is a capability it has by design. That is the tool being able to crack this, not the tool having an identifier for the truncation, and \"mdxfind -h '^SHA1$'\" is still the command for it. mdxfind reproduces this row under BOTH SHA1 (e8) and AICH (e21), pinned, through its generic truncated matching at a comparison width of 32. NO mdxfind mapping is recorded: decided by Royce 2026-09-07 that finding a row is not denoting it. MD5 was pinned in the same run and REFUSED, which is the control that says the match is about these types and not about mdxfind reading a short digest loosely."
             }
          ],
          "sameas" : "same as axcryptsha1 (encoding); truncates sha1 (truncation)",
@@ -73431,7 +73820,7 @@
                "distinction" : "truncation",
                "entry" : "sha1raw-substr-0-32",
                "kind" : "truncates",
-               "note" : "This row is sha1raw cut to its first 32 hex characters. dynamic_1028 computes this; it had been sitting on mysql4-1-mysql5, which adds a leading star and upper-cases the digest, so that row was wrong about it twice over -- measured 2026-09-06."
+               "note" : "This row is sha1raw cut to its first 32 hex characters. dynamic_1028 computes this; it had been sitting on mysql4-1-mysql5, which adds a leading star and upper-cases the digest, so that row was wrong about it twice over -- measured 2026-09-06. mdxfind reproduces this row under BOTH SHA1RAW (e34) and SQL5 (e259), pinned, through its generic truncated matching at a comparison width of 32. NO mdxfind mapping is recorded: decided by Royce 2026-09-07 that finding a row is not denoting it. Two types matching one 32-hex digest is itself the argument -- at that width they are not distinguishable, so neither name identifies the row."
             }
          ],
          "sameas" : "truncates sha1raw-substr-0-32 (truncation)",
@@ -79699,8 +80088,15 @@
          "nesting_depth" : 2,
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "iteration",
+               "entry" : "raw-sha224",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type SHA224; this one at -i 2 and raw-sha224 at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            }
+         ],
+         "sameas" : "iterates raw-sha224 (iteration)",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -80152,8 +80548,15 @@
          "nesting_depth" : 1,
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "iteration",
+               "entry" : "sha256-x2",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type SHA256; this one at -i 2 and sha256 at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            }
+         ],
+         "sameas" : "iterates sha256-x2 (iteration)",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -80216,8 +80619,21 @@
          "nesting_depth" : 2,
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "iteration",
+               "entry" : "dane-rfc7929-rfc8162-sha2-256",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type SHA256; this one at -i 2 and dane-rfc7929-rfc8162-sha2-256 at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            },
+            {
+               "distinction" : "iteration",
+               "entry" : "sha256",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type SHA256; this one at -i 2 and sha256 at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            }
+         ],
+         "sameas" : "iterates dane-rfc7929-rfc8162-sha2-256 (iteration); iterates sha256 (iteration)",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -80283,8 +80699,15 @@
          "nesting_depth" : 1,
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "iteration",
+               "entry" : "sha256-sha256-pass-salt",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type SHA256PASSSALT; this one at -i 2 and sha256-pass-salt at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            }
+         ],
+         "sameas" : "iterates sha256-sha256-pass-salt (iteration)",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -80732,8 +81155,15 @@
          "nesting_depth" : 2,
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "iteration",
+               "entry" : "sha256-pass-salt",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type SHA256PASSSALT; this one at -i 2 and sha256-pass-salt at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            }
+         ],
+         "sameas" : "iterates sha256-pass-salt (iteration)",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -81635,8 +82065,15 @@
          "nesting_depth" : 2,
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "iteration",
+               "entry" : "sha3-224-plain",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type SHA3-224; this one at -i 2 and sha3-224-plain at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            }
+         ],
+         "sameas" : "iterates sha3-224-plain (iteration)",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -81702,8 +82139,15 @@
          "nesting_depth" : 1,
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "iteration",
+               "entry" : "sha3-224-x2",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type SHA3-224; this one at -i 2 and sha3-224-plain at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            }
+         ],
+         "sameas" : "iterates sha3-224-x2 (iteration)",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -81766,8 +82210,15 @@
          "nesting_depth" : 2,
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "iteration",
+               "entry" : "sha3-256-plain",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type SHA3-256; this one at -i 2 and sha3-256-plain at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            }
+         ],
+         "sameas" : "iterates sha3-256-plain (iteration)",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -81833,8 +82284,15 @@
          "nesting_depth" : 1,
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "iteration",
+               "entry" : "sha3-256-x2",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type SHA3-256; this one at -i 2 and sha3-256-plain at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            }
+         ],
+         "sameas" : "iterates sha3-256-x2 (iteration)",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -81897,8 +82355,15 @@
          "nesting_depth" : 2,
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "iteration",
+               "entry" : "sha3-384-plain",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type SHA3-384; this one at -i 2 and sha3-384-plain at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            }
+         ],
+         "sameas" : "iterates sha3-384-plain (iteration)",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -81964,8 +82429,15 @@
          "nesting_depth" : 1,
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "iteration",
+               "entry" : "sha3-384-x2",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type SHA3-384; this one at -i 2 and sha3-384-plain at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            }
+         ],
+         "sameas" : "iterates sha3-384-x2 (iteration)",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -82028,8 +82500,15 @@
          "nesting_depth" : 2,
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "iteration",
+               "entry" : "sha3-512-plain",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type SHA3-512; this one at -i 2 and sha3-512-plain at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            }
+         ],
+         "sameas" : "iterates sha3-512-plain (iteration)",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -82102,9 +82581,15 @@
                "entry" : "raw-sha3",
                "kind" : "duplicate-of",
                "note" : "merged 2026-09-07: Merged 2026-09-06, decided by Royce. These five john-named rows and their survivors are one computation, proven twice over: john's dynamic compiler recovers each loser's own plaintext from its own hash under the expression the survivor already carries at tier vector (gost($p), haval128_4($p), sha3_512($p), ripemd128($p), ripemd160($p)), and mdxfind pinned to ONE type reproduces BOTH rows' vectors on two different plaintexts. NOT the streebog-64-plain/gost2012-64 case, which stayed two rows under distinction naming: there the two rows carried two DIFFERENT mdxfind types, so each name had an identifier of its own. Here both rows carried the SAME type, and the loser was a strictly poorer view -- john's named format and nothing else, no hashcat mode, no hashpipe block -- so a reader arriving by john's label was landing on an incomplete answer. The label survives as an alias and as a john identifier on this row, and the tombstone redirects."
+            },
+            {
+               "distinction" : "iteration",
+               "entry" : "sha3-512-x2",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type SHA3-512; this one at -i 2 and sha3-512-plain at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
             }
          ],
-         "sameas" : "duplicate of raw-sha3",
+         "sameas" : "duplicate of raw-sha3; iterates sha3-512-x2 (iteration)",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -82167,8 +82652,15 @@
          "nesting_depth" : 2,
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "iteration",
+               "entry" : "raw-sha384",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type SHA384; this one at -i 2 and raw-sha384 at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            }
+         ],
+         "sameas" : "iterates raw-sha384 (iteration)",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -82749,8 +83241,15 @@
          "nesting_depth" : 1,
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "iteration",
+               "entry" : "sha512-x2",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type SHA512; this one at -i 2 and sha512 at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            }
+         ],
+         "sameas" : "iterates sha512-x2 (iteration)",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -82813,8 +83312,15 @@
          "nesting_depth" : 2,
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "iteration",
+               "entry" : "sha512",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type SHA512; this one at -i 2 and sha512 at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            }
+         ],
+         "sameas" : "iterates sha512 (iteration)",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -84280,9 +84786,15 @@
                "entry" : "sm3",
                "kind" : "duplicate-of",
                "note" : "merged 2026-09-01: one computation under two names, proven by john's dynamic compiler against both vectors. Royce chose the john-named row on 2026-09-01: shangmi-3 carries john's Raw-SM3, and dynamic_450 now sits beside it so a reader arriving by either name lands here"
+            },
+            {
+               "distinction" : "iteration",
+               "entry" : "sm3-x2",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type SM3; this one at -i 2 and shangmi-3 at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
             }
          ],
-         "sameas" : "duplicate of sm3",
+         "sameas" : "duplicate of sm3; iterates sm3-x2 (iteration)",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -85199,8 +85711,15 @@
          "nesting_depth" : "",
          "notes" : "Accepted 2026-09-04 from a name match that was then measured. This entry carried no vector at all. mdxfind's own published SKEIN256 example recovers password123 under SKEIN256 pinned, and john's skein-256 -- the format this entry already named -- recovers the same plaintext from the same digest. Two tools agreeing on one digest is what turns a matching name into a computation.",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "iteration",
+               "entry" : "skein256-x2",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type SKEIN256; this one at -i 2 and skein-256 at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            }
+         ],
+         "sameas" : "iterates skein256-x2 (iteration)",
          "serialization" : "shared",
          "status" : "needs-review",
          "tool_note" : {
@@ -85260,8 +85779,15 @@
          "nesting_depth" : "",
          "notes" : "Accepted 2026-09-04 from a name match that was then measured: mdxfind's own SKEIN512 example and john's skein-512 recover the same plaintext from the same digest. The entry carried no vector before this.",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "iteration",
+               "entry" : "skein512-x2",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type SKEIN512; this one at -i 2 and skein-512 at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            }
+         ],
+         "sameas" : "iterates skein512-x2 (iteration)",
          "serialization" : "shared",
          "status" : "needs-review",
          "tool_note" : {
@@ -85324,8 +85850,15 @@
          "nesting_depth" : 1,
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "iteration",
+               "entry" : "skein224-x2",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type SKEIN224; this one at -i 2 and skein224 at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            }
+         ],
+         "sameas" : "iterates skein224-x2 (iteration)",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -85388,8 +85921,15 @@
          "nesting_depth" : 2,
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "iteration",
+               "entry" : "skein224",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type SKEIN224; this one at -i 2 and skein224 at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            }
+         ],
+         "sameas" : "iterates skein224 (iteration)",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -85452,8 +85992,15 @@
          "nesting_depth" : 1,
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "iteration",
+               "entry" : "skein256-x2",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type SKEIN256; this one at -i 2 and skein256 at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            }
+         ],
+         "sameas" : "iterates skein256-x2 (iteration)",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -85516,8 +86063,21 @@
          "nesting_depth" : 2,
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "iteration",
+               "entry" : "skein-256",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type SKEIN256; this one at -i 2 and skein-256 at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            },
+            {
+               "distinction" : "iteration",
+               "entry" : "skein256",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type SKEIN256; this one at -i 2 and skein256 at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            }
+         ],
+         "sameas" : "iterates skein-256 (iteration); iterates skein256 (iteration)",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -85580,8 +86140,15 @@
          "nesting_depth" : 1,
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "iteration",
+               "entry" : "skein384-x2",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type SKEIN384; this one at -i 2 and skein384 at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            }
+         ],
+         "sameas" : "iterates skein384-x2 (iteration)",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -85644,8 +86211,15 @@
          "nesting_depth" : 2,
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "iteration",
+               "entry" : "skein384",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type SKEIN384; this one at -i 2 and skein384 at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            }
+         ],
+         "sameas" : "iterates skein384 (iteration)",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -85708,8 +86282,15 @@
          "nesting_depth" : 1,
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "iteration",
+               "entry" : "skein512-x2",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type SKEIN512; this one at -i 2 and skein512 at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            }
+         ],
+         "sameas" : "iterates skein512-x2 (iteration)",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -85772,8 +86353,21 @@
          "nesting_depth" : 2,
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "iteration",
+               "entry" : "skein-512",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type SKEIN512; this one at -i 2 and skein-512 at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            },
+            {
+               "distinction" : "iteration",
+               "entry" : "skein512",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type SKEIN512; this one at -i 2 and skein512 at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            }
+         ],
+         "sameas" : "iterates skein-512 (iteration); iterates skein512 (iteration)",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -85958,8 +86552,15 @@
          "nesting_depth" : 2,
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "iteration",
+               "entry" : "shangmi-3",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type SM3; this one at -i 2 and shangmi-3 at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            }
+         ],
+         "sameas" : "iterates shangmi-3 (iteration)",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -86106,7 +86707,7 @@
          "vecs" : 2
       },
       {
-         "alias" : "",
+         "alias" : "Snefru-128",
          "application" : "",
          "category" : "primitive",
          "crack" : {
@@ -86119,7 +86720,7 @@
          "expr_note" : "transcribed from the hx specification's Appendix A entry for mdxfind type SNE128 (e25), which states sne128(pass). Transcription, not reproduction, so this is upstream and not vector; run derive-expressions.pl to try to promote it. Not checkable locally: the construction uses functions RosettaExpr cannot compile, so this rests on upstream's word alone.; TRIAGE 2026-09-05 [format-encoding]: Snefru-128 has its own ciphertext encoding rather than plain hex, so a generic expression cannot be checked against it however correctly it describes the computation",
          "expr_tier" : "upstream",
          "hash_length" : 32,
-         "hash_length_basis" : "observed",
+         "hash_length_basis" : "fixed",
          "hashcat" : {
             "ids" : [],
             "state" : "no"
@@ -86157,8 +86758,15 @@
          "nesting_depth" : 1,
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "none",
+               "entry" : "snefru-128",
+               "kind" : "duplicate-of",
+               "note" : "merged 2026-09-07: Strictly poorer: the loser published one identifier (john Snefru-128) and the survivor publishes that plus mdxfind and hashpipe SNE128. Confirmed one computation 2026-09-07 by pinning the shared identifiers against both rows' vectors."
+            }
+         ],
+         "sameas" : "duplicate of snefru-128",
          "serialization" : "shared",
          "status" : "needs-review",
          "tool_note" : {
@@ -86167,10 +86775,10 @@
             "john" : "format discovered by round-trip search, not by name",
             "mdxfind" : "mdxfind's own published example for this identifier, recovered by mdxfind at this identifier with mdxfind's own published plaintext."
          },
-         "vecs" : 1
+         "vecs" : 2
       },
       {
-         "alias" : "",
+         "alias" : "Snefru-256",
          "application" : "",
          "category" : "primitive",
          "crack" : {
@@ -86221,8 +86829,15 @@
          "nesting_depth" : 1,
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "none",
+               "entry" : "snefru-256",
+               "kind" : "duplicate-of",
+               "note" : "merged 2026-09-07: Strictly poorer: the loser published one identifier (john Snefru-256) and the survivor publishes that plus mdxfind and hashpipe SNE256. Confirmed one computation 2026-09-07 by pinning the shared identifiers against both rows' vectors."
+            }
+         ],
+         "sameas" : "duplicate of snefru-256",
          "serialization" : "shared",
          "status" : "needs-review",
          "tool_note" : {
@@ -86231,129 +86846,7 @@
             "john" : "format discovered by round-trip search, not by name",
             "mdxfind" : "mdxfind's own published example for this identifier, recovered by mdxfind at this identifier with mdxfind's own published plaintext."
          },
-         "vecs" : 1
-      },
-      {
-         "alias" : "",
-         "application" : "",
-         "category" : "",
-         "crack" : {
-            "ids" : [],
-            "state" : "no"
-         },
-         "cracknote" : "",
-         "denotation" : "Snefru-128",
-         "expr" : "",
-         "expr_note" : "john publishes this as \"Snefru-128\" and no category, so what kind of construction it is has not been established here. Its name is not expression-shaped and john's dynamic EXPRESSION language cannot be handed it, so there is no expression on this row. That says nothing about whether any tool can CRACK it, and it is not a claim that the algorithm HAS no expression -- run seed-hx.pl and derive-expressions.pl, which can settle that from evidence.",
-         "expr_tier" : "absent",
-         "hash_length" : 32,
-         "hash_length_basis" : "observed",
-         "hashcat" : {
-            "ids" : [],
-            "state" : "no"
-         },
-         "hashcat_salted" : "",
-         "hashcat_speed" : "",
-         "hashpipe" : {
-            "ids" : [
-               "SNE128"
-            ],
-            "state" : "proven",
-            "tier" : "vector"
-         },
-         "id" : "snefru-128",
-         "john" : {
-            "ids" : [
-               "Snefru-128"
-            ],
-            "state" : "proven",
-            "tier" : "vector"
-         },
-         "john_expr" : "",
-         "john_salted" : "no",
-         "john_work_factor" : "",
-         "legacy" : "",
-         "mdxfind" : {
-            "ids" : [
-               "SNE128"
-            ],
-            "state" : "proven",
-            "tier" : "vector"
-         },
-         "mdxfind_salted" : "no",
-         "name" : "Snefru-128",
-         "nesting_depth" : "",
-         "notes" : "",
-         "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
-         "serialization" : "shared",
-         "status" : "ok",
-         "tool_note" : {
-            "hashcat" : "no mode. Swept the 12 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-03 (tools/discover-hashcat.pl --all, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
-            "hashpipe" : "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one.",
-            "john" : "john's own published example ciphertext for this format, recovered by john under this format. john publishes no plaintext, so the plaintext was found by handing john its own example and a candidate list -- what john recovered IS the plaintext, by construction.",
-            "mdxfind" : "type discovered by round-trip search, not by name"
-         },
-         "vecs" : 1
-      },
-      {
-         "alias" : "",
-         "application" : "",
-         "category" : "",
-         "crack" : {
-            "ids" : [],
-            "state" : "no"
-         },
-         "cracknote" : "",
-         "denotation" : "Snefru-256",
-         "expr" : "",
-         "expr_note" : "john publishes this as \"Snefru-256\" and no category, so what kind of construction it is has not been established here. Its name is not expression-shaped and john's dynamic EXPRESSION language cannot be handed it, so there is no expression on this row. That says nothing about whether any tool can CRACK it, and it is not a claim that the algorithm HAS no expression -- run seed-hx.pl and derive-expressions.pl, which can settle that from evidence.",
-         "expr_tier" : "absent",
-         "hash_length" : "",
-         "hash_length_basis" : "",
-         "hashcat" : {
-            "ids" : [],
-            "state" : "unknown"
-         },
-         "hashcat_salted" : "",
-         "hashcat_speed" : "",
-         "hashpipe" : {
-            "ids" : [],
-            "state" : "unknown"
-         },
-         "id" : "snefru-256",
-         "john" : {
-            "ids" : [
-               "Snefru-256"
-            ],
-            "state" : "proven",
-            "tier" : "vector"
-         },
-         "john_expr" : "",
-         "john_salted" : "no",
-         "john_work_factor" : "",
-         "legacy" : "",
-         "mdxfind" : {
-            "ids" : [],
-            "state" : "no"
-         },
-         "mdxfind_salted" : "",
-         "name" : "Snefru-256",
-         "nesting_depth" : "",
-         "notes" : "",
-         "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
-         "serialization" : "unknown",
-         "status" : "ok",
-         "tool_note" : {
-            "hashcat" : "",
-            "hashpipe" : "",
-            "john" : "john's own published example ciphertext for this format, recovered by john under this format. john publishes no plaintext, so the plaintext was found by handing john its own example and a candidate list -- what john recovered IS the plaintext, by construction.",
-            "mdxfind" : "no type. Swept all 1002 mdxfind types on 2026-09-03 (a tools/discover-mdxfind.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable type ran to completion; a type killed at the timeout is counted as untested and withholds this verdict. No mdxfind type name matches any identifier this entry publishes either, normalized by the separator-drift rule. Corroborated by hashpipe, a second binary built from the same catalog: handed this entry's own hash and plaintext it names no type at all. It is the more direct instrument -- it recomputes rather than cracking -- and on this corpus it named a type for 58 entries the sweep alone called silent. This is the absence of an IDENTIFIER, not of the algorithm: if mdxfind gains one, this becomes a mapping."
-         },
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -87812,7 +88305,7 @@
          "vecs" : 1
       },
       {
-         "alias" : "",
+         "alias" : "NetIQ SSPR (SHA-256 with Salt)",
          "application" : "",
          "category" : "application",
          "crack" : {
@@ -87867,8 +88360,15 @@
          "nesting_depth" : "",
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "none",
+               "entry" : "netiq-sspr-sha-256-with-salt",
+               "kind" : "duplicate-of",
+               "note" : "merged 2026-09-07: Strict subset: the loser's identifiers (hashcat 32030, mdxfind SSPR-SHA256, john sspr) are all on the survivor, which adds hashpipe SSPR-SHA256. NOTE the sibling adobe-aem-sspr-sha-256-with-salt is NOT merged: it carries hashcat 32031, a mode of its own, so it is a distinct landing place and wants an edge rather than a tombstone."
+            }
+         ],
+         "sameas" : "duplicate of netiq-sspr-sha-256-with-salt",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -87877,10 +88377,10 @@
             "john" : "format discovered by round-trip search, not by name",
             "mdxfind" : "mdxfind's own published example for this identifier, recovered by mdxfind at this identifier with mdxfind's own published plaintext."
          },
-         "vecs" : 1
+         "vecs" : 2
       },
       {
-         "alias" : "",
+         "alias" : "NetIQ SSPR (SHA-512 with Salt)",
          "application" : "",
          "category" : "application",
          "crack" : {
@@ -87935,8 +88435,15 @@
          "nesting_depth" : "",
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "none",
+               "entry" : "netiq-sspr-sha-512-with-salt",
+               "kind" : "duplicate-of",
+               "note" : "merged 2026-09-07: Strict subset: the loser's identifiers (hashcat 32040, mdxfind SSPR-SHA512, john sspr) are all on the survivor, which adds hashpipe SSPR-SHA512. NOTE the sibling adobe-aem-sspr-sha-512-with-salt is NOT merged: it carries hashcat 32041, a mode of its own."
+            }
+         ],
+         "sameas" : "duplicate of netiq-sspr-sha-512-with-salt",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -87945,7 +88452,7 @@
             "john" : "format discovered by round-trip search, not by name",
             "mdxfind" : "mdxfind's own published example for this identifier, recovered by mdxfind at this identifier with mdxfind's own published plaintext."
          },
-         "vecs" : 1
+         "vecs" : 2
       },
       {
          "alias" : "",
@@ -89122,8 +89629,15 @@
          "nesting_depth" : "",
          "notes" : "Accepted 2026-09-04 from a name match that was then measured: mdxfind's own TIGER example and john's Tiger recover the same plaintext from the same digest. The entry carried no vector before this. john echoes its canonical $tiger$<UPPERCASE HEX> form; mdxfind reads and echoes the bare lower-case digest.",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "iteration",
+               "entry" : "tiger-x2",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type TIGER; this one at -i 2 and tiger-johntiger at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            }
+         ],
+         "sameas" : "iterates tiger-x2 (iteration)",
          "serialization" : "shared",
          "status" : "needs-review",
          "tool_note" : {
@@ -89186,8 +89700,15 @@
          "nesting_depth" : 1,
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "iteration",
+               "entry" : "tiger-x2",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type TIGER; this one at -i 2 and tiger at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            }
+         ],
+         "sameas" : "iterates tiger-x2 (iteration)",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -89250,8 +89771,21 @@
          "nesting_depth" : 2,
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "iteration",
+               "entry" : "tiger",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type TIGER; this one at -i 2 and tiger at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            },
+            {
+               "distinction" : "iteration",
+               "entry" : "tiger-johntiger",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type TIGER; this one at -i 2 and tiger-johntiger at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            }
+         ],
+         "sameas" : "iterates tiger (iteration); iterates tiger-johntiger (iteration)",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -95118,8 +95652,21 @@
          "nesting_depth" : 1,
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "iteration",
+               "entry" : "wrl-x2",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type WRL; this one at -i 2 and whirlpool at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            },
+            {
+               "distinction" : "truncation",
+               "entry" : "dynamic-1030",
+               "kind" : "truncates",
+               "note" : "john's own run/dynamic.conf states dynamic_1030 as \"whirlpool($p) (hash truncated to length 32)\", which is the instrument for what a dynamic computes; its digest is 32 hex where whirlpool's is 128. Edge written 2026-09-07."
+            }
+         ],
+         "sameas" : "iterates wrl-x2 (iteration); truncates dynamic-1030 (truncation)",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -96269,8 +96816,15 @@
          "nesting_depth" : 2,
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "iteration",
+               "entry" : "whirlpool",
+               "kind" : "iterates",
+               "note" : "Both rows name mdxfind type WRL; this one at -i 2 and whirlpool at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+            }
+         ],
+         "sameas" : "iterates whirlpool (iteration)",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -96854,70 +97408,6 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "yescrypt(pass, salt, N, r, p)",
-         "expr" : "",
-         "expr_note" : "the construction upstream states for mdxfind type YESCRYPT (e995) names yescrypt(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
-         "expr_tier" : "absent",
-         "hash_length" : "",
-         "hash_length_basis" : "",
-         "hashcat" : {
-            "ids" : [
-               36100
-            ],
-            "state" : "proven",
-            "tier" : "vector"
-         },
-         "hashcat_salted" : "yes",
-         "hashcat_speed" : "slow",
-         "hashpipe" : {
-            "ids" : [
-               "YESCRYPT"
-            ],
-            "state" : "proven",
-            "tier" : "vector"
-         },
-         "id" : "yescrypt-mdxfindyescrypt",
-         "john" : {
-            "ids" : [],
-            "state" : "unknown"
-         },
-         "john_expr" : "",
-         "john_salted" : "",
-         "john_work_factor" : "",
-         "legacy" : "",
-         "mdxfind" : {
-            "ids" : [
-               "YESCRYPT"
-            ],
-            "state" : "proven",
-            "tier" : "vector"
-         },
-         "mdxfind_salted" : "yes",
-         "name" : "YESCRYPT",
-         "nesting_depth" : "",
-         "notes" : "",
-         "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
-         "serialization" : "shared",
-         "status" : "ok",
-         "tool_note" : {
-            "hashcat" : "mode discovered by round-trip search, not by name",
-            "hashpipe" : "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one.",
-            "john" : "",
-            "mdxfind" : "mdxfind's own published example for this identifier, recovered by mdxfind at this identifier with mdxfind's own published plaintext."
-         },
-         "vecs" : 1
-      },
-      {
-         "alias" : "",
-         "application" : "",
-         "category" : "kdf",
-         "crack" : {
-            "ids" : [],
-            "state" : "no"
-         },
-         "cracknote" : "",
          "denotation" : "yescrypt",
          "expr" : "",
          "expr_note" : "hashcat mode 36100 is \"yescrypt\" (Generic KDF). It is a bare construction, but john's dynamic EXPRESSION language has no token for it, so it cannot be written as an expression here. That says nothing about whether john can CRACK it -- run discover-john.pl, and if john has a format it goes in tools.john.",
@@ -96961,8 +97451,15 @@
          "nesting_depth" : "",
          "notes" : "",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "none",
+               "entry" : "yescrypt-mdxfindyescrypt",
+               "kind" : "duplicate-of",
+               "note" : "merged 2026-09-07: The loser's id is a seeding artifact -- the tool name concatenated onto its own type name -- and it publishes nothing yescrypt does not. Confirmed one computation 2026-09-07: mdxfind YESCRYPT pinned reproduces both rows' vectors."
+            }
+         ],
+         "sameas" : "duplicate of yescrypt-mdxfindyescrypt",
          "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
@@ -96971,17 +97468,31 @@
             "john" : "",
             "mdxfind" : "type discovered by round-trip search, not by name"
          },
-         "vecs" : 1
+         "vecs" : 2
       }
    ],
-   "generated" : "2026-09-06",
-   "merged" : 14,
+   "generated" : "2026-09-07",
+   "merged" : 21,
    "tombstones" : [
+      {
+         "id" : "episerver-6-x-lt-net-4",
+         "merged_into" : "episerver",
+         "name" : "Episerver 6.x < .NET 4",
+         "relations_text" : "duplicate of episerver",
+         "status" : "merged"
+      },
       {
          "id" : "gost-r-34-11-94",
          "merged_into" : "hash-gost-plain",
          "name" : "GOST R 34.11-94",
          "relations_text" : "duplicate of hash-gost-plain",
+         "status" : "merged"
+      },
+      {
+         "id" : "gost-yescrypt-mdxfindgost-yescrypt",
+         "merged_into" : "gost-yescrypt",
+         "name" : "GOST-YESCRYPT",
+         "relations_text" : "duplicate of gost-yescrypt",
          "status" : "merged"
       },
       {
@@ -97003,6 +97514,20 @@
          "merged_into" : "md5-strtoupper-md5-pass",
          "name" : "MD5MD5UC",
          "relations_text" : "duplicate of md5-strtoupper-md5-pass",
+         "status" : "merged"
+      },
+      {
+         "id" : "netiq-sspr-sha-256-with-salt",
+         "merged_into" : "sspr-sha256",
+         "name" : "NetIQ SSPR (SHA-256 with Salt)",
+         "relations_text" : "duplicate of sspr-sha256",
+         "status" : "merged"
+      },
+      {
+         "id" : "netiq-sspr-sha-512-with-salt",
+         "merged_into" : "sspr-sha512",
+         "name" : "NetIQ SSPR (SHA-512 with Salt)",
+         "relations_text" : "duplicate of sspr-sha512",
          "status" : "merged"
       },
       {
@@ -97073,6 +97598,27 @@
          "merged_into" : "shangmi-3",
          "name" : "SM3",
          "relations_text" : "duplicate of shangmi-3",
+         "status" : "merged"
+      },
+      {
+         "id" : "snefru-128",
+         "merged_into" : "sne128",
+         "name" : "Snefru-128",
+         "relations_text" : "duplicate of sne128",
+         "status" : "merged"
+      },
+      {
+         "id" : "snefru-256",
+         "merged_into" : "sne256",
+         "name" : "Snefru-256",
+         "relations_text" : "duplicate of sne256",
+         "status" : "merged"
+      },
+      {
+         "id" : "yescrypt-mdxfindyescrypt",
+         "merged_into" : "yescrypt",
+         "name" : "YESCRYPT",
+         "relations_text" : "duplicate of yescrypt",
          "status" : "merged"
       }
    ],
