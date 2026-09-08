@@ -565,6 +565,8 @@ sub mx_echo_is {
 }
 
 my (%cracked, %attempted, %failed_job, %mx_job_ids, %ran_ident);
+# blocks whose bare verified_with was replaced with the binary that ran
+my %restamped;
 # (entry, type) pairs whose round trip used a line from
 # data/mdxfind-transcodes.tsv rather than the vector as stored. The block's
 # note says so, because otherwise the promotion reads as though the stored
@@ -1312,6 +1314,32 @@ if (!$dry) {
                     delete $blk->{note};
                     $touched = 1;
                 }
+                # THE AUDIT HOLE, filled only where there is nothing to lose.
+                # ~1460 blocks carry `verified_with: "mdxfind"` -- a tool name
+                # and no version -- because they were written before
+                # 2026-09-05, when verify-vectors.pl and the three discover-*
+                # tools were fixed to name the binary that RAN. A clean run
+                # here has just re-earned the claim against a binary whose
+                # version is known, so record it.
+                #
+                # SCOPED TO BARE VALUES ON PURPOSE. A block citing "mdxfind
+                # RCS 1.540" is a record of which build proved it, and 244 of
+                # them do; overwriting that with today's build would be
+                # inventing evidence rather than gathering it, which is the
+                # bulk back-fill CLAUDE.md forbids. A bare value carries no
+                # such record, so there is nothing to overwrite.
+                #
+                # verified_at moves with it. The two fields describe ONE
+                # verification event, and stamping today's binary beside an
+                # older date would describe an event that never happened.
+                if (($blk->{verified} // '') eq 'vector'
+                    && defined $blk->{verified_with}
+                    && $blk->{verified_with} =~ /^(?:john|mdxfind|hashcat)$/) {
+                    $blk->{verified_with} = "$tool $TOOL_VER{$tool}";
+                    $blk->{verified_at}   = $today;
+                    $touched = 1;
+                    $restamped{$tool}++;
+                }
                 next if ($blk->{verified} // '') eq 'vector';
                 $blk->{verified}      = 'vector';
                 $blk->{verified_at}   = $today;
@@ -1436,6 +1464,8 @@ for my $tool (@tools) {
     next unless $attempted{$tool};
     printf STDERR "-   %-8s entries attempted %4d, promoted to tier 'vector' %4d\n",
         $tool, scalar(keys %{ $attempted{$tool} }), $promoted{$tool} // 0;
+    printf STDERR "-   %-8s bare verified_with restamped %4d\n",
+        $tool, $restamped{$tool} if $restamped{$tool};
 }
 printf STDERR "-   files rewritten: %d\n", $changed unless $dry;
 
