@@ -298,8 +298,14 @@ sub cell {
     my $label = $tool eq 'mdxfind' && $b->{iterations} && $b->{iterations} > 1
               ? [ map { "$_ -i$b->{iterations}" } @ids ]
               : [@ids];
+    # WHAT WAS CONCEDED, carried out verbatim. `proven` alone cannot say it:
+    # a consumer filtering on <tool>_state sees the same value for a
+    # byte-exact round trip and for one that needed the plaintext's case
+    # relaxed or the vector transcribed into the tool's own spelling. 29 rows
+    # were in that position before this column existed.
     return { state => ($tier eq 'vector' ? 'proven' : 'claimed'),
-             ids => $label, tier => $tier };
+             ids => $label, tier => $tier,
+             match => join(' ', @{ $b->{match} || [] }) };
 }
 
 # same_as($entry) - the relations as one phrase a person can read in a table
@@ -528,8 +534,10 @@ sub csv_field {
 # tool's convention for the algorithm's own.
 my @CSV = qw(id name aliases expression expression_tier john_dynamic_expr
              denotation category application status merged_into
-             hashcat hashcat_state john john_state mdxfind mdxfind_state
-             hashpipe hashpipe_state
+             hashcat hashcat_state hashcat_match
+             john john_state john_match
+             mdxfind mdxfind_state mdxfind_match
+             hashpipe hashpipe_state hashpipe_match
              crack_state vectors serialization primary_form
              hashcat_salted hashcat_speed john_salted john_work_factor
              mdxfind_salted nesting_depth hash_length hash_length_basis
@@ -557,9 +565,13 @@ for my $r (@out) {
         $r->{expr_tier}, $r->{john_expr}, $r->{denotation},
         $r->{category}, $r->{application}, $r->{status}, '',
         join(' ', @{ $r->{hashcat}{ids} }), $r->{hashcat}{state},
+        $r->{hashcat}{match} // '',
         join(' ', @{ $r->{john}{ids} }),    $r->{john}{state},
+        $r->{john}{match} // '',
         join(' ', @{ $r->{mdxfind}{ids} }), $r->{mdxfind}{state},
+        $r->{mdxfind}{match} // '',
         join(' ', @{ $r->{hashpipe}{ids} }), $r->{hashpipe}{state},
+        $r->{hashpipe}{match} // '',
         $r->{crack}{state}, $r->{vecs}, $r->{serialization},
         $r->{primary_form},
         $r->{hashcat_salted}, $r->{hashcat_speed}, $r->{john_salted},
@@ -577,7 +589,7 @@ for my $t (@tomb_out) {
     # other, so they are empty here too.
     print {$csv} csv_row(
         $t->{id}, $t->{name}, '', '', '', '', '', '', '', 'merged', $t->{into},
-        ('') x 12,                         # the tool and vector columns
+        ('') x 16,                         # the tool and vector columns
         ('') x 8,                          # the practitioner columns
         $t->{sameas}, '', $t->{notes},
     );

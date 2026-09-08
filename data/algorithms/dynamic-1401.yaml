@@ -16,6 +16,7 @@ tools:
     verified: "vector"
     verified_at: "2026-09-06"
     verified_with: "mdxfind RCS 1.576 (2026/09/02)"
+    match: ["hash-transcoded"]
     note: "Round-tripped on the TRANSCRIBED form, not on the vector as stored: this entry keeps its vector in another tool's serialization, which mdxfind's reader does not parse. mdxfind pinned with -h reproduced SKYPE as \"27f6a9d892475e6ce0391de8d2d893f7:username:password\", from data/mdxfind-transcodes.tsv. The plaintext is one this entry already stores, and the two strings are ONE piece of evidence written twice -- not two agreeing vectors."
   john:
     cpu: ["dynamic_1401"]

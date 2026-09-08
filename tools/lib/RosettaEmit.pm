@@ -148,10 +148,15 @@ my @ENTRY_ORDER = qw(
 # for why the two tools' suffixes must not share one.
 my @TOOL_ORDER   = qw(hashcat mdxfind hashpipe john crack);
 my %TOOL_KEYS = (
-    hashcat  => [qw(modes verified verified_at verified_with note)],
-    mdxfind  => [qw(types iterations verified verified_at verified_with note)],
-    hashpipe => [qw(types verified verified_at verified_with note)],
-    john     => [qw(cpu gpu verified verified_at verified_with note)],
+    # `match` sits between verified_with and note on purpose: identifiers,
+    # then the tier, then WHEN and WITH WHAT it was established, then HOW --
+    # what was conceded to establish it -- and only then the prose. Absent
+    # means the round trip was byte-exact, which is the overwhelming majority
+    # and should stay the quiet case.
+    hashcat  => [qw(modes verified verified_at verified_with match note)],
+    mdxfind  => [qw(types iterations verified verified_at verified_with match note)],
+    hashpipe => [qw(types verified verified_at verified_with match note)],
+    john     => [qw(cpu gpu verified verified_at verified_with match note)],
     crack    => [qw(supported note)],
 );
 # Keys whose value is a YAML boolean, addressed as "<tool>.<key>".

@@ -539,6 +539,11 @@ sub vectors_for {
 sub mx_echo_is {
     my ($rest, $vec, $type) = @_;
     my $want = "$vec->{hash}:$vec->{pass}";
+    # Returns '' for no match, 1 for a byte-exact one, and the NAME of the
+    # concession where the comparison had to relax to see it. Both non-empty
+    # values are truthy, so every `next unless mx_echo_is(...)` caller is
+    # unchanged; a caller that wants to RECORD what was conceded compares the
+    # return value against 1.
     return 1 if $rest eq $want;
 
     # A type that upper- or lower-cases its input returns a plaintext that
@@ -548,25 +553,34 @@ sub mx_echo_is {
     # Everything else about the comparison, the salt included, still has to
     # match exactly.
     if (defined $type && $MX_NOCASE{$type} && lc $rest eq lc $want) {
-        return 1;
+        return 'plaintext-case';
     }
 
     return 0 unless $vec->{hash} =~ /^[0-9A-Fa-f]+$/;
     my $tail = ":$vec->{pass}";
+    my $conceded = '';
     if (defined $type && $MX_NOCASE{$type}) {
         return 0 unless length($rest) > length($tail);
         return 0 unless lc(substr($rest, -length($tail))) eq lc($tail);
+        $conceded = 'plaintext-case'
+            unless substr($rest, -length($tail)) eq $tail;
     }
     else {
         return 0 unless length($rest) > length($tail);
         return 0 unless substr($rest, -length($tail)) eq $tail;
     }
-    return lc(substr($rest, 0, length($rest) - length($tail))) eq lc($vec->{hash});
+    return 0 unless lc(substr($rest, 0, length($rest) - length($tail)))
+                    eq lc($vec->{hash});
+    return $conceded || 1;
 }
 
 my (%cracked, %attempted, %failed_job, %mx_job_ids, %ran_ident);
 # blocks whose bare verified_with was replaced with the binary that ran
 my %restamped;
+# What each (tool, entry) had to CONCEDE to match: the values of the
+# schema's tools.<tool>.match. Empty for the overwhelming majority,
+# which is the byte-exact case and stays the quiet one.
+my %conceded;
 # (entry, type) pairs whose round trip used a line from
 # data/mdxfind-transcodes.tsv rather than the vector as stored. The block's
 # note says so, because otherwise the promotion reads as though the stored
@@ -895,7 +909,9 @@ if ($want{mdxfind} && $job{mdxfind}) {
             next unless $got == $it;
             my $rest = $2;
             for my $vec (@v) {
-                next unless mx_echo_is($rest, $vec, $type);
+                my $how = mx_echo_is($rest, $vec, $type);
+                next unless $how;
+                $conceded{mdxfind}{ $vec->{id} }{$how} = 1 if $how ne '1';
                 $cracked{mdxfind}{ $vec->{id} }{$type} = 1;
                 $read{mdxfind}{ $vec->{id} }{ $vec->{vi} } = 1;
                 $read_here{ $vec->{id} }{ $vec->{vi} } = 1;
@@ -1291,6 +1307,33 @@ if (!$dry) {
             my @bad = grep { !$cracked{$tool}{$id}{$_} } @idents;
 
             if (!@bad) {
+                # WHAT WAS CONCEDED TO EARN THIS, written on every clean run
+                # and CLEARED when nothing was conceded. Setting without
+                # clearing is how a field like this rots: a row that once
+                # needed a transcode, and now round-trips as stored, would
+                # keep telling readers it did not. The tier is rewritten on
+                # every clean run for the same reason, and this travels with
+                # it.
+                #
+                # mdxfind's transcode is per (entry, type) and known here;
+                # the case relaxation is reported by mx_echo_is at the moment
+                # it fires, because only the comparison knows whether it
+                # actually had to relax -- a type on the case list whose
+                # stored plaintext is already upper case concedes NOTHING,
+                # and must not say it did.
+                my %m;
+                $m{'hash-transcoded'} = 1
+                    if $tool eq 'mdxfind' && $transcoded{$id};
+                $m{$_} = 1 for keys %{ $conceded{$tool}{$id} || {} };
+                if (%m) {
+                    my @m = sort keys %m;
+                    my $old = join "\0", @{ $blk->{match} || [] };
+                    if ($old ne join "\0", @m) { $blk->{match} = \@m; $touched = 1 }
+                }
+                elsif (exists $blk->{match}) {
+                    delete $blk->{match};
+                    $touched = 1;
+                }
                 # A clean run always withdraws a machine-written note that
                 # says the opposite of the tier, INCLUDING on a block that
                 # was already at 'vector'. The early return used to skip

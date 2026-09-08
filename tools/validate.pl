@@ -159,6 +159,13 @@ my $scoped = %scope ? 1 : 0;
 
 my @TIERS      = qw(vector upstream asserted absent);
 my %IS_TIER    = map { $_ => 1 } @TIERS;
+
+# tools.<tool>.match -- what was CONCEDED to earn the tier. Fixed vocabulary
+# for the same reason the tiers are: every consumer's reading of every row
+# depends on it, so a fifth value is a breaking change and not a convenience.
+# Absent means the round trip was byte-exact.
+my @MATCHES    = qw(plaintext-case plaintext-reserialized hash-transcoded);
+my %IS_MATCH   = map { $_ => 1 } @MATCHES;
 my %IS_STATUS  = map { $_ => 1 } qw(ok needs-review merged);
 
 # The serializations a test vector can be written in. 'native' is the form the
@@ -227,13 +234,13 @@ my %REL_MIRROR = (
 );
 
 my %TOOL_KEY = (
-    hashcat  => { map { $_ => 1 } qw(modes verified verified_at verified_with note) },
-    john     => { map { $_ => 1 } qw(cpu gpu verified verified_at verified_with note) },
-    mdxfind  => { map { $_ => 1 } qw(types iterations verified verified_at verified_with note) },
+    hashcat  => { map { $_ => 1 } qw(modes verified verified_at verified_with match note) },
+    john     => { map { $_ => 1 } qw(cpu gpu verified verified_at verified_with match note) },
+    mdxfind  => { map { $_ => 1 } qw(types iterations verified verified_at verified_with match note) },
     # No iterations: hashpipe's suffix reports the algorithm's own round count
     # read out of the hash where mdxfind's counts outer re-hashing driven by
     # -i, so the two are different quantities. See the schema.
-    hashpipe => { map { $_ => 1 } qw(types verified verified_at verified_with note) },
+    hashpipe => { map { $_ => 1 } qw(types verified verified_at verified_with match note) },
     crack    => { map { $_ => 1 } qw(supported note) },
 );
 
@@ -319,6 +326,26 @@ my (%hit_hc, %hit_jn, %hit_mx, %hit_hp);
 
 #-----------------------------------------------------------------------
 # Walk the curated entries.
+
+# The (entry) ids that data/mdxfind-transcodes.tsv carries a transcode for.
+# Read here so the check below compares the entry against the FILE rather
+# than against a claim in the entry itself -- a row cannot vouch for its own
+# provenance. A missing file is not an error: it means no entry has one, and
+# the check then holds vacuously rather than failing every row.
+my %TRANSCODED;
+{
+    my $tf = "$ROOT/data/mdxfind-transcodes.tsv";
+    if (open my $th, '<', $tf) {
+        while (my $l = <$th>) {
+            next if $l =~ /^\s*#/ || $l !~ /\S/;
+            my (undef, $eid) = split /\t/, $l;
+            next unless defined $eid;
+            $eid =~ s/^\s+|\s+$//g;
+            $TRANSCODED{$eid} = 1 if length $eid;
+        }
+        close $th;
+    }
+}
 
 opendir(my $dh, $algdir) or do {
     print STDERR "$PROG: cannot read $algdir: $!\n";
@@ -585,6 +612,54 @@ for my $file (@files) {
                     && $blk->{verified_at} !~ /^\d{4}-\d{2}-\d{2}$/) {
                     err("%s: tools.%s.verified_at '%s' is not YYYY-MM-DD",
                         $file, $tool, $blk->{verified_at});
+                }
+
+                # WHAT WAS CONCEDED TO EARN THE TIER. Three rules, and the
+                # third is the one with teeth.
+                if (exists $blk->{match}) {
+                    my $m = $blk->{match};
+                    if (ref $m ne 'ARRAY' || !@$m) {
+                        err("%s: tools.%s.match must be a non-empty list; "
+                          . "omit it entirely when the round trip was exact",
+                            $file, $tool);
+                    }
+                    else {
+                        my %seen;
+                        for my $v (@$m) {
+                            err("%s: tools.%s.match '%s' is not one of: %s",
+                                $file, $tool, $v, join(', ', @MATCHES))
+                                unless $IS_MATCH{$v};
+                            err("%s: tools.%s.match lists '%s' twice",
+                                $file, $tool, $v) if $seen{$v}++;
+                        }
+                        # A concession describes how a ROUND TRIP was seen, so
+                        # it is meaningless on a tier that never ran one.
+                        err("%s: tools.%s.match is only meaningful at tier "
+                          . "'vector'; this block is '%s'",
+                            $file, $tool, $tier // '(unset)')
+                            unless defined $tier && $tier eq 'vector';
+                        err("%s: tools.%s.match has 'hash-transcoded' but "
+                          . "only mdxfind has a transcode file", $file, $tool)
+                            if (grep { $_ eq 'hash-transcoded' } @$m)
+                               && $tool ne 'mdxfind';
+                    }
+                }
+
+                # THE RULE WITH TEETH, and the reason this field exists rather
+                # than a note. data/mdxfind-transcodes.tsv names the (type,
+                # entry) pairs whose vector is stored in another tool's
+                # spelling. If such a pair is at tier 'vector', the round trip
+                # CANNOT have been byte-exact -- the tool's reader refuses the
+                # stored string, which is why the file exists -- so the block
+                # must say so. Without this a future relaxation lands silently
+                # and every row it touches looks exact.
+                if ($tool eq 'mdxfind' && defined $tier && $tier eq 'vector'
+                    && $TRANSCODED{$id}
+                    && !grep { $_ eq 'hash-transcoded' } @{ $blk->{match} || [] }) {
+                    err("%s: data/mdxfind-transcodes.tsv carries a transcode "
+                      . "for this entry and tools.mdxfind is at tier 'vector', "
+                      . "so the round trip was not byte-exact; declare "
+                      . "match: [\"hash-transcoded\"]", $file);
                 }
 
                 # A claim of 'vector' with nothing to verify against is the

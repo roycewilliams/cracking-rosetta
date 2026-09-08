@@ -203,6 +203,19 @@
             "verified_with": {
               "type": "string"
             },
+            "match": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "plaintext-case",
+                  "plaintext-reserialized",
+                  "hash-transcoded"
+                ]
+              },
+              "uniqueItems": true,
+              "description": "What was CONCEDED to earn this tier, absent when the round trip was byte-exact. The tier says a tool reproduced this entry's plaintext from its hash; this says what the comparison had to relax to see it, which the tier alone cannot express and which a consumer reading only <tool>_state could not otherwise distinguish from an exact match. Each value is here because it actually happened, not because it might. 'plaintext-case': the tool returns a plaintext differing from the stored one in case alone, BY CONSTRUCTION -- MD5LM is md5(LM($p)) and LM upper-cases, hashcat's Oracle 7 mode does the same, and john's netlm is the same defect a third time; the relaxation is legitimate only where no input could have produced the stored case. 'plaintext-reserialized': the tool echoes a re-encoded plaintext rather than the candidate -- hashcat -m 18100 returns base32 of it, -m 25400 appends an annotation. 'hash-transcoded': the round trip used the type's own spelling of the vector from data/mdxfind-transcodes.tsv, because the tool's reader refuses the serialization this entry stores. The two strings are ONE piece of evidence written twice, never two agreeing vectors. NOTE what is deliberately NOT a value here: a TRUNCATED match. A type matching below its own digest width does not denote the algorithm at all, so it earns a `truncates` relation and no mapping -- decided 2026-09-07."
+            },
             "note": {
               "type": "string"
             }
@@ -232,6 +245,19 @@
             },
             "verified_with": {
               "type": "string"
+            },
+            "match": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "plaintext-case",
+                  "plaintext-reserialized",
+                  "hash-transcoded"
+                ]
+              },
+              "uniqueItems": true,
+              "description": "What was CONCEDED to earn this tier, absent when the round trip was byte-exact. The tier says a tool reproduced this entry's plaintext from its hash; this says what the comparison had to relax to see it, which the tier alone cannot express and which a consumer reading only <tool>_state could not otherwise distinguish from an exact match. Each value is here because it actually happened, not because it might. 'plaintext-case': the tool returns a plaintext differing from the stored one in case alone, BY CONSTRUCTION -- MD5LM is md5(LM($p)) and LM upper-cases, hashcat's Oracle 7 mode does the same, and john's netlm is the same defect a third time; the relaxation is legitimate only where no input could have produced the stored case. 'plaintext-reserialized': the tool echoes a re-encoded plaintext rather than the candidate -- hashcat -m 18100 returns base32 of it, -m 25400 appends an annotation. 'hash-transcoded': the round trip used the type's own spelling of the vector from data/mdxfind-transcodes.tsv, because the tool's reader refuses the serialization this entry stores. The two strings are ONE piece of evidence written twice, never two agreeing vectors. NOTE what is deliberately NOT a value here: a TRUNCATED match. A type matching below its own digest width does not denote the algorithm at all, so it earns a `truncates` relation and no mapping -- decided 2026-09-07."
             },
             "note": {
               "type": "string"
@@ -263,6 +289,19 @@
             "verified_with": {
               "type": "string"
             },
+            "match": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "plaintext-case",
+                  "plaintext-reserialized",
+                  "hash-transcoded"
+                ]
+              },
+              "uniqueItems": true,
+              "description": "What was CONCEDED to earn this tier, absent when the round trip was byte-exact. The tier says a tool reproduced this entry's plaintext from its hash; this says what the comparison had to relax to see it, which the tier alone cannot express and which a consumer reading only <tool>_state could not otherwise distinguish from an exact match. Each value is here because it actually happened, not because it might. 'plaintext-case': the tool returns a plaintext differing from the stored one in case alone, BY CONSTRUCTION -- MD5LM is md5(LM($p)) and LM upper-cases, hashcat's Oracle 7 mode does the same, and john's netlm is the same defect a third time; the relaxation is legitimate only where no input could have produced the stored case. 'plaintext-reserialized': the tool echoes a re-encoded plaintext rather than the candidate -- hashcat -m 18100 returns base32 of it, -m 25400 appends an annotation. 'hash-transcoded': the round trip used the type's own spelling of the vector from data/mdxfind-transcodes.tsv, because the tool's reader refuses the serialization this entry stores. The two strings are ONE piece of evidence written twice, never two agreeing vectors. NOTE what is deliberately NOT a value here: a TRUNCATED match. A type matching below its own digest width does not denote the algorithm at all, so it earns a `truncates` relation and no mapping -- decided 2026-09-07."
+            },
             "note": {
               "type": "string"
             }
@@ -287,6 +326,19 @@
             },
             "verified_with": {
               "type": "string"
+            },
+            "match": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "plaintext-case",
+                  "plaintext-reserialized",
+                  "hash-transcoded"
+                ]
+              },
+              "uniqueItems": true,
+              "description": "What was CONCEDED to earn this tier, absent when the round trip was byte-exact. The tier says a tool reproduced this entry's plaintext from its hash; this says what the comparison had to relax to see it, which the tier alone cannot express and which a consumer reading only <tool>_state could not otherwise distinguish from an exact match. Each value is here because it actually happened, not because it might. 'plaintext-case': the tool returns a plaintext differing from the stored one in case alone, BY CONSTRUCTION -- MD5LM is md5(LM($p)) and LM upper-cases, hashcat's Oracle 7 mode does the same, and john's netlm is the same defect a third time; the relaxation is legitimate only where no input could have produced the stored case. 'plaintext-reserialized': the tool echoes a re-encoded plaintext rather than the candidate -- hashcat -m 18100 returns base32 of it, -m 25400 appends an annotation. 'hash-transcoded': the round trip used the type's own spelling of the vector from data/mdxfind-transcodes.tsv, because the tool's reader refuses the serialization this entry stores. The two strings are ONE piece of evidence written twice, never two agreeing vectors. NOTE what is deliberately NOT a value here: a TRUNCATED match. A type matching below its own digest width does not denote the algorithm at all, so it earns a `truncates` relation and no mapping -- decided 2026-09-07."
             },
             "note": {
               "type": "string"
