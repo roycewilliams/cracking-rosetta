@@ -9,6 +9,14 @@
 # hash and salt in "$dynamic_1602$...$...$$U<user>" and QAS-VASAUTH ignores the
 # user field entirely.
 #
+# The WPA lines are a different KIND of transcode and are worth naming as such:
+# they are not a reshuffle of one line's fields but a re-serialization of a
+# binary struct. john stores a handshake as "$WPAPSK$<essid>#<475 chars>", where
+# the tail is john's own base64 (the crypt "./0-9A-Za-z" alphabet, NOT RFC 4648)
+# over the hccap_t of src/hccap.h; mdxfind and hashcat want hashcat's
+# "WPA*02*<mic>*<mac_ap>*<mac_sta>*<essid hex>*<anonce>*<eapol>*<message_pair>".
+# tools/wpapsk-transcode.pl does the decode, per the loop in john's src/wpapsk.h.
+#
 # These are hints about SPELLING, never claims. tools/attach-mdxfind-ahead.pl
 # still has to see the line come back on stdout from `hashpipe -c` pinned to
 # the named type, or nothing is written. A line here and the entry's stored
@@ -32,3 +40,5 @@ NSEC3	dnssec-nsec3	hgmlgembs8j1dhkrmhbu1ggh3jmgkrjn:.example.com.:41414141414141
 SKYPE	dynamic-1401	27f6a9d892475e6ce0391de8d2d893f7:username:password
 POSTGRESQL	dynamic-1034	bd6fd49a627ecdbe4031b2d52d5748ab:postgres:openwall
 SHA1SALTPASS	django-sha-1	02d5916550edf7fc8c886f044887f4b1abf9b013:fe76b:hashcat
+WPA-EAPOL	wpa-wpa2-pmf-pmkid-psk	WPA*02*a462a7029ad5ba30b6af0df391988e45*000c4182b255*000d9382363a*436f6865726572*3e8e967dacd960324cac5b6aa721235bf57b949771c867989f49d04ed47c6933*0203007502010a00100000000000000000cdf405ceb9d889ef3dec42609828fae546b7add7baecbb1a394eac5214b1d386000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001630140100000fac020100000fac040100000fac020000*00:Induction
+WPA-PMK	wpa-wpa2-pmf-pmkid-master-key	WPA*02*cc303dcc8fb0b285257353480a52c563*000d93ebb08c*00095b91535d*74657374*54adc644966dc8423d44364a1de9ec22415522bd0555ee718f8a53b8d679470c*0103005ffe010900200000000000000001fe5f0c5b5423815f35fe606720bbb9466d8601a8b4493af4cf5a0317f38c83870000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000*00:cdd79a5acfb070c7e9d1023b870285d639e430b32f31aa37ac825a55b55524ee

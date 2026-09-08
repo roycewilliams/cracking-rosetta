@@ -11,6 +11,13 @@ denotation:
   note: "john's own label for wpapsk-pmk, in 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200."
 status: "needs-review"
 tools:
+  mdxfind:
+    types: ["WPA-PMK"]
+    verified: "vector"
+    verified_at: "2026-09-07"
+    verified_with: "mdxfind RCS 1.579 (2026/09/06)"
+    match: ["hash-transcoded"]
+    note: "Round-tripped on the TRANSCRIBED form, not on the vector as stored: this entry keeps its vector in another tool's serialization, which mdxfind's reader does not parse. mdxfind pinned with -h reproduced WPA-PMK as \"WPA*02*cc303dcc8fb0b285257353480a52c563*000d93ebb08c*00095b91535d*74657374*54adc644966dc8423d44364a1de9ec22415522bd0555ee718f8a53b8d679470c*0103005ffe010900200000000000000001fe5f0c5b5423815f35fe606720bbb9466d8601a8b4493af4cf5a0317f38c83870000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000*00:cdd79a5acfb070c7e9d1023b870285d639e430b32f31aa37ac825a55b55524ee\", from data/mdxfind-transcodes.tsv. The plaintext is one this entry already stores, and the two strings are ONE piece of evidence written twice -- not two agreeing vectors."
   john:
     cpu: ["wpapsk-pmk"]
     verified: "vector"

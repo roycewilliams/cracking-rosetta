@@ -11,6 +11,13 @@ denotation:
   note: "john's own label for wpapsk, in 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200."
 status: "needs-review"
 tools:
+  mdxfind:
+    types: ["WPA-EAPOL"]
+    verified: "vector"
+    verified_at: "2026-09-07"
+    verified_with: "mdxfind RCS 1.579 (2026/09/06)"
+    match: ["hash-transcoded"]
+    note: "Round-tripped on the TRANSCRIBED form, not on the vector as stored: this entry keeps its vector in another tool's serialization, which mdxfind's reader does not parse. mdxfind pinned with -h reproduced WPA-EAPOL as \"WPA*02*a462a7029ad5ba30b6af0df391988e45*000c4182b255*000d9382363a*436f6865726572*3e8e967dacd960324cac5b6aa721235bf57b949771c867989f49d04ed47c6933*0203007502010a00100000000000000000cdf405ceb9d889ef3dec42609828fae546b7add7baecbb1a394eac5214b1d386000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001630140100000fac020100000fac040100000fac020000*00:Induction\", from data/mdxfind-transcodes.tsv. The plaintext is one this entry already stores, and the two strings are ONE piece of evidence written twice -- not two agreeing vectors."
   john:
     cpu: ["wpapsk"]
     verified: "vector"
