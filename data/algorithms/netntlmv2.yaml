@@ -41,11 +41,11 @@ vectors:
   - hash: "user::domain:1122334455667788:d5add1cebafed2180b3cca8728f5aff8:01010000000000000000000000000000aabbccdd1122334400000000"
     pass: "password123"
     source: "mdxfind"
-    reads_in: ["john", "mdxfind"]
+    reads_in: ["hashcat", "john", "mdxfind"]
   - hash: "NTlmv2::TESTWORKGROUP:1122334455667788:07659A550D5E9D02996DFD95C87EC1D5:0101000000000000006CF6385B74CA01B3610B02D99732DD000000000200120057004F0052004B00470052004F00550050000100200044004100540041002E00420049004E0043002D0053004500430055005200490000000000"
     pass: "password"
     source: "john"
-    reads_in: ["john", "mdxfind"]
+    reads_in: ["hashcat", "john", "mdxfind"]
   - hash: "0UL5G37JOI0SX::6VB1IS0KA74:ebe1afa18b7fbfa6:aab8bf8675658dd2a939458a1077ba08:010100000000000031c8aa092510945398b9f7b7dde1a9fb00000000f7876f2b04b700"
     pass: "hashcat"
     source: "hashcat"

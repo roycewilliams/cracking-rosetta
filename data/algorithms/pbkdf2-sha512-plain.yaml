@@ -64,6 +64,6 @@ vectors:
     pass: "hashcat"
     source: "hashcat"
     form: "hashcat"
-    reads_in: ["hashcat"]
+    reads_in: ["hashcat", "mdxfind"]
 legacy:
   hashes_org: "PBKDF2"

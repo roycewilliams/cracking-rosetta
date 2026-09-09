@@ -17,6 +17,7 @@ tools:
     verified: "vector"
     verified_at: "2026-09-07"
     verified_with: "hashcat v7.1.2-606-ge2a7ab834"
+    match: ["plaintext-case"]
   mdxfind:
     types: ["LM"]
     verified: "vector"
@@ -40,7 +41,7 @@ vectors:
   - hash: "4b4aa8a8a048c29caad3b435b51404ee"
     pass: "rosetta"
     source: "sheet"
-    reads_in: ["john"]
+    reads_in: ["hashcat", "john"]
   - hash: "299bd128c1101fd6"
     pass: "HASHCAT"
     source: "hashcat"

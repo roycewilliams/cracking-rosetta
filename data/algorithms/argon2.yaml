@@ -46,6 +46,7 @@ vectors:
   - hash: "3118004b2f9ce8fcf3abc2fdf9623b85988db360951c607456beb26821381a12:aaaaaaaaaaaaaaaabbbbbbbbbbbbbbbb:3_32_2_67108864"
     pass: "password123"
     source: "mdxfind"
+    reads_in: ["mdxfind"]
   - hash: "$argon2d$v=19$m=16384,t=3,p=1$c2hvcnRfc2FsdA$TLSTPihIo+5F67Y1vJdfWdB9"
     pass: "blessed_dead"
     source: "john"

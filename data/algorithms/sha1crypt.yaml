@@ -45,4 +45,4 @@ vectors:
   - hash: "$sha1$20000$75552156$HhYMDdaEHiK3eMIzTldOFPnw.s2Q"
     pass: "hashcat"
     source: "hashcat"
-    reads_in: ["hashcat", "john"]
+    reads_in: ["hashcat", "john", "mdxfind"]

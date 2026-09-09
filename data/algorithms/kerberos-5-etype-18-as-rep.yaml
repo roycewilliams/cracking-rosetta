@@ -43,6 +43,6 @@ vectors:
     pass: "hashcat"
     source: "john"
     form: "john"
-    reads_in: ["john"]
+    reads_in: ["hashcat", "john"]
     credential: 1
 notes: "Vector(s) 'hashcat' added 2026-09-01: the SAME Kerberos 5 AS-REP credential(s) already above, re-serialized into the form john reads. They are not independent evidence -- do not read two agreeing vectors here as corroboration. hashcat writes $krb5asrep$<et>$<user>$<REALM>$<checksum>$<data>; john writes $krb5asrep$<et>$<REALM><user>$<data>$<checksum>. The re-encoding was not assumed: each transcoded string was handed to john with only the plaintext the hashcat vector already states, and fell under both the CPU format and the GPU build."

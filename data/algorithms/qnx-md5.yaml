@@ -40,8 +40,8 @@ vectors:
   - hash: "@m,1000@88d84096c0656f7013e9c03af8c6f158@8741857532330050"
     pass: "password123"
     source: "mdxfind"
-    reads_in: ["john", "mdxfind"]
+    reads_in: ["hashcat", "john", "mdxfind"]
   - hash: "@m@75f6f129f9c9e77b6b1b78f791ed764a@8741857532330050"
     pass: "hashcat"
     source: "hashcat"
-    reads_in: ["hashcat", "john"]
+    reads_in: ["hashcat", "john", "mdxfind"]

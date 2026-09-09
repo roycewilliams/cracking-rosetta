@@ -28089,7 +28089,7 @@
          "primary_form" : "",
          "relations" : [],
          "sameas" : "",
-         "serialization" : "divergent",
+         "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
             "hashcat" : "hashcat's own published example hash for this mode, recovered by hashcat at this mode with hashcat's own published plaintext.",
@@ -29434,7 +29434,7 @@
             "ids" : [
                3000
             ],
-            "match" : "",
+            "match" : "plaintext-case",
             "state" : "proven",
             "tier" : "vector"
          },
@@ -51347,7 +51347,7 @@
             "ids" : [
                131
             ],
-            "match" : "",
+            "match" : "plaintext-case",
             "state" : "proven",
             "tier" : "vector"
          },
@@ -51389,7 +51389,7 @@
          "primary_form" : "",
          "relations" : [],
          "sameas" : "",
-         "serialization" : "divergent",
+         "serialization" : "shared",
          "status" : "needs-review",
          "tool_note" : {
             "hashcat" : "",
@@ -55776,7 +55776,7 @@
             }
          ],
          "sameas" : "same as netiq-sspr-pbkdf2withhmacsha1 (application); same as pbkdf2-hmac-sha1 (application)",
-         "serialization" : "divergent",
+         "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
             "hashcat" : "",
@@ -58060,7 +58060,7 @@
          "primary_form" : "",
          "relations" : [],
          "sameas" : "",
-         "serialization" : "divergent",
+         "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
             "hashcat" : "",
@@ -58823,7 +58823,7 @@
          "primary_form" : "",
          "relations" : [],
          "sameas" : "",
-         "serialization" : "divergent",
+         "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
             "hashcat" : "",
@@ -58894,7 +58894,7 @@
          "primary_form" : "",
          "relations" : [],
          "sameas" : "",
-         "serialization" : "divergent",
+         "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
             "hashcat" : "",
@@ -63128,7 +63128,7 @@
          "primary_form" : "",
          "relations" : [],
          "sameas" : "",
-         "serialization" : "divergent",
+         "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
             "hashcat" : "",
@@ -63195,7 +63195,7 @@
          "primary_form" : "",
          "relations" : [],
          "sameas" : "",
-         "serialization" : "divergent",
+         "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
             "hashcat" : "",
@@ -71132,7 +71132,7 @@
          "primary_form" : "",
          "relations" : [],
          "sameas" : "",
-         "serialization" : "divergent",
+         "serialization" : "shared",
          "status" : "ok",
          "tool_note" : {
             "hashcat" : "",

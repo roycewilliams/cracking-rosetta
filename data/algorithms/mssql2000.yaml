@@ -14,6 +14,7 @@ tools:
     verified: "vector"
     verified_at: "2026-09-07"
     verified_with: "hashcat v7.1.2-606-ge2a7ab834"
+    match: ["plaintext-case"]
   mdxfind:
     types: ["MSSQL2000"]
     verified: "vector"
@@ -38,8 +39,8 @@ vectors:
     pass: "password123"
     source: "mdxfind"
     form: "mdxfind"
-    reads_in: ["john", "mdxfind"]
+    reads_in: ["hashcat", "john", "mdxfind"]
   - hash: "0x0100778883860000000000000000000000000000000000000000eda3604e067a06f2732b05b9cb90b8a710996939"
     pass: "HASHCAT"
     source: "hashcat"
-    reads_in: ["hashcat", "john"]
+    reads_in: ["hashcat", "john", "mdxfind"]

@@ -40,7 +40,7 @@ vectors:
   - hash: "@S,1000@a16f7fee0d37b2e3bad06ba26f0caff09095e19face700ecdd8d78d626d358da4408951f714c609122444757af7376555d4733e445ca0b5ecc65b4fa4209fae5@2257314490293159"
     pass: "password123"
     source: "mdxfind"
-    reads_in: ["mdxfind"]
+    reads_in: ["hashcat", "mdxfind"]
   - hash: "@S,223@bc01a21efdd35a499f96306110f65c8e84e5914de86974013a6d0d6633505f73e112850ce89db6286922b4f77f1b658be6f043603c9853bebd838d34bd201192@abcd1234abcd1234"
     pass: 3
     source: "john"
@@ -48,4 +48,4 @@ vectors:
   - hash: "@S@715df9e94c097805dd1e13c6a40f331d02ce589765a2100ec7435e76b978d5efc364ce10870780622cee003c9951bd92ec1020c924b124cfff7e0fa1f73e3672@2257314490293159"
     pass: "hashcat"
     source: "hashcat"
-    reads_in: ["hashcat"]
+    reads_in: ["hashcat", "mdxfind"]

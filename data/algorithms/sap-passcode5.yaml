@@ -31,9 +31,9 @@ vectors:
     pass: "password123"
     source: "mdxfind"
     form: "mdxfind"
-    reads_in: ["mdxfind"]
+    reads_in: ["hashcat", "mdxfind"]
   - hash: "604020408266$32837BA7B97672BA4E5A00000000000000000000"
     pass: "hashcat"
     source: "hashcat"
     form: "hashcat"
-    reads_in: ["hashcat"]
+    reads_in: ["hashcat", "mdxfind"]
