@@ -579,6 +579,36 @@ mdxfind also accepts hashcat modes directly (`mdxfind -m 0`, `-m e1`,
   fires correctly" and "the gate fires always" are the same reading), and
   that a TRUNCATING format still fails. It needs a cracker, so it is not in
   CI and it skips loudly.
+- **A GATE THAT ASKS ABOUT THE ENTRY CANNOT ANSWER ABOUT THE VECTOR, and
+  `verify-vectors.pl`'s two solo fallbacks asked the wrong one until
+  2026-09-09.** `%cracked` is tool -> ENTRY -> identifier, which is what a
+  TIER needs, since promotion asks whether the entry verified under every
+  identifier its block names. `reads_in` is per VECTOR. The two coincide on
+  a single-vector entry and diverge on every other, so a grouped run that
+  attributed ONE vector set the entry's flag and suppressed the solo retry
+  for every SIBLING it could not attribute -- and the sibling kept
+  `reads_in: []`, which reads as "no tool has ever read this string".
+  Measured 2026-09-08 on `argon2`: mdxfind pinned to `^ARGON2$` reports
+  `3 hash(es) -> 2 cracked` and vector [0], in mdxfind's OWN serialization,
+  stays unread, yet cracks immediately handed to the same binary alone.
+  hashcat had the identical gate on the identical hash.
+  **The population was 24 (vector, tool) pairs, not the 84 the empty
+  `reads_in` count suggested**, and separating them is the instrument
+  lesson: of 84 empty `reads_in`, 39 are the decoded-bytes family (hashcat
+  read the BYTES, never the string -- correct by design), 22 are
+  single-vector entries below tier `vector` where no gate was ever reached,
+  and 23 were the defect's shape. Ask for the shape, not the symptom: the
+  query that finds it is a vector a mapped tool has not read whose SIBLING
+  that same tool has.
+  **The fix is observable only in the scratch files.** A solo run that finds
+  nothing leaves the entry byte-identical to one that never ran, so the data
+  cannot say whether the gate opened. The solo files therefore carry the
+  vector index -- `mx.<TYPE>.<i>.solo.<vi>.*`, `hc.<mode>.solo.<vi>.*` --
+  and `tools/test-verify-solo-gate.pl` asserts on them: fires for a vector
+  whose sibling cracked, does NOT fire when both cracked, still fires when
+  neither did. Without the middle control "the gate opens when it should"
+  and "the gate is gone" are the same reading. It needs a cracker, so it is
+  not in CI and it skips loudly per tool.
 - **A HASHCAT "FAILURE" IS USUALLY A QUESTION ABOUT THE INPUT, NOT THE MODE.**
   Measured 2026-09-05: of 51 hashcat blocks below tier `vector`, 47 turned out
   to be provable and NOT ONE of the four causes was hashcat failing to

@@ -575,6 +575,26 @@ sub mx_echo_is {
 }
 
 my (%cracked, %attempted, %failed_job, %mx_job_ids, %ran_ident);
+# %cracked is tool -> ENTRY -> identifier, because that is what a TIER needs:
+# promotion asks whether the entry verified under every identifier its block
+# names. %vcracked is hashcat -> entry -> VECTOR INDEX -> mode, and it exists
+# because the solo fallback asks a different question -- "has THIS STRING been
+# settled under this identifier" -- and was asking %cracked.
+#
+# Only hashcat needs a map of its own. mdxfind's solo gate is %read, which is
+# already per vector; hashcat's deliberately is NOT gated on %read, because
+# read-but-not-cracked is precisely the case its plaintext concession was
+# built for, so it has nothing per-vector to gate on otherwise.
+#
+# The two coincide on a single-vector entry and diverge on every other. A
+# grouped run that attributes one vector of an entry sets %cracked for the
+# whole entry, so a SIBLING vector that the run could not attribute was never
+# retried alone and kept reads_in: []. Measured 2026-09-08 on argon2: mdxfind
+# pinned to ^ARGON2$ reports "3 hash(es) -> 2 cracked", and vector [0] -- in
+# mdxfind's OWN serialization -- stays unread, yet cracks immediately when
+# handed to the same binary solo. The empty reads_in was an artifact of the
+# grouping, not a fact about the vector.
+my %vcracked;
 # blocks whose bare verified_with was replaced with the binary that ran
 my %restamped;
 # What each (tool, entry) had to CONCEDE to match: the values of the
@@ -656,8 +676,10 @@ if ($want{hashcat} && $job{hashcat}) {
             my $said = $1;
             $read{hashcat}{ $vec->{id} }{ $vec->{vi} } = 1;
             $read_here{ $vec->{id} }{ $vec->{vi} } = 1;
-            $cracked{hashcat}{ $vec->{id} }{$mode} = 1
-                if hc_plain_is($said, $vec->{pass});
+            if (hc_plain_is($said, $vec->{pass})) {
+                $cracked{hashcat}{ $vec->{id} }{$mode} = 1;
+                $vcracked{hashcat}{ $vec->{id} }{ $vec->{vi} }{$mode} = 1;
+            }
         }
         # SOLO FALLBACK. hashcat does not always echo the string it was
         # GIVEN. Measured 2026-09-05 on v7.1.2-549-g8a15e210b: -m 26900 strips
@@ -679,7 +701,11 @@ if ($want{hashcat} && $job{hashcat}) {
         # primary, a regression is structurally impossible, and the cost is
         # bounded by what is still unexplained.
         for my $vec (@v) {
-            next if $cracked{hashcat}{ $vec->{id} }{$mode};
+            # PER VECTOR, not per entry. This read %cracked until 2026-09-09,
+            # which is an ENTRY-level fact, so one attributed vector suppressed
+            # the retry for every sibling the grouped run could not attribute.
+            # See the %vcracked comment at the top for the measurement.
+            next if $vcracked{hashcat}{ $vec->{id} }{ $vec->{vi} }{$mode};
             # NOT gated on %read any more. It used to be, and that was right
             # while the solo run existed only to concede the HASH's spelling:
             # a vector the grouped run had already read exactly had nothing
@@ -689,8 +715,15 @@ if ($want{hashcat} && $job{hashcat}) {
             # that did not match, which is what a re-serializing or
             # case-folding mode looks like. Keeping the gate skipped exactly
             # the four rows the concession was built for.
-            my $sf = write_file("$workdir/hc.$mode.solo.hash", $vec->{hash});
-            my $sw = write_file("$workdir/hc.$mode.solo.word", $vec->{pass});
+            # THE VECTOR INDEX IS IN THE NAME, and that is not tidiness.
+            # These files are the only observable that says whether the gate
+            # above opened for a given vector: the outcome cannot, since a
+            # solo run that finds nothing leaves the entry exactly as a solo
+            # run that never happened. One fixed name per mode made "fired for
+            # vector 1" and "fired for vector 0 and was overwritten" the same
+            # reading. tools/test-verify-solo-gate.pl asserts on these.
+            my $sf = write_file("$workdir/hc.$mode.solo.$vec->{vi}.hash", $vec->{hash});
+            my $sw = write_file("$workdir/hc.$mode.solo.$vec->{vi}.word", $vec->{pass});
             my ($c2, $o2) = run_capture($timeout, $hashcat,
                 '-m', $mode, '-a', '0', '--quiet', '--potfile-disable',
                 '--self-test-disable', '--backend-ignore-opencl', @depr, $sf, $sw);
@@ -772,7 +805,7 @@ if ($want{hashcat} && $job{hashcat}) {
             # different string, the concession is withheld rather than taken
             # on an untested control.
             if (!$hit) {
-                my $of = "$workdir/hc.$mode.solo.out";
+                my $of = "$workdir/hc.$mode.solo.$vec->{vi}.out";
                 unlink $of;
                 run_capture($timeout, $hashcat, '-m', $mode, '-a', '0',
                     '--quiet', '--potfile-disable', '--self-test-disable',
@@ -782,8 +815,8 @@ if ($want{hashcat} && $job{hashcat}) {
                     my $decoy = $vec->{pass};
                     $decoy =~ tr/a-zA-Z0-9/n-za-mN-ZA-M5-90-4/;
                     if ($decoy ne $vec->{pass}) {
-                        my $df = write_file("$workdir/hc.$mode.decoy.word", $decoy);
-                        my $dof = "$workdir/hc.$mode.decoy.out";
+                        my $df = write_file("$workdir/hc.$mode.decoy.$vec->{vi}.word", $decoy);
+                        my $dof = "$workdir/hc.$mode.decoy.$vec->{vi}.out";
                         unlink $dof;
                         run_capture($timeout, $hashcat, '-m', $mode, '-a', '0',
                             '--quiet', '--potfile-disable', '--self-test-disable',
@@ -814,6 +847,7 @@ if ($want{hashcat} && $job{hashcat}) {
             $read{hashcat}{ $vec->{id} }{ $vec->{vi} } = 1;
             $read_here{ $vec->{id} }{ $vec->{vi} } = 1;
             $cracked{hashcat}{ $vec->{id} }{$mode} = 1;
+            $vcracked{hashcat}{ $vec->{id} }{ $vec->{vi} }{$mode} = 1;
             # Two different causes send a pair here and they are not the same
             # sentence. If the grouped run COMPLETED, it read this hash and
             # echoed a spelling that did not match, which is a fact about the
@@ -1059,17 +1093,29 @@ if ($want{mdxfind} && $job{mdxfind}) {
         # Same shape and same guarantee as the PEPPER fallback above: the
         # grouped run stays primary and this only ever ADDS a verification, so
         # nothing that verified before can stop verifying.
-        # Only where the (entry, type) pair has NOTHING yet, which is the pair
-        # that would otherwise be reported as failing. A vector that is another
-        # tool's serialization is not expected to verify under mdxfind and does
-        # not need a run of its own to say so; reads_in already carries the
-        # per-vector fact. Measured 2026-09-04: without this guard the fallback
-        # fires for every unverified vector and the pass takes hours.
+        # Only where the VECTOR has nothing yet. It used to be gated on the
+        # (entry, type) pair as well, and that gate is what this fallback
+        # exists to defeat: %cracked is entry-level, so one attributed vector
+        # suppressed the retry for every sibling the grouped run could not
+        # attribute, and the sibling kept reads_in: []. See the %vcracked
+        # comment at the top for the argon2 measurement.
+        #
+        # The %read gate is the one that bounds the cost, and it is the one
+        # the 2026-09-04 note was really about: a vector already read by
+        # mdxfind under any type needs no run of its own, and a vector stored
+        # in another tool's serialization is not expected to verify here.
+        # Without THAT the fallback fires for every unverified vector and the
+        # pass takes hours; without the entry-level one it fires only for a
+        # vector its own entry has already shown mdxfind can read something
+        # of, which is a handful.
         for my $vec (@v) {
-            next if $cracked{mdxfind}{ $vec->{id} }{$type};
             next if $read{mdxfind}{ $vec->{id} }{ $vec->{vi} };
-            my $sf = write_file("$workdir/mx.$safe.$it.solo.hash", $vec->{hash});
-            my $sw = write_file("$workdir/mx.$safe.$it.solo.word", $vec->{pass});
+            # The vector index is in the name for the reason the hashcat solo
+            # run gives: these files are the only observable that says whether
+            # the gate opened for THIS vector, and one fixed name per type
+            # made two different answers look identical.
+            my $sf = write_file("$workdir/mx.$safe.$it.solo.$vec->{vi}.hash", $vec->{hash});
+            my $sw = write_file("$workdir/mx.$safe.$it.solo.$vec->{vi}.word", $vec->{pass});
             my ($c2, $o2) = run_capture($timeout, $mdxfind,
                 '-h', "^\Q$type\E\$", $readflag, $sf, '-i', $it, $sw);
             next unless defined $o2;
