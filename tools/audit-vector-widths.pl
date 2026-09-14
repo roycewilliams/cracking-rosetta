@@ -126,6 +126,16 @@ for my $t (@{ $inv->{types} || [] }) {
     my @f = split /:/, $ex;
     next unless @f == 2 || @f == 3;
     next unless $f[0] =~ /^[0-9a-fA-F]+$/;
+    # The leading field is not always the digest. IPMI2-SHA1 publishes
+    # 00:<40 hex>:password123 -- salt first -- while its sibling IPMI2-MD5
+    # publishes digest first, so no leading-field rule is right for both. A
+    # two-character leading field is hex and passes every guard above, and
+    # recording it as the digest width made this script report that every
+    # IPMI2-SHA1 vector was the wrong width. No digest is shorter than
+    # half-md5's 16, so a shorter leading field means the layout is not
+    # digest-first and this script cannot speak about the type. Declining is
+    # correct: the alternative is a confident wrong answer.
+    next unless length $f[0] >= 16;
     $width{ $t->{name} } = length $f[0];
 }
 
