@@ -29,10 +29,11 @@ tools:
     verified_with: "hashpipe RCS 1.189 (2026/09/02)"
     note: "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one."
   john:
-    verified: "absent"
-    verified_at: "2026-09-04"
+    cpu: ["HMAC-SHA1"]
+    verified: "vector"
+    verified_at: "2026-09-05"
     verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
-    note: "no format. Swept the 33 format(s) whose own valid() accepts this entry's own vector, as john --show=left reports them, on 2026-09-04 (a tools/discover-john.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. For john the control is also per ENTRY and not only per shape: every format counted above is one whose own loader ACCEPTED this hash, so each was asked this exact question and answered no. A format that cannot parse the hash is not counted at all, and an entry no format can parse is reported as unsearched rather than decided. Every applicable format ran to completion; a format killed at the timeout is counted as untested and withholds this verdict. No john format name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if john gains one, this becomes a mapping."
+    note: "The same NAME means opposite things in john and mdxfind, which is what put this mapping on the wrong row. john's HMAC-* formats key on the PASSWORD -- john's own source says so, ALGORITHM_NAME is literally \"password is key\" in hmacMD5_fmt_plug.c, hmacSHA1_fmt_plug.c, hmacSHA256_fmt_plug.c and hmacSHA512_fmt_plug.c. mdxfind splits the two cases across two names: hx Appendix A gives HMAC-SHA1 (e215) as hmac_sha1(pass, user), keyed on the USER, and HMAC-SHA1-KPASS (e793) as hmac_sha1(salt, pass), keyed on the PASSWORD. So john's HMAC-SHA1 is mdxfind's HMAC-SHA1-KPASS, and matching the two by name pairs each with the wrong one. john's HMAC-SHA1 recovers this row's own plaintext from its own vector once that vector is written in john's <message>#<digest> shape."
   crack:
     supported: false
 relations:
@@ -44,4 +45,13 @@ vectors:
   - hash: "2b2f85e38e1c709c1c1e75e6ee4d64342b07549b:testsalt"
     pass: "password123"
     source: "mdxfind"
+    form: "mdxfind"
     reads_in: ["hashcat", "mdxfind"]
+    credential: "hmac-sha1-kpass"
+  - hash: "testsalt#2b2f85e38e1c709c1c1e75e6ee4d64342b07549b"
+    pass: "password123"
+    source: "john"
+    form: "john"
+    reads_in: ["john"]
+    credential: "hmac-sha1-kpass"
+notes: "The two vectors on this row are ONE credential written twice and must never be read as corroborating each other: mdxfind reads <digest>:<salt>, john reads <message>#<digest>. The same NAME means opposite things in john and mdxfind, which is what put this mapping on the wrong row. john's HMAC-* formats key on the PASSWORD -- john's own source says so, ALGORITHM_NAME is literally \"password is key\" in hmacMD5_fmt_plug.c, hmacSHA1_fmt_plug.c, hmacSHA256_fmt_plug.c and hmacSHA512_fmt_plug.c. mdxfind splits the two cases across two names: hx Appendix A gives HMAC-SHA1 (e215) as hmac_sha1(pass, user), keyed on the USER, and HMAC-SHA1-KPASS (e793) as hmac_sha1(salt, pass), keyed on the PASSWORD. So john's HMAC-SHA1 is mdxfind's HMAC-SHA1-KPASS, and matching the two by name pairs each with the wrong one."

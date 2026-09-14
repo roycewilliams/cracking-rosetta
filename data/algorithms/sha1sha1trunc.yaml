@@ -21,6 +21,12 @@ tools:
     verified: "vector"
     verified_at: "2026-09-07"
     verified_with: "mdxfind RCS 1.579 (2026/09/06)"
+  hashpipe:
+    types: ["SHA1SHA1TRUNC"]
+    verified: "vector"
+    verified_at: "2026-09-05"
+    verified_with: "hashpipe RCS 1.193 (2026/09/05)"
+    note: "hashpipe e626 SHA1SHA1TRUNC, verified with hashpipe -c against the NATIVE vector added on 2026-09-05 -- a per-line pin with no detection, at -t 1, with the emitted label compared against the one asked for. hashpipe compares the whole digest, so it reads the 40-character form and not john's 32-character one; that is a difference of serialization and not of algorithm. No iterations: is recorded from hashpipe -- the suffixes are different quantities and this repository follows mdxfind for that field."
   john:
     cpu: ["dynamic_1026"]
     verified: "vector"
@@ -30,7 +36,15 @@ tools:
   crack:
     supported: false
 vectors:
+  - hash: "360621c68ac8101809a7a66d5a2c24694ae961de:40"
+    pass: "password123"
+    source: "mdxfind"
+    form: "native"
+    credential: "password123/sha1sha1trunc"
   - hash: "360621c68ac8101809a7a66d5a2c2469"
     pass: "password123"
     source: "mdxfind"
+    form: "john"
     reads_in: ["john", "mdxfind"]
+    credential: "password123/sha1sha1trunc"
+notes: "This row carries ONE credential in two serializations, grouped by credential:. The native form is mdxfind's and hashpipe's: the full 40-character sha1 digest, a colon, then the truncation length N that produced it -- N=40 being the full width of the inner sha1 hex, the case where the truncation is the identity, which is exactly why this type and john's dynamic_1026 meet here at all. The second string is john's own spelling: dynamic_1026 declares itself in dynamic.conf as 'sha1(sha1($p)) (hash truncated to length 32)', so 32 hex characters is what john stores and compares, not a truncation this repository introduced. The re-encoding was proven, not assumed: john's form is the leading 32 characters of the native digest, john cracks its own form and CANNOT LOAD the 40-character one, and mdxfind reproduces the native form while also matching the 32-character prefix because it compares binary at the shortest length it read. Both were measured on 2026-09-05. The twelve sibling TRUNC rows had no such john format and their 32-character strings were simple truncations, so those were corrected in place rather than extended."

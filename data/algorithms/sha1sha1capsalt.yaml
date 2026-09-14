@@ -4,7 +4,7 @@ expression_proof:
   verified: "absent"
   verified_at: "2026-09-02"
   verified_with: "mdxfind RCS 1.545 (2026/08/29), source and -z emission count"
-  note: "WITHDRAWN 2026-09-02. This row carried sha1(cap(sha1($p)).$s) at tier upstream, transcribed from hx Appendix A for e666. It is ONE of 16 forms and so a false claim on its own: mdxfind type SHA1SHA1CAPSALT is MULTI-EMIT, sweeping which characters of the inner digest are upper-cased in the same way JOB_SHA1SHA11CAP does. A full sweep of all 1002 types with mdxfind -z measured 16 on 2026-09-02 against RCS 1.545, and the count is INPUT-DEPENDENT, which no single expression can describe. hx cap() means the FIRST lower-case letter only, which is one of the 16."
+  note: "This row carried sha1(cap(sha1($p)).$s) at tier upstream, transcribed from hx Appendix A for e666. It is ONE of 16 forms and so a false claim on its own: mdxfind type SHA1SHA1CAPSALT is MULTI-EMIT, sweeping which characters of the inner digest are upper-cased in the same way JOB_SHA1SHA11CAP does. A full sweep of all 1002 types with mdxfind -z measured 16 on 2026-09-02 against RCS 1.545, and the count is INPUT-DEPENDENT, which no single expression can describe. hx cap() means the FIRST lower-case letter only, which is one of the 16."
 denotation:
   text: "SHA1SHA1CAPSALT is MULTI-EMIT: it emits sha1() of the inner sha1 hex digest concatenated with the salt, sweeping which lower-case hex characters of that digest are upper-cased. The number of emissions varies with the digest; it was 16 for \"rosetta\"."
   source: "mdxfind"

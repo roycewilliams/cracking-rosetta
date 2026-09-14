@@ -74,6 +74,50 @@ Salted hashes go in as `hash:salt`. Say where you got it in `source:` -- a
 tool's example hash, a public test corpus, "generated it myself" are all fine.
 Please don't contribute a hash from real data.
 
+A few entries carry no vector *and are not waiting for one*. They say so, in a
+`no_vector:` block that gives the reason and what was measured, and
+[`docs/GAPS.md`](docs/GAPS.md) leaves them out of its request on that basis:
+
+```yaml
+no_vector:
+  reason: "impossible"     # or "withheld"
+  note: "the type computes no digest at all, so there is no hash for any
+         plaintext to produce"
+  measured_at: "2026-09-04"
+  measured_with: "mdxfind RCS 1.576 (2026/09/02)"
+```
+
+`impossible` means no vector can exist -- mdxfind's `PARALLEL` computes
+nothing, so nobody can supply one however well equipped. `withheld` means one
+*does* exist but storing it under the row as written would assert something
+false, most often a wrong iteration depth; there the missing piece is a
+decision about what the row is for, not data. Please don't open a PR adding a
+vector to either without reading the note first, and if the note is wrong, say
+so -- that is a better contribution than the vector would have been. The block
+is illegal alongside `vectors:`, so a vector arriving later means the block
+comes out.
+
+A mapping can also be marked as one this row's vector cannot settle, which is
+why it is not in `GAPS.md`'s "believed but never reproduced" table even though
+it looks like it belongs there:
+
+```yaml
+tools:
+  mdxfind:
+    types: ["MD5SPECAM"]
+    verified: "asserted"
+    no_round_trip:
+      reason: "different-algorithm"   # or "emits-nothing"
+      note: "mdxfind computes something else under this name, so this row's
+             vector cannot exercise it"
+      measured_at: "2026-09-04"
+```
+
+It means the command has been run and could not decide -- so please don't
+report back that the vector failed to crack, because that is the recorded
+finding rather than news. What would help is deciding whether the identifier
+belongs on that row at all.
+
 ### ...add a mapping a tool is missing
 
 Find the entry in `data/algorithms/`, add the block, and be honest about the

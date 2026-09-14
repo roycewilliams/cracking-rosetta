@@ -4,7 +4,7 @@ expression_proof:
   verified: "absent"
   verified_at: "2026-09-02"
   verified_with: "mdxfind RCS 1.545 (2026/08/29), source and -z emission count"
-  note: "WITHDRAWN 2026-09-02. This row carried sha1(cap(sha256($p))) at tier upstream, transcribed from hx Appendix A for e632. It is ONE of 27 forms and so a false claim on its own: mdxfind type SHA1SHA256CAP is MULTI-EMIT, sweeping which characters of the inner sha256 digest are upper-cased in the same way JOB_SHA1SHA11CAP does. A full sweep of all 1002 types with mdxfind -z measured 27 on 2026-09-02 against RCS 1.545 -- more than SHA1SHA11CAP because a sha256 digest is 64 hex characters and so carries more lower-case letters, which is the input-dependence itself. No single expression can describe that."
+  note: "This row carried sha1(cap(sha256($p))) at tier upstream, transcribed from hx Appendix A for e632. It is ONE of 27 forms and so a false claim on its own: mdxfind type SHA1SHA256CAP is MULTI-EMIT, sweeping which characters of the inner sha256 digest are upper-cased in the same way JOB_SHA1SHA11CAP does. A full sweep of all 1002 types with mdxfind -z measured 27 on 2026-09-02 against RCS 1.545 -- more than SHA1SHA11CAP because a sha256 digest is 64 hex characters and so carries more lower-case letters, which is the input-dependence itself. No single expression can describe that."
 denotation:
   text: "SHA1SHA256CAP is MULTI-EMIT: it emits sha1() of the inner sha256 hex digest, sweeping which lower-case hex characters of that digest are upper-cased. The number of emissions varies with the digest; it was 27 for \"rosetta\"."
   source: "mdxfind"

@@ -36,6 +36,10 @@ tools:
   crack:
     supported: false
 relations:
+  - kind: "collides-on-subset"
+    entry: "dynamic-1031"
+    distinction: "truncation"
+    note: "Measured 2026-09-05. john states dynamic_1031 as \"gost($p) (hash truncated to length 32)\"; the two agree on the first 32 hex characters of gost($p) and nowhere else. mdxfind's GOST recovers the 32-hex vector by comparing at the shortest loaded length, which is a capability rather than an identifier for the truncation."
   - kind: "duplicate-of"
     entry: "gost-r-34-11-94"
     distinction: "none"
@@ -43,7 +47,7 @@ relations:
   - kind: "iterates"
     entry: "gost-x2"
     distinction: "iteration"
-    note: "Both rows name mdxfind type GOST; this one at -i 2 and hash-gost-plain at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved."
+    note: "Both rows name mdxfind type GOST; this one at -i 2 and hash-gost-plain at -i 1. The iteration suffix is part of the identity (MD5x02 is john's dynamic_2, MD5x03 its dynamic_3), so these are two algorithms and not two names. Edge written 2026-09-07 from the data: same type, different iterations: is what `iterates` means, and no judgment was involved. Measured 2026-09-05. john states dynamic_1031 as \"gost($p) (hash truncated to length 32)\"; the two agree on the first 32 hex characters of gost($p) and nowhere else. mdxfind's GOST recovers the 32-hex vector by comparing at the shortest loaded length, which is a capability rather than an identifier for the truncation."
 vectors:
   - hash: "e473da8002e5a1fd1e0d0ba3c22d57c86f793ec8a176c8fb3766909e8b4504e9"
     pass: "rosetta"

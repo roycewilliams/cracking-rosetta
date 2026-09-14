@@ -218,7 +218,38 @@
               "uniqueItems": true,
               "description": "What was CONCEDED to earn this tier, absent when the round trip was byte-exact. The tier says a tool reproduced this entry's plaintext from its hash; this says what the comparison had to relax to see it, which the tier alone cannot express and which a consumer reading only <tool>_state could not otherwise distinguish from an exact match. Each value is here because it actually happened, not because it might. 'plaintext-case': the tool returns a plaintext differing from the stored one in case alone, BY CONSTRUCTION -- MD5LM is md5(LM($p)) and LM upper-cases, hashcat's Oracle 7 mode does the same, and john's netlm is the same defect a third time; the relaxation is legitimate only where no input could have produced the stored case. 'plaintext-reserialized': the tool echoes a re-encoded plaintext rather than the candidate -- hashcat -m 18100 returns base32 of it, -m 25400 appends an annotation. 'hash-transcoded': the round trip used the type's own spelling of the vector from data/mdxfind-transcodes.tsv, because the tool's reader refuses the serialization this entry stores. The two strings are ONE piece of evidence written twice, never two agreeing vectors. NOTE what is deliberately NOT a value here: a TRUNCATED match. A type matching below its own digest width does not denote the algorithm at all, so it earns a `truncates` relation and no mapping -- decided 2026-09-07."
             },
-            "note": {
+            "no_round_trip": {
+            "type": "object",
+            "additionalProperties": false,
+            "description": "Why this tool's mapping cannot be promoted to tier 'vector' from THIS entry's vectors, when that has been measured rather than merely not attempted. GAPS.md ranks a claimed-but-unproven mapping as the cheapest contribution in the repository -- 'one command decides it' -- which is only true where the command can decide. Where it has been run and cannot, saying so keeps the queue honest and stops the same measurement being repeated. Scoped to the entry and the tool: it says nothing about whether the tool could round-trip some OTHER vector, and it never changes the tier, which stays whatever the evidence supports.",
+            "required": [
+              "reason",
+              "note"
+            ],
+            "properties": {
+              "reason": {
+                "description": "'different-algorithm' means this tool computes something else under the identifier named here, so this row's vector cannot exercise it and a failure to crack would say nothing about the mapping. 'emits-nothing' means the tool's own type produces no digest for any input. 'not-comparable' means the tool computes this construction but cannot present the value at this depth for matching, because of how it compares -- mdxfind converts a loaded hash to binary, so a digest distinguished only by hex case is the same bytes as its lower-case twin and cannot be a distinct type, and the first depth it can present is one hash further on.",
+                "enum": [
+                  "different-algorithm",
+                  "emits-nothing",
+                  "not-comparable"
+                ]
+              },
+              "note": {
+                "type": "string",
+                "minLength": 1,
+                "description": "Required. State what was measured, so the next reader audits the claim instead of re-running it."
+              },
+              "measured_at": {
+                "type": "string",
+                "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+              },
+              "measured_with": {
+                "type": "string"
+              }
+            }
+          },
+          "note": {
               "type": "string"
             }
           }
@@ -261,7 +292,38 @@
               "uniqueItems": true,
               "description": "What was CONCEDED to earn this tier, absent when the round trip was byte-exact. The tier says a tool reproduced this entry's plaintext from its hash; this says what the comparison had to relax to see it, which the tier alone cannot express and which a consumer reading only <tool>_state could not otherwise distinguish from an exact match. Each value is here because it actually happened, not because it might. 'plaintext-case': the tool returns a plaintext differing from the stored one in case alone, BY CONSTRUCTION -- MD5LM is md5(LM($p)) and LM upper-cases, hashcat's Oracle 7 mode does the same, and john's netlm is the same defect a third time; the relaxation is legitimate only where no input could have produced the stored case. 'plaintext-reserialized': the tool echoes a re-encoded plaintext rather than the candidate -- hashcat -m 18100 returns base32 of it, -m 25400 appends an annotation. 'hash-transcoded': the round trip used the type's own spelling of the vector from data/mdxfind-transcodes.tsv, because the tool's reader refuses the serialization this entry stores. The two strings are ONE piece of evidence written twice, never two agreeing vectors. NOTE what is deliberately NOT a value here: a TRUNCATED match. A type matching below its own digest width does not denote the algorithm at all, so it earns a `truncates` relation and no mapping -- decided 2026-09-07."
             },
-            "note": {
+            "no_round_trip": {
+            "type": "object",
+            "additionalProperties": false,
+            "description": "Why this tool's mapping cannot be promoted to tier 'vector' from THIS entry's vectors, when that has been measured rather than merely not attempted. GAPS.md ranks a claimed-but-unproven mapping as the cheapest contribution in the repository -- 'one command decides it' -- which is only true where the command can decide. Where it has been run and cannot, saying so keeps the queue honest and stops the same measurement being repeated. Scoped to the entry and the tool: it says nothing about whether the tool could round-trip some OTHER vector, and it never changes the tier, which stays whatever the evidence supports.",
+            "required": [
+              "reason",
+              "note"
+            ],
+            "properties": {
+              "reason": {
+                "description": "'different-algorithm' means this tool computes something else under the identifier named here, so this row's vector cannot exercise it and a failure to crack would say nothing about the mapping. 'emits-nothing' means the tool's own type produces no digest for any input. 'not-comparable' means the tool computes this construction but cannot present the value at this depth for matching, because of how it compares -- mdxfind converts a loaded hash to binary, so a digest distinguished only by hex case is the same bytes as its lower-case twin and cannot be a distinct type, and the first depth it can present is one hash further on.",
+                "enum": [
+                  "different-algorithm",
+                  "emits-nothing",
+                  "not-comparable"
+                ]
+              },
+              "note": {
+                "type": "string",
+                "minLength": 1,
+                "description": "Required. State what was measured, so the next reader audits the claim instead of re-running it."
+              },
+              "measured_at": {
+                "type": "string",
+                "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+              },
+              "measured_with": {
+                "type": "string"
+              }
+            }
+          },
+          "note": {
               "type": "string"
             }
           }
@@ -304,7 +366,38 @@
               "uniqueItems": true,
               "description": "What was CONCEDED to earn this tier, absent when the round trip was byte-exact. The tier says a tool reproduced this entry's plaintext from its hash; this says what the comparison had to relax to see it, which the tier alone cannot express and which a consumer reading only <tool>_state could not otherwise distinguish from an exact match. Each value is here because it actually happened, not because it might. 'plaintext-case': the tool returns a plaintext differing from the stored one in case alone, BY CONSTRUCTION -- MD5LM is md5(LM($p)) and LM upper-cases, hashcat's Oracle 7 mode does the same, and john's netlm is the same defect a third time; the relaxation is legitimate only where no input could have produced the stored case. 'plaintext-reserialized': the tool echoes a re-encoded plaintext rather than the candidate -- hashcat -m 18100 returns base32 of it, -m 25400 appends an annotation. 'hash-transcoded': the round trip used the type's own spelling of the vector from data/mdxfind-transcodes.tsv, because the tool's reader refuses the serialization this entry stores. The two strings are ONE piece of evidence written twice, never two agreeing vectors. NOTE what is deliberately NOT a value here: a TRUNCATED match. A type matching below its own digest width does not denote the algorithm at all, so it earns a `truncates` relation and no mapping -- decided 2026-09-07."
             },
-            "note": {
+            "no_round_trip": {
+            "type": "object",
+            "additionalProperties": false,
+            "description": "Why this tool's mapping cannot be promoted to tier 'vector' from THIS entry's vectors, when that has been measured rather than merely not attempted. GAPS.md ranks a claimed-but-unproven mapping as the cheapest contribution in the repository -- 'one command decides it' -- which is only true where the command can decide. Where it has been run and cannot, saying so keeps the queue honest and stops the same measurement being repeated. Scoped to the entry and the tool: it says nothing about whether the tool could round-trip some OTHER vector, and it never changes the tier, which stays whatever the evidence supports.",
+            "required": [
+              "reason",
+              "note"
+            ],
+            "properties": {
+              "reason": {
+                "description": "'different-algorithm' means this tool computes something else under the identifier named here, so this row's vector cannot exercise it and a failure to crack would say nothing about the mapping. 'emits-nothing' means the tool's own type produces no digest for any input. 'not-comparable' means the tool computes this construction but cannot present the value at this depth for matching, because of how it compares -- mdxfind converts a loaded hash to binary, so a digest distinguished only by hex case is the same bytes as its lower-case twin and cannot be a distinct type, and the first depth it can present is one hash further on.",
+                "enum": [
+                  "different-algorithm",
+                  "emits-nothing",
+                  "not-comparable"
+                ]
+              },
+              "note": {
+                "type": "string",
+                "minLength": 1,
+                "description": "Required. State what was measured, so the next reader audits the claim instead of re-running it."
+              },
+              "measured_at": {
+                "type": "string",
+                "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+              },
+              "measured_with": {
+                "type": "string"
+              }
+            }
+          },
+          "note": {
               "type": "string"
             }
           }
@@ -342,7 +435,38 @@
               "uniqueItems": true,
               "description": "What was CONCEDED to earn this tier, absent when the round trip was byte-exact. The tier says a tool reproduced this entry's plaintext from its hash; this says what the comparison had to relax to see it, which the tier alone cannot express and which a consumer reading only <tool>_state could not otherwise distinguish from an exact match. Each value is here because it actually happened, not because it might. 'plaintext-case': the tool returns a plaintext differing from the stored one in case alone, BY CONSTRUCTION -- MD5LM is md5(LM($p)) and LM upper-cases, hashcat's Oracle 7 mode does the same, and john's netlm is the same defect a third time; the relaxation is legitimate only where no input could have produced the stored case. 'plaintext-reserialized': the tool echoes a re-encoded plaintext rather than the candidate -- hashcat -m 18100 returns base32 of it, -m 25400 appends an annotation. 'hash-transcoded': the round trip used the type's own spelling of the vector from data/mdxfind-transcodes.tsv, because the tool's reader refuses the serialization this entry stores. The two strings are ONE piece of evidence written twice, never two agreeing vectors. NOTE what is deliberately NOT a value here: a TRUNCATED match. A type matching below its own digest width does not denote the algorithm at all, so it earns a `truncates` relation and no mapping -- decided 2026-09-07."
             },
-            "note": {
+            "no_round_trip": {
+            "type": "object",
+            "additionalProperties": false,
+            "description": "Why this tool's mapping cannot be promoted to tier 'vector' from THIS entry's vectors, when that has been measured rather than merely not attempted. GAPS.md ranks a claimed-but-unproven mapping as the cheapest contribution in the repository -- 'one command decides it' -- which is only true where the command can decide. Where it has been run and cannot, saying so keeps the queue honest and stops the same measurement being repeated. Scoped to the entry and the tool: it says nothing about whether the tool could round-trip some OTHER vector, and it never changes the tier, which stays whatever the evidence supports.",
+            "required": [
+              "reason",
+              "note"
+            ],
+            "properties": {
+              "reason": {
+                "description": "'different-algorithm' means this tool computes something else under the identifier named here, so this row's vector cannot exercise it and a failure to crack would say nothing about the mapping. 'emits-nothing' means the tool's own type produces no digest for any input. 'not-comparable' means the tool computes this construction but cannot present the value at this depth for matching, because of how it compares -- mdxfind converts a loaded hash to binary, so a digest distinguished only by hex case is the same bytes as its lower-case twin and cannot be a distinct type, and the first depth it can present is one hash further on.",
+                "enum": [
+                  "different-algorithm",
+                  "emits-nothing",
+                  "not-comparable"
+                ]
+              },
+              "note": {
+                "type": "string",
+                "minLength": 1,
+                "description": "Required. State what was measured, so the next reader audits the claim instead of re-running it."
+              },
+              "measured_at": {
+                "type": "string",
+                "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+              },
+              "measured_with": {
+                "type": "string"
+              }
+            }
+          },
+          "note": {
               "type": "string"
             }
           }
@@ -355,7 +479,38 @@
             "supported": {
               "type": "boolean"
             },
-            "note": {
+            "no_round_trip": {
+            "type": "object",
+            "additionalProperties": false,
+            "description": "Why this tool's mapping cannot be promoted to tier 'vector' from THIS entry's vectors, when that has been measured rather than merely not attempted. GAPS.md ranks a claimed-but-unproven mapping as the cheapest contribution in the repository -- 'one command decides it' -- which is only true where the command can decide. Where it has been run and cannot, saying so keeps the queue honest and stops the same measurement being repeated. Scoped to the entry and the tool: it says nothing about whether the tool could round-trip some OTHER vector, and it never changes the tier, which stays whatever the evidence supports.",
+            "required": [
+              "reason",
+              "note"
+            ],
+            "properties": {
+              "reason": {
+                "description": "'different-algorithm' means this tool computes something else under the identifier named here, so this row's vector cannot exercise it and a failure to crack would say nothing about the mapping. 'emits-nothing' means the tool's own type produces no digest for any input. 'not-comparable' means the tool computes this construction but cannot present the value at this depth for matching, because of how it compares -- mdxfind converts a loaded hash to binary, so a digest distinguished only by hex case is the same bytes as its lower-case twin and cannot be a distinct type, and the first depth it can present is one hash further on.",
+                "enum": [
+                  "different-algorithm",
+                  "emits-nothing",
+                  "not-comparable"
+                ]
+              },
+              "note": {
+                "type": "string",
+                "minLength": 1,
+                "description": "Required. State what was measured, so the next reader audits the claim instead of re-running it."
+              },
+              "measured_at": {
+                "type": "string",
+                "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+              },
+              "measured_with": {
+                "type": "string"
+              }
+            }
+          },
+          "note": {
               "type": "string"
             }
           }
@@ -413,6 +568,38 @@
             "type": "string",
             "description": "Groups vectors that are ONE credential written in different tools' serializations. Two vectors sharing a credential are not independent evidence and must never be read as corroboration. An entry holding a group of more than one must say in notes: how the forms differ and that the re-encoding was proven rather than assumed."
           }
+        }
+      }
+    },
+    "no_vector": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Why this entry carries no vectors, when the reason is a settled fact rather than a backlog. An entry with no vectors and no no_vector: block is an ordinary gap -- nobody has supplied one yet -- and the generated GAPS.md asks for it. This block says that asking would be wrong, and why, so a contributor is not sent looking for something that is not there. Illegal alongside vectors:, which would make the entry deny what it also carries.",
+      "required": [
+        "reason",
+        "note"
+      ],
+      "properties": {
+        "reason": {
+          "description": "Fixed vocabulary, and the two values are not degrees of the same thing. 'impossible' means no vector can exist: the type emits nothing, so there is no hash for any plaintext to produce, and nobody -- however well equipped -- can supply one. 'withheld' means a vector exists but recording it here would assert something false about THIS row, so what is missing is a curator's decision rather than a contributor's data.",
+          "enum": [
+            "impossible",
+            "withheld"
+          ]
+        },
+        "note": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Required, because an unexplained 'impossible' is indistinguishable from a shrug and would foreclose the very question it claims to settle. State what was measured, or what decision is owed."
+        },
+        "measured_at": {
+          "type": "string",
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$",
+          "description": "ISO date the claim was established. Deliberately not called verified_at: this is not a tier and nothing here is ever promoted."
+        },
+        "measured_with": {
+          "type": "string",
+          "description": "Version string of whatever established it, e.g. the mdxfind build the type was pinned under."
         }
       }
     },

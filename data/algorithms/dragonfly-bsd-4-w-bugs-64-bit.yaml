@@ -16,6 +16,7 @@ tools:
     verified: "vector"
     verified_at: "2026-09-05"
     verified_with: "mdxfind RCS 1.576 (2026/09/02)"
+    note: "mdxfind e1024 DRAGONFLY4-64."
   hashpipe:
     types: ["DRAGONFLY4-64"]
     verified: "vector"

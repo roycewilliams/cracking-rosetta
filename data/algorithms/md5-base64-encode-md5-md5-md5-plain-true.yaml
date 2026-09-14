@@ -5,7 +5,7 @@ expression_proof:
   verified: "absent"
   verified_at: "2026-09-02"
   verified_with: "mdxfind RCS 1.545 (2026/08/29), source and -z emission count"
-  note: "WITHDRAWN 2026-09-02. This row carried md5(base64(md5_raw(md5(md5($p))))) at tier upstream, transcribed from hx Appendix A for e244, and triage recorded it as reproducing 1 of 2 vectors. Both vectors are correct and the expression was the false claim: mdxfind type MD5BASE64MD5RAWMD5MD5 falls through into mdxfind.c b64md5raw, which is MULTI-EMIT -- md5 of the whole 24-character base64 into mdcur[0] and, under if (len > 18), md5 of that base64 minus its last two characters into mdcur[1], both checkhash()ed. mdxfind -z counts 2 emissions, RCS 1.545, measured 2026-09-02. The hx VM reproduces this row first vector from the padded form and its second from the 22-character form."
+  note: "This row carried md5(base64(md5_raw(md5(md5($p))))) at tier upstream, transcribed from hx Appendix A for e244, and triage recorded it as reproducing 1 of 2 vectors. Both vectors are correct and the expression was the false claim: mdxfind type MD5BASE64MD5RAWMD5MD5 falls through into mdxfind.c b64md5raw, which is MULTI-EMIT -- md5 of the whole 24-character base64 into mdcur[0] and, under if (len > 18), md5 of that base64 minus its last two characters into mdcur[1], both checkhash()ed. mdxfind -z counts 2 emissions, RCS 1.545, measured 2026-09-02. The hx VM reproduces this row first vector from the padded form and its second from the 22-character form."
 denotation:
   text: "MD5BASE64MD5RAWMD5MD5 is MULTI-EMIT: it matches either md5(base64(md5_raw(md5(md5($p))))) or md5(cut(base64(md5_raw(md5(md5($p)))),0,22)), which is the same base64 with its \"==\" padding removed"
   source: "mdxfind"

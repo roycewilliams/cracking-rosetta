@@ -1,0 +1,25 @@
+id: "md5passsaltmd5passsalt"
+name: "MD5PASSSALTMD5PASSSALT"
+category: "composite"
+status: "ok"
+tools:
+  mdxfind:
+    types: ["MD5PASSSALTMD5PASSSALT"]
+    verified: "vector"
+    verified_at: "2026-09-05"
+    verified_with: "mdxfind RCS 1.576 (2026/09/02)"
+    note: "mdxfind e1007 MD5PASSSALTMD5PASSSALT."
+  hashpipe:
+    types: ["MD5PASSSALTMD5PASSSALT"]
+    verified: "vector"
+    verified_at: "2026-09-05"
+    verified_with: "hashpipe RCS 1.193 (2026/09/05)"
+    note: "verified with hashpipe -c, which pins each line to its own leading TYPE label and runs no detection, at -t 1 and with the emitted label compared against the one asked for. Both precautions are load-bearing here: hashpipe -m does not restrict what a recognised wrapper reaches, and its results vary with the thread count."
+  crack:
+    supported: false
+vectors:
+  - hash: "07a4c8a48e3fd0610f81d24504f34c8a:aaaSXB"
+    pass: "password123"
+    source: "mdxfind"
+    reads_in: ["mdxfind"]
+notes: "Created 2026-09-05. Appendix A states the construction as md5(pass . salt . md5(pass . salt)), which is expressible in john dynamic notation, so no denotation: is recorded -- a denotation forecloses an expression, and this one may yet be proven. Run tools/derive-expressions.pl, which hands a candidate to john against this row own vector and either recovers the plaintext or does not. NOT seeded from hashpipe john_map.h: this type appears in JohnMapLocal[], whose numbering upstream own comment says is LOCAL to the machine that generated it."

@@ -13,9 +13,9 @@ status: "ok"
 tools:
   mdxfind:
     verified: "absent"
-    verified_at: "2026-09-03"
-    verified_with: "mdxfind RCS 1.545 (2026/08/29)"
-    note: "no type. Swept all 1002 mdxfind types on 2026-09-03 (a tools/discover-mdxfind.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable type ran to completion; a type killed at the timeout is counted as untested and withholds this verdict. No mdxfind type name matches any identifier this entry publishes either, normalized by the separator-drift rule. Corroborated by hashpipe, a second binary built from the same catalog: handed this entry's own hash and plaintext it names no type at all. It is the more direct instrument -- it recomputes rather than cracking -- and on this corpus it named a type for 58 entries the sweep alone called silent. This is the absence of an IDENTIFIER, not of the algorithm: if mdxfind gains one, this becomes a mapping."
+    verified_at: "2026-09-05"
+    verified_with: "mdxfind RCS 1.576 (2026/09/02)"
+    note: "RE-MEASURED 2026-09-05 against mdxfind RCS 1.576 (1027 types), because every mdxfind absence in this repository had been established against RCS 1.545 and the ones on john dynamics were additionally established by offering mdxfind a $dynamic_NNNN$ string it cannot parse. Both faults are fixed for this row: the vector was rewritten into mdxfind's own serialization and offered to full auto-detect over the whole catalog, single-threaded. It is NOT that mdxfind cannot compute this. john states dynamic_1029 as sha256($p) truncated to length 32, and mdxfind's SHA256 duly recovers the 32-hex vector -- mdxfind compares at the length of the shortest hash it loaded, so cracking a truncated digest is a capability it has by design. That is the tool being able to crack this, not the tool having an IDENTIFIER for the truncation, and recording SHA256 here would put a full-digest type on a truncated row. The relation records it instead."
   john:
     cpu: ["dynamic_1029"]
     verified: "vector"
@@ -24,6 +24,11 @@ tools:
     note: "john's own published example ciphertext for this format, recovered by john under this format. john publishes no plaintext, so the plaintext was found by handing john its own example and a candidate list -- what john recovered IS the plaintext, by construction."
   crack:
     supported: false
+relations:
+  - kind: "collides-on-subset"
+    entry: "sha256"
+    distinction: "truncation"
+    note: "Measured 2026-09-05. john states dynamic_1029 as \"sha256($p) (hash truncated to length 32)\", so the two agree on exactly the first 32 hex characters of sha256($p) and on nothing else. mdxfind's SHA256 does recover this row's 32-hex vector, because mdxfind compares at the length of the shortest hash it loaded and cracking a truncated digest is a capability it has by design. That is the tool being able to crack this, NOT the tool having an identifier for the truncation, so no mdxfind mapping is recorded here. Same call Royce made on sha1-substr-0-32."
 vectors:
   - hash: "$dynamic_1029$e4ad93ca07acb8d908a3aa41e920ea4f"
     pass: "iloveyou"

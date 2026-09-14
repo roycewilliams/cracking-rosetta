@@ -11,7 +11,27 @@ change, so the diff shows exactly what upstream altered.
 | File | Source | Commit | Fetched |
 |---|---|---|---|
 | `hashpipe-HASH_TYPES.md` | [Cynosureprime/hashpipe](https://github.com/Cynosureprime/hashpipe) `HASH_TYPES.md` | `deecd388a34301b2bcc34c5b5985b53bc07aaece` (2026-09-05) | 2026-09-05 |
+| `hx.8` | [Cynosureprime/hx](https://github.com/Cynosureprime/hx) `hx.8` | `2139193c41bdedd5f3625c5b941afad700f34c7a` (2026-09-05) | 2026-09-05 |
 | `john_map.h` | [Cynosureprime/hashpipe](https://github.com/Cynosureprime/hashpipe) `john_map.h` | `deecd388a34301b2bcc34c5b5985b53bc07aaece` (2026-09-05) | 2026-09-05 |
+
+## What `hx.8` is
+
+Appendix A of the hx Language Specification: one row per registered mdxfind
+type, giving its index, its name and the expression it computes. It is the
+authority behind every `denotation:` this repository sources to mdxfind, and
+behind the expressions `seed-hx.pl` proposes.
+
+`tools/extract-hx.pl` renders it into `data/hx-appendix-a.txt`, resolving the
+troff font escapes and the multi-line `tbl` cells, which is the form
+`RosettaHx::parse_appendix` reads. The troff is vendored rather than the
+published PDF because the troff is the source, it diffs, and a specification
+change is then visible in the same way a catalog change is.
+
+The specification carries one version, the document's, printed in its running
+header and bumped when the document is published; Appendix A is part of that
+document and is identified by it. The commit in the table above is what pins
+the exact bytes this repository read, which is what a check-upstream record
+needs in order to run -- not a second version of the appendix.
 
 ## Why hashpipe's catalog and not mdxfind's
 
@@ -27,7 +47,7 @@ mdxfind's copy is therefore deliberately **not** vendored. See
 
 ## License
 
-Both projects are MIT licensed. See the LICENSE file in each upstream
+All three projects are MIT licensed. See the LICENSE file in each upstream
 repository; these copies are included under those terms.
 
 ## Known stale rows, and why they are not corrected here

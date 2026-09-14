@@ -141,24 +141,30 @@ sub emit_records {
 my @ENTRY_ORDER = qw(
     id name aliases expression john_dynamic_expr expression_proof denotation
     category application application_version status merged_into
-    tools relations vectors legacy notes
+    tools relations vectors no_vector legacy notes
 );
 # hashpipe sits next to mdxfind because that is where a reader looks for it:
 # one catalog, two binaries. It carries no iterations field -- see the schema
 # for why the two tools' suffixes must not share one.
 my @TOOL_ORDER   = qw(hashcat mdxfind hashpipe john crack);
+# no_round_trip last in every block: it is a nested map and the only one a
+# tool block carries, so keeping it after the scalars leaves each block
+# readable as a flat stanza with one indented tail.
 my %TOOL_KEYS = (
     # `match` sits between verified_with and note on purpose: identifiers,
     # then the tier, then WHEN and WITH WHAT it was established, then HOW --
     # what was conceded to establish it -- and only then the prose. Absent
     # means the round trip was byte-exact, which is the overwhelming majority
     # and should stay the quiet case.
-    hashcat  => [qw(modes verified verified_at verified_with match note)],
-    mdxfind  => [qw(types iterations verified verified_at verified_with match note)],
-    hashpipe => [qw(types verified verified_at verified_with match note)],
-    john     => [qw(cpu gpu verified verified_at verified_with match note)],
-    crack    => [qw(supported note)],
+    hashcat  => [qw(modes verified verified_at verified_with match note no_round_trip)],
+    mdxfind  => [qw(types iterations verified verified_at verified_with match note no_round_trip)],
+    hashpipe => [qw(types verified verified_at verified_with match note no_round_trip)],
+    john     => [qw(cpu gpu verified verified_at verified_with match note no_round_trip)],
+    crack    => [qw(supported note no_round_trip)],
 );
+# The inner key order of that one nested map, in the same place the flat
+# blocks below state theirs.
+my @NO_ROUND_TRIP_KEYS = qw(reason note measured_at measured_with);
 # Keys whose value is a YAML boolean, addressed as "<tool>.<key>".
 #
 # YAML::XS loads "true" as 1 and "false" as the empty string, so a boolean
@@ -195,10 +201,19 @@ my @RELATION_KEYS = qw(kind entry distinction note);
 # expression -- a pseudo-expression in a richer language than john's dynamic
 # ('hmac("sha1", $plain, $salt)'), or simply the label a suite uses. It carries
 # a source so it is never an unattributed human claim.
+#
+# no_vector: is why an entry carries no vectors, where that is a settled fact
+# rather than a backlog. GAPS.md asks the world for a vector for every entry
+# that has none, and for some entries -- a type whose case in mdxfind.c
+# computes no digest at all -- that request cannot be answered by anyone. The
+# reason lived in notes: as prose, which no generator could read, so both
+# generated documents went on asking. It is not a tier: nothing here is
+# promoted, and validate.pl refuses it beside vectors:.
 my %FLAT_BLOCKS = (
     legacy           => [qw(hashes_org hashkiller)],
     expression_proof => [qw(verified verified_at verified_with note)],
     denotation       => [qw(text source note)],
+    no_vector        => [qw(reason note measured_at measured_with)],
 );
 
 # Skip a value that carries no information: undef, empty string, empty list,
@@ -302,6 +317,14 @@ sub entry_text {
                         next;
                     }
                     next if _empty($v->{$t}{$tk});
+                    if ($tk eq 'no_round_trip') {
+                        $out .= "    $tk:\n";
+                        for my $nk (@NO_ROUND_TRIP_KEYS) {
+                            next if _empty($v->{$t}{$tk}{$nk});
+                            $out .= _kv('      ', $nk, $v->{$t}{$tk}{$nk});
+                        }
+                        next;
+                    }
                     $out .= _kv('    ', $tk, $v->{$t}{$tk});
                 }
             }

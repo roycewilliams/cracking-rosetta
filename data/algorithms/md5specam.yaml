@@ -10,6 +10,17 @@ tools:
     verified_at: "2026-09-04"
     verified_with: "mdxfind RCS 1.576 (2026/09/02)"
     note: "special purpose and not for general use, per mdxfind's maintainer, and it emits nothing. Measured 2026-09-04, pinned with -M under -z: alone, with -s and with -u, stdout was empty in every case, and a run seeded from mdxfind's own regress/md5specamdef.txt produced nothing either. So MDXFIND can generate no vector for it and the mdxfind mapping cannot reach tier vector; that is a property of mdxfind's type rather than a gap here. Narrowed from \"this entry cannot reach tier vector\" on 2026-09-04: hashpipe ships an example for a type of the same name and it verifies, so the row now carries a vector. See notes: -- the two tools do not compute the same thing under this name, which does not touch the measurement above. The identifier is real and in mdxfind's type table, which is what the mapping records."
+    no_round_trip:
+      reason: "different-algorithm"
+      note: "mdxfind and hashpipe do not compute the same thing under this name, so this row's vector -- which is hashpipe's -- cannot exercise mdxfind's type and a failure to crack it would say nothing about the mapping. hashpipe's compute_md5specam is md5($p . md5_raw($p)) and takes neither salt nor user; mdxfind's JOB_MD5SPECAM reads a userid off the line, lower-casing it up to the first colon, and breaks out when that field is empty. Pinned with -h '^MD5SPECAM$', mdxfind performs ZERO hash calculations on this line under -f and zero again under -F with a userid field appended: it declines the input shape rather than computing and missing. mdxfind can generate nothing to seed from either -- pinned with -M under -z, alone, with -s and with -u, stdout was empty in every case, and a run seeded from mdxfind's own regress/md5specamdef.txt produced nothing. So the mdxfind mapping stays at tier asserted, and settling it means deciding whether mdxfind's MD5SPECAM belongs on this row at all."
+      measured_at: "2026-09-04"
+      measured_with: "mdxfind RCS 1.576 (2026/09/02); hashpipe RCS 1.192 (2026/09/04)"
+  hashpipe:
+    types: ["MD5SPECAM"]
+    verified: "vector"
+    verified_at: "2026-09-05"
+    verified_with: "hashpipe RCS 1.193 (2026/09/05)"
+    note: "hashpipe e435 MD5SPECAM. verified with hashpipe -c, which pins each line to its own leading TYPE label and runs no detection, at -t 1 and with the emitted label compared against the one asked for. Both precautions matter on this build: -m does not restrict what a recognised wrapper reaches, and results vary with the thread count. No iterations: is recorded from hashpipe -- the suffixes are different quantities and this repository follows mdxfind for that field."
   crack:
     supported: false
 vectors:

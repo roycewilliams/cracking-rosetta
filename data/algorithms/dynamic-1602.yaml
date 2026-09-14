@@ -17,7 +17,7 @@ tools:
     verified_at: "2026-09-05"
     verified_with: "mdxfind RCS 1.576 (2026/09/02)"
     match: ["hash-transcoded"]
-    note: "Round-tripped on the TRANSCRIBED form, not on the vector as stored: this entry keeps its vector in another tool's serialization, which mdxfind's reader does not parse. mdxfind pinned with -h reproduced QAS-VASAUTH as \"9b4d1328a3dc064704301d2da2975f97b9212d8f08539214b27fd3106dc208ff:C34208EA-8C33-473D-A9B4-53FB40347EA0:P0rtcu11i5!\", from data/mdxfind-transcodes.tsv. The plaintext is one this entry already stores, and the two strings are ONE piece of evidence written twice -- not two agreeing vectors."
+    note: "Round-tripped on the TRANSCRIBED form, not on the vector as stored: this entry keeps its vector in another tool's serialization, which mdxfind's reader does not parse. mdxfind pinned with -h reproduced QAS-VASAUTH as \"9b4d1328a3dc064704301d2da2975f97b9212d8f08539214b27fd3106dc208ff:C34208EA-8C33-473D-A9B4-53FB40347EA0:P0rtcu11i5!\", from data/mdxfind-transcodes.tsv. The plaintext is one this entry already stores, and the two strings are ONE piece of evidence written twice -- not two agreeing vectors. mdxfind e1008 QAS-VASAUTH, reached by rewriting this row's vector into mdxfind's serialization: john writes $dynamic_1602$<digest>$<salt>; mdxfind reads <digest>:<salt>. Added 2026-09-05."
   john:
     cpu: ["dynamic_1602"]
     verified: "vector"
@@ -29,4 +29,13 @@ vectors:
   - hash: "$dynamic_1602$9b4d1328a3dc064704301d2da2975f97b9212d8f08539214b27fd3106dc208ff$C34208EA-8C33-473D-A9B4-53FB40347EA0$$UAdministrator@3rd-party.example.org"
     pass: "P0rtcu11i5!"
     source: "john"
+    form: "john"
     reads_in: ["john"]
+    credential: "dynamic-1602"
+  - hash: "9b4d1328a3dc064704301d2da2975f97b9212d8f08539214b27fd3106dc208ff:C34208EA-8C33-473D-A9B4-53FB40347EA0"
+    pass: "P0rtcu11i5!"
+    source: "mdxfind"
+    form: "mdxfind"
+    reads_in: ["mdxfind"]
+    credential: "dynamic-1602"
+notes: "The two vectors on this row are ONE credential written twice and must never be read as corroborating each other. john writes $dynamic_1602$<digest>$<salt>; mdxfind reads <digest>:<salt>. The re-encoding was proven rather than assumed: mdxfind pinned to QAS-VASAUTH recovers this row's own stated plaintext from the rewritten string."

@@ -70,7 +70,7 @@ use RosettaHx qw(parse_appendix translate_hx is_multi_emit);
 my $PROG = basename($0);
 my $ROOT = "$RealBin/..";
 
-my $appendix = "$ROOT/tmp/hx/appA.txt";
+my $appendix = "$ROOT/data/hx-appendix-a.txt";
 my $algdir   = "$ROOT/data/algorithms";
 my ($apply, $verbose, $help) = (0, 0, 0);
 
@@ -78,7 +78,7 @@ sub usage {
     print <<"USAGE";
 Usage: $PROG [options]
 
-   --appendix FILE  parsed Appendix A text  (default: tmp/hx/appA.txt)
+   --appendix FILE  parsed Appendix A text  (default: data/hx-appendix-a.txt)
    --algorithms DIR curated entries         (default: data/algorithms)
    --apply          write; without it, report only
    -v, --verbose    per-entry detail on stderr
