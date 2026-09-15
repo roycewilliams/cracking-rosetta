@@ -308,6 +308,38 @@ sub cell {
              match => join(' ', @{ $b->{match} || [] }) };
 }
 
+# suite_states(\%row) - the three SUITES, from the four tool cells.
+#
+# THREE, NOT FOUR, and the measurement is what decides it. mdxfind and
+# hashpipe are one project's type list read by two instruments: measured
+# 2026-09-14 across all 1545 live rows, their joint states are
+# proven/proven 1011, no/unknown 355, proven/unknown 94, unknown/unknown 64,
+# claimed/proven 15, claimed/unknown 6 -- and there is NOT ONE row where one
+# says proven and the other says no. hashpipe carries zero absences in the
+# whole corpus, because the absence pass has never covered it, so all 519 of
+# its `unknown` mean "nobody asked" and not "hashpipe lacks it".
+#
+# Counting it as a fourth suite would therefore do two wrong things at once:
+# double-count Cynosure Prime on 1011 rows, and dock 19 rows a point for a
+# sweep nobody has run. So the suite's answer is the best-evidenced of its two
+# instruments, on the precedence proven > claimed > no > unknown.
+#
+# A contradiction -- one instrument proven, the other absent -- does not
+# occur, and if it ever does it is a defect to be reported rather than
+# silently resolved, which is why the precedence is written out rather than
+# expressed as a max().
+sub suite_states {
+    my ($r) = @_;
+    my ($mx, $hp) = ($r->{mdxfind}{state}, $r->{hashpipe}{state});
+    my $cyno = 'unknown';
+    for my $want (qw(proven claimed no)) {
+        next unless $mx eq $want || $hp eq $want;
+        $cyno = $want;
+        last;
+    }
+    return ($r->{hashcat}{state}, $r->{john}{state}, $cyno);
+}
+
 # same_as($entry) - the relations as one phrase a person can read in a table
 # cell. A row that says "md5($p.$s)" twice in a 784-row table is a puzzle; a
 # row that says "same as md5-pass-salt (application)" is an answer.
@@ -334,7 +366,7 @@ sub same_as {
     return join('; ', @parts);
 }
 
-my (%tally, %state_count);
+my (%tally, %state_count, %suite_tally);
 my @out;
 for my $e (@rows) {
     my %r = (
@@ -493,6 +525,40 @@ for my $e (@rows) {
         $r{cracknote} = $e->{tools}{crack}{note} // '' if $t eq 'crack';
         $state_count{$t}{ $c->{state} }++;
     }
+
+    # HOW MANY SUITES AGREE -- the old sheet's green rows, made sortable.
+    #
+    # Two numbers, because "how many suites agree" is two questions and the
+    # sheet conflated them. `absent` here is a PROVEN NEGATIVE, so a row can
+    # be finished and still supported by only one suite: 576 rows read
+    # no/no/proven, which is every suite having answered. Sorting those
+    # alongside a row with an unasked suite would tell a reader the opposite
+    # of what the data knows.
+    #
+    #   suites_proven   how many of the three round-tripped a vector under an
+    #                   identifier this row publishes. 3 is the green row.
+    #   suites_decided  how many answered at all -- proven, absent, or an
+    #                   unreproduced claim. Below 3 there is an open question.
+    #
+    # CLAIMED COUNTS TOWARD decided AND NEVER TOWARD proven, which is how the
+    # weighting is carried without a third column: the documented sort is
+    # (proven desc, decided desc), so a suite whose only answer is an
+    # assertion earns the row credit for being answered and none for being
+    # proven. Measured 2026-09-14, that discount is narrow and real: only 11
+    # live rows have a claimed suite at all once mdxfind and hashpipe are
+    # collapsed, every one of them has NO proven suite, and exactly one
+    # (sha1wrluctruncsalt, no/no/claimed) reaches decided 3 on the strength of
+    # a claim. A suites_claimed column would be zero on 1534 of 1545 rows,
+    # which is the schema test this repository applies to every field.
+    #
+    # crack is not a suite. It is frozen, historical, and says `no` on 1542
+    # rows; folding it in would move every row by the same amount and mean
+    # nothing.
+    my @suite = suite_states(\%r);
+    $r{suites_proven}  = scalar grep { $_ eq 'proven' }  @suite;
+    $r{suites_decided} = scalar grep { $_ ne 'unknown' } @suite;
+    $suite_tally{ $r{suites_proven} }{ $r{suites_decided} }++;
+
     $tally{ $r{status} }++;
     push @out, \%r;
 }
@@ -538,7 +604,8 @@ my @CSV = qw(id name aliases expression expression_tier john_dynamic_expr
              john john_state john_match
              mdxfind mdxfind_state mdxfind_match
              hashpipe hashpipe_state hashpipe_match
-             crack_state vectors serialization primary_form
+             crack_state suites_proven suites_decided
+             vectors serialization primary_form
              hashcat_salted hashcat_speed john_salted john_work_factor
              mdxfind_salted nesting_depth hash_length hash_length_basis
              relations legacy notes);
@@ -572,7 +639,8 @@ for my $r (@out) {
         $r->{mdxfind}{match} // '',
         join(' ', @{ $r->{hashpipe}{ids} }), $r->{hashpipe}{state},
         $r->{hashpipe}{match} // '',
-        $r->{crack}{state}, $r->{vecs}, $r->{serialization},
+        $r->{crack}{state}, $r->{suites_proven}, $r->{suites_decided},
+        $r->{vecs}, $r->{serialization},
         $r->{primary_form},
         $r->{hashcat_salted}, $r->{hashcat_speed}, $r->{john_salted},
         $r->{john_work_factor}, $r->{mdxfind_salted}, $r->{nesting_depth},
@@ -589,7 +657,11 @@ for my $t (@tomb_out) {
     # other, so they are empty here too.
     print {$csv} csv_row(
         $t->{id}, $t->{name}, '', '', '', '', '', '', '', 'merged', $t->{into},
-        ('') x 16,                         # the tool and vector columns
+        # The two suite counts are in here and are EMPTY, not 0. A tombstone
+        # is not an algorithm, so "no suite proves this" would be a claim
+        # about one, and it would sort the row in among the 14 live rows that
+        # really do have nothing proven.
+        ('') x 18,                         # the tool, suite and vector columns
         ('') x 8,                          # the practitioner columns
         $t->{sameas}, '', $t->{notes},
     );
@@ -1209,6 +1281,12 @@ my $compact = JSON::PP->new->canonical->encode([
             $_->{hashcat_salted}, $_->{hashcat_speed}, $_->{john_salted},
             $_->{john_work_factor}, $_->{mdxfind_salted},
             $_->{nesting_depth}, $_->{hash_length}, $_->{hash_length_basis},
+            # 23, 24: the suite counts. The page's generic sort compares cells
+            # numerically when both are plain digits, so the RAW integers go
+            # in the payload and the cell composes its own display from them.
+            # Putting "3/3" here instead would sort as text and place 10 -- if
+            # there were ever a tenth suite -- between 1 and 2.
+            $_->{suites_proven}, $_->{suites_decided},
           ] } @out
 ]);
 
@@ -1291,9 +1369,17 @@ td.rel{color:var(--ink3);font-size:.74rem;max-width:30ch;word-break:break-word;
    the work factor, the per-tool salt and the nesting depth are there for the
    row you have already stopped on. Every one of them also has a title, since
    "hc+ jo+ mx-" is only readable once somebody has told you what it means. */
-td.cost,td.shape{font-size:.78rem;white-space:nowrap}
-td.cost .sub,td.shape .sub{display:block;color:var(--ink3);font-size:.72rem;
+td.cost,td.shape,td.suites{font-size:.78rem;white-space:nowrap}
+td.cost .sub,td.shape .sub,td.suites .sub{display:block;color:var(--ink3);
+ font-size:.72rem;
  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;white-space:normal}
+/* The sheet's green row, and the only place on this page where a colour
+   summarises several columns at once. It is deliberately the SAME green as a
+   proven cell: a reader who has learned what green means on one tool's column
+   should not have to learn a second vocabulary for the row. */
+td.suites{font-variant-numeric:tabular-nums;font-weight:600;text-align:center}
+td.suites.all{background:var(--provenbg);color:var(--proven)}
+td.suites.none{color:var(--ink3)}
 .slow{color:var(--no);font-weight:600}
 .fast{color:var(--ink2)}
 .ids{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.8rem}
@@ -1348,6 +1434,14 @@ a{color:inherit}
     <option value="no">not supported</option>
     <option value="unknown">gap</option>
   </select>
+  <select id="cov" title="How many of the three suites round-tripped a vector. mdxfind and hashpipe are one suite.">
+    <option value="">any coverage</option>
+    <option value="3">all three suites</option>
+    <option value="2">two or more suites</option>
+    <option value="1">one or more suites</option>
+    <option value="0">no suite proves it</option>
+    <option value="open">a suite unanswered</option>
+  </select>
   <button id="gaps" type="button">Show gaps only</button>
   <span class="count" id="count"></span>
 </div>
@@ -1356,12 +1450,14 @@ a{color:inherit}
   <span><span class="sw" style="background:var(--claimbg);border:1px solid var(--claim)"></span><b>claimed</b> &mdash; asserted, unverified</span>
   <span><span class="sw" style="background:var(--nobg);border:1px solid var(--no)"></span><b>not supported</b> &mdash; checked; it cannot</span>
   <span><span class="sw" style="background:var(--gapbg);border:1px solid var(--gap)"></span><b>gap</b> &mdash; nobody has said yet</span>
+  <span><b>Suites</b> &mdash; how many of the three round-tripped a vector; mdxfind and hashpipe are one suite. <b>3/3</b> is green. &ldquo;<b>n open</b>&rdquo; means that many suites have not answered, which is not the same as their saying no.</span>
 </div>
 <div class="wrap">
 <div id="note"></div>
 <table>
 <thead><tr>
-  <th data-c="0">Algorithm</th><th data-c="3">hashcat</th>
+  <th data-c="0">Algorithm</th><th data-c="23" title="How many of the three suites round-tripped a vector under an identifier this row publishes. mdxfind and hashpipe count as one suite. Click to sort.">Suites</th>
+  <th data-c="3">hashcat</th>
   <th data-c="5">John</th><th data-c="7">mdxfind</th>
   <th data-c="16" title="hashcat's own slow/fast split, and what John says is tunable">Cost</th>
   <th data-c="21" title="length of the hash string, how well evidenced, which tools salt it, and how many hashes deep">Shape</th>
@@ -1402,7 +1498,8 @@ a{color:inherit}
 const D = $compact;
 const tb=document.getElementById('tb'), q=document.getElementById('q'),
       toolSel=document.getElementById('tool'), stSel=document.getElementById('state'),
-      gapsBtn=document.getElementById('gaps'), countEl=document.getElementById('count');
+      gapsBtn=document.getElementById('gaps'), countEl=document.getElementById('count'),
+      covSel=document.getElementById('cov');
 let gapsOnly=false, sortCol=0, sortDir=1;
 const COLS=[[2,3],[4,5],[6,7]];               // [stateIdx, idsIdx] per tool
 const label={proven:'ok',claimed:'?',no:'no',unknown:'gap'};
@@ -1428,6 +1525,27 @@ function costHtml(r){
       +(speed==='slow'?'marks this mode slow':'marks this mode fast')+'">'
       +esc(speed)+'</span>':'&mdash;')
     +(wf?'<span class="sub" title="John tunable cost">'+esc(wf)+'</span>':'')
+    +'</td>';
+}
+
+// suiteHtml: the old sheet's green row, and the reason it needs two numbers.
+//
+// The big figure is how many of the three suites round-tripped a vector. The
+// quiet one is what is still unanswered, and without it a finished row and a
+// half-asked one read identically: no/no/proven and proven/unknown/proven are
+// both "one or two suites", but the first has nothing left to learn and the
+// second has an unasked question. 3 of 3 gets the proven colour, which is
+// what the sheet's green meant.
+function suiteHtml(r){
+  const p=+r[23], d=+r[24], open=3-d;
+  // Dedicated modifiers rather than the state classes: td.no means "checked,
+  // it cannot" and 0 of 3 does not mean that -- it means nothing has proved
+  // it, which several of those 14 rows will outgrow.
+  const cls = p===3 ? ' all' : p===0 ? ' none' : '';
+  return '<td class="suites'+cls+'" title="'+p+' of 3 suites round-tripped a vector; '
+    +(open? open+' suite'+(open>1?'s':'')+' has not answered' : 'every suite has answered')
+    +'">'+p+'/3'
+    +(open? '<span class="sub">'+open+' open</span>' : '')
     +'</td>';
 }
 
@@ -1463,7 +1581,8 @@ function shapeHtml(r){
 }
 
 function render(){
-  const term=q.value.trim().toLowerCase(), tool=toolSel.value, st=stSel.value;
+  const term=q.value.trim().toLowerCase(), tool=toolSel.value, st=stSel.value,
+        cov=covSel.value;
   let rows=D.filter(r=>{
     if(term){
       // name, id, tool identifiers, aliases, legacy names, relations, and
@@ -1482,6 +1601,15 @@ function render(){
       else if(!COLS.some(c=>r[c[0]]===st)) return false;
     } else if(idx!==null && r[idx]==='unknown') return false;
     if(gapsOnly && !COLS.some(c=>r[c[0]]==='unknown')) return false;
+    // Coverage. The numeric options are "at least this many suites proved
+    // it", because that is the question -- nobody wants exactly two. 'open'
+    // is the orthogonal one and deliberately not a number: it asks whether a
+    // suite has yet to answer, which is independent of how many have.
+    if(cov){
+      if(cov==='open'){ if(+r[24]===3) return false; }
+      else if(cov==='0'){ if(+r[23]!==0) return false; }
+      else if(+r[23] < +cov) return false;
+    }
     return true;
   });
   rows.sort((a,b)=>{
@@ -1510,6 +1638,7 @@ function render(){
     +((r[13]&&r[13]!==r[0])?'<span class="ex">'+esc(r[13])+'</span>':
       (r[14]&&r[14]!==r[0])?'<span class="ex">'+esc(r[14])+'</span>':'')
     +(r[9]?'<span class="al">'+esc(r[9])+'</span>':'')+'</td>'
+    +suiteHtml(r)
     +cellHtml(r[2],r[3])+cellHtml(r[4],r[5])+cellHtml(r[6],r[7])
     +costHtml(r)+shapeHtml(r)
     +'<td>'+(r[11]||0)+'</td>'
@@ -1539,7 +1668,7 @@ function focusHash(){
   // Only reset the filters if the row is not on screen: a permalink clicked
   // from inside a filtered view should not silently throw the filter away.
   if(!document.getElementById(id)){
-    q.value=''; toolSel.value=''; stSel.value='';
+    q.value=''; toolSel.value=''; stSel.value=''; covSel.value='';
     gapsOnly=false; gapsBtn.classList.remove('on');
     render();
   }
@@ -1555,6 +1684,7 @@ function focusHash(){
 }
 window.addEventListener('hashchange', focusHash);
 q.oninput=render; toolSel.onchange=render; stSel.onchange=render;
+covSel.onchange=render;
 gapsBtn.onclick=()=>{gapsOnly=!gapsOnly;gapsBtn.classList.toggle('on',gapsOnly);render();};
 document.querySelectorAll('th').forEach(th=>th.onclick=()=>{
   const c=+th.dataset.c; sortDir = (c===sortCol)? -sortDir : 1; sortCol=c; render();
@@ -1626,5 +1756,17 @@ for my $t (qw(hashcat john mdxfind)) {
     # dynamic_disabled.conf -- but it is the reason, and it should be visible.
     printf STDERR "-   %-18s hashcat %d, john %d, mdxfind %d\n",
         'unresolved ids', map { $unresolved{$_} // 0 } qw(hashcat john mdxfind);
+    # The suite counts as a 2-D tally, not two 1-D ones. Reported this way
+    # because the whole argument for two columns is that they are not the
+    # same question: the cell at (proven 1, decided 3) is a FINISHED row that
+    # one suite supports, and reading it off a "1 proven" total alone would
+    # put it beside a row two suites have never been asked about.
+    for my $p (reverse 0 .. 3) {
+        my $row = $suite_tally{$p} or next;
+        my $tot = 0; $tot += $_ for values %$row;
+        printf STDERR "-   %-18s %4d row(s), of which decided %s\n",
+            "suites proven $p", $tot,
+            join('  ', map { "$_:$row->{$_}" } sort { $b <=> $a } keys %$row);
+    }
 }
 exit 0;

@@ -59,7 +59,7 @@ const document = {
     if (els[id]) return els[id];
     // A row element exists only if render() emitted an id for it.
     if (lastRows.includes('<tr id="' + id + '"')) return (els[id] = mk(id));
-    if (['tb','q','tool','state','gaps','count','note'].includes(id)) return (els[id] = mk(id));
+    if (['tb','q','tool','state','cov','gaps','count','note'].includes(id)) return (els[id] = mk(id));
     return null;
   },
   querySelectorAll(){ return { forEach(){} }; },
@@ -90,6 +90,26 @@ checks.push(['search finds an id', search('rmd320').includes('<tr id="rmd320">')
 checks.push(['search finds a hashcat mode', search('4710').includes('<tr id=')]);
 checks.push(['nonsense finds nothing', search('zzzznope') === '']);
 els.q.value = '';
+
+// THE COVERAGE FACET. Three assertions, and the middle one is the point: a
+// filter that returns rows is not evidence it filtered, since returning
+// EVERYTHING also returns rows. So the 3-of-3 view must be non-empty, must be
+// strictly smaller than the unfiltered table, and must contain no cell
+// reporting fewer than three -- which is the only check that can tell "the
+// filter works" from "the filter is wired to nothing".
+function coverage(v){ els.cov.value = v; render(); const out = lastRows;
+                      els.cov.value = ''; render(); return out; }
+const all3 = coverage('3');
+const countRows = (h) => (h.match(/<tr id=/g) || []).length;
+checks.push(['coverage 3 of 3 returns rows', countRows(all3) > 0]);
+checks.push(['coverage 3 of 3 is a subset', countRows(all3) < countRows(lastRows)]);
+checks.push(['coverage 3 of 3 shows only 3/3', !/>[012]\/3</.test(all3)]);
+// The orthogonal one: 'open' asks whether a suite has yet to answer, which is
+// independent of how many have proved it. It must not simply repeat a count.
+const open = coverage('open');
+checks.push(['coverage open returns rows', countRows(open) > 0]);
+checks.push(['coverage open is a subset', countRows(open) < countRows(lastRows)]);
+checks.push(['coverage open shows no settled row', !/every suite has answered/.test(open)]);
 
 let bad = 0;
 for (const [what, ok] of checks) { if (!ok) bad++; console.log((ok ? 'ok   ' : 'FAIL ') + what); }
