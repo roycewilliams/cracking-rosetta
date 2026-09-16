@@ -137,7 +137,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | C/R | **--** | `MSCHAPv2` (v) | no |  |
 | Cardano Encrypted 128-byte Secret Key (a.k.a XPrv) | **--** | `cardano` (v) | no |  |
 | ChaCha20 | `15400` (v) | **--** | no |  |
-| Cisco ASA | **--** | `asa-md5` (v) | `CISCOASA` (v) |  |
+| Cisco ASA | `2410` (v) | `asa-md5` (v) | `CISCOASA` (v) |  |
 | CISCO4 | `5700` (v) | `Raw-SHA256`<br>`raw-SHA256-opencl` (v) | `CISCO4` (v) |  |
 | CISCO8 | `9200` (v) | `PBKDF2-HMAC-SHA256`<br>`PBKDF2-HMAC-SHA256-opencl` (v) | `CISCO8` (v) |  |
 | CISCO9 | `9300` (v) | `scrypt` (v) | `CISCO9` (v) |  |
@@ -169,7 +169,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | descrypt($plain) (c) | `1500` (v) | `descrypt`<br>`descrypt-opencl` (v) | `DESCRYPT` (v) |  |
 | DESENCRYPT | `14000` (v) | **--** | `DESENCRYPT` (v) |  |
 | DIGEST-MD5 C/R | **--** | `dmd5` (v) | no |  |
-| DiskCryptor | **--** | `diskcryptor`<br>`diskcryptor-aes-opencl` (v) | no |  |
+| DiskCryptor | `20011`<br>`20012`<br>`20013` (v) | `diskcryptor`<br>`diskcryptor-aes-opencl` (v) | no |  |
 | DiskCryptor SHA512 + XTS 1024 bit | `20012` (v) | no | no |  |
 | DiskCryptor SHA512 + XTS 1536 bit | `20013` (v) | **--** | no |  |
 | DiskCryptor SHA512 + XTS 512 bit | `20011` (v) | **--** | no |  |
@@ -197,13 +197,13 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | dynamic_1004 | no | `dynamic_1004` (v) | `MD5 -i6` (v) |  |
 | dynamic_1005 | no | `dynamic_1005` (v) | `MD5 -i7` (v) |  |
 | dynamic_1006 | no | `dynamic_1006` (v) | `MD5 -i8` (v) |  |
-| dynamic_1008 | **--** | `dynamic_1008` (v) | `MD5PASSSALT` (v) |  |
-| dynamic_1015 | **--** | `dynamic_1015` (v) | no |  |
+| dynamic_1008 | `10` (v) | `dynamic_1008` (v) | `MD5PASSSALT` (v) | same as dynamic-1034 (application) |
+| dynamic_1015 | `11100` (v) | `dynamic_1015` (v) | no |  |
 | dynamic_1029 | **--** | `dynamic_1029` (v) | no | collides with sha256 (truncation) |
 | dynamic_1030 | **--** | `dynamic_1030` (v) | no | collides with whirlpool (truncation); truncates whirlpool (truncation) |
 | dynamic_1031 | **--** | `dynamic_1031` (v) | no | collides with hash-gost-plain (truncation) |
-| dynamic_1032 | **--** | `dynamic_1032` (v) | `PEOPLESOFT` (v) |  |
-| dynamic_1034 | **--** | `dynamic_1034` (v) | `POSTGRESQL` (v) |  |
+| dynamic_1032 | `133` (v) | `dynamic_1032` (v) | `PEOPLESOFT` (v) |  |
+| dynamic_1034 | `12` (v) | `dynamic_1034` (v) | `POSTGRESQL` (v) | same as dynamic-1008 (application) |
 | dynamic_1401 | no | `dynamic_1401` (v) | `SKYPE` (v) |  |
 | dynamic_15 | no | `dynamic_15` (v) | `MD5USERMD5PASSSALT` (v) |  |
 | dynamic_1505 | no | `dynamic_1505` (v) | `MD5PASSSALTMD5PASSSALT` (v) |  |
@@ -214,14 +214,14 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | dynamic_1550 | **--** | `dynamic_1550` (v) | `MONGODB` (v) |  |
 | dynamic_1551 | **--** | `dynamic_1551` (v) | no |  |
 | dynamic_1552 | **--** | `dynamic_1552` (v) | no |  |
-| dynamic_1560 | **--** | `dynamic_1560` (v) | `MD5SALT1SALT2` (v) |  |
+| dynamic_1560 | `33000` (v) | `dynamic_1560` (v) | `MD5SALT1SALT2` (v) |  |
 | dynamic_1590 | **--** | `dynamic_1590` (v) | no |  |
 | dynamic_16 | **--** | `dynamic_16` (v) | no |  |
 | dynamic_1602 | no | `dynamic_1602` (v) | `QAS-VASAUTH` (v) |  |
 | dynamic_1608 | **--** | `dynamic_1608` (v) | no |  |
 | dynamic_18 | no | `dynamic_18` (v) | `POSTOFFICE` (v) |  |
-| dynamic_2002 | **--** | `dynamic_2002` (v) | `MD5 -i2` (v) |  |
-| dynamic_2003 | **--** | `dynamic_2003` (v) | `MD5 -i3` (v) |  |
+| dynamic_2002 | `2600` (v) | `dynamic_2002` (v) | `MD5 -i2` (v) |  |
+| dynamic_2003 | `3500` (v) | `dynamic_2003` (v) | `MD5 -i3` (v) |  |
 | dynamic_31 | no | `dynamic_31` (v) | `MD4SALTPASS` (v) |  |
 | dynamic_32 | no | `dynamic_32` (v) | `MD4PASSSALT` (v) |  |
 | dynamic_35 | no | `dynamic_35` (v) | `SHA1UCUSERPASS` (v) |  |
@@ -386,7 +386,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | HMAC-RIPEMD320 (key = $salt) | `33660` (v) | no | `HMAC-RMD320` (v) | duplicate of hmac-ripemd320-plain-salt |
 | HMAC-RMD160-KPASS | `6050` (v) | no | `HMAC-RMD160-KPASS` (v) |  |
 | HMAC-RMD320-KPASS | `33650` (v) | no | `HMAC-RMD320-KPASS` (v) |  |
-| HMAC-SHA1 | **--** | `HMAC-SHA1` (v) | `HMAC-SHA1-KPASS` (v) | same as hmac-sha1-kpass (naming) |
+| HMAC-SHA1 | `150` (v) | `HMAC-SHA1` (v) | `HMAC-SHA1-KPASS` (v) | same as hmac-sha1-kpass (naming) |
 | HMAC-SHA1-KPASS | `150` (v) | `HMAC-SHA1` (v) | `HMAC-SHA1-KPASS` (v) | same as hmac-sha1 (naming) |
 | HMAC-SHA224 | no | `HMAC-SHA224` (v) | `HMAC-SHA224-KPASS` (v) | same as hmac-sha224-kpass (naming) |
 | HMAC-SHA224-KPASS | no | `HMAC-SHA224` (v) | `HMAC-SHA224-KPASS` (v) | same as hmac-sha224 (naming) |
@@ -395,7 +395,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | HMAC-SHA384 | no | `HMAC-SHA384` (v) | `HMAC-SHA384-KPASS` (v) | same as hmac-sha384-kpass (naming) |
 | HMAC-SHA384 | no | **--** | `HMAC-SHA384` (v) |  |
 | HMAC-SHA384-KPASS | no | `HMAC-SHA384` (v) | `HMAC-SHA384-KPASS` (v) | same as hmac-sha384-johnhmac-sha384 (naming) |
-| HMAC-SHA512 | **--** | `HMAC-SHA512` (v) | `HMAC-SHA512-KPASS` (v) | same as hmac-sha512-kpass (naming) |
+| HMAC-SHA512 | `1750` (v) | `HMAC-SHA512` (v) | `HMAC-SHA512-KPASS` (v) | same as hmac-sha512-kpass (naming) |
 | HMAC-SHA512 (key = $salt) | `1760` (v) | no | `HMAC-SHA512` (v) | duplicate of hmac-sha512-plain-salt |
 | HMAC-SHA512-KPASS | `1750` (v) | `HMAC-SHA512` (v) | `HMAC-SHA512-KPASS` (v) | same as hmac-sha512 (naming) |
 | HMAC-STREEBOG256 | `11760` (v) | no | `HMAC-STREEBOG256` (v) |  |
@@ -933,7 +933,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | QNX-SHA512 | `19200` (v) | `qnx` (v) | `QNX-SHA512` (v) |  |
 | QNX7-SHA512 | `19210` (v) | **--** | `QNX7-SHA512` (v) |  |
 | RACF | `8500` (v) | `RACF` (v) | `RACF` (v) |  |
-| RACF-KDFAES | **--** | `RACF-KDFAES` (v) | `RACF-KDFAES` (v) |  |
+| RACF-KDFAES | `14200` (v) | `RACF-KDFAES` (v) | `RACF-KDFAES` (v) |  |
 | RACF-KDFAES | `14200` (v) | **--** | `RACF-KDFAES` (v) |  |
 | RADIOGATUN32 | no | no | `RADIOGATUN32` (v) |  |
 | RADIOGATUN64 | no | no | `RADIOGATUN64` (v) |  |

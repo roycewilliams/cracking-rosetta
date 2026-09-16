@@ -11,6 +11,11 @@ denotation:
   note: "john's own label for dynamic_1008, in 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200."
 status: "ok"
 tools:
+  hashcat:
+    modes: [10]
+    verified: "vector"
+    verified_at: "2026-09-15"
+    verified_with: "hashcat v7.1.2-684-g150a0e61a"
   mdxfind:
     types: ["MD5PASSSALT"]
     verified: "vector"
@@ -25,6 +30,11 @@ tools:
     note: "john's own published example ciphertext for this format, recovered by john under this format. john publishes no plaintext, so the plaintext was found by handing john its own example and a candidate list -- what john recovered IS the plaintext, by construction."
   crack:
     supported: false
+relations:
+  - kind: "same-computation"
+    entry: "dynamic-1034"
+    distinction: "application"
+    note: "Measured 2026-09-15 by a full discover-hashcat.pl sweep: hashcat mode 10 (md5($pass.$salt)) and mode 12 (PostgreSQL) EACH crack BOTH rows' vectors, because the two constructions coincide whenever the salt is the username. john keeps them apart for the same reason hashcat does -- dynamic_1008 is md5($p.$s) (RADIUS User-Password) and dynamic_1034 is md5($p.$u) (PostgreSQL MD5), both quoted from run/dynamic.conf. So each row carries only its OWN mode: 10 here, 12 there. The sweep proposing both modes for both rows is what this edge records, and taking those proposals literally would have said this row is PostgreSQL and that one is generic."
 vectors:
   - hash: "$dynamic_1008$b962b0d40fc9111ce5f8efab424bad73$NormalSaltNormal"
     pass: "secret"
@@ -36,6 +46,6 @@ vectors:
     pass: "secret"
     source: "mdxfind"
     form: "mdxfind"
-    reads_in: ["mdxfind"]
+    reads_in: ["hashcat", "mdxfind"]
     credential: "dynamic-1008"
 notes: "The two vectors on this row are ONE credential written twice and must never be read as corroborating each other. john writes $dynamic_1008$<digest>$<salt>; mdxfind reads <digest>:<salt>. The re-encoding was proven rather than assumed: mdxfind pinned to MD5PASSSALT recovers this row's own stated plaintext from the rewritten string."

@@ -7527,11 +7527,15 @@
          "hash_length" : "",
          "hash_length_basis" : "",
          "hashcat" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               2410
+            ],
+            "match" : "",
+            "state" : "proven",
+            "tier" : "vector"
          },
-         "hashcat_salted" : "",
-         "hashcat_speed" : "",
+         "hashcat_salted" : "yes",
+         "hashcat_speed" : "fast",
          "hashpipe" : {
             "ids" : [],
             "state" : "unknown"
@@ -7566,10 +7570,10 @@
          "sameas" : "",
          "serialization" : "divergent",
          "status" : "ok",
-         "suites_decided" : 2,
-         "suites_proven" : 2,
+         "suites_decided" : 3,
+         "suites_proven" : 3,
          "tool_note" : {
-            "hashcat" : "",
+            "hashcat" : "mode discovered by round-trip search, not by name",
             "hashpipe" : "",
             "john" : "john's own published example ciphertext for this format, recovered by john under this format. john publishes no plaintext, so the plaintext was found by handing john its own example and a candidate list -- what john recovered IS the plaintext, by construction.",
             "mdxfind" : "name match accepted by a curator on 2026-09-04 and not yet reproduced by this repository's own tooling; seed-vectors.pl and verify-vectors.pl decide it. See notes for what was measured by hand first."
@@ -9693,11 +9697,17 @@
          "hash_length" : "",
          "hash_length_basis" : "",
          "hashcat" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               20011,
+               20012,
+               20013
+            ],
+            "match" : "",
+            "state" : "proven",
+            "tier" : "vector"
          },
-         "hashcat_salted" : "",
-         "hashcat_speed" : "",
+         "hashcat_salted" : "yes",
+         "hashcat_speed" : "slow",
          "hashpipe" : {
             "ids" : [],
             "state" : "unknown"
@@ -9729,10 +9739,10 @@
          "sameas" : "",
          "serialization" : "unknown",
          "status" : "ok",
-         "suites_decided" : 2,
-         "suites_proven" : 1,
+         "suites_decided" : 3,
+         "suites_proven" : 2,
          "tool_note" : {
-            "hashcat" : "",
+            "hashcat" : "mode discovered by round-trip search, not by name",
             "hashpipe" : "",
             "john" : "Round-tripped here on 2026-09-01, under both diskcryptor and diskcryptor-aes-opencl, against both vectors this entry carries. It had been tier upstream with a note blaming the ~819 candidate plaintexts harvested from john's source for not containing the answer; that diagnosis was wrong. john --list=format-details truncates example_ciphertext at 896 characters, so the header being attacked was never a loadable hash and no wordlist could have cracked it. The vectors here come from john's own src/diskcryptor_common_plug.c test array. Only the two AES-XTS vectors are carried, so the AES-only GPU build round-trips every one of them; john's CPU format also reads the Twofish and Serpent examples. GPU build diskcryptor-aes-opencl has no CPU format of that name, so discover-john.pl --mirror-gpu could not place it; tools/probe-gpu.pl proved it.",
             "mdxfind" : "no type. Swept all 1002 mdxfind types on 2026-09-03 (a tools/discover-mdxfind.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable type ran to completion; a type killed at the timeout is counted as untested and withholds this verdict. No mdxfind type name matches any identifier this entry publishes either, normalized by the separator-drift rule. Corroborated by hashpipe, a second binary built from the same catalog: handed this entry's own hash and plaintext it names no type at all. It is the more direct instrument -- it recomputes rather than cracking -- and on this corpus it named a type for 58 entries the sweep alone called silent. This is the absence of an IDENTIFIER, not of the algorithm: if mdxfind gains one, this becomes a mapping."
@@ -11528,11 +11538,15 @@
          "hash_length" : 32,
          "hash_length_basis" : "observed",
          "hashcat" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               10
+            ],
+            "match" : "",
+            "state" : "proven",
+            "tier" : "vector"
          },
-         "hashcat_salted" : "",
-         "hashcat_speed" : "",
+         "hashcat_salted" : "yes",
+         "hashcat_speed" : "fast",
          "hashpipe" : {
             "ids" : [],
             "state" : "unknown"
@@ -11563,12 +11577,19 @@
          "nesting_depth" : "",
          "notes" : "The two vectors on this row are ONE credential written twice and must never be read as corroborating each other. john writes $dynamic_1008$<digest>$<salt>; mdxfind reads <digest>:<salt>. The re-encoding was proven rather than assumed: mdxfind pinned to MD5PASSSALT recovers this row's own stated plaintext from the rewritten string.",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "application",
+               "entry" : "dynamic-1034",
+               "kind" : "same-computation",
+               "note" : "Measured 2026-09-15 by a full discover-hashcat.pl sweep: hashcat mode 10 (md5($pass.$salt)) and mode 12 (PostgreSQL) EACH crack BOTH rows' vectors, because the two constructions coincide whenever the salt is the username. john keeps them apart for the same reason hashcat does -- dynamic_1008 is md5($p.$s) (RADIUS User-Password) and dynamic_1034 is md5($p.$u) (PostgreSQL MD5), both quoted from run/dynamic.conf. So each row carries only its OWN mode: 10 here, 12 there. The sweep proposing both modes for both rows is what this edge records, and taking those proposals literally would have said this row is PostgreSQL and that one is generic."
+            }
+         ],
+         "sameas" : "same as dynamic-1034 (application)",
          "serialization" : "divergent",
          "status" : "ok",
-         "suites_decided" : 2,
-         "suites_proven" : 2,
+         "suites_decided" : 3,
+         "suites_proven" : 3,
          "tool_note" : {
             "hashcat" : "",
             "hashpipe" : "",
@@ -11593,11 +11614,15 @@
          "hash_length" : "",
          "hash_length_basis" : "",
          "hashcat" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               11100
+            ],
+            "match" : "",
+            "state" : "proven",
+            "tier" : "vector"
          },
-         "hashcat_salted" : "",
-         "hashcat_speed" : "",
+         "hashcat_salted" : "yes",
+         "hashcat_speed" : "fast",
          "hashpipe" : {
             "ids" : [],
             "state" : "unknown"
@@ -11628,10 +11653,10 @@
          "sameas" : "",
          "serialization" : "divergent",
          "status" : "needs-review",
-         "suites_decided" : 2,
-         "suites_proven" : 1,
+         "suites_decided" : 3,
+         "suites_proven" : 2,
          "tool_note" : {
-            "hashcat" : "",
+            "hashcat" : "mode discovered by round-trip search, not by name",
             "hashpipe" : "",
             "john" : "",
             "mdxfind" : "no type. Swept all 1027 mdxfind types on 2026-09-06, in 4 separate runs over different corpora, (a tools/discover-mdxfind.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable type ran to completion; a type killed at the timeout is counted as untested and withholds this verdict. No mdxfind type name matches any identifier this entry publishes either, normalized by the separator-drift rule. Corroborated by hashpipe, a second binary built from the same catalog: handed this entry's own hash and plaintext it names no type at all. It is the more direct instrument -- it recomputes rather than cracking -- and on this corpus it named a type for 58 entries the sweep alone called silent. This is the absence of an IDENTIFIER, not of the algorithm: if mdxfind gains one, this becomes a mapping. mdxfind e906 POSTGRESCRAM, reached by rewriting this row's vector into mdxfind's serialization: john writes $dynamic_1015$<digest>$HEX$<challenge+$$U+user>; mdxfind reads its own $postgres$<user>*<challenge>*<digest> wrapper. Added 2026-09-05."
@@ -11864,11 +11889,15 @@
          "hash_length" : "",
          "hash_length_basis" : "",
          "hashcat" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               133
+            ],
+            "match" : "",
+            "state" : "proven",
+            "tier" : "vector"
          },
-         "hashcat_salted" : "",
-         "hashcat_speed" : "",
+         "hashcat_salted" : "yes",
+         "hashcat_speed" : "fast",
          "hashpipe" : {
             "ids" : [],
             "state" : "unknown"
@@ -11903,10 +11932,10 @@
          "sameas" : "",
          "serialization" : "divergent",
          "status" : "ok",
-         "suites_decided" : 2,
-         "suites_proven" : 2,
+         "suites_decided" : 3,
+         "suites_proven" : 3,
          "tool_note" : {
-            "hashcat" : "",
+            "hashcat" : "mode discovered by round-trip search, not by name",
             "hashpipe" : "",
             "john" : "john's own published example ciphertext for this format, recovered by john under this format. john publishes no plaintext, so the plaintext was found by handing john its own example and a candidate list -- what john recovered IS the plaintext, by construction.",
             "mdxfind" : "mdxfind e858 PEOPLESOFT, reached by rewriting this row's vector into mdxfind's serialization: john writes $dynamic_1032$<base64>; mdxfind reads the bare base64 digest."
@@ -11929,11 +11958,15 @@
          "hash_length" : 32,
          "hash_length_basis" : "observed",
          "hashcat" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               12
+            ],
+            "match" : "",
+            "state" : "proven",
+            "tier" : "vector"
          },
-         "hashcat_salted" : "",
-         "hashcat_speed" : "",
+         "hashcat_salted" : "yes",
+         "hashcat_speed" : "fast",
          "hashpipe" : {
             "ids" : [],
             "state" : "unknown"
@@ -11964,12 +11997,19 @@
          "nesting_depth" : "",
          "notes" : "The two vectors on this row are ONE credential written twice and must never be read as corroborating each other. john writes $dynamic_1034$<digest>$$U<user>; mdxfind reads <digest>:<user>, the user occupying the salt field. The re-encoding was proven rather than assumed: mdxfind pinned to MD5PASSSALT recovers this row's own stated plaintext from the rewritten string.",
          "primary_form" : "",
-         "relations" : [],
-         "sameas" : "",
+         "relations" : [
+            {
+               "distinction" : "application",
+               "entry" : "dynamic-1008",
+               "kind" : "same-computation",
+               "note" : "Measured 2026-09-15 by a full discover-hashcat.pl sweep: hashcat mode 10 (md5($pass.$salt)) and mode 12 (PostgreSQL) EACH crack BOTH rows' vectors, because the two constructions coincide whenever the salt is the username. john keeps them apart for the same reason hashcat does -- dynamic_1008 is md5($p.$s) (RADIUS User-Password) and dynamic_1034 is md5($p.$u) (PostgreSQL MD5), both quoted from run/dynamic.conf. So each row carries only its OWN mode: 10 here, 12 there. The sweep proposing both modes for both rows is what this edge records, and taking those proposals literally would have said this row is PostgreSQL and that one is generic."
+            }
+         ],
+         "sameas" : "same as dynamic-1008 (application)",
          "serialization" : "divergent",
          "status" : "needs-review",
-         "suites_decided" : 2,
-         "suites_proven" : 2,
+         "suites_decided" : 3,
+         "suites_proven" : 3,
          "tool_note" : {
             "hashcat" : "",
             "hashpipe" : "",
@@ -12628,11 +12668,15 @@
          "hash_length" : 32,
          "hash_length_basis" : "observed",
          "hashcat" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               33000
+            ],
+            "match" : "",
+            "state" : "proven",
+            "tier" : "vector"
          },
-         "hashcat_salted" : "",
-         "hashcat_speed" : "",
+         "hashcat_salted" : "yes",
+         "hashcat_speed" : "fast",
          "hashpipe" : {
             "ids" : [],
             "state" : "unknown"
@@ -12667,10 +12711,10 @@
          "sameas" : "",
          "serialization" : "divergent",
          "status" : "ok",
-         "suites_decided" : 2,
-         "suites_proven" : 2,
+         "suites_decided" : 3,
+         "suites_proven" : 3,
          "tool_note" : {
-            "hashcat" : "",
+            "hashcat" : "mode discovered by round-trip search, not by name",
             "hashpipe" : "",
             "john" : "john's own published example ciphertext for this format, recovered by john under this format. john publishes no plaintext, so the plaintext was found by handing john its own example and a candidate list -- what john recovered IS the plaintext, by construction.",
             "mdxfind" : "mdxfind e991 MD5SALT1SALT2, reached by rewriting this row's vector into mdxfind's serialization: john writes $dynamic_1560$<digest>$<salt>$$2<salt2>; mdxfind reads <digest>:<salt>:<salt2>. Appendix A names this correspondence itself."
@@ -13010,11 +13054,15 @@
          "hash_length" : 32,
          "hash_length_basis" : "observed",
          "hashcat" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               2600
+            ],
+            "match" : "",
+            "state" : "proven",
+            "tier" : "vector"
          },
-         "hashcat_salted" : "",
-         "hashcat_speed" : "",
+         "hashcat_salted" : "yes",
+         "hashcat_speed" : "fast",
          "hashpipe" : {
             "ids" : [],
             "state" : "unknown"
@@ -13049,10 +13097,10 @@
          "sameas" : "",
          "serialization" : "divergent",
          "status" : "ok",
-         "suites_decided" : 2,
-         "suites_proven" : 2,
+         "suites_decided" : 3,
+         "suites_proven" : 3,
          "tool_note" : {
-            "hashcat" : "",
+            "hashcat" : "mode discovered by round-trip search, not by name",
             "hashpipe" : "",
             "john" : "john's own published example ciphertext for this format, recovered by john under this format. john publishes no plaintext, so the plaintext was found by handing john its own example and a candidate list -- what john recovered IS the plaintext, by construction.",
             "mdxfind" : "mdxfind e1 MD5 at -i 2, reached by rewriting this row's vector into mdxfind's serialization: john writes $dynamic_2002$<digest>; mdxfind reads the bare digest at depth x02. The iteration count is part of the identity, not a tuning knob, so it is declared: mdxfind reports this vector at x02 and nothing shallower."
@@ -13075,11 +13123,15 @@
          "hash_length" : 32,
          "hash_length_basis" : "observed",
          "hashcat" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               3500
+            ],
+            "match" : "",
+            "state" : "proven",
+            "tier" : "vector"
          },
-         "hashcat_salted" : "",
-         "hashcat_speed" : "",
+         "hashcat_salted" : "yes",
+         "hashcat_speed" : "fast",
          "hashpipe" : {
             "ids" : [],
             "state" : "unknown"
@@ -13114,10 +13166,10 @@
          "sameas" : "",
          "serialization" : "divergent",
          "status" : "ok",
-         "suites_decided" : 2,
-         "suites_proven" : 2,
+         "suites_decided" : 3,
+         "suites_proven" : 3,
          "tool_note" : {
-            "hashcat" : "",
+            "hashcat" : "mode discovered by round-trip search, not by name",
             "hashpipe" : "",
             "john" : "john's own published example ciphertext for this format, recovered by john under this format. john publishes no plaintext, so the plaintext was found by handing john its own example and a candidate list -- what john recovered IS the plaintext, by construction.",
             "mdxfind" : "mdxfind e1 MD5 at -i 3, reached by rewriting this row's vector into mdxfind's serialization: john writes $dynamic_2003$<digest>; mdxfind reads the bare digest at depth x03. The iteration count is part of the identity, not a tuning knob, so it is declared: mdxfind reports this vector at x03 and nothing shallower."
@@ -24383,11 +24435,15 @@
          "hash_length" : 40,
          "hash_length_basis" : "observed",
          "hashcat" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               150
+            ],
+            "match" : "",
+            "state" : "proven",
+            "tier" : "vector"
          },
-         "hashcat_salted" : "",
-         "hashcat_speed" : "",
+         "hashcat_salted" : "yes",
+         "hashcat_speed" : "fast",
          "hashpipe" : {
             "ids" : [],
             "state" : "unknown"
@@ -24429,10 +24485,10 @@
          "sameas" : "same as hmac-sha1-kpass (naming)",
          "serialization" : "divergent",
          "status" : "ok",
-         "suites_decided" : 2,
-         "suites_proven" : 2,
+         "suites_decided" : 3,
+         "suites_proven" : 3,
          "tool_note" : {
-            "hashcat" : "",
+            "hashcat" : "mode discovered by round-trip search, not by name",
             "hashpipe" : "",
             "john" : "john's own published example ciphertext for this format, recovered by john under this format. john publishes no plaintext, so the plaintext was found by handing john its own example and a candidate list -- what john recovered IS the plaintext, by construction.",
             "mdxfind" : "mdxfind e793 HMAC-SHA1-KPASS. Added 2026-09-05. This row read as though john were doing something no other tool does, and it is not: The same NAME means opposite things in john and mdxfind, which is what put this mapping on the wrong row. john's HMAC-* formats key on the PASSWORD -- john's own source says so, ALGORITHM_NAME is literally \"password is key\" in hmacMD5_fmt_plug.c, hmacSHA1_fmt_plug.c, hmacSHA256_fmt_plug.c and hmacSHA512_fmt_plug.c. mdxfind splits the two cases across two names: hx Appendix A gives HMAC-SHA1 (e215) as hmac_sha1(pass, user), keyed on the USER, and HMAC-SHA1-KPASS (e793) as hmac_sha1(salt, pass), keyed on the PASSWORD. So john's HMAC-SHA1 is mdxfind's HMAC-SHA1-KPASS, and matching the two by name pairs each with the wrong one. Measured -- mdxfind pinned to HMAC-SHA1-KPASS recovers this row's own plaintext, and pinned to the same-named non-KPASS type it correctly refuses, which is the control that says the two are different computations rather than two spellings."
@@ -25045,11 +25101,15 @@
          "hash_length" : 128,
          "hash_length_basis" : "observed",
          "hashcat" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               1750
+            ],
+            "match" : "",
+            "state" : "proven",
+            "tier" : "vector"
          },
-         "hashcat_salted" : "",
-         "hashcat_speed" : "",
+         "hashcat_salted" : "yes",
+         "hashcat_speed" : "fast",
          "hashpipe" : {
             "ids" : [],
             "state" : "unknown"
@@ -25091,10 +25151,10 @@
          "sameas" : "same as hmac-sha512-kpass (naming)",
          "serialization" : "divergent",
          "status" : "ok",
-         "suites_decided" : 2,
-         "suites_proven" : 2,
+         "suites_decided" : 3,
+         "suites_proven" : 3,
          "tool_note" : {
-            "hashcat" : "",
+            "hashcat" : "mode discovered by round-trip search, not by name",
             "hashpipe" : "",
             "john" : "john's own published example ciphertext for this format, recovered by john under this format. john publishes no plaintext, so the plaintext was found by handing john its own example and a candidate list -- what john recovered IS the plaintext, by construction.",
             "mdxfind" : "mdxfind e797 HMAC-SHA512-KPASS. Added 2026-09-05. This row read as though john were doing something no other tool does, and it is not: The same NAME means opposite things in john and mdxfind, which is what put this mapping on the wrong row. john's HMAC-* formats key on the PASSWORD -- john's own source says so, ALGORITHM_NAME is literally \"password is key\" in hmacMD5_fmt_plug.c, hmacSHA1_fmt_plug.c, hmacSHA256_fmt_plug.c and hmacSHA512_fmt_plug.c. mdxfind splits the two cases across two names: hx Appendix A gives HMAC-SHA1 (e215) as hmac_sha1(pass, user), keyed on the USER, and HMAC-SHA1-KPASS (e793) as hmac_sha1(salt, pass), keyed on the PASSWORD. So john's HMAC-SHA1 is mdxfind's HMAC-SHA1-KPASS, and matching the two by name pairs each with the wrong one. Measured -- mdxfind pinned to HMAC-SHA512-KPASS recovers this row's own plaintext, and pinned to the same-named non-KPASS type it correctly refuses, which is the control that says the two are different computations rather than two spellings."
@@ -61338,11 +61398,15 @@
          "hash_length" : "",
          "hash_length_basis" : "",
          "hashcat" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               14200
+            ],
+            "match" : "",
+            "state" : "proven",
+            "tier" : "vector"
          },
-         "hashcat_salted" : "",
-         "hashcat_speed" : "",
+         "hashcat_salted" : "yes",
+         "hashcat_speed" : "slow",
          "hashpipe" : {
             "ids" : [],
             "state" : "unknown"
@@ -61377,10 +61441,10 @@
          "sameas" : "",
          "serialization" : "divergent",
          "status" : "ok",
-         "suites_decided" : 2,
-         "suites_proven" : 2,
+         "suites_decided" : 3,
+         "suites_proven" : 3,
          "tool_note" : {
-            "hashcat" : "",
+            "hashcat" : "mode discovered by round-trip search, not by name",
             "hashpipe" : "",
             "john" : "john's own published example ciphertext for this format, recovered by john under this format. john publishes no plaintext, so the plaintext was found by handing john its own example and a candidate list -- what john recovered IS the plaintext, by construction.",
             "mdxfind" : "name match accepted by a curator on 2026-09-04 and not yet reproduced by this repository's own tooling; seed-vectors.pl and verify-vectors.pl decide it. See notes."

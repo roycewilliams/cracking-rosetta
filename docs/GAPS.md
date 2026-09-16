@@ -94,7 +94,7 @@ flavor of the hash function - `md5(MD5($p))` - and john rejects the first
 outright. It is deliberately **not** in john's column, which lists formats
 `--list=formats` will show; the gap worth filling is whether a named one exists.
 
-### hashcat: 169 entries say nothing
+### hashcat: 157 entries say nothing
 
 A few that carry a vector, so a candidate identifier can be tested at once, one per family:
 
@@ -114,7 +114,7 @@ A few that carry a vector, so a candidate identifier can be tested at once, one 
 * [`astra-linux-gost12256hash`](index.html#astra-linux-gost12256hash) - `Astra Linux $gost12256hash$` (and 1 more starting `Astra`)
 * [`azuread`](index.html#azuread) - `AzureAD`
 
-All 169: filter `hashcat_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
+All 157: filter `hashcat_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
 
 ### mdxfind: 60 entries say nothing
 
