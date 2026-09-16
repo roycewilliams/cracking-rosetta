@@ -220,7 +220,7 @@ what those vectors really are.
 | [`winphone`](index.html#winphone) | `sha256(utf16($p).fromhex($s))` | `-` | no john format, so john ships no control vectors; but RosettaExpr -- an implementation independent of all three crackers -- computes this expression over the entry's own vector(s) and reproduces 1 of ... |
 | [`yaf-sha1`](index.html#yaf-sha1) | `base64(sha1_raw(utf16($p).frombase64($s)))` | `-` | no john format, and RosettaExpr can compute this expression but none of the entry's 1 vector(s) is a bare digest to compare it against -- each is in a tool's own serialization, or lacks a salt the exp... |
 
-## Cracked, but not by that name (14)
+## Cracked, but not by that name (20)
 
 A tool recovers the plaintext from one of these vectors without implementing
 the algorithm the row is about, so the identifier is deliberately **not**
@@ -237,6 +237,10 @@ promote it.
 | Entry | Collides with | Why |
 |---|---|---|
 | [`aich`](index.html#aich) | `sha1lsb35` | AICH of a single block is SHA-1, and SHA1lsb35 is SHA-1 with the leading nibbles masked to zero, so any tool that ignores that field -- hashcat -m 100... |
+| [`dynamic-1029`](index.html#dynamic-1029) | `sha256` | Measured 2026-09-05. john states dynamic_1029 as "sha256($p) (hash truncated to length 32)", so the two agree on exactly the first 32 hex characters o... |
+| [`dynamic-1030`](index.html#dynamic-1030) | `whirlpool` | Measured 2026-09-05. john states dynamic_1030 as "whirlpool($p) (hash truncated to length 32)"; the two agree on the first 32 hex characters of whirlp... |
+| [`dynamic-1031`](index.html#dynamic-1031) | `hash-gost-plain` | Measured 2026-09-05. john states dynamic_1031 as "gost($p) (hash truncated to length 32)"; the two agree on the first 32 hex characters of gost($p) an... |
+| [`hash-gost-plain`](index.html#hash-gost-plain) | `dynamic-1031` | Measured 2026-09-05. john states dynamic_1031 as "gost($p) (hash truncated to length 32)"; the two agree on the first 32 hex characters of gost($p) an... |
 | [`md5`](index.html#md5) | `md5cap` | MD5CAP is cap(md5($p)), a no-op whenever the digest contains no letters to capitalize, so john's dynamic_2 and plain MD5 crack its vector without deno... |
 | [`md5-capitalise-md5-plain-username`](index.html#md5-capitalise-md5-plain-username) | `md5-md5-plain-salt-3` | MD5MD5USER and MD5CAPMD5USER differ only by cap() on the inner hex digest, which is a no-op whenever that digest starts with a digit. md5('rosetta') i... |
 | [`md5-md5-plain-salt-3`](index.html#md5-md5-plain-salt-3) | `md5-capitalise-md5-plain-username` | MD5MD5USER and MD5CAPMD5USER differ only by cap() on the inner hex digest, which is a no-op whenever that digest starts with a digit. md5('rosetta') i... |
@@ -248,18 +252,42 @@ promote it.
 | [`sha1lsb35`](index.html#sha1lsb35) | `aich` | AICH of a single block is SHA-1, and SHA1lsb35 is SHA-1 with the leading nibbles masked to zero, so any tool that ignores that field -- hashcat -m 100... |
 | [`sha1lsb35`](index.html#sha1lsb35) | `sha1uc` | SHA1UC is SHA-1 written in uppercase hex and SHA1lsb35 is SHA-1 with the leading nibbles masked to zero, so a tool that skips that field cannot tell t... |
 | [`sha1uc`](index.html#sha1uc) | `sha1lsb35` | SHA1UC is SHA-1 written in uppercase hex and SHA1lsb35 is SHA-1 with the leading nibbles masked to zero, so a tool that skips that field cannot tell t... |
+| [`sha256`](index.html#sha256) | `dynamic-1029` | Measured 2026-09-05. john states dynamic_1029 as "sha256($p) (hash truncated to length 32)", so the two agree on exactly the first 32 hex characters o... |
 | [`sha512-pass-salt`](index.html#sha512-pass-salt) | `sha512rawpasssalt` | Both mdxfind types reproduce BOTH entries' vectors at x01, measured 2026-09-05 with hashpipe -c pinned to each in turn: SHA512RAWPASSSALT and SHA512PA... |
-| [`sha512rawpasssalt`](index.html#sha512rawpasssalt) | `sha512-pass-salt` | Both mdxfind types reproduce BOTH entries' vectors at x01, measured 2026-09-05 with hashpipe -c pinned to each in turn: SHA512RAWPASSSALT and SHA512PA... |
+| [`sha512rawpasssalt`](index.html#sha512rawpasssalt) | `sha512-pass-salt` | Measured 2026-09-05. At depth one the two are numerically identical -- SHA512RAWPASSSALT (e1013) and SHA512PASSSALT (e386) both compute sha512(pass . ... |
+| [`whirlpool`](index.html#whirlpool) | `dynamic-1030` | Measured 2026-09-05. john states dynamic_1030 as "whirlpool($p) (hash truncated to length 32)"; the two agree on the first 32 hex characters of whirlp... |
 
-## Entries nothing can prove yet (2)
+## Entries nothing can prove yet (0)
 
-No test vector, so no tier above `asserted` is reachable for any tool, however
-well equipped. Several are types whose publisher's own example does not
-reproduce under that type, which is itself a question worth an answer. Any
-hash-and-plaintext pair settles one.
+None. Every entry that carries no vector now records why it carries none, and
+neither recorded reason is "nobody has got round to it". The two states that
+used to sit under this heading are below and, for the one that is not a
+question at all, at the end of this document.
 
-* [`parallel`](index.html#parallel) - PARALLEL - No vector exists to seed, measured 2026-09-04, and this is the one type in the inventory for which that is a fact about the tools rather than a gap in...
-* [`sha1saltcx`](index.html#sha1saltcx) - SHA1SALTCX - This row has NO vector and that is a deliberate withholding, measured 2026-09-04. The only example anyone publishes for this type -- mdxfind's own inv...
+## A vector exists, and is deliberately withheld (1)
+
+Not a data gap. Somebody publishes a vector for each of these, and storing it
+under the row as it currently stands would assert something the vector does
+not support - most often a depth, since the iteration suffix is identity and
+not a tuning knob. What is owed is a curator's decision about what the row
+describes. Reading the note is the whole job; supplying a vector is not.
+
+* [`sha1saltcx`](index.html#sha1saltcx) - SHA1SALTCX - A vector exists and is deliberately not recorded. The only published example -- mdxfind's own inventory row and the vendored hashpipe catalog carry the same string -- is a TEN-iteration hash, and this row declares no ite...
+
+## Mappings this row's vector cannot settle (4)
+
+Claimed, and carrying a vector, and still not a one-command job: the command
+has been run and could not decide. Where a tool computes something else under
+the identifier this row names, its failure to crack this row's vector is not
+evidence against the mapping - so the pair is here rather than at the top of
+[GAPS.md](GAPS.md), where it would have been advertised as the cheapest
+contribution in the repository. Settling one means deciding what the row is
+for: whether the identifier belongs on it at all, or wants a row of its own.
+
+* [`md5specam`](index.html#md5specam) - mdxfind `MD5SPECAM` (different-algorithm) - mdxfind and hashpipe do not compute the same thing under this name, so this row's vector -- which is hashpipe's -- cannot exercise mdxfind's type and a failure to crack it would say nothing about the mapping. hashpipe's ...
+* [`md5uc`](index.html#md5uc) - mdxfind `MD5UC` (not-comparable) - mdxfind cannot present this row's vector, and that is a property of how it compares rather than a defect. It converts a loaded hash to binary, so upper(md5($p)) and md5($p) are the same bytes to it -- offer it this row's...
+* [`sha1uc`](index.html#sha1uc) - mdxfind `SHA1UC` (not-comparable) - mdxfind cannot present this row's vector, and that is a property of how it compares rather than a defect. It converts a loaded hash to binary, so upper(sha1($p)) and sha1($p) are the same bytes to it -- offer it this row...
+* [`sha256uc`](index.html#sha256uc) - mdxfind `SHA256UC` (not-comparable) - mdxfind cannot present this row's vector, and that is a property of how it compares rather than a defect. It converts a loaded hash to binary, so upper(sha256($p)) and sha256($p) are the same bytes to it -- offer it this...
 
 ## Rows that may be more than one algorithm
 
@@ -284,3 +312,4 @@ and the vector are both already recorded, and one command decides it.
 * **`category:` on most entries.** Unfilled, and derivable from what the entry
   already proves; grinding through it by hand would be worse than leaving it.
 * **Crack's coverage.** Frozen at its 1996 manual on purpose - [CRACK.md](CRACK.md).
+* **A vector for `parallel`.** It cannot have one. The type computes no digest at all, so there is no hash for any plaintext to produce - which makes the absence a fact about the tool rather than a gap here. Each entry's `no_vector:` block states what was measured.

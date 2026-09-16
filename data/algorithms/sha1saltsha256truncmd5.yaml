@@ -6,9 +6,9 @@ expression_proof:
   verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
   note: "mdxfind type SHA1SALTSHA256TRUNCMD5 (e726) is MULTI-EMIT: it computes several candidate digests per input and matches if any one reproduces the stored hash. There is therefore no single expression to record, and writing one of the emitted forms into expression: would be a false claim even though the string itself is correct. This is also why two vectors of such a type can disagree with each other, and why a tool matching one of them is not evidence about the other."
 denotation:
-  text: "sha1(salt . md5(cut(sha256(pass), 0, N)))"
+  text: "sha1(salt . cut(sha256(md5(pass)), 0, N))"
   source: "mdxfind"
-  note: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A, entry for mdxfind type SHA1SALTSHA256TRUNCMD5 (e726), which states sha1(salt . md5(cut(sha256(pass), 0, N))) (N = 21-64). This is what the type emits, not a single construction -- see expression_proof."
+  note: "hx Language Specification, Appendix A, vendored as vendor/cynosureprime/hx.8 at commit 2139193c, entry for mdxfind type SHA1SALTSHA256TRUNCMD5 (e726), which states sha1(salt . cut(sha256(md5(pass)), 0, N)). CORRECTED 2026-09-05: this entry recorded sha1(salt . md5(cut(sha256(pass), 0, N))), and the two disagreed about the algorithm. The md5 is applied to the PASSWORD, before the sha256, not to the truncation after it. The case body reads mymd5(cur, len, curin.h); cur = prmd5(curin.h, mdbuf, 32); len = 32; and then FALLS THROUGH to the plain sha256 case, so the order is md5, then sha256, then the truncation, then sha1. The text recorded here put the md5 outside the cut, which is a different algorithm. mdxfind.c is authoritative and it agrees with the specification, so the entry is what changed. Found by tools/audit-denotations.pl, which compares every denotation against the vendored appendix."
 status: "needs-review"
 tools:
   hashcat:

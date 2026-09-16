@@ -6,9 +6,9 @@ expression_proof:
   verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
   note: "mdxfind type MD5MD5HUM (e363) is MULTI-EMIT: it computes several candidate digests per input and matches if any one reproduces the stored hash. There is therefore no single expression to record, and writing one of the emitted forms into expression: would be a false claim even though the string itself is correct. This is also why two vectors of such a type can disagree with each other, and why a tool matching one of them is not evidence about the other."
 denotation:
-  text: "emit(md5(md5(pass).S))"
+  text: "emit(md5(md5^N(pass) . S))"
   source: "mdxfind"
-  note: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A, entry for mdxfind type MD5MD5HUM (e363), which states emit(md5(md5(pass).S)) (S = \\n, \\r, \\r\\n, etc.). This is what the type emits, not a single construction -- see expression_proof."
+  note: "hx Language Specification, Appendix A, vendored as vendor/cynosureprime/hx.8 at commit 2139193c, entry for mdxfind type MD5MD5HUM (e363), which states emit(md5(md5^N(pass) . S)). CORRECTED 2026-09-05: this entry recorded emit(md5(md5(pass).S)), and the two disagreed about the algorithm. The HUM block re-hashes the inner digest at the end of every iteration -- if (x < Maxniter) { if (len == 32) mymd5(cur, len, md5buf.h); else mysha1(cur, len, md5buf.h); } -- so the value the outer hash consumes is the inner digest applied N times, which is what the exponent in the specification records. The text recorded here described only the N=1 case. mdxfind.c is authoritative and it agrees with the specification, so the entry is what changed. Found by tools/audit-denotations.pl, which compares every denotation against the vendored appendix."
 status: "needs-review"
 tools:
   hashcat:
@@ -21,6 +21,12 @@ tools:
     verified: "vector"
     verified_at: "2026-09-05"
     verified_with: "mdxfind RCS 1.576 (2026/09/02)"
+  hashpipe:
+    types: ["MD5MD5HUM"]
+    verified: "vector"
+    verified_at: "2026-09-05"
+    verified_with: "hashpipe RCS 1.193 (2026/09/05)"
+    note: "hashpipe e363 MD5MD5HUM. verified with hashpipe -c, which pins each line to its own leading TYPE label and runs no detection, at -t 1 and with the emitted label compared against the one asked for. Both precautions matter on this build: -m does not restrict what a recognised wrapper reaches, and results vary with the thread count. No iterations: is recorded from hashpipe -- the suffixes are different quantities and this repository follows mdxfind for that field."
   john:
     verified: "absent"
     verified_at: "2026-09-04"

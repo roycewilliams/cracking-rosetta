@@ -244,6 +244,36 @@
 # is safe within one tool's convention and unsafe across two that both write
 # expressions with different implicit operands.
 #
+# THREE WAYS AN ABSENCE IS A MEASUREMENT OF THE HARNESS, NOT OF THE TOOL
+#
+# All three were found on 2026-09-05 by re-checking the mdxfind absences this
+# script had written, and all three produce a verdict indistinguishable from a
+# real one. They are listed here because the sweep this script READS is where
+# each of them happens.
+#
+#   1. THE BUILD MOVED. An absence is true of the binary it was measured
+#      against. Every mdxfind absence here was established against RCS 1.545
+#      with 1002 types while data/tools/mdxfind.yaml had moved to RCS 1.576
+#      with 1027, and nineteen were wrong because the 25 indices added between
+#      the two were exactly the algorithms they were about. validate.pl now
+#      reports any absence naming a build the inventory has moved past.
+#
+#   2. THE TOOL COULD NOT READ THE VECTOR. A john dynamic's vector is stored
+#      as "$dynamic_NNNN$<digest>$<salt>$$U<user>", which mdxfind cannot parse
+#      at all, so the sweep offered it a string it was always going to decline.
+#      Fifteen john dynamics were recorded absent for this reason alone; every
+#      one cracks once the vector is rewritten into mdxfind's own field order.
+#      A sweep whose input a tool cannot READ has measured the serialization,
+#      not the algorithm.
+#
+#   3. THE ITERATION BOUND WAS TOO LOW. dynamic_1004, _1005 and _1006 are md5
+#      at six, seven and eight rounds. A sweep bounded below that finds nothing
+#      and looks exactly like a type that is missing. mdxfind reports the depth
+#      it matched at, so the bound has to be stated with the verdict.
+#
+# None of the three is detectable from the verdict alone, which is why each is
+# now recorded on the entry rather than left to be rediscovered.
+#
 # WHAT IT WILL NOT DO
 #
 # It never touches an entry that already names an identifier for the tool,

@@ -23,6 +23,11 @@ tools:
     verified_at: "2026-08-31"
     verified_with: "mdxfind RCS 1.540 (2026/08/22)"
     note: "NOT REPRODUCED HERE. mdxfind publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: the tool pinned to this identifier did not reproduce its own published example. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool mdxfind --only SHA1UC to retry."
+    no_round_trip:
+      reason: "not-comparable"
+      note: "mdxfind cannot present this row's vector, and that is a property of how it compares rather than a defect. It converts a loaded hash to binary, so upper(sha1($p)) and sha1($p) are the same bytes to it -- offer it this row's digest and it answers SHA1x01, because that is what those bytes are. A type distinguished only by hex case therefore cannot exist for mdxfind at depth one, and the first depth it can present is one hash further on, which it reports as SHA1UCx02. hashpipe compares the stored text, can tell the two apart, and verifies this row's vector as SHA1UCx01. Both are correct and they are not in conflict: each reports the first value its own comparison can distinguish. Appendix A's row, sha1_uc(pass), states the construction both implement. Measured 2026-09-05 against mdxfind RCS 1.576 and hashpipe RCS 1.193."
+      measured_at: "2026-09-05"
+      measured_with: "mdxfind RCS 1.576 (2026/09/02); hashpipe RCS 1.193 (2026/09/05)"
   hashpipe:
     types: ["SHA1UC"]
     verified: "vector"

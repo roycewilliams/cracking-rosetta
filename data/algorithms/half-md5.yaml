@@ -41,8 +41,9 @@ vectors:
   - hash: "975790dfb2854c88"
     pass: "rosetta"
     source: "sheet"
+    form: "hashcat"
     reads_in: ["hashcat", "mdxfind"]
 legacy:
   hashes_org: "CUTn-16MD5"
   hashkiller: "n/a"
-notes: "(n denoting the starting position n>=0)"
+notes: "(n denoting the starting position n>=0) The vector is 16 hex characters where MD5 emits 32, which is the whole point of this entry rather than a defect: hashcat mode 5100 stores the leading half, and the stored string is the first 16 characters of the md5 of the plaintext. mdxfind reads it too, because it compares binary at the shortest length it read. form: records the spelling so an audit of digest widths does not read this as a lost half. Measured 2026-09-05."

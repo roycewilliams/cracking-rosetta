@@ -35,6 +35,8 @@ tools:
     verified: "vector"
     verified_at: "2026-09-07"
     verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
+    match: ["plaintext-case"]
+    note: "john reproduces this row and returns ROSETTA where the vector stores rosetta. LM upper-cases by construction, so the round trip is exact in the hash and differs in the plaintext by case alone. Re-measured 2026-09-14 against the build named above: john --format=LM cracks the stored vector and --show reports ROSETTA."
   crack:
     supported: false
 vectors:
@@ -45,7 +47,9 @@ vectors:
   - hash: "299bd128c1101fd6"
     pass: "HASHCAT"
     source: "hashcat"
+    form: "hashcat"
     reads_in: ["hashcat", "mdxfind"]
 legacy:
   hashes_org: "LM"
   hashkiller: "n/a"
+notes: "The two vectors here are different credentials, not one credential written twice. The 32-character string is the LM pair as john writes it, and its second half is aad3b435b51404ee, the LM of the empty string; the 16-character string is a SINGLE half, which is what hashcat mode 3000 takes. form: on the shorter one records that its width is hashcat's serialization and not a truncation. Measured 2026-09-05."

@@ -11,6 +11,12 @@ denotation:
   note: "john's own label for HMAC-SHA224, in 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200."
 status: "ok"
 tools:
+  mdxfind:
+    types: ["HMAC-SHA224-KPASS"]
+    verified: "vector"
+    verified_at: "2026-09-05"
+    verified_with: "mdxfind RCS 1.576 (2026/09/02)"
+    note: "mdxfind e794 HMAC-SHA224-KPASS. Added 2026-09-05. This row read as though john were doing something no other tool does, and it is not: The same NAME means opposite things in john and mdxfind, which is what put this mapping on the wrong row. john's HMAC-* formats key on the PASSWORD -- john's own source says so, ALGORITHM_NAME is literally \"password is key\" in hmacMD5_fmt_plug.c, hmacSHA1_fmt_plug.c, hmacSHA256_fmt_plug.c and hmacSHA512_fmt_plug.c. mdxfind splits the two cases across two names: hx Appendix A gives HMAC-SHA1 (e215) as hmac_sha1(pass, user), keyed on the USER, and HMAC-SHA1-KPASS (e793) as hmac_sha1(salt, pass), keyed on the PASSWORD. So john's HMAC-SHA1 is mdxfind's HMAC-SHA1-KPASS, and matching the two by name pairs each with the wrong one. Measured -- mdxfind pinned to HMAC-SHA224-KPASS recovers this row's own plaintext, and pinned to the same-named non-KPASS type it correctly refuses, which is the control that says the two are different computations rather than two spellings."
   john:
     cpu: ["HMAC-SHA224"]
     verified: "vector"
@@ -28,4 +34,13 @@ vectors:
   - hash: "what do ya want for nothing?#a30e01098bc6dbbf45690f3a7e9e6d0f8bbea2a39e6148008fd05e44"
     pass: "Jefe"
     source: "john"
+    form: "john"
     reads_in: ["john"]
+    credential: "hmac-sha224"
+  - hash: "a30e01098bc6dbbf45690f3a7e9e6d0f8bbea2a39e6148008fd05e44:what do ya want for nothing?"
+    pass: "Jefe"
+    source: "mdxfind"
+    form: "mdxfind"
+    reads_in: ["mdxfind"]
+    credential: "hmac-sha224"
+notes: "The two vectors on this row are ONE credential written twice and must never be read as corroborating each other: john reads <message>#<digest>, mdxfind reads <digest>:<salt>. The same NAME means opposite things in john and mdxfind, which is what put this mapping on the wrong row. john's HMAC-* formats key on the PASSWORD -- john's own source says so, ALGORITHM_NAME is literally \"password is key\" in hmacMD5_fmt_plug.c, hmacSHA1_fmt_plug.c, hmacSHA256_fmt_plug.c and hmacSHA512_fmt_plug.c. mdxfind splits the two cases across two names: hx Appendix A gives HMAC-SHA1 (e215) as hmac_sha1(pass, user), keyed on the USER, and HMAC-SHA1-KPASS (e793) as hmac_sha1(salt, pass), keyed on the PASSWORD. So john's HMAC-SHA1 is mdxfind's HMAC-SHA1-KPASS, and matching the two by name pairs each with the wrong one."

@@ -16,6 +16,7 @@ tools:
     verified: "vector"
     verified_at: "2026-09-05"
     verified_with: "mdxfind RCS 1.576 (2026/09/02)"
+    note: "mdxfind e1027 SUNMD5. Added 2026-09-05: no mdxfind block existed on this row and mdxfind has a type for this algorithm."
   hashpipe:
     types: ["SUNMD5"]
     verified: "vector"

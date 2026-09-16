@@ -181,19 +181,31 @@ my %FORM = map { $_ => 1 } qw(native hashcat john mdxfind);
 # the drift the merge was meant to remove.
 my @TOMB_FORBIDDEN = qw(
     expression john_dynamic_expr expression_proof denotation category
-    application application_version tools vectors aliases legacy
+    application application_version tools vectors no_vector aliases legacy
 );
 
 my %TOP_KEY = map { $_ => 1 } qw(
     id name aliases expression john_dynamic_expr expression_proof denotation
     category application application_version status merged_into
-    tools relations vectors legacy notes
+    tools relations vectors no_vector legacy notes
 );
 
 my %EXPR_PROOF_KEY = map { $_ => 1 } qw(verified verified_at verified_with note);
 my %DENOTATION_KEY = map { $_ => 1 } qw(text source note);
 my %IS_DENOT_SOURCE = map { $_ => 1 }
     qw(sheet mdxfind hashcat john hashpipe hashes.org human);
+
+my %NO_VECTOR_KEY = map { $_ => 1 } qw(reason note measured_at measured_with);
+
+# Why an entry carries no vectors, where that is a settled fact rather than a
+# backlog. The distinction is the whole point: GAPS.md asks the world for a
+# vector for every entry that has none, and for some entries that request is
+# not merely unanswered but unanswerable. 'impossible' means the type emits
+# nothing at all, so no plaintext has a hash to be paired with; 'withheld'
+# means a vector exists and recording it HERE would assert something false,
+# which is a curator's decision and not a contributor's data. An entry with
+# neither block nor vectors stays an ordinary gap and is still asked for.
+my %IS_NO_VECTOR_REASON = map { $_ => 1 } qw(impossible withheld);
 
 my %IS_CATEGORY = map { $_ => 1 } qw(
     primitive composite iterated encoding application protocol kdf
@@ -238,16 +250,27 @@ my %REL_MIRROR = (
     'covered-by'        => 'covers',
 );
 
+# no_round_trip on every one of them: it is a statement about whether THIS
+# entry's vectors can exercise THAT tool's identifier, which every column can
+# fail to do for its own reasons.
 my %TOOL_KEY = (
-    hashcat  => { map { $_ => 1 } qw(modes verified verified_at verified_with match note) },
-    john     => { map { $_ => 1 } qw(cpu gpu verified verified_at verified_with match note) },
-    mdxfind  => { map { $_ => 1 } qw(types iterations verified verified_at verified_with match note) },
+    hashcat  => { map { $_ => 1 } qw(modes verified verified_at verified_with match note no_round_trip) },
+    john     => { map { $_ => 1 } qw(cpu gpu verified verified_at verified_with match note no_round_trip) },
+    mdxfind  => { map { $_ => 1 } qw(types iterations verified verified_at verified_with match note no_round_trip) },
     # No iterations: hashpipe's suffix reports the algorithm's own round count
     # read out of the hash where mdxfind's counts outer re-hashing driven by
     # -i, so the two are different quantities. See the schema.
-    hashpipe => { map { $_ => 1 } qw(types verified verified_at verified_with match note) },
-    crack    => { map { $_ => 1 } qw(supported note) },
+    hashpipe => { map { $_ => 1 } qw(types verified verified_at verified_with match note no_round_trip) },
+    crack    => { map { $_ => 1 } qw(supported note no_round_trip) },
 );
+
+my %NO_RT_KEY = map { $_ => 1 } qw(reason note measured_at measured_with);
+# Why this entry's vectors cannot promote this tool's mapping. Measured, not
+# assumed: 'different-algorithm' means the tool computes something else under
+# the identifier, so a failure to crack this row's vector says nothing about
+# the mapping; 'emits-nothing' means the tool's type produces no digest for
+# any input at all.
+my %IS_NO_RT_REASON = map { $_ => 1 } qw(different-algorithm emits-nothing not-comparable);
 
 # Which key in each tool block holds the identifiers to cross-reference.
 my %IDENT_KEYS = (
@@ -367,6 +390,17 @@ my %seen_id;
 my %tier_count;      # tool tier -> n
 my %expr_tier;       # expression_proof.verified -> n
 my ($n_expr, $n_denot, $n_novec) = (0, 0, 0);
+my %novec_reason;   # no_vector.reason -> n; the subset that is NOT a backlog
+
+# An 'absent' claim is a MEASUREMENT against a particular build, and it expires
+# when that tool gains types. Measured 2026-09-05: every one of the 343 mdxfind
+# absences here had been established against RCS 1.545 with 1002 types, while
+# data/tools/mdxfind.yaml had already moved to RCS 1.576 with 1027 -- and 19 of
+# those absences were wrong, because the 25 indices added between the two builds
+# are exactly the john-shaped types several of them named. The claims even said
+# so: "if mdxfind gains one, this becomes a mapping". Nothing compared the two
+# version strings, so nothing noticed. This does.
+my %absent_build;   # tool -> the build string the claim names -> n
 my $tombstones = 0;
 my %tomb;            # tombstone id -> { into => survivor id, file => ... }
 my %by_expression;   # expression -> [ ids ] , for the collision rule
@@ -411,6 +445,13 @@ for my $file (@files) {
         $n_expr++  if defined $d->{expression} && length $d->{expression};
         $n_denot++ if ref $d->{denotation} eq 'HASH';
         $n_novec++ unless ref $d->{vectors} eq 'ARRAY' && @{ $d->{vectors} };
+        $novec_reason{ $d->{no_vector}{reason} // '?' }++
+            if ref $d->{no_vector} eq 'HASH';
+        for my $t (qw(hashcat john mdxfind hashpipe)) {
+            my $b = $d->{tools}{$t} or next;
+            next unless ($b->{verified} // '') eq 'absent';
+            $absent_build{$t}{ $b->{verified_with} // '(unrecorded)' }++;
+        }
         $expr_tier{ $d->{expression_proof}{verified} // '?' }++
             if ref $d->{expression_proof} eq 'HASH';
         for my $t (qw(hashcat john mdxfind hashpipe crack)) {
@@ -577,6 +618,64 @@ for my $file (@files) {
         }
     }
 
+    # --- no_vector ------------------------------------------------------
+    #
+    # GAPS.md tells the world that every entry with no vectors is waiting for
+    # one, and names the contribution as "a hash and the plaintext that
+    # produces it". For some entries that is not a gap at all: mdxfind's
+    # PARALLEL computes nothing -- its case in mdxfind.c increments the hash
+    # counter and breaks -- so there is no digest for any plaintext to
+    # produce and no amount of equipment will supply one. Asking anyway sends
+    # a willing contributor after something that is not there, and the fact
+    # that it is not there is exactly what the repository knows and was
+    # saying only in prose.
+    #
+    # So the reason becomes data. It is deliberately NOT a tier: nothing here
+    # is promoted, and 'impossible' is not a weaker 'vector'.
+    my $novec = $d->{no_vector};
+    if (defined $novec) {
+        if (ref $novec ne 'HASH') {
+            err("%s: 'no_vector' must be a mapping", $file);
+        }
+        else {
+            for my $k (sort keys %$novec) {
+                err("%s: unknown key 'no_vector.%s'", $file, $k)
+                    unless $NO_VECTOR_KEY{$k};
+            }
+
+            my $reason = $novec->{reason};
+            if (!defined $reason || !length $reason) {
+                err("%s: no_vector needs a 'reason'", $file);
+            }
+            elsif (!$IS_NO_VECTOR_REASON{$reason}) {
+                err("%s: no_vector.reason '%s' is not one of: %s", $file,
+                    $reason, join(', ', sort keys %IS_NO_VECTOR_REASON));
+            }
+
+            # An unexplained 'impossible' forecloses the question it claims
+            # to settle, and is indistinguishable from a shrug. The note is
+            # what a later reader audits the claim against.
+            err("%s: no_vector needs a 'note' saying what was measured or "
+              . "what decision is owed", $file)
+                unless defined $novec->{note} && length $novec->{note};
+
+            if (defined $novec->{measured_at}
+                && $novec->{measured_at} !~ /^\d{4}-\d{2}-\d{2}$/) {
+                err("%s: no_vector.measured_at '%s' is not YYYY-MM-DD",
+                    $file, $novec->{measured_at});
+            }
+
+            # The one that keeps it honest. A vector arriving later is the
+            # good outcome, and it must not leave a stale denial standing
+            # beside the thing it denies.
+            if (ref $d->{vectors} eq 'ARRAY' && @{ $d->{vectors} }) {
+                err("%s: no_vector is set alongside %d vector(s); it is for "
+                  . "entries that have none -- drop the block", $file,
+                  scalar @{ $d->{vectors} });
+            }
+        }
+    }
+
     # --- tools --------------------------------------------------------
     my $tools = $d->{tools};
     if (defined $tools) {
@@ -673,6 +772,77 @@ for my $file (@files) {
                     && !(ref $d->{vectors} eq 'ARRAY' && @{ $d->{vectors} })) {
                     err("%s: tools.%s.verified is 'vector' but the entry has no vectors",
                         $file, $tool);
+                }
+
+                # --- no_round_trip ---------------------------------------
+                #
+                # GAPS.md sells a claimed-but-unproven mapping as the
+                # cheapest contribution there is: the identifier and the
+                # vector are both on the row, so "one command decides it".
+                # That is only true where the command CAN decide. mdxfind's
+                # MD5SPECAM reads a userid off the line and performs zero
+                # hash calculations on this row's vector -- which is
+                # hashpipe's, for a type of the same name that computes
+                # something else -- so running it settles nothing, and the
+                # queue was advertising a job that had already been done and
+                # had come back inconclusive.
+                my $nrt = $blk->{no_round_trip};
+                if (defined $nrt) {
+                    if (ref $nrt ne 'HASH') {
+                        err("%s: tools.%s.no_round_trip must be a mapping",
+                            $file, $tool);
+                    }
+                    else {
+                        for my $k (sort keys %$nrt) {
+                            err("%s: unknown key 'tools.%s.no_round_trip.%s'",
+                                $file, $tool, $k) unless $NO_RT_KEY{$k};
+                        }
+
+                        my $reason = $nrt->{reason};
+                        if (!defined $reason || !length $reason) {
+                            err("%s: tools.%s.no_round_trip needs a 'reason'",
+                                $file, $tool);
+                        }
+                        elsif (!$IS_NO_RT_REASON{$reason}) {
+                            err("%s: tools.%s.no_round_trip.reason '%s' is not "
+                              . "one of: %s", $file, $tool, $reason,
+                                join(', ', sort keys %IS_NO_RT_REASON));
+                        }
+
+                        err("%s: tools.%s.no_round_trip needs a 'note' saying "
+                          . "what was measured", $file, $tool)
+                            unless defined $nrt->{note} && length $nrt->{note};
+
+                        if (defined $nrt->{measured_at}
+                            && $nrt->{measured_at} !~ /^\d{4}-\d{2}-\d{2}$/) {
+                            err("%s: tools.%s.no_round_trip.measured_at '%s' "
+                              . "is not YYYY-MM-DD", $file, $tool,
+                                $nrt->{measured_at});
+                        }
+
+                        # The contradiction that matters. 'vector' means this
+                        # tool DID reproduce one of this entry's vectors, so
+                        # a standing statement that it cannot is stale by
+                        # definition -- and leaving both would let a reader
+                        # pick whichever half they liked.
+                        if (defined $tier && $tier eq 'vector') {
+                            err("%s: tools.%s is tier 'vector' but carries a "
+                              . "no_round_trip block saying this entry's "
+                              . "vectors cannot promote it; the round trip "
+                              . "happened, so the block comes out",
+                                $file, $tool);
+                        }
+
+                        # 'absent' says the tool does not support this
+                        # algorithm at all. Then there is no identifier for a
+                        # vector to fail against and nothing to explain.
+                        if (defined $tier && $tier eq 'absent') {
+                            err("%s: tools.%s is tier 'absent', so there is no "
+                              . "mapping for a vector to promote and "
+                              . "no_round_trip has nothing to say", $file,
+                                $tool);
+                        }
+                    }
                 }
 
                 # And a block must not say the opposite of its own tier.
@@ -1133,6 +1303,44 @@ if (@shown) {
 }
 
 unless ($quiet) {
+    # Absences that were measured against a build the inventory has moved past.
+    # Not an error: a stale claim is unverified, not necessarily wrong. But it
+    # is the one thing a reader cannot tell from the row, and it is how 19 wrong
+    # absences survived a refresh -- see the comment on %absent_build above.
+    {
+        my %invver = (hashcat  => $hc_doc->{version}, john     => $jn_doc->{version},
+                      mdxfind  => $mx_doc->{version}, hashpipe => $hp_doc->{version});
+        my @stale;
+        for my $t (sort keys %absent_build) {
+            my $cur = $invver{$t};
+            next unless defined $cur && length $cur;
+            for my $claimed (sort keys %{ $absent_build{$t} }) {
+                my $n = $absent_build{$t}{$claimed};
+                # An unrecorded build cannot be compared and is its own problem.
+                if ($claimed eq '(unrecorded)') {
+                    push @stale, [$t, $claimed, $cur, $n]; next;
+                }
+                # A claim is current when the build it names still appears in
+                # the inventory's version string. Deliberately a substring test
+                # rather than a version parse: the two strings are written by
+                # different tools and only have their build token in common.
+                my ($ctok) = $claimed =~ /((?:RCS\s+)?v?[0-9]+(?:\.[0-9]+)+(?:-[0-9A-Za-z.]+)?)/;
+                next if defined $ctok && index($cur, $ctok) >= 0;
+                push @stale, [$t, $claimed, $cur, $n];
+            }
+        }
+        if (@stale) {
+            my $total = 0; $total += $_->[3] for @stale;
+            printf STDERR "\n- Stale absences: %d 'absent' claim(s) name a build the inventory has\n"
+                        . "                  moved past. An absence expires when the tool gains types,\n"
+                        . "                  so each is unverified rather than wrong -- re-run the\n"
+                        . "                  matching discover-*.pl over the indices added since.\n",
+                   $total;
+            printf STDERR "                  %-8s %4d claim(s) measured against %s; inventory is %s\n",
+                   $_->[0], $_->[3], $_->[1], $_->[2] for @stale;
+        }
+    }
+
     printf STDERR "\n- Inventories: hashcat %d modes (%s), john %d formats (%s), mdxfind %d types (%s)\n",
         scalar(@$hc_list), $hc_doc->{version},
         scalar(@$jn_list), $jn_doc->{version},
@@ -1178,14 +1386,22 @@ unless ($quiet) {
             join('  ', map { "$_ $tier_count{$_}" }
                  grep { $tier_count{$_} } qw(vector upstream asserted absent));
         printf STDERR "- Expression:  %d of %d entries carry one (%s); "
-                    . "no vector at all %d; denotation %d\n",
+                    . "no vector at all %d%s; denotation %d\n",
             # Live entries only: a tombstone carries no expression by rule,
             # so counting it in the denominator would report a slow decline
             # every time a merge succeeded.
             $n_expr, $entries - $tombstones,
             join(', ', map { "$_ $expr_tier{$_}" }
                  grep { $expr_tier{$_} } qw(vector upstream asserted absent)),
-            $n_novec, $n_denot;
+            $n_novec,
+            (%novec_reason
+             ? sprintf(' (of which %d settled: %s)',
+                       eval { my $s = 0; $s += $_ for values %novec_reason; $s },
+                       join(', ', map { "$_ $novec_reason{$_}" }
+                            grep { $novec_reason{$_} }
+                            qw(impossible withheld)))
+             : ''),
+            $n_denot;
 
         my @unmapped = sort { $a <=> $b } grep { !$hit_hc{$_} } map { $_->{mode} } @$hc_list;
         printf STDERR "-   hashcat modes with no entry: %d (first: %s)\n",

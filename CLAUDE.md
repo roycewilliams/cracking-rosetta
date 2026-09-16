@@ -194,7 +194,16 @@ identity, mdxfind is the instrument that defines it, and the schema gives
 hashpipe no `iterations` field at all. What changes is that the rule no
 longer has a disagreement behind it to point at.
 
-**The 25 names hashpipe has and mdxfind does not are TRANSIENT, and that is
+**RESOLVED 2026-09-05: the 25 arrived in mdxfind, exactly as predicted below,
+and the prediction is left standing because it came true.** Measured against
+mdxfind RCS 1.576, all 25 are now indices `e1003`-`e1027` of mdxfind's own type
+table, every one round-trips under `mdxfind -M eNNNN`, and every one now has a
+row here -- mdxfind coverage is 1027/1027. What follows is the reasoning as it
+stood, kept because the argument it settled is the one that recurs: whether a
+hashpipe-only name is grounds for a fourth column. It was not, and the reason
+it was not is that the list was transient.
+
+**The 25 names hashpipe had and mdxfind did not were TRANSIENT, and that was
 upstream's own account.** Waffle told Royce (relayed 2026-09-03) that they
 exist because he is improving hashpipe's overlapping support with algorithms
 JOHN supports. That is the author's statement of intent, not a measurement,
@@ -232,7 +241,9 @@ its own record in `data/upstream-disagreements.yaml`, and nothing here
 touches it. And because the divergence is transient by upstream's account,
 the thing to watch after the next `fetch-upstream.sh` is the list SHRINKING:
 if these types arrive in mdxfind, they stop being hashpipe-only and the
-question closes itself.
+question closes itself. **It closed on 2026-09-05.** The list is empty, and
+`QAS-VASAUTH` -- named above as the one hashpipe type unreachable here by any
+identifier -- is reachable by its own, on the `qas-vasauth` row.
 
 **What detects that it has stopped being true is
 `data/upstream-disagreements.yaml`, executed by `tools/check-upstream.pl`.**
@@ -275,6 +286,151 @@ Never promote a tier without re-running the check.
 The same four tiers apply to `expression:` via `expression_proof:` -- see
 **Expression language** below. It is the same kind of claim and deserves the
 same audit trail.
+
+### `absent` is a measurement, and it expires
+
+The other three tiers describe a claim that was proved. `absent` describes one
+that could not be, which makes it the only tier that can go wrong while nobody
+touches it: it is a statement about a BUILD, and the build moves.
+
+Measured 2026-09-05. Every one of the 343 mdxfind absences here had been
+established against mdxfind RCS 1.545 with 1002 types, by a full
+`discover-mdxfind.pl` sweep with positive controls -- careful work, correctly
+recorded. `data/tools/mdxfind.yaml` had since been regenerated at RCS 1.576
+with 1027. The 25 indices added between the two builds, `e1003`-`e1027`, are
+overwhelmingly John-shaped formats, and nineteen of the absences were about
+exactly those algorithms. The notes even said so, in terms: *"hashpipe DOES
+cover this algorithm, as type DRAGONFLY3-32, which mdxfind has no equivalent
+of ... This is the absence of an IDENTIFIER, not of the algorithm: if mdxfind
+gains one, this becomes a mapping."* mdxfind gained one. Nothing compared the
+two version strings, so nothing noticed, and the rows went on saying no.
+
+So **`verified_with` on an `absent` claim is load-bearing, not decoration.**
+`validate.pl` now reports every absence naming a build the inventory has moved
+past -- an advisory, because a stale absence is unverified rather than wrong.
+It found 327 mdxfind claims still at 1.545 and 19 hashcat claims with no
+recorded build at all, which cannot be checked even in principle.
+`verify-vectors.pl` wrote a bare `"mdxfind"` into the same field and now writes
+the inventory's version string, so what it promotes stays auditable.
+
+And the build is only one of three ways an absence measures the harness rather
+than the tool. The other two were found on 2026-09-05 by re-checking the john
+dynamics, and both produce a verdict indistinguishable from a real one:
+
+- **The tool could not read the vector.** A john dynamic is stored as
+  `$dynamic_NNNN$<digest>$<salt>$$U<user>`, which mdxfind cannot parse at all,
+  so the sweep offered it a string it was always going to decline. Fifteen
+  dynamics were recorded absent for that reason alone, and every one cracks
+  once the vector is rewritten into mdxfind's own field order. A sweep whose
+  input a tool cannot READ has measured the serialization, not the algorithm.
+- **The iteration bound was too low.** `dynamic_1004`, `_1005` and `_1006` are
+  md5 at six, seven and eight rounds. A sweep bounded below that finds nothing
+  and looks exactly like a missing type. mdxfind reports the depth it matched
+  at, so the bound belongs with the verdict.
+
+Both are now in `absence.pl`'s methodology, beside the build one.
+
+What closes an absence is cheap, and should be the reflex after any inventory
+refresh: sweep the corpus against the indices the refresh ADDED, one type per
+invocation, rather than re-running everything. Measured 2026-09-05: 25 types
+over 1761 hashes took under a minute.
+
+A GAPS.md section per tool is the other half. Only hashcat had one, so the 25
+new mdxfind types were in no queue and nobody had reason to look at them.
+
+### An entry with no vector is not always a gap
+
+`GAPS.md` used to list every entry with no `vectors:` under "No test vector at
+all", and tell the reader that supplying one "is the whole contribution".
+`OPEN-QUESTIONS.md` listed the same set under "Entries nothing can prove yet".
+Both were generated from one predicate -- the entry has no vectors -- which
+cannot see the difference between a backlog and a settled fact.
+
+For `parallel` the request was unanswerable. mdxfind's `JOB_PARALLEL` case is
+`hashcnt += Maxiter; break;`: it advances the hash counter and returns,
+computing no digest and calling no `checkhash`. There is no hash for any
+plaintext to produce, which is also why e426 is the one index mdxfind has that
+hashpipe does not -- there is nothing there to implement. Upstream had already
+established this and it was recorded in the entry's `notes:`, in prose, where
+no generator could read it, so both documents went on asking.
+
+So the reason is data. `no_vector:` carries a `reason:`, a required `note:`
+and the usual `measured_at`/`measured_with`, and the vocabulary is exactly two
+values that are NOT degrees of one thing:
+
+- `impossible` -- no vector can exist. The type emits nothing, so nobody can
+                  supply one however well equipped. Not a question.
+- `withheld`   -- a vector exists, and storing it under the row as written
+                  would assert something false. `sha1saltcx` is the case: the
+                  only published example is a ten-iteration hash and the row
+                  declares no iteration count, which the schema reads as one.
+                  What is missing is a curator's decision, not a contributor's
+                  data.
+
+Deliberately not a fifth tier. Tiers say how well a claim is known and can be
+promoted; this says why a claim will never be made, and nothing about it is
+promoted. `validate.pl` refuses it beside `vectors:` -- a vector arriving is
+the good outcome and must not leave a stale denial standing next to the thing
+it denies -- refuses an unknown `reason:`, and refuses a missing `note:`,
+because an unexplained `impossible` is indistinguishable from a shrug and
+forecloses the question it claims to settle. It is also on the tombstone
+forbidden list: a tombstone asserts nothing, and this is an assertion.
+
+`render.pl` then routes rather than hides. The `impossible` ones appear under
+`OPEN-QUESTIONS.md`'s "What is deliberately not a question", derived so that
+marking another type stops it being asked for without anyone editing a list;
+the `withheld` ones get their own section stating the decision that is owed;
+and `GAPS.md` says how many it set aside and why, so the count shrinking is
+visible rather than silent.
+
+One trap worth keeping, because it was nearly shipped: the row hash in
+`render.pl` IS the export shape -- `dist/rosetta.json` serializes it whole --
+so carrying `no_vector` there for a document's benefit put `"no_vector": null`
+on every row and widened the published contract without anyone deciding to.
+It lives in a lookup beside the rows instead. **Anything added to that hash is
+published; check `git diff dist/` before believing a render is clean.**
+
+### And a mapping with a vector beside it is not always one command away
+
+The same defect one level down, and it survived the fix above because it is a
+different predicate. `GAPS.md` section 1 ranks a claimed-but-unproven mapping
+as the cheapest contribution in the repository -- the identifier and the vector
+are both already on the row, so "one command decides it" -- and selects on
+`state eq 'claimed' && $r->{vecs}`. It cannot see whether the command CAN
+decide.
+
+`md5specam` is the case, and note that it was ALREADY correct about everything
+except the queue it sat in. mdxfind and hashpipe do not compute the same thing
+under that name: hashpipe's `compute_md5specam` is `md5($p . md5_raw($p))` and
+takes neither salt nor user, while mdxfind's `JOB_MD5SPECAM` reads a userid off
+the line and breaks out when that field is empty. The row's vector is
+hashpipe's. Pinned with `-h '^MD5SPECAM$'`, mdxfind performs ZERO hash
+calculations on it under `-f` and zero again under `-F` with a userid appended
+-- it declines the input shape rather than computing and missing -- so a
+failure to crack is not evidence against the mapping, and the tier correctly
+stayed at `asserted`. What was wrong was advertising it as a one-liner.
+
+So `tools.<tool>.no_round_trip:` says that this ENTRY's vectors cannot exercise
+that TOOL's identifier, with the same `reason:` + required `note:` +
+`measured_at`/`measured_with` shape. Two reasons: `different-algorithm` (the
+tool computes something else under that identifier) and `emits-nothing` (the
+tool's type produces no digest for any input). It is scoped deliberately: it
+says nothing about whether the tool could round-trip some OTHER vector, and it
+never changes the tier, which stays whatever the evidence supports.
+
+`validate.pl` refuses it at tier `vector` -- the round trip demonstrably
+happened, so the block is stale -- and at tier `absent`, where there is no
+mapping for a vector to promote and nothing to explain. `render.pl` moves the
+pair out of `GAPS.md` section 1 and into `OPEN-QUESTIONS.md` under "Mappings
+this row's vector cannot settle", because the question that IS open is a
+curator's: does that identifier belong on this row at all, or does it want a
+row of its own.
+
+Note the shape this shares with `no_vector:` above, since a third instance
+will want the same treatment: **a queue that selects on the absence of
+evidence will keep proposing work that has already been done.** Both fixes
+record the measurement that closed the question, in a field a generator can
+read, and let the queue subtract it.
 
 ## Round-trip verification recipes
 
@@ -461,6 +617,88 @@ mdxfind also accepts hashcat modes directly (`mdxfind -m 0`, `-m e1`,
   `base_iter` 1 control beside them, since without it "the fix landed" and
   "every depth shifted by one" are the same reading. Asserting only `-c` is
   precisely how the half that moved went unasserted for two revisions.
+- **A shared salt pool can MANUFACTURE a hit, not only suppress one.** The
+  entry above records that a large type selection suppresses matches. The
+  mirror image is real, measured 2026-09-05: sweeping 1761 corpus hashes with
+  `mdxfind -M e1003 -F <all>` reported a hit on the `md4` row, because with
+  every corpus salt loaded `MD4SALTPASS` finds a salt for which `md4($s.$p)`
+  equals `md4($p)` -- the empty one. Pinned to that row's own vector alone,
+  the same type cracks nothing. Four more hits in the same sweep had the same
+  shape: `SHA512RAWPASSSALT` on two `SHA512PASSSALT` rows, which are identical
+  at x01 and differ only in iteration role, and `SHA1UCUSERPASS` on `MANGOS`.
+  Every one was on a row already naming a LOWER `eN`, which is the existing
+  tie-break doing its job. **A corpus-wide sweep proposes; a run pinned to the
+  single row disposes.** Never record a mapping from the sweep line.
+- **hashpipe's `-m` does not restrict what a recognised wrapper reaches.**
+  Measured on hashpipe RCS 1.193, 2026-09-05, and reported upstream rather
+  than worked around here. `parse_line`'s prefix recogniser resolves a known
+  wrapper with `find_type_by_name("7ZIP")` and never consults `ModeList`, so
+  `printf '$7z$...' | hashpipe -m e1021` reports `7ZIP` although e1021 is
+  DRAGONFLY3-32. 61 types are named by a recogniser call site; over a
+  1743-line corpus with a 29-index `-m`, 96 of 122 results named a type
+  outside the selection. Types with no recogniser entry -- MONGODB, H3C,
+  DRAGONFLY3-32, SUNMD5, ORACLE11 -- obey `-m` correctly, which is the
+  control. So a `-m` pin is not yet the hashpipe equivalent of
+  `mdxfind -h '^TYPE$'`, and a tool treating it as one will record a mapping
+  the pin never proved.
+- **hashpipe loses matches as the thread count rises.** Same input, same
+  flags, five runs each, measured 2026-09-05: `-t 1` and `-t 2` give 122 every
+  time, `-t 4` gives 116, `-t 8` gives 117, `-t 16` gives 114-119 varying run
+  to run. The default is the CPU count. A lost match is indistinguishable from
+  a genuine negative, which is the failure `absence.pl` exists to prevent, so
+  run hashpipe at `-t 1` wherever its silence will be read as evidence.
+- **mdxfind COMPARES BINARY, so a type distinguished only by hex case has no
+  comparable value at x01.** This is the explanation for a whole family of
+  rows that look broken and are not. mdxfind converts a loaded hash to binary,
+  so `upper(md5($p))` and `md5($p)` are the same sixteen bytes to it: offer it
+  `482C811DA5D5B4BC6D497FFA98491E38` and it answers **`MD5x01`**, because that
+  is what those bytes are. A type whose only distinguishing feature is the case
+  of the hex therefore cannot exist for mdxfind at depth one, and the first
+  depth it can present is one hash further on, which it reports as `x02`.
+  hashpipe compares the stored TEXT, can tell the two apart, and reports the
+  same type at `x01`. **Neither tool is wrong and they are not in conflict** --
+  each reports the first value its own comparison can distinguish, and
+  Appendix A's row states the construction both implement.
+  Measured 2026-09-05 for `MD5UC` (e2), `SHA1UC` (e182) and `SHA256UC` (e488):
+  each accepts the other tool's value under neither case, which is what the
+  binary comparison predicts.
+  The consequence for this repository is on the entry, not on the tool. Such a
+  row's published vector is the x01 value, so **mdxfind can never promote it
+  from that vector** -- those three sat at `upstream`/`asserted` for exactly
+  this reason and no re-run was going to move them. They now carry
+  `no_round_trip: reason: not-comparable`, which says so. An entry that instead
+  carries the x02 value declares `iterations: 2` and promotes normally, which
+  is what `md5-strtoupper-md5-md5-plain-true` does for `MD5RAWUC`.
+  **Do not read "reproduces in neither case" as a defect in the row.** It was
+  read that way once, and produced a finding against upstream for a document
+  that was correct.
+- **A NAME MATCH ACROSS TOOLS IS NOT EVIDENCE, AND IN THE HMAC FAMILY IT IS
+  INVERTED.** The rule above says to normalize names before matching. That
+  finds real pairs, and it also finds false ones, because two projects can
+  publish the same name for opposite constructions. Measured 2026-09-05, and
+  it had cost four rows.
+  john's `HMAC-SHA1` keys on the PASSWORD. That is not an inference: john's own
+  source says `ALGORITHM_NAME "password is key, SHA1 "`, and the same string
+  appears in `hmacMD5_fmt_plug.c`, `hmacSHA256_fmt_plug.c` and
+  `hmacSHA512_fmt_plug.c`. mdxfind splits the two keyings across two names --
+  Appendix A gives `HMAC-SHA1` (e215) as `hmac_sha1(pass, user)`, keyed on the
+  USER, and `HMAC-SHA1-KPASS` (e793) as `hmac_sha1(salt, pass)`, keyed on the
+  PASSWORD. **So john's `HMAC-SHA1` is mdxfind's `HMAC-SHA1-KPASS`, and the
+  two identifiers spelled identically are the two that do NOT correspond.**
+  The damage was symmetric and both halves looked plausible. john's format sat
+  on `hmac-sha1`, a row carrying no hashcat mode and no mdxfind type, so the
+  published table showed john implementing something no other tool did; and
+  `hmac-sha1-kpass`, which carries hashcat 150 and mdxfind `HMAC-SHA1-KPASS`,
+  asserted `john: absent` -- a false claim, repeated on all six of MD5, SHA1,
+  SHA224, SHA256, SHA384 and SHA512.
+  What settles it is a round trip in both directions, with the control run:
+  john's vector cracks under `mdxfind -M e793` and is REFUSED under `-M e215`,
+  and each KPASS row's vector cracks under john's `HMAC-*` once rewritten into
+  john's `<message>#<digest>` shape. The refusal is the half that matters --
+  without it a single crack cannot tell a correspondence from a coincidence.
+  Note where the name collision does NOT reach: hashcat numbers both keyings
+  rather than naming them (150 is key=$pass, 160 is key=$salt), so its column
+  was right throughout and is a useful third opinion on which row is which.
 - **Name separator drift.** The source sheet wrote `HAV128_4` where mdxfind
   writes `HAV128-4`. Normalize by stripping non-alphanumerics before matching;
   store the tool's exact spelling.

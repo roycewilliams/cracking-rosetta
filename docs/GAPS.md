@@ -17,7 +17,7 @@ Each row below links to its entry in the [browsable table](index.html).
 Gaps are absences; for the rows where something is known to be *odd*, see
 [OPEN-QUESTIONS.md](OPEN-QUESTIONS.md).
 
-## 1. Believed but never reproduced (24)
+## 1. Believed but never reproduced (20)
 
 The cheapest contribution in the repository, if you own the tool. Each of
 these already names an identifier and already carries a test vector; nobody
@@ -38,8 +38,6 @@ tools/verify-vectors.pl --tool <tool> --only <id> -v
 | [`generic-hash-bridged-rust`](index.html#generic-hash-bridged-rust) | hashcat | `74000` | upstream |
 | [`halflm-c-r`](index.html#halflm-c-r) | john | `nethalflm` | upstream |
 | [`md5dsalt`](index.html#md5dsalt) | mdxfind | `MD5DSALT` | asserted |
-| [`md5specam`](index.html#md5specam) | mdxfind | `MD5SPECAM` | asserted |
-| [`md5uc`](index.html#md5uc) | mdxfind | `MD5UC` | upstream |
 | [`md5ucmd5`](index.html#md5ucmd5) | mdxfind | `MD5UCMD5` | upstream |
 | [`progressencode-plain`](index.html#progressencode-plain) | mdxfind | `PROGRESSENCODE` | asserted |
 | [`sha1md5truncsalt`](index.html#sha1md5truncsalt) | mdxfind | `SHA1MD5TRUNCSALT` | upstream |
@@ -51,22 +49,31 @@ tools/verify-vectors.pl --tool <tool> --only <id> -v
 | [`sha1sha1truncsalt`](index.html#sha1sha1truncsalt) | mdxfind | `SHA1SHA1TRUNCSALT` | upstream |
 | [`sha1sha256truncmd5salt`](index.html#sha1sha256truncmd5salt) | mdxfind | `SHA1SHA256TRUNCMD5SALT` | upstream |
 | [`sha1sha256truncsalt`](index.html#sha1sha256truncsalt) | mdxfind | `SHA1SHA256TRUNCSALT` | upstream |
-| [`sha1uc`](index.html#sha1uc) | mdxfind | `SHA1UC` | upstream |
 | [`sha1wrluctruncsalt`](index.html#sha1wrluctruncsalt) | mdxfind | `SHA1WRLUCTRUNCSALT` | upstream |
-| [`sha256uc`](index.html#sha256uc) | mdxfind | `SHA256UC` | asserted |
 | [`stdout`](index.html#stdout) | hashcat | `2000` | upstream |
 
-## 2. No test vector at all (2)
+4 further mappings are claimed, carries a vector, and is deliberately **not**
+in that table: somebody has already run the command, and it cannot decide.
+Where a tool computes something else under the identifier the row names, its
+failure to crack this row's vector is not evidence against the mapping - so
+the pair is in [OPEN-QUESTIONS.md](OPEN-QUESTIONS.md#mappings-this-rows-vector-cannot-settle)
+as a question about what the row is for, which is a curator's job rather than
+a one-liner.
 
-Blocked on one piece of data, and it is the piece that does not require any
-tool: a hash and the plaintext that produces it. Nothing here can reach tier
-`vector` without one, so these rows cannot be proven by anyone, however well
-equipped. If you have a vector for one of these - from a tool's own test
-suite, from your own scratch implementation, from a wordlist you cracked -
-that is the whole contribution.
+## 2. No test vector at all (0)
 
-* [`parallel`](index.html#parallel) - PARALLEL
-* [`sha1saltcx`](index.html#sha1saltcx) - SHA1SALTCX
+None outstanding. Every entry that carries no vector records why it carries
+none, and neither recorded reason is a contribution anyone is waiting for.
+
+2 further entries carry no vector and are deliberately **not** listed above.
+Their reason is on record rather than outstanding: one is a type that computes
+nothing at all, so no plaintext has a hash to be paired with and no equipment
+will ever produce one, and another withholds a published vector because storing
+it would put a digest under a row describing a different iteration depth.
+Asking the world for a vector for either would be asking for something that
+does not exist, or that would not be accepted if it arrived. They are in
+[OPEN-QUESTIONS.md](OPEN-QUESTIONS.md) instead - the withheld one as a question
+for a curator, the impossible one as no question at all.
 
 ## 3. A tool column nobody has filled
 
@@ -74,13 +81,13 @@ Real work rather than a one-liner: it means finding out whether the tool
 supports the construction at all, and under which identifier. The counts are
 the honest size of the job.
 
-### john: 290 entries say nothing
+### john: 292 entries say nothing
 
 A few that carry a vector and a proven expression, so there is a definite construction to look for, one per family:
 
 * [`sha1-md5-md5-plain`](index.html#sha1-md5-md5-plain) - `sha1(md5(md5($p)))` (and 3 more starting `sha`)
 
-All 290: filter `john_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
+All 292: filter `john_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
 
 Where such an entry carries an expression, john can already attack it without
 a named format:
@@ -97,23 +104,20 @@ flavor of the hash function - `md5(MD5($p))` - and john rejects the first
 outright. It is deliberately **not** in john's column, which lists formats
 `--list=formats` will show; the gap worth filling is whether a named one exists.
 
-### hashcat: 202 entries say nothing
+### hashcat: 204 entries say nothing
 
 A few that carry a vector and a proven expression, so there is a definite construction to look for, one per family:
 
-* [`dynamic-15`](index.html#dynamic-15) - `md5($u.md5($p).$s)` (and 2 more starting `md`)
 * [`sha1usercolonpass`](index.html#sha1usercolonpass) - `sha1($s.$c1.$p),c1=\x3a`
 
-All 202: filter `hashcat_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
+All 204: filter `hashcat_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
 
-### mdxfind: 64 entries say nothing
+### mdxfind: 59 entries say nothing
 
 A few that carry a vector, so a candidate identifier can be tested at once, one per family:
 
 * [`1password-agilekeychain`](index.html#1password-agilekeychain) - `1Password, agilekeychain`
 * [`domain-cached-credentials-dcc-ms-cache-nt`](index.html#domain-cached-credentials-dcc-ms-cache-nt) - `Domain Cached Credentials (DCC), MS Cache (NT)` (and 1 more starting `Domain`)
-* [`dynamic-1030`](index.html#dynamic-1030) - `dynamic_1030`
-* [`hmac-sha1`](index.html#hmac-sha1) - `HMAC-SHA1` (and 3 more starting `HMAC`)
 * [`kde-kwallet-4-13-pbkdf2-hmac-sha512-blowfish`](index.html#kde-kwallet-4-13-pbkdf2-hmac-sha512-blowfish) - `KDE KWallet 4.13+ (PBKDF2-HMAC-SHA512, Blowfish)`
 * [`kerberos-5-etype-23-tgs-rep-nt`](index.html#kerberos-5-etype-23-tgs-rep-nt) - `Kerberos 5, etype 23, TGS-REP (NT)`
 * [`lotus-notes-domino-8-5`](index.html#lotus-notes-domino-8-5) - `Lotus Notes/Domino 8.5`
@@ -125,16 +129,65 @@ A few that carry a vector, so a candidate identifier can be tested at once, one 
 * [`sha1-md5-pass-substr-0-32`](index.html#sha1-md5-pass-substr-0-32) - `cut(sha1(md5($p)),0,32)` (and 4 more starting `cut`)
 * [`stuffit5`](index.html#stuffit5) - `Stuffit5`
 * [`totp-hmac-sha1`](index.html#totp-hmac-sha1) - `TOTP (HMAC-SHA1)`
+* [`truecrypt-ripemd160-xts-1024-bit-legacy`](index.html#truecrypt-ripemd160-xts-1024-bit-legacy) - `TrueCrypt RIPEMD160 + XTS 1024 bit (legacy)` (and 11 more starting `TrueCrypt`)
+* [`veracrypt-ripemd160-xts-1024-bit-legacy`](index.html#veracrypt-ripemd160-xts-1024-bit-legacy) - `VeraCrypt RIPEMD160 + XTS 1024 bit (legacy)` (and 23 more starting `VeraCrypt`)
 
-All 64: filter `mdxfind_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
+All 59: filter `mdxfind_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
 
-## 4. hashcat modes with no row here (1)
+## 4. Identifiers with no row here (25)
 
-Whole algorithms rather than gaps in a row. Many are full-disk-encryption and
-wallet formats whose place in this table is still an open question; others are
-simply not written yet. hashcat publishes an example hash for each, so an
-entry can usually be created and proven in one sitting.
+Whole algorithms rather than gaps in a row. Each is an identifier a tool
+publishes and this table does not answer to, so somebody arriving by it lands
+nowhere. Many are full-disk-encryption and wallet formats whose place here is
+still an open question; others are simply not written yet.
+
+Every tool gets this section, not just hashcat. Until 2026-09-05 only hashcat
+had one, and the asymmetry hid a queue: mdxfind had gained twenty-five types
+that no row named, ten of them John-shaped formats this repository already had
+rows for and had recorded as mdxfind `absent`. Nothing pointed at them, so
+nobody looked.
+
+### hashcat: 1 with no row
+
+hashcat publishes an example hash for each, so an entry can usually be created and proven in one sitting.
 
 * `14600` - LUKS v1 (legacy)
 
-All 1 are listed by `tools/validate.pl -v`.
+### mdxfind: 0 with no row
+
+None.
+
+### john: 23 with no row
+
+john's own `src/*_fmt_plug.c` test arrays carry a vector for nearly every format; `tools/seed-john-vectors.pl` reads them.
+
+* `Drupal7-ztex`
+* `OpenBSD-SoftRAID-opencl`
+* `agilekeychain-opencl`
+* `bcrypt-ztex`
+* `cloudkeychain-opencl`
+* `descrypt-ztex`
+* `diskcryptor-opencl`
+* `dmg-opencl`
+* `enpass-opencl`
+* `geli-opencl`
+* `keystore-opencl`
+* `md5crypt-ztex`
+* `mscash-opencl`
+* `o5logon-opencl`
+* `pfx-opencl`
+* `phpass-ztex`
+* `sha256crypt-ztex`
+* `sha512crypt-ztex`
+* `sm3crypt-opencl`
+* `solarwinds-opencl`
+* `strip-opencl`
+* `wpapsk-opencl`
+* `wpapsk-pmk-opencl`
+
+### hashpipe: 1 with no row
+
+hashpipe ships a self-test vector for every registered type; `hashpipe -N` prints the table and `-G` generates one where a type has none.
+
+* `SHA1SALTCX` - e521
+

@@ -79,8 +79,8 @@
 # else: an expression nobody can compile is a claim, and a wrong claim gets
 # withdrawn rather than adjusted.
 #
-# The specification is NOT vendored: this repository is MIT throughout and
-# the PDF carries no license grant. Re-fetch it to tmp/hx/ to re-run this.
+# Appendix A is vendored as vendor/cynosureprime/hx.8 and rendered into
+# data/hx-appendix-a.txt by tools/extract-hx.pl, which is what this reads.
 #
 # Usage: denote-hx.pl [--appendix FILE] [--repair] [--apply] [-v]
 #
@@ -128,7 +128,7 @@ my %MULTI_SOURCE_TEXT = map { $_ => $ONESALT_CITE }
      SHA11SALTMD5 SHA11SALTMD5UC SHA11SALTMD5SHA256 SHA1MD51SALTMD5);
 my $ROOT = "$RealBin/..";
 
-my $appendix = "$ROOT/tmp/hx/appA.txt";
+my $appendix = "$ROOT/data/hx-appendix-a.txt";
 my $algdir   = "$ROOT/data/algorithms";
 my $subfile;
 my $john;
@@ -140,7 +140,7 @@ sub usage {
 
 Usage: $PROG [options]
 
-   --appendix FILE   parsed Appendix A text  (default: tmp/hx/appA.txt)
+   --appendix FILE   parsed Appendix A text  (default: data/hx-appendix-a.txt)
    --algorithms DIR  curated entries         (default: data/algorithms)
    --john PATH       john binary             (default: @{[tool_env_help('john')]})
    --subformats PATH read john's listing from a file instead of running it
@@ -174,7 +174,8 @@ GetOptions(
 ) or usage();
 usage() if $help || !$had_args;
 unless (-f $appendix) {
-    print STDERR "$PROG: no appendix at $appendix; re-fetch hx.pdf (see STATE.md)\n";
+    print STDERR "$PROG: no appendix at $appendix; run tools/extract-hx.pl,\n"
+               . "which renders it from vendor/cynosureprime/hx.8\n";
     exit 1;
 }
 
@@ -214,7 +215,16 @@ my $JVER = john_version();
 my $hx = parse_appendix($appendix);
 printf STDERR "- appendix: %d type(s)\n", scalar keys %$hx;
 
-my $HXCITE = 'hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A';
+# The specification carries ONE version, the document's, printed in the running
+# header and bumped deliberately when the document is published. Appendix A is
+# part of that document and is identified by it; the RCS revision of the troff
+# file it happens to live in is bookkeeping about a file and is not a version
+# of anything to cite.
+#
+# The citation names the document and the vendored copy: the version says which
+# specification, and the vendored file is what a record can be executed against,
+# with the commit recorded once in vendor/cynosureprime/PROVENANCE.md.
+my $HXCITE = 'hx Language Specification $Revision: 1.16$ (Waffle), Appendix A, vendored as vendor/cynosureprime/hx.8';
 
 #-----------------------------------------------------------------------
 # ill_formed($expression) - the reasons an expression: already in the corpus

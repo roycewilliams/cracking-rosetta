@@ -367,6 +367,23 @@ sub same_as {
 }
 
 my (%tally, %state_count, %suite_tally);
+
+# Why an entry carries no vectors, where that is settled rather than pending.
+# GAPS.md and OPEN-QUESTIONS.md both used to treat "no vectors" as a single
+# state and ask the world to fill it; where the type emits nothing there is
+# nothing to fill, and the request sent a willing contributor after something
+# that is not there.
+#
+# Kept OUT of the row hash on purpose. That hash is the export shape -- it is
+# serialized whole into dist/rosetta.json -- so a field carried there for a
+# generated document's benefit would appear as a null on every row and widen
+# the published contract without anyone deciding to.
+my %no_vector_of;
+# And why a given tool's mapping cannot be promoted from THIS entry's vectors,
+# keyed "<id>\0<tool>". Section 1 below calls a claimed mapping with a vector
+# beside it the cheapest contribution in the repository -- "one command decides
+# it" -- which is only true where the command can decide.
+my %no_round_trip_of;
 my @out;
 for my $e (@rows) {
     my %r = (
@@ -560,6 +577,12 @@ for my $e (@rows) {
     $suite_tally{ $r{suites_proven} }{ $r{suites_decided} }++;
 
     $tally{ $r{status} }++;
+    $no_vector_of{ $r{id} } = $e->{no_vector}
+        if ref $e->{no_vector} eq 'HASH';
+    for my $tool (keys %{ $e->{tools} || {} }) {
+        my $nrt = $e->{tools}{$tool}{no_round_trip};
+        $no_round_trip_of{ "$r{id}\0$tool" } = $nrt if ref $nrt eq 'HASH';
+    }
     push @out, \%r;
 }
 
@@ -830,25 +853,73 @@ close $md;
 # Everything here is derived, so it cannot drift from the data the way a
 # hand-kept "help wanted" list does.
 
-my (@promotable, @novector, %unknown_by_tool);
+my (@promotable, @novector, @novec_settled, @no_round_trip, %unknown_by_tool);
 for my $r (@out) {
-    push @novector, $r unless $r->{vecs};
+    # A gap is something nobody has said yet. An entry carrying a no_vector:
+    # block has said it, and said why -- so it is not asked for here, and the
+    # count stops implying it is outstanding.
+    unless ($r->{vecs}) {
+        push @{ $no_vector_of{ $r->{id} } ? \@novec_settled : \@novector }, $r;
+    }
     for my $t (qw(hashcat john mdxfind)) {
         my $c = $r->{$t};
         push @{ $unknown_by_tool{$t} }, $r if $c->{state} eq 'unknown';
         # 'claimed' is the render-side name for a tier of upstream or
         # asserted: identifiers are recorded, nothing round-tripped them.
-        push @promotable, { row => $r, tool => $t, tier => $c->{tier} // '?' }
-            if $c->{state} eq 'claimed' && $r->{vecs};
+        if ($c->{state} eq 'claimed' && $r->{vecs}) {
+            # A measured "this row's vector cannot exercise that identifier"
+            # takes the pair out of the queue rather than leaving it at the
+            # top of it. mdxfind's MD5SPECAM reads a userid off the line and
+            # performs zero hash calculations on this row's vector, which is
+            # hashpipe's for a type of the same name computing something
+            # else: the command has been run, and it decided nothing.
+            my $nrt = $no_round_trip_of{ "$r->{id}\0$t" };
+            push @{ $nrt ? \@no_round_trip : \@promotable },
+                { row => $r, tool => $t, tier => $c->{tier} // '?',
+                  why => $nrt };
+        }
     }
 }
 
-# hashcat modes nobody has claimed. The inventory is the denominator the
-# coverage line in validate.pl uses, so this is the same set it counts.
-my %claimed_mode;
-for my $r (@out) { $claimed_mode{$_} = 1 for @{ $r->{hashcat}{ids} } }
-my @orphan_modes = grep { !$claimed_mode{ $_->{mode} } }
-                   @{ $inv{hashcat}{modes} || [] };
+# Identifiers nobody has claimed. The inventory is the denominator the coverage
+# line in validate.pl uses, so these are the same sets it counts, and the match
+# is exact for the same reason it is there.
+#
+# Only hashcat had this section until 2026-09-05, and the asymmetry hid a real
+# queue: mdxfind had gained 25 types that no row named, ten of them john-shaped
+# formats this repository already had rows for and had recorded as mdxfind
+# 'absent'. Nothing pointed at them, so nobody looked. A tool that publishes an
+# identifier is a tool someone will arrive by, whichever tool it is.
+my %orphan_ids;
+{
+    my %list = (
+        hashcat  => [ map { { id => $_->{mode}, label => ($_->{name}  // '?') } }
+                      @{ $inv{hashcat}{modes}   || [] } ],
+        mdxfind  => [ map { { id => $_->{name}, label => ($_->{index} // '?') } }
+                      @{ $inv{mdxfind}{types}   || [] } ],
+        john     => [ map { { id => $_->{label}, label => ($_->{name} // '') } }
+                      @{ $inv{john}{formats}    || [] } ],
+        hashpipe => [ map { { id => $_->{name}, label => ($_->{index} // '?') } }
+                      @{ $inv{hashpipe}{types}  || [] } ],
+    );
+    # Read the RAW entries, not the rendered cells. cell() decorates an mdxfind
+    # identifier with its iteration count -- "MD5CAP -i2" -- which is a display
+    # label and matches no inventory name, so scanning the cells reported two
+    # types as unclaimed that two rows name at tier vector. The coverage line in
+    # validate.pl reads the raw block, and these counts have to agree with it.
+    for my $tool (sort keys %list) {
+        my %claimed;
+        for my $e (@rows) {
+            my $b = $e->{tools}{$tool} or next;
+            my @ids = $tool eq 'hashcat' ? @{ $b->{modes} || [] }
+                    : $tool eq 'john'    ? (@{ $b->{cpu} || [] }, @{ $b->{gpu} || [] })
+                    :                      @{ $b->{types} || [] };
+            $claimed{$_} = 1 for @ids;
+        }
+        $orphan_ids{$tool} = [ grep { !$claimed{ $_->{id} } } @{ $list{$tool} } ];
+    }
+}
+my @orphan_modes = @{ $orphan_ids{hashcat} || [] };
 
 sub gaps_link {
     my ($r) = @_;
@@ -895,9 +966,24 @@ for my $g (sort { $a->{row}{id} cmp $b->{row}{id} } @promotable) {
     printf {$gp} "| %s | %s | `%s` | %s |\n", gaps_link($g->{row}), $g->{tool},
         join('`, `', @{ $g->{row}{ $g->{tool} }{ids} }), $g->{tier};
 }
+if (@no_round_trip) {
+    printf {$gp} <<'GAPS_1_NRT',
+%s claimed, carries a vector, and is deliberately **not**
+in that table: somebody has already run the command, and it cannot decide.
+Where a tool computes something else under the identifier the row names, its
+failure to crack this row's vector is not evidence against the mapping - so
+the pair is in [OPEN-QUESTIONS.md](OPEN-QUESTIONS.md#mappings-this-rows-vector-cannot-settle)
+as a question about what the row is for, which is a curator's job rather than
+a one-liner.
+GAPS_1_NRT
+        (@no_round_trip == 1
+         ? "\nOne further mapping is"
+         : sprintf("\n%d further mappings are", scalar @no_round_trip));
+}
 
 printf {$gp} "\n## 2. No test vector at all (%d)\n\n", scalar @novector;
-print  {$gp} <<'GAPS_2';
+if (@novector) {
+    print {$gp} <<'GAPS_2';
 Blocked on one piece of data, and it is the piece that does not require any
 tool: a hash and the plaintext that produces it. Nothing here can reach tier
 `vector` without one, so these rows cannot be proven by anyone, however well
@@ -906,7 +992,30 @@ suite, from your own scratch implementation, from a wordlist you cracked -
 that is the whole contribution.
 
 GAPS_2
-printf {$gp} "* %s - %s\n", gaps_link($_), $_->{name} for @novector;
+    printf {$gp} "* %s - %s\n", gaps_link($_), $_->{name} for @novector;
+}
+else {
+    print {$gp} <<'GAPS_2_NONE';
+None outstanding. Every entry that carries no vector records why it carries
+none, and neither recorded reason is a contribution anyone is waiting for.
+GAPS_2_NONE
+}
+if (@novec_settled) {
+    printf {$gp} <<'GAPS_2_SETTLED',
+%s no vector and are deliberately **not** listed above.
+Their reason is on record rather than outstanding: one is a type that computes
+nothing at all, so no plaintext has a hash to be paired with and no equipment
+will ever produce one, and another withholds a published vector because storing
+it would put a digest under a row describing a different iteration depth.
+Asking the world for a vector for either would be asking for something that
+does not exist, or that would not be accepted if it arrived. They are in
+[OPEN-QUESTIONS.md](OPEN-QUESTIONS.md) instead - the withheld one as a question
+for a curator, the impossible one as no question at all.
+GAPS_2_SETTLED
+        (@novec_settled == 1
+         ? "\nOne further entry carries"
+         : sprintf("\n%d further entries carry", scalar @novec_settled));
+}
 
 print {$gp} "\n## 3. A tool column nobody has filled\n\n";
 print {$gp} <<'GAPS_3';
@@ -980,17 +1089,44 @@ outright. It is deliberately **not** in john's column, which lists formats
 GAPS_JOHN
 }
 
-printf {$gp} "## 4. hashcat modes with no row here (%d)\n\n", scalar @orphan_modes;
-print  {$gp} <<'GAPS_4';
-Whole algorithms rather than gaps in a row. Many are full-disk-encryption and
-wallet formats whose place in this table is still an open question; others are
-simply not written yet. hashcat publishes an example hash for each, so an
-entry can usually be created and proven in one sitting.
+{
+    my $total = 0;
+    $total += scalar @{ $orphan_ids{$_} } for keys %orphan_ids;
+    printf {$gp} "## 4. Identifiers with no row here (%d)\n\n", $total;
+    print {$gp} <<'GAPS_4';
+Whole algorithms rather than gaps in a row. Each is an identifier a tool
+publishes and this table does not answer to, so somebody arriving by it lands
+nowhere. Many are full-disk-encryption and wallet formats whose place here is
+still an open question; others are simply not written yet.
+
+Every tool gets this section, not just hashcat. Until 2026-09-05 only hashcat
+had one, and the asymmetry hid a queue: mdxfind had gained twenty-five types
+that no row named, ten of them John-shaped formats this repository already had
+rows for and had recorded as mdxfind `absent`. Nothing pointed at them, so
+nobody looked.
 
 GAPS_4
-printf {$gp} "* `%d` - %s\n", $_->{mode}, ($_->{name} // '?')
-    for @orphan_modes[0 .. ($#orphan_modes < 24 ? $#orphan_modes : 24)];
-printf {$gp} "\nAll %d are listed by `tools/validate.pl -v`.\n", scalar @orphan_modes;
+    my %blurb = (
+        hashcat  => 'hashcat publishes an example hash for each, so an entry can usually be created and proven in one sitting.',
+        mdxfind  => 'Both `mdxfind -N`-style catalogs and `hashpipe -N` publish a self-test vector per type, so these can be proven without hunting for a hash.',
+        john     => 'john\'s own `src/*_fmt_plug.c` test arrays carry a vector for nearly every format; `tools/seed-john-vectors.pl` reads them.',
+        hashpipe => 'hashpipe ships a self-test vector for every registered type; `hashpipe -N` prints the table and `-G` generates one where a type has none.',
+    );
+    for my $tool (qw(hashcat mdxfind john hashpipe)) {
+        my $o = $orphan_ids{$tool} || [];
+        printf {$gp} "### %s: %d with no row\n\n", $tool, scalar @$o;
+        if (!@$o) { print {$gp} "None.\n\n"; next }
+        print {$gp} "$blurb{$tool}\n\n";
+        my $cap = $#$o < 24 ? $#$o : 24;
+        for my $e (@{$o}[0 .. $cap]) {
+            printf {$gp} "* `%s`%s\n", $e->{id},
+                (length($e->{label} // '') ? " - $e->{label}" : '');
+        }
+        printf {$gp} "\nAll %d are listed by `tools/validate.pl -v`.\n\n", scalar @$o
+            if @$o > $cap + 1;
+        print {$gp} "\n" unless @$o > $cap + 1;
+    }
+}
 close $gp;
 
 #-----------------------------------------------------------------------
@@ -1014,7 +1150,19 @@ close $gp;
 
 my @expr_unproven = grep { $_->{expr} && $_->{expr_tier} ne 'vector'
                                       && $_->{expr_tier} ne 'absent' } @out;
-my @novec_q       = grep { !$_->{vecs} } @out;
+my @novec_q       = grep { !$_->{vecs} && !$no_vector_of{ $_->{id} } } @out;
+# An entry whose no_vector: reason is 'withheld' has a vector somewhere and is
+# waiting on a decision, not on data. One whose reason is 'impossible' is
+# waiting on nothing at all, and is not a question in the first place.
+sub novec_reason_is {
+    my ($reason) = @_;
+    return grep {
+        my $nv = $no_vector_of{ $_->{id} };
+        !$_->{vecs} && $nv && ($nv->{reason} // '') eq $reason;
+    } @out;
+}
+my @novec_withheld = novec_reason_is('withheld');
+my @novec_never    = novec_reason_is('impossible');
 my @traps;
 for my $r (@out) {
     push @traps, { row => $r, rel => $_ }
@@ -1115,18 +1263,83 @@ for my $t (sort { $a->{row}{id} cmp $b->{row}{id} } @traps) {
 }
 
 printf {$oq} "\n## Entries nothing can prove yet (%d)\n\n", scalar @novec_q;
-print  {$oq} <<'OQ_NOVEC';
+if (@novec_q) {
+    print {$oq} <<'OQ_NOVEC';
 No test vector, so no tier above `asserted` is reachable for any tool, however
 well equipped. Several are types whose publisher's own example does not
 reproduce under that type, which is itself a question worth an answer. Any
 hash-and-plaintext pair settles one.
 
 OQ_NOVEC
-for my $r (sort { $a->{id} cmp $b->{id} } @novec_q) {
-    (my $note = $r->{notes}) =~ s/\s+/ /g;
-    $note = substr($note, 0, 150) . '...' if length $note > 153;
-    printf {$oq} "* %s - %s%s\n", gaps_link($r), $r->{name},
-        (length $note ? " - $note" : '');
+    for my $r (sort { $a->{id} cmp $b->{id} } @novec_q) {
+        (my $note = $r->{notes}) =~ s/\s+/ /g;
+        $note = substr($note, 0, 150) . '...' if length $note > 153;
+        printf {$oq} "* %s - %s%s\n", gaps_link($r), $r->{name},
+            (length $note ? " - $note" : '');
+    }
+}
+else {
+    print {$oq} <<'OQ_NOVEC_NONE';
+None. Every entry that carries no vector now records why it carries none, and
+neither recorded reason is "nobody has got round to it". The two states that
+used to sit under this heading are below and, for the one that is not a
+question at all, at the end of this document.
+OQ_NOVEC_NONE
+}
+
+# A vector for these EXISTS. What is missing is a decision about what the row
+# is for, and until that is made a contributed vector would be refused -- so
+# listing them beside "nobody has supplied one" was asking the wrong people
+# for the wrong thing.
+printf {$oq} "\n## A vector exists, and is deliberately withheld (%d)\n\n",
+    scalar @novec_withheld;
+if (@novec_withheld) {
+    print {$oq} <<'OQ_WITHHELD';
+Not a data gap. Somebody publishes a vector for each of these, and storing it
+under the row as it currently stands would assert something the vector does
+not support - most often a depth, since the iteration suffix is identity and
+not a tuning knob. What is owed is a curator's decision about what the row
+describes. Reading the note is the whole job; supplying a vector is not.
+
+OQ_WITHHELD
+    for my $r (sort { $a->{id} cmp $b->{id} } @novec_withheld) {
+        (my $note = $no_vector_of{ $r->{id} }{note}) =~ s/\s+/ /g;
+        $note = substr($note, 0, 220) . '...' if length $note > 223;
+        printf {$oq} "* %s - %s - %s\n", gaps_link($r), $r->{name}, $note;
+    }
+}
+else {
+    print {$oq} "None.\n";
+}
+
+# The same shape one level down: not the entry that cannot be proven, but one
+# TOOL's mapping on it. Kept separate because the question is different --
+# there, what is this row for; here, is this tool's identifier even the same
+# algorithm as the rest of the row.
+printf {$oq} "\n## Mappings this row's vector cannot settle (%d)\n\n",
+    scalar @no_round_trip;
+if (@no_round_trip) {
+    print {$oq} <<'OQ_NRT';
+Claimed, and carrying a vector, and still not a one-command job: the command
+has been run and could not decide. Where a tool computes something else under
+the identifier this row names, its failure to crack this row's vector is not
+evidence against the mapping - so the pair is here rather than at the top of
+[GAPS.md](GAPS.md), where it would have been advertised as the cheapest
+contribution in the repository. Settling one means deciding what the row is
+for: whether the identifier belongs on it at all, or wants a row of its own.
+
+OQ_NRT
+    for my $g (sort { $a->{row}{id} cmp $b->{row}{id}
+                   || $a->{tool}    cmp $b->{tool} } @no_round_trip) {
+        (my $note = $g->{why}{note}) =~ s/\s+/ /g;
+        $note = substr($note, 0, 220) . '...' if length $note > 223;
+        printf {$oq} "* %s - %s `%s` (%s) - %s\n", gaps_link($g->{row}),
+            $g->{tool}, join('`, `', @{ $g->{row}{ $g->{tool} }{ids} }),
+            $g->{why}{reason} // '?', $note;
+    }
+}
+else {
+    print {$oq} "None.\n";
 }
 
 print {$oq} <<"OQ_MIXED";
@@ -1155,6 +1368,18 @@ and the vector are both already recorded, and one command decides it.
   already proves; grinding through it by hand would be worse than leaving it.
 * **Crack's coverage.** Frozen at its 1996 manual on purpose - [CRACK.md](CRACK.md).
 OQ_MIXED
+
+# Derived, not prose, so that marking another type stops it being asked for
+# without anyone remembering to edit this list.
+if (@novec_never) {
+    printf {$oq} "* **A vector for %s.** %s\n",
+        join(' or ', map { sprintf('`%s`', $_->{id}) } @novec_never),
+        (@novec_never == 1 ? 'It cannot have one.' : 'Neither can have one.')
+        . ' The type computes no digest at all, so there is no hash for any'
+        . ' plaintext to produce - which makes the absence a fact about the'
+        . " tool rather than a gap here. Each entry's `no_vector:` block"
+        . ' states what was measured.';
+}
 close $oq;
 
 #-----------------------------------------------------------------------
