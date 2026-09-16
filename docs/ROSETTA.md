@@ -65,7 +65,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | APPLE-SECURE-NOTES | `16700` (v) | `FVDE`<br>`FVDE-opencl` (v) | `APPLE-SECURE-NOTES` (v) |  |
 | ARGON2 | `34000` (v) | `Argon2`<br>`argon2-opencl` (v) | `ARGON2` (v) | covers argon2id-bridged-reference-implementation-tunings (naming) |
 | Argon2id [Bridged: reference implementation + tunings] | `70000` (v) | `Argon2`<br>`argon2-opencl` (v) | `ARGON2` (v) | covered-by argon2 (naming) |
-| ARGON2MD5 | **--** | **--** | `ARGON2MD5` (v) |  |
+| ARGON2MD5 | no | **--** | `ARGON2MD5` (v) |  |
 | Armory wallet | **--** | `armory` (v) | no |  |
 | ARUBAOS | `125` (v) | **--** | `ARUBAOS` (v) |  |
 | AS/400 DES | **--** | `as400-des` (v) | `AS400-DES` (v) |  |
@@ -194,9 +194,9 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | DRUPAL7 | `7900` (v) | `Drupal7` (v) | `DRUPAL7` (v) | duplicate of drupal-7 |
 | dummy | **--** | `dummy` (v) | no |  |
 | dynamic=md5($p) | **--** | `dynamic=md5($p)` (v) | no |  |
-| dynamic_1004 | **--** | `dynamic_1004` (v) | `MD5 -i6` (v) |  |
-| dynamic_1005 | **--** | `dynamic_1005` (v) | `MD5 -i7` (v) |  |
-| dynamic_1006 | **--** | `dynamic_1006` (v) | `MD5 -i8` (v) |  |
+| dynamic_1004 | no | `dynamic_1004` (v) | `MD5 -i6` (v) |  |
+| dynamic_1005 | no | `dynamic_1005` (v) | `MD5 -i7` (v) |  |
+| dynamic_1006 | no | `dynamic_1006` (v) | `MD5 -i8` (v) |  |
 | dynamic_1008 | **--** | `dynamic_1008` (v) | `MD5PASSSALT` (v) |  |
 | dynamic_1015 | **--** | `dynamic_1015` (v) | no |  |
 | dynamic_1029 | **--** | `dynamic_1029` (v) | no | collides with sha256 (truncation) |
@@ -204,12 +204,12 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | dynamic_1031 | **--** | `dynamic_1031` (v) | no | collides with hash-gost-plain (truncation) |
 | dynamic_1032 | **--** | `dynamic_1032` (v) | `PEOPLESOFT` (v) |  |
 | dynamic_1034 | **--** | `dynamic_1034` (v) | `POSTGRESQL` (v) |  |
-| dynamic_1401 | **--** | `dynamic_1401` (v) | `SKYPE` (v) |  |
-| dynamic_15 | **--** | `dynamic_15` (v) | `MD5USERMD5PASSSALT` (v) |  |
-| dynamic_1505 | **--** | `dynamic_1505` (v) | `MD5PASSSALTMD5PASSSALT` (v) |  |
+| dynamic_1401 | no | `dynamic_1401` (v) | `SKYPE` (v) |  |
+| dynamic_15 | no | `dynamic_15` (v) | `MD5USERMD5PASSSALT` (v) |  |
+| dynamic_1505 | no | `dynamic_1505` (v) | `MD5PASSSALTMD5PASSSALT` (v) |  |
 | dynamic_1506 | **--** | `dynamic_1506` (v) | no |  |
 | dynamic_1507 | **--** | `dynamic_1507` (v) | no |  |
-| dynamic_1528 | **--** | `dynamic_1528` (v) | `SHA256SALTPASSSALT` (v) |  |
+| dynamic_1528 | no | `dynamic_1528` (v) | `SHA256SALTPASSSALT` (v) |  |
 | dynamic_1529 | **--** | `dynamic_1529` (v) | no |  |
 | dynamic_1550 | **--** | `dynamic_1550` (v) | `MONGODB` (v) |  |
 | dynamic_1551 | **--** | `dynamic_1551` (v) | no |  |
@@ -217,15 +217,15 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | dynamic_1560 | **--** | `dynamic_1560` (v) | `MD5SALT1SALT2` (v) |  |
 | dynamic_1590 | **--** | `dynamic_1590` (v) | no |  |
 | dynamic_16 | **--** | `dynamic_16` (v) | no |  |
-| dynamic_1602 | **--** | `dynamic_1602` (v) | `QAS-VASAUTH` (v) |  |
+| dynamic_1602 | no | `dynamic_1602` (v) | `QAS-VASAUTH` (v) |  |
 | dynamic_1608 | **--** | `dynamic_1608` (v) | no |  |
-| dynamic_18 | **--** | `dynamic_18` (v) | `POSTOFFICE` (v) |  |
+| dynamic_18 | no | `dynamic_18` (v) | `POSTOFFICE` (v) |  |
 | dynamic_2002 | **--** | `dynamic_2002` (v) | `MD5 -i2` (v) |  |
 | dynamic_2003 | **--** | `dynamic_2003` (v) | `MD5 -i3` (v) |  |
-| dynamic_31 | **--** | `dynamic_31` (v) | `MD4SALTPASS` (v) |  |
-| dynamic_32 | **--** | `dynamic_32` (v) | `MD4PASSSALT` (v) |  |
-| dynamic_35 | **--** | `dynamic_35` (v) | `SHA1UCUSERPASS` (v) |  |
-| dynamic_36 | **--** | `dynamic_36` (v) | `SHA1USERCOLONPASS` (v) |  |
+| dynamic_31 | no | `dynamic_31` (v) | `MD4SALTPASS` (v) |  |
+| dynamic_32 | no | `dynamic_32` (v) | `MD4PASSSALT` (v) |  |
+| dynamic_35 | no | `dynamic_35` (v) | `SHA1UCUSERPASS` (v) |  |
+| dynamic_36 | no | `dynamic_36` (v) | `SHA1USERCOLONPASS` (v) |  |
 | dynamic_39 | **--** | `dynamic_39` (v) | no |  |
 | dynamic_40 | **--** | `dynamic_40` (v) | no |  |
 | ECHO224 | no | no | `ECHO224` (v) |  |
@@ -250,7 +250,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | Enpass Password Manager | **--** | `enpass` (v) | no |  |
 | EPISERVER | `141` (v) | `EPiServer` (v) | `EPISERVER` (v) | duplicate of episerver-6-x-lt-net-4; duplicate of episerver-johnepiserver |
 | Episerver 6.x >= .NET 4 | `1441` (v) | **--** | `EPISERVER` (v) |  |
-| EPiServer SID | **--** | `EPI` (v) | `EPISERVER-SID` (v) |  |
+| EPiServer SID | no | `EPI` (v) | `EPISERVER-SID` (v) |  |
 | Ethereum Pre-Sale Wallet, PBKDF2-HMAC-SHA256 | `16300` (v) | `ethereum`<br>`ethereum-presale-opencl` (v) | no |  |
 | Ethereum Wallet, PBKDF2-HMAC-SHA256 | `15600` (v) | `ethereum`<br>`ethereum-opencl` (v) | no |  |
 | Ethereum Wallet, SCRYPT | `15700` (v) | `ethereum` (v) | no |  |
@@ -388,11 +388,11 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | HMAC-RMD320-KPASS | `33650` (v) | no | `HMAC-RMD320-KPASS` (v) |  |
 | HMAC-SHA1 | **--** | `HMAC-SHA1` (v) | `HMAC-SHA1-KPASS` (v) | same as hmac-sha1-kpass (naming) |
 | HMAC-SHA1-KPASS | `150` (v) | `HMAC-SHA1` (v) | `HMAC-SHA1-KPASS` (v) | same as hmac-sha1 (naming) |
-| HMAC-SHA224 | **--** | `HMAC-SHA224` (v) | `HMAC-SHA224-KPASS` (v) | same as hmac-sha224-kpass (naming) |
+| HMAC-SHA224 | no | `HMAC-SHA224` (v) | `HMAC-SHA224-KPASS` (v) | same as hmac-sha224-kpass (naming) |
 | HMAC-SHA224-KPASS | no | `HMAC-SHA224` (v) | `HMAC-SHA224-KPASS` (v) | same as hmac-sha224 (naming) |
 | HMAC-SHA256 (key = $salt) | `1460` (v) | no | `HMAC-SHA256` (v) | duplicate of hmac-sha256-plain-salt |
 | HMAC-SHA256-KPASS | `1450` (v) | `HMAC-SHA256` (v) | `HMAC-SHA256-KPASS` (v) |  |
-| HMAC-SHA384 | **--** | `HMAC-SHA384` (v) | `HMAC-SHA384-KPASS` (v) | same as hmac-sha384-kpass (naming) |
+| HMAC-SHA384 | no | `HMAC-SHA384` (v) | `HMAC-SHA384-KPASS` (v) | same as hmac-sha384-kpass (naming) |
 | HMAC-SHA384 | no | **--** | `HMAC-SHA384` (v) |  |
 | HMAC-SHA384-KPASS | no | `HMAC-SHA384` (v) | `HMAC-SHA384-KPASS` (v) | same as hmac-sha384-johnhmac-sha384 (naming) |
 | HMAC-SHA512 | **--** | `HMAC-SHA512` (v) | `HMAC-SHA512-KPASS` (v) | same as hmac-sha512-kpass (naming) |
@@ -408,7 +408,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | IBM/Toshiba 4690 | **--** | `adxcrypt` (v) | no |  |
 | IKEPSK-MD5 | `5300` (v) | **--** | `IKEPSK-MD5` (v) |  |
 | IKEPSK-SHA1 | `5400` (v) | **--** | `IKEPSK-SHA1` (v) |  |
-| Invision Power Board 2.x | **--** | `ipb2` (v) | `IPB2` (v) |  |
+| Invision Power Board 2.x | no | `ipb2` (v) | `IPB2` (v) |  |
 | IPB2+, MyBB1.2+ | `2811` (v) | `dynamic_12` (v) | `MD5-MD5SALTMD5PASS` (v) |  |
 | iPhone passcode (UID key + System Keybag) | `26500` (v) | **--** | no |  |
 | IPMI 2.0 RAKP (RMCP+) | **--** | `RAKP-SHA1`<br>`RAKP-SHA1-opencl` (v) | no |  |
@@ -503,7 +503,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | MACOSX | `122` (v) | no | `MACOSX` (v) |  |
 | MACOSX7 | `1722` (v) | `xsha512`<br>`XSHA512-opencl`<br>`XSHA512-free-opencl` (v) | `MACOSX7` (v) |  |
 | MANGOS | no | no | `MANGOS` (v) |  |
-| MD2 | **--** | `MD2` (v) | `MD2` (v) | iterates md2-x2 (iteration) |
+| MD2 | no | `MD2` (v) | `MD2` (v) | iterates md2-x2 (iteration) |
 | MD2 | no | `dynamic_310` (v) | `MD2` (v) | iterates md2-x2 (iteration) |
 | MD2 (2 iterations) | no | `dynamic_313` (v) | `MD2 -i2` (v) | iterates md2 (iteration); iterates md2-johnmd2 (iteration) |
 | md2(md5($plain)) | no | no | `MD2MD5` (v) |  |
@@ -521,7 +521,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | MD4UTF16BASE64 | no | no | `MD4UTF16BASE64` (v) |  |
 | MD4UTF16BASE64SHA256 | no | no | `MD4UTF16BASE64SHA256` (v) |  |
 | MD4UTF16DESCRYPT | no | no | `MD4UTF16DESCRYPT` (v) |  |
-| MD4UTF16MD5HUM | **--** | **--** | `MD4UTF16MD5HUM` (v) |  |
+| MD4UTF16MD5HUM | no | **--** | `MD4UTF16MD5HUM` (v) |  |
 | MD4UTF16MD5MD5 | no | no | `MD4UTF16MD5MD5` (v) |  |
 | MD4UTF16MD5MD5MD5 | no | no | `MD4UTF16MD5MD5MD5` (v) |  |
 | MD4UTF16MD5MD5MD5MD5 | no | no | `MD4UTF16MD5MD5MD5MD5` (v) |  |
@@ -534,7 +534,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | MD4UTF16MD5x | no | no | `MD4UTF16MD5x` (v) |  |
 | MD4UTF16revBASE64x | no | no | `MD4UTF16revBASE64x` (v) |  |
 | MD4UTF16SHA1 | no | no | `MD4UTF16SHA1` (v) |  |
-| MD4UTF16SHA1HUM | **--** | **--** | `MD4UTF16SHA1HUM` (v) |  |
+| MD4UTF16SHA1HUM | no | **--** | `MD4UTF16SHA1HUM` (v) |  |
 | MD4UTF16SHA1MD5 | no | no | `MD4UTF16SHA1MD5` (v) |  |
 | MD4UTF16SHA1SHA1 | no | no | `MD4UTF16SHA1SHA1` (v) |  |
 | MD4UTF16SHA1UC | no | no | `MD4UTF16SHA1UC` (v) |  |
@@ -740,7 +740,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | MD5MD5UCSQL3p | no | no | `MD5MD5UCSQL3p` (v) |  |
 | MD5NTLMp | no | no | `MD5NTLMp` (v) |  |
 | MD5padMD5 | no | no | `MD5padMD5` (v) |  |
-| MD5PASSSALTMD5PASSSALT | **--** | **--** | `MD5PASSSALTMD5PASSSALT` (v) |  |
+| MD5PASSSALTMD5PASSSALT | no | **--** | `MD5PASSSALTMD5PASSSALT` (v) |  |
 | MD5PASSSHA1 | no | no | `MD5PASSSHA1` (v) |  |
 | MD5revMD5SALT | no | no | `MD5revMD5SALT` (v) |  |
 | MD5SALT1SALT2 | `33000` (v) | **--** | `MD5SALT1SALT2` (v) |  |
@@ -927,7 +927,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | Purdy | **--** | `OpenVMS` (v) | no |  |
 | PWSAFE3 | `5200` (v) | **--** | `PWSAFE3` (v) |  |
 | Python passlib pbkdf2-sha256 | `20300` (v) | `PBKDF2-HMAC-SHA256`<br>`PBKDF2-HMAC-SHA256-opencl` (v) | `PBKDF2-SHA256` (v) | same as netiq-sspr-pbkdf2withhmacsha256 (application); same as pbkdf2-hmac-sha256 (application); same as pbkdf2-sha256-plain (application) |
-| QAS-VASAUTH | **--** | **--** | `QAS-VASAUTH` (v) |  |
+| QAS-VASAUTH | no | **--** | `QAS-VASAUTH` (v) |  |
 | QNX-MD5 | `19000` (v) | `qnx` (v) | `QNX-MD5` (v) |  |
 | QNX-SHA256 | `19100` (v) | `qnx` (v) | `QNX-SHA256` (v) |  |
 | QNX-SHA512 | `19200` (v) | `qnx` (v) | `QNX-SHA512` (v) |  |
@@ -986,7 +986,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | RSA/DSA/EC/OpenSSH Private Keys ($4$) | `22941` (v) | `SSH`<br>`ssh-opencl` (v) | no |  |
 | RSA/DSA/EC/OpenSSH Private Keys ($5$) | `22951` (v) | `SSH`<br>`ssh-opencl` (v) | no |  |
 | RSA/DSA/EC/OpenSSH Private Keys ($6$) | `22921` (v) | `SSH`<br>`ssh-opencl` (v) | no |  |
-| RVARY | **--** | `RVARY` (v) | `RVARY` (v) |  |
+| RVARY | no | `RVARY` (v) | `RVARY` (v) |  |
 | S/Key | **--** | `skey` (v) | no |  |
 | salted | **--** | `Iterated-SHA1`<br>`Iterated-SHA1-opencl` (v) | no |  |
 | SAMSUNGSHA1 | `5800` (v) | no | `SAMSUNGSHA1` (v) |  |
@@ -1024,7 +1024,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | sha1(CX) | `14400` (v) | no | `SHA1-SALT-SPECIAL` (v) | duplicate of sha1-salt-special |
 | sha1(hesk($plain)) ? | no | no | `SHA1HESK` (v) |  |
 | sha1(md5($pass)) | `4700` (v) | `dynamic_23` (v) | `SHA1MD5` (v) | truncates sha1-md5-pass-substr-0-32 (truncation) |
-| sha1(md5($pass)).Substr(0, 32) | **--** | `dynamic_1024` (v) | **--** | truncates sha1-md5-pass (truncation) |
+| sha1(md5($pass)).Substr(0, 32) | no | `dynamic_1024` (v) | **--** | truncates sha1-md5-pass (truncation) |
 | sha1(md5($pass).$salt) | `4710` (v) | no | `SHA1MD5PASS-SALT`<br>`SHA1-MD5PASSSALT`<br>`SHA1MD5SALT` (v) | duplicate of sha1-md5-md5-pass-salt; same as huawei-sha1-md5-pass-salt (application) |
 | sha1(md5($plain),$plain) | no | no | `SHA1MD5PASS` (v) |  |
 | sha1(md5($plain).$salt) | `4710` (v) | no | `SHA11SALTMD5` (v) |  |
@@ -1032,7 +1032,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | sha1(md5($plain).sha1($plain)) | no | no | `SHA1-1xMD5SHA1` (v) |  |
 | sha1(md5($salt.$plain).":".$salt) | no | no | `SHA1HEXSALT` (v) |  |
 | sha1(md5(md5($plain))) | `18500` (v) | **--** | `SHA1MD5MD5` (v) | truncates sha1-md5-md5-plain-substr-0-32 (truncation) |
-| sha1(md5(md5($plain))).Substr(0, 32) | **--** | `dynamic_1025` (v) | **--** | truncates sha1-md5-md5-plain (truncation) |
+| sha1(md5(md5($plain))).Substr(0, 32) | no | `dynamic_1025` (v) | **--** | truncates sha1-md5-md5-plain (truncation) |
 | sha1(md5(md5($plain).$plain) | no | no | `SHA1MD5MD5PASS` (v) |  |
 | sha1(md5(md5($plain).$salt)) | no | no | `SHA1MD51SALTMD5` (v) |  |
 | sha1(md5(md5(md5($plain)))) | no | no | `SHA1MD5MD5MD5` (v) |  |
@@ -1065,9 +1065,9 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | sha1(sha1(md5(md5(md5($plain)))).<br>sha1(md5(md5(md5($plain))))) | no | no | `SHA1-2xSHA1-MD5MD5MD5` (v) |  |
 | sha1(sha1(md5(md5(md5($plain))),true)) | no | no | `SHA1SHA1RAWMD5MD5MD5` (v) |  |
 | sha1(sha1(sha1($pass))) | no | **--** | `SHA1 -i3` (v) | iterates sha1 (iteration); iterates sha1-sha1-pass (iteration); truncates sha1-sha1-sha1-pass-substr-0-32 (truncation) |
-| sha1(sha1(sha1($pass))).Substr(0, 32) | **--** | `dynamic_1027` (v) | **--** | truncates sha1-sha1-sha1-pass (truncation) |
+| sha1(sha1(sha1($pass))).Substr(0, 32) | no | `dynamic_1027` (v) | **--** | truncates sha1-sha1-sha1-pass (truncation) |
 | sha1(sha1(sha1($plain)).sha1(sha1($plain))) | no | no | `SHA1-2xSHA1-SHA1` (v) |  |
-| sha1(sha1_raw($pass)).Substr(0, 32) | **--** | `dynamic_1028` (v) | **--** | truncates sha1raw (truncation) |
+| sha1(sha1_raw($pass)).Substr(0, 32) | no | `dynamic_1028` (v) | **--** | truncates sha1raw (truncation) |
 | sha1(sha256($plain)) | no | no | `SHA1SHA256` (v) |  |
 | sha1(sha384($plain)) | no | no | `SHA1SHA384` (v) |  |
 | sha1(sha512($plain)) | no | no | `SHA1SHA512` (v) |  |
@@ -1107,7 +1107,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | SHA1-SALTSHA1U16 | `29000` (v) | **--** | `SHA1-SALTSHA1U16` (v) |  |
 | SHA1-SHA1SALTSHA1PASS | no | no | `SHA1-SHA1SALTSHA1PASS` (v) |  |
 | SHA1-SHA512PASSSHA512SALT | no | no | `SHA1-SHA512PASSSHA512SALT` (v) |  |
-| SHA1.Substr(0, 32) | **--** | `dynamic_1023` (v) | **--** | same as axcryptsha1 (encoding); truncates sha1 (truncation) |
+| SHA1.Substr(0, 32) | no | `dynamic_1023` (v) | **--** | same as axcryptsha1 (encoding); truncates sha1 (truncation) |
 | SHA11SALTMD5SHA256 | no | no | `SHA11SALTMD5SHA256` (v) |  |
 | SHA11SALTMD5UC | no | no | `SHA11SALTMD5UC` (v) |  |
 | SHA1BASE64CUSTBASE64MD5 | no | no | `SHA1BASE64CUSTBASE64MD5` (v) |  |
@@ -1280,12 +1280,12 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | SHA1SHA512UC | no | no | `SHA1SHA512UC` (v) |  |
 | SHA1SHA512UCTRUNC | no | no | `SHA1SHA512UCTRUNC` (v) |  |
 | SHA1SQL5-32 | no | no | `SHA1SQL5-32` (v) |  |
-| SHA1SQL5MD5 | **--** | **--** | `SHA1SQL5MD5` (v) |  |
-| SHA1SQL5MD5MD5 | **--** | **--** | `SHA1SQL5MD5MD5` (v) |  |
+| SHA1SQL5MD5 | no | **--** | `SHA1SQL5MD5` (v) |  |
+| SHA1SQL5MD5MD5 | no | **--** | `SHA1SQL5MD5MD5` (v) |  |
 | SHA1UC | `100` (v) | `Raw-SHA1`<br>`dynamic_26`<br>`raw-SHA1-opencl` (v) | `SHA1UC` | collides with sha1lsb35 (truncation) |
-| SHA1UCUSERPASS | **--** | **--** | `SHA1UCUSERPASS` (v) |  |
+| SHA1UCUSERPASS | no | **--** | `SHA1UCUSERPASS` (v) |  |
 | SHA1UCUTF16LE | `170` (v) | `dynamic_1400` (v) | `SHA1UCUTF16LE` (v) |  |
-| SHA1USERCOLONPASS | **--** | **--** | `SHA1USERCOLONPASS` (v) |  |
+| SHA1USERCOLONPASS | no | **--** | `SHA1USERCOLONPASS` (v) |  |
 | SHA1USERSQL3 | no | no | `SHA1USERSQL3` (v) |  |
 | SHA1UTF16BE | no | no | `SHA1UTF16BE` (v) |  |
 | SHA1UTF16BEZ | no | no | `SHA1UTF16BEZ` (v) |  |
@@ -1381,8 +1381,8 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | SIMPLACMS | `22800` (v) | no | `SIMPLACMS` (v) |  |
 | SIP digest authentication (MD5) | `11400` (v) | `SIP` (v) | no |  |
 | SIPHASH | `10100` (v) | **--** | `SIPHASH` (v) |  |
-| Skein 256 | **--** | `skein-256` (v) | `SKEIN256` (v) | iterates skein256-x2 (iteration) |
-| Skein 512 | **--** | `skein-512` (v) | `SKEIN512` (v) | iterates skein512-x2 (iteration) |
+| Skein 256 | no | `skein-256` (v) | `SKEIN256` (v) | iterates skein256-x2 (iteration) |
+| Skein 512 | no | `skein-512` (v) | `SKEIN512` (v) | iterates skein512-x2 (iteration) |
 | SKEIN224 | no | `dynamic_330` (v) | `SKEIN224` (v) | iterates skein224-x2 (iteration) |
 | SKEIN224 (2 iterations) | no | `dynamic_333` (v) | `SKEIN224 -i2` (v) | iterates skein224 (iteration) |
 | SKEIN256 | no | `dynamic_340` (v) | `SKEIN256` (v) | iterates skein256-x2 (iteration) |

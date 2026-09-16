@@ -94,13 +94,27 @@ flavor of the hash function - `md5(MD5($p))` - and john rejects the first
 outright. It is deliberately **not** in john's column, which lists formats
 `--list=formats` will show; the gap worth filling is whether a named one exists.
 
-### hashcat: 204 entries say nothing
+### hashcat: 169 entries say nothing
 
-A few that carry a vector and a proven expression, so there is a definite construction to look for, one per family:
+A few that carry a vector, so a candidate identifier can be tested at once, one per family:
 
-* [`sha1usercolonpass`](index.html#sha1usercolonpass) - `sha1($s.$c1.$p),c1=\x3a`
+* [`keyed-md5-ripv2-ospf-bgp-snmpv2`](index.html#keyed-md5-ripv2-ospf-bgp-snmpv2) - `"Keyed MD5" RIPv2, OSPF, BGP, SNMPv2`
+* [`keyed-sha1-bfd`](index.html#keyed-sha1-bfd) - `"Keyed SHA1" BFD`
+* [`md5-authentication-hsrp-hsrpv2-vrrp-glbp`](index.html#md5-authentication-hsrp-hsrpv2-vrrp-glbp) - `"MD5 authentication" HSRP, HSRPv2, VRRP, GLBP`
+* [`md5-based-authentication-dahua`](index.html#md5-based-authentication-dahua) - `"MD5 based authentication" Dahua`
+* [`md5-based-authentication-vtp`](index.html#md5-based-authentication-vtp) - `"MD5 based authentication" VTP`
+* [`pfx-p12`](index.html#pfx-p12) - `(.pfx, .p12)`
+* [`1password-agile-keychain`](index.html#1password-agile-keychain) - `1Password Agile Keychain`
+* [`1password-cloud-keychain`](index.html#1password-cloud-keychain) - `1Password Cloud Keychain`
+* [`7-zip-archive-encryption`](index.html#7-zip-archive-encryption) - `7-Zip archive encryption`
+* [`andotp`](index.html#andotp) - `andOTP`
+* [`apple-dmg`](index.html#apple-dmg) - `Apple DMG`
+* [`armory-wallet`](index.html#armory-wallet) - `Armory wallet`
+* [`as-400-des`](index.html#as-400-des) - `AS/400 DES` (and 1 more starting `AS`)
+* [`astra-linux-gost12256hash`](index.html#astra-linux-gost12256hash) - `Astra Linux $gost12256hash$` (and 1 more starting `Astra`)
+* [`azuread`](index.html#azuread) - `AzureAD`
 
-All 204: filter `hashcat_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
+All 169: filter `hashcat_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
 
 ### mdxfind: 60 entries say nothing
 

@@ -2812,7 +2812,7 @@
          "hash_length_basis" : "",
          "hashcat" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "hashcat_salted" : "",
          "hashcat_speed" : "",
@@ -2850,10 +2850,10 @@
          "sameas" : "",
          "serialization" : "unknown",
          "status" : "needs-review",
-         "suites_decided" : 1,
+         "suites_decided" : 2,
          "suites_proven" : 1,
          "tool_note" : {
-            "hashcat" : "",
+            "hashcat" : "no mode. Swept the 2 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-15 (a tools/discover-hashcat.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
             "hashpipe" : "hashpipe e1020 ARGON2MD5. verified with hashpipe -c, which pins each line to its own leading TYPE label and runs no detection, at -t 1 and with the emitted label compared against the one asked for. Both precautions matter on this build: -m does not restrict what a recognised wrapper reaches, and results vary with the thread count. No iterations: is recorded from hashpipe -- the suffixes are different quantities and this repository follows mdxfind for that field.",
             "john" : "",
             "mdxfind" : ""
@@ -11334,7 +11334,7 @@
          "hash_length_basis" : "observed",
          "hashcat" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "hashcat_salted" : "",
          "hashcat_speed" : "",
@@ -11372,10 +11372,10 @@
          "sameas" : "",
          "serialization" : "divergent",
          "status" : "ok",
-         "suites_decided" : 2,
+         "suites_decided" : 3,
          "suites_proven" : 2,
          "tool_note" : {
-            "hashcat" : "",
+            "hashcat" : "no mode. Swept the 12 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-15 (a tools/discover-hashcat.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
             "hashpipe" : "",
             "john" : "john's own published example ciphertext for this format, recovered by john under this format. john publishes no plaintext, so the plaintext was found by handing john its own example and a candidate list -- what john recovered IS the plaintext, by construction.",
             "mdxfind" : "mdxfind e1 MD5 at -i 6, reached by rewriting this row's vector into mdxfind's serialization: john writes $dynamic_1004$<digest>; mdxfind reads the bare digest and reports the depth, which here is x06. The iteration count is part of the identity, not a tuning knob, so it is declared: mdxfind reports this vector at x06 and nothing shallower."
@@ -11399,7 +11399,7 @@
          "hash_length_basis" : "observed",
          "hashcat" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "hashcat_salted" : "",
          "hashcat_speed" : "",
@@ -11437,10 +11437,10 @@
          "sameas" : "",
          "serialization" : "divergent",
          "status" : "ok",
-         "suites_decided" : 2,
+         "suites_decided" : 3,
          "suites_proven" : 2,
          "tool_note" : {
-            "hashcat" : "",
+            "hashcat" : "no mode. Swept the 12 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-15 (a tools/discover-hashcat.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
             "hashpipe" : "",
             "john" : "john's own published example ciphertext for this format, recovered by john under this format. john publishes no plaintext, so the plaintext was found by handing john its own example and a candidate list -- what john recovered IS the plaintext, by construction.",
             "mdxfind" : "mdxfind e1 MD5 at -i 7, reached by rewriting this row's vector into mdxfind's serialization: john writes $dynamic_1005$<digest>; mdxfind reads the bare digest at depth x07. The iteration count is part of the identity, not a tuning knob, so it is declared: mdxfind reports this vector at x07 and nothing shallower."
@@ -11464,7 +11464,7 @@
          "hash_length_basis" : "observed",
          "hashcat" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "hashcat_salted" : "",
          "hashcat_speed" : "",
@@ -11502,10 +11502,10 @@
          "sameas" : "",
          "serialization" : "divergent",
          "status" : "ok",
-         "suites_decided" : 2,
+         "suites_decided" : 3,
          "suites_proven" : 2,
          "tool_note" : {
-            "hashcat" : "",
+            "hashcat" : "no mode. Swept the 12 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-15 (a tools/discover-hashcat.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
             "hashpipe" : "",
             "john" : "john's own published example ciphertext for this format, recovered by john under this format. john publishes no plaintext, so the plaintext was found by handing john its own example and a candidate list -- what john recovered IS the plaintext, by construction.",
             "mdxfind" : "mdxfind e1 MD5 at -i 8, reached by rewriting this row's vector into mdxfind's serialization: john writes $dynamic_1006$<digest>; mdxfind reads the bare digest at depth x08. The iteration count is part of the identity, not a tuning knob, so it is declared: mdxfind reports this vector at x08 and nothing shallower."
@@ -11995,7 +11995,7 @@
          "hash_length_basis" : "observed",
          "hashcat" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "hashcat_salted" : "",
          "hashcat_speed" : "",
@@ -12033,10 +12033,10 @@
          "sameas" : "",
          "serialization" : "divergent",
          "status" : "needs-review",
-         "suites_decided" : 2,
+         "suites_decided" : 3,
          "suites_proven" : 2,
          "tool_note" : {
-            "hashcat" : "",
+            "hashcat" : "no mode. Swept the 18 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-15 (a tools/discover-hashcat.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
             "hashpipe" : "",
             "john" : "",
             "mdxfind" : ""
@@ -12060,7 +12060,7 @@
          "hash_length_basis" : "observed",
          "hashcat" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "hashcat_salted" : "",
          "hashcat_speed" : "",
@@ -12102,10 +12102,10 @@
          "sameas" : "",
          "serialization" : "divergent",
          "status" : "ok",
-         "suites_decided" : 2,
+         "suites_decided" : 3,
          "suites_proven" : 2,
          "tool_note" : {
-            "hashcat" : "",
+            "hashcat" : "no mode. Swept the 33 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-15 (a tools/discover-hashcat.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
             "hashpipe" : "hashpipe e1011 MD5USERMD5PASSSALT. verified with hashpipe -c, which pins each line to its own leading TYPE label and runs no detection, at -t 1 and with the emitted label compared against the one asked for. Both precautions matter on this build: -m does not restrict what a recognised wrapper reaches, and results vary with the thread count. No iterations: is recorded from hashpipe -- the suffixes are different quantities and this repository follows mdxfind for that field.",
             "john" : "john's own published example ciphertext for this format, recovered by john under this format. john publishes no plaintext, so the plaintext was found by handing john its own example and a candidate list -- what john recovered IS the plaintext, by construction.",
             "mdxfind" : ""
@@ -12129,7 +12129,7 @@
          "hash_length_basis" : "observed",
          "hashcat" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "hashcat_salted" : "",
          "hashcat_speed" : "",
@@ -12167,10 +12167,10 @@
          "sameas" : "",
          "serialization" : "shared",
          "status" : "ok",
-         "suites_decided" : 2,
+         "suites_decided" : 3,
          "suites_proven" : 2,
          "tool_note" : {
-            "hashcat" : "",
+            "hashcat" : "no mode. Swept the 27 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-15 (a tools/discover-hashcat.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
             "hashpipe" : "",
             "john" : "john's own published example ciphertext for this format, recovered by john under this format. john publishes no plaintext, so the plaintext was found by handing john its own example and a candidate list -- what john recovered IS the plaintext, by construction.",
             "mdxfind" : ""
@@ -12316,7 +12316,7 @@
          "hash_length_basis" : "observed",
          "hashcat" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "hashcat_salted" : "",
          "hashcat_speed" : "",
@@ -12354,10 +12354,10 @@
          "sameas" : "",
          "serialization" : "divergent",
          "status" : "ok",
-         "suites_decided" : 2,
+         "suites_decided" : 3,
          "suites_proven" : 2,
          "tool_note" : {
-            "hashcat" : "",
+            "hashcat" : "no mode. Swept the 15 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-15 (a tools/discover-hashcat.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
             "hashpipe" : "",
             "john" : "john's own published example ciphertext for this format, recovered by john under this format. john publishes no plaintext, so the plaintext was found by handing john its own example and a candidate list -- what john recovered IS the plaintext, by construction.",
             "mdxfind" : "mdxfind e825 SHA256SALTPASSSALT, reached by rewriting this row's vector into mdxfind's serialization: john writes $dynamic_1528$<digest>$HEX$<salt>; mdxfind reads <digest>:<salt> and accepts the binary salt as $HEX[...], which it also emits."
@@ -12816,7 +12816,7 @@
          "hash_length_basis" : "observed",
          "hashcat" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "hashcat_salted" : "",
          "hashcat_speed" : "",
@@ -12854,10 +12854,10 @@
          "sameas" : "",
          "serialization" : "shared",
          "status" : "needs-review",
-         "suites_decided" : 2,
+         "suites_decided" : 3,
          "suites_proven" : 2,
          "tool_note" : {
-            "hashcat" : "",
+            "hashcat" : "no mode. Swept the 15 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-15 (a tools/discover-hashcat.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
             "hashpipe" : "",
             "john" : "",
             "mdxfind" : ""
@@ -12942,7 +12942,7 @@
          "hash_length_basis" : "observed",
          "hashcat" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "hashcat_salted" : "",
          "hashcat_speed" : "",
@@ -12984,10 +12984,10 @@
          "sameas" : "",
          "serialization" : "shared",
          "status" : "ok",
-         "suites_decided" : 2,
+         "suites_decided" : 3,
          "suites_proven" : 2,
          "tool_note" : {
-            "hashcat" : "",
+            "hashcat" : "no mode. Swept the 31 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-15 (a tools/discover-hashcat.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
             "hashpipe" : "hashpipe e1009 POSTOFFICE. verified with hashpipe -c, which pins each line to its own leading TYPE label and runs no detection, at -t 1 and with the emitted label compared against the one asked for. Both precautions matter on this build: -m does not restrict what a recognised wrapper reaches, and results vary with the thread count. No iterations: is recorded from hashpipe -- the suffixes are different quantities and this repository follows mdxfind for that field.",
             "john" : "john's own published example ciphertext for this format, recovered by john under this format. john publishes no plaintext, so the plaintext was found by handing john its own example and a candidate list -- what john recovered IS the plaintext, by construction.",
             "mdxfind" : ""
@@ -13141,7 +13141,7 @@
          "hash_length_basis" : "observed",
          "hashcat" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "hashcat_salted" : "",
          "hashcat_speed" : "",
@@ -13183,10 +13183,10 @@
          "sameas" : "",
          "serialization" : "shared",
          "status" : "ok",
-         "suites_decided" : 2,
+         "suites_decided" : 3,
          "suites_proven" : 2,
          "tool_note" : {
-            "hashcat" : "",
+            "hashcat" : "no mode. Swept the 27 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-15 (a tools/discover-hashcat.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
             "hashpipe" : "hashpipe e1003 MD4SALTPASS. verified with hashpipe -c, which pins each line to its own leading TYPE label and runs no detection, at -t 1 and with the emitted label compared against the one asked for. Both precautions matter on this build: -m does not restrict what a recognised wrapper reaches, and results vary with the thread count. No iterations: is recorded from hashpipe -- the suffixes are different quantities and this repository follows mdxfind for that field.",
             "john" : "john's own published example ciphertext for this format, recovered by john under this format. john publishes no plaintext, so the plaintext was found by handing john its own example and a candidate list -- what john recovered IS the plaintext, by construction.",
             "mdxfind" : ""
@@ -13210,7 +13210,7 @@
          "hash_length_basis" : "observed",
          "hashcat" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "hashcat_salted" : "",
          "hashcat_speed" : "",
@@ -13252,10 +13252,10 @@
          "sameas" : "",
          "serialization" : "shared",
          "status" : "ok",
-         "suites_decided" : 2,
+         "suites_decided" : 3,
          "suites_proven" : 2,
          "tool_note" : {
-            "hashcat" : "",
+            "hashcat" : "no mode. Swept the 27 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-15 (a tools/discover-hashcat.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
             "hashpipe" : "hashpipe e1004 MD4PASSSALT. verified with hashpipe -c, which pins each line to its own leading TYPE label and runs no detection, at -t 1 and with the emitted label compared against the one asked for. Both precautions matter on this build: -m does not restrict what a recognised wrapper reaches, and results vary with the thread count. No iterations: is recorded from hashpipe -- the suffixes are different quantities and this repository follows mdxfind for that field.",
             "john" : "john's own published example ciphertext for this format, recovered by john under this format. john publishes no plaintext, so the plaintext was found by handing john its own example and a candidate list -- what john recovered IS the plaintext, by construction.",
             "mdxfind" : ""
@@ -13279,7 +13279,7 @@
          "hash_length_basis" : "observed",
          "hashcat" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "hashcat_salted" : "",
          "hashcat_speed" : "",
@@ -13321,10 +13321,10 @@
          "sameas" : "",
          "serialization" : "divergent",
          "status" : "ok",
-         "suites_decided" : 2,
+         "suites_decided" : 3,
          "suites_proven" : 2,
          "tool_note" : {
-            "hashcat" : "",
+            "hashcat" : "no mode. Swept the 17 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-15 (a tools/discover-hashcat.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
             "hashpipe" : "hashpipe e1005 SHA1UCUSERPASS. verified with hashpipe -c, which pins each line to its own leading TYPE label and runs no detection, at -t 1 and with the emitted label compared against the one asked for. Both precautions matter on this build: -m does not restrict what a recognised wrapper reaches, and results vary with the thread count. No iterations: is recorded from hashpipe -- the suffixes are different quantities and this repository follows mdxfind for that field.",
             "john" : "john's own published example ciphertext for this format, recovered by john under this format. john publishes no plaintext, so the plaintext was found by handing john its own example and a candidate list -- what john recovered IS the plaintext, by construction.",
             "mdxfind" : "mdxfind e1005 SHA1UCUSERPASS, reached by rewriting this row's vector into mdxfind's serialization: john writes $dynamic_35$<digest>$$U<user>; mdxfind reads <digest>:<user>."
@@ -13348,7 +13348,7 @@
          "hash_length_basis" : "observed",
          "hashcat" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "hashcat_salted" : "",
          "hashcat_speed" : "",
@@ -13390,10 +13390,10 @@
          "sameas" : "",
          "serialization" : "divergent",
          "status" : "ok",
-         "suites_decided" : 2,
+         "suites_decided" : 3,
          "suites_proven" : 2,
          "tool_note" : {
-            "hashcat" : "",
+            "hashcat" : "no mode. Swept the 17 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-15 (a tools/discover-hashcat.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
             "hashpipe" : "hashpipe e1006 SHA1USERCOLONPASS. verified with hashpipe -c, which pins each line to its own leading TYPE label and runs no detection, at -t 1 and with the emitted label compared against the one asked for. Both precautions matter on this build: -m does not restrict what a recognised wrapper reaches, and results vary with the thread count. No iterations: is recorded from hashpipe -- the suffixes are different quantities and this repository follows mdxfind for that field.",
             "john" : "john's own published example ciphertext for this format, recovered by john under this format. john publishes no plaintext, so the plaintext was found by handing john its own example and a candidate list -- what john recovered IS the plaintext, by construction.",
             "mdxfind" : "mdxfind e1006 SHA1USERCOLONPASS, reached by rewriting this row's vector into mdxfind's serialization: john writes $dynamic_36$<digest>$$U<user>; mdxfind reads <digest>:<user>."
@@ -14998,7 +14998,7 @@
          "hash_length_basis" : "observed",
          "hashcat" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "hashcat_salted" : "",
          "hashcat_speed" : "",
@@ -15040,10 +15040,10 @@
          "sameas" : "",
          "serialization" : "divergent",
          "status" : "ok",
-         "suites_decided" : 2,
+         "suites_decided" : 3,
          "suites_proven" : 2,
          "tool_note" : {
-            "hashcat" : "",
+            "hashcat" : "no mode. Swept the 17 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-15 (a tools/discover-hashcat.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
             "hashpipe" : "hashpipe e1014 EPISERVER-SID. verified with hashpipe -c, which pins each line to its own leading TYPE label and runs no detection, at -t 1 and with the emitted label compared against the one asked for. Both precautions matter on this build: -m does not restrict what a recognised wrapper reaches, and results vary with the thread count. No iterations: is recorded from hashpipe -- the suffixes are different quantities and this repository follows mdxfind for that field.",
             "john" : "john's own published example ciphertext for this format, recovered by john under this format. john publishes no plaintext, so the plaintext was found by handing john its own example and a candidate list -- what john recovered IS the plaintext, by construction.",
             "mdxfind" : ""
@@ -24536,7 +24536,7 @@
          "hash_length_basis" : "observed",
          "hashcat" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "hashcat_salted" : "",
          "hashcat_speed" : "",
@@ -24581,10 +24581,10 @@
          "sameas" : "same as hmac-sha224-kpass (naming)",
          "serialization" : "divergent",
          "status" : "ok",
-         "suites_decided" : 2,
+         "suites_decided" : 3,
          "suites_proven" : 2,
          "tool_note" : {
-            "hashcat" : "",
+            "hashcat" : "no mode. Swept the 2 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-15 (a tools/discover-hashcat.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
             "hashpipe" : "",
             "john" : "john's own published example ciphertext for this format, recovered by john under this format. john publishes no plaintext, so the plaintext was found by handing john its own example and a candidate list -- what john recovered IS the plaintext, by construction.",
             "mdxfind" : "mdxfind e794 HMAC-SHA224-KPASS. Added 2026-09-05. This row read as though john were doing something no other tool does, and it is not: The same NAME means opposite things in john and mdxfind, which is what put this mapping on the wrong row. john's HMAC-* formats key on the PASSWORD -- john's own source says so, ALGORITHM_NAME is literally \"password is key\" in hmacMD5_fmt_plug.c, hmacSHA1_fmt_plug.c, hmacSHA256_fmt_plug.c and hmacSHA512_fmt_plug.c. mdxfind splits the two cases across two names: hx Appendix A gives HMAC-SHA1 (e215) as hmac_sha1(pass, user), keyed on the USER, and HMAC-SHA1-KPASS (e793) as hmac_sha1(salt, pass), keyed on the PASSWORD. So john's HMAC-SHA1 is mdxfind's HMAC-SHA1-KPASS, and matching the two by name pairs each with the wrong one. Measured -- mdxfind pinned to HMAC-SHA224-KPASS recovers this row's own plaintext, and pinned to the same-named non-KPASS type it correctly refuses, which is the control that says the two are different computations rather than two spellings."
@@ -24833,7 +24833,7 @@
          "hash_length_basis" : "observed",
          "hashcat" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "hashcat_salted" : "",
          "hashcat_speed" : "",
@@ -24878,10 +24878,10 @@
          "sameas" : "same as hmac-sha384-kpass (naming)",
          "serialization" : "divergent",
          "status" : "ok",
-         "suites_decided" : 2,
+         "suites_decided" : 3,
          "suites_proven" : 2,
          "tool_note" : {
-            "hashcat" : "",
+            "hashcat" : "no mode. Swept the 4 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-15 (a tools/discover-hashcat.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
             "hashpipe" : "",
             "john" : "john's own published example ciphertext for this format, recovered by john under this format. john publishes no plaintext, so the plaintext was found by handing john its own example and a candidate list -- what john recovered IS the plaintext, by construction.",
             "mdxfind" : "mdxfind e796 HMAC-SHA384-KPASS. Added 2026-09-05. This row read as though john were doing something no other tool does, and it is not: The same NAME means opposite things in john and mdxfind, which is what put this mapping on the wrong row. john's HMAC-* formats key on the PASSWORD -- john's own source says so, ALGORITHM_NAME is literally \"password is key\" in hmacMD5_fmt_plug.c, hmacSHA1_fmt_plug.c, hmacSHA256_fmt_plug.c and hmacSHA512_fmt_plug.c. mdxfind splits the two cases across two names: hx Appendix A gives HMAC-SHA1 (e215) as hmac_sha1(pass, user), keyed on the USER, and HMAC-SHA1-KPASS (e793) as hmac_sha1(salt, pass), keyed on the PASSWORD. So john's HMAC-SHA1 is mdxfind's HMAC-SHA1-KPASS, and matching the two by name pairs each with the wrong one. Measured -- mdxfind pinned to HMAC-SHA384-KPASS recovers this row's own plaintext, and pinned to the same-named non-KPASS type it correctly refuses, which is the control that says the two are different computations rather than two spellings."
@@ -25961,7 +25961,7 @@
          "hash_length_basis" : "observed",
          "hashcat" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "hashcat_salted" : "",
          "hashcat_speed" : "",
@@ -26003,10 +26003,10 @@
          "sameas" : "",
          "serialization" : "divergent",
          "status" : "ok",
-         "suites_decided" : 2,
+         "suites_decided" : 3,
          "suites_proven" : 2,
          "tool_note" : {
-            "hashcat" : "",
+            "hashcat" : "no mode. Swept the 27 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-15 (a tools/discover-hashcat.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
             "hashpipe" : "hashpipe e1010 IPB2. verified with hashpipe -c, which pins each line to its own leading TYPE label and runs no detection, at -t 1 and with the emitted label compared against the one asked for. Both precautions matter on this build: -m does not restrict what a recognised wrapper reaches, and results vary with the thread count. No iterations: is recorded from hashpipe -- the suffixes are different quantities and this repository follows mdxfind for that field.",
             "john" : "john's own published example ciphertext for this format, recovered by john under this format. john publishes no plaintext, so the plaintext was found by handing john its own example and a candidate list -- what john recovered IS the plaintext, by construction.",
             "mdxfind" : ""
@@ -32245,7 +32245,7 @@
          "hash_length_basis" : "observed",
          "hashcat" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "hashcat_salted" : "",
          "hashcat_speed" : "",
@@ -32290,10 +32290,10 @@
          "sameas" : "iterates md2-x2 (iteration)",
          "serialization" : "shared",
          "status" : "ok",
-         "suites_decided" : 2,
+         "suites_decided" : 3,
          "suites_proven" : 2,
          "tool_note" : {
-            "hashcat" : "",
+            "hashcat" : "no mode. Swept the 12 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-15 (a tools/discover-hashcat.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
             "hashpipe" : "",
             "john" : "john's own published example ciphertext for this format, recovered by john under this format. john publishes no plaintext, so the plaintext was found by handing john its own example and a candidate list -- what john recovered IS the plaintext, by construction.",
             "mdxfind" : "name match accepted by a curator on 2026-09-04 and not yet reproduced by this repository's own tooling; seed-vectors.pl and verify-vectors.pl decide it. See notes for what was measured by hand first."
@@ -33524,7 +33524,7 @@
          "hash_length_basis" : "observed",
          "hashcat" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "hashcat_salted" : "",
          "hashcat_speed" : "",
@@ -33562,10 +33562,10 @@
          "sameas" : "",
          "serialization" : "unknown",
          "status" : "needs-review",
-         "suites_decided" : 1,
+         "suites_decided" : 2,
          "suites_proven" : 1,
          "tool_note" : {
-            "hashcat" : "",
+            "hashcat" : "no mode. Swept the 27 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-15 (a tools/discover-hashcat.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
             "hashpipe" : "hashpipe e575 MD4UTF16MD5HUM. verified with hashpipe -c, which pins each line to its own leading TYPE label and runs no detection, at -t 1 and with the emitted label compared against the one asked for. Both precautions matter on this build: -m does not restrict what a recognised wrapper reaches, and results vary with the thread count. No iterations: is recorded from hashpipe -- the suffixes are different quantities and this repository follows mdxfind for that field.",
             "john" : "",
             "mdxfind" : "mdxfind's own published example for this identifier, recovered by mdxfind at this identifier with mdxfind's own published plaintext."
@@ -34369,7 +34369,7 @@
          "hash_length_basis" : "observed",
          "hashcat" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "hashcat_salted" : "",
          "hashcat_speed" : "",
@@ -34407,10 +34407,10 @@
          "sameas" : "",
          "serialization" : "unknown",
          "status" : "needs-review",
-         "suites_decided" : 1,
+         "suites_decided" : 2,
          "suites_proven" : 1,
          "tool_note" : {
-            "hashcat" : "",
+            "hashcat" : "no mode. Swept the 27 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-15 (a tools/discover-hashcat.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
             "hashpipe" : "hashpipe e576 MD4UTF16SHA1HUM. verified with hashpipe -c, which pins each line to its own leading TYPE label and runs no detection, at -t 1 and with the emitted label compared against the one asked for. Both precautions matter on this build: -m does not restrict what a recognised wrapper reaches, and results vary with the thread count. No iterations: is recorded from hashpipe -- the suffixes are different quantities and this repository follows mdxfind for that field.",
             "john" : "",
             "mdxfind" : "mdxfind's own published example for this identifier, recovered by mdxfind at this identifier with mdxfind's own published plaintext."
@@ -47535,7 +47535,7 @@
          "suites_decided" : 2,
          "suites_proven" : 1,
          "tool_note" : {
-            "hashcat" : "",
+            "hashcat" : "no mode. Swept the 27 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-15 (a tools/discover-hashcat.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
             "hashpipe" : "hashpipe e408 MD5DSALT. verified with hashpipe -c, which pins each line to its own leading TYPE label and runs no detection, at -t 1 and with the emitted label compared against the one asked for. Both precautions matter on this build: -m does not restrict what a recognised wrapper reaches, and results vary with the thread count. No iterations: is recorded from hashpipe -- the suffixes are different quantities and this repository follows mdxfind for that field.",
             "john" : "",
             "mdxfind" : ""
@@ -48343,7 +48343,7 @@
          "hash_length_basis" : "observed",
          "hashcat" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "hashcat_salted" : "",
          "hashcat_speed" : "",
@@ -48381,10 +48381,10 @@
          "sameas" : "",
          "serialization" : "unknown",
          "status" : "ok",
-         "suites_decided" : 1,
+         "suites_decided" : 2,
          "suites_proven" : 1,
          "tool_note" : {
-            "hashcat" : "",
+            "hashcat" : "no mode. Swept the 27 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-15 (a tools/discover-hashcat.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
             "hashpipe" : "verified with hashpipe -c, which pins each line to its own leading TYPE label and runs no detection, at -t 1 and with the emitted label compared against the one asked for. Both precautions are load-bearing here: hashpipe -m does not restrict what a recognised wrapper reaches, and its results vary with the thread count.",
             "john" : "",
             "mdxfind" : "mdxfind e1007 MD5PASSSALTMD5PASSSALT."
@@ -48778,7 +48778,7 @@
          "suites_decided" : 2,
          "suites_proven" : 1,
          "tool_note" : {
-            "hashcat" : "",
+            "hashcat" : "no mode. Swept the 27 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-15 (a tools/discover-hashcat.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
             "hashpipe" : "hashpipe e366 MD5SHA1HUM. verified with hashpipe -c, which pins each line to its own leading TYPE label and runs no detection, at -t 1 and with the emitted label compared against the one asked for. Both precautions matter on this build: -m does not restrict what a recognised wrapper reaches, and results vary with the thread count. No iterations: is recorded from hashpipe -- the suffixes are different quantities and this repository follows mdxfind for that field.",
             "john" : "",
             "mdxfind" : ""
@@ -48908,7 +48908,7 @@
          "suites_decided" : 2,
          "suites_proven" : 1,
          "tool_note" : {
-            "hashcat" : "",
+            "hashcat" : "no mode. Swept the 27 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-15 (a tools/discover-hashcat.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
             "hashpipe" : "hashpipe e378 MD5SHA1MD5HUM. verified with hashpipe -c, which pins each line to its own leading TYPE label and runs no detection, at -t 1 and with the emitted label compared against the one asked for. Both precautions matter on this build: -m does not restrict what a recognised wrapper reaches, and results vary with the thread count. No iterations: is recorded from hashpipe -- the suffixes are different quantities and this repository follows mdxfind for that field.",
             "john" : "",
             "mdxfind" : ""
@@ -50025,7 +50025,7 @@
          "suites_decided" : 2,
          "suites_proven" : 1,
          "tool_note" : {
-            "hashcat" : "",
+            "hashcat" : "no mode. Swept the 12 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-15 (a tools/discover-hashcat.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
             "hashpipe" : "hashpipe e435 MD5SPECAM. verified with hashpipe -c, which pins each line to its own leading TYPE label and runs no detection, at -t 1 and with the emitted label compared against the one asked for. Both precautions matter on this build: -m does not restrict what a recognised wrapper reaches, and results vary with the thread count. No iterations: is recorded from hashpipe -- the suffixes are different quantities and this repository follows mdxfind for that field.",
             "john" : "",
             "mdxfind" : "special purpose and not for general use, per mdxfind's maintainer, and it emits nothing. Measured 2026-09-04, pinned with -M under -z: alone, with -s and with -u, stdout was empty in every case, and a run seeded from mdxfind's own regress/md5specamdef.txt produced nothing either. So MDXFIND can generate no vector for it and the mdxfind mapping cannot reach tier vector; that is a property of mdxfind's type rather than a gap here. Narrowed from \"this entry cannot reach tier vector\" on 2026-09-04: hashpipe ships an example for a type of the same name and it verifies, so the row now carries a vector. See notes: -- the two tools do not compute the same thing under this name, which does not touch the measurement above. The identifier is real and in mdxfind's type table, which is what the mapping records."
@@ -50562,7 +50562,7 @@
          "suites_decided" : 2,
          "suites_proven" : 1,
          "tool_note" : {
-            "hashcat" : "",
+            "hashcat" : "no mode. Swept the 12 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-15 (a tools/discover-hashcat.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
             "hashpipe" : "hashpipe e375 MD5UCBASE64MD5RAW. verified with hashpipe -c, which pins each line to its own leading TYPE label and runs no detection, at -t 1 and with the emitted label compared against the one asked for. Both precautions matter on this build: -m does not restrict what a recognised wrapper reaches, and results vary with the thread count. No iterations: is recorded from hashpipe -- the suffixes are different quantities and this repository follows mdxfind for that field.",
             "john" : "",
             "mdxfind" : ""
@@ -60913,7 +60913,7 @@
          "hash_length_basis" : "observed",
          "hashcat" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "hashcat_salted" : "",
          "hashcat_speed" : "",
@@ -60951,10 +60951,10 @@
          "sameas" : "",
          "serialization" : "unknown",
          "status" : "ok",
-         "suites_decided" : 1,
+         "suites_decided" : 2,
          "suites_proven" : 1,
          "tool_note" : {
-            "hashcat" : "",
+            "hashcat" : "no mode. Swept the 15 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-15 (a tools/discover-hashcat.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
             "hashpipe" : "verified with hashpipe -c, which pins each line to its own leading TYPE label and runs no detection, at -t 1 and with the emitted label compared against the one asked for. Both precautions are load-bearing here: hashpipe -m does not restrict what a recognised wrapper reaches, and its results vary with the thread count.",
             "john" : "",
             "mdxfind" : "mdxfind e1008 QAS-VASAUTH."
@@ -64956,7 +64956,7 @@
          "hash_length_basis" : "observed",
          "hashcat" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "hashcat_salted" : "",
          "hashcat_speed" : "",
@@ -64998,10 +64998,10 @@
          "sameas" : "",
          "serialization" : "divergent",
          "status" : "ok",
-         "suites_decided" : 2,
+         "suites_decided" : 3,
          "suites_proven" : 2,
          "tool_note" : {
-            "hashcat" : "",
+            "hashcat" : "no mode. Swept the 5 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-15 (a tools/discover-hashcat.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
             "hashpipe" : "hashpipe e1012 RVARY. verified with hashpipe -c, which pins each line to its own leading TYPE label and runs no detection, at -t 1 and with the emitted label compared against the one asked for. Both precautions matter on this build: -m does not restrict what a recognised wrapper reaches, and results vary with the thread count. No iterations: is recorded from hashpipe -- the suffixes are different quantities and this repository follows mdxfind for that field.",
             "john" : "john's own published example ciphertext for this format, recovered by john under this format. john publishes no plaintext, so the plaintext was found by handing john its own example and a candidate list -- what john recovered IS the plaintext, by construction.",
             "mdxfind" : ""
@@ -67673,7 +67673,7 @@
          "hash_length_basis" : "observed",
          "hashcat" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "hashcat_salted" : "",
          "hashcat_speed" : "",
@@ -67714,10 +67714,10 @@
          "sameas" : "truncates sha1-md5-pass (truncation)",
          "serialization" : "unknown",
          "status" : "needs-review",
-         "suites_decided" : 1,
+         "suites_decided" : 2,
          "suites_proven" : 1,
          "tool_note" : {
-            "hashcat" : "",
+            "hashcat" : "no mode. Swept the 12 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-15 (a tools/discover-hashcat.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
             "hashpipe" : "",
             "john" : "",
             "mdxfind" : ""
@@ -68236,7 +68236,7 @@
          "hash_length_basis" : "observed",
          "hashcat" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "hashcat_salted" : "",
          "hashcat_speed" : "",
@@ -68277,10 +68277,10 @@
          "sameas" : "truncates sha1-md5-md5-plain (truncation)",
          "serialization" : "unknown",
          "status" : "needs-review",
-         "suites_decided" : 1,
+         "suites_decided" : 2,
          "suites_proven" : 1,
          "tool_note" : {
-            "hashcat" : "",
+            "hashcat" : "no mode. Swept the 12 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-15 (a tools/discover-hashcat.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
             "hashpipe" : "",
             "john" : "",
             "mdxfind" : ""
@@ -70454,7 +70454,7 @@
          "hash_length_basis" : "fixed",
          "hashcat" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "hashcat_salted" : "",
          "hashcat_speed" : "",
@@ -70495,10 +70495,10 @@
          "sameas" : "truncates sha1-sha1-sha1-pass (truncation)",
          "serialization" : "unknown",
          "status" : "needs-review",
-         "suites_decided" : 1,
+         "suites_decided" : 2,
          "suites_proven" : 1,
          "tool_note" : {
-            "hashcat" : "",
+            "hashcat" : "no mode. Swept the 12 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-15 (a tools/discover-hashcat.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
             "hashpipe" : "",
             "john" : "",
             "mdxfind" : ""
@@ -70587,7 +70587,7 @@
          "hash_length_basis" : "fixed",
          "hashcat" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "hashcat_salted" : "",
          "hashcat_speed" : "",
@@ -70628,10 +70628,10 @@
          "sameas" : "truncates sha1raw (truncation)",
          "serialization" : "unknown",
          "status" : "needs-review",
-         "suites_decided" : 1,
+         "suites_decided" : 2,
          "suites_proven" : 1,
          "tool_note" : {
-            "hashcat" : "",
+            "hashcat" : "no mode. Swept the 12 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-15 (a tools/discover-hashcat.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
             "hashpipe" : "",
             "john" : "",
             "mdxfind" : ""
@@ -73210,7 +73210,7 @@
          "hash_length_basis" : "observed",
          "hashcat" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "hashcat_salted" : "",
          "hashcat_speed" : "",
@@ -73257,10 +73257,10 @@
          "sameas" : "same as axcryptsha1 (encoding); truncates sha1 (truncation)",
          "serialization" : "shared",
          "status" : "ok",
-         "suites_decided" : 1,
+         "suites_decided" : 2,
          "suites_proven" : 1,
          "tool_note" : {
-            "hashcat" : "",
+            "hashcat" : "no mode. Swept the 12 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-15 (a tools/discover-hashcat.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
             "hashpipe" : "",
             "john" : "dynamic_1023 is the only identifier on this row that truncates; john states it as \"sha1($p) (hash truncated to length 32)\". The plain-SHA-1 identifiers this row used to carry moved to the sha1 entry on 2026-09-04.",
             "mdxfind" : ""
@@ -75496,7 +75496,7 @@
          "suites_decided" : 2,
          "suites_proven" : 1,
          "tool_note" : {
-            "hashcat" : "",
+            "hashcat" : "no mode. Swept the 17 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-15 (a tools/discover-hashcat.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
             "hashpipe" : "hashpipe e364 SHA1MD5HUM. verified with hashpipe -c, which pins each line to its own leading TYPE label and runs no detection, at -t 1 and with the emitted label compared against the one asked for. Both precautions matter on this build: -m does not restrict what a recognised wrapper reaches, and results vary with the thread count. No iterations: is recorded from hashpipe -- the suffixes are different quantities and this repository follows mdxfind for that field.",
             "john" : "",
             "mdxfind" : ""
@@ -80971,7 +80971,7 @@
          "suites_decided" : 2,
          "suites_proven" : 1,
          "tool_note" : {
-            "hashcat" : "",
+            "hashcat" : "no mode. Swept the 17 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-15 (a tools/discover-hashcat.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
             "hashpipe" : "hashpipe e365 SHA1SHA1HUM. verified with hashpipe -c, which pins each line to its own leading TYPE label and runs no detection, at -t 1 and with the emitted label compared against the one asked for. Both precautions matter on this build: -m does not restrict what a recognised wrapper reaches, and results vary with the thread count. No iterations: is recorded from hashpipe -- the suffixes are different quantities and this repository follows mdxfind for that field.",
             "john" : "",
             "mdxfind" : ""
@@ -84513,7 +84513,7 @@
          "hash_length_basis" : "observed",
          "hashcat" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "hashcat_salted" : "",
          "hashcat_speed" : "",
@@ -84551,10 +84551,10 @@
          "sameas" : "",
          "serialization" : "unknown",
          "status" : "needs-review",
-         "suites_decided" : 1,
+         "suites_decided" : 2,
          "suites_proven" : 1,
          "tool_note" : {
-            "hashcat" : "",
+            "hashcat" : "no mode. Swept the 7 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-15 (a tools/discover-hashcat.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
             "hashpipe" : "hashpipe e760 SHA1SQL5MD5. verified with hashpipe -c, which pins each line to its own leading TYPE label and runs no detection, at -t 1 and with the emitted label compared against the one asked for. Both precautions matter on this build: -m does not restrict what a recognised wrapper reaches, and results vary with the thread count. No iterations: is recorded from hashpipe -- the suffixes are different quantities and this repository follows mdxfind for that field.",
             "john" : "",
             "mdxfind" : "mdxfind's own published example for this identifier, recovered by mdxfind at this identifier with mdxfind's own published plaintext."
@@ -84578,7 +84578,7 @@
          "hash_length_basis" : "observed",
          "hashcat" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "hashcat_salted" : "",
          "hashcat_speed" : "",
@@ -84616,10 +84616,10 @@
          "sameas" : "",
          "serialization" : "unknown",
          "status" : "needs-review",
-         "suites_decided" : 1,
+         "suites_decided" : 2,
          "suites_proven" : 1,
          "tool_note" : {
-            "hashcat" : "",
+            "hashcat" : "no mode. Swept the 7 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-15 (a tools/discover-hashcat.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
             "hashpipe" : "hashpipe e761 SHA1SQL5MD5MD5. verified with hashpipe -c, which pins each line to its own leading TYPE label and runs no detection, at -t 1 and with the emitted label compared against the one asked for. Both precautions matter on this build: -m does not restrict what a recognised wrapper reaches, and results vary with the thread count. No iterations: is recorded from hashpipe -- the suffixes are different quantities and this repository follows mdxfind for that field.",
             "john" : "",
             "mdxfind" : "mdxfind's own published example for this identifier, recovered by mdxfind at this identifier with mdxfind's own published plaintext."
@@ -84725,7 +84725,7 @@
          "hash_length_basis" : "observed",
          "hashcat" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "hashcat_salted" : "",
          "hashcat_speed" : "",
@@ -84759,10 +84759,10 @@
          "sameas" : "",
          "serialization" : "unknown",
          "status" : "needs-review",
-         "suites_decided" : 1,
+         "suites_decided" : 2,
          "suites_proven" : 1,
          "tool_note" : {
-            "hashcat" : "",
+            "hashcat" : "no mode. Swept the 17 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-15 (a tools/discover-hashcat.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
             "hashpipe" : "",
             "john" : "",
             "mdxfind" : ""
@@ -84859,7 +84859,7 @@
          "hash_length_basis" : "observed",
          "hashcat" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "hashcat_salted" : "",
          "hashcat_speed" : "",
@@ -84893,10 +84893,10 @@
          "sameas" : "",
          "serialization" : "unknown",
          "status" : "needs-review",
-         "suites_decided" : 1,
+         "suites_decided" : 2,
          "suites_proven" : 1,
          "tool_note" : {
-            "hashcat" : "",
+            "hashcat" : "no mode. Swept the 17 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-15 (a tools/discover-hashcat.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
             "hashpipe" : "",
             "john" : "",
             "mdxfind" : ""
@@ -91587,7 +91587,7 @@
          "hash_length_basis" : "observed",
          "hashcat" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "hashcat_salted" : "",
          "hashcat_speed" : "",
@@ -91632,10 +91632,10 @@
          "sameas" : "iterates skein256-x2 (iteration)",
          "serialization" : "shared",
          "status" : "needs-review",
-         "suites_decided" : 2,
+         "suites_decided" : 3,
          "suites_proven" : 2,
          "tool_note" : {
-            "hashcat" : "",
+            "hashcat" : "no mode. Swept the 10 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-15 (a tools/discover-hashcat.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
             "hashpipe" : "",
             "john" : "",
             "mdxfind" : "name match accepted by a curator on 2026-09-04 and not yet reproduced by this repository's own tooling; seed-vectors.pl and verify-vectors.pl decide it. See notes for what was measured by hand first."
@@ -91659,7 +91659,7 @@
          "hash_length_basis" : "observed",
          "hashcat" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "hashcat_salted" : "",
          "hashcat_speed" : "",
@@ -91704,10 +91704,10 @@
          "sameas" : "iterates skein512-x2 (iteration)",
          "serialization" : "shared",
          "status" : "needs-review",
-         "suites_decided" : 2,
+         "suites_decided" : 3,
          "suites_proven" : 2,
          "tool_note" : {
-            "hashcat" : "",
+            "hashcat" : "no mode. Swept the 8 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-15 (a tools/discover-hashcat.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
             "hashpipe" : "",
             "john" : "",
             "mdxfind" : "name match accepted by a curator on 2026-09-04 and not yet reproduced by this repository's own tooling; seed-vectors.pl and verify-vectors.pl decide it. See notes for what was measured by hand first."

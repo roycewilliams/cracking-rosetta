@@ -11,6 +11,11 @@ denotation:
   note: "hx Language Specification, Appendix A, vendored as vendor/cynosureprime/hx.8 at commit 2139193c, entry for mdxfind type MD4UTF16SHA1HUM (e576), which states emit(md4(utf16le(sha1^N(pass) . S))). CORRECTED 2026-09-05: this entry recorded emit(sha1(md4(utf16le(pass)).S)), and the two disagreed about the algorithm. The composition was also inverted. mdxfind hashes the password FIRST, then widens that result to UTF-16LE and calls MD4 on it last -- for (j=0; j < len+i; j++) linebuf[j*2] = cur[j]; MD4(linebuf, (len+i)*2, mdcur[0].h); -- so MD4 is the OUTER hash, not the inner one. The HUM block re-hashes the inner digest at the end of every iteration -- if (x < Maxniter) { if (len == 32) mymd5(cur, len, md5buf.h); else mysha1(cur, len, md5buf.h); } -- so the value the outer hash consumes is the inner digest applied N times, which is what the exponent in the specification records. The text recorded here described only the N=1 case. mdxfind.c is authoritative and it agrees with the specification, so the entry is what changed. Found by tools/audit-denotations.pl, which compares every denotation against the vendored appendix."
 status: "needs-review"
 tools:
+  hashcat:
+    verified: "absent"
+    verified_at: "2026-09-15"
+    verified_with: "hashcat v7.1.2-684-g150a0e61a"
+    note: "no mode. Swept the 27 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-15 (a tools/discover-hashcat.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping."
   mdxfind:
     types: ["MD4UTF16SHA1HUM"]
     verified: "vector"

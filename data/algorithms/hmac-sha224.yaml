@@ -11,6 +11,11 @@ denotation:
   note: "john's own label for HMAC-SHA224, in 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200."
 status: "ok"
 tools:
+  hashcat:
+    verified: "absent"
+    verified_at: "2026-09-15"
+    verified_with: "hashcat v7.1.2-684-g150a0e61a"
+    note: "no mode. Swept the 2 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-15 (a tools/discover-hashcat.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping."
   mdxfind:
     types: ["HMAC-SHA224-KPASS"]
     verified: "vector"
