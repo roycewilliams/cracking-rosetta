@@ -817,6 +817,52 @@ mdxfind also accepts hashcat modes directly (`mdxfind -m 0`, `-m e1`,
   fires correctly" and "the gate fires always" are the same reading), and
   that a TRUNCATING format still fails. It needs a cracker, so it is not in
   CI and it skips loudly.
+- **A RELATIVE `--work` SILENTLY BREAKS EVERY john RUN, and the failure looks
+  exactly like a wrong mapping.** `verify-vectors.pl` runs
+  `cd <john's run dir> && ./john ...`, because john finds `john.conf` relative
+  to its own tree -- so the hash file, the wordlist, the pot and the session
+  are all resolved from THERE. mdxfind and hashcat never `cd`, which is why
+  the defect is john-only and why it survived so long. Measured 2026-09-16:
+  `lm` under `--work tmp/s33/w-lm2` reports `2 hash(es) -> 0 cracked`, and the
+  same path spelled absolutely reports `1 cracked`. `$workdir` and `$algdir`
+  are `File::Spec->rel2abs`'d at startup now, and
+  `tools/test-verify-native.pl` asserts the relative case against the absolute
+  one as its control.
+  **It cost data, which is the part to remember.** "0 cracked" is
+  indistinguishable from a wrong mapping, and `reads_in` was then cleared on
+  the strength of it -- commit `463ba1c` deleted john from `dynamic-31`'s
+  john-form vector, a read proven weeks earlier. **If john reports zero across
+  a whole batch, suspect the invocation before the mappings.**
+- **A CONTROL THAT SHARES THE DEFECT OF THE THING IT CONTROLS PROVES NOTHING,
+  and it will read as proof.** Eleven john blocks were reported here as
+  "at tier `vector` but no longer re-proving", a standing data problem. They
+  were not: all eleven verify once the path is absolute. The reason the wrong
+  conclusion held is that the control was run the same way -- `dynamic-31` was
+  re-checked against its pre-PR data under a relative `--work` too, failed
+  identically, and that identical failure was read as "pre-existing, therefore
+  not caused by the change". **Vary the instrument, not only the input.** A
+  control answers only the question its own configuration can answer, and two
+  runs sharing a misconfiguration agree with each other about nothing.
+- **`reads_in` MUST NOT BE CLEARED ON A GROUPED RUN'S SILENCE.** A tool can
+  read a string perfectly well and still fail to attribute it: mdxfind
+  compares at the shortest length it read, so a 32-hex prefix collapses into
+  its 40-hex parent; john re-inserts the plaintext into the ciphertext's own
+  line structure, so its output lines do not correspond to its input lines.
+  Reading non-attribution as non-reading DELETES a proven fact, which is the
+  demotion `FAILURE NEVER DEMOTES` forbids for a tier and nothing was
+  forbidding here. The clear is licensed only by a run in which that vector
+  was the ONLY hash. For john that means the native retry and nothing else, so
+  the clear now almost never fires there -- which is correct rather than a
+  gap, because john publishes no per-vector evidence the rest of the time.
+- **john's case relaxation now SAYS SO, and only when it had to.** hashcat and
+  mdxfind record a relaxation as `match: ["plaintext-case"]`; john relaxed on
+  its own `FMT_CASE` bit and recorded nothing, so a reader could not tell a
+  byte-exact round trip from one where john returned `ROSETTA` for `rosetta`.
+  Both john paths record it now, gated on no field having matched EXACTLY --
+  a format on the nocase list whose plaintext is already upper case concedes
+  nothing and must not claim it did. Measured 2026-09-16 over the whole
+  population: ten entries name a case-insensitive john format at tier
+  `vector`, and exactly two concede (`lm-c-r` and `mssql2000`).
 - **A GATE THAT ASKS ABOUT THE ENTRY CANNOT ANSWER ABOUT THE VECTOR, and
   `verify-vectors.pl`'s two solo fallbacks asked the wrong one until
   2026-09-09.** `%cracked` is tool -> ENTRY -> identifier, which is what a
