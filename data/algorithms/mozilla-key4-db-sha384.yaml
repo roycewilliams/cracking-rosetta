@@ -1,0 +1,26 @@
+id: "mozilla-key4-db-sha384"
+name: "Mozilla key4.db SHA384"
+expression_proof:
+  verified: "absent"
+  verified_at: "2026-09-15"
+  verified_with: "hashcat v7.1.2-684-g150a0e61a"
+  note: "hashcat 26150 is a container or application format. john's dynamic expression language describes constructions over a password and a salt; it cannot express a container's KDF-plus-cipher, so this has no expression and will not acquire one. That says nothing about whether john can CRACK it -- run discover-john.pl, and if john has a format it goes in tools.john."
+denotation:
+  text: "Mozilla key4.db SHA384"
+  source: "hashcat"
+  note: "hashcat's own label for 26150, category \"Password Manager\", in v7.1.2-684-g150a0e61a. This is a container or application format rather than a bare construction, so there is no single digest expression to record."
+category: "application"
+status: "needs-review"
+tools:
+  hashcat:
+    modes: [26150]
+    verified: "vector"
+    verified_at: "2026-09-15"
+    verified_with: "hashcat v7.1.2-684-g150a0e61a"
+    note: "hashcat's own published example for this identifier, recovered by hashcat at this identifier with hashcat's own published plaintext."
+  crack:
+    supported: false
+vectors:
+  - hash: "$mozilla$*AES*95f6acda22fbfb543226eca01b2e65099730d20cb3114c47536bc33a96b9137ea4a1dcebbcb8d924d20f5784be1fb1f3*b3edd4ec861f2e7a16c72771302a55f11b1504ac1792a4c408c44aa82023ef7f*10000*040eaff904bd66d4f3ba86cbb13ced52*a0b908a87ba816a5cb4d9632f015a972"
+    pass: "hashcat"
+    source: "hashcat"

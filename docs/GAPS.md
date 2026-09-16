@@ -71,13 +71,13 @@ Real work rather than a one-liner: it means finding out whether the tool
 supports the construction at all, and under which identifier. The counts are
 the honest size of the job.
 
-### john: 292 entries say nothing
+### john: 293 entries say nothing
 
 A few that carry a vector and a proven expression, so there is a definite construction to look for, one per family:
 
 * [`sha1-md5-md5-plain`](index.html#sha1-md5-md5-plain) - `sha1(md5(md5($p)))` (and 3 more starting `sha`)
 
-All 292: filter `john_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
+All 293: filter `john_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
 
 Where such an entry carries an expression, john can already attack it without
 a named format:
@@ -102,7 +102,7 @@ A few that carry a vector and a proven expression, so there is a definite constr
 
 All 204: filter `hashcat_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
 
-### mdxfind: 59 entries say nothing
+### mdxfind: 60 entries say nothing
 
 A few that carry a vector, so a candidate identifier can be tested at once, one per family:
 
@@ -111,6 +111,7 @@ A few that carry a vector, so a candidate identifier can be tested at once, one 
 * [`kde-kwallet-4-13-pbkdf2-hmac-sha512-blowfish`](index.html#kde-kwallet-4-13-pbkdf2-hmac-sha512-blowfish) - `KDE KWallet 4.13+ (PBKDF2-HMAC-SHA512, Blowfish)`
 * [`kerberos-5-etype-23-tgs-rep-nt`](index.html#kerberos-5-etype-23-tgs-rep-nt) - `Kerberos 5, etype 23, TGS-REP (NT)`
 * [`lotus-notes-domino-8-5`](index.html#lotus-notes-domino-8-5) - `Lotus Notes/Domino 8.5`
+* [`mozilla-key4-db-sha384`](index.html#mozilla-key4-db-sha384) - `Mozilla key4.db SHA384`
 * [`murmurhash64a-truncated-zero-seed`](index.html#murmurhash64a-truncated-zero-seed) - `MurmurHash64A truncated (zero seed)`
 * [`netntlmv1-netntlmv1-ess-nt`](index.html#netntlmv1-netntlmv1-ess-nt) - `NetNTLMv1 / NetNTLMv1+ESS (NT)` (and 1 more starting `NetNTLMv`)
 * [`netscreen`](index.html#netscreen) - `Netscreen`
@@ -120,9 +121,8 @@ A few that carry a vector, so a candidate identifier can be tested at once, one 
 * [`stuffit5`](index.html#stuffit5) - `Stuffit5`
 * [`totp-hmac-sha1`](index.html#totp-hmac-sha1) - `TOTP (HMAC-SHA1)`
 * [`truecrypt-ripemd160-xts-1024-bit-legacy`](index.html#truecrypt-ripemd160-xts-1024-bit-legacy) - `TrueCrypt RIPEMD160 + XTS 1024 bit (legacy)` (and 11 more starting `TrueCrypt`)
-* [`veracrypt-ripemd160-xts-1024-bit-legacy`](index.html#veracrypt-ripemd160-xts-1024-bit-legacy) - `VeraCrypt RIPEMD160 + XTS 1024 bit (legacy)` (and 23 more starting `VeraCrypt`)
 
-All 59: filter `mdxfind_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
+All 60: filter `mdxfind_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
 
 ## 4. Identifiers with no row here (25)
 
