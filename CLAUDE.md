@@ -50,10 +50,16 @@ release disagree about what exists, the tip wins and the inventory is
 regenerated from it. The reason is that the alternative is worse: a release
 lags by months, and the mappings people actually arrive asking about are the
 new ones. **The cost is real and is stated here rather than discovered:**
-measured 2026-09-06, 13 of hashcat's 595 modes exist in NO release -- 17050,
-34301, 35300, 35400, 35500, 35600, 35700, 35800, 36100, 36200, 36300, 36400,
-36410 -- and this repository publishes all 13 at tier `vector`. A reader on
-hashcat 7.1.2 does not have them. See "Open questions for Royce" in STATE.md
+re-measured 2026-09-15 against the inventory at v7.1.2-684-g150a0e61a, **9 of
+hashcat's 596 modes exist in NO tagged release** -- 17050, 26150, 34301,
+35500, 35600, 35700, 35800, 36100, 36200 -- and this repository publishes all
+9 at tier `vector`. A reader on hashcat 7.1.2 does not have them.
+**The figure MOVES IN BOTH DIRECTIONS and the list is the thing to read, not
+the count.** It was 13 of 595 on 2026-09-06; five of those thirteen (35300,
+35400, 36300, 36400, 36410) have since been picked up by a tag, and 26150
+arrived tip-only with the 2026-09-15 pull. Do not quote the number from here
+-- `dist/availability.csv` derives it, and `awk -F, 'NR>1 && $1=="hashcat" &&
+$5==""' dist/availability.csv` prints the current list. See "Open questions for Royce" in STATE.md
 for the proposal to publish that difference rather than leave it implicit.
 
 | Tool | Binary / source | Extraction command |

@@ -409,6 +409,7 @@ hashcat,25800,,bcrypt(sha1($pass)),v6.2.2,2021-06-13,yes,2021-05-18,yes,v7.1.2
 hashcat,25900,,KNX IP Secure - Device Authentication Code,v6.2.0,2021-05-14,yes,2021-04-03,yes,v7.1.2
 hashcat,26000,,Mozilla key3.db,v6.2.0,2021-05-14,yes,2021-04-17,yes,v7.1.2
 hashcat,26100,,Mozilla key4.db,v6.2.0,2021-05-14,yes,2021-04-17,yes,v7.1.2
+hashcat,26150,,Mozilla key4.db SHA384,,,,2026-09-13,no,v7.1.2
 hashcat,26200,,OpenEdge Progress Encode,v6.2.2,2021-06-13,yes,2021-06-05,yes,v7.1.2
 hashcat,26300,,FortiGate256 (FortiOS256),v6.2.2,2021-06-13,yes,2021-06-08,yes,v7.1.2
 hashcat,26401,,"AES-128-ECB NOKDF (PT = $salt, key = $pass)",v6.2.3,2021-07-16,yes,2021-06-26,yes,v7.1.2
