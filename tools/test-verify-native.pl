@@ -73,6 +73,7 @@ use RosettaTools qw(tool_path);
 use Digest::SHA qw(sha1_hex);
 use File::Temp qw(tempdir);
 use File::Path qw(make_path);
+use Cwd qw(getcwd);
 use YAML::XS;
 
 my $PROG = 'test-verify-native.pl';
@@ -188,6 +189,50 @@ for my $c (@CASE) {
     ok($fired == $want_native,
        "$id: native path " . ($want_native ? 'FIRED' : 'did NOT fire'),
        "found " . scalar(@nat) . " native scratch file(s) for $label");
+}
+
+# A RELATIVE --work MUST WORK, and until 2026-09-16 it silently did not.
+#
+# The john branch runs `cd <john's run dir> && ./john ...`, because john finds
+# john.conf relative to its own tree. Every path handed to it is therefore
+# resolved from THERE, so a relative --work made the hash file, the wordlist,
+# the pot and the session all unresolvable and john cracked nothing. mdxfind
+# and hashcat never cd, which is why the defect was john-only.
+#
+# It is asserted here rather than left to care at the call site because the
+# failure is silent and expensive: "0 cracked" is exactly what a wrong mapping
+# looks like, and the reads_in clear then DELETED a proven read on the
+# strength of it -- commit 463ba1c stripped john from dynamic-31 that way.
+#
+# The control is the same entry under an ABSOLUTE --work in the loop above
+# (tn-ordinary-digest). Without it, "the relative path works" and "this format
+# verifies no matter what" are the same reading.
+{
+    my $id   = 'tn-relative-work';
+    my $adir = "$TMP/$id/algorithms";
+    make_path($adir);
+    YAML::XS::DumpFile("$adir/$id.yaml", {
+        id     => $id,
+        name   => $id,
+        status => 'needs-review',
+        tools  => { john => { cpu => ['dynamic_26'], verified => 'asserted' } },
+        vectors => [ { hash => $SHA1, pass => 'password', source => 'john' } ],
+    });
+    # Relative to the CURRENT directory, which is not john's -- that is the
+    # whole point. It is created under the temp tree so nothing is left behind.
+    my $cwd = getcwd();
+    chdir $TMP or die "chdir $TMP: $!";
+    my $rc = system($^X, $VV, '--tool', 'john', '--john', $JOHN,
+                    '--algorithms', $adir, '--work', "$id/relwork",
+                    '--timeout', '120', '--only', $id) >> 8;
+    chdir $cwd or die "chdir back: $!";
+    ok($rc == 0, "$id: verify-vectors.pl exited 0", "exit was $rc");
+    my $got  = eval { YAML::XS::LoadFile("$adir/$id.yaml") };
+    my $tier = $got ? ($got->{tools}{john}{verified} // '(none)') : '(unreadable)';
+    ok($tier eq 'vector',
+       "$id: a RELATIVE --work still verifies -- john is run from its own "
+     . "directory, so every path must be resolved before the chdir",
+       "got '$tier'");
 }
 
 printf STDERR "- %s: %d assertion(s) passed, %d failed\n", $PROG, $pass, $fail;

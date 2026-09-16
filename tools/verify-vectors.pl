@@ -167,6 +167,7 @@ use warnings;
 
 use File::Basename qw(basename);
 use File::Path qw(make_path);
+use File::Spec;
 use FindBin qw($RealBin);
 use Getopt::Long qw(GetOptions);
 use POSIX qw(strftime);
@@ -261,6 +262,21 @@ my %TOOL_VER = map { $_->[0] => (tool_version($_->[0], $_->[1])
                ( ['hashcat', $hashcat], ['mdxfind', $mdxfind], ['john', $john] );
 $algdir  //= "$ROOT/data/algorithms";
 $workdir //= "$ROOT/tmp/verify";
+# ABSOLUTE, ALWAYS, AND THIS IS NOT TIDINESS. The john branch runs
+# `cd <john's run dir> && ./john ...`, because john finds john.conf relative
+# to its own tree. Every path handed to it -- the hash file, the wordlist, the
+# pot, the session -- is therefore resolved from THERE, so a relative --work
+# makes all four unresolvable and john cracks nothing.
+#
+# That failure is silent and it is not merely a lost run: "0 cracked" is
+# exactly what a wrong mapping looks like, and the reads_in clear below then
+# DELETES a proven read on the strength of it. Measured 2026-09-16 -- `lm`
+# under `--work tmp/s33/...` reports 0 of 2 and under the same path spelled
+# absolutely reports 1 of 2, and commit 463ba1c stripped john from
+# dynamic-31 for precisely this reason. mdxfind and hashcat never cd, which
+# is why the defect is john-only and why it survived this long.
+$workdir = File::Spec->rel2abs($workdir);
+$algdir  = File::Spec->rel2abs($algdir);
 
 @tools = map { lc } @tools;
 @tools = qw(hashcat mdxfind john) if grep { $_ eq 'all' } @tools;
@@ -434,6 +450,12 @@ for my $f (@files) {
 # names it and has a vector.
 
 my %job;   # tool -> identifier -> { entries => {id=>1}, iterations => n }
+# Which (tool, entry, vector) pairs got a run in which THIS VECTOR WAS THE
+# ONLY HASH -- a solo run, or john's native retry. It is what licenses
+# CLEARING a read, and nothing else does: in a grouped run a tool can read a
+# string perfectly well and still fail to attribute it, so non-attribution
+# there is not evidence of non-reading. See the reads_in block below.
+my %solo_ran;
 my %read;  # tool -> entry id -> vector index -> 1, when that tool read THAT
            # string. %cracked answers "did this entry verify", which is what a
            # tier needs; this answers "which serialization did each tool
@@ -718,6 +740,7 @@ if ($want{hashcat} && $job{hashcat}) {
             # run that never happened. One fixed name per mode made "fired for
             # vector 1" and "fired for vector 0 and was overwritten" the same
             # reading. tools/test-verify-solo-gate.pl asserts on these.
+            $solo_ran{hashcat}{ $vec->{id} }{ $vec->{vi} } = 1;
             my $sf = write_file("$workdir/hc.$mode.solo.$vec->{vi}.hash", $vec->{hash});
             my $sw = write_file("$workdir/hc.$mode.solo.$vec->{vi}.word", $vec->{pass});
             my ($c2, $o2) = run_capture($timeout, $hashcat,
@@ -1149,6 +1172,7 @@ if ($want{mdxfind} && $job{mdxfind}) {
             # run gives: these files are the only observable that says whether
             # the gate opened for THIS vector, and one fixed name per type
             # made two different answers look identical.
+            $solo_ran{mdxfind}{ $vec->{id} }{ $vec->{vi} } = 1;
             my $sf = write_file("$workdir/mx.$safe.$it.solo.$vec->{vi}.hash", $vec->{hash});
             my $sw = write_file("$workdir/mx.$safe.$it.solo.$vec->{vi}.word", $vec->{pass});
             my ($c2, $o2) = run_capture($timeout, $mdxfind,
@@ -1330,6 +1354,15 @@ if ($want{john} && $job{john}) {
             my $vec = $login_of{$login} or next;
             next unless $pw eq $vec->{pass}
                      || ($JOHN_NOCASE{ lc $label } && lc $pw eq lc $vec->{pass});
+            # SAY WHAT WAS CONCEDED. hashcat and mdxfind both record a case
+            # relaxation as match: ["plaintext-case"]; john relaxed on its own
+            # FMT_CASE bit and recorded nothing, so a reader of a john block
+            # could not tell a byte-exact round trip from one where john
+            # returned ROSETTA for rosetta. LM, netlm and their neighbours are
+            # all in that position, and the schema names LM as a motivating
+            # case for the field.
+            $conceded{john}{ $vec->{id} }{'plaintext-case'} = 1
+                if $pw ne $vec->{pass};
             next if $enc_used && $vec->{pass} =~ /[^\x20-\x7e]/;
             $won{"$vec->{hash}\0$vec->{pass}"} = 1;
         }
@@ -1346,6 +1379,7 @@ if ($want{john} && $job{john}) {
         if (!%won && $loaded == 0 && !$enc_refused && $code != -2) {
             my $nvi = 0;
             for my $vec (@v) {
+                $solo_ran{john}{ $vec->{id} }{ $vec->{vi} } = 1;
                 my $ns   = "$safe.native." . $nvi++;
                 my $nhf  = write_file("$workdir/jn.$ns.hash", $vec->{hash});
                 my $nwf  = write_file("$workdir/jn.$ns.word", $vec->{pass});
@@ -1379,11 +1413,18 @@ if ($want{john} && $job{john}) {
                 # is a bare number could match the summary's own digits.
                 for my $line (split /\n/, $nshown // '') {
                     next if $line =~ /^\d+ password hash(?:es)? cracked, \d+ left$/;
+                    my @f = split /:/, $line, -1;
                     next unless grep {
                                     $_ eq $vec->{pass}
                                  || ($JOHN_NOCASE{ lc $label }
                                      && lc $_ eq lc $vec->{pass})
-                                } split /:/, $line, -1;
+                                } @f;
+                    # Same concession as the grouped path: recorded only when
+                    # no field matched EXACTLY, so a format on the nocase list
+                    # whose plaintext happens to be already-uppercase concedes
+                    # nothing and must not say it did.
+                    $conceded{john}{ $vec->{id} }{'plaintext-case'} = 1
+                        unless grep { $_ eq $vec->{pass} } @f;
                     $won{"$vec->{hash}\0$vec->{pass}"} = 1;
                     $native_john{ $vec->{id} }{$label} = 1;
                     last;
@@ -1481,8 +1522,29 @@ if (!$dry) {
             # reads_in: which tools were proven to READ this exact string.
             # Three states, and the third is the point -- a tool that did not
             # run tells us nothing, and recording that as "does not read" would
-            # invent a negative. So: a read sets it; a complete run that read
-            # nothing clears it; anything else leaves the vector alone.
+            # invent a negative. So: a read sets it; a run that read nothing
+            # AND could have attributed one clears it; anything else leaves
+            # the vector alone.
+            #
+            # THE CLEAR NEEDS PER-VECTOR EVIDENCE, and requiring only that
+            # every identifier RAN is not that. A tool can read a string
+            # perfectly well in a grouped run and still fail to attribute it:
+            # mdxfind compares at the shortest length it read, so a 32-hex
+            # prefix collapses into its 40-hex parent; john re-inserts the
+            # plaintext into the ciphertext's own line structure. Reading
+            # non-attribution as non-reading then DELETES a proven fact, which
+            # is the demotion the tier model forbids and nothing was stopping
+            # here. It is not hypothetical: 463ba1c stripped john from
+            # dynamic-31's john-form vector, because john's grouped run loaded
+            # its hashes, cracked none, and every identifier had run.
+            #
+            # So the clear is licensed only by %solo_ran -- a run in which
+            # this vector was the ONLY hash, where nothing else could have
+            # taken the answer. mdxfind and hashcat do one for every vector
+            # they did not read; john does one only on the native retry, so
+            # for john the clear now almost never fires, which is the correct
+            # answer rather than a gap: john publishes no per-vector evidence
+            # the rest of the time.
             #
             # This is what makes a divergent serialization visible. Where one
             # string reads in hashcat and john both, they agree on the format;
@@ -1493,9 +1555,11 @@ if (!$dry) {
                 $vi++;
                 my %in = map { $_ => 1 } @{ $vec->{reads_in} || [] };
                 my $was = join ',', sort keys %in;
-                if ($read{$tool}{$id}{$vi})  { $in{$tool} = 1 }
-                elsif ($all_ran)             { delete $in{$tool} }
-                else                         { next }
+                if ($read{$tool}{$id}{$vi}) { $in{$tool} = 1 }
+                elsif ($all_ran && $solo_ran{$tool}{$id}{$vi}) {
+                    delete $in{$tool};
+                }
+                else                        { next }
                 my @now = sort keys %in;
                 next if join(',', @now) eq $was;
                 if (@now) { $vec->{reads_in} = \@now }
