@@ -67,7 +67,7 @@ use File::Path qw(make_path);
 use File::Basename qw(basename);
 use Time::HiRes qw(time);
 use RosettaEmit qw(emit_entry);
-use RosettaTools qw(tool_path tool_env_help);
+use RosettaTools qw(tool_path tool_env_help hashpipe_label);
 
 my $PROG = basename($0);
 my $ROOT = "$RealBin/..";
@@ -279,7 +279,10 @@ sub hashpipe_verifies {
     (my $safe = $type) =~ s/[^A-Za-z0-9._-]/_/g;
     # Ask BARE and let the tool say what depth matched: the emitted label is
     # bare where the input was bare or x01, mdxfind's own convention.
-    my $in = write_file("$workdir/hp.$safe.in", "$type $hash:$pass");
+    # See RosettaTools::hashpipe_label: a bare trailing-`x` name resolves to
+    # the wrong type.
+    my $in = write_file("$workdir/hp.$safe.in",
+                        hashpipe_label($type) . " $hash:$pass");
     my ($code, $out) = run_capture($timeout, '/bin/sh', '-c',
         sprintf('%s -c < %s 2>/dev/null', quotemeta($hashpipe), quotemeta($in)));
     return (0, 'timeout') if $code == -2;

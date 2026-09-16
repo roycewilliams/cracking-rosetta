@@ -132,7 +132,7 @@ use File::Path qw(make_path);
 use POSIX qw(strftime);
 use YAML::XS qw(LoadFile);
 use RosettaEmit qw(emit_entry);
-use RosettaTools qw(tool_path tool_env_help);
+use RosettaTools qw(tool_path tool_env_help hashpipe_label);
 use RosettaHx qw(parse_appendix translate_hx);
 
 my $PROG = basename($0);
@@ -701,7 +701,10 @@ sub hp_version {
 sub hp_verify {
     my ($ident, $vector) = @_;
     my $s  = safe($ident);
-    my $in = write_file("$workdir/hp.$s.in", "$ident $vector");
+    # See RosettaTools::hashpipe_label: a type whose name ends in `x` must
+    # carry an explicit depth or hashpipe answers about a different type.
+    my $in = write_file("$workdir/hp.$s.in",
+                        hashpipe_label($ident) . " $vector");
     # run_capture already sends the child's stderr to /dev/null, so $out is
     # stdout alone -- the separation -c requires.
     my ($code, $out) = run_capture($timeout, undef, $hp_binary, '-c', $in);

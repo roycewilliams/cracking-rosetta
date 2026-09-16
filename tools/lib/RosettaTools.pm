@@ -54,7 +54,8 @@ use warnings;
 use Exporter 'import';
 our @EXPORT_OK = qw(tool_path tool_env_help tool_version
                     share_measurable share_unmeasurable_reason
-                    hc_plain_is hc_line_plain_is);
+                    hc_plain_is hc_line_plain_is
+                    hashpipe_label);
 
 # The path each tool has had all along on the machine this data was generated
 # on. Do not change these to make a different machine work -- set the
@@ -252,6 +253,39 @@ sub hc_line_plain_is {
         return 1 if hc_plain_is(join(':', @f[ @f - $k .. $#f ]), $want);
     }
     return 0;
+}
+
+
+# hashpipe_label($type, $iterations) - how to NAME a type to `hashpipe -c`.
+#
+# TWELVE mdxfind/hashpipe type names END IN A BARE `x`, and hashpipe resolves
+# a bare one to the WRONG TYPE. Measured 2026-09-16 against RCS 1.194:
+#
+#     echo "MD5SHA1x    <digest>:password123" | hashpipe -c
+#          ->  MD5SHA1x01   ... which is type MD5SHA1 (e178) at depth 1
+#     echo "MD5SHA1xx01 <digest>:password123" | hashpipe -c
+#          ->  MD5SHA1xx01  ... which is type MD5SHA1x (e702) at depth 1
+#
+# Both names are real types. hashpipe emits `<name>x%02d` when the depth is
+# non-zero (hashpipe.c around line 30225), so the ECHO distinguishes them
+# perfectly -- it is the INPUT parse that takes the trailing `x` for a suffix
+# marker and hands back a different type. 11 of the 12 answer as the shorter
+# type and one is refused outright.
+#
+# So a trailing-`x` type is always named with an explicit depth. That is not a
+# workaround for our matchers: they were already right, and refused the wrong
+# type's echo, which is why this cost coverage and never correctness. What was
+# wrong was the question.
+#
+# The depth defaults to 1 because that is what a bare label means for every
+# other type. A caller that knows the entry's iteration count should pass it;
+# a type whose first emitted value is deeper will be refused rather than
+# searched for, because trying depths until one passes is the re-casing
+# pitfall in another costume.
+sub hashpipe_label {
+    my ($type, $iter) = @_;
+    return $type unless defined $type && $type =~ /x\z/;
+    return sprintf('%sx%02d', $type, ($iter && $iter > 0) ? $iter : 1);
 }
 
 1;

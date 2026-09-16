@@ -123,6 +123,7 @@ use YAML::XS qw(LoadFile);
 
 use lib "$RealBin/lib";
 use RosettaEmit qw(emit_entry);
+use RosettaTools qw(hashpipe_label);
 
 my $PROG = basename($0);
 my $ROOT = "$RealBin/..";
@@ -293,7 +294,13 @@ if (defined $transfile) {
 
 sub prove {
     my ($type, $line) = @_;
-    my $in = write_line("$workdir/pin." . safe($type) . ".txt", "$type $line");
+    # NAMED WITH AN EXPLICIT DEPTH where the type's name ends in `x`: a bare
+    # one resolves to a different type. RosettaTools::hashpipe_label has the
+    # measurement. The matcher below is unchanged and was always right -- it
+    # refused the other type's echo, which is why this cost coverage and never
+    # correctness.
+    my $ask = hashpipe_label($type);
+    my $in = write_line("$workdir/pin." . safe($type) . ".txt", "$ask $line");
     my $out = run_out($hp_binary, '-c', $in);
     for my $l (split /\n/, $out) {
         # the emitted label is bare where the input was bare, or carries the
