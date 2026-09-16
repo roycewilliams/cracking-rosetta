@@ -40,6 +40,7 @@ vectors:
     pass: "password123"
     source: "mdxfind"
     form: "native"
+    reads_in: ["mdxfind"]
     credential: "password123/sha1sha1trunc"
   - hash: "360621c68ac8101809a7a66d5a2c2469"
     pass: "password123"

@@ -35,6 +35,7 @@ vectors:
     pass: "QWERTY1"
     source: "john"
     form: "john"
+    reads_in: ["john"]
     credential: "rvary"
   - hash: "5AA70358A9C369E0"
     pass: "QWERTY1"

@@ -35,6 +35,7 @@ vectors:
     pass: "test1"
     source: "john"
     form: "john"
+    reads_in: ["john"]
     credential: "dynamic-15"
   - hash: "6093d5cb3e2f99d9110eb9c4bbca5f8c:aaaSXB:joeblow"
     pass: "test1"

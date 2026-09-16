@@ -28,6 +28,7 @@ vectors:
     pass: "openwall"
     source: "john"
     form: "john"
+    reads_in: ["john"]
     credential: "dynamic-1034"
   - hash: "bd6fd49a627ecdbe4031b2d52d5748ab:postgres"
     pass: "openwall"

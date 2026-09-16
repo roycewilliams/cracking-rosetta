@@ -29,11 +29,12 @@ vectors:
     pass: "test1"
     source: "john"
     form: "john"
+    reads_in: ["john"]
     credential: "dynamic-1505"
   - hash: "b8bbabb1eb9802a2e962de0207ca5172:aaaSXB"
     pass: "test1"
     source: "mdxfind"
     form: "mdxfind"
-    reads_in: ["mdxfind"]
+    reads_in: ["john", "mdxfind"]
     credential: "dynamic-1505"
 notes: "The two vectors on this row are ONE credential written twice and must never be read as corroborating each other. john writes $dynamic_1505$<digest>$<salt>; mdxfind reads <digest>:<salt>. The re-encoding was proven rather than assumed: mdxfind pinned to MD5PASSSALTMD5PASSSALT recovers this row's own stated plaintext from the rewritten string."

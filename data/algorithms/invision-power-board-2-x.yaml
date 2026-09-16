@@ -35,6 +35,7 @@ vectors:
     pass: "welcome"
     source: "john"
     form: "john"
+    reads_in: ["john"]
     credential: "invision-power-board-2-x"
   - hash: "d891f03a7327639bc632d62a7f302604:2e75504633"
     pass: "welcome"

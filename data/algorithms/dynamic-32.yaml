@@ -35,11 +35,12 @@ vectors:
     pass: "test1"
     source: "john"
     form: "john"
+    reads_in: ["john"]
     credential: "dynamic-32"
   - hash: "7587e30d68ce5d7e2d4e7d98a8f69ff5:RAkUuD88"
     pass: "test1"
     source: "mdxfind"
     form: "mdxfind"
-    reads_in: ["mdxfind"]
+    reads_in: ["john", "mdxfind"]
     credential: "dynamic-32"
 notes: "The two vectors on this row are ONE credential written twice and must never be read as corroborating each other. john writes $dynamic_32$<digest>$<salt>; mdxfind reads <digest>:<salt>. The re-encoding was proven rather than assumed: mdxfind pinned to MD4PASSSALT recovers this row's own stated plaintext from the rewritten string, and the field-swapped control does not crack, so the field order is measured and not guessed."

@@ -35,6 +35,7 @@ vectors:
     pass: "Abc.!23"
     source: "john"
     form: "john"
+    reads_in: ["john"]
     credential: "episerver-sid"
   - hash: "4D5EFDFA143EDF74193076F174AC47CEBF2F417F:5F1D84A6DE97E2BEFB637A3CB5318AFEF0750B856CF1836BD1D4470175BE"
     pass: "Abc.!23"

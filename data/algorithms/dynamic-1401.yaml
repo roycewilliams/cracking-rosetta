@@ -28,6 +28,7 @@ vectors:
     pass: "password"
     source: "john"
     form: "john"
+    reads_in: ["john"]
     credential: "dynamic-1401"
   - hash: "27f6a9d892475e6ce0391de8d2d893f700000000:username"
     pass: "password"
