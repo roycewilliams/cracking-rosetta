@@ -338,7 +338,9 @@ if ($want{hashcat}) {
 }
 
 # Which mdxfind types carry a salt, so -f or -F is chosen from the inventory.
-my (%MX_SALTED, %MX_PEPPER);
+# The 'j' PEPPER flag is deliberately NOT read here any more: it named the
+# wrong set. See the split fallback in the mdxfind section for the measurement.
+my %MX_SALTED;
 if ($want{mdxfind}) {
     my $mx = eval { YAML::XS::LoadFile("$ROOT/data/tools/mdxfind.yaml") };
     if ($mx) {
@@ -348,12 +350,6 @@ if ($want{mdxfind}) {
             # way, and 47 types are flagged 'u'. Both need -F rather than -f.
             $MX_SALTED{ $t->{name} } = 1
                 if grep { $_ eq 's' || $_ eq 'u' } @{ $t->{flags} || [] };
-            # 'j' is a PEPPER type: it takes a site-wide secret that is not in
-            # the hash line and cannot be derived from it, so mdxfind reads it
-            # from a file (-j, the global pepper array). 13 types carry the
-            # flag.
-            $MX_PEPPER{ $t->{name} } = 1
-                if grep { $_ eq 'j' } @{ $t->{flags} || [] };
         }
     }
     else {
@@ -1013,24 +1009,63 @@ if ($want{mdxfind} && $job{mdxfind}) {
         # passes". The hash and the plaintext are fixed; only the plumbing by
         # which the tool is handed its own published fields varies, and both
         # forms ask the identical question of the identical type.
-        if ($MX_PEPPER{$type} && ($out // '') !~ /^\Q$type\E/m) {
+        #
+        # NOT GATED ON THE 'j' FLAG, and it was until 2026-09-16. The flag
+        # says a type takes a site-wide pepper; it does NOT say which types
+        # spell a second field after a space in the salt position, and those
+        # are not the same set. SHA1WRLUCTRUNCSALT (e672) is flagged 'f,s'
+        # with no 'j', publishes its vector as
+        # "<digest>:<salt> <N>" where N is the TRUNCATION LENGTH, and mdxfind
+        # reads that N out of the pepper array like any other. Pinned with the
+        # whole field it answers "None found, sorry!"; with the field split
+        # and N handed to -j it cracks on the first try. The row sat at tier
+        # 'upstream' carrying a note saying the tool would not reproduce its
+        # own published example, which was a fact about this gate.
+        #
+        # Widening it cannot manufacture a verification, and the guard is one
+        # already here rather than a new one: mx_echo_is compares the ECHOED
+        # hash against the stored string, so a split that dropped data would
+        # echo something shorter and attribute nothing. mdxfind reconstructs
+        # the whole original line -- "<digest>:<salt> 128:password123" -- which
+        # is what shows the split was re-plumbing and not truncation. The
+        # narrowing that remains is the shape itself: @peppers is built only
+        # from vectors whose salt field actually contains a space, and the run
+        # is skipped when none does.
+        #
+        # BOTH ORDERS, because the corpus holds both and nothing in the
+        # inventory says which a type wants. Measured 2026-09-16 on this host:
+        #
+        #   SHA1WRLUCTRUNCSALT  "<digest>:1122334455667788 128"
+        #                       salt FIRST, parameter second (the truncation
+        #                       length N)
+        #   SHA1MD5xSALT        "<digest>:1 Salt"
+        #                       parameter FIRST, salt second (the inner
+        #                       iteration count the type's own `x` names)
+        #
+        # Trying one order only leaves the other reading as "the tool did not
+        # reproduce its own published example", which is what both rows said.
+        # A wrong order costs one run and attributes nothing, because the
+        # echo still has to reproduce the stored string.
+        for my $order (0, 1) {
+            last if ($out // '') =~ /^\Q$type\E/m;
             my (@hashes, @peppers);
             for my $vec (@v) {
                 my ($h, $rest) = split /:/, $vec->{hash}, 2;
                 if (defined $rest && $rest =~ /^(.*?) (.+)$/) {
-                    push @hashes,  "$h:$1";
-                    push @peppers, $2;
+                    my ($head, $tail) = ($1, $2);
+                    my ($salt, $pep) = $order ? ($tail, $head) : ($head, $tail);
+                    push @hashes,  "$h:$salt";
+                    push @peppers, $pep;
                 }
                 else { push @hashes, $vec->{hash} }
             }
-            if (@peppers) {
-                my %u; my @uniq = grep { !$u{$_}++ } @peppers;
-                my $hf2 = write_file("$workdir/mx.$safe.$it.hash2", @hashes);
-                my $jf  = write_file("$workdir/mx.$safe.$it.pep",   @uniq);
-                ($code, $out) = run_capture($timeout, $mdxfind,
-                    '-h', "^\Q$type\E\$", $readflag, $hf2, '-i', $it,
-                    '-j', $jf, $wf);
-            }
+            last unless @peppers;
+            my %u; my @uniq = grep { !$u{$_}++ } @peppers;
+            my $hf2 = write_file("$workdir/mx.$safe.$it.hash2.$order", @hashes);
+            my $jf  = write_file("$workdir/mx.$safe.$it.pep.$order",   @uniq);
+            ($code, $out) = run_capture($timeout, $mdxfind,
+                '-h', "^\Q$type\E\$", $readflag, $hf2, '-i', $it,
+                '-j', $jf, $wf);
         }
 
         # %read_here is THIS identifier's reads. %read is the tool's, across
@@ -1522,6 +1557,27 @@ if (!$dry) {
                 # anchored list above was added to stop.
                 if (($blk->{note} // '') =~ /^(hashcat mapping shipped|from hashpipe|vector replaced|NOT REPRODUCED HERE)/
                     || ($blk->{note} // '') =~ /NOT ROUND-TRIPPED BY mdxfind HERE/) {
+                    delete $blk->{note};
+                    $touched = 1;
+                }
+                # THE TRANSCODE NOTE GOES STALE THE SAME WAY, and it is
+                # written by this tool a hundred lines below. It says the
+                # round trip used data/mdxfind-transcodes.tsv because the
+                # entry kept its vector in another tool's serialization. Add
+                # a vector in mdxfind's OWN spelling to that row and the
+                # statement is simply false: the next run reads the stored
+                # string and concedes nothing. Measured 2026-09-16 on eleven
+                # rows PR #8 restated that way -- `match` cleared itself,
+                # because %m is recomputed every run, while the note stayed
+                # and contradicted it.
+                #
+                # Withdrawn ONLY where this run needed no transcode for this
+                # pair. A row that still depends on one keeps its note, which
+                # is the same test `match` already passes, read off the same
+                # %transcoded rather than off a second source that could
+                # disagree with it.
+                if ($tool eq 'mdxfind' && !$transcoded{$id}
+                    && ($blk->{note} // '') =~ /^Round-tripped on the TRANSCRIBED form/) {
                     delete $blk->{note};
                     $touched = 1;
                 }
