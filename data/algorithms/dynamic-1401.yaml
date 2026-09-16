@@ -16,8 +16,6 @@ tools:
     verified: "vector"
     verified_at: "2026-09-06"
     verified_with: "mdxfind RCS 1.576 (2026/09/02)"
-    match: ["hash-transcoded"]
-    note: "Round-tripped on the TRANSCRIBED form, not on the vector as stored: this entry keeps its vector in another tool's serialization, which mdxfind's reader does not parse. mdxfind pinned with -h reproduced SKYPE as \"27f6a9d892475e6ce0391de8d2d893f7:username:password\", from data/mdxfind-transcodes.tsv. The plaintext is one this entry already stores, and the two strings are ONE piece of evidence written twice -- not two agreeing vectors. mdxfind e857 SKYPE, reached by rewriting this row's vector into mdxfind's serialization: john writes $dynamic_1401$<digest>$$U<user>; mdxfind reads <digest>:<user>. Added 2026-09-05."
   john:
     cpu: ["dynamic_1401"]
     verified: "vector"
@@ -30,7 +28,6 @@ vectors:
     pass: "password"
     source: "john"
     form: "john"
-    reads_in: ["john"]
     credential: "dynamic-1401"
   - hash: "27f6a9d892475e6ce0391de8d2d893f700000000:username"
     pass: "password"

@@ -16,8 +16,6 @@ tools:
     verified: "vector"
     verified_at: "2026-09-05"
     verified_with: "mdxfind RCS 1.576 (2026/09/02)"
-    match: ["hash-transcoded"]
-    note: "Round-tripped on the TRANSCRIBED form, not on the vector as stored: this entry keeps its vector in another tool's serialization, which mdxfind's reader does not parse. mdxfind pinned with -h reproduced MD5USERMD5PASSSALT as \"6093d5cb3e2f99d9110eb9c4bbca5f8c:aaaSXB:joeblow:test1\", from data/mdxfind-transcodes.tsv. The plaintext is one this entry already stores, and the two strings are ONE piece of evidence written twice -- not two agreeing vectors. mdxfind e1011 MD5USERMD5PASSSALT, reached by rewriting this row's vector into mdxfind's serialization: john writes $dynamic_15$<digest>$<salt>$$U<user>; mdxfind reads <digest>:<salt>:<user>."
   hashpipe:
     types: ["MD5USERMD5PASSSALT"]
     verified: "vector"
@@ -37,7 +35,6 @@ vectors:
     pass: "test1"
     source: "john"
     form: "john"
-    reads_in: ["john"]
     credential: "dynamic-15"
   - hash: "6093d5cb3e2f99d9110eb9c4bbca5f8c:aaaSXB:joeblow"
     pass: "test1"

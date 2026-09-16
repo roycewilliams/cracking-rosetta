@@ -16,8 +16,6 @@ tools:
     verified: "vector"
     verified_at: "2026-09-05"
     verified_with: "mdxfind RCS 1.576 (2026/09/02)"
-    match: ["hash-transcoded"]
-    note: "Round-tripped on the TRANSCRIBED form, not on the vector as stored: this entry keeps its vector in another tool's serialization, which mdxfind's reader does not parse. mdxfind pinned with -h reproduced POSTOFFICE as \"0c78bdef7d5448105cfbbc9aaa490a44:550c41c11bab48f9dbd8203ed313eef0:abc123\", from data/mdxfind-transcodes.tsv. The plaintext is one this entry already stores, and the two strings are ONE piece of evidence written twice -- not two agreeing vectors. mdxfind e1009 POSTOFFICE, reached by rewriting this row's vector into mdxfind's serialization: john writes $dynamic_18$<digest>$<salt>; mdxfind reads <digest>:<salt>."
   hashpipe:
     types: ["POSTOFFICE"]
     verified: "vector"
@@ -37,7 +35,6 @@ vectors:
     pass: "abc123"
     source: "john"
     form: "john"
-    reads_in: ["john"]
     credential: "dynamic-18"
   - hash: "0c78bdef7d5448105cfbbc9aaa490a44:550c41c11bab48f9dbd8203ed313eef0"
     pass: "abc123"

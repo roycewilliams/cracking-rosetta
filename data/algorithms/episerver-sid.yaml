@@ -16,8 +16,6 @@ tools:
     verified: "vector"
     verified_at: "2026-09-05"
     verified_with: "mdxfind RCS 1.576 (2026/09/02)"
-    match: ["hash-transcoded"]
-    note: "Round-tripped on the TRANSCRIBED form, not on the vector as stored: this entry keeps its vector in another tool's serialization, which mdxfind's reader does not parse. mdxfind pinned with -h reproduced EPISERVER-SID as \"4d5efdfa143edf74193076f174ac47cebf2f417f:5F1D84A6DE97E2BEFB637A3CB5318AFEF0750B856CF1836BD1D4470175BE:Abc.!23\", from data/mdxfind-transcodes.tsv. The plaintext is one this entry already stores, and the two strings are ONE piece of evidence written twice -- not two agreeing vectors. mdxfind e1014 EPISERVER-SID, reached by rewriting this row's vector into mdxfind's serialization: john writes 0x<SID> 0x<digest> space separated with the SID first; mdxfind reads <digest>:<SID>."
   hashpipe:
     types: ["EPISERVER-SID"]
     verified: "vector"
@@ -37,7 +35,6 @@ vectors:
     pass: "Abc.!23"
     source: "john"
     form: "john"
-    reads_in: ["john"]
     credential: "episerver-sid"
   - hash: "4D5EFDFA143EDF74193076F174AC47CEBF2F417F:5F1D84A6DE97E2BEFB637A3CB5318AFEF0750B856CF1836BD1D4470175BE"
     pass: "Abc.!23"

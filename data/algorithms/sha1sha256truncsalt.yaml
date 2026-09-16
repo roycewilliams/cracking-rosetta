@@ -18,10 +18,9 @@ tools:
     note: "no mode. Swept the 17 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-03 (tools/discover-hashcat.pl --all, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping."
   mdxfind:
     types: ["SHA1SHA256TRUNCSALT"]
-    verified: "upstream"
-    verified_at: "2026-08-31"
-    verified_with: "mdxfind RCS 1.540 (2026/08/22)"
-    note: "NOT REPRODUCED HERE. mdxfind publishes this identifier and a worked example, which is what tier `upstream` means, but the local round-trip FAILED: the tool pinned to this identifier did not reproduce its own published example. The row exists so that someone arriving by this identifier is not met with nothing; the claim is upstream's, not this repository's, until a vector is round-tripped here. Re-run seed-orphans.pl --tool mdxfind --only SHA1SHA256TRUNCSALT to retry."
+    verified: "vector"
+    verified_at: "2026-09-15"
+    verified_with: "mdxfind RCS 1.579 (2026/09/06)"
   hashpipe:
     types: ["SHA1SHA256TRUNCSALT"]
     verified: "vector"
@@ -39,3 +38,4 @@ vectors:
   - hash: "dacff3bff50db6dcacee1f52d6bc22ccbe8184b9:Salt 63"
     pass: "password123"
     source: "mdxfind"
+    reads_in: ["mdxfind"]
