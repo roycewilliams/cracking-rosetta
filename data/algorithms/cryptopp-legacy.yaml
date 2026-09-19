@@ -1,20 +1,78 @@
 id: "cryptopp-legacy"
 name: "CRYPTOPPLEGACY"
+aliases: ["Crypto++ DefaultEncryptor (1998-era)", "Crypto++ LegacyEncryptor", "Dynu.Encrypt"]
 denotation:
-  text: "CRYPTOPPLEGACY"
-  source: "mdxfind"
-  note: "mdxfind/hashpipe type e1028: Crypto++'s legacy password-based scheme, DES-EDE2-CBC key recovery (hx(1) 1.5 Appendix A, e1028). It mixes an inline site key -- mdxfind loads it in the salt field via -F -- with the password. hx 1.5 records it as not an expression, so this row carries a denotation rather than an expression."
+  text: "salt(8) . des_ede2_cbc(key=mash_sha1(pass . salt, 200)[0:16], iv=mash_sha1(pass . salt, 200)[16:24], sha1(pass . salt)[0:8] . plaintext . pkcs5)"
+  source: "human"
+  note: "Recovered from Crypto++ upstream default.cpp/default.h and confirmed against the vendor DLL. Not expressible in hx: the construction ENCRYPTS rather than hashes, and hx has no CBC block-cipher spelling."
 category: "application"
+application: "Crypto++ DataEncryptor"
 status: "ok"
 tools:
+  hashcat:
+    verified: "absent"
+    verified_at: "2026-09-19"
+    verified_with: "HashMob hash identifier, 2026-09-18"
+    note: "hashcat's own identifier reports \"No hash-mode matches the structure of the text\" for an 80-hex record of this form, so there is no mode to name."
   mdxfind:
     types: ["CRYPTOPPLEGACY"]
     verified: "vector"
-    verified_at: "2026-09-26"
-    verified_with: "mdxfind RCS 1.596 (2026/09/19)"
-    note: "the type's own published example (vendored hashpipe HASH_TYPES.md v1.200), recovered by mdxfind pinned to this type with -F, which loads the inline site key in the salt field."
+    verified_at: "2026-09-19"
+    verified_with: "mdxfind RCS 1.595 (2026/09/18)"
+  hashpipe:
+    types: ["CRYPTOPPLEGACY"]
+    verified: "vector"
+    verified_at: "2026-09-19"
+    verified_with: "hashpipe RCS 1.198 (2026/09/18)"
+    note: "verified by round-tripping the type PINNED with -m, not by taking an unpinned report. Cross-checked: this vector does NOT verify under CRYPTOPPDEFAULT, and that entry's vector does not verify here."
+  crack:
+    supported: false
 vectors:
   - hash: "3DDC35B38270872954DA6A445397860FA8BBFEC184353FFAAEA87A16D72B68FD:secret"
     pass: "password123"
-    source: "mdxfind"
+    source: "vendor DLL"
     reads_in: ["mdxfind"]
+notes: |
+  A NAMING TRAP, and it is the whole reason this entry and cryptopp-default are
+  separate. In the 1998-era Crypto++ this row describes, the class was called
+  DefaultEncryptor, DES_EDE was the name for 2-key triple DES, and SHA was the
+  name for SHA-1. Modern Crypto++ renamed that entire construction to
+  LegacyEncryptor and gave the DefaultEncryptor name to a DIFFERENT type: AES
+  with SHA-256 at 2500 iterations, which is cryptopp-default here. Implementing
+  from a modern Crypto++ header while reading a 1998-era name reproduces nothing.
+
+  THIS IS ENCRYPTION, NOT HASHING, and the difference is operational rather than
+  academic. The stored record is DES-EDE2-CBC ciphertext under a site-wide key
+  chosen by whoever installed the software. Consequences: a candidate stream of
+  user passwords cannot recover anything, because the thing being guessed is the
+  site key; one recovered key decrypts every record on that installation at once;
+  and cost is independent of record count, since a single record validates a
+  candidate key. mdxfind carries the key in the salt channel (-s, or inline as
+  record:sitekey with -F) and emits record:sitekey:plaintext, so a found line
+  round-trips through hashpipe for verification before filing.
+
+  The acceptance oracle is the 8-byte check block, which holds
+  sha1(passphrase . salt) truncated to 8 bytes. It is derivable from the
+  candidate key alone, so a key search needs no known plaintext, at a
+  false-positive rate of 2^-64 per try. Note for implementers: a
+  reverse-engineering summary in circulation states that the check block equals
+  the SALT. It does not, and that error is expensive rather than cosmetic,
+  because implementing it as written makes a search with the CORRECT key report
+  nothing at all.
+
+  RECORD LENGTH identifies the family cheaply. Stored length is
+  8 + 8 + plaintext rounded up to a multiple of 8, so 1-15 bytes of plaintext
+  gives 32 bytes stored, 16-23 gives 40, 24-31 gives 48. 40 bytes is the common
+  case for real passwords and is not a digest length for any algorithm, which is
+  the tell: a bare-hex value whose byte length is a multiple of 8 and is not a
+  standard digest length is a block-cipher candidate rather than an exotic hash.
+  32 and 48 bytes collide with SHA-256 and SHA-384 and cannot be separated by
+  length alone. There is no magic prefix; the leading 8 bytes are a random salt,
+  regenerated per call, so the same plaintext and key encrypt differently every
+  time.
+
+  Seen in the field as the credential store of a classic-ASP site via the
+  commercial Dynu.Encrypt COM component (DynuCOM v3.0, Dynu Systems, 1997-2002),
+  whose documented API is Encrypt(String, Password) / Decrypt(String, Password).
+  The component's own documentation permits an empty Password and warns that
+  data so encrypted can be decrypted by anyone holding the component.
