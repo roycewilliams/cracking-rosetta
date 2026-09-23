@@ -112,12 +112,26 @@ Usage: $PROG [options]
 
    Runs hashpipe -T, which self-tests every registered type. Exit 0 success,
    1 error, 2 usage.
+
+   With NO options this prints usage and exits 2 rather than running, so a
+   bare invocation cannot silently overwrite the committed inventory. To
+   regenerate it, name the destination explicitly:
+     $PROG --hashpipe /home/claude/src/upstream/hashpipe/hashpipe \\
+           --out data/tools/hashpipe.yaml
 END_USAGE
     return;
 }
 
 my ($hashpipe, $outfile, $timeout, $verbose, $help);
 $timeout = 600;
+
+# House convention: no arguments prints usage and exits 2, rather than running.
+# Without this, a bare invocation silently defaults --out to the committed
+# data/tools/hashpipe.yaml and overwrites it from whatever binary tool_path
+# resolves -- usually the OLDER installed hashpipe, not the canonical local
+# build. Regeneration therefore names a flag: --out (or '-'), or --hashpipe.
+my $had_args = scalar @ARGV;
+
 GetOptions(
     'hashpipe=s' => \$hashpipe,
     'out=s'      => \$outfile,
@@ -126,6 +140,7 @@ GetOptions(
     'help|h'     => \$help,
 ) or do { usage(); exit 2 };
 if ($help) { usage(); exit 0 }
+if (!$had_args) { usage(); exit 2 }
 
 $hashpipe = tool_path('hashpipe', $hashpipe);
 $outfile //= "$ROOT/data/tools/hashpipe.yaml";
