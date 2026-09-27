@@ -21,6 +21,7 @@ on:
       - 'tools/**'
       - 'vendor/**'
       - 'docs/index.html'
+      - '**.md'
       - '.github/workflows/validate.yml'
   push:
     branches: [main]
@@ -30,6 +31,7 @@ on:
       - 'tools/**'
       - 'vendor/**'
       - 'docs/index.html'
+      - '**.md'
       - '.github/workflows/validate.yml'
   workflow_dispatch:
 
