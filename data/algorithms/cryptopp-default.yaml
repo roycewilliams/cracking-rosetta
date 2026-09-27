@@ -3,7 +3,7 @@ name: "CRYPTOPPDEFAULT"
 denotation:
   text: "CRYPTOPPDEFAULT"
   source: "mdxfind"
-  note: "mdxfind/hashpipe type e1029: the Crypto++ library's default password-based scheme, which mixes an inline site key (mdxfind loads it in the salt field via -F and reports \"site key accepted\") with the password. A library scheme, not a bare digest construction, so there is no single expression to record."
+  note: "mdxfind/hashpipe type e1029: Crypto++'s default password-based scheme, AES-CBC key recovery (hx(1) 1.5 Appendix A, e1029). It mixes an inline site key -- mdxfind loads it in the salt field via -F -- with the password. hx 1.5 records it as not an expression, so this row carries a denotation rather than an expression."
 category: "application"
 status: "ok"
 tools:
