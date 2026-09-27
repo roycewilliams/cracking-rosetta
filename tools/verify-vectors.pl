@@ -363,9 +363,16 @@ if ($want{mdxfind}) {
         for my $t (@{ $mx->{types} }) {
             # 's' is a salt carried in the hash line; 'u' is a userid field
             # carried the same way -- mdxfind's HMAC types take their key that
-            # way, and 47 types are flagged 'u'. Both need -F rather than -f.
+            # way, and 47 types are flagged 'u'. 'F' is mdxfind's own marker
+            # that the type is read in FIELD mode: its stored record carries
+            # structured fields (bcrypt's $2a$, PBKDF2 params, the RFC 2307
+            # {SHA} brace forms) that -f will not parse. All three need -F
+            # rather than -f; measured 2026-09-27 on APACHE-SHA (e457) and
+            # APACHE-SHA-TRUNC16 (e1040), each of which -f leaves 0 cracked and
+            # -F round-trips. This is monotonic: a type already at tier vector
+            # never demotes, and an F-only type could not promote before.
             $MX_SALTED{ $t->{name} } = 1
-                if grep { $_ eq 's' || $_ eq 'u' } @{ $t->{flags} || [] };
+                if grep { $_ eq 's' || $_ eq 'u' || $_ eq 'F' } @{ $t->{flags} || [] };
         }
     }
     else {
