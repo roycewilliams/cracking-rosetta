@@ -138,7 +138,7 @@ A few that carry a vector, so a candidate identifier can be tested at once, one 
 
 All 60: filter `mdxfind_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
 
-## 4. Identifiers with no row here (25)
+## 4. Identifiers with no row here (33)
 
 Whole algorithms rather than gaps in a row. Each is an identifier a tool
 publishes and this table does not answer to, so somebody arriving by it lands
@@ -151,15 +151,22 @@ that no row named, ten of them John-shaped formats this repository already had
 rows for and had recorded as mdxfind `absent`. Nothing pointed at them, so
 nobody looked.
 
-### hashcat: 1 with no row
+### hashcat: 5 with no row
 
 hashcat publishes an example hash for each, so an entry can usually be created and proven in one sitting.
 
 * `14600` - LUKS v1 (legacy)
+* `36500` - NTLM(NTLM_bin($pass))
+* `36800` - OpenSSH Private Keys (bcrypt-pbkdf)
+* `37700` - Cardano Eternl Wallet (PBKDF2-HMAC-SHA512-ChaCha20Poly1305)
+* `38000` - Mikrotik RouterOS EC-SRP5 (Curve25519)
 
-### mdxfind: 0 with no row
+### mdxfind: 2 with no row
 
-None.
+Both `mdxfind -N`-style catalogs and `hashpipe -N` publish a self-test vector per type, so these can be proven without hunting for a hash.
+
+* `CRYPTOPPLEGACY` - e1028
+* `CRYPTOPPDEFAULT` - e1029
 
 ### john: 23 with no row
 
@@ -189,9 +196,11 @@ john's own `src/*_fmt_plug.c` test arrays carry a vector for nearly every format
 * `wpapsk-opencl`
 * `wpapsk-pmk-opencl`
 
-### hashpipe: 1 with no row
+### hashpipe: 3 with no row
 
 hashpipe ships a self-test vector for every registered type; `hashpipe -N` prints the table and `-G` generates one where a type has none.
 
 * `SHA1SALTCX` - e521
+* `CRYPTOPPLEGACY` - e1028
+* `CRYPTOPPDEFAULT` - e1029
 
