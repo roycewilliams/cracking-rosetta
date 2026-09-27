@@ -2146,7 +2146,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "{SHA} . base64(trunc(sha1_bin(pass), 16))",
+         "denotation" : "\"{SHA}\" . base64(trunc(sha1_bin(pass), 16))",
          "expr" : "",
          "expr_note" : "",
          "expr_tier" : "",
