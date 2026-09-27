@@ -315,7 +315,7 @@ e304	MD5-2xMD5-MD5	h=md5(md5(pass)); md5(h . h)
 e305	MD5-2xMD5-SHA1	h=md5(sha1(pass)); md5(h . h)
 e306	MD5-2xMD5-MD5MD5	h=md5(md5(md5(pass))); md5(h . h)
 e307	MD5-2xMD5-MD5MD5MD5	h=md5(md5(md5(md5(pass)))); md5(h . h)
-e308	SHA1MD5USER	emit(sha1(md5(pass) . user)) \fI(Note [24]; see Note [48])\fP
+e308	SHA1MD5USER	emit(sha1(md5(pass) . user)) \fI(Note [24]; see Note [47])\fP
 e309	SHA1MD5RADMIN2	sha1(md5(md5(pad(pass, 100))))
 e310	SHA1SHA1USER	sha1(sha1(pass) . user)
 e311	SHA11SALTMD5	\fI(complex: iterates over single-char salts)\fP
@@ -361,9 +361,9 @@ e350	MD5UCSALT	md5(upper(md5(pass)) . salt)
 e351	MD5TIGER	md5(tiger(pass))
 e352	MD5SHA1MD5PASS	md5(sha1(md5(pass)) . pass)
 e353	MD5CAP	cap(md5(pass))
-e354	MD5CAPMD5USER	emit(md5(cap(md5(pass)) . user)) \fI(Note [24]; see Note [48])\fP
-e355	MD5CAPMD5MD5USER	emit(md5(cap(md5(cap(md5(pass)))) . user)) \fI(Note [24]; see Note [48])\fP
-e356	MD5MD5MD5USER	emit(md5(md5(md5(pass)) . user)) \fI(Note [24]; see Note [48])\fP
+e354	MD5CAPMD5USER	emit(md5(cap(md5(pass)) . user)) \fI(Note [24]; see Note [47])\fP
+e355	MD5CAPMD5MD5USER	emit(md5(cap(md5(cap(md5(pass)))) . user)) \fI(Note [24]; see Note [47])\fP
+e356	MD5MD5MD5USER	emit(md5(md5(md5(pass)) . user)) \fI(Note [24]; see Note [47])\fP
 e357	MD5MD5SALT-SALT	md5(md5(pass . salt) . ":" . salt)
 e358	MD5CAPSHA1	md5(cap(sha1(pass)))
 e359	MD5SHA1MD5x	md5(sha1(md5^N(pass))) \fI(N = iteration count)\fP
@@ -393,7 +393,7 @@ e382	SHA256SHA256SALT	sha256(sha256(pass) . salt)
 e383	MD5RAWUC	hex(upper(md5_bin(pass)))
 e384	MD5SHA1UCu32	md5(cut(upper(sha1(pass)), 0, 32))
 e385	SHA1SALTPASS	sha1(salt . pass)
-e386	SHA512PASSSALT	sha512(pass . salt)
+e386	SHA512PASSSALT	sha512(pass . salt) \fI(FileZilla Server >= 0.9.55)\fP
 e387	SHA512SHA512SALT	sha512(sha512(pass) . salt)
 e388	SHA512SALTPASS	sha512(salt . pass)
 e389	SHA512SALTSHA512	sha512(salt . sha512(pass))
@@ -417,7 +417,7 @@ T}
 e405	SHA1PASSSALT	sha1(pass . salt)
 e406	SHA256MD5SALTPASS	sha256(md5(salt . pass))
 e407	MD5padMD5	md5(" " . md5(pass) . "  ")
-e408	MD5DSALT	md5(md5(md5(pass) . salt) . salt2) \fI(see Note [50])\fP
+e408	MD5DSALT	md5(md5(md5(pass) . salt) . salt2) \fI(see Note [48])\fP
 e409	SHA1lsb35	T{
 hex(and(sha1_bin(pass), "\\x00\\x0f\\xff...\\xff")) \fI(nibble mask)\fP
 T}
@@ -451,7 +451,7 @@ T}
 e437	MD5HESK	T{
 h=""; for i=0 to length(pass)-1 { h=h.md5(cut(pass,i,1)) }; md5(h)
 T}
-e438	SHA1SALTSHA1SALTSHA1PASS	sha1(salt . sha1(salt . sha1(pass)))
+e438	SHA1SALTSHA1SALTSHA1PASS	sha1(salt . sha1(salt . sha1(pass))) \fI(OpenCart)\fP
 e439	MSCACHE	md4(md4_bin(utf16le(pass)) . utf16le(lower(user)))
 e440	MD5SHA1SALTMD5PASS	md5(sha1(salt) . md5(pass))
 e441	MD5SALTMD5PASS	md5(salt . md5(pass))
@@ -897,7 +897,7 @@ e870	AIX-SHA256	pbkdf2_sha256(pass, salt, N, 32) \fI(AIX {ssha256})\fP
 e871	AIX-SHA512	pbkdf2_sha512(pass, salt, N, 64) \fI(AIX {ssha512})\fP
 e872	IPMI2-SHA1	hmac_sha1(pass, rakp_data) \fI(IPMI 2.0 RAKP)\fP
 e873	IPMI2-MD5	hmac_md5(pass, rakp_data) \fI(IPMI 2.0 RAKP)\fP
-e874	KRB5PA23	rc4_hmac_md5(pass, realm, user, timestamp) \fI(see Note [51])\fP
+e874	KRB5PA23	rc4_hmac_md5(pass, realm, user, timestamp) \fI(see Note [49])\fP
 e875	MYSQL-SHA256CRYPT	sha256crypt(pass, salt) \fI(MySQL)\fP
 e876	DRUPAL7	phpass(pass, salt, N) \fI(Drupal 7)\fP
 e877	SYBASE-ASE	sha256(salt . pass) \fI(Sybase ASE)\fP
@@ -935,13 +935,13 @@ e908	SHIRO1	pbkdf2_sha1(pass, salt, N, 16) \fI(Apache Shiro)\fP
 e909	ECRYPTFS	sha512^65536(pass . salt) \fI(Linux eCryptfs)\fP
 e910	ORACLE12	pbkdf2_sha512(pass, salt, 4096, 64) \fI(Oracle 12c)\fP
 e911	COLDFUSION10	sha256(salt . upper(sha1(pass))) \fI(Adobe ColdFusion 10)\fP
-e912	AZURESYNC	pbkdf2_sha256(pass, salt, 1000, 32) \fI(Azure AD Sync; see Note [51])\fP
+e912	AZURESYNC	pbkdf2_sha256(pass, salt, 1000, 32) \fI(Azure AD Sync; see Note [49])\fP
 e913	ANDROIDFDE	pbkdf2_sha1(pass, salt, 2000, 16) \fI(Android FDE master key)\fP
-e914	KRB5TGS23	rc4_hmac_md5(pass, realm, spn) \fI(Kerberos 5 TGS etype 23; see Note [51])\fP
+e914	KRB5TGS23	rc4_hmac_md5(pass, realm, spn) \fI(Kerberos 5 TGS etype 23; see Note [49])\fP
 e915	AXCRYPT	axcrypt(pass, fromhex(salt), iter) \fI(AES Key Wrap)\fP
 e916	AXCRYPTSHA1	cut(sha1(pass), 0, 32)
 e917	CISCO9	scrypt(pass, salt, 16384, 1, 1) \fI(Cisco Type 9)\fP
-e918	DCC2	pbkdf2_sha1(md4(utf16le(pass)), utf16le(username), 10240, 16) \fI(see Note [51])\fP
+e918	DCC2	pbkdf2_sha1(md4_bin(md4_bin(utf16le(pass)) . utf16le(lower(user))), utf16le(lower(user)), N, 16) \fI(N = iteration count; see Note [49])\fP
 e919	PWSAFE3	T{
 sha256^N(pass . salt) \fI(Password Safe v3, N = iteration count)\fP
 T}
@@ -1031,7 +1031,7 @@ e978	SSPR-SHA256	sha256^N(salt . pass) \fI(Note [37])\fP
 e979	SSPR-SHA512	sha512^N(salt . pass) \fI(Note [37])\fP
 e980	EMPIRECMS	md5(md5(salt) . md5(pass)) \fI(EmpireCMS)\fP
 e981	PBKDF1-SHA1	pbkdf1_sha1(pass, salt, iter)
-e982	MSONLINE	pbkdf2_sha256(pass, salt, N, 32) \fI(Microsoft Online; see Note [51])\fP
+e982	MSONLINE	pbkdf2_sha256(pass, salt, N, 32) \fI(Microsoft Online; see Note [49])\fP
 e983	WBB4	sha1(salt . sha1(salt . sha1(pass))) \fI(WBB4 = WBB3)\fP
 e984	SAPCODVNH512	pbkdf2_sha512(pass, salt, N, 64) \fI(SAP CODVN H SHA512)\fP
 e985	SM3CRYPT	sm3crypt(pass, salt, rounds)
@@ -1077,6 +1077,8 @@ e1024	DRAGONFLY4-64	sha512(pass . "$4$" . fromhex("00") . "/etc" . salt) \fI(Dra
 e1025	GOST12256CRYPT	gost12_256crypt(pass, salt, rounds) \fI(see Note [45])\fP
 e1026	GOST94CRYPT	gost94crypt(pass, salt, rounds) \fI(see Note [45])\fP
 e1027	SUNMD5	sunmd5(pass, salt, rounds) \fI(Solaris \(em see Note [46])\fP
+e1028	CRYPTOPPLEGACY	\fInot an expression \(em DES-EDE2-CBC key recovery, see Note [50]\fP
+e1029	CRYPTOPPDEFAULT	\fInot an expression \(em AES-CBC key recovery, see Note [50]\fP
 .TE
 .SK
 .H 2 "Notes"
@@ -2452,21 +2454,65 @@ multiplicity does not, so the three are distinguishable in output at every
 input.
 .P
 .B Encoding.
-e369 applies three encodings through
+This is the paragraph most often read backwards, so it is worth being exact
+about who invented what.
+.P
+Microsoft invented this hash when their wide character
+.I was
+UTF\-16LE, and they believed that sufficient to represent every language.
+The operating system mapped the user's code page into UTF\-16LE using its own
+conversion tables, as an OS service.  It specifically did
+.I not
+zero\-extend.
+.P
+.B e369
+is therefore the specification type: it applies three real encodings through
 .BR iconv ,
-UTF-8, CP1251 and CP1252, and dedups identical results with a
+UTF\-8, CP1251 and CP1252, and dedups identical results with a
 .BR memcmp .
-e786 reproduces the mapping of UTF-8 to UTF-16 that
+.B e786
+zero\-extends instead, which is what
 .I hashcat
-performs, which is not correct, and exists precisely so that mdxfind agrees
-with hashcat on inputs where hashcat is wrong.
-It is a compatibility type, not a specification type.
+does, and it is a
+.I hack
+\(em it exists because hashcat cannot convert a code page at all, having no
+tables and treating candidate bytes as opaque.  It is a compatibility type,
+not a specification type.
+.P
+The persistent confusion is this: CP1252's code points mostly sit below
+U+0100, so a 1:1 look of the mapping is mistaken for a zero fill.  It is not.
+The two agree only over 0xA0\-0xFF, where the code points happen to equal the
+byte values; the whole of 0x80\-0x9F diverges.  CP1252 0x80 is U+20AC, so
+Windows hashes
+.B "AC 20"
+where a zero fill hashes
+.BR "80 00" .
+That band holds the euro sign, the curly quotes, the en and em dashes and the
+trademark sign, so
+.B e786
+cannot reproduce a genuine Windows digest for any password containing one of
+them, while
+.B e369
+can.
+.P
 For ASCII every variant collapses to one digest, which is why the three test
 identical; they separate as soon as a byte above 0x7f appears.
 With the password
 .B $HEX[636166c3a9]
-\(em the letters c, a, f followed by the two UTF-8 bytes of an e-acute \(em
+\(em the letters c, a, f followed by the two UTF\-8 bytes of an e\-acute \(em
 e369 emits three distinct digests and e786 emits two.
+.P
+.B e496
+assumes its input is UTF\-8 and cannot accept a code\-page encoding, where
+Windows natively could.  Windows held UTF\-16LE internally and performed the
+code\-page conversion on
+.IR output ,
+so the code page is recorded nowhere in the resulting text and the recipient
+is simply required to know it.  That is what
+.BR encforce (1)
+exists to untangle, and the reason the output side is moving to UTF\-8: e496
+converts back to UTF\-8 for the solved output, so the answer carries its own
+encoding.
 .P
 .B Iteration.
 e496 honours
@@ -2656,114 +2702,69 @@ Symfony.
 .B sha512(pass)
 followed by 9999 rounds of SHA-512 over the 128-character hex of the previous
 digest. The last 4999 of those rounds append the salt.
-.H 3 "Note [46]"
-.B "SUNMD5 (e1027)."
-Solaris crypt. The initial digest is md5(pass . salt); thereafter 4096 plus the
-rounds= value are run, each computing md5 of the previous digest, optionally a
-fixed 1517-byte phrase, and the decimal round number in ASCII.
-.P
-Whether the phrase is included is decided per round by a coin flip derived from
-bits of the previous digest \(em two seven-bit indices are assembled from the
-digest bytes and the XOR of the bits they address gives the flip. Roughly half
-the rounds therefore hash an extra 1517 bytes, so the cost is data dependent and
-varies with the candidate rather than being fixed by the rounds= field alone.
-.P
-The phrase is 1516 characters of Hamlet's soliloquy
-.I plus
-its terminating NUL: Sun's implementation passed sizeof(), so 1517 bytes are
-hashed, and dropping the NUL yields a plausible but wrong digest for every
-candidate.
-.P
-The salt is everything before the LAST dollar sign. That definition also covers
-the variant whose salt ends in a dollar sign and so shows a doubled separator in
-the stored form, with no special case. The digest is emitted with the md5crypt
-transposition, 22 characters. All 8 of John the Ripper's vectors verify,
-including its 120-character password, and mdxfind -z output cracks back.
-.H 3 "Note [48]"
-.B "SHA1MD5USER (e308), MD5CAPMD5USER (e354), MD5CAPMD5MD5USER (e355), MD5MD5MD5USER (e356)."
-Four entry points into one loop in mdxfind, reached by fallthrough, differing
-only in how the intermediate hex is built: one md5 or two, with the leading hex
-character capitalised or not. The capitalisation of the
-.I first
-hex happens in the e355 pre-block, so a reading that caps only the last md5
-agrees with mdxfind whenever that character is a digit and disagrees otherwise
-\(em about five times in eight.
-.P
-For every user, two digests are emitted: one over hex . user and one over
-hex . ":" . user. Both are iterated, each over its own hex. Registering the
-pair so that only one of them seeds the iteration chain leaves the type
-complete at its base depth and exactly half strength at every depth below,
-which is how the defect presented before it was found.
-.P
-Earlier revisions of this page gave these expressions as md5(md5(user)) and the
-like, with no password term at all. That was a transcription error; the
-password is the inner operand and the username is appended.
-.H 3 "Note [50]"
-.B "MD5DSALT (e408)."
-The two salts are reported in a single field, concatenated with no separator,
-so a line carrying the salt
-.B Kpa
-does not say whether that is
-.B Kp
-then
-.BR a ,
+.H 3 "Note [40]"
+.B "ORACLE11 (e1015)."
+Oracle 11g. The digest is
+.B "upper(sha1(pass . fromhex(salt)))"
+\(em the same value
+.B SHA1PASSHEXSALT
+(e834, hashcat mode 112) computes. The two differ only in stored form, and that
+difference is the reason both exist. e834 takes the digest and the salt as two
+separate fields; e1015 owns the form Oracle actually stores, a single
+60-character field holding the 40-hex digest immediately followed by the 20-hex
+salt. No other type in the catalogue has a 30-byte digest, so that width
+identifies the format on its own, with no wrapper. Found lines are reported in
+the same concatenated form, so a result can be handed straight back to Oracle.
+.PF "'Appendix B' \\\\nP'Waffle'"
+.H 3 "Note [41]"
+.B "SAPCODVNH256 (e1016), SAPCODVNH384 (e1017)."
+SAP CODVN H in its SHA-256 and SHA-384 flavours. The stored form is
+.B "{x-isSHA256, ITER}"
 or
-.B K
-then
-.BR pa .
-Anything consuming this type has to try each split; mdxfind bounds each salt at
-three characters, so at most three positions need testing. A reader that
-assumes an even split agrees only when the two salts are the same length.
-.H 3 "Note [51]"
-.B "Two UTF-16LE conventions."
-mdxfind turns a password into UTF-16LE in two different ways, and which one a
-type uses is not visible from its expression.
+.B "{x-isSHA384, ITER}"
+followed by base64 of the digest immediately followed by the salt. The
+computation is
+.B "h = H(pass . salt)"
+for the first round and
+.B "h = H(pass . h)"
+for each of the remaining
+.B ITER-1
+rounds, with the password truncated at 40 characters. The iteration count is
+carried in the hash rather than fixed by the type, so it is a runtime parameter
+and these rows are documentation rather than a compilable expression.
 .P
-The first is a byte expansion: each input byte is followed by a NUL, so the
-bytes are treated as Latin-1. The second is a real UTF-8 to UTF-16LE
-conversion through iconv, opened with //IGNORE so that input which is not valid
-UTF-8 has the bad sequences dropped rather than failing the conversion.
+These complete the family: e904 SAPCODVNH is the SHA-1 flavour and e984
+SAPCODVNH512 the SHA-512 one. All four of John the Ripper's
+.B saph
+SHA-256 and SHA-384 test vectors were reproduced by an independent
+implementation before either type was written.
+.H 3 "Note [42]"
+.B "H3C (e1019)."
+H3C, HPE and Huawei device passwords. The stored form is
+.B "$h$6$<salt>$<base64>"
+and the digest is
+.B "sha512(pass . NUL . salt . pass . NUL)"
+\(em the password is hashed INCLUDING its terminating NUL, twice, with the salt
+between the two copies. The 64-byte digest is stored base64-encoded. Verified
+against all three of John the Ripper's own
+.B h3c
+test vectors, base64 exact.
+.H 3 "Note [43]"
+.B "ARGON2MD5 (e1020)."
+vBulletin 6. Argon2 over the MD5 of the password rather than the password
+itself, the direct successor to what
+.B BCRYPTMD5
+(e451) models for vBulletin 5. The inner digest is the 32-character lowercase
+HEX, not the 16 raw bytes, matching e451 and vBulletin's own convention. The
+stored form is ordinary Argon2 MCF and carries no marker distinguishing it from
+e987 ARGON2, so a line can be offered to either type and only the correct one
+verifies.
 .P
-They agree for ASCII and differ for everything else.
-.B DCC2 ,
-.B AZURESYNC ,
-.B KRB5PA23
-and
-.B KRB5TGS23
-use the byte expansion;
-.B MSONLINE
-and plain
-.B NTLM
-use iconv. An implementation that picks one convention for all of them will
-verify ASCII passwords and quietly fail every other one.
-.H 3 "Note [45]"
-.B "GOST12256CRYPT (e1025), GOST94CRYPT (e1026)."
-The two remaining members of the GOST crypt family, siblings of
-.B GOST12512CRYPT
-(e994). All three are the Drepper schedule \(em the same one
-.B SHA256CRYPT
-(e512) and
-.B SHA512CRYPT
-(e513) use \(em with the SHA replaced by a GOST digest, defaulting to 5000
-rounds and accepting an explicit rounds= field.
-.P
-e1025 substitutes Streebog-256 and e1026 substitutes GOST R 34.11-94. Both
-produce a 32-byte digest and so use the sha256crypt transposition and a
-43-character stored hash, where e994 uses the sha512crypt transposition and 86.
-.P
-e1026 uses the TEST parameter S-box, not CryptoPro \(em i.e. the same set as
-.B GOST
-(e13), not
-.B GOST-CRYPTO
-(e14). John the Ripper's gost94hash carries a
-.B john_gost_cryptopro_init
-override but leaves it commented out, and the bundled gosthash used here is the
-test-parameter build, so the two agree.
-.P
-Streebog output is byte-reversed relative to the published GOST vectors by the
-bundled Saarinen implementation, so e1025 reverses each digest exactly as e994
-does. All of John's vectors for both types verify, and mdxfind -z output cracks
-back.
+Neither John the Ripper nor hashcat ships a vector for this scheme. The
+registered one was produced by
+.B argon2-cffi ,
+a different implementation from the argon2 library linked here, so the check is
+across implementations rather than self-generated.
 .H 3 "Note [44]"
 .B "DRAGONFLY3-32, DRAGONFLY3-64, DRAGONFLY4-32, DRAGONFLY4-64 (e1021\(en e1024)."
 DragonFly BSD's own crypt schemes. Both set up like
@@ -2796,69 +2797,166 @@ Ripper's vectors were reproduced by an independent implementation before this
 code was written, and
 .B "mdxfind \-z"
 regenerates John's published strings byte for byte.
-.H 3 "Note [43]"
-.B "ARGON2MD5 (e1020)."
-vBulletin 6. Argon2 over the MD5 of the password rather than the password
-itself, the direct successor to what
-.B BCRYPTMD5
-(e451) models for vBulletin 5. The inner digest is the 32-character lowercase
-HEX, not the 16 raw bytes, matching e451 and vBulletin's own convention. The
-stored form is ordinary Argon2 MCF and carries no marker distinguishing it from
-e987 ARGON2, so a line can be offered to either type and only the correct one
-verifies.
+.H 3 "Note [45]"
+.B "GOST12256CRYPT (e1025), GOST94CRYPT (e1026)."
+The two remaining members of the GOST crypt family, siblings of
+.B GOST12512CRYPT
+(e994). All three are the Drepper schedule \(em the same one
+.B SHA256CRYPT
+(e512) and
+.B SHA512CRYPT
+(e513) use \(em with the SHA replaced by a GOST digest, defaulting to 5000
+rounds and accepting an explicit rounds= field.
 .P
-Neither John the Ripper nor hashcat ships a vector for this scheme. The
-registered one was produced by
-.B argon2-cffi ,
-a different implementation from the argon2 library linked here, so the check is
-across implementations rather than self-generated.
-.H 3 "Note [42]"
-.B "H3C (e1019)."
-H3C, HPE and Huawei device passwords. The stored form is
-.B "$h$6$<salt>$<base64>"
-and the digest is
-.B "sha512(pass . NUL . salt . pass . NUL)"
-\(em the password is hashed INCLUDING its terminating NUL, twice, with the salt
-between the two copies. The 64-byte digest is stored base64-encoded. Verified
-against all three of John the Ripper's own
-.B h3c
-test vectors, base64 exact.
-.H 3 "Note [41]"
-.B "SAPCODVNH256 (e1016), SAPCODVNH384 (e1017)."
-SAP CODVN H in its SHA-256 and SHA-384 flavours. The stored form is
-.B "{x-isSHA256, ITER}"
+e1025 substitutes Streebog-256 and e1026 substitutes GOST R 34.11-94. Both
+produce a 32-byte digest and so use the sha256crypt transposition and a
+43-character stored hash, where e994 uses the sha512crypt transposition and 86.
+.P
+e1026 uses the TEST parameter S-box, not CryptoPro \(em i.e. the same set as
+.B GOST
+(e13), not
+.B GOST-CRYPTO
+(e14). John the Ripper's gost94hash carries a
+.B john_gost_cryptopro_init
+override but leaves it commented out, and the bundled gosthash used here is the
+test-parameter build, so the two agree.
+.P
+Streebog output is byte-reversed relative to the published GOST vectors by the
+bundled Saarinen implementation, so e1025 reverses each digest exactly as e994
+does. All of John's vectors for both types verify, and mdxfind -z output cracks
+back.
+.H 3 "Note [46]"
+.B "SUNMD5 (e1027)."
+Solaris crypt. The initial digest is md5(pass . salt); thereafter 4096 plus the
+rounds= value are run, each computing md5 of the previous digest, optionally a
+fixed 1517-byte phrase, and the decimal round number in ASCII.
+.P
+Whether the phrase is included is decided per round by a coin flip derived from
+bits of the previous digest \(em two seven-bit indices are assembled from the
+digest bytes and the XOR of the bits they address gives the flip. Roughly half
+the rounds therefore hash an extra 1517 bytes, so the cost is data dependent and
+varies with the candidate rather than being fixed by the rounds= field alone.
+.P
+The phrase is 1516 characters of Hamlet's soliloquy
+.I plus
+its terminating NUL: Sun's implementation passed sizeof(), so 1517 bytes are
+hashed, and dropping the NUL yields a plausible but wrong digest for every
+candidate.
+.P
+The salt is everything before the LAST dollar sign. That definition also covers
+the variant whose salt ends in a dollar sign and so shows a doubled separator in
+the stored form, with no special case. The digest is emitted with the md5crypt
+transposition, 22 characters. All 8 of John the Ripper's vectors verify,
+including its 120-character password, and mdxfind -z output cracks back.
+.H 3 "Note [47]"
+.B "SHA1MD5USER (e308), MD5CAPMD5USER (e354), MD5CAPMD5MD5USER (e355), MD5MD5MD5USER (e356)."
+Four entry points into one loop in mdxfind, reached by fallthrough, differing
+only in how the intermediate hex is built: one md5 or two, with the leading hex
+character capitalised or not. The capitalisation of the
+.I first
+hex happens in the e355 pre-block, so a reading that caps only the last md5
+agrees with mdxfind whenever that character is a digit and disagrees otherwise
+\(em about five times in eight.
+.P
+For every user, two digests are emitted: one over hex . user and one over
+hex . ":" . user. Both are iterated, each over its own hex. Registering the
+pair so that only one of them seeds the iteration chain leaves the type
+complete at its base depth and exactly half strength at every depth below,
+which is how the defect presented before it was found.
+.P
+Earlier revisions of this page gave these expressions as md5(md5(user)) and the
+like, with no password term at all. That was a transcription error; the
+password is the inner operand and the username is appended.
+.H 3 "Note [48]"
+.B "MD5DSALT (e408)."
+The two salts are reported in a single field, concatenated with no separator,
+so a line carrying the salt
+.B Kpa
+does not say whether that is
+.B Kp
+then
+.BR a ,
 or
-.B "{x-isSHA384, ITER}"
-followed by base64 of the digest immediately followed by the salt. The
-computation is
-.B "h = H(pass . salt)"
-for the first round and
-.B "h = H(pass . h)"
-for each of the remaining
-.B ITER-1
-rounds, with the password truncated at 40 characters. The iteration count is
-carried in the hash rather than fixed by the type, so it is a runtime parameter
-and these rows are documentation rather than a compilable expression.
+.B K
+then
+.BR pa .
+Anything consuming this type has to try each split; mdxfind bounds each salt at
+three characters, so at most three positions need testing. A reader that
+assumes an even split agrees only when the two salts are the same length.
+.H 3 "Note [49]"
+.B "Two UTF-16LE conventions."
+mdxfind turns a password into UTF-16LE in two different ways, and which one a
+type uses is not visible from its expression.
 .P
-These complete the family: e904 SAPCODVNH is the SHA-1 flavour and e984
-SAPCODVNH512 the SHA-512 one. All four of John the Ripper's
-.B saph
-SHA-256 and SHA-384 test vectors were reproduced by an independent
-implementation before either type was written.
-.H 3 "Note [40]"
-.B "ORACLE11 (e1015)."
-Oracle 11g. The digest is
-.B "upper(sha1(pass . fromhex(salt)))"
-\(em the same value
-.B SHA1PASSHEXSALT
-(e834, hashcat mode 112) computes. The two differ only in stored form, and that
-difference is the reason both exist. e834 takes the digest and the salt as two
-separate fields; e1015 owns the form Oracle actually stores, a single
-60-character field holding the 40-hex digest immediately followed by the 20-hex
-salt. No other type in the catalogue has a 30-byte digest, so that width
-identifies the format on its own, with no wrapper. Found lines are reported in
-the same concatenated form, so a result can be handed straight back to Oracle.
-.PF "'Appendix B' \\\\nP'Waffle'"
+The first is a byte expansion: each input byte is followed by a NUL, so the
+bytes are treated as Latin-1. The second is a real UTF-8 to UTF-16LE
+conversion through iconv, opened with //IGNORE so that input which is not valid
+UTF-8 has the bad sequences dropped rather than failing the conversion.
+.P
+They agree for ASCII and differ for everything else.
+.B DCC2 ,
+.B AZURESYNC ,
+.B KRB5PA23
+and
+.B KRB5TGS23
+use the byte expansion;
+.B MSONLINE
+and plain
+.B NTLM
+use iconv. An implementation that picks one convention for all of them will
+verify ASCII passwords and quietly fail every other one.
+.H 3 "Note [50]"
+.B "CRYPTOPPLEGACY (e1028), CRYPTOPPDEFAULT (e1029)."
+Crypto++'s
+.B DataEncryptor
+framework. The stored value is 8 bytes of salt in the clear followed by CBC
+ciphertext over
+.B "keycheck || plaintext || PKCS#7" ,
+where
+.B keycheck
+is
+.B SHA1(key\ .\ salt)
+truncated to the cipher's block size. The key and IV come from
+.B Mash(key\ .\ salt) ,
+an iterated SHA construction over a growing buffer.
+.P
+e1028 is DES-EDE2 with SHA-1 over 200 iterations, an 8-byte block and an 8-byte
+key-check. e1029 is AES-128 with SHA-256 over 2500 iterations, a 16-byte block
+and a 16-byte key-check. Stored length is a multiple of the block size plus the
+8-byte salt, and at least 24 bytes.
+.P
+.B "These have no hx expression."
+Every other entry in this table computes a value to be compared with what was
+stored. Here the stored value is the ciphertext and the comparison is internal:
+the first block is decrypted and checked against the key-check. Expressing that
+needs a verify predicate rather than a digest.
+.P
+.B "The key is a salt whose cardinality is 1."
+One key covers every record on an installation. Supply it with
+.B \-s ,
+or with
+.B \-S
+after
+.B \-M ,
+exactly as for any other salt. The candidate stream is the key list, so the
+wordlist does not affect the result. Output is
+.B "record:sitekey:plaintext" ,
+the ordinary salted shape, with the decrypted plaintext in the last field so
+.B getpass
+and the ledger receive a password.
+.P
+.B "Naming."
+e1028 is the construction Crypto++ calls
+.B LegacyEncryptor .
+A binary whose RTTI names
+.B DefaultEncryptor
+and whose build predates the rename is e1028, not e1029; the
+.B DefaultEncryptor
+name now belongs to the AES and SHA-256 type, which is e1029.
+.P
+e1028 is confirmed against a vendor DLL. e1029 is verified against upstream
+Crypto++ and has no field sample, so a hit on it identifies the construction and
+not any particular application.
 .H 1 "Appendix B: Intrinsic Function Reference"
 .PF "'Appendix B' \\\\nP'Waffle'"
 .P
