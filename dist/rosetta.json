@@ -9534,7 +9534,7 @@
             "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "pbkdf2_sha1(md4(utf16le(pass)), utf16le(username), 10240, 16)",
+         "denotation" : "pbkdf2_sha1(md4_bin(md4_bin(utf16le(pass)) . utf16le(lower(user))), utf16le(lower(user)), N, 16)",
          "expr" : "",
          "expr_note" : "the construction upstream states for mdxfind type DCC2 (e918) names pbkdf2_sha1(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:.",
          "expr_tier" : "absent",

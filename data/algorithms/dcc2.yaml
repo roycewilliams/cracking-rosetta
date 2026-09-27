@@ -6,9 +6,9 @@ expression_proof:
   verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
   note: "the construction upstream states for mdxfind type DCC2 (e918) names pbkdf2_sha1(), which john's dynamic EXPRESSION vocabulary does not have -- checked against the function names appearing in john's own --list=subformats, so this is a lookup and not an opinion. It says nothing about whether john can CRACK this: john has formats for plenty of these constructions, and where it does they are in tools.john.cpu. The wording upstream uses is kept in denotation:."
 denotation:
-  text: "pbkdf2_sha1(md4(utf16le(pass)), utf16le(username), 10240, 16)"
+  text: "pbkdf2_sha1(md4_bin(md4_bin(utf16le(pass)) . utf16le(lower(user))), utf16le(lower(user)), N, 16)"
   source: "mdxfind"
-  note: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A, entry for mdxfind type DCC2 (e918), which states pbkdf2_sha1(md4(utf16le(pass)), utf16le(username), 10240, 16)."
+  note: "hx(1) 1.5 Appendix A, entry for mdxfind type DCC2 (e918). The 1.5 spec corrected the construction to the full nested MS-CACHEv2 form, keyed by the lowercased user, matching the type's userid (u) flag. The earlier Revision 1.15 wording named only pbkdf2_sha1(md4(utf16le(pass)), utf16le(username), 10240, 16), the inner-hash simplification."
 category: "application"
 status: "ok"
 tools:
