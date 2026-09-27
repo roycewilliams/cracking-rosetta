@@ -77,7 +77,7 @@ disagreements:
     kind: "catalog-index-set"
     upstream: "vendor/cynosureprime/hashpipe-HASH_TYPES.md"
     inventory: "data/tools/mdxfind.yaml"
-    absent_upstream: ["e426"]
+    absent_upstream: ["e426","e1030","e1031","e1032","e1033","e1034","e1035","e1036","e1037","e1038","e1039","e1040","e1041","e1042","e1043","e1044","e1045","e1046"]
     mode_differs:
       - index: "e1"
         publishes: "0,2600,5100"
@@ -176,6 +176,19 @@ disagreements:
       because the mapping this repository publishes comes from the entries,
       not from either column. An UNRECORDED mode disagreement still fails, and
       a NAME disagreement has no exception path at all.
+
+      RE-MEASURED 2026-09-27 AND THE LAG RE-WIDENED, exactly the way the
+      original 2026-09-04 note describes and for the same reason. mdxfind added
+      e1030-e1046 (RCS 1.604-1.606) and hashpipe pulled the identical 17
+      (RCS 1.213), but the vendored catalog is generated from upstream's own
+      committed HASH_TYPES.md, which upstream has not regenerated since the
+      types landed: fetch-upstream.sh on 2026-09-27 brought back a catalog of
+      1028 rows that still stops at e1029. So absent_upstream grows from 1 to
+      18 -- e426 plus the seventeen new binary types -- and it is upstream's
+      state, not a stale local copy. It will shrink again when upstream
+      regenerates HASH_TYPES.md from a binary that has them. The mode half is
+      unchanged: all 1028 shared indices still agree on name, the same eight
+      disagree on the hashcat mapping.
 
   - id: "hashpipe-john-map-agreement"
     kind: "john-map-agreement"

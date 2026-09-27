@@ -472,7 +472,7 @@ e453	MD5sub8-24MD5	md5(cut(md5(pass), 8, 16))
 e454	MD5sub8-24MD5sub8-24MD5	md5(cut(md5(cut(md5(pass), 8, 16)), 8, 16))
 e455	PHPBB3	\fIphpass / itoa64-encoded MD5 chain \(em see Note [5]\fP
 e456	MYSQL3	mysql3(pass)
-e457	APACHE-SHA	\fI"{SHA}" . base64(sha1_bin(pass))\fP
+e457	APACHE-SHA	"{SHA}" . base64(sha1_bin(pass))
 e458	MD5-MD5PASSMD5SALT	md5(md5(pass) . md5(salt))
 e459	YAF-SHA1	base64(sha1_bin(utf16le(pass) . frombase64(salt)))
 e460	MD5revMD5SHA1	md5(rev(md5(sha1(pass))))
@@ -1079,6 +1079,23 @@ e1026	GOST94CRYPT	gost94crypt(pass, salt, rounds) \fI(see Note [45])\fP
 e1027	SUNMD5	sunmd5(pass, salt, rounds) \fI(Solaris \(em see Note [46])\fP
 e1028	CRYPTOPPLEGACY	\fInot an expression \(em DES-EDE2-CBC key recovery, see Note [50]\fP
 e1029	CRYPTOPPDEFAULT	\fInot an expression \(em AES-CBC key recovery, see Note [50]\fP
+e1030	MD5BASE64MD5SHA1	md5(base64(md5(sha1(pass))))
+e1031	WRLSHA1	wrl(sha1(pass))
+e1032	\s-2MD5sub8-24MD5sub8-24MD5MD5MD5\s+2	md5(cut(md5(cut(md5(md5(md5(pass))), 8, 16)), 8, 16))
+e1033	MD5SHA1SHA1MD5SHA1MD5	md5(sha1(sha1(md5(sha1(md5(pass))))))
+e1034	MD5SHA1SHA1SHA1	md5(sha1(sha1(sha1(pass))))
+e1035	MD5SHA1MD5SHA1MD5SHA1	md5(sha1(md5(sha1(md5(sha1(pass))))))
+e1036	MD5SHA512MD5	md5(sha512(md5(pass)))
+e1037	MD5sub1-16MD5	md5(cut(md5(pass), 0, 16))
+e1038	MD5sub1-28MD5	md5(cut(md5(pass), 0, 28))
+e1039	MD5MD5sub1-30MD5	md5(md5(cut(md5(pass), 0, 30)))
+e1040	APACHE-SHA-TRUNC16	"{SHA}" . base64(trunc(sha1_bin(pass), 16))
+e1041	MD5SALTLAST16	cut(md5(md5(pass) . salt), -16) \fI(the LAST 16 hex are stored; single depth only)\fP
+e1042	MD5SALTMD5PASS-PASS	md5(salt . md5(pass) . ":" . pass)
+e1043	MD5-1xMD5SHA1pSHA1p	md5(md5(sha1(pass)) . sha1(pass))
+e1044	MD5-1xMD5SHA256pSHA256p	md5(md5(sha256(pass)) . sha256(pass))
+e1045	MD5-1xMD5SHA512pSHA512p	md5(md5(sha512(pass)) . sha512(pass))
+e1046	MD5-1xMD5MD5pMD5p	md5(md5(md5(pass)) . md5(pass))
 .TE
 .SK
 .H 2 "Notes"

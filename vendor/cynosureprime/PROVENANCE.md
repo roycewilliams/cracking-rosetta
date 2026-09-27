@@ -10,9 +10,9 @@ change, so the diff shows exactly what upstream altered.
 
 | File | Source | Commit | Fetched |
 |---|---|---|---|
-| `hashpipe-HASH_TYPES.md` | [Cynosureprime/hashpipe](https://github.com/Cynosureprime/hashpipe) `HASH_TYPES.md` | `cfbaff7dcfe6460507ba90b42d811c9ef67ff820` (2026-09-26) | 2026-09-27 |
-| `hx.8` | [Cynosureprime/hx](https://github.com/Cynosureprime/hx) `hx.8` | `fb49bef66099166f42b9d73423b852a252c0ca02` (2026-09-19) | 2026-09-27 |
-| `john_map.h` | [Cynosureprime/hashpipe](https://github.com/Cynosureprime/hashpipe) `john_map.h` | `cfbaff7dcfe6460507ba90b42d811c9ef67ff820` (2026-09-26) | 2026-09-27 |
+| `hashpipe-HASH_TYPES.md` | [Cynosureprime/hashpipe](https://github.com/Cynosureprime/hashpipe) `HASH_TYPES.md` | `5445f6fa0365eff9f6b36919a3870151e4c73dd2` (2026-09-27) | 2026-09-27 |
+| `hx.8` | [Cynosureprime/hx](https://github.com/Cynosureprime/hx) `hx.8` | `93fcce559a98ae10c6f62ed08b7496f41c2b532c` (2026-09-27) | 2026-09-27 |
+| `john_map.h` | [Cynosureprime/hashpipe](https://github.com/Cynosureprime/hashpipe) `john_map.h` | `5445f6fa0365eff9f6b36919a3870151e4c73dd2` (2026-09-27) | 2026-09-27 |
 
 ## What `hx.8` is
 
