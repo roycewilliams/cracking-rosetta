@@ -1,7 +1,7 @@
 id: "apache-sha-trunc16"
 name: "APACHE-SHA-TRUNC16"
 denotation:
-  text: "{SHA} . base64(trunc(sha1_bin(pass), 16))"
+  text: "\"{SHA}\" . base64(trunc(sha1_bin(pass), 16))"
   source: "mdxfind"
   note: "hx 1.5 Appendix A (e1040). The RFC 2307 brace-SHA scheme of APACHE-SHA (e457) with a 16-byte payload instead of the full 20: the SHA-1 digest is truncated to 16 bytes before base64. Not expressible in this repository's hx notation, which has no binary-truncation or brace-literal spelling; both e1040 and e457 carry the same {SHA} tag and mdxfind routes on decoded payload length."
 category: "application"
