@@ -141,7 +141,8 @@ person's job, done with the tools in workflow 4.
 - **mdxfind must be CPU-only.** The script enforces it (`make OPENCL_GPU=`), and
   refuses to extract a binary whose `-h` output carries ` [GPU]`. A GPU-linked
   mdxfind contends for the card (which has corrupted data on this host) and
-  silently drops 109 types from the inventory. Never "simplify" its build to a
+  silently drops the types whose `-h` row it marks ` [GPU]` -- 109 of them,
+  measured 2026-09-06 -- from the inventory. Never "simplify" its build to a
   bare `make`.
 - **hashpipe build:** the script runs a plain `make`, which relinks in seconds
   against the vendored `libsph.a`. If it fails for a missing archive, run
