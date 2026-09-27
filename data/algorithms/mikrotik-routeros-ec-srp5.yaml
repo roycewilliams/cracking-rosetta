@@ -1,0 +1,20 @@
+id: "mikrotik-routeros-ec-srp5"
+name: "Mikrotik RouterOS EC-SRP5 (Curve25519)"
+denotation:
+  text: "Mikrotik RouterOS EC-SRP5 (Curve25519)"
+  source: "hashcat"
+  note: "hashcat's own label for mode 38000, category \"Network Protocol\": the EC-SRP5 password verifier used by Mikrotik RouterOS over Curve25519. A protocol verifier, not a bare digest construction, so there is no single expression to record. hashcat ships tools/routeros2hashcat.py to extract these."
+category: "protocol"
+status: "ok"
+tools:
+  hashcat:
+    modes: [38000]
+    verified: "vector"
+    verified_at: "2026-09-26"
+    verified_with: "hashcat v7.1.2-778-ga488c9ea4"
+    note: "hashcat's own published example for this mode, recovered by hashcat under this mode with hashcat's own published plaintext."
+vectors:
+  - hash: "$mikrotik$hashcat$3069ece5c30baced372fb3d64647d42f$25772ddb1fa2e0f13511d7d7dc8c611b6529dd915d10482243dfca38"
+    pass: "hashcat"
+    source: "hashcat"
+    reads_in: ["hashcat"]

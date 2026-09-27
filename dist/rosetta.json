@@ -1,5 +1,5 @@
 {
-   "count" : 1548,
+   "count" : 1554,
    "entries" : [
       {
          "alias" : "",
@@ -7453,6 +7453,67 @@
       {
          "alias" : "",
          "application" : "",
+         "category" : "application",
+         "crack" : {
+            "ids" : [],
+            "state" : "unknown"
+         },
+         "cracknote" : "",
+         "denotation" : "Cardano Eternl Wallet (PBKDF2-HMAC-SHA512-ChaCha20Poly1305)",
+         "expr" : "",
+         "expr_note" : "",
+         "expr_tier" : "",
+         "hash_length" : "",
+         "hash_length_basis" : "",
+         "hashcat" : {
+            "ids" : [
+               37700
+            ],
+            "match" : "",
+            "state" : "proven",
+            "tier" : "vector"
+         },
+         "hashcat_salted" : "yes",
+         "hashcat_speed" : "slow",
+         "hashpipe" : {
+            "ids" : [],
+            "state" : "unknown"
+         },
+         "id" : "cardano-eternl-wallet",
+         "john" : {
+            "ids" : [],
+            "state" : "unknown"
+         },
+         "john_expr" : "",
+         "john_salted" : "",
+         "john_work_factor" : "",
+         "legacy" : "",
+         "mdxfind" : {
+            "ids" : [],
+            "state" : "unknown"
+         },
+         "mdxfind_salted" : "",
+         "name" : "Cardano Eternl Wallet (PBKDF2-HMAC-SHA512-ChaCha20Poly1305)",
+         "nesting_depth" : "",
+         "notes" : "",
+         "primary_form" : "",
+         "relations" : [],
+         "sameas" : "",
+         "serialization" : "unknown",
+         "status" : "ok",
+         "suites_decided" : 1,
+         "suites_proven" : 1,
+         "tool_note" : {
+            "hashcat" : "hashcat's own published example for this mode, recovered by hashcat under this mode with hashcat's own published plaintext.",
+            "hashpipe" : "",
+            "john" : "",
+            "mdxfind" : ""
+         },
+         "vecs" : 1
+      },
+      {
+         "alias" : "",
+         "application" : "",
          "category" : "primitive",
          "crack" : {
             "ids" : [],
@@ -8676,6 +8737,128 @@
             "hashpipe" : "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one.",
             "john" : "no format. Swept the 29 format(s) whose own valid() accepts this entry's own vector, as john --show=left reports them, on 2026-09-04 (a tools/discover-john.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. For john the control is also per ENTRY and not only per shape: every format counted above is one whose own loader ACCEPTED this hash, so each was asked this exact question and answered no. A format that cannot parse the hash is not counted at all, and an entry no format can parse is reported as unsearched rather than decided. Every applicable format ran to completion; a format killed at the timeout is counted as untested and withholds this verdict. No john format name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if john gains one, this becomes a mapping.",
             "mdxfind" : "mdxfind's own published example for this identifier, recovered by mdxfind at this identifier with mdxfind's own published plaintext."
+         },
+         "vecs" : 1
+      },
+      {
+         "alias" : "",
+         "application" : "",
+         "category" : "application",
+         "crack" : {
+            "ids" : [],
+            "state" : "unknown"
+         },
+         "cracknote" : "",
+         "denotation" : "CRYPTOPPDEFAULT",
+         "expr" : "",
+         "expr_note" : "",
+         "expr_tier" : "",
+         "hash_length" : 80,
+         "hash_length_basis" : "observed",
+         "hashcat" : {
+            "ids" : [],
+            "state" : "unknown"
+         },
+         "hashcat_salted" : "",
+         "hashcat_speed" : "",
+         "hashpipe" : {
+            "ids" : [],
+            "state" : "unknown"
+         },
+         "id" : "cryptopp-default",
+         "john" : {
+            "ids" : [],
+            "state" : "unknown"
+         },
+         "john_expr" : "",
+         "john_salted" : "",
+         "john_work_factor" : "",
+         "legacy" : "",
+         "mdxfind" : {
+            "ids" : [
+               "CRYPTOPPDEFAULT"
+            ],
+            "match" : "",
+            "state" : "proven",
+            "tier" : "vector"
+         },
+         "mdxfind_salted" : "yes",
+         "name" : "CRYPTOPPDEFAULT",
+         "nesting_depth" : "",
+         "notes" : "",
+         "primary_form" : "",
+         "relations" : [],
+         "sameas" : "",
+         "serialization" : "unknown",
+         "status" : "ok",
+         "suites_decided" : 1,
+         "suites_proven" : 1,
+         "tool_note" : {
+            "hashcat" : "",
+            "hashpipe" : "",
+            "john" : "",
+            "mdxfind" : "the type's own published example (vendored hashpipe HASH_TYPES.md v1.200), recovered by mdxfind pinned to this type with -F, which loads the inline site key in the salt field."
+         },
+         "vecs" : 1
+      },
+      {
+         "alias" : "",
+         "application" : "",
+         "category" : "application",
+         "crack" : {
+            "ids" : [],
+            "state" : "unknown"
+         },
+         "cracknote" : "",
+         "denotation" : "CRYPTOPPLEGACY",
+         "expr" : "",
+         "expr_note" : "",
+         "expr_tier" : "",
+         "hash_length" : 64,
+         "hash_length_basis" : "observed",
+         "hashcat" : {
+            "ids" : [],
+            "state" : "unknown"
+         },
+         "hashcat_salted" : "",
+         "hashcat_speed" : "",
+         "hashpipe" : {
+            "ids" : [],
+            "state" : "unknown"
+         },
+         "id" : "cryptopp-legacy",
+         "john" : {
+            "ids" : [],
+            "state" : "unknown"
+         },
+         "john_expr" : "",
+         "john_salted" : "",
+         "john_work_factor" : "",
+         "legacy" : "",
+         "mdxfind" : {
+            "ids" : [
+               "CRYPTOPPLEGACY"
+            ],
+            "match" : "",
+            "state" : "proven",
+            "tier" : "vector"
+         },
+         "mdxfind_salted" : "yes",
+         "name" : "CRYPTOPPLEGACY",
+         "nesting_depth" : "",
+         "notes" : "",
+         "primary_form" : "",
+         "relations" : [],
+         "sameas" : "",
+         "serialization" : "unknown",
+         "status" : "ok",
+         "suites_decided" : 1,
+         "suites_proven" : 1,
+         "tool_note" : {
+            "hashcat" : "",
+            "hashpipe" : "",
+            "john" : "",
+            "mdxfind" : "the type's own published example (vendored hashpipe HASH_TYPES.md v1.200), recovered by mdxfind pinned to this type with -F, which loads the inline site key in the salt field."
          },
          "vecs" : 1
       },
@@ -51824,6 +52007,67 @@
       {
          "alias" : "",
          "application" : "",
+         "category" : "protocol",
+         "crack" : {
+            "ids" : [],
+            "state" : "unknown"
+         },
+         "cracknote" : "",
+         "denotation" : "Mikrotik RouterOS EC-SRP5 (Curve25519)",
+         "expr" : "",
+         "expr_note" : "",
+         "expr_tier" : "",
+         "hash_length" : "",
+         "hash_length_basis" : "",
+         "hashcat" : {
+            "ids" : [
+               38000
+            ],
+            "match" : "",
+            "state" : "proven",
+            "tier" : "vector"
+         },
+         "hashcat_salted" : "yes",
+         "hashcat_speed" : "slow",
+         "hashpipe" : {
+            "ids" : [],
+            "state" : "unknown"
+         },
+         "id" : "mikrotik-routeros-ec-srp5",
+         "john" : {
+            "ids" : [],
+            "state" : "unknown"
+         },
+         "john_expr" : "",
+         "john_salted" : "",
+         "john_work_factor" : "",
+         "legacy" : "",
+         "mdxfind" : {
+            "ids" : [],
+            "state" : "unknown"
+         },
+         "mdxfind_salted" : "",
+         "name" : "Mikrotik RouterOS EC-SRP5 (Curve25519)",
+         "nesting_depth" : "",
+         "notes" : "",
+         "primary_form" : "",
+         "relations" : [],
+         "sameas" : "",
+         "serialization" : "unknown",
+         "status" : "ok",
+         "suites_decided" : 1,
+         "suites_proven" : 1,
+         "tool_note" : {
+            "hashcat" : "hashcat's own published example for this mode, recovered by hashcat under this mode with hashcat's own published plaintext.",
+            "hashpipe" : "",
+            "john" : "",
+            "mdxfind" : ""
+         },
+         "vecs" : 1
+      },
+      {
+         "alias" : "",
+         "application" : "",
          "category" : "",
          "crack" : {
             "ids" : [],
@@ -55443,6 +55687,67 @@
       {
          "alias" : "",
          "application" : "",
+         "category" : "composite",
+         "crack" : {
+            "ids" : [],
+            "state" : "unknown"
+         },
+         "cracknote" : "",
+         "denotation" : "NTLM(NTLM_bin($pass))",
+         "expr" : "",
+         "expr_note" : "",
+         "expr_tier" : "",
+         "hash_length" : 32,
+         "hash_length_basis" : "observed",
+         "hashcat" : {
+            "ids" : [
+               36500
+            ],
+            "match" : "",
+            "state" : "proven",
+            "tier" : "vector"
+         },
+         "hashcat_salted" : "no",
+         "hashcat_speed" : "fast",
+         "hashpipe" : {
+            "ids" : [],
+            "state" : "unknown"
+         },
+         "id" : "ntlm-ntlm-bin",
+         "john" : {
+            "ids" : [],
+            "state" : "unknown"
+         },
+         "john_expr" : "",
+         "john_salted" : "",
+         "john_work_factor" : "",
+         "legacy" : "",
+         "mdxfind" : {
+            "ids" : [],
+            "state" : "unknown"
+         },
+         "mdxfind_salted" : "",
+         "name" : "NTLM(NTLM_bin($pass))",
+         "nesting_depth" : "",
+         "notes" : "",
+         "primary_form" : "",
+         "relations" : [],
+         "sameas" : "",
+         "serialization" : "unknown",
+         "status" : "ok",
+         "suites_decided" : 1,
+         "suites_proven" : 1,
+         "tool_note" : {
+            "hashcat" : "hashcat's own published example for this mode, recovered by hashcat under this mode with hashcat's own published plaintext.",
+            "hashpipe" : "",
+            "john" : "",
+            "mdxfind" : ""
+         },
+         "vecs" : 1
+      },
+      {
+         "alias" : "",
+         "application" : "",
          "category" : "application",
          "crack" : {
             "ids" : [],
@@ -55907,6 +56212,67 @@
             "hashpipe" : "",
             "john" : "",
             "mdxfind" : "no type. Swept all 1027 mdxfind types on 2026-09-06, in 4 separate runs over different corpora, (a tools/discover-mdxfind.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable type ran to completion; a type killed at the timeout is counted as untested and withholds this verdict. No mdxfind type name matches any identifier this entry publishes either, normalized by the separator-drift rule. Corroborated by hashpipe, a second binary built from the same catalog: handed this entry's own hash and plaintext it names no type at all. It is the more direct instrument -- it recomputes rather than cracking -- and on this corpus it named a type for 58 entries the sweep alone called silent. This is the absence of an IDENTIFIER, not of the algorithm: if mdxfind gains one, this becomes a mapping."
+         },
+         "vecs" : 1
+      },
+      {
+         "alias" : "",
+         "application" : "",
+         "category" : "application",
+         "crack" : {
+            "ids" : [],
+            "state" : "unknown"
+         },
+         "cracknote" : "",
+         "denotation" : "OpenSSH Private Keys (bcrypt-pbkdf)",
+         "expr" : "",
+         "expr_note" : "",
+         "expr_tier" : "",
+         "hash_length" : "",
+         "hash_length_basis" : "",
+         "hashcat" : {
+            "ids" : [
+               36800
+            ],
+            "match" : "",
+            "state" : "proven",
+            "tier" : "vector"
+         },
+         "hashcat_salted" : "yes",
+         "hashcat_speed" : "slow",
+         "hashpipe" : {
+            "ids" : [],
+            "state" : "unknown"
+         },
+         "id" : "openssh-private-keys-bcrypt-pbkdf",
+         "john" : {
+            "ids" : [],
+            "state" : "unknown"
+         },
+         "john_expr" : "",
+         "john_salted" : "",
+         "john_work_factor" : "",
+         "legacy" : "",
+         "mdxfind" : {
+            "ids" : [],
+            "state" : "unknown"
+         },
+         "mdxfind_salted" : "",
+         "name" : "OpenSSH Private Keys (bcrypt-pbkdf)",
+         "nesting_depth" : "",
+         "notes" : "",
+         "primary_form" : "",
+         "relations" : [],
+         "sameas" : "",
+         "serialization" : "unknown",
+         "status" : "ok",
+         "suites_decided" : 1,
+         "suites_proven" : 1,
+         "tool_note" : {
+            "hashcat" : "hashcat's own published example for this mode, recovered by hashcat under this mode with hashcat's own published plaintext.",
+            "hashpipe" : "",
+            "john" : "",
+            "mdxfind" : ""
          },
          "vecs" : 1
       },
@@ -104380,7 +104746,7 @@
          "vecs" : 2
       }
    ],
-   "generated" : "2026-09-15",
+   "generated" : "2026-09-26",
    "merged" : 33,
    "tombstones" : [
       {

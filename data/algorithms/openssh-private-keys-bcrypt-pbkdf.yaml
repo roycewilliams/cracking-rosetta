@@ -1,0 +1,20 @@
+id: "openssh-private-keys-bcrypt-pbkdf"
+name: "OpenSSH Private Keys (bcrypt-pbkdf)"
+denotation:
+  text: "OpenSSH Private Keys (bcrypt-pbkdf)"
+  source: "hashcat"
+  note: "hashcat's own label for mode 36800, category \"Private Key\": an OpenSSH private-key container protected by bcrypt-pbkdf. A container format, not a bare digest construction, so there is no single expression to record."
+category: "application"
+status: "ok"
+tools:
+  hashcat:
+    modes: [36800]
+    verified: "vector"
+    verified_at: "2026-09-26"
+    verified_with: "hashcat v7.1.2-778-ga488c9ea4"
+    note: "hashcat's own published example for this mode, recovered by hashcat under this mode with hashcat's own published plaintext."
+vectors:
+  - hash: "$sshng$6$16$89b7dac5965613fa4f2faf9284983843$274$6f70656e7373682d6b65792d7631000000000a6165733235362d63747200000006626372797074000000180000001089b7dac5965613fa4f2faf92849838430000001000000001000000330000000b7373682d6564323535313900000020979ccdbbb3f2c8b04842e77fdd5475b21963e7ddad9a4d029d712322f5c930ee000000909e38aa2f92ae189f7e4f04ef62fcd869ceb572e5c047ea0e9dfbb4657c38a13506d580ff8709a8787810a53688e3b0c7b7af155422aed8089da87a63da0147d8c8e04a6d236e70f0c6be5fbeb0b620d7abe928b10169fd3e48c1b526d3ead3a28fa4385969aebea6621baada8821a20035be97e2fa42575f5e4246e174ac3c96b19e89623ff267a2629090da6f79f7e4$16$130"
+    pass: "hashcat"
+    source: "hashcat"
+    reads_in: ["hashcat"]

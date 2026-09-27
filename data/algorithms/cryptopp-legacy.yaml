@@ -1,0 +1,20 @@
+id: "cryptopp-legacy"
+name: "CRYPTOPPLEGACY"
+denotation:
+  text: "CRYPTOPPLEGACY"
+  source: "mdxfind"
+  note: "mdxfind/hashpipe type e1028: the Crypto++ library's legacy password-based scheme, which mixes an inline site key (mdxfind loads it in the salt field via -F and reports \"site key accepted\") with the password. A library scheme, not a bare digest construction, so there is no single expression to record."
+category: "application"
+status: "ok"
+tools:
+  mdxfind:
+    types: ["CRYPTOPPLEGACY"]
+    verified: "vector"
+    verified_at: "2026-09-26"
+    verified_with: "mdxfind RCS 1.596 (2026/09/19)"
+    note: "the type's own published example (vendored hashpipe HASH_TYPES.md v1.200), recovered by mdxfind pinned to this type with -F, which loads the inline site key in the salt field."
+vectors:
+  - hash: "3DDC35B38270872954DA6A445397860FA8BBFEC184353FFAAEA87A16D72B68FD:secret"
+    pass: "password123"
+    source: "mdxfind"
+    reads_in: ["mdxfind"]

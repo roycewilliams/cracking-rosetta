@@ -1,0 +1,20 @@
+id: "ntlm-ntlm-bin"
+name: "NTLM(NTLM_bin($pass))"
+denotation:
+  text: "NTLM(NTLM_bin($pass))"
+  source: "hashcat"
+  note: "hashcat's own label for mode 36500 (renumbered from 89100), category \"Operating System\": NTLM applied to the raw binary NTLM digest of the password. Expression-shaped; a proven expression may later replace this denotation via derive-expressions.pl."
+category: "composite"
+status: "ok"
+tools:
+  hashcat:
+    modes: [36500]
+    verified: "vector"
+    verified_at: "2026-09-26"
+    verified_with: "hashcat v7.1.2-778-ga488c9ea4"
+    note: "hashcat's own published example for this mode, recovered by hashcat under this mode with hashcat's own published plaintext."
+vectors:
+  - hash: "7f30a0c84b2a806d93c39cea3b760716"
+    pass: "hashcat"
+    source: "hashcat"
+    reads_in: ["hashcat"]
