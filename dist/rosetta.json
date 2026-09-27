@@ -45676,7 +45676,7 @@
          "hash_length_basis" : "observed",
          "hashcat" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "hashcat_salted" : "",
          "hashcat_speed" : "",
@@ -45691,7 +45691,7 @@
          "id" : "md5-1xmd5md5pmd5p",
          "john" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "john_expr" : "dynamic=md5(md5(md5($p)).md5($p))",
          "john_salted" : "",
@@ -45714,12 +45714,12 @@
          "sameas" : "",
          "serialization" : "unknown",
          "status" : "needs-review",
-         "suites_decided" : 1,
+         "suites_decided" : 3,
          "suites_proven" : 1,
          "tool_note" : {
-            "hashcat" : "",
+            "hashcat" : "no mode. Swept the 13 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-27 (a tools/discover-hashcat.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
             "hashpipe" : "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one.",
-            "john" : "",
+            "john" : "no format. Swept the 76 format(s) whose own valid() accepts this entry's own vector, as john --show=left reports them, on 2026-09-27 (a tools/discover-john.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. For john the control is also per ENTRY and not only per shape: every format counted above is one whose own loader ACCEPTED this hash, so each was asked this exact question and answered no. A format that cannot parse the hash is not counted at all, and an entry no format can parse is reported as unsearched rather than decided. Every applicable format ran to completion; a format killed at the timeout is counted as untested and withholds this verdict. No john format name matches any identifier this entry publishes either, normalized by the separator-drift rule. john nonetheless COMPUTES this: the entry carries a proven john_dynamic_expr, dynamic=md5(md5(md5($p)).md5($p)), which john's own dynamic compiler recovered this entry's plaintext from this entry's hash under. That is a runnable command and not a format identifier, which is why it stays out of this column -- putting it here would inflate john's coverage with something no --list=formats will ever show. Read this verdict as 'no named format', not as 'john cannot do it'. This is the absence of an IDENTIFIER, not of the algorithm: if john gains one, this becomes a mapping.",
             "mdxfind" : "generated with mdxfind -z and crack-back verified under the local build pinned with -h '^MD5-1xMD5MD5pMD5p$'; verify-vectors.pl promotes to tier vector. Upstream added this type 2026-09-27 (mdxfind RCS 1.604-1.606, hashpipe 1.213); the vendored catalog does not yet carry an example."
          },
          "vecs" : 1
@@ -45741,7 +45741,7 @@
          "hash_length_basis" : "observed",
          "hashcat" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "hashcat_salted" : "",
          "hashcat_speed" : "",
@@ -45756,7 +45756,7 @@
          "id" : "md5-1xmd5sha1psha1p",
          "john" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "john_expr" : "dynamic=md5(md5(sha1($p)).sha1($p))",
          "john_salted" : "",
@@ -45779,12 +45779,12 @@
          "sameas" : "",
          "serialization" : "unknown",
          "status" : "needs-review",
-         "suites_decided" : 1,
+         "suites_decided" : 3,
          "suites_proven" : 1,
          "tool_note" : {
-            "hashcat" : "",
+            "hashcat" : "no mode. Swept the 13 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-27 (a tools/discover-hashcat.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
             "hashpipe" : "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one.",
-            "john" : "",
+            "john" : "no format. Swept the 76 format(s) whose own valid() accepts this entry's own vector, as john --show=left reports them, on 2026-09-27 (a tools/discover-john.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. For john the control is also per ENTRY and not only per shape: every format counted above is one whose own loader ACCEPTED this hash, so each was asked this exact question and answered no. A format that cannot parse the hash is not counted at all, and an entry no format can parse is reported as unsearched rather than decided. Every applicable format ran to completion; a format killed at the timeout is counted as untested and withholds this verdict. No john format name matches any identifier this entry publishes either, normalized by the separator-drift rule. john nonetheless COMPUTES this: the entry carries a proven john_dynamic_expr, dynamic=md5(md5(sha1($p)).sha1($p)), which john's own dynamic compiler recovered this entry's plaintext from this entry's hash under. That is a runnable command and not a format identifier, which is why it stays out of this column -- putting it here would inflate john's coverage with something no --list=formats will ever show. Read this verdict as 'no named format', not as 'john cannot do it'. This is the absence of an IDENTIFIER, not of the algorithm: if john gains one, this becomes a mapping.",
             "mdxfind" : "generated with mdxfind -z and crack-back verified under the local build pinned with -h '^MD5-1xMD5SHA1pSHA1p$'; verify-vectors.pl promotes to tier vector. Upstream added this type 2026-09-27 (mdxfind RCS 1.604-1.606, hashpipe 1.213); the vendored catalog does not yet carry an example."
          },
          "vecs" : 1
@@ -45806,7 +45806,7 @@
          "hash_length_basis" : "observed",
          "hashcat" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "hashcat_salted" : "",
          "hashcat_speed" : "",
@@ -45821,7 +45821,7 @@
          "id" : "md5-1xmd5sha256psha256p",
          "john" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "john_expr" : "dynamic=md5(md5(sha256($p)).sha256($p))",
          "john_salted" : "",
@@ -45844,12 +45844,12 @@
          "sameas" : "",
          "serialization" : "unknown",
          "status" : "needs-review",
-         "suites_decided" : 1,
+         "suites_decided" : 3,
          "suites_proven" : 1,
          "tool_note" : {
-            "hashcat" : "",
+            "hashcat" : "no mode. Swept the 13 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-27 (a tools/discover-hashcat.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
             "hashpipe" : "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one.",
-            "john" : "",
+            "john" : "no format. Swept the 76 format(s) whose own valid() accepts this entry's own vector, as john --show=left reports them, on 2026-09-27 (a tools/discover-john.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. For john the control is also per ENTRY and not only per shape: every format counted above is one whose own loader ACCEPTED this hash, so each was asked this exact question and answered no. A format that cannot parse the hash is not counted at all, and an entry no format can parse is reported as unsearched rather than decided. Every applicable format ran to completion; a format killed at the timeout is counted as untested and withholds this verdict. No john format name matches any identifier this entry publishes either, normalized by the separator-drift rule. john nonetheless COMPUTES this: the entry carries a proven john_dynamic_expr, dynamic=md5(md5(sha256($p)).sha256($p)), which john's own dynamic compiler recovered this entry's plaintext from this entry's hash under. That is a runnable command and not a format identifier, which is why it stays out of this column -- putting it here would inflate john's coverage with something no --list=formats will ever show. Read this verdict as 'no named format', not as 'john cannot do it'. This is the absence of an IDENTIFIER, not of the algorithm: if john gains one, this becomes a mapping.",
             "mdxfind" : "generated with mdxfind -z and crack-back verified under the local build pinned with -h '^MD5-1xMD5SHA256pSHA256p$'; verify-vectors.pl promotes to tier vector. Upstream added this type 2026-09-27 (mdxfind RCS 1.604-1.606, hashpipe 1.213); the vendored catalog does not yet carry an example."
          },
          "vecs" : 1
@@ -45871,7 +45871,7 @@
          "hash_length_basis" : "observed",
          "hashcat" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "hashcat_salted" : "",
          "hashcat_speed" : "",
@@ -45886,7 +45886,7 @@
          "id" : "md5-1xmd5sha512psha512p",
          "john" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "john_expr" : "dynamic=md5(md5(sha512($p)).sha512($p))",
          "john_salted" : "",
@@ -45909,12 +45909,12 @@
          "sameas" : "",
          "serialization" : "unknown",
          "status" : "needs-review",
-         "suites_decided" : 1,
+         "suites_decided" : 3,
          "suites_proven" : 1,
          "tool_note" : {
-            "hashcat" : "",
+            "hashcat" : "no mode. Swept the 13 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-27 (a tools/discover-hashcat.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
             "hashpipe" : "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one.",
-            "john" : "",
+            "john" : "no format. Swept the 76 format(s) whose own valid() accepts this entry's own vector, as john --show=left reports them, on 2026-09-27 (a tools/discover-john.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. For john the control is also per ENTRY and not only per shape: every format counted above is one whose own loader ACCEPTED this hash, so each was asked this exact question and answered no. A format that cannot parse the hash is not counted at all, and an entry no format can parse is reported as unsearched rather than decided. Every applicable format ran to completion; a format killed at the timeout is counted as untested and withholds this verdict. No john format name matches any identifier this entry publishes either, normalized by the separator-drift rule. john nonetheless COMPUTES this: the entry carries a proven john_dynamic_expr, dynamic=md5(md5(sha512($p)).sha512($p)), which john's own dynamic compiler recovered this entry's plaintext from this entry's hash under. That is a runnable command and not a format identifier, which is why it stays out of this column -- putting it here would inflate john's coverage with something no --list=formats will ever show. Read this verdict as 'no named format', not as 'john cannot do it'. This is the absence of an IDENTIFIER, not of the algorithm: if john gains one, this becomes a mapping.",
             "mdxfind" : "generated with mdxfind -z and crack-back verified under the local build pinned with -h '^MD5-1xMD5SHA512pSHA512p$'; verify-vectors.pl promotes to tier vector. Upstream added this type 2026-09-27 (mdxfind RCS 1.604-1.606, hashpipe 1.213); the vendored catalog does not yet carry an example."
          },
          "vecs" : 1
@@ -47472,7 +47472,7 @@
          "hash_length_basis" : "observed",
          "hashcat" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "hashcat_salted" : "",
          "hashcat_speed" : "",
@@ -47487,7 +47487,7 @@
          "id" : "md5base64md5sha1",
          "john" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "john_expr" : "",
          "john_salted" : "",
@@ -47510,12 +47510,12 @@
          "sameas" : "",
          "serialization" : "unknown",
          "status" : "needs-review",
-         "suites_decided" : 1,
+         "suites_decided" : 3,
          "suites_proven" : 1,
          "tool_note" : {
-            "hashcat" : "",
+            "hashcat" : "no mode. Swept the 13 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-27 (a tools/discover-hashcat.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
             "hashpipe" : "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one.",
-            "john" : "",
+            "john" : "no format. Swept the 76 format(s) whose own valid() accepts this entry's own vector, as john --show=left reports them, on 2026-09-27 (a tools/discover-john.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. For john the control is also per ENTRY and not only per shape: every format counted above is one whose own loader ACCEPTED this hash, so each was asked this exact question and answered no. A format that cannot parse the hash is not counted at all, and an entry no format can parse is reported as unsearched rather than decided. Every applicable format ran to completion; a format killed at the timeout is counted as untested and withholds this verdict. No john format name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if john gains one, this becomes a mapping.",
             "mdxfind" : "generated with mdxfind -z and crack-back verified under the local build pinned with -h '^MD5BASE64MD5SHA1$'; verify-vectors.pl promotes to tier vector. Upstream added this type 2026-09-27 (mdxfind RCS 1.604-1.606, hashpipe 1.213); the vendored catalog does not yet carry an example."
          },
          "vecs" : 1
@@ -48659,7 +48659,7 @@
          "hash_length_basis" : "observed",
          "hashcat" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "hashcat_salted" : "",
          "hashcat_speed" : "",
@@ -48674,7 +48674,7 @@
          "id" : "md5md5sub1-30md5",
          "john" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "john_expr" : "",
          "john_salted" : "",
@@ -48697,12 +48697,12 @@
          "sameas" : "",
          "serialization" : "unknown",
          "status" : "needs-review",
-         "suites_decided" : 1,
+         "suites_decided" : 3,
          "suites_proven" : 1,
          "tool_note" : {
-            "hashcat" : "",
+            "hashcat" : "no mode. Swept the 13 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-27 (a tools/discover-hashcat.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
             "hashpipe" : "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one.",
-            "john" : "",
+            "john" : "no format. Swept the 76 format(s) whose own valid() accepts this entry's own vector, as john --show=left reports them, on 2026-09-27 (a tools/discover-john.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. For john the control is also per ENTRY and not only per shape: every format counted above is one whose own loader ACCEPTED this hash, so each was asked this exact question and answered no. A format that cannot parse the hash is not counted at all, and an entry no format can parse is reported as unsearched rather than decided. Every applicable format ran to completion; a format killed at the timeout is counted as untested and withholds this verdict. No john format name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if john gains one, this becomes a mapping.",
             "mdxfind" : "generated with mdxfind -z and crack-back verified under the local build pinned with -h '^MD5MD5sub1-30MD5$'; verify-vectors.pl promotes to tier vector. Upstream added this type 2026-09-27 (mdxfind RCS 1.604-1.606, hashpipe 1.213); the vendored catalog does not yet carry an example."
          },
          "vecs" : 1
@@ -49378,7 +49378,7 @@
          "hash_length_basis" : "observed",
          "hashcat" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "hashcat_salted" : "",
          "hashcat_speed" : "",
@@ -49393,7 +49393,7 @@
          "id" : "md5saltmd5pass-pass",
          "john" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "john_expr" : "dynamic=md5($s.md5($p).$c1.$p),c1=\\x3a",
          "john_salted" : "",
@@ -49416,12 +49416,12 @@
          "sameas" : "",
          "serialization" : "unknown",
          "status" : "needs-review",
-         "suites_decided" : 1,
+         "suites_decided" : 3,
          "suites_proven" : 1,
          "tool_note" : {
-            "hashcat" : "",
+            "hashcat" : "no mode. Swept the 29 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-27 (a tools/discover-hashcat.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
             "hashpipe" : "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one.",
-            "john" : "",
+            "john" : "no format. Swept the 63 format(s) whose own valid() accepts this entry's own vector, as john --show=left reports them, on 2026-09-27 (a tools/discover-john.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. For john the control is also per ENTRY and not only per shape: every format counted above is one whose own loader ACCEPTED this hash, so each was asked this exact question and answered no. A format that cannot parse the hash is not counted at all, and an entry no format can parse is reported as unsearched rather than decided. Every applicable format ran to completion; a format killed at the timeout is counted as untested and withholds this verdict. No john format name matches any identifier this entry publishes either, normalized by the separator-drift rule. john nonetheless COMPUTES this: the entry carries a proven john_dynamic_expr, dynamic=md5($s.md5($p).$c1.$p),c1=\\x3a, which john's own dynamic compiler recovered this entry's plaintext from this entry's hash under. That is a runnable command and not a format identifier, which is why it stays out of this column -- putting it here would inflate john's coverage with something no --list=formats will ever show. Read this verdict as 'no named format', not as 'john cannot do it'. This is the absence of an IDENTIFIER, not of the algorithm: if john gains one, this becomes a mapping.",
             "mdxfind" : "generated with mdxfind -z and crack-back verified under the local build pinned with -h '^MD5SALTMD5PASS-PASS$'; verify-vectors.pl promotes to tier vector. Upstream added this type 2026-09-27 (mdxfind RCS 1.604-1.606, hashpipe 1.213); the vendored catalog does not yet carry an example."
          },
          "vecs" : 1
@@ -49963,7 +49963,7 @@
          "hash_length_basis" : "observed",
          "hashcat" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "hashcat_salted" : "",
          "hashcat_speed" : "",
@@ -49978,7 +49978,7 @@
          "id" : "md5sha1md5sha1md5sha1",
          "john" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "john_expr" : "dynamic=md5(sha1(md5(sha1(md5(sha1($p))))))",
          "john_salted" : "",
@@ -50001,12 +50001,12 @@
          "sameas" : "",
          "serialization" : "unknown",
          "status" : "needs-review",
-         "suites_decided" : 1,
+         "suites_decided" : 3,
          "suites_proven" : 1,
          "tool_note" : {
-            "hashcat" : "",
+            "hashcat" : "no mode. Swept the 13 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-27 (a tools/discover-hashcat.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
             "hashpipe" : "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one.",
-            "john" : "",
+            "john" : "no format. Swept the 76 format(s) whose own valid() accepts this entry's own vector, as john --show=left reports them, on 2026-09-27 (a tools/discover-john.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. For john the control is also per ENTRY and not only per shape: every format counted above is one whose own loader ACCEPTED this hash, so each was asked this exact question and answered no. A format that cannot parse the hash is not counted at all, and an entry no format can parse is reported as unsearched rather than decided. Every applicable format ran to completion; a format killed at the timeout is counted as untested and withholds this verdict. No john format name matches any identifier this entry publishes either, normalized by the separator-drift rule. john nonetheless COMPUTES this: the entry carries a proven john_dynamic_expr, dynamic=md5(sha1(md5(sha1(md5(sha1($p)))))), which john's own dynamic compiler recovered this entry's plaintext from this entry's hash under. That is a runnable command and not a format identifier, which is why it stays out of this column -- putting it here would inflate john's coverage with something no --list=formats will ever show. Read this verdict as 'no named format', not as 'john cannot do it'. This is the absence of an IDENTIFIER, not of the algorithm: if john gains one, this becomes a mapping.",
             "mdxfind" : "generated with mdxfind -z and crack-back verified under the local build pinned with -h '^MD5SHA1MD5SHA1MD5SHA1$'; verify-vectors.pl promotes to tier vector. Upstream added this type 2026-09-27 (mdxfind RCS 1.604-1.606, hashpipe 1.213); the vendored catalog does not yet carry an example."
          },
          "vecs" : 1
@@ -50357,7 +50357,7 @@
          "hash_length_basis" : "observed",
          "hashcat" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "hashcat_salted" : "",
          "hashcat_speed" : "",
@@ -50372,7 +50372,7 @@
          "id" : "md5sha1sha1md5sha1md5",
          "john" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "john_expr" : "dynamic=md5(sha1(sha1(md5(sha1(md5($p))))))",
          "john_salted" : "",
@@ -50395,12 +50395,12 @@
          "sameas" : "",
          "serialization" : "unknown",
          "status" : "needs-review",
-         "suites_decided" : 1,
+         "suites_decided" : 3,
          "suites_proven" : 1,
          "tool_note" : {
-            "hashcat" : "",
+            "hashcat" : "no mode. Swept the 13 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-27 (a tools/discover-hashcat.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
             "hashpipe" : "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one.",
-            "john" : "",
+            "john" : "no format. Swept the 76 format(s) whose own valid() accepts this entry's own vector, as john --show=left reports them, on 2026-09-27 (a tools/discover-john.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. For john the control is also per ENTRY and not only per shape: every format counted above is one whose own loader ACCEPTED this hash, so each was asked this exact question and answered no. A format that cannot parse the hash is not counted at all, and an entry no format can parse is reported as unsearched rather than decided. Every applicable format ran to completion; a format killed at the timeout is counted as untested and withholds this verdict. No john format name matches any identifier this entry publishes either, normalized by the separator-drift rule. john nonetheless COMPUTES this: the entry carries a proven john_dynamic_expr, dynamic=md5(sha1(sha1(md5(sha1(md5($p)))))), which john's own dynamic compiler recovered this entry's plaintext from this entry's hash under. That is a runnable command and not a format identifier, which is why it stays out of this column -- putting it here would inflate john's coverage with something no --list=formats will ever show. Read this verdict as 'no named format', not as 'john cannot do it'. This is the absence of an IDENTIFIER, not of the algorithm: if john gains one, this becomes a mapping.",
             "mdxfind" : "generated with mdxfind -z and crack-back verified under the local build pinned with -h '^MD5SHA1SHA1MD5SHA1MD5$'; verify-vectors.pl promotes to tier vector. Upstream added this type 2026-09-27 (mdxfind RCS 1.604-1.606, hashpipe 1.213); the vendored catalog does not yet carry an example."
          },
          "vecs" : 1
@@ -50422,7 +50422,7 @@
          "hash_length_basis" : "observed",
          "hashcat" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "hashcat_salted" : "",
          "hashcat_speed" : "",
@@ -50437,7 +50437,7 @@
          "id" : "md5sha1sha1sha1",
          "john" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "john_expr" : "dynamic=md5(sha1(sha1(sha1($p))))",
          "john_salted" : "",
@@ -50460,12 +50460,12 @@
          "sameas" : "",
          "serialization" : "unknown",
          "status" : "needs-review",
-         "suites_decided" : 1,
+         "suites_decided" : 3,
          "suites_proven" : 1,
          "tool_note" : {
-            "hashcat" : "",
+            "hashcat" : "no mode. Swept the 13 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-27 (a tools/discover-hashcat.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
             "hashpipe" : "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one.",
-            "john" : "",
+            "john" : "no format. Swept the 76 format(s) whose own valid() accepts this entry's own vector, as john --show=left reports them, on 2026-09-27 (a tools/discover-john.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. For john the control is also per ENTRY and not only per shape: every format counted above is one whose own loader ACCEPTED this hash, so each was asked this exact question and answered no. A format that cannot parse the hash is not counted at all, and an entry no format can parse is reported as unsearched rather than decided. Every applicable format ran to completion; a format killed at the timeout is counted as untested and withholds this verdict. No john format name matches any identifier this entry publishes either, normalized by the separator-drift rule. john nonetheless COMPUTES this: the entry carries a proven john_dynamic_expr, dynamic=md5(sha1(sha1(sha1($p)))), which john's own dynamic compiler recovered this entry's plaintext from this entry's hash under. That is a runnable command and not a format identifier, which is why it stays out of this column -- putting it here would inflate john's coverage with something no --list=formats will ever show. Read this verdict as 'no named format', not as 'john cannot do it'. This is the absence of an IDENTIFIER, not of the algorithm: if john gains one, this becomes a mapping.",
             "mdxfind" : "generated with mdxfind -z and crack-back verified under the local build pinned with -h '^MD5SHA1SHA1SHA1$'; verify-vectors.pl promotes to tier vector. Upstream added this type 2026-09-27 (mdxfind RCS 1.604-1.606, hashpipe 1.213); the vendored catalog does not yet carry an example."
          },
          "vecs" : 1
@@ -51015,7 +51015,7 @@
          "hash_length_basis" : "observed",
          "hashcat" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "hashcat_salted" : "",
          "hashcat_speed" : "",
@@ -51030,7 +51030,7 @@
          "id" : "md5sha512md5",
          "john" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "john_expr" : "dynamic=md5(sha512(md5($p)))",
          "john_salted" : "",
@@ -51053,12 +51053,12 @@
          "sameas" : "",
          "serialization" : "unknown",
          "status" : "needs-review",
-         "suites_decided" : 1,
+         "suites_decided" : 3,
          "suites_proven" : 1,
          "tool_note" : {
-            "hashcat" : "",
+            "hashcat" : "no mode. Swept the 13 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-27 (a tools/discover-hashcat.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
             "hashpipe" : "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one.",
-            "john" : "",
+            "john" : "no format. Swept the 76 format(s) whose own valid() accepts this entry's own vector, as john --show=left reports them, on 2026-09-27 (a tools/discover-john.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. For john the control is also per ENTRY and not only per shape: every format counted above is one whose own loader ACCEPTED this hash, so each was asked this exact question and answered no. A format that cannot parse the hash is not counted at all, and an entry no format can parse is reported as unsearched rather than decided. Every applicable format ran to completion; a format killed at the timeout is counted as untested and withholds this verdict. No john format name matches any identifier this entry publishes either, normalized by the separator-drift rule. john nonetheless COMPUTES this: the entry carries a proven john_dynamic_expr, dynamic=md5(sha512(md5($p))), which john's own dynamic compiler recovered this entry's plaintext from this entry's hash under. That is a runnable command and not a format identifier, which is why it stays out of this column -- putting it here would inflate john's coverage with something no --list=formats will ever show. Read this verdict as 'no named format', not as 'john cannot do it'. This is the absence of an IDENTIFIER, not of the algorithm: if john gains one, this becomes a mapping.",
             "mdxfind" : "generated with mdxfind -z and crack-back verified under the local build pinned with -h '^MD5SHA512MD5$'; verify-vectors.pl promotes to tier vector. Upstream added this type 2026-09-27 (mdxfind RCS 1.604-1.606, hashpipe 1.213); the vendored catalog does not yet carry an example."
          },
          "vecs" : 1
@@ -51210,7 +51210,7 @@
          "hash_length_basis" : "observed",
          "hashcat" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "hashcat_salted" : "",
          "hashcat_speed" : "",
@@ -51225,7 +51225,7 @@
          "id" : "md5sub1-16md5",
          "john" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "john_expr" : "",
          "john_salted" : "",
@@ -51248,12 +51248,12 @@
          "sameas" : "",
          "serialization" : "unknown",
          "status" : "needs-review",
-         "suites_decided" : 1,
+         "suites_decided" : 3,
          "suites_proven" : 1,
          "tool_note" : {
-            "hashcat" : "",
+            "hashcat" : "no mode. Swept the 13 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-27 (a tools/discover-hashcat.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
             "hashpipe" : "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one.",
-            "john" : "",
+            "john" : "no format. Swept the 76 format(s) whose own valid() accepts this entry's own vector, as john --show=left reports them, on 2026-09-27 (a tools/discover-john.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. For john the control is also per ENTRY and not only per shape: every format counted above is one whose own loader ACCEPTED this hash, so each was asked this exact question and answered no. A format that cannot parse the hash is not counted at all, and an entry no format can parse is reported as unsearched rather than decided. Every applicable format ran to completion; a format killed at the timeout is counted as untested and withholds this verdict. No john format name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if john gains one, this becomes a mapping.",
             "mdxfind" : "generated with mdxfind -z and crack-back verified under the local build pinned with -h '^MD5sub1-16MD5$'; verify-vectors.pl promotes to tier vector. Upstream added this type 2026-09-27 (mdxfind RCS 1.604-1.606, hashpipe 1.213); the vendored catalog does not yet carry an example."
          },
          "vecs" : 1
@@ -51405,7 +51405,7 @@
          "hash_length_basis" : "observed",
          "hashcat" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "hashcat_salted" : "",
          "hashcat_speed" : "",
@@ -51420,7 +51420,7 @@
          "id" : "md5sub1-28md5",
          "john" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "john_expr" : "",
          "john_salted" : "",
@@ -51443,12 +51443,12 @@
          "sameas" : "",
          "serialization" : "unknown",
          "status" : "needs-review",
-         "suites_decided" : 1,
+         "suites_decided" : 3,
          "suites_proven" : 1,
          "tool_note" : {
-            "hashcat" : "",
+            "hashcat" : "no mode. Swept the 13 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-27 (a tools/discover-hashcat.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
             "hashpipe" : "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one.",
-            "john" : "",
+            "john" : "no format. Swept the 76 format(s) whose own valid() accepts this entry's own vector, as john --show=left reports them, on 2026-09-27 (a tools/discover-john.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. For john the control is also per ENTRY and not only per shape: every format counted above is one whose own loader ACCEPTED this hash, so each was asked this exact question and answered no. A format that cannot parse the hash is not counted at all, and an entry no format can parse is reported as unsearched rather than decided. Every applicable format ran to completion; a format killed at the timeout is counted as untested and withholds this verdict. No john format name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if john gains one, this becomes a mapping.",
             "mdxfind" : "generated with mdxfind -z and crack-back verified under the local build pinned with -h '^MD5sub1-28MD5$'; verify-vectors.pl promotes to tier vector. Upstream added this type 2026-09-27 (mdxfind RCS 1.604-1.606, hashpipe 1.213); the vendored catalog does not yet carry an example."
          },
          "vecs" : 1
@@ -51535,7 +51535,7 @@
          "hash_length_basis" : "observed",
          "hashcat" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "hashcat_salted" : "",
          "hashcat_speed" : "",
@@ -51550,7 +51550,7 @@
          "id" : "md5sub8-24md5sub8-24md5md5md5",
          "john" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "john_expr" : "",
          "john_salted" : "",
@@ -51573,12 +51573,12 @@
          "sameas" : "",
          "serialization" : "unknown",
          "status" : "needs-review",
-         "suites_decided" : 1,
+         "suites_decided" : 3,
          "suites_proven" : 1,
          "tool_note" : {
-            "hashcat" : "",
+            "hashcat" : "no mode. Swept the 13 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-27 (a tools/discover-hashcat.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
             "hashpipe" : "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one.",
-            "john" : "",
+            "john" : "no format. Swept the 76 format(s) whose own valid() accepts this entry's own vector, as john --show=left reports them, on 2026-09-27 (a tools/discover-john.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. For john the control is also per ENTRY and not only per shape: every format counted above is one whose own loader ACCEPTED this hash, so each was asked this exact question and answered no. A format that cannot parse the hash is not counted at all, and an entry no format can parse is reported as unsearched rather than decided. Every applicable format ran to completion; a format killed at the timeout is counted as untested and withholds this verdict. No john format name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if john gains one, this becomes a mapping.",
             "mdxfind" : "generated with mdxfind -z and crack-back verified under the local build pinned with -h '^MD5sub8-24MD5sub8-24MD5MD5MD5$'; verify-vectors.pl promotes to tier vector. Upstream added this type 2026-09-27 (mdxfind RCS 1.604-1.606, hashpipe 1.213); the vendored catalog does not yet carry an example."
          },
          "vecs" : 1
@@ -105535,7 +105535,7 @@
          "hash_length_basis" : "observed",
          "hashcat" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "hashcat_salted" : "",
          "hashcat_speed" : "",
@@ -105550,7 +105550,7 @@
          "id" : "wrlsha1",
          "john" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "john_expr" : "dynamic=whirlpool(sha1($p))",
          "john_salted" : "",
@@ -105573,12 +105573,12 @@
          "sameas" : "",
          "serialization" : "unknown",
          "status" : "needs-review",
-         "suites_decided" : 1,
+         "suites_decided" : 3,
          "suites_proven" : 1,
          "tool_note" : {
-            "hashcat" : "",
+            "hashcat" : "no mode. Swept the 8 mode(s) whose parser accepts this entry's own vector, as hashcat --identify lists them, on 2026-09-27 (a tools/discover-hashcat.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. Every applicable mode ran to completion; a mode killed at the timeout is counted as untested and withholds this verdict. No hashcat mode name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if hashcat gains one, this becomes a mapping.",
             "hashpipe" : "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one.",
-            "john" : "",
+            "john" : "no format. Swept the 31 format(s) whose own valid() accepts this entry's own vector, as john --show=left reports them, on 2026-09-27 (a tools/discover-john.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. For john the control is also per ENTRY and not only per shape: every format counted above is one whose own loader ACCEPTED this hash, so each was asked this exact question and answered no. A format that cannot parse the hash is not counted at all, and an entry no format can parse is reported as unsearched rather than decided. Every applicable format ran to completion; a format killed at the timeout is counted as untested and withholds this verdict. No john format name matches any identifier this entry publishes either, normalized by the separator-drift rule. john nonetheless COMPUTES this: the entry carries a proven john_dynamic_expr, dynamic=whirlpool(sha1($p)), which john's own dynamic compiler recovered this entry's plaintext from this entry's hash under. That is a runnable command and not a format identifier, which is why it stays out of this column -- putting it here would inflate john's coverage with something no --list=formats will ever show. Read this verdict as 'no named format', not as 'john cannot do it'. This is the absence of an IDENTIFIER, not of the algorithm: if john gains one, this becomes a mapping.",
             "mdxfind" : "generated with mdxfind -z and crack-back verified under the local build pinned with -h '^WRLSHA1$'; verify-vectors.pl promotes to tier vector. Upstream added this type 2026-09-27 (mdxfind RCS 1.604-1.606, hashpipe 1.213); the vendored catalog does not yet carry an example."
          },
          "vecs" : 1

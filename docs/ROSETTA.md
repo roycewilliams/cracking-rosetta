@@ -699,10 +699,10 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | md5(wrl(md5($plain))) | no | no | `MD5WRLMD5` (v) |  |
 | md5(wrl_raw($plain)) | no | no | `MD5WRLRAW` (v) |  |
 | MD5(ZipMonster) | **--** | `ZipMonster` (v) | no |  |
-| MD5-1xMD5MD5pMD5p | **--** | **--** | `MD5-1xMD5MD5pMD5p` (v) |  |
-| MD5-1xMD5SHA1pSHA1p | **--** | **--** | `MD5-1xMD5SHA1pSHA1p` (v) |  |
-| MD5-1xMD5SHA256pSHA256p | **--** | **--** | `MD5-1xMD5SHA256pSHA256p` (v) |  |
-| MD5-1xMD5SHA512pSHA512p | **--** | **--** | `MD5-1xMD5SHA512pSHA512p` (v) |  |
+| MD5-1xMD5MD5pMD5p | no | no | `MD5-1xMD5MD5pMD5p` (v) |  |
+| MD5-1xMD5SHA1pSHA1p | no | no | `MD5-1xMD5SHA1pSHA1p` (v) |  |
+| MD5-1xMD5SHA256pSHA256p | no | no | `MD5-1xMD5SHA256pSHA256p` (v) |  |
+| MD5-1xMD5SHA512pSHA512p | no | no | `MD5-1xMD5SHA512pSHA512p` (v) |  |
 | MD5-2xMD5UC | no | no | `MD5-2xMD5UC` (v) |  |
 | MD5-2xSHA1 | no | no | `MD5-2xSHA1` (v) |  |
 | MD5-2xSHA1MD5 | no | no | `MD5-2xSHA1MD5` (v) |  |
@@ -726,7 +726,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | MD5AM2 | no | no | `MD5AM2` (v) |  |
 | MD5BASE64BASE64 | no | no | `MD5BASE64BASE64` (v) |  |
 | MD5BASE64BASE64BASE64 | no | no | `MD5BASE64BASE64BASE64` (v) |  |
-| MD5BASE64MD5SHA1 | **--** | **--** | `MD5BASE64MD5SHA1` (v) |  |
+| MD5BASE64MD5SHA1 | no | no | `MD5BASE64MD5SHA1` (v) |  |
 | MD5BASE64SHA1MD5 | no | no | `MD5BASE64SHA1MD5` (v) |  |
 | md5bcad (order of 32bit values) | no | no | `MD5bcad` (v) |  |
 | MD5CAP | no | **--** | `MD5CAP -i2` (v) | collides with md5 (encoding) |
@@ -744,7 +744,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | MD5MD5SALT-SALT | no | no | `MD5MD5SALT-SALT` (v) |  |
 | MD5MD5SHA1SALT | no | no | `MD5MD5SHA1SALT` (v) |  |
 | MD5MD5SHA256SALT | no | no | `MD5MD5SHA256SALT` (v) |  |
-| MD5MD5sub1-30MD5 | **--** | **--** | `MD5MD5sub1-30MD5` (v) |  |
+| MD5MD5sub1-30MD5 | no | no | `MD5MD5sub1-30MD5` (v) |  |
 | MD5MD5UCp | no | no | `MD5MD5UCp` (v) |  |
 | MD5MD5UCSHA1MD5MD5 | no | no | `MD5MD5UCSHA1MD5MD5` (v) |  |
 | MD5MD5UCSQL3p | no | no | `MD5MD5UCSQL3p` (v) |  |
@@ -755,7 +755,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | MD5revMD5SALT | no | no | `MD5revMD5SALT` (v) |  |
 | MD5SALT1SALT2 | `33000` (v) | **--** | `MD5SALT1SALT2` (v) |  |
 | MD5SALTLAST16 | **--** | **--** | `MD5SALTLAST16` (v) |  |
-| MD5SALTMD5PASS-PASS | **--** | **--** | `MD5SALTMD5PASS-PASS` (v) |  |
+| MD5SALTMD5PASS-PASS | no | no | `MD5SALTMD5PASS-PASS` (v) |  |
 | MD5SHA0 | no | no | `MD5SHA0` (v) |  |
 | MD5SHA1BASE64MD5RAW | no | no | `MD5SHA1BASE64MD5RAW` (v) |  |
 | MD5SHA1HUM | no | **--** | `MD5SHA1HUM` (v) |  |
@@ -764,14 +764,14 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | MD5SHA1MD5MD5SHA1 | no | no | `MD5SHA1MD5MD5SHA1` (v) |  |
 | MD5SHA1MD5MD5SHA1MD5 | no | no | `MD5SHA1MD5MD5SHA1MD5` (v) |  |
 | MD5SHA1MD5MD5UC | no | no | `MD5SHA1MD5MD5UC` (v) |  |
-| MD5SHA1MD5SHA1MD5SHA1 | **--** | **--** | `MD5SHA1MD5SHA1MD5SHA1` (v) |  |
+| MD5SHA1MD5SHA1MD5SHA1 | no | no | `MD5SHA1MD5SHA1MD5SHA1` (v) |  |
 | MD5SHA1MD5SHA1MD5SHA1MD5SHA1MD5SHA1MD5SHA1 | no | no | `MD5SHA1MD5SHA1MD5SHA1MD5SHA1MD5SHA1MD5SHA1` (v) |  |
 | MD5SHA1MD5UC | no | no | `MD5SHA1MD5UC` (v) |  |
 | MD5SHA1MD5x | no | no | `MD5SHA1MD5x` (v) |  |
 | MD5SHA1RADMIN2MD5 | no | no | `MD5SHA1RADMIN2MD5` (v) |  |
 | MD5SHA1SALT | `4410` (v) | no | `MD5SHA1SALT` (v) |  |
-| MD5SHA1SHA1MD5SHA1MD5 | **--** | **--** | `MD5SHA1SHA1MD5SHA1MD5` (v) |  |
-| MD5SHA1SHA1SHA1 | **--** | **--** | `MD5SHA1SHA1SHA1` (v) |  |
+| MD5SHA1SHA1MD5SHA1MD5 | no | no | `MD5SHA1SHA1MD5SHA1MD5` (v) |  |
+| MD5SHA1SHA1SHA1 | no | no | `MD5SHA1SHA1SHA1` (v) |  |
 | MD5SHA1u32SALT | no | no | `MD5SHA1u32SALT` (v) |  |
 | MD5SHA1u39 | no | no | `MD5SHA1u39` (v) |  |
 | MD5SHA1UC | no | no | `MD5SHA1UC` (v) |  |
@@ -780,15 +780,15 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | MD5SHA256MD5 | no | no | `MD5SHA256MD5` (v) |  |
 | MD5SHA256SHA256 | no | no | `MD5SHA256SHA256` (v) |  |
 | MD5SHA512 | no | no | `MD5SHA512` (v) |  |
-| MD5SHA512MD5 | **--** | **--** | `MD5SHA512MD5` (v) |  |
+| MD5SHA512MD5 | no | no | `MD5SHA512MD5` (v) |  |
 | MD5SPECAM | no | **--** | `MD5SPECAM` |  |
 | MD5SQL3SQL5MD5MD5 | no | no | `MD5SQL3SQL5MD5MD5` (v) |  |
-| MD5sub1-16MD5 | **--** | **--** | `MD5sub1-16MD5` (v) |  |
+| MD5sub1-16MD5 | no | no | `MD5sub1-16MD5` (v) |  |
 | MD5sub1-20MD5 | no | no | `MD5sub1-20MD5` (v) |  |
 | MD5sub1-20MD5MD5 | no | no | `MD5sub1-20MD5MD5` (v) |  |
-| MD5sub1-28MD5 | **--** | **--** | `MD5sub1-28MD5` (v) |  |
+| MD5sub1-28MD5 | no | no | `MD5sub1-28MD5` (v) |  |
 | MD5sub8-24MD5sub8-24MD5 | no | no | `MD5sub8-24MD5sub8-24MD5` (v) |  |
-| MD5sub8-24MD5sub8-24MD5MD5MD5 | **--** | **--** | `MD5sub8-24MD5sub8-24MD5MD5MD5` (v) |  |
+| MD5sub8-24MD5sub8-24MD5MD5MD5 | no | no | `MD5sub8-24MD5sub8-24MD5MD5MD5` (v) |  |
 | MD5sub8-24SALT | no | no | `MD5sub8-24SALT` (v) |  |
 | MD5SWAP | no | no | `MD5SWAP` (v) |  |
 | MD5UC | `0` (v) | `Raw-MD5`<br>`dynamic_0`<br>`dynamic_2000` (v) | `MD5UC` | encoding of md5 (encoding) |
@@ -1590,7 +1590,7 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | WRLSALTPASS | no | `dynamic_101` (v) | `WRLSALTPASS` (v) |  |
 | WRLSALTPASSSALT | `32600` (v) | no | `WRLSALTPASSSALT` (v) |  |
 | WRLSALTWRL | no | `dynamic_106` (v) | `WRLSALTWRL` (v) |  |
-| WRLSHA1 | **--** | **--** | `WRLSHA1` (v) |  |
+| WRLSHA1 | no | no | `WRLSHA1` (v) |  |
 | WRLWRLSALT | no | `dynamic_105` (v) | `WRLWRLSALT` (v) |  |
 | XMPP SCRAM PBKDF2-SHA1 | `23200` (v) | `SCRAM-PBKDF2-SHA1` (v) | no |  |
 | YAF-SHA1 | no | **--** | `YAF-SHA1` (v) |  |
