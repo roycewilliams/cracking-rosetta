@@ -1,5 +1,5 @@
 {
-   "count" : 1554,
+   "count" : 1571,
    "entries" : [
       {
          "alias" : "",
@@ -2134,6 +2134,71 @@
             "hashpipe" : "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one.",
             "john" : "format discovered by round-trip search, not by name",
             "mdxfind" : ""
+         },
+         "vecs" : 1
+      },
+      {
+         "alias" : "",
+         "application" : "",
+         "category" : "application",
+         "crack" : {
+            "ids" : [],
+            "state" : "no"
+         },
+         "cracknote" : "",
+         "denotation" : "{SHA} . base64(trunc(sha1_bin(pass), 16))",
+         "expr" : "",
+         "expr_note" : "",
+         "expr_tier" : "",
+         "hash_length" : "",
+         "hash_length_basis" : "",
+         "hashcat" : {
+            "ids" : [],
+            "state" : "unknown"
+         },
+         "hashcat_salted" : "",
+         "hashcat_speed" : "",
+         "hashpipe" : {
+            "ids" : [
+               "APACHE-SHA-TRUNC16"
+            ],
+            "match" : "",
+            "state" : "proven",
+            "tier" : "vector"
+         },
+         "id" : "apache-sha-trunc16",
+         "john" : {
+            "ids" : [],
+            "state" : "unknown"
+         },
+         "john_expr" : "",
+         "john_salted" : "",
+         "john_work_factor" : "",
+         "legacy" : "",
+         "mdxfind" : {
+            "ids" : [
+               "APACHE-SHA-TRUNC16"
+            ],
+            "match" : "",
+            "state" : "proven",
+            "tier" : "vector"
+         },
+         "mdxfind_salted" : "no",
+         "name" : "APACHE-SHA-TRUNC16",
+         "nesting_depth" : "",
+         "notes" : "",
+         "primary_form" : "",
+         "relations" : [],
+         "sameas" : "",
+         "serialization" : "unknown",
+         "status" : "needs-review",
+         "suites_decided" : 1,
+         "suites_proven" : 1,
+         "tool_note" : {
+            "hashcat" : "",
+            "hashpipe" : "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one.",
+            "john" : "",
+            "mdxfind" : "generated with mdxfind -z and crack-back verified under the local build pinned with -h '^APACHE-SHA-TRUNC16$'; verify-vectors.pl promotes to tier vector. Upstream added this type 2026-09-27 (mdxfind RCS 1.604-1.606, hashpipe 1.213); the vendored catalog does not yet carry an example."
          },
          "vecs" : 1
       },
@@ -45604,6 +45669,266 @@
          },
          "cracknote" : "",
          "denotation" : "",
+         "expr" : "md5(md5(md5($p)).md5($p))",
+         "expr_note" : "round-tripped as --format=dynamic=<expr> against every vector this entry carries",
+         "expr_tier" : "vector",
+         "hash_length" : 32,
+         "hash_length_basis" : "observed",
+         "hashcat" : {
+            "ids" : [],
+            "state" : "unknown"
+         },
+         "hashcat_salted" : "",
+         "hashcat_speed" : "",
+         "hashpipe" : {
+            "ids" : [
+               "MD5-1xMD5MD5pMD5p"
+            ],
+            "match" : "",
+            "state" : "proven",
+            "tier" : "vector"
+         },
+         "id" : "md5-1xmd5md5pmd5p",
+         "john" : {
+            "ids" : [],
+            "state" : "unknown"
+         },
+         "john_expr" : "dynamic=md5(md5(md5($p)).md5($p))",
+         "john_salted" : "",
+         "john_work_factor" : "",
+         "legacy" : "",
+         "mdxfind" : {
+            "ids" : [
+               "MD5-1xMD5MD5pMD5p"
+            ],
+            "match" : "",
+            "state" : "proven",
+            "tier" : "vector"
+         },
+         "mdxfind_salted" : "no",
+         "name" : "MD5-1xMD5MD5pMD5p",
+         "nesting_depth" : 3,
+         "notes" : "",
+         "primary_form" : "",
+         "relations" : [],
+         "sameas" : "",
+         "serialization" : "unknown",
+         "status" : "needs-review",
+         "suites_decided" : 1,
+         "suites_proven" : 1,
+         "tool_note" : {
+            "hashcat" : "",
+            "hashpipe" : "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one.",
+            "john" : "",
+            "mdxfind" : "generated with mdxfind -z and crack-back verified under the local build pinned with -h '^MD5-1xMD5MD5pMD5p$'; verify-vectors.pl promotes to tier vector. Upstream added this type 2026-09-27 (mdxfind RCS 1.604-1.606, hashpipe 1.213); the vendored catalog does not yet carry an example."
+         },
+         "vecs" : 1
+      },
+      {
+         "alias" : "",
+         "application" : "",
+         "category" : "composite",
+         "crack" : {
+            "ids" : [],
+            "state" : "no"
+         },
+         "cracknote" : "",
+         "denotation" : "",
+         "expr" : "md5(md5(sha1($p)).sha1($p))",
+         "expr_note" : "round-tripped as --format=dynamic=<expr> against every vector this entry carries",
+         "expr_tier" : "vector",
+         "hash_length" : 32,
+         "hash_length_basis" : "observed",
+         "hashcat" : {
+            "ids" : [],
+            "state" : "unknown"
+         },
+         "hashcat_salted" : "",
+         "hashcat_speed" : "",
+         "hashpipe" : {
+            "ids" : [
+               "MD5-1xMD5SHA1pSHA1p"
+            ],
+            "match" : "",
+            "state" : "proven",
+            "tier" : "vector"
+         },
+         "id" : "md5-1xmd5sha1psha1p",
+         "john" : {
+            "ids" : [],
+            "state" : "unknown"
+         },
+         "john_expr" : "dynamic=md5(md5(sha1($p)).sha1($p))",
+         "john_salted" : "",
+         "john_work_factor" : "",
+         "legacy" : "",
+         "mdxfind" : {
+            "ids" : [
+               "MD5-1xMD5SHA1pSHA1p"
+            ],
+            "match" : "",
+            "state" : "proven",
+            "tier" : "vector"
+         },
+         "mdxfind_salted" : "no",
+         "name" : "MD5-1xMD5SHA1pSHA1p",
+         "nesting_depth" : 3,
+         "notes" : "",
+         "primary_form" : "",
+         "relations" : [],
+         "sameas" : "",
+         "serialization" : "unknown",
+         "status" : "needs-review",
+         "suites_decided" : 1,
+         "suites_proven" : 1,
+         "tool_note" : {
+            "hashcat" : "",
+            "hashpipe" : "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one.",
+            "john" : "",
+            "mdxfind" : "generated with mdxfind -z and crack-back verified under the local build pinned with -h '^MD5-1xMD5SHA1pSHA1p$'; verify-vectors.pl promotes to tier vector. Upstream added this type 2026-09-27 (mdxfind RCS 1.604-1.606, hashpipe 1.213); the vendored catalog does not yet carry an example."
+         },
+         "vecs" : 1
+      },
+      {
+         "alias" : "",
+         "application" : "",
+         "category" : "composite",
+         "crack" : {
+            "ids" : [],
+            "state" : "no"
+         },
+         "cracknote" : "",
+         "denotation" : "",
+         "expr" : "md5(md5(sha256($p)).sha256($p))",
+         "expr_note" : "round-tripped as --format=dynamic=<expr> against every vector this entry carries",
+         "expr_tier" : "vector",
+         "hash_length" : 32,
+         "hash_length_basis" : "observed",
+         "hashcat" : {
+            "ids" : [],
+            "state" : "unknown"
+         },
+         "hashcat_salted" : "",
+         "hashcat_speed" : "",
+         "hashpipe" : {
+            "ids" : [
+               "MD5-1xMD5SHA256pSHA256p"
+            ],
+            "match" : "",
+            "state" : "proven",
+            "tier" : "vector"
+         },
+         "id" : "md5-1xmd5sha256psha256p",
+         "john" : {
+            "ids" : [],
+            "state" : "unknown"
+         },
+         "john_expr" : "dynamic=md5(md5(sha256($p)).sha256($p))",
+         "john_salted" : "",
+         "john_work_factor" : "",
+         "legacy" : "",
+         "mdxfind" : {
+            "ids" : [
+               "MD5-1xMD5SHA256pSHA256p"
+            ],
+            "match" : "",
+            "state" : "proven",
+            "tier" : "vector"
+         },
+         "mdxfind_salted" : "no",
+         "name" : "MD5-1xMD5SHA256pSHA256p",
+         "nesting_depth" : 3,
+         "notes" : "",
+         "primary_form" : "",
+         "relations" : [],
+         "sameas" : "",
+         "serialization" : "unknown",
+         "status" : "needs-review",
+         "suites_decided" : 1,
+         "suites_proven" : 1,
+         "tool_note" : {
+            "hashcat" : "",
+            "hashpipe" : "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one.",
+            "john" : "",
+            "mdxfind" : "generated with mdxfind -z and crack-back verified under the local build pinned with -h '^MD5-1xMD5SHA256pSHA256p$'; verify-vectors.pl promotes to tier vector. Upstream added this type 2026-09-27 (mdxfind RCS 1.604-1.606, hashpipe 1.213); the vendored catalog does not yet carry an example."
+         },
+         "vecs" : 1
+      },
+      {
+         "alias" : "",
+         "application" : "",
+         "category" : "composite",
+         "crack" : {
+            "ids" : [],
+            "state" : "no"
+         },
+         "cracknote" : "",
+         "denotation" : "",
+         "expr" : "md5(md5(sha512($p)).sha512($p))",
+         "expr_note" : "round-tripped as --format=dynamic=<expr> against every vector this entry carries",
+         "expr_tier" : "vector",
+         "hash_length" : 32,
+         "hash_length_basis" : "observed",
+         "hashcat" : {
+            "ids" : [],
+            "state" : "unknown"
+         },
+         "hashcat_salted" : "",
+         "hashcat_speed" : "",
+         "hashpipe" : {
+            "ids" : [
+               "MD5-1xMD5SHA512pSHA512p"
+            ],
+            "match" : "",
+            "state" : "proven",
+            "tier" : "vector"
+         },
+         "id" : "md5-1xmd5sha512psha512p",
+         "john" : {
+            "ids" : [],
+            "state" : "unknown"
+         },
+         "john_expr" : "dynamic=md5(md5(sha512($p)).sha512($p))",
+         "john_salted" : "",
+         "john_work_factor" : "",
+         "legacy" : "",
+         "mdxfind" : {
+            "ids" : [
+               "MD5-1xMD5SHA512pSHA512p"
+            ],
+            "match" : "",
+            "state" : "proven",
+            "tier" : "vector"
+         },
+         "mdxfind_salted" : "no",
+         "name" : "MD5-1xMD5SHA512pSHA512p",
+         "nesting_depth" : 3,
+         "notes" : "",
+         "primary_form" : "",
+         "relations" : [],
+         "sameas" : "",
+         "serialization" : "unknown",
+         "status" : "needs-review",
+         "suites_decided" : 1,
+         "suites_proven" : 1,
+         "tool_note" : {
+            "hashcat" : "",
+            "hashpipe" : "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one.",
+            "john" : "",
+            "mdxfind" : "generated with mdxfind -z and crack-back verified under the local build pinned with -h '^MD5-1xMD5SHA512pSHA512p$'; verify-vectors.pl promotes to tier vector. Upstream added this type 2026-09-27 (mdxfind RCS 1.604-1.606, hashpipe 1.213); the vendored catalog does not yet carry an example."
+         },
+         "vecs" : 1
+      },
+      {
+         "alias" : "",
+         "application" : "",
+         "category" : "composite",
+         "crack" : {
+            "ids" : [],
+            "state" : "no"
+         },
+         "cracknote" : "",
+         "denotation" : "",
          "expr" : "md5(upper(md5($p)).upper(md5($p)))",
          "expr_note" : "round-tripped against every vector this entry carries as --format=dynamic='md5(MD5($p).MD5($p))', which is this expression written in john's own notation: john spells a representation change as a flavor of the hash function, not as a wrapper. The two strings are ONE claim, not two pieces of evidence",
          "expr_tier" : "vector",
@@ -47140,6 +47465,71 @@
          },
          "cracknote" : "",
          "denotation" : "",
+         "expr" : "md5(base64(md5(sha1($p))))",
+         "expr_note" : "transcribed from the hx specification's Appendix A entry for mdxfind type MD5BASE64MD5SHA1 (e1030), which states md5(base64(md5(sha1(pass)))). Transcription, not reproduction, so this is upstream and not vector; run derive-expressions.pl to try to promote it. An independent Digest:: computation of this string DOES reproduce this entry's own vector, checked 2026-09-27.",
+         "expr_tier" : "upstream",
+         "hash_length" : 32,
+         "hash_length_basis" : "observed",
+         "hashcat" : {
+            "ids" : [],
+            "state" : "unknown"
+         },
+         "hashcat_salted" : "",
+         "hashcat_speed" : "",
+         "hashpipe" : {
+            "ids" : [
+               "MD5BASE64MD5SHA1"
+            ],
+            "match" : "",
+            "state" : "proven",
+            "tier" : "vector"
+         },
+         "id" : "md5base64md5sha1",
+         "john" : {
+            "ids" : [],
+            "state" : "unknown"
+         },
+         "john_expr" : "",
+         "john_salted" : "",
+         "john_work_factor" : "",
+         "legacy" : "",
+         "mdxfind" : {
+            "ids" : [
+               "MD5BASE64MD5SHA1"
+            ],
+            "match" : "",
+            "state" : "proven",
+            "tier" : "vector"
+         },
+         "mdxfind_salted" : "no",
+         "name" : "MD5BASE64MD5SHA1",
+         "nesting_depth" : 3,
+         "notes" : "",
+         "primary_form" : "",
+         "relations" : [],
+         "sameas" : "",
+         "serialization" : "unknown",
+         "status" : "needs-review",
+         "suites_decided" : 1,
+         "suites_proven" : 1,
+         "tool_note" : {
+            "hashcat" : "",
+            "hashpipe" : "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one.",
+            "john" : "",
+            "mdxfind" : "generated with mdxfind -z and crack-back verified under the local build pinned with -h '^MD5BASE64MD5SHA1$'; verify-vectors.pl promotes to tier vector. Upstream added this type 2026-09-27 (mdxfind RCS 1.604-1.606, hashpipe 1.213); the vendored catalog does not yet carry an example."
+         },
+         "vecs" : 1
+      },
+      {
+         "alias" : "",
+         "application" : "",
+         "category" : "composite",
+         "crack" : {
+            "ids" : [],
+            "state" : "no"
+         },
+         "cracknote" : "",
+         "denotation" : "",
          "expr" : "md5(base64(sha1(md5($p))))",
          "expr_note" : "transcribed from the hx specification's Appendix A entry for mdxfind type MD5BASE64SHA1MD5 (e572), which states md5(base64(sha1(md5(pass)))). Transcription, not reproduction, so this is upstream and not vector; run derive-expressions.pl to try to promote it.; TRIAGE 2026-09-08 [corroborated]: no john format, so john ships no control vectors; but RosettaExpr -- an implementation independent of all three crackers -- computes this expression over the entry's own vector(s) and reproduces 1 of 1. That is corroboration, not tier vector, which needs john's own compiler",
          "expr_tier" : "upstream",
@@ -48262,6 +48652,71 @@
          },
          "cracknote" : "",
          "denotation" : "",
+         "expr" : "md5(md5(cut(md5($p),0,30)))",
+         "expr_note" : "transcribed from the hx specification's Appendix A entry for mdxfind type MD5MD5sub1-30MD5 (e1039), which states md5(md5(cut(md5(pass), 0, 30))). Transcription, not reproduction, so this is upstream and not vector; run derive-expressions.pl to try to promote it. An independent Digest:: computation of this string DOES reproduce this entry's own vector, checked 2026-09-27.",
+         "expr_tier" : "upstream",
+         "hash_length" : 32,
+         "hash_length_basis" : "observed",
+         "hashcat" : {
+            "ids" : [],
+            "state" : "unknown"
+         },
+         "hashcat_salted" : "",
+         "hashcat_speed" : "",
+         "hashpipe" : {
+            "ids" : [
+               "MD5MD5sub1-30MD5"
+            ],
+            "match" : "",
+            "state" : "proven",
+            "tier" : "vector"
+         },
+         "id" : "md5md5sub1-30md5",
+         "john" : {
+            "ids" : [],
+            "state" : "unknown"
+         },
+         "john_expr" : "",
+         "john_salted" : "",
+         "john_work_factor" : "",
+         "legacy" : "",
+         "mdxfind" : {
+            "ids" : [
+               "MD5MD5sub1-30MD5"
+            ],
+            "match" : "",
+            "state" : "proven",
+            "tier" : "vector"
+         },
+         "mdxfind_salted" : "no",
+         "name" : "MD5MD5sub1-30MD5",
+         "nesting_depth" : 3,
+         "notes" : "",
+         "primary_form" : "",
+         "relations" : [],
+         "sameas" : "",
+         "serialization" : "unknown",
+         "status" : "needs-review",
+         "suites_decided" : 1,
+         "suites_proven" : 1,
+         "tool_note" : {
+            "hashcat" : "",
+            "hashpipe" : "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one.",
+            "john" : "",
+            "mdxfind" : "generated with mdxfind -z and crack-back verified under the local build pinned with -h '^MD5MD5sub1-30MD5$'; verify-vectors.pl promotes to tier vector. Upstream added this type 2026-09-27 (mdxfind RCS 1.604-1.606, hashpipe 1.213); the vendored catalog does not yet carry an example."
+         },
+         "vecs" : 1
+      },
+      {
+         "alias" : "",
+         "application" : "",
+         "category" : "composite",
+         "crack" : {
+            "ids" : [],
+            "state" : "no"
+         },
+         "cracknote" : "",
+         "denotation" : "",
          "expr" : "md5(upper(md5($p)).$c1),c1= ",
          "expr_note" : "transcribed from the hx specification's Appendix A entry for mdxfind type MD5MD5UCp (e417), which states md5(upper(md5(pass)) . \" \"). Transcription, not reproduction, so this is upstream and not vector; run derive-expressions.pl to try to promote it.; TRIAGE 2026-09-08 [corroborated]: no john format, so john ships no control vectors; but RosettaExpr -- an implementation independent of all three crackers -- computes this expression over the entry's own vector(s) and reproduces 1 of 1. That is corroboration, not tier vector, which needs john's own compiler",
          "expr_tier" : "upstream",
@@ -48850,6 +49305,136 @@
             "state" : "no"
          },
          "cracknote" : "",
+         "denotation" : "cut(md5(md5(pass) . salt), -16)",
+         "expr" : "",
+         "expr_note" : "",
+         "expr_tier" : "",
+         "hash_length" : 16,
+         "hash_length_basis" : "observed",
+         "hashcat" : {
+            "ids" : [],
+            "state" : "unknown"
+         },
+         "hashcat_salted" : "",
+         "hashcat_speed" : "",
+         "hashpipe" : {
+            "ids" : [
+               "MD5SALTLAST16"
+            ],
+            "match" : "",
+            "state" : "proven",
+            "tier" : "vector"
+         },
+         "id" : "md5saltlast16",
+         "john" : {
+            "ids" : [],
+            "state" : "unknown"
+         },
+         "john_expr" : "",
+         "john_salted" : "",
+         "john_work_factor" : "",
+         "legacy" : "",
+         "mdxfind" : {
+            "ids" : [
+               "MD5SALTLAST16"
+            ],
+            "match" : "",
+            "state" : "proven",
+            "tier" : "vector"
+         },
+         "mdxfind_salted" : "yes",
+         "name" : "MD5SALTLAST16",
+         "nesting_depth" : "",
+         "notes" : "",
+         "primary_form" : "",
+         "relations" : [],
+         "sameas" : "",
+         "serialization" : "unknown",
+         "status" : "needs-review",
+         "suites_decided" : 1,
+         "suites_proven" : 1,
+         "tool_note" : {
+            "hashcat" : "",
+            "hashpipe" : "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one.",
+            "john" : "",
+            "mdxfind" : "generated with mdxfind -z and crack-back verified under the local build pinned with -h '^MD5SALTLAST16$'; verify-vectors.pl promotes to tier vector. Upstream added this type 2026-09-27 (mdxfind RCS 1.604-1.606, hashpipe 1.213); the vendored catalog does not yet carry an example."
+         },
+         "vecs" : 1
+      },
+      {
+         "alias" : "",
+         "application" : "",
+         "category" : "composite",
+         "crack" : {
+            "ids" : [],
+            "state" : "no"
+         },
+         "cracknote" : "",
+         "denotation" : "",
+         "expr" : "md5($s.md5($p).$c1.$p),c1=\\x3a",
+         "expr_note" : "round-tripped as --format=dynamic=<expr> against every vector this entry carries",
+         "expr_tier" : "vector",
+         "hash_length" : 32,
+         "hash_length_basis" : "observed",
+         "hashcat" : {
+            "ids" : [],
+            "state" : "unknown"
+         },
+         "hashcat_salted" : "",
+         "hashcat_speed" : "",
+         "hashpipe" : {
+            "ids" : [
+               "MD5SALTMD5PASS-PASS"
+            ],
+            "match" : "",
+            "state" : "proven",
+            "tier" : "vector"
+         },
+         "id" : "md5saltmd5pass-pass",
+         "john" : {
+            "ids" : [],
+            "state" : "unknown"
+         },
+         "john_expr" : "dynamic=md5($s.md5($p).$c1.$p),c1=\\x3a",
+         "john_salted" : "",
+         "john_work_factor" : "",
+         "legacy" : "",
+         "mdxfind" : {
+            "ids" : [
+               "MD5SALTMD5PASS-PASS"
+            ],
+            "match" : "",
+            "state" : "proven",
+            "tier" : "vector"
+         },
+         "mdxfind_salted" : "yes",
+         "name" : "MD5SALTMD5PASS-PASS",
+         "nesting_depth" : 2,
+         "notes" : "",
+         "primary_form" : "",
+         "relations" : [],
+         "sameas" : "",
+         "serialization" : "unknown",
+         "status" : "needs-review",
+         "suites_decided" : 1,
+         "suites_proven" : 1,
+         "tool_note" : {
+            "hashcat" : "",
+            "hashpipe" : "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one.",
+            "john" : "",
+            "mdxfind" : "generated with mdxfind -z and crack-back verified under the local build pinned with -h '^MD5SALTMD5PASS-PASS$'; verify-vectors.pl promotes to tier vector. Upstream added this type 2026-09-27 (mdxfind RCS 1.604-1.606, hashpipe 1.213); the vendored catalog does not yet carry an example."
+         },
+         "vecs" : 1
+      },
+      {
+         "alias" : "",
+         "application" : "",
+         "category" : "composite",
+         "crack" : {
+            "ids" : [],
+            "state" : "no"
+         },
+         "cracknote" : "",
          "denotation" : "",
          "expr" : "md5(sha0($p))",
          "expr_note" : "transcribed from the hx specification's Appendix A entry for mdxfind type MD5SHA0 (e499), which states md5(sha0(pass)). Transcription, not reproduction, so this is upstream and not vector; run derive-expressions.pl to try to promote it. Not checkable locally: the construction uses functions RosettaExpr cannot compile, so this rests on upstream's word alone.; TRIAGE 2026-09-08 [no-john-format]: no john format on this entry, so john ships no control vectors, and RosettaExpr cannot compile this expression either -- nothing here can check it",
@@ -49364,6 +49949,71 @@
       {
          "alias" : "",
          "application" : "",
+         "category" : "composite",
+         "crack" : {
+            "ids" : [],
+            "state" : "no"
+         },
+         "cracknote" : "",
+         "denotation" : "",
+         "expr" : "md5(sha1(md5(sha1(md5(sha1($p))))))",
+         "expr_note" : "round-tripped as --format=dynamic=<expr> against every vector this entry carries",
+         "expr_tier" : "vector",
+         "hash_length" : 32,
+         "hash_length_basis" : "observed",
+         "hashcat" : {
+            "ids" : [],
+            "state" : "unknown"
+         },
+         "hashcat_salted" : "",
+         "hashcat_speed" : "",
+         "hashpipe" : {
+            "ids" : [
+               "MD5SHA1MD5SHA1MD5SHA1"
+            ],
+            "match" : "",
+            "state" : "proven",
+            "tier" : "vector"
+         },
+         "id" : "md5sha1md5sha1md5sha1",
+         "john" : {
+            "ids" : [],
+            "state" : "unknown"
+         },
+         "john_expr" : "dynamic=md5(sha1(md5(sha1(md5(sha1($p))))))",
+         "john_salted" : "",
+         "john_work_factor" : "",
+         "legacy" : "",
+         "mdxfind" : {
+            "ids" : [
+               "MD5SHA1MD5SHA1MD5SHA1"
+            ],
+            "match" : "",
+            "state" : "proven",
+            "tier" : "vector"
+         },
+         "mdxfind_salted" : "no",
+         "name" : "MD5SHA1MD5SHA1MD5SHA1",
+         "nesting_depth" : 6,
+         "notes" : "",
+         "primary_form" : "",
+         "relations" : [],
+         "sameas" : "",
+         "serialization" : "unknown",
+         "status" : "needs-review",
+         "suites_decided" : 1,
+         "suites_proven" : 1,
+         "tool_note" : {
+            "hashcat" : "",
+            "hashpipe" : "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one.",
+            "john" : "",
+            "mdxfind" : "generated with mdxfind -z and crack-back verified under the local build pinned with -h '^MD5SHA1MD5SHA1MD5SHA1$'; verify-vectors.pl promotes to tier vector. Upstream added this type 2026-09-27 (mdxfind RCS 1.604-1.606, hashpipe 1.213); the vendored catalog does not yet carry an example."
+         },
+         "vecs" : 1
+      },
+      {
+         "alias" : "",
+         "application" : "",
          "category" : "",
          "crack" : {
             "ids" : [],
@@ -49689,6 +50339,136 @@
             "mdxfind" : ""
          },
          "vecs" : 2
+      },
+      {
+         "alias" : "",
+         "application" : "",
+         "category" : "composite",
+         "crack" : {
+            "ids" : [],
+            "state" : "no"
+         },
+         "cracknote" : "",
+         "denotation" : "",
+         "expr" : "md5(sha1(sha1(md5(sha1(md5($p))))))",
+         "expr_note" : "round-tripped as --format=dynamic=<expr> against every vector this entry carries",
+         "expr_tier" : "vector",
+         "hash_length" : 32,
+         "hash_length_basis" : "observed",
+         "hashcat" : {
+            "ids" : [],
+            "state" : "unknown"
+         },
+         "hashcat_salted" : "",
+         "hashcat_speed" : "",
+         "hashpipe" : {
+            "ids" : [
+               "MD5SHA1SHA1MD5SHA1MD5"
+            ],
+            "match" : "",
+            "state" : "proven",
+            "tier" : "vector"
+         },
+         "id" : "md5sha1sha1md5sha1md5",
+         "john" : {
+            "ids" : [],
+            "state" : "unknown"
+         },
+         "john_expr" : "dynamic=md5(sha1(sha1(md5(sha1(md5($p))))))",
+         "john_salted" : "",
+         "john_work_factor" : "",
+         "legacy" : "",
+         "mdxfind" : {
+            "ids" : [
+               "MD5SHA1SHA1MD5SHA1MD5"
+            ],
+            "match" : "",
+            "state" : "proven",
+            "tier" : "vector"
+         },
+         "mdxfind_salted" : "no",
+         "name" : "MD5SHA1SHA1MD5SHA1MD5",
+         "nesting_depth" : 6,
+         "notes" : "",
+         "primary_form" : "",
+         "relations" : [],
+         "sameas" : "",
+         "serialization" : "unknown",
+         "status" : "needs-review",
+         "suites_decided" : 1,
+         "suites_proven" : 1,
+         "tool_note" : {
+            "hashcat" : "",
+            "hashpipe" : "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one.",
+            "john" : "",
+            "mdxfind" : "generated with mdxfind -z and crack-back verified under the local build pinned with -h '^MD5SHA1SHA1MD5SHA1MD5$'; verify-vectors.pl promotes to tier vector. Upstream added this type 2026-09-27 (mdxfind RCS 1.604-1.606, hashpipe 1.213); the vendored catalog does not yet carry an example."
+         },
+         "vecs" : 1
+      },
+      {
+         "alias" : "",
+         "application" : "",
+         "category" : "composite",
+         "crack" : {
+            "ids" : [],
+            "state" : "no"
+         },
+         "cracknote" : "",
+         "denotation" : "",
+         "expr" : "md5(sha1(sha1(sha1($p))))",
+         "expr_note" : "round-tripped as --format=dynamic=<expr> against every vector this entry carries",
+         "expr_tier" : "vector",
+         "hash_length" : 32,
+         "hash_length_basis" : "observed",
+         "hashcat" : {
+            "ids" : [],
+            "state" : "unknown"
+         },
+         "hashcat_salted" : "",
+         "hashcat_speed" : "",
+         "hashpipe" : {
+            "ids" : [
+               "MD5SHA1SHA1SHA1"
+            ],
+            "match" : "",
+            "state" : "proven",
+            "tier" : "vector"
+         },
+         "id" : "md5sha1sha1sha1",
+         "john" : {
+            "ids" : [],
+            "state" : "unknown"
+         },
+         "john_expr" : "dynamic=md5(sha1(sha1(sha1($p))))",
+         "john_salted" : "",
+         "john_work_factor" : "",
+         "legacy" : "",
+         "mdxfind" : {
+            "ids" : [
+               "MD5SHA1SHA1SHA1"
+            ],
+            "match" : "",
+            "state" : "proven",
+            "tier" : "vector"
+         },
+         "mdxfind_salted" : "no",
+         "name" : "MD5SHA1SHA1SHA1",
+         "nesting_depth" : 4,
+         "notes" : "",
+         "primary_form" : "",
+         "relations" : [],
+         "sameas" : "",
+         "serialization" : "unknown",
+         "status" : "needs-review",
+         "suites_decided" : 1,
+         "suites_proven" : 1,
+         "tool_note" : {
+            "hashcat" : "",
+            "hashpipe" : "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one.",
+            "john" : "",
+            "mdxfind" : "generated with mdxfind -z and crack-back verified under the local build pinned with -h '^MD5SHA1SHA1SHA1$'; verify-vectors.pl promotes to tier vector. Upstream added this type 2026-09-27 (mdxfind RCS 1.604-1.606, hashpipe 1.213); the vendored catalog does not yet carry an example."
+         },
+         "vecs" : 1
       },
       {
          "alias" : "",
@@ -50221,6 +51001,71 @@
       {
          "alias" : "",
          "application" : "",
+         "category" : "composite",
+         "crack" : {
+            "ids" : [],
+            "state" : "no"
+         },
+         "cracknote" : "",
+         "denotation" : "",
+         "expr" : "md5(sha512(md5($p)))",
+         "expr_note" : "round-tripped as --format=dynamic=<expr> against every vector this entry carries",
+         "expr_tier" : "vector",
+         "hash_length" : 32,
+         "hash_length_basis" : "observed",
+         "hashcat" : {
+            "ids" : [],
+            "state" : "unknown"
+         },
+         "hashcat_salted" : "",
+         "hashcat_speed" : "",
+         "hashpipe" : {
+            "ids" : [
+               "MD5SHA512MD5"
+            ],
+            "match" : "",
+            "state" : "proven",
+            "tier" : "vector"
+         },
+         "id" : "md5sha512md5",
+         "john" : {
+            "ids" : [],
+            "state" : "unknown"
+         },
+         "john_expr" : "dynamic=md5(sha512(md5($p)))",
+         "john_salted" : "",
+         "john_work_factor" : "",
+         "legacy" : "",
+         "mdxfind" : {
+            "ids" : [
+               "MD5SHA512MD5"
+            ],
+            "match" : "",
+            "state" : "proven",
+            "tier" : "vector"
+         },
+         "mdxfind_salted" : "no",
+         "name" : "MD5SHA512MD5",
+         "nesting_depth" : 3,
+         "notes" : "",
+         "primary_form" : "",
+         "relations" : [],
+         "sameas" : "",
+         "serialization" : "unknown",
+         "status" : "needs-review",
+         "suites_decided" : 1,
+         "suites_proven" : 1,
+         "tool_note" : {
+            "hashcat" : "",
+            "hashpipe" : "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one.",
+            "john" : "",
+            "mdxfind" : "generated with mdxfind -z and crack-back verified under the local build pinned with -h '^MD5SHA512MD5$'; verify-vectors.pl promotes to tier vector. Upstream added this type 2026-09-27 (mdxfind RCS 1.604-1.606, hashpipe 1.213); the vendored catalog does not yet carry an example."
+         },
+         "vecs" : 1
+      },
+      {
+         "alias" : "",
+         "application" : "",
          "category" : "",
          "crack" : {
             "ids" : [],
@@ -50345,6 +51190,71 @@
             "hashpipe" : "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one.",
             "john" : "no format. Swept the 76 format(s) whose own valid() accepts this entry's own vector, as john --show=left reports them, on 2026-09-04 (a tools/discover-john.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. For john the control is also per ENTRY and not only per shape: every format counted above is one whose own loader ACCEPTED this hash, so each was asked this exact question and answered no. A format that cannot parse the hash is not counted at all, and an entry no format can parse is reported as unsearched rather than decided. Every applicable format ran to completion; a format killed at the timeout is counted as untested and withholds this verdict. No john format name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if john gains one, this becomes a mapping.",
             "mdxfind" : "mdxfind's own published example for this identifier, recovered by mdxfind at this identifier with mdxfind's own published plaintext."
+         },
+         "vecs" : 1
+      },
+      {
+         "alias" : "",
+         "application" : "",
+         "category" : "composite",
+         "crack" : {
+            "ids" : [],
+            "state" : "no"
+         },
+         "cracknote" : "",
+         "denotation" : "",
+         "expr" : "md5(cut(md5($p),0,16))",
+         "expr_note" : "transcribed from the hx specification's Appendix A entry for mdxfind type MD5sub1-16MD5 (e1037), which states md5(cut(md5(pass), 0, 16)). Transcription, not reproduction, so this is upstream and not vector; run derive-expressions.pl to try to promote it. An independent Digest:: computation of this string DOES reproduce this entry's own vector, checked 2026-09-27.",
+         "expr_tier" : "upstream",
+         "hash_length" : 32,
+         "hash_length_basis" : "observed",
+         "hashcat" : {
+            "ids" : [],
+            "state" : "unknown"
+         },
+         "hashcat_salted" : "",
+         "hashcat_speed" : "",
+         "hashpipe" : {
+            "ids" : [
+               "MD5sub1-16MD5"
+            ],
+            "match" : "",
+            "state" : "proven",
+            "tier" : "vector"
+         },
+         "id" : "md5sub1-16md5",
+         "john" : {
+            "ids" : [],
+            "state" : "unknown"
+         },
+         "john_expr" : "",
+         "john_salted" : "",
+         "john_work_factor" : "",
+         "legacy" : "",
+         "mdxfind" : {
+            "ids" : [
+               "MD5sub1-16MD5"
+            ],
+            "match" : "",
+            "state" : "proven",
+            "tier" : "vector"
+         },
+         "mdxfind_salted" : "no",
+         "name" : "MD5sub1-16MD5",
+         "nesting_depth" : 2,
+         "notes" : "",
+         "primary_form" : "",
+         "relations" : [],
+         "sameas" : "",
+         "serialization" : "unknown",
+         "status" : "needs-review",
+         "suites_decided" : 1,
+         "suites_proven" : 1,
+         "tool_note" : {
+            "hashcat" : "",
+            "hashpipe" : "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one.",
+            "john" : "",
+            "mdxfind" : "generated with mdxfind -z and crack-back verified under the local build pinned with -h '^MD5sub1-16MD5$'; verify-vectors.pl promotes to tier vector. Upstream added this type 2026-09-27 (mdxfind RCS 1.604-1.606, hashpipe 1.213); the vendored catalog does not yet carry an example."
          },
          "vecs" : 1
       },
@@ -50488,6 +51398,71 @@
          },
          "cracknote" : "",
          "denotation" : "",
+         "expr" : "md5(cut(md5($p),0,28))",
+         "expr_note" : "transcribed from the hx specification's Appendix A entry for mdxfind type MD5sub1-28MD5 (e1038), which states md5(cut(md5(pass), 0, 28)). Transcription, not reproduction, so this is upstream and not vector; run derive-expressions.pl to try to promote it. An independent Digest:: computation of this string DOES reproduce this entry's own vector, checked 2026-09-27.",
+         "expr_tier" : "upstream",
+         "hash_length" : 32,
+         "hash_length_basis" : "observed",
+         "hashcat" : {
+            "ids" : [],
+            "state" : "unknown"
+         },
+         "hashcat_salted" : "",
+         "hashcat_speed" : "",
+         "hashpipe" : {
+            "ids" : [
+               "MD5sub1-28MD5"
+            ],
+            "match" : "",
+            "state" : "proven",
+            "tier" : "vector"
+         },
+         "id" : "md5sub1-28md5",
+         "john" : {
+            "ids" : [],
+            "state" : "unknown"
+         },
+         "john_expr" : "",
+         "john_salted" : "",
+         "john_work_factor" : "",
+         "legacy" : "",
+         "mdxfind" : {
+            "ids" : [
+               "MD5sub1-28MD5"
+            ],
+            "match" : "",
+            "state" : "proven",
+            "tier" : "vector"
+         },
+         "mdxfind_salted" : "no",
+         "name" : "MD5sub1-28MD5",
+         "nesting_depth" : 2,
+         "notes" : "",
+         "primary_form" : "",
+         "relations" : [],
+         "sameas" : "",
+         "serialization" : "unknown",
+         "status" : "needs-review",
+         "suites_decided" : 1,
+         "suites_proven" : 1,
+         "tool_note" : {
+            "hashcat" : "",
+            "hashpipe" : "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one.",
+            "john" : "",
+            "mdxfind" : "generated with mdxfind -z and crack-back verified under the local build pinned with -h '^MD5sub1-28MD5$'; verify-vectors.pl promotes to tier vector. Upstream added this type 2026-09-27 (mdxfind RCS 1.604-1.606, hashpipe 1.213); the vendored catalog does not yet carry an example."
+         },
+         "vecs" : 1
+      },
+      {
+         "alias" : "",
+         "application" : "",
+         "category" : "composite",
+         "crack" : {
+            "ids" : [],
+            "state" : "no"
+         },
+         "cracknote" : "",
+         "denotation" : "",
          "expr" : "md5(cut(md5(cut(md5($p),8,16)),8,16))",
          "expr_note" : "transcribed from the hx specification's Appendix A entry for mdxfind type MD5sub8-24MD5sub8-24MD5 (e454), which states md5(cut(md5(cut(md5(pass), 8, 16)), 8, 16)). Transcription, not reproduction, so this is upstream and not vector; run derive-expressions.pl to try to promote it.; TRIAGE 2026-09-08 [corroborated]: no john format, so john ships no control vectors; but RosettaExpr -- an implementation independent of all three crackers -- computes this expression over the entry's own vector(s) and reproduces 1 of 1. That is corroboration, not tier vector, which needs john's own compiler",
          "expr_tier" : "upstream",
@@ -50540,6 +51515,71 @@
             "hashpipe" : "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one.",
             "john" : "no format. Swept the 76 format(s) whose own valid() accepts this entry's own vector, as john --show=left reports them, on 2026-09-04 (a tools/discover-john.pl sweep, evidence read by tools/absence.pl): not one reproduced this entry's own vector. That the vector was IN the search is not assumed -- the same sweep reported a hit on another vector of the same shape, a positive control measured in the same run by the same binary, and without it finding nothing would not be evidence. For john the control is also per ENTRY and not only per shape: every format counted above is one whose own loader ACCEPTED this hash, so each was asked this exact question and answered no. A format that cannot parse the hash is not counted at all, and an entry no format can parse is reported as unsearched rather than decided. Every applicable format ran to completion; a format killed at the timeout is counted as untested and withholds this verdict. No john format name matches any identifier this entry publishes either, normalized by the separator-drift rule. This is the absence of an IDENTIFIER, not of the algorithm: if john gains one, this becomes a mapping.",
             "mdxfind" : ""
+         },
+         "vecs" : 1
+      },
+      {
+         "alias" : "",
+         "application" : "",
+         "category" : "composite",
+         "crack" : {
+            "ids" : [],
+            "state" : "no"
+         },
+         "cracknote" : "",
+         "denotation" : "",
+         "expr" : "md5(cut(md5(cut(md5(md5(md5($p))),8,16)),8,16))",
+         "expr_note" : "transcribed from the hx specification's Appendix A entry for mdxfind type MD5sub8-24MD5sub8-24MD5MD5MD5 (e1032), which states md5(cut(md5(cut(md5(md5(md5(pass))), 8, 16)), 8, 16)). Transcription, not reproduction, so this is upstream and not vector; run derive-expressions.pl to try to promote it. An independent Digest:: computation of this string DOES reproduce this entry's own vector, checked 2026-09-27.",
+         "expr_tier" : "upstream",
+         "hash_length" : 32,
+         "hash_length_basis" : "observed",
+         "hashcat" : {
+            "ids" : [],
+            "state" : "unknown"
+         },
+         "hashcat_salted" : "",
+         "hashcat_speed" : "",
+         "hashpipe" : {
+            "ids" : [
+               "MD5sub8-24MD5sub8-24MD5MD5MD5"
+            ],
+            "match" : "",
+            "state" : "proven",
+            "tier" : "vector"
+         },
+         "id" : "md5sub8-24md5sub8-24md5md5md5",
+         "john" : {
+            "ids" : [],
+            "state" : "unknown"
+         },
+         "john_expr" : "",
+         "john_salted" : "",
+         "john_work_factor" : "",
+         "legacy" : "",
+         "mdxfind" : {
+            "ids" : [
+               "MD5sub8-24MD5sub8-24MD5MD5MD5"
+            ],
+            "match" : "",
+            "state" : "proven",
+            "tier" : "vector"
+         },
+         "mdxfind_salted" : "no",
+         "name" : "MD5sub8-24MD5sub8-24MD5MD5MD5",
+         "nesting_depth" : 5,
+         "notes" : "",
+         "primary_form" : "",
+         "relations" : [],
+         "sameas" : "",
+         "serialization" : "unknown",
+         "status" : "needs-review",
+         "suites_decided" : 1,
+         "suites_proven" : 1,
+         "tool_note" : {
+            "hashcat" : "",
+            "hashpipe" : "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one.",
+            "john" : "",
+            "mdxfind" : "generated with mdxfind -z and crack-back verified under the local build pinned with -h '^MD5sub8-24MD5sub8-24MD5MD5MD5$'; verify-vectors.pl promotes to tier vector. Upstream added this type 2026-09-27 (mdxfind RCS 1.604-1.606, hashpipe 1.213); the vendored catalog does not yet carry an example."
          },
          "vecs" : 1
       },
@@ -104488,6 +105528,71 @@
          },
          "cracknote" : "",
          "denotation" : "",
+         "expr" : "whirlpool(sha1($p))",
+         "expr_note" : "round-tripped as --format=dynamic=<expr> against every vector this entry carries",
+         "expr_tier" : "vector",
+         "hash_length" : 128,
+         "hash_length_basis" : "observed",
+         "hashcat" : {
+            "ids" : [],
+            "state" : "unknown"
+         },
+         "hashcat_salted" : "",
+         "hashcat_speed" : "",
+         "hashpipe" : {
+            "ids" : [
+               "WRLSHA1"
+            ],
+            "match" : "",
+            "state" : "proven",
+            "tier" : "vector"
+         },
+         "id" : "wrlsha1",
+         "john" : {
+            "ids" : [],
+            "state" : "unknown"
+         },
+         "john_expr" : "dynamic=whirlpool(sha1($p))",
+         "john_salted" : "",
+         "john_work_factor" : "",
+         "legacy" : "",
+         "mdxfind" : {
+            "ids" : [
+               "WRLSHA1"
+            ],
+            "match" : "",
+            "state" : "proven",
+            "tier" : "vector"
+         },
+         "mdxfind_salted" : "no",
+         "name" : "WRLSHA1",
+         "nesting_depth" : 2,
+         "notes" : "",
+         "primary_form" : "",
+         "relations" : [],
+         "sameas" : "",
+         "serialization" : "unknown",
+         "status" : "needs-review",
+         "suites_decided" : 1,
+         "suites_proven" : 1,
+         "tool_note" : {
+            "hashcat" : "",
+            "hashpipe" : "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one.",
+            "john" : "",
+            "mdxfind" : "generated with mdxfind -z and crack-back verified under the local build pinned with -h '^WRLSHA1$'; verify-vectors.pl promotes to tier vector. Upstream added this type 2026-09-27 (mdxfind RCS 1.604-1.606, hashpipe 1.213); the vendored catalog does not yet carry an example."
+         },
+         "vecs" : 1
+      },
+      {
+         "alias" : "",
+         "application" : "",
+         "category" : "composite",
+         "crack" : {
+            "ids" : [],
+            "state" : "no"
+         },
+         "cracknote" : "",
+         "denotation" : "",
          "expr" : "whirlpool(whirlpool($p).$s)",
          "expr_note" : "round-tripped as --format=dynamic=<expr> against every vector this entry carries",
          "expr_tier" : "vector",
@@ -104991,8 +106096,8 @@
    ],
    "tools" : {
       "hashcat" : "v7.1.2-778-ga488c9ea4",
-      "hashpipe" : "RCS 1.210 (2026/09/26)",
+      "hashpipe" : "RCS 1.213 (2026/09/27)",
       "john" : "1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200",
-      "mdxfind" : "RCS 1.596 (2026/09/19)"
+      "mdxfind" : "RCS 1.606 (2026/09/27)"
    }
 }

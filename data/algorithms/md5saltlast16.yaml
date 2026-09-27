@@ -1,0 +1,28 @@
+id: "md5saltlast16"
+name: "MD5SALTLAST16"
+denotation:
+  text: "cut(md5(md5(pass) . salt), -16)"
+  source: "mdxfind"
+  note: "hx 1.5 Appendix A (e1041). Salted, and deliberately single-depth: only the LAST 16 hex of the digest are stored (the last 8 bytes copied to the front of a scratch union and reported as a 16-hex field), so there is nothing defined to iterate and an -i 2 line does not verify. Not expressible in this repository's hx notation, which has no negative/tail cut."
+category: "composite"
+status: "needs-review"
+tools:
+  mdxfind:
+    types: ["MD5SALTLAST16"]
+    verified: "vector"
+    verified_at: "2026-09-27"
+    verified_with: "mdxfind RCS 1.606 (2026/09/27)"
+    note: "generated with mdxfind -z and crack-back verified under the local build pinned with -h '^MD5SALTLAST16$'; verify-vectors.pl promotes to tier vector. Upstream added this type 2026-09-27 (mdxfind RCS 1.604-1.606, hashpipe 1.213); the vendored catalog does not yet carry an example."
+  hashpipe:
+    types: ["MD5SALTLAST16"]
+    verified: "vector"
+    verified_at: "2026-09-27"
+    verified_with: "hashpipe RCS 1.213 (2026/09/27)"
+    note: "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one."
+  crack:
+    supported: false
+vectors:
+  - hash: "b493a261017feb0e:32903f"
+    pass: 1111
+    source: "mdxfind"
+    reads_in: ["mdxfind"]

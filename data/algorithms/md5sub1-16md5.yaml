@@ -1,0 +1,30 @@
+id: "md5sub1-16md5"
+name: "MD5sub1-16MD5"
+expression: "md5(cut(md5($p),0,16))"
+expression_proof:
+  verified: "upstream"
+  verified_at: "2026-09-27"
+  verified_with: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A"
+  note: "transcribed from the hx specification's Appendix A entry for mdxfind type MD5sub1-16MD5 (e1037), which states md5(cut(md5(pass), 0, 16)). Transcription, not reproduction, so this is upstream and not vector; run derive-expressions.pl to try to promote it. An independent Digest:: computation of this string DOES reproduce this entry's own vector, checked 2026-09-27."
+category: "composite"
+status: "needs-review"
+tools:
+  mdxfind:
+    types: ["MD5sub1-16MD5"]
+    verified: "vector"
+    verified_at: "2026-09-27"
+    verified_with: "mdxfind RCS 1.606 (2026/09/27)"
+    note: "generated with mdxfind -z and crack-back verified under the local build pinned with -h '^MD5sub1-16MD5$'; verify-vectors.pl promotes to tier vector. Upstream added this type 2026-09-27 (mdxfind RCS 1.604-1.606, hashpipe 1.213); the vendored catalog does not yet carry an example."
+  hashpipe:
+    types: ["MD5sub1-16MD5"]
+    verified: "vector"
+    verified_at: "2026-09-27"
+    verified_with: "hashpipe RCS 1.213 (2026/09/27)"
+    note: "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one."
+  crack:
+    supported: false
+vectors:
+  - hash: "da90eb6c906b45b28f817e50fb6a019e"
+    pass: 1111
+    source: "mdxfind"
+    reads_in: ["mdxfind"]

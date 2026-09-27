@@ -1,0 +1,28 @@
+id: "apache-sha-trunc16"
+name: "APACHE-SHA-TRUNC16"
+denotation:
+  text: "{SHA} . base64(trunc(sha1_bin(pass), 16))"
+  source: "mdxfind"
+  note: "hx 1.5 Appendix A (e1040). The RFC 2307 brace-SHA scheme of APACHE-SHA (e457) with a 16-byte payload instead of the full 20: the SHA-1 digest is truncated to 16 bytes before base64. Not expressible in this repository's hx notation, which has no binary-truncation or brace-literal spelling; both e1040 and e457 carry the same {SHA} tag and mdxfind routes on decoded payload length."
+category: "application"
+status: "needs-review"
+tools:
+  mdxfind:
+    types: ["APACHE-SHA-TRUNC16"]
+    verified: "vector"
+    verified_at: "2026-09-27"
+    verified_with: "mdxfind RCS 1.606 (2026/09/27)"
+    note: "generated with mdxfind -z and crack-back verified under the local build pinned with -h '^APACHE-SHA-TRUNC16$'; verify-vectors.pl promotes to tier vector. Upstream added this type 2026-09-27 (mdxfind RCS 1.604-1.606, hashpipe 1.213); the vendored catalog does not yet carry an example."
+  hashpipe:
+    types: ["APACHE-SHA-TRUNC16"]
+    verified: "vector"
+    verified_at: "2026-09-27"
+    verified_with: "hashpipe RCS 1.213 (2026/09/27)"
+    note: "verified by round-tripping each type PINNED with -m, not by taking an unpinned report: hashpipe names the FIRST type that reproduces a digest, so an unpinned answer names a type that works and not necessarily this one."
+  crack:
+    supported: false
+vectors:
+  - hash: "{SHA}ARyUXzDOLLr8RS85hA8CVg=="
+    pass: 1111
+    source: "mdxfind"
+    reads_in: ["mdxfind"]
