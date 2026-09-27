@@ -306,7 +306,9 @@ Usage: $PROG [options]
    --timeout SECS    per john run     (default: 60)
    --limit N         stop after N formats; for smoke tests
    --format REGEX    only formats whose label matches (repeatable)
-   --only ID         only consider this entry
+   --only ID         only consider this entry (repeatable; several --only
+                     build ONE corpus, so add same-shape controls beside the
+                     targets and absence.pl gets its positive control)
    --exclude ID      never write a mapping for this entry (repeatable); it is
                      still measured and reported, so the reason stays visible
    --all             target every entry with a vector, not just the unmapped
@@ -324,8 +326,8 @@ Usage: $PROG [options]
                      (default 6; they are reported, never written)
    --max-share PCT   hold back a format matching more than PCT% of the corpus
                      (default 20). The corpus is the TARGET set, so a narrow
-                     run narrows the denominator: under --only it is one entry
-                     and every format that matched scores 100%. The guard still
+                     run narrows the denominator: under --only it is the
+                     targeted set, so a format can score 100%. The guard still
                      withholds, but reports the share as UNMEASURABLE rather
                      than calling the format over-broad.
    --loadable        do NOT crack: for each candidate format, record which
@@ -345,10 +347,11 @@ END_USAGE
     return;
 }
 
-my ($john, $algdir, $inventory, $workdir, $only, $help, $dry, $apply);
+my ($john, $algdir, $inventory, $workdir, $help, $dry, $apply);
 my ($all, $include_gpu, $skip_disabled, $resume, $mirror_gpu);
 my @fmt_re;
 my @exclude;
+my @only;
 my $timeout       = 60;
 my $limit         = 0;
 my $verbose       = 0;
@@ -368,7 +371,7 @@ GetOptions(
     'timeout=i'       => \$timeout,
     'limit=i'         => \$limit,
     'format=s'        => \@fmt_re,
-    'only=s'          => \$only,
+    'only=s'          => \@only,
     'exclude=s'       => \@exclude,
     'all'             => \$all,
     'include-gpu'     => \$include_gpu,
@@ -489,7 +492,7 @@ for my $f (@files) {
     my $p = "$algdir/$f";
     my $e = eval { YAML::XS::LoadFile($p) };
     next unless $e && $e->{id};
-    next if defined $only && $e->{id} ne $only;
+    next if @only && !grep { $_ eq $e->{id} } @only;
     $entry{ $e->{id} } = $e;
     $path{  $e->{id} } = $p;
 }

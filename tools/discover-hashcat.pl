@@ -228,7 +228,9 @@ Usage: $PROG [options]
    --timeout SECS    per hashcat run (default: 60)
    --limit N         stop after N modes; for smoke tests
    --mode N          only this mode (repeatable)
-   --only ID         only consider this entry
+   --only ID         only consider this entry (repeatable; several --only
+                     build ONE corpus, so add same-shape controls beside the
+                     targets and absence.pl gets its positive control)
    --exclude ID      never write a mapping for this entry (repeatable); it is
                      still measured and reported, so the reason stays visible
    --all             target every entry with a vector, not just the unmapped
@@ -242,8 +244,8 @@ Usage: $PROG [options]
                      (default 6; they are reported, never written)
    --max-share PCT   hold back a mode matching more than PCT% of the corpus
                      (default 20). The corpus is the TARGET set, so a narrow
-                     run narrows the denominator: under --only it is one entry
-                     and every mode that matched scores 100%. The guard still
+                     run narrows the denominator: under --only it is the
+                     targeted set, so a mode can score 100%. The guard still
                      withholds, but reports the share as UNMEASURABLE rather
                      than calling the mode over-broad.
    --resume          reuse per-mode results already in the work dir
@@ -259,11 +261,11 @@ END_USAGE
     return;
 }
 
-my ($hashcat, $algdir, $inventory, $workdir, $only, $help, $dry, $apply);
+my ($hashcat, $algdir, $inventory, $workdir, $help, $dry, $apply);
 my ($all, $resume, $no_canary);
 my $canary_rounds = 12;
 my $canary_span   = 512;
-my (@mode_want, @exclude);
+my (@mode_want, @exclude, @only);
 my $timeout       = 60;
 my $limit         = 0;
 my $verbose       = 0;
@@ -279,7 +281,7 @@ GetOptions(
     'timeout=i'       => \$timeout,
     'limit=i'         => \$limit,
     'mode=i'          => \@mode_want,
-    'only=s'          => \$only,
+    'only=s'          => \@only,
     'exclude=s'       => \@exclude,
     'all'             => \$all,
     'max-per-entry=i' => \$max_per_entry,
@@ -363,7 +365,7 @@ for my $f (@files) {
     my $e = eval { YAML::XS::LoadFile($p) };
     next unless $e && $e->{id};
     next if ($e->{status} // '') eq 'merged';     # a tombstone is not an algorithm
-    next if defined $only && $e->{id} ne $only;
+    next if @only && !grep { $_ eq $e->{id} } @only;
     $entry{ $e->{id} } = $e;
     $path{  $e->{id} } = $p;
 }
