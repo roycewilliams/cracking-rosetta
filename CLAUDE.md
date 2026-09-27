@@ -17,6 +17,41 @@ identifier. Unverified mappings are allowed, but must be labeled as such
 the header of `hashpipe/john_map.h`: *"Formats whose vectors did not verify
 are absent rather than guessed."*
 
+## Session start: check for open PRs
+
+**At the start of every session, check for open pull requests. Just check --
+do NOT act on them without being asked.** Report the result at the bottom of
+the first response, on its own line after a blank line:
+
+    Open PR count: N
+
+(`N` is the number; `0` if none.) This is a standing rule because a PR can
+land against `main` between sessions, and reconciling one blindly is how the
+same entry gets seeded twice -- which happened 2026-09-26 with PR #9
+(waffle2's Crypto++ entries) after this session had already seeded stubs for
+the same two types.
+
+**The method, and its trap (measured 2026-09-26).** This account's GitHub
+token cannot read the Issues API or most GraphQL: `gh issue list` and
+`gh pr view` both fail with 403 / GraphQL errors, and `open_issues_count` from
+the repo metadata endpoint counts issues AND PRs together, so it cannot stand
+in for a PR count. What DOES work:
+
+    gh pr list --state open                         # the check; lists open PRs
+    gh api repos/roycewilliams/cracking-rosetta/pulls/N --jq '.title,.mergeable,.body'
+
+For a PR's diff and commits (to reconcile, only when asked):
+
+    gh api repos/roycewilliams/cracking-rosetta/pulls/N/commits --jq '.[].sha'
+    git fetch origin <branch> && git show origin/<branch>:<path>
+
+A PR based on a stale `main` shows a huge diff that is mostly the branch being
+behind; its real contribution is the few files it means to change. Take those,
+keep `main`'s newer generated layers, and preserve the contributor's authorship
+with `git cherry-pick` (resolve conflicts in its favour for the files it owns,
+in `main`'s favour for the inventory) rather than copying its text into a fresh
+commit.
+
 ## Repository layout
 
     data/tools/*.yaml        GENERATED. Per-tool inventories. Never hand-edit.
