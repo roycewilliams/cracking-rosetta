@@ -155,8 +155,8 @@ hashcat mode that takes no salt and an mdxfind type that does.
 | CRC32C | `27900` (v) | **--** | no |  |
 | CRC64Jones | `28000` (v) | **--** | no |  |
 | CRYPTEXT | no | no | `CRYPTEXT` (v) |  |
-| CRYPTOPPDEFAULT | **--** | **--** | `CRYPTOPPDEFAULT` (v) |  |
-| CRYPTOPPLEGACY | **--** | **--** | `CRYPTOPPLEGACY` (v) |  |
+| CRYPTOPPDEFAULT | no | **--** | `CRYPTOPPDEFAULT` (v) |  |
+| CRYPTOPPLEGACY | no | **--** | `CRYPTOPPLEGACY` (v) |  |
 | cryptoSafe | **--** | `cryptoSafe`<br>`cryptosafe-opencl` (v) | no |  |
 | CUBE224 | no | no | `CUBE224` (v) |  |
 | CUBE256 | no | no | `CUBE256` (v) |  |

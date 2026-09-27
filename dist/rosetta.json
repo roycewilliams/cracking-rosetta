@@ -8741,15 +8741,15 @@
          "vecs" : 1
       },
       {
-         "alias" : "",
-         "application" : "",
+         "alias" : "Crypto++ DefaultEncryptor (modern)",
+         "application" : "Crypto++ DataEncryptor",
          "category" : "application",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "CRYPTOPPDEFAULT",
+         "denotation" : "salt(8) . aes_cbc(key=mash_sha256(pass . salt, 2500)[0:32], iv=mash_sha256(pass . salt, 2500)[32:48], sha256(pass . salt)[0:16] . plaintext . pkcs5)",
          "expr" : "",
          "expr_note" : "",
          "expr_tier" : "",
@@ -8757,13 +8757,17 @@
          "hash_length_basis" : "observed",
          "hashcat" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "hashcat_salted" : "",
          "hashcat_speed" : "",
          "hashpipe" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "CRYPTOPPDEFAULT"
+            ],
+            "match" : "",
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "cryptopp-default",
          "john" : {
@@ -8785,32 +8789,32 @@
          "mdxfind_salted" : "yes",
          "name" : "CRYPTOPPDEFAULT",
          "nesting_depth" : "",
-         "notes" : "",
+         "notes" : "The MODERN Crypto++ DefaultEncryptor. See cryptopp-legacy for the naming trap:\na 1998-era DefaultEncryptor is a DIFFERENT construction, DES-EDE2 with SHA-1 at\n200 iterations, which modern Crypto++ calls LegacyEncryptor.\n\nNO FIELD EVIDENCE. This entry is verified bidirectionally against a locally\nbuilt upstream libcryptopp.a, which establishes the algorithm and says nothing\nabout whether any deployed application emits it. cryptopp-legacy, by contrast,\nhas been confirmed against real records from a live site. Do not read a\nCRYPTOPPDEFAULT hit as a record from a known product.\n\nTHIS IS ENCRYPTION, NOT HASHING; the operational notes in cryptopp-legacy apply\nunchanged. The key is site-wide, a candidate stream of user passwords recovers\nnothing, one key decrypts an entire installation, and cost is independent of\nrecord count.\n\nRECORD LENGTH differs usefully from cryptopp-legacy. AES has a 16-byte block and\nthe check block is 16 bytes rather than 8, so stored length is\n8 + 16 + plaintext rounded up to a multiple of 16. That makes the two\ndistinguishable by length whenever the value is not also a digest length.\n",
          "primary_form" : "",
          "relations" : [],
          "sameas" : "",
          "serialization" : "unknown",
          "status" : "ok",
-         "suites_decided" : 1,
+         "suites_decided" : 2,
          "suites_proven" : 1,
          "tool_note" : {
-            "hashcat" : "",
-            "hashpipe" : "",
+            "hashcat" : "no mode names this construction.",
+            "hashpipe" : "verified by round-tripping the type PINNED with -m. Cross-checked: this vector does NOT verify under CRYPTOPPLEGACY, and that entry's vector does not verify here.",
             "john" : "",
-            "mdxfind" : "the type's own published example (vendored hashpipe HASH_TYPES.md v1.200), recovered by mdxfind pinned to this type with -F, which loads the inline site key in the salt field."
+            "mdxfind" : ""
          },
          "vecs" : 1
       },
       {
-         "alias" : "",
-         "application" : "",
+         "alias" : "Crypto++ DefaultEncryptor (1998-era); Crypto++ LegacyEncryptor; Dynu.Encrypt",
+         "application" : "Crypto++ DataEncryptor",
          "category" : "application",
          "crack" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "cracknote" : "",
-         "denotation" : "CRYPTOPPLEGACY",
+         "denotation" : "salt(8) . des_ede2_cbc(key=mash_sha1(pass . salt, 200)[0:16], iv=mash_sha1(pass . salt, 200)[16:24], sha1(pass . salt)[0:8] . plaintext . pkcs5)",
          "expr" : "",
          "expr_note" : "",
          "expr_tier" : "",
@@ -8818,13 +8822,17 @@
          "hash_length_basis" : "observed",
          "hashcat" : {
             "ids" : [],
-            "state" : "unknown"
+            "state" : "no"
          },
          "hashcat_salted" : "",
          "hashcat_speed" : "",
          "hashpipe" : {
-            "ids" : [],
-            "state" : "unknown"
+            "ids" : [
+               "CRYPTOPPLEGACY"
+            ],
+            "match" : "",
+            "state" : "proven",
+            "tier" : "vector"
          },
          "id" : "cryptopp-legacy",
          "john" : {
@@ -8846,19 +8854,19 @@
          "mdxfind_salted" : "yes",
          "name" : "CRYPTOPPLEGACY",
          "nesting_depth" : "",
-         "notes" : "",
+         "notes" : "A NAMING TRAP, and it is the whole reason this entry and cryptopp-default are\nseparate. In the 1998-era Crypto++ this row describes, the class was called\nDefaultEncryptor, DES_EDE was the name for 2-key triple DES, and SHA was the\nname for SHA-1. Modern Crypto++ renamed that entire construction to\nLegacyEncryptor and gave the DefaultEncryptor name to a DIFFERENT type: AES\nwith SHA-256 at 2500 iterations, which is cryptopp-default here. Implementing\nfrom a modern Crypto++ header while reading a 1998-era name reproduces nothing.\n\nTHIS IS ENCRYPTION, NOT HASHING, and the difference is operational rather than\nacademic. The stored record is DES-EDE2-CBC ciphertext under a site-wide key\nchosen by whoever installed the software. Consequences: a candidate stream of\nuser passwords cannot recover anything, because the thing being guessed is the\nsite key; one recovered key decrypts every record on that installation at once;\nand cost is independent of record count, since a single record validates a\ncandidate key. mdxfind carries the key in the salt channel (-s, or inline as\nrecord:sitekey with -F) and emits record:sitekey:plaintext, so a found line\nround-trips through hashpipe for verification before filing.\n\nThe acceptance oracle is the 8-byte check block, which holds\nsha1(passphrase . salt) truncated to 8 bytes. It is derivable from the\ncandidate key alone, so a key search needs no known plaintext, at a\nfalse-positive rate of 2^-64 per try. Note for implementers: a\nreverse-engineering summary in circulation states that the check block equals\nthe SALT. It does not, and that error is expensive rather than cosmetic,\nbecause implementing it as written makes a search with the CORRECT key report\nnothing at all.\n\nRECORD LENGTH identifies the family cheaply. Stored length is\n8 + 8 + plaintext rounded up to a multiple of 8, so 1-15 bytes of plaintext\ngives 32 bytes stored, 16-23 gives 40, 24-31 gives 48. 40 bytes is the common\ncase for real passwords and is not a digest length for any algorithm, which is\nthe tell: a bare-hex value whose byte length is a multiple of 8 and is not a\nstandard digest length is a block-cipher candidate rather than an exotic hash.\n32 and 48 bytes collide with SHA-256 and SHA-384 and cannot be separated by\nlength alone. There is no magic prefix; the leading 8 bytes are a random salt,\nregenerated per call, so the same plaintext and key encrypt differently every\ntime.\n\nSeen in the field as the credential store of a classic-ASP site via the\ncommercial Dynu.Encrypt COM component (DynuCOM v3.0, Dynu Systems, 1997-2002),\nwhose documented API is Encrypt(String, Password) / Decrypt(String, Password).\nThe component's own documentation permits an empty Password and warns that\ndata so encrypted can be decrypted by anyone holding the component.\n",
          "primary_form" : "",
          "relations" : [],
          "sameas" : "",
          "serialization" : "unknown",
          "status" : "ok",
-         "suites_decided" : 1,
+         "suites_decided" : 2,
          "suites_proven" : 1,
          "tool_note" : {
-            "hashcat" : "",
-            "hashpipe" : "",
+            "hashcat" : "hashcat's own identifier reports \"No hash-mode matches the structure of the text\" for an 80-hex record of this form, so there is no mode to name.",
+            "hashpipe" : "verified by round-tripping the type PINNED with -m, not by taking an unpinned report. Cross-checked: this vector does NOT verify under CRYPTOPPDEFAULT, and that entry's vector does not verify here.",
             "john" : "",
-            "mdxfind" : "the type's own published example (vendored hashpipe HASH_TYPES.md v1.200), recovered by mdxfind pinned to this type with -F, which loads the inline site key in the salt field."
+            "mdxfind" : ""
          },
          "vecs" : 1
       },

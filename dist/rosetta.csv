@@ -130,8 +130,70 @@ crc32,CRC32,,,absent,,CRC32,primitive,,ok,,11500,proven,,,unknown,,,no,,,unknown
 crc32c,CRC32C,,,absent,,CRC32C,primitive,,ok,,27900,proven,,,unknown,,,no,,,unknown,,no,1,2,1,unknown,,yes,fast,,,,,8,observed,,,
 crc64jones,CRC64Jones,,,absent,,CRC64Jones,primitive,,ok,,28000,proven,,,unknown,,,no,,,unknown,,no,1,2,1,unknown,,yes,fast,,,,,16,observed,,,
 cryptext,CRYPTEXT,,,,,,,,ok,,,no,,,no,,CRYPTEXT,proven,,CRYPTEXT,proven,,no,1,3,1,unknown,,,,,,no,,40,observed,,,
-cryptopp-default,CRYPTOPPDEFAULT,,,,,CRYPTOPPDEFAULT,application,,ok,,,unknown,,,unknown,,CRYPTOPPDEFAULT,proven,,,unknown,,unknown,1,1,1,unknown,,,,,,yes,,80,observed,,,
-cryptopp-legacy,CRYPTOPPLEGACY,,,,,CRYPTOPPLEGACY,application,,ok,,,unknown,,,unknown,,CRYPTOPPLEGACY,proven,,,unknown,,unknown,1,1,1,unknown,,,,,,yes,,64,observed,,,
+cryptopp-default,CRYPTOPPDEFAULT,Crypto++ DefaultEncryptor (modern),,,,"salt(8) . aes_cbc(key=mash_sha256(pass . salt, 2500)[0:32], iv=mash_sha256(pass . salt, 2500)[32:48], sha256(pass . salt)[0:16] . plaintext . pkcs5)",application,Crypto++ DataEncryptor,ok,,,no,,,unknown,,CRYPTOPPDEFAULT,proven,,CRYPTOPPDEFAULT,proven,,no,1,2,1,unknown,,,,,,yes,,80,observed,,,"The MODERN Crypto++ DefaultEncryptor. See cryptopp-legacy for the naming trap:
+a 1998-era DefaultEncryptor is a DIFFERENT construction, DES-EDE2 with SHA-1 at
+200 iterations, which modern Crypto++ calls LegacyEncryptor.
+
+NO FIELD EVIDENCE. This entry is verified bidirectionally against a locally
+built upstream libcryptopp.a, which establishes the algorithm and says nothing
+about whether any deployed application emits it. cryptopp-legacy, by contrast,
+has been confirmed against real records from a live site. Do not read a
+CRYPTOPPDEFAULT hit as a record from a known product.
+
+THIS IS ENCRYPTION, NOT HASHING; the operational notes in cryptopp-legacy apply
+unchanged. The key is site-wide, a candidate stream of user passwords recovers
+nothing, one key decrypts an entire installation, and cost is independent of
+record count.
+
+RECORD LENGTH differs usefully from cryptopp-legacy. AES has a 16-byte block and
+the check block is 16 bytes rather than 8, so stored length is
+8 + 16 + plaintext rounded up to a multiple of 16. That makes the two
+distinguishable by length whenever the value is not also a digest length.
+"
+cryptopp-legacy,CRYPTOPPLEGACY,Crypto++ DefaultEncryptor (1998-era); Crypto++ LegacyEncryptor; Dynu.Encrypt,,,,"salt(8) . des_ede2_cbc(key=mash_sha1(pass . salt, 200)[0:16], iv=mash_sha1(pass . salt, 200)[16:24], sha1(pass . salt)[0:8] . plaintext . pkcs5)",application,Crypto++ DataEncryptor,ok,,,no,,,unknown,,CRYPTOPPLEGACY,proven,,CRYPTOPPLEGACY,proven,,no,1,2,1,unknown,,,,,,yes,,64,observed,,,"A NAMING TRAP, and it is the whole reason this entry and cryptopp-default are
+separate. In the 1998-era Crypto++ this row describes, the class was called
+DefaultEncryptor, DES_EDE was the name for 2-key triple DES, and SHA was the
+name for SHA-1. Modern Crypto++ renamed that entire construction to
+LegacyEncryptor and gave the DefaultEncryptor name to a DIFFERENT type: AES
+with SHA-256 at 2500 iterations, which is cryptopp-default here. Implementing
+from a modern Crypto++ header while reading a 1998-era name reproduces nothing.
+
+THIS IS ENCRYPTION, NOT HASHING, and the difference is operational rather than
+academic. The stored record is DES-EDE2-CBC ciphertext under a site-wide key
+chosen by whoever installed the software. Consequences: a candidate stream of
+user passwords cannot recover anything, because the thing being guessed is the
+site key; one recovered key decrypts every record on that installation at once;
+and cost is independent of record count, since a single record validates a
+candidate key. mdxfind carries the key in the salt channel (-s, or inline as
+record:sitekey with -F) and emits record:sitekey:plaintext, so a found line
+round-trips through hashpipe for verification before filing.
+
+The acceptance oracle is the 8-byte check block, which holds
+sha1(passphrase . salt) truncated to 8 bytes. It is derivable from the
+candidate key alone, so a key search needs no known plaintext, at a
+false-positive rate of 2^-64 per try. Note for implementers: a
+reverse-engineering summary in circulation states that the check block equals
+the SALT. It does not, and that error is expensive rather than cosmetic,
+because implementing it as written makes a search with the CORRECT key report
+nothing at all.
+
+RECORD LENGTH identifies the family cheaply. Stored length is
+8 + 8 + plaintext rounded up to a multiple of 8, so 1-15 bytes of plaintext
+gives 32 bytes stored, 16-23 gives 40, 24-31 gives 48. 40 bytes is the common
+case for real passwords and is not a digest length for any algorithm, which is
+the tell: a bare-hex value whose byte length is a multiple of 8 and is not a
+standard digest length is a block-cipher candidate rather than an exotic hash.
+32 and 48 bytes collide with SHA-256 and SHA-384 and cannot be separated by
+length alone. There is no magic prefix; the leading 8 bytes are a random salt,
+regenerated per call, so the same plaintext and key encrypt differently every
+time.
+
+Seen in the field as the credential store of a classic-ASP site via the
+commercial Dynu.Encrypt COM component (DynuCOM v3.0, Dynu Systems, 1997-2002),
+whose documented API is Encrypt(String, Password) / Decrypt(String, Password).
+The component's own documentation permits an empty Password and warns that
+data so encrypted can be decrypted by anyone holding the component.
+"
 cryptosafe,cryptoSafe,,,absent,,cryptoSafe,,,ok,,,unknown,,cryptoSafe cryptosafe-opencl,proven,,,no,,,unknown,,no,1,2,1,unknown,,,,yes,,,,,,,,
 cube224,CUBE224,,,absent,,cube224(pass),,,ok,,,no,,,no,,CUBE224,proven,,CUBE224,proven,,no,1,3,1,unknown,,,,,,no,,56,observed,,CUBE224,
 cube256,CUBE256,,,absent,,cube256(pass),,,ok,,,no,,,no,,CUBE256,proven,,CUBE256,proven,,no,1,3,1,unknown,,,,,,no,,64,observed,,CUBE256,

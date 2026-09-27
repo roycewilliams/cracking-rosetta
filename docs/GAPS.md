@@ -94,7 +94,7 @@ flavor of the hash function - `md5(MD5($p))` - and john rejects the first
 outright. It is deliberately **not** in john's column, which lists formats
 `--list=formats` will show; the gap worth filling is whether a named one exists.
 
-### hashcat: 159 entries say nothing
+### hashcat: 157 entries say nothing
 
 A few that carry a vector, so a candidate identifier can be tested at once, one per family:
 
@@ -114,7 +114,7 @@ A few that carry a vector, so a candidate identifier can be tested at once, one 
 * [`astra-linux-gost12256hash`](index.html#astra-linux-gost12256hash) - `Astra Linux $gost12256hash$` (and 1 more starting `Astra`)
 * [`azuread`](index.html#azuread) - `AzureAD`
 
-All 159: filter `hashcat_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
+All 157: filter `hashcat_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
 
 ### mdxfind: 64 entries say nothing
 
@@ -138,7 +138,7 @@ A few that carry a vector, so a candidate identifier can be tested at once, one 
 
 All 64: filter `mdxfind_state` for `unknown` in [rosetta.csv](../dist/rosetta.csv).
 
-## 4. Identifiers with no row here (27)
+## 4. Identifiers with no row here (25)
 
 Whole algorithms rather than gaps in a row. Each is an identifier a tool
 publishes and this table does not answer to, so somebody arriving by it lands
@@ -189,11 +189,9 @@ john's own `src/*_fmt_plug.c` test arrays carry a vector for nearly every format
 * `wpapsk-opencl`
 * `wpapsk-pmk-opencl`
 
-### hashpipe: 3 with no row
+### hashpipe: 1 with no row
 
 hashpipe ships a self-test vector for every registered type; `hashpipe -N` prints the table and `-G` generates one where a type has none.
 
 * `SHA1SALTCX` - e521
-* `CRYPTOPPLEGACY` - e1028
-* `CRYPTOPPDEFAULT` - e1029
 
