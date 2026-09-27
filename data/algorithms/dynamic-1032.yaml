@@ -1,14 +1,11 @@
 id: "dynamic-1032"
 name: "dynamic_1032"
+expression: "base64(sha1_raw(utf16($p)))"
 expression_proof:
-  verified: "absent"
-  verified_at: "2026-08-31"
-  verified_with: "john 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200"
-  note: "john publishes this as \"dynamic_1032\" and no category, so what kind of construction it is has not been established here. Its name is not expression-shaped and john's dynamic EXPRESSION language cannot be handed it, so there is no expression on this row. That says nothing about whether any tool can CRACK it, and it is not a claim that the algorithm HAS no expression -- run seed-hx.pl and derive-expressions.pl, which can settle that from evidence."
-denotation:
-  text: "dynamic_1032"
-  source: "john"
-  note: "john's own label for dynamic_1032, in 1.9.0-jumbo-1+bleeding-9a336d800a 2026-08-02 00:19:48 +0200."
+  verified: "upstream"
+  verified_at: "2026-09-27"
+  verified_with: "hx Language Specification $Revision: 1.15$ (Waffle, Aug 2026), Appendix A"
+  note: "transcribed from the hx specification's Appendix A entry for mdxfind type PEOPLESOFT (e858), which states base64(sha1_bin(utf16le(pass))) (PeopleSoft). Transcription, not reproduction, so this is upstream and not vector; run derive-expressions.pl to try to promote it. An independent Digest:: computation of this string DOES reproduce this entry's own vector, checked 2026-09-27. Superseded the denotation \"dynamic_1032\" (source: john), which validate.pl forbids alongside an expression."
 status: "ok"
 tools:
   hashcat:
