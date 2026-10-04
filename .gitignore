@@ -18,3 +18,7 @@ fleet-staging/
 # committed into this one.
 hashcat-pattern/
 STATE-HISTORY.md
+
+# Local-only working notes: retained on this machine, removed from the repo
+# by request (2026-10-04).
+ACTION-PLAN.md
