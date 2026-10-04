@@ -324,8 +324,7 @@ quietly becomes a lie.
 
 `tools/check-numbers.pl --tracked` is the gate, and CI runs it. A document that
 is a record of one moment rather than living documentation can opt out with a
-`check-numbers: frozen YYYY-MM-DD` line near the top, which is what
-`ACTION-PLAN.md` does.
+`check-numbers: frozen YYYY-MM-DD` line near the top.
 
 ## What happens to your PR
 

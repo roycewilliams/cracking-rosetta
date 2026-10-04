@@ -68,7 +68,7 @@
 #                     rewritten on every render, so it cannot go stale.
 #   frozen files      A file may declare 'check-numbers: frozen <date>' near
 #                     the top. That is for a document which is a RECORD of a
-#                     moment -- ACTION-PLAN.md is the proposal as it stood --
+#                     moment -- a frozen design or planning doc is the typical case --
 #                     where every number is historical by definition. The
 #                     marker sits in the file rather than in this tool's
 #                     exclude list so a reader opening it learns that too.

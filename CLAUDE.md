@@ -1591,7 +1591,8 @@ given edge only once, so a merge that leaves the stale pre-merge `duplicate-of`
 beside the new one passes.
 
 The full design, the options weighed against it and what changed on contact
-with the code are in `ACTION-PLAN.md` section 11.
+with the code are in `ACTION-PLAN.md` section 11 -- a working document kept
+local-only on the maintainer's host, not tracked in the repo (see `.gitignore`).
 
 ## The published contract
 

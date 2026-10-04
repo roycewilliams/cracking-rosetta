@@ -211,8 +211,7 @@ my %IS_CATEGORY = map { $_ => 1 } qw(
     primitive composite iterated encoding application protocol kdf
 );
 
-# The relation vocabulary. See ACTION-PLAN.md section 11 for what each edge
-# means; the short version is that 'kind' says what the relationship is and
+# The relation vocabulary: 'kind' says what the relationship is and
 # 'distinction' says why both entries nonetheless exist.
 my %IS_REL_KIND = map { $_ => 1 } qw(
     same-computation encodes input-encoding iterates truncates
@@ -1283,8 +1282,7 @@ for my $t (sort keys %tomb) {
         push @{ $group{ $find->($_) } }, $_ for @ids;
         next if keys %group == 1;
         err("'%s' is claimed by entries that are not related to each other: "
-          . "%s. Join them with same-computation, encodes or duplicate-of "
-          . "(see ACTION-PLAN.md section 11)",
+          . "%s. Join them with same-computation, encodes or duplicate-of.",
             $x, join(' | ', map { join(', ', sort @{ $group{$_} }) }
                             sort keys %group));
     }
