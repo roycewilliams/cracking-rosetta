@@ -59,18 +59,22 @@ distinct and have DIFFERENT fixes:
   the repo metadata endpoint counts issues AND PRs together, so it cannot stand
   in for a PR count. This is a standing scope limitation, NOT an expiry: do the
   check with REST `gh pr list` below, never `gh pr view`.
-- **401 "Bad credentials" / `gh auth status` says "no longer valid" == the PAT
-  has EXPIRED or been REVOKED.** This is NOT under-scoping (that is the 403
-  above) and NOT a wrong method: scopes that worked yesterday are irrelevant
-  once the credential itself is rejected. Fine-grained PATs carry an expiry, so
-  this is an expected end state. `gh pr list` AND
-  `git push`/`fetch` to github.com all fail together until the operator installs
-  a fresh fine-grained PAT (scoped Contents: R/W + Pull requests: Read). You
-  cannot do this -- do NOT reach for `gh auth login`; that is the OAuth path this
-  repo does not use. Report the PR count as unavailable BECAUSE the PAT expired,
-  and ask the operator to reinstall it. Measured 2026-10-04: the stored PAT was
-  invalid (401) and the session could not check PRs or push until it was
-  replaced.
+- **401 "Bad credentials" / `gh auth status` says "no longer valid" == the
+  credential THIS HOST PRESENTS is rejected by GitHub.** It does NOT by itself
+  mean the token expired, was revoked, or is under-scoped (under-scoping is the
+  403 above). A 401 is equally consistent with the stored secret being STALE --
+  the PAT was regenerated and this host still holds the old secret -- or simply
+  wrong. DO NOT conclude expiry from `gh auth status` alone; CHECK THE TOKEN ON
+  GITHUB first. Measured 2026-10-04 and WRONGLY called expiry before the
+  operator corrected it: the `cracking-rosetta-claude-maint` PAT was valid to
+  2027-08-31 and correctly scoped (code R/W, pull requests R/W,
+  metadata/actions/statuses read), yet this host still got 401 -- so the copy in
+  `hosts.yml` no longer matched the live token. `gh` AND `git push`/`fetch` fail
+  together until the credential this host presents is refreshed to the CURRENT
+  PAT secret (re-stored, not a new PAT). You cannot do this: the store is
+  access-guarded, and `gh auth login` OAuth is NOT the path -- ask the operator
+  to re-store the current token. Report the PR count as unavailable, naming this
+  cause, rather than dropping the check.
 
 What works once the PAT is valid and scoped:
 
