@@ -31,11 +31,48 @@ same entry gets seeded twice -- which happened 2026-09-26 with PR #9
 (waffle2's Crypto++ entries) after this session had already seeded stubs for
 the same two types.
 
-**The method, and its trap (measured 2026-09-26).** This account's GitHub
-token cannot read the Issues API or most GraphQL: `gh issue list` and
-`gh pr view` both fail with 403 / GraphQL errors, and `open_issues_count` from
-the repo metadata endpoint counts issues AND PRs together, so it cannot stand
-in for a PR count. What DOES work:
+**Authentication -- what the credential actually is (from prior-session
+transcripts, 2026-10-04).** It is THE OPERATOR'S OWN GitHub FINE-GRAINED PAT
+(`github_pat_...`), NOT an interactive `gh auth login` / OAuth token. There is
+no OAuth flow to run and no `gh` command needed for normal work: the PAT sits in
+`~/.config/gh/hosts.yml`, and both `gh` and `git` read it from there -- `git`
+push/fetch to github.com routes through the credential helper
+`!/usr/bin/gh auth git-credential` set per-host in `~/.gitconfig`, so a plain
+`git push origin` and a `gh api` call use the same PAT. The hosts.yml file is
+access-guarded (`stat`/`sed`/reads on it are denied from this account), so you
+can neither read nor replace the PAT from here; refreshing it is the operator's.
+
+**On ANY GitHub failure, run `gh auth status` FIRST**, and when the mechanism is
+unclear, grep the prior-session transcripts under
+`~/.claude/projects/-home-claude-projects-cracking-rosetta/*.jsonl` for how push
+and pull were done rather than inventing one (NEVER print token values; the
+credential-exploration classifier will -- rightly -- block a raw token hunt, so
+search benign mechanism keywords and mask long runs). The two failure modes are
+distinct and have DIFFERENT fixes:
+
+- **403 / GraphQL errors == the PAT is VALID but cannot reach the Issues API or
+  most GraphQL.** `gh issue list` and `gh pr view` (GraphQL) fail with 403,
+  while REST works: `gh pr list --state open` lists PRs fine (Pull requests:
+  Read IS granted -- it has been working since the 2026-09-26 note), and
+  `git push`/`fetch` work (Contents: Read and write is granted). The PR CHECK
+  is not affected; only the Issues/GraphQL calls are. `open_issues_count` from
+  the repo metadata endpoint counts issues AND PRs together, so it cannot stand
+  in for a PR count. This is a standing scope limitation, NOT an expiry: do the
+  check with REST `gh pr list` below, never `gh pr view`.
+- **401 "Bad credentials" / `gh auth status` says "no longer valid" == the PAT
+  has EXPIRED or been REVOKED.** This is NOT under-scoping (that is the 403
+  above) and NOT a wrong method: scopes that worked yesterday are irrelevant
+  once the credential itself is rejected. Fine-grained PATs carry an expiry, so
+  this is an expected end state. `gh pr list` AND
+  `git push`/`fetch` to github.com all fail together until the operator installs
+  a fresh fine-grained PAT (scoped Contents: R/W + Pull requests: Read). You
+  cannot do this -- do NOT reach for `gh auth login`; that is the OAuth path this
+  repo does not use. Report the PR count as unavailable BECAUSE the PAT expired,
+  and ask the operator to reinstall it. Measured 2026-10-04: the stored PAT was
+  invalid (401) and the session could not check PRs or push until it was
+  replaced.
+
+What works once the PAT is valid and scoped:
 
     gh pr list --state open                         # the check; lists open PRs
     gh api repos/roycewilliams/cracking-rosetta/pulls/N --jq '.title,.mergeable,.body'
